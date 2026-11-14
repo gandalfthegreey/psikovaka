@@ -2214,3 +2214,214 @@ body.combo-mode-active .btn-submit {
         height: 340px;
     }
 }
+
+
+/* ==========================================================================
+   PSIKOVAKA 3.0 - ONLINE ARENA HUB, KOMIK AVATAR & RANKED SCOREBOARD UI
+   ========================================================================== */
+.header-profile-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.7rem 0.25rem 0.3rem;
+    background: rgba(99, 102, 241, 0.14);
+    border: 1px solid rgba(99, 102, 241, 0.38);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.header-profile-pill:hover {
+    transform: translateY(-2px);
+    background: rgba(99, 102, 241, 0.24);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.header-profile-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+}
+
+.header-profile-meta strong {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.header-profile-meta small {
+    font-size: 0.68rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+}
+
+.arena-hub-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+    padding: 0 1.4rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+.arena-hub-tab-btn {
+    padding: 0.6rem 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: var(--transition);
+}
+
+.arena-hub-tab-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-highlight);
+    transform: translateY(-1px);
+}
+
+.arena-hub-tab-btn.active {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.38);
+}
+
+.arena-mode-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.arena-mode-card {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.arena-mode-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.arena-mode-card.active {
+    background: linear-gradient(145deg, rgba(79, 70, 229, 0.2), rgba(236, 72, 153, 0.14));
+    border-color: #ec4899;
+    box-shadow: 0 10px 26px rgba(236, 72, 153, 0.25);
+}
+
+.arena-mode-icon {
+    font-size: 1.85rem;
+    margin-bottom: 0.35rem;
+}
+
+.arena-mode-title {
+    font-size: 0.94rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.arena-mode-desc {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    margin-bottom: 0.65rem;
+}
+
+.arena-mode-rp {
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 900;
+    font-family: var(--font-mono);
+    padding: 0.2rem 0.55rem;
+    border-radius: 99px;
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+}
+
+.arena-launch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 0.75rem;
+}
+
+.arena-action-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+}
+
+.scoreboard-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.scoreboard-row:hover {
+    transform: translateX(3px);
+    border-color: var(--border-highlight);
+}
+
+.scoreboard-row.is-me {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(56, 189, 248, 0.1));
+    border-color: #10b981;
+}
+
+.avatar-part-pill {
+    padding: 0.34rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.avatar-part-pill:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+}
+
+.avatar-part-pill.active {
+    background: var(--accent-primary);
+    color: #fff;
+    border-color: transparent;
+}
+
+@media (max-width: 720px) {
+    .arena-hub-tabs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .arena-mode-cards-grid,
+    .arena-launch-grid {
+        grid-template-columns: 1fr;
+    }
+    #tabArenaAvatar > div {
+        grid-template-columns: 1fr !important;
+    }
+}

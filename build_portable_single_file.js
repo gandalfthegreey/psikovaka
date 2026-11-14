@@ -61,6 +61,7 @@ const manualRaw = fs.readFileSync(path.join(__dirname, 'js', 'dsm_manual.js'), '
 const therapiesRaw = fs.readFileSync(path.join(__dirname, 'js', 'therapies.js'), 'utf8');
 const pharmaRaw = fs.readFileSync(path.join(__dirname, 'js', 'pharmacology.js'), 'utf8');
 const casesRaw = fs.readFileSync(path.join(__dirname, 'js', 'cases.js'), 'utf8');
+const arenaRaw = fs.readFileSync(path.join(__dirname, 'js', 'online_arena.js'), 'utf8');
 const appRaw = fs.readFileSync(path.join(__dirname, 'js', 'app.js'), 'utf8');
 
 let bundled = htmlRaw;
@@ -77,6 +78,7 @@ const scriptsTarget = `    <script src="js/diagnoses.js"></script>
     <script src="js/therapies.js"></script>
     <script src="js/pharmacology.js"></script>
     <script src="js/cases.js"></script>
+    <script src="js/online_arena.js"></script>
     <script src="js/app.js"></script>`;
 
 const inlineScripts = `<script>\n${diagnosesRaw}\n</script>
@@ -84,6 +86,7 @@ const inlineScripts = `<script>\n${diagnosesRaw}\n</script>
 <script>\n${therapiesRaw}\n</script>
 <script>\n${pharmaRaw}\n</script>
 <script>\n${casesRaw}\n</script>
+<script>\n${arenaRaw}\n</script>
 <script>\n${appRaw}\n</script>`;
 
 bundled = bundled.replace(scriptsTarget, inlineScripts);

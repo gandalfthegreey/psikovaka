@@ -60,6 +60,9 @@ class PsikoVakaGame {
         this.initDOM();
         this.applyActivePack(this.activePackId, false);
         this.initEventListeners();
+        if (typeof this.initOnlineArena === 'function') {
+            this.initOnlineArena();
+        }
         this.updateUnsolvedUI();
         this.checkURLForCustomOrDuelCase();
     }
@@ -1581,8 +1584,12 @@ class PsikoVakaGame {
             }
         }
 
-        // Render Duel Comparison Podium if Duel is Active
-        this.renderDuelPodium(won);
+        // Render Duel / FFA / Tournament Comparison Podium if Duel is Active
+        if (typeof this.CheckTournamentEliminationAndRenderPodium === 'function') {
+            this.CheckTournamentEliminationAndRenderPodium();
+        } else {
+            this.renderDuelPodium(won);
+        }
 
         diffDiagEl.textContent = this.currentCase.differentialDiagnosis || 'Ayırıcı tanı bilgisi bulunmuyor.';
 
@@ -1700,13 +1707,30 @@ class PsikoVakaGame {
         const btnNextPractice = document.getElementById('btnNextPractice');
         if (btnNextPractice) {
             btnNextPractice.onclick = () => {
-                this.closeModal(this.dom.resultModal);
                 if (this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel) {
+                    if (typeof this.areAllActivePlayersFinished === 'function' && !this.areAllActivePlayersFinished()) {
+                        this.nextRoomDuelCase();
+                        return;
+                    }
+                    this.closeModal(this.dom.resultModal);
                     this.nextRoomDuelCase();
                 } else {
+                    btnNextPractice.disabled = false;
+                    btnNextPractice.style.opacity = '1';
+                    btnNextPractice.textContent = 'Sıradaki Vakaya Geç ➔';
+                    this.closeModal(this.dom.resultModal);
                     this.setMode('practice');
                 }
             };
+        }
+
+        if (this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel && typeof this.updateRoundLockButtons === 'function') {
+            this.updateRoundLockButtons();
+        } else if (btnNextPractice) {
+            btnNextPractice.disabled = false;
+            btnNextPractice.style.opacity = '1';
+            btnNextPractice.style.cursor = 'pointer';
+            btnNextPractice.textContent = 'Sıradaki Vakaya Geç ➔';
         }
 
         this.openModal(this.dom.resultModal);
@@ -2989,6 +3013,9 @@ window.addEventListener('DOMContentLoaded', () => {
         themeBtn.textContent = (savedTheme === 'light') ? '🌙' : '☀️';
     }
 
+    if (typeof attachOnlineArenaToGame === 'function') {
+        attachOnlineArenaToGame(PsikoVakaGame);
+    }
     window.game = new PsikoVakaGame();
 });
 

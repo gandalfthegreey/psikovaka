@@ -34,17 +34,24 @@
             </div>
 
             <div class="header-actions">
-                <button class="btn-header-pill duel-pill" id="duelCenterBtn" title="Canlı Oda Düellosu & Arkadaşa Meydan Okuma">
-                    <span>⚔️</span> Canlı Düello
+                <button class="header-profile-pill" id="btnHeaderProfilePill" type="button" title="Komik Karakterini Düzenle & Ranked Profilini Gör">
+                    <span id="headerFunnyAvatarMount"></span>
+                    <span class="header-profile-meta">
+                        <strong id="headerPlayerNameMount">Klinisyen</strong>
+                        <small id="headerPlayerRpMount">🥈 250 RP</small>
+                    </span>
                 </button>
-                <button class="btn-header-pill pack-pill" id="caseManagerBtn" title="Hazır Paket Rafı & Özel Vaka Kütüphanesi">
-                    <span>📦</span> Paket Rafı
+                <button class="btn-header-pill duel-pill" id="duelCenterBtn" title="Online Arena: 1v1 Düello, Free-For-All, Turnuva & Top 10 Ranked">
+                    <span>⚔️</span> Online Arena & Turnuva
+                </button>
+                <button class="btn-header-pill pack-pill" id="caseManagerBtn" title="Hazır Paket Rafı & Çözülen Vakalar Arşivi">
+                    <span>📦</span> Paketler & Arşiv
                 </button>
                 <button class="btn-icon" id="caseStudioBtn" title="Kendi Vakanı Yaz & Paylaş">✍️</button>
                 <button class="btn-icon" id="dsmGuideBtn" title="DSM-5-TR Tanı Kılavuzu (297 Tanı)">📚</button>
-                <button class="btn-icon" id="therapyGuideBtn" title="Psikoterapi Ekolleri & Teknikleri Rehberi">🛡️</button>
-                <button class="btn-icon" id="pharmaGuideBtn" title="Psikofarmakoloji & Biyolojik Tedavi Rehberi">💊</button>
-                <button class="btn-icon" id="statsBtn" title="İstatistikler & Başarı">📊</button>
+                <button class="btn-icon" id="therapyGuideBtn" title="Psikoterapi Ekolleri Rehberi">🛡️</button>
+                <button class="btn-icon" id="pharmaGuideBtn" title="Psikofarmakoloji Rehberi">💊</button>
+                <button class="btn-icon" id="statsBtn" title="İstatistikler">📊</button>
                 <button class="btn-icon" id="helpBtn" title="Nasıl Oynanır?">❓</button>
                 <button class="btn-icon" id="themeToggleBtn" title="Karanlık/Aydınlık Mod">☀️</button>
             </div>
@@ -359,75 +366,150 @@
         </div>
     </div>
 
-    <!-- Modal: Live Duel & Challenge Center (Canlı Düello & Meydan Okuma Merkezi) -->
+    <!-- Modal: Interactive Online Arena Hub (Oyna, Top 10 Ranked, Komik Avatarım, Arkadaşlarım) -->
     <div class="modal-backdrop" id="duelCenterModal">
-        <div class="modal-window" style="max-width: 680px;">
-            <div class="modal-header">
+        <div class="modal-window" style="max-width: 780px;">
+            <div class="modal-header" style="padding-bottom: 0.75rem;">
                 <div class="modal-title">
-                    <span>⚔️</span> Canlı Düello & Arkadaşa Meydan Okuma Merkezi
+                    <span>🌐</span> Online Arena, Turnuva & Klinisyen Kulübü
                 </div>
                 <button class="btn-icon btn-close-modal">✕</button>
             </div>
 
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">🧑‍⚕️ Klinisyen Adınız / Takma Adınız:</label>
-                    <input type="text" id="duelNicknameInput" class="form-input" placeholder="Örn: Dr. Emre" maxlength="24">
-                </div>
+            <!-- Interactive 4-Tab Bar -->
+            <div class="arena-hub-tabs">
+                <button type="button" class="arena-hub-tab-btn active" data-tab="tabArenaPlay">
+                    <span>🎮</span> Oyna & Modlar
+                </button>
+                <button type="button" class="arena-hub-tab-btn" data-tab="tabArenaScoreboard">
+                    <span>🏆</span> Top 10 Ranked
+                </button>
+                <button type="button" class="arena-hub-tab-btn" data-tab="tabArenaAvatar">
+                    <span>🤪</span> Komik Avatarım
+                </button>
+                <button type="button" class="arena-hub-tab-btn" data-tab="tabArenaFriends">
+                    <span>👥</span> Arkadaşlarım
+                </button>
+            </div>
 
-                <!-- 0. Otomatik Rastgele Rakip Ara (Global Matchmaking Lobi) -->
-                <div class="edu-section" style="border-left: 4px solid #10b981; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.08));">
-                    <div class="edu-title" style="color: #34d399;">🌐 1. Otomatik Canlı Rakip Ara (Sitedeki Aktif Oyuncularla Eşleş)</div>
-                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                        Oda kodu paylaşmaya gerek kalmadan, o anda sitede <strong>"Rakip Ara"</strong> butonuna basan başka bir oyuncuyla otomatik eşleşip 5 vakalık canlı düelloya başlayın!
-                    </p>
-                    <button class="btn-primary" id="btnStartMatchmaking" type="button" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); padding: 0.85rem;">
-                        <span>🔍</span> Canlı Rakip Ara (Otomatik Eşleştirme Başlat)
-                    </button>
-                    <div id="matchmakingStatusBox" style="display: none; margin-top: 0.75rem; padding: 0.85rem; background: var(--bg-secondary); border: 1px dashed #10b981; border-radius: var(--radius-md); text-align: center;">
-                        <div id="matchmakingStatusText" style="font-size: 0.86rem; font-weight: 700; color: #34d399;">📡 Küresel Lobi Taranıyor... Rakip bekleniyor...</div>
-                        <button class="btn-secondary" id="btnCancelMatchmaking" type="button" style="margin-top: 0.5rem; font-size: 0.76rem; padding: 0.35rem 0.75rem;">İptal Et</button>
+            <div class="modal-body" style="padding-top: 1rem;">
+                <!-- TAB 1: OYNA & MOD SEÇ (Sade, İnteraktif Kartlar) -->
+                <div class="arena-hub-panel" id="tabArenaPlay">
+                    <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem; background:var(--bg-secondary); padding:0.7rem 0.95rem; border-radius:14px; border:1px solid var(--border-color);">
+                        <div style="flex:1; min-width:200px;">
+                            <label class="form-label" style="margin-bottom:0.2rem; font-size:0.75rem;">🧑‍⚕️ Görünen Klinisyen Adınız:</label>
+                            <input type="text" id="duelNicknameInput" class="form-input" placeholder="Örn: Dr. Emre" maxlength="24" style="padding:0.45rem 0.75rem;">
+                        </div>
+                        <label id="arenaBotFillToggleWrap" style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; font-weight:700; color:#38bdf8; cursor:pointer; background:rgba(56,189,248,0.1); padding:0.55rem 0.85rem; border-radius:10px; border:1px solid rgba(56,189,248,0.3);">
+                            <input type="checkbox" id="chkIncludeFunnyBots" style="width:16px; height:16px; accent-color:#10b981;">
+                            <span>🤖 Odaya Komik Bot Doktorlar da Ekle</span>
+                        </label>
                     </div>
-                </div>
 
-                <!-- 1. Canlı Oda Düellosu (Gerçek Zamanlı P2P + Senkron Oda Kodu) -->
-                <div class="edu-section" style="border-left: 4px solid #f43f5e;">
-                    <div class="edu-title" style="color: #fb7185;">⚡ 2. Arkadaşınla Özel Oda Koduyla Düello</div>
-                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                        4 haneli bir <strong>Oda Kodu</strong> oluşturup arkadaşınıza gönderin. Arkadaşınız aynı kodu girdiğinde her ikinize <strong>birebir aynı vakalar</strong> açılır ve birbirinizin hamlelerini/skorunu canlı görürsünüz!
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-                        <button class="btn-duel-action" id="btnCreateLiveDuelRoom" type="button" style="justify-content: center;">
-                            <span>🏠</span> Yeni Düello Odası Kur
-                        </button>
-                        <div style="display: flex; gap: 0.4rem;">
-                            <input type="text" id="joinRoomCodeInput" class="form-input" placeholder="ODA KODU (Örn: K7M9)" style="text-transform: uppercase; font-family: var(--font-mono); font-weight: 800; text-align: center;" maxlength="8">
-                            <button class="btn-primary" id="btnJoinLiveDuelRoom" type="button">Katıl</button>
+                    <!-- 3 Interactive Multiplayer Mode Cards -->
+                    <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem; letter-spacing:0.6px;">1. Oynamak İstediğiniz Canlı Modu Seçin:</div>
+                    <div class="arena-mode-cards-grid">
+                        <div class="arena-mode-card active" data-arenamode="duel">
+                            <div class="arena-mode-icon">⚔️</div>
+                            <div class="arena-mode-title">1v1 Canlı Düello</div>
+                            <div class="arena-mode-desc">Arkadaşınla veya rastgele rakiple 5 vakalık kafa kafaya kapışma. İki taraf da çözmeden vakalar geçilmez!</div>
+                            <div class="arena-mode-rp">+35 RP Ödül</div>
+                        </div>
+                        <div class="arena-mode-card" data-arenamode="ffa">
+                            <div class="arena-mode-icon">🏟️</div>
+                            <div class="arena-mode-title">Free-For-All (Herkes Tek)</div>
+                            <div class="arena-mode-desc">Aynı odada 2–16 kişi aynı vakaları eşzamanlı çözer! En az ipucuyla en hızlı bilen en çok puanı toplar.</div>
+                            <div class="arena-mode-rp">+50 RP Ödül</div>
+                        </div>
+                        <div class="arena-mode-card" data-arenamode="tournament">
+                            <div class="arena-mode-icon">🏆</div>
+                            <div class="arena-mode-title">Elemeli Turnuva</div>
+                            <div class="arena-mode-desc">Çeyrek Final ➔ Yarı Final ➔ Büyük Final! Her vakada en düşük puanlı elenir, şampiyon kupayı kaldırır!</div>
+                            <div class="arena-mode-rp">+75 RP Ödül</div>
                         </div>
                     </div>
 
-                    <div id="liveRoomCreatedBox" style="display: none; margin-top: 0.85rem; padding: 0.9rem; background: var(--bg-secondary); border: 1px dashed #f43f5e; border-radius: var(--radius-md); text-align: center;">
-                        <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Aktif Düello Oda Kodunuz</div>
-                        <div id="generatedRoomCodeDisplay" style="font-family: var(--font-mono); font-size: 1.75rem; font-weight: 900; color: #fb7185; letter-spacing: 3px; margin: 0.25rem 0;">K7M9</div>
-                        <div id="liveRoomConnectionStatus" style="font-size: 0.82rem; color: var(--accent-emerald); margin-bottom: 0.65rem;">🟢 Oda hazır! Arkadaşınız bu kodu girerek veya aşağıdaki davet linkine tıklayarak katılabilir.</div>
-                        <div class="share-buttons-row">
-                            <button class="btn-secondary" id="btnCopyRoomInviteLink" type="button">🔗 Oda Davet Linkini Kopyala</button>
-                            <button class="btn-whatsapp" id="btnWhatsappRoomInvite" type="button">📲 WhatsApp'tan Davet Gönder</button>
+                    <!-- 2. Hızlı Başlatma & Oda Kontrolleri -->
+                    <div style="font-size:0.78rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); margin:1.1rem 0 0.5rem; letter-spacing:0.6px;">2. Maça Başla:</div>
+                    <div class="arena-launch-grid">
+                        <!-- Auto Matchmaking -->
+                        <div class="arena-action-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                            <div style="font-weight:800; font-size:0.92rem; color:#34d399; margin-bottom:0.25rem;">🔍 Otomatik Rakip Bul</div>
+                            <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.65rem;">Sitede o an "Rakip Ara" diyen oyuncularla otomatik eşleşin.</p>
+                            <button class="btn-primary" id="btnStartMatchmaking" type="button" style="width:100%; justify-content:center; background:linear-gradient(135deg,#10b981,#059669);">
+                                🔍 Canlı Rakip Ara
+                            </button>
+                            <div id="matchmakingStatusBox" style="display:none; margin-top:0.6rem; padding:0.6rem; background:var(--bg-primary); border:1px dashed #10b981; border-radius:10px; text-align:center;">
+                                <div id="matchmakingStatusText" style="font-size:0.78rem; font-weight:700; color:#34d399;">📡 Lobi taranıyor...</div>
+                                <button class="btn-secondary" id="btnCancelMatchmaking" type="button" style="margin-top:0.4rem; font-size:0.72rem; padding:0.25rem 0.65rem;">İptal Et</button>
+                            </div>
+                        </div>
+
+                        <!-- Create or Join Room by Code -->
+                        <div class="arena-action-card" style="border-color: rgba(244, 63, 94, 0.4);">
+                            <div style="font-weight:800; font-size:0.92rem; color:#fb7185; margin-bottom:0.25rem;">🔑 Özel Oda Kur veya Katıl</div>
+                            <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.65rem;">Arkadaşlarınızla 4 haneli oda kodunu paylaşarak birlikte yarışın.</p>
+                            <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+                                <button class="btn-duel-action" id="btnCreateLiveDuelRoom" type="button" style="flex:1; justify-content:center; padding:0.55rem 0.7rem; font-size:0.82rem;">
+                                    🏠 Oda Kur
+                                </button>
+                                <div style="display:flex; gap:0.35rem; flex:1.2;">
+                                    <input type="text" id="joinRoomCodeInput" class="form-input" placeholder="KOD (K7M9)" style="text-transform:uppercase; font-family:var(--font-mono); font-weight:800; text-align:center; padding:0.45rem;" maxlength="8">
+                                    <button class="btn-primary" id="btnJoinLiveDuelRoom" type="button" style="padding:0.45rem 0.75rem;">Gir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compact Single Case Link Share -->
+                    <div style="margin-top:0.9rem; padding:0.7rem 0.9rem; background:var(--bg-secondary); border-radius:12px; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap;">
+                        <span style="font-size:0.8rem; font-weight:700; color:var(--text-secondary);">🎯 Sadece şu anki vakayı link olarak arkadaşına at:</span>
+                        <div style="display:flex; gap:0.4rem; flex:1; min-width:220px;">
+                            <input type="text" id="currentCaseDuelLinkInput" class="form-input" readonly style="font-size:0.75rem; padding:0.35rem 0.6rem;">
+                            <button class="btn-secondary" id="btnCopyCurrentDuelLink" type="button" style="padding:0.35rem 0.65rem; font-size:0.76rem;">📋 Kopyala</button>
+                            <button class="btn-whatsapp" id="btnWhatsappCurrentDuel" type="button" style="padding:0.35rem 0.65rem; font-size:0.76rem;">📲 WhatsApp</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Tek Vaka Meydan Okuma Linki -->
-                <div class="edu-section" style="border-left: 4px solid var(--accent-primary);">
-                    <div class="edu-title">🎯 2. Şu Anki Vakayla Meydan Oku (Asenkron Düello Linki)</div>
-                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                        Şu an ekranda açık olan vakayı (veya az önce çözdüğünüz skoru) özel bir düello linkine dönüştürün. Arkadaşınız tıkladığında doğrudan bu vakayla sizin rekorunuza karşı yarışır!
-                    </p>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="text" id="currentCaseDuelLinkInput" class="form-input" readonly style="flex: 1; font-size: 0.8rem;">
-                        <button class="btn-primary" id="btnCopyCurrentDuelLink" type="button">📋 Kopyala</button>
-                        <button class="btn-whatsapp" id="btnWhatsappCurrentDuel" type="button">📲 WhatsApp</button>
+                <!-- TAB 2: TOP 10 RANKED SCOREBOARD -->
+                <div class="arena-hub-panel" id="tabArenaScoreboard" style="display:none;">
+                    <div id="myRankedSummaryBanner" style="background:linear-gradient(135deg, rgba(79,70,229,0.16), rgba(236,72,153,0.12)); border:1px solid rgba(168,85,247,0.4); border-radius:16px; padding:1rem 1.15rem; margin-bottom:1rem;"></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                        <div style="font-size:0.84rem; font-weight:900; text-transform:uppercase; color:#fbbf24; letter-spacing:0.6px;">🏆 Top 10 Ranked Klinisyen Sıralaması</div>
+                        <span style="font-size:0.74rem; color:var(--text-muted);">1. İpucu = 100P • Düello = +35 RP • FFA = +50 RP • Turnuva = +75 RP</span>
                     </div>
+                    <div id="top10ScoreboardList" style="display:flex; flex-direction:column; gap:0.45rem;"></div>
+                </div>
+
+                <!-- TAB 3: KOMİK KARAKTER AVATAR STÜDYOSU -->
+                <div class="arena-hub-panel" id="tabArenaAvatar" style="display:none;">
+                    <div style="display:grid; grid-template-columns: 210px 1fr; gap:1rem; align-items:start;">
+                        <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:16px; padding:1.1rem; text-align:center; position:sticky; top:0;">
+                            <div id="funnyAvatarLivePreview"></div>
+                            <button type="button" class="btn-primary" id="btnRandomizeFunnyAvatar" style="width:100%; justify-content:center; margin-top:0.85rem; font-size:0.8rem; padding:0.55rem;">
+                                🎲 Rastgele Komik Karakter
+                            </button>
+                        </div>
+                        <div id="funnyAvatarControlsGrid" style="display:flex; flex-direction:column; gap:0.6rem; max-height:420px; overflow-y:auto; padding-right:4px;"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: ARKADAŞLARIM & DAVET SİSTEMİ -->
+                <div class="arena-hub-panel" id="tabArenaFriends" style="display:none;">
+                    <div style="background:linear-gradient(135deg, rgba(16,185,129,0.12), rgba(56,189,248,0.1)); border:1px solid rgba(16,185,129,0.35); border-radius:14px; padding:0.9rem 1.1rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <div style="font-size:0.76rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Senin Klinisyen Arkadaş Kodun</div>
+                            <div id="myFriendCodeBadge" style="font-family:var(--font-mono); font-size:1.35rem; font-weight:900; color:#34d399; letter-spacing:1px;">DR-0000</div>
+                        </div>
+                        <div style="display:flex; gap:0.45rem; flex-wrap:wrap; flex:1; max-width:430px;">
+                            <input type="text" id="friendCodeInput" class="form-input" placeholder="Arkadaş Kodu (Örn: DR-4821)" style="flex:1; font-family:var(--font-mono); text-transform:uppercase; font-size:0.82rem;">
+                            <input type="text" id="friendNameInput" class="form-input" placeholder="Arkadaş Adı" style="flex:1; font-size:0.82rem;">
+                            <button type="button" class="btn-primary" id="btnAddFriendByCode" style="padding:0.45rem 0.85rem; font-size:0.82rem;">➕ Ekle</button>
+                        </div>
+                    </div>
+                    <div style="font-size:0.82rem; font-weight:800; color:var(--text-secondary); margin-bottom:0.5rem;">👥 Arkadaş Listem (Canlı Odaya Davet Gönder)</div>
+                    <div id="friendsListContainer" style="display:flex; flex-direction:column; gap:0.5rem;"></div>
                 </div>
             </div>
 
@@ -803,6 +885,7 @@
     <script src="js/therapies.js"></script>
     <script src="js/pharmacology.js"></script>
     <script src="js/cases.js"></script>
+    <script src="js/online_arena.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
