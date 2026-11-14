@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PsikoVaka 2.0 | DSM-5-TR Klinik Simülasyon, Farmakoterapi & Canlı Düello</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- PeerJS for Serverless Live P2P Duel Rooms (Graceful fallback if offline) -->
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <!-- Application Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-group" onclick="location.reload()">
+                <div class="logo-icon">🧠</div>
+                <div style="display: flex; align-items: center;">
+                    <span class="logo-title">PsikoVaka</span>
+                    <span class="logo-badge" id="headerLogoBadge">DSM-5-TR • 2.0</span>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn-header-pill duel-pill" id="duelCenterBtn" title="Canlı Oda Düellosu & Arkadaşa Meydan Okuma">
+                    <span>⚔️</span> Canlı Düello
+                </button>
+                <button class="btn-header-pill pack-pill" id="caseManagerBtn" title="Hazır Paket Rafı & Özel Vaka Kütüphanesi">
+                    <span>📦</span> Paket Rafı
+                </button>
+                <button class="btn-icon" id="caseStudioBtn" title="Kendi Vakanı Yaz & Paylaş">✍️</button>
+                <button class="btn-icon" id="dsmGuideBtn" title="DSM-5-TR Tanı Kılavuzu (297 Tanı)">📚</button>
+                <button class="btn-icon" id="therapyGuideBtn" title="Psikoterapi Ekolleri & Teknikleri Rehberi">🛡️</button>
+                <button class="btn-icon" id="pharmaGuideBtn" title="Psikofarmakoloji & Biyolojik Tedavi Rehberi">💊</button>
+                <button class="btn-icon" id="statsBtn" title="İstatistikler & Başarı">📊</button>
+                <button class="btn-icon" id="helpBtn" title="Nasıl Oynanır?">❓</button>
+                <button class="btn-icon" id="themeToggleBtn" title="Karanlık/Aydınlık Mod">☀️</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 4-Way Game Target Switcher (Tanı | Terapi | Farmakoterapi | Kombo) -->
+    <div class="target-mode-switcher-container">
+        <div class="target-mode-switcher">
+            <button class="target-mode-btn active" id="btnModeDiagnosis" data-target="diagnosis">
+                <span>🩺</span> DSM-5 Tanı Avcısı
+            </button>
+            <button class="target-mode-btn" id="btnModeTherapy" data-target="therapy">
+                <span>🛡️</span> Terapi Simülatörü
+            </button>
+            <button class="target-mode-btn" id="btnModePharmacology" data-target="pharmacology">
+                <span>💊</span> Farmakoterapi Avcısı
+            </button>
+            <button class="target-mode-btn" id="btnModeCombo" data-target="combo">
+                <span>⚡</span> Tam Konsültasyon (Kombo)
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Modes & Smart Filters -->
+    <nav class="mode-nav">
+        <button class="nav-tab active" data-mode="daily">
+            <span>📅</span> Günün Vakası
+        </button>
+        <button class="nav-tab" data-mode="practice">
+            <span>♾️</span> Sınırsız Pratik
+        </button>
+        <button class="unsolved-toggle-pill" id="btnToggleUnsolved" type="button" title="Daha önce çözdüğünüz vakaları gizler, sadece yeni vakaları getirir">
+            <span>🎯</span> Sadece Çözülmemişler (<span id="unsolvedCountBadge">150</span>)
+        </button>
+        <button class="active-pack-indicator" id="btnQuickPackIndicator" type="button" title="Oynanan vaka paketini değiştirmek için tıklayın">
+            <span>📦</span> <span id="quickPackLabel">Tüm Vakalar (150)</span>
+        </button>
+    </nav>
+
+    <!-- Course & Field Selector Bar (Ders & Alan Filtreleri) -->
+    <div class="course-nav" id="courseNav" style="display: none;"></div>
+
+    <!-- Category Filter Bar (Visible in Practice Mode) -->
+    <div class="main-wrapper" style="padding-bottom: 0;">
+        <div class="filter-bar" id="filterBar" style="display: none;"></div>
+    </div>
+
+    <!-- Main Game Container -->
+    <main class="main-wrapper">
+        <!-- Live Duel HUD Banner (Canlı Düello veya Meydan Okuma Aktifken Görünür) -->
+        <div class="duel-hud-banner" id="duelHudBanner" style="display: none;">
+            <div class="duel-players-box">
+                <div class="duel-player-chip me">
+                    <span>🧑‍⚕️</span>
+                    <span id="duelMyName">Sen</span>
+                    <span class="badge" style="background: rgba(16,185,129,0.2); color: #34d399;" id="duelMyScoreBadge">0 Puan</span>
+                </div>
+                <span class="duel-vs-badge">VS</span>
+                <div class="duel-player-chip opponent">
+                    <span>⚔️</span>
+                    <span id="duelOpponentName">Rakip</span>
+                    <span class="badge" style="background: rgba(244,63,94,0.2); color: #fda4af;" id="duelOpponentStatus">Hazır</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <div class="duel-timer-box">
+                    <span>⏱️</span>
+                    <span id="duelTimerText">00:00</span>
+                </div>
+                <button class="btn-secondary" id="btnExitDuel" style="padding: 0.35rem 0.7rem; font-size: 0.75rem;">✕ Düellodan Çık</button>
+            </div>
+        </div>
+
+        <!-- Combo Mode 3-Stage Stepper (Kombo Modu Aktifken Görünür) -->
+        <div class="combo-stepper-bar" id="comboStepperBar" style="display: none;">
+            <div class="combo-step-item active" id="comboStep1">
+                <div class="combo-step-num">1</div>
+                <div class="combo-step-info">
+                    <span class="combo-step-title">Aşama 1 • DSM-5 Tanısı</span>
+                    <span class="combo-step-val" id="comboStep1Val">Tanıyı belirleyin...</span>
+                </div>
+            </div>
+            <div class="combo-step-item" id="comboStep2">
+                <div class="combo-step-num">2</div>
+                <div class="combo-step-info">
+                    <span class="combo-step-title">Aşama 2 • Psikoterapi</span>
+                    <span class="combo-step-val" id="comboStep2Val">Bekleniyor...</span>
+                </div>
+            </div>
+            <div class="combo-step-item" id="comboStep3">
+                <div class="combo-step-num">3</div>
+                <div class="combo-step-info">
+                    <span class="combo-step-title">Aşama 3 • Farmakoterapi</span>
+                    <span class="combo-step-val" id="comboStep3Val">Bekleniyor...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Chart (Klinik Hasta Dosyası) -->
+        <section class="patient-card">
+            <!-- Header of Chart -->
+            <div class="patient-card-header">
+                <div class="chart-title-group">
+                    <span class="chart-stamp">GİZLİ / KLİNİK DOSYA</span>
+                    <span class="patient-id" id="patientId">DOSYA NO: CASE-001</span>
+                </div>
+                <div class="chart-meta-badges">
+                    <button class="btn-duel-quick" id="btnQuickChallengeCase" type="button" title="Bu vakayı arkadaşına düello linki olarak gönder!">
+                        ⚔️ Arkadaşına Meydan Oku
+                    </button>
+                    <span class="badge badge-difficulty-orta" id="difficultyBadge">Orta</span>
+                    <span class="badge badge-mode" id="modeBadge">Günün Vakası</span>
+                </div>
+            </div>
+
+            <!-- Patient Demographics Bar -->
+            <div class="patient-summary-bar">
+                <div>
+                    <span>👤 <strong>Danışan Profili:</strong></span>
+                    <span id="patientSummaryText">Yükleniyor...</span>
+                </div>
+                <span id="caseSolvedStatusBadge" style="font-size: 0.75rem; font-weight: 700; color: var(--accent-emerald); display: none;">✅ Daha Önce Çözüldü</span>
+            </div>
+
+            <!-- Progressive Clue Node Tracker (6 Steps) -->
+            <div class="clue-progress-tracker" id="clueProgressTracker"></div>
+
+            <!-- Clues Timeline / Feed -->
+            <div class="clues-container" id="cluesContainer"></div>
+
+            <!-- Previous Guesses Feed -->
+            <div class="guesses-feed" id="guessesFeed"></div>
+        </section>
+
+        <!-- Finished Actions Bar (Vaka bittiğinde ana ekranda görünür) -->
+        <div class="finished-actions" id="finishedActions" style="display: none;">
+            <button class="btn-primary" id="btnMainNextCase" style="padding: 0.85rem 1.5rem; font-size: 0.95rem;">
+                <span>⚡</span> Sıradaki Vakayı Çöz
+            </button>
+            <button class="btn-secondary" id="btnMainShowReport" style="padding: 0.85rem 1.5rem; font-size: 0.95rem;">
+                <span>📋</span> Vaka Raporunu & Mini-Quiz'i Aç
+            </button>
+            <button class="btn-duel-action" id="btnMainDuelShare" style="padding: 0.85rem 1.5rem; font-size: 0.95rem;">
+                <span>⚔️</span> Arkadaşına Düello Gönder
+            </button>
+        </div>
+
+        <!-- Input & Search Section -->
+        <section class="input-section" id="mainInputSection">
+            <div class="search-and-browser-container">
+                <!-- Sol Bölüm: Kategori & Alt Kategori Ağacı Menüsü -->
+                <div class="category-browser-wrapper" id="categoryBrowserWrapper">
+                    <button class="btn-category-browser" id="btnCategoryBrowser" type="button" title="Tüm kategorileri ve alt seçenekleri ağaç şeklinde inceleyin">
+                        <span id="categoryBrowserIcon">📂</span>
+                        <span id="categoryBrowserLabel">DSM-5 Kategorileri</span>
+                        <span class="chevron">▾</span>
+                    </button>
+                    
+                    <!-- Kategori Ağacı Açılır Paneli -->
+                    <div class="category-tree-panel" id="categoryTreePanel">
+                        <div class="category-tree-header">
+                            <span id="treePanelTitle">📖 DSM-5 Kategori & Tanı Ağacı</span>
+                            <button class="btn-close-tree" id="btnCloseCategoryTree" type="button">✕</button>
+                        </div>
+                        <div class="category-tree-search-box">
+                            <input type="text" id="categoryTreeSearchInput" placeholder="Kategori veya tanı filtrele..." class="form-input" style="font-size: 0.82rem; padding: 0.45rem 0.65rem; width: 100%;">
+                        </div>
+                        <div class="category-tree-content" id="categoryTreeContent">
+                            <!-- JS ile kategoriler ve altındaki tanılar akordiyon olarak doldurulur -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ Bölüm: Yazarak Arama ve Tahmin Butonu -->
+                <div class="search-container" style="flex: 1;">
+                    <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                    
+                    <div class="input-group">
+                        <div class="search-input-box">
+                            <span class="search-icon">🔍</span>
+                            <input 
+                                type="text" 
+                                id="diagnosisInput" 
+                                class="diagnosis-input" 
+                                placeholder="Bir DSM-5 tanısı yazın veya soldaki kategorilerden seçin..." 
+                                autocomplete="off"
+                                spellcheck="false"
+                            >
+                        </div>
+                        <button class="btn-submit" id="btnSubmit">
+                            <span id="btnSubmitLabel">Tahmin Et</span> ⏎
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer of Input Section -->
+            <div class="game-controls">
+                <div class="remaining-guesses">
+                    <span id="remainingGuessesText">Kalan Hak: 6/6</span>
+                    <div class="guess-dots" id="guessDots"></div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button class="btn-link" id="btnGiveUp">Pes Et ve Çözümü Gör</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal: Result / Differential Diagnosis Card -->
+    <div class="modal-backdrop" id="resultModal">
+        <div class="modal-window" style="max-width: 720px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📋</span> Vaka Değerlendirme & Konsültasyon Raporu
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="result-banner" id="resultBanner">
+                    <div class="result-icon" id="resultIcon">🎉</div>
+                    <div class="result-heading" id="resultHeading">Tebrikler!</div>
+                    
+                    <div class="result-diagnosis-box">
+                        <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">Kesin Klinik Hedef</div>
+                        <div class="result-diagnosis-name" id="resultDiagnosisName">Tanı Adı</div>
+                        <div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 2px;" id="resultDiagnosisEn">Diagnosis English</div>
+                    </div>
+                </div>
+
+                <!-- Düello Karşılaştırma Podyumu (Düello Modunda Görünür) -->
+                <div class="duel-podium-card" id="duelPodiumBox" style="display: none;"></div>
+
+                <!-- Kombo Tam Konsültasyon Özeti (Kombo Modunda Görünür) -->
+                <div class="edu-section" id="comboSummaryBox" style="display: none; border-color: var(--accent-amber);"></div>
+
+                <!-- Detaylı Klinik Tanım ve Psikopatoloji -->
+                <div class="edu-section" id="resultClinicalSection">
+                    <div class="edu-title">
+                        <span>🧠</span> Detaylı Klinik Tanım & Psikopatoloji
+                    </div>
+                    <div class="edu-content" id="resultClinicalOverview"></div>
+                </div>
+
+                <!-- Resmi DSM-5 Tanı Kriterleri (Ayrı Ayrı Maddeler) -->
+                <div class="edu-section" id="resultDsmManualSection">
+                    <div class="edu-title">
+                        <span>📖</span> Resmi DSM-5-TR Tanı Kriterleri (Tüm Maddeler)
+                    </div>
+                    <div class="edu-content" id="resultDsmFullCriteria"></div>
+                </div>
+
+                <!-- Vakadaki Belirti Eşleştirmeleri -->
+                <div class="edu-section" id="resultSymptomSection">
+                    <div class="edu-title">
+                        <span>🎯</span> Vakadaki Belirti ➔ DSM-5 Kriter Eşleştirmeleri
+                    </div>
+                    <div class="edu-content" id="resultDsmCriteria"></div>
+                </div>
+
+                <!-- Ayırıcı Tanı (Differential Diagnosis) -->
+                <div class="edu-section">
+                    <div class="edu-title">
+                        <span>⚖️</span> Ayırıcı Tanı Analizi (Differential Diagnosis)
+                    </div>
+                    <div class="edu-content" id="resultDiffDiag"></div>
+                </div>
+
+                <!-- Kanıta Dayalı Terapi & Farmakoterapi Kartı -->
+                <div class="therapy-box" id="resultTherapyBox">
+                    <div class="therapy-title">
+                        <span>🛡️</span> Kanıta Dayalı Altın Standart Psikoterapi & Farmakoterapi
+                    </div>
+                    <div class="therapy-gold" id="therapyGold">DBT (Diyalektik Davranış Terapisi)</div>
+                    <div class="therapy-desc" id="therapyDesc">Terapi detayları...</div>
+                    <div style="font-size: 0.84rem; color: #fda4af; margin-top: 0.5rem; font-weight: 600;" id="therapyPharm">İlaç notu...</div>
+                </div>
+
+                <!-- Mini-Quiz (Differential Diagnosis Showdown) -->
+                <div class="mini-quiz-card" id="resultMiniQuizBox">
+                    <span class="quiz-badge">🧠 Ayırıcı Tanı Mini-Quiz'i</span>
+                    <div class="quiz-question-text" id="quizQuestion">Soru yükleniyor...</div>
+                    <div class="quiz-options-list" id="quizOptionsList"></div>
+                    <div class="quiz-explanation-box" id="quizExplanation" style="display: none;"></div>
+                </div>
+
+                <!-- Wordle Copy Score & Instant Duel Challenge -->
+                <div class="score-share-box">
+                    <div class="score-share-text" id="shareScoreText"></div>
+                    <div class="share-buttons-row">
+                        <button class="btn-primary" id="btnCopyScore">
+                            <span>📋</span> Skoru Kopyala
+                        </button>
+                        <button class="btn-whatsapp" id="btnShareWhatsApp">
+                            <span>📲</span> WhatsApp'ta Paylaş
+                        </button>
+                        <button class="btn-duel-action" id="btnChallengeFriendLink">
+                            <span>⚔️</span> Bu Vakayla Meydan Oku (Düello Linki)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary btn-close-modal">Kapat</button>
+                <button class="btn-primary" id="btnNextPractice">
+                    <span>⚡</span> Sıradaki Vakayı Çöz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Live Duel & Challenge Center (Canlı Düello & Meydan Okuma Merkezi) -->
+    <div class="modal-backdrop" id="duelCenterModal">
+        <div class="modal-window" style="max-width: 680px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>⚔️</span> Canlı Düello & Arkadaşa Meydan Okuma Merkezi
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">🧑‍⚕️ Klinisyen Adınız / Takma Adınız:</label>
+                    <input type="text" id="duelNicknameInput" class="form-input" placeholder="Örn: Dr. Emre" maxlength="24">
+                </div>
+
+                <!-- 0. Otomatik Rastgele Rakip Ara (Global Matchmaking Lobi) -->
+                <div class="edu-section" style="border-left: 4px solid #10b981; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.08));">
+                    <div class="edu-title" style="color: #34d399;">🌐 1. Otomatik Canlı Rakip Ara (Sitedeki Aktif Oyuncularla Eşleş)</div>
+                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        Oda kodu paylaşmaya gerek kalmadan, o anda sitede <strong>"Rakip Ara"</strong> butonuna basan başka bir oyuncuyla otomatik eşleşip 5 vakalık canlı düelloya başlayın!
+                    </p>
+                    <button class="btn-primary" id="btnStartMatchmaking" type="button" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); padding: 0.85rem;">
+                        <span>🔍</span> Canlı Rakip Ara (Otomatik Eşleştirme Başlat)
+                    </button>
+                    <div id="matchmakingStatusBox" style="display: none; margin-top: 0.75rem; padding: 0.85rem; background: var(--bg-secondary); border: 1px dashed #10b981; border-radius: var(--radius-md); text-align: center;">
+                        <div id="matchmakingStatusText" style="font-size: 0.86rem; font-weight: 700; color: #34d399;">📡 Küresel Lobi Taranıyor... Rakip bekleniyor...</div>
+                        <button class="btn-secondary" id="btnCancelMatchmaking" type="button" style="margin-top: 0.5rem; font-size: 0.76rem; padding: 0.35rem 0.75rem;">İptal Et</button>
+                    </div>
+                </div>
+
+                <!-- 1. Canlı Oda Düellosu (Gerçek Zamanlı P2P + Senkron Oda Kodu) -->
+                <div class="edu-section" style="border-left: 4px solid #f43f5e;">
+                    <div class="edu-title" style="color: #fb7185;">⚡ 2. Arkadaşınla Özel Oda Koduyla Düello</div>
+                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        4 haneli bir <strong>Oda Kodu</strong> oluşturup arkadaşınıza gönderin. Arkadaşınız aynı kodu girdiğinde her ikinize <strong>birebir aynı vakalar</strong> açılır ve birbirinizin hamlelerini/skorunu canlı görürsünüz!
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <button class="btn-duel-action" id="btnCreateLiveDuelRoom" type="button" style="justify-content: center;">
+                            <span>🏠</span> Yeni Düello Odası Kur
+                        </button>
+                        <div style="display: flex; gap: 0.4rem;">
+                            <input type="text" id="joinRoomCodeInput" class="form-input" placeholder="ODA KODU (Örn: K7M9)" style="text-transform: uppercase; font-family: var(--font-mono); font-weight: 800; text-align: center;" maxlength="8">
+                            <button class="btn-primary" id="btnJoinLiveDuelRoom" type="button">Katıl</button>
+                        </div>
+                    </div>
+
+                    <div id="liveRoomCreatedBox" style="display: none; margin-top: 0.85rem; padding: 0.9rem; background: var(--bg-secondary); border: 1px dashed #f43f5e; border-radius: var(--radius-md); text-align: center;">
+                        <div style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Aktif Düello Oda Kodunuz</div>
+                        <div id="generatedRoomCodeDisplay" style="font-family: var(--font-mono); font-size: 1.75rem; font-weight: 900; color: #fb7185; letter-spacing: 3px; margin: 0.25rem 0;">K7M9</div>
+                        <div id="liveRoomConnectionStatus" style="font-size: 0.82rem; color: var(--accent-emerald); margin-bottom: 0.65rem;">🟢 Oda hazır! Arkadaşınız bu kodu girerek veya aşağıdaki davet linkine tıklayarak katılabilir.</div>
+                        <div class="share-buttons-row">
+                            <button class="btn-secondary" id="btnCopyRoomInviteLink" type="button">🔗 Oda Davet Linkini Kopyala</button>
+                            <button class="btn-whatsapp" id="btnWhatsappRoomInvite" type="button">📲 WhatsApp'tan Davet Gönder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Tek Vaka Meydan Okuma Linki -->
+                <div class="edu-section" style="border-left: 4px solid var(--accent-primary);">
+                    <div class="edu-title">🎯 2. Şu Anki Vakayla Meydan Oku (Asenkron Düello Linki)</div>
+                    <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        Şu an ekranda açık olan vakayı (veya az önce çözdüğünüz skoru) özel bir düello linkine dönüştürün. Arkadaşınız tıkladığında doğrudan bu vakayla sizin rekorunuza karşı yarışır!
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <input type="text" id="currentCaseDuelLinkInput" class="form-input" readonly style="flex: 1; font-size: 0.8rem;">
+                        <button class="btn-primary" id="btnCopyCurrentDuelLink" type="button">📋 Kopyala</button>
+                        <button class="btn-whatsapp" id="btnWhatsappCurrentDuel" type="button">📲 WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Case Manager & Built-in Pack Shelf (Paket Rafı & JSON Kütüphanesi) -->
+    <div class="modal-backdrop" id="caseManagerModal">
+        <div class="modal-window" style="max-width: 760px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📦</span> Vaka Paketi Rafı & Özel Havuz Yöneticisi
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Current Library Stats & Unsolved Filter Reset -->
+                <div class="edu-section" style="border-left: 4px solid var(--accent-emerald);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <div class="edu-title" style="margin-bottom: 0.2rem;">📊 Aktif Vaka Havuzu & Çözüm İlerlemesi</div>
+                            <div style="font-size: 0.9rem;">
+                                <span id="activePoolLabel">Oynanan Paket:</span>
+                                <strong id="totalCasesCount" style="color: var(--accent-emerald);">Tüm Vakalar (150 Vaka)</strong>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
+                            <button class="btn-secondary" id="btnResetSolvedHistory" style="font-size: 0.78rem; padding: 0.45rem 0.75rem;">
+                                🧹 Çözülen Vaka Geçmişini Sıfırla
+                            </button>
+                            <button class="btn-secondary" id="btnRestoreDefaultPool" style="font-size: 0.78rem; padding: 0.45rem 0.75rem;">
+                                🌟 Tüm 150 Vakayı Aktif Et
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Dahili Hazır Paket Rafı (Dosya Yüklemeden Tek Tıkla Seçim) -->
+                <div class="edu-section">
+                    <div class="edu-title">🗂️ Dahili Hazır Paket Rafı (JSON Yüklemeden Tek Tıkla Geçiş Yapın!)</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">
+                        Artık her seferinde dosya seçmenize gerek yok! İstediğiniz vaka paketine aşağıdan tek tıkla geçebilirsiniz:
+                    </p>
+                    <div class="pack-shelf-grid" id="builtInPackShelf"></div>
+                </div>
+
+                <!-- 2. Kaydedilen Özel JSON Paketlerim -->
+                <div class="edu-section" id="savedCustomPacksSection">
+                    <div class="edu-title">💾 Kaydedilen Özel Paketlerim (Kalıcı Hafıza)</div>
+                    <div id="savedCustomPacksList" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;"></div>
+                </div>
+
+                <!-- 3. Yeni JSON Paketi Ekle (Dosya Seç VEYA Metin Yapıştır) -->
+                <div class="edu-section">
+                    <div class="edu-title">📤 Yeni Özel Vaka Paketi Ekle (.JSON Dosyası veya Kopyala-Yapıştır)</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 0.75rem;">
+                        <input type="text" id="customPackNameInput" class="form-input" placeholder="Paket Adı (Örn: Final Çalışma Paketi)" style="font-size: 0.84rem;">
+                        <div>
+                            <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
+                            <button class="btn-primary" id="btnTriggerUploadJSON" type="button" style="width: 100%; justify-content: center;">
+                                <span>📁</span> Bilgisayardan/Telefondan .JSON Seç
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" style="font-size: 0.78rem;">Veya JSON Vaka Metnini Doğrudan Buraya Yapıştırın:</label>
+                        <textarea id="pasteJsonTextarea" class="form-textarea" placeholder='[{"id": "case-901", "diagnosisId": "mdd", "clues": ["1...", "2...", "3...", "4...", "5...", "6..."]}]' style="font-family: var(--font-mono); font-size: 0.78rem; min-height: 68px;"></textarea>
+                        <button class="btn-secondary" id="btnImportPastedJSON" type="button" style="justify-content: center; margin-top: 0.35rem;">
+                            <span>⚡</span> Yapıştırılan JSON Paketini Kaydet ve Oyna
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Çözülen Vakalar Arşivim -->
+                <div class="edu-section" style="border-left: 4px solid #a855f7;">
+                    <div class="edu-title" style="color: #c084fc;">🗄️ Çözülen Vakalar Arşivim (Tamamlanan Vakalar)</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Çözdüğünüz tüm vakalar otomatik olarak bu arşive taşınır ("Sadece Çözülmemişler" açıkken karşınıza tekrar çıkmaz, ancak istediğiniz zaman buradan tekrar açıp inceleyebilirsiniz):
+                    </p>
+                    <div id="solvedArchiveList" style="display: flex; flex-direction: column; gap: 0.45rem; max-height: 210px; overflow-y: auto; padding-right: 4px;"></div>
+                </div>
+
+                <!-- 5. Dışa Aktar & GitHub Sürümü İçin Kalıcı Birleştirici -->
+                <div class="edu-section" style="border-left: 4px solid #38bdf8;">
+                    <div class="edu-title" style="color: #38bdf8;">☁️ GitHub Sürümüne Kalıcı Vaka Ekleme & Dışa Aktarma</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.65rem;">
+                        Her ay 100 yeni vakalık JSON yüklediğinizde, bu vakaların <strong>GitHub sitenize giren herkeste kalıcı olarak görünmesi</strong> için aşağıdaki mavi butona basıp güncel <code>cases.js</code> dosyasını indirin ve GitHub'daki <code>js/cases.js</code> dosyasının üzerine bırakın:
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
+                        <button class="btn-primary" id="btnExportMasterCasesJS" type="button" style="justify-content: center; background: linear-gradient(135deg, #0284c7, #4f46e5);">
+                            <span>🚀</span> Yeni Vakalarla Birleştirilmiş <code>cases.js</code> İndir
+                        </button>
+                        <button class="btn-secondary" id="btnExportJSON" type="button" style="justify-content: center;">
+                            <span>💾</span> Aktif Vakaları (.json) İndir
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: DSM Criteria Symptom Detail (Tıklanan Semptom Eşleşmesi) -->
+    <div class="modal-backdrop" id="dsmCriteriaDetailModal">
+        <div class="modal-window" style="max-width: 580px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📖</span> DSM-5 Tanı Kriteri Eşleştirmesi
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="dsm-popover-header">
+                    <span>🔍 Danışanın İpucundaki İfadesi:</span>
+                </div>
+                <div class="dsm-popover-symptom" id="modalSymptomText">"..."</div>
+
+                <div class="dsm-popover-header" style="margin-top: 1rem; color: var(--accent-emerald);">
+                    <span>📋 Resmi DSM-5 Tanı Kriteri Karşılığı:</span>
+                </div>
+                <div class="edu-section" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3);">
+                    <div class="dsm-popover-criteria" id="modalCriteriaText">DSM-5 Kriteri...</div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Anladım</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Statistics -->
+    <div class="modal-backdrop" id="statsModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📊</span> İstatistikler ve Başarı Durumu
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="statPlayed">0</div>
+                        <div class="stat-label">Oynanan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statWinRate">%0</div>
+                        <div class="stat-label">Başarı</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statStreak">0</div>
+                        <div class="stat-label">Mevcut Seri</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="statMaxStreak">0</div>
+                        <div class="stat-label">En İyi Seri</div>
+                    </div>
+                </div>
+
+                <div class="edu-section" style="margin-top: 0.5rem;">
+                    <div class="edu-title">Tahmin Dağılımı</div>
+                    <div id="statDistribution" style="margin-top: 0.5rem;"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Tamam</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: DSM-5 Guide -->
+    <div class="modal-backdrop" id="dsmGuideModal">
+        <div class="modal-window" style="max-width: 720px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📚</span> DSM-5-TR Tanı Kütüphanesi & Rehberi (297 Tanı)
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="dsmGuideList"></div>
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Psychotherapy Guide -->
+    <div class="modal-backdrop" id="therapyGuideModal">
+        <div class="modal-window" style="max-width: 760px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>🛡️</span> Kanıta Dayalı Psikoterapi Ekolleri & Müdahale Kılavuzu
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="therapyGuideList"></div>
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Psychopharmacology Guide -->
+    <div class="modal-backdrop" id="pharmaGuideModal">
+        <div class="modal-window" style="max-width: 760px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>💊</span> Klinik Psikofarmakoloji & Biyolojik Müdahale Rehberi
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="pharmaGuideList"></div>
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Case Studio (Kendi Vakanı Yaz & Paylaş) -->
+    <div class="modal-backdrop" id="caseStudioModal">
+        <div class="modal-window" style="max-width: 700px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>✍️</span> Vaka Stüdyosu (Kendi Vakanı Oluştur)
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                    Derste gördüğünüz ya da hazırladığınız bir klinik vakayı 6 aşamalı olarak yazın. Sistem size <strong>özel bir web linki</strong> üretecektir!
+                </p>
+
+                <form id="caseStudioForm" style="display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.4rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <div class="form-group">
+                            <label class="form-label">Hedef Tanı (DSM-5):</label>
+                            <select id="studioDiagnosisSelect" class="form-select" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Zorluk Derecesi:</label>
+                            <select id="studioDifficulty" class="form-select">
+                                <option value="Kolay">Kolay</option>
+                                <option value="Orta" selected>Orta</option>
+                                <option value="Zor">Zor</option>
+                                <option value="İleri Düzey">İleri Düzey</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Danışan Profili (Örn: 24 yaşında, kadın, mimar):</label>
+                        <input type="text" id="studioPatientSummary" class="form-input" placeholder="Yaş, meslek, medeni durum vb." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">1. İpucu (Başvuru Şikayeti & İlk İzlenim):</label>
+                        <textarea id="studioClue1" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">2. İpucu (Belirti Süresi, Başlangıç & Gidişat):</label>
+                        <textarea id="studioClue2" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">3. İpucu (İşlevsellik Kaybı & Davranışsal Yansıma):</label>
+                        <textarea id="studioClue3" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">4. İpucu (Dışlama Kriterleri, Tıbbi Tetkikler, Madde):</label>
+                        <textarea id="studioClue4" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">5. İpucu (Ruhsal Durum Muayenesi - MSE):</label>
+                        <textarea id="studioClue5" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">6. İpucu (DSM-5 Kilit Tanı Kriteri):</label>
+                        <textarea id="studioClue6" class="form-textarea" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ayırıcı Tanı Açıklaması (İsteğe bağlı):</label>
+                        <textarea id="studioDiffDiag" class="form-textarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">DSM-5 Kriter Özeti (İsteğe bağlı):</label>
+                        <textarea id="studioDsmSummary" class="form-textarea"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="justify-content: center; padding: 0.9rem;">
+                        <span>🔗</span> Özel Vaka Linki Oluştur
+                    </button>
+                </form>
+
+                <div id="studioResultContainer" style="display: none; margin-top: 1rem; background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-highlight);">
+                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--accent-emerald); margin-bottom: 0.5rem;">
+                        🎉 Vakanız Başarıyla Oluşturuldu!
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="studioShareLinkInput" class="form-input" readonly>
+                        <button class="btn-primary" id="btnCopyStudioLink">Kopyala</button>
+                    </div>
+                    <div style="margin-top: 0.75rem; display: flex; justify-content: flex-end;">
+                        <button class="btn-secondary" id="btnPlayStudioCase">Bu Vakayı Şimdi Çöz 🎮</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary btn-close-modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Help / How to Play -->
+    <div class="modal-backdrop" id="helpModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>❓</span> PsikoVaka 2.0 Nasıl Oynanır?
+                </div>
+                <button class="btn-icon btn-close-modal">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <p style="font-size: 0.92rem; color: var(--text-primary); line-height: 1.6;">
+                    <strong>PsikoVaka 2.0</strong>, 297 DSM-5-TR tanısı ve 150 zengin klinik vakayla donatılmış interaktif bir klinik konsültasyon ve düello simülatörüdür.
+                </p>
+
+                <div class="edu-section">
+                    <div class="edu-title">🎮 4 Farklı Klinik Uzmanlık Modu:</div>
+                    <ul style="padding-left: 1.2rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.75;">
+                        <li><strong>🩺 DSM-5 Tanı Avcısı:</strong> 6 kademeli ipucuyla danışanın kesin DSM-5-TR tanısını bulun.</li>
+                        <li><strong>🛡️ Terapi Simülatörü:</strong> Vaka için kanıta dayalı altın standart psikoterapi ekolünü seçin.</li>
+                        <li><strong>💊 Farmakoterapi Avcısı:</strong> Danışan için birinci basamak ilaç protokolünü veya acil antidotu belirleyin.</li>
+                        <li><strong>⚡ Tam Konsültasyon (Kombo Modu):</strong> Aynı vakada sırasıyla önce <em>Tanıyı</em>, ardından <em>Psikoterapiyi</em> ve son olarak <em>Farmakoterapiyi</em> bilerek 3 aşamalı tam konsültasyonu tamamlayın!</li>
+                    </ul>
+                </div>
+
+                <div class="edu-section">
+                    <div class="edu-title">⚔️ Canlı Düello & Paket Rafı:</div>
+                    <ul style="padding-left: 1.2rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.75;">
+                        <li><strong>📦 Dahili Paket Rafı:</strong> Hiçbir JSON dosyası yüklemeden Paket 1'den Paket 6'ya kadar dilediğiniz paketi tek tıkla seçip oynayın.</li>
+                        <li><strong>🎯 Çözülmemiş Vakalar Filtresi:</strong> Daha önce çözdüğünüz vakaları gizleyerek sadece yeni vakaları görün.</li>
+                        <li><strong>⚔️ Canlı Düello:</strong> Oda kodu kurarak arkadaşınızla anlık yarışın veya tek tıkla WhatsApp düello linki gönderin!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary btn-close-modal">Anladım, Başla!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/diagnoses.js"></script>
+    <script src="js/dsm_manual.js"></script>
+    <script src="js/therapies.js"></script>
+    <script src="js/pharmacology.js"></script>
+    <script src="js/cases.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

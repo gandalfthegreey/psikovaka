@@ -1,0 +1,984 @@
+[
+  {
+    "id": "case-070",
+    "caseNumber": 70,
+    "difficulty": "Zor",
+    "course": "FORENSIC",
+    "diagnosisId": "frotteuristic",
+    "therapyId": "cbt_general",
+    "category": "SEXUAL",
+    "patientSummary": "26 yaşında, erkek, muhasebe personeli (Adli & Parafilik Vaka)",
+    "clues": [
+      "26 yaşındaki danışan, kalabalık metrobüs ve otobüslerde tanımadığı kadınlara rızaları olmaksızın sürtünme eylemlerini durduramadığını ve yoğun suçluluk yaşadığını belirterek kliniğe başvurdu.",
+      "Bu dürtülerin 17 yaşlarında hayal olarak başladığı, son 2 yıldır ise haftada en az 2-3 kez kalabalık toplu taşıma araçlarında fiili sürtünme eylemlerine dönüştüğü öğrenildi.",
+      "Eylemlerin ardından kendini aşağılık hissettiği, ancak kalabalık bir ortama girdiğinde karşı konulamaz bir gerilim ve ardından gelen cinsel uyarılma döngüsüne girdiği anlatılıyor.",
+      "Genel fiziksel ve nörolojik muayenesi olağandır; toksikoloji taraması temizdir.",
+      "Ruhsal Durum Muayenesinde: Cinsel uyarılmanın tamamen rıza dışı temas koşullanmasına kilitlendiği, dürtü denetiminde yetersizlik ve yoğun ego-distonik utanç duygulanımı gözlendi.",
+      "DSM-5'e göre: En az 6 aylık bir süre boyunca, onay vermeyen bir kişiye dokunma ya da sürtünmeyle ilgili yineleyen, yoğun cinsel uyarılma dürtülerinin bulunması ve kişinin bu dürtüleri rızası olmayan kişilerle eyleme dökmüş olması kriterini tam karşılar."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "rızaları olmaksızın sürtünme eylemlerini",
+        "dsmMatch": "DSM-5 Kriter A: Onay vermeyen kişiye dokunma veya sürtünme dürtüleri"
+      },
+      {
+        "clueIndex": 1,
+        "text": "son 2 yıldır",
+        "dsmMatch": "DSM-5 Süre Eşiği: En az 6 aylık süre"
+      },
+      {
+        "clueIndex": 5,
+        "text": "bu dürtüleri rızası olmayan kişilerle eyleme dökmüş olması",
+        "dsmMatch": "DSM-5 Kriter B: Eyleme dökme veya belirgin klinik sıkıntı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Gizli Şartlandırma",
+      "therapyDetails": "Dürtü yönetimi, gizli duyarsızlaştırma (covert sensitization), nüks önleme ve cinsel empati eğitimi.",
+      "pharmacologyNote": "Ağır ve kontrolsüz adli vakalarda antiandrojenler veya yüksek doz SSRI grubu ajanlar dürtü baskılamada kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Frotteuristik Bozukluk ile Antisosyal Kişilik Bozukluğu arasındaki temel klinik fark nedir?",
+      "options": [
+        "Frotteurizmde eylem sonrası yoğun utanç, suçluluk ve ego-distonik sıkıntı vardır; Antisosyal KB'de ise vicdan azabı ve suçluluk yoktur.",
+        "Frotteurizm sadece çocuklukta görülür.",
+        "Antisosyal hastalar toplu taşımaya binmez.",
+        "İkisi tamamen aynı bozukluktur."
+      ],
+      "correctIndex": 0,
+      "explanation": "Frotteurizmde danışan eylemlerinden ötürü derin suçluluk ve utanç (ego-distonik) yaşar; Antisosyal KB'de ise kural ihlallerinde suçluluk ve empati bulunmaz."
+    },
+    "differentialDiagnosis": "• Ekzibisyonizm: Cinsel organı yabancıya gösterme hazzıdır; sürtünme ve fiziksel temas birincil amaç değildir.\n• Antisosyal KB: Genel suç davranışı ve vicdan azabı eksikliği hakimdir; suçluluk hissetmezler.\n• OKB (Cinsel Obsesyonlar): OKB'de düşünceler haz vermez ve eyleme dökülmez; parafilide ise eylem haz vericidir.",
+    "dsmCriteriaSummary": "DSM-5: En az 6 ay süreyle onay vermeyen kişiye dokunma/sürtünme dürtüleri + Bu dürtülerin rıza dışı eyleme dökülmesi."
+  },
+  {
+    "id": "case-071",
+    "caseNumber": 71,
+    "difficulty": "Zor",
+    "course": "FORENSIC",
+    "diagnosisId": "voyeuristic",
+    "therapyId": "cbt_general",
+    "category": "SEXUAL",
+    "patientSummary": "24 yaşında, erkek, üniversite son sınıf öğrencisi (Adli Vaka)",
+    "clues": [
+      "24 yaşındaki danışan, karşı apartmandaki komşusunun yatak odasını gizlice gözetlerken cep telefonu kamerasıyla yakalanması ve polise şikayet edilmesi üzerine adli psikiyatrik muayeneye getirildi.",
+      "Son 1 yıldır haftanın 4-5 gecesi dürbün ve kamerayla habersiz kişilerin soyunmasını ve cinsel ilişkilerini gizlice izlediğini, bu anları izlerken mastürbasyon yaparak yoğun haz aldığını itiraf etti.",
+      "Normal flört veya onaylı cinsel birlikteliklerin kendisine 'gizlice izleme heyecanı kadar tatmin vermediğini' ifade etmektedir.",
+      "Madde veya alkol bağımlılığı saptanmamış, toksikoloji negatif çıkmıştır.",
+      "Ruhsal Durum Muayenesinde: Yakalanma korkusu ve adli süreç nedeniyle yoğun anksiyete; cinsel uyarılmanın habersiz kişileri dikizleme koşullanmasına bağlandığı gözlendi.",
+      "DSM-5'e göre: Kişi en az 18 yaşındadır ve en az 6 aylık süre boyunca, habersiz bir kişinin çıplaklığını, soyunmasını ya da cinsel etkinliğini gizlice gözetlemeyle ilgili yoğun dürtüleri eyleme dökmüştür."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "habersiz kişilerin soyunmasını ve cinsel ilişkilerini gizlice izlediğini",
+        "dsmMatch": "DSM-5 Kriter A: Habersiz birinin çıplaklığını veya cinsel etkinliğini gözetleme"
+      },
+      {
+        "clueIndex": 5,
+        "text": "en az 18 yaşındadır",
+        "dsmMatch": "DSM-5 Kriter B: Kişinin en az 18 yaşında olması gerekliliği"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi (Gizli Şartlandırma & Yeniden Çerçeveleme)",
+      "therapyDetails": "Gözetleme tetikleyicilerini tanıma, gözetleme anında olumsuz adli sonuçları canlandırma, empati geliştirme.",
+      "pharmacologyNote": "Dürtü yoğunluğunu azaltmak için SSRI grubu antidepresanlar reçete edilebilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5'e göre Voyörizm (Gözetlemecilik Bozukluğu) tanısı koyabilmek için failin en az kaç yaşında olması şarttır?",
+      "options": [
+        "En az 18 yaşında olmalıdır.",
+        "En az 12 yaşında olmalıdır.",
+        "En az 21 yaşında olmalıdır.",
+        "Yaş sınırı bulunmamaktadır."
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5 voyöristik bozukluk için failin en az 18 yaşında olmasını kesin tanı kriteri olarak zorunlu kılar."
+    },
+    "differentialDiagnosis": "• Normal Merak/İnternet Pornografisi: Pornografide izlenen kişinin haberi ve rızası vardır; voyörizmde mağdur habersizdir ve uyarılma habersiz olmasıyla doğrudan bağlantılıdır.\n• Ekzibisyonizm: Kendi organını gösterme eylemidir, gözetleme değildir.",
+    "dsmCriteriaSummary": "DSM-5: ≥18 yaş + En az 6 ay habersiz kişileri çıplak/ilişki anında gözetleme dürtüleri + Eyleme dökme."
+  },
+  {
+    "id": "case-072",
+    "caseNumber": 72,
+    "difficulty": "Zor",
+    "course": "FORENSIC",
+    "diagnosisId": "exhibitionistic",
+    "therapyId": "cbt_general",
+    "category": "SEXUAL",
+    "patientSummary": "29 yaşında, erkek, elektrik teknisyeni (Adli Vaka)",
+    "clues": [
+      "29 yaşındaki danışan, parkta bankta oturan yabancı bir kadının önüne geçip trençkotunu aniden açarak genital organını teşhir ederken güvenlik görevlileri tarafından suçüstü yakalandı.",
+      "Bu teşhir eylemlerini son 8 aydır haftada 1-2 kez tanımadığı yabancılara karşı tekrarladığını, kadının şaşkınlık ve korku dolu çığlığını gördüğü anda yoğun bir cinsel haz yaşadığını anlattı.",
+      "Kurbanlara fiziksel temas, tecavüz veya saldırı niyeti olmadığını, amacının sadece 'karşı tarafın şok tepkisini görmek' olduğunu vurguladı.",
+      "Genel tıbbi ve nörolojik taramalar temizdir; epilepsi veya frontal lob patolojisi saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Yetersizlik hislerini kurbanın şok tepkisiyle telafi etme çabası, dürtüsellik ve yakalanma sonrası utanç duyguları belirlendi.",
+      "DSM-5'e göre: En az 6 aylık süre boyunca, hazırlıksız bir kişiye cinsel organını göstermeyle ilgili yineleyen yoğun cinsel uyarılma fantezileri/dürtüleri bulunması ve bu dürtüleri onay vermeyen kişiler üzerinde eyleme dökmüş olması tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "genital organını teşhir ederken",
+        "dsmMatch": "DSM-5 Kriter A: Hazırlıksız bir kişiye genital organı gösterme dürtüleri"
+      },
+      {
+        "clueIndex": 1,
+        "text": "son 8 aydır",
+        "dsmMatch": "DSM-5 Süre Kriteri: En az 6 ay"
+      },
+      {
+        "clueIndex": 2,
+        "text": "karşı tarafın şok tepkisini görmek",
+        "dsmMatch": "Psikopatoloji: Mağdurun şok/korku tepkisinden cinsel doyum alma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Dürtü Kontrolü",
+      "therapyDetails": "Mağdur odaklı empati eğitimi, uyaran kontrolü, gizli duyarsızlaştırma ve öfke/yetersizlik şemalarıyla çalışma.",
+      "pharmacologyNote": "SSRI grubu ilaçlar ve ağır olgularda antiandrojen hormon tedavisi."
+    },
+    "miniQuiz": {
+      "question": "Göstermecilik Bozukluğunda faili en çok cinsel olarak uyaran ve tatmin eden temel psikolojik unsur nedir?",
+      "options": [
+        "Hazırlıksız kurbanın yüzündeki korku, şaşkınlık ve şok tepkisi",
+        "Kurbanla fiziksel cinsel ilişkiye girmek",
+        "Kurbandan para çalmak",
+        "Kurbanın ona iltifat etmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ekzibisyonizmde fail temas istemez; temel uyarılma kurbanın hazırlıksız yakalanması ve gösterdiği dehşet/şaşkınlık tepkisidir."
+    },
+    "differentialDiagnosis": "• Frotteurizm: Fiziksel temas ve sürtünme vardır; ekzibisyonizmde temas yoktur, sadece görsel teşhir vardır.\n• Bipolar Manik Epizod: Manide genel disinhibisyonla soyunma olabilir; ancak burada kronik ve spesifik parafilik odak vardır.",
+    "dsmCriteriaSummary": "DSM-5: En az 6 ay hazırlıksız kişiye genital organını gösterme dürtüleri + Eyleme dökme veya belirgin klinik sıkıntı."
+  },
+  {
+    "id": "case-073",
+    "caseNumber": 73,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "nightmare_disorder",
+    "therapyId": "irt",
+    "category": "SLEEP",
+    "patientSummary": "28 yaşında, kadın, mimar",
+    "clues": [
+      "28 yaşındaki danışan, neredeyse her gece uykunun ikinci yarısında (sabaha karşı) yüksekten düşme, canavarlar tarafından kovalanma veya sevdiklerinin öldürülmesini içeren dehşet verici canlı rüyalarla kan ter içinde uyandığını belirterek başvurdu.",
+      "Rüyadan uyandığı anda bilincinin saniyeler içinde tamamen açıldığını, nerede olduğunu bildiğini (tam oryante) ve gördüğü kabusun tüm korkunç detaylarını çok net hatırladığını söyledi.",
+      "Son 5 aydır haftada en az 3-4 gece tekrarlayan bu kabuslar nedeniyle uyumaktan korktuğunu ve gündüzleri derin bir yorgunluk ve kaygı yaşadığını belirtti.",
+      "Polisomnografi (PSG) incelemesinde kabusların REM uykusu evresinde ortaya çıktığı; nörolojik muayenenin normal olduğu belirlendi.",
+      "Ruhsal Durum Muayenesinde: Yatağa girerken yoğun beklenti anksiyetesi, uykusuzluk yorgunluğu ve REM uykusu korkusu saptandı. TSSB tablosu oluşturan travmatik bir olay öyküsü yoktur.",
+      "DSM-5'e göre: Hayatta kalma veya güvenliğe yönelik tehditleri içeren, ayrıntılı olarak iyi hatırlanan korkutucu rüyaların yineleyen biçimde görülmesi ve uyanıldığında hızla tam çevreye yönelme (oryantasyon) olması kriterini karşılar."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "dehşet verici canlı rüyalarla kan ter içinde uyandığını",
+        "dsmMatch": "DSM-5 Kriter A: İyi hatırlanan korkutucu rüyaların yinelemesi"
+      },
+      {
+        "clueIndex": 1,
+        "text": "uyandığı anda bilincinin saniyeler içinde tamamen açıldığını",
+        "dsmMatch": "DSM-5 Kriter B: Uyanma anında hızlı oryantasyon (konfüzyon olmaması)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "İmgeleme Provası Terapisi (IRT / Imagery Rehearsal Therapy)",
+      "therapyDetails": "Kabus senaryosunu uyanıkken kağıda yazma, sonunu olumlu ve güvenli bir şekilde yeniden yazıp zihinde prova etme.",
+      "pharmacologyNote": "Prazosin (alfa-1 bloker) dirençli vakalarda sempatik uyarılmayı ve kabusları yatıştırmada etkilidir."
+    },
+    "miniQuiz": {
+      "question": "Kabus Bozukluğu ile Gece Terörü (Uyku Terörü / NREM Parasomnisi) arasındaki en kritik tanısal fark nedir?",
+      "options": [
+        "Kabus Bozukluğunda uyanınca bilinç hemen açılır ve rüya net hatırlanır; Gece Teröründe ise konfüzyon vardır ve rüya hatırlanmaz.",
+        "Kabus sadece gündüz uykusunda olur.",
+        "Gece terörü sadece yaşlılarda görülür.",
+        "Kabus bozukluğunda hasta yataktan fırlayıp koşar."
+      ],
+      "correctIndex": 0,
+      "explanation": "Kabus REM uykusunda olur, uyanınca rüya çok net hatırlanır ve bilinç açıktır. Uyku Terörü NREM evresindedir, amnezi ve uyanma konfüzyonu ile seyreder."
+    },
+    "differentialDiagnosis": "• Gece Terörü (Sleep Terror): NREM evresindedir; hasta uyanmakta zorlanır, konfüzyon yaşar ve rüyayı hatırlamaz.\n• TSSB: Kabuslar doğrudan gerçek bir travmanın aynen yeniden yaşantılanmasıdır.\n• REM Uykusu Davranış Bozukluğu: Rüyayı eyleme dökme ve yataktan fırlama/vurma hareketleri vardır.",
+    "dsmCriteriaSummary": "DSM-5: İyi hatırlanan korkutucu rüyalar + Uyanıldığında hızla tam yönelim (oryantasyon) + Belirgin gündüz sıkıntısı."
+  },
+  {
+    "id": "case-074",
+    "caseNumber": 74,
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "insomnia_disorder",
+    "therapyId": "cbt_i",
+    "category": "SLEEP",
+    "patientSummary": "36 yaşında, kadın, banka şube müdürü",
+    "clues": [
+      "36 yaşındaki danışan, yatağa yattığında zihnini susturamadığını, uykuya dalmasının en az 2-3 saat sürdüğünü ve gece boyunca sık sık uyanıp tekrar uyuyamadığını belirterek başvurdu.",
+      "Yeterli uyuma fırsatı ve sessiz bir yatak odası olmasına rağmen son 6 aydır haftada en az 4-5 gece bu uykusuzluk tablosunu yaşamaktadır.",
+      "Gündüzleri yoğun konsantrasyon kaybı, işte hata yapma korkusu ve sürekli bir bitkinlik yaşadığını, akşam yaklaştığında 'Bu gece de uyuyamayacağım' korkusuyla paniklediğini söyledi.",
+      "Tiroid paneli, demir düzeyleri ve polisomnografi normal çıkmış; uyku apnesi veya huzursuz bacaklar sendromu dışlanmıştır.",
+      "Ruhsal Durum Muayenesinde: Yatak ile uyanıklık ve kaygı arasında güçlü bir negatif koşullanma (psikofizyolojik insomni), uykuya dair felaketleştirici otomatik düşünceler saptandı.",
+      "DSM-5'e göre: Yeterli uyku fırsatına karşın uyku başlatma veya sürdürme güçlüğü, haftada en az 3 gece ortaya çıkma, en az 3 aydır sürme ve gündüz işlevsellik kaybına yol açma kriterlerini tam karşılar."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "uykuya dalmasının en az 2-3 saat sürdüğünü",
+        "dsmMatch": "DSM-5 Kriter A: Uyku başlatma veya sürdürmede güçlük"
+      },
+      {
+        "clueIndex": 1,
+        "text": "son 6 aydır haftada en az 4-5 gece",
+        "dsmMatch": "DSM-5 Kriter C & D: Haftada en az 3 gece ve en az 3 ay süre"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Uykusuzluk için Bilişsel Davranışçı Terapi (CBT-I / Morin Modeli)",
+      "therapyDetails": "Uyaran kontrolü (yatak sadece uyku içindir), uyku kısıtlama terapisi, uyku hijyeni ve bilişsel yeniden yapılandırma.",
+      "pharmacologyNote": "Kısa süreli kriz durumlarında non-benzodiazepin hipnotikler (Z-ilaçlar) verilebilir ancak CBT-I kalıcı altın standarttır."
+    },
+    "miniQuiz": {
+      "question": "Uykusuzluk için BDT (CBT-I) protokolünde 'Uyaran Kontrolü' (Stimulus Control) kuralına göre yatakta 20 dakika uyuyamayan hastaya ne yapması önerilir?",
+      "options": [
+        "Yataktan kalkıp başka bir odaya geçmeli, loş ışıkta dinlendirici bir şey yapmalı ve sadece uykusu gelince yatağa dönmelidir.",
+        "Yatakta kalıp zorla gözlerini kapatmalı ve uyumayı beklemelidir.",
+        "Hemen telefondan sosyal medyaya bakmalıdır.",
+        "Işıkları açıp yoğun egzersiz yapmalıdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "Uyaran kontrolünün özü; yatak ile kaygı/uyanıklık koşullanmasını kırmaktır. 20 dakikada uyuyamayan kişi yataktan ayrılmalıdır."
+    },
+    "differentialDiagnosis": "• Uyku Apnesi: Gece horlama, boğulma hissi ve solunum durması vardır.\n• Huzursuz Bacaklar Sendromu: Bacaklarda hareket ettirme dürtüsü ve paresteziler vardır.\n• Depresyona Bağlı İnsomni: Anhedoni ve derin çökkünlük primerdir.",
+    "dsmCriteriaSummary": "DSM-5: Uyku başlatma/sürdürme güçlüğü + Haftada ≥3 gece + Süre ≥3 ay + Yeterli uyku fırsatına rağmen oluşma."
+  },
+  {
+    "id": "case-075",
+    "caseNumber": 75,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "hypersomnolence",
+    "therapyId": "cbt_general",
+    "category": "SLEEP",
+    "patientSummary": "22 yaşında, erkek, üniversite öğrencisi",
+    "clues": [
+      "22 yaşındaki danışan, gece kesintisiz 9-10 saat uyumasına rağmen sabahları asla dinlenmiş uyanamadığını ve gün içinde derslerde istemsizce uyuyakaldığını belirterek başvurdu.",
+      "Sabah çalar saat çaldığında saatlerce 'uyku sarhoşluğu' (sleep inertia) yaşadığını, uyanmakta aşırı zorlandığını ve gün içinde 2 saat uyusa dahi dinlenemediğini söyledi.",
+      "Bu durumun son 7 aydır haftanın hemen her günü devam ettiği ve ders başarısının ciddi şekilde çöktüğü öğrenildi.",
+      "Polisomnografi ve Çoklu Uyku Latansı Testinde (MSLT) narkolepsiye özgü SOREMP bulgusu saptanmamış; uyku apnesi görülmemiştir.",
+      "Ruhsal Durum Muayenesinde: Katapleksi (gülmeyle gelen kas felci) öyküsü KESİNLİKLE yoktur; hipnagojik halüsinasyon veya uyku felci (karabasan) bildirilmemiştir.",
+      "DSM-5'e göre: En az 7 saat süren bir ana uyku evresi geçirilmesine karşın gün içinde tekrarlayan uyku dönemleri, dinlendirmeyen 9 saatten uzun uyku ve uyanmakta güçlük çekme tablosunun haftada en az 3 gün ve en az 3 aydır sürmesi tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "gece kesintisiz 9-10 saat uyumasına rağmen",
+        "dsmMatch": "DSM-5 Kriter A: Ana uykuya rağmen dinlendirmeyen aşırı uykululuk"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Katapleksi",
+        "dsmMatch": "Ayırıcı Tanı: Narkolepsi dışlaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Davranışsal Uyku Planlaması & BDT",
+      "therapyDetails": "Sabit uyanma saatleri, planlı kısa gündüz şekerlemeleri, parlak ışık terapisi ve uyku sarhoşluğunu yönetme.",
+      "pharmacologyNote": "Gündüz uyanıklığını artırmak için Modafinil veya metilfenidat gibi psikostimülanlar reçete edilir."
+    },
+    "miniQuiz": {
+      "question": "Hipersomnolans Bozukluğunu Narkolepsiden ayıran en belirleyici klinik özellik nedir?",
+      "options": [
+        "Narkolepside kısa uykular dinlendiricidir ve katapleksi görülür; Hipersomnolans'ta ise uzun uykular dahi dinlendirmez ve katapleksi yoktur.",
+        "Hipersomnolans sadece yaşlılarda görülür.",
+        "Narkolepside hasta hiç uyuyamaz.",
+        "İkisi tamamen aynı bozukluktur."
+      ],
+      "correctIndex": 0,
+      "explanation": "Narkolepside 15 dakikalık şekerleme hastayı yeniler ve katapleksi eşlik edebilir. Hipersomnolans'ta ise saatlerce uyunsa bile asla dinlenilmez."
+    },
+    "differentialDiagnosis": "• Narkolepsi: Katapleksi, uyku felci ve dinlendirici kısa şekerlemeler vardır.\n• Uyku Apnesi: Horlama ve gece solunum durmaları vardır.\n• Yetersiz Uyku Sendromu: Kişi fırsat bulamadığı için az uyumaktadır; fırsat verildiğinde düzelir.",
+    "dsmCriteriaSummary": "DSM-5: En az 7 saatlik uykuya rağmen aşırı uyku ihtiyacı + Dinlendirmeyen uyku + Haftada ≥3 kez + Süre ≥3 ay."
+  },
+  {
+    "id": "case-076",
+    "caseNumber": 76,
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "genito_pelvic_pain",
+    "therapyId": "sensate_focus",
+    "category": "SEXUAL",
+    "patientSummary": "25 yaşında, kadın, yeni evli (1 yıllık evli)",
+    "clues": [
+      "25 yaşındaki kadın danışan, 1 yıllık evli olmasına rağmen eşiyle vajinal birleşmeyi hiçbir şekilde gerçekleştiremediklerini belirterek cinsel terapi kliniğine başvurdu.",
+      "Cinsel ilişki denemelerinde vajina girişinde sanki 'etten bir duvar örülmüş gibi' hissettiğini, bacaklarını istemsizce kapattığını ve şiddetli bir yırtılma/acı korkusuyla eşini ittiğini anlattı.",
+      "Tampon kullanamadığını ve bugüne kadar jinekolojik muayene masasına dahi oturamadığını ifade etti.",
+      "Jinekolojik değerlendirmede anatomik veya enfeksiyöz hiçbir organik patoloji (himen anomalisi, enfeksiyon vb.) saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Cinsellik ve bekaretle ilgili katı tabular, ilk geceye dair felaketleştirici mitler, pelvik taban kaslarında istemsiz spazm şartlanması tespit edildi.",
+      "DSM-5'e göre: Vajinal penetrasyon sırasında sürekli/yineleyici güçlük, belirgin vulvovajinal ağrı korkusu ve penetrasyon denemelerinde pelvik taban kaslarında belirgin istemsiz kasılma (en az 6 ay) tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "bacaklarını istemsizce kapattığını ve şiddetli bir yırtılma/acı korkusuyla",
+        "dsmMatch": "DSM-5 Kriter A: Pelvik taban kasılmaları ve ağrı korkusu"
+      },
+      {
+        "clueIndex": 0,
+        "text": "1 yıllık evli olmasına rağmen",
+        "dsmMatch": "DSM-5: Penetrasyonun imkansız hale gelmesi ve süre"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Cinsel Terapi & Duyusal Odaklanma (Masters & Johnson)",
+      "therapyDetails": "Cinsel eğitim (mitlerin çürütülmesi), gevşeme ve Kegel egzersizleri, kademeli dilatör çalışmaları ve Duyusal Odaklanma (Sensate Focus).",
+      "pharmacologyNote": "Primer farmakoterapisi yoktur; gerekirse kas gevşemesi için lokal anestezikler veya anksiyolitikler destekleyici verilebilir."
+    },
+    "miniQuiz": {
+      "question": "Vajinismus (Genito-Pelvik Ağrı Bozukluğu) tedavisinde Masters & Johnson'ın geliştirdiği en temel davranışçı egzersiz basamağı nedir?",
+      "options": [
+        "Duyusal Odaklanma (Sensate Focus) ve Kademeli Dilatör Egzersizleri",
+        "Genel anestezi altında cinsel ilişki",
+        "Cerrahi operasyonla kızlık zarının alınması",
+        "Hipnozla tüm anıların silinmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vajinismus tedavisinde performans baskısını kaldıran Duyusal Odaklanma ve pelvik kasları eğiten aşamalı dilatör egzersizleri başarı oranı %95+ olan altın standarttır."
+    },
+    "differentialDiagnosis": "• Disparoni (Organik Ağrı): Enfeksiyon veya endometriozise bağlı organik ağrıdır.\n• Cinsel İstek Azlığı: İstek vardır ancak istemsiz spazm nedeniyle penetrasyon gerçekleşemez.",
+    "dsmCriteriaSummary": "DSM-5: Penetrasyonda belirgin güçlük + Ağrı korkusu + Pelvik taban kaslarında belirgin kasılma (Süre ≥ 6 ay)."
+  },
+  {
+    "id": "case-077",
+    "caseNumber": 77,
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "premature_ejaculation",
+    "therapyId": "sensate_focus",
+    "category": "SEXUAL",
+    "patientSummary": "29 yaşında, erkek, yazılım mühendisi",
+    "clues": [
+      "29 yaşındaki erkek danışan, partneriyle cinsel ilişkilerinde vajinal penetrasyondan sonraki 20-30 saniye içinde ve kendi isteği dışında boşaldığını belirterek başvurdu.",
+      "Bu durumun ilk cinsel deneyiminden beri (yaşam boyu tip) hemen her cinsel ilişkide (%90'ın üzerinde) yaşandığı bildirildi.",
+      "Erken boşalma nedeniyle partnerine karşı derin bir yetersizlik ve suçluluk hissettiğini, ilişkiden kaçınmaya başladığını ifade etti.",
+      "Ürolojik muayenede prostatit veya hormonal bir anomali saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Yoğun performans kaygısı, 'yine erken bitecek' felaketleştirmesi ve boşalma refleksini kontrol etme eşiğinde otonomik aşırı duyarlılık saptandı.",
+      "DSM-5'e göre: Partnerle cinsel etkinlik sırasında, vajinal penetrasyonun ardından yaklaşık 1 dakika içinde ve kişinin arzusundan önce sürekli ya da yineleyici biçimde boşalma olması ve en az 6 aydır sürmesi tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "vajinal penetrasyondan sonraki 20-30 saniye içinde",
+        "dsmMatch": "DSM-5 Kriter A: Penetrasyondan sonra yaklaşık 1 dakika içinde boşalma"
+      },
+      {
+        "clueIndex": 1,
+        "text": "hemen her cinsel ilişkide (%90'ın üzerinde)",
+        "dsmMatch": "DSM-5 Kriter B: Cinsel etkinliğin neredeyse tamamında (%75-100) ortaya çıkma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Cinsel Terapi (Dur-Başlat & Sıkma Teknikleri / Semans Modeli)",
+      "therapyDetails": "Boşalma öncesi uyarılma platosunu tanıma eğitimi, Dur-Başlat (Stop-Start) ve Sıkma (Squeeze) egzersizleri.",
+      "pharmacologyNote": "Gerektiğinde boşalmayı geciktirici Dapoksetin (kısa etkili SSRI) veya lokal geciktirici spreyler eklenebilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5'e göre Yaşam Boyu Erken Boşalma tanısı için vajinal penetrasyondan sonraki süre eşiği yaklaşık ne kadardır?",
+      "options": [
+        "Yaklaşık 1 dakika içinde boşalma olması",
+        "Yaklaşık 10 dakika içinde boşalma olması",
+        "Yaklaşık 30 dakika içinde boşalma olması",
+        "Süre eşiği yoktur, sadece partnerin isteği önemlidir"
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5 tanı kriterlerine göre erken boşalma için objektif süre eşiği penetrasyon sonrası yaklaşık 1 dakikadır."
+    },
+    "differentialDiagnosis": "• Erektil Bozukluk: Sertleşmeyi koruma güçlüğüdür.\n• Durumsal Erken Boşalma: Yeni partnerle ilk ilişkideki geçici heyecan durumudur.",
+    "dsmCriteriaSummary": "DSM-5: Penetrasyondan sonraki yaklaşık 1 dakika içinde boşalma + Süre ≥ 6 ay + Neredeyse tüm ilişkilerde görülme."
+  },
+  {
+    "id": "case-078",
+    "caseNumber": 78,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "erectile_disorder",
+    "therapyId": "sensate_focus",
+    "category": "SEXUAL",
+    "patientSummary": "42 yaşında, erkek, şirket yöneticisi",
+    "clues": [
+      "42 yaşındaki erkek danışan, son 8 aydır eşiyle birlikte olmak istediğinde sertleşmeyi sağlamada ve ilişki sonuna dek sürdürmede belirgin güçlük yaşadığını belirterek başvurdu.",
+      "Kritik ayırt edici klinik bulgu: Sabah uyandığında spontan sabah ereksiyonlarının (NPT) tamamen normal ve güçlü olduğunu, ancak eşiyle yatağa girdiğinde kalbinin çarptığını ve sertliğin hızla kaybolduğunu anlattı.",
+      "İlişki anında 'Acaba yine sertleşmeyecek mi?' düşüncesine odaklandığını ve adeta kendi bedenini dışarıdan bir seyirci gibi izlediğini (seyirci kalma / spectatoring) söyledi.",
+      "Kardiyovasküler, ürolojik ve hormonal testler (testosteron, prolaktin, şeker) tamamen normaldir; organik vasküler patoloji dışlanmıştır.",
+      "Ruhsal Durum Muayenesinde: Başarısızlık korkusu, erkeklik rolüne dair bilişsel çarpıtmalar ve cinsel anksiyete saptandı.",
+      "DSM-5'e göre: Cinsel etkinliklerin neredeyse tamamında sertliği elde etmede veya sürdürmede belirgin güçlük olması ve bu durumun en az 6 aydır sürmesi kriterini karşılar."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "sabah ereksiyonlarının",
+        "dsmMatch": "Ayırıcı Tanı: Psikojenik kökeni kanıtlayan sabah ereksiyonu varlığı"
+      },
+      {
+        "clueIndex": 2,
+        "text": "kendi bedenini",
+        "dsmMatch": "Psikopatoloji: Performans anksiyetesine bağlı seyirci kalma etkisi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Duyusal Odaklanma Terapisi (Sensate Focus / Masters & Johnson)",
+      "therapyDetails": "Penetrasyon yasağı konularak dokunma ve haz alma egzersizleri ile performans baskısını sıfırlama, bilişsel yeniden yapılandırma.",
+      "pharmacologyNote": "Gerekirse başlangıçta güven oluşturmak için PDE-5 inhibitörleri (Sildenafil/Tadalafil) verilebilir."
+    },
+    "miniQuiz": {
+      "question": "Psikojenik Sertleşme Bozukluğunu Organik (Damarsal/Hormonal) Sertleşme Bozukluğundan ayıran en kritik klinik öykü nedir?",
+      "options": [
+        "Sabah ve gece spontan ereksiyonlarının korunmuş olması ve mastürbasyonda sertleşebilme",
+        "Hastanın 60 yaşından büyük olması",
+        "Sertleşme sorununun sadece gündüzleri olması",
+        "Hastanın hiç alkol kullanmaması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Organik bozuklukta gece/sabah ereksiyonu da kaybolur. Psikojenik vakalarda ise sabah ereksiyonları tamdır, sorun partnere karşı performans kaygısındadır."
+    },
+    "differentialDiagnosis": "• Organik Erektil Disfonksiyon: Diyabet, hipertansiyon veya vasküler yetmezliktedir; sabah ereksiyonları yoktur.\n• Cinsel İstek Bozukluğu: Cinsel arzu ve fanteziler tamamen yok olmuştur.",
+    "dsmCriteriaSummary": "DSM-5: Cinsel etkinliklerin çoğunda sertliği elde edememe/sürdürememe + Süre ≥ 6 ay + Belirgin klinik sıkıntı."
+  },
+  {
+    "id": "case-079",
+    "caseNumber": 79,
+    "difficulty": "Orta",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "delirium",
+    "therapyId": "cbt_general",
+    "category": "NEUROCOGNITIVE",
+    "patientSummary": "74 yaşında, kadın, dahiliye servisinde yatan hasta (Akut Tablo)",
+    "clues": [
+      "74 yaşındaki kadın hasta, idrar yolu enfeksiyonu nedeniyle yatırıldığı hastanede 2 gün içinde aniden ajite olmuş; hemşirelere 'Odamdaki tavandan böcekler yağıyor' diye bağırarak serumlarını sökmüştür.",
+      "Kritik klinik seyir: Hastanın bilinci ve dikkati gün içinde aşırı dalgalanma (fluktuasyon) göstermekte; sabahları uykulu ve sessizken akşamları aşırı ajite ve yönelimsiz (oryantasyon bozuk) hale gelmektedir.",
+      "Danışan nerede olduğunu ve hangi yılda olduğunu bilememekte, dikkatini birkaç saniyeden fazla toparlayamamaktadır.",
+      "Tıbbi tetkiklerde idrar kültüründe ağır E. coli üremesi, yüksek CRP ve hafif lökositoz saptandı; beyin BT'sinde akut inme/kanama yoktur.",
+      "Ruhsal Durum Muayenesinde: Dikkat ve farkındalıkta akut çöküş, görsel halüsinasyonlar, zaman-mekan oryantasyon kaybı ve dalgalı seyir gözlendi.",
+      "DSM-5'e göre: Kısa bir süre içinde (saatler/günler) gelişen, dikkat ve farkındalıkta belirgin bozulma, gün içinde dalgalanma gösteren ek bilişsel bozulmalar ve genel bir tıbbi duruma doğrudan bağlı olma kriterlerini tam karşılar."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "gün içinde aşırı dalgalanma (fluktuasyon) göstermekte",
+        "dsmMatch": "DSM-5 Kriter B: Hızlı başlangıç ve gün içi dalgalı seyir"
+      },
+      {
+        "clueIndex": 0,
+        "text": "tavandan böcekler yağıyor",
+        "dsmMatch": "DSM-5 Kriter C: Görsel halüsinasyonlar ve algı bozukluğu"
+      },
+      {
+        "clueIndex": 3,
+        "text": "idrar kültüründe ağır E. coli üremesi",
+        "dsmMatch": "DSM-5 Kriter D: Genel tıbbi duruma doğrudan bağlı fizyolojik kanıt"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Tıbbi Etiyolojiyi Tedavi & Çevresel Reoryantasyon",
+      "therapyDetails": "Altta yatan enfeksiyonun hızla tedavisi, odada saat ve takvim bulundurma, tanıdık aile bireylerinin refakati ve loş gece lambası.",
+      "pharmacologyNote": "Ağır ajitasyon ve halüsinasyonları kontrol etmek için düşük doz Haloperidol veya ketiapin kısa süreli kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Deliryum tablosunu Demans (Alzheimer) tablosundan ayıran en temel iki klinik özellik nedir?",
+      "options": [
+        "Deliryumun aniden (saatler/günler) başlaması ve gün içinde bilincin dalgalı (fluktuasyon) seyretmesi",
+        "Deliryumun sadece gençlerde görülmesi",
+        "Demans hastalarının hiç unutkan olmaması",
+        "Deliryumda hiçbir halüsinasyon görülmemesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Demans sinsi ve aylar/yıllar içinde ilerler; deliryum ise akut başlar, dikkat çöker ve gün içinde saatten saate şiddeti dalgalanır."
+    },
+    "differentialDiagnosis": "• Demans (Majör Nörobilişsel B.): Sinsi başlar, aylar/yıllar sürer, bilinç açıktır ve dikkat görece korunmuştur.\n• Şizofreni: Görsel değil işitsel halüsinasyonlar ön plandadır; genel tıbbi enfeksiyon doğrudan sebep değildir.",
+    "dsmCriteriaSummary": "DSM-5: Dikkat ve farkındalıkta akut bozulma + Hızlı başlangıç ve gün içi dalgalanma + Tıbbi fizyolojik kanıt."
+  },
+  {
+    "id": "case-080",
+    "caseNumber": 80,
+    "difficulty": "Kolay",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "major_neurocognitive_alzheimer",
+    "therapyId": "cbt_general",
+    "category": "NEUROCOGNITIVE",
+    "patientSummary": "76 yaşında, erkek, emekli öğretmen",
+    "clues": [
+      "76 yaşındaki emekli öğretmen, son 2 yıldır cüzdanını nereye koyduğunu unutma, aynı soruları 10 dakika arayla tekrar tekrar sorma ve torunlarının isimlerini karıştırma şikayetleriyle ailesi tarafından getirildi.",
+      "Son 6 aydır her gün gittiği mahalle bakkalından dönerken evinin yolunu kaybettiği, faturalarını ödeyemediği ve ilaçlarını kendi başına yönetemediği bildirildi.",
+      "Eski çocukluk ve gençlik anılarını çok iyi hatırlamasına rağmen, sabah kahvaltısında ne yediğini veya 5 dakika önce söylenenleri tamamen unuttuğu (yakın bellek kusuru) görüldü.",
+      "Kranial MR görüntülemesinde bilateral belirgin hipokampal atrofi ve temporal lobda hacim kaybı saptandı; kan biyokimyası ve B12/tiroid normaldir.",
+      "Ruhsal Durum Muayenesinde: Mini Mental Test skoru 18/30 (orta evre gerileme), anomi (kelime bulma güçlüğü), içgörü kaybı ve yönetsel işlevlerde belirgin kayıp tespit edildi.",
+      "DSM-5'e göre: Öğrenme ve bellek alanında sinsi başlayan, ilerleyici gerileme gösteren ve günlük yaşam aktivitelerinde tam bağımsızlığı engelleyen Majör Nörobilişsel Bozukluk tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "faturalarını ödeyemediği ve ilaçlarını kendi başına yönetemediği",
+        "dsmMatch": "DSM-5 Kriter B: Günlük yaşam aktivitelerinde bağımsızlığın kaybedilmesi"
+      },
+      {
+        "clueIndex": 3,
+        "text": "bilateral belirgin hipokampal atrofi",
+        "dsmMatch": "Nöropatoloji: Alzheimer'a özgü hipokampal atrofi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Uyarım Terapisi & Bakıcı Psiko-eğitimi",
+      "therapyDetails": "Hafıza albümleri, çevre güvenliği düzenlemeleri, rutin oluşturma ve bakıcı tükenmişliğini önleme desteği.",
+      "pharmacologyNote": "Asetilkolinesteraz inhibitörleri (Donepezil, Rivastigmin) ve NMDA reseptör antagonisti Memantin."
+    },
+    "miniQuiz": {
+      "question": "Alzheimer Tipi Demansta hastalığın erken ve orta evrelerinde ilk ve en belirgin çöken bilişsel alan hangisidir?",
+      "options": [
+        "Yeni bilgileri öğrenme ve yakın bellek (Epizodik Bellek)",
+        "Eski çocukluk anıları",
+        "Yürüme ve motor beceriler",
+        "Görme yetisi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Alzheimer hipokampustan başladığı için ilk çöken alan yeni bilgileri kaydetme ve yakın bellektir; eski anılar uzun süre korunur."
+    },
+    "differentialDiagnosis": "• Deliryum: Hızlı başlar ve bilinç dalgalıdır; Alzheimer ise sinsi başlar ve bilinç uyanıktır.\n• Psödodemans (Depresif Yalancı Demans): Depresyon kaynaklıdır; hasta testlerde 'bilmiyorum' der ve çaba göstermez.",
+    "dsmCriteriaSummary": "DSM-5: Bir veya daha fazla bilişsel alanda belirgin gerileme + Günlük yaşam bağımsızlığının kaybı + Sinsi başlangıç."
+  },
+  {
+    "id": "case-081",
+    "caseNumber": 81,
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "pseudocyesis",
+    "therapyId": "cbt_general",
+    "category": "SOMATIC",
+    "patientSummary": "34 yaşında, kadın, ev hanımı",
+    "clues": [
+      "34 yaşındaki danışan, 7 aydır adet görmediğini, karnının giderek büyüdüğünü, bebek tekmelerini bizzat hissettiğini ve doğumunun yaklaştığını belirterek kadın doğum kliniğine başvurdu.",
+      "Fizik muayenede karnın hamile bir kadın gibi belirgin şişkin olduğu, meme uçlarından süt salgısı (galaktore) geldiği ve kilo aldığı objektif olarak gözlendi.",
+      "Ancak yapılan acil transvajinal ultrasonografide rahim tamamen boş çıkmış ve serum Beta-hCG gebelik hormonu kesin olarak sıfır (<0.1 mIU/mL) bulunmuştur.",
+      "Öyküde hastanın 8 yıldır kısırlık (infertilite) tedavisi gördüğü, 4 başarısız tüp bebek denemesi sonrası yoğun bir çocuk sahibi olma arzusu ve yas yaşadığı öğrenildi.",
+      "Ruhsal Durum Muayenesinde: Ultrason sonuçlarına ilk başta inanmakta zorlanma; hezeyanlı bir psikoz tablosu olmaksızın yoğun psikosomatik inanç ve derin kayıp yası saptandı.",
+      "DSM-5'e göre: Gebe olmadığı halde gebe olduğuna dair yanlış bir inançla birlikte karın büyümesi, amenore (adetten kesilme), süt salgısı ve fetal hareket algısı gibi objektif gebelik belirtilerinin bulunması tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "7 aydır adet görmediğini, karnının giderek büyüdüğünü, bebek tekmelerini bizzat hissettiğini",
+        "dsmMatch": "DSM-5: Gebe olmadığı halde objektif gebelik belirtileri sergileme"
+      },
+      {
+        "clueIndex": 2,
+        "text": "ultrasonografide rahim tamamen boş",
+        "dsmMatch": "Tanı Kriteri: Objektif gebelik yokluğunun kanıtlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Destekleyici Psikoterapi & İnfertilite Yas Terapisi",
+      "therapyDetails": "Ultrason gerçeğinin şefkatle sunulması, infertilite yası ile çalışma ve somatizasyonun duygusal kökenlerini işleme.",
+      "pharmacologyNote": "Hormonal hiperprolaktinemi varsa medikal tedavi ve eşlik eden depresyon için antidepresan."
+    },
+    "miniQuiz": {
+      "question": "Yalancı Gebelik (Psödosiyezis) tablosunda kadında karın büyümesi ve memelerden süt gelmesi gibi fiziksel belirtilerin ortaya çıkmasının nöroendokrin mekanizması nedir?",
+      "options": [
+        "Yoğun psikolojik çocuk arzusunun hipotalamus-hipofiz aksını etkileyerek prolaktin ve LH salınımını değiştirmesi",
+        "Hastanın karnına yastık koyması",
+        "Gerçek bir virüs enfeksiyonu",
+        "Zeka geriliği olması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Psödosiyeziste psikolojik arzu hipotalamo-hipofizer aksı etkileyerek prolaktin artışına, amenoreye ve karın distansiyonuna yol açan gerçek bir psikonöroendokrin tablodur."
+    },
+    "differentialDiagnosis": "• Somatizasyon Bozukluğu: Çoklu bedensel ağrılar vardır; spesifik gebelik tablosu yoktur.\n• Psikotik Bozukluk (Gebelik Hezeyanı): Bedensel değişiklikler olmadan sadece şizofrenik hezeyan vardır.",
+    "dsmCriteriaSummary": "DSM-5: Gebe olunmadığı halde karın büyümesi, amenore ve galaktore ile giden yanlış gebelik inancı."
+  },
+  {
+    "id": "case-082",
+    "caseNumber": 82,
+    "difficulty": "Zor",
+    "course": "ADULT",
+    "diagnosisId": "olfactory_reference",
+    "therapyId": "erp",
+    "category": "OCD_RELATED",
+    "patientSummary": "25 yaşında, erkek, yazılım mühendisi",
+    "clues": [
+      "25 yaşındaki danışan, vücudundan ve ağzından 'çürümüş et ve lağım gibi iğrenç bir koku' yayıldığına inanarak günde 6 kez duş aldığını, saat başı dişlerini fırçaladığını belirterek başvurdu.",
+      "Ailesi, arkadaşları ve doktorlar hiçbir kötü koku almadıklarını defalarca söyleseler de danışan buna inanmamakta ve 'Beni kırmamak için yalan söylüyorsunuz' demektedir.",
+      "Ofiste yanındaki arkadaşı pencereyi her açtığında veya burnuna dokunduğunda 'Benim kokumdan rahatsız oldu' diyerek (referans fikirleri) masasını terk etmekte ve son 2 aydır tamamen evden çalışmaktadır.",
+      "KBB, diş hekimliği ve gastroenteroloji muayenelerinde halitozis veya organik hiçbir koku kaynağı saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Kötü koku yaydığına dair aşırı zihinsel uğraş, koku kontrol kompulsiyonları (sürekli koltuk altını koklama) ve belirgin referans düşünceleri tespit edildi.",
+      "DSM-5 ve DSM-5-TR'ye göre: Başkalarınca algılanmayan ya da hafif olan kötü bir vücut kokusu yaydığına dair sürekli zihinsel uğraş ve buna eşlik eden kontrol etme/temizlik kompulsiyonları tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "vücudundan ve ağzından 'çürümüş et ve lağım gibi iğrenç bir koku' yayıldığına inanarak",
+        "dsmMatch": "DSM-5 Kriter A: Başkalarınca algılanmayan kötü vücut kokusu yayma inancı"
+      },
+      {
+        "clueIndex": 2,
+        "text": "pencereyi her açtığında",
+        "dsmMatch": "DSM-5 Kriter B: Kokudan kaynaklı referans düşünceleri ve kaçınma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Tepki Önleme ile Maruz Bırakma (ERP) & BDT",
+      "therapyDetails": "Koku kontrol etme/duş alma ritüellerini kademeli durdurma, başkalarının davranışlarını kokuya yormama bilişsel yeniden yapılandırması.",
+      "pharmacologyNote": "Yüksek doz SSRI grubu antidepresanlar ve dirençli vakalarda düşük doz antipsikotik güçlendirmesi."
+    },
+    "miniQuiz": {
+      "question": "Koku Referans Bozukluğunda hastanın en sık sergilediği bilişsel çarpıtma ve davranışsal kompulsiyon nedir?",
+      "options": [
+        "Başkalarının burnunu tutmasını veya cam açmasını kendi kokusuna yorma (Referans) ve aşırı parfüm sıkma/yıkanma",
+        "Hiç yıkanmama davranışı",
+        "Sadece karanlıkta oturma",
+        "Başkalarının kokusunu koklama"
+      ],
+      "correctIndex": 0,
+      "explanation": "Koku referans bozukluğunda hasta etraftaki insanların her hareketini kendi kokusuna bağlar (referans) ve saatlerce yıkanarak ritüel yapar."
+    },
+    "differentialDiagnosis": "• Beden Algısı Bozukluğu (BDD): Odak koku değil, dış görünümdeki (burun, saç, cilt) estetik kusurlardır.\n• Şizofreni: Koku hezeyanı bizar bir uzaylı kontrolüyle ilişkilidir; referans bozukluğunda ise tablo kokuyla sınırlıdır.",
+    "dsmCriteriaSummary": "DSM-5: Başkalarınca algılanmayan kötü koku inancı + Yineleyici kontrol/temizlik davranışları + Sosyal izolasyon."
+  },
+  {
+    "id": "case-083",
+    "caseNumber": 83,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "prolonged_grief_disorder",
+    "therapyId": "ipt",
+    "category": "TRAUMA",
+    "patientSummary": "48 yaşında, kadın, öğretmen (DSM-5-TR Yeni Tanı)",
+    "clues": [
+      "48 yaşındaki kadın danışan, 18 ay önce eşini bir trafik kazasında kaybetmiş; aradan 1.5 yıl geçmesine rağmen acısının ilk günkü gibi taze ve dayanılmaz olduğunu belirterek başvurdu.",
+      "Günün neredeyse tamamında ölen eşine karşı dinmeyen yoğun bir özlem duyduğunu, eşinin kıyafetlerini hiç yıkamadan yatağına serip her gece onlara sarılarak ağladığını anlattı.",
+      "Eşinin ölümünden sonra 'Kendi benliğimin ve ruhumun da onunla birlikte öldüğünü' hissettiğini, geleceğe dair hiçbir anlam ve plan göremediğini ifade etti.",
+      "Genel tıbbi ve laboratuvar testleri normaldir.",
+      "Ruhsal Durum Muayenesinde: Kimlik karmaşası, ölümü kabullenmede derin kilitlenme, ölen kişiye karşı şiddetli hasret/özlem ve yaşamdan tamamen kopma duygulanımı gözlendi.",
+      "DSM-5-TR'ye göre: Yakın birinin ölümünün ardından yetişkinlerde en az 12 ay geçmesine karşın dinmeyen yoğun özlem, kimlik karmaşası ve yaşama devam etmekte belirgin güçlük çekme tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "aradan 1.5 yıl geçmesine rağmen acısının ilk günkü gibi taze",
+        "dsmMatch": "DSM-5-TR Süre Eşiği: Yetişkinlerde kaybın üzerinden en az 12 ay geçmiş olması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "Kendi benliğimin ve ruhumun da onunla birlikte öldüğünü",
+        "dsmMatch": "DSM-5-TR Kriter C: Kimliğin bir parçasının öldüğü hissi ve yalnızlık"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Uzatılmış Yas Terapisi (PGT / Shear Modeli) & Kişilerarası Terapi (IPT)",
+      "therapyDetails": "Ölüm hikayesini işleme, kaybı hatırlatan kaçınmaları kırma ve ölen kişiyle kurulan bağı dönüştürerek yaşama yeniden bağlanma.",
+      "pharmacologyNote": "Eşlik eden majör depresyon varsa antidepresan tedavi başlanır."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'ye göre bir yas tablosuna 'Uzatılmış Yas Bozukluğu' tanısı koyabilmek için yetişkinlerde ölümün üzerinden minimum ne kadar süre geçmiş olmalıdır?",
+      "options": [
+        "En az 12 ay (1 yıl)",
+        "En az 2 hafta",
+        "En az 1 ay",
+        "En az 6 ay (Bu süre sadece çocuklar içindir)"
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5-TR'de yetişkinler için süre eşiği en az 12 aydır (çocuk ve ergenlerde ise en az 6 aydır)."
+    },
+    "differentialDiagnosis": "• Normal Yas: Zamanla acının şiddeti azalır, kişi yeni ilişkilere ve hayata uyum sağlar.\n• Majör Depresyon: Genel değersizlik ve anhedoni vardır; uzatılmış yasta ise temel kilitlenme ölen kişiye duyulan yoğun hasrettir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Kaybın üzerinden ≥12 ay geçmesi + Yoğun hasret/özlem + Kimlik karmaşası ve yaşama devam edememe."
+  },
+  {
+    "id": "case-084",
+    "caseNumber": 84,
+    "difficulty": "Kolay",
+    "course": "SUBSTANCE",
+    "diagnosisId": "internet_gaming_disorder",
+    "therapyId": "motivational_interviewing",
+    "category": "SUBSTANCE",
+    "patientSummary": "18 yaşında, erkek, lise son sınıf öğrencisi",
+    "clues": [
+      "18 yaşındaki genç, günde 12-14 saat aralıksız online rekabetçi video oyunları oynadığı, üniversite sınavına hazırlanmayı bıraktığı ve ailesi interneti kestiğinde kapıları kırdığı için getirildi.",
+      "Son 1 yıldır oyun oynamadığı her an yoğun huzursuzluk, titreme ve öfke patlamaları (yoksunluk) yaşadığını; aynı hazzı almak için oyunda geçirdiği süreyi sürekli artırdığını (tolerans) anlattı.",
+      "Tüm gerçek arkadaşlıklarını bitirdiğini, geceleri uyumayıp sabahladığını ve kişisel hijyenini tamamen ihmal ettiğini söyledi.",
+      "Toksikoloji taramasında madde veya alkol saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Dijital ödül döngüsüne şartlanma, dürtüsellik, oyun dışındaki tüm yaşam aktivitelerine karşı anhedoni ve aileye karşı agresyon saptandı.",
+      "DSM-5'e göre: 12 aylık bir dönem içinde oyunla aşırı zihinsel uğraş, yoksunluk belirtileri, tolerans, kontrol kaybı ve önemli eğitim/ilişki fırsatlarını tehlikeye atma (en az 5/9 ölçüt) tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "oyun oynamadığı her an yoğun huzursuzluk",
+        "dsmMatch": "DSM-5 Kriter A2: Oyun oynanmadığında ortaya çıkan yoksunluk belirtileri"
+      },
+      {
+        "clueIndex": 1,
+        "text": "oyunda geçirdiği süreyi sürekli artırdığını (tolerans)",
+        "dsmMatch": "DSM-5 Kriter A3: Tolerans gelişimi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme & İnternet Bağımlılığı için BDT (CBT-IA)",
+      "therapyDetails": "Ekran süresini kademeli sınırlandırma, alternatif reel hobi geliştirme, tetikleyici yönetimi ve aile iletişimi.",
+      "pharmacologyNote": "Eşlik eden DEHB veya depresyon varsa medikal tedavi eklenir."
+    },
+    "miniQuiz": {
+      "question": "İnternet Oyun Oynama Bozukluğunda danışanın oyundan uzaklaştırıldığında yaşadığı huzursuzluk, sinirlilik ve öfke hangi bağımlılık fenomenidir?",
+      "options": [
+        "Yoksunluk (Withdrawal)",
+        "Tolerans",
+        "Konfabulasyon",
+        "Transfersans"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bağımlılık nesnesinden uzak kalındığında ortaya çıkan negatif fiziksel/duygusal gerilim tablosuna yoksunluk denir."
+    },
+    "differentialDiagnosis": "• Kumar Oynama Bozukluğu: Maddi para bahsi ve kazanç odaklıdır; video oyununda dijital kazanım esastır.\n• Normal Rekreasyonel Oyun: Okul/iş kaybı ve agresif yoksunluk yaşanmaz.",
+    "dsmCriteriaSummary": "DSM-5: 12 aylık sürede oyunla zihinsel uğraş + Yoksunluk + Tolerans + Kontrol kaybı (en az 5/9 belirti)."
+  },
+  {
+    "id": "case-085",
+    "caseNumber": 85,
+    "difficulty": "Orta",
+    "course": "COMORBID",
+    "diagnosisId": "panic_disorder",
+    "secondaryDiagnosisId": "agoraphobia",
+    "therapyId": "interoceptive_exposure",
+    "category": "ANXIETY",
+    "patientSummary": "31 yaşında, kadın, mimar (Komorbid / Çift Tanılı Vaka 🔗)",
+    "clues": [
+      "31 yaşındaki danışan, tekrarlayan beklenmedik panik ataklar ve yardım alamama korkusuyla son 4 aydır evden dışarı tek başına adım atamadığını belirterek online terapiye başvurdu.",
+      "İlk atağının metroda aniden başlayan kalp çarpıntısı, nefes darlığı ve delirme korkusuyla ortaya çıktığı, o günden beri metro, AVM, köprü ve kalabalık caddelerden tamamen kaçındığı öğrenildi.",
+      "Evde tek başına kalamamakta, sadece eşi yanındayken ve hastaneye yakın güzergahlarda kısa süreliğine dışarı çıkabilmektedir.",
+      "Kardiyolojik ve nörolojik tetkikler (Holter, EKG, Tiroid) tamamen temizdir.",
+      "Ruhsal Durum Muayenesinde: Güvenlik arama davranışları (sürekli tansiyon aleti taşıma), interoseptif duyumlara karşı aşırı tetiktelik ve şiddetli agorafobik kaçınma saptandı.",
+      "DSM-5'e göre: Vaka hem tekrarlayan beklenmedik Panik Bozukluk kriterlerini hem de kaçmanın zor olacağı ortamlardan kaçınma içeren Agorafobi kriterlerini tam olarak karşılamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "tekrarlayan beklenmedik panik ataklar",
+        "dsmMatch": "1. Tanı: Panik Bozukluk"
+      },
+      {
+        "clueIndex": 1,
+        "text": "metro, AVM, köprü ve kalabalık caddelerden tamamen kaçındığı",
+        "dsmMatch": "2. Tanı: Agorafobi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "İnteroseptif Maruz Bırakma + In Vivo (Canlı) Maruz Bırakma",
+      "therapyDetails": "Seans içinde bedensel duyumları kasten tetikleyip panikle baş etme (interoseptif) ve kademeli olarak korkulan mekanlara gitme (in vivo).",
+      "pharmacologyNote": "SSRI grubu antidepresanlar (Sertralin/Essitalopram) birinci basamak tedavidir."
+    },
+    "miniQuiz": {
+      "question": "Panik Bozukluk tedavisinde hastaya seans içinde kasten baş dönmesi ve kalp çarpıntısı yaşatılarak yapılan BDT tekniğine ne ad verilir?",
+      "options": [
+        "İnteroseptif (İçsel Duyumsal) Maruz Bırakma",
+        "Sistematik Hipnoz",
+        "EMDR Göz Hareketleri",
+        "Diyalektik Beceri Eğitimi"
+      ],
+      "correctIndex": 0,
+      "explanation": "İnteroseptif maruz bırakma; hastaya hiperventilasyon veya dönen sandalyeyle yapay panik duyumları yaşatarak duyarsızlaşmasını sağlar."
+    },
+    "differentialDiagnosis": "• Sosyal Fobi: Korku rezil olmaktır; Agorafobide ise panik anında kaçamama ve yardım bulamama korkusudur.\n• Klostrofobi: Sadece kapalı alanla sınırlıdır, spontan panik ataklar eşlik etmez.",
+    "dsmCriteriaSummary": "DSM-5: Beklenmedik panik ataklar + Atak beklentisi kaygısı + Kaçışın zor olduğu ortamlardan kaçınma (Agorafobi)."
+  },
+  {
+    "id": "case-086",
+    "caseNumber": 86,
+    "difficulty": "Zor",
+    "course": "COMORBID",
+    "diagnosisId": "borderline_pd",
+    "secondaryDiagnosisId": "ptsd",
+    "therapyId": "dbt",
+    "category": "PERSONALITY_B",
+    "patientSummary": "27 yaşında, kadın, grafik tasarımcı (Komorbid / Çift Tanılı Vaka 🔗)",
+    "clues": [
+      "27 yaşındaki danışan, kollarındaki jilet kesikleri ve acil serviste dikilen yaralarıyla 'Beni kimse sevmiyor, terk edilmeye dayanamıyorum, acımı sadece kan görünce dindiriyorum' diyerek başvurdu.",
+      "Çocukluk çağında 8 yıl boyunca birinci derece yakını tarafından ağır cinsel ve fiziksel istismara uğradığı; geceleri hala aynı kabuslarla ve flashbacklerle uyandığı öğrenildi.",
+      "İlişkilerinde insanları bir anda göklere çıkarıp ardından en ufak gecikmede yerin dibine soktuğu (splitting), yoğun bir içsel boşluk ve kronik intihar düşünceleri yaşadığı belirlendi.",
+      "Toksikoloji temizdir; organik patoloji saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Aşırı affektif labilite, öfke patlamaları, dissosiyatif kopmalar ve travmatik yeniden yaşantılama belirtileri eşzamanlı gözlendi.",
+      "DSM-5'e göre: Vaka hem Sınırda (Borderline) Kişilik Bozukluğu kriterlerini hem de Travma Sonrası Stres Bozukluğu (TSSB) kriterlerini tam olarak karşılamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "terk edilmeye dayanamıyorum, acımı sadece kan görünce dindiriyorum",
+        "dsmMatch": "1. Tanı: Borderline Kişilik Bozukluğu (NSSI ve Terk Edilme Korkusu)"
+      },
+      {
+        "clueIndex": 1,
+        "text": "ağır cinsel ve fiziksel istismara uğradığı",
+        "dsmMatch": "2. Tanı: Travma Sonrası Stres Bozukluğu (TSSB)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Diyalektik Davranış Terapisi (DBT / Marsha Linehan) & DBT-PTSD",
+      "therapyDetails": "Duygu düzenleme, sıkıntıya tolerans, bilinçli farkındalık ve aşamalı travma maruziyeti.",
+      "pharmacologyNote": "Duygudurum dengeleyiciler (Lamotrijin) ve krizlerde düşük doz ikinci kuşak antipsikotikler."
+    },
+    "miniQuiz": {
+      "question": "Borderline Kişilik Bozukluğu ve intihar/kendine zarar davranışları için geliştirilen kanıta dayalı altın standart terapi ekolü hangisidir?",
+      "options": [
+        "Diyalektik Davranış Terapisi (DBT / Marsha Linehan)",
+        "Klasik Psikanaliz",
+        "Gestalt Terapisi",
+        "Sistemik Aile Dizimi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Marsha Linehan tarafından geliştirilen DBT, Borderline ve kendine zarar verici davranışlar için 1 numaralı altın standart terapidir."
+    },
+    "differentialDiagnosis": "• Bipolar II: Epizodlar haftalar sürer ve içseldir; BPD'de dalgalanmalar saatliktir ve kişilerarası tetiklenir.\n• Tek Başına TSSB: BPD'deki gibi yaygın kimlik karmaşası, splitting ve terk edilme dehşeti TSSB'ye özgü değildir.",
+    "dsmCriteriaSummary": "DSM-5: Borderline Kişilik Örüntüsü (Terk edilme korkusu, kimlik karmaşası, NSSI) + Travmatik Yeniden Yaşantılama (TSSB)."
+  },
+  {
+    "id": "case-087",
+    "caseNumber": 87,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "anorexia_nervosa",
+    "therapyId": "cbt_e",
+    "category": "EATING",
+    "patientSummary": "19 yaşında, kadın, üniversite öğrencisi",
+    "clues": [
+      "19 yaşındaki genç kadın, bayılma nöbetleri ve aşırı zayıflık nedeniyle ailesi tarafından getirildi. Boyu 1.68 m, kilosu 43 kg (BKİ: 15.2 kg/m² - Şiddetli Zayıflık).",
+      "Kemikleri sayılacak kadar zayıf olmasına rağmen aynaya baktığında 'Karnımın ve bacaklarımın yağ tulumu gibi olduğunu görüyorum' diyerek kilo almaktan dehşetle korktuğunu anlattı.",
+      "Günlerce sadece marul ve maden suyu ile beslendikten sonra kontrolünü kaybedip tatlıları hızla yediğini ve hemen ardından parmağıyla kendini kusturduğunu (çıkarma atağı) söyledi.",
+      "El sırtında kusmaya bağlı nasırlar (Russell belirtisi), diş minesinde asit erozyonu, hipotermi (35.4°C) ve son 6 aydır amenore (adetten kesilme) saptandı.",
+      "Ruhsal Durum Muayenesinde: Beden imgesinde ağır algısal bozulma, kilo alma fobisi, mükemmeliyetçilik ve kısıtlayıcı/çıkarıcı yeme ritüelleri tespit edildi.",
+      "DSM-5'e göre: Yaş ve boya göre belirgin derecede düşük vücut ağırlığı (BKİ < 18.5), kilo almaktan aşırı korku, beden imgesinde bozulma ve tekrarlayan tıkınma/çıkarma atakları tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "kilosu 43 kg (BKİ: 15.2 kg/m² - Şiddetli Zayıflık)",
+        "dsmMatch": "DSM-5 Kriter A: Belirgin derecede düşük vücut ağırlığı"
+      },
+      {
+        "clueIndex": 1,
+        "text": "Karnımın ve bacaklarımın yağ tulumu gibi olduğunu görüyorum",
+        "dsmMatch": "DSM-5 Kriter C: Beden ağırlığı ve biçimini algılamada bozulma"
+      },
+      {
+        "clueIndex": 3,
+        "text": "Russell belirtisi",
+        "dsmMatch": "Klinik Belirteç: Kusmaya bağlı el sırtı nasırları"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Geliştirilmiş BDT (CBT-E / Fairburn) & Maudsley Aile Terapisi",
+      "therapyDetails": "Kilo restorasyonu, yeme kural ve tabularını kırma, beden algısı çarpıtmalarını düzeltme ve tıkınma-çıkarma döngüsünü durdurma.",
+      "pharmacologyNote": "Düşük doz Olanzapin kilo alımına ve zihinsel takıntılara yardımcı olabilir; SSRI'lar kilo düzeldikten sonra etkilidir."
+    },
+    "miniQuiz": {
+      "question": "Tıkınma/Çıkarma Tipi Anoreksiya Nervoza ile Bulimiya Nervoza arasındaki en temel tanısal ayrım kriteri nedir?",
+      "options": [
+        "Hastanın vücut ağırlığının belirgin şekilde düşük (BKİ < 18.5) olması",
+        "Bulimiyada hastanın hiç kusmaması",
+        "Anoreksiyada hastanın kilo almayı istemesi",
+        "Bulimiyanın sadece erkeklerde görülmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bulimiya hastaları normal kiloda veya hafif kiloludur (BKİ >= 18.5). Kusan hasta eğer aşırı zayıfsa (BKİ < 18.5) tanı kesinlikle Anoreksiya Nervoza'dır."
+    },
+    "differentialDiagnosis": "• Bulimiya Nervoza: Kilo normal veya normalin üzerindedir (BKİ ≥ 18.5).\n• Tıkınırcasına Yeme Bozukluğu (BED): Kusma ve çıkarma davranışları yoktur.\n• Beden Algısı Bozukluğu (BDD): Odak kilo değil, burun veya yüz kusurlarıdır.",
+    "dsmCriteriaSummary": "DSM-5: Düşük vücut ağırlığı (BKİ < 18.5) + Kilo alma korkusu + Beden algısı bozukluğu + Tıkınma/çıkarma alt tipi."
+  },
+  {
+    "id": "case-088",
+    "caseNumber": 88,
+    "difficulty": "Orta",
+    "course": "CHILD",
+    "diagnosisId": "selective_mutism",
+    "therapyId": "stimulus_fading",
+    "category": "ANXIETY",
+    "patientSummary": "8 yaşında, kız çocuğu, ilkokul 2. sınıf öğrencisi",
+    "clues": [
+      "8 yaşındaki kız çocuğunu öğretmeni ve ailesi getirdi. Öğretmeni: 'Sene başından beri 6 aydır sınıfta sesini hiç duymadık, parmak kaldırıp söz alsa bile sadece kafasını sallıyor' dedi.",
+      "Annesi ev ortamında çocuğun son derece konuşkan, şarkılar söyleyen, espriler yapan ve dil gelişiminin yaşıtlarından ileri düzeyde olduğunu belirtti.",
+      "Yabancı biri veya öğretmeni soru sorduğunda çocuğun yüzünün kaskatı kesildiği, göz temasını kestiği ve adeta donup kaldığı (freezing) gözlendi.",
+      "İşitme testleri, KBB ve nörogelişimsel dil değerlendirmeleri tamamen normaldir; Türkçeyi anlama ve konuşma becerisinde organik bir eksiklik yoktur.",
+      "Ruhsal Durum Muayenesinde: Ev videolarında son derece neşeli ve konuşkan olan çocuğun, klinik ortamda konuşma beklentisi karşısında yoğun kaygı ve seçici sessizlik yaşadığı tespit edildi.",
+      "DSM-5'e göre: Konuşmanın beklendiği özgül toplumsal durumlarda (okulda) sürekli bir konuşamama hali ve bu durumun başka durumlarda (evde) akıcı konuşuyor olmasına karşın en az 1 aydır sürmesi tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "6 aydır sınıfta sesini hiç duymadık",
+        "dsmMatch": "DSM-5 Kriter A: Beklenen durumlarda konuşamama"
+      },
+      {
+        "clueIndex": 1,
+        "text": "ev ortamında çocuğun son derece konuşkan",
+        "dsmMatch": "DSM-5: Başka durumlarda konuşuyor olma kriteri"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Uyaran Kaydırma (Stimulus Fading) & Kademeli Maruziyet",
+      "therapyDetails": "Çocuğun rahat konuştuğu ebeveynle başlayıp ortama kademeli olarak öğretmeni ve arkadaşları dahil etme, cesaretlendirme.",
+      "pharmacologyNote": "Dirençli ve şiddetli vakalarda çocuk psikiyatrisi tarafından düşük doz SSRI (Fluoksetin) eklenebilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5'e göre Seçici Konuşmazlık (Selective Mutism) tanısı için okulun ilk ayı hariç minimum ne kadar süre konuşamama gereklidir?",
+      "options": [
+        "En az 1 ay",
+        "En az 3 ay",
+        "En az 6 ay",
+        "En az 1 yıl"
+      ],
+      "correctIndex": 0,
+      "explanation": "Okula başlama çekingenliğini dışlamak için okulun ilk ayı hariç tutulur ve belirtilerin en az 1 ay sürmesi tanı için yeterlidir."
+    },
+    "differentialDiagnosis": "• Otizm Spektrum Bozukluğu: Genel sosyal iletişim defisiti vardır, çocuk evde de ilişki kuramaz.\n• İletişim/Dil Bozukluğu: Gramer ve dil kapasitesi yetersizdir, evde de konuşamaz.\n• Sosyal Anksiyete: Eşlik edebilir ancak selektif mutizmde tam konuşamama özgül tablosu vardır.",
+    "dsmCriteriaSummary": "DSM-5: Beklenen durumlarda konuşamama + Başka ortamlarda konuşma + Süre ≥ 1 ay (ilk ay hariç) + Eğitim/sosyal başarıyı engelleme."
+  },
+  {
+    "id": "case-089",
+    "caseNumber": 89,
+    "difficulty": "Kolay",
+    "course": "SUBSTANCE",
+    "diagnosisId": "alcohol_use_disorder",
+    "therapyId": "motivational_interviewing",
+    "category": "SUBSTANCE",
+    "patientSummary": "45 yaşında, erkek, eski muhasebe müdürü",
+    "clues": [
+      "45 yaşındaki danışan, eşinin boşanma davası açması, işten kovulması ve 3 kez alkollü araç kullanmaktan ehliyetini kaptırması sonrası 'Ben bağımlı değilim sadece stresimi yatıştırıyorum' diyerek başvurdu.",
+      "Eskiden 2 kadeh rakı ile sarhoş olurken, son 2 yıldır aynı etkiyi alabilmek için her gün en az 1 büyük şişe (70'lik) rakı içtiğini (tolerans gelişimi) anlattı.",
+      "Sabah uyandığında ellerinin zangır zangır titrediğini, terlediğini ve titremeyi durdurmak için sabah ilk iş olarak bir duble alkol içtiğini (göz açıcı / eye-opener yoksunluk) kabul etti.",
+      "Karaciğer fonksiyon testlerinde GGT ve ALT değerleri normalin 4 katı yüksek çıkmış; hekimlerin uyarılarına rağmen içmeyi bırakamamıştır.",
+      "Ruhsal Durum Muayenesinde: Ağır inkar mekanizması, aşırı alkol aşermesi (craving), kontrol kaybı ve yaşamın merkezine alkolü alma örüntüsü saptandı.",
+      "DSM-5'e göre: Son 12 aylık bir dönem içinde tolerans, yoksunluk, kontrol kaybı, aşerme, zarara rağmen sürdürme ve mesleki/sosyal yıkım kriterlerinin 7 tanesini karşılamaktadır (Şiddetli Düzey)."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "aynı etkiyi alabilmek için her gün en az 1 büyük şişe",
+        "dsmMatch": "DSM-5 Kriter 10: Belirgin tolerans gelişimi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "duble alkol",
+        "dsmMatch": "DSM-5 Kriter 11: Yoksunluk belirtilerini dindirmek için alkol alma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme & Nüks Önleme BDT (Marlatt Modeli)",
+      "therapyDetails": "İnkarı kırma, değişim evrelerini ilerletme, tetikleyici ortamları tanıma ve baş etme becerileri eğitimi.",
+      "pharmacologyNote": "Aşermeyi azaltmak için Akamprosat/Naltrekson; tiksindirici tedavi için Disülfiram; yoksunlukta benzodiazepin detoksu."
+    },
+    "miniQuiz": {
+      "question": "DSM-5'e göre Alkol Kullanım Bozukluğunun 'Şiddetli' (Severe) düzeyde sınıflandırılabilmesi için 11 tanı ölçütünden en az kaç tanesinin karşılanması gerekir?",
+      "options": [
+        "En az 6 veya daha fazla ölçüt",
+        "En az 2-3 ölçüt (Hafif düzey)",
+        "En az 4-5 ölçüt (Orta düzey)",
+        "11 ölçütün tamamı"
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5'te 2-3 belirti Hafif, 4-5 belirti Orta, 6 ve üzeri belirti Şiddetli (Severe) madde/alkol kullanım bozukluğu olarak derecelendirilir."
+    },
+    "differentialDiagnosis": "• Sosyal Alkol Tüketimi: Tolerans, sabah yoksunluğu ve sosyal yıkım yoktur.\n• Bipolar Manik Epizod: Manide epizodik aşırı kullanım olabilir; burada primer kimyasal bağımlılık vardır.",
+    "dsmCriteriaSummary": "DSM-5: 12 aylık sürede tolerans, yoksunluk, kontrol kaybı, aşerme, zarara rağmen içme (≥6 belirti = Şiddetli)."
+  }
+]

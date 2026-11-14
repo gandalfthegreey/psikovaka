@@ -1,0 +1,905 @@
+[
+  {
+    "id": "case-050",
+    "caseNumber": 50,
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "alcohol_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "44 yaşında, erkek, inşaat mühendisi",
+    "clues": [
+      "Danışan son 3 yıldır her akşam içtiği alkol miktarını giderek artırdığını, sabahları ellerinde titreme ve yoğun anksiyete ile uyandığı için titremeyi durdurmak amacıyla sabah uyanır uyanmaz ilk iş olarak bir kadeh viski içtiğini (yoksunluk belirtisi) anlatıyor.",
+      "Aynı sarhoşluk ve rahatlama hissini yakalayabilmek için 2 dubleden 1 şişe viskiye çıktığı (tolerans gelişimi) belirtiliyor.",
+      "Alkol yüzünden işe geç kalmakta, eşiyle boşanma aşamasına gelmiş olmasına ve doktorunun 'karaciğer enzimlerin çok yüksek, bırakmalısın' uyarısına rağmen içmeyi bırakmaya yönelik defalarca verdiği sözleri tutamamıştır.",
+      "Kan tahlillerinde GGT: 180 U/L, ALT: 85 U/L ve AST: 110 U/L tespit edilmiştir; ultrason karaciğerde grade 2 yağlanma göstermektedir.",
+      "Ruhsal Durum Muayenesinde: Aşerme (craving), kontrol kaybı, inkâr ve rasyonalizasyon savunma düzenekleri ile belirgin otonomik yoksunluk bulguları.",
+      "DSM-5'e göre: 12 aylık bir dönem içinde klinik açıdan belirgin bir bozulmaya ya da sıkıntıya yol açan, tolerans ve yoksunluk içeren sorunlu bir alkol kullanım örüntüsüdür."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "sabahları ellerinde titreme",
+        "dsmMatch": "DSM-5 Kriter 11: Yoksunluk belirtilerini gidermek ya da bundan kaçınmak için alkol alma"
+      },
+      {
+        "clueIndex": 1,
+        "text": "Aynı sarhoşluk",
+        "dsmMatch": "DSM-5 Kriter 10: Belirgin bir tolerans gelişmesi (aynı etki için belirgin artan miktarlar)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme (MI) & Nüks Önleme için BDT (Adsız Alkolikler - AA)",
+      "therapyDetails": "Değişim aşamalarını ilerletme, tetikleyici ortamları yönetme ve alkolsüz başa çıkma stratejileri.",
+      "pharmacologyNote": "Aşermeyi azaltmak için Akamprosat veya Naltrekson; caydırıcı olarak Disülfiram; akut detoksta Benzodiazepin protokolü."
+    },
+    "miniQuiz": {
+      "question": "Alkol bağımlılığında kişinin aynı etkiyi elde etmek için tükettiği alkol miktarını sürekli artırmak zorunda kalmasına ne ad verilir?",
+      "options": [
+        "Tolerans",
+        "Yoksunluk",
+        "Aşerme (Craving)",
+        "Delirium Tremens"
+      ],
+      "correctIndex": 0,
+      "explanation": "İstenen intoksikasyon etkisini yakalamak için giderek daha fazla miktarda maddeye ihtiyaç duyulması 'tolerans' olarak tanımlanır."
+    },
+    "differentialDiagnosis": "• Sosyal İçicilik: Sosyal içicilikte tolerans, yoksunluk veya işlev kaybı yoktur.\n• Bipolar Manik Dönem: Manideki kontrolsüz içme dönemsel taşkınlığa ikincildir.",
+    "dsmCriteriaSummary": "DSM-5 (En az 2/11): Amaçlanandan fazla içme, bırakma çabalarında başarısızlık, aşerme, sorumlulukları aksatma, tehlikeli ortamlarda içme, tolerans, yoksunluk."
+  },
+  {
+    "id": "case-051",
+    "caseNumber": 51,
+    "difficulty": "Orta",
+    "course": "CHILD",
+    "diagnosisId": "dmdd",
+    "category": "MOOD",
+    "patientSummary": "9 yaşında, erkek, ilkokul 3. sınıf öğrencisi",
+    "clues": [
+      "Danışan, haftada en az 3-4 kez en ufak bir engellenmede (örneğin televizyonun kapatılması veya ödev yapmasının istenmesi) ortalığı birbirine katan, duvarlara tekmeler savuran, eşyaları parçalayan ve 45 dakika süren şiddetli öfke patlamaları yaşamaktadır.",
+      "Önemli tanısal kilit nokta: Bu şiddetli öfke patlamaları OLMADIĞI zamanlarda bile (patlamalar arasında hemen hemen her gün) çocuğun duygudurumu sürekli olarak öfkeli, huysuz, alıngan ve kolay kızandır (kronik irritabilite).",
+      "Bu belirtiler son 1.5 yıldır kesintisiz sürmekte olup hem evde hem okulda (birden fazla ortamda) devam etmektedir.",
+      "Nörolojik tarama ve EEG normaldir; çocukta epizodik kabarmış mani dönemi veya grandiyözite saptanmamıştır.",
+      "Ruhsal Durum Muayenesinde: Ağır kronik irritabilite, düşük engellenme eşiği ve durumsal stresörün ağırlığıyla tamamen orantısız sözel/davranışsal patlamalar.",
+      "DSM-5'e göre: Gelişimsel düzeye uygun olmayan, haftada ortalama 3 ya da daha çok kez yineleyen ağır öfke patlamaları ve patlamalar arasındaki duygudurumun sürekli irritabl olmasıdır (Başlangıç < 10 yaş)."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "haftada en az 3-4 kez",
+        "dsmMatch": "DSM-5 Kriter B: Öfke patlamaları haftada ortalama 3 ya da daha çok kez yineler"
+      },
+      {
+        "clueIndex": 1,
+        "text": "patlamalar arasında hemen hemen her gün",
+        "dsmMatch": "DSM-5 Kriter D: Öfke patlamaları arasındaki duygudurum hemen her gün sürekli irritabldır"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Ebeveyn Yönetim Eğitimi (PMT) & Çocuk için BDT",
+      "therapyDetails": "Engellenme toleransını artırma, erken duygu regülasyonu, tutarlı ebeveyn tepkileri ve sakinleşme becerileri.",
+      "pharmacologyNote": "Ağır irritabilite ve agresyon için düşük doz atipik antipsikotikler (Risperidon) veya SSRI'lar kullanılabilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5'te DMDD (Yıkıcı Duygudurumu Düzenleyememe Bozukluğu) tanısının getirilmesinin en temel amacı nedir?",
+      "options": [
+        "Kronik irritabl ve öfkeli çocuklara gereksiz yere 'Pediyatrik Bipolar Bozukluk' aşırı tanısı konulmasını ve lityum/antipsikotik yüklenmesini önlemek.",
+        "Çocukların okuldan atılmasını kolaylaştırmak.",
+        "DEHB tanısını tamamen ortadan kaldırmak.",
+        "Sadece yetişkinlere tanı koyabilmek."
+      ],
+      "correctIndex": 0,
+      "explanation": "DMDD, epizodik mani göstermeyen sadece kronik öfkeli çocukların yanlışlıkla 'Pediyatrik Bipolar' olarak etiketlenmesini engellemek için DSM-5 duygudurum kategorisine eklenmiştir."
+    },
+    "differentialDiagnosis": "• Pediyatrik Bipolar Bozukluk: Bipolarda epizodik mani (az uyku, grandiyözite) vardır; DMDD'de ise süreğen non-epizodik öfke vardır.\n• KOKGB: KOKGB'de öfke patlamaları arasındaki kronik irritabilite zorunlu değildir.",
+    "dsmCriteriaSummary": "DSM-5: Haftada ≥ 3 ağır öfke patlaması + Patlamalar arasında sürekli irritabl duygudurum + En az 1 yıl sürmesi + Başlangıcın 10 yaşından önce olması."
+  },
+  {
+    "id": "case-052",
+    "caseNumber": 52,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "cyclothymia",
+    "category": "MOOD",
+    "patientSummary": "25 yaşında, kadın, moda tasarımcısı",
+    "clues": [
+      "Danışan son 3 yıldır duygudurumunun sürekli bir lunapark treni gibi olduğunu; birkaç gün boyunca aşırı enerjik, günde 4 saat uykuyla harika çizimler yapan biriyken, hemen ardından gelen 1 hafta boyunca kendini yorgun, özgüvensiz ve karamsar hissettiğini anlatıyor.",
+      "Kritik tanısal ayrıntı: Enerjik olduğu dönemler hiçbir zaman tam bir 'Manik Epizod' şiddetine (hastaneye yatış veya psikoz) ulaşmamış; çökkün olduğu dönemler de hiçbir zaman tam bir 'Majör Depresif Epizod' ölçütlerini tam karşılamamıştır.",
+      "Bu 3 yıllık süreçte duygudurumunun tamamen nötr ve dengeli olduğu aralıklar hiçbir zaman 2 aydan uzun sürmemiştir.",
+      "Tıbbi tahliller ve hormon profili normaldir.",
+      "Ruhsal Durum Muayenesinde: Subklinik hipomanik dönemler ile subklinik hafif depresif dönemler arasında dalgalanan kronik duygudurum labilitesi.",
+      "DSM-5'e göre: En az 2 yıl boyunca, tam bir hipomani ölçütlerini karşılamayan hipomanik belirtiler ile tam bir majör depresyon ölçütlerini karşılamayan depresif belirtilerin bulunduğu çok sayıda dönemin olmasıdır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "son 3 yıldır duygudurumunun sürekli",
+        "dsmMatch": "DSM-5 Kriter A: En az 2 yıl boyunca çok sayıda hipomanik ve depresif belirti dönemi"
+      },
+      {
+        "clueIndex": 1,
+        "text": "hiçbir zaman tam bir 'Manik Epizod'",
+        "dsmMatch": "DSM-5 Kriter C: Majör depresif, manik ya da hipomanik bir epizodun ölçütleri hiçbir zaman karşılanmamıştır"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Duygudurum Günlüğü & Bilişsel Terapi (Sosyal Ritim Odaklı)",
+      "therapyDetails": "Duygudurum dalgalanmalarını tanıma, uyku hijyenini koruma ve stresörleri kontrol etme.",
+      "pharmacologyNote": "Gerektiğinde düşük doz duygudurum dengeleyiciler (Lityum, Lamotrijin) dalgalanmaları yatıştırmak için kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Siklotimik Bozukluk ile Bipolar II Bozukluğu arasındaki en temel fark nedir?",
+      "options": [
+        "Bipolar II'de en az bir kez tam 'Majör Depresif Epizod' yaşanmış olması şarttır; Siklotimide ise belirtiler hiçbir zaman tam bir majör depresyon atağı düzeyine ulaşmaz.",
+        "Siklotimide hasta sadece 1 gün yaşar.",
+        "Bipolar II sadece çocuklarda görülür.",
+        "İki bozukluk tamamen aynıdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "Siklotimi, tam majör depresyon veya tam hipomani kriterlerini doldurmayan dalgalanmaların en az 2 yıl sürmesidir. Tam bir majör depresyon yaşandığı anda tanı Bipolar II olur."
+    },
+    "differentialDiagnosis": "• Bipolar II: Tam Majör Depresif Epizod vardır.\n• Sınırda Kişilik Bozukluğu: BPD'de dalgalanmalar saatliktir ve terk edilme tetikleyicilidir.",
+    "dsmCriteriaSummary": "DSM-5: En az 2 yıl süren subklinik hipomani ve subklinik depresyon dönemleri + 2 aydan uzun belirtisiz aralık olmaması + Tam mani/majör depresyon atağı OLMAMASI."
+  },
+  {
+    "id": "case-053",
+    "caseNumber": 53,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "hoarding_disorder",
+    "category": "OCD_RELATED",
+    "patientSummary": "58 yaşında, erkek, emekli öğretmen",
+    "clues": [
+      "Danışan, evinde son 10 yıldır biriktirdiği eski gazeteler, kırık plastik kutular, bozuk elektronik parçalar ve naylon poşetler nedeniyle yatağına bile ulaşamadığı, evde sadece daracık patikalardan geçilebildiği ve yangın tehlikesi nedeniyle komşuların şikayetiyle belediye ekiplerinin müdahale etmesi üzerine getiriliyor.",
+      "Bu eşyaların hiçbir maddi veya işlevsel değeri olmamasına rağmen, 'Bir gün mutlaka lazım olur, atarsam büyük hata yaparım' diyerek eşyaları elden çıkarmaya yönelik yoğun bir ıstırap ve direnç yaşamaktadır.",
+      "Mutfak tezgahı ve banyo küveti dahi istiflenmiş kutularla dolu olduğundan evde yemek pişirememekte ve temizlenememektedir.",
+      "Nörolojik taramada demans veya kafa travması dışlanmıştır.",
+      "Ruhsal Durum Muayenesinde: Nesnelere aşırı duygusal bağlanma, karar verme güçlüğü (infleksibilite), eşyaları atma düşüncesine karşı dayanılmaz anksiyete.",
+      "DSM-5'e göre: Gerçek değerleri ne olursa olsun, sahip olunan şeyleri elden çıkarma ya da onlardan ayrılmayla ilgili süregiden bir güçlük ve bu birikimin yaşam alanlarını kullanılamaz hale getirmesidir."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "eşyaları elden çıkarmaya yönelik yoğun bir ıstırap ve direnç",
+        "dsmMatch": "DSM-5 Kriter B: Eşyaları elden çıkarma düşüncesiyle ilişkili belirgin bir sıkıntı duyma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "İstifleme Bozukluğuna Özgü BDT (Steketee & Frost Modeli)",
+      "therapyDetails": "Kademeli atma ve ayıklama egzersizleri, yeni eşya edinmeyi durdurma, karar verme ve kategorizasyon becerileri.",
+      "pharmacologyNote": "Klasik OKB'ye göre ilaç yanıtı daha düşüktür; yüksek doz SSRI veya Venlafaksin denenebilir."
+    },
+    "miniQuiz": {
+      "question": "İstifleme (Biriktiricilik) Bozukluğu ile normal Koleksiyonculuk (Hobiler) arasındaki en temel fark nedir?",
+      "options": [
+        "Koleksiyonculukta eşyalar düzenli, tematik ve yaşam alanlarını işgal etmeyecek şekildedir; İstiflemede ise değersiz nesneler dağınık birikir ve yaşam alanlarını yaşanamaz hale getirir.",
+        "İstifçiler sadece altın biriktirir.",
+        "Koleksiyoncular asla para harcamaz.",
+        "İkisi arasında hiçbir fark yoktur."
+      ],
+      "correctIndex": 0,
+      "explanation": "Koleksiyonculuk organize, planlı ve estetik bir hobidir. İstifleme bozukluğunda ise değersiz çöpler ve eşyalar evi kullanılamaz hale getirir ve atma düşüncesi yoğun ıstırap yaratır."
+    },
+    "differentialDiagnosis": "• OKB: OKB'deki biriktirme bulaşma veya büyüsel takıntı kompulsiyonu olarak yapılır; İstiflemede ise doğrudan eşyaya bağlanma vardır.\n• Demans: Bilişsel testlerle dışlanmıştır.",
+    "dsmCriteriaSummary": "DSM-5: Eşyalardan ayrılmada sürekli güçlük + Elden çıkarma sıkıntısı + Yaşam alanlarının dağınıklıkla tıkanması + Belirgin işlevsellik kaybı."
+  },
+  {
+    "id": "case-054",
+    "caseNumber": 54,
+    "difficulty": "Orta",
+    "course": "FORENSIC",
+    "diagnosisId": "conduct_disorder",
+    "category": "IMPULSE",
+    "patientSummary": "15 yaşında, erkek, lise 1. sınıf öğrencisi",
+    "clues": [
+      "Danışan, mahalledeki sokak köpeklerini kasıtlı olarak sopalarla dövüp bacaklarını kırdığı, okul kantinindeki paraları tehditle gasp ettiği ve gece evden kaçarak sahte plakalı araç çaldığı için çocuk mahkemesi tarafından yönlendiriliyor.",
+      "Yaptığı bu ağır eylemlerden dolayı en ufak bir suçluluk veya pişmanlık duymamakta ('Güçlü olan zayıfı ezer, onlar da bana bulaşmasaydı') diyerek mağdurlarla alay etmektedir.",
+      "12 yaşından beri okuldan kaçma (bolos), yangın çıkarma ve insanlarla fiziksel kavga başlatma öyküsü bulunmaktadır.",
+      "Nörolojik muayene ve EEG normaldir.",
+      "Ruhsal Durum Muayenesinde: Kısıtlı prososyal duygular (empati yoksunluğu, vicdan azabı çekmeme), kuralları ve başkalarının temel haklarını acımasızca çiğneme örüntüsü.",
+      "DSM-5'e göre: Başkalarının temel haklarının ya da yaşa uygun başlıca toplumsal değerlerin/kuralların çiğnendiği, yineleyici ve sürekli bir davranış örüntüsüdür (İnsanlara/hayvanlara saldırganlık, mala zarar verme, dolandırıcılık/hırsızlık, kuralları ağır ihlal)."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "sokak köpeklerini kasıtlı olarak sopalarla dövüp",
+        "dsmMatch": "DSM-5 Kriter 1-7: İnsanlara ve hayvanlara saldırganlık (fiziksel acımasızlık ve gasp)"
+      },
+      {
+        "clueIndex": 1,
+        "text": "en ufak bir suçluluk veya pişmanlık duymamakta",
+        "dsmMatch": "DSM-5 Belirleyici: Kısıtlı Prososyal Duygularla Birlikte (Pişmanlık/Suçluluk Duymama)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Çoklu Sistemik Terapi (MST / Multisystemic Therapy) & Aile Terapisi",
+      "therapyDetails": "Akran grubunu değiştirme, aile denetimini artırma, sosyal beceri ve empati geliştirme protokolleri.",
+      "pharmacologyNote": "Şiddetli dürtüsel saldırganlık durumlarında düşük doz atipik antipsikotik veya duygudurum dengeleyici eklenebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu çocuk 18 yaşını doldurduğunda bu suç ve hak ihlali örüntüsü aynı şekilde devam ederse DSM-5 tanısı neye dönüşür?",
+      "options": [
+        "Antisosyal Kişilik Bozukluğu (ASPD)",
+        "Karşıt Olma Karşı Gelme Bozukluğu (KOKGB)",
+        "Aralıklı Patlayıcı Bozukluk",
+        "Sınırda Kişilik Bozukluğu"
+      ],
+      "correctIndex": 0,
+      "explanation": "Davranım Bozukluğu çocukluk ve ergenlik tanısıdır; 18 yaşından sonra başkalarının haklarını çiğneme örüntüsü devam ederse tanı Antisosyal Kişilik Bozukluğu olur."
+    },
+    "differentialDiagnosis": "• KOKGB: KOKGB'de sözel inatlaşma vardır; hayvanlara eziyet, hırsızlık ve ağır şiddet KESİNLİKLE görülmez.\n• DEHB: DEHB'de saldırganlık kasıtlı hak ihlali değil dikkatsizlik ve dürtüselliktir.",
+    "dsmCriteriaSummary": "DSM-5: İnsanlara/hayvanlara saldırganlık + Mala zarar verme + Hırsızlık/dolandırıcılık + Kuralları ağır ihlal (son 12 ayda en az 3 belirti) + Yaş < 18."
+  },
+  {
+    "id": "case-055",
+    "caseNumber": 55,
+    "difficulty": "Zor",
+    "course": "FORENSIC",
+    "diagnosisId": "pyromania",
+    "category": "IMPULSE",
+    "patientSummary": "26 yaşında, erkek, benzinlik çalışanı",
+    "clues": [
+      "Danışan son 1 yılda ormanlık alanda ve terk edilmiş binalarda 5 farklı yerde kasıtlı olarak yangın çıkardığı ve ardından itfaiyeyi arayıp yangının büyümesini ve söndürülmesini büyük bir hayranlıkla izlediği güvenlik kameralarından tespit edilerek adli makamlarca sevk edilmiştir.",
+      "Yangını çıkarmadan hemen önce içinde karşı konulamaz bir gerilim, sabırsızlık ve uyarılma hissettiğini; alevler yükseldiği anda ise derin bir haz, coşku ve rahatlama yaşadığını ifade ediyor.",
+      "Kritik adli dışlama: Yangınları bir terör eylemi, sigorta parası alma (maddi çıkar), intikam alma ya da bir hezeyanın emriyle ÇIKARMADIĞI kesinleşmiştir.",
+      "Toksikoloji ve kranial MRG temizdir.",
+      "Ruhsal Durum Muayenesinde: Yangına, itfaiye araçlarına ve alev ekipmanlarına karşı aşırı çekim/büyülenme, dürtü denetim defisiti ve eylem sonrası rahatlama.",
+      "DSM-5'e göre: Birden çok kez, kasıtlı ve amaca yönelik biçimde yangın çıkarma; eylemden önce gerginlik ve yangını çıkarırken/izlerken yoğun haz, doyum veya rahatlama yaşama tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "Yangını çıkarmadan hemen önce",
+        "dsmMatch": "DSM-5 Kriter B & C: Eylemden önce gerginlik/duygusal uyarılma ve eylem sırasında haz/rahatlama"
+      },
+      {
+        "clueIndex": 2,
+        "text": "sigorta parası alma",
+        "dsmMatch": "DSM-5 Kriter E: Yangın çıkarma parasal kazanç, intikam ya da suç örtbas etme amacıyla yapılmaz"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Yangın Güvenliği Farkındalık Eğitimi",
+      "therapyDetails": "Gizli duyarsızlaştırma (yangının yıkıcı sonuçlarını zihinsel canlandırma), gevşeme egzersizleri ve alternatif heyecan arama kanalları.",
+      "pharmacologyNote": "SSRI'lar veya duygudurum dengeleyiciler dürtü kontrolünü desteklemek için denenebilir."
+    },
+    "miniQuiz": {
+      "question": "Adli psikolojide Kundakçılık (Arson) ile Piromani arasındaki en temel fark nedir?",
+      "options": [
+        "Kundakçılıkta maddi çıkar (sigorta parası), intikam veya siyasi bir amaç vardır; Piromanide ise tek amaç yangın öncesi gerginliği dindirmek ve alevlerden dürtüsel haz almaktır.",
+        "Piromani sadece itfaiyecilerde görülür.",
+        "Kundakçılar asla yakalanmaz.",
+        "İki kavram tamamen aynıdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "Kundakçılık (Arson) maddi, intikam veya ideolojik amaçla yapılan bir suçtur. Piromani ise parasal/kişisel çıkar gütmeyen saf bir psikiyatrik dürtü kontrol bozukluğudur."
+    },
+    "differentialDiagnosis": "• Kundakçılık (Arson): Maddi kazanç veya intikam vardır.\n• Davranım Bozukluğu / Antisosyal KB: Yangın çıkarma genel kural tanımazlığın parçasıdır.",
+    "dsmCriteriaSummary": "DSM-5: Birden çok kez kasıtlı yangın çıkarma + Eylem öncesi gerginlik + Eylem anında haz/rahatlama + Yangına büyülenme + Maddi/intikam çıkarının olmaması."
+  },
+  {
+    "id": "case-056",
+    "caseNumber": 56,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "separation_anxiety",
+    "category": "ANXIETY",
+    "patientSummary": "29 yaşında, kadın, finans analisti (Erişkin Ayrılma Kaygısı)",
+    "clues": [
+      "Danışan, eşi iş seyahatine gittiğinde veya yanından 1 saatliğine ayrıldığında 'Eşimin başına trafik kazası gelecek, ölecek veya onu bir daha asla göremeyeceğim' dehşetiyle panikleyip eşini dakikada bir aradığını ve evde tek başına asla uyuyamadığını anlatıyor.",
+      "Eşinin olmadığı gecelerde korkudan annesinin evine gidip onunla aynı yatakta yatmakta, eşinin ayrı seyahat gerektiren terfi tekliflerini reddetmesi için baskı yapmaktadır.",
+      "Geceleri sürekli eşinin ya da kendisinin kaçırıldığı veya öldüğü temalı kabuslar görmektedir.",
+      "Genel tıbbi değerlendirme temizdir; panik bozukluk veya agorafobi kriterlerini tam karşılamamaktadır.",
+      "Ruhsal Durum Muayenesinde: Bağlanma figüründen ayrılmaya ilişkin gelişimsel olarak uygunsuz ve aşırı korku, ayrılık anlarında somatik belirtiler (mide bulantısı, çarpıntı).",
+      "DSM-5'e göre: Bağlandığı kişilerden ayrılmayla ilgili, gelişimsel düzeye uygun olmayan ve en az 6 ay süren aşırı korku veya kaygı duyma örüntüsüdür."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "Eşimin başına trafik kazası gelecek, ölecek veya onu bir daha asla göremeyeceğim",
+        "dsmMatch": "DSM-5 Kriter 1 & 2: Bağlanılan kişinin başına kötü bir şey geleceğine dair sürekli aşırı kaygı"
+      },
+      {
+        "clueIndex": 1,
+        "text": "annesinin evine gidip",
+        "dsmMatch": "DSM-5 Kriter 5 & 6: Bağlanılan kişi yanında olmadan evde yalnız kalma veya uyuma korkusu"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi (Kademeli Ayrılık Maruz Bırakması & Şema Terapi)",
+      "therapyDetails": "'Terk Edilme' ve 'Bağımlılık' şemalarını çalışma, tek başına kalma toleransı geliştirme ve felaketleştirici bilişleri yeniden yapılandırma.",
+      "pharmacologyNote": "SSRI grubu antidepresanlar ayrılık anksiyetesini hafifletmede birinci basamaktır."
+    },
+    "miniQuiz": {
+      "question": "DSM-5 ile birlikte Ayrılma Kaygısı Bozukluğu tanısında yapılan en önemli revizyon nedir?",
+      "options": [
+        "Daha önce sadece çocukluk/ergenlik dönemine ait bir tanı iken, yetişkinlikte de başlayabileceği kabul edilerek yetişkinler için de tanı ölçütü eklenmiştir (Süre yetişkinde ≥ 6 ay).",
+        "Bu tanı tamamen kaldırılmıştır.",
+        "Tanı sadece erkeklere özgü kılınmıştır.",
+        "Sadece hayvanlardan ayrılma korkusu haline getirilmiştir."
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-IV'te çocukluk çağı bozukluğu olan Ayrılma Kaygısı, DSM-5'te yetişkinleri de kapsayacak şekilde genel Anksiyete Bozuklukları kategorisine taşınmıştır."
+    },
+    "differentialDiagnosis": "• Bağımlı Kişilik Bozukluğu: Bağımlı kişi karar alma desteği arar; Ayrılma kaygısında ise figürün başına felaket gelmesi dehşeti vardır.\n• Agorafobi: Kaçamama korkusudur.",
+    "dsmCriteriaSummary": "DSM-5 (En az 3/8): Bağlanma figürünün kaybı korkusu, ayrılma korkusuyla evden çıkamama, yalnız kalamama, yalnız uyuyamama, kabuslar, ayrılıkta bedensel belirtiler. Süre: Çocukta ≥ 4 hafta, Yetişkinde ≥ 6 ay."
+  },
+  {
+    "id": "case-057",
+    "caseNumber": 57,
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "specific_phobia",
+    "category": "ANXIETY",
+    "patientSummary": "24 yaşında, kadın, stajyer hemşire (Kan-Enjeksiyon-Yara Fobisi)",
+    "clues": [
+      "Danışan kan gördüğünde, aşı/enjeksiyon yaptırırken veya bir yara pansumanına tanık olduğunda önce kısa bir kalp hızlanması yaşadığını, hemen ardından tansiyonunun ve nabzının aniden dibe vurarak bayıldığını (senkop geçirdiğini) anlatıyor.",
+      "Önemli ve tipik fizyolojik özellik: Diğer tüm fobilerde (örneğin köpek veya yükseklik) sempatik sistem aktive olup tansiyon YÜKSELİRKEN; bu hastada bifazik vazovagal yanıtla parasempatik deşarj oluşmakta ve hasta bayılmaktadır.",
+      "Bu bayılma korkusu yüzünden hastane stajlarını yapamaz hale gelmiş ve kan tahlili yaptırmaktan ısrarla kaçınmaktadır.",
+      "Kardiyolojik ve nörolojik elektrofizyolojik testler (Tilt-table, EKG) vazovagal senkop paternini doğrulamıştır.",
+      "Ruhsal Durum Muayenesinde: Kan, enjeksiyon ve yaralanma uyaranlarına karşı özgül kaçınma ve vazovagal fobi tablosu.",
+      "DSM-5'e göre: Kan, enjeksiyon ya da yaralanma durumlarıyla ilgili belirgin ve orantısız korku/kaçınma (Kan-Enjeksiyon-Yaralanma Tipi Özgül Fobi) mevcuttur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "tansiyonunun ve nabzının aniden dibe vurarak bayıldığını",
+        "dsmMatch": "DSM-5 Özgül Belirleyici: Kan-Enjeksiyon-Yaralanma Tipi (Bifazik vazovagal senkop yanıtı)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Uygulamalı Kas Gerdirme Tekniği (Applied Tension / Öst Protokolü)",
+      "therapyDetails": "Kan görmeden hemen önce kol, bacak ve gövde kaslarını sıkarak kan basıncını yükseltme ve bayılmayı önleme egzersizleri.",
+      "pharmacologyNote": "Genellikle ilaç tedavisi gerekmez; kas gerdirme ile başarı oranı %90'dır."
+    },
+    "miniQuiz": {
+      "question": "Kan-Enjeksiyon-Yara Fobisini diğer tüm özgül fobilerden ayıran benzersiz fizyolojik özellik nedir?",
+      "options": [
+        "Diğer fobilerde tansiyon yükselirken, bu fobide bifazik vazovagal refleksle nabız ve tansiyonun aniden düşerek bayılmaya (senkopa) yol açması.",
+        "Hastanın uçaktan korkması.",
+        "Bu fobinin sadece uykuda ortaya çıkması.",
+        "Hastanın hafızasını tamamen kaybetmesi."
+      ],
+      "correctIndex": 0,
+      "explanation": "Kan-enjeksiyon-yara fobisi, sempatik aktivasyon sonrası ani parasempatik aşırı uyarılmayla bradikardi ve hipotansiyona yol açan tek fobik tablodur."
+    },
+    "differentialDiagnosis": "• Panik Bozukluk: Panik atakta taşikardi ve hipertansiyon olur, bayılma neredeyse hiç görülmez.\n• Epilepsi: EEG temizdir.",
+    "dsmCriteriaSummary": "DSM-5: Kan, enjeksiyon ve yara durumlarına karşı orantısız korku ve kaçınma (Bifazik vazovagal yanıtla birlikte). Süre ≥ 6 ay."
+  },
+  {
+    "id": "case-058",
+    "caseNumber": 58,
+    "difficulty": "Zor",
+    "course": "ADULT",
+    "diagnosisId": "schizoaffective",
+    "category": "PSYCHOTIC",
+    "patientSummary": "34 yaşında, erkek, müzisyen",
+    "clues": [
+      "Danışan son 2 yıldır hem taşkın manik dönemler yaşamakta hem de bu manik dönemlerin tamamen dışında; duygudurumu normalken tam 3 hafta boyunca aralıksız 'FBI'ın kendisini uydudan dinlediği sanrıları ve gaipten gelen emir veren sesler' yaşadığını anlatıyor.",
+      "Kritik tanısal anahtar: Şizofreni kriterlerini karşılayan bu sanrı ve varsanılar, belirgin bir duygudurum atağı (mani veya depresyon) OLMADIĞI dönemde en az 2 hafta boyunca tek başına sürmüştür.",
+      "Hastalık süresinin toplamında ise manik epizod ölçütleri aktif ve kalıcı dönemlerin önemli bir kısmında tabloya eşlik etmiştir.",
+      "Beyin MRG ve toksikoloji taraması olağandır.",
+      "Ruhsal Durum Muayenesinde: Psikotik hezeyanlar, işitsel varsanılar ile birlikte epizodik bipolar manik dalgalanmalar.",
+      "DSM-5'e göre: Şizofreninin A ölçütünü karşılayan belirtilerle eşzamanlı olarak bir Majör Duygudurum Döneminin (Mani/Depresyon) bulunması VE yaşam boyu hastalık süresi içinde duygudurum belirtileri olmaksızın en az 2 hafta süren sanrı ya da varsanıların varlığıdır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "tamamen dışında",
+        "dsmMatch": "DSM-5 Kriter B: Belirgin bir duygudurum dönemi olmaksızın en az 2 hafta süren sanrılar ya da varsanılar"
+      },
+      {
+        "clueIndex": 2,
+        "text": "manik epizod ölçütleri aktif",
+        "dsmMatch": "DSM-5 Kriter C: Duygudurum dönemi ölçütlerini karşılayan belirtilerin hastalığın toplam süresinin çoğunda bulunması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Kombine BDT & Psikososyal Destek",
+      "therapyDetails": "Psikotik belirtiler ve duygudurum dalgalanmalarını yönetme, erken uyarı işaretleri ve stres azaltma.",
+      "pharmacologyNote": "Atipik antipsikotikler (Paliperidon FDA onaylı) + Duygudurum dengeleyiciler (Lityum/Valproat) kombine edilir."
+    },
+    "miniQuiz": {
+      "question": "Şizoaffektif Bozukluk ile Psikotik Özellikli Bipolar I Bozukluk arasındaki en kritik ayrım nedir?",
+      "options": [
+        "Şizoaffektifte duygudurum atağı (mani/depresyon) TAMAMEN DÜZELDİĞİNDE BİLE en az 2 hafta boyunca tek başına devam eden psikotik sanrı/varsanılar vardır; Bipolar I'de ise psikoz SADECE manik/depresif dönem sırasında ortaya çıkar.",
+        "Şizoaffektif bozuklukta hasta hiç konuşamaz.",
+        "Bipolar I'de psikoz görülmesi imkansızdır.",
+        "İki hastalık tamamen aynıdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5 Kriter B gereğince, duygudurum dönemi yokken tek başına en az 2 hafta süren psikotik semptomların varlığı Şizoaffektif Bozukluğu bipolar psikozdan ayıran kilit ölçüttür."
+    },
+    "differentialDiagnosis": "• Psikotik Özellikli Bipolar: Psikoz sadece manik dönemde vardır; maniden bağımsız 2 hafta psikoz olmaz.\n• Şizofreni: Duygudurum dönemleri sürenin az bir kısmını kapsar.",
+    "dsmCriteriaSummary": "DSM-5: Şizofreni A kriteri + Majör duygudurum dönemi eşzamanlılığı + Duygudurum atağı YOKKEN en az 2 hafta süren sanrı/varsanı varlığı."
+  },
+  {
+    "id": "case-059",
+    "caseNumber": 59,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "schizophreniform",
+    "category": "PSYCHOTIC",
+    "patientSummary": "23 yaşında, kadın, yeni mezun mühendis",
+    "clues": [
+      "Danışan son 2.5 aydır şirket yöneticilerinin bilgisayar ekranından kendisini izlediğini, düşüncelerinin çalındığını iddia etmekte ve odasında kendi kendine gülüp kimsenin duymadığı seslerle tartışmaktadır.",
+      "Bu aktif hezeyan ve halüsinasyonlar tam 2.5 aydır kesintisiz devam etmekte olup ailesi tarafından kliniğe getirilmiştir.",
+      "Kritik süre kuralı: Bozukluğun toplam süresi (öncül ve aktif dönemler dahil) 1 ayı geçmiş ANCAK HENÜZ 6 AYI DOLDURMAMIŞTIR (toplam 2.5 ay).",
+      "Kranial MRG, EEG ve kan toksikolojisi negatiftir.",
+      "Ruhsal Durum Muayenesinde: Düşünce içeriğinde persekütuar sanrılar, işitsel varsanılar, çağrışım dağınıklığı ve uygunsuz duygulanım.",
+      "DSM-5'e göre: Şizofreninin A ölçütünü karşılayan (sanrı, varsanı, dezorganizasyon), en az 1 ay süren ancak 6 aydan daha kısa süren bir epizoddur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "1 ayı geçmiş ANCAK HENÜZ 6 AYI DOLDURMAMIŞTIR (toplam 2.5 ay)",
+        "dsmMatch": "DSM-5 Kriter B: Bir atağın süresi en az 1 aydır ancak 6 aydan daha kısadır"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Erken Psikoz Müdahalesi & BDT (CBTp)",
+      "therapyDetails": "İçgörüyü koruma, stres faktörlerini hafifletme ve sosyal işlevselliği destekleme.",
+      "pharmacologyNote": "İkinci kuşak antipsikotik ilaçlar (Risperidon, Olanzapin, Aripiprazol) hızla başlanır."
+    },
+    "miniQuiz": {
+      "question": "Bu genç kadının psikotik belirtileri düzelmeden devam eder ve 6. ayı doldurursa resmi DSM-5 tanısı neye dönüşür?",
+      "options": [
+        "Şizofreni",
+        "Kısa Psikotik Bozukluk",
+        "Sanrılı Bozukluk",
+        "Şizoaffektif Bozukluk"
+      ],
+      "correctIndex": 0,
+      "explanation": "Şizofreniform bozukluk 1-6 ay arası sürer; belirtiler 6 ayı geçtiği anda tanı otomatik olarak Şizofreni olur."
+    },
+    "differentialDiagnosis": "• Kısa Psikotik Bozukluk: Süre < 1 aydır.\n• Şizofreni: Toplam süre en az 6 aydır.",
+    "dsmCriteriaSummary": "DSM-5: Şizofreni A ölçütleri (sanrı, varsanı vb.) + Sürenin en az 1 ay ile en fazla 6 ay arasında olması."
+  },
+  {
+    "id": "case-060",
+    "caseNumber": 60,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "delusional_disorder",
+    "category": "PSYCHOTIC",
+    "patientSummary": "31 yaşında, kadın, idari sekreter (Erotomanik Tip Sanrılı Bozukluk / Clérambault Sendromu)",
+    "clues": [
+      "Danışan son 8 aydır ünlü ve evli bir pop şarkıcısının televizyon konserlerinde söylediği şarkı sözleriyle ve giydiği ceket renkleriyle 'kendisine gizli aşk mesajları gönderdiğine ve aslında deliler gibi kendisine aşık olduğuna' sarsılmaz bir şekilde inanmaktadır.",
+      "Şarkıcının menajerlik ofisine yüzlerce aşk mektubu ve hediye göndermiş; şarkıcının korumaları tarafından uzaklaştırıldığında ise 'Aşkımızı medyadan saklamak için böyle numara yapıyor' diyerek inancını korumuştur.",
+      "Kritik ayırt edici özellik: Bu tekil aşk sanrısı dışında hastanın bilişsel muhakemesi, iş yerindeki performansı, giyim kuşamı ve günlük yaşamı TAMAMEN KUSURSUZ VE NORMALDİR; Şizofrenideki gibi genel bir yıkım yoktur.",
+      "Nörolojik taramalar ve toksikoloji temizdir.",
+      "Ruhsal Durum Muayenesinde: Erotomanik sanrı (yüksek statülü birinin kendisine gizlice aşık olduğu hezeyanı), içgörü yokluğu, kapsüllenmiş düşünce yapısı.",
+      "DSM-5'e göre: En az 1 ay süren bir ya da daha çok sanrının varlığı ve sanrının alt tipinin 'Erotomanik Tip' olması tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "aslında deliler gibi kendisine aşık olduğuna' sarsılmaz bir şekilde inanmaktadır",
+        "dsmMatch": "DSM-5 Belirleyici: Erotomanik Tip (Başka bir kişinin, genellikle daha üst konumdaki birinin kendisine aşık olduğu sanrısı)"
+      },
+      {
+        "clueIndex": 2,
+        "text": "günlük yaşamı TAMAMEN KUSURSUZ VE NORMALDİR",
+        "dsmMatch": "DSM-5 Kriter C: Sanrının doğrudan etkisi dışında işlevsellik belirgin olarak bozulmamıştır"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Destekleyici Psikoterapi & Gerçeklik Testi",
+      "therapyDetails": "Sanrıyı doğrudan aşağılamadan terapötik güven kurma, takip (stalking) davranışlarını engelleme ve yasal sınırları koruma.",
+      "pharmacologyNote": "İkinci kuşak antipsikotikler (Pimozid, Risperidon, Aripiprazol) sanrı yoğunluğunu azaltmada kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Erotomanik tip sanrılı bozukluk klasik psikiyatride hangi sendrom ismiyle de bilinir?",
+      "options": [
+        "De Clérambault Sendromu",
+        "Cotard Sendromu",
+        "Capgras Sendromu",
+        "Othello Sendromu"
+      ],
+      "correctIndex": 0,
+      "explanation": "Üst konumdaki birinin kendisine aşık olduğuna inanılan erotomanik sanrı tablosu klasik literatürde 'De Clérambault Sendromu' olarak bilinir."
+    },
+    "differentialDiagnosis": "• Şizofreni: Şizofrenide varsanılar, künt duygulanım ve dezorganizasyon vardır; burada işlevsellik tamdır.\n• Narsisistik KB: Narsistte sanrı değil büyüklenme vardır.",
+    "dsmCriteriaSummary": "DSM-5: En az 1 ay süren erotomanik sanrı + Şizofreni A ölçütünün olmaması + Sanrı dışındaki alanlarda işlevselliğin korunması."
+  },
+  {
+    "id": "case-061",
+    "caseNumber": 61,
+    "difficulty": "Orta",
+    "course": "FORENSIC",
+    "diagnosisId": "delusional_disorder",
+    "category": "PSYCHOTIC",
+    "patientSummary": "48 yaşında, erkek, oto galeri sahibi (Kıskançlık Tipi Sanrılı Bozukluk / Othello Sendromu)",
+    "clues": [
+      "Danışan son 1 yıldır 25 yıllık eşinin kendisini mahalledeki bakkalla, komşularıyla ve hatta yoldan geçen yabancılarla aldattığına dair sarsılmaz bir hezeyan yaşamakta; eşinin yatak çarşaflarını mikroskopla incelemekte ve iç çamaşırlarına gizli kimyasal test kitleri sürmektedir.",
+      "Eşinin telefonuna casus takip cihazları yerleştirmiş, perdeleri kapatıp evi hapishaneye çevirmiş ancak hiçbir kanıt bulamamasına rağmen 'Benden çok zekice saklıyorlar' diyerek inancından milim geri adım atmamaktadır.",
+      "Önemli klinik nokta: Bu aldatılma hezeyanı dışında hastanın iş hayatı, muhasebe hesaplamaları, arkadaş ilişkileri ve genel entelektüel kapasitesi TAMAMEN KORUNMUŞTUR.",
+      "Beyin BT taraması ve toksikoloji temizdir; alkol kullanımına bağlı organik kıskançlık dışlanmıştır.",
+      "Ruhsal Durum Muayenesinde: Kıskançlık (jealous) sanrısı, kapsüllenmiş hezeyan ve potansiyel adli şiddet riski.",
+      "DSM-5'e göre: En az 1 ay süren bir ya da daha çok sanrının bulunması ve alt tipin 'Kıskançlık Tipi' olması tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "eşinin kendisini",
+        "dsmMatch": "DSM-5 Belirleyici: Kıskançlık Tipi (Eşinin ya da sevgilisinin sadakatsiz olduğu sanrısı - Othello Sendromu)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Güvenlik Yönetimi",
+      "therapyDetails": "Eşe yönelik şiddet ve tehdit riskini değerlendirme, takip davranışlarını sınırlama ve şüpheleri sorgulama.",
+      "pharmacologyNote": "Antipsikotik ilaç tedavisi (Paliperidon, Olanzapin) esastır; adli risk nedeniyle yakın izlem gerekir."
+    },
+    "miniQuiz": {
+      "question": "Eşin sadakatsiz olduğuna dair sarsılmaz patolojik sanrılarla giden bu tablo klasik edebiyat ve psikiyatride hangi isimle anılır?",
+      "options": [
+        "Othello Sendromu",
+        "Münchausen Sendromu",
+        "Tourette Sendromu",
+        "Ganser Sendromu"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shakespeare'in tragedyasından esinlenerek patolojik kıskançlık hezeyanlarına 'Othello Sendromu' adı verilir."
+    },
+    "differentialDiagnosis": "• Paranoid Kişilik Bozukluğu: Paranoid KB'de genel bir güvensizlik karakteri vardır; burada ise spesifik sarsılmaz bir aldatılma sanrısı vardır.\n• Şizofreni: Halüsinasyon ve genel yıkım yoktur.",
+    "dsmCriteriaSummary": "DSM-5: En az 1 ay süren kıskançlık sanrısı + Şizofreni A ölçütünün olmaması + Sanrı konusu dışında işlevselliğin korunması."
+  },
+  {
+    "id": "case-062",
+    "caseNumber": 62,
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "conversion_disorder",
+    "category": "SOMATIC",
+    "patientSummary": "21 yaşında, kadın, üniversite öğrencisi (Psikojenik Non-Epileptik Nöbet - PNES)",
+    "clues": [
+      "Danışan son 3 aydır final sınavları öncesinde ve aile içi şiddetli tartışmalar sırasında aniden yere düşüp tüm vücudunda titremeler, başını iki yana sallama (pelvik thrusting) ve kollarını savurma şeklinde günde 2-3 kez bayılma nöbetleri geçirdiği için epilepsi şüphesiyle getiriliyor.",
+      "Video-EEG monitorizasyonunda: Hasta nöbet anında tüm vücuduyla şiddetli kasılmalar sergilerken, eşzamanlı beyin EEG kaydında HİÇBİR EİLEPTİK İKTAL DEŞARJ (epilepsi dalgası) SAPTANMAMIŞTIR.",
+      "Nöbet sırasında gözlerini sıkıca kapalı tuttuğu ve göz kapakları açılmaya çalışıldığında aktif bir direnç gösterdiği; nöbet sonrası post-iktal konfüzyonun olmadığı saptanmıştır.",
+      "Kranial MRG ve kan prolaktin düzeyleri normaldir (organik grand-mal nöbet dışlanmıştır).",
+      "Ruhsal Durum Muayenesinde: Psikojenik non-epileptik nöbet (PNES / yalancı nöbet), stresörle tetiklenen dissosiyatif motor boşalım.",
+      "DSM-5'e göre: İstemli motor işlevlerde değişme (nöbetler) ve belirtinin nörolojik bir hastalıkla (epilepsi) bağdaşmadığını gösteren klinik bulgular mevcuttur (Dönüşüm Bozukluğu - Nöbetler ya da Kasılmalarla Giden)."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "SAPTANMAMIŞTIR",
+        "dsmMatch": "DSM-5 Kriter B: Nörolojik durumla (epilepsi) bağdaşmadığına ilişkin klinik/laboratuvar kanıtı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Psikoeğitim",
+      "therapyDetails": "Hastaya tanıyı şefkatle ve damgalamadan açıklama (beynin aşırı stres anında sigorta attırması metaforu), duygusal tetikleyicileri tanıma ve antiepileptik ilaçların gereksiz kullanımını sonlandırma.",
+      "pharmacologyNote": "Antiepileptik ilaçlar etkisizdir; altta yatan anksiyete/depresyon için SSRI kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Psikojenik Non-Epileptik Nöbetleri (Dönüşüm Bozukluğu) gerçek epileptik nöbetlerden ayıran altın standart tanı aracı nedir?",
+      "options": [
+        "Eşzamanlı Video-EEG Monitorizasyonu (Nöbet anında beyin dalgalarında epileptik deşarj olmaması)",
+        "Akciğer Grafisi",
+        "Göz Muayenesi",
+        "İdrar Tahlili"
+      ],
+      "correctIndex": 0,
+      "explanation": "Video-EEG monitorizasyonunda nöbet anında epileptik dalgaların görülmemesi, PNES (psikojenik nöbet) tanısı koymada altın standarttır."
+    },
+    "differentialDiagnosis": "• Gerçek Epilepsi: EEG'de iktal epileptik deşarjlar vardır.\n• Temarruz: Adli kazanç için numara yapmadır.",
+    "dsmCriteriaSummary": "DSM-5: Nöbet ya da kasılmalarla giden istemli motor işlev değişikliği + Nörolojik epilepsi ile bağdaşmazlık kanıtı."
+  },
+  {
+    "id": "case-063",
+    "caseNumber": 63,
+    "difficulty": "Zor",
+    "course": "CHILD",
+    "diagnosisId": "pica",
+    "category": "EATING",
+    "patientSummary": "8 yaşında, erkek, 2. sınıf öğrencisi (ARFID - Kaçıngan/Kısıtlı Yiyecek Alımı)",
+    "clues": [
+      "Danışan son 3 yıldır sadece beyaz renkli ve kuru gıdaları (sadece patates kızartması, kraker ve sade beyaz ekmek) yiyebilmekte; sebze, et, meyve veya soslu hiçbir yiyeceği dokusu, kokusu ve rengi nedeniyle ağzına dahi sürmemektedir.",
+      "Kritik tanısal anahtar: Çocukta Anoreksiya veya Bulimiya'daki gibi 'şişmanlama korkusu, kilo takıntısı veya beden imgesi bozukluğu' KESİNLİKLE YOKTUR.",
+      "Bu aşırı seçicilik ve kısıtlılık yüzünden büyüme ve gelişme geriliği yaşamakta, vitamin eksiklikleri nedeniyle besin takviyesi almakta ve okul gezilerindeki yemeklere katılamamaktadır.",
+      "Genel gastroenterolojik ve alerji testleri temizdir.",
+      "Ruhsal Durum Muayenesinde: Besinlerin duyusal özelliklerine karşı aşırı hassasiyet, kilo kaygısından bağımsız gıda kaçınması.",
+      "DSM-5'e göre: Uygun beslenme gereksinimlerinin karşılanmasında sürekli bir başarısızlıkla giden; belirgin kilo kaybı, beslenme eksikliği ya da psikososyal işlevsellikte bozulmaya yol açan yeme ya da beslenme bozukluğudur (Beden imgesi bozukluğu olmaksızın)."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "şişmanlama korkusu, kilo takıntısı veya beden imgesi bozukluğu' KESİNLİKLE YOKTUR",
+        "dsmMatch": "DSM-5 Kriter C: Vücut ağırlığı ya da biçiminin algılanmasında bir bozukluk olduğuna ilişkin bir kanıt yoktur"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Kaçıngan Yeme Bozukluğu için BDT (CBT-AR) & Duyusal Maruz Bırakma",
+      "therapyDetails": "Yeni gıdalara kademeli duyusal temas (koklama, dokunma, tatma) ve gıda repertuvarını genişletme.",
+      "pharmacologyNote": "Gerektiğinde iştah açıcı ve kaygı yatıştırıcı düşük doz Mirtazapin veya Siproheptadin kullanılabilir."
+    },
+    "miniQuiz": {
+      "question": "Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID) ile Anoreksiya Nervoza arasındaki en temel fark nedir?",
+      "options": [
+        "ARFID'de hastalar kilo almaktan korkmazlar ve beden imgesi takıntıları yoktur; yiyecekleri duyusal özellikleri (koku, doku) veya boğulma/kusma korkusu yüzünden reddederler.",
+        "ARFID sadece 60 yaş üstünde görülür.",
+        "Anoreksiyada hastalar her şeyi yer.",
+        "İki hastalık tamamen aynıdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "ARFID'i Anoreksiya'dan ayıran en kritik kriter, kilo alma korkusu veya şişmanlık hezeyanının kesinlikle bulunmamasıdır."
+    },
+    "differentialDiagnosis": "• Anoreksiya Nervoza: Kilo alma korkusu ve beden imge bozukluğu vardır.\n• Otizm Spektrum: Duyusal hassasiyet otizme eşlik edebilir.",
+    "dsmCriteriaSummary": "DSM-5: Kilo kaybı/besin yetersizliğine yol açan gıda kısıtlaması + Yiyeceğin duyusal özelliklerine hassasiyet + Beden imgesi bozukluğu OLMAMASI."
+  },
+  {
+    "id": "case-064",
+    "caseNumber": 64,
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "bdd",
+    "category": "OCD_RELATED",
+    "patientSummary": "25 yaşında, erkek, fitness eğitmeni (Kas Dismorfisi / Bigoreksiya)",
+    "clues": [
+      "Danışan 1.85 boyunda, 92 kilo ve son derece kaslı bir vücut geliştirici olmasına rağmen aynaya baktığında kendisini 'çelimsiz, sıska, kasları yetersiz ve zayıf' gördüğünü söyleyerek günde 5 saat ağırlık çalışmakta ve günde 400 gram protein tüketmektedir.",
+      "Kaslarının küçüleceği dehşetiyle arkadaşlarıyla buluşmayı, dışarıda yemek yemeyi ve sosyal hayatını tamamen terk etmiş; kas kütlesini artırmak için sağlığını tehdit eden anabolik steroidler enjekte etmeye başlamıştır.",
+      "Günde onlarca kez aynada kollarını ve göğüs kaslarını mezurayla ölçmekte ve yetersiz bulmaktadır.",
+      "Kardiyolojik değerlendirmede steroid kullanımına bağlı sol ventrikül hipertrofisi saptanmıştır.",
+      "Ruhsal Durum Muayenesinde: Beden Algısı Bozukluğu kapsamında 'Kas Dismorfisi' (Muscle Dysmorphia / Ters Anoreksiya) tablosu.",
+      "DSM-5'e göre: Beden Algısı Bozukluğunun bir belirleyicisi olarak; bireyin vücut yapısının çok küçük ya da yeterince kaslı olmadığı düşüncesi üzerine aşırı kafa yormasıdır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "son derece kaslı",
+        "dsmMatch": "DSM-5 Belirleyici: Kas Dismorfisi ile Birlikte (Vücudunun yeterince kaslı olmadığı inancı)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel Davranışçı Terapi (Kas Dismorfisi Protokolü)",
+      "therapyDetails": "Ayna kontrolünü ve kas ölçmeyi bırakma, steroid kullanımını sonlandırma ve değerler odaklı yaşam inşası.",
+      "pharmacologyNote": "Yüksek doz SSRI grubu antidepresanlar takıntılı algıyı esnetmede etkilidir."
+    },
+    "miniQuiz": {
+      "question": "Kas Dismorfisi (Bigoreksiya) DSM-5 sınıflandırmasında hangi ana bozukluğun özel bir alt belirleyicisidir?",
+      "options": [
+        "Beden Algısı Bozukluğu (Beden Dismorfik Bozukluğu - BDD)",
+        "Narsisistik Kişilik Bozukluğu",
+        "Anoreksiya Nervoza",
+        "Şizofreni"
+      ],
+      "correctIndex": 0,
+      "explanation": "Kas Dismorfisi, DSM-5'te Beden Algısı Bozukluğu'nun (BDD) resmi bir tanısal alt belirleyicisidir."
+    },
+    "differentialDiagnosis": "• Sağlıklı Vücut Geliştirme: Sağlıklı sporcularda steroid kötüye kullanımı, sosyal izolasyon ve ağır beden çarpıtması görülmez.\n• Anoreksiya: Anoreksiyada amaç zayıflamaktır; burada amaç aşırı kaslanmaktır.",
+    "dsmCriteriaSummary": "DSM-5: Beden Dismorfik Bozukluğu + 'Kas Dismorfisi ile Birlikte' belirleyicisi (Vücudunun yeterince iri ve kaslı olmadığı inancı)."
+  },
+  {
+    "id": "case-065",
+    "caseNumber": 65,
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "social_anxiety",
+    "category": "ANXIETY",
+    "patientSummary": "28 yaşında, erkek, profesyonel konser piyanisti (Sadece Performans Tipi Sosyal Fobi)",
+    "clues": [
+      "Danışan günlük hayatında arkadaşlarıyla kafede otururken, tanımadığı insanlarla sohbet ederken veya alışveriş yaparken hiçbir kaygı YAŞAMAMASINA rağmen; sahneye çıkıp piyano çalması gerektiğinde ellerinde kontrol edilemez bir titreme, kalp çarpıntısı ve bayılacak gibi olma yaşamaktadır.",
+      "Sahne korkusu nedeniyle son 6 aydır vereceği tüm solo konserleri iptal etmiş ve uluslararası yarışmalardan çekilmek zorunda kalmıştır.",
+      "Sadece topluluk önünde performans sergileme durumuyla sınırlı bu anksiyete, mesleki kariyerini bitirme noktasına getirmiştir.",
+      "Nörolojik muayenede esansiyel tremor veya Parkinson dışlanmıştır.",
+      "Ruhsal Durum Muayenesinde: Sadece performans durumlarıyla kısıtlı şiddetli performans anksiyetesi.",
+      "DSM-5'e göre: Korku ya da kaygı yalnızca topluluk önünde konuşma ya da sergileme/icra etme durumlarıyla sınırlıysa 'Yalnızca Performans' belirleyicisi kullanılır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "günlük hayatında",
+        "dsmMatch": "DSM-5 Belirleyici: Yalnızca Performans (Korku sadece topluluk önünde icra etmeyle sınırlıdır)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "BDT (Sanal Gerçeklik & Sahne Maruz Bırakması) & Performans Psikolojisi",
+      "therapyDetails": "Performans anında felaketleştirici düşünceleri durdurma, nefes kontrolü ve kademeli seyirci önünde prova.",
+      "pharmacologyNote": "Performanstan 45 dakika önce alınan düşük doz Beta-bloker (Propranolol) sempatik taşikardi ve el titremesini bloke etmede altın standarttır."
+    },
+    "miniQuiz": {
+      "question": "Sadece Performans Tipi Sosyal Anksiyete yaşayan sanatçı ve konuşmacılarda sahne öncesi otonomik el titremesi ve taşikardiyi bloke etmek için hangi ilaç grubu tercih edilir?",
+      "options": [
+        "Beta-blokerler (örn. Propranolol)",
+        "Antipsikotikler",
+        "Duygudurum Dengeleyiciler",
+        "Antibiyotikler"
+      ],
+      "correctIndex": 0,
+      "explanation": "Propranolol gibi beta-adrenerjik blokerler, sahne öncesi sempatik sistemin neden olduğu el titremesi ve çarpıntıyı bloke ederek performansı korur."
+    },
+    "differentialDiagnosis": "• Yaygın Sosyal Anksiyete: Yaygın tipte sohbet etme, yemek yeme gibi tüm sosyal etkileşimlerde kaygı vardır; burada sadece sahne performansıdır.\n• Panik Bozukluk: Beklenmedik spontane panik ataklar vardır.",
+    "dsmCriteriaSummary": "DSM-5: Sosyal Anksiyete Bozukluğu + 'Yalnızca Performans' Belirleyicisi (Topluluk önünde konuşma/sergileme ile sınırlı)."
+  },
+  {
+    "id": "case-066",
+    "caseNumber": 66,
+    "difficulty": "Zor",
+    "course": "FORENSIC",
+    "diagnosisId": "factitious_disorder",
+    "category": "SOMATIC",
+    "patientSummary": "32 yaşında, kadın, ev hanımı (Başkasına Yüklenen Yapay Bozukluk / Münchausen by Proxy)",
+    "clues": [
+      "Danışan, 4 yaşındaki öz kızını son 1 yılda 'sürekli açıklanamayan ishal, kusma ve havale nöbetleri' şikayetiyle 14 farklı çocuk hastanesine yatırmış; çocuk defalarca yoğun bakıma alınmıştır.",
+      "Hastane güvenlik kamera kayıtları incelendiğinde; annenin hemşireler odadan çıktığı anda gizlice kızının damar yoluna çeşme suyu enjekte ettiği ve sütüne aşırı doz laksatif karıştırdığı tespit edilmiştir.",
+      "Kritik adli özellik: Annenin bu korkunç eylemi yaparken hiçbir 'maddi sigorta tazminatı veya nafaka alma amacı' YOKTUR; tek motivasyonu 'hasta bir çocuğun fedakar, kahraman annesi rolünü oynamak ve doktorların övgüsünü almaktır'.",
+      "Çocuk annesinden uzaklaştırıldığında tüm semptomlar anında ve tamamen düzelmiştir.",
+      "Ruhsal Durum Muayenesinde: Başkasına yüklenen yapay bozukluk (Münchausen by Proxy), ağır patolojik ilgi arayışı ve çocuk istismarı.",
+      "DSM-5'e göre: Belirlenebilir bir dış ödül olmaksızın, bir başkasında (genellikle çocuğunda) fiziksel ya da psikolojik belirti ve bulguları bilerek ortaya çıkarma ya da uydurma tablosudur."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "annenin",
+        "dsmMatch": "DSM-5 Kriter A: Bir başkasında fiziksel belirtileri bilerek ortaya çıkarma ya da hastalık uydurma"
+      },
+      {
+        "clueIndex": 2,
+        "text": "hiçbir 'maddi sigorta tazminatı",
+        "dsmMatch": "DSM-5 Kriter C: Belirgin bir dış ödülün olmaması (Münchausen by Proxy)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Adli Koruma, Çocuğun Güvenliği & Yoğun Psikoterapi",
+      "therapyDetails": "Öncelikli adım çocuğun velayetinin derhal alınması ve adli koruma sağlanmasıdır; fail için yoğun kişilik ve sınır terapisi.",
+      "pharmacologyNote": "Primer bir medikal tedavisi yoktur; adli psikiyatrik vaka yönetimi gerektirir."
+    },
+    "miniQuiz": {
+      "question": "Başkasına Yüklenen Yapay Bozukluk (Münchausen by Proxy) vakalarında klinik tablonun doğrulanmasında en belirleyici kanıt nedir?",
+      "options": [
+        "Mağdur çocuk fail olan ebeveynden uzaklaştırıldığında tüm tıbbi belirtilerin anında ortadan kalkması ve sağlıklı hale gelmesi.",
+        "Çocuğun genetik testlerinin bozuk çıkması.",
+        "Annenin çok zengin olması.",
+        "Çocuğun hiç aşı olmamış olması."
+      ],
+      "correctIndex": 0,
+      "explanation": "Münchausen by Proxy vakalarında çocuk fail ebeveynden ayrıldığı anda tıbbi semptomların tamamen kesilmesi tanıyı teyit eden en kritik klinik bulgudur."
+    },
+    "differentialDiagnosis": "• Temarruz (Numara Yapma): Maddi tazminat veya çıkar için yapılır.\n• Kendine Yüklenen Yapay Bozukluk: Hasta belirtileri kendi vücudunda üretir.",
+    "dsmCriteriaSummary": "DSM-5: Başka birinde (çocukta) belirtileri kasten üretme + Bireyin kendini fedakar bakıcı olarak sunması + Belirgin bir dışsal kazancın olmaması."
+  },
+  {
+    "id": "case-067",
+    "caseNumber": 67,
+    "difficulty": "İleri Düzey",
+    "course": "COMORBID",
+    "diagnosisId": "bipolar_1",
+    "secondaryDiagnosisId": "alcohol_use_disorder",
+    "category": "MOOD",
+    "patientSummary": "37 yaşında, erkek, mimar (Çift Tanılı / Bipolar I + Alkol Bağımlılığı Komorbiditesi 🔗)",
+    "clues": [
+      "Danışan son 10 gündür günde 1 saat uykuyla aralıksız konuşmakta, evdeki eşyaları balkondan aşağı atmakta ve 'Cumhurbaşkanının başdanışmanı olduğunu' iddia etmektedir (1. Tanı - Akut Manik Epizod).",
+      "Aynı zamanda son 4 yıldır her gün 1 büyük şişe rakı içtiği, alkolü bıraktığı anda deliryum benzeri ağır titreme nöbetleri geçirdiği ve manik ataklarında alkol tüketiminin kontrolsüzce arttığı öğreniliyor (2. Eşlik Eden Tanı - Alkol Kullanım Bozukluğu).",
+      "Manik dönemleri yatıştırmak için 'kendi kendini tedavi etme' (self-medication) amacıyla alkole başladığı ancak zamanla her iki bozukluğun da birbirini yıkarak ağır bir klinik tablo oluşturduğu saptanmıştır.",
+      "Kranial MRG temizdir; kan tahlillerinde karaciğer enzimleri yüksektir.",
+      "Ruhsal Durum Muayenesinde: Grandiyöz sanrılar, baskılı konuşma, psikomotor taşkınlık ve eşzamanlı ağır alkol aşermesi/yoksunluğu.",
+      "DSM-5'e göre: Vaka hem Bipolar I Bozukluğu (Manik Epizod) hem de Alkol Kullanım Bozukluğu kriterlerini eşzamanlı olarak tam karşılamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "günde 1 saat uykuyla",
+        "dsmMatch": "1. Tanı: Bipolar I Bozukluğu (Grandiyöz manik atak)"
+      },
+      {
+        "clueIndex": 1,
+        "text": "her gün 1 büyük şişe rakı",
+        "dsmMatch": "2. Tanı: Alkol Kullanım Bozukluğu (Ağır yoksunluk ve tolerans)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Entegre Çift Tanı Terapisi (Integrated Dual Disorder Treatment - IDDT)",
+      "therapyDetails": "Bipolar atakları kontrol altına alırken eşzamanlı nüks önleme ve bağımlılık motivasyonel görüşmesi.",
+      "pharmacologyNote": "Valproat (alkol komorbiditesinde lityuma göre daha stabil) veya Atipik Antipsikotik + Naltrekson."
+    },
+    "miniQuiz": {
+      "question": "Bipolar Bozukluğu olan bireylerde madde ve alkol kullanım bozukluklarının genel popülasyona göre çok daha yüksek oranda (komorbid) görülmesinin en yaygın psikolojik sebebi nedir?",
+      "options": [
+        "Hastaların manik taşkınlığı veya depresif acıyı yatıştırmak için 'kendi kendini tedavi etme' (Self-Medication Hipotezi) amacıyla maddeye yönelmesi.",
+        "Bipolar hastaların karaciğerinin alkol üretememesi.",
+        "Bipolar ilaçlarının alkol içmeyi zorunlu kılması.",
+        "Bu iki durumun birlikte görülmesi tıbben imkansızdır."
+      ],
+      "correctIndex": 0,
+      "explanation": "Self-Medication Hipotezine göre, bipolar hastalar manik ajitasyonu dindirmek veya depresyonun getirdiği derin kederi uyuşturmak için sıklıkla alkol ve maddelere sığınırlar."
+    },
+    "differentialDiagnosis": "• Sadece Maddeye Bağlı Psikoz: Madde kesildikten sonra manik atak devam ederse birincil Bipolar I tanısı doğrulanır.",
+    "dsmCriteriaSummary": "DSM-5 Çift Tanı: Bipolar I Manik Epizod + Alkol Kullanım Bozukluğu (Tolerans ve Yoksunluk ile birlikte)."
+  },
+  {
+    "id": "case-068",
+    "caseNumber": 68,
+    "difficulty": "İleri Düzey",
+    "course": "COMORBID",
+    "diagnosisId": "adhd",
+    "secondaryDiagnosisId": "odd",
+    "category": "NEURODEV",
+    "patientSummary": "8 yaşında, erkek, ilkokul 2. sınıf öğrencisi (Çift Tanılı / DEHB + KOKGB Komorbiditesi 🔗)",
+    "clues": [
+      "Danışan sınıfta ders sırasında bir saniye bile yerinde duramamakta, pencereye tırmanmakta, dikkatini 2 dakika bile toparlayamamakta ve eşyalarını sürekli kaybetmektedir (1. Tanı - DEHB Bileşeni).",
+      "Aynı zamanda öğretmeninin veya ebeveynlerinin verdiği en ufak bir yönergede (örneğin 'Kitabını aç') 'Açmıyorum, sen kimsin ki bana emir veriyorsun!' diyerek kasıtlı olarak otoriteye meydan okumakta ve arkadaşlarıyla kasıtlı dalga geçmektedir (2. Eşlik Eden Tanı - KOKGB Bileşeni).",
+      "Önemli klinik ayrım: Çocuk sadece dikkatsiz ve hareketli değil; aynı zamanda kurallara karşı bilinçli, öfkeli ve kinci bir karşı gelme sergilemektedir.",
+      "İşitme, görme ve nörolojik muayene normaldir.",
+      "Ruhsal Durum Muayenesinde: Ağır dikkat eksikliği ve motor hiperaktivite ile birlikte otorite figürlerine karşı süregiden meydan okuyucu bilişsel şemalar.",
+      "DSM-5'e göre: Vaka hem Dikkat Eksikliği ve Hiperaktivite Bozukluğu (Bileşik Tip) hem de Karşıt Olma Karşı Gelme Bozukluğu ölçütlerini eşzamanlı olarak karşılamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "yerinde duramamakta",
+        "dsmMatch": "1. Tanı: DEHB (Dikkatsizlik ve Hiperaktivite-Dürtüsellik)"
+      },
+      {
+        "clueIndex": 1,
+        "text": "sen kimsin ki bana emir veriyorsun!",
+        "dsmMatch": "2. Tanı: KOKGB (Otoriteye karşı gelme ve tartışmacı tutum)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Kombine Ebeveyn Yönetim Eğitimi (PMT) + Okul Temelli Davranışsal Müdahale",
+      "therapyDetails": "Pozitif pekiştirme sistemleri, yönergeleri basitleştirme ve öfke mola (time-out) protokolleri.",
+      "pharmacologyNote": "Uyarıcı (Metilfenidat) tedavisi DEHB'yi yatıştırırken dolaylı olarak KOKGB semptomlarını da belirgin azaltır."
+    },
+    "miniQuiz": {
+      "question": "DEHB olan çocukların yaklaşık %40-50'sinde Karşıt Olma Karşı Gelme Bozukluğunun (KOKGB) eşlik etmesinin en önemli klinik sonucu nedir?",
+      "options": [
+        "Tedavi edilmediği takdirde ergenlikte Davranım Bozukluğuna ve adli suç davranışlarına evrilme riskinin çok yüksek olması.",
+        "Çocuğun aniden dilsiz kalması.",
+        "Çocuğun boyunun uzamasının durması.",
+        "Bu iki durumun birlikte olması iyiye işarettir."
+      ],
+      "correctIndex": 0,
+      "explanation": "DEHB + KOKGB komorbiditesi erken yaşta tedavi edilmezse, ergenlikte Davranım Bozukluğu ve kriminal antisosyal davranışlara dönüşme riski çok yüksektir."
+    },
+    "differentialDiagnosis": "• Tek Başına DEHB: Kasıtlı karşı çıkma ve kin gütme yoktur.\n• Tek Başına KOKGB: Dikkat süresi ve hiperaktivite normaldir.",
+    "dsmCriteriaSummary": "DSM-5 Çift Tanı: DEHB (Bileşik Görünüm) + Karşıt Olma Karşı Gelme Bozukluğu (Öfkeli/Tartışmacı Görünüm)."
+  },
+  {
+    "id": "case-069",
+    "caseNumber": 69,
+    "difficulty": "İleri Düzey",
+    "course": "COMORBID",
+    "diagnosisId": "ocd",
+    "secondaryDiagnosisId": "mdd",
+    "category": "OCD_RELATED",
+    "patientSummary": "30 yaşında, kadın, biyolog (Çift Tanılı / Ağır OKB + İkincil Majör Depresyon Komorbiditesi 🔗)",
+    "clues": [
+      "Danışan son 6 yıldır günde 6 saat kapı kilitlerini, ocağı ve prizleri kontrol etme ritüelleriyle (kontrol kompulsiyonları) boğuştuğunu anlatıyor (1. Tanı - OKB).",
+      "Son 2 aydır ise bu takıntılardan tamamen tükenmiş halde yataktan hiç çıkamaz hale geldiğini, 8 kilo verdiğini, intihar planları yaptığını ve 'Bu takıntılar yüzünden hayatım bitti, artık yaşamak istemiyorum' dediğini anlatıyor (2. Eşlik Eden Tanı - Majör Depresif Bozukluk).",
+      "Klinik tablo incelendiğinde, yıllardır süren tedavi edilmemiş ağır OKB'nin yarattığı yıkıcı çaresizliğin ikincil olarak ağır bir Majör Depresif Epizod tetiklediği saptanmıştır.",
+      "Tiroid ve metabolik taramalar temizdir.",
+      "Ruhsal Durum Muayenesinde: Şiddetli kontrol takıntıları, derin çökkün duygudurum, anhedoni ve aktif özkıyım riski.",
+      "DSM-5'e göre: Vaka hem Obsesif-Kompulsif Bozukluk (OKB) hem de Majör Depresif Bozukluk (MDD) tanı kriterlerini eşzamanlı olarak tam karşılamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "günde 6 saat kapı kilitlerini, ocağı ve prizleri kontrol etme ritüelleriyle",
+        "dsmMatch": "1. Tanı: Obsesif-Kompulsif Bozukluk (Zaman alıcı kontrol kompulsiyonları)"
+      },
+      {
+        "clueIndex": 1,
+        "text": "yataktan hiç çıkamaz hale geldiğini, 8 kilo verdiğini, intihar planları yaptığını",
+        "dsmMatch": "2. Tanı: Majör Depresif Bozukluk (Ağır depresif epizod ve özkıyım riski)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Kombine Terapi (Önce Davranışsal Aktivasyon & Kriz Yönetimi, ardından ERP)",
+      "therapyDetails": "Önce hastayı depresif yataktan kaldırmak için davranışsal aktivasyon ve intihar güvenliği protokolü; enerji toparlandığında takıntılar için ERP (Maruz Bırakma).",
+      "pharmacologyNote": "Yüksek doz SSRI (örn. Sertralin 200 mg veya Fluoksetin 80 mg) her iki bozukluğu da eşzamanlı hedefleyen altın standarttır."
+    },
+    "miniQuiz": {
+      "question": "Ağır OKB ve ikincil Majör Depresyon komorbiditesinde psikoterapiye başlarken neden doğrudan ERP (Maruz Bırakma) yerine önce depresyona yönelik müdahale edilir?",
+      "options": [
+        "Çünkü ağır depresyon ve enerjisizlik içindeki bir danışan ERP'nin gerektirdiği yoğun kaygıya maruz kalma zorluğuna dayanamaz; önce depresyon hafifletilip enerji kazandırılmalıdır.",
+        "Çünkü OKB asla tedavi edilemez.",
+        "Çünkü depresyonlu hastalar takıntı yapamaz.",
+        "İki bozukluk aynı anda tedavi edilemez."
+      ],
+      "correctIndex": 0,
+      "explanation": "ERP yüksek motivasyon ve direnç gerektirir. Ağır depresyondaki hasta bu zorluğa katlanamayacağından, önce duygudurum toparlanıp intihar riski güvenceye alınır."
+    },
+    "differentialDiagnosis": "• Sadece Psikotik Depresyon: OKB'deki takıntılar egodistoniktir; psikotik depresyonda ise sarsılmaz melankolik sanrılar vardır.",
+    "dsmCriteriaSummary": "DSM-5 Çift Tanı: Obsesif-Kompulsif Bozukluk (A kriterleri) + Majör Depresif Epizod (A kriterleri)."
+  }
+]
