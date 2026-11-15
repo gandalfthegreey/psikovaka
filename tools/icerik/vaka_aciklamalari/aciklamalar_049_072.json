@@ -1,0 +1,529 @@
+{
+  "case-049": {
+    "whyThis": [
+      "Kayıpları geri kazanmak için daha yüksek bahis oynaması (kayıp kovalama) ve aynı heyecan için artan miktarlara ihtiyaç duyması kumar bozukluğunun çekirdek ölçütleridir.",
+      "Bırakma girişimlerinin başarısız olması ve azaltınca huzursuzluk, sinirlilik yaşaması denetim kaybını gösterir.",
+      "Aileden gizli kredi çekme, şirket kasasından para alma girişimi ve işini kaybetme riski kumarın yalan, başkalarının parasına başvurma ve ciddi işlev kaybıyla sürdüğünü gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Kontrolsüz harcama epizodik bir taşkınlık, azalmış uyku ya da büyüklenmecilik döneminde değil, üç yıldır sürekli ve kumara özgü olarak ortaya çıkmaktadır."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Kasa parasına yönelme kumar borçlarını kapatmaya yöneliktir; çocukluktan beri süren genel bir hak ihlali örüntüsü tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "kleptomania",
+        "reason": "Para almanın amacı ihtiyaç duyulmayan nesneleri çalmak değil, kumar borcunu kapatmaktır."
+      }
+    ],
+    "teachingPoint": "Kumar bozukluğu madde kullanım bozukluklarına benzer bir mantıkla değerlendirilir; ‘kayıp kovalama’ en ayırt edici davranışsal işarettir."
+  },
+  "case-050": {
+    "whyThis": [
+      "Aynı etki için ikiden bir şişeye çıkan miktar toleransı, sabah titremesini içerek gidermesi yoksunluk ölçütünü gösterir.",
+      "Defalarca bırakma sözü verip tutamaması kullanımı denetlemede başarısızlıktır.",
+      "Karaciğer hasarı ve evlilik ile iş sorunlarına rağmen içmeyi sürdürmesi zarara rağmen kullanımdır; 12 ay içinde ikiden çok ölçüt karşılanır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "alcohol_withdrawal",
+        "reason": "Sabah titremesi yoksunluğu gösterir, ancak tablo tek başına yoksunlukla sınırlı değil; tolerans, kontrol kaybı ve zarara rağmen kullanımla giden süreğen bir kullanım örüntüsüdür."
+      },
+      {
+        "diagnosisId": "gad",
+        "reason": "Sabah anksiyetesi alkol yoksunluğuyla ortaya çıkıyor ve içince geçiyor; içmeden bağımsız süreğen bir kaygı tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "substance_induced_depressive",
+        "reason": "Belirgin, süreğen bir depresif duygudurum tarif edilmiyor; öne çıkan tablo kullanım örüntüsünün kendisidir."
+      }
+    ],
+    "teachingPoint": "Alkol kullanım bozukluğunun şiddeti 12 ayda karşılanan ölçüt sayısına göre belirlenir: 2-3 hafif, 4-5 orta, 6 ve üzeri ağır."
+  },
+  "case-051": {
+    "whyThis": [
+      "Televizyon kapatılması gibi küçük engellemelere haftada 3-4 kez verilen, eşya kıran ağır öfke patlamaları gelişim düzeyine uygun değildir.",
+      "Patlamalar arasında da neredeyse her gün süren öfkeli ve kolay kızan duygudurum tanının kilit ölçütüdür.",
+      "Tablo bir buçuk yıldır, ev ve okulda sürmektedir ve 10 yaşından önce başlamıştır; epizodik mani yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "odd",
+        "reason": "Öfke patlamaları ve kalıcı irritabilite KOKGB'nin şiddetini aşıyor; iki tablonun ölçütleri karşılanırsa yalnızca DMDD konur."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "İrritabilite süreğen ve epizodik değildir; azalmış uyku ya da büyüklenmecilik içeren ayrı manik dönemler yoktur."
+      },
+      {
+        "diagnosisId": "intermittent_explosive",
+        "reason": "Patlamalar arasındaki sürekli öfkeli duygudurum aralıklı patlayıcı bozuklukta beklenmez; ayrıca bu yaşta ve bu tabloda DMDD önceliklidir."
+      }
+    ],
+    "teachingPoint": "DMDD'yi KOKGB ve aralıklı patlayıcı bozukluktan ayıran şey, patlamalar arasında da neredeyse her gün süren öfkeli duygudurumdur."
+  },
+  "case-052": {
+    "whyThis": [
+      "Üç yıldır birkaç gün süren enerjik, az uykulu dönemlerle bir hafta süren karamsar dönemler arasında gidip gelme çok sayıda dalgalanma olduğunu gösterir.",
+      "Yükselme dönemleri tam hipomani ya da mani, çökkün dönemler tam majör depresif epizod düzeyine hiç ulaşmamıştır.",
+      "Erişkinde iki yıl ölçütü aşılmıştır ve dengeli aralıklar hiçbir zaman iki aydan uzun sürmemiştir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bipolar_2",
+        "reason": "Bipolar II için en az bir tam hipomanik ve bir tam majör depresif epizod gerekir; burada hiçbiri ölçüt eşiğine ulaşmamıştır."
+      },
+      {
+        "diagnosisId": "borderline_pd",
+        "reason": "Dalgalanmalar saatler değil günler sürüyor ve terk edilme gibi kişilerarası tetikleyicilere bağlı tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "dysthymia",
+        "reason": "Yalnızca süreğen düşük duygudurum değil, arada hipomanik belirtili dönemler de vardır."
+      }
+    ],
+    "teachingPoint": "Siklotimide hiçbir dönem tam epizod ölçütüne ulaşmaz; bir kez tam hipomani ya da majör depresyon ortaya çıkarsa tanı değişir."
+  },
+  "case-053": {
+    "whyThis": [
+      "Değersiz gazete, kutu ve poşetleri elden çıkarmada süregen güçlük ve atmaya karşı yoğun sıkıntı temel ölçüttür.",
+      "Birikimin yatağa ulaşmayı, mutfak ve banyoyu kullanmayı engellemesi yaşam alanlarının amacına uygun kullanılamaz hale gelmesidir.",
+      "Yangın riski ve belediye müdahalesi belirgin işlev kaybı ve güvenlik sorununu gösterir; demans ve kafa travması dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "ocd",
+        "reason": "Biriktirme bulaşma ya da büyüsel bir korkuyu yatıştırmak için değil, eşyaya bağlılık ve ‘lazım olur’ düşüncesiyle yapılıyor."
+      },
+      {
+        "diagnosisId": "ocpd",
+        "reason": "Değersiz eşyaları atamama OKKB'nin bir özelliği olabilir, ancak burada yaşam alanını kullanılamaz kılan bir birikim ve geniş bir kişilik örüntüsünün yokluğu vardır."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "reason": "58 yaşında ortaya çıkan biriktirmede frontotemporal demans akla gelir, ancak nörolojik değerlendirme demansı dışlamıştır."
+      }
+    ],
+    "teachingPoint": "Biriktiricilik bozukluğunda temel sorun eşyayı edinmekten çok elden çıkaramamaktır; tanı için yaşam alanının kullanılamaz hale gelmesi gerekir."
+  },
+  "case-054": {
+    "whyThis": [
+      "Köpeklere kasıtlı eziyet ve fiziksel kavga başlatma insanlara ve hayvanlara saldırganlık ölçütleridir.",
+      "Tehditle para gasp etme ve araç çalma hırsızlık, yangın çıkarma mala zarar verme, gece evden kaçma ve okuldan kaçma kuralların ağır ihlalidir.",
+      "Örüntü 12 yaşından beri süregen ve yineleyicidir; pişmanlık ve empati yokluğu kısıtlı prososyal duygular belirtecini düşündürür."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "odd",
+        "reason": "KOKGB sözel inatlaşma ve karşı gelmeyle sınırlıdır; hayvanlara eziyet, gasp ve hırsızlık gibi hak ihlalleri içermez."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Kişi 15 yaşındadır; antisosyal kişilik bozukluğu 18 yaşından önce konamaz."
+      },
+      {
+        "diagnosisId": "adhd",
+        "reason": "Davranışlar dikkatsizlik ya da dürtüsellikten değil, kasıtlı ve amaçlı hak ihlallerinden oluşur."
+      }
+    ],
+    "teachingPoint": "Davranım bozukluğunda başlangıç yaşı belirteçtir: 10 yaşından önce en az bir ölçüt varsa çocuklukta, yoksa ergenlikte başlayan tip olarak kodlanır."
+  },
+  "case-055": {
+    "whyThis": [
+      "Bir yıl içinde beş kez kasıtlı ve amaçlı yangın çıkarma, birden çok kez yangın çıkarma ölçütünü karşılar.",
+      "Eylemden önce gerginlik ve uyarılma, yangını izlerken haz ve rahatlama ile yangına ve itfaiye ekipmanına büyülenme tanının özgül özellikleridir.",
+      "Maddi çıkar, intikam, ideoloji ya da sanrı gibi bir amaç kesin olarak dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "conduct_disorder",
+        "reason": "Kişi 26 yaşındadır ve yangın dışında hak ihlali içeren genel bir davranış örüntüsü tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Yangın genel bir kural tanımazlığın ya da çıkarın parçası değil, hazza yönelik tekil bir dürtüdür; çocukluk davranım öyküsü bildirilmiyor."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Yangınlar manik bir dönemin dürtüselliği sırasında değil, kendi başına yineleyen bir örüntü olarak ortaya çıkıyor; bu yine de sorgulanmalıdır."
+      }
+    ],
+    "teachingPoint": "Piromani tanısı, çıkar, intikam, sanrı ya da başka bir bozukluk yangını açıklıyorsa konamaz; geriye haz ve gerilim boşaltma kalmalıdır."
+  },
+  "case-056": {
+    "whyThis": [
+      "Eşinden ayrıldığında ona kaza gibi bir felaket geleceği korkusu, bağlanma figürüne zarar gelmesiyle ilgili aşırı kaygıdır.",
+      "Evde yalnız uyuyamama, eşi yokken annesinin yanında yatma ve eşinin seyahatini engellemeye çalışma ayrılıktan kaçınma davranışlarıdır.",
+      "Ayrılık temalı kabuslar ve ayrılık anında bedensel belirtiler ek ölçütlerdir; belirtiler erişkinde gelişim düzeyine uygun değildir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "dependent_pd",
+        "reason": "Kaygının odağı karar verme ve bakılma desteği değil, ayrılınca sevilen kişinin başına felaket geleceği korkusudur."
+      },
+      {
+        "diagnosisId": "agoraphobia",
+        "reason": "Korku kaçışın zor olduğu yerlerle değil, bağlanma figüründen ayrılmakla ilgilidir; agorafobi ölçütleri karşılanmıyor."
+      },
+      {
+        "diagnosisId": "gad",
+        "reason": "Kaygı birçok yaşam alanına yayılmamış, ayrılık temasıyla sınırlıdır."
+      }
+    ],
+    "teachingPoint": "Ayrılma kaygısı bozukluğu yalnızca çocukluk tanısı değildir; erişkinde de ayrılığa odaklı felaket korkusu ve kaçınma ile konabilir (erişkinde en az 6 ay)."
+  },
+  "case-057": {
+    "whyThis": [
+      "Kan, enjeksiyon ve yara görmeye karşı korku ve kaçınma, korkunun özgül bir uyaran grubuna bağlı olduğunu gösterir.",
+      "Önce kısa bir kalp hızlanması, ardından tansiyon ve nabız düşüşüyle bayılma, bu alt tipe özgü iki evreli vazovagal yanıttır.",
+      "Staj yapamama ve kan tahlilinden kaçınma belirgin işlev kaybını gösterir; tilt testi vazovagal örüntüyü doğrulamıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Ataklar beklenmedik değil, kan ve enjeksiyon uyaranına bağlıdır; panik atakta bayılma değil, sürekli sempatik uyarılma beklenir."
+      },
+      {
+        "diagnosisId": "illness_anxiety_disorder",
+        "reason": "Kan tahlilinden kaçınma hasta olma korkusundan değil, kanı görme ve bayılma tepkisinden kaynaklanır."
+      },
+      {
+        "diagnosisId": "conversion_disorder",
+        "reason": "Bayılmalar tilt testiyle doğrulanan fizyolojik bir vazovagal yanıttır ve yalnızca belirli uyaranla ortaya çıkar."
+      }
+    ],
+    "teachingPoint": "Kan-enjeksiyon-yaralanma tipi fobi, bayılmaya yol açan iki evreli vazovagal yanıtla diğer fobilerden ayrılan tek alt tiptir."
+  },
+  "case-058": {
+    "whyThis": [
+      "FBI tarafından dinlendiği sanrısı ve emir veren sesler şizofreninin aktif faz ölçütünü karşılar.",
+      "Bu psikotik belirtiler duygudurum normalken üç hafta boyunca tek başına sürmüştür; şizoaffektif bozukluk için gereken ‘en az iki hafta duygudurum epizodu olmadan psikoz’ koşulu sağlanır.",
+      "Manik epizodlar hastalığın toplam süresinin büyük bölümünde tabloya eşlik etmiştir; bu da bipolar tip belirtecine işaret eder."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Psikotik özellikli bipolar bozuklukta sanrı ve varsanılar yalnızca duygudurum epizodu içinde görülür; burada maniden bağımsız üç haftalık psikoz vardır."
+      },
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Şizofrenide duygudurum epizodları toplam sürenin yalnızca küçük bir kısmını kaplar; burada manik dönemler hastalığın önemli bölümüne eşlik ediyor."
+      },
+      {
+        "diagnosisId": "substance_induced_psychotic",
+        "reason": "Toksikoloji taraması olağandır."
+      }
+    ],
+    "teachingPoint": "Şizoaffektif tanı için iki koşul birlikte gerekir: duygudurum epizodu olmadan en az iki hafta psikoz ve hastalık süresinin çoğunda duygudurum epizodlarının bulunması."
+  },
+  "case-059": {
+    "whyThis": [
+      "İzlendiği ve düşüncelerinin çalındığı sanrıları, işitsel varsanılar ve çağrışım dağınıklığı şizofreninin aktif faz ölçütünü karşılar.",
+      "Prodrom dahil toplam süre iki buçuk aydır, yani bir ayı aşmış ama altı ayı doldurmamıştır.",
+      "MRG, EEG ve toksikoloji negatiftir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "brief_psychotic",
+        "reason": "Belirtiler bir aydan uzun sürmektedir; kısa psikotik bozukluk bir aydan kısa ve tam düzelme ile sınırlıdır."
+      },
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Toplam süre henüz altı aya ulaşmamıştır; belirtiler sürerse tanı şizofreniye dönüşebilir."
+      },
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "Belirgin varsanılar, dezorganizasyon ve uygunsuz duygulanım sanrılı bozuklukla bağdaşmaz."
+      }
+    ],
+    "teachingPoint": "Şizofreniform tanısı henüz iyileşme olmamışsa ‘geçici’ olarak konur; altı ay dolduğunda tablo sürüyorsa tanı şizofreni olarak değiştirilir."
+  },
+  "case-060": {
+    "whyThis": [
+      "Ünlü ve evli bir şarkıcının kendisine gizlice âşık olduğu inancı sekiz aydır sarsılmaz biçimde sürer; bu, erotomanik tip sanrıdır.",
+      "Korumalarca uzaklaştırılmayı bile ‘aşkı saklama’ olarak yorumlaması, inancın karşıt kanıtlara rağmen değişmediğini gösterir.",
+      "Sanrı dışında muhakeme, iş performansı ve görünüm tamamen korunmuştur; varsanı ve dezorganizasyon yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "İkinci bir aktif faz belirtisi (varsanı, dezorganizasyon, negatif belirti) yoktur ve işlevsellik korunmuştur."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Erotomanik inanç manide de görülebilir, ancak taşkın duygudurum, azalmış uyku gibi manik belirtiler tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "narcissistic_pd",
+        "reason": "Büyüklenmeci bir benlik algısı değil, belirli ve sabit bir sanrı vardır."
+      }
+    ],
+    "teachingPoint": "Sanrılı bozukluk sanrının içeriğine göre alt tiplere ayrılır (erotomanik, büyüklük, kıskançlık, kötülük görme, bedensel); tiplendirme ayırıcı tanıyı değiştirmez ama tabloyu tanımlar."
+  },
+  "case-061": {
+    "whyThis": [
+      "Eşinin birçok kişiyle aldattığına dair bir yıldır süren, hiçbir kanıt bulunamamasına rağmen sarsılmayan inanç kıskançlık tipi sanrıdır.",
+      "Çarşafları incelemek, kimyasal test ve takip cihazı kullanmak davranışların sanrının içeriğiyle sınırlı olduğunu gösterir.",
+      "İş, hesap yapma ve arkadaş ilişkileri korunmuştur; varsanı ya da dezorganizasyon yoktur ve alkol nedeni dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "paranoid_pd",
+        "reason": "Genel bir kuşkuculuk değil, tek bir konuda karşıt kanıtlarla sarsılmayan sanrısal bir kesinlik vardır."
+      },
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Varsanı, dezorganizasyon ya da negatif belirti yoktur; işlevsellik sanrı dışında korunmuştur."
+      },
+      {
+        "diagnosisId": "alcohol_use_disorder",
+        "reason": "Patolojik kıskançlık alkol kullanımıyla sık görülür, ancak burada alkol kullanımı ve buna bağlı organik neden dışlanmıştır."
+      }
+    ],
+    "teachingPoint": "Kıskançlık sanrısında ilk dışlanacak nedenler alkol kullanımı ve beyin hastalığıdır; dışlanınca sanrının işlevselliği bozmayan ‘kapsüllü’ yapısı sanrılı bozukluğu destekler."
+  },
+  "case-062": {
+    "whyThis": [
+      "Stresli durumlarda ortaya çıkan, yere düşme ve kasılmalarla giden nöbetler istemli motor işlevde değişikliği gösterir.",
+      "Nöbet sırasında video-EEG'de epileptik deşarj olmaması, gözleri sıkıca kapalı tutma, göz açmaya direnç ve nöbet sonrası konfüzyon olmaması nörolojik hastalıkla uyumsuzluğun olumlu kanıtlarıdır.",
+      "MRG ve prolaktin normaldir; belirtilerin bilerek üretildiğine dair veri yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Nöbetleri bilerek üretme ya da hasta rolü arama davranışına dair bir kanıt yoktur."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Stres altında ortaya çıksa da tablo çarpıntı ve korku atakları değil, bilinç ve motor işlevi etkileyen nöbetlerdir."
+      },
+      {
+        "diagnosisId": "somatic_symptom_disorder",
+        "reason": "Öne çıkan, belirtiye ilişkin aşırı kaygı ve uğraş değil, nörolojik bir işlev belirtisinin kendisidir."
+      }
+    ],
+    "teachingPoint": "Psikojenik non-epileptik nöbet tanısının altın standardı, tipik bir nöbetin video-EEG ile yakalanıp eşzamanlı epileptik aktivite olmadığının gösterilmesidir."
+  },
+  "case-063": {
+    "whyThis": [
+      "Yalnızca beyaz ve kuru yiyecekleri yemesi ve diğerlerini doku, koku ve renk nedeniyle reddetmesi duyusal özelliklere bağlı bir yiyecek kısıtlamasıdır.",
+      "Büyüme geriliği, vitamin takviyesi gereksinimi ve okul etkinliklerine katılamama, kilo korkusu olmadan gelişen beslenme yetersizliğini ve işlev kaybını gösterir.",
+      "Gastroenterolojik ve alerji testlerinin temiz olması kısıtlamayı açıklayan tıbbi bir durum olmadığını gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Kilo alma korkusu, kilo uğraşı ya da beden algısı bozukluğu açıkça yoktur."
+      },
+      {
+        "diagnosisId": "pica",
+        "reason": "Pikada besin değeri olmayan maddeler (toprak, kâğıt, kireç) yenir; bu çocuk ise normal yiyecekleri duyusal özellikleri nedeniyle reddediyor."
+      },
+      {
+        "diagnosisId": "asd",
+        "reason": "Duyusal seçicilik otizme eşlik edebilir, ancak sosyal iletişim sorunları ya da başka yineleyici davranışlar tarif edilmiyor; yine de gelişimsel değerlendirme yapılmalıdır."
+      }
+    ],
+    "teachingPoint": "Pika yiyecek olmayan maddeleri yemektir; normal yiyecekleri duyusal nedenlerle reddedip beslenme yetersizliğine giren bir çocukta ARFID düşünülmelidir."
+  },
+  "case-064": {
+    "whyThis": [
+      "92 kiloluk ve belirgin kaslı biri olarak kendini çelimsiz ve yetersiz kaslı görmesi, başkalarınca fark edilmeyen bir kusurla aşırı uğraştır.",
+      "Günde onlarca kez mezura ile ölçüm, beş saat ağırlık çalışması ve aşırı protein alımı bu kaygıya yanıt olarak yapılan yineleyici davranışlardır.",
+      "Sosyal yaşamı terk etmesi ve sağlığına zarar veren steroid kullanımı, ‘kas dismorfisi ile’ belirtecine uyan ağır işlev kaybını gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Amaç zayıflamak değil kas kütlesini artırmaktır ve düşük vücut ağırlığı yoktur."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Takıntı ve ritüeller yalnızca beden görünümüne odaklıdır; görünüm dışı obsesyonlar tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "substance_induced_psychotic",
+        "reason": "Steroid kullanımı tablonun nedeni değil sonucudur; beden algısı uğraşı steroid kullanımından önce başlamıştır."
+      }
+    ],
+    "teachingPoint": "Kas dismorfisi bir yeme bozukluğu değil, BDD'nin bir belirtecidir; ayırıcı nokta amacın zayıflamak değil daha kaslı görünmek olmasıdır."
+  },
+  "case-065": {
+    "whyThis": [
+      "Sahnede çalarken titreme, çarpıntı ve bayılacak gibi olma, başkalarının izleyip değerlendirdiği bir durumda ortaya çıkan belirgin kaygıdır.",
+      "Altı aydır solo konserleri iptal etmesi ve yarışmalardan çekilmesi kaçınma ve ciddi mesleki işlev kaybını gösterir.",
+      "Sohbet, yemek ve alışveriş gibi diğer sosyal durumlarda kaygı olmaması ‘yalnızca performans’ belirtecine uyar; esansiyel tremor dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Belirtiler yalnızca performans sırasında ortaya çıkıyor; beklenmedik ve tetikleyicisiz ataklar yoktur."
+      },
+      {
+        "diagnosisId": "specific_phobia",
+        "reason": "Korkunun özü bir ortamın kendisi değil, başkalarınca izlenip olumsuz değerlendirilme olasılığıdır."
+      },
+      {
+        "diagnosisId": "gad",
+        "reason": "Kaygı birçok yaşam alanına yayılmamış, tek bir sosyal-performans durumuyla sınırlıdır."
+      }
+    ],
+    "teachingPoint": "Kaygı yalnızca topluluk önünde konuşma ya da sahne performansıyla sınırlıysa sosyal kaygı bozukluğuna ‘yalnızca performans’ belirteci eklenir."
+  },
+  "case-066": {
+    "whyThis": [
+      "Kızının damar yoluna su enjekte etmesi ve sütüne laksatif katması belirtileri bir başkasında bilerek oluşturmanın kamera kaydıyla belgelenmiş kanıtıdır.",
+      "Maddi bir amaç yoktur; motivasyon ‘hasta çocuğun fedakâr annesi’ rolüdür ve çocuk ayrılınca belirtiler düzelmiştir. Tanı failin, yani annenin kendisine konur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Kendine yüklenen yapay bozuklukta kişi belirtileri kendi bedeninde üretir; burada anne belirtileri çocuğunun bedeninde oluşturmaktadır."
+      },
+      {
+        "diagnosisId": "somatic_symptom_disorder",
+        "reason": "Belirtiler gerçek yaşanan değil, bir başkası tarafından yapay olarak üretilmiştir."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Çocuğa zarar verilmektedir, ancak eylemin amacı çıkar değil hasta rolü yoluyla ilgi ve övgüdür; genel bir hak ihlali örüntüsü tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "Belirtiler bir başkasında, genellikle çocukta üretiliyorsa tanı ‘başkasına yüklenen yapay bozukluk’tur ve faile konur; mağdur çocuğa yapay bozukluk tanısı konmaz."
+  },
+  "case-067": {
+    "whyThis": [
+      "Son on günde günde bir saatlik uyku, durmaksızın konuşma, eşyaları balkondan atma ve cumhurbaşkanı danışmanı olduğu inancı psikotik özellikli manik epizodu gösterir.",
+      "Dört yıldır her gün büyük şişe rakı, bırakınca ağır titreme ve kontrolsüz artan kullanım alkol kullanım bozukluğunun tolerans, yoksunluk ve denetim kaybı ölçütlerini karşılar.",
+      "Mani ve alkol kullanımı birbirini ağırlaştırmaktadır; manik tablo kendi başına bipolar I tanısını koydurur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "substance_induced_bipolar",
+        "reason": "Maddeye bağlı tanı için manik belirtilerin alkol etkisi ya da yoksunluğuyla açıklanması gerekir; alkol manik dönemleri yatıştırmak için başlanmıştır ve mani alkolden bağımsız görünür. Kesin ayrım için ayıklık döneminde gözlem gerekir."
+      },
+      {
+        "diagnosisId": "alcohol_withdrawal_delirium",
+        "reason": "Bilinç bulanıklığı ve dikkat bozukluğu değil, büyüklenmecilik ve baskılı konuşmayla giden net bir manik tablo vardır."
+      },
+      {
+        "diagnosisId": "schizoaffective",
+        "reason": "Psikotik belirtilerin duygudurum epizodu dışında da en az iki hafta sürdüğüne dair veri yoktur."
+      }
+    ],
+    "teachingPoint": "Madde kullanımı ile birlikte görülen manide birincil bipolar tanısı için manik belirtilerin maddeden önce başlaması ya da ayıklık dönemlerinde de sürmesi aranır."
+  },
+  "case-068": {
+    "whyThis": [
+      "Yerinde duramama, tırmanma, kısa dikkat süresi ve eşya kaybetme hem dikkatsizlik hem hiperaktivite-dürtüsellik belirtileridir; bu bileşik görünüm DEHB'ye işaret eder.",
+      "Buna ek olarak otoriteye kasıtlı meydan okuma, başkalarını kasıtlı kızdırma ve kin tutma, dikkatsizlikle açıklanamayan ayrı bir karşı gelme örüntüsüdür.",
+      "İki örüntü birlikte bulunduğu için DEHB ana tanı, KOKGB eşlik eden tanıdır; işitme ve görme normaldir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "conduct_disorder",
+        "reason": "Hayvanlara zarar, hırsızlık ya da mala zarar verme gibi temel hak ihlalleri tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "dmdd",
+        "reason": "Patlamalar arasında neredeyse her gün süren kalıcı öfkeli duygudurum ve ağır öfke patlamaları tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "intermittent_explosive",
+        "reason": "Öfke kısa, dürtüsel saldırganlık patlamaları biçiminde değil; yönergelere kasıtlı ve kinci karşı gelme biçimindedir."
+      }
+    ],
+    "teachingPoint": "DEHB'li bir çocukta kural ihlalinin dikkatsizlikten mi yoksa kasıtlı karşı gelmeden mi kaynaklandığını sor; ikincisi varsa eşlik eden KOKGB düşünülür."
+  },
+  "case-069": {
+    "whyThis": [
+      "Altı yıldır günde altı saati bulan kilit, ocak ve priz kontrolleri, ciddi zaman kaybına yol açan kontrol kompulsiyonlarıdır.",
+      "Son iki ayda yataktan çıkamama, sekiz kilo kaybı, anhedoni ve intihar planları ayrı bir majör depresif epizodu gösterir.",
+      "Depresyon OKB'nin yıllar içinde yarattığı çaresizlikten sonra gelişmiştir; ana tanı OKB, depresyon eşlik eden tanıdır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "Takıntılar kişiye yabancı ve istenmeyen düşünceler olarak yaşanıyor ve kişi bunlarla savaşıyor; sabit ve sorgulanamayan bir sanrısal inanç tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "ocpd",
+        "reason": "Kontroller kişinin benimsediği bir düzen tarzı değil, sıkıntı veren ve tüketen ritüellerdir."
+      },
+      {
+        "diagnosisId": "gad",
+        "reason": "Kaygı yaygın bir kuruntu değil, belirli bir korkuyu yatıştırmaya yönelik kurallı tekrarlayıcı davranışlarla ilişkilidir."
+      }
+    ],
+    "teachingPoint": "Uzun süreli OKB'de depresyon sık eklenir ve intihar riskini artırır; OKB'li her hastada depresif belirtiler ve intihar düşüncesi ayrıca sorulmalıdır."
+  },
+  "case-070": {
+    "whyThis": [
+      "Kalabalık toplu taşımada rızası olmayan kadınlara sürtünme, onay vermeyen kişiye dokunmaya yönelik cinsel uyarılmanın eyleme dökülmesidir.",
+      "Dürtüler 17 yaşında fantezi olarak başlamış, son iki yıldır haftada birkaç kez eyleme dökülmektedir; altı ay ölçütü karşılanır.",
+      "Kişi bu dürtüleri rıza vermeyen kişilerle eyleme döktüğü için, yaşadığı suçluluk tanı için ayrıca gerekli olmasa da tabloyu destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "exhibitionistic",
+        "reason": "Uyarılmanın kaynağı cinsel organı göstermek değil, fiziksel temas ve sürtünmedir."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Eylemler cinsel uyarılmaya özgüdür ve kişi belirgin suçluluk duyar; genel bir suç ve kural ihlali örüntüsü tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "OKB'deki cinsel içerikli obsesyonlar haz vermez ve eyleme dökülmez; burada eylem cinsel uyarılmayla sonuçlanır."
+      }
+    ],
+    "teachingPoint": "Parafilik bozukluk tanısı için ya kişinin sıkıntı yaşaması ya da dürtülerini rıza vermeyen kişilerle eyleme dökmüş olması yeterlidir."
+  },
+  "case-071": {
+    "whyThis": [
+      "Habersiz kişilerin soyunmasını ve cinsel ilişkisini gizlice izleyip bu sırada mastürbasyon yapması, uyarılmanın gözetleme davranışına bağlı olduğunu gösterir.",
+      "Davranış bir yıldır haftada birkaç gece, yani altı aydan uzun süredir tekrarlamaktadır.",
+      "Dürtüler rıza vermeyen kişilerle eyleme dökülmüştür ve kişi 18 yaşından büyüktür."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "exhibitionistic",
+        "reason": "Kişi kendini göstermiyor; uyarılma izlenen kişinin haberi olmamasına bağlıdır."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Davranış cinsel uyarılmaya özgüdür; genel bir dolandırıcılık, saldırganlık ya da çocukluk davranım bozukluğu öyküsü tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "other_specified_paraphilic",
+        "reason": "Tablo gözetlemecilik bozukluğunun tüm ölçütlerini karşıladığı için ‘belirlenmiş diğer’ kategorisine gerek yoktur."
+      }
+    ],
+    "teachingPoint": "Gözetlemecilikte belirleyici öğe izlenen kişinin habersiz olmasıdır; rızayla izlenen pornografi bu tanıya girmez."
+  },
+  "case-072": {
+    "whyThis": [
+      "Hazırlıksız yabancılara cinsel organını göstermesi ve onların şok tepkisiyle cinsel haz alması göstermecilik bozukluğunun çekirdeğidir.",
+      "Davranış sekiz aydır haftada 1-2 kez tekrarlanmaktadır; altı ay ölçütü karşılanır.",
+      "Dürtüler onay vermeyen kişiler üzerinde eyleme dökülmüştür; fiziksel temas amacı yoktur ve frontal lob patolojisi dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "frotteuristic",
+        "reason": "Sürtünme ya da dokunma yoktur; uyarılma yalnızca görsel teşhir ve karşı tarafın tepkisine bağlıdır."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Manideki ketlenmesizlik epizodik ve geneldir; burada sekiz aydır süren, tek bir cinsel davranışa odaklı bir örüntü vardır."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "reason": "Ketlenmesizlikle giden cinsel davranışlarda frontotemporal demans akla gelir, ancak kişi 29 yaşındadır ve nörolojik taramalar temizdir."
+      }
+    ],
+    "teachingPoint": "Cinsel ketlenmesizlik yeni başladıysa önce mani ve frontal lob hastalıklarını dışla; süreğen ve tek odaklı bir örüntü parafilik bozukluğu düşündürür."
+  }
+}

@@ -192,7 +192,7 @@
         const r = await NS.api.advanceIfDue(id);
         if (id !== R.roomId) return;
         if (r.ok && differs(r.data)) refresh();
-        else if (!r.ok && r.error.code === 'NOT_MEMBER') refresh();
+        else if (!r.ok && (r.error.code === 'NOT_MEMBER' || r.error.code === 'QUICK_TIMEOUT')) refresh();
         else {
             // geçiş henüz olmadıysa (saat farkı) kısa süre sonra yine dene
             const s = R.state;
@@ -217,7 +217,7 @@
         const r = await NS.api.heartbeat(id);
         if (id !== R.roomId) return;
         if (r.ok) { if (differs(r.data)) refresh(); }
-        else if (r.error.code === 'NOT_MEMBER') refresh();
+        else if (r.error.code === 'NOT_MEMBER' || r.error.code === 'QUICK_TIMEOUT') refresh();
     }
 
     // ------------------------------------------------------------ presence (görsel)

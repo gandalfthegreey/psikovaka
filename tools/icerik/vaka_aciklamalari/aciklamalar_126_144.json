@@ -1,0 +1,398 @@
+{
+  "case-126": {
+    "whyThis": [
+      "Yaralandığında bile avutulmak için yetişkinlere yönelmemesi ve sarılınca kaskatı kesilmesi, sıkıntı anında bakım verene yönelme ve avutulmaya yanıt vermede belirgin eksikliktir.",
+      "Olumlu duygu paylaşmaması, donuk ve korkulu duygulanım ile açıklanamayan huzursuzluk dönemleri toplumsal-duygusal tepkisizliği gösterir.",
+      "İlk üç yıldaki ağır ihmal ve sürekli değişen bakıcılar zorunlu bakım eksikliği ölçütünü karşılar; tablo beş yaşından önce başlamıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "asd",
+        "reason": "Basmakalıp hareketler, ekolali ve dar ilgi alanları yoktur ve sosyal bilişsel kapasite korunmuştur; tablo ağır ihmal zemininde gelişmiştir."
+      },
+      {
+        "diagnosisId": "disinhibited_social_engagement",
+        "reason": "Çocuk yabancılara sınırsızca yaklaşmıyor; tersine içe kapanık ve tepkisizdir."
+      },
+      {
+        "diagnosisId": "ptsd_preschool",
+        "reason": "Belirli bir travmatik olaya bağlı yeniden yaşantılama ya da kaçınma tarif edilmiyor; sorun bağlanma davranışının yokluğudur."
+      }
+    ],
+    "teachingPoint": "Tepkisel bağlanma bozukluğunda çocuk bağlanma kapasitesine sahiptir ama bunu geliştirme fırsatı bulamamıştır; ağır bakım eksikliği öyküsü tanı için zorunludur."
+  },
+  "case-127": {
+    "whyThis": [
+      "Parkta tanımadığı yabancılarla gitmeye çalışması ve ilk kez gördüğü bir yetişkinin kucağına oturması, yabancılara yaklaşmada ketlenmenin kaybolduğunu gösterir.",
+      "Yabancı ortamlarda bile ebeveynine dönüp bakmaması ve kolayca uzaklaşabilmesi, bakım verene başvurmanın azaldığını gösterir.",
+      "Yaşamın ilk iki buçuk yılındaki kurum bakımı ve ihmal zorunlu bakım eksikliği ölçütüdür; davranış dürtüsellikle sınırlı değildir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "reactive_attachment_disorder",
+        "reason": "Çocuk içe kapanık ve tepkisiz değil; tam tersine yabancılara aşırı ve teklifsizce yaklaşıyor."
+      },
+      {
+        "diagnosisId": "adhd",
+        "reason": "Davranış dikkat sorunu ve genel dürtüsellik olmadan da sürüyor; asıl sorun sosyal sınırların kaybıdır."
+      },
+      {
+        "diagnosisId": "asd",
+        "reason": "Sosyal ilgi azalmamış, aksine aşırı artmıştır; kısıtlı ilgiler ya da basmakalıp davranışlar tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "İhmal sonrası iki bağlanma tablosu zıt kutuplardır: RAD'da çocuk kimseye yönelmez, DSED'de herkese ayrımsız yönelir."
+  },
+  "case-128": {
+    "whyThis": [
+      "Adını, adresini ve medeni durumunu hatırlayamaması olağan unutkanlığı aşan önemli otobiyografik bilgi kaybıdır.",
+      "İflas günü evden çıkıp 600 km uzağa sakin ve amaçlı biçimde seyahat etmesi ve takma adla pansiyona kaydolması füg tablosunu gösterir; DSM-5-TR'de füg, dissosiyatif amnezinin bir belirtecidir.",
+      "Genel bilgi, dil ve hesap becerileri sağlamdır; MRG, EEG ve toksikoloji normaldir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "did",
+        "reason": "‘Ali Yılmaz’ adı yeni bir kimlik gibi görünse de birbirinden ayrı, yineleyen kişilik durumları ve aralarında geçişler tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_tbi",
+        "reason": "Görüntülemede travma bulgusu yoktur ve yeni bilgi öğrenme korunmuştur; amnezi kişisel kimlikle sınırlıdır."
+      },
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Belirtileri bilerek ürettiğine ya da hasta rolü aradığına dair kanıt yoktur; ancak iflas gibi dış bir etken olduğundan temaruz da dikkatle değerlendirilmelidir."
+      }
+    ],
+    "teachingPoint": "Füg ayrı bir tanı değil, dissosiyatif amnezinin ‘dissosiyatif füg ile’ belirtecidir: ağır bir stresörden kaçışla ilişkili amaçlı seyahat ve kimlik bilgisinin kaybı; genel bilgi ve beceriler korunurken kişisel geçmiş silinir."
+  },
+  "case-129": {
+    "whyThis": [
+      "Aile tartışmaları ve sınav stresiyle ortaya çıkan, yere yavaşça kayma ve asenkron çırpınmalarla giden nöbetler istemli motor işlevde değişikliktir.",
+      "Kapalı ve açılmaya direnen gözler, iki yana baş sallama, dil ısırma ve postiktal konfüzyon olmaması epilepsiyle uyumsuz olumlu bulgulardır.",
+      "Nöbet sırasında video-EEG'nin normal kalması ve prolaktin ile CK'nin yükselmemesi tanıyı doğrular; nöbetler bilerek üretilmiyor."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Nöbetleri bilerek ürettiğine ya da hasta rolü aradığına dair kanıt yoktur."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Stres altında ortaya çıksa da tablo korku ve otonom belirtilerle giden ataklar değil, motor nöbetlerdir."
+      },
+      {
+        "diagnosisId": "other_specified_dissociative",
+        "reason": "Belirtiler bilinç ya da kimlikte değil, motor işlevdedir; bu tablo DSM-5-TR'de işlevsel nörolojik belirti (konversiyon) bozukluğu içinde ‘atak ya da nöbetlerle’ belirteciyle sınıflanır."
+      }
+    ],
+    "teachingPoint": "PNES'te gözlerin kapalı olması, asenkron hareketler ve nöbet sonrası konfüzyonun olmaması yararlı ipuçlarıdır; kesin tanı nöbetin video-EEG ile kaydedilmesiyle konur."
+  },
+  "case-130": {
+    "whyThis": [
+      "Annenin çocuğa gizlice insülin enjekte etmesi ve kendi kanını çocuğun dışkısına damlatması, belirtilerin bir başkasında bilerek üretildiğinin kamera kaydıyla gösterilmiş kanıtıdır.",
+      "Çocuğu 6 hastanede yineleyen yatışlarla hasta olarak sunmuştur; belirtiler yalnızca anne yalnız kaldığında ortaya çıkmış ve ayrıldıktan sonra tamamen kesilmiştir.",
+      "Maddi bir çıkar yoktur; amaç ‘kahraman anne’ olarak ilgi ve takdir görmektir. Tanı faile, yani anneye konur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Belirtiler annenin kendi bedeninde değil çocuğun bedeninde üretilmektedir."
+      },
+      {
+        "diagnosisId": "illness_anxiety_disorder",
+        "reason": "Kaygılı ebeveyn çocuğunun hasta olmasından korkar ama hastalık üretmez; burada belirtiler bilerek yaratılmıştır."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Ağır bir istismar söz konusudur, ancak amaç çıkar değil hasta rolü üzerinden ilgi görmektir ve genel bir hak ihlali örüntüsü tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "Belirtilerin yalnızca belirli bir bakım verenin yanında ortaya çıkıp ondan ayrılınca kaybolması, başkasına yüklenen yapay bozukluğun en güçlü klinik işaretidir."
+  },
+  "case-131": {
+    "whyThis": [
+      "Dört aydır her yemekten sonra yiyeceği öğürme ya da bulantı olmadan ağza getirip yeniden çiğneme ve yutma, tekrarlayan geri çıkarma davranışıdır ve bir ay ölçütünü aşar.",
+      "Davranışın sıkılma ve stres anlarında, karın kaslarını kasarak rahatlamak için yapılması öğrenilmiş bir alışkanlık niteliğindedir.",
+      "Reflü, akalazya ve pilor darlığı ayrıntılı incelemeyle dışlanmıştır; kilo kaygısı ve beden algısı bozukluğu yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bulimia_nervosa",
+        "reason": "Kilo almamak için kusma yoktur; yiyecek öğürmeden ağza gelir ve yeniden yutulur, tıkınma nöbetleri de tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "arfid",
+        "reason": "Belirli yiyeceklerden kaçınma ya da kısıtlama değil, yenen yiyeceğin tekrar ağza getirilmesi söz konusudur."
+      },
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Düşük kilo, kilo alma korkusu ve beden algısı bozukluğu yoktur."
+      }
+    ],
+    "teachingPoint": "Ruminasyonu kusmadan ayıran, yiyeceğin zahmetsizce ve öğürmeden ağza gelmesi ve çoğunlukla yeniden çiğnenip yutulmasıdır."
+  },
+  "case-132": {
+    "whyThis": [
+      "Sabahları öğlene kadar hiç yiyememe ve günlük kalorinin yarısından fazlasını akşam yemeğinden sonra ve gece alması gece yeme sendromunun özelliğidir.",
+      "Gece uykudan tam bilinçle uyanıp yemek yemeden tekrar uyuyamaması ve yediklerini sabah hatırlaması, yemenin bilinçli olduğunu gösterir.",
+      "Porsiyonlar tıkınma düzeyinde değildir; tablo hiçbir özgül yeme bozukluğunun ölçütünü karşılamadığı için ‘belirlenmiş diğer’ olarak kodlanır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "binge_eating",
+        "reason": "Kısa sürede çok büyük miktarda yeme ve kontrol kaybı nöbetleri değil, gece boyu atıştırma şeklinde yeme vardır."
+      },
+      {
+        "diagnosisId": "nrem_sleep_arousal",
+        "reason": "Gece yeme sırasında bilinç tamamen açıktır ve sabah amnezi yoktur; uykuyla ilişkili yeme bozukluğunda ise kişi yediğini hatırlamaz."
+      },
+      {
+        "diagnosisId": "insomnia_disorder",
+        "reason": "Gece uyanmaları var, ancak tablo yemek yeme dürtüsü ve yemeden uyuyamama inancı etrafında örgütlenmiştir; uykusuzluk tek başına sorunun merkezinde değildir."
+      }
+    ],
+    "teachingPoint": "Gece yemenin farkındalıkla mı yoksa uyku sırasında amnezi ile mi olduğunu sor: bilinçli ise gece yeme sendromu, amnezi varsa uykuyla ilişkili yeme bozukluğu düşünülür."
+  },
+  "case-133": {
+    "whyThis": [
+      "Yalnızca ‘saf ve işlenmemiş’ yiyecekleri yeme kuralıyla besin çeşitliliğini altı ürüne indirmesi ve B12/demir eksikliği geliştirmesi, beslenme davranışında belirgin bir bozulmadır.",
+      "Günde beş saat besin araştırması, kural ihlalinde yoğun suçluluk ve ardından ‘detoks’ açlığı ile sosyal yemeklerden çekilme klinik önemde sıkıntı ve işlev kaybını gösterir.",
+      "Zayıflama hedefi ve kilo korkusu yoktur; ortoreksiya ayrı bir tanı olmadığından tablo ‘belirlenmiş diğer’ olarak kodlanır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Kısıtlamanın amacı kilo vermek değil yiyeceğin saflığıdır; kilo alma korkusu ve beden algısı bozukluğu yoktur."
+      },
+      {
+        "diagnosisId": "arfid",
+        "reason": "Kaçınma yiyeceğin dokusu, kokusu ya da boğulma korkusundan değil, ideolojik saflık ve sağlık kurallarından kaynaklanır."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Katı kurallar ve suçluluk obsesif özellik taşır, ancak tüm uğraş beslenme etrafında döner ve kişi kurallarını benimsemektedir; farklı temalarda obsesyonlar varsa OKB ayrıca değerlendirilmelidir."
+      }
+    ],
+    "teachingPoint": "Ortoreksiyada odak yiyeceğin miktarı ya da kilo değil kalitesi ve saflığıdır; ciddi beslenme eksikliği ve işlev kaybı varsa ‘belirlenmiş diğer beslenme ve yeme bozukluğu’ olarak kodlanır."
+  },
+  "case-134": {
+    "whyThis": [
+      "Yedi yaşında, son altı aydır haftada 4-5 gece yatağı ıslatması yaş, sıklık ve süre ölçütlerini (en az 5 yaş, üç ay boyunca haftada en az iki kez) karşılar.",
+      "Gündüz kontrolü normaldir ve ıslatma yalnızca uykuda olur; bu ‘yalnızca gece’ tipine, bebeklikten beri hiç kuru dönem olmaması birincil enürezise uyar.",
+      "Kamptan kaçınma ve özgüven kaybı belirgin sıkıntıyı gösterir; enfeksiyon, diyabet ve anatomik nedenler dışlanmıştır ve aile öyküsü güçlüdür."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "encopresis",
+        "reason": "Kaçırılan şey dışkı değil idrardır."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Kamp korkusu genel bir değerlendirilme kaygısından değil, gece ıslatmanın fark edilmesi korkusundan kaynaklanır; bu enürezisin bir sonucudur."
+      },
+      {
+        "diagnosisId": "nrem_sleep_arousal",
+        "reason": "Derin uyku ve uyanamama ortak olsa da yataktan kalkma ya da karmaşık davranışlar tarif edilmiyor; sorun mesane doluluğuna uyanamamaktır."
+      }
+    ],
+    "teachingPoint": "Birincil enürezis (hiç kuru dönem olmaması) ile ikincil enürezis (en az birkaç ay kuru dönem sonrası başlama) ayrımı, olası nedenler ve stresörler açısından yön gösterir."
+  },
+  "case-135": {
+    "whyThis": [
+      "Altı buçuk yaşında, beş aydır haftada 3-4 kez iç çamaşırına dışkı kaçırması yaş (en az 4), sıklık (ayda en az bir) ve süre (en az üç ay) ölçütlerini karşılar.",
+      "Ağrılı fissür sonrası dışkıyı tutma, rektumda fekalom ve tıkaç çevresinden sızan sıvı dışkı ‘kabızlık ve taşma inkontinansı ile’ alt tipini gösterir.",
+      "Hirschsprung ve spina bifida dışlanmıştır; kaçırma kasıtlı değildir ve çocuk durumu utancından gizlemektedir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "odd",
+        "reason": "Kaçırma kasıtlı bir karşı gelme davranışı değil, kabızlığa bağlı istemsiz bir sızıntıdır; çocuk utanç duyup saklamaktadır."
+      },
+      {
+        "diagnosisId": "enuresis",
+        "reason": "Kaçırılan şey idrar değil dışkıdır."
+      },
+      {
+        "diagnosisId": "specific_phobia",
+        "reason": "Tuvalet korkusu ağrılı fissürden sonra gelişmiş ve dışkı tutmaya yol açmıştır; ancak tablonun tamamı enkoprezisi oluşturur, fobi ayrı bir tanı gerektirecek kadar bağımsız değildir."
+      }
+    ],
+    "teachingPoint": "Enkopreziste ‘ishal’ yakınması çoğu zaman taşma inkontinansıdır; önce kabızlık ve fekalom araştırılmalı, ebeveynlere davranışın kasıtlı olmadığı anlatılmalıdır."
+  },
+  "case-137": {
+    "whyThis": [
+      "Baldırlarda karıncalanma ve çekilme ile bacakları hareket ettirmek için karşı konulamaz dürtü tanının çekirdek ölçütüdür.",
+      "Duyumlar yalnızca dinlenme ve hareketsizlik sırasında başlar, yürümekle hemen geçer ve akşam-gece kötüleşir; bu üç özellik birlikte aranır.",
+      "Altı aydır süren tablo uykuya dalma güçlüğü ve gündüz tükenmişliğine yol açmıştır; düşük ferritin ve mirtazapin ile antihistaminik kullanımı ağırlaştırıcı etkenlerdir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "insomnia_disorder",
+        "reason": "Uykuya dalma güçlüğü bacaklardaki dürtüden kaynaklanıyor; uykusuzluk başka bir uyku bozukluğuyla açıklandığı için ayrı tanı gerekmez."
+      },
+      {
+        "diagnosisId": "gad",
+        "reason": "Huzursuzluk zihinsel bir kuruntu değil, bacaklarda yerleşik bedensel bir dürtüdür ve hareketle anında geçer."
+      },
+      {
+        "diagnosisId": "substance_induced_anxiety",
+        "reason": "İlaçlar tabloyu ağırlaştırmış olsa da belirtiler akatizi ya da kaygı değil, akşam belirginleşen ve hareketle geçen tipik huzursuz bacak örüntüsüdür."
+      }
+    ],
+    "teachingPoint": "Huzursuz bacaklar sendromunda ferritin düzeyine ve mirtazapin, antihistaminik, bazı antidepresanlar gibi ağırlaştırıcı ilaçlara mutlaka bakılmalıdır."
+  },
+  "case-138": {
+    "whyThis": [
+      "Uykuya daldıktan 1-1,5 saat sonra yataktan kalkıp evde dolaşması, gecenin ilk üçte birinde NREM uykusundan tamamlanmamış uyanma ile karmaşık davranıştır.",
+      "Açık ama boş bakan gözler, seslenmeye yanıtsızlık ve uyandırılma güçlüğü uyurgezerlik epizodunun tipik özelliğidir.",
+      "Sabah tam amnezi ve rüya görmeme ile polisomnografide olayların NREM evre 3'te kaydedilmesi tanıyı doğrular; uyku yoksunluğu tetikleyicidir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "rem_sleep_behavior_disorder",
+        "reason": "Olaylar REM'de ve sabaha karşı değil, derin NREM'de ve gecenin başında olmaktadır; rüya hatırlanmaz."
+      },
+      {
+        "diagnosisId": "dissociative_amnesia",
+        "reason": "Füg epizodları uyanıkken olur ve günler sürebilir; burada epizodlar uykudan çıkarken olur ve dakikalarla sınırlıdır, kimlik kaybı ve amaçlı uzun seyahat yoktur."
+      },
+      {
+        "diagnosisId": "nightmare_disorder",
+        "reason": "Kabus bozukluğunda kişi REM uykusundan tam uyanır, yönelimlidir ve rüyayı hatırlar; burada rüya hatırlanmaz ve kişi uyandırılamaz."
+      }
+    ],
+    "teachingPoint": "Uyurgezerlik ve gece terörü aynı tanının (NREM uykusundan uyanma bozukluğu) iki tipidir; ikisinde de olaylar gecenin ilk üçte birinde olur ve sabah hatırlanmaz."
+  },
+  "case-139": {
+    "whyThis": [
+      "Uykuya daldıktan 60-90 dakika sonra dehşet çığlığıyla ani uyanma, gecenin ilk üçte birinde NREM uykusundan kısmi uyanmayı gösterir.",
+      "Hızlı kalp atımı, terleme, hızlı soluma ve geniş göz bebekleri yoğun otonom uyarılmadır.",
+      "Avutma çabalarına yanıt vermemesi, ebeveynlerini tanımaması ve sabah olayı ya da bir rüyayı hiç hatırlamaması tipiktir; EEG epilepsiyi dışlamıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "nightmare_disorder",
+        "reason": "Kabuslar REM uykusunda, gecenin ikinci yarısında olur; çocuk uyanınca tam yönelimlidir ve rüyayı hatırlar."
+      },
+      {
+        "diagnosisId": "separation_anxiety",
+        "reason": "Ebeveynlerine yönelmiyor, aksine onları tanımıyor ve itiyor; ayrılık korkusu ya da gündüz ayrılık belirtileri tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Gece panik atağında kişi tamamen uyanır, olanı hatırlar ve avutulabilir; burada ise sabah tam amnezi vardır."
+      }
+    ],
+    "teachingPoint": "Gece teröründe (NREM uyanma bozukluğunun uyku terörü tipi) çocuk uyanık görünür ama avutulamaz ve sabah hatırlamaz; kabusta ise uyanınca hemen yönelimlidir ve rüyayı anlatabilir."
+  },
+  "case-140": {
+    "whyThis": [
+      "Boşalamama ve cinsel istekte azalma paroksetin başlandıktan kısa süre sonra ortaya çıkmıştır; zamansal ilişki açıktır.",
+      "İlaçtan önce hiçbir cinsel işlev sorunu yoktur ve SSRI'ların cinsel yan etkileri iyi bilinmektedir.",
+      "Sorun partnerle ve mastürbasyonda aynı şekilde görülür; hormon düzeyleri normaldir, ilişki çatışması yoktur ve kaygı düzelmiştir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "delayed_ejaculation",
+        "reason": "Boşalma güçlüğü ilaç başlamadan önce yoktu ve ilacın etkisiyle açıklanıyor; birincil cinsel işlev bozukluğu tanısı konmaz."
+      },
+      {
+        "diagnosisId": "male_hypoactive_desire",
+        "reason": "İstek azalması da ilaçla eşzamanlı başlamıştır; ilaçtan bağımsız bir istek sorunu yoktur."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Depresif belirti tarif edilmiyor ve kaygı düzelmiş olmasına rağmen cinsel sorun sürüyor; sorun ruhsal hastalığın değil ilacın etkisidir."
+      }
+    ],
+    "teachingPoint": "Cinsel işlev sorununda ilk soru ilaç öyküsüdür; belirtiler ilaçla başladıysa ve her koşulda görülüyorsa maddenin yol açtığı cinsel işlev bozukluğu düşünülür."
+  },
+  "case-141": {
+    "whyThis": [
+      "Saatler içinde uyanıklık ve konfüzyon arasında gidip gelme, belirgin bilişsel dalgalanmadır.",
+      "Yineleyen, canlı ve ayrıntılı görsel varsanılar, kendiliğinden gelişen parkinsonizm ve yıllar önce başlayan REM uykusu davranış bozukluğu tanının temel özellikleridir.",
+      "Haloperidol sonrası ağır katılık ve bilinç bulanıklığı (nöroleptik duyarlılığı) ile DaTscan'de azalmış dopamin taşıyıcı tutulumu tanıyı destekler; erken bozulma bellekte değil görsel-mekânsal ve yürütücü işlevlerdedir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "İlk ve baskın bozukluk yakın bellekte değil, görsel-mekânsal ve yürütücü işlevlerdedir; varsanı ve parkinsonizm erken dönemde ortaya çıkmıştır."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "reason": "Parkinsonizm bilişsel bozulmadan yıllar önce başlamamıştır; ikisi yaklaşık aynı dönemde ortaya çıktığı için Lewy cisimcikli tanı uygundur."
+      },
+      {
+        "diagnosisId": "delirium",
+        "reason": "Dalgalanma bir yıldır sürmektedir ve akut bir tıbbi neden bulunmamıştır; ancak haloperidol sonrası ağırlaşma deliryumu tetiklemiş olabilir."
+      }
+    ],
+    "teachingPoint": "Dalgalanan biliş, görsel varsanılar ve parkinsonizmi olan yaşlı hastada antipsikotik duyarlılığı yüksektir; tipik antipsikotiklerden kaçınmak hayati önemdedir."
+  },
+  "case-142": {
+    "whyThis": [
+      "Altı hafta içinde unutkanlık, kişilik değişikliği, konuşma kaybı ve ataksiyle gelişen çöküş, hızlı ilerleyen bir majör nörobilişsel bozukluktur.",
+      "Ses ve dokunmayla tetiklenen irkilme miyoklonusu prion hastalığının tipik bulgusudur.",
+      "Difüzyon MRG'de kortikal şeritlenme ve bazal ganglion sinyali, EEG'de periyodik keskin dalgalar ve BOS'ta 14-3-3 ile RT-QuIC pozitifliği tanıyı destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "Alzheimer yıllar içinde yavaş ilerler; haftalar içinde miyoklonus ve ataksiyle çöküş beklenmez."
+      },
+      {
+        "diagnosisId": "delirium",
+        "reason": "Hızlı bir bozulma var, ancak tablo dalgalanan bir dikkat bozukluğu değil, sürekli ilerleyen bir yıkımdır ve özgül prion bulguları vardır."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_another_medical",
+        "reason": "Otoimmün ensefalit hızlı ilerleyen demansın tedavi edilebilir bir nedenidir; ancak RT-QuIC pozitifliği prion hastalığına özgüdür. Antikor paneli yine de dışlama için gereklidir."
+      }
+    ],
+    "teachingPoint": "Haftalar-aylar içinde ilerleyen demans ve miyoklonusta prion hastalığını düşün, ama önce tedavi edilebilir otoimmün ve metabolik nedenleri dışla."
+  },
+  "case-143": {
+    "whyThis": [
+      "İki yıldır ilerleyen yürütücü işlev kaybı ve işlem hızında yavaşlama, bellekten önce bozulan subkortikal tipte bir nörobilişsel bozukluktur.",
+      "Parmaklarda, omuzlarda ve gövdede düzensiz akan istemsiz hareketler kore; irritabilite ve öfke patlamaları sık eşlik eden psikiyatrik belirtilerdir.",
+      "Babada ve halada benzer tablo (otozomal baskın geçiş), kaudat atrofisi ve HTT geninde 46 CAG tekrarı tanıyı kesinleştirir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "intermittent_explosive",
+        "reason": "Öfke patlamaları kore, yürütücü işlev kaybı ve genetik bir nörodejeneratif hastalık zemininde ortaya çıkmıştır; bağımsız bir dürtü denetim bozukluğuyla açıklanmaz."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "reason": "Davranış değişikliği ve yürütücü bozulma ortak olsa da belirgin kore, kaudat atrofisi ve genetik test Huntington'ı gösterir."
+      },
+      {
+        "diagnosisId": "personality_change_due_to_medical",
+        "reason": "Kişilik değişikliği var, ancak ilerleyici bilişsel yıkım günlük işlevi bozduğu için tablo majör nörobilişsel bozukluk düzeyindedir."
+      }
+    ],
+    "teachingPoint": "Orta yaşta irritabilite, yürütücü bozulma ve kore birlikte görülürse aile öyküsü sorulmalı; Huntington'da intihar riski yüksektir ve izlenmelidir."
+  },
+  "case-144": {
+    "whyThis": [
+      "Yirmi yıllık ağır alkol kullanımı ve yetersiz beslenmenin ardından göz kası felci, ataksi ve konfüzyonla gelen Wernicke ensefalopatisi tablonun başlangıcıdır.",
+      "Bilinç açıldıktan sonra beş dakika önceki olayları hatırlayamama ağır anterograd amnezi; boşlukları kendinden emin hayali anılarla doldurma konfabülasyondur.",
+      "Anlık bellek ve genel zeka korunmuştur; mamiller cisim ve talamus bulguları ile tiamin eksikliği alkolün yol açtığı amnestik-konfabülatuvar tipi destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "Dil ve genel zeka korunmuştur, bozukluk yeni bilgi öğrenmeye sınırlıdır ve alkol-tiamin eksikliğiyle akut başlamıştır."
+      },
+      {
+        "diagnosisId": "alcohol_withdrawal_delirium",
+        "reason": "Bilinç açıktır ve dikkat korunmuştur; sorun dalgalanan bir bilinç bozukluğu değil, kalıcı bir bellek kaybıdır."
+      },
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Konfabülasyon bilerek ve bir amaçla yapılan uydurma değildir; kişi anlattıklarının doğru olduğuna inanır."
+      }
+    ],
+    "teachingPoint": "Korsakoff sendromunda konfabülasyon yalan değil, bellek boşluğunun farkında olmadan doldurulmasıdır; Wernicke tablosunda erken tiamin verilmesi kalıcı hasarı önleyebilir."
+  }
+}

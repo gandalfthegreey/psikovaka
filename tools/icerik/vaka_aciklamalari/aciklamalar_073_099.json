@@ -1,0 +1,526 @@
+{
+  "case-073": {
+    "whyThis": [
+      "Düşme, kovalanma ve sevdiklerinin öldürülmesi gibi hayatta kalmayı tehdit eden, ayrıntılı hatırlanan korkutucu rüyalar tekrarlamaktadır.",
+      "Uyanınca saniyeler içinde tamamen yönelimli olması ve kabuslar REM evresinde, gecenin ikinci yarısında ortaya çıkması tanıya özgüdür.",
+      "Beş aydır haftada 3-4 gece süren kabuslar uyku korkusu ve gündüz yorgunluğu ile işlevi bozmaktadır; travma öyküsü yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "nrem_sleep_arousal",
+        "reason": "NREM uykusundan uyanma bozukluğunun uyku terörü tipinde olaylar gecenin ilk üçte birinde olur; kişi zor uyanır, konfüzedir ve rüyayı hatırlamaz."
+      },
+      {
+        "diagnosisId": "ptsd",
+        "reason": "Kabuslar yaşanmış bir travmanın yeniden yaşantılanması değildir ve travmatik olay öyküsü yoktur."
+      },
+      {
+        "diagnosisId": "rem_sleep_behavior_disorder",
+        "reason": "Rüyayı eyleme dökme, vurma ya da yataktan fırlama gibi hareketler tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "Kabus ile gece terörünü üç soru ayırır: uyku evresi (REM/NREM), uyanınca yönelim ve rüyanın hatırlanıp hatırlanmadığı."
+  },
+  "case-074": {
+    "whyThis": [
+      "Yeterli fırsata rağmen uykuya dalmada 2-3 saat güçlük ve gece uyanıp tekrar uyuyamama, uyku başlatma ve sürdürme yakınmalarıdır.",
+      "Altı aydır haftada 4-5 gece sürmesi, haftada üç gece ve üç ay ölçütlerini aşar; gündüz konsantrasyon kaybı ve bitkinlik işlev bozukluğunu gösterir.",
+      "Akşam ‘bu gece de uyuyamayacağım’ korkusu yatak ile uyarılmışlık arasındaki koşullanmayı yansıtır; apne, huzursuz bacaklar ve tiroid sorunu dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "gad",
+        "reason": "Kaygı birçok yaşam alanına yayılmamış, uyku ve onun gündüz sonuçlarıyla sınırlıdır; başka konularda süreğen kuruntu tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Çökkün duygudurum ve anhedoni tarif edilmiyor; uykusuzluk depresyonun bir belirtisi gibi görünmüyor, yine de taranmalıdır."
+      },
+      {
+        "diagnosisId": "circadian_rhythm_sleep_wake",
+        "reason": "Kişi uykuya geç dalmakla kalmıyor, gece boyunca da sık uyanıyor; sirkadiyen ritim bozukluğunun gecikmiş uyku evresi tipinde uyku zamanı kaydırılınca uyku normaldir."
+      }
+    ],
+    "teachingPoint": "Uykusuzluk bozukluğu, başka bir bozukluk eşlik etse bile uykusuzluk ayrı klinik dikkat gerektirecek kadar belirginse bağımsız tanı olarak konabilir."
+  },
+  "case-075": {
+    "whyThis": [
+      "Gece 9-10 saat uyumasına rağmen dinlenmemiş uyanması ve gün içinde uyuyakalması, yeterli ana uykuya karşın aşırı uykululuktur.",
+      "Saatler süren uyku sarhoşluğu ve iki saatlik şekerlemelerin bile dinlendirmemesi tanının tipik özellikleridir.",
+      "Yedi aydır neredeyse her gün sürmesi süre ölçütünü aşar; MSLT'de SOREMP ve PSG'de apne yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "narcolepsy",
+        "reason": "Katapleksi, uyku felci ve hipnagojik varsanı yoktur; MSLT'de narkolepsiye özgü bulgu saptanmamıştır."
+      },
+      {
+        "diagnosisId": "obstructive_sleep_apnea",
+        "reason": "Polisomnografide uyku apnesi görülmemiştir."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Aşırı uyku atipik depresyonda görülebilir, ancak çökkün duygudurum ya da anhedoni tarif edilmiyor; bu yine de sorulmalıdır."
+      }
+    ],
+    "teachingPoint": "Narkolepside kısa şekerlemeler dinlendirir; aşırı uykululuk bozukluğunda ise uzun uykular ve şekerlemeler bile dinlendirmez."
+  },
+  "case-076": {
+    "whyThis": [
+      "Bir yıllık evlilikte vajinal birleşmenin hiç gerçekleşememesi penetrasyonda süregen güçlüktür.",
+      "Şiddetli acı ve yırtılma korkusu ile bacakları istemsizce kapatma, belirgin ağrı korkusu ve pelvik taban kaslarında istemsiz kasılmayı gösterir.",
+      "Tampon kullanamama ve jinekolojik muayeneye girememe genellenmiş bir penetrasyon kaygısına işaret eder; organik neden saptanmamıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "female_sexual_interest_arousal",
+        "reason": "Sorunun merkezinde cinsel istek ya da uyarılma eksikliği değil, penetrasyona karşı korku ve istemsiz kasılma vardır."
+      },
+      {
+        "diagnosisId": "specific_phobia",
+        "reason": "Korku kan, iğne ya da yara gibi özgül bir nesneyle değil, penetrasyon ve ona eşlik eden ağrıyla ilgilidir ve tampon kullanımına da uzanır."
+      },
+      {
+        "diagnosisId": "female_orgasmic_disorder",
+        "reason": "Yakınma orgazma ulaşamamak değil, birleşmenin hiç gerçekleşememesidir."
+      }
+    ],
+    "teachingPoint": "DSM-5'te vajinismus ve disparoni ‘genito-pelvik ağrı/penetrasyon bozukluğu’ adı altında birleştirilmiştir; ağrı korkusu ve pelvik kas kasılması merkezi özelliklerdir."
+  },
+  "case-077": {
+    "whyThis": [
+      "Vajinal penetrasyondan sonra 20-30 saniye içinde, istemeden boşalma yaklaşık bir dakikalık ölçütün altındadır.",
+      "Durum ilk cinsel deneyiminden beri ve ilişkilerin neredeyse tamamında görülmektedir; bu yaşam boyu tipine uyar ve altı ay ölçütü karşılanır.",
+      "Yetersizlik, suçluluk ve ilişkiden kaçınma belirgin sıkıntıyı gösterir; ürolojik ve hormonal neden yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "erectile_disorder",
+        "reason": "Sertleşmeyi sağlama ya da sürdürmede güçlük tarif edilmiyor; sorun boşalmanın zamanlamasıdır."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Performans kaygısı vardır, ancak yalnızca cinsel ilişkiyle ve onun sonucuyla sınırlıdır; diğer sosyal durumlarda değerlendirilme korkusu tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "substance_induced_sexual_dysfunction",
+        "reason": "Durum ilk deneyimden beri vardır ve bir madde ya da ilaç başlangıcıyla ilişkili değildir."
+      }
+    ],
+    "teachingPoint": "Erken boşalma tanısında ölçüt penetrasyondan sonra yaklaşık bir dakikadır; ‘yaşam boyu’ ve ‘sonradan başlayan’ tipler ayrımı nedene dair önemli ipucu verir."
+  },
+  "case-078": {
+    "whyThis": [
+      "Sekiz aydır eşiyle cinsel etkinliklerin neredeyse tamamında sertleşmeyi sağlama ve sürdürmede güçlük, temel ölçütü ve altı ay süresini karşılar.",
+      "Sabah ereksiyonlarının normal olması ve sorunun yalnızca ilişki sırasında ortaya çıkması fizyolojik kapasitenin korunduğunu gösterir.",
+      "Başarısızlık beklentisi ve kendini dışarıdan izleme (seyircilik) psikojenik bir kaygı döngüsüne işaret eder; kardiyovasküler ve hormonal testler normaldir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "male_hypoactive_desire",
+        "reason": "Eşiyle birlikte olmak istemektedir; cinsel istek ve düşlemlerde azalma tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "premature_ejaculation",
+        "reason": "Sorun boşalmanın zamanlaması değil, sertliğin kaybolmasıdır."
+      },
+      {
+        "diagnosisId": "substance_induced_sexual_dysfunction",
+        "reason": "Kullanılan ilaç ya da madde bildirilmiyor; ancak antihipertansif veya antidepresan kullanımı mutlaka sorulmalıdır."
+      }
+    ],
+    "teachingPoint": "Sabah ve gece ereksiyonlarının korunması, sertleşme sorununda vasküler-organik nedenden çok psikojenik bir mekanizmayı düşündürür."
+  },
+  "case-079": {
+    "whyThis": [
+      "Belirtiler idrar yolu enfeksiyonuyla iki gün içinde, yani saatler-günler içinde akut olarak gelişmiştir.",
+      "Dikkatini birkaç saniyeden fazla toplayamama ve farkındalıkta bozulma deliryumun çekirdek ölçütüdür; yer ve zaman yönelimi de bozuktur.",
+      "Sabah uykulu, akşam ajite olan dalgalı seyir ve görsel varsanılar tipiktir; ağır enfeksiyon bulguları doğrudan fizyolojik nedeni gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "Alzheimer aylar-yıllar içinde sinsi başlar ve bilinç ile dikkat erken dönemde korunur; burada iki günde gelişen dalgalı bir dikkat bozukluğu vardır."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_lewy_body",
+        "reason": "Görsel varsanı ve dalgalanma Lewy cisimcikli demansı düşündürebilir, ancak tablo öncesinde ilerleyici bir bilişsel gerileme öyküsü yoktur ve enfeksiyonla akut başlamıştır."
+      },
+      {
+        "diagnosisId": "psychotic_due_to_medical",
+        "reason": "Varsanılar bilinç ve dikkat bozukluğu zemininde ortaya çıkıyor; bu durumda tanı deliryumdur."
+      }
+    ],
+    "teachingPoint": "Yaşlı bir hastada ani başlayan, gün içinde dalgalanan dikkat bozukluğu görüldüğünde önce deliryumu ve altta yatan tıbbi nedeni ara."
+  },
+  "case-080": {
+    "whyThis": [
+      "İki yıldır sinsi başlayan ve ilerleyen yakın bellek kaybı, yeni öğrenme ve bellek alanında belirgin gerilemedir.",
+      "Yol kaybetme, fatura ödeyememe ve ilaçlarını yönetememe günlük yaşamda bağımsızlığın bozulduğunu, yani majör düzeyi gösterir.",
+      "Eski anıların korunup yeni bilginin kaybolması, kelime bulma güçlüğü ve hipokampal atrofi Alzheimer tipini destekler; B12 ve tiroid normaldir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "delirium",
+        "reason": "Tablo günler içinde değil iki yılda gelişmiştir ve bilinçte dalgalanma tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "mild_neurocognitive_alzheimer",
+        "reason": "Bilişsel kayıp faturalar ve ilaçlar gibi gündelik işlerde bağımsızlığı bozmuştur; hafif düzeyde bağımsızlık korunur."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_vascular",
+        "reason": "Basamaklı kötüleşme, inme öyküsü ya da görüntülemede damarsal lezyon tarif edilmiyor; atrofi hipokampal ağırlıklıdır."
+      }
+    ],
+    "teachingPoint": "Hafif ile majör nörobilişsel bozukluğu ayıran şey kaybın kendisi değil, günlük yaşam etkinliklerinde bağımsızlığın bozulup bozulmadığıdır."
+  },
+  "case-081": {
+    "whyThis": [
+      "Gebe olmadığı ultrason ve sıfır Beta-hCG ile kesinleşmişken gebe olduğuna inanması yanlış bir gebelik inancıdır.",
+      "Amenore, karın büyümesi, süt salgısı ve bebek hareketi hissi gibi nesnel bedensel gebelik belirtileri eşlik etmektedir; bu tablo psödosiyezis olarak adlandırılır.",
+      "DSM-5-TR psödosiyezisi ‘belirlenmiş diğer bedensel belirti ve ilişkili bozukluk’ örnekleri arasında sayar; uzun infertilite öyküsü tipik bir zemindir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "İnanç sonuçlarla sarsılabiliyor ve tabloda belirgin bedensel değişiklikler var; sanrısal gebelikte bedensel bulgular olmadan sabit bir inanç vardır."
+      },
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Belirtileri bilerek üretme ya da uydurma kanıtı yoktur; bedensel değişiklikler istemsizdir."
+      },
+      {
+        "diagnosisId": "somatic_symptom_disorder",
+        "reason": "Belirtilerle ilgili aşırı kaygı ve uğraştan çok, gebe olduğuna dair yanlış bir inanç ve özgül bir gebelik tablosu vardır."
+      }
+    ],
+    "teachingPoint": "Psödosiyeziste gebelik inancına nesnel bedensel belirtiler eşlik eder; bedensel değişiklik olmadan yalnızca sabit bir inanç varsa sanrısal gebelik düşünülür."
+  },
+  "case-082": {
+    "whyThis": [
+      "Başkalarınca alınmayan kötü bir beden ve ağız kokusu yaydığına dair süregen uğraş bu tablonun çekirdeğidir.",
+      "Günde altı kez duş, saat başı diş fırçalama ve sürekli koltuk altını koklama bu uğraşa yanıt olarak yapılan yineleyici davranışlardır.",
+      "Pencere açılmasını kendi kokusuna yorması ve evden çalışmaya başlaması işlev kaybını gösterir; DSM-5-TR bu tabloyu (koku referans bozukluğu) belirlenmiş diğer OKB-ilişkili bozukluklar arasında sayar."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bdd",
+        "reason": "Uğraşın konusu görünümdeki bir kusur değil, algılanan bir kokudur."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Sosyal kaçınma vardır, ancak temelinde genel değerlendirilme korkusu değil, kötü koku yaydığı inancı yatar."
+      },
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "İnanç güçlü olsa da kontrol ve temizlik ritüelleriyle giden bir tablo vardır; içgörü tamamen yoksa bile OKB-ilişkili tanı ‘içgörüsüz’ belirteciyle korunur."
+      }
+    ],
+    "teachingPoint": "Koku referans bozukluğu BDD'nin ‘koku’ versiyonu gibi düşünülebilir: uğraş ve yineleyici davranışlar vardır, odak ise görünüm değil kokudur."
+  },
+  "case-083": {
+    "whyThis": [
+      "Eşinin ölümünün üzerinden 18 ay geçmiştir; erişkinde en az 12 ay koşulu karşılanır.",
+      "Günün çoğunda süren yoğun özlem ve eşin kıyafetlerine sarılarak ağlama, ölen kişiye odaklı süregen yas tepkisidir.",
+      "Benliğinin de onunla öldüğünü hissetmesi kimlik bozulmasına, geleceği anlamsız görmesi ise yaşamı sürdürmede belirgin güçlüğe karşılık gelir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "mdd",
+        "reason": "Acının odağı genel değersizlik ya da her şeyde zevk kaybı değil, ölen kişiye duyulan özlemdir; yine de depresif epizod ölçütleri ayrıca değerlendirilmelidir."
+      },
+      {
+        "diagnosisId": "ptsd",
+        "reason": "Ölüm ani bir kazayla olmuş olsa da tablo yeniden yaşantılama ve kaçınma değil, özlem ve ölen kişiyle uğraştır."
+      },
+      {
+        "diagnosisId": "adjustment_disorder",
+        "reason": "Yas tepkisi uzatılmış yas ölçütlerini tam karşılamaktadır; bu durumda daha özgül tanı tercih edilir."
+      }
+    ],
+    "teachingPoint": "Uzatılmış yası depresyondan ayıran ana özellik, acının ölen kişiye duyulan özlem ve onunla uğraş etrafında dönmesidir."
+  },
+  "case-085": {
+    "whyThis": [
+      "Metroda aniden başlayan çarpıntı, nefes darlığı ve delirme korkusuyla giden ataklar tekrarlayan ve beklenmedik panik ataklardır.",
+      "Sürekli tansiyon aleti taşıma ve bedensel duyumlara aşırı dikkat, ataklardan sonra gelişen kaygı ve davranış değişikliğidir.",
+      "Metro, AVM, köprü ve kalabalık caddelerden kaçınma ve evden yalnız çıkamama, ayrı bir agorafobi tanısının da karşılandığını gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "specific_phobia",
+        "reason": "Kaçınma tek bir durumla sınırlı değil, birçok farklı alana yayılmıştır ve tetikleyicisiz ataklar vardır."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Korku başkalarınca olumsuz değerlendirilmek değil, atak sırasında kaçamamak ve yardım alamamaktır."
+      },
+      {
+        "diagnosisId": "anxiety_due_to_medical",
+        "reason": "EKG, Holter ve tiroid testleri temizdir; belirtileri açıklayan tıbbi bir durum yoktur."
+      }
+    ],
+    "teachingPoint": "DSM-5'te panik bozukluk ve agorafobi ayrı tanılardır; ikisinin ölçütleri birlikte karşılanıyorsa her iki tanı da konur."
+  },
+  "case-086": {
+    "whyThis": [
+      "Terk edilmeye dayanamama, yineleyen kendini kesme ve kronik intihar düşünceleri borderline kişiliğin çekirdek ölçütleridir.",
+      "İnsanları idealleştirip hızla değersizleştirme, kronik boşluk, öfke patlamaları ve değişken duygulanım yaygın örüntüyü tamamlar.",
+      "Çocuklukta yıllarca süren istismardan sonra hâlâ süren kabuslar ve flashbackler eşlik eden TSSB tanısını da gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bipolar_2",
+        "reason": "Duygu değişimleri günler süren epizodlar değil, kişilerarası tetikleyicilerle hızla değişen dalgalanmalardır."
+      },
+      {
+        "diagnosisId": "did",
+        "reason": "Dissosiyatif kopmalar var, ancak ayrı kimlik durumları ve gündelik olaylar için yineleyen amnezi tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "İntihar düşünceleri ve boşluk süreklidir ve sınırları belli bir depresif epizod değil, kişilik düzeyinde bir örüntü içinde yer alır."
+      }
+    ],
+    "teachingPoint": "Ağır çocukluk travması olan borderline hastalarda TSSB sık eşlik eder; iki tanı ayrı ayrı değerlendirilmeli, biri diğerini açıklamış sayılmamalıdır."
+  },
+  "case-087": {
+    "whyThis": [
+      "BKİ 15,2 ile yaşa ve boya göre belirgin düşük vücut ağırlığı vardır.",
+      "Bu kiloda kendini yağlı görmesi ve kilo almaktan dehşetle korkması beden algısı bozukluğu ile kilo korkusu ölçütlerini karşılar.",
+      "Kısıtlama dönemlerini izleyen tıkınma ve kendini kusturma, Russell belirtisi ve diş erozyonu tıkınma/çıkarma tipine işaret eder."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bulimia_nervosa",
+        "reason": "Tıkınma ve kusma ortak olsa da kişi belirgin düşük kilodadır; bu durumda tanı anoreksiyadır."
+      },
+      {
+        "diagnosisId": "arfid",
+        "reason": "Yeme kısıtlaması duyusal özelliklerden ya da yeme korkusundan değil, kilo alma korkusu ve beden algısı bozukluğundan kaynaklanır."
+      },
+      {
+        "diagnosisId": "bdd",
+        "reason": "Uğraşın odağı belirli bir yüz ya da beden kusuru değil, kilo ve yağlanmadır."
+      }
+    ],
+    "teachingPoint": "Anoreksiyanın alt tipi son üç aydaki davranışa göre belirlenir: düzenli tıkınma ya da çıkarma varsa tıkınma/çıkarma tipi, yoksa kısıtlayıcı tip."
+  },
+  "case-088": {
+    "whyThis": [
+      "Evde çok konuşkanken altı aydır sınıfta hiç konuşmaması, konuşmanın beklendiği belirli bir ortamda sürekli konuşamamadır.",
+      "Yabancı ya da öğretmen soru sorduğunda donakalma ve göz temasını kesme, konuşamamanın kaygıya bağlı olduğunu gösterir.",
+      "İşitme ve dil gelişimi normal, hatta ileri düzeydedir; sorun dil becerisi değildir ve süre bir ayı çoktan aşmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "asd",
+        "reason": "Evde ilişki kuran, esprili ve konuşkan bir çocuk vardır; sosyal iletişim sorunu tüm ortamlara yayılmamıştır."
+      },
+      {
+        "diagnosisId": "language_disorder",
+        "reason": "Dil gelişimi yaşıtlarından ileridir; dil bozukluğunda sorun her ortamda görülür."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Kaygı eşlik ediyor, ancak tablonun merkezinde belirli ortamlarda tamamen konuşamama vardır."
+      }
+    ],
+    "teachingPoint": "Seçici konuşmazlık tanısında konuşamamanın okulun ilk ayıyla sınırlı olmaması gerekir; ilk aydaki sessizlik uyum sürecinin parçası olabilir."
+  },
+  "case-089": {
+    "whyThis": [
+      "İki kadehten günde bir şişe rakıya çıkma toleransı, sabah titremesini ‘göz açıcı’ ile giderme yoksunluğu gösterir.",
+      "Alkollü araç kullanma nedeniyle üç kez ehliyet kaybı, işten çıkarılma ve boşanma davası, fiziksel tehlikeye ve toplumsal zarara rağmen kullanımı gösterir.",
+      "Karaciğer bulgularına ve uyarılara rağmen bırakamaması kontrol kaybıdır; 12 ayda karşılanan yedi ölçüt ağır düzeye karşılık gelir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "alcohol_withdrawal",
+        "reason": "Sabah yoksunluğu tablonun yalnızca bir parçasıdır; asıl tanı tolerans, kontrol kaybı ve zarara rağmen süren kullanım örüntüsüdür."
+      },
+      {
+        "diagnosisId": "adjustment_disorder",
+        "reason": "Kişi stresi bahane etse de iş ve evlilik kayıpları alkolün nedeni değil sonucudur; kullanım ölçütleri tam karşılanıyor."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Epizodik taşkınlık, azalmış uyku ya da büyüklenmecilik tarif edilmiyor; kullanım süreklidir."
+      }
+    ],
+    "teachingPoint": "Bağımlılıkta ‘stresimi atıyorum’ gibi inkâr ve rasyonalizasyon yaygındır; tanıyı kişinin yorumu değil, son 12 aydaki ölçüt sayısı belirler."
+  },
+  "case-090": {
+    "whyThis": [
+      "Eşinin yerine görünüşü tıpatıp aynı bir dublör geçtiğine dair inanç, kanıtlara rağmen sarsılmayan bir yanlış tanıma (Capgras) sanrısıdır.",
+      "Kapıyı kilitleme ve yemekleri yememe davranışları sanrının içeriğiyle sınırlıdır; sanrı üç aydır, yani bir aydan uzun süredir vardır.",
+      "Yüz tanıma korunmuştur ve deliryum bulgusu yoktur; Capgras ayrı bir tanı değil, sanrının içeriğidir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Tek bir sanrı vardır; varsanı, dezorganizasyon ya da negatif belirti tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_lewy_body",
+        "reason": "Yanlış tanıma sanrıları Lewy cisimcikli demansta sık görülür, ancak burada bilişsel gerileme, parkinsonizm ya da görsel varsanı tarif edilmiyor; sağ hemisfer bulgusu nedeniyle nörolojik izlem gerekir."
+      },
+      {
+        "diagnosisId": "psychotic_due_to_medical",
+        "reason": "Görüntülemede yalnızca hafif hipoperfüzyon vardır ve akut lezyon yoktur; tıbbi neden kanıtlanırsa tanı bu yöne değişir."
+      }
+    ],
+    "teachingPoint": "Capgras gibi yanlış tanıma sanrıları ileri yaşta ilk kez çıktığında, sanrılı bozukluk demeden önce nörolojik bir hastalığı dışlamak gerekir."
+  },
+  "case-091": {
+    "whyThis": [
+      "Bir aydır süren hareket ve banyo reddi, ağır psikomotor yavaşlama ve derin çökkünlük majör depresif epizodu gösterir.",
+      "Öldüğüne, organlarının çürüdüğüne ve kalbinin atmadığına dair sarsılmaz inanç, duygudurumla uyumlu nihilistik bir sanrıdır (Cotard sendromu); bu, tanıya ‘psikotik özellikli’ belirtecinin eklenmesini gerektirir.",
+      "Mutlak açlık, dehidratasyon ve kilo kaybı tablonun ağırlığını ve yaşamsal riskini gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Sanrı ağır bir depresif epizod içinde ve onunla uyumlu içerikte ortaya çıkmıştır; depresyondan bağımsız psikoz tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "illness_anxiety_disorder",
+        "reason": "Kişi hasta olmaktan korkmuyor; öldüğüne kesin olarak inanıyor ve kanıtı kabul etmiyor. Bu, kaygı değil sanrıdır."
+      },
+      {
+        "diagnosisId": "catatonia_associated",
+        "reason": "Hareketsizlik var, ancak donakalma, mutizm ya da kalıp duruş gibi katatoni belirtileri ayrıca tanımlanmamış; varsa depresyona eşlik eden katatoni olarak eklenir."
+      }
+    ],
+    "teachingPoint": "Psikotik depresyonda sanrılar genellikle duygudurumla uyumludur (suçluluk, yıkım, ölüm); bu, şizofreniye karşı önemli bir ipucudur."
+  },
+  "case-094": {
+    "whyThis": [
+      "Kahkaha atarken bilinç açıkken dizlerin çözülmesi ve yere yığılma, duyguyla tetiklenen katapleksidir.",
+      "Karşı konulamaz gündüz uyku atakları ve 15-20 dakikalık şekerlemelerden dinlenmiş uyanma narkolepsinin tipik özelliğidir; hipnagojik varsanı ve uyku felci eşlik eder.",
+      "MSLT'de kısa uyku latansı ve SOREMP ile beyin omurilik sıvısında düşük hipokretin tanıyı nesnel olarak doğrular."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "hypersomnolence",
+        "reason": "Şekerlemeler dinlendiricidir, katapleksi vardır ve hipokretin düşüktür; aşırı uykululuk bozukluğunda bunlar görülmez."
+      },
+      {
+        "diagnosisId": "obstructive_sleep_apnea",
+        "reason": "Gündüz uykululuğu apnede de görülür, ancak horlama ya da solunum durması tarif edilmiyor; katapleksi ve erken REM başlangıcı narkolepsiye özgüdür."
+      },
+      {
+        "diagnosisId": "conversion_disorder",
+        "reason": "Yere yığılma sırasında bilinç açıktır ve atak duyguyla tetiklenir; nesnel uyku bulguları ve hipokretin eksikliği organik bir tabloyu gösterir."
+      }
+    ],
+    "teachingPoint": "Narkolepsiyi diğer aşırı uykululuk nedenlerinden ayıran en özgül bulgu, güçlü bir duyguyla tetiklenen ve bilinç açıkken olan katapleksidir."
+  },
+  "case-095": {
+    "whyThis": [
+      "Rüyada kurtla dövüşürken eşine yumruk atma ve yataktan düşme, rüya içeriğinin motor davranışla canlandırılmasıdır.",
+      "Davranışlar uykunun ikinci yarısında (REM'in yoğun olduğu dönemde) olur; uyanınca konfüzyon yoktur ve rüya ayrıntılı hatırlanır.",
+      "Polisomnografide REM atonisinin kaybı tanıyı doğrular; koku kaybı eşlik ettiği için sinükleinopati riski açısından izlem gerekir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "nrem_sleep_arousal",
+        "reason": "NREM uykusundan uyanma bozukluğunda (uyurgezerlik ya da uyku terörü) olaylar gecenin ilk bölümünde, NREM uykusunda olur; kişi konfüze uyanır ve rüyayı hatırlamaz."
+      },
+      {
+        "diagnosisId": "nightmare_disorder",
+        "reason": "Kabus bozukluğunda REM atonisi korunur ve kişi rüyasını eyleme dökmez."
+      }
+    ],
+    "teachingPoint": "İleri yaşta başlayan REM uykusu davranış bozukluğu Parkinson ve Lewy cisimcikli demans için önemli bir erken işarettir."
+  },
+  "case-096": {
+    "whyThis": [
+      "Nişanlısını gerçekten sevip sevmediğine dair gün boyu süren, istenmeyen ve sıkıntı veren şüpheler obsesyondur.",
+      "Testler çözme, arkadaşlardan güvence isteme ve kendi duygularını sürekli içsel olarak kontrol etme kaygıyı azaltmaya yönelik kompulsiyonlardır.",
+      "Günde 5-6 saati bulan zaman kaybı ölçütü karşılar; ilişkide gerçek bir uyumsuzluk yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "gad",
+        "reason": "Kaygı birçok yaşam alanına yayılmamış, ilişki teması etrafında dönüyor ve ritüellerle yatıştırılıyor."
+      },
+      {
+        "diagnosisId": "adjustment_disorder",
+        "reason": "Belirli bir stresöre bağlı geçici bir tepki değil, saatler süren obsesyon-kompulsiyon döngüsü vardır."
+      },
+      {
+        "diagnosisId": "illness_anxiety_disorder",
+        "reason": "Güvence arama var, ancak konu sağlık değil ilişkidir."
+      }
+    ],
+    "teachingPoint": "OKB'nin teması mikrop ya da kontrolle sınırlı değildir; ilişki şüpheleri gibi temalarda da istenmeyen düşünce ve zihinsel ritüeller tanıyı koydurur."
+  },
+  "case-097": {
+    "whyThis": [
+      "Yalnızca belirli bir patates kızartması ve beyaz ekmek yemesi ve diğer yiyecekleri dokusu ve kokusu nedeniyle reddetmesi duyusal özelliklere bağlı kaçınmadır.",
+      "Kilonun 3. persentilin altına düşmesi beslenme yetersizliğini, okul gezilerine ve partilere katılamaması psikososyal işlev kaybını gösterir.",
+      "Kilo korkusu, beden algısı bozukluğu ve kusma yoktur; bu özellik ARFID'i yeme bozukluklarından ayırır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Kilo alma korkusu ve kendini şişman görme açıkça yoktur."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Kaçınma yiyeceğin mikroplu ya da zehirli olacağı korkusundan değil, dokusundan ve kokusundan kaynaklanır."
+      },
+      {
+        "diagnosisId": "asd",
+        "reason": "Duyusal seçicilik otizme eşlik edebilir, ancak sosyal iletişim sorunları ya da başka yineleyici davranışlar tarif edilmiyor; yine de taranmalıdır."
+      }
+    ],
+    "teachingPoint": "ARFID'i ‘seçici yiyen çocuk’tan ayıran, kilo kaybı, beslenme eksikliği ya da işlev bozukluğu gibi somut sonuçların varlığıdır."
+  },
+  "case-098": {
+    "whyThis": [
+      "Cenazede gülme, yabancılara uygunsuz teklif ve parasını ödemeden yeme sosyal ketlenmesizliği; ailesinin acısına kayıtsızlık empati kaybını gösterir.",
+      "Sürekli tatlı tüketme beslenme davranışında değişikliği, alkışlama hareketleri kalıplaşmış davranışları gösterir; bu belirtiler davranışsal varyantın tipik özellikleridir.",
+      "Bellek ve yön bulma korunurken frontal ve ön temporal atrofi saptanması ve 56 yaşında sinsi başlangıç tabloyu destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "Erken dönemde bellek ve yön bulma korunmuştur, hipokampus hacmi normaldir; Alzheimer'da bellek kaybı öndedir."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Değişiklik epizodik değil, bir buçuk yılda sinsi ve ilerleyici biçimde gelişmiştir; görüntülemede atrofi vardır."
+      },
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Davranışlar yaşam boyu süren bir örüntü değil, daha önce nazik ve disiplinli olan birinde orta yaşta ortaya çıkmış bir değişikliktir."
+      }
+    ],
+    "teachingPoint": "Orta yaşta yeni başlayan kişilik ve davranış değişikliği, bellek korunmuş olsa bile frontotemporal nörobilişsel bozukluğu düşündürmelidir."
+  },
+  "case-099": {
+    "whyThis": [
+      "Sekiz ayda gelişen unutkanlık, düşünce yavaşlaması ve yürütücü işlev gerilemesi bir nörobilişsel bozukluğu gösterir.",
+      "Mıknatıslı yürüyüş, idrar kaçırma ve bilişsel yavaşlama normal basınçlı hidrosefalinin üçlüsüdür; ventriküller belirgin genişlemiştir.",
+      "BOS boşaltıldıktan sonra yürüme ve dikkatin belirgin düzelmesi, tablonun tedavi edilebilir bir tıbbi duruma bağlı olduğunu gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "reason": "Yürüme bozukluğu ve idrar kaçırma Alzheimer'da çok geç evrede görülür ve BOS boşaltma testine yanıt beklenmez."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "reason": "Dinlenme tremoru ve rijidite tarif edilmiyor; yürüyüş Parkinson'a özgü değil, geniş tabanlı ve yapışkan niteliktedir."
+      },
+      {
+        "diagnosisId": "major_neurocognitive_vascular",
+        "reason": "Görüntülemede öne çıkan bulgu damarsal lezyon değil ventrikül genişlemesidir ve BOS boşaltma testine yanıt vardır."
+      }
+    ],
+    "teachingPoint": "Demansla birlikte erken yürüme bozukluğu ve idrar kaçırma varsa, tedavi edilebilir bir neden olan normal basınçlı hidrosefaliyi araştır."
+  }
+}

@@ -1,7 +1,10 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 export const BASE = process.env.BASE || 'http://localhost:8899/tools/online_dev/harness.html';
+// Şifreler supabase/tests/.test-credentials.json'dan (git dışı); dosya yoksa eski varsayılan
+const CRED = (() => { try { return JSON.parse(fs.readFileSync(new URL('../../../supabase/tests/.test-credentials.json', import.meta.url), 'utf8')).accounts || []; } catch (e) { return []; } })();
 export const PW = '123456';
+export const pwFor = (email) => (CRED.find(a => a.email === email) || {}).password || PW;
 const SUPA = fs.readFileSync('/home/claude/rt/node_modules/@supabase/supabase-js/dist/umd/supabase.js');
 export async function browser() {
   return chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
@@ -30,7 +33,7 @@ export async function signIn(p, email, url) {
   await p.waitForFunction(() => window.PsikoVakaAccount && window.PsikoVakaAccount.availability !== 'pending', null, { timeout: 20000 });
   const st = await p.evaluate(() => window.PsikoVakaAccount.state);
   if (st !== 'ready') {
-    const r = await p.evaluate(async ([e, pw]) => window.PsikoVakaAccount.signIn(e, pw, { remember: true }), [email, PW]);
+    const r = await p.evaluate(async ([e, pw]) => window.PsikoVakaAccount.signIn(e, pw, { remember: true }), [email, pwFor(email)]);
     if (!r.ok) throw new Error('signIn failed ' + JSON.stringify(r));
   }
   await p.waitForFunction(() => window.PsikoVakaAccount.state === 'ready', null, { timeout: 20000 });

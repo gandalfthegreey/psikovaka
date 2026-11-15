@@ -14,7 +14,12 @@
         INVITE_EXPIRED: 'Davetin süresi dolmuş.',
         ROOM_NOT_FOUND: 'Oda bulunamadı ya da kapandı.',
         ALREADY_STARTED: 'Maç başladı; sonradan katılınamaz.',
-        NOT_FULL_CODE: 'Oda kodu 6 karakter olmalı.'
+        NOT_FULL_CODE: 'Oda kodu 6 karakter olmalı.',
+        QUICK_TIMEOUT: 'Şu an eşleşecek kimse yok.',
+        ALREADY_IN_ROOM: 'Zaten bir odadasın.',
+        QUICK_ROOM: 'Hızlı eşleşme odasının ayarları değiştirilemez.',
+        DAILY_ALREADY_FINISHED: 'Bugünün vakasını bu hedefte zaten bitirdin.',
+        DAILY_NOT_STARTED: 'Önce vakayı başlat.'
     };
 
     function acc() { return global.PsikoVakaAccount || null; }
@@ -46,7 +51,8 @@
         }
         return { code: /^[A-Z_]+$/.test(m) ? m : 'UNKNOWN', message: m || 'Bir şeyler ters gitti.' };
     }
-    const fail = (e) => ({ ok: false, error: mapError(e) });
+    // details: sunucunun ek bilgisi (ör. ALREADY_IN_ROOM -> mevcut oda kodu)
+    const fail = (e) => { const er = mapError(e); if (e && typeof e === 'object' && e.details) er.detail = e.details; return { ok: false, error: er }; };
 
     function sampleClock(data, t0, t1) {
         if (!data || typeof data !== 'object') return;
@@ -81,6 +87,14 @@
 
     const PROFILE_COLS = 'id,username,display_name,avatar,ranked_points';
     const unsupported = new Set();
+
+    /** Sonradan eklenen RPC: PGRST202 gelirse işaretlenir, sonraki çağrılar sunucuya gitmeden UNSUPPORTED döner. */
+    async function feature(fn, args) {
+        if (unsupported.has(fn)) return fail({ code: 'PGRST202' });
+        const r = await rpc(fn, args);
+        if (!r.ok && r.error.code === 'UNSUPPORTED') unsupported.add(fn);
+        return r;
+    }
 
     const api = {
         client, myId, mapError, PROFILE_COLS,
@@ -149,6 +163,16 @@
             return api._probed;
         },
 
+        // ---- migration 0003 (§13): yoksa UNSUPPORTED döner ve bir daha sorulmaz (sayfa yenilenene kadar)
+        getDailyChallenge: (target) => feature('get_daily_challenge', { p_target: target || 'diagnosis' }),
+        dailyBegin: (target) => feature('daily_begin', { p_target: target || 'diagnosis' }),
+        dailySubmitGuess: (target, item) => feature('daily_submit_guess', { p_target: target, p_item_id: item }),
+        dailyGiveUp: (target) => feature('daily_give_up', { p_target: target }),
+        getDailyLeaderboard: (target, day, limit) => feature('get_daily_leaderboard', { p_target: target, p_day: day || null, p_limit: limit || 50 }),
+        getMyStreaks: () => feature('get_my_streaks', {}),
+        quickMatch: (mode, target) => feature('quick_match', { p_mode: mode, p_target: target || 'diagnosis' }),
+        getMyRpHistory: (limit) => feature('get_my_rp_history', { p_limit: limit || 20 }),
+
         listPublicRooms: () => select(c => c.from('rooms')
             .select('id,code,mode,format,target_type,capacity,player_count,round_count,created_at,host_id,host:profiles!rooms_host_id_fkey(username,avatar,ranked_points)')
             .eq('visibility', 'public').eq('status', 'lobby')
@@ -172,6 +196,8 @@
             const room = row && row.room;
             return { ok: true, data: room && ['lobby', 'in_round', 'round_result'].includes(room.status) ? room : null };
         },
+        /** Gönderdiğim bir davetin durumu (RLS: davet eden de okur). */
+        getInvite: (id) => select(c => c.from('room_invites').select('id,status,expires_at').eq('id', id).limit(1)),
         getConfig: () => select(c => c.from('game_config').select('key,value'))
     };
 

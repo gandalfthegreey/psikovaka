@@ -31,6 +31,7 @@
         const returnFocus = document.activeElement;
         document.body.appendChild(wrap);
         document.body.classList.add('ol-sheet-open');
+        syncBannerSpace();
         const api = {
             el: wrap,
             body: wrap.querySelector('.ol-sheet-body'),
@@ -40,7 +41,7 @@
                 api.closed = true;
                 wrap.classList.remove('open');
                 const idx = openSheets.indexOf(api); if (idx >= 0) openSheets.splice(idx, 1);
-                if (!openSheets.length) document.body.classList.remove('ol-sheet-open');
+                if (!openSheets.length) { document.body.classList.remove('ol-sheet-open'); syncBannerSpace(); }
                 setTimeout(() => wrap.remove(), NS.util.reducedMotion() ? 0 : 180);
                 if (!silent && opts.onClose) opts.onClose();
                 if (returnFocus && document.body.contains(returnFocus) && returnFocus.focus) { try { returnFocus.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
@@ -94,8 +95,18 @@
             bannerHost.className = 'ol-banners';
             bannerHost.setAttribute('aria-live', 'polite');
             document.body.appendChild(bannerHost);
+            // Afiş hiçbir denetimi örtmesin: yüksekliği kadar yer ayrılır (--ol-banner-space; CSS üst çubukları aşağı iter)
+            if (global.ResizeObserver) new ResizeObserver(syncBannerSpace).observe(bannerHost);
+            new MutationObserver(syncBannerSpace).observe(bannerHost, { childList: true });
         }
         return bannerHost;
+    }
+    function syncBannerSpace() {
+        if (!bannerHost) return;
+        const live = Array.from(bannerHost.children).filter(el => !el.classList.contains('is-leaving'));
+        const h = live.length && !document.body.classList.contains('ol-sheet-open') ? Math.ceil(bannerHost.getBoundingClientRect().height) + 8 : 0;
+        document.documentElement.style.setProperty('--ol-banner-space', h + 'px');
+        document.body.classList.toggle('ol-has-banner', h > 0);
     }
     /** opts: { key, html, actions:[{id,label,kind}], onAction(id), ttlMs } */
     function banner(opts) {
@@ -108,7 +119,7 @@
         el.innerHTML = `<div class="ol-banner-main">${opts.html}</div><div class="ol-banner-actions">${(opts.actions || []).map(a =>
             `<button type="button" class="btn btn-sm ${a.kind === 'primary' ? 'btn-primary' : 'btn-secondary'}" data-ol-b="${esc(a.id)}">${esc(a.label)}</button>`).join('')}</div>`;
         let timer = null;
-        const close = () => { clearTimeout(timer); el.classList.add('is-leaving'); setTimeout(() => el.remove(), NS.util.reducedMotion() ? 0 : 200); };
+        const close = () => { clearTimeout(timer); el.classList.add('is-leaving'); syncBannerSpace(); setTimeout(() => { el.remove(); syncBannerSpace(); }, NS.util.reducedMotion() ? 0 : 200); };
         el.addEventListener('click', (e) => {
             const b = e.target.closest('[data-ol-b]');
             if (!b) return;
@@ -122,6 +133,7 @@
         if (!bannerHost) return;
         const el = bannerHost.querySelector(`[data-key="${CSS.escape(key)}"]`);
         if (el) el.remove();
+        syncBannerSpace();
     }
 
     // ================================================================ menü rozeti
@@ -195,6 +207,7 @@
         if (!hub.rendered) {
             m.innerHTML = `
                 <div class="ol-hub">
+                    <section class="ol-quick card" id="olQuick" aria-labelledby="olQuickT" hidden></section>
                     <div class="ol-hub-cta">
                         <button class="ol-cta-card ol-cta-primary" type="button" data-ol-hub="create">
                             <span class="ol-cta-icon">${icon('swords')}</span>
@@ -232,6 +245,7 @@
                     <section class="ol-section" aria-labelledby="olLbTitle">
                         <div class="ol-section-head">
                             <h2 class="ol-section-title" id="olLbTitle">Sıralama</h2>
+                            <a class="btn btn-ghost btn-sm ol-section-link" href="#/ligler">${icon('trophy')}<span>Ligler</span></a>
                             <button class="icon-btn icon-btn-sm" type="button" data-ol-hub="refresh-lb" aria-label="Sıralamayı yenile">${icon('refresh')}</button>
                         </div>
                         <div class="ol-lb" id="olLb"></div>
@@ -240,6 +254,7 @@
             hub.rendered = true;
             hub.lbLoaded = false;
         }
+        if (NS.quick) { NS.quick.bindCard(m); NS.quick.renderCard(); }
         if (NS.friends) NS.friends.renderInto($('#olFriendsMount', m));
         renderPublicRooms();
         startHubLive();

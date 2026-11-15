@@ -9,12 +9,53 @@
     'use strict';
     const NS = global.PsikoVakaOnline;
     const { esc, icon } = NS.util;
+    const T = NS.T;
 
     const PENDING_KEY = 'psikovaka_online_pending_room';
     const A = {
         started: false, layer: null, view: null, viewTimer: null, uid: null,
-        pendingRematch: null, lastPhase: null, leaving: false
+        pendingRematch: null, lastPhase: null, leaving: false,
+        challenge: null, chTimer: null
     };
+
+    // ------------------------------------------------------------ düello çağrısı (ajan P): davetin durumunu izle
+    function setChallenge(ch) {
+        A.challenge = ch;
+        clearInterval(A.chTimer); A.chTimer = null;
+        if (ch && ch.inviteId && ch.status === 'pending') A.chTimer = setInterval(pollChallenge, 4000);
+        if (A.view === 'lobby' && NS.lobby) NS.lobby.update();
+    }
+    function clearChallenge() { clearInterval(A.chTimer); A.chTimer = null; A.challenge = null; }
+    async function pollChallenge() {
+        const ch = A.challenge;
+        if (!ch || NS.rooms.roomId !== ch.roomId) { clearChallenge(); return; }
+        const s = NS.rooms.state;
+        if (s && s.room.status !== 'lobby') { clearChallenge(); return; }
+        if (s && s.players.some(p => p.user_id === ch.user.id && !p.left_at)) { ch.status = 'joined'; clearInterval(A.chTimer); A.chTimer = null; if (NS.lobby) NS.lobby.update(); return; }
+        if (document.hidden) return;
+        const r = await NS.api.getInvite(ch.inviteId);
+        if (A.challenge !== ch || !r.ok || !r.data[0]) return;
+        const row = r.data[0];
+        let st = row.status;
+        if (st === 'pending' && NS.clock.msUntil(row.expires_at) <= 0) st = 'expired';
+        if (st !== ch.status && st !== 'pending') {
+            ch.status = st;
+            if (st === 'declined') { NS.toast(`${ch.user.username} daveti reddetti.`); NS.announce(`${ch.user.username} daveti reddetti.`); }
+            if (st === 'expired') NS.announce('Davetin süresi doldu.');
+            if (st !== 'accepted') { clearInterval(A.chTimer); A.chTimer = null; }
+            if (NS.lobby) NS.lobby.update();
+        }
+    }
+    async function reinviteChallenge(btn) {
+        const ch = A.challenge;
+        if (!ch) return;
+        if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+        const r = await NS.api.inviteFriend(ch.roomId, ch.user.id);
+        if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); }
+        if (r.ok) { ch.inviteId = r.data && r.data.id; ch.status = 'pending'; ch.error = null; NS.toast('Davet yeniden gönderildi.'); }
+        else { ch.status = 'error'; ch.error = r.error; }
+        setChallenge(ch);
+    }
 
     function account() { return global.PsikoVakaAccount || null; }
     function ready() { const a = account(); return !!(a && a.availability === 'ready' && a.state === 'ready' && NS.api.client()); }
@@ -105,6 +146,20 @@
         else if (view === 'spectate') A.viewTimer = NS.match.renderSpectate(root, 'spectate');
         else if (view === 'pairing') A.viewTimer = NS.match.renderSpectate(root, 'pairing');
         else if (view === 'finished') { NS.match.exit(); NS.match.renderFinal(root); }
+        else if (view === 'abandoned' && s.room.is_quick && s.room.close_reason === 'quick_timeout') {
+            NS.match.exit();
+            const me = NS.rooms.me() || {};
+            root.innerHTML = `<div class="ol-center-view"><div class="ol-card-big">
+                <div class="ol-big-fig" aria-hidden="true">${NS.avatar(me.avatar, { size: 96, framed: false, animated: true, emote: 'think' })}</div>
+                <h2 class="ol-h2">Şu an kimse yok</h2>
+                <p class="ol-muted">${esc(T.mode[s.room.mode])} · ${esc(T.target[s.room.target_type])} için iki dakikada rakip bulunamadı.</p>
+                <div class="ol-row-btns ol-row-btns-wrap">
+                    <button class="btn btn-primary" type="button" data-ol-v="quick-again">${icon('refresh')}<span>Tekrar dene</span></button>
+                    <button class="btn btn-secondary" type="button" data-ol-v="quick-create">${icon('swords')}<span>Oda kur</span></button>
+                    <button class="btn btn-secondary" type="button" data-ol-v="quick-invite">${icon('user-plus')}<span>Arkadaş davet et</span></button>
+                </div>
+                <button class="btn btn-ghost btn-sm" type="button" data-ol-v="exit">Online'a dön</button></div></div>`;
+        }
         else if (view === 'abandoned') {
             NS.match.exit();
             root.innerHTML = `<div class="ol-center-view"><div class="ol-card-big"><span class="ol-big-icon">${icon('door')}</span><h2 class="ol-h2">Oda kapandı</h2>
@@ -124,7 +179,9 @@
         const act = b.dataset.olV;
         if (act === 'leave') leaveRoom();
         else if (act === 'exit') exitToHub();
+        else if (act === 'leagues') { e.preventDefault(); exitToHub(); location.hash = '#/ligler'; }
         else if (act === 'rematch') rematch(b);
+        else if (act === 'quick-again' || act === 'quick-create' || act === 'quick-invite') quickFollowUp(act, b);
         else if (act === 'join-rematch' && A.pendingRematch) { b.disabled = true; const code = A.pendingRematch.code; A.pendingRematch = null; const r = await joinByCode(code, b); if (!r.ok) b.disabled = false; }
     }
 
@@ -187,7 +244,14 @@
         const inMatch = (st === 'in_round' || st === 'round_result') && me && me.played && !me.left_at;
         if (inMatch) {
             const alive = me.eliminated_round == null;
-            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.' : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama RP alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
+            const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
+            // RP v2 (§13.4): kalan her tur (bu tur dahil, bitirmediysen) −pen; hp'de tur sınırı 10, bracket'te yalnızca bu eşleşme
+            const mr = NS.rooms.myRound();
+            const total = s.room.format === 'hp' ? 10 : s.room.round_count;
+            const cur = s.room.current_round || 0;
+            const left = s.room.format === 'bracket' ? 1 : Math.max(1, total - cur + (mr && !mr.finished ? 1 : 0));
+            const leaveText = pen ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} RP. Sıralama primi de alamazsın.` : 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.';
+            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama RP alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
             if (!ok) return;
         }
         if (st === 'finished' || st === 'abandoned') { exitToHub(); return; }
@@ -198,6 +262,7 @@
     }
 
     function exitToHub() {
+        clearChallenge();
         NS.match.exit();
         if (NS.rooms.roomId) NS.rooms.close(true);
         clearView();
@@ -232,6 +297,20 @@
         await openRoom(r.data.id);
         others.filter(id => friends.has(id)).forEach(id => NS.api.inviteFriend(r.data.id, id));
         if (others.some(id => !friends.has(id))) NS.toast('Arkadaşın olmayan oyuncular oda kodu ya da final ekranındaki "Katıl" düğmesiyle gelebilir.');
+    }
+
+    /** Hızlı odadan sonra: tekrar eşleş / aynı ayarlarla oda kur / oda kurup arkadaş davet et. */
+    async function quickFollowUp(act, btn) {
+        const s = NS.rooms.state;
+        if (!s) return;
+        const mode = s.room.mode === 'ffa' ? 'ffa' : 'duel', target = s.room.target_type;
+        exitToHub();
+        if (act === 'quick-again') { if (NS.quick) NS.quick.start(mode, target); return; }
+        if (act === 'quick-create') { NS.hub.openCreateSheet(Object.assign(NS.ui.defaultsFor(mode, { target }), { target })); return; }
+        const r = await createRoom({ mode, format: 'rounds', target, capacity: mode === 'ffa' ? 4 : 2, rounds: 5, visibility: 'private' });
+        if (!r.ok) { NS.toast(r.error.message); return; }
+        setTimeout(() => { const st = NS.rooms.state; if (st) NS.friends.openInvitePicker(st.room); }, 300);
+        void btn;
     }
 
     // ------------------------------------------------------------ oyun ekranı geri tuşu
@@ -345,8 +424,9 @@
     }
 
     NS.app = {
-        init, createRoom, joinByCode, acceptInvite, leaveRoom, exitToHub, inviteLink, showLayerView, route,
+        init, createRoom, openRoom, setChallenge, reinviteChallenge, joinByCode, acceptInvite, leaveRoom, exitToHub, inviteLink, showLayerView, route,
         get pendingRematch() { return A.pendingRematch; },
+        get challenge() { return A.challenge && NS.rooms.roomId === A.challenge.roomId ? A.challenge : null; },
         get view() { return A.view; }
     };
 

@@ -3,7 +3,7 @@
 Bu belge `migrations/0001_init.sql` dosyasının neyi, neden yaptığını anlatır ve istemci
 (yeniden yazılacak `js/online_arena.js`) için sözleşmedir. Kurulum adımları `README.md`'de.
 
-**Test durumu:** `tests/scenario.test.mjs` içindeki 44 senaryonun hepsi PGlite (PostgreSQL 18.6, WASM)
+**Test durumu (0001–0002; 0003 için bkz. §13 ve README):** `tests/scenario.test.mjs` içindeki 44 senaryonun hepsi PGlite (PostgreSQL 18.6, WASM)
 ve PostgreSQL 16.15 üzerinde geçti. Supabase'in sağladığı nesneler (`auth.users`, `auth.uid()`,
 `realtime.messages`, `realtime.topic()`, roller, yayın) `tests/00_supabase_stubs.sql` ile taklit edildi.
 Gerçek Supabase projesinde henüz çalıştırılmadı. Eşzamanlılık (iki isteğin aynı anda gelmesi)
@@ -128,6 +128,8 @@ geç elenenden erken elenene.
   `room_rounds` (alt tur) eklenmesi yeterli.
 
 ### 3.5 RP (maç sonunda, sunucuda, bir kez)
+> **2026-11-15: bu tablo RP v2 ile değişti — geçerli kural §13.4.** Aşağıdaki koruma notları hâlâ geçerli.
+
 | durum | RP |
 |---|---|
 | 1. — turnuva (battle/bracket) | +75 |
@@ -398,3 +400,171 @@ Uygulanan istemci bu belgeyi birebir izler; aşağıdakiler belgeyi netleştirir
 - **Açık kararlar §11 için istemci varsayılanları:** herkese açık odalar açık (oda kurarken seçilir, varsayılan özel);
   host'un "Başlat"ı kendi hazır onayı (§11.8 aynen); çevrimiçi çözülen vakalar yerel "çözüldü" listesine ve yerel
   istatistiklere yazılmaz.
+
+## 13. Günlük vaka, seri ve hızlı eşleşme (ajan N, 2026-11-15 — `0003_gunluk_ve_hizli.sql`)
+
+İstemci (ajan P) bu bölüme göre yazar. Buradaki adlar, parametreler ve JSON biçimleri sözleşmedir.
+0003 uygulanmamışsa bu RPC'ler PostgREST'te `PGRST202` döner (`api.js` → `UNSUPPORTED`).
+Hata kodları her zamanki gibi `error.message` içinde sabit İngilizce dizge, Türkçe açıklama `error.details`'ta.
+
+### 13.1 Günlük vaka
+
+- **Gün** = `Europe/Istanbul` takvim günü (`(now() at time zone 'Europe/Istanbul')::date`). Gece yarısı (İstanbul) yeni gün başlar.
+- **Hedef** (`p_target`): `diagnosis | therapy | pharmacology | combo`. Başka değer → `INVALID_TARGET`.
+- **Vaka seçimi:** (gün, hedef) için ilk çağrıda sunucu seçer ve `daily_challenges`'a bir kez yazar; herkes aynı `case_id`'yi alır.
+  Seçim: aktif vakalar arasından rastgele; o hedef için son `daily_no_repeat_days` (60) günde kullanılmış vakalar mümkünse atlanır
+  (hepsi kullanılmışsa yine aktiflerden rastgele). Hedefler birbirinden bağımsızdır (aynı gün tanı ve kombo farklı vaka olabilir).
+- **Hak ve puan:** `submit_guess` ile aynı kurallar: aşama başına `max_guesses_per_stage` (6) tahmin; `UNKNOWN_ITEM` ve
+  `DUPLICATE_GUESS` hak yemez. Puan = `taban(tahmin no) + hız bonusu(süre)` (§3.1); kombo = üç aşamanın taban ortalaması + hız
+  bonusu(toplam süre). **Süre** = `daily_begin`'in saati başlattığı andan bitişe kadar (sunucu saati, saniye). Süre sınırı yok.
+- **Günlük oyun RP VERMEZ.** Yalnızca günlük sıralama ve seriler içindir; `profiles.ranked_points`, `matches_played/won` değişmez.
+- **Bir kullanıcı × gün × hedef = tek sonuç.** Bitince (kazandı / 6 hak bitti / pes etti) değiştirilemez.
+- **Gece yarısını geçen deneme:** RPC'ler yalnızca *bugünün* denemesine bakar. Dün başlayıp bitirilmemiş deneme gece yarısından sonra
+  erişilemez olur (sonuç yazılmaz, seri açısından "oynanmamış gün" sayılır). İstemci gece yarısına yakın başlatmada uyarabilir.
+- **Kimlik:** `get_daily_challenge` hem `anon` hem `authenticated` çağırabilir. Diğer bütün günlük RPC'ler `authenticated` + kullanıcı adı ister
+  (`NOT_AUTHENTICATED`, `USERNAME_REQUIRED`). `anon` başka hiçbir yeni fonksiyonu çağıramaz.
+
+`daily_state` (ortak dönüş biçimi):
+```json
+{ "server_time": "ISO", "day": "2026-11-15", "target": "diagnosis", "case_id": "case_12",
+  "status": "not_started | in_progress | finished",
+  "guesses_used": 0,            // tüm aşamalardaki toplam tahmin
+  "won": null,                  // bitene kadar null, sonra true/false
+  "points": null,               // bitene kadar null, sonra tam sayı (kayıpta 0)
+  "time_sec": null,             // bitene kadar null
+  "stage": 1 }                  // kombo: şu anki aşama (1 tanı, 2 terapi, 3 ilaç); tek hedefte hep 1
+```
+
+| RPC | Parametreler | Dönüş | Hatalar |
+|---|---|---|---|
+| `get_daily_challenge` | `p_target text` | `daily_state`. Misafir (anon) için her zaman `status:'not_started'`, `guesses_used:0`. Cevap YOK. | `INVALID_TARGET`, `NOT_ENOUGH_CASES` |
+| `daily_begin` | `p_target text` | `daily_state` + `started_at`, `guesses: [{stage, guess_no, item_id, correct, same_group}]` (sıralı), `guesses_left` (şu anki aşamada), `answer` (yalnızca `finished` ise `{diagnosis_id, therapy_id, pharmacology_id}`, değilse `null`). İdempotent: ilk çağrı saati başlatır, sonrakiler aynı denemeyi döner (yenilemede kaldığı yerden devam). | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `NOT_ENOUGH_CASES` |
+| `daily_submit_guess` | `p_target text, p_item_id text` | `{server_time, day, target, case_id, correct, same_group, stage, next_stage, stage_completed, guess_no, guesses_used, guesses_left, finished, won, points, time_sec, answer}` — `stage` = tahminin yapıldığı aşama; `next_stage` yalnızca kombo aşaması geçilip oyun sürüyorsa; `won/points/time_sec` bitene kadar `null`; `answer` yalnızca bitince | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `DAILY_NOT_STARTED` (önce `daily_begin`), `DAILY_ALREADY_FINISHED`, `UNKNOWN_ITEM`, `DUPLICATE_GUESS` |
+| `daily_give_up` | `p_target text` | `daily_state` + `answer` (kaybedilmiş olarak biter, puan 0, seri sıfırlanır) | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `DAILY_NOT_STARTED`, `DAILY_ALREADY_FINISHED` |
+| `get_daily_leaderboard` | `p_target text, p_day date default null` (null = bugün; geçmiş günler salt okunur), `p_limit int default 50` (1–200'e kırpılır) | `{server_time, day, target, total_players, rows: [row], me: row \| null}`; `row = {rank, user_id, username, display_name, avatar, ranked_points, won, guesses_used, time_sec, points}`. Yalnızca BİTMİŞ sonuçlar. Sıra: kazananlar önce → puan ↓ → tahmin ↑ → süre ↑ → bitiş anı ↑ (`rank` 1'den, eşitlik yok). `me` = çağıranın satırı (ilk N'de olmasa da), oynamadıysa `null`. Cevap ve `case_id` YOK. | `INVALID_TARGET`, `NOT_AUTHENTICATED` |
+| `get_my_streaks` | — | `[{target, current_streak, best_streak, last_day, played_today}]` — her zaman 4 satır (diagnosis, therapy, pharmacology, combo; hiç oynanmadıysa 0/0/null/false) | `NOT_AUTHENTICATED` |
+
+**Seriler** (`solo_streaks`, yalnızca sunucu yazar): her günlük bitişte (kullanıcı × hedef) güncellenir. Kazanç: önceki sonuç
+dün (İstanbul) ise `current_streak + 1`, değilse `1`; `best_streak = max(best, current)`. Kayıp/pes: `current_streak = 0`.
+`last_day` = son biten günlük günü. Kaçırılan gün: `get_my_streaks` `last_day < dün` ise `current_streak`'i 0 gösterir
+(tablodaki değer bir sonraki bitişte düzelir). `played_today` = bugün o hedefte bitmiş sonuç var.
+`solo_streaks` ve `daily_results` tabloları giriş yapmış herkese okunur (0001'den beri); oynanmakta olan deneme
+(`daily_attempts`) ve tahmin içerikleri (`daily_guesses`) **hiç kimseye okunmaz** (politikasız), yalnızca RPC'lerle döner.
+
+**Cevap koruması:** hiçbir hata mesajı doğru cevabı ya da grubunu içermez; `answer` yalnızca deneme bitince döner;
+liderlik tablosu cevap göstermez. Deneme başına en fazla 6 (kombo 18) değerlendirilen tahmin olduğundan RPC ile cevap taranamaz.
+(§9 hâlâ geçerli: vaka metni ve cevabı istemcideki JS dosyalarında.) `get_daily_challenge` misafire de `case_id` döner.
+
+**Realtime:** günlük için yeni yayın yok. Liderlik ekranı açıkken `get_daily_leaderboard`'u 30–60 sn'de bir veya kendi bitişinden
+sonra yeniden çağırmak yeterli.
+
+### 13.2 Hızlı eşleşme
+
+| RPC | Parametreler | Dönüş | Hatalar |
+|---|---|---|---|
+| `quick_match` | `p_mode text default 'duel'` (`duel` \| `ffa`), `p_target text default 'diagnosis'` (dört hedeften biri) | `{server_time, room_id, code, created, players, capacity, status, room}` — `created` = yeni oda kuruldu (bekleyen ilk oyuncusun); `players` = odadaki (ayrılmamış) oyuncu sayısı; `status` = `lobby` (bekleniyor) veya `in_round` (oda doldu, maç başladı); `room` = `rooms` satırı | `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `INVALID_MODE`, `INVALID_TARGET`, `ALREADY_IN_ROOM` (details: mevcut oda kodu), `NOT_ENOUGH_CASES`, `CODE_GENERATION_FAILED` |
+
+- **Hızlı oda** = `rooms.is_quick = true`. `duel` → kapasite 2; `ffa` → kapasite 4. İkisi de format `rounds`, `quick_round_count` (3) tur,
+  hedefin varsayılan tur süresi (180 sn / kombo 300 sn). Ayarlar değiştirilemez (`update_room_settings` → `QUICK_ROOM`).
+- **Eşleşme (atomik):** aynı mod + hedef için sunucu önce en eski uygun hızlı odayı arar: `status='lobby'`, boş yeri var, içindeki herkes
+  son `lobby_absent_grace_sec` (60) içinde kalp atışı göndermiş, bekleme süresi dolmamış. Bulursa katılır, yoksa yeni oda kurar.
+  Aynı (mod, hedef) kovasındaki eşzamanlı `quick_match` çağrıları `pg_advisory_xact_lock` ile sıraya girer: iki kişi aynı anda gelirse
+  biri kurar, öbürü ona katılır (iki ayrı oda açılmaz).
+- **Zaten odadaysa:** çağıranın bitmemiş bir odası (`is_current`, `lobby | in_round | round_result`) varsa `ALREADY_IN_ROOM`.
+  İstisna: aynı mod + hedefte hâlâ bekleyen kendi hızlı odasıysa hata yerine o odayı döner (`created:false`; sayfa yenileme güvenli).
+  Başka moda geçmek için önce `leave_room`.
+- **Hazır ve otomatik başlama:** hızlı odada herkes katılır katılmaz hazır sayılır (`is_ready = true`). Oda dolduğu anda (son katılanın
+  `quick_match`/`join_room` işleminin içinde) sunucu maçı başlatır: `start_match` ile aynı iç fonksiyon (`_start_match_locked`): vaka sırası,
+  `played = true`, tur 1, `starts_at = now() + round_countdown_sec`. Kimsenin `start_match` çağırması gerekmez.
+- **Herkese açık listede görünmez:** hızlı odalar `visibility = 'private'` kurulur. "Açık odalar" listesi (`rooms`, `visibility=eq.public`,
+  `status=eq.lobby`) ve RLS onları zaten göstermez; istemcide ek süzgeç gerekmez. (Oda kodu yine vardır; kodla `join_room` çalışır ve
+  dolarsa yine otomatik başlar.)
+- **Bekleme zaman aşımı:** odada tek kişi kaldıysa ve son üyelik değişikliğinden (katılma/ayrılma) bu yana `quick_wait_timeout_sec` (120)
+  geçtiyse, o kişinin bir sonraki `heartbeat` veya `advance_if_due` çağrısı odayı kapatır (`status='abandoned'`,
+  `rooms.close_reason='quick_timeout'`, `is_current=false`) ve **hata fırlatmak yerine** `room_brief || {ok:false, error:'QUICK_TIMEOUT'}`
+  döner (`respond_room_invite`'taki `INVITE_EXPIRED` kalıbı: `api.js` bunu `error.code = 'QUICK_TIMEOUT'` olarak verir). Neden veri:
+  hata fırlatmak odayı kapatan yazmayı da geri alırdı. Kapanmış odaya sonraki `heartbeat`/`advance_if_due` aynı yanıtı verir.
+  İstemci 10 sn'lik `heartbeat`'i bekleme ekranında da sürdürmeli (zaten öyle). FFA'da 2–3 kişi bekliyorsa zaman aşımı yok; oda dolana
+  kadar bekler (kalp atışı kesilen düşer, §4).
+- **Ayrılma:** mevcut `leave_room`. Lobide son kişi çıkarsa oda `abandoned` olur (`close_reason` null).
+- **RP:** normal maç kuralları (§3.5), erken bitiş çiftçilik kuralı dahil (3 turluk maçta en az 2 tur oynanmalı).
+
+**"Rakip bulundu"yu fark etmek — yeni dinleyici yok.** `quick_match`'ten sonra istemci odaya normal oda gibi abone olur (§6.1):
+`rooms` UPDATE `id=eq.<room_id>` (`player_count` artar; dolunca aynı işlemde `status: lobby → in_round`, `current_round: 1`),
+`room_players` INSERT `room_id=eq.<room_id>` (yeni oyuncu), `room_rounds` INSERT (tur 1, `starts_at`). Olay kaçarsa 10 sn'lik
+`heartbeat` yanıtındaki `room_brief.status` veya `get_room_state` yeterli. `get_room_state.room` artık `is_quick` ve `close_reason`
+alanlarını da içerir.
+
+### 13.3 Şema değişiklikleri (0003, eklemeli ve tekrar çalıştırılabilir)
+
+- `rooms.is_quick boolean not null default false`, `rooms.close_reason text` (`null | 'quick_timeout'`), kısmi indeks (hızlı lobi araması).
+- `solo_streaks.last_day date`.
+- Yeni tablolar (RLS açık, politika YOK, yetki yok): `daily_attempts` (kullanıcı × gün × hedef; durum, aşama, sayaçlar, `started_at`),
+  `daily_guesses` (tahmin içerikleri).
+- `daily_results`'a yalnızca bitişte yazılır (`completed_at` = bitiş anı). `daily_leaderboard` görünümü yeni sıralamayla yeniden tanımlandı
+  (sütunlar aynı).
+- `game_config`: `quick_wait_timeout_sec` (120), `quick_round_count` (3), `daily_no_repeat_days` (60), RP v2 anahtarları (§13.4); `rp_default` 250 → 0.
+- `match_results.rp_breakdown jsonb`; `profiles.ranked_points` varsayılanı 0.
+- Değiştirilen (aynı davranış + ek) fonksiyonlar: `start_match` (gövdesi `_start_match_locked`'a taşındı), `_join_room_locked` (hızlı odada
+  hazır + dolunca otomatik başlat), `heartbeat`, `advance_if_due` (hızlı oda zaman aşımı), `update_room_settings` (`QUICK_ROOM`), `_finish_match` (RP v2), `_handle_new_user` (0 RP).
+- **Test kancası:** "bugün" yalnızca testte değiştirilebilir: `_daily_today()` `psikovaka.test_today` ayarını yalnızca oturum kullanıcısı
+  süper kullanıcıysa dikkate alır (PostgREST'in `authenticator` rolü değildir; istemci parametresi yok).
+
+### 13.4 RP v2 (Emre kararı, 2026-11-15) — kaybetmek de puan götürür
+
+§3.5'teki yalnızca sıralamaya göre ödül (75/50/35/20/5) **kaldırıldı**. Yeni kural `_finish_match` içinde, maç sonunda bir kez
+(idempotent, §3.5'teki çifte ödeme koruması aynen) uygulanır. Bütün sayılar `game_config`'te. Hızlı ve normal odalar aynı; günlük oyun RP vermez.
+
+**1) Tur başına (her oyuncu, o turdaki sonucuna göre):**
+
+| sonuç (`outcome`) | RP | anahtar |
+|---|---|---|
+| `g1` — 1. tahminde çözdü | +10 | `rp_round_g1` |
+| `g2` | +8 | `rp_round_g2` |
+| `g3` | +6 | `rp_round_g3` |
+| `g4` | +4 | `rp_round_g4` |
+| `g5` | +2 | `rp_round_g5` |
+| `g6` | +1 | `rp_round_g6` |
+| `fail` — çözemedi: 6 yanlış, pes, süre doldu, kalp atışı yok (`absent`), maçtan çıktı (`left`) | −10 | `rp_round_fail` |
+| `void` — tur, maç bittiği için yarıda kesildi (`finish_reason='aborted'`) ve oyuncu odada | 0 | — |
+
+- **Kombo:** çözdüyse `N = round(ortalama(üç aşamanın tahmin sayısı))` (1–6), puan hesabındaki taban ortalamasıyla tutarlı;
+  herhangi bir aşama başarısızsa (6 hak bitti / pes / süre) `fail`.
+- **Elenenler cezalandırılmaz:** battle elemesi veya bracket kaybı sonrası turlar için satır yoktur, RP de yoktur.
+- **Çıkan (maç sürerken `leave_room` ya da kopup düşen) oyuncu**, kalan turlar için de `fail` alır (`outcome:'fail', missed:true`):
+  `rounds`/`hp`/`battle`: oynadığı son turdan sonraki turlardan `round_count`'a kadar (hp'de `hp_max_rounds`); `bracket`: yalnızca
+  bulunduğu eşleşmenin turu (o turda satırı yoksa bir tur). Elendikten sonra çıkan için ek ceza yok. Yarıda kesilen (`aborted`) turu
+  odadan çıkmış oyuncu için de `fail`.
+
+**2) Sıralama primi (turların üstüne; çıkanlara verilmez):** düello 1. +10 (`rp_place_duel_1`); ffa 1. +15 (`rp_place_ffa_1`),
+2. +5 (`rp_place_ffa_2`, yalnızca ≥3 oyuncuyla); turnuva (battle/bracket) 1. +25 (`rp_place_tournament_1`), 2. +10
+(`rp_place_tournament_2`). Tamamlama primi yok. Eski `rp_win_*`, `rp_second`, `rp_completion` anahtarları duruyor ama kullanılmıyor.
+
+**3) Toplam:** `rp_delta = Σ tur + prim`; `ranked_points = max(0, ranked_points + rp_delta)`. `rp_after` gerçek yeni değerdir
+(taban 0 yüzünden `rp_after − önceki ≠ rp_delta` olabilir).
+
+**4) Çiftçilik koruması ile etkileşim:** maç rakipler çıktığı için erken bittiyse ve turların yarısından azı oynandıysa
+(`rooms.ended_early` + eşik, §3.5): **odada kalanların** toplamı 0 (maç geçersiz; ne kazanç ne kayıp, satırlar `voided:true`);
+**çıkanlar** yalnızca negatif kalemlerini öder (pozitif turları ve primi silinir). Böylece maçtan kaçmak asla bedava değil ve ikinci
+hesapla katıl-çık hâlâ kazanç getirmez.
+
+**5) Saklama ve okuma:** `match_results.rp_delta` (toplam) + yeni `match_results.rp_breakdown jsonb`:
+```json
+{ "rounds": [ { "round": 1, "outcome": "g2", "delta": 8 }, { "round": 2, "outcome": "fail", "delta": -10, "missed": true } ],
+  "placement": 10, "voided": false, "total": 8 }
+```
+`match_results` oda üyelerine ve sahibine okunur (0001 politikası; yeni sütun da). `get_room_state.results[]` artık `rp_breakdown` içerir.
+
+| RPC | Parametreler | Dönüş | Hatalar |
+|---|---|---|---|
+| `get_my_rp_history` | `p_limit int default 20` (1–100) | `[{room_id, finished_at, mode, format, target, placement, players, rp_delta, rp_breakdown, rp_after}]` en yeniden eskiye; `players` = maçı başlatan oyuncu sayısı | `NOT_AUTHENTICATED` |
+
+**6) Yeni hesaplar 0 RP ile başlar** (`profiles.ranked_points` varsayılanı 0; `_handle_new_user` `game_config.rp_default` (0) yazar).
+Mevcut hesaplar değişmez. Lig adları/eşikleri yalnızca istemcide (`js/leagues.js`).
+
+### 13.5 Test ve dağıtım durumu
+- `tests/scenario.test.mjs` 46/46 (0001+0002+0003, RP beklentileri v2'ye güncellendi) ve `tests/daily_quick.test.mjs`
+  45/45 (PGlite) / 47/47 (PostgreSQL 16; +2 iki bağlantılı eşzamanlılık testi: aynı anda iki `quick_match` tek oda,
+  iki sekmeden aynı günlük tahmin). 0003 iki kez çalıştırıldığında parmak izi aynı (fonksiyon, yetki, ayar, sütun, politika, kısıt).
+- Migration'lar artık GitHub Actions ile uygulanır (`supabase/tools/apply_migrations.sh`, kayıt tablosu `public._migrations`);
+  ayrıntı `README.md`. 0003 gerçek Supabase'de henüz çalıştırılmadı.

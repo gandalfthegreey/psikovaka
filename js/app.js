@@ -91,8 +91,13 @@ class PsikoVakaGame {
             oyna: this.dom.screenHome,
             online: this.dom.screenOnline,
             kutuphane: this.dom.screenLibrary,
-            profil: this.dom.screenProfile
+            profil: this.dom.screenProfile,
+            ligler: document.getElementById('screenLeagues'),
+            gunluk: document.getElementById('screenDaily')
         };
+        // Alt ekranlar: menüde hangi ana sekme etkin görünsün
+        this.routeNavParent = { ligler: 'profil', gunluk: 'oyna' };
+        this.screenHooks = this.screenHooks || {};
 
         window.addEventListener('hashchange', () => {
             const r = this.parseRouteHash();
@@ -148,7 +153,8 @@ class PsikoVakaGame {
 
     /** name: 'oyna' | 'online' | 'kutuphane' | 'profil' | 'play' */
     showScreen(name) {
-        const all = [this.dom.screenHome, this.dom.screenOnline, this.dom.screenLibrary, this.dom.screenProfile, this.dom.screenPlay];
+        const all = [this.dom.screenHome, this.dom.screenOnline, this.dom.screenLibrary, this.dom.screenProfile, this.dom.screenPlay]
+            .concat(Object.values(this.routeScreens || {}).filter(x => x && ![this.dom.screenHome, this.dom.screenOnline, this.dom.screenLibrary, this.dom.screenProfile].includes(x)));
         const target = name === 'play' ? this.dom.screenPlay : (this.routeScreens && this.routeScreens[name]);
         all.forEach(s => { if (s) s.hidden = (s !== target); });
 
@@ -156,7 +162,7 @@ class PsikoVakaGame {
         document.body.classList.toggle('is-playing', isPlay);
 
         document.querySelectorAll('[data-route]').forEach(link => {
-            const active = !isPlay && link.dataset.route === name;
+            const active = !isPlay && link.dataset.route === ((this.routeNavParent && this.routeNavParent[name]) || name);
             link.classList.toggle('active', active);
             if (active) link.setAttribute('aria-current', 'page');
             else link.removeAttribute('aria-current');
@@ -167,6 +173,8 @@ class PsikoVakaGame {
 
         if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); }
         if (name === 'profil') this.updateProfileScreen();
+        const hook = this.screenHooks && this.screenHooks[name];
+        if (hook) { try { hook({ changed }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
 
         if (changed) {
             this.libViewKey = null; // kütüphaneye her girişte görünüm yeniden kurulur
@@ -176,6 +184,16 @@ class PsikoVakaGame {
                 try { this.dom.appMain.focus({ preventScroll: true }); } catch (e) {}
             }
         }
+    }
+
+    /**
+     * Modüllerin ekran kancası (ör. js/online/ligler.js -> 'ligler'). Ekran açık görünürken kayıt olursa hemen çağrılır.
+     * fn({ changed }) her showScreen(name) çağrısında.
+     */
+    registerScreen(name, fn) {
+        this.screenHooks = this.screenHooks || {};
+        this.screenHooks[name] = fn;
+        if (this.currentScreen === name) { try { fn({ changed: true }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
     }
 
     enterPlayScreen() {
@@ -816,7 +834,7 @@ class PsikoVakaGame {
         if (a.profileRpNote) {
             const differs = !!(acct && localRp !== null && localRp !== acct.ranked_points);
             a.profileRpNote.hidden = !differs;
-            if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda herkes için 250 RP ile başlar; bu cihazdaki ${localRp} RP aktarılmaz.`;
+            if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda tutulur; bu cihazdaki ${localRp} RP aktarılmaz.`;
         }
     }
 
@@ -896,11 +914,10 @@ class PsikoVakaGame {
         const diagId = c.diagnosisId || '';
         const cat = c.category || '';
         if (diagId === 'major_neurocognitive_huntington') return 'valbenazine_vmat2';
-        if (diagId === 'mdd_with_psychotic') return 'ect_biological_acute';
         if (diagId === 'catatonia_associated' || diagId === 'catatonia_medical') return 'lorazepam_catatonia';
         if (diagId === 'wernicke_korsakoff_syndrome') return 'thiamine_iv_wernicke';
         if (diagId === 'narcolepsy') return 'modafinil_oxybate';
-        if (diagId === 'rem_sleep_behavior_disorder' || diagId === 'sleepwalking_disorder') return 'clonazepam_parasomnia';
+        if (diagId === 'rem_sleep_behavior_disorder' || diagId === 'nrem_sleep_arousal') return 'clonazepam_parasomnia';
         if (diagId === 'restless_legs_syndrome') return 'pramipexole_gabapentin_rls';
         if (diagId === 'enuresis') return 'desmopressin_enuresis';
         if (diagId === 'bipolar_2' || diagId === 'hallucinogen_persisting_perception') return 'lamotrigine_bipolar2';
@@ -1190,6 +1207,8 @@ class PsikoVakaGame {
             libListIlac: document.getElementById('libListIlac'),
             libEmpty: document.getElementById('libEmpty'),
             playResultLinks: document.getElementById('playResultLinks'),
+            playResultTakeaway: document.getElementById('playResultTakeaway'),
+            resultExplainBox: document.getElementById('resultExplainBox'),
             resultLibraryLinks: document.getElementById('resultLibraryLinks'),
             profileTierLabel: document.getElementById('profileTierLabel'),
             profileStatPlayed: document.getElementById('profileStatPlayed'),
@@ -1821,6 +1840,7 @@ class PsikoVakaGame {
         this.gameWon = false;
         this.comboStage = 1;
         this.comboResults = { stage1Guesses: 0, stage2Guesses: 0, stage3Guesses: 0 };
+        this.diagWrongLog = [];   // yanlış TANI tahminleri (açıklamadaki "Senin tahminin" için; kombo aşamaları sıfırlansa da kalır)
 
         this.caseTargetMode = this.targetGameMode;
         if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = 'Tanıyı belirle';
@@ -2287,6 +2307,7 @@ class PsikoVakaGame {
         };
 
         this.guesses.push(guessData);
+        if (effectiveType === 'diagnosis' && !isCorrect) (this.diagWrongLog = this.diagWrongLog || []).push(chosenObj.id);
         this.dom.diagnosisInput.value = '';
         delete this.dom.diagnosisInput.dataset.selectedId;
         this.closeAutocomplete();
@@ -2410,6 +2431,12 @@ class PsikoVakaGame {
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
+        if (this.dom.playResultTakeaway) {
+            const xp = window.PsikoVakaExplain ? window.PsikoVakaExplain.get(this.currentCase) : null;
+            this.dom.playResultTakeaway.hidden = !(xp && xp.teachingPoint && this.isGameOver);
+            const t = this.dom.playResultTakeaway.querySelector('[data-xp-text]');
+            if (t) t.textContent = xp && xp.teachingPoint ? xp.teachingPoint : '';
+        }
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.disabled = false;
             this.dom.btnMainNextCase.textContent = this.currentMode === 'daily' ? 'Pratiğe devam et' : 'Sıradaki vaka';
@@ -2494,6 +2521,8 @@ class PsikoVakaGame {
         } else {
             this.renderDuelPodium(won);
         }
+
+        this.renderResultExplanation();
 
         diffDiagEl.textContent = this.currentCase.differentialDiagnosis || 'Ayırıcı tanı bilgisi bulunmuyor.';
 
@@ -2628,6 +2657,28 @@ class PsikoVakaGame {
 
         this.renderResultLibraryLinks();
         this.openModal(this.dom.resultModal);
+    }
+
+    /**
+     * Vaka raporundaki "Neden bu tanı, neden diğerleri değil?" bölümü (js/explain.js).
+     * Yalnızca vaka bittiyse; online maç turunda rapor penceresinde gösterilmez (tur sonucu ekranı,
+     * sunucu turu kapatınca gösterir). Alanı olmayan vakada bölüm gizli kalır.
+     */
+    renderResultExplanation() {
+        const box = this.dom.resultExplainBox || document.getElementById('resultExplainBox');
+        if (!box) return;
+        const X = window.PsikoVakaExplain;
+        const show = !!(X && this.currentCase && this.isGameOver && this.currentMode !== 'online' && X.has(this.currentCase));
+        if (!show) { box.hidden = true; box.innerHTML = ''; return; }
+        box.innerHTML = X.render(this.currentCase, {
+            wrongIds: this.diagWrongLog || [],
+            links: true,
+            collapsed: !this.libIsDesktop(),
+            idPrefix: 'rxp'
+        });
+        box.hidden = false;
+        // Kütüphane bağlantısı pencereyi kapatır (rapordaki diğer bağlantılar gibi)
+        box.querySelectorAll('a[href^="#/kutuphane/"]').forEach(a => a.addEventListener('click', () => this.closeModal(this.dom.resultModal)));
     }
 
     renderMiniQuiz() {

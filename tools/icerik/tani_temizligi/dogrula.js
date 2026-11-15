@@ -90,6 +90,23 @@ if (fs.existsSync(yedek)) {
   for (const id of eski) if (!simdi.has(id)) err(`Vaka kayboldu: ${id}`);
 }
 
+// 2. tur (ajan R, 2026-11-15): belirleyici/alt tip girdileri listeye geri dönmemeli; harita ve vaka başlıkları
+const altTip = path.join(__dirname, 'alt_tip_veri.js');
+if (fs.existsSync(altTip)) {
+  const { KALDIR, YENI } = require(altTip);
+  for (const id of Object.keys(KALDIR)) { if (ids.has(id)) err(`Belirleyici/alt tip girdisi listede: ${id} (üst tanı: ${KALDIR[id][0]})`); if (!disi[id]) err(`Kaldırılan alt tip liste dışı kavramlarda yok: ${id}`); }
+  for (const id of Object.keys(YENI)) if (!ids.has(id)) err(`Üst tanı listede yok: ${id}`);
+}
+for (const [id, v] of Object.entries(disi)) if (v.karsilayanResmiTani && !ids.has(v.karsilayanResmiTani)) err(`Liste dışı ${id}: karşılayan tanı listede yok (${v.karsilayanResmiTani})`);
+{ const { DIAGNOSIS_TO_PHARMACOLOGY_MAP: MAP } = require(J('js', 'pharmacology.js'));
+  for (const k of Object.keys(MAP)) { if (!ids.has(k)) err(`Farmakoloji haritasında listede olmayan id: ${k}`); else if (!pharmaIds.has(MAP[k])) err(`Farmakoloji haritası ${k}: protokol yok (${MAP[k]})`); }
+  for (const d of D) if (!MAP[d.id]) err(`Farmakoloji haritasında yok: ${d.id}`); }
+// goldForDiagnoses (terapi + ilaç protokolleri) yalnızca listedeki tanılara işaret etmeli (ajan P; eşleme: gold_remap.js)
+for (const x of T.concat(P)) for (const g of (x.goldForDiagnoses || [])) if (!ids.has(g)) err(`goldForDiagnoses ${x.id}: listede olmayan tanı ${g} (node tools/icerik/tani_temizligi/gold_remap.js)`);
+// Oyun bitmeden görünen başlık (patientSummary) tanı/kategori etiketi taşımamalı: sondaki parantez yalnızca BKİ ya da "Çift tanılı vaka" olabilir
+for (const c of C) { const m = /\(([^()]*)\)\s*$/.exec(c.patientSummary || ''); if (m && !/^BKİ/.test(m[1]) && m[1] !== 'Çift tanılı vaka') warns.push(`Vaka ${c.id}: başlıkta etiket olabilir: "${m[1]}"`);
+  for (let i = 0; i < 2; i++) if (/\((?:\d\.\s*)?(?:Eşlik Eden\s*)?Tanı[\s)-]/.test(c.clues[i])) warns.push(`Vaka ${c.id}: ipucu ${i + 1} tanı etiketi içeriyor`); }
+
 console.log(`Tanı: ${D.length} | Kategori: ${Object.keys(CAT).length} | Rehber girdisi: ${Object.keys(M).length} | Aktif vaka: ${C.length} | Arşivlenen vaka: ${arsiv.length} | Liste dışı kavram: ${Object.keys(disi).length}`);
 if (warns.length) console.log(`Uyarı (${warns.length}):\n  - ` + warns.join('\n  - '));
 if (errors.length) { console.error(`HATA (${errors.length}):\n  - ` + errors.join('\n  - ')); process.exit(1); }

@@ -1,5 +1,5 @@
 /**
- * PsikoVaka - DSM-5-TR Tanı Listesi: 207 Resmî Tanı, 21 Ana Kategori
+ * PsikoVaka - DSM-5-TR Tanı Listesi: 179 Resmî Tanı, 21 Ana Kategori
  * Yalnızca resmî DSM-5-TR Bölüm II ruhsal bozukluk tanıları (resmî "belirlenmiş diğer/belirtilmemiş" kategoriler ve ayrı kodlanan görünümler dahil).
  * 2026-11-15 tanı temizliği: kararlar tools/icerik/tani_temizligi/KARAR_TABLOSU.md, listeden çıkan kavramlar liste_disi_kavramlar.json.
  */
@@ -262,68 +262,51 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "adhd",
-        "nameTr": "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB - Bileşik Görünüm)",
-        "nameEn": "Attention-Deficit/Hyperactivity Disorder (ADHD Combined)",
+        "nameTr": "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB)",
+        "nameEn": "Attention-Deficit/Hyperactivity Disorder",
         "category": "NEURODEV",
         "aliases": [
             "DEHB",
             "ADHD",
             "Hiperaktivite",
             "Dikkat Eksikliği",
-            "F90.2"
-        ]
-    },
-    {
-        "id": "adhd_inattentive",
-        "nameTr": "DEHB (Dikkatsizliğin Baskın Olduğu Görünüm)",
-        "nameEn": "ADHD (Predominantly Inattentive Presentation)",
-        "category": "NEURODEV",
-        "aliases": [
+            "F90.2",
+            "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB - Bileşik Görünüm)",
+            "Attention-Deficit/Hyperactivity Disorder (ADHD Combined)",
+            "DEHB (Dikkatsizliğin Baskın Olduğu Görünüm)",
+            "ADHD (Predominantly Inattentive Presentation)",
             "ADD",
             "Dikkat Dağınıklığı",
-            "F90.0"
-        ]
-    },
-    {
-        "id": "adhd_hyperactive",
-        "nameTr": "DEHB (Aşırı Hareketlilik/Dürtüsellik Baskın Görünüm)",
-        "nameEn": "ADHD (Predominantly Hyperactive/Impulsive Presentation)",
-        "category": "NEURODEV",
-        "aliases": [
+            "F90.0",
+            "DEHB (Aşırı Hareketlilik/Dürtüsellik Baskın Görünüm)",
+            "ADHD (Predominantly Hyperactive/Impulsive Presentation)",
             "Hiperaktivite Baskın Tip",
             "F90.1"
         ]
     },
     {
-        "id": "specific_learning_dyslexia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Okuma Bozukluğu / Disleksi)",
-        "nameEn": "Specific Learning Disorder with Impairment in Reading (Dyslexia)",
+        "id": "specific_learning_disorder",
+        "nameTr": "Özgül Öğrenme Bozukluğu",
+        "nameEn": "Specific Learning Disorder",
         "category": "NEURODEV",
         "aliases": [
+            "ÖÖB",
+            "Öğrenme Güçlüğü",
+            "Learning Disability",
+            "Özgül Öğrenme Bozukluğu (Okuma Bozukluğu / Disleksi)",
+            "Specific Learning Disorder with Impairment in Reading (Dyslexia)",
             "Disleksi",
             "Okuma Güçlüğü",
             "Dyslexia",
-            "F81.0"
-        ]
-    },
-    {
-        "id": "specific_learning_dysgraphia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Yazılı Anlatım Bozukluğu / Disgrafi)",
-        "nameEn": "Specific Learning Disorder with Impairment in Written Expression",
-        "category": "NEURODEV",
-        "aliases": [
+            "F81.0",
+            "Özgül Öğrenme Bozukluğu (Yazılı Anlatım Bozukluğu / Disgrafi)",
+            "Specific Learning Disorder with Impairment in Written Expression",
             "Disgrafi",
             "Yazma Güçlüğü",
             "Dysgraphia",
-            "F81.81"
-        ]
-    },
-    {
-        "id": "specific_learning_dyscalculia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Matematik Bozukluğu / Diskalkuli)",
-        "nameEn": "Specific Learning Disorder with Impairment in Mathematics (Dyscalculia)",
-        "category": "NEURODEV",
-        "aliases": [
+            "F81.81",
+            "Özgül Öğrenme Bozukluğu (Matematik Bozukluğu / Diskalkuli)",
+            "Specific Learning Disorder with Impairment in Mathematics (Dyscalculia)",
             "Diskalkuli",
             "Aritmetik Güçlüğü",
             "Dyscalculia",
@@ -475,25 +458,13 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "Schizoaffective Disorder",
         "category": "PSYCHOTIC",
         "aliases": [
-            "Şizoafektif Bozukluk"
-        ]
-    },
-    {
-        "id": "schizoaffective_bipolar",
-        "nameTr": "Şizoaffektif Bozukluk (Bipolar Tip)",
-        "nameEn": "Schizoaffective Disorder (Bipolar Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
+            "Şizoafektif Bozukluk",
+            "Şizoaffektif Bozukluk (Bipolar Tip)",
+            "Schizoaffective Disorder (Bipolar Type)",
             "Şizoaffektif Mani",
-            "F25.0"
-        ]
-    },
-    {
-        "id": "schizoaffective_depressive",
-        "nameTr": "Şizoaffektif Bozukluk (Depresif Tip)",
-        "nameEn": "Schizoaffective Disorder (Depressive Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
+            "F25.0",
+            "Şizoaffektif Bozukluk (Depresif Tip)",
+            "Schizoaffective Disorder (Depressive Type)",
             "Şizoaffektif Depresyon",
             "F25.1"
         ]
@@ -574,7 +545,7 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "bipolar_1",
-        "nameTr": "Bipolar I Bozukluğu (Manik Epizodlu)",
+        "nameTr": "Bipolar I Bozukluğu",
         "nameEn": "Bipolar I Disorder",
         "category": "BIPOLAR",
         "aliases": [
@@ -588,15 +559,10 @@ const DIAGNOSES_DATABASE = [
             "Bipolar I Bozukluğu (Karışık Özellikli)",
             "Bipolar I Disorder with Mixed Features",
             "Bipolar I Bozukluğu (Hızlı Döngülü Tip / Rapid Cycling)",
-            "Bipolar I Disorder with Rapid Cycling"
-        ]
-    },
-    {
-        "id": "bipolar_1_depressed",
-        "nameTr": "Bipolar I Bozukluğu (Şu Anki Epizod Depresif)",
-        "nameEn": "Bipolar I Disorder, Current Episode Depressed",
-        "category": "BIPOLAR",
-        "aliases": [
+            "Bipolar I Disorder with Rapid Cycling",
+            "Bipolar I Bozukluğu (Manik Epizodlu)",
+            "Bipolar I Bozukluğu (Şu Anki Epizod Depresif)",
+            "Bipolar I Disorder, Current Episode Depressed",
             "Bipolar Depresyon",
             "F31.3"
         ]
@@ -667,8 +633,8 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "mdd",
-        "nameTr": "Majör Depresif Bozukluk (Tek Epizod)",
-        "nameEn": "Major Depressive Disorder (Single Episode)",
+        "nameTr": "Majör Depresif Bozukluk",
+        "nameEn": "Major Depressive Disorder",
         "category": "MOOD",
         "aliases": [
             "Depresyon",
@@ -686,15 +652,11 @@ const DIAGNOSES_DATABASE = [
             "Atipik Özellikli Majör Depresif Bozukluk",
             "Major Depressive Disorder with Atypical Features",
             "Melankolik Özellikli Majör Depresif Bozukluk",
-            "Major Depressive Disorder with Melancholic Features"
-        ]
-    },
-    {
-        "id": "mdd_recurrent",
-        "nameTr": "Majör Depresif Bozukluk (Yineleyici / Tekrarlayan)",
-        "nameEn": "Major Depressive Disorder (Recurrent)",
-        "category": "MOOD",
-        "aliases": [
+            "Major Depressive Disorder with Melancholic Features",
+            "Majör Depresif Bozukluk (Tek Epizod)",
+            "Major Depressive Disorder (Single Episode)",
+            "Majör Depresif Bozukluk (Yineleyici / Tekrarlayan)",
+            "Major Depressive Disorder (Recurrent)",
             "Tekrarlayan Depresyon",
             "Kronik Depresyon",
             "F33.9",
@@ -702,15 +664,9 @@ const DIAGNOSES_DATABASE = [
             "Kış Depresyonu",
             "Mevsimsel Özellik Gösteren Majör Depresyon (Kış Depresyonu)",
             "Major Depressive Disorder with Seasonal Pattern",
-            "Mevsimsel Depresyon"
-        ]
-    },
-    {
-        "id": "mdd_with_psychotic",
-        "nameTr": "Psikotik Özellikli Majör Depresif Bozukluk",
-        "nameEn": "Major Depressive Disorder with Psychotic Features",
-        "category": "MOOD",
-        "aliases": [
+            "Mevsimsel Depresyon",
+            "Psikotik Özellikli Majör Depresif Bozukluk",
+            "Major Depressive Disorder with Psychotic Features",
             "Psikotik Depresyon",
             "Hezeyanlı Depresyon",
             "F32.3",
@@ -866,51 +822,27 @@ const DIAGNOSES_DATABASE = [
             "Özgül Fobi (Kusma Korkusu / Emetofobi)",
             "Specific Phobia (Emetophobia)",
             "Özgül Fobi (Boğulma/Yutma Korkusu / Fagofobi)",
-            "Specific Phobia (Phagophobia)"
-        ]
-    },
-    {
-        "id": "specific_phobia_animal",
-        "nameTr": "Özgül Fobi (Hayvan Tipi: Örümcek, Yılan, Köpek)",
-        "nameEn": "Specific Phobia (Animal Type)",
-        "category": "ANXIETY",
-        "aliases": [
+            "Specific Phobia (Phagophobia)",
+            "Özgül Fobi (Hayvan Tipi: Örümcek, Yılan, Köpek)",
+            "Specific Phobia (Animal Type)",
             "Araknofobi",
             "Kinofobi",
             "Ofidiyofobi",
-            "F40.218"
-        ]
-    },
-    {
-        "id": "specific_phobia_natural",
-        "nameTr": "Özgül Fobi (Doğal Çevre Tipi: Yükseklik, Fırtına, Su)",
-        "nameEn": "Specific Phobia (Natural Environment Type)",
-        "category": "ANXIETY",
-        "aliases": [
+            "F40.218",
+            "Özgül Fobi (Doğal Çevre Tipi: Yükseklik, Fırtına, Su)",
+            "Specific Phobia (Natural Environment Type)",
             "Akrofobi",
             "Yükseklik Korkusu",
             "Hidrofobi",
-            "F40.228"
-        ]
-    },
-    {
-        "id": "specific_phobia_blood",
-        "nameTr": "Özgül Fobi (Kan-Enjeksiyon-Yara Tipi / Vazovagal)",
-        "nameEn": "Specific Phobia (Blood-Injection-Injury Type)",
-        "category": "ANXIETY",
-        "aliases": [
+            "F40.228",
+            "Özgül Fobi (Kan-Enjeksiyon-Yara Tipi / Vazovagal)",
+            "Specific Phobia (Blood-Injection-Injury Type)",
             "Kan Fobisi",
             "İğne Fobisi",
             "Vazovagal Bayılma Fobisi",
-            "F40.230"
-        ]
-    },
-    {
-        "id": "specific_phobia_situational",
-        "nameTr": "Özgül Fobi (Durumsal Tip: Klostrofobi, Uçak, Asansör)",
-        "nameEn": "Specific Phobia (Situational Type)",
-        "category": "ANXIETY",
-        "aliases": [
+            "F40.230",
+            "Özgül Fobi (Durumsal Tip: Klostrofobi, Uçak, Asansör)",
+            "Specific Phobia (Situational Type)",
             "Klostrofobi",
             "Uçak Korkusu",
             "Asansör Fobisi",
@@ -1104,24 +1036,12 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Uyumsuzluk",
             "Strese Bağlı Uyum Bozukluğu",
-            "F43.20"
-        ]
-    },
-    {
-        "id": "adjustment_disorder_depressed",
-        "nameTr": "Uyum Bozukluğu (Çökkün Duygudurum ile)",
-        "nameEn": "Adjustment Disorder with Depressed Mood",
-        "category": "TRAUMA",
-        "aliases": [
-            "F43.21"
-        ]
-    },
-    {
-        "id": "adjustment_disorder_anxious",
-        "nameTr": "Uyum Bozukluğu (Kaygı ile)",
-        "nameEn": "Adjustment Disorder with Anxiety",
-        "category": "TRAUMA",
-        "aliases": [
+            "F43.20",
+            "Uyum Bozukluğu (Çökkün Duygudurum ile)",
+            "Adjustment Disorder with Depressed Mood",
+            "F43.21",
+            "Uyum Bozukluğu (Kaygı ile)",
+            "Adjustment Disorder with Anxiety",
             "F43.22"
         ]
     },
@@ -1181,15 +1101,9 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Psikojenik Bellek Kaybı",
             "Travmatik Unutma",
-            "F44.0"
-        ]
-    },
-    {
-        "id": "dissociative_fugue",
-        "nameTr": "Dissosiyatif Füg (Kaçış ve Kimlik Kaybı)",
-        "nameEn": "Dissociative Amnesia with Dissociative Fugue",
-        "category": "DISSOCIATIVE",
-        "aliases": [
+            "F44.0",
+            "Dissosiyatif Füg (Kaçış ve Kimlik Kaybı)",
+            "Dissociative Amnesia with Dissociative Fugue",
             "Füg Durumu",
             "Kaçış Amnezisi",
             "F44.1"
@@ -1262,39 +1176,21 @@ const DIAGNOSES_DATABASE = [
             "Konversiyon",
             "Histeri",
             "Psikojenik Felç/Körlük/Bayılma",
-            "İşlevsel Nörolojik Belirti Bozukluğu"
-        ]
-    },
-    {
-        "id": "conversion_motor",
-        "nameTr": "Konversiyon Bozukluğu (Motor Belirtiler: Felç / Yürüme Bozukluğu)",
-        "nameEn": "Conversion Disorder (Motor Symptoms)",
-        "category": "SOMATIC",
-        "aliases": [
+            "İşlevsel Nörolojik Belirti Bozukluğu",
+            "Konversiyon Bozukluğu (Motor Belirtiler: Felç / Yürüme Bozukluğu)",
+            "Conversion Disorder (Motor Symptoms)",
             "Psikojenik Felç",
             "Histerik Paralizi",
             "F44.4",
-            "Psikojenik Afoni"
-        ]
-    },
-    {
-        "id": "conversion_seizures",
-        "nameTr": "Konversiyon Bozukluğu (Psödonöbet / PNES)",
-        "nameEn": "Conversion Disorder (Attacks or Seizures / PNES)",
-        "category": "SOMATIC",
-        "aliases": [
+            "Psikojenik Afoni",
+            "Konversiyon Bozukluğu (Psödonöbet / PNES)",
+            "Conversion Disorder (Attacks or Seizures / PNES)",
             "Psödonöbet",
             "PNES",
             "Yalancı Epileptik Nöbet",
-            "F44.5"
-        ]
-    },
-    {
-        "id": "conversion_sensory",
-        "nameTr": "Konversiyon Bozukluğu (Duyusal Belirtiler: Duyu Kaybı / Histerik Körlük)",
-        "nameEn": "Conversion Disorder (With Anesthesia or Sensory Loss / Special Sensory Symptom)",
-        "category": "SOMATIC",
-        "aliases": [
+            "F44.5",
+            "Konversiyon Bozukluğu (Duyusal Belirtiler: Duyu Kaybı / Histerik Körlük)",
+            "Conversion Disorder (With Anesthesia or Sensory Loss / Special Sensory Symptom)",
             "Histerik Körlük",
             "F44.6"
         ]
@@ -1339,25 +1235,13 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Anoreksiya",
             "Yememe Hastalığı",
-            "Aşırı Zayıflık"
-        ]
-    },
-    {
-        "id": "anorexia_restricting",
-        "nameTr": "Anoreksiya Nervoza (Kısıtlayıcı Tip)",
-        "nameEn": "Anorexia Nervosa (Restricting Type)",
-        "category": "EATING",
-        "aliases": [
+            "Aşırı Zayıflık",
+            "Anoreksiya Nervoza (Kısıtlayıcı Tip)",
+            "Anorexia Nervosa (Restricting Type)",
             "Kısıtlayıcı Anoreksiya",
-            "F50.01"
-        ]
-    },
-    {
-        "id": "anorexia_binge_purge",
-        "nameTr": "Anoreksiya Nervoza (Tıkınma/Çıkarma Tipi)",
-        "nameEn": "Anorexia Nervosa (Binge-Eating/Purging Type)",
-        "category": "EATING",
-        "aliases": [
+            "F50.01",
+            "Anoreksiya Nervoza (Tıkınma/Çıkarma Tipi)",
+            "Anorexia Nervosa (Binge-Eating/Purging Type)",
             "Kusan Anoreksiya",
             "Düşük Kilolu Bulimik Anoreksiya",
             "F50.02"
@@ -1475,22 +1359,17 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "narcolepsy",
-        "nameTr": "Narkolepsi (Katapleksi ile Giden)",
-        "nameEn": "Narcolepsy with Cataplexy",
+        "nameTr": "Narkolepsi",
+        "nameEn": "Narcolepsy",
         "category": "SLEEP",
         "aliases": [
-            "Narkolepsi",
             "Gülmeyle Kas Felci",
             "Uyku Nöbetleri",
-            "G47.411"
-        ]
-    },
-    {
-        "id": "narcolepsy_without_cataplexy",
-        "nameTr": "Narkolepsi (Katapleksi Olmayan Tip)",
-        "nameEn": "Narcolepsy without Cataplexy",
-        "category": "SLEEP",
-        "aliases": [
+            "G47.411",
+            "Narkolepsi (Katapleksi ile Giden)",
+            "Narcolepsy with Cataplexy",
+            "Narkolepsi (Katapleksi Olmayan Tip)",
+            "Narcolepsy without Cataplexy",
             "Katapleksisiz Narkolepsi",
             "G47.419"
         ]
@@ -1529,51 +1408,43 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "circadian_delayed_sleep",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Gecikmiş Uyku Evresi Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Delayed Sleep Phase Type)",
+        "id": "circadian_rhythm_sleep_wake",
+        "nameTr": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu",
+        "nameEn": "Circadian Rhythm Sleep-Wake Disorder",
         "category": "SLEEP",
         "aliases": [
+            "Sirkadiyen Ritim Bozukluğu",
+            "Biyolojik Saat Bozukluğu",
+            "G47.20",
+            "Sirkadiyen Ritim Bozukluğu (Gecikmiş Uyku Evresi Tipi)",
+            "Circadian Rhythm Sleep Disorder (Delayed Sleep Phase Type)",
             "Gece Kuşu Sendromu",
-            "G47.21"
-        ]
-    },
-    {
-        "id": "circadian_advanced_sleep",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Erken Uyku Evresi Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Advanced Sleep Phase Type)",
-        "category": "SLEEP",
-        "aliases": [
+            "G47.21",
+            "Sirkadiyen Ritim Bozukluğu (Erken Uyku Evresi Tipi)",
+            "Circadian Rhythm Sleep Disorder (Advanced Sleep Phase Type)",
             "Erken Uyuma Sendromu",
-            "G47.22"
-        ]
-    },
-    {
-        "id": "circadian_shift_work",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Vardiyalı Çalışma Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Shift Work Type)",
-        "category": "SLEEP",
-        "aliases": [
+            "G47.22",
+            "Sirkadiyen Ritim Bozukluğu (Vardiyalı Çalışma Tipi)",
+            "Circadian Rhythm Sleep Disorder (Shift Work Type)",
             "Vardiyalı İş Uyku Bozukluğu",
-            "G47.26"
-        ]
-    },
-    {
-        "id": "circadian_non_24_hour",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (24 Saate Uymayan Tip)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Non-24-Hour Type)",
-        "category": "SLEEP",
-        "aliases": [
+            "G47.26",
+            "Sirkadiyen Ritim Bozukluğu (24 Saate Uymayan Tip)",
+            "Circadian Rhythm Sleep Disorder (Non-24-Hour Type)",
             "Serbest Döngülü Uyku",
             "G47.24"
         ]
     },
     {
-        "id": "sleepwalking_disorder",
-        "nameTr": "NREM Uykusundan Uyanma (Uyurgezerlik / Somnambulizm)",
-        "nameEn": "Non-REM Sleep Arousal Disorder (Sleepwalking type)",
+        "id": "nrem_sleep_arousal",
+        "nameTr": "NREM Uykusundan Uyanma Bozukluğu",
+        "nameEn": "Non-Rapid Eye Movement Sleep Arousal Disorder",
         "category": "SLEEP",
         "aliases": [
+            "NREM Parasomnisi",
+            "NREM Uyanma Bozukluğu",
+            "Non-REM Sleep Arousal Disorder",
+            "NREM Uykusundan Uyanma (Uyurgezerlik / Somnambulizm)",
+            "Non-REM Sleep Arousal Disorder (Sleepwalking type)",
             "Uyurgezerlik",
             "Somnambulizm",
             "F51.3",
@@ -1581,15 +1452,9 @@ const DIAGNOSES_DATABASE = [
             "Uykuda Cinsel Davranış",
             "Seksomni (Uykuda Cinsel Davranış)",
             "Sexsomnia (Sleep Sex / NREM Parasomnia)",
-            "Sexsomnia"
-        ]
-    },
-    {
-        "id": "sleep_terrors",
-        "nameTr": "NREM Uykusundan Uyanma (Gece Terörü / Uyku Terörü)",
-        "nameEn": "Non-REM Sleep Arousal Disorder (Sleep Terror type)",
-        "category": "SLEEP",
-        "aliases": [
+            "Sexsomnia",
+            "NREM Uykusundan Uyanma (Gece Terörü / Uyku Terörü)",
+            "Non-REM Sleep Arousal Disorder (Sleep Terror type)",
             "Gece Terörü",
             "Çığlıkla Uyanma",
             "F51.4"
@@ -1799,25 +1664,13 @@ const DIAGNOSES_DATABASE = [
             "Sınırlı Prososyal Duygularla",
             "Katı-Duygusuz Özellikler",
             "Davranım Bozukluğu (Sınırlı Prososyal Duygularla / Katı-Duygusuz Mizaç)",
-            "Conduct Disorder with Limited Prosocial Emotions"
-        ]
-    },
-    {
-        "id": "conduct_childhood",
-        "nameTr": "Davranım Bozukluğu (Çocuklukta Başlayan Tip)",
-        "nameEn": "Conduct Disorder (Childhood-Onset Type)",
-        "category": "IMPULSE",
-        "aliases": [
+            "Conduct Disorder with Limited Prosocial Emotions",
+            "Davranım Bozukluğu (Çocuklukta Başlayan Tip)",
+            "Conduct Disorder (Childhood-Onset Type)",
             "Erken Başlangıçlı Davranım",
-            "F91.1"
-        ]
-    },
-    {
-        "id": "conduct_adolescent",
-        "nameTr": "Davranım Bozukluğu (Ergenlikte Başlayan Tip)",
-        "nameEn": "Conduct Disorder (Adolescent-Onset Type)",
-        "category": "IMPULSE",
-        "aliases": [
+            "F91.1",
+            "Davranım Bozukluğu (Ergenlikte Başlayan Tip)",
+            "Conduct Disorder (Adolescent-Onset Type)",
             "Ergenlik Tipi Davranım",
             "F91.2"
         ]

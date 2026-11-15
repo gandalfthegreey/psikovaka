@@ -800,7 +800,6 @@ const THERAPIES_DATABASE = [
             "Sanrılar için Gerçeklik Sınaması"
         ],
         "goldForDiagnoses": [
-            "capgras_syndrome",
             "delusional_disorder",
             "schizophrenia"
         ],
@@ -825,8 +824,7 @@ const THERAPIES_DATABASE = [
             "Biyolojik Tedavi"
         ],
         "goldForDiagnoses": [
-            "cotard_syndrome",
-            "mdd_with_psychotic",
+            "mdd",
             "catatonia_associated"
         ],
         "shortDefinition": "Ağır psikotik depresyon, Cotard sendromu ve katatonide hayat kurtarıcı en hızlı etkili biyolojik yöntemdir.",
@@ -848,10 +846,7 @@ const THERAPIES_DATABASE = [
             "Dantrolen/Bromokriptin",
             "Siproheptadin"
         ],
-        "goldForDiagnoses": [
-            "neuroleptic_malignant_syndrome",
-            "serotonin_syndrome"
-        ],
+        "goldForDiagnoses": [],
         "shortDefinition": "Nöroleptik Malign Sendrom veya Serotonin Sendromu gibi ölümcül toksisitelerde tetikleyici ilacın derhal kesilmesi ve spesifik antidotların verilmesidir.",
         "protocolSteps": [
             "1. Şüpheli tüm psikotrop ilaçların derhal stoplanması",
@@ -894,7 +889,7 @@ const THERAPIES_DATABASE = [
         ],
         "goldForDiagnoses": [
             "rem_sleep_behavior_disorder",
-            "sleepwalking_disorder"
+            "nrem_sleep_arousal"
         ],
         "shortDefinition": "RBD hastalarında yaralanmaları önlemek için çevresel güvenlik önlemleri ve REM kas atonisini restore eden tedavidir.",
         "protocolSteps": [
@@ -937,7 +932,7 @@ const THERAPIES_DATABASE = [
             "VP Şant"
         ],
         "goldForDiagnoses": [
-            "major_neurocognitive_nph"
+            "major_neurocognitive_another_medical"
         ],
         "shortDefinition": "Normal Basınçlı Hidrosefalide (NPH) ventriküllerdeki aşırı BOS'u karın boşluğuna boşaltarak demansı ve yürüme bozukluğunu geri döndüren cerrahi yöntemdir.",
         "protocolSteps": [
@@ -983,8 +978,7 @@ const THERAPIES_DATABASE = [
             "Yapılandırılmış Okuma"
         ],
         "goldForDiagnoses": [
-            "specific_learning_dyslexia",
-            "specific_learning_dysgraphia"
+            "specific_learning_disorder"
         ],
         "shortDefinition": "Disleksili bireylerde harf ve sesleri görsel, işitsel ve kinestetik kanallarla eşzamanlı öğreten altın standart okuma eğitimidir.",
         "protocolSteps": [
@@ -1029,7 +1023,7 @@ const THERAPIES_DATABASE = [
             "NREM Güvenlik Protokolü"
         ],
         "goldForDiagnoses": [
-            "sexsomnia"
+            "nrem_sleep_arousal"
         ],
         "shortDefinition": "Seksomni ve uyurgezerlik vakalarında adli riskleri ve yaralanmaları sıfırlamak için çevre güvenliği ve NREM derinliğini düzenleme protokolüdür.",
         "protocolSteps": [
@@ -1050,9 +1044,7 @@ const THERAPIES_DATABASE = [
             "Tardif Diskinezi Tedavisi",
             "VMAT2 İnhibitörü"
         ],
-        "goldForDiagnoses": [
-            "tardive_dyskinesia"
-        ],
+        "goldForDiagnoses": [],
         "shortDefinition": "Tardif diskinezide istemsiz yüz ve dil hareketlerini durdurmak için presinaptik veziküler monoamin taşıyıcıyı (VMAT2) bloke eden onaylı tedavidir.",
         "protocolSteps": [
             "1. Antipsikotik dozunun gözden geçirilmesi ve mümkünse atipik ilaca (Klozapin) geçiş",
@@ -1099,7 +1091,6 @@ const THERAPIES_DATABASE = [
             "Pierre Janet Modeli"
         ],
         "goldForDiagnoses": [
-            "dissociative_fugue",
             "dissociative_amnesia",
             "did"
         ],
@@ -1123,10 +1114,8 @@ const THERAPIES_DATABASE = [
             "Adli/Tıbbi Gözlem"
         ],
         "goldForDiagnoses": [
-            "ganser_syndrome",
-            "transient_global_amnesia",
-            "factitious_another",
-            "malingering"
+            "other_specified_dissociative",
+            "factitious_another"
         ],
         "shortDefinition": "Akut nöropsikiyatrik krizler, geçici amneziler ve adli/yapay tablolarda ego işlevlerini destekleyen, gerçeklik sınamasını koruyan ve güvenli sınırlar çizen klinik yaklaşımdır.",
         "protocolSteps": [
@@ -1150,7 +1139,7 @@ const THERAPIES_DATABASE = [
         ],
         "goldForDiagnoses": [
             "rumination_disorder",
-            "enuresis_nocturna",
+            "enuresis",
             "trichotillomania",
             "excoriation"
         ],

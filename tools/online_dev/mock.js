@@ -18,7 +18,7 @@
 
     // ---------------------------------------------------------- sahte hesap
     const listeners = new Set();
-    const snap = () => ({ state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
+    const snap = () => (M.opt && M.opt.guest ? { state: 'guest', availability: 'ready', user: null, profile: null, remember: true, passwordMinLength: 8 } : { state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
         profile: { id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760 }, remember: true, passwordMinLength: 8 });
     const fakeAcc = Object.assign({}, realAcc, {
         init: async () => { listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
@@ -29,7 +29,7 @@
         refreshProfile: async () => ({ ok: true }),
         getLeaderboard: async () => ({ ok: true, rows: names.slice(0, 8).map((n, i) => ({ user_id: uid(i), username: n, avatar: AV.randomConfig(n), ranked_points: 2100 - i * 230, position: i + 1 })), me: null })
     });
-    Object.defineProperty(fakeAcc, 'state', { get: () => 'ready' });
+    Object.defineProperty(fakeAcc, 'state', { get: () => (M.opt && M.opt.guest ? 'guest' : 'ready') });
     Object.defineProperty(fakeAcc, 'availability', { get: () => 'ready' });
     window.PsikoVakaAccount = fakeAcc;
 
@@ -77,24 +77,95 @@
             { id: 'p2', code: 'QWE789', mode: 'tournament', format: 'bracket', target_type: 'diagnosis', capacity: 8, player_count: 5, round_count: 3, host: { username: longNames[4], avatar: AV.randomConfig(names[4]) } },
             { id: 'p3', code: 'ZXC456', mode: 'duel', format: 'hp', target_type: 'pharmacology', capacity: 2, player_count: 1, round_count: 10, host: { username: names[7], avatar: AV.randomConfig(names[7]) } }
         ]),
-        listPendingInvites: () => ok(M.hubMode === 'full' ? [{ id: 'inv1', room_id: 'r9', room_code: 'TRN888', inviter_id: uid(1), invitee_id: ME, status: 'pending', created_at: iso(now()), expires_at: iso(now() + 600000),
+        listPendingInvites: () => ok(M.opt.duelInvite ? [{ id: 'invd', room_id: 'rd', room_code: 'DUE111', inviter_id: uid(2), invitee_id: ME, status: 'pending', created_at: iso(now()), expires_at: iso(now() + 600000),
+            inviter: { username: names[2], avatar: AV.randomConfig(names[2]) }, room: { mode: 'duel', format: 'hp', target_type: 'diagnosis', capacity: 2, player_count: 1, status: 'lobby' } }] : M.hubMode === 'full' ? [{ id: 'inv1', room_id: 'r9', room_code: 'TRN888', inviter_id: uid(1), invitee_id: ME, status: 'pending', created_at: iso(now()), expires_at: iso(now() + 600000),
             inviter: { username: names[1], avatar: AV.randomConfig(names[1]) }, room: { mode: 'tournament', format: 'battle', target_type: 'therapy', capacity: 4, player_count: 2, status: 'lobby' } }] : []),
-        getMyCurrentRoom: () => ok(null),
+        getMyCurrentRoom: () => ok(M.state && ['lobby', 'in_round', 'round_result'].includes(M.state.room.status) && sessionStorage.getItem('olMockPersist') === '1' ? { id: M.state.room.id, code: M.state.room.code, status: M.state.room.status } : null),
         searchUsers: () => ok([]),
         sendFriendRequest: () => err('USER_NOT_FOUND', 'Bu kullanıcı adıyla biri bulunamadı.'),
         createRoom: (o) => { M.state = { server_time: iso(Date.now()), room: room({ mode: o.mode, format: o.format, target_type: o.target, capacity: o.capacity, round_count: NS.ui.roundsFor(o) }), players: [player(0)], round: null, round_players: [], my_guesses: [], pairings: [], results: [] }; return ok(M.state.room); },
         joinRoom: () => err('ALREADY_STARTED', 'Maç başladı; sonradan katılınamaz.'),
         getRoomState: () => M.state ? ok(JSON.parse(JSON.stringify(Object.assign({}, M.state, { server_time: iso(Date.now()) })))) : err('NOT_MEMBER', 'Bu odada değilsin.'),
-        heartbeat: () => ok(brief()), advanceIfDue: () => ok(brief()),
+        heartbeat: () => quickTimeoutCheck() || ok(brief()), advanceIfDue: () => quickTimeoutCheck() || ok(brief()),
+        quickMatch: (mode, target) => {
+            const q = M.opt.quick || 'wait';
+            if (q === 'unsupported') return err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.');
+            if (q === 'already') return Promise.resolve({ ok: false, error: { code: 'ALREADY_IN_ROOM', message: 'Zaten bir odadasın.', detail: 'K7M2QX' } });
+            M.state = { server_time: iso(Date.now()), room: room({ id: 'mock-room', code: 'QK3R7Z', is_quick: true, close_reason: null, mode, format: 'rounds', target_type: target, capacity: mode === 'ffa' ? 4 : 2, round_count: 3, visibility: 'private', status: 'lobby', player_count: 1 }),
+                players: [Object.assign(player(0), { is_ready: true, joined_at: iso(now() - (M.opt.waitedMs || 0)) })], round: null, round_players: [], my_guesses: [], pairings: [], results: [] };
+            M.quickAt = Date.now();
+            if (q === 'found') { for (let i = 1; i < M.state.room.capacity; i++) { const p = player(i); p.is_ready = true; p.is_host = false; M.state.players.push(p); } startRoom(); }
+            persist();
+            return ok({ server_time: iso(Date.now()), room_id: 'mock-room', code: 'QK3R7Z', created: q !== 'found', players: M.state.players.length, capacity: M.state.room.capacity, status: M.state.room.status, room: M.state.room });
+        },
         setReady: (id, r) => { const me = M.state.players[0]; me.is_ready = r; return ok({ ok: true, is_ready: r }); },
         startMatch: () => err('NOT_ALL_READY', 'Herkes hazır olmadan maç başlamaz.'),
-        leaveRoom: () => { M.state = null; return ok({ ok: true }); },
+        leaveRoom: () => { M.left = (M.left || 0) + 1; M.state = null; persist(); return ok({ ok: true }); },
         submitGuess: () => err('ROUND_CLOSED', 'Bu tur kapandı.'),
         forfeitRound: () => err('ROUND_CLOSED', 'Bu tur kapandı.'),
-        inviteFriend: () => ok({}),
+        inviteFriend: (roomId, fid) => { M.invites = (M.invites || 0) + 1; M.lastInvite = { roomId, fid }; return M.opt.inviteError ? err(M.opt.inviteError, 'Bu arkadaş zaten odada.') : ok({ id: 'inv-sent-' + M.invites, status: 'pending' }); },
+        getInvite: (id) => ok([{ id, status: M.opt.inviteStatus || 'pending', expires_at: iso(now() + (M.opt.inviteStatus === 'expired-time' ? -1000 : 600000)) }].map(x => (x.status === 'expired-time' ? Object.assign(x, { status: 'pending' }) : x))),
         updateRoomSettings: () => err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.'),
-        respondRoomInvite: () => err('INVITE_EXPIRED', 'Davetin süresi dolmuş.')
+        respondRoomInvite: () => err('INVITE_EXPIRED', 'Davetin süresi dolmuş.'),
+        // ---- ajan P: lig ekranı
+        getConfig: () => {
+            const o = M.opt.config;
+            if (o === 'none') return err('OFFLINE', 'Bağlantı kurulamadı.');
+            const base = [{ key: 'max_guesses_per_stage', value: 6 }].concat(M.opt.quick === 'unsupported' ? [] : [{ key: 'quick_round_count', value: 3 }, { key: 'quick_wait_timeout_sec', value: 120 }]);
+            if (o === 'old') return ok(base.concat([['rp_win_tournament', 75], ['rp_win_ffa', 50], ['rp_win_duel', 35], ['rp_second', 20], ['rp_completion', 5]].map(([key, value]) => ({ key, value }))));
+            return ok(base.concat(Object.entries(NS.leaguesView ? NS.leaguesView.V2_DEFAULTS : {}).map(([key, value]) => ({ key, value }))));
+        },
+        // ---- ajan P: günlük (§13.1)
+        getDailyChallenge: (t) => M.opt.daily === 'unsupported' ? err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.') : ok(dailyState(t, true)),
+        dailyBegin: (t) => { if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-'); const d = dget(t); if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now() - (M.opt.dailyElapsed || 0)); } persist(); return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, answer: d.status === 'finished' ? dailyAnswer(t) : null })); },
+        dailySubmitGuess: (t, item) => {
+            const d = dget(t);
+            if (d.status === 'not_started') return err('DAILY_NOT_STARTED', 'Önce vakayı başlat.');
+            if (d.status === 'finished') return err('DAILY_ALREADY_FINISHED', 'Bugünün vakasını bu hedefte zaten bitirdin.');
+            if (d.guesses.some(x => x.stage === d.stage && x.item_id === item)) return err('DUPLICATE_GUESS', 'Bunu zaten tahmin ettin.');
+            const ans = dailyAnswer(t), kind = t === 'combo' ? ['diagnosis', 'therapy', 'pharmacology'][d.stage - 1] : t;
+            const correct = ans[kind + '_id'] === item, stage = d.stage;
+            const nInStage = d.guesses.filter(x => x.stage === stage).length + 1;
+            d.guesses.push({ stage, guess_no: nInStage, item_id: item, correct, same_group: false });
+            let next = null;
+            if (correct && t === 'combo' && stage < 3) { d.stage++; next = d.stage; }
+            else if (correct) finishDaily(d, true);
+            else if (nInStage >= 6) finishDaily(d, false);
+            persist();
+            return ok({ server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, correct, same_group: false, stage, next_stage: next, stage_completed: correct, guess_no: nInStage, guesses_used: d.guesses.length, guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, finished: d.status === 'finished', won: d.status === 'finished' ? d.won : null, points: d.status === 'finished' ? d.points : null, time_sec: d.status === 'finished' ? d.time_sec : null, answer: d.status === 'finished' ? ans : null });
+        },
+        dailyGiveUp: (t) => { const d = dget(t); if (d.status !== 'in_progress') return err(d.status === 'finished' ? 'DAILY_ALREADY_FINISHED' : 'DAILY_NOT_STARTED', '-'); finishDaily(d, false); persist(); return ok(Object.assign(dailyState(t), { answer: dailyAnswer(t) })); },
+        getDailyLeaderboard: (t, day, limit) => {
+            if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-');
+            const n = M.opt.boardRows != null ? M.opt.boardRows : 30;
+            const rows = Array.from({ length: n }, (_, i) => { const nm = i < 8 ? (i === 0 ? 'ayse_klinik' : longNames[i]) : 'oyuncu_' + (i + 1); const won = i < n - 3 || n < 4; const gu = won ? Math.min(6, 1 + Math.floor(i / 5)) : 6;
+                return { rank: i + 1, user_id: i === 0 ? uid(1) : 'u-' + i, username: nm, display_name: nm, avatar: AV.randomConfig(nm), ranked_points: [4200, 3300, 2600, 2000, 1500, 1200, 950, 760, 520, 310][i % 10] - i, won, guesses_used: gu, time_sec: 25 + i * 7, points: won ? 100 - (gu - 1) * 15 + Math.max(0, 20 - i) : 0 }; });
+            const d = dget(t);
+            let me = null;
+            if (d.status === 'finished' && !day) {
+                me = { rank: M.opt.mePos === 'top' ? 2 : n + 4, user_id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760, won: d.won, guesses_used: d.guesses.length, time_sec: d.time_sec, points: d.points };
+                if (M.opt.mePos === 'top') { if (rows.length >= 2) rows.splice(1, 1, me); else { me.rank = 1; rows.splice(0, rows.length, me); } }
+            }
+            return ok({ server_time: iso(Date.now()), day: day || '2026-11-15', target: t, total_players: n + (me && M.opt.mePos !== 'top' ? 4 : 0) + (day ? 3 : 0), rows: rows.slice(0, limit || 50), me });
+        },
+        getMyStreaks: () => M.opt.daily === 'unsupported' ? err('UNSUPPORTED', '-') : ok(['diagnosis', 'therapy', 'pharmacology', 'combo'].map(t => { const d = M.daily && M.daily[t]; const base = M.opt.streakBase != null ? M.opt.streakBase : 3;
+            const cur = d && d.status === 'finished' ? (d.won ? base + 1 : 0) : (t === 'diagnosis' ? base : 0); return { target: t, current_streak: cur, best_streak: Math.max(cur, t === 'diagnosis' ? 6 : cur), last_day: '2026-11-14', played_today: !!(d && d.status === 'finished') }; })),
+        getMyRpHistory: () => {
+            const o = M.opt.rpHistory;
+            if (o === 'unsupported') return err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.');
+            if (o === 'empty') return ok([]);
+            const t = now();
+            return ok([
+                { room_id: 'h1', finished_at: iso(t - 3600e3), mode: 'duel', format: 'hp', target: 'diagnosis', placement: 1, players: 2, rp_delta: 32, rp_after: 760,
+                    rp_breakdown: { rounds: [{ round: 1, outcome: 'g1', delta: 10 }, { round: 2, outcome: 'g3', delta: 6 }, { round: 3, outcome: 'fail', delta: -10 }, { round: 4, outcome: 'g2', delta: 8 }, { round: 5, outcome: 'g2', delta: 8 }], placement: 10, voided: false, total: 32 } },
+                { room_id: 'h2', finished_at: iso(t - 86400e3), mode: 'ffa', format: 'rounds', target: 'combo', placement: 3, players: 4, rp_delta: -14, rp_after: 728,
+                    rp_breakdown: { rounds: [{ round: 1, outcome: 'fail', delta: -10 }, { round: 2, outcome: 'g5', delta: 2 }, { round: 3, outcome: 'fail', delta: -10, missed: true }, { round: 4, outcome: 'g4', delta: 4 }], placement: 0, voided: false, total: -14 } },
+                { room_id: 'h3', finished_at: iso(t - 2 * 86400e3), mode: 'tournament', format: 'battle', target: 'therapy', placement: 2, players: 4, rp_delta: 20, rp_after: 742 }
+            ]);
+        }
     });
+    M.opt = { config: 'v2', rpHistory: 'rows' };
+    try { if (sessionStorage.getItem('olMockPersist') === '1') { const saved = JSON.parse(sessionStorage.getItem('olMockState') || 'null'); if (saved) { M.state = saved.state; Object.assign(M.opt, saved.opt); M.daily = saved.daily || {}; } } } catch (e) { /* yok */ }
 
     // ---------------------------------------------------------- senaryolar
     function scenario(name, o) {
@@ -158,6 +229,7 @@
             s = { room: room({ status: 'abandoned' }), players: [player(0)], round: null, round_players: [], my_guesses: [], pairings: [], results: [] };
         }
         if (!s) throw new Error('bilinmeyen senaryo ' + name);
+        if (o.myGuesses) s.my_guesses = o.myGuesses;
         s.server_time = iso(Date.now());
         M.state = s;
         if (window.game && window.game.showRoute) window.game.showRoute('online');
@@ -165,5 +237,50 @@
         NS.app.exitToHub();
         NS.rooms.open('mock-room');
     }
-    window.olMock = { scenario, get state() { return M.state; } };
+    // ---- sahte günlük durum
+    function dget(t) {
+        M.daily = M.daily || {};
+        if (!M.daily[t]) { const ids = caseIds(); M.daily[t] = { case_id: M.opt.dailyCase || ids[{ diagnosis: 9, therapy: 10, pharmacology: 11, combo: 12 }[t]], status: 'not_started', guesses: [], stage: 1, won: null, points: null, time_sec: null, started_at: null }; }
+        return M.daily[t];
+    }
+    function dailyAnswer(t) { const c = (window.game.allMasterCases || []).find(x => x.id === dget(t).case_id) || {}; return { diagnosis_id: c.diagnosisId, therapy_id: c.therapyId || 'cbt_general', pharmacology_id: c.pharmacologyId || (window.game.getFallbackPharmacologyId ? window.game.getFallbackPharmacologyId(c) : null) }; }
+    function dailyState(t, pub) {
+        const d = dget(t);
+        if (pub && M.opt.guest) return { server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, status: 'not_started', guesses_used: 0, won: null, points: null, time_sec: null, stage: 1 };
+        return { server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, status: d.status, guesses_used: d.guesses.length, won: d.won, points: d.points, time_sec: d.time_sec, stage: d.stage };
+    }
+    function finishDaily(d, won) {
+        d.status = 'finished'; d.won = won;
+        d.time_sec = Math.max(1, Math.floor((now() - Date.parse(d.started_at)) / 1000));
+        const n = d.guesses.filter(x => x.stage === d.stage).length;
+        d.points = won ? [0, 100, 85, 70, 55, 40, 25][n] + Math.max(0, Math.min(20, Math.round((60 - Math.min(60, d.time_sec || 30)) / 3))) : 0;
+    }
+
+    /** Sahte: bir oyuncu odaya katılır (hızlı eşleşme / çağrı testleri). Hızlı oda dolunca sunucu gibi maçı başlatır. */
+    function addPlayer(i) {
+        if (!M.state) return;
+        const p = player(i); p.is_ready = true; p.is_host = false;
+        M.state.players.push(p); M.state.room.player_count = M.state.players.filter(x => !x.left_at).length;
+        if (M.state.room.is_quick && M.state.room.player_count >= M.state.room.capacity) startRoom();
+        persist();
+        NS.rooms.refresh();
+    }
+    /** Sahte _start_match_locked: tur 1, 3 sn geri sayım. */
+    function startRoom() {
+        const s = M.state, ids = caseIds(), T0 = now();
+        s.room.status = 'in_round'; s.room.current_round = 1; s.room.player_count = s.players.length;
+        s.players.forEach(p => { p.played = true; });
+        s.round = { room_id: 'mock-room', round_no: 1, case_id: ids[5], starts_at: iso(T0 + 3000), deadline_at: iso(T0 + 183000), closed_at: null, close_reason: null, hp_multiplier: null, eliminated_user_ids: [] };
+        s.round_players = s.players.map((p, i) => rp(i, 1, {}));
+    }
+    function quickTimeoutCheck() {
+        const s = M.state;
+        if (!s || !s.room.is_quick) return null;
+        if (s.room.status === 'lobby' && M.opt.quickTimeout && s.players.length === 1) { s.room.status = 'abandoned'; s.room.close_reason = 'quick_timeout'; persist(); }
+        if (s.room.status === 'abandoned' && s.room.close_reason === 'quick_timeout') return Promise.resolve({ ok: false, error: { code: 'QUICK_TIMEOUT', message: 'Şu an eşleşecek kimse yok.' } });
+        return null;
+    }
+    // Yeniden yükleme testleri için: sessionStorage['olMockPersist']='1' ise durum saklanır ve geri yüklenir
+    function persist() { try { if (sessionStorage.getItem('olMockPersist') === '1') sessionStorage.setItem('olMockState', JSON.stringify({ state: M.state, opt: M.opt, daily: M.daily })); } catch (e) { /* yok */ } }
+    window.olMock = { scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; persist(); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
 })();

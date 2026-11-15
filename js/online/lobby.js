@@ -91,11 +91,12 @@
                     <span class="ol-offscreen" id="olCodeHint">Kopyalamak için dokun</span>
                 </div>
             </header>
-            <div class="ol-lobby-tools">
+            <div class="ol-lobby-tools" id="olLobbyTools">
                 <button class="btn btn-secondary btn-sm" type="button" data-ol-l="invite">${icon('user-plus')}<span>Arkadaş davet et</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="copy-link" aria-label="Davet bağlantısını kopyala">${icon('link')}<span class="ol-lg-only">Davet bağlantısını kopyala</span><span class="ol-sm-only">Bağlantı</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="settings" id="olLobbySettingsBtn">${icon('settings')}<span>Ayarlar</span></button>
             </div>
+            <div class="ol-ch-note" id="olChNote" aria-live="polite" hidden></div>
             <div class="ol-stage" id="olStage" tabindex="0" role="group" aria-roledescription="lobi sahnesi" aria-label="Lobi. Boş bir yere dokunarak ya da ok tuşlarıyla Nöro'nu taşı.">
                 ${stageArt()}
                 <div class="ol-stage-layer" id="olStageLayer"></div>
@@ -113,6 +114,10 @@
                     </div>
                 </div>
                 <div class="ol-lobby-cta">
+                    <div class="ol-search" id="olSearch" hidden>
+                        <span class="ol-search-pulse" aria-hidden="true"></span>
+                        <span class="ol-search-text"><span class="ol-search-title" id="olSearchTitle" aria-live="polite">Rakip aranıyor…</span><span class="ol-search-time" id="olSearchTime" aria-hidden="true">0:00</span></span>
+                    </div>
                     <p class="ol-gate-line" id="olGateLine" aria-live="polite"></p>
                     <div class="ol-lobby-btns" id="olLobbyBtns"></div>
                 </div>
@@ -143,18 +148,45 @@
         const s = NS.rooms.state;
         if (!s || !L.root || !L.root.querySelector('.ol-lobby')) return;
         const room = s.room;
-        $('#olLobbyTitle', L.root).textContent = NS.roomTitle(room);
+        const quick = !!room.is_quick;
+        L.root.querySelector('.ol-lobby').classList.toggle('is-quick', quick);
+        $('#olLobbyTools', L.root).hidden = quick;
+        $('.ol-topbar-side', L.root).hidden = quick;
+        $('#olLobbyTitle', L.root).textContent = quick ? `Hızlı eşleşme · ${T.mode[room.mode]}` : NS.roomTitle(room);
         $('#olLobbyCode', L.root).textContent = room.code;
         const roundsTxt = room.format === 'rounds' ? `${room.round_count} tur` : room.format === 'hp' ? '600 can' : `${room.round_count} tur`;
         $('#olLobbyChips', L.root).innerHTML = `
             <span class="ol-chip-static ol-t-${esc(room.target_type)}">${icon(T.targetIcon[room.target_type])}${esc(T.target[room.target_type])}</span>
             <span class="ol-chip-static">${icon('clock')}${esc(roundsTxt)} · ${Math.round(room.round_time_limit_sec / 60 * 10) / 10} dk</span>
-            <span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`;
+            ${quick ? '' : `<span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`}`;
         const setBtn = $('#olLobbySettingsBtn', L.root);
-        if (setBtn) setBtn.hidden = !NS.rooms.isHost();
+        if (setBtn) setBtn.hidden = quick || !NS.rooms.isHost();
         updatePlayers();
         updateCta();
+        updateChallenge();
         announceDiff();
+    }
+
+    /** Düello çağrısı: davet edilen arkadaşın durumu (bekleniyor / reddetti / süresi doldu / gönderilemedi). */
+    function updateChallenge() {
+        const box = L.root && $('#olChNote', L.root);
+        if (!box) return;
+        const ch = NS.app.challenge;
+        const s = NS.rooms.state;
+        const joined = ch && s && s.players.some(p => p.user_id === ch.user.id && !p.left_at);
+        if (!ch || joined || ch.status === 'sending') { box.hidden = true; box.innerHTML = ''; box.dataset.sig = ''; return; }
+        const sig = ch.status + (ch.error ? ch.error.code : '');
+        if (box.dataset.sig === sig) return;
+        box.dataset.sig = sig;
+        const name = esc(ch.user.username);
+        let html = '';
+        if (ch.status === 'pending' || ch.status === 'accepted') html = `${icon('hourglass')}<span><strong>${name}</strong> bekleniyor. Davet 10 dakika geçerli.</span>`;
+        else if (ch.status === 'declined') html = `${icon('x')}<span><strong>${name}</strong> daveti reddetti.</span><span class="ol-ch-actions"><button class="btn btn-sm btn-secondary" type="button" data-ol-l="leave">Odayı kapat</button><button class="btn btn-sm btn-ghost" type="button" data-ol-l="invite">Başkasını davet et</button></span>`;
+        else if (ch.status === 'expired') html = `${icon('clock')}<span>Davetin süresi doldu.</span><span class="ol-ch-actions"><button class="btn btn-sm btn-primary" type="button" data-ol-l="reinvite">Tekrar davet et</button><button class="btn btn-sm btn-secondary" type="button" data-ol-l="leave">Odayı kapat</button></span>`;
+        else if (ch.status === 'error') html = `${icon('alert')}<span>Davet gönderilemedi: ${esc(ch.error ? ch.error.message : '')}</span><span class="ol-ch-actions"><button class="btn btn-sm btn-primary" type="button" data-ol-l="reinvite">Tekrar dene</button><button class="btn btn-sm btn-secondary" type="button" data-ol-l="leave">Odayı kapat</button></span>`;
+        box.className = 'ol-ch-note is-' + ch.status;
+        box.innerHTML = html;
+        box.hidden = false;
     }
 
     function figureHtml(p, ready, emote, size) {
@@ -210,15 +242,16 @@
             if (fig.dataset.key !== key) { fig.innerHTML = figureHtml(p, ready, emote, size); fig.dataset.key = key; }
             const disc = NS.rooms.isDisconnected(p.user_id);
             node.classList.toggle('is-me', p.user_id === myId);
-            node.classList.toggle('is-ready', !!p.is_ready && !p.is_host);
+            node.classList.toggle('is-ready', !!p.is_ready && !p.is_host && !s.room.is_quick);
             node.classList.toggle('is-host', !!p.is_host);
             node.classList.toggle('is-away', disc);
-            node.querySelector('.ol-p-crown').hidden = !p.is_host;
+            node.querySelector('.ol-p-crown').hidden = !p.is_host || !!s.room.is_quick;
             node.querySelector('.ol-p-name').textContent = p.username || p.display_name || 'Oyuncu';
             const b = node.querySelector('.ol-p-badge');
             if (b.dataset.rp !== String(p.ranked_points)) { b.innerHTML = NS.leagueBadge(p.ranked_points, 16); b.dataset.rp = String(p.ranked_points); b.title = NS.leagueName(p.ranked_points); }
             const stEl = node.querySelector('.ol-p-state');
-            stEl.innerHTML = disc ? `${icon('wifi-off')}Bağlantı koptu` : p.is_host ? 'Oda sahibi' : p.is_ready ? `${icon('check')}Hazır` : 'Bekliyor';
+            const quick = !!s.room.is_quick;
+            stEl.innerHTML = disc ? `${icon('wifi-off')}Bağlantı koptu` : quick ? (p.user_id === myId ? 'Sen' : `${icon('check')}Geldi`) : p.is_host ? 'Oda sahibi' : p.is_ready ? `${icon('check')}Hazır` : 'Bekliyor';
             node.setAttribute('aria-label', `${p.username}${p.user_id === myId ? ' (sen)' : ''}: ${disc ? 'bağlantı koptu' : p.is_host ? 'oda sahibi' : p.is_ready ? 'hazır' : 'bekliyor'}`);
             node.setAttribute('role', 'img');
         });
@@ -232,7 +265,12 @@
             e.style.setProperty('--x', (sl[i].x * 100).toFixed(2) + '%');
             e.style.setProperty('--y', (sl[i].y * 100).toFixed(2) + '%');
             e.style.setProperty('--depth', (0.82 + (sl[i].y - FLOOR_TOP) * 0.45).toFixed(3));
-            e.innerHTML = `<span class="ol-slot-ring">${icon('user')}</span><span class="ol-slot-text">Oyuncu bekleniyor</span>`;
+            const ch = NS.app.challenge;
+            const chWait = ch && i === act.length && ['pending', 'accepted', 'sending'].includes(ch.status);
+            e.classList.toggle('is-invited', !!chWait);
+            e.innerHTML = chWait
+                ? `<span class="ol-slot-ring is-invited">${NS.avatar(ch.user.avatar, { size: 40, framed: true })}</span><span class="ol-slot-text">${esc(ch.user.username)} bekleniyor</span>`
+                : `<span class="ol-slot-ring">${icon('user')}</span><span class="ol-slot-text">Oyuncu bekleniyor</span>`;
             layer.appendChild(e);
         }
         layer.dataset.count = String(cap);
@@ -246,8 +284,24 @@
         const btns = L.root && $('#olLobbyBtns', L.root);
         if (!s || !line || !btns) return;
         const me = NS.rooms.me();
-        const gate = NS.rooms.startGate();
         const act = NS.rooms.active();
+        const search = $('#olSearch', L.root);
+        if (s.room.is_quick) {
+            // Hızlı oda: hazır/başlat yok; sunucu oda dolunca başlatır. Yalnızca arama durumu + Vazgeç.
+            search.hidden = false;
+            const left = s.room.capacity - act.length;
+            const title = left <= 0 ? 'Rakip bulundu. Maç başlıyor…' : s.room.capacity === 2 ? 'Rakip aranıyor…' : `${act.length}/${s.room.capacity} oyuncu · ${left} kişi aranıyor…`;
+            const tEl = $('#olSearchTitle', L.root); if (tEl.textContent !== title) tEl.textContent = title;
+            line.innerHTML = ''; line.hidden = true;
+            if (btns.dataset.sig !== 'quick') {
+                btns.dataset.sig = 'quick';
+                btns.innerHTML = `<button class="btn btn-secondary btn-lg ol-cancel-btn" type="button" data-ol-l="leave">${icon('x')}<span>Vazgeç</span></button>`;
+            }
+            startSearchClock();
+            return;
+        }
+        search.hidden = true; line.hidden = false;
+        const gate = NS.rooms.startGate();
         const readyCount = act.filter(p => p.is_host || p.is_ready).length;
         line.innerHTML = `<span class="ol-gate-count">${act.length}/${s.room.capacity}</span> <span>${esc(gate.reason)}</span>${readyCount ? ` <span class="ol-gate-dim">· ${readyCount} hazır</span>` : ''}`;
         line.classList.toggle('is-ok', gate.can);
@@ -260,6 +314,21 @@
             const r = !!(me && me.is_ready);
             btns.innerHTML = `<button class="btn btn-lg ${r ? 'btn-secondary ol-ready-on' : 'btn-primary'} ol-ready-btn" type="button" data-ol-l="ready" aria-pressed="${r}" ${L.busy ? 'disabled' : ''}>${icon(r ? 'check' : 'hand')}<span>${r ? 'Hazırsın' : 'Hazırım'}</span></button>`;
         }
+    }
+
+    /** Arama süresi: odaya katıldığım andan (sunucu saati) beri. */
+    function startSearchClock() {
+        if (L.searchTimer) return;
+        const tick = () => {
+            const el = L.root && $('#olSearchTime', L.root);
+            const m = NS.rooms.me();
+            if (!el || !m) return;
+            const sec = Math.max(0, Math.floor((NS.clock.now() - Date.parse(m.joined_at)) / 1000));
+            el.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+        };
+        tick();
+        L.searchTimer = setInterval(tick, 1000);
+        L.offs.push(() => { clearInterval(L.searchTimer); L.searchTimer = null; });
     }
 
     function announceDiff() {
@@ -382,6 +451,7 @@
         if (act === 'copy-code') { const ok = await NS.util.copyText(s.room.code); NS.toast(ok ? `Oda kodu kopyalandı: ${s.room.code}` : s.room.code); return; }
         if (act === 'copy-link') { const ok = await NS.util.copyText(NS.app.inviteLink(s.room.code)); NS.toast(ok ? 'Davet bağlantısı kopyalandı.' : NS.app.inviteLink(s.room.code)); return; }
         if (act === 'invite') { NS.friends.openInvitePicker(s.room); return; }
+        if (act === 'reinvite') { NS.app.reinviteChallenge(b); return; }
         if (act === 'settings') { openSettings(); return; }
         if (act === 'ready') {
             const me = NS.rooms.me();

@@ -76,14 +76,15 @@
         F.seenInvites.add(inv.id);
         const who = (inv.inviter && inv.inviter.username) || 'Bir arkadaşın';
         const room = inv.room || {};
-        const what = room.mode ? `${NS.T.mode[room.mode]} · ${NS.T.format[room.format]} · ${NS.T.target[room.target_type]}` : 'oda';
+        const isDuel = room.mode === 'duel';
+        const what = room.mode ? (isDuel ? `${NS.T.target[room.target_type]} · ${NS.T.format[room.format]}` : `${NS.T.mode[room.mode]} · ${NS.T.format[room.format]} · ${NS.T.target[room.target_type]}`) : 'oda';
         const ttl = Math.max(5000, NS.clock.msUntil(inv.expires_at));
-        NS.announce(`${who} seni bir odaya davet etti.`);
+        NS.announce(isDuel ? `${who} seni düelloya çağırdı.` : `${who} seni bir odaya davet etti.`);
         NS.ui.banner({
             key: 'inv-' + inv.id, ttlMs: ttl,
             html: `${NS.avatar(inv.inviter && inv.inviter.avatar, { size: 40, framed: true, animated: true })}
-                <span class="ol-banner-text"><strong>${esc(who)}</strong> seni odasına çağırıyor<span class="ol-banner-sub">${esc(what)}</span></span>`,
-            actions: [{ id: 'no', label: 'Reddet' }, { id: 'yes', label: 'Katıl', kind: 'primary' }],
+                <span class="ol-banner-text"><span><strong>${esc(who)}</strong> ${isDuel ? 'seni düelloya çağırdı' : 'seni odasına çağırıyor'}</span><span class="ol-banner-sub">${esc(what)}</span></span>`,
+            actions: [{ id: 'no', label: 'Reddet' }, { id: 'yes', label: isDuel ? 'Kabul et' : 'Katıl', kind: 'primary' }],
             async onAction(id, close, btn) {
                 btn.disabled = true;
                 if (id === 'yes') {
@@ -141,6 +142,7 @@
         return `<li class="ol-friend" data-uid="${esc(u.id)}">
             <span class="ol-friend-av">${NS.avatar(u.avatar, { size: 40, framed: true })}<span class="ol-dot ol-dot-${st.cls}" aria-hidden="true"></span></span>
             <span class="ol-friend-text"><span class="ol-friend-name">${esc(u.username)}</span><span class="ol-friend-sub">${NS.leagueBadge(u.ranked_points, 14)}<span>${esc(st.text)}</span></span></span>
+            ${opts && opts.challenge ? `<button class="btn btn-sm btn-primary ol-friend-duel" type="button" data-ol-f="challenge" aria-label="${esc(u.username)} kişisini düelloya çağır">${icon('swords')}<span class="ol-lg-only">Düelloya çağır</span><span class="ol-sm-only">Çağır</span></button>` : ''}
             ${canInvite ? `<button class="btn btn-sm btn-primary" type="button" data-ol-f="invite" ${opts.invited && opts.invited.has(u.id) ? 'disabled' : ''}>${opts.invited && opts.invited.has(u.id) ? 'Davet edildi' : 'Davet et'}</button>` : ''}
             ${opts && opts.manage ? `<button class="icon-btn icon-btn-sm icon-btn-danger" type="button" data-ol-f="remove" aria-label="${esc(u.username)} arkadaşlıktan çıkar">${icon('x')}</button>` : ''}
         </li>`;
@@ -176,14 +178,14 @@
             ${F.invites.length ? `<div class="ol-subhead">Oda davetleri <span class="ol-count">${F.invites.length}</span></div><ul class="ol-friend-list">${F.invites.map(inv => `
                 <li class="ol-friend is-request" data-inv="${esc(inv.id)}">
                     <span class="ol-friend-av">${NS.avatar(inv.inviter && inv.inviter.avatar, { size: 40, framed: true })}</span>
-                    <span class="ol-friend-text"><span class="ol-friend-name">${esc(inv.inviter ? inv.inviter.username : 'Arkadaşın')}</span><span class="ol-friend-sub">${esc(inv.room ? NS.T.mode[inv.room.mode] + ' · ' + NS.T.target[inv.room.target_type] : 'Oda')}</span></span>
+                    <span class="ol-friend-text"><span class="ol-friend-name">${esc(inv.inviter ? inv.inviter.username : 'Arkadaşın')}</span><span class="ol-friend-sub">${esc(inv.room ? (inv.room.mode === 'duel' ? 'Düello çağrısı · ' + NS.T.target[inv.room.target_type] + ' · ' + NS.T.format[inv.room.format] : NS.T.mode[inv.room.mode] + ' · ' + NS.T.target[inv.room.target_type]) : 'Oda')}</span></span>
                     <button class="btn btn-sm btn-secondary" type="button" data-ol-f="inv-no">Reddet</button>
-                    <button class="btn btn-sm btn-primary" type="button" data-ol-f="inv-yes">Katıl</button>
+                    <button class="btn btn-sm btn-primary" type="button" data-ol-f="inv-yes">${inv.room && inv.room.mode === 'duel' ? 'Kabul et' : 'Katıl'}</button>
                 </li>`).join('')}</ul>` : ''}
             ${!F.loaded ? `<div class="ol-skel"></div><div class="ol-skel"></div>` : ''}
             ${F.loaded && !F.friends.length && !F.error ? `<div class="ol-empty">${icon('users')}<span>Henüz arkadaşın yok. Kullanıcı adıyla ekleyebilirsin.</span></div>` : ''}
-            ${online.length ? `<div class="ol-subhead">Çevrimiçi <span class="ol-count">${online.length}</span></div><ul class="ol-friend-list">${online.map(f => friendRow(f, { manage: true })).join('')}</ul>` : ''}
-            ${offline.length ? `<div class="ol-subhead">Çevrimdışı</div><ul class="ol-friend-list">${offline.map(f => friendRow(f, { manage: true })).join('')}</ul>` : ''}
+            ${online.length ? `<div class="ol-subhead">Çevrimiçi <span class="ol-count">${online.length}</span></div><ul class="ol-friend-list">${online.map(f => friendRow(f, { manage: true, challenge: true })).join('')}</ul>` : ''}
+            ${offline.length ? `<div class="ol-subhead">Çevrimdışı</div><ul class="ol-friend-list">${offline.map(f => friendRow(f, { manage: true, challenge: true })).join('')}</ul>` : ''}
             ${F.outgoing.length ? `<div class="ol-subhead">Gönderilen istekler</div><ul class="ol-friend-list">${F.outgoing.map(f => `
                 <li class="ol-friend is-outgoing" data-uid="${esc(f.user.id)}">
                     <span class="ol-friend-av">${NS.avatar(f.user.avatar, { size: 40, framed: true })}</span>
@@ -229,6 +231,7 @@
             const act = b.dataset.olF;
             const li = b.closest('li');
             if (act === 'reload') { load(); return; }
+            if (act === 'challenge') { const f = F.friends.find(x => x.user.id === li.dataset.uid); if (f) openChallengeSheet(f.user); return; }
             b.disabled = true;
             if (act === 'accept' || act === 'decline') await respond(li.dataset.fid, act === 'accept');
             else if (act === 'remove' || act === 'cancel') {
@@ -284,6 +287,69 @@
         return sh;
     }
 
+    // ------------------------------------------------------------ düelloya çağır (ajan P)
+    const CH_KEY = 'psikovaka_online_last_challenge';
+    function lastChallenge() {
+        try { const v = JSON.parse(localStorage.getItem(CH_KEY) || 'null'); if (v && NS.T.target[v.target] && (v.format === 'rounds' || v.format === 'hp')) return v; } catch (e) { /* yok */ }
+        return { target: 'diagnosis', format: 'rounds' };
+    }
+    /** Arkadaş satırındaki "Düelloya çağır": küçük ayar sayfası → özel düello odası + davet → lobi. */
+    function openChallengeSheet(user) {
+        const T = NS.T;
+        let cur = lastChallenge();
+        if (NS.rooms.roomId && NS.rooms.state && ['lobby', 'in_round', 'round_result'].includes(NS.rooms.state.room.status)) {
+            const sh0 = NS.ui.sheet({
+                title: 'Zaten bir odadasın',
+                body: `<p class="ol-sheet-text">Yeni bir düello kurmak için önce bulunduğun odadan çık. İstersen ${esc(user.username)} kişisini o odaya davet edebilirsin.</p>`,
+                actions: [{ id: 'back', label: 'Odaya dön', kind: 'primary' }],
+                onAction(id, sh) { sh.close(true); NS.app.openRoom(NS.rooms.roomId); }
+            });
+            return sh0;
+        }
+        const st = statusOf(user.id);
+        const chips = (group, vals, val, label) => `<div class="ol-chips" role="radiogroup" aria-label="${esc(label)}">${vals.map(v =>
+            `<label class="ol-chip${v.v === val ? ' is-checked' : ''}"><input type="radio" name="${group}" value="${esc(v.v)}" ${v.v === val ? 'checked' : ''}><span>${esc(v.l)}</span></label>`).join('')}</div>`;
+        const sh = NS.ui.sheet({
+            title: 'Düelloya çağır',
+            body: `<div class="ol-ch-who">${NS.avatar(user.avatar, { size: 48, framed: true })}<span class="ol-ch-who-text"><strong>${esc(user.username)}</strong><span class="ol-ch-who-sub"><span class="ol-dot ol-dot-${st.cls}" aria-hidden="true"></span>${esc(st.text)}</span></span></div>
+                <form class="ol-form" data-ol-ch novalidate>
+                    <fieldset class="ol-field"><legend class="ol-legend">Hedef</legend>${chips('target', ['diagnosis', 'therapy', 'pharmacology', 'combo'].map(t => ({ v: t, l: T.target[t] })), cur.target, 'Hedef')}</fieldset>
+                    <fieldset class="ol-field"><legend class="ol-legend">Biçim</legend>${chips('format', [{ v: 'rounds', l: T.format.rounds }, { v: 'hp', l: T.format.hp }], cur.format, 'Biçim')}
+                        <p class="ol-field-note" data-ol-ch-note>${esc(T.formatSub[cur.format])}</p></fieldset>
+                </form>
+                ${st.cls === 'off' ? `<div class="notice">${icon('info')}<span>${esc(user.username)} şu an çevrimdışı. Davet 10 dakika geçerli; bu sürede girerse görür.</span></div>` : ''}
+                <p class="ol-form-error" data-ol-err role="alert"></p>`,
+            actions: [{ id: 'go', label: 'Çağır', kind: 'primary', icon: 'swords' }],
+            async onAction(id, shx) {
+                if (id !== 'go') return;
+                cur = NS.ui.readForm(shx.body, cur);
+                shx.setBusy('go', true);
+                const r = await challenge(user, cur);
+                shx.setBusy('go', false);
+                if (r.ok) { try { localStorage.setItem(CH_KEY, JSON.stringify({ target: cur.target, format: cur.format })); } catch (e) { /* yok */ } shx.close(true); }
+                else { const el = shx.body.querySelector('[data-ol-err]'); if (el) el.textContent = r.error.message; }
+            }
+        });
+        sh.body.addEventListener('change', () => {
+            NS.ui.syncChecked(sh.body);
+            const f = sh.body.querySelector('input[name="format"]:checked');
+            const n = sh.body.querySelector('[data-ol-ch-note]');
+            if (f && n) n.textContent = T.formatSub[f.value];
+        });
+        return sh;
+    }
+    async function challenge(user, o) {
+        const r = await NS.app.createRoom({ mode: 'duel', format: o.format === 'hp' ? 'hp' : 'rounds', target: o.target, capacity: 2, rounds: o.format === 'hp' ? null : 5, visibility: 'private' });
+        if (!r.ok) return r;
+        const ch = { roomId: r.data.id, user: { id: user.id, username: user.username, avatar: user.avatar }, inviteId: null, status: 'sending', at: Date.now() };
+        NS.app.setChallenge(ch);
+        const inv = await NS.api.inviteFriend(r.data.id, user.id);
+        if (inv.ok) { ch.inviteId = inv.data && inv.data.id; ch.status = 'pending'; }
+        else { ch.status = 'error'; ch.error = inv.error; }
+        NS.app.setChallenge(ch);
+        return { ok: true, data: r.data };
+    }
+
     function reset() {
         F.loaded = false; F.friends = []; F.incoming = []; F.outgoing = []; F.invites = [];
         F.seenIncoming.clear(); F.seenInvites.clear();
@@ -292,7 +358,7 @@
     }
 
     NS.friends = {
-        state: F, load, loadInvites, reloadSoon, reloadInvitesSoon, renderInto, render, openInvitePicker, reset, add, respond,
+        state: F, openChallengeSheet, challenge, load, loadInvites, reloadSoon, reloadInvitesSoon, renderInto, render, openInvitePicker, reset, add, respond,
         onFriendshipChange() { reloadSoon(); },
         onInviteChange(p) { reloadInvitesSoon(); if (p && p.new && p.new.status !== 'pending') NS.ui.closeBanner('inv-' + p.new.id); }
     };

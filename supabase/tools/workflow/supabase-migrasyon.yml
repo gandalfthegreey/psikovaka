@@ -1,0 +1,155 @@
+# PsikoVaka — Supabase veritabanini GitHub'dan kendiliginden gunceller (iki is, sirayla).
+#
+#  1) migrasyon      : supabase/migrations/NNNN_*.sql dosyalarindan henuz uygulanmamis olanlari ad
+#                      sirasiyla uygular (supabase/tools/apply_migrations.sh; kayit tablosu public._migrations).
+#                      0001_init.sql canli projede zaten elle uygulandigi icin calistirilmadan kaydedilir.
+#                      Ilk hatada durur; basarisiz dosya kaydedilmez, sonraki dosyalar denenmez.
+#  2) cevap-anahtari : ancak 1. is basariliysa calisir. Cevap anahtarini js/cases.js'ten yeniden uretip
+#                      supabase/seed/0002_cases_answer_key.sql'i uygular (upsert; tekrar calistirmak guvenli).
+#
+# Bu dosya eski .github/workflows/supabase-cevap-anahtari.yml'nin yerine gecer (o _arsiv/'e tasindi):
+# iki is ayni akista oldugu icin cevap anahtari hicbir zaman sema guncellemesinden once calismaz ve
+# tek bir concurrency grubu sayesinde iki calisma ust uste binmez.
+#
+# Gerekli repository secret: SUPABASE_DB_URL = Supabase "Connect" penceresindeki Session pooler
+# baglanti dizesi (GitHub runner'lari yalnizca IPv4). Kurulum ve hata durumunda ne yapilir: supabase/README.md.
+
+name: Supabase veritabani
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - supabase/migrations/**
+      - supabase/tools/apply_migrations.sh
+      - supabase/seed/**
+      - js/cases.js
+      - js/diagnoses.js
+      - js/therapies.js
+      - js/pharmacology.js
+      - .github/workflows/supabase-migrasyon.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-veritabani
+  cancel-in-progress: false
+
+jobs:
+  migrasyon:
+    name: Veritabani guncellemelerini uygula (migration)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Secret kontrolu / Check secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error title=SUPABASE_DB_URL eksik / missing::Depoda SUPABASE_DB_URL secret'i tanimli degil. supabase/README.md 'GitHub'a veritabani baglantisini tanitma' bolumune bakin. / Repository secret SUPABASE_DB_URL is not set."
+            exit 1
+          fi
+          case "$SUPABASE_DB_URL" in
+            *YOUR-PASSWORD*|*'[YOUR'*)
+              echo "::error title=Sifre yer tutucusu / Password placeholder::SUPABASE_DB_URL icinde hala [YOUR-PASSWORD] yaziyor. / SUPABASE_DB_URL still contains the placeholder."
+              exit 1 ;;
+            *db.*.supabase.co*)
+              echo "::warning title=Dogrudan baglanti / Direct connection::Bu dize dogrudan (IPv6) baglantiya benziyor; Session pooler dizesini kullanin. / Looks like a direct (IPv6) connection string; use the Session pooler string." ;;
+          esac
+          echo "SUPABASE_DB_URL tanimli / is set."
+
+      - uses: actions/checkout@v7
+
+      - name: psql hazirla / Ensure psql
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+          fi
+          psql --version
+
+      - name: Migration'lari uygula / Apply migrations
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: bash supabase/tools/apply_migrations.sh supabase/migrations
+
+  cevap-anahtari:
+    name: Cevap anahtarini Supabase'e yukle
+    needs: migrasyon
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Secret kontrolu / Check secret
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ]; then
+            echo "::error title=SUPABASE_DB_URL eksik / missing::Depoda SUPABASE_DB_URL secret'i tanimli degil. supabase/README.md 'GitHub'a veritabani baglantisini tanitma' bolumune bakin. Cevap anahtari Supabase'e YUKLENMEDI. / Repository secret SUPABASE_DB_URL is not set; the answer key was NOT uploaded. See supabase/README.md."
+            exit 1
+          fi
+          case "$SUPABASE_DB_URL" in
+            *YOUR-PASSWORD*|*'[YOUR'*)
+              echo "::error title=Sifre yer tutucusu / Password placeholder::SUPABASE_DB_URL icinde hala [YOUR-PASSWORD] yazıyor; gercek veritabani sifresini koyun. / SUPABASE_DB_URL still contains the [YOUR-PASSWORD] placeholder."
+              exit 1 ;;
+            *db.*.supabase.co*)
+              echo "::warning title=Dogrudan baglanti / Direct connection::Bu dize dogrudan (direct) baglantiya benziyor; GitHub runner'lari IPv4 oldugu icin baglanamayabilir. Connect penceresinden Session pooler dizesini kullanin. / Looks like a direct connection string (IPv6); use the Session pooler string." ;;
+          esac
+          echo "SUPABASE_DB_URL tanimli / is set."
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Cevap anahtarini uret / Generate answer key
+        run: |
+          node supabase/seed/generate_answer_key.js
+          if ! git diff --quiet -- supabase/seed/0002_cases_answer_key.sql; then
+            echo "::notice::Depodaki 0002_cases_answer_key.sql eskiydi; yeniden uretilen surum uygulanacak. / Committed SQL was stale; the regenerated file is applied."
+          fi
+
+      - name: psql hazirla / Ensure psql
+        run: |
+          if ! command -v psql >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+          fi
+          psql --version
+
+      - name: Sema kontrolu / Check schema
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          ok=$(psql "$SUPABASE_DB_URL" -X -v ON_ERROR_STOP=1 -At -c \
+            "select (to_regclass('public.cases_answer_key') is not null and to_regclass('public.answer_catalog') is not null)::text")
+          if [ "$ok" != "true" ]; then
+            echo "::error title=Sema yok / Schema missing::Supabase'de public.cases_answer_key / public.answer_catalog tablolari yok. Migrasyon isinin ciktisina bakin (0001 uygulanmamis olabilir). / Tables missing; check the migration job output."
+            exit 1
+          fi
+
+      # Dosya kendi begin ... commit blogunu iceriyor (SQL Editor'de elle calistirma icin de tek islem).
+      # Bu yuzden --single-transaction kullanilmiyor (psql belgeleri: betik BEGIN/COMMIT iceriyorsa
+      # bu secenek beklenen etkiyi vermez). ON_ERROR_STOP=1 ile ilk hatada psql durur, acik islem geri alinir.
+      - name: Supabase'e uygula / Apply to Supabase
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          psql "$SUPABASE_DB_URL" -X -q -v ON_ERROR_STOP=1 -f supabase/seed/0002_cases_answer_key.sql
+
+      - name: Dogrulama / Verify counts
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          expected=$(node -e "const {CLINICAL_CASES}=require('./js/cases.js');console.log(CLINICAL_CASES.length)")
+          psql "$SUPABASE_DB_URL" -X -v ON_ERROR_STOP=1 -c "
+            select (select count(*) from public.cases_answer_key where is_active)     as aktif_vaka,
+                   (select count(*) from public.cases_answer_key where not is_active) as pasif_vaka,
+                   (select count(*) from public.answer_catalog)                       as katalog_ogesi;"
+          active=$(psql "$SUPABASE_DB_URL" -X -v ON_ERROR_STOP=1 -At -c "select count(*) from public.cases_answer_key where is_active")
+          echo "js/cases.js: $expected vaka | Supabase aktif vaka: $active"
+          if [ "$active" != "$expected" ]; then
+            echo "::error::Aktif vaka sayisi ($active) js/cases.js ile ($expected) uyusmuyor. / Active case count mismatch."
+            exit 1
+          fi
+          echo "### Cevap anahtari yuklendi: $active aktif vaka" >> "$GITHUB_STEP_SUMMARY"

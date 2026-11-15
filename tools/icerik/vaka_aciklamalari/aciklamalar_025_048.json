@@ -1,0 +1,526 @@
+{
+  "case-025": {
+    "whyThis": [
+      "Başkalarınca neredeyse fark edilmeyen milimetrik bir asimetriyi ‘ucube gibi’ bir kusur olarak algılaması temel ölçüttür.",
+      "Günde dört saati aşan ayna kontrolü ve burnu maske ile gözlükle gizleme, görünüm kaygısına yanıt olarak yapılan yineleyici davranışlardır.",
+      "Dört ameliyata rağmen memnun olmaması ve insan içine çıkamaması belirgin sıkıntı ve işlev kaybını gösterir; içgörü zayıftır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Kameralardan ve insanlardan kaçınma var, ancak korkunun kaynağı genel olarak değerlendirilmek değil, algılanan belirli bir beden kusurudur."
+      },
+      {
+        "diagnosisId": "anorexia_nervosa",
+        "reason": "Uğraşın konusu kilo ya da beden şekli değil, burun gibi belirli bir yüz özelliğidir ve yeme kısıtlaması yoktur."
+      },
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "İçgörü zayıf olsa da tablo görünüm uğraşı ve yineleyici davranışlarla tanımlanır; içgörü tamamen yoksa bile BDD ‘içgörüsüz’ belirteciyle konur."
+      }
+    ],
+    "teachingPoint": "BDD'de içgörü tamamen kaybolsa bile tanı sanrılı bozukluk değil, ‘içgörü yok/sanrısal inançlarla’ belirteçli BDD olarak kalır."
+  },
+  "case-026": {
+    "whyThis": [
+      "Sık öfke patlamaları, kolay içerleme ve kin tutma öfkeli/kolay kızan duygudurum boyutunu karşılar.",
+      "Otoriteyle inatlaşma, kurallara karşı gelme, başkalarını kasıtlı kızdırma ve hatalarını başkalarına yükleme tartışmacı/meydan okuyan davranış boyutudur.",
+      "Örüntü sekiz aydır, haftada birkaç kez, hem evde hem okulda görülmektedir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "conduct_disorder",
+        "reason": "Fiziksel saldırganlık, hayvanlara zarar, hırsızlık ya da yangın çıkarma gibi temel hak ihlalleri açıkça yoktur."
+      },
+      {
+        "diagnosisId": "adhd",
+        "reason": "Kural ihlalleri dikkatsizlik ya da dürtüsellikten değil, otoriteye karşı kasıtlı bir tutumdan kaynaklanır; yine de DEHB eşlik edebileceği için ayrıca taranmalıdır."
+      },
+      {
+        "diagnosisId": "dmdd",
+        "reason": "Öfke patlamaları ile karşı gelme davranışı öndedir; patlamalar arasında neredeyse her gün süren kalıcı bir öfkeli duygudurum tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "KOKGB'yi davranım bozukluğundan ayıran, başkalarının temel haklarını ve toplumsal kuralları çiğneyen ağır davranışların yokluğudur."
+  },
+  "case-027": {
+    "whyThis": [
+      "Evde akıcı konuşurken okulda öğretmen ve arkadaşlarıyla hiç konuşmaması, konuşmanın beklendiği belirli toplumsal ortamlarda sürekli konuşamamadır.",
+      "Durum okulun ilk ayıyla sınırlı kalmamış, beş aydır sürmekte ve akademik değerlendirmeyi engellemektedir.",
+      "İşitme, dil ve konuşma becerileri yaşına uygundur; konuşamama bir dil eksikliğinden değil, kaygıdan kaynaklanır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "asd",
+        "reason": "Evde esprili, şarkı söyleyen ve karşılıklı iletişim kuran bir çocuk görülüyor; sosyal iletişim sorunu ortama özgüdür, yaygın değildir."
+      },
+      {
+        "diagnosisId": "language_disorder",
+        "reason": "Dil anlama ve ifade becerileri gelişim düzeyine uygundur; sorun beceri değil kullanım ortamıdır."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Sosyal kaygı eşlik ediyor, ancak tablonun merkezinde belirli ortamlarda tamamen konuşamama vardır; bu özgül tablo seçici konuşmazlık olarak adlandırılır."
+      }
+    ],
+    "teachingPoint": "Seçici konuşmazlıkta konuşma becerisi sağlamdır; ayırt edici bulgu, çocuğun bazı ortamlarda rahatça konuşup bazılarında hiç konuşmamasıdır."
+  },
+  "case-028": {
+    "whyThis": [
+      "Maddi durumu çok iyiyken ihtiyaç duymadığı, değersiz bir tokayı çalması kişisel kullanım ya da para için olmayan çalma dürtüsünü gösterir.",
+      "Eylemden önce artan gerginlik, eylem sırasında haz ve rahatlama, ardından suçluluk dürtü denetimi bozukluklarına özgü döngüdür.",
+      "Çalınan eşyaların kullanılmadan saklanması ve eylemin öfke, intikam ya da sanrıyla ilişkili olmaması tabloyu destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Genel bir kural tanımazlık, aldatma ya da pişmanlık yokluğu yoktur; tersine eylem sonrası belirgin suçluluk vardır."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Dürtüsel davranışlar manik dönemde görülebilir, ancak burada epizodik yükselmiş duygudurum ya da azalmış uyku tarif edilmiyor; bu yine de sorgulanmalıdır."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Eylem bir obsesyonu nötralize etmek için değil, gerginliği haz ve doyumla boşaltmak için yapılır; OKB kompulsiyonları haz vermez."
+      }
+    ],
+    "teachingPoint": "Kleptomaniyi sıradan hırsızlıktan ayıran, nesneye ihtiyaç duyulmaması ve eylem öncesi gerginlik-eylem anında rahatlama döngüsüdür."
+  },
+  "case-029": {
+    "whyThis": [
+      "Sekiz haftadır neredeyse her gün süren çökkün duygudurum, yataktan çıkamama, yedi kilo kaybı, konsantrasyon kaybı ve anlamsızlık düşünceleri majör depresif epizodu karşılar.",
+      "Öyküde liseden beri, depresyondan çok önce başlayan konuşma ve yemek yeme gibi sosyal durumlarda rezil olma korkusu ve kaçınma vardır.",
+      "Sosyal kaygının yalnızlaşmaya ve ardından depresyona yol açması, iki ayrı ama ilişkili tanıyı gösterir; ana başvuru nedeni depresyondur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "avoidant_pd",
+        "reason": "Kaçınma belirli performans ve yemek durumlarına odaklı tarif ediliyor; yaygın bir yetersizlik benlik algısı ve tüm ilişkilerden çekilme gösterilmemiştir."
+      },
+      {
+        "diagnosisId": "dysthymia",
+        "reason": "Çökkünlük iki yıldır değil, iki aydır vardır; uzun süren kısım depresyon değil sosyal kaygıdır."
+      },
+      {
+        "diagnosisId": "adjustment_disorder",
+        "reason": "Depresif belirtiler majör depresyon ölçütlerini tam karşılıyor; bu durumda uyum bozukluğu tanısı konmaz."
+      }
+    ],
+    "teachingPoint": "Depresyonla gelen bir hastada sosyal çekilmenin depresyondan önce mi başladığını sor; önce başlamışsa altta yatan sosyal kaygı bozukluğu olabilir."
+  },
+  "case-030": {
+    "whyThis": [
+      "Köprü, tünel, toplu taşıma ve kalabalık pazar gibi birden çok durumda korku vardır; ölçüt için en az iki durum yeterlidir.",
+      "Korkunun içeriği ‘kaçamam ya da panik olursa yardım alamam’ düşüncesidir; bu agorafobinin özgül bilişidir.",
+      "Altı aydır yalnızca eşiyle evden çıkabilmesi, refakatçiye bağımlılık ve kaçınma ile belirgin işlev kaybını gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "specific_phobia",
+        "reason": "Korku tek bir durumla sınırlı değil; toplu taşıma, açık ve kapalı alanlar ile kalabalık gibi birçok alana yayılmıştır."
+      },
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Korkunun odağı başkalarınca olumsuz değerlendirilmek değil, kaçış ya da yardımın zor olacağı durumda kalmaktır."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Panik atak korkusu var, ancak beklenmedik tekrarlayan ataklar tarif edilmiyor; varsa iki tanı birlikte konabilir."
+      }
+    ],
+    "teachingPoint": "DSM-5 sonrası agorafobi panik bozukluktan bağımsız bir tanıdır; ayırt edici bilişi ‘kaçamam/yardım alamam’ korkusudur."
+  },
+  "case-031": {
+    "whyThis": [
+      "Sanrılar, görsel-işitsel varsanılar ve dezorganizasyon gerekli psikotik belirtilerden birden fazlasını karşılar.",
+      "Belirtiler on iki gün sürmüş, yani en az bir gün ve bir aydan kısa süre koşulunu sağlar.",
+      "Üçüncü haftada hastalık öncesi işlevselliğe tam dönüş olmuş ve nişanlının kaybolması belirgin bir stresör olarak öne çıkar."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophreniform",
+        "reason": "Belirtiler bir aydan kısa sürmüş ve tamamen gerilemiştir; şizofreniform için en az bir ay gerekir."
+      },
+      {
+        "diagnosisId": "acute_stress_disorder",
+        "reason": "Ağır bir stresör var ama tablo yeniden yaşantılama ve kaçınma değil, sanrı ve varsanılardır; ayrıca terk edilme ASB'nin aradığı türde bir travma değildir."
+      },
+      {
+        "diagnosisId": "substance_induced_psychotic",
+        "reason": "İdrar toksikolojisi ve kan tahlilleri temizdir."
+      }
+    ],
+    "teachingPoint": "Kısa psikotik bozukluk geriye dönük konan bir tanıdır: bir aydan kısa süre ve tam iyileşme gerçekleşmeden kesinleşmez; belirgin stresör varsa belirteç olarak eklenir."
+  },
+  "case-032": {
+    "whyThis": [
+      "Öfke, alınganlık, ağlama krizleri ve çökkünlük döngülerin çoğunda kanamadan önceki haftada ortaya çıkar ve kanamadan birkaç gün sonra kaybolur.",
+      "Göğüs hassasiyeti, eklem ağrısı, tatlı istekleri ve dikkat güçlüğü ek belirtilerdir; toplam belirti sayısı beşi aşar.",
+      "Belirtilerin en az iki döngü boyunca ileriye dönük günlükle doğrulanması tanının kesinleşmesi için gereken koşuldur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "mdd",
+        "reason": "Çökkünlük iki hafta kesintisiz sürmüyor; foliküler fazda belirtisiz bir dönem vardır."
+      },
+      {
+        "diagnosisId": "bipolar_2",
+        "reason": "Belirtisiz haftalarda bildirilen enerji ve neşe hipomani değil, normal duygudurumdur; döngüye kilitlenen değişim PMDD lehinedir."
+      },
+      {
+        "diagnosisId": "borderline_pd",
+        "reason": "Duygusal değişkenlik ve kavgalar kişilerarası tetikleyicilere değil, adet döngüsünün belirli bir fazına bağlıdır."
+      }
+    ],
+    "teachingPoint": "PMDD tanısı hatırlamaya değil, en az iki döngü boyunca tutulan günlük kayıtlarla gösterilen luteal faz-foliküler faz örüntüsüne dayanır."
+  },
+  "case-033": {
+    "whyThis": [
+      "Aura görme, kristallerin telepatik koruması ve büyü yapıldığı inancı büyüsel düşünce ve alışılmadık algısal deneyimlerdir.",
+      "Mecazi, aşırı ayrıntılı konuşma ve mevsime aykırı tuhaf giyim, garip konuşma ve davranış ölçütlerine uyar.",
+      "Yakınlar dışında arkadaşı olmaması, kuşkuculuk ve tanıdıklığa rağmen azalmayan sosyal kaygı kişilerarası yetersizlik boyutunu gösterir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Belirgin varsanı, sabit sanrı, dezorganizasyon ya da işlevsel çöküş tarif edilmiyor; inançlar eksantrik düzeyde kalıyor. İnançların ne kadar sarsılmaz olduğu ayrıca sınanmalıdır."
+      },
+      {
+        "diagnosisId": "schizoid_pd",
+        "reason": "Şizoid kişilikte büyüsel inançlar, tuhaf konuşma ve paranoid kaygı bulunmaz."
+      },
+      {
+        "diagnosisId": "paranoid_pd",
+        "reason": "Kuşkuculuk var, ancak büyüsel düşünce, algısal tuhaflıklar ve eksantrik davranış paranoid kişiliği aşar."
+      }
+    ],
+    "teachingPoint": "Şizotipal kişiliği öteki A kümesi bozukluklarından ayıran, büyüsel düşünce ve tuhaf algı/davranış gibi bilişsel-algısal çarpıklıklardır."
+  },
+  "case-034": {
+    "whyThis": [
+      "Giyim gibi gündelik kararları bile anne ya da sevgilisine sormadan verememesi aşırı güvence ve öğüt ihtiyacını gösterir.",
+      "Desteği yitirme korkusuyla aşağılayıcı davranışlara karşı çıkamaması, anlaşmazlık bildirmede güçlük ölçütüdür.",
+      "Kendi başına iş başlatamama ve bir ilişki bitince hemen yeni bir bakım kaynağı araması bakılma gereksiniminin yaygın örüntüsüdür."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "borderline_pd",
+        "reason": "Terk edilme korkusu ortak, ancak burada öfke patlamaları, kendine zarar verme ve değişken duygudurum değil, pasif ve uysal bir bağlılık vardır."
+      },
+      {
+        "diagnosisId": "avoidant_pd",
+        "reason": "Çekingen kişi reddedilme korkusuyla ilişkiden uzak durur; bu kişi ise ilişkiye yapışır."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Kendini çaresiz algılama var, ancak süreli bir çökkünlük epizodu değil, yaşam boyu süren bir bağımlılık örüntüsü tarif ediliyor."
+      }
+    ],
+    "teachingPoint": "Bağımlı kişilikte terk edilme korkusu boyun eğme ve yapışma ile, borderline'da ise öfke ve dürtüsel çabalarla ifade edilir."
+  },
+  "case-035": {
+    "whyThis": [
+      "İlgi odağı olmadığında rahatsızlık duyması ve görünümünü dikkat çekmek için kullanması temel özelliklerdir.",
+      "Terapistle ilk dakikalarda aşırı samimi ve cinsel açıdan kışkırtıcı davranması, ilişkileri olduğundan yakın algılama ve uygunsuz baştan çıkarıcılık ölçütleridir.",
+      "Hızla değişen, yüzeysel duygular, teatrallik ve kolay etkilenme tabloyu tamamlar; manik dönem öyküsü yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "narcissistic_pd",
+        "reason": "Aradığı şey üstünlük ve hayranlık değil, ne pahasına olursa olsun ilgidir; büyüklenmecilik ve ayrıcalık beklentisi tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "borderline_pd",
+        "reason": "Duygusal değişkenlik var, ancak kendine zarar verme, kronik boşluk ve terk edilme dehşeti yoktur; duygular derin değil yüzeyseldir."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Abartılı ve dışa dönük tavır epizodik değil, kişiliğin kalıcı bir özelliğidir ve manik dönem öyküsü yoktur."
+      }
+    ],
+    "teachingPoint": "Histriyonik kişilikte duygular yoğun görünür ama yüzeyseldir ve hızla değişir; amaç ilgiyi kendinde tutmaktır."
+  },
+  "case-036": {
+    "whyThis": [
+      "Meslektaşlarının gizli plan yaptığı ve komşularının arabasını bilerek çizdiği şüphesi, yeterli dayanak olmadan zarar görme beklentisidir.",
+      "Eşinin sadakatini kanıt olmadan sürekli sorgulaması ve yıllar önceki bir şakayı affetmemesi kin tutma ve yinelenen haksız kuşkuculuk ölçütleridir.",
+      "Masum sözlerden gizli aşağılama anlamı çıkarması, örüntünün yaygın ve uzun süreli olduğunu gösterir; sabit, bizar bir sanrı saptanmamıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "delusional_disorder",
+        "reason": "Kuşkular tek bir sabit sanrıya odaklanmak yerine birçok kişiye yayılıyor; ancak eşin aldattığı inancı sarsılmaz kesinliğe ulaşmışsa kıskançlık tipi sanrılı bozukluk ayrıca değerlendirilmelidir."
+      },
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Varsanı, dezorganizasyon ve negatif belirti yoktur; işlevsellik korunmaktadır."
+      },
+      {
+        "diagnosisId": "schizotypal_pd",
+        "reason": "Büyüsel düşünce, tuhaf algısal deneyimler ve eksantrik davranış tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "Paranoid kişilik ile sanrılı bozukluk arasındaki çizgi inancın kesinliğidir: kuşku sorgulanabiliyorsa kişilik, sarsılmaz kesinlikteyse sanrı düşünülür."
+  },
+  "case-037": {
+    "whyThis": [
+      "Şakaktaki saçları tekrar tekrar kökünden koparması belirgin saç kaybına (kellik alanları, peruk ihtiyacı) yol açmıştır.",
+      "Eldiven ve tırnak kesme gibi yöntemlerle davranışı durdurma girişimleri defalarca başarısız olmuştur.",
+      "Koparmadan önce gerilim, koparınca rahatlama ve ders çalışma, televizyon gibi pasif anlarda ortaya çıkması beden odaklı tekrarlayıcı davranışa uyar; alopesi areata ve mantar enfeksiyonu dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bdd",
+        "reason": "Saçı kusurlu bulup düzeltmek için değil, gerilimi boşaltmak için yoluyor; kellik onun için davranışın sonucudur, nedeni değil."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Yolmayı başlatan bir obsesyon ya da korkulan bir sonuç yoktur; davranış hazza yakın bir rahatlamayla biter."
+      },
+      {
+        "diagnosisId": "excoriation",
+        "reason": "Hedef deri değil saçtır; aynı ailede yer alan iki tanıyı davranışın yöneldiği bölge ayırır."
+      }
+    ],
+    "teachingPoint": "Trikotillomanide amaç görünümü düzeltmek değil gerilimi boşaltmaktır; amaç görünümü düzeltmekse BDD düşünülmelidir."
+  },
+  "case-038": {
+    "whyThis": [
+      "Sivilce, kabuk ve pürüzleri saatlerce tırnaklayarak kanama ve kalıcı izlere yol açması, deri lezyonlarıyla sonuçlanan yineleyici yolma davranışıdır.",
+      "Tırnak protezi ve yara bandı gibi durdurma girişimleri başarısız olmuştur.",
+      "Günde 2-3 saat kaybı ve yazın uzun kol giyme sıkıntı ve işlev kaybını gösterir; egzama, uyuz ve uyarıcı kullanımına bağlı kaşıntı dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bdd",
+        "reason": "Davranış algılanan bir görünüm kusurunu düzeltme isteğinden değil gerginlik anlarında dürtüsel olarak ortaya çıkar; yine de yolmanın amacı mutlaka sorulmalıdır."
+      },
+      {
+        "diagnosisId": "factitious_disorder",
+        "reason": "Yaralar hasta rolü kazanmak için bilerek üretilmiyor; kişi onları gizlemeye çalışıyor."
+      },
+      {
+        "diagnosisId": "trichotillomania",
+        "reason": "Davranış saç ya da kıla değil deriye yöneliktir."
+      }
+    ],
+    "teachingPoint": "Beden odaklı tekrarlayıcı davranışlarda (saç ve deri yolma) tanı için hem fiziksel hasar hem de durdurma girişimlerinin başarısız olması aranır."
+  },
+  "case-039": {
+    "whyThis": [
+      "Ölümcül zincirleme kazadan sağ kurtulmak gerçek ölüm tehdidine maruz kalmadır.",
+      "İstemsiz anılar, kendini dışarıdan izleme ve çarpışma anını hatırlayamama, araçtan ve haberlerden kaçınma ile aşırı tetikte olma birçok belirti kümesini kapsar.",
+      "Olayın üzerinden 10 gün geçmiştir; belirtiler üç gün ile bir ay arasındaki zaman penceresindedir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "ptsd",
+        "reason": "TSSB tanısı için belirtilerin bir aydan uzun sürmesi gerekir; burada yalnızca 10 gün geçmiştir. Bir ay sonra sürerse tanı TSSB'ye dönüşür."
+      },
+      {
+        "diagnosisId": "depersonalization_derealization",
+        "reason": "Yabancılaşma deneyimi travmanın hemen ardından ve yeniden yaşantılamayla birlikte ortaya çıkmıştır; bağımsız bir dissosiyatif bozukluk değildir."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Çarpıntı ve titreme beklenmedik ataklar değil, travma anılarıyla tetiklenen tepkilerdir."
+      }
+    ],
+    "teachingPoint": "Akut stres bozukluğu ile TSSB'yi aynı belirtiler değil zaman ayırır: travmadan sonra 3 gün-1 ay ASB, bir aydan sonra TSSB."
+  },
+  "case-040": {
+    "whyThis": [
+      "Belirtiler belirli bir stresörden, boşanmadan bir ay sonra, yani üç aylık pencerenin içinde başlamıştır.",
+      "Ağlama isteği, karamsarlık, konsantrasyon güçlüğü ve iş performansında düşüş stresörün beklenen etkisinden fazla sıkıntı ve işlev kaybını gösterir.",
+      "Anhedoni, ağır intihar düşüncesi ve psikotik öğe yoktur; tablo majör depresyon ölçütlerine ulaşmıyor."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "mdd",
+        "reason": "Anhedoni yoktur ve belirti sayısı ile şiddeti majör depresif epizod eşiğine ulaşmıyor; ulaşsaydı stresör olsa bile MDD tanısı konurdu."
+      },
+      {
+        "diagnosisId": "ptsd",
+        "reason": "Boşanma, yaşamı tehdit eden travmatik bir olay değildir ve yeniden yaşantılama ya da kaçınma belirtileri yoktur."
+      },
+      {
+        "diagnosisId": "prolonged_grief_disorder",
+        "reason": "Uzatılmış yas yakın birinin ölümünden sonra en az 12 ay süren bir yas tepkisidir; burada kayıp bir boşanmadır ve süre iki aydır."
+      }
+    ],
+    "teachingPoint": "Uyum bozukluğu ‘artık’ bir tanıdır: stresöre yanıt olan tablo başka bir bozukluğun ölçütlerini karşılıyorsa o tanı öncelik kazanır."
+  },
+  "case-041": {
+    "whyThis": [
+      "Aç olmadan, hızlı ve rahatsız edecek kadar dolana kadar, gizlice yeme; kontrol kaybıyla giden tıkınma nöbetlerinin tipik özellikleridir.",
+      "Nöbetler beş aydır haftada 2-3 kez tekrarlamakta, ardından tiksinme, utanç ve çökkünlük gelmektedir.",
+      "Kusma, laksatif ya da aşırı egzersiz gibi düzenli telafi davranışı yoktur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "bulimia_nervosa",
+        "reason": "Tıkınma nöbetlerinin ardından kusma, laksatif ya da aşırı egzersiz gibi telafi davranışları yoktur."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Nöbet sonrası çökkünlük vardır, ancak iki hafta boyunca süren bir depresif epizod tarif edilmiyor; tablo yeme davranışı etrafında örgütlenmiştir."
+      },
+      {
+        "diagnosisId": "other_specified_feeding",
+        "reason": "Nöbet sıklığı ve süresi tam tanı eşiğini (en az üç ay, haftada en az bir) aştığı için ‘belirlenmiş diğer’ kategorisi gerekmez."
+      }
+    ],
+    "teachingPoint": "Tıkınırcasına yeme bozukluğunu bulimiyadan ayıran tek temel ölçüt, düzenli telafi davranışının yokluğudur; obezite tanı ölçütü değildir."
+  },
+  "case-042": {
+    "whyThis": [
+      "Toprak, tebeşir, boya ve silgi gibi besin değeri olmayan maddeleri dört aydır yemesi en az bir aylık süre ölçütünü karşılar.",
+      "Yedi yaşında bu davranış gelişim düzeyine uygun değildir ve kültürel ya da dini bir uygulamanın parçası değildir.",
+      "Ağır demir eksikliği anemisi pika ile sık birlikte görülen, tıbbi değerlendirme gerektiren bir bulgudur."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "asd",
+        "reason": "Gelişim ve sosyal iletişim yaşına uygundur, otizm bulgusu yoktur; bu durumda pika ayrı bir tanı olarak konur."
+      },
+      {
+        "diagnosisId": "intellectual_disability_mild",
+        "reason": "Zeka ve gelişim testleri yaşına uygundur."
+      },
+      {
+        "diagnosisId": "arfid",
+        "reason": "Sorun normal yiyecekleri kısıtlamak değil, yiyecek olmayan maddeleri yemektir."
+      }
+    ],
+    "teachingPoint": "Pika tanısında yaş ve bağlam kritiktir: davranış gelişim düzeyine uygun olmamalı ve kültürel olarak kabul görmüş bir uygulama olmamalıdır."
+  },
+  "case-043": {
+    "whyThis": [
+      "Sırt ağrısı, karın şişkinliği, yanma ve yutma güçlüğü gibi gerçekten yaşanan ve sıkıntı veren bedensel belirtiler vardır.",
+      "Gününün neredeyse tamamını belirtilere odaklanarak ve felaket senaryolarıyla geçirmesi, 12 hekime başvurması belirtilerle ilgili aşırı düşünce, kaygı ve davranışı gösterir.",
+      "Tablo üç yıldır sürmektedir; tanı organik nedenin bulunamamasına değil, belirtilere verilen aşırı tepkiye dayanır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "illness_anxiety_disorder",
+        "reason": "Belirgin ve sıkıntı veren bedensel belirtiler vardır; hastalık kaygısında belirtiler yoktur ya da çok hafiftir."
+      },
+      {
+        "diagnosisId": "conversion_disorder",
+        "reason": "Felç, körlük ya da nöbet gibi nörolojik işlev kaybı değil, ağrı ve yanma gibi yaygın belirtiler vardır."
+      },
+      {
+        "diagnosisId": "mdd",
+        "reason": "Çoklu ağrılar depresyonla birlikte görülebilir, ancak çökkün duygudurum ve anhedoni tarif edilmiyor; bunlar ayrıca taranmalıdır."
+      }
+    ],
+    "teachingPoint": "Bedensel belirti bozukluğu ‘açıklanamayan belirti’ tanısı değildir; belirti tıbbi olarak açıklansa bile ona verilen orantısız tepki tanıyı koydurur."
+  },
+  "case-044": {
+    "whyThis": [
+      "Bedenini dışarıdan izliyormuş gibi hissetme ve ellerini kendine ait hissetmeme kendilikten kopma (depersonalizasyon) yaşantısıdır.",
+      "Çevrenin yapay, cansız ve dekor gibi algılanması gerçekdışılık (derealizasyon) yaşantısıdır.",
+      "Kişi bunların bir his olduğunu bilir; gerçeği değerlendirme sağlamdır. MRG, EEG ve madde taraması temizdir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "schizophrenia",
+        "reason": "Gerçeği değerlendirme sağlamdır; kişi yaşantının gerçek olmadığını bilir ve sanrı ya da varsanı yoktur."
+      },
+      {
+        "diagnosisId": "panic_disorder",
+        "reason": "Depersonalizasyon panik atakta da görülebilir, ancak burada dakikalar içinde tepe yapan ve bedensel belirtilerle giden ataklar tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "substance_induced_anxiety",
+        "reason": "Esrar ve sentetik kannabinoid dahil madde kullanımı dışlanmıştır."
+      }
+    ],
+    "teachingPoint": "Depersonalizasyon/derealizasyonda en önemli soru gerçeği değerlendirmenin korunup korunmadığıdır; korunmuyorsa psikotik bir süreç düşünülür."
+  },
+  "case-045": {
+    "whyThis": [
+      "Adını, mesleğini ve medeni durumunu hatırlayamaması olağan unutkanlıkla açıklanamayacak düzeyde önemli otobiyografik bilgi kaybıdır.",
+      "Kaybolma, ağır bir stresle aynı gün olmuş ve 400 km uzağa amaçlı bir yolculuk eşlik etmiştir; bu, dissosiyatif amnezide ‘füg ile’ belirtecine karşılık gelir.",
+      "Dil, zeka ve motor işlevler sağlamdır; kafa travması, inme ve epilepsi dışlanmıştır."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "major_neurocognitive_tbi",
+        "reason": "Görüntülemede travma bulgusu yoktur ve yeni bilgi öğrenme korunmuştur; organik amnezide genellikle yeni bilgi öğrenme bozulur."
+      },
+      {
+        "diagnosisId": "did",
+        "reason": "Belirgin ayrı kimlik durumları gözlenmemiştir; bellek kaybı tek başına tablonun merkezindedir."
+      }
+    ],
+    "teachingPoint": "Dissosiyatif amneziyi organik amneziden ayıran, kişisel geçmişe ait (otobiyografik) bilginin seçici kaybı ve yeni bilgi öğrenmenin korunmasıdır; amaçlı yolculuk eşlik ediyorsa ayrı bir tanı değil, ‘dissosiyatif füg ile’ belirteci eklenir."
+  },
+  "case-046": {
+    "whyThis": [
+      "Espri ve mecazları harfi harfine anlama, göz temasından rahatsızlık, tekdüze ses tonu ve beden dilini okuyamama sosyal iletişim ve karşılıklılıkta süregen kısıtlılıklardır.",
+      "Çocukluktan beri tren ve metro hatlarına yoğun, dar ilgi ile rutin değişikliğine aşırı tepki kısıtlı ve yineleyici davranış boyutunu karşılar.",
+      "Belirtiler erken gelişimden beri vardır ve iş ortamında işlevi etkilemektedir; dil ve zeka normalin üstündedir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "social_anxiety",
+        "reason": "Kişi sosyal ipuçlarını anlayıp olumsuz değerlendirilmekten korkmuyor; asıl sorun ipuçlarını anlamlandırmadaki gelişimsel güçlüktür."
+      },
+      {
+        "diagnosisId": "ocpd",
+        "reason": "Rutinlere bağlılık ve dar ilgiler var, ancak OKKB'de sosyal-duygusal karşılıklılıkta ve mecazları anlamada çocukluktan beri süren bir sorun yoktur."
+      },
+      {
+        "diagnosisId": "social_communication_disorder",
+        "reason": "Toplumsal iletişim bozukluğunda kısıtlı ve yineleyici ilgi/davranışlar yoktur; burada belirgin biçimde vardır."
+      }
+    ],
+    "teachingPoint": "Otizm ile toplumsal (pragmatik) iletişim bozukluğunu ayıran, kısıtlı ve yineleyici ilgi/davranışların varlığıdır."
+  },
+  "case-047": {
+    "whyThis": [
+      "Göz kırpma ve baş-omuz silkme çoklu motor tiklerdir; boğaz temizleme ve havlama benzeri sesler vokal tiklerdir.",
+      "Tikler bir buçuk yıldır, yani bir yıldan uzun süredir devam etmektedir ve 18 yaşından önce başlamıştır.",
+      "Tik öncesi dürtüsel baskı ve sonrasında rahatlama, stresle artma ve odaklanmayla azalma tiklerin tipik özelliğidir; MRG normaldir."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "chronic_motor_vocal_tic",
+        "reason": "Süregen tik bozukluğunda yalnızca motor ya da yalnızca vokal tik vardır; burada ikisi birlikte bulunur."
+      },
+      {
+        "diagnosisId": "provisional_tic_disorder",
+        "reason": "Tikler bir yıldan uzun süredir devam ettiği için geçici tik bozukluğu tanımının dışındadır."
+      },
+      {
+        "diagnosisId": "ocd",
+        "reason": "Hareketten önce gelen şey bir düşünce ya da korku değil bedensel bir dürtü hissidir; ancak OKB Tourette'e sık eşlik ettiği için ayrıca taranmalıdır."
+      }
+    ],
+    "teachingPoint": "Tik bozukluklarını iki soru ayırır: hem motor hem vokal tik var mı ve süre bir yılı aşıyor mu? İkisi de evetse Tourette."
+  },
+  "case-048": {
+    "whyThis": [
+      "Trafikteki küçük bir yavaşlamaya levyeyle araç camlarını kırma ve darp etme tepkisi, tetikleyiciyle belirgin biçimde orantısız bir saldırganlıktır.",
+      "Patlamalar ayda 2-3 kez, önemsiz tartışmalarda, plansız ve kontrolsüzce ortaya çıkar ve mal ya da kişiye zarar verir.",
+      "Sonrasında pişmanlık ve utanç duyması, madde etkisi ve beyin patolojisinin dışlanmış olması tabloyu destekler."
+    ],
+    "whyNot": [
+      {
+        "diagnosisId": "antisocial_pd",
+        "reason": "Saldırganlık çıkar amaçlı ve planlı değildir; kişi sonrasında belirgin pişmanlık duyar ve genel bir hak ihlali örüntüsü tarif edilmiyor."
+      },
+      {
+        "diagnosisId": "bipolar_1",
+        "reason": "Öfke epizodik yükselmiş duygudurum, azalmış uyku ya da büyüklenmecilik eşliğinde değil, dakikalar süren patlamalar halindedir."
+      },
+      {
+        "diagnosisId": "borderline_pd",
+        "reason": "Yoğun öfke borderline'da da görülür, ancak terk edilme korkusu, kimlik karmaşası ve kendine zarar verme tarif edilmiyor."
+      }
+    ],
+    "teachingPoint": "Aralıklı patlayıcı bozuklukta saldırganlık dürtüsel ve amaçsızdır, ardından pişmanlık gelir; planlı ve çıkar amaçlı saldırganlık başka tanıları düşündürür."
+  }
+}

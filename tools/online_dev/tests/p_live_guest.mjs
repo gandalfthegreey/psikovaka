@@ -1,0 +1,28 @@
+// Ajan P: canlı proje, MİSAFİR (hesap gerekmez): 0003 yokken yeni girişler gizli/"yakında", yerel günlük çalışıyor.
+import { browser, ctx, page, check, sleep } from './lib.mjs';
+const IDX = process.env.IDX || 'http://localhost:8899/index.html';
+const b = await browser();
+const c = await ctx(b, { viewport: { width: 390, height: 844 } });
+const p = await page(c, 'live');
+await p.goto(IDX + '#/oyna');
+await p.waitForFunction(() => window.PsikoVakaAccount && window.PsikoVakaAccount.availability !== 'pending', null, { timeout: 20000 });
+check(await p.evaluate(() => window.PsikoVakaAccount.availability === 'ready' && window.PsikoVakaAccount.state === 'guest'), 'canlı Supabase: misafir hazır');
+await p.evaluate(() => window.PsikoVakaOnline.daily.refreshCard(true)); await sleep(2500);
+const av = await p.evaluate(() => window.PsikoVakaOnline.daily.available);
+console.log('  günlük özellik:', av);
+check(av === false ? await p.locator('#btnDailyBoard').isHidden() : true, '0003 yoksa "Sıralamayı gör" gizli');
+check(await p.locator('#dailyStreakChip').isHidden(), 'misafirde seri gizli');
+await p.click('#btnStartDaily'); await sleep(800);
+check(await p.evaluate(() => window.game.currentScreen === 'play' && window.game.currentMode === 'daily' && !window.PsikoVakaOnline.daily.isServerDaily()), 'yerel günlük vaka başladı');
+await p.evaluate(() => window.game.giveUp()); await sleep(900);
+check(await p.evaluate(() => window.game.isGameOver), 'yerel günlük bitti (pes)');
+await p.evaluate(() => { window.game.closeModal(window.game.dom.resultModal); window.game.leavePlayScreen(); location.hash = '#/gunluk'; }); await sleep(1500);
+const t = await p.locator('#dailyMount').innerText();
+check(/yakında|giriş yap/i.test(t), 'sıralama ekranı: "yakında" ya da giriş çağrısı → ' + t.split('\n').slice(-2).join(' '));
+await p.evaluate(() => { location.hash = '#/online'; }); await sleep(1200);
+check(await p.locator('#olQuick').count() === 0 || await p.locator('#olQuick').isHidden(), 'misafir: hızlı eşleş kartı yok');
+await p.evaluate(() => { location.hash = '#/ligler'; }); await sleep(1200);
+check((await p.locator('.lg-tier').count()) === 17 && (await p.locator('.lg-head-guest').count()) === 1, 'Lig bilgisi (misafir) canlıda çalışıyor');
+check(p._errors.length === 0, 'konsol temiz ' + p._errors.join('|'));
+await b.close();
+console.log(`SONUÇ ${check.oks || 0} ok / ${check.fails || 0} fail`);

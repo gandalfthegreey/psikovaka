@@ -1,8 +1,10 @@
 /**
  * PsikoVaka — Lig tablosu (tek kaynak). Lig adları yalnızca istemcide hesaplanır; sunucu yalnızca RP tutar.
  *
- * Bronz, Gümüş, Altın, Platin, Elmas: her biri 3 kademe ("Altın 1" en düşük, "Altın 3" en yüksek), her kademe 100 RP.
- * Uzman (1500+) ve Kahin (2000+) tek kademe. Yeni hesap 250 RP = Bronz 3.
+ * Bronz, Gümüş, Altın, Platin, Elmas: her biri 3 kademe ("Altın 1" en düşük, "Altın 3" en yüksek); ardından Uzman ve Kahin.
+ * Eşikler (RP, 2026-11-15 Emre kararı, "daha zor merdiven"): Bronz 0/150/300, Gümüş 500/700/900,
+ * Altın 1150/1400/1650, Platin 1950/2250/2550, Elmas 2900/3250/3600, Uzman 4000, Kahin 5000+.
+ * Yeni hesap 0 RP = Bronz 1 (RP v2, migration 0003).
  *
  * API: window.PsikoVakaLeagues
  *   TIERS                 [{ id, league, leagueName, level, name, min, max, color }]  (17 kademe, artan)
@@ -23,26 +25,28 @@
         { id: 'kahin', name: 'Kahin', color: '#ff5f86', dark: '#8f1f43', levels: 1 }
     ];
 
+    // Her kademenin alt sınırı (artan). Tek kaynak: burası.
+    const THRESHOLDS = {
+        bronz: [0, 150, 300], gumus: [500, 700, 900], altin: [1150, 1400, 1650],
+        platin: [1950, 2250, 2550], elmas: [2900, 3250, 3600], uzman: [4000], kahin: [5000]
+    };
     const TIERS = [];
-    let rp = 0;
     LEAGUES.forEach(L => {
         for (let lv = 1; lv <= L.levels; lv++) {
-            const min = L.id === 'kahin' ? 2000 : rp;
-            const span = L.id === 'uzman' ? 500 : 100;
             TIERS.push({
                 id: L.levels > 1 ? `${L.id}${lv}` : L.id,
                 league: L.id,
                 leagueName: L.name,
                 level: L.levels > 1 ? lv : 0,
                 name: L.levels > 1 ? `${L.name} ${lv}` : L.name,
-                min,
-                max: L.id === 'kahin' ? Infinity : min + span - 1,
+                min: THRESHOLDS[L.id][lv - 1],
+                max: Infinity,
                 color: L.color,
                 dark: L.dark
             });
-            rp = min + span;
         }
     });
+    for (let k = 0; k < TIERS.length - 1; k++) TIERS[k].max = TIERS[k + 1].min - 1;
 
     function clean(v) {
         const n = Math.floor(Number(v));
@@ -105,7 +109,7 @@
             `<path d="${shape}" fill="${t.color}" stroke="${t.dark}" stroke-width="1.4" stroke-linejoin="round"/>${inner}${pips}</svg>`;
     }
 
-    const api = { LEAGUES, TIERS, tierFor, progressText, badge };
+    const api = { LEAGUES, TIERS, THRESHOLDS, tierFor, progressText, badge, dative };
     global.PsikoVakaLeagues = api;
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

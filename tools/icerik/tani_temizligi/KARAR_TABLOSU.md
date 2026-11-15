@@ -397,3 +397,70 @@ Eşlenen vakalarda 6. ipucu ve gerektiğinde `dsmCriteriaSummary` / `symptomHigh
 - Koku alma referans bozukluğu DSM-5-TR'de belirlenmiş diğer OKİB örneği olarak ele alındı (DSM-5'teki jikoshu-kyofu örneğinin yerine). Kitapla doğrulanmalı.
 - Kleine-Levin sendromu vakası (136) arşivlendi: hipersomnolans bozukluğunun süre ölçütü karşılanmıyor; "belirlenmiş diğer hipersomnolans bozukluğu" listede yok. İstenirse o kategori eklenip vaka geri alınabilir.
 - Yeni 6 rehber girdisi ve birleştirilen 164 F_/G_ özeti kitaba erişimsiz yazıldı; `tani_ozetleri/F_GOZDEN_GECIR.md` ve `G_GOZDEN_GECIR.md` listeleri hâlâ geçerli.
+
+
+## 2026-11-15 (2. tur, Claude ajan R) — Belirleyici / alt tip girdilerinin kaldırılması
+
+**Bu bölüm elle eklendi; yukarıdaki tablo `uygula.js` ile üretilmişti.** `uygula.js` eski yedekten yeniden kurar: **yeniden çalıştırmayın** (bu turu, sonraki takma ad eklemelerini ve pharmacology.js düzeltmelerini geri alır). Bu turun betiği: `alt_tip_temizligi.js` (veri: `alt_tip_veri.js`, açıklama düzeltmeleri: `alt_tip_aciklama_duzeltmeleri.js`); güncel dosyalardan çalışır, tekrar çalıştırılabilir (`--kuru` ile önizleme).
+
+**Kural (Emre, kesin):** tahmin listesinde yalnızca resmî DSM-5-TR tanıları; belirleyiciler / alt tipler / görünümler ayrı girdi değildir (ayrı ICD kodu olsa bile). Ölçüt kümesi ayrı olanlar kalır: bipolar I / II, maddeye özgü bozukluklar, nörobilişsel etiyolojiler, kalıcı depresif bozukluk, parafilik bozukluklar, ayrı yeme bozuklukları, kendine / başkasına yüklenen yapay bozukluk, çocuk / ergen-erişkin cinsiyet disforisi, 6 yaş ve altı TSSB, uyku apnesi türleri. Zihinsel yetiyitimi düzeyleri önceki karar gereği **kaldı** (kurala göre şiddet belirleyicisidir; Emre isterse birleştirilir). Önceki tabloda "ayrı kodlu görünüm" diye tutulan alt tipler bu turda kural gereği **geri alındı** (gerekçe sütununda belirtildi).
+
+- Önce: 207 tanı, 207 rehber girdisi, 138 aktif vaka. Sonra: **179 tanı, 179 rehber girdisi, 138 aktif vaka**; liste dışı kavram 96 → 127.
+- Kaldırılan: 31 (hepsi BELIRLEYICI). Eklenen üst tanı: 3 (`specific_learning_disorder`, `circadian_rhythm_sleep_wake`, `nrem_sleep_arousal`; alt tipleri listedeydi, üst tanı yoktu). Kaldırılanların adları/takma adları üst tanıya takma ad oldu; rehber özetleri `liste_disi_kavramlar.json`a taşındı; üst tanıların rehberine "Belirleyiciler / Alt tipler" ölçüt bloğu eklendi (adhd, schizoaffective, bipolar_1, mdd, adjustment_disorder, conversion_disorder, narcolepsy, conduct_disorder; specific_phobia, anorexia_nervosa, dissociative_amnesia zaten içeriyordu).
+- Ad düzeltmeleri: `adhd` "(DEHB - Bileşik Görünüm)" → "(DEHB)"; `bipolar_1` "(Manik Epizodlu)", `mdd` "(Tek Epizod)", `narcolepsy` "(Katapleksi ile Giden)" çıktı (eski adlar takma ad).
+- `js/pharmacology.js`: haritadan 31 anahtar çıktı, 3 üst tanı eklendi (öğrenme → psychotherapy_first_no_drug; sirkadiyen ve NREM → clonazepam_parasomnia). `goldForDiagnoses` listelerine dokunulmadı (bkz. AI_ISBIRLIGI.md açık kalanlar).
+
+| id | → üst tanı | gerekçe |
+|---|---|---|
+| `adhd_inattentive` | `adhd` | DEHB "dikkatsizliğin baskın olduğu görünüm" belirleyicisi (F90.0); ayrı ölçüt kümesi yok. Önceki tabloda "ayrı kodlu görünüm" diye tutulmuştu: kural gereği geri alındı. |
+| `adhd_hyperactive` | `adhd` | DEHB "aşırı hareketlilik/dürtüselliğin baskın olduğu görünüm" belirleyicisi (F90.1); ayrı ölçüt kümesi yok. Önceki karar geri alındı. |
+| `specific_learning_dyslexia` | `specific_learning_disorder` | Özgül öğrenme bozukluğunun "okumada bozulma ile" belirleyicisi (F81.0); tek ölçüt kümesi. Üst tanı listede yoktu, `specific_learning_disorder` olarak eklendi. |
+| `specific_learning_dysgraphia` | `specific_learning_disorder` | Özgül öğrenme bozukluğunun "yazılı anlatımda bozulma ile" belirleyicisi (F81.81). |
+| `specific_learning_dyscalculia` | `specific_learning_disorder` | Özgül öğrenme bozukluğunun "matematikte bozulma ile" belirleyicisi (F81.2). |
+| `schizoaffective_bipolar` | `schizoaffective` | Şizoaffektif bozukluğun "bipolar tip" belirleyicisi (F25.0); ölçütler aynı. Önceki karar geri alındı. |
+| `schizoaffective_depressive` | `schizoaffective` | Şizoaffektif bozukluğun "depresif tip" belirleyicisi (F25.1). Önceki karar geri alındı. |
+| `bipolar_1_depressed` | `bipolar_1` | Bipolar I bozukluğunda "şu anki ya da en son epizod depresif" kodlama ayrıntısı (F31.3x); ayrı tanı değil. Önceki karar geri alındı. |
+| `mdd_recurrent` | `mdd` | Majör depresif bozukluğun "yineleyici epizod" kodlaması (F33.x); ölçütler aynı, tek tanı. Listede kullanılmıyordu ve "tek epizod" girdisiyle çatışıyordu. Önceki karar geri alındı. |
+| `mdd_with_psychotic` | `mdd` | Majör depresif bozukluğun "psikotik özellikli" belirleyicisi (F32.3/F33.3); ayrı ölçüt kümesi yok. Önceki karar geri alındı. |
+| `specific_phobia_animal` | `specific_phobia` | Özgül fobinin "hayvan" tipi belirleyicisi (F40.218). Önceki karar geri alındı. |
+| `specific_phobia_natural` | `specific_phobia` | Özgül fobinin "doğal çevre" tipi belirleyicisi (F40.228). Önceki karar geri alındı. |
+| `specific_phobia_blood` | `specific_phobia` | Özgül fobinin "kan-enjeksiyon-yaralanma" tipi belirleyicisi (F40.23x). Önceki karar geri alındı. |
+| `specific_phobia_situational` | `specific_phobia` | Özgül fobinin "durumsal" tipi belirleyicisi (F40.248). Önceki karar geri alındı. |
+| `adjustment_disorder_depressed` | `adjustment_disorder` | Uyum bozukluğunun "çökkün duygudurumla" alt tipi (F43.21). Önceki karar geri alındı. |
+| `adjustment_disorder_anxious` | `adjustment_disorder` | Uyum bozukluğunun "kaygıyla" alt tipi (F43.22). Önceki karar geri alındı. |
+| `conversion_motor` | `conversion_disorder` | Konversiyon bozukluğunun belirti türü belirleyicisi (güçsüzlük/felç, anormal hareket, yutma, konuşma; F44.4). Önceki karar geri alındı. |
+| `conversion_seizures` | `conversion_disorder` | Konversiyon bozukluğunun "atak ya da nöbetlerle" belirti türü (F44.5). Önceki karar geri alındı. |
+| `conversion_sensory` | `conversion_disorder` | Konversiyon bozukluğunun "anestezi/duyu kaybı" ya da "özel duyu belirtisiyle" belirti türü (F44.6). Önceki karar geri alındı. |
+| `anorexia_restricting` | `anorexia_nervosa` | Anoreksiya nervozanın "kısıtlayıcı tip" belirleyicisi. Önceki karar geri alındı. |
+| `anorexia_binge_purge` | `anorexia_nervosa` | Anoreksiya nervozanın "tıkınırcasına yeme/çıkarma tipi" belirleyicisi. Önceki karar geri alındı. |
+| `dissociative_fugue` | `dissociative_amnesia` | DSM-5-TR'de füg ayrı tanı değil; dissosiyatif amnezinin "dissosiyatif füg ile" belirleyicisi (F44.1). Önceki karar geri alındı. |
+| `narcolepsy_without_cataplexy` | `narcolepsy` | Narkolepsinin alt tip belirleyicisi (katapleksisiz, hipokretin eksikliği olmadan; G47.419). Önceki karar geri alındı. |
+| `circadian_delayed_sleep` | `circadian_rhythm_sleep_wake` | Sirkadiyen ritim uyku-uyanıklık bozukluğunun "gecikmiş uyku evresi tipi" (G47.21); tek ölçüt kümesi. Üst tanı `circadian_rhythm_sleep_wake` olarak eklendi. |
+| `circadian_advanced_sleep` | `circadian_rhythm_sleep_wake` | Sirkadiyen ritim uyku-uyanıklık bozukluğunun "erken uyku evresi tipi" (G47.22). |
+| `circadian_shift_work` | `circadian_rhythm_sleep_wake` | Sirkadiyen ritim uyku-uyanıklık bozukluğunun "vardiyalı çalışma tipi" (G47.26). |
+| `circadian_non_24_hour` | `circadian_rhythm_sleep_wake` | Sirkadiyen ritim uyku-uyanıklık bozukluğunun "24 saate uymayan tip" (G47.24). |
+| `sleepwalking_disorder` | `nrem_sleep_arousal` | NREM uykusundan uyanma bozukluğunun "uyurgezerlik tipi" (F51.3); tek ölçüt kümesi. Üst tanı `nrem_sleep_arousal` olarak eklendi. |
+| `sleep_terrors` | `nrem_sleep_arousal` | NREM uykusundan uyanma bozukluğunun "uyku terörü tipi" (F51.4). |
+| `conduct_childhood` | `conduct_disorder` | Davranım bozukluğunun "çocuklukta başlayan tip" belirleyicisi (F91.1). Önceki karar geri alındı. |
+| `conduct_adolescent` | `conduct_disorder` | Davranım bozukluğunun "ergenlikte başlayan tip" belirleyicisi (F91.2). Önceki karar geri alındı. |
+
+### Vaka cevap değişiklikleri (bu tur)
+
+| vaka | eski | yeni | neden |
+|---|---|---|---|
+| case-063 | `pica` | `arfid` | yanlış kayıtlı cevap: ipuçları ARFID |
+| case-066 | `factitious_disorder` | `factitious_another` | yanlış kayıtlı cevap: belirtiler çocukta üretiliyor |
+| case-091 | `mdd_with_psychotic` | `mdd` | belirleyici |
+| case-102 | `specific_learning_dyslexia` | `specific_learning_disorder` | belirleyici |
+| case-104 | `sleepwalking_disorder` | `nrem_sleep_arousal` | tip |
+| case-120 | `specific_phobia_blood` | `specific_phobia` | tip |
+| case-128 | `dissociative_fugue` | `dissociative_amnesia` | belirleyici |
+| case-129 | `conversion_seizures` | `conversion_disorder` | belirti türü |
+| case-138 | `sleepwalking_disorder` | `nrem_sleep_arousal` | tip |
+| case-139 | `sleep_terrors` | `nrem_sleep_arousal` | tip |
+
+Case-012, 018, 019, 040, 057, 058, 062, 087 zaten üst tanıdaydı; artık aynı tablo = aynı id. Değişen vakaların 6. ipuçları alt tipi üst tanıyla birlikte adlandırdığı için (ör. "Konversiyon Bozukluğu (Ataklar ya da Nöbetlerle Giden)") değiştirilmedi.
+
+### Oyun bitmeden görünen başlık ve ipucu 1-2 etiketleri
+
+Oyun vaka bitmeden vaka id, zorluk, `patientSummary` ve açılan ipuçlarını gösterir (`js/app.js` loadCase). 64 vakanın `patientSummary`'sinden tanı/kategori/alan etiketi kaldırıldı (sondaki parantez; yalnızca BKİ ve nötr "(Çift tanılı vaka)" kaldı; 113, 114, 116, 130, 144 nötr demografik satıra indirildi). 6 vakada ipucu 1-2 etiketi yumuşatıldı: "(1. Tanı - …)" / "(2. Eşlik Eden Tanı - …)" (029, 067, 068, 069), case-134 "(primer/birincil enürezis)" → "(primer/birincil)", case-118 "Klasik depresyon hastalarının aksine" → "Beklenenin aksine". `dogrula.js` artık bu tür etiketleri uyarı olarak raporlar.

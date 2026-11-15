@@ -3,7 +3,7 @@
  * Her tanı için ayrı ayrı:
  * 1. Detaylı Klinik Tanım & Psikopatoloji
  * 2. Resmi DSM-5 Tanı Kriterleri
- * Girdi sayısı: 207 (DIAGNOSES_DATABASE ile birebir; 2026-11-15 tanı temizliği)
+ * Girdi sayısı: 179 (DIAGNOSES_DATABASE ile birebir; 2026-11-15 tanı temizliği)
  */
 
 const DSM5_MANUAL = {
@@ -53,6 +53,17 @@ const DSM5_MANUAL = {
                 "code": "Kriter E",
                 "title": "Mani/Hipomani Dışlaması",
                 "content": "Kişi hiçbir zaman bir Manik Epizod ya da Hipomanik Epizod geçirmemiştir (Geçirmişse tanı Bipolar Bozukluk olur)."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Epizod Kodlaması ve Belirleyiciler",
+                "content": "Majör depresif bozukluk tek tanıdır; tek ya da yineleyici epizod, şiddet ve özellikler belirleyici olarak eklenir.",
+                "items": [
+                    "Tek epizod (F32.x) ya da yineleyici epizod (F33.x): epizodların ayrı sayılması için aralarında ölçütlerin karşılanmadığı en az 2 ardışık ay olmalıdır.",
+                    "Şiddet: hafif, orta, ağır. Psikotik özelliklerle: epizod sırasında sanrı ve/veya varsanı; duygudurumla uyumlu (suçluluk, hastalık, ölüm, nihilizm, hak edilmiş ceza temaları) ya da uyumsuz olarak belirtilir.",
+                    "Diğer belirleyiciler: kaygılı sıkıntıyla, karışık özelliklerle, melankolik özelliklerle (olumlu olaylara tepkisizlik, sabah kötüleşme, erken uyanma), atipik özelliklerle (duygudurum tepkiselliği, aşırı uyku/yeme, kurşun felci), katatoniyle, doğum dönemi başlangıçlı (gebelikte ya da doğumdan sonraki 4 hafta içinde), mevsimsel örüntülü (yalnızca yineleyici epizodda).",
+                    "Yatışma: kısmi ya da tam yatışmada."
+                ]
             }
         ]
     },
@@ -95,6 +106,16 @@ const DSM5_MANUAL = {
                 "code": "Kriter D",
                 "title": "Madde/Sağlık Durumu Dışlaması",
                 "content": "Epizod bir maddenin (madde kötüye kullanımı, ilaç) ya da başka bir genel sağlık durumunun doğrudan fizyolojik etkilerine bağlanamaz."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Epizod Kodlaması ve Belirleyiciler",
+                "content": "Bipolar I bozukluğu, yaşam boyu en az bir manik epizodla konan tek tanıdır; şu anki ya da en son epizod tanının kodlamasında belirtilir.",
+                "items": [
+                    "Şu anki / en son epizod: manik, hipomanik, depresif ya da belirtilmemiş; ardından şiddet (hafif, orta, ağır), psikotik özellikler ve yatışma durumu.",
+                    "Şu anki epizod depresifse de tanı bipolar I bozukluğudur: majör depresif epizod ölçütleri karşılanır ve öyküde manik epizod vardır.",
+                    "Ek belirleyiciler: kaygılı sıkıntıyla, karışık özelliklerle, hızlı döngülü (12 ayda en az 4 epizod), melankolik, atipik, duygudurumla uyumlu/uyumsuz psikotik özelliklerle, katatoniyle, doğum dönemi başlangıçlı, mevsimsel örüntülü."
+                ]
             }
         ]
     },
@@ -696,6 +717,18 @@ const DSM5_MANUAL = {
                 "code": "Kriter B & E",
                 "title": "Orantısız Sıkıntı ve Süre Kuralı",
                 "content": "Stresörün ağırlığıyla orantısız sıkıntı ya da işlevsellik kaybı. Stresör sonlandıktan sonra belirtiler 6 aydan daha uzun sürmez."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Alt Tipler ve Süre Belirleyicisi",
+                "content": "Uyum bozukluğu tek tanıdır; baskın belirtilere göre alt tip belirtilir.",
+                "items": [
+                    "Çökkün duygudurumla (F43.21): çökkün duygudurum, ağlamaklılık ya da umutsuzluk baskındır.",
+                    "Kaygıyla (F43.22): sinirlilik, endişe, gerginlik ya da ayrılma kaygısı baskındır.",
+                    "Karışık kaygı ve çökkün duygudurumla (F43.23); davranım bozukluğuyla (F43.24); karışık duygu ve davranım bozukluğuyla (F43.25); belirtilmemiş (F43.20).",
+                    "Süre: akut (belirtiler 6 aydan kısa) ya da süregen (6 ay veya daha uzun; süregen bir stres etkenine ya da kalıcı sonuçları olan bir etkene yanıt olarak).",
+                    "Majör depresif epizod, TSSB ya da akut stres bozukluğu ölçütleri karşılanıyorsa stres etkeni olsa bile o tanı konur."
+                ]
             }
         ]
     },
@@ -764,6 +797,17 @@ const DSM5_MANUAL = {
                 "code": "Kriter C",
                 "title": "Duygudurum Belirtilerinin Baskınlığı",
                 "content": "Duygudurum dönemi ölçütlerini karşılayan belirtiler hastalığın aktif ve kalıcı dönemlerinin toplam süresinin çoğunda bulunur."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Tip Belirleyicileri",
+                "content": "Şizoaffektif bozukluk tek tanıdır; tip, tabloda yer alan duygudurum epizodlarına göre belirtilir.",
+                "items": [
+                    "Bipolar tip (F25.0): tablonun bir parçası olarak manik epizod vardır; majör depresif epizodlar da olabilir.",
+                    "Depresif tip (F25.1): yalnızca majör depresif epizodlar vardır, manik epizod hiç olmamıştır.",
+                    "Psikotik belirtiler yalnızca duygudurum epizodları sırasında görülüyorsa tanı psikotik özellikli duygudurum bozukluğudur (B ölçütü: duygudurum epizodu olmadan en az 2 hafta psikoz).",
+                    "Ek belirleyiciler: katatoniyle; seyir (ilk epizod / çoğul epizod, akut / kısmi / tam yatışmada, süregen)."
+                ]
             }
         ]
     },
@@ -1303,6 +1347,17 @@ const DSM5_MANUAL = {
                 "code": "Kriter B",
                 "title": "Nörolojik Bağdaşmazlık Kanıtı",
                 "content": "Belirti ile tanınan nörolojik ya da tıbbi durumlar arasında bağdaşmazlık olduğunu gösteren klinik bulgular (örn. Hoover testi pozitifliği, Video-EEG'de epileptik deşarj olmaması)."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Belirti Türü ve Seyir Belirleyicileri",
+                "content": "Konversiyon (işlevsel nörolojik belirti) bozukluğu tek tanıdır; belirti türü kodlamada belirtilir.",
+                "items": [
+                    "Güçsüzlük ya da felçle; anormal hareketle (titreme, distoni, miyoklonus, yürüme bozukluğu); yutma belirtileriyle; konuşma belirtisiyle (afoni, peltek konuşma) — F44.4.",
+                    "Atak ya da nöbetlerle (psikojenik non-epileptik nöbet, PNES) — F44.5. Kesin tanı tipik bir atağın video-EEG ile kaydedilip eşzamanlı epileptik etkinlik olmadığının gösterilmesiyle konur.",
+                    "Anestezi ya da duyu kaybıyla; özel duyu belirtisiyle (görme, koku alma, işitme) — F44.6. Karışık belirtilerle — F44.7.",
+                    "Seyir: akut epizod (6 aydan kısa) ya da süregen (6 ay veya daha uzun); psikolojik stres etkeniyle ya da olmaksızın. Psikolojik etken ya da \"aldırmazlık\" tanı için gerekmez."
+                ]
             }
         ]
     },
@@ -1440,6 +1495,17 @@ const DSM5_MANUAL = {
                 "code": "Kriter B & C",
                 "title": "Başlangıç Yaşı (< 12 yaş) ve Çoklu Ortam",
                 "content": "Belirtiler 12 yaşından önce mevcuttur ve en az 2 farklı ortamda (ev, okul, iş) kendini gösterir."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Görünüm Belirleyicileri (son 6 aya göre)",
+                "content": "DEHB tek tanıdır; görünüm ayrı tanı değil, belirleyicidir ve zamanla değişebilir.",
+                "items": [
+                    "Bileşik görünüm (F90.2): son 6 ayda hem A1 (dikkatsizlik) hem A2 (aşırı hareketlilik-dürtüsellik) ölçütü karşılanır.",
+                    "Dikkatsizliğin baskın olduğu görünüm (F90.0): A1 karşılanır, A2 karşılanmaz.",
+                    "Aşırı hareketlilik/dürtüselliğin baskın olduğu görünüm (F90.1): A2 karşılanır, A1 karşılanmaz.",
+                    "Ayrıca: kısmi yatışma; şu anki şiddet hafif, orta ya da ağır."
+                ]
             }
         ]
     },
@@ -1514,6 +1580,17 @@ const DSM5_MANUAL = {
                 "code": "Belirleyici",
                 "title": "Kısıtlı Prososyal Duygularla Birlikte",
                 "content": "Pişmanlık/suçluluk duymama, eşduyum (empati) yoksunluğu, başarıyı umursamama ve yüzeysel duygulanım."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Başlangıç Tipi ve Şiddet",
+                "content": "Davranım bozukluğu tek tanıdır; başlangıç yaşı tip olarak belirtilir.",
+                "items": [
+                    "Çocuklukta başlayan tip (F91.1): 10 yaşından önce en az bir davranım bozukluğu ölçütüne özgü belirti vardır.",
+                    "Ergenlikte başlayan tip (F91.2): 10 yaşından önce hiçbir belirti yoktur.",
+                    "Başlangıcı belirtilmemiş (F91.9): başlangıç yaşını belirlemek için yeterli bilgi yoktur.",
+                    "Şiddet: hafif, orta, ağır. \"Sınırlı prososyal duygularla\" belirleyicisi ayrıca eklenebilir."
+                ]
             }
         ]
     },
@@ -1992,8 +2069,8 @@ const DSM5_MANUAL = {
     },
     "narcolepsy": {
         "id": "narcolepsy",
-        "nameTr": "Narkolepsi (Tip 1 / Katapleksili)",
-        "nameEn": "Narcolepsy with Cataplexy",
+        "nameTr": "Narkolepsi",
+        "nameEn": "Narcolepsy",
         "clinicalDescription": {
             "overview": "Gündüz önüne geçilemez ani uyku atakları, gülmeyle tetiklenen ani kas felci (katapleksi), hipnagojik halüsinasyonlar ve uyku felci ile seyreden kronik nörolojik uyku bozukluğudur.",
             "epidemiology": "Toplumda 2000 kişide 1 görülür. Başlangıç genellikle ergenlik veya genç erişkinliktedir.",
@@ -2010,6 +2087,17 @@ const DSM5_MANUAL = {
                 "code": "Kriter B",
                 "title": "Katapleksi veya BOS Hipokretin Eksikliği",
                 "content": "Duygusal tetiklenmeli kısa süreli kas tonusu kaybı veya BOS hipokretin-1 < 110 pg/mL olması."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Doğrulayıcı Bulgu ve Alt Tipler",
+                "content": "Narkolepsi tek tanıdır. Katapleksi yoksa B ölçütü için BOS hipokretin-1 eksikliği (≤ 110 pg/mL ya da sağlıklı değerlerin üçte biri) veya polisomnografide REM latansı ≤ 15 dakika ya da MSLT'de ortalama uyku latansı ≤ 8 dakika ve en az 2 SOREMP gerekir.",
+                "items": [
+                    "Katapleksili ya da hipokretin eksikliğiyle (tip 1) — G47.411.",
+                    "Katapleksisiz ve hipokretin eksikliği olmadan ya da ölçülmeden (tip 2) — G47.419.",
+                    "Diğer alt tipler: otozomal dominant serebellar ataksi, sağırlık ve narkolepsiyle; otozomal dominant narkolepsi, obezite ve tip 2 diyabetle; başka bir sağlık durumuna ikincil narkolepsi.",
+                    "Şiddet: hafif, orta, ağır."
+                ]
             }
         ]
     },
@@ -2128,26 +2216,45 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "specific_learning_dyslexia": {
-        "id": "specific_learning_dyslexia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Okuma Güçlüğü / Disleksi)",
-        "nameEn": "Specific Learning Disorder with Impairment in Reading",
+    "specific_learning_disorder": {
+        "id": "specific_learning_disorder",
+        "nameTr": "Özgül Öğrenme Bozukluğu",
+        "nameEn": "Specific Learning Disorder",
         "clinicalDescription": {
-            "overview": "Normal zeka ve yeterli eğitime rağmen sözcükleri doğru ve akıcı okumada, harf-ses eşleştirmede yaşanan nörogelişimsel öğrenme güçlüğüdür.",
-            "epidemiology": "Okul çağı çocuklarının %5-15'inde görülür. En sık rastlanan öğrenme bozukluğudur.",
-            "etiology": "Sol temporal-paryetal bölgedeki fonolojik işleme devrelerinde nöronal göç ve bağlantı farklılıkları.",
-            "prognosis": "Çok duyulu yapılandırılmış özel eğitim (Orton-Gillingham) ile okuma becerileri telafi edilir."
+            "overview": "Zihinsel yetiyitimi, duyusal sorun ya da yetersiz eğitimle açıklanamayan, okul çağında başlayan ve temel akademik becerilerin (sözcük okuma, okuduğunu anlama, yazım, yazılı anlatım, sayı duyusu, hesaplama, matematiksel akıl yürütme) öğrenilip kullanılmasında süregen güçlükle giden nörogelişimsel bozukluktur. Tek tanıdır; etkilenen alan (okuma, yazılı anlatım, matematik) ve alt beceriler belirleyici olarak eklenir. \"Disleksi\" okumada, \"diskalkuli\" matematikte bozulmanın alternatif adlarıdır.",
+            "epidemiology": "Okul çağı çocuklarında tüm alanlar için yaygınlık farklı dil ve kültürlerde yaklaşık %5-15'tir; erişkinlerde yaklaşık %4. En sık okumada bozulma görülür; alanların birlikteliği ve DEHB eşlik etmesi sıktır. Erkeklerde daha sık tanı konur.",
+            "etiology": "Güçlü genetik yatkınlık; okumada sol temporoparyetal fonolojik işlemleme ağlarındaki, matematikte paryetal (intraparyetal oluk) sayısal büyüklük ağlarındaki farklılıklar; çalışma belleği, işlemleme hızı ve yürütücü işlev zayıflıkları. Prematürite ve doğum öncesi maruziyetler risk etkenleridir.",
+            "prognosis": "Erken, açık ve sistematik, çok duyulu ve alana özgü eğitim (ör. fonolojik farkındalık ve harf-ses eğitimi, somuttan soyuta matematik öğretimi) ve sınav düzenlemeleri işlevselliği belirgin artırır. Güçlükler yaşam boyu sürebilir; ikincil kaygı ve özgüven sorunları izlenmelidir."
         },
         "criteriaList": [
             {
                 "code": "Kriter A",
-                "title": "Okuma Güçlüğü",
-                "content": "Sözcük okuma doğruluğunda, okuma hızında ve okuduğunu anlamada en az 6 aydır süren güçlük."
+                "title": "Akademik Becerilerde Süregen Güçlük (En az 6 ay, müdahaleye rağmen)",
+                "content": "Bu güçlükleri hedefleyen müdahalelere karşın en az 6 aydır süren, aşağıdakilerden en az birinin bulunduğu öğrenme ve akademik beceri kullanma güçlüğü:",
+                "items": [
+                    "1. Yanlış ya da yavaş ve zahmetli sözcük okuma.",
+                    "2. Okuduğunun anlamını kavramada güçlük.",
+                    "3. Yazımda (heceleme/imla) güçlük.",
+                    "4. Yazılı anlatımda güçlük (dilbilgisi ve noktalama hataları, paragraf düzenlemede yetersizlik, düşünceleri yazıda açıkça ifade edememe).",
+                    "5. Sayı duyusu, aritmetik bilgiler ya da hesaplamada ustalaşmada güçlük.",
+                    "6. Matematiksel akıl yürütmede güçlük."
+                ]
             },
             {
-                "code": "Kriter B",
-                "title": "Zeka Düzeyinin Üstünde Olması",
-                "content": "Okuma becerilerinin kronolojik yaş ve zeka kapasitesinin belirgin gerisinde kalması."
+                "code": "Kriter B, C & D",
+                "title": "Ölçülebilir Düşüklük, Okul Çağında Başlangıç ve Dışlama",
+                "content": "Etkilenen beceriler yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır ve okul, iş ya da günlük yaşamı belirgin biçimde etkiler; bireysel standart başarı testleri ve kapsamlı klinik değerlendirmeyle doğrulanır (B). Güçlükler okul çağında başlar, ancak talepler kapasiteyi aşana dek tam ortaya çıkmayabilir (C). Zihinsel yetiyitimi, düzeltilmemiş görme/işitme sorunları, başka ruhsal ya da nörolojik bozukluklar, psikososyal güçlükler, öğretim dilinde yetersizlik ya da yetersiz eğitimle daha iyi açıklanamaz (D)."
+            },
+            {
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Etkilenen Alanlar ve Şiddet",
+                "content": "Etkilenen tüm alan ve alt beceriler ayrı ayrı belirtilir:",
+                "items": [
+                    "Okumada bozulma ile (F81.0): sözcük okuma doğruluğu, okuma hızı ya da akıcılığı, okuduğunu anlama. Disleksi bu örüntünün alternatif adıdır.",
+                    "Yazılı anlatımda bozulma ile (F81.81): yazım doğruluğu, dilbilgisi ve noktalama doğruluğu, yazılı anlatımın açıklığı ya da düzenlenmesi. Salt el yazısının motor olarak kötü olması bu belirleyicinin özü değildir (gelişimsel eşgüdüm bozukluğu açısından değerlendirilir).",
+                    "Matematikte bozulma ile (F81.2): sayı duyusu, aritmetik bilgilerin belleğe alınması, doğru ya da akıcı hesaplama, matematiksel akıl yürütme. Diskalkuli bu örüntünün alternatif adıdır.",
+                    "Şiddet: hafif, orta, ağır."
+                ]
             }
         ]
     },
@@ -2243,29 +2350,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "specific_phobia_blood": {
-        "id": "specific_phobia_blood",
-        "nameTr": "Özgül Fobi (Kan-Enjeksiyon-Yara Tipi / Vazovagal)",
-        "nameEn": "Specific Phobia (Blood-Injection-Injury Type)",
-        "clinicalDescription": {
-            "overview": "Kan görme, iğne/enjeksiyon yaptırma veya invaziv tıbbi işlemlere karşı duyulan aşırı korku ve kaçınma tablosudur. Diğer tüm fobilerden farklı olarak 'bifazik otonomik yanıt' (önce kısa taşikardi, ardından ani vagal bradikardi ve tansiyon düşüşüyle bayılma/senkop) görülür.",
-            "epidemiology": "Toplumda yaygınlığı %3-4'tür ve tüm özgül fobiler içinde ailesel/genetik geçişi en güçlü olandır (%60-70).",
-            "etiology": "Evrimsel aşırı gelişmiş vazovagal refleks ve travmatik tıbbi işlem koşullanmaları.",
-            "prognosis": "Gevşeme değil, 'Uygulamalı Kas Gerdirme' (Applied Tension - Öst protokolü) ve kademeli maruz bırakma ile birkaç seansta tam düzelir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Kan ve İğne Korkusu (En az 6 ay)",
-                "content": "En az 6 aydır süren, kan, enjeksiyon veya yaralanma uyaranlarıyla karşılaşıldığında ortaya çıkan yoğun korku ve vazovagal senkop eğilimi."
-            },
-            {
-                "code": "Kriter B",
-                "title": "Tıbbi İşlemlerden Kaçınma",
-                "content": "Korku nedeniyle hastaneye gitmekten ve kan tahlili yaptırmaktan aktif olarak kaçınma."
-            }
-        ]
-    },
     "reactive_attachment_disorder": {
         "id": "reactive_attachment_disorder",
         "nameTr": "Tepkisel Bağlanma Bozukluğu (RAD)",
@@ -2309,52 +2393,6 @@ const DSM5_MANUAL = {
                 "code": "Kriter B",
                 "title": "Patojenik Bakım Öyküsü",
                 "content": "Ağır sosyal ihmal, yoksunluk veya sürekli değişen bakıcı öyküsü (Gelişimsel yaş en az 9 ay olmalıdır)."
-            }
-        ]
-    },
-    "dissociative_fugue": {
-        "id": "dissociative_fugue",
-        "nameTr": "Dissosiyatif Füg (Kaçış ve Kimlik Kaybı)",
-        "nameEn": "Dissociative Amnesia with Dissociative Fugue",
-        "clinicalDescription": {
-            "overview": "Ağır bir travmatik veya yıkıcı stresör sonrasında kişinin kendi adını, kimliğini ve geçmişini tamamen unutarak (otobiyografik amnezi) evinden ve şehrinden ayrılması, başka bir şehre amaçlı yolculuk yapması veya bazen yeni bir kimlik benimsemesi tablosudur.",
-            "epidemiology": "Dissosiyatif amnezinin en dramatik ve nadir alt tipidir; savaş, doğal afet, ağır finansal iflas veya evlilik yıkımlarında görülür.",
-            "etiology": "Dayanılmaz suçluluk, utanç veya travmadan hem zihinsel (amnezi) hem fiziksel (yolculuk) olarak radikal dissosiyatif kaçış.",
-            "prognosis": "Çoğu füg birkaç gün veya hafta içinde kendiliğinden çözülür; Faz Odaklı Travma Terapisi ile anılar bütünleştirilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Kişisel Kimlik Amnezisi",
-                "content": "Kişinin kendi adını, ailesini ve kişisel geçmişini anımsayamaması (semantik/genel dünya bilgisi korunmuştur)."
-            },
-            {
-                "code": "Kriter B",
-                "title": "Amaçlı Yolculuk (Füg)",
-                "content": "Evden veya işyerinden beklenmedik biçimde ayrılıp başka bir yere amaçlı yolculuk yapma ya da şaşkın bir biçimde dolaşma."
-            }
-        ]
-    },
-    "conversion_seizures": {
-        "id": "conversion_seizures",
-        "nameTr": "Konversiyon Bozukluğu (Psödonöbet / PNES)",
-        "nameEn": "Conversion Disorder (Attacks or Seizures / PNES)",
-        "clinicalDescription": {
-            "overview": "Epileptik nöbete benzeyen ancak beyinde hiçbir anormal elektriksel deşarj olmadan, tamamen bilinçdışı psikolojik stres ve çatışmaların bedensel kasılma/sarsılma nöbetine dönüştürülmesiyle oluşan tablodur (Psikojenik Non-Epileptik Nöbet - PNES).",
-            "epidemiology": "Epilepsi merkezlerine 'ilaca dirençli epilepsi' diye sevk edilen hastaların %20-30'u gerçekte PNES'tir; genç kadınlarda 3 kat sıktır.",
-            "etiology": "Bilinçdışı duygusal çatışma veya travmanın sözel ifade edilemeyip motor-dissosiyatif deşarjla dışavurulması (birincil kazanç).",
-            "prognosis": "Tanının empatik açıklanması, gereksiz antiepileptiklerin kesilmesi ve PNES odaklı BDT ile nöbetler kontrol altına alınır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Epilepsi Benzeri Nöbetler ve Klinik Uyumsuzluk",
-                "content": "Nöbet sırasında gözlerin sımsıkı kapalı olması ve açmaya direnç, başı sağa-sola sallama, asenkron ekstremite hareketleri ve postiktal konfüzyon olmaması."
-            },
-            {
-                "code": "Kriter B",
-                "title": "Video-EEG'de Normal Alfa Ritmi (Altın Standart)",
-                "content": "Eşzamanlı Video-EEG kaydında hasta nöbet geçirirken epileptiform deşarj olmaması ve normal uyanıklık dalgalarının görülmesi."
             }
         ]
     },
@@ -2450,49 +2488,40 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "sleepwalking_disorder": {
-        "id": "sleepwalking_disorder",
-        "nameTr": "NREM Uykusundan Uyanma (Uyurgezerlik / Somnambulizm)",
-        "nameEn": "Non-REM Sleep Arousal Disorder (Sleepwalking Type)",
+    "nrem_sleep_arousal": {
+        "id": "nrem_sleep_arousal",
+        "nameTr": "NREM Uykusundan Uyanma Bozukluğu",
+        "nameEn": "Non-Rapid Eye Movement Sleep Arousal Disorder",
         "clinicalDescription": {
-            "overview": "Gecenin ilk üçte birlik diliminde (NREM Evre 3 derin yavaş dalga uykusunda) yataktan kalkıp yürüme, boş ve donuk gözlerle bakma, dışarıdan uyandırılma güçlüğü ve sabah uyandığında olanları hiç hatırlamama (tam amnezi) ile seyreden NREM parasomnisidir.",
-            "epidemiology": "Çocukların %10-15'inde, yetişkinlerin %1-4'ünde görülür; güçlü genetik geçiş (%80 aile öyküsü) gösterir.",
-            "etiology": "Derin delta uykusundan motor merkezlerin uyanırken bilinç korteksinin uykuda kalması (uyku yoksunluğu, ateş ve stresle tetiklenir).",
-            "prognosis": "Ev güvenlik önlemleri (kapı/pencere kilitleme), uyku hijyeni ve yetişkinlerde düşük doz Klonazepam ile yaralanmalar önlenir."
+            "overview": "Çoğunlukla ana uyku döneminin ilk üçte birinde, derin NREM (evre 3, yavaş dalga) uykusundan tamamlanmamış uyanma epizodlarıyla giden parasomnidir. Epizodlar uyurgezerlik (yataktan kalkıp dolaşma, boş bakış, uyandırılma güçlüğü) ya da uyku terörü (dehşet çığlığıyla ani uyanma, yoğun otonom uyarılma, avutulamama) biçimindedir; rüya çok az ya da hiç hatırlanmaz ve sabah epizoda amnezi vardır. Tek tanıdır; uyurgezerlik ve uyku terörü bu tanının tipleridir.",
+            "epidemiology": "Uyurgezerlik epizodları çocukların %10-30'unda en az bir kez, yineleyen biçimde %2-3'ünde; erişkinlerde yaklaşık %1-4'ünde görülür. Uyku terörü 4-12 yaş çocuklarda sıktır ve ergenlikte çoğunlukla kendiliğinden kaybolur. Aile öyküsü güçlüdür.",
+            "etiology": "Derin yavaş dalga uykusundan motor ve otonom sistemler uyanırken korteksin kısmen uykuda kalması (ayrışmış uyanma). Uyku yoksunluğu, ateş, stres, alkol, bazı ilaçlar ve uyku apnesi gibi uykuyu bölen durumlar tetikler.",
+            "prognosis": "Çocuklarda genellikle kendiliğinden geçer. Ev güvenliği (kapı/pencere kilidi, alarm), uyku yoksunluğu ve tetikleyicilerden kaçınma, aile eğitimi (atak sırasında zorla uyandırmama) ve planlı uyandırma yararlıdır; yaralanma riski olan erişkinlerde düşük doz klonazepam kullanılabilir."
         },
         "criteriaList": [
             {
                 "code": "Kriter A",
-                "title": "Gecenin İlk 1/3'ünde NREM'den Kalkıp Yürüme",
-                "content": "Uyku döneminin ilk üçte birinde yataktan kalkıp dolaşma; boş bakışlar, başkalarının iletişim çabalarına tepkisizlik ve güç uyandırılma."
+                "title": "Tamamlanmamış Uyanma Epizodları",
+                "content": "Çoğunlukla ana uyku döneminin ilk üçte birinde ortaya çıkan, uykudan tamamlanmamış uyanma epizodları; aşağıdakilerden biri eşlik eder:",
+                "items": [
+                    "Uyurgezerlik: uyku sırasında yataktan kalkıp dolaşma; boş, dik bakış, başkalarının iletişim çabalarına görece tepkisizlik ve güç uyandırılma.",
+                    "Uyku terörü: çoğunlukla dehşet çığlığıyla başlayan ani korkulu uyanmalar; yoğun korku ve otonom uyarılma belirtileri (midriyazis, taşikardi, hızlı soluma, terleme) ve epizod sırasında avutma çabalarına görece tepkisizlik."
+                ]
             },
             {
-                "code": "Kriter B",
-                "title": "Sabah Tam Amnezi",
-                "content": "Uyandıktan sonra rüya hatırlamama ve uyurgezerlik atağına dair tam bellek yitimi (amnezi)."
-            }
-        ]
-    },
-    "sleep_terrors": {
-        "id": "sleep_terrors",
-        "nameTr": "NREM Uykusundan Uyanma (Gece Terörü / Uyku Terörü)",
-        "nameEn": "Non-REM Sleep Arousal Disorder (Sleep Terror Type)",
-        "clinicalDescription": {
-            "overview": "Gecenin ilk üçte birinde (NREM Evre 3 derin uykuda) panik dolu tiz bir çığlıkla yatakta doğrulma, taşikardi, hızlı soluma, terleme (otonomik fırtına), ebeveynlerin avutma çabalarına yanıtsızlık ve sabah tam amnezi ile karakterize parasomnidir (Pavor Nocturnus).",
-            "epidemiology": "4-12 yaş arası çocuklarda (%3-6) sık görülür ve ergenlikte çoğunlukla kendiliğinden kaybolur.",
-            "etiology": "Derin yavaş dalga (delta) uykusunda otonomik ve limbik sistemin ani deşarjı.",
-            "prognosis": "Aile eğitimi (atak anında zorla uyandırmama) ve Planlı Uyandırma (Scheduled Awakenings) tekniği ile kolayca yatışır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Panik Çığlığı ve Otonomik Deşarj",
-                "content": "Gecenin ilk üçte birinde panik çığlığıyla uyanma; yoğun korku, midriyazis, taşikardi, takipne ve terleme."
+                "code": "Kriter B-F",
+                "title": "Rüya Hatırlamama, Amnezi ve Dışlama",
+                "content": "Rüya imgesi hiç ya da çok az (tek bir görsel sahne) hatırlanır (B). Epizodlara amnezi vardır (C). Epizodlar belirgin sıkıntıya ya da işlev bozulmasına yol açar (D). Bir maddenin ya da ilacın fizyolojik etkilerine bağlanamaz (E). Eşlik eden ruhsal ve tıbbi bozukluklar epizodları açıklamaz (F)."
             },
             {
-                "code": "Kriter B",
-                "title": "Avutulamama ve Sabah Amnezisi",
-                "content": "Başkalarının avutma/sakinleştirme çabalarına yanıtsızlık, rüya hatırlamama ve sabah olaya dair tam amnezi."
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Tipler",
+                "content": "Tip belirtilir:",
+                "items": [
+                    "Uyurgezerlik tipi (F51.3); ek belirleyiciler: uykuyla ilişkili yeme ile, uykuyla ilişkili cinsel davranışla (seksomni).",
+                    "Uyku terörü tipi (F51.4).",
+                    "Ayırıcı tanı: REM uykusu davranış bozukluğu ve kabus bozukluğu REM uykusunda, gecenin ikinci yarısında olur; kişi uyanınca yönelimlidir ve rüyayı hatırlar."
+                ]
             }
         ]
     },
@@ -2852,118 +2881,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "adhd_inattentive": {
-        "id": "adhd_inattentive",
-        "nameTr": "DEHB (Dikkatsizliğin Baskın Olduğu Görünüm)",
-        "nameEn": "ADHD (Predominantly Inattentive Presentation)",
-        "clinicalDescription": {
-            "overview": "DEHB tanı ölçütlerinin karşılandığı ve son 6 ayda dikkatsizlik belirtileri ölçütünün (A1) karşılanıp aşırı hareketlilik-dürtüsellik ölçütünün (A2) karşılanmadığı görünümdür. Klinik tabloda dalgınlık, unutkanlık, ayrıntıları kaçırma, işleri düzenleyememe, eşyaları kaybetme ve zihinsel çaba gerektiren görevleri erteleme ön plandadır. Belirgin yıkıcı davranış olmadığı için özellikle kız çocuklarında ve yetişkinlerde geç tanınabilir; 'tembel' ya da 'hayalperest' olarak etiketlenebilir.",
-            "epidemiology": "Toplumda örneklerinde en sık görülen DEHB görünümlerindendir. Kızlarda ve yetişkinlerde dikkatsizliğin baskın olduğu görünüm, hiperaktivitenin baskın olduğu görünüme göre görece daha sıktır.",
-            "etiology": "DEHB'nin genel etiyolojisiyle aynıdır: yüksek kalıtılabilirlik, prefrontal-striatal ağlarda dopamin ve noradrenalin işlevinde farklılıklar, yürütücü işlev ve dikkat ağlarında gelişimsel gecikme; düşük doğum ağırlığı, prematürite ve doğum öncesi sigara/alkol maruziyeti risk etkenleridir.",
-            "prognosis": "Görünüm zaman içinde değişebilir; çocuklukta birleşik görünümde olan birçok kişide hiperaktivite yaşla azalır ve tablo dikkatsizliğin baskın olduğu görünüme döner. İlaç tedavisi (uyarıcılar ve uyarıcı olmayan ajanlar), aile eğitimi, okul düzenlemeleri ve yetişkinlerde BDT temelli beceri programları etkilidir. Eşlik eden öğrenme bozuklukları, anksiyete ve depresyon taranmalıdır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A1",
-                "title": "Dikkatsizlik Belirtileri (En az 6/9; 17 yaş ve üzerinde en az 5/9; en az 6 ay)",
-                "content": "Gelişim düzeyiyle uyumsuz, toplumsal ve akademik/mesleki etkinlikleri doğrudan olumsuz etkileyen belirtiler: ayrıntılara dikkat etmeme ve dikkatsizce hata yapma, dikkati sürdürmede güçlük, doğrudan konuşulduğunda dinlemiyor görünme, yönergeleri izleyip işleri bitirememe, görevleri düzenlemede güçlük, sürekli zihinsel çaba gerektiren işlerden kaçınma, gerekli eşyaları kaybetme, dış uyaranlarla kolay dağılma, günlük etkinliklerde unutkanlık."
-            },
-            {
-                "code": "Kriter B-E",
-                "title": "Ortak DEHB Ölçütleri",
-                "content": "Belirtilerin birkaçı 12 yaşından önce vardır (B), birkaçı iki ya da daha fazla ortamda (ev, okul, iş, arkadaş ortamı) görülür (C), işlevselliği bozduğuna ya da niteliğini düşürdüğüne dair açık kanıt vardır (D) ve belirtiler yalnızca şizofreni ya da başka bir psikotik bozukluk sırasında ortaya çıkmaz, başka bir ruhsal bozuklukla daha iyi açıklanamaz (E)."
-            },
-            {
-                "code": "Görünüm Belirleyicisi",
-                "title": "Dikkatsizliğin Baskın Olduğu Görünüm",
-                "content": "Son 6 ayda A1 (dikkatsizlik) ölçütü karşılanmış, A2 (aşırı hareketlilik-dürtüsellik) ölçütü karşılanmamıştır. Her iki ölçüt de karşılanıyorsa birleşik görünüm, yalnızca A2 karşılanıyorsa aşırı hareketlilik/dürtüselliğin baskın olduğu görünüm belirtilir."
-            }
-        ]
-    },
-    "adhd_hyperactive": {
-        "id": "adhd_hyperactive",
-        "nameTr": "DEHB (Aşırı Hareketlilik/Dürtüsellik Baskın Görünüm)",
-        "nameEn": "ADHD (Predominantly Hyperactive/Impulsive Presentation)",
-        "clinicalDescription": {
-            "overview": "DEHB tanı ölçütlerinin karşılandığı ve son 6 ayda aşırı hareketlilik-dürtüsellik ölçütünün (A2) karşılanıp dikkatsizlik ölçütünün (A1) karşılanmadığı görünümdür. Yerinde duramama, kıpırdanma, sırada bekleyememe, aşırı konuşma, başkalarının sözünü kesme ve sonuçlarını düşünmeden hareket etme ön plandadır. Kaza ve yaralanma riski yüksektir; okul öncesi dönemde en belirgin olan görünümdür.",
-            "epidemiology": "En çok okul öncesi ve erken okul çağı çocuklarında görülür; erkek çocuklarda belirgin olarak daha sıktır. Ergenlik ve yetişkinlikte saf hiperaktif-dürtüsel görünüm görece seyrektir.",
-            "etiology": "DEHB'nin genel etiyolojisiyle aynıdır; dürtü denetimi ve yanıt ketlemesiyle ilişkili fronto-striatal devrelerdeki farklılıklar öne çıkar. Yüksek kalıtılabilirlik ve doğum öncesi risk etkenleri rol oynar.",
-            "prognosis": "Motor hiperaktivite yaşla birlikte genellikle azalır ve yerini iç huzursuzluk hissine bırakır; bir kısım çocukta ilerleyen yıllarda dikkatsizlik belirtileri belirginleşerek birleşik görünüme geçiş olur. Davranışçı aile eğitimi (özellikle okul öncesi dönemde ilk basamak), okul temelli müdahaleler ve ilaç tedavisi etkilidir. Karşıt olma-karşı gelme bozukluğu ve davranım bozukluğu eşlik edebilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A2",
-                "title": "Aşırı Hareketlilik ve Dürtüsellik Belirtileri (En az 6/9; 17 yaş ve üzerinde en az 5/9; en az 6 ay)",
-                "content": "Gelişim düzeyiyle uyumsuz ve işlevselliği doğrudan olumsuz etkileyen belirtiler: elleri ayakları kıpır kıpır, oturması beklenen yerde kalkma, uygunsuz ortamda koşuşturma/tırmanma (ergen ve yetişkinde huzursuzluk hissi), sakin oyun oynayamama, sürekli hareket halinde olma ('motor takılmış gibi'), aşırı konuşma, soru bitmeden yanıt verme, sırasını bekleyememe, başkalarının sözünü kesme ya da işlerine karışma."
-            },
-            {
-                "code": "Kriter B-E",
-                "title": "Ortak DEHB Ölçütleri",
-                "content": "Belirtilerin birkaçı 12 yaşından önce vardır (B), birkaçı iki ya da daha fazla ortamda görülür (C), işlevselliğin bozulduğuna dair açık kanıt vardır (D), belirtiler yalnızca psikotik bir bozukluk sırasında ortaya çıkmaz ve başka bir ruhsal bozuklukla (duygudurum, anksiyete, dissosiyatif, kişilik bozukluğu, madde etkisi/yoksunluğu) daha iyi açıklanamaz (E)."
-            },
-            {
-                "code": "Görünüm Belirleyicisi",
-                "title": "Aşırı Hareketlilik/Dürtüselliğin Baskın Olduğu Görünüm",
-                "content": "Son 6 ayda A2 ölçütü karşılanmış, A1 (dikkatsizlik) ölçütü karşılanmamıştır. Ayırıcı tanıda gelişim düzeyine uygun yüksek etkinlik, karşıt olma-karşı gelme bozukluğu, kaygı ve travmaya bağlı huzursuzluk değerlendirilmelidir."
-            }
-        ]
-    },
-    "specific_learning_dysgraphia": {
-        "id": "specific_learning_dysgraphia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Yazılı Anlatım Bozukluğu / Disgrafi)",
-        "nameEn": "Specific Learning Disorder with Impairment in Written Expression",
-        "clinicalDescription": {
-            "overview": "Özgül öğrenme bozukluğunun, yazılı anlatım alanında belirgin güçlükle giden biçimidir. Yazım (heceleme/imla) doğruluğu, dilbilgisi ve noktalama doğruluğu ile yazılı anlatımın açıklığı ve düzenlenmesi etkilenir: çocuk sesleri harflere dönüştürürken hata yapar, cümleleri noktalama olmadan birbirine ekler, paragrafları düzenleyemez ve düşüncelerini yazıda açıkça aktaramaz. DSM-5'te salt el yazısının motor olarak kötü olması (yazının okunaksızlığı) tek başına bu tanının özü değildir; ince motor koordinasyon sorunları gelişimsel koordinasyon bozukluğu açısından değerlendirilir. Türkçede 'disgrafi' terimi çoğu zaman el yazısı güçlüğü anlamında da kullanıldığından ayrım önemlidir.",
-            "epidemiology": "Özgül öğrenme bozukluğunun (tüm alanlar) okul çağındaki yaygınlığı farklı dil ve kültürlerde yaklaşık %5-15'tir. Yazılı anlatım güçlüğü çoğunlukla okuma bozukluğuyla birlikte görülür.",
-            "etiology": "Genetik yatkınlık güçlüdür; fonolojik işlemleme, çalışma belleği ve yürütücü işlevlerdeki yetersizlikler, dil bozukluğu öyküsü ve DEHB ile birliktelik sıktır. Yetersiz öğretim, öğretim dilinde yetersizlik ve görme/işitme sorunları dışlanmalıdır.",
-            "prognosis": "Açık ve sistematik yazım-yazma öğretimi, yazma süreçlerini (planlama, taslak, gözden geçirme) adım adım öğreten stratejiler, klavye ve dikte yazılımı gibi destekleyici teknolojiler ile sınav düzenlemeleri işlevselliği artırır. Güçlük yaşam boyu sürebilir ancak telafi stratejileriyle büyük ölçüde azaltılabilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Akademik Becerilerde Güçlük (En az 6 ay, müdahaleye rağmen)",
-                "content": "Bu güçlükleri hedefleyen müdahalelere karşın en az 6 aydır süren akademik beceri güçlüğü; yazılı anlatım alanında özellikle yazım (heceleme) güçlüğü ve yazılı anlatımda güçlük (birçok dilbilgisi ve noktalama hatası, paragraf düzenlemede yetersizlik, düşüncelerin yazıda açıkça ifade edilememesi)."
-            },
-            {
-                "code": "Kriter B, C & D",
-                "title": "Ölçülebilir Düşüklük, Okul Çağında Başlangıç ve Dışlama",
-                "content": "Etkilenen beceriler yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır ve okul, iş ya da günlük yaşamı belirgin biçimde etkiler; bu durum bireysel uygulanan standart başarı testleri ve kapsamlı klinik değerlendirmeyle doğrulanır (17 yaş ve üzerinde belgelenmiş öğrenme güçlüğü öyküsü yerine geçebilir) (B). Güçlükler okul çağında başlar, ancak talepler kapasiteyi aşana dek tam olarak ortaya çıkmayabilir (C). Zihinsel yetiyitimi, düzeltilmemiş görme/işitme sorunları, başka ruhsal ya da nörolojik bozukluklar, psikososyal güçlükler, öğretim dilinde yetersizlik ya da yetersiz eğitimle daha iyi açıklanamaz (D)."
-            },
-            {
-                "code": "Belirleyiciler",
-                "title": "Yazılı Anlatım Alt Becerileri ve Şiddet",
-                "content": "Yazılı anlatımda bozulma ile: yazım (heceleme) doğruluğu, dilbilgisi ve noktalama doğruluğu, yazılı anlatımın açıklığı ya da düzenlenmesi. Şiddet hafif, orta ya da ağır olarak belirtilir."
-            }
-        ]
-    },
-    "specific_learning_dyscalculia": {
-        "id": "specific_learning_dyscalculia",
-        "nameTr": "Özgül Öğrenme Bozukluğu (Matematik Bozukluğu / Diskalkuli)",
-        "nameEn": "Specific Learning Disorder with Impairment in Mathematics (Dyscalculia)",
-        "clinicalDescription": {
-            "overview": "Özgül öğrenme bozukluğunun matematik alanında belirgin güçlükle giden biçimidir. Sayı duyusunun (nicelikleri sezgisel kavrama, sayıların büyüklüğünü karşılaştırma) zayıf olması, temel aritmetik bilgilerin (örn. çarpım tablosu) belleğe alınamaması, hesaplamanın yavaş ve hatalı olması ve matematiksel akıl yürütmede (problem çözmede kavram ve işlemleri uygulama) güçlük görülür. Çocuk büyük yaşlarda bile parmakla saymayı sürdürebilir, işlem basamaklarını karıştırabilir. 'Diskalkuli' terimi, sayısal bilgiyi işleme, aritmetik bilgileri öğrenme ve akıcı hesaplamadaki bu güçlük örüntüsü için kullanılan alternatif bir terimdir.",
-            "epidemiology": "Özgül öğrenme bozukluğunun tüm alanlarda okul çağı yaygınlığı yaklaşık %5-15'tir; matematik alanındaki güçlük için çalışmalarda yaklaşık %3-7 arasında oranlar bildirilmektedir. Okuma bozukluğu ve DEHB ile birliktelik sıktır.",
-            "etiology": "Genetik etkenler ve parietal korteksteki (özellikle intraparietal oluk) sayısal büyüklük işlemleme ağlarındaki farklılıklar sorumlu tutulmaktadır. Çalışma belleği, görsel-uzamsal işlemleme ve işlemleme hızı zayıflıkları katkıda bulunur. Prematürite, fetal alkol maruziyeti ve bazı genetik sendromlar (örn. Turner sendromu) risk etkenleridir. Matematik kaygısı ikincil olarak gelişip tabloyu ağırlaştırabilir.",
-            "prognosis": "Açık ve sistematik, somuttan soyuta ilerleyen matematik öğretimi, sayı doğrusu ve somut materyallerle çalışma, akıcılık çalışmaları ve sınavlarda ek süre/hesap makinesi gibi düzenlemeler yararlıdır. Güçlükler yetişkinlikte günlük para ve zaman yönetimini etkileyebilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Akademik Becerilerde Güçlük (En az 6 ay, müdahaleye rağmen)",
-                "content": "Hedefli müdahalelere karşın en az 6 aydır süren güçlük; matematik alanında özellikle sayı duyusu, aritmetik bilgiler ya da hesaplamada ustalaşma güçlüğü (sayıları, büyüklükleri ve aralarındaki ilişkileri kavrayamama, toplama işlemlerini akılda tutamayıp parmakla sayma, işlemin ortasında kaybolma) ve matematiksel akıl yürütmede güçlük (nicel problemleri çözmek için kavram, bilgi ve işlemleri uygulayamama)."
-            },
-            {
-                "code": "Kriter B, C & D",
-                "title": "Ölçülebilir Düşüklük, Okul Çağında Başlangıç ve Dışlama",
-                "content": "Matematik becerileri yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır, akademik/mesleki ya da günlük yaşamı belirgin biçimde etkiler ve bu, bireysel standart başarı testleri ile kapsamlı klinik değerlendirmeyle doğrulanır (B). Güçlükler okul çağında başlar (C). Zihinsel yetiyitimi, duyusal sorunlar, başka ruhsal/nörolojik bozukluklar, psikososyal güçlükler, öğretim dilinde yetersizlik ya da yetersiz eğitimle daha iyi açıklanamaz (D)."
-            },
-            {
-                "code": "Belirleyiciler",
-                "title": "Matematik Alt Becerileri ve Şiddet",
-                "content": "Matematikte bozulma ile: sayı duyusu, aritmetik bilgilerin belleğe alınması, doğru ya da akıcı hesaplama, doğru matematiksel akıl yürütme. Şiddet hafif, orta ya da ağır olarak belirtilir."
-            }
-        ]
-    },
     "stereotypic_movement_disorder": {
         "id": "stereotypic_movement_disorder",
         "nameTr": "Stereotipik Hareket Bozukluğu",
@@ -3060,52 +2977,6 @@ const DSM5_MANUAL = {
                     "4. Uyumsal işlevsellikte en az iki alanda bozulma; bunlardan biri iletişim ya da toplumsal etkileşim alanı olmalıdır.",
                     "5. Başlangıcın çocuklukta olması, belirgin sıkıntı/işlev bozulması ve başka bir nedenle daha iyi açıklanamaması."
                 ]
-            }
-        ]
-    },
-    "schizoaffective_bipolar": {
-        "id": "schizoaffective_bipolar",
-        "nameTr": "Şizoaffektif Bozukluk (Bipolar Tip)",
-        "nameEn": "Schizoaffective Disorder (Bipolar Type)",
-        "clinicalDescription": {
-            "overview": "Şizofreninin aktif evre belirtileriyle (sanrı, varsanı, dağınık konuşma vb.) eş zamanlı olarak majör bir duygudurum epizodunun bulunduğu ve tablonun bir parçası olarak manik epizodun yer aldığı şizoaffektif bozukluk alt tipidir; majör depresif epizodlar da görülebilir. Tanının anahtarı, duygudurum epizodu olmaksızın en az 2 hafta süren sanrı ya da varsanı döneminin bulunması ve duygudurum epizodlarının hastalığın toplam süresinin çoğunluğunu kaplamasıdır.",
-            "epidemiology": "Şizoaffektif bozukluğun yaşam boyu yaygınlığı yaklaşık %0.3'tür. Bipolar tip genç erişkinlerde, depresif tip ileri erişkinlerde görece daha sıktır.",
-            "etiology": "Şizofreni ve bipolar bozuklukla ortak genetik yatkınlık gösterir; birinci derece yakınlarında her iki bozukluğun riski de artmıştır.",
-            "prognosis": "Genel olarak prognozu şizofreniden daha iyi, bipolar bozukluktan daha kötüdür. Antipsikotik ile duygudurum dengeleyici tedavi, psikoeğitim ve psikososyal rehabilitasyon uygulanır. Tanı zaman içinde değişebileceğinden boylamsal izlem önemlidir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-D",
-                "title": "Şizoaffektif Bozukluk Ortak Ölçütleri",
-                "content": "Şizofreni A ölçütüyle eş zamanlı majör duygudurum epizodunun (manik ya da majör depresif; depresif epizod çökkün duygudurumu içermeli) bulunduğu kesintisiz hastalık dönemi (A). Hastalığın yaşam boyu süresince, majör duygudurum epizodu olmaksızın 2 hafta ya da daha uzun süren sanrı veya varsanılar (B). Duygudurum epizodu ölçütlerini karşılayan belirtiler hastalığın aktif ve kalıntı evrelerinin toplam süresinin çoğunluğunda bulunur (C). Madde ya da sağlık durumuna bağlanamaz (D)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Bipolar Tip",
-                "content": "Tablonun bir parçası olarak manik epizod bulunur; majör depresif epizodlar da olabilir. Yalnızca majör depresif epizodlar varsa depresif tip kodlanır. Duygudurum epizodları kısa ve hastalığın küçük bir bölümünü oluşturuyorsa şizofreni tanısı daha uygundur."
-            }
-        ]
-    },
-    "schizoaffective_depressive": {
-        "id": "schizoaffective_depressive",
-        "nameTr": "Şizoaffektif Bozukluk (Depresif Tip)",
-        "nameEn": "Schizoaffective Disorder (Depressive Type)",
-        "clinicalDescription": {
-            "overview": "Şizofreni aktif evre belirtileriyle eş zamanlı majör depresif epizodun görüldüğü ve hastalık boyunca hiç manik epizodun bulunmadığı şizoaffektif bozukluk alt tipidir. Depresif epizodun çökkün duygudurumu içermesi gerekir; yalnızca ilgi kaybı, şizofreninin negatif belirtileriyle karışabileceğinden yeterli sayılmaz. Duygudurum epizodu yokken de en az 2 hafta süren sanrı ya da varsanılar bulunur.",
-            "epidemiology": "Şizoaffektif bozukluğun yaşam boyu yaygınlığı yaklaşık %0.3'tür; depresif tip ileri yaşta başlayan olgularda daha sıktır ve kadınlarda daha yaygın olduğu bildirilmektedir.",
-            "etiology": "Şizofreni ve duygudurum bozukluklarıyla ortak genetik ve nörobiyolojik etkenler. Ayırıcı tanıda psikotik özellikli majör depresif bozukluk (psikotik belirtilerin yalnızca depresif epizod sırasında görülmesi) ile ayrım temel noktadır.",
-            "prognosis": "Bipolar tipe göre prognozun daha kötü olabileceği bildirilmektedir. Antipsikotik ve antidepresan tedavi, psikososyal destek ve intihar riskinin yakın izlemi gerekir; depresif dönemlerde intihar riski yüksektir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-D",
-                "title": "Şizoaffektif Bozukluk Ortak Ölçütleri",
-                "content": "Şizofreni A ölçütüyle eş zamanlı majör duygudurum epizodu (A); duygudurum epizodu olmaksızın en az 2 hafta sanrı ya da varsanı (B); duygudurum epizodu belirtilerinin hastalığın toplam süresinin çoğunluğunda bulunması (C); madde ya da sağlık durumuna bağlanamaması (D)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Depresif Tip",
-                "content": "Tabloda yalnızca majör depresif epizodlar bulunur, manik epizod hiç olmamıştır. Psikotik belirtiler yalnızca depresif epizodlar sırasında görülüyorsa tanı psikotik özellikli majör depresif bozukluktur."
             }
         ]
     },
@@ -3212,29 +3083,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "bipolar_1_depressed": {
-        "id": "bipolar_1_depressed",
-        "nameTr": "Bipolar I Bozukluğu (Şu Anki Epizod Depresif)",
-        "nameEn": "Bipolar I Disorder, Current Episode Depressed",
-        "clinicalDescription": {
-            "overview": "Yaşamı boyunca en az bir kez manik epizod geçirmiş bir kişinin şu anda majör depresif epizod içinde olduğu tablodur. Depresif dönem, tek kutuplu depresyondan belirti düzeyinde çoğu zaman ayırt edilemez; ancak erken başlangıç, aşırı uyku, aşırı yeme ve kurşun gibi ağırlık hissi (atipik özellikler), belirgin psikomotor yavaşlama, psikotik özellikler, doğum sonrası başlangıç, çok sayıda epizod ve ailede bipolar bozukluk öyküsü bipolar depresyonu düşündürür. Tanının anahtarı geçmişteki manik epizodun ayrıntılı öykü ve yakınlardan alınan bilgiyle sorgulanmasıdır.",
-            "epidemiology": "Bipolar I bozukluğu olan kişiler uzun dönem izlemde zamanlarının belirgin biçimde daha büyük bölümünü depresif belirtilerle geçirir; bu nedenle hastalık yükünün ve intihar riskinin önemli kısmı depresif dönemlerle ilişkilidir.",
-            "etiology": "Bipolar I bozukluğunun genel etiyolojisiyle aynıdır: yüksek kalıtılabilirlik, sirkadiyen ritim bozuklukları, monoaminerjik ve hücre içi sinyal yolaklarında işlev bozukluğu; uyku yoksunluğu ve stresli yaşam olayları epizodları tetikler.",
-            "prognosis": "Bipolar depresyon tek kutuplu depresyona göre tedaviye daha dirençli olabilir. Antidepresanların tek başına kullanımı manik/hipomanik kaymaya ve hızlı döngülülüğe yol açabileceğinden önerilmez; duygudurum dengeleyiciler ve depresyonda etkinliği gösterilmiş bazı atipik antipsikotikler, psikoeğitim, kişilerarası ve sosyal ritim terapisi kullanılır. İntihar riski yakından izlenmelidir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter 1",
-                "title": "En Az Bir Manik Epizod Öyküsü",
-                "content": "Yaşam boyunca en az bir kez manik epizod ölçütleri karşılanmıştır (en az 1 hafta ya da yatış gerektiriyorsa herhangi bir süre; en az 3, yalnızca irritabl duygudurumda en az 4 manik belirti; belirgin işlev bozulması, yatış gereksinimi ya da psikotik özellikler). Manik ve majör depresif epizodlar şizoaffektif bozukluk, şizofreni ya da diğer psikotik bozukluklarla daha iyi açıklanamaz."
-            },
-            {
-                "code": "Şu Anki Epizod",
-                "title": "Majör Depresif Epizod (≥ 2 hafta, 9 belirtiden en az 5'i)",
-                "content": "Şu anda, en az biri çökkün duygudurum ya da ilgi/zevk kaybı olmak üzere en az 5 depresif belirtinin 2 hafta boyunca bulunduğu, sıkıntı ya da işlev bozulmasına yol açan ve madde/sağlık durumuna bağlanamayan bir majör depresif epizod vardır. Şiddet (hafif, orta, ağır), psikotik özellikler, kaygılı sıkıntı, karışık, melankolik, atipik, doğum dönemi başlangıçlı ve mevsimsel örüntü belirleyicileri eklenebilir."
-            }
-        ]
-    },
     "substance_induced_bipolar": {
         "id": "substance_induced_bipolar",
         "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
@@ -3333,52 +3181,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "mdd_recurrent": {
-        "id": "mdd_recurrent",
-        "nameTr": "Majör Depresif Bozukluk (Yineleyici / Tekrarlayan)",
-        "nameEn": "Major Depressive Disorder (Recurrent)",
-        "clinicalDescription": {
-            "overview": "Kişinin yaşamı boyunca birden fazla majör depresif epizod geçirdiği majör depresif bozukluk biçimidir. İki epizodun ayrı sayılabilmesi için, aralarında majör depresif epizod ölçütlerinin karşılanmadığı ardışık en az 2 aylık bir dönem bulunmalıdır. 'Yineleyici' terimi 'kronik' ile aynı anlamda değildir: belirtilerin 2 yıldan uzun süre kesintisiz devam ettiği tablolar süregen depresif bozukluk (distimi) olarak ayrıca değerlendirilir.",
-            "epidemiology": "Majör depresif bozukluğu olan kişilerin önemli bir çoğunluğu yaşamı boyunca birden fazla epizod geçirir. Her yeni epizodla birlikte yineleme riski artar.",
-            "etiology": "Erken başlangıç, önceki epizod sayısı, tam olmayan iyileşme (kalıntı belirtiler), eşlik eden anksiyete bozuklukları, kişilik özellikleri (yüksek nevrotiklik), süregen stres ve olumsuz bilişsel şemalar yineleme riskini artırır. Epizodlar arttıkça daha küçük stres etkenlerinin epizodu tetikleyebildiği 'duyarlılaşma (kindling)' modeli öne sürülmüştür.",
-            "prognosis": "Bir epizod sonrası yineleme riski yaklaşık %50, iki epizod sonrası %70, üç epizod sonrası %80-90 civarında bildirilir. Bu nedenle yineleyici olgularda idame (koruyucu) antidepresan tedavisi ve yinelemeyi önleyici psikoterapiler (BDT, bilinçli farkındalığa dayalı bilişsel terapi) önerilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-E",
-                "title": "Majör Depresif Bozukluk Ölçütleri",
-                "content": "2 haftalık dönemde, en az biri çökkün duygudurum ya da ilgi/zevk kaybı olan en az 5 depresif belirti (A); belirgin sıkıntı ya da işlev bozulması (B); madde ya da tıbbi duruma bağlanamama (C); şizofreni spektrumu bozukluklarıyla daha iyi açıklanamama (D); hiçbir zaman manik ya da hipomanik epizod geçirmemiş olma (E)."
-            },
-            {
-                "code": "Seyir Belirleyicisi",
-                "title": "Yineleyici Epizod (En az 2 epizod, aralarında ≥ 2 ay)",
-                "content": "En az iki majör depresif epizod bulunur; epizodların ayrı sayılması için aralarında majör depresif epizod ölçütlerinin karşılanmadığı ardışık en az 2 aylık bir dönem olmalıdır. Şu anki şiddet (hafif, orta, ağır), psikotik özellikler, kısmi/tam yatışma ve diğer belirleyiciler (kaygılı sıkıntı, melankolik, atipik, mevsimsel örüntü vb.) eklenir."
-            }
-        ]
-    },
-    "mdd_with_psychotic": {
-        "id": "mdd_with_psychotic",
-        "nameTr": "Psikotik Özellikli Majör Depresif Bozukluk",
-        "nameEn": "Major Depressive Disorder with Psychotic Features",
-        "clinicalDescription": {
-            "overview": "Majör depresif epizodun herhangi bir döneminde sanrı ve/veya varsanıların eşlik ettiği ağır depresyon biçimidir. Psikotik belirtiler çoğunlukla duygudurumla uyumludur: kişisel yetersizlik, suçluluk, hastalık, yok olma (nihilistik sanrılar, örn. Cotard), hak edilmiş cezalandırma ya da yoksullaşma temaları görülür; kişi işlediği 'günahlar' için cezalandırılacağına inanabilir veya kendisini suçlayan sesler duyabilir. Duygudurumla uyumsuz temalar (örn. düşünce sokulması) da görülebilir. Psikotik belirtiler yalnızca depresif epizod sırasında görülür; epizod dışında da sürüyorsa şizoaffektif bozukluk düşünülür.",
-            "epidemiology": "Yatarak tedavi gören depresyon hastalarında psikotik özellikler sık görülür; yaşlılarda daha sıktır.",
-            "etiology": "HPA ekseni aşırı etkinliği ve yüksek kortizol düzeyi, dopaminerjik etkinlik artışı öne sürülmektedir. Bipolar bozukluk açısından aile öyküsü ve sonraki yıllarda bipolar tanısına geçiş riski daha yüksektir.",
-            "prognosis": "İntihar riski psikotik olmayan depresyona göre belirgin yüksektir. Tek başına antidepresan tedavisi genellikle yetersizdir; antidepresan ile antipsikotik birlikte kullanılır ya da elektrokonvülsif tedavi (EKT) uygulanır. EKT bu grupta özellikle yüksek yanıt oranına sahiptir. Yineleme ve kronikleşme riski yüksektir."
-        },
-        "criteriaList": [
-            {
-                "code": "Temel Ölçüt",
-                "title": "Majör Depresif Epizod + Psikotik Belirtiler",
-                "content": "Majör depresif bozukluk ölçütleri karşılanır ve epizodun herhangi bir anında sanrılar ve/veya varsanılar bulunur. Psikotik belirtiler bulunduğunda bu belirleyici, epizodun şiddet düzeyinden bağımsız olarak belirtilir."
-            },
-            {
-                "code": "Belirleyici",
-                "title": "Duygudurumla Uyumlu / Uyumsuz",
-                "content": "Duygudurumla uyumlu psikotik özellikler: tüm sanrı ve varsanıların içeriği kişisel yetersizlik, suçluluk, hastalık, ölüm, nihilizm ya da hak edilmiş ceza gibi tipik depresif temalarla tutarlıdır. Duygudurumla uyumsuz psikotik özellikler: içerik bu temaları içermez ya da uyumlu ve uyumsuz temalar karışıktır."
-            }
-        ]
-    },
     "substance_induced_depressive": {
         "id": "substance_induced_depressive",
         "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
@@ -3455,75 +3257,6 @@ const DSM5_MANUAL = {
                 "code": "Belirtilmemiş ile Farkı",
                 "title": "Nedenin Belirtilmesi",
                 "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş Depresif Bozukluk' kategorisi kullanılır."
-            }
-        ]
-    },
-    "specific_phobia_animal": {
-        "id": "specific_phobia_animal",
-        "nameTr": "Özgül Fobi (Hayvan Tipi: Örümcek, Yılan, Köpek)",
-        "nameEn": "Specific Phobia (Animal Type)",
-        "clinicalDescription": {
-            "overview": "Örümcek, böcek, yılan, köpek, kedi, kuş, fare gibi hayvanlara karşı duyulan, gerçek tehlikeyle orantısız, yoğun ve süregen korku ile kaçınmadır. Kişi hayvanla karşılaşacağı yerlere gitmekten kaçınabilir, hayvanın resmini görmek bile kaygıyı tetikleyebilir. Korkuda iğrenme duygusu (özellikle örümcek ve böceklerde) önemli bir bileşendir. Çocuklarda korku ağlama, öfke nöbeti, donakalma ya da bakım verene yapışma şeklinde görülebilir.",
-            "epidemiology": "Özgül fobi alt tipleri içinde en sık görülenlerdendir. Genellikle erken çocuklukta başlar ve kadınlarda belirgin olarak daha sıktır.",
-            "etiology": "Hayvanla yaşanmış olumsuz deneyim (doğrudan koşullanma), başkalarının korkusunu gözlemleme (dolaylı öğrenme), olumsuz bilgi aktarımı ve evrimsel 'hazırlanmışlık' (tehlikeli olabilecek canlılardan korkmaya biyolojik yatkınlık); iğrenme duyarlılığının yüksekliği.",
-            "prognosis": "Kademeli canlı (in vivo) maruz bırakma çok etkilidir; tek seanslık uzatılmış maruz bırakma protokolleri (Öst) ile birçok kişide hızlı ve kalıcı düzelme sağlanır. Tedavi edilmezse çocuklukta başlayan fobilerin bir kısmı yetişkinliğe uzanır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-G",
-                "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
-                "content": "Belirli bir nesne ya da durumla ilgili belirgin korku veya kaygı (A); fobik uyaranın hemen her zaman ani korku doğurması (B); uyarandan etkin olarak kaçınılması ya da yoğun korkuyla katlanılması (C); korkunun gerçek tehlike ve sosyokültürel bağlamla orantısız olması (D); süregenlik, tipik olarak 6 ay ya da daha uzun (E); belirgin sıkıntı ya da işlev bozulması (F); agorafobi, OKB, TSSB, ayrılma kaygısı ya da sosyal kaygı bozukluğu gibi başka bir bozuklukla daha iyi açıklanamama (G)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Hayvan Tipi",
-                "content": "Fobik uyaran hayvanlar ya da böceklerdir (örn. örümcek, yılan, köpek, böcek). Kişi birden fazla alt tipte fobi taşıyabilir; bu durumda her biri ayrı belirtilir."
-            }
-        ]
-    },
-    "specific_phobia_natural": {
-        "id": "specific_phobia_natural",
-        "nameTr": "Özgül Fobi (Doğal Çevre Tipi: Yükseklik, Fırtına, Su)",
-        "nameEn": "Specific Phobia (Natural Environment Type)",
-        "clinicalDescription": {
-            "overview": "Yükseklik, fırtına, gök gürültüsü, şimşek, su (derin su, deniz) gibi doğal çevre öğelerine karşı duyulan orantısız ve süregen korku ile kaçınmadır. Yükseklik korkusu (akrofobi) olan kişi yüksek katlarda balkona çıkamaz, köprülerden veya merdiven boşluklarından kaçınır ve yükseklikte baş dönmesi, düşme ya da 'atlama dürtüsü' korkusu yaşayabilir. Not: 'Hidrofobi' terimi tıpta kuduzun bir belirtisi için de kullanılır; suya karşı fobi için 'akuafobi' terimi daha uygundur.",
-            "epidemiology": "Yaygın bir alt tiptir; yükseklik korkusu toplumda en sık görülen özgül fobiler arasındadır. Başlangıç genellikle çocukluktadır.",
-            "etiology": "Doğrudan olumsuz deneyim, gözlemle öğrenme ve evrimsel hazırlanmışlık. Yükseklik korkusunda görsel-vestibüler uyumsuzluk ve denge sistemine ilişkin duyarlılık rol oynayabilir.",
-            "prognosis": "Kademeli maruz bırakma (canlı ya da sanal gerçeklik ile) etkilidir. Akrofobide sanal gerçeklik maruziyet terapisinin etkinliği iyi belgelenmiştir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-G",
-                "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
-                "content": "Belirli nesne/duruma karşı belirgin korku (A), hemen her karşılaşmada ani korku (B), kaçınma ya da yoğun korkuyla katlanma (C), gerçek tehlikeyle orantısızlık (D), tipik olarak 6 ay ya da daha uzun süre (E), belirgin sıkıntı/işlev bozulması (F), başka bir ruhsal bozuklukla daha iyi açıklanamama (G)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Doğal Çevre Tipi",
-                "content": "Fobik uyaran doğal çevreye ait öğelerdir (örn. yükseklik, fırtına, su). Yükseklikte baş dönmesi ve denge kaybı yakınmalarında vestibüler bozukluklar ayırıcı tanıda değerlendirilmelidir."
-            }
-        ]
-    },
-    "specific_phobia_situational": {
-        "id": "specific_phobia_situational",
-        "nameTr": "Özgül Fobi (Durumsal Tip: Klostrofobi, Uçak, Asansör)",
-        "nameEn": "Specific Phobia (Situational Type)",
-        "clinicalDescription": {
-            "overview": "Uçağa binme, asansör, kapalı alanlar (klostrofobi), tünel, köprü, toplu taşıma ya da araç kullanma gibi belirli durumlara karşı orantısız ve süregen korku ile kaçınmadır. Korku çoğu zaman sıkışıp kalma, kaçamama, kontrolü kaybetme ya da panik atak geçirme beklentisiyle ilişkilidir. MR çekimi gibi tıbbi işlemlerde klostrofobi önemli sorun yaratabilir.",
-            "epidemiology": "Başlangıç yaşı iki tepe gösterir: çocukluk ve 20'li yaşların ortası. Kadınlarda daha sık görülür.",
-            "etiology": "Olumsuz deneyimler (örn. asansörde mahsur kalma, türbülans), beklenmedik panik atakların belirli bir durumla ilişkilendirilmesi ve felaketleştirici yorumlar. Panik bozukluğu ve agorafobi ile sık birliktelik gösterir.",
-            "prognosis": "Kademeli maruz bırakma ve bilişsel yeniden yapılandırma etkilidir; uçuş fobisinde sanal gerçeklik uygulamaları yararlıdır. Ayırıcı tanıda agorafobi önemlidir: korku 5 agorafobik durum grubundan (toplu taşıma, açık alanlar, kapalı yerler, sıra ya da kalabalık, evin dışında yalnız olma) en az ikisini kapsıyorsa agorafobi düşünülür."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-G",
-                "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
-                "content": "Belirli nesne/duruma karşı belirgin korku (A), hemen her karşılaşmada ani korku (B), kaçınma ya da yoğun korkuyla katlanma (C), gerçek tehlike ve bağlamla orantısızlık (D), tipik olarak 6 ay ya da daha uzun süre (E), belirgin sıkıntı/işlev bozulması (F), agorafobi ve panik bozukluğu dahil başka bir bozuklukla daha iyi açıklanamama (G)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Durumsal Tip",
-                "content": "Fobik uyaran belirli durumlardır (örn. uçak, asansör, kapalı yerler, tünel, köprü). Korku tek bir durumla sınırlıysa özgül fobi, birden fazla agorafobik durum grubunu kapsıyorsa agorafobi tanısı değerlendirilir."
             }
         ]
     },
@@ -3634,52 +3367,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "adjustment_disorder_depressed": {
-        "id": "adjustment_disorder_depressed",
-        "nameTr": "Uyum Bozukluğu (Çökkün Duygudurum ile)",
-        "nameEn": "Adjustment Disorder with Depressed Mood",
-        "clinicalDescription": {
-            "overview": "Belirlenebilir bir stres etkenine (ayrılık, iş kaybı, taşınma, hastalık, akademik başarısızlık vb.) yanıt olarak stres etkeninin başlamasından sonraki 3 ay içinde ortaya çıkan ve klinik tabloda çökkün duygudurum, ağlamaklılık ve umutsuzluk duygularının baskın olduğu uyum bozukluğu alt tipidir. Belirtiler stres etkeninin ağırlığıyla orantısız sıkıntı ya da belirgin işlev bozulmasına yol açar ancak majör depresif epizod ölçütlerini karşılamaz.",
-            "epidemiology": "Uyum bozuklukları ayaktan ruh sağlığı başvurularında sık görülür (yaklaşık %5-20); konsültasyon-liyezon psikiyatrisinde en sık konan tanılardandır. Çökkün duygudurumlu alt tip en sık alt tiplerdendir.",
-            "etiology": "Stres etkeninin niteliği ve kişinin baş etme kapasitesi, toplumsal destek, önceki ruhsal durum ve kişilik özellikleri belirleyicidir. Dezavantajlı yaşam koşulları stres etkenlerine maruziyeti ve riski artırır.",
-            "prognosis": "Çoğu yetişkinde iyi seyreder; stres etkeni ve sonuçları sona erdikten sonra belirtiler 6 ay içinde geriler. Ergenlerde daha uzun sürebilir ve sonradan başka ruhsal bozukluklar gelişebilir. İntihar düşünce ve davranışları açısından (özellikle ergenlerde) dikkatli olunmalıdır. Kısa süreli destekleyici, sorun çözme odaklı ve bilişsel-davranışçı yaklaşımlar ilk seçenektir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-E",
-                "title": "Uyum Bozukluğu Ortak Ölçütleri",
-                "content": "Belirlenebilir stres etken(ler)ine yanıt olarak, etkenin başlamasından sonraki 3 ay içinde ortaya çıkan duygusal ya da davranışsal belirtiler (A). Belirtiler klinik açıdan belirgindir: dış bağlam ve kültürel etkenler göz önüne alındığında etkenin şiddetiyle orantısız belirgin sıkıntı ve/veya önemli işlev bozulması (B). Başka bir ruhsal bozukluğun ölçütlerini karşılamaz ve önceden var olan bir bozukluğun yalnızca alevlenmesi değildir (C). Olağan yas tepkisini yansıtmaz ve uzamış yas bozukluğuyla daha iyi açıklanamaz (D). Stres etkeni ya da sonuçları sona erdikten sonra belirtiler 6 aydan uzun sürmez (E)."
-            },
-            {
-                "code": "Alt Tip & Belirleyici",
-                "title": "Çökkün Duygudurumla",
-                "content": "Çökkün duygudurum, ağlamaklılık ya da umutsuzluk duyguları baskındır. Süre belirleyicisi: akut (belirtiler 6 aydan kısa) ya da süregen (6 ay veya daha uzun; süregen bir stres etkenine ya da kalıcı sonuçları olan bir etkene yanıt olarak). Majör depresif epizod ölçütleri karşılanıyorsa stres etkeni olsa bile majör depresif bozukluk tanısı konur."
-            }
-        ]
-    },
-    "adjustment_disorder_anxious": {
-        "id": "adjustment_disorder_anxious",
-        "nameTr": "Uyum Bozukluğu (Kaygı ile)",
-        "nameEn": "Adjustment Disorder with Anxiety",
-        "clinicalDescription": {
-            "overview": "Belirlenebilir bir stres etkenine yanıt olarak 3 ay içinde ortaya çıkan ve klinik tabloda sinirlilik, endişe, gerginlik, huzursuzluk ya da (çocuklarda) ayrılma kaygısının baskın olduğu uyum bozukluğu alt tipidir. Belirtiler stres etkeniyle orantısız sıkıntıya ya da belirgin işlev bozulmasına yol açar ancak yaygın anksiyete bozukluğu, TSSB ya da akut stres bozukluğu gibi başka bir bozukluğun ölçütlerini karşılamaz.",
-            "epidemiology": "Uyum bozuklukları ayaktan ruh sağlığı başvurularında sık görülür (yaklaşık %5-20). Kaygılı alt tip, çökkün duygudurumlu ve karışık alt tiplerle birlikte en sık görülenlerdendir.",
-            "etiology": "Stres etkeninin belirsizlik içermesi (örn. tıbbi tetkik sonucu bekleme, iş güvencesizliği), kaygıya yatkın mizaç, sınırlı baş etme becerileri ve zayıf toplumsal destek riski artırır.",
-            "prognosis": "Stres etkeni ortadan kalktığında ya da kişi uyum sağladığında genellikle düzelir. Sorun çözme terapisi, gevşeme ve stres yönetimi becerileri, kısa süreli BDT etkilidir. Uzun süreli benzodiazepin kullanımından kaçınılmalıdır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-E",
-                "title": "Uyum Bozukluğu Ortak Ölçütleri",
-                "content": "Stres etkenine yanıt olarak 3 ay içinde başlayan belirtiler (A); etkenle orantısız sıkıntı ve/veya işlev bozulması (B); başka bir ruhsal bozukluğun ölçütlerini karşılamama ve önceki bir bozukluğun alevlenmesi olmama (C); olağan yas ya da uzamış yas bozukluğu ile açıklanamama (D); etken ve sonuçları sona erdikten sonra belirtilerin 6 aydan uzun sürmemesi (E)."
-            },
-            {
-                "code": "Alt Tip & Belirleyici",
-                "title": "Kaygıyla",
-                "content": "Sinirlilik, endişe, gerginlik ya da ayrılma kaygısı baskındır. Süre belirleyicisi: akut (6 aydan kısa) ya da süregen (6 ay veya daha uzun). Travmatik bir olay sonrası belirtiler TSSB ya da akut stres bozukluğu ölçütlerini karşılıyorsa o tanılar konur; karşılamıyorsa uyum bozukluğu uygundur."
-            }
-        ]
-    },
     "other_specified_dissociative": {
         "id": "other_specified_dissociative",
         "nameTr": "Belirlenmiş Diğer Bir Dissosiyatif Bozukluk",
@@ -3719,52 +3406,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "conversion_motor": {
-        "id": "conversion_motor",
-        "nameTr": "Konversiyon Bozukluğu (Motor Belirtiler: Felç / Yürüme Bozukluğu)",
-        "nameEn": "Conversion Disorder (Motor Symptoms)",
-        "clinicalDescription": {
-            "overview": "DSM-5-TR'deki adıyla 'Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu)'nun istemli motor işlevin etkilendiği biçimidir: bir ya da daha fazla uzuvda güçsüzlük veya felç, yürüme bozuklukları, titreme, distoni, miyoklonus gibi anormal hareketler, yutma ya da konuşma belirtileri görülür. Tanı, belirtilerin bilinen nörolojik hastalıklarla bağdaşmadığını gösteren olumlu klinik bulgulara dayanır; yalnızca 'tetkiklerin normal çıkması' yeterli değildir. Örnek bulgular: Hoover belirtisi (felçli bacakta istemli kalça ekstansiyonu zayıfken karşı kalça fleksiyonunda otomatik ekstansiyonun güçlü olması), kas gücü muayenesinde 'birden bırakma', dikkat dağıtılınca ya da başka bir ritme uydurulunca değişen titreme. Belirtilerin bilinçli olarak üretilmediği kabul edilir; DSM-5 itibarıyla tanı için psikolojik bir stres etkeni gösterilmesi şart değildir.",
-            "epidemiology": "Nöroloji polikliniklerine başvuranların önemli bir bölümünde işlevsel nörolojik belirtiler saptanır. Kadınlarda 2-3 kat daha sık görülür; her yaşta başlayabilir.",
-            "etiology": "Biyopsikososyal model: travma ve olumsuz yaşam olayları (her olguda bulunmaz), dissosiyasyon eğilimi, beklenti ve dikkatin bedene aşırı yönelmesi, öncül fiziksel hastalık ya da yaralanma. İşlevsel görüntüleme çalışmaları istemli hareket duygusu (faillik) ve dikkatle ilişkili beyin ağlarında değişiklikler göstermektedir.",
-            "prognosis": "Belirtilerin kısa süreli olması, akut başlangıç ve tanının hasta tarafından kabul edilmesi iyi prognozla ilişkilidir. Tanının açık ve inandırıcı biçimde açıklanması tedavinin ilk adımıdır; işlevsel nörolojik bozukluğa özgü fizyoterapi ve BDT etkilidir. Gereksiz tetkik ve girişimlerden kaçınılmalıdır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-D",
-                "title": "Konversiyon (İşlevsel Nörolojik Belirti) Bozukluğu Ölçütleri",
-                "content": "Bir ya da daha fazla istemli motor ya da duyusal işlev değişikliği belirtisi (A). Klinik bulgular belirti ile bilinen nörolojik veya tıbbi durumlar arasında bağdaşmazlık olduğunu gösterir (B). Belirti başka bir tıbbi ya da ruhsal bozuklukla daha iyi açıklanamaz (C). Belirti belirgin sıkıntıya, işlev bozulmasına yol açar ya da tıbbi değerlendirme gerektirir (D)."
-            },
-            {
-                "code": "Belirleyiciler",
-                "title": "Motor Belirti Türleri ve Seyir",
-                "content": "Motor belirti türleri: güçsüzlük ya da felçle; anormal hareketle (titreme, distoni, miyoklonus, yürüme bozukluğu); yutma belirtileriyle; konuşma belirtisiyle (ses kısıklığı/afoni, peltek konuşma). Ek belirleyiciler: akut epizod (6 aydan kısa) ya da süregen (6 ay veya daha uzun); psikolojik stres etkeniyle ya da olmaksızın."
-            }
-        ]
-    },
-    "conversion_sensory": {
-        "id": "conversion_sensory",
-        "nameTr": "Konversiyon Bozukluğu (Duyusal Belirtiler: Duyu Kaybı / Histerik Körlük)",
-        "nameEn": "Conversion Disorder (With Anesthesia or Sensory Loss / Special Sensory Symptom)",
-        "clinicalDescription": {
-            "overview": "Konversiyon bozukluğunun (işlevsel nörolojik belirti bozukluğu) duyusal belirtilerle giden biçimidir: deride uyuşma ya da duyu kaybı (anestezi), görme kaybı ya da görme alanı daralması, işitme kaybı gibi özel duyu belirtileri görülür. Olumlu bulgular arasında anatomik sinir dağılımına uymayan duyu kaybı (örn. eldiven-çorap biçiminde ya da tam orta hatta sonlanan uyuşma), uzaklık arttıkça genişlemeyen 'tüp biçiminde' görme alanı daralması ve optokinetik nistagmus gibi görmenin sürdüğünü gösteren bulgular sayılabilir. Not: afoni (ses kaybı) DSM-5-TR'de duyusal değil, 'konuşma belirtisiyle' giden motor alt tür içinde sınıflanır.",
-            "epidemiology": "Kadınlarda daha sık görülür. Duyusal belirtiler çoğu zaman motor belirtilerle birlikte bulunur; tek başına işlevsel körlük görece seyrektir.",
-            "etiology": "Motor tiple ortak biyopsikososyal etkenler: stres ve travma (zorunlu değildir), dissosiyatif yatkınlık, dikkat ve beklentinin algıyı biçimlendirmesi, önceki hastalık ya da yaralanma deneyimi.",
-            "prognosis": "Akut ve kısa süreli duyusal belirtilerde prognoz genellikle iyidir. Tanının açıkça açıklanması, nedenin 'hayal ürünü' olmadığının vurgulanması, BDT ve rehabilitasyon yaklaşımları önerilir. Nörolojik ve oftalmolojik nedenler (örn. multipl skleroz, optik nörit) dikkatle dışlanmalıdır; işlevsel belirti ile organik hastalık birlikte de bulunabilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-D",
-                "title": "Konversiyon (İşlevsel Nörolojik Belirti) Bozukluğu Ölçütleri",
-                "content": "İstemli motor ya da duyusal işlevde değişiklik belirtisi (A); belirti ile bilinen nörolojik/tıbbi durumlar arasında bağdaşmazlığı gösteren klinik bulgular (B); başka bir tıbbi ya da ruhsal bozuklukla daha iyi açıklanamama (C); belirgin sıkıntı, işlev bozulması ya da tıbbi değerlendirme gereksinimi (D)."
-            },
-            {
-                "code": "Belirleyiciler",
-                "title": "Duyusal Belirti Türleri ve Seyir",
-                "content": "Duyusal belirti türleri: anestezi ya da duyu kaybıyla; özel duyu belirtisiyle (görme, koku alma ya da işitme bozukluğu). Hem motor hem duyusal belirtiler varsa 'karışık belirtilerle' kodlanır. Ek belirleyiciler: akut epizod (6 aydan kısa) ya da süregen (6 ay veya daha uzun); psikolojik stres etkeniyle ya da olmaksızın."
-            }
-        ]
-    },
     "psychological_factors_affecting_medical": {
         "id": "psychological_factors_affecting_medical",
         "nameTr": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenler",
@@ -3788,52 +3429,6 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "anorexia_restricting": {
-        "id": "anorexia_restricting",
-        "nameTr": "Anoreksiya Nervoza (Kısıtlayıcı Tip)",
-        "nameEn": "Anorexia Nervosa (Restricting Type)",
-        "clinicalDescription": {
-            "overview": "Anoreksiya nervozanın, son 3 ay içinde yineleyen tıkınırcasına yeme ya da çıkarma davranışının (kendini kusturma, laksatif, diüretik ya da lavman kötüye kullanımı) bulunmadığı alt tipidir. Kilo kaybı başlıca diyet, açlık ve/veya aşırı egzersizle sağlanır. Kişi belirgin düşük kiloya karşın kilo almaktan yoğun korku duyar, beden algısı bozuktur ve düşük kilonun ciddiyetini çoğu zaman kabul etmez.",
-            "epidemiology": "Anoreksiya nervozanın genç kadınlarda 12 aylık yaygınlığı yaklaşık %0.4 civarındadır; kadın/erkek oranı yaklaşık 10/1'dir. Genellikle ergenlik ya da genç erişkinlikte başlar.",
-            "etiology": "Genetik yatkınlık, mükemmeliyetçilik ve kaygılı mizaç, denetim gereksinimi, incelik idealini öne çıkaran sosyokültürel baskılar ve ergenlik geçişi. Açlığın kendisi bilişsel katılığı ve yemekle uğraşı artırarak tabloyu sürdürür.",
-            "prognosis": "Psikiyatrik bozukluklar içinde ölüm oranı en yüksek olanlardandır (tıbbi komplikasyonlar ve intihar). Ergenlerde aile temelli tedavi (Maudsley), yetişkinlerde geliştirilmiş BDT (CBT-E) ve MANTRA gibi yaklaşımlar, tıbbi izlem ve beslenme rehabilitasyonu (yeniden beslenme sendromuna dikkat) uygulanır. Kısıtlayıcı tipteki kişilerin bir kısmı zamanla tıkınma/çıkarma tipine geçer."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-C",
-                "title": "Anoreksiya Nervoza Ortak Ölçütleri",
-                "content": "Gereksinime göre enerji alımının kısıtlanması ve bunun yaş, cinsiyet, gelişim ve bedensel sağlık bağlamında belirgin düşük vücut ağırlığına yol açması (asgari normalin altı; çocuk ve ergende beklenenin altı) (A). Belirgin düşük kiloya karşın kilo almaktan ya da şişmanlamaktan yoğun korku veya kilo alımını engelleyen süregen davranış (B). Vücut ağırlığı ya da biçiminin algılanmasında bozukluk, kendini değerlendirmede bunların aşırı etkisi ya da düşük kilonun ciddiyetini süregen biçimde kabul etmeme (C)."
-            },
-            {
-                "code": "Alt Tip & Şiddet",
-                "title": "Kısıtlayıcı Tip ve Yetişkinde BKİ'ye Göre Şiddet",
-                "content": "Son 3 ayda yineleyen tıkınma ya da çıkarma davranışı yoktur. Yetişkinde şiddet BKİ'ye göre: hafif ≥ 17, orta 16-16.99, ağır 15-15.99, aşırı < 15 kg/m²; çocuk ve ergenlerde BKİ persentilleri kullanılır. Kısmi ve tam yatışma belirleyicileri eklenebilir."
-            }
-        ]
-    },
-    "anorexia_binge_purge": {
-        "id": "anorexia_binge_purge",
-        "nameTr": "Anoreksiya Nervoza (Tıkınma/Çıkarma Tipi)",
-        "nameEn": "Anorexia Nervosa (Binge-Eating/Purging Type)",
-        "clinicalDescription": {
-            "overview": "Anoreksiya nervozanın, son 3 ay içinde yineleyen tıkınırcasına yeme ya da çıkarma davranışlarının (kendini kusturma, laksatif, diüretik ya da lavman kötüye kullanımı) bulunduğu alt tipidir. Bazı kişiler tıkınma olmadan yalnızca küçük miktarlar yedikten sonra çıkarma yapar. Belirgin düşük kilo bulunduğu için bulimia nervozadan ayrılır: düşük kilo ölçütü karşılanıyorsa tanı bulimia değil anoreksiyadır.",
-            "epidemiology": "Anoreksiya nervozalı kişilerin önemli bir kısmında izlemde tıkınma/çıkarma davranışları ortaya çıkar; alt tipler arası geçiş sıktır.",
-            "etiology": "Anoreksiyanın genel etiyolojisine ek olarak bu tipte dürtüsellik, duygu düzenleme güçlükleri, madde kullanımı ve kendine zarar verme davranışları daha sık görülür.",
-            "prognosis": "Çıkarma davranışları hipokalemi, metabolik alkaloz, aritmi, diş minesi erozyonu, tükürük bezi büyümesi ve el sırtında nasırlaşma (Russell belirtisi) gibi ek tıbbi riskler doğurur; elektrolit izlemi zorunludur. İntihar riski kısıtlayıcı tipe göre daha yüksek olabilir. Tedavi ilkeleri kısıtlayıcı tiple aynıdır (aile temelli tedavi, CBT-E, tıbbi izlem)."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-C",
-                "title": "Anoreksiya Nervoza Ortak Ölçütleri",
-                "content": "Enerji alımının kısıtlanmasıyla belirgin düşük vücut ağırlığı (A); düşük kiloya karşın kilo alma korkusu ya da kilo alımını engelleyen süregen davranış (B); beden algısında bozukluk, kendini değerlendirmede kilo/biçimin aşırı etkisi ya da düşük kilonun ciddiyetini kabul etmeme (C)."
-            },
-            {
-                "code": "Alt Tip & Şiddet",
-                "title": "Tıkınma/Çıkarma Tipi",
-                "content": "Son 3 ayda yineleyen tıkınırcasına yeme ya da çıkarma davranışı (kendini kusturma, laksatif, diüretik, lavman kötüye kullanımı) vardır. Şiddet yetişkinde BKİ'ye göre belirlenir (hafif ≥ 17, orta 16-16.99, ağır 15-15.99, aşırı < 15 kg/m²)."
-            }
-        ]
-    },
     "enuresis": {
         "id": "enuresis",
         "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
@@ -3854,29 +3449,6 @@ const DSM5_MANUAL = {
                 "code": "Kriter D & Alt Tipler",
                 "title": "Dışlama ve Alt Tipler",
                 "content": "Bir maddenin (örn. diüretik, antipsikotik) fizyolojik etkisine ya da başka bir sağlık durumuna (örn. diyabet, spina bifida, nöbet bozukluğu) bağlanamaz (D). Alt tipler: yalnızca gece, yalnızca gündüz, gece ve gündüz birlikte."
-            }
-        ]
-    },
-    "narcolepsy_without_cataplexy": {
-        "id": "narcolepsy_without_cataplexy",
-        "nameTr": "Narkolepsi (Katapleksi Olmayan Tip)",
-        "nameEn": "Narcolepsy without Cataplexy",
-        "clinicalDescription": {
-            "overview": "Karşı konulamaz uyku ihtiyacı, gün içinde uykuya dalma ya da şekerleme atakları ile seyreden ancak katapleksinin (duygularla tetiklenen ani kas tonusu kaybı) bulunmadığı narkolepsi biçimidir. Uyku felci ve uykuya dalarken/uyanırken görülen canlı varsanılar (hipnagojik/hipnopompik) eşlik edebilir. DSM-5'te tanı, katapleksi yoksa beyin-omurilik sıvısında hipokretin eksikliği ya da uyku laboratuvarı (polisomnografi ve Çoklu Uyku Latansı Testi, MSLT) bulgularıyla konur. DSM-5'in özgül alt tipi 'katapleksi olmaksızın ancak hipokretin eksikliği ile' biçimidir; uluslararası uyku sınıflamasında (ICSD-3) katapleksisiz ve hipokretin düzeyi normal ya da ölçülmemiş olgular 'Narkolepsi Tip 2' olarak adlandırılır.",
-            "epidemiology": "Narkolepsinin genel yaygınlığı yaklaşık on binde 2-5'tir. Başlangıç çoğunlukla ergenlik ve genç erişkinliktedir.",
-            "etiology": "Tip 1 narkolepside lateral hipotalamustaki hipokretin (oreksin) nöronlarının otoimmün kaybı ve HLA-DQB1*06:02 ile güçlü ilişki bilinmektedir; katapleksisiz biçimde hipokretin düzeyi çoğu zaman normaldir ve mekanizma daha az aydınlatılmıştır.",
-            "prognosis": "Ömür boyu süren bir durumdur. Planlı kısa şekerlemeler, düzenli uyku-uyanıklık programı, uyanıklığı artırıcı ilaçlar ve araç kullanımı ile iş güvenliği konusunda danışmanlık uygulanır. Bazı olgularda izlemde katapleksi gelişerek tablo Tip 1'e dönüşebilir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Karşı Konulamaz Uyku İhtiyacı (≥ 3 gün/hafta, ≥ 3 ay)",
-                "content": "Aynı gün içinde yineleyen karşı konulamaz uyku ihtiyacı, uykuya dalma ya da şekerleme dönemleri; son 3 ay boyunca haftada en az 3 kez."
-            },
-            {
-                "code": "Kriter B",
-                "title": "Doğrulayıcı Bulgu (Katapleksi yoksa)",
-                "content": "Katapleksi bulunmadığında aşağıdakilerden en az biri gerekir: beyin-omurilik sıvısında hipokretin-1 eksikliği (sağlıklı bireylerin değerlerinin üçte biri ya da daha azı veya ≤ 110 pg/mL) veya gece polisomnografisinde REM uyku latansının ≤ 15 dakika olması ya da MSLT'de ortalama uyku latansının ≤ 8 dakika olup iki ya da daha fazla uykuya dalış REM döneminin (SOREMP) saptanması."
             }
         ]
     },
@@ -3949,95 +3521,34 @@ const DSM5_MANUAL = {
             }
         ]
     },
-    "circadian_delayed_sleep": {
-        "id": "circadian_delayed_sleep",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Gecikmiş Uyku Evresi Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Delayed Sleep Phase Type)",
+    "circadian_rhythm_sleep_wake": {
+        "id": "circadian_rhythm_sleep_wake",
+        "nameTr": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu",
+        "nameEn": "Circadian Rhythm Sleep-Wake Disorder",
         "clinicalDescription": {
-            "overview": "Ana uyku döneminin istenen ya da toplumsal olarak beklenen saatlere göre belirgin biçimde (genellikle 2 saatten fazla) geç olduğu sirkadiyen ritim uyku-uyanıklık bozukluğudur. Kişi geceyarısından çok sonra uyuyabilir ve sabah okula ya da işe uygun saatte uyanmakta büyük güçlük çeker; buna karşın kendi programına bırakıldığında uyku süresi ve niteliği yaşına göre normaldir. Uykusuzluk bozukluğu ya da 'tembellik' ile karıştırılabilir.",
-            "epidemiology": "Ergen ve genç erişkinlerde en sık görülen sirkadiyen ritim bozukluğudur; bu yaş grubunda oran belirgin olarak daha yüksektir. Ailesel olgular bildirilmiştir.",
-            "etiology": "Biyolojik saatin doğal olarak geç ayarlı olması, akşam ışığına aşırı duyarlılık, ergenlikteki biyolojik evre kayması, gece ekran ve ışık maruziyeti; saat genlerinde (örn. CRY1) çeşitlemeler.",
-            "prognosis": "Sabah parlak ışık maruziyeti, akşam ışıktan kaçınma, uygun zamanda melatonin ve düzenli uyku programı etkilidir. Akademik ve mesleki işlevsellik etkilenebilir; depresyon ve madde kullanımı ile ilişkili olabilir. Tedavi bırakıldığında yineleme sıktır."
+            "overview": "Başlıca sirkadiyen sistemdeki bir değişikliğe ya da kişinin içsel ritmi ile fiziksel çevrenin veya toplumsal/mesleki programın gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen ya da yineleyen uyku bölünmesidir. Sonuç uykusuzluk, aşırı uykululuk ya da ikisidir. Kendi programına bırakıldığında uykunun süresi ve niteliği çoğunlukla normaldir. Tek tanıdır; tip (gecikmiş, erken, düzensiz, 24 saate uymayan, vardiyalı çalışma) belirleyici olarak eklenir.",
+            "epidemiology": "Gecikmiş uyku evresi tipi ergen ve genç erişkinlerde en sık görülen tiptir; erken uyku evresi tipi yaşla artar; 24 saate uymayan tip tam görme kaybı olanların yaklaşık yarısında görülür; vardiyalı çalışma tipi gece çalışanların bir bölümünde bozukluk düzeyine ulaşır. Ailesel biçimler bildirilmiştir.",
+            "etiology": "Biyolojik saatin geç ya da erken ayarlı olması, saat genlerinde (CRY1, PER2 vb.) çeşitlemeler, ışığın saati ayarlayamaması (görme kaybı), ışık ve toplumsal ipuçlarına maruziyetin azlığı ya da uygunsuz zamanlaması, dayatılan iş programı.",
+            "prognosis": "Uygun zamanlanmış ışık tedavisi, melatonin ya da melatonin reseptör agonistleri, düzenli uyku programı ve (vardiyalı çalışmada) planlı şekerleme ile uyku ortamı düzenlemesi etkilidir. Tedavi bırakıldığında yineleme sıktır; depresyon ve uykusuzluk bozukluğu ayırıcı tanıda değerlendirilmelidir."
         },
         "criteriaList": [
             {
                 "code": "Kriter A-C",
-                "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
-                "content": "Başlıca sirkadiyen sistemdeki değişikliğe ya da içsel ritim ile fiziksel çevre veya toplumsal/mesleki programın gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen ya da yineleyen uyku bölünmesi (A); bunun aşırı uykululuk, uykusuzluk ya da her ikisine yol açması (B); belirgin sıkıntı ya da işlev bozulması (C)."
+                "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ölçütleri",
+                "content": "Başlıca sirkadiyen sistemdeki değişikliğe ya da içsel ritim ile fiziksel çevre veya toplumsal/mesleki programın gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen ya da yineleyen uyku bölünmesi (A); bunun aşırı uykululuk, uykusuzluk ya da her ikisine yol açması (B); belirgin sıkıntı ya da işlev bozulması (C). Tanıda uyku günlüğü ve aktigrafi kullanılır."
             },
             {
-                "code": "Alt Tip",
-                "title": "Gecikmiş Uyku Evresi Tipi",
-                "content": "Ana uyku döneminin başlangıç ve uyanma saatlerinde gecikme örüntüsü; istenen ya da toplumsal olarak kabul edilen saatte uykuya dalamama ve uyanamama. Ailesel ve 24 saatlik olmayan tiple örtüşen biçimler belirtilebilir. Tanıda uyku günlüğü ve aktigrafi kullanılır."
-            }
-        ]
-    },
-    "circadian_advanced_sleep": {
-        "id": "circadian_advanced_sleep",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Erken Uyku Evresi Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Advanced Sleep Phase Type)",
-        "clinicalDescription": {
-            "overview": "Ana uyku döneminin istenen ya da toplumsal olarak beklenen saatlere göre birkaç saat erken olduğu sirkadiyen ritim uyku-uyanıklık bozukluğudur. Kişi akşam erken saatlerde karşı konulamaz uykululuk yaşar ve sabahın çok erken saatlerinde uyanır; uyanmak istediği saate kadar uyuyamaz. Sabah erken uyanma yakınması nedeniyle depresyonla karıştırılabilir; ancak uyku süresi ve niteliği kendi programında normaldir.",
-            "epidemiology": "Orta yaş ve üzerinde daha sık görülür ve yaşla birlikte artar. Ailesel (otozomal dominant) biçimleri tanımlanmıştır.",
-            "etiology": "Yaşlanmayla birlikte sirkadiyen evrenin öne kayması; ailesel biçimlerde saat genlerinde (örn. PER2) mutasyonlar.",
-            "prognosis": "Akşam saatlerinde parlak ışık tedavisi ve uyku programının düzenlenmesi yararlıdır. Erken uyanmanın nedeni olarak depresyon ve uykusuzluk bozukluğu ayırıcı tanıda değerlendirilmelidir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-C",
-                "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
-                "content": "Sirkadiyen sistem değişikliği ya da içsel ritim ile istenen program arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Erken Uyku Evresi Tipi",
-                "content": "Ana uyku döneminin başlangıç ve uyanma saatlerinin istenenden birkaç saat erken olduğu örüntü; erken sabah uykusuzluğu ve akşam aşırı uykululuk. Ailesel biçim belirtilebilir."
-            }
-        ]
-    },
-    "circadian_shift_work": {
-        "id": "circadian_shift_work",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (Vardiyalı Çalışma Tipi)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Shift Work Type)",
-        "clinicalDescription": {
-            "overview": "Olağan gündüz çalışma saatleri dışında (özellikle gece) düzenli olarak çalışmayı gerektiren iş programıyla ilişkili olarak ana uyku döneminde uykusuzluk ve/veya ana uyanıklık döneminde (iş sırasında) aşırı uykululukla giden sirkadiyen ritim uyku-uyanıklık bozukluğudur. Gece vardiyası sonrası gündüz uykusu kısa ve bölünmüştür; iş sırasında dikkat azalır ve kaza riski artar.",
-            "epidemiology": "Vardiyalı çalışanlar iş gücünün önemli bir kısmını oluşturur; gece çalışanların bir bölümünde bozukluk düzeyinde belirtiler görülür. Belirtiler yaş ilerledikçe ve 'sabahçıl' kronotipte daha belirgindir.",
-            "etiology": "İçsel sirkadiyen ritim ile dayatılan uyku-uyanıklık programı arasındaki uyumsuzluk; işe gidip gelirken gün ışığına maruziyet, gündüz uyku ortamının gürültülü ve aydınlık olması, sık değişen vardiya düzenleri.",
-            "prognosis": "Vardiya bırakıldığında genellikle düzelir. Planlı şekerleme, iş sırasında parlak ışık, eve dönüşte güneş gözlüğü, karanlık ve sessiz uyku ortamı ve vardiyaların ileri yönde (sabah→akşam→gece) döndürülmesi yararlıdır. Uzun dönemde metabolik, kalp-damar ve duygudurum sorunları riski artar."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-C",
-                "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
-                "content": "İçsel ritim ile iş programının gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Vardiyalı Çalışma Tipi",
-                "content": "Olağan sabah-akşam (yaklaşık 08.00-18.00) aralığı dışında, özellikle gece, düzenli olarak çalışmayı gerektiren vardiya programıyla ilişkili ana uyku döneminde uykusuzluk ve/veya ana uyanıklık döneminde aşırı uykululuk."
-            }
-        ]
-    },
-    "circadian_non_24_hour": {
-        "id": "circadian_non_24_hour",
-        "nameTr": "Sirkadiyen Ritim Bozukluğu (24 Saate Uymayan Tip)",
-        "nameEn": "Circadian Rhythm Sleep Disorder (Non-24-Hour Type)",
-        "clinicalDescription": {
-            "overview": "İçsel sirkadiyen ritmin 24 saatlik çevre döngüsüne (gece-gündüz) eşlenemediği ve uyku-uyanıklık döngüsünün her gün tutarlı biçimde (genellikle giderek daha geç saatlere) kaydığı sirkadiyen ritim bozukluğudur. Kişinin ritmi çevreyle uyumlu olduğu dönemlerde yakınması azdır; ritim kaydıkça uykusuzluk ve gündüz uykululuk dönemleri yineler ('serbest döngü').",
-            "epidemiology": "Tamamen görme kaybı olan bireylerde sıktır (yaklaşık yarısında bildirilir). Görmesi olan bireylerde nadirdir; bu grupta erkeklerde ve gecikmiş uyku evresi öyküsü olanlarda daha sık görülür.",
-            "etiology": "Işığın biyolojik saati ayarlayamaması (görme kaybında retinal ışık algısının yokluğu); görmesi olanlarda ışık maruziyetinin azlığı, uzun içsel döngü süresi, toplumsal ipuçlarının azlığı ve bazı nörolojik durumlar.",
-            "prognosis": "Düzenli zamanlanmış melatonin ya da melatonin reseptör agonistleri ve görmesi olanlarda zamanlanmış ışık tedavisi ile ritim 24 saate eşlenebilir. Tedavi bırakıldığında genellikle yineler."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A-C",
-                "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
-                "content": "İçsel ritim ile çevrenin 24 saatlik döngüsü arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "24 Saate Uymayan Tip",
-                "content": "Uyku-uyanıklık döngüsünün 24 saatlik çevreyle eşlenmediği, uyku başlangıcı ve uyanma saatlerinin tutarlı günlük kaymayla (genellikle her gün daha geç) ilerlediği örüntü; uykusuzluk ve aşırı uykululuk dönemleri. Tanıda uzun süreli (çoğunlukla birkaç hafta) uyku günlüğü ve aktigrafi gerekir."
+                "code": "Belirleyiciler / Alt tipler",
+                "title": "Tipler",
+                "content": "Tip belirtilir:",
+                "items": [
+                    "Gecikmiş uyku evresi tipi (G47.21): uykuya dalma ve uyanma saatleri istenenden belirgin (çoğunlukla 2 saatten fazla) geç; kendi programında uyku normal. Ailesel ya da 24 saate uymayan tiple örtüşen biçimler belirtilebilir.",
+                    "Erken uyku evresi tipi (G47.22): uykuya dalma ve uyanma istenenden birkaç saat erken; akşam aşırı uykululuk, sabah çok erken uyanma.",
+                    "Düzensiz uyku-uyanıklık tipi (G47.23): 24 saate dağılmış, belirgin ana uyku dönemi olmayan parçalı uyku (çoğunlukla nörobilişsel bozukluklarda).",
+                    "24 saate uymayan tip (G47.24): uyku-uyanıklık döngüsü 24 saatlik çevreyle eşlenmez, her gün tutarlı biçimde (çoğunlukla daha geç saate) kayar.",
+                    "Vardiyalı çalışma tipi (G47.26): olağan gündüz saatleri dışında, özellikle gece düzenli çalışmaya bağlı ana uyku döneminde uykusuzluk ve/veya uyanıklıkta aşırı uykululuk.",
+                    "Belirtilmemiş tip (G47.20). Seyir: epizodik, süregen, yineleyen."
+                ]
             }
         ]
     },
@@ -4268,84 +3779,6 @@ const DSM5_MANUAL = {
                 "code": "Belirlenmiş Diğer ile Farkı",
                 "title": "Nedenin Belirtilmemesi",
                 "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmek istediğinde 'Belirlenmiş Diğer Bir Cinsiyet Disforisi' (ör. 6 aydan kısa süren uyumsuzluk) kullanılır; neden belirtilmeyecekse ya da bilgi yetersizse bu kategori kullanılır."
-            }
-        ]
-    },
-    "conduct_childhood": {
-        "id": "conduct_childhood",
-        "nameTr": "Davranım Bozukluğu (Çocuklukta Başlayan Tip)",
-        "nameEn": "Conduct Disorder (Childhood-Onset Type)",
-        "clinicalDescription": {
-            "overview": "Davranım Bozukluğunun Çocuklukta Başlayan Tipi, 10 yaşından önce en az bir davranım bozukluğu ölçütünün ortaya çıktığı alt tiptir. Bu çocuklarda erken dönemde genellikle Karşıt Olma-Karşı Gelme Bozukluğu (KOKGB) öyküsü, belirgin fiziksel saldırganlık ve akran ilişkilerinde bozulma görülür. Davranım bozukluğu alt tipleri içinde en kötü gidişe sahip olanıdır.",
-            "epidemiology": "Davranım bozukluğunun yıllık yaygınlığı %2 ile %10'un üzeri arasında (ortanca yaklaşık %4) bildirilir. Çocuklukta başlayan tipte erkek baskınlığı ergenlikte başlayan tipe göre çok daha belirgindir. Sıklıkla DEHB ve öğrenme güçlükleri eşlik eder.",
-            "etiology": "Zor mizaç, düşük sözel zekâ, DEHB, yürütücü işlev zayıflığı gibi nörogelişimsel etmenler ile sert/tutarsız disiplin, ebeveyn reddi, istismar, ebeveyn madde kullanımı ve antisosyal davranışı gibi aile etmenlerinin etkileşimi rol oynar. Kalıtsal katkı belirgindir.",
-            "prognosis": "Ergenlik ve erişkinliğe süreğenleşme olasılığı yüksektir; erişkinlikte Antisosyal Kişilik Bozukluğu, madde kullanım bozuklukları ve adli sorunlar açısından en yüksek risk bu gruptadır. Erken başlanan ebeveyn yönetimi eğitimi (ör. Ebeveyn Yönetimi Eğitimi, PCIT) ve okul temelli çok bileşenli müdahaleler gidişi iyileştirir."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Ağır Hak ve Kural İhlalleri (Son 12 ayda en az 3/15; en az 1'i son 6 ayda)",
-                "content": "Başkalarının temel haklarının ya da yaşa uygun toplumsal kuralların çiğnendiği yineleyici ve süreğen bir davranış örüntüsü; aşağıdaki dört gruptaki 15 ölçütten en az üçü son 12 ayda bulunmalı, en az biri son 6 ayda görülmüş olmalıdır:",
-                "items": [
-                    "İnsanlara ve hayvanlara saldırganlık: başkalarına sık sık zorbalık/gözdağı; sık kavga başlatma; ciddi zarar verebilecek silah kullanma; insanlara fiziksel acımasızlık; hayvanlara fiziksel acımasızlık; kurbanla yüz yüze gelerek çalma (gasp, kapkaç, silahlı soygun); birini cinsel etkinliğe zorlama.",
-                    "Mala zarar verme: ciddi hasar verme niyetiyle bilerek yangın çıkarma; başkasının malını (yangın dışında yollarla) bilerek tahrip etme.",
-                    "Dolandırıcılık veya hırsızlık: başkasının evine, binasına ya da arabasına zorla girme; çıkar sağlamak ya da yükümlülükten kaçmak için sık yalan söyleme ('işletme'); kurbanla yüz yüze gelmeden değerli eşya çalma (ör. dükkândan aşırma, sahtecilik).",
-                    "Kuralları ağır biçimde çiğneme: 13 yaşından önce başlayan, yasaklara rağmen geceleri dışarıda kalma; ebeveyn evinden en az iki kez geceyi dışarıda geçirecek şekilde (ya da bir kez uzun süre dönmemek üzere) kaçma; 13 yaşından önce başlayan okul kaçamakları."
-                ]
-            },
-            {
-                "code": "Kriter B & C",
-                "title": "İşlevsellik Kaybı ve Antisosyal KB Dışlaması",
-                "content": "Davranış bozukluğu toplumsal, okul veya iş işlevselliğinde klinik açıdan belirgin bozulmaya yol açar. Kişi 18 yaşında ya da daha büyükse Antisosyal Kişilik Bozukluğu ölçütleri karşılanmamalıdır."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Çocuklukta Başlayan Tip",
-                "content": "10 yaşından önce en az bir davranım bozukluğu ölçütüne özgü belirti ortaya çıkmıştır. (Ergenlikte başlayan tipte 10 yaşından önce hiçbir belirti yoktur; başlangıç yaşı için yeterli bilgi yoksa 'Başlangıcı belirtilmemiş' kullanılır.)"
-            },
-            {
-                "code": "Şiddet Belirleyicisi",
-                "title": "Hafif / Orta / Ağır",
-                "content": "Hafif: tanı için gerekenin ötesinde az sayıda sorun ve başkalarına görece küçük zarar (yalan, okul kaçamağı). Orta: sorun sayısı ve zarar ikisinin arasında. Ağır: çok sayıda sorun ya da başkalarına ciddi zarar (zorla cinsel etkinlik, fiziksel acımasızlık, silah kullanımı, zorla girme)."
-            }
-        ]
-    },
-    "conduct_adolescent": {
-        "id": "conduct_adolescent",
-        "nameTr": "Davranım Bozukluğu (Ergenlikte Başlayan Tip)",
-        "nameEn": "Conduct Disorder (Adolescent-Onset Type)",
-        "clinicalDescription": {
-            "overview": "Davranım Bozukluğunun Ergenlikte Başlayan Tipi, 10 yaşından önce davranım bozukluğu ölçütlerine özgü hiçbir belirtinin bulunmadığı alt tiptir. Davranışlar daha çok akran grubu içinde ortaya çıkar (grupla hırsızlık, okul kaçamakları, kural ihlalleri); fiziksel saldırganlık çocuklukta başlayan tipe göre daha az belirgindir ve akran ilişkileri daha olağandır.",
-            "epidemiology": "Davranım bozukluğu tanılı ergenlerin büyük bölümü bu alt tiptedir. Erkek/kız oranı çocuklukta başlayan tipe göre daha dengelidir.",
-            "etiology": "Normatif ergen özerklik arayışının, antisosyal akranlarla takılma (akran etkisi), yetersiz ebeveyn gözetimi ve çevresel risklerle birleşmesi öne çıkar. Nörogelişimsel risk etmenleri çocuklukta başlayan tipe göre daha zayıf rol oynar.",
-            "prognosis": "Gidiş genellikle daha iyidir; davranışların çoğu erişkinliğe geçerken azalır ve Antisosyal Kişilik Bozukluğuna ilerleme olasılığı daha düşüktür. Ancak madde kullanımı, okul bırakma ve adli kayıt gibi kalıcı sonuçlar yaşamı etkileyebilir. Aile temelli ve çok sistemli tedaviler (ör. Çok Sistemli Terapi, İşlevsel Aile Terapisi) kullanılır."
-        },
-        "criteriaList": [
-            {
-                "code": "Kriter A",
-                "title": "Ağır Hak ve Kural İhlalleri (Son 12 ayda en az 3/15; en az 1'i son 6 ayda)",
-                "content": "Başkalarının temel haklarının ya da yaşa uygun toplumsal kuralların çiğnendiği yineleyici ve süreğen bir davranış örüntüsü; aşağıdaki dört gruptaki 15 ölçütten en az üçü son 12 ayda bulunmalı, en az biri son 6 ayda görülmüş olmalıdır:",
-                "items": [
-                    "İnsanlara ve hayvanlara saldırganlık: başkalarına sık sık zorbalık/gözdağı; sık kavga başlatma; ciddi zarar verebilecek silah kullanma; insanlara fiziksel acımasızlık; hayvanlara fiziksel acımasızlık; kurbanla yüz yüze gelerek çalma (gasp, kapkaç, silahlı soygun); birini cinsel etkinliğe zorlama.",
-                    "Mala zarar verme: ciddi hasar verme niyetiyle bilerek yangın çıkarma; başkasının malını (yangın dışında yollarla) bilerek tahrip etme.",
-                    "Dolandırıcılık veya hırsızlık: başkasının evine, binasına ya da arabasına zorla girme; çıkar sağlamak ya da yükümlülükten kaçmak için sık yalan söyleme ('işletme'); kurbanla yüz yüze gelmeden değerli eşya çalma (ör. dükkândan aşırma, sahtecilik).",
-                    "Kuralları ağır biçimde çiğneme: 13 yaşından önce başlayan, yasaklara rağmen geceleri dışarıda kalma; ebeveyn evinden en az iki kez geceyi dışarıda geçirecek şekilde (ya da bir kez uzun süre dönmemek üzere) kaçma; 13 yaşından önce başlayan okul kaçamakları."
-                ]
-            },
-            {
-                "code": "Kriter B & C",
-                "title": "İşlevsellik Kaybı ve Antisosyal KB Dışlaması",
-                "content": "Davranış bozukluğu toplumsal, okul veya iş işlevselliğinde klinik açıdan belirgin bozulmaya yol açar. Kişi 18 yaşında ya da daha büyükse Antisosyal Kişilik Bozukluğu ölçütleri karşılanmamalıdır."
-            },
-            {
-                "code": "Alt Tip",
-                "title": "Ergenlikte Başlayan Tip",
-                "content": "10 yaşından önce davranım bozukluğu ölçütlerine özgü hiçbir belirti yoktur."
-            },
-            {
-                "code": "Şiddet Belirleyicisi",
-                "title": "Hafif / Orta / Ağır",
-                "content": "Hafif: tanı için gerekenin ötesinde az sayıda sorun ve başkalarına görece küçük zarar (yalan, okul kaçamağı). Orta: sorun sayısı ve zarar ikisinin arasında. Ağır: çok sayıda sorun ya da başkalarına ciddi zarar (zorla cinsel etkinlik, fiziksel acımasızlık, silah kullanımı, zorla girme)."
             }
         ]
     },

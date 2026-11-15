@@ -295,7 +295,7 @@
     "course": "ADULT",
     "diagnosisId": "separation_anxiety",
     "category": "ANXIETY",
-    "patientSummary": "29 yaşında, kadın, finans analisti (Erişkin Ayrılma Kaygısı)",
+    "patientSummary": "29 yaşında, kadın, finans analisti",
     "clues": [
       "Danışan, eşi iş seyahatine gittiğinde veya yanından 1 saatliğine ayrıldığında 'Eşimin başına trafik kazası gelecek, ölecek veya onu bir daha asla göremeyeceğim' dehşetiyle panikleyip eşini dakikada bir aradığını ve evde tek başına asla uyuyamadığını anlatıyor.",
       "Eşinin olmadığı gecelerde korkudan annesinin evine gidip onunla aynı yatakta yatmakta, eşinin ayrı seyahat gerektiren terfi tekliflerini reddetmesi için baskı yapmaktadır.",
@@ -344,7 +344,7 @@
     "course": "ADULT",
     "diagnosisId": "specific_phobia",
     "category": "ANXIETY",
-    "patientSummary": "24 yaşında, kadın, stajyer hemşire (Kan-Enjeksiyon-Yara Fobisi)",
+    "patientSummary": "24 yaşında, kadın, stajyer hemşire",
     "clues": [
       "Danışan kan gördüğünde, aşı/enjeksiyon yaptırırken veya bir yara pansumanına tanık olduğunda önce kısa bir kalp hızlanması yaşadığını, hemen ardından tansiyonunun ve nabzının aniden dibe vurarak bayıldığını (senkop geçirdiğini) anlatıyor.",
       "Önemli ve tipik fizyolojik özellik: Diğer tüm fobilerde (örneğin köpek veya yükseklik) sempatik sistem aktive olup tansiyon YÜKSELİRKEN; bu hastada bifazik vazovagal yanıtla parasempatik deşarj oluşmakta ve hasta bayılmaktadır.",
@@ -481,7 +481,7 @@
     "course": "ADULT",
     "diagnosisId": "delusional_disorder",
     "category": "PSYCHOTIC",
-    "patientSummary": "31 yaşında, kadın, idari sekreter (Erotomanik Tip Sanrılı Bozukluk / Clérambault Sendromu)",
+    "patientSummary": "31 yaşında, kadın, idari sekreter",
     "clues": [
       "Danışan son 8 aydır ünlü ve evli bir pop şarkıcısının televizyon konserlerinde söylediği şarkı sözleriyle ve giydiği ceket renkleriyle 'kendisine gizli aşk mesajları gönderdiğine ve aslında deliler gibi kendisine aşık olduğuna' sarsılmaz bir şekilde inanmaktadır.",
       "Şarkıcının menajerlik ofisine yüzlerce aşk mektubu ve hediye göndermiş; şarkıcının korumaları tarafından uzaklaştırıldığında ise 'Aşkımızı medyadan saklamak için böyle numara yapıyor' diyerek inancını korumuştur.",
@@ -530,7 +530,7 @@
     "course": "FORENSIC",
     "diagnosisId": "delusional_disorder",
     "category": "PSYCHOTIC",
-    "patientSummary": "48 yaşında, erkek, oto galeri sahibi (Kıskançlık Tipi Sanrılı Bozukluk / Othello Sendromu)",
+    "patientSummary": "48 yaşında, erkek, oto galeri sahibi",
     "clues": [
       "Danışan son 1 yıldır 25 yıllık eşinin kendisini mahalledeki bakkalla, komşularıyla ve hatta yoldan geçen yabancılarla aldattığına dair sarsılmaz bir hezeyan yaşamakta; eşinin yatak çarşaflarını mikroskopla incelemekte ve iç çamaşırlarına gizli kimyasal test kitleri sürmektedir.",
       "Eşinin telefonuna casus takip cihazları yerleştirmiş, perdeleri kapatıp evi hapishaneye çevirmiş ancak hiçbir kanıt bulamamasına rağmen 'Benden çok zekice saklıyorlar' diyerek inancından milim geri adım atmamaktadır.",
@@ -574,7 +574,7 @@
     "course": "NEURO_SOMATIC",
     "diagnosisId": "conversion_disorder",
     "category": "SOMATIC",
-    "patientSummary": "21 yaşında, kadın, üniversite öğrencisi (Psikojenik Non-Epileptik Nöbet - PNES)",
+    "patientSummary": "21 yaşında, kadın, üniversite öğrencisi",
     "clues": [
       "Danışan son 3 aydır final sınavları öncesinde ve aile içi şiddetli tartışmalar sırasında aniden yere düşüp tüm vücudunda titremeler, başını iki yana sallama (pelvik thrusting) ve kollarını savurma şeklinde günde 2-3 kez bayılma nöbetleri geçirdiği için epilepsi şüphesiyle getiriliyor.",
       "Video-EEG monitorizasyonunda: Hasta nöbet anında tüm vücuduyla şiddetli kasılmalar sergilerken, eşzamanlı beyin EEG kaydında HİÇBİR EİLEPTİK İKTAL DEŞARJ (epilepsi dalgası) SAPTANMAMIŞTIR.",
@@ -616,9 +616,9 @@
     "caseNumber": 63,
     "difficulty": "Zor",
     "course": "CHILD",
-    "diagnosisId": "pica",
+    "diagnosisId": "arfid",
     "category": "EATING",
-    "patientSummary": "8 yaşında, erkek, 2. sınıf öğrencisi (ARFID - Kaçıngan/Kısıtlı Yiyecek Alımı)",
+    "patientSummary": "8 yaşında, erkek, 2. sınıf öğrencisi",
     "clues": [
       "Danışan son 3 yıldır sadece beyaz renkli ve kuru gıdaları (sadece patates kızartması, kraker ve sade beyaz ekmek) yiyebilmekte; sebze, et, meyve veya soslu hiçbir yiyeceği dokusu, kokusu ve rengi nedeniyle ağzına dahi sürmemektedir.",
       "Kritik tanısal anahtar: Çocukta Anoreksiya veya Bulimiya'daki gibi 'şişmanlama korkusu, kilo takıntısı veya beden imgesi bozukluğu' KESİNLİKLE YOKTUR.",
@@ -650,7 +650,7 @@
       "correctIndex": 0,
       "explanation": "ARFID'i Anoreksiya'dan ayıran en kritik kriter, kilo alma korkusu veya şişmanlık hezeyanının kesinlikle bulunmamasıdır."
     },
-    "differentialDiagnosis": "• Anoreksiya Nervoza: Kilo alma korkusu ve beden imge bozukluğu vardır.\n• Otizm Spektrum: Duyusal hassasiyet otizme eşlik edebilir.",
+    "differentialDiagnosis": "• Anoreksiya Nervoza: Kilo alma korkusu ve beden imge bozukluğu vardır.\n• Otizm Spektrum: Duyusal hassasiyet otizme eşlik edebilir.\n• Pika: Besin değeri olmayan maddelerin (toprak, kâğıt, kireç) yenmesidir; bu çocuk normal yiyecekleri duyusal nedenlerle reddediyor.",
     "dsmCriteriaSummary": "DSM-5: Kilo kaybı/besin yetersizliğine yol açan gıda kısıtlaması + Yiyeceğin duyusal özelliklerine hassasiyet + Beden imgesi bozukluğu OLMAMASI.",
     "therapyId": "cbt_ar",
     "pharmacologyId": "mirtazapine_nassa"
@@ -662,7 +662,7 @@
     "course": "ADULT",
     "diagnosisId": "bdd",
     "category": "OCD_RELATED",
-    "patientSummary": "25 yaşında, erkek, fitness eğitmeni (Kas Dismorfisi / Bigoreksiya)",
+    "patientSummary": "25 yaşında, erkek, fitness eğitmeni",
     "clues": [
       "Danışan 1.85 boyunda, 92 kilo ve son derece kaslı bir vücut geliştirici olmasına rağmen aynaya baktığında kendisini 'çelimsiz, sıska, kasları yetersiz ve zayıf' gördüğünü söyleyerek günde 5 saat ağırlık çalışmakta ve günde 400 gram protein tüketmektedir.",
       "Kaslarının küçüleceği dehşetiyle arkadaşlarıyla buluşmayı, dışarıda yemek yemeyi ve sosyal hayatını tamamen terk etmiş; kas kütlesini artırmak için sağlığını tehdit eden anabolik steroidler enjekte etmeye başlamıştır.",
@@ -706,7 +706,7 @@
     "course": "ADULT",
     "diagnosisId": "social_anxiety",
     "category": "ANXIETY",
-    "patientSummary": "28 yaşında, erkek, profesyonel konser piyanisti (Sadece Performans Tipi Sosyal Fobi)",
+    "patientSummary": "28 yaşında, erkek, profesyonel konser piyanisti",
     "clues": [
       "Danışan günlük hayatında arkadaşlarıyla kafede otururken, tanımadığı insanlarla sohbet ederken veya alışveriş yaparken hiçbir kaygı YAŞAMAMASINA rağmen; sahneye çıkıp piyano çalması gerektiğinde ellerinde kontrol edilemez bir titreme, kalp çarpıntısı ve bayılacak gibi olma yaşamaktadır.",
       "Sahne korkusu nedeniyle son 6 aydır vereceği tüm solo konserleri iptal etmiş ve uluslararası yarışmalardan çekilmek zorunda kalmıştır.",
@@ -748,9 +748,9 @@
     "caseNumber": 66,
     "difficulty": "Zor",
     "course": "FORENSIC",
-    "diagnosisId": "factitious_disorder",
+    "diagnosisId": "factitious_another",
     "category": "SOMATIC",
-    "patientSummary": "32 yaşında, kadın, ev hanımı (Başkasına Yüklenen Yapay Bozukluk / Münchausen by Proxy)",
+    "patientSummary": "32 yaşında, kadın, ev hanımı",
     "clues": [
       "Danışan, 4 yaşındaki öz kızını son 1 yılda 'sürekli açıklanamayan ishal, kusma ve havale nöbetleri' şikayetiyle 14 farklı çocuk hastanesine yatırmış; çocuk defalarca yoğun bakıma alınmıştır.",
       "Hastane güvenlik kamera kayıtları incelendiğinde; annenin hemşireler odadan çıktığı anda gizlice kızının damar yoluna çeşme suyu enjekte ettiği ve sütüne aşırı doz laksatif karıştırdığı tespit edilmiştir.",
@@ -800,10 +800,10 @@
     "diagnosisId": "bipolar_1",
     "secondaryDiagnosisId": "alcohol_use_disorder",
     "category": "BIPOLAR",
-    "patientSummary": "37 yaşında, erkek, mimar (Çift Tanılı / Bipolar I + Alkol Bağımlılığı Komorbiditesi 🔗)",
+    "patientSummary": "37 yaşında, erkek, mimar (Çift tanılı vaka)",
     "clues": [
-      "Danışan son 10 gündür günde 1 saat uykuyla aralıksız konuşmakta, evdeki eşyaları balkondan aşağı atmakta ve 'Cumhurbaşkanının başdanışmanı olduğunu' iddia etmektedir (1. Tanı - Akut Manik Epizod).",
-      "Aynı zamanda son 4 yıldır her gün 1 büyük şişe rakı içtiği, alkolü bıraktığı anda deliryum benzeri ağır titreme nöbetleri geçirdiği ve manik ataklarında alkol tüketiminin kontrolsüzce arttığı öğreniliyor (2. Eşlik Eden Tanı - Alkol Kullanım Bozukluğu).",
+      "Danışan son 10 gündür günde 1 saat uykuyla aralıksız konuşmakta, evdeki eşyaları balkondan aşağı atmakta ve 'Cumhurbaşkanının başdanışmanı olduğunu' iddia etmektedir.",
+      "Aynı zamanda son 4 yıldır her gün 1 büyük şişe rakı içtiği, alkolü bıraktığı anda deliryum benzeri ağır titreme nöbetleri geçirdiği ve manik ataklarında alkol tüketiminin kontrolsüzce arttığı öğreniliyor.",
       "Manik dönemleri yatıştırmak için 'kendi kendini tedavi etme' (self-medication) amacıyla alkole başladığı ancak zamanla her iki bozukluğun da birbirini yıkarak ağır bir klinik tablo oluşturduğu saptanmıştır.",
       "Kranial MRG temizdir; kan tahlillerinde karaciğer enzimleri yüksektir.",
       "Ruhsal Durum Muayenesinde: Grandiyöz sanrılar, baskılı konuşma, psikomotor taşkınlık ve eşzamanlı ağır alkol aşermesi/yoksunluğu.",
@@ -850,10 +850,10 @@
     "diagnosisId": "adhd",
     "secondaryDiagnosisId": "odd",
     "category": "NEURODEV",
-    "patientSummary": "8 yaşında, erkek, ilkokul 2. sınıf öğrencisi (Çift Tanılı / DEHB + KOKGB Komorbiditesi 🔗)",
+    "patientSummary": "8 yaşında, erkek, ilkokul 2. sınıf öğrencisi (Çift tanılı vaka)",
     "clues": [
-      "Danışan sınıfta ders sırasında bir saniye bile yerinde duramamakta, pencereye tırmanmakta, dikkatini 2 dakika bile toparlayamamakta ve eşyalarını sürekli kaybetmektedir (1. Tanı - DEHB Bileşeni).",
-      "Aynı zamanda öğretmeninin veya ebeveynlerinin verdiği en ufak bir yönergede (örneğin 'Kitabını aç') 'Açmıyorum, sen kimsin ki bana emir veriyorsun!' diyerek kasıtlı olarak otoriteye meydan okumakta ve arkadaşlarıyla kasıtlı dalga geçmektedir (2. Eşlik Eden Tanı - KOKGB Bileşeni).",
+      "Danışan sınıfta ders sırasında bir saniye bile yerinde duramamakta, pencereye tırmanmakta, dikkatini 2 dakika bile toparlayamamakta ve eşyalarını sürekli kaybetmektedir.",
+      "Aynı zamanda öğretmeninin veya ebeveynlerinin verdiği en ufak bir yönergede (örneğin 'Kitabını aç') 'Açmıyorum, sen kimsin ki bana emir veriyorsun!' diyerek kasıtlı olarak otoriteye meydan okumakta ve arkadaşlarıyla kasıtlı dalga geçmektedir.",
       "Önemli klinik ayrım: Çocuk sadece dikkatsiz ve hareketli değil; aynı zamanda kurallara karşı bilinçli, öfkeli ve kinci bir karşı gelme sergilemektedir.",
       "İşitme, görme ve nörolojik muayene normaldir.",
       "Ruhsal Durum Muayenesinde: Ağır dikkat eksikliği ve motor hiperaktivite ile birlikte otorite figürlerine karşı süregiden meydan okuyucu bilişsel şemalar.",
@@ -900,10 +900,10 @@
     "diagnosisId": "ocd",
     "secondaryDiagnosisId": "mdd",
     "category": "OCD_RELATED",
-    "patientSummary": "30 yaşında, kadın, biyolog (Çift Tanılı / Ağır OKB + İkincil Majör Depresyon Komorbiditesi 🔗)",
+    "patientSummary": "30 yaşında, kadın, biyolog (Çift tanılı vaka)",
     "clues": [
-      "Danışan son 6 yıldır günde 6 saat kapı kilitlerini, ocağı ve prizleri kontrol etme ritüelleriyle (kontrol kompulsiyonları) boğuştuğunu anlatıyor (1. Tanı - OKB).",
-      "Son 2 aydır ise bu takıntılardan tamamen tükenmiş halde yataktan hiç çıkamaz hale geldiğini, 8 kilo verdiğini, intihar planları yaptığını ve 'Bu takıntılar yüzünden hayatım bitti, artık yaşamak istemiyorum' dediğini anlatıyor (2. Eşlik Eden Tanı - Majör Depresif Bozukluk).",
+      "Danışan son 6 yıldır günde 6 saat kapı kilitlerini, ocağı ve prizleri kontrol etme ritüelleriyle (kontrol kompulsiyonları) boğuştuğunu anlatıyor.",
+      "Son 2 aydır ise bu takıntılardan tamamen tükenmiş halde yataktan hiç çıkamaz hale geldiğini, 8 kilo verdiğini, intihar planları yaptığını ve 'Bu takıntılar yüzünden hayatım bitti, artık yaşamak istemiyorum' dediğini anlatıyor.",
       "Klinik tablo incelendiğinde, yıllardır süren tedavi edilmemiş ağır OKB'nin yarattığı yıkıcı çaresizliğin ikincil olarak ağır bir Majör Depresif Epizod tetiklediği saptanmıştır.",
       "Tiroid ve metabolik taramalar temizdir.",
       "Ruhsal Durum Muayenesinde: Şiddetli kontrol takıntıları, derin çökkün duygudurum, anhedoni ve aktif özkıyım riski.",

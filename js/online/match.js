@@ -283,7 +283,8 @@
     async function onlineGiveUp() {
         const gm = g(), s = S();
         if (!s || !s.round || gm.isGameOver || M.busy) return;
-        const ok = await NS.ui.confirm('Pes et', 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
+        const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
+        const ok = await NS.ui.confirm('Pes et', pen ? `Bu turdan 0 puan alırsın ve tur çözülemedi sayılır (−${pen} RP). Maç devam eder.` : 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
         if (!ok) return;
         const key = s.room.id + ':' + s.round.round_no;
         setSubmitting(true);
@@ -580,6 +581,24 @@
         }).join('')}</ol>`;
     }
 
+    /**
+     * Tur sonucu: "Neden bu tanı?" açıklaması (js/explain.js). Yalnızca sunucu turu kapattıktan sonra
+     * (bu görünüm zaten round_result / closed_at'te açılır) ve tanının bu kipte açıklandığı hedeflerde
+     * (tanı, kombo). Terapi/ilaç turunda sonuç ekranı tanıyı göstermediği için açıklama da gösterilmez.
+     * Maç içinde kütüphane bağlantısı yok (maçtan çıkarır).
+     */
+    function roundExplain(s) {
+        const X = global.PsikoVakaExplain;
+        if (!X || !s.round || !(s.room.status === 'round_result' || s.round.closed_at)) return '';
+        if (!['diagnosis', 'combo'].includes(s.room.target_type)) return '';
+        const c = findCase(s.round.case_id);
+        if (!c || !X.has(c)) return '';
+        const wrong = (s.my_guesses || []).filter(x => !x.is_correct && (s.room.target_type === 'diagnosis' || x.stage === 1)).map(x => x.item_id);
+        const gm = g();
+        const desktop = gm && gm.libIsDesktop ? gm.libIsDesktop() : false;
+        return `<div class="ol-explain">${X.render(c, { wrongIds: wrong, links: false, collapsed: !desktop, idPrefix: 'oxp' })}</div>`;
+    }
+
     function renderResult(root) {
         const s = S();
         if (!s || !s.round) return null;
@@ -610,6 +629,7 @@
                 </div>
                 ${hp}
                 ${elimNote}
+                ${roundExplain(s)}
                 ${room.format === 'bracket' ? `<div class="ol-bracket-wrap">${bracketHtml(s)}</div>` : resultRows(s)}
                 ${room.format === 'bracket' ? `<details class="ol-details"><summary>Bu turun puanları</summary>${resultRows(s)}</details>` : ''}
             </div>
@@ -724,9 +744,19 @@
         let league = '';
         if (mine && mine.rp_after != null && L) {
             const t = L.tierFor(mine.rp_after);
-            league = `<div class="ol-league-line">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} RP</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
-                <span class="ol-league-bar"><i data-pct="${t.pct}"></i></span></div>`;
+            league = `<a class="ol-league-line" href="#/ligler" data-ol-v="leagues" aria-label="Lig bilgisi">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} RP</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
+                <span class="ol-league-bar"><i data-pct="${t.pct}"></i></span></a>`;
+            // Lig değişimi (kademe sınırı aşıldıysa): önceki RP ≈ rp_after − rp_delta (0 tabanı yüzünden yaklaşık; sınırlar 0'dan uzak)
+            const prev = Math.max(0, mine.rp_after - (Number(mine.rp_delta) || 0));
+            const pt = L.tierFor(prev);
+            if (pt.id !== t.id) {
+                const up = L.TIERS.findIndex(x => x.id === t.id) > L.TIERS.findIndex(x => x.id === pt.id);
+                league = `<div class="ol-league-change ${up ? 'is-up' : 'is-down'}" role="status">
+                    <span class="ol-lc-badges">${L.badge(prev, 36)}${icon('arrow-right')}<span class="ol-lc-new">${L.badge(mine.rp_after, 56)}</span></span>
+                    <span class="ol-lc-text"><span class="ol-lc-title">${up ? 'Yeni lig' : 'Lig düştü'}: ${esc(t.name)}</span><span class="ol-lc-sub">${esc(pt.name)} → ${esc(t.name)}</span></span></div>` + league;
+            }
         }
+        const bdHtml = mine ? rpBreakdownHtml(mine) : '';
         root.innerHTML = `<div class="ol-view ol-final-view">
             <header class="ol-topbar"><button class="icon-btn" type="button" data-ol-v="exit" aria-label="Çık">${icon('x')}</button>
                 <div class="ol-topbar-main"><h1 class="ol-topbar-title">Maç bitti</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(room))}</span></div></div></header>
@@ -742,30 +772,50 @@
                     </div>`;
                 }).join('')}</div>` : `<div class="ol-empty">${icon('hourglass')}<span>Sonuçlar yükleniyor…</span></div>`}
                 ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için RP verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
-                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>Maçtan erken ayrıldığın için RP almadın.</span></div>` : ''}
+                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için RP almadın.'}</span></div>` : ''}
                 ${league}
+                ${bdHtml}
                 <ol class="ol-res-list">${res.map(x => {
                     const p = P[x.user_id] || {};
                     return `<li class="ol-res-row${x.user_id === me ? ' is-me' : ''}">
                         <span class="ol-res-pos">${x.final_rank}</span>${NS.avatar(p.avatar, { size: 36, framed: true })}
                         <span class="ol-res-main"><span class="ol-res-name">${esc(p.username || '')}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}${x.left_early ? ' <span class="ol-out-tag">Ayrıldı</span>' : ''}</span>
                         <span class="ol-res-sub">${esc(metric(x))}${x.eliminated_round ? ` · ${room.format === 'bracket' ? bracketRoundLoc(x.eliminated_round, room.round_count) : x.eliminated_round + '. turda'} elendi` : ''}</span></span>
-                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : ''}">${x.rp_delta > 0 ? '+' : ''}${x.rp_delta} RP</span>
+                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : x.rp_delta < 0 ? ' is-minus' : ''}">${x.rp_delta > 0 ? '+' : x.rp_delta < 0 ? '−' : ''}${Math.abs(x.rp_delta)} RP</span>
                     </li>`;
                 }).join('')}</ol>
                 <div class="ol-rematch" id="olRematch"></div>
             </div>
             <div class="ol-view-foot ol-row-btns">
                 <button class="btn btn-secondary btn-lg" type="button" data-ol-v="exit">Çık</button>
-                <button class="btn btn-primary btn-lg" type="button" data-ol-v="rematch">${icon('refresh')}<span>Lobiye dön</span></button>
+                ${room.is_quick ? `<button class="btn btn-primary btn-lg" type="button" data-ol-v="quick-again">${icon('zap')}<span>Tekrar eşleş</span></button>` : `<button class="btn btn-primary btn-lg" type="button" data-ol-v="rematch">${icon('refresh')}<span>Lobiye dön</span></button>`}
             </div>
         </div>`;
         root.querySelectorAll('.ol-league-bar i').forEach(i => i.style.setProperty('--pct', (i.dataset.pct || 0) + '%'));
         if (NS.app.pendingRematch) showRematchOffer(NS.app.pendingRematch);
         if (mine && mine.final_rank === 1 && !M.confetti && g() && g().launchConfetti && !NS.util.reducedMotion()) { M.confetti = room.id; g().launchConfetti(); }
-        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta > 0 ? '+' + mine.rp_delta + ' RP' : ''}` : 'Maç bitti.');
+        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta ? (mine.rp_delta > 0 ? 'artı ' : 'eksi ') + Math.abs(mine.rp_delta) + ' RP' : ''}` : 'Maç bitti.');
         return null;
     }
+    /** RP v2 dökümü (match_results.rp_breakdown, §13.4). Alan yoksa (eski sunucu) hiçbir şey çizilmez. */
+    const RP_OUT = { g1: '1. tahminde çözdün', g2: '2. tahminde çözdün', g3: '3. tahminde çözdün', g4: '4. tahminde çözdün', g5: '5. tahminde çözdün', g6: '6. tahminde çözdün', fail: 'Çözemedin', void: 'Yarıda kaldı' };
+    function rpBreakdownHtml(x) {
+        const bd = x.rp_breakdown;
+        if (!bd || typeof bd !== 'object' || !Array.isArray(bd.rounds)) return '';
+        const sg = (n) => (n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0');
+        const cls = (n) => (n > 0 ? 'is-plus' : n < 0 ? 'is-minus' : '');
+        const total = Number(x.rp_delta) || 0;
+        const place = Number(bd.placement) || 0;
+        return `<details class="ol-rpbd">
+            <summary class="ol-rpbd-sum"><span>Bu maçın RP dökümü</span><span class="ol-rpbd-total ${cls(total)}">${sg(total)} RP</span></summary>
+            <ul class="ol-rpbd-list">${bd.rounds.map(r => { const d = Number(r.delta) || 0; return `<li><span class="ol-rpbd-r">Tur ${esc(r.round)}</span><span class="ol-rpbd-o">${esc(r.missed ? 'Oynanmadı (ayrıldın)' : (RP_OUT[r.outcome] || r.outcome || ''))}</span><span class="ol-rpbd-d ${cls(d)}">${sg(d)}</span></li>`; }).join('')}
+                ${place ? `<li class="ol-rpbd-place"><span class="ol-rpbd-r">Sıralama primi</span><span class="ol-rpbd-o"></span><span class="ol-rpbd-d is-plus">${sg(place)}</span></li>` : ''}
+            </ul>
+            ${bd.voided ? `<p class="ol-muted ol-small">Maç erken bittiği için bu maç geçersiz sayıldı.</p>` : ''}
+            ${x.rp_after === 0 && total < 0 ? `<p class="ol-muted ol-small">RP 0'ın altına inmez.</p>` : ''}
+        </details>`;
+    }
+
     function showRematchOffer(offer) {
         const box = document.getElementById('olRematch');
         if (!box || !offer) return;

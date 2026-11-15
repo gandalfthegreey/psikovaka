@@ -85,8 +85,7 @@ const PHARMACOLOGY_DATABASE = [
             "separation_anxiety",
             "illness_anxiety_disorder",
             "premature_ejaculation",
-            "hoarding_disorder",
-            "rocd"
+            "hoarding_disorder"
         ],
         "shortDefinition": "Majör depresyon, anksiyete bozuklukları, OKB, TSSB, PMDD ve Bulimiya Nervozada güvenlik profili ve kanıt düzeyi nedeniyle birinci basamak altın standart farmakoterapidir.",
         "mechanism": "Presinaptik serotonin taşıyıcısını (SERT) seçici olarak bloke ederek sinaptik aralıkta 5-HT düzeyini artırır; 3-6 hafta içinde otoreseptör (5-HT1A) duyarsızlaşması ve BDNF aracılı nöroplastisite sağlar.",
@@ -115,7 +114,7 @@ const PHARMACOLOGY_DATABASE = [
         "goldForDiagnoses": [
             "gad",
             "somatic_symptom_disorder",
-            "mdd_recurrent",
+            "mdd",
             "other_specified_somatic"
         ],
         "shortDefinition": "Yaygın Anksiyete Bozukluğu (YAB), kronik ağrının eşlik ettiği Somatik Belirti Bozukluğu, fibromiyalji ve melankolik/dirençli depresyonda hem serotonerjik hem noradrenerjik etki sunan birinci basamak ajandır.",
@@ -145,7 +144,7 @@ const PHARMACOLOGY_DATABASE = [
             "ocd",
             "trichotillomania",
             "excoriation",
-            "body_focused_repetitive"
+            "other_specified_ocd"
         ],
         "shortDefinition": "SSRI tedavisine dirençli ağır Obsesif-Kompulsif Bozukluk (OKB) ile Trikotillomani ve Deri Yolma Bozukluğunda (N-Asetilsistein ile birlikte) en güçlü serotonerjik etkinliğe sahip referans trisiklik ajandır.",
         "mechanism": "Ana bileşik güçlü SERT inhibisyonu yaparken, aktif metaboliti desmetilklomipramin güçlü NET inhibisyonu sağlar; ek olarak H1, M1 ve Alfa-1 reseptör blokajı gösterir.",
@@ -171,8 +170,7 @@ const PHARMACOLOGY_DATABASE = [
             "Dopaminerjik Antidepresan"
         ],
         "goldForDiagnoses": [
-            "mdd_with_seasonal",
-            "mdd_with_atypical",
+            "mdd",
             "tobacco_use_disorder",
             "substance_induced_sexual_dysfunction",
             "erectile_disorder",
@@ -231,9 +229,9 @@ const PHARMACOLOGY_DATABASE = [
             "Sertralin + Risperidon"
         ],
         "goldForDiagnoses": [
-            "mdd_with_psychotic",
-            "olfactory_reference",
-            "schizoaffective_depressive",
+            "mdd",
+            "other_specified_ocd",
+            "schizoaffective",
             "borderline_pd"
         ],
         "shortDefinition": "Psikotik Özellikli Majör Depresyon, sanrısal boyuta ulaşan içgörüsüz OKB/Koku Referans Bozukluğu ve ağır dürtüsel/mikro-psikotik krizlerle seyreden komorbid Sınırda (Borderline) Kişilik Bozukluğunda uygulanan kombine protokoldür.",
@@ -267,10 +265,10 @@ const PHARMACOLOGY_DATABASE = [
             "brief_psychotic",
             "schizoaffective",
             "schizotypal_pd",
-            "capgras_syndrome",
+            "delusional_disorder",
             "asd",
             "dmdd",
-            "folie_a_deux",
+            "other_specified_schizophrenia_spectrum",
             "substance_induced_psychotic"
         ],
         "shortDefinition": "Şizofreni spektrumu bozuklukları, akut psikotik epizodlar, Capgras sendromu, Otizm Spektrum Bozukluğunda şiddetli irritabilite/öfke krizleri ve Anoreksiya Nervozada beden algısı katılığında birinci basamak antipsikotik grubudur.",
@@ -324,10 +322,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "delirium",
-            "delirium_hyperactive",
-            "delirium_hypoactive",
-            "phencyclidine_use_disorder",
-            "synthetic_cannabinoid_intoxication"
+            "phencyclidine_use_disorder"
         ],
         "shortDefinition": "Akut Hiperaktif Deliryumda (antikolinerjik yükü sıfıra yakın olduğu için) ve acil servis ağır psikomotor ajitasyonlarında altta yatan organik neden tedavi edilirken kullanılan yüksek potensli D2 antagonistidir.",
         "mechanism": "Mezolimbik ve nigrostriatal yolaklarda postsinaptik Dopamin D2 reseptörlerini güçlü biçimde bloke eder; muskarinik (M1) antikolinerjik etkisi minimaldir.",
@@ -354,13 +349,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "delusional_disorder",
-            "delusional_erotomanic",
-            "delusional_grandiose",
-            "delusional_jealous",
-            "delusional_persecutory",
-            "delusional_somatic",
-            "delusional_mixed",
-            "pseudocyesis"
+            "other_specified_somatic"
         ],
         "shortDefinition": "Kıskançlık (Othello), Erotomanik (Clérambault), Persekütuar ve Somatik (Ekbom / Delüzyonel Parazitoz) tip Sanrılı Bozukluklarda ve Psödosiyeziste terapötik ittifak kurularak uygulanan düşük doz antipsikotik protokoldür.",
         "mechanism": "Kapsüllü monosemptomatik sanrı ağını besleyen mezolimbik hiperdopaminerjik aktiviteyi D2/5-HT2A antagonizması ile kademeli olarak zayıflatır; sanrıya eşlik eden afektif gerilimi düşürür.",
@@ -387,9 +376,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "bipolar_1",
-            "bipolar_1_depressed",
             "cyclothymia",
-            "kleine_levin_syndrome",
             "other_specified_bipolar",
             "unspecified_bipolar"
         ],
@@ -417,8 +404,7 @@ const PHARMACOLOGY_DATABASE = [
             "Karbamazepin"
         ],
         "goldForDiagnoses": [
-            "bipolar_1_mixed",
-            "bipolar_1_rapid_cycling",
+            "bipolar_1",
             "substance_induced_bipolar",
             "bipolar_due_to_medical"
         ],
@@ -505,12 +491,8 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "rem_sleep_behavior_disorder",
-            "sexsomnia",
-            "sleepwalking_disorder",
-            "sleep_terrors",
-            "circadian_delayed_sleep",
-            "circadian_advanced_sleep",
-            "circadian_non_24_hour"
+            "nrem_sleep_arousal",
+            "circadian_rhythm_sleep_wake"
         ],
         "shortDefinition": "REM Uykusu Davranış Bozukluğu (RBD - rüyaları yaşama) ve tehlikeli/adli NREM parasomnilerinde (Seksomni, travmatik Uyurgezerlik) yatak odası güvenlik önlemleriyle birlikte motor disinhibisyonu baskılayan spesifik gece protokolüdür.",
         "mechanism": "Klonazepam uzun etkili GABA-A agonizması ile beyin sapı lokomotor merkezlerini ve фаzik REM motor deşarjlarını baskılar, NREM derin uykusundan patolojik kısmi uyanma (arousal) eşiğini stabilize eder; Melatonin ise MT1/MT2 reseptörleri üzerinden REM kas atonisini restore eder.",
@@ -536,8 +518,7 @@ const PHARMACOLOGY_DATABASE = [
             "Akatizi Tedavisi"
         ],
         "goldForDiagnoses": [
-            "social_anxiety_performance",
-            "medication_induced_akathisia"
+            "social_anxiety"
         ],
         "shortDefinition": "Yalnızca Performans Tipi Sosyal Anksiyete Bozukluğunda (konser piyanisti, cerrah, sunum yapacak konuşmacı) sedasyon yapmadan el titremesi ve çarpıntıyı kesen; ayrıca Antipsikotik Kaynaklı Akatizide 1. basamak altın standart olan lipofilik beta-blokerdir.",
         "mechanism": "Periferik ve santral Beta-1 ve Beta-2 adrenerjik reseptörleri yarışmalı olarak bloke eder; otonomik taşikardi, ses titremesi, terleme ve ince postural tremoru durdurarak 'bedensel duyum -> felaketleştirme -> panik' kısır döngüsünü kırar.",
@@ -564,7 +545,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "nightmare_disorder",
-            "ptsd_dissociative"
+            "ptsd"
         ],
         "shortDefinition": "Kabus Bozukluğu (Nightmare Disorder) ve TSSB'ye bağlı gece ter, çarpıntı ve dehşet içinde uyandıran tekrarlayıcı travmatik kabuslarda İmajinatif Yeniden Senaryolaştırma Terapisi (IRT) ile birlikte kullanılan santral etkili Alfa-1 adrenerjik blokördür.",
         "mechanism": "Kan-beyin bariyerini geçerek santral sinir sisteminde postsinaptik Alfa-1 noradrenerjik reseptörleri bloke eder; REM uykusu sırasındaki locus coeruleus kaynaklı noradrenerjik fırtınayı ve amigdala hiperaktivitesini susturur.",
@@ -592,8 +573,6 @@ const PHARMACOLOGY_DATABASE = [
         "goldForDiagnoses": [
             "acute_stress_disorder",
             "adjustment_disorder",
-            "adjustment_disorder_depressed",
-            "adjustment_disorder_anxious",
             "other_specified_trauma",
             "sedative_hypnotic_use_disorder",
             "cannabis_withdrawal",
@@ -624,9 +603,7 @@ const PHARMACOLOGY_DATABASE = [
             "DEHB Stimülanı"
         ],
         "goldForDiagnoses": [
-            "adhd",
-            "adhd_inattentive",
-            "adhd_hyperactive"
+            "adhd"
         ],
         "shortDefinition": "Çocuk, ergen ve erişkin Dikkat Eksikliği ve Hiperaktivite Bozukluğunda (DEHB) prefrontal korteksin yürütücü işlevlerini, sürdürülebilir dikkati ve dürtü kontrolünü en yüksek etki büyüklüğüyle (Effect Size ~0.8-1.0) düzelten birinci basamak altın standart tedavidir.",
         "mechanism": "Prefrontal korteks ve striatumda Dopamin Taşıyıcısı (DAT) ve Noradrenalin Taşıyıcısını (NET) bloke ederek sinaptik katekolamin düzeyini artırır; D1 ve Alfa-2A reseptör uyarımı üzerinden sinyal/gürültü oranını optimize eder.",
@@ -656,9 +633,6 @@ const PHARMACOLOGY_DATABASE = [
             "chronic_motor_vocal_tic",
             "provisional_tic_disorder",
             "conduct_disorder",
-            "conduct_childhood",
-            "conduct_adolescent",
-            "conduct_callous_unemotional",
             "ptsd_preschool"
         ],
         "shortDefinition": "Tourette Bozukluğu, Kronik Motor/Vokal Tik Bozukluğu (özellikle DEHB komorbiditesinde) ve çocuk/ergen yıkıcı dürtüsellik-agresyon tablolarında CBIT terapisiyle birlikte hem tikleri hem dürtüselliği azaltan birinci basamak güvenli protokoldür.",
@@ -687,9 +661,8 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "narcolepsy",
-            "narcolepsy_without_cataplexy",
             "hypersomnolence",
-            "circadian_shift_work"
+            "circadian_rhythm_sleep_wake"
         ],
         "shortDefinition": "Narkolepsi (Tip 1 Katapleksili ve Tip 2), İdiyopatik Hipersomnolans ve Vardiyalı Çalışma Uyku Bozukluğunda karşı konulamaz gündüz uyku ataklarını ve ani kas tonusu kaybını (katapleksi) önleyen uyanıklık destekleyici protokoldür.",
         "mechanism": "Modafinil zayıf/seçici DAT blokajı üzerinden hipotalamik histaminerjik (TMN) ve oreksinerjik (hipokretin) uyanıklık yolaklarını aktive eder; Pitolisant H3 otoreseptör ters agonizmasıyla histamin ve noradrenalin salınımını artırarak hem uyanıklığı sağlar hem katapleksiyi önler; Sodyum Oksibat gece GABA-B agonizmasıyla derin yavaş dalga uykusunu konsolide eder.",
@@ -720,9 +693,7 @@ const PHARMACOLOGY_DATABASE = [
             "alcohol_use_disorder",
             "gambling_disorder",
             "kleptomania",
-            "pyromania",
-            "compulsive_buying_disorder",
-            "internet_gaming_disorder"
+            "pyromania"
         ],
         "shortDefinition": "Alkol Kullanım Bozukluğunda aşerme (craving) ve nüksü önleyen; ayrıca Kumar Oynama Bozukluğu, Kleptomani ve Kompulsif Satın Alma gibi davranışsal/dürtü bağımlılıklarında mezolimbik ödül hazzını bloke eden kanıta dayalı farmakoterapidir.",
         "mechanism": "Naltrekson mü-opioid reseptörlerini yarışmalı bloke ederek alkol veya dürtüsel davranış (kumar, çalma) sırasında ventral tegmental alandan nukleus akumbense endorfin/dopamin salınımını keser; Akamprosat kronik alkolün bozduğu NMDA/GABA dengesini (glutamaterjik hiperaktiviteyi) restore eder; Disülfiram ise aldehit dehidrogenazı inhibe ederek asetaldehit birikimiyle caydırıcı toksik reaksiyon yaratır.",
@@ -775,9 +746,7 @@ const PHARMACOLOGY_DATABASE = [
             "Nöroleptik Malign Sendrom Antidotu",
             "Amantadin"
         ],
-        "goldForDiagnoses": [
-            "neuroleptic_malignant_syndrome"
-        ],
+        "goldForDiagnoses": [],
         "shortDefinition": "Antipsikotik kullanımı sonrası gelişen kurşun boru rijiditesi, >39-40°C hipertermi, otonomik instabilite ve rabdomiyoliz (CK >10.000 U/L) ile karakterize ölümcül Nöroleptik Malign Sendromun (NMS) yoğun bakım spesifik antidot protokolüdür.",
         "mechanism": "Dantrolen iskelet kası sarkoplazmik retikulumundaki Riyanodin (RyR1) kalsiyum kanallarını bloke ederek periferal kas kasılmasını, ısı üretimini ve rabdomiyolizi durdurur; Bromokriptin ise santral postsinaptik D2 reseptör agonizması yaparak hipotalamik ve nigrostriatal dopamin blokajını kırar.",
         "targetMechanism": "İskelet kası Riyanodin (RyR1) Ca2+ kanal blokajı (Dantrolen) + Santral D2 agonizması (Bromokriptin).",
@@ -800,9 +769,7 @@ const PHARMACOLOGY_DATABASE = [
             "Serotonin Sendromu Antidotu",
             "5-HT2A Antagonisti"
         ],
-        "goldForDiagnoses": [
-            "serotonin_syndrome"
-        ],
+        "goldForDiagnoses": [],
         "shortDefinition": "SSRI/SNRI ile MAOİ, Tramadol, Triptan, Linezolid veya Sarı Kantaron (St. John's Wort) kombinasyonu sonucu saatler içinde gelişen klonus, hiperrefleksi, ajitasyon, diyare ve hipertermi tablosunun (Serotonin Sendromu) spesifik antidot protokolüdür.",
         "mechanism": "Siproheptadin santral ve periferik 5-HT2A ve 5-HT1A serotonin reseptörlerini güçlü biçimde bloke ederek yaşamı tehdit eden hipertermi ve otonomik fırtınayı durdurur; Benzodiazepinler ise miyoklonus, tremor ve sempatik hiperaktiviteyi baskılar.",
         "targetMechanism": "Potent 5-HT2A / 5-HT1A reseptör antagonizması ve GABAerjik motor sedasyon.",
@@ -853,10 +820,7 @@ const PHARMACOLOGY_DATABASE = [
             "Amantadin",
             "Antikolinerjik EPS Tedavisi"
         ],
-        "goldForDiagnoses": [
-            "medication_induced_dystonia",
-            "medication_induced_parkinsonism"
-        ],
+        "goldForDiagnoses": [],
         "shortDefinition": "Antipsikotik (özellikle yüksek potensli D2 bloker) başlanmasından saatler-günler sonra gelişen Akut Distoni (okülogirik kriz, tortikollis, laringospazm) ve haftalar sonra gelişen İlacın Yol Açtığı Parkinsonizmde nigrostriatal asetilkolin-dopamin dengesini hızla düzelten antidot tedavisidir.",
         "mechanism": "Striatumda Dopamin D2 reseptörlerinin antipsikotikle bloke edilmesi sonucu oluşan 'göreceli kolinerjik hiperaktiviteyi', santral Muskarinik M1 asetilkolin reseptörlerini bloke ederek dengeler.",
         "targetMechanism": "Nigrostriatal yolakta santral Muskarinik M1 reseptör antagonizması (DA/ACh dengesi).",
@@ -882,7 +846,6 @@ const PHARMACOLOGY_DATABASE = [
             "Austedo"
         ],
         "goldForDiagnoses": [
-            "tardive_dyskinesia",
             "major_neurocognitive_huntington"
         ],
         "shortDefinition": "Uzun süreli dopamin reseptör blokajı sonucu dilde, dudaklarda, çenede ve ekstremitelerde gelişen istemsiz koreoatetoid hareketlerde (Tardif Diskinezi) ve Huntington Koresinde FDA onaylı birinci basamak spesifik tedavidir.",
@@ -947,8 +910,7 @@ const PHARMACOLOGY_DATABASE = [
             "RLS Protokolü"
         ],
         "goldForDiagnoses": [
-            "restless_legs_syndrome",
-            "persistent_genital_arousal"
+            "restless_legs_syndrome"
         ],
         "shortDefinition": "Huzursuz Bacaklar Sendromunda (Willis-Ekbom) akşamları ortaya çıkan bacakları hareket ettirme dürtüsünü kesen; güncel kılavuzlarda augmentasyon riskini önlemek için Alfa-2-Delta ligandları, D2/D3 agonistleri ve demir replasmanını birleştiren protokoldür.",
         "mechanism": "Pregabalin ve Gabapentin voltaj kapılı kalsiyum kanallarının Alfa-2-Delta alt birimine bağlanarak spinal ve talamokortikal aşırı duyarlılığı yatıştırır; Pramipeksol striatal D3/D2 reseptörlerini uyarır; Demir ise tirozin hidroksilaz enziminin zorunlu kofaktörü olarak nigrostriatal dopamin sentezini sağlar.",
@@ -974,8 +936,7 @@ const PHARMACOLOGY_DATABASE = [
             "Acil EKT Protokolü"
         ],
         "goldForDiagnoses": [
-            "cotard_syndrome",
-            "mdd_with_melancholic"
+            "mdd"
         ],
         "shortDefinition": "Organlarının çürüdüğüne veya öldüğüne inanan Cotard Sendromunda, yemeden-içmeden kesilmiş ağır Melankolik/Psikotik Depresyonda, Lorazepama yanıtsız Katatonide ve akut yüksek intihar riskinde %80-90 yanıt oranıyla hayat kurtaran en güçlü biyolojik tedavidir.",
         "mechanism": "Genel anestezi ve kas gevşetici altında kontrollü, kısa süreli (30-60 sn) jeneralize serebral nöbet oluşturarak; hipokampal nörogenezi, BDNF salınımını, kan-beyin bariyeri geçirgenliğini ve tüm monoaminerjik/GABAerjik/glutamaterjik reseptör duyarlılığını hızla yeniden başlatır (resetler).",
@@ -1001,7 +962,7 @@ const PHARMACOLOGY_DATABASE = [
             "Hakim-Adams Tedavisi"
         ],
         "goldForDiagnoses": [
-            "major_neurocognitive_nph"
+            "major_neurocognitive_another_medical"
         ],
         "shortDefinition": "Hakim-Adams üçlüsü (mıknatıs/apraksik yürüme bozukluğu, üriner inkontinans ve frontal-subkortikal demans) ile karakterize Normal Basınçlı Hidrosefalide (NPH) ventriküllerdeki fazla BOS'u peritona drene ederek demansı geri döndüren nöroşirürjikal tedavidir.",
         "mechanism": "Serebral ventriküllerin genişleyerek (Evans indeksi >0.3) periventriküler beyaz cevherdeki korona radiata (bacak motor lifleri ve mesane kontrol yolakları) ve prefrontal traktuslara yaptığı mekanik gerilme/iskemi basısını kalıcı olarak ortadan kaldırır.",
@@ -1027,9 +988,7 @@ const PHARMACOLOGY_DATABASE = [
             "Oksibutinin"
         ],
         "goldForDiagnoses": [
-            "enuresis",
-            "enuresis_nocturna",
-            "enuresis_diurna"
+            "enuresis"
         ],
         "shortDefinition": "Çocukluk çağı Enürezis Nokturna (Gece Alt Islatma) tedavisinde en düşük nüks oranına sahip klasik koşullanma temelli Enürezis Alarmı ile hızlı sosyal/kamp kontrolü sağlayan sentetik antidiüretik hormon analoğu Desmopressin (DDAVP) protokolüdür.",
         "mechanism": "Desmopressin (DDAVP) böbrek toplayıcı kanallarındaki V2 vazopressin reseptörlerine seçici agonizma yaparak su geri emilimini artırır ve gece idrar üretimini (nokturnal poliüriyi) fizyolojik mesane kapasitesinin altına düşürür.",
@@ -1056,26 +1015,14 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "specific_phobia",
-            "specific_phobia_animal",
-            "specific_phobia_natural",
-            "specific_phobia_blood",
-            "specific_phobia_situational",
-            "specific_phobia_emetophobia",
-            "specific_phobia_phagophobia",
             "conversion_disorder",
-            "conversion_motor",
-            "conversion_seizures",
-            "conversion_sensory",
             "factitious_disorder",
             "factitious_another",
             "did",
             "dissociative_amnesia",
-            "dissociative_fugue",
-            "ganser_syndrome",
+            "other_specified_dissociative",
             "childhood_fluency_disorder",
-            "specific_learning_dyslexia",
-            "specific_learning_dysgraphia",
-            "specific_learning_dyscalculia",
+            "specific_learning_disorder",
             "developmental_coordination_disorder",
             "genito_pelvic_pain",
             "pica",
@@ -1123,11 +1070,7 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "unspecified_communication_disorder": "psychotherapy_first_no_drug",
     "asd": "atypical_ap_secondgen",
     "adhd": "methylphenidate_stimulant",
-    "adhd_inattentive": "methylphenidate_stimulant",
-    "adhd_hyperactive": "methylphenidate_stimulant",
-    "specific_learning_dyslexia": "psychotherapy_first_no_drug",
-    "specific_learning_dysgraphia": "psychotherapy_first_no_drug",
-    "specific_learning_dyscalculia": "psychotherapy_first_no_drug",
+    "specific_learning_disorder": "psychotherapy_first_no_drug",
     "developmental_coordination_disorder": "psychotherapy_first_no_drug",
     "stereotypic_movement_disorder": "atypical_ap_secondgen",
     "tourette": "alpha2_agonist_tic",
@@ -1142,8 +1085,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "schizophreniform": "atypical_ap_secondgen",
     "schizophrenia": "atypical_ap_secondgen",
     "schizoaffective": "atypical_ap_secondgen",
-    "schizoaffective_bipolar": "atypical_ap_secondgen",
-    "schizoaffective_depressive": "ssri_plus_antipsychotic",
     "substance_induced_psychotic": "atypical_ap_secondgen",
     "psychotic_due_to_medical": "atypical_ap_secondgen",
     "catatonia_associated": "lorazepam_catatonia",
@@ -1152,7 +1093,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
 
     // 3. BİPOLAR VE İLİŞKİLİ BOZUKLUKLAR
     "bipolar_1": "lithium_gold",
-    "bipolar_1_depressed": "lithium_gold",
     "bipolar_2": "lamotrigine_bipolar2",
     "cyclothymia": "lithium_gold",
     "substance_induced_bipolar": "valproate_acute_mania",
@@ -1162,8 +1102,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
 
     // 4. DEPRESİF BOZUKLUKLAR
     "mdd": "ssri_firstline",
-    "mdd_recurrent": "ssri_firstline",
-    "mdd_with_psychotic": "ssri_plus_antipsychotic",
     "dysthymia": "ssri_firstline",
     "dmdd": "atypical_ap_secondgen",
     "pmdd": "ssri_firstline",
@@ -1177,10 +1115,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "agoraphobia": "ssri_firstline",
     "social_anxiety": "ssri_firstline",
     "specific_phobia": "psychotherapy_first_no_drug",
-    "specific_phobia_animal": "psychotherapy_first_no_drug",
-    "specific_phobia_natural": "psychotherapy_first_no_drug",
-    "specific_phobia_blood": "psychotherapy_first_no_drug",
-    "specific_phobia_situational": "psychotherapy_first_no_drug",
     "separation_anxiety": "ssri_firstline",
     "selective_mutism": "ssri_firstline",
     "substance_induced_anxiety": "hydroxyzine_buspirone",
@@ -1201,8 +1135,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "ptsd_preschool": "alpha2_agonist_tic",
     "acute_stress_disorder": "hydroxyzine_buspirone",
     "adjustment_disorder": "hydroxyzine_buspirone",
-    "adjustment_disorder_depressed": "hydroxyzine_buspirone",
-    "adjustment_disorder_anxious": "hydroxyzine_buspirone",
     "reactive_attachment_disorder": "psychotherapy_first_no_drug",
     "disinhibited_social_engagement": "psychotherapy_first_no_drug",
     "prolonged_grief_disorder": "ssri_firstline",
@@ -1211,7 +1143,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     // 8. DİSSOSİYATİF BOZUKLUKLAR
     "did": "psychotherapy_first_no_drug",
     "dissociative_amnesia": "psychotherapy_first_no_drug",
-    "dissociative_fugue": "psychotherapy_first_no_drug",
     "depersonalization_derealization": "lamotrigine_bipolar2",
     "other_specified_dissociative": "psychotherapy_first_no_drug",
 
@@ -1219,9 +1150,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "somatic_symptom_disorder": "snri_dualex",
     "illness_anxiety_disorder": "ssri_firstline",
     "conversion_disorder": "psychotherapy_first_no_drug",
-    "conversion_motor": "psychotherapy_first_no_drug",
-    "conversion_seizures": "psychotherapy_first_no_drug",
-    "conversion_sensory": "psychotherapy_first_no_drug",
     "factitious_disorder": "psychotherapy_first_no_drug",
     "factitious_another": "psychotherapy_first_no_drug",
     "psychological_factors_affecting_medical": "snri_dualex",
@@ -1229,8 +1157,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
 
     // 10. BESLENME VE YEME BOZUKLUKLARI
     "anorexia_nervosa": "psychotherapy_first_no_drug",
-    "anorexia_restricting": "psychotherapy_first_no_drug",
-    "anorexia_binge_purge": "atypical_ap_secondgen",
     "bulimia_nervosa": "ssri_firstline",
     "binge_eating": "ssri_firstline",
     "arfid": "mirtazapine_nassa",
@@ -1246,16 +1172,11 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "insomnia_disorder": "mirtazapine_nassa",
     "hypersomnolence": "modafinil_oxybate",
     "narcolepsy": "modafinil_oxybate",
-    "narcolepsy_without_cataplexy": "modafinil_oxybate",
     "obstructive_sleep_apnea": "psychotherapy_first_no_drug",
     "central_sleep_apnea": "psychotherapy_first_no_drug",
     "sleep_related_hypoventilation": "psychotherapy_first_no_drug",
-    "circadian_delayed_sleep": "clonazepam_parasomnia",
-    "circadian_advanced_sleep": "clonazepam_parasomnia",
-    "circadian_shift_work": "modafinil_oxybate",
-    "circadian_non_24_hour": "clonazepam_parasomnia",
-    "sleepwalking_disorder": "clonazepam_parasomnia",
-    "sleep_terrors": "clonazepam_parasomnia",
+    "circadian_rhythm_sleep_wake": "clonazepam_parasomnia",
+    "nrem_sleep_arousal": "clonazepam_parasomnia",
     "nightmare_disorder": "prazosin_nightmares",
     "rem_sleep_behavior_disorder": "clonazepam_parasomnia",
     "restless_legs_syndrome": "pramipexole_gabapentin_rls",
@@ -1278,8 +1199,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "odd": "psychotherapy_first_no_drug",
     "intermittent_explosive": "ssri_firstline",
     "conduct_disorder": "alpha2_agonist_tic",
-    "conduct_childhood": "alpha2_agonist_tic",
-    "conduct_adolescent": "alpha2_agonist_tic",
     "pyromania": "naltrexone_acamprosate",
     "kleptomania": "naltrexone_acamprosate",
 

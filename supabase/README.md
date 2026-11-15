@@ -4,10 +4,11 @@ Bu klasör, PsikoVaka'nın çevrimiçi katmanının (hesaplar, arkadaşlar, odal
 Supabase tarafını içerir. Site yine GitHub Pages'te statik kalır; tarayıcı Supabase'e yalnızca
 **herkese açık (publishable / anon) anahtar** ile bağlanır.
 
-> **Durum:** Taslak. SQL, yerel test ortamında çalıştırıldı ve 44 senaryo testinin hepsi geçti
-> (PGlite/PostgreSQL 18.6 ve PostgreSQL 16.15 üzerinde, `tests/00_supabase_stubs.sql` taklitleriyle).
-> Gerçek Supabase projesinde henüz çalıştırılmadı. İlk çalıştırmada bir hata çıkarsa mesajı
-> olduğu gibi geliştiriciye iletin.
+> **Durum:** 0001 ve 0002 canlı projede çalışıyor. 0003 (günlük vaka, hızlı eşleşme, RP v2) yerel test
+> ortamında çalıştırıldı: `tests/scenario.test.mjs` 46/46, `tests/daily_quick.test.mjs` 45/45 (PGlite) ve
+> 47/47 (PostgreSQL 16, iki bağlantılı eşzamanlılık testleri dahil), `tests/00_supabase_stubs.sql` taklitleriyle.
+> 0003 gerçek Supabase projesinde henüz çalıştırılmadı; ilk yayında GitHub Actions uygular (bkz. "Veritabanı
+> güncellemeleri kendiliğinden uygulanır"). Hata çıkarsa mesajı olduğu gibi geliştiriciye iletin.
 
 Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.supabase.co`**
 
@@ -15,10 +16,14 @@ Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.s
 
 | Dosya | Ne işe yarar |
 |---|---|
-| `migrations/0001_init.sql` | Bütün tablolar, güvenlik kuralları (RLS), sunucu fonksiyonları, Realtime ayarları. **Bir kez** çalıştırılır. |
+| `migrations/0001_init.sql` | Bütün tablolar, güvenlik kuralları (RLS), sunucu fonksiyonları, Realtime ayarları. Canlı projede elle çalıştırıldı; bir daha çalıştırılmaz. |
+| `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
+| `tools/apply_migrations.sh` | Uygulanmamış migration dosyalarını sırayla uygulayan betik (GitHub Actions çalıştırır). Hangi dosyanın uygulandığı veritabanında `public._migrations` tablosunda tutulur. |
+| `tools/workflow/supabase-migrasyon.yml` | Yeni GitHub Actions akışının hazır kopyası (bir kez yerine konacak; bkz. aşağıda "Kurulum (bir kez)"). |
 | `seed/0002_cases_answer_key.sql` | Vakaların doğru cevapları + seçenek listesi. Otomatik üretilir; elle düzenlemeyin. |
 | `seed/generate_answer_key.js` | Yukarıdaki dosyayı `js/cases.js` vb. dosyalardan üretir. `GITHUBA_YUKLE.bat` bunu her seferinde çalıştırır. |
-| `../.github/workflows/supabase-cevap-anahtari.yml` | GitHub'a her yüklemede cevap anahtarını Supabase'e **otomatik** uygular (bkz. "Yeni vaka ekleyince"). |
+| `../.github/workflows/supabase-migrasyon.yml` (kurulunca) | GitHub'a her yüklemede önce veritabanı güncellemelerini, sonra cevap anahtarını Supabase'e **otomatik** uygular. Eski `supabase-cevap-anahtari.yml`'nin yerine geçer. |
+| `DURUM_N.md` | Son geliştirme turunun ilerleme notu (geliştiriciler için). |
 | `tests/` | Yalnızca geliştiriciler için test. Supabase'e **yüklenmez**. |
 | `TASARIM.md` | Veri modeli, oda durum makinesi, Realtime ve API sözleşmesi, açık kararlar. |
 
@@ -41,13 +46,47 @@ Proje zaten açılmış. Yeni bir proje açmanız gerekirse bölge olarak Avrupa
 4. Kontrol: `select count(*) from public.cases_answer_key where is_active;` → `js/cases.js` içindeki
    aktif vaka sayısı dönmeli (`node supabase/seed/generate_answer_key.js` çıktısındaki sayıyla aynı).
 
-`0001_init.sql` dosyasını ikinci kez çalıştırmayın ("already exists" hatası verir). İleride şema
-değişikliği `0002_...sql`, `0003_...sql` gibi yeni dosyalarla `migrations/` klasörüne gelecek.
+`0001_init.sql` dosyasını ikinci kez çalıştırmayın ("already exists" hatası verir).
 
-> **Şema değişiklikleri (`migrations/*.sql`) otomatik UYGULANMAZ.** GitHub yalnızca cevap anahtarını
-> (`seed/0002_cases_answer_key.sql`) yükler. Yeni bir migration dosyası geldiğinde onu bir geliştiriciyle
-> birlikte okuyup SQL Editor'de **elle** çalıştırın. Sebep: şema değişikliği tabloları/kuralları
-> değiştirir; yanlışlıkla otomatik çalışırsa oyuncu verisini bozabilir.
+## Veritabanı güncellemeleri kendiliğinden uygulanır (2026-11-15'ten itibaren)
+
+**SQL yapıştırmaya gerek yok; yayınlayınca veritabanı güncellemeleri kendiliğinden uygulanır.**
+`GITHUBA_YUKLE.bat` ile yayınladığınızda GitHub Actions'taki **Supabase veritabani** akışı sırayla iki iş yapar:
+
+1. **Veritabanı güncellemeleri (migration):** `supabase/migrations/` içindeki `0001_…`, `0002_…`, `0003_…` dosyalarından
+   **henüz uygulanmamış olanları** ad sırasıyla uygular. Hangisinin uygulandığını veritabanındaki `public._migrations`
+   tablosuna yazar; uygulanmış dosyayı bir daha çalıştırmaz. `0001_init.sql` canlı projede zaten elle çalıştırıldığı için
+   çalıştırılmadan "uygulanmış" diye kaydedilir.
+2. **Cevap anahtarı:** ancak 1. iş başarılıysa çalışır (önceki gibi).
+
+İkisi aynı akışta ve aynı kuyrukta olduğu için hiçbir zaman üst üste binmezler ve cevap anahtarı hiçbir zaman şema
+güncellemesinden önce yüklenmez. Secret aynı: `SUPABASE_DB_URL` (değişiklik yok).
+
+### Kurulum (bir kez) — yeni akışı yerine koymak
+> **Durum (2026-11-15): Bu kurulum yapıldı.** Yeni akış `.github/workflows/supabase-migrasyon.yml` olarak yerinde, eski `supabase-cevap-anahtari.yml` `_arsiv/2026-11-15-eski-workflow/` altına taşındı. Aşağıdaki adımları yeniden yapmanıza gerek yok.
+
+Yapay zeka asistanları `.github` klasörüne yazamadığı için yeni akış dosyası hazır olarak `supabase/tools/workflow/` içinde
+bekliyor. Bir kez, Dosya Gezgini'nde:
+1. `supabase\tools\workflow\supabase-migrasyon.yml` dosyasını **`.github\workflows\`** klasörüne **taşıyın**.
+2. `.github\workflows\supabase-cevap-anahtari.yml` dosyasını `_arsiv\` klasörüne **taşıyın** (yeni akış onun işini de yapıyor;
+   ikisi birlikte kalırsa cevap anahtarı şema güncellemesinden önce yüklenebilir).
+3. `GITHUBA_YUKLE.bat` ile yayınlayın. İlk çalışmada Actions sekmesinde 0001'in "kaydedildi", 0002 ve 0003'ün "uygulandı"
+   olarak yazması beklenir.
+
+### Sonucu nerede görürüm?
+GitHub'da depo → **Actions** → solda **Supabase veritabani** → en üstteki çalışma. "Veritabani guncellemelerini uygula"
+işine tıklayınca özet tablosunda her dosya için ✅ uygulandı / zaten uygulanmış / ❌ BAŞARISIZ yazar. Elle çalıştırmak için
+aynı sayfada **Run workflow** (dal `main`).
+
+### Bir güncelleme başarısız olursa (ileriye doğru düzeltme)
+- Başarısız dosyanın bütün değişiklikleri **geri alınır** (her dosya tek işlem) ve kaydedilmez; sonraki dosyalar ve cevap
+  anahtarı o çalışmada denenmez. Site ve oyuncu verisi bir önceki hâliyle çalışmaya devam eder.
+- Hata mesajını (kırmızı satırları) olduğu gibi bir geliştiriciye / yapay zeka asistanına iletin. Düzeltme, **aynı dosyanın
+  düzeltilmesi** (henüz uygulanmadığı için güvenli) ya da gerekirse **yeni bir `NNNN_…sql` dosyası** ile yapılır; sonra yeniden
+  yayınlayın veya **Re-run jobs**. Uygulanmış bir dosyayı sonradan değiştirmek işe yaramaz (yeniden çalıştırılmaz; Actions
+  bir uyarı yazar) — değişiklik her zaman yeni dosyayla gelir.
+- Supabase SQL Editor'de elle bir şey çalıştırmanız gerekmez. (Acil durumda yedek yol: dosyayı SQL Editor'de çalıştırıp
+  `insert into public._migrations (name) values ('NNNN_dosya.sql');` ile kaydetmek; ancak bir geliştiriciyle birlikte.)
 
 ## Yeni vaka ekleyince (her seferinde — tek adım)
 
@@ -121,11 +160,11 @@ GitHub'ın cevap anahtarını Supabase'e yükleyebilmesi için veritabanına ba�
 4. GitHub secret'ı bir daha göstermez; değiştirmek için aynı yerden **Update** kullanılır.
 
 **D. Çalıştı mı? / elle yeniden çalıştırma**
-- Depoda üstteki **Actions** sekmesi → solda **Supabase cevap anahtari**. Her çalışma bir satırdır:
+- Depoda üstteki **Actions** sekmesi → solda **Supabase veritabani** (kurulumdan önce: **Supabase cevap anahtari**). Her çalışma bir satırdır:
   yeşil tik = cevap anahtarı yüklendi; kırmızı çarpı = yüklenmedi.
 - Bir çalışmaya tıklayıp "Dogrulama / Verify counts" adımını açınca kaç aktif vaka, kaç pasif vaka
   ve kaç seçenek olduğu yazar; aktif vaka sayısı `js/cases.js` ile aynı olmalı.
-- Elle çalıştırmak için (ör. secret'ı ilk kez ekledikten sonra): Actions → **Supabase cevap anahtari** →
+- Elle çalıştırmak için (ör. secret'ı ilk kez ekledikten sonra): Actions → **Supabase veritabani** →
   sağda **Run workflow** → dal `main` → **Run workflow**. Başarısız bir çalışmayı aynen tekrarlamak
   için o çalışmanın sayfasında **Re-run jobs** de kullanılabilir.
 - Sık görülen kırmızı çarpı sebepleri (hata mesajı Türkçe + İngilizce yazar):
@@ -133,7 +172,8 @@ GitHub'ın cevap anahtarını Supabase'e yükleyebilmesi için veritabanına ba�
   - "[YOUR-PASSWORD]": şifre yerleştirilmemiş (B adımı).
   - `password authentication failed`: şifre yanlış; sıfırlayıp secret'ı güncelleyin.
   - `Network is unreachable` / bağlantı zaman aşımı: Session pooler yerine doğrudan bağlantı adresi girilmiş (A adımı).
-  - "Sema yok / Schema missing": `migrations/0001_init.sql` henüz Supabase'de çalıştırılmamış (bölüm 2).
+  - "Sema yok / Schema missing": şema kurulmamış; aynı çalışmadaki migration işinin çıktısına bakın.
+  - "Migration başarısız": yukarıdaki "Bir güncelleme başarısız olursa" bölümü.
   - Supabase projesi duraklatılmış (bölüm 7): Dashboard'dan **Resume project**, sonra Run workflow.
 - Yedek yol (GitHub çalışmazsa): `supabase/seed/0002_cases_answer_key.sql` dosyasının tamamını SQL
   Editor'de çalıştırmak aynı sonucu verir.
@@ -224,8 +264,10 @@ temizlik istenirse Dashboard → **Integrations → Cron** (pg_cron) ile 15 daki
 
 ## 9. Ayarları değiştirmek
 
-Tur süresi, HP düellosu canı/çarpanı, RP ödülleri, bağlantı kopma toleransları
-`public.game_config` tablosundadır. Örnek: `update public.game_config set value = 800 where key = 'hp_start';`
+Tur süresi, HP düellosu canı/çarpanı, RP kuralları (RP v2: `rp_round_g1`…`rp_round_g6`, `rp_round_fail`,
+`rp_place_*`; eski `rp_win_*`/`rp_second`/`rp_completion` artık kullanılmıyor), hızlı eşleşme bekleme süresi
+(`quick_wait_timeout_sec`), günlük vaka tekrar aralığı (`daily_no_repeat_days`), bağlantı kopma toleransları
+`public.game_config` tablosundadır. Günlük vaka RP vermez. Örnek: `update public.game_config set value = 800 where key = 'hp_start';`
 Değişiklik yeni başlayan maçlara uygulanır.
 
 ## 10. Testler (geliştiriciler için)
@@ -233,7 +275,8 @@ Değişiklik yeni başlayan maçlara uygulanır.
 ```
 cd supabase/tests
 npm install
-npm test            # PGlite (tarayıcı dışı WASM Postgres) ile, kurulum gerektirmez
+npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs
 ```
+Migration betiği yerelde: `DATABASE_URL=postgres://...test-db bash supabase/tools/apply_migrations.sh` (yalnızca test veritabanı).
 Gerçek bir Postgres ile: `DATABASE_URL=postgres://...  npm test` — **yalnızca boş, atılabilir bir
 test veritabanı**; Supabase projesine bağlamayın (test, stub şema kurar).

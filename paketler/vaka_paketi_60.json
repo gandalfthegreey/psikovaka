@@ -7,7 +7,7 @@
     "diagnosisId": "frotteuristic",
     "therapyId": "cbt_general",
     "category": "PARAPHILIC",
-    "patientSummary": "26 yaşında, erkek, muhasebe personeli (Adli & Parafilik Vaka)",
+    "patientSummary": "26 yaşında, erkek, muhasebe personeli",
     "clues": [
       "26 yaşındaki danışan, kalabalık metrobüs ve otobüslerde tanımadığı kadınlara rızaları olmaksızın sürtünme eylemlerini durduramadığını ve yoğun suçluluk yaşadığını belirterek kliniğe başvurdu.",
       "Bu dürtülerin 17 yaşlarında hayal olarak başladığı, son 2 yıldır ise haftada en az 2-3 kez kalabalık toplu taşıma araçlarında fiili sürtünme eylemlerine dönüştüğü öğrenildi.",
@@ -61,7 +61,7 @@
     "diagnosisId": "voyeuristic",
     "therapyId": "cbt_general",
     "category": "PARAPHILIC",
-    "patientSummary": "24 yaşında, erkek, üniversite son sınıf öğrencisi (Adli Vaka)",
+    "patientSummary": "24 yaşında, erkek, üniversite son sınıf öğrencisi",
     "clues": [
       "24 yaşındaki danışan, karşı apartmandaki komşusunun yatak odasını gizlice gözetlerken cep telefonu kamerasıyla yakalanması ve polise şikayet edilmesi üzerine adli psikiyatrik muayeneye getirildi.",
       "Son 1 yıldır haftanın 4-5 gecesi dürbün ve kamerayla habersiz kişilerin soyunmasını ve cinsel ilişkilerini gizlice izlediğini, bu anları izlerken mastürbasyon yaparak yoğun haz aldığını itiraf etti.",
@@ -110,7 +110,7 @@
     "diagnosisId": "exhibitionistic",
     "therapyId": "cbt_general",
     "category": "PARAPHILIC",
-    "patientSummary": "29 yaşında, erkek, elektrik teknisyeni (Adli Vaka)",
+    "patientSummary": "29 yaşında, erkek, elektrik teknisyeni",
     "clues": [
       "29 yaşındaki danışan, parkta bankta oturan yabancı bir kadının önüne geçip trençkotunu aniden açarak genital organını teşhir ederken güvenlik görevlileri tarafından suçüstü yakalandı.",
       "Bu teşhir eylemlerini son 8 aydır haftada 1-2 kez tanımadığı yabancılara karşı tekrarladığını, kadının şaşkınlık ve korku dolu çığlığını gördüğü anda yoğun bir cinsel haz yaşadığını anlattı.",
@@ -311,7 +311,7 @@
     "diagnosisId": "genito_pelvic_pain",
     "therapyId": "sensate_focus",
     "category": "SEXUAL",
-    "patientSummary": "25 yaşında, kadın, yeni evli (1 yıllık evli)",
+    "patientSummary": "25 yaşında, kadın, yeni evli",
     "clues": [
       "25 yaşındaki kadın danışan, 1 yıllık evli olmasına rağmen eşiyle vajinal birleşmeyi hiçbir şekilde gerçekleştiremediklerini belirterek cinsel terapi kliniğine başvurdu.",
       "Cinsel ilişki denemelerinde vajina girişinde sanki 'etten bir duvar örülmüş gibi' hissettiğini, bacaklarını istemsizce kapattığını ve şiddetli bir yırtılma/acı korkusuyla eşini ittiğini anlattı.",
@@ -458,7 +458,7 @@
     "diagnosisId": "delirium",
     "therapyId": "cbt_general",
     "category": "NEUROCOGNITIVE",
-    "patientSummary": "74 yaşında, kadın, dahiliye servisinde yatan hasta (Akut Tablo)",
+    "patientSummary": "74 yaşında, kadın, dahiliye servisinde yatan hasta",
     "clues": [
       "74 yaşındaki kadın hasta, idrar yolu enfeksiyonu nedeniyle yatırıldığı hastanede 2 gün içinde aniden ajite olmuş; hemşirelere 'Odamdaki tavandan böcekler yağıyor' diye bağırarak serumlarını sökmüştür.",
       "Kritik klinik seyir: Hastanın bilinci ve dikkati gün içinde aşırı dalgalanma (fluktuasyon) göstermekte; sabahları uykulu ve sessizken akşamları aşırı ajite ve yönelimsiz (oryantasyon bozuk) hale gelmektedir.",
@@ -659,7 +659,7 @@
     "diagnosisId": "prolonged_grief_disorder",
     "therapyId": "ipt",
     "category": "TRAUMA",
-    "patientSummary": "48 yaşında, kadın, öğretmen (DSM-5-TR Yeni Tanı)",
+    "patientSummary": "48 yaşında, kadın, öğretmen",
     "clues": [
       "48 yaşındaki kadın danışan, 18 ay önce eşini bir trafik kazasında kaybetmiş; aradan 1.5 yıl geçmesine rağmen acısının ilk günkü gibi taze ve dayanılmaz olduğunu belirterek başvurdu.",
       "Günün neredeyse tamamında ölen eşine karşı dinmeyen yoğun bir özlem duyduğunu, eşinin kıyafetlerini hiç yıkamadan yatağına serip her gece onlara sarılarak ağladığını anlattı.",
@@ -709,7 +709,7 @@
     "secondaryDiagnosisId": "agoraphobia",
     "therapyId": "interoceptive_exposure",
     "category": "ANXIETY",
-    "patientSummary": "31 yaşında, kadın, mimar (Komorbid / Çift Tanılı Vaka 🔗)",
+    "patientSummary": "31 yaşında, kadın, mimar (Çift tanılı vaka)",
     "clues": [
       "31 yaşındaki danışan, tekrarlayan beklenmedik panik ataklar ve yardım alamama korkusuyla son 4 aydır evden dışarı tek başına adım atamadığını belirterek online terapiye başvurdu.",
       "İlk atağının metroda aniden başlayan kalp çarpıntısı, nefes darlığı ve delirme korkusuyla ortaya çıktığı, o günden beri metro, AVM, köprü ve kalabalık caddelerden tamamen kaçındığı öğrenildi.",
@@ -759,7 +759,7 @@
     "secondaryDiagnosisId": "ptsd",
     "therapyId": "dbt",
     "category": "PERSONALITY_B",
-    "patientSummary": "27 yaşında, kadın, grafik tasarımcı (Komorbid / Çift Tanılı Vaka 🔗)",
+    "patientSummary": "27 yaşında, kadın, grafik tasarımcı (Çift tanılı vaka)",
     "clues": [
       "27 yaşındaki danışan, kollarındaki jilet kesikleri ve acil serviste dikilen yaralarıyla 'Beni kimse sevmiyor, terk edilmeye dayanamıyorum, acımı sadece kan görünce dindiriyorum' diyerek başvurdu.",
       "Çocukluk çağında 8 yıl boyunca birinci derece yakını tarafından ağır cinsel ve fiziksel istismara uğradığı; geceleri hala aynı kabuslarla ve flashbacklerle uyandığı öğrenildi.",

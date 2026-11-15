@@ -7,7 +7,7 @@
     "diagnosisId": "delusional_disorder",
     "therapyId": "cbt_psychosis",
     "category": "PSYCHOTIC",
-    "patientSummary": "52 yaşında, kadın, ev hanımı (Sanrısal Yanlış Tanıma Sendromu)",
+    "patientSummary": "52 yaşında, kadın, ev hanımı",
     "clues": [
       "52 yaşındaki danışan, 28 yıllık eşinin 'aslında öldüğünü ve şu an evde yaşayan adamın onun yerine geçen kusursuz bir dublör olduğunu' iddia ederek savcılığa başvurdu.",
       "Danışan adamın boyunun, ses tonunun ve yüz hatlarının eşine tıpatıp benzediğini kabul etmekte, ancak gözlerine baktığında 'Onun gerçek kocam olmadığını, sahte bir sahtekara ait olduğunu biliyorum' demektedir.",
@@ -53,10 +53,10 @@
     "caseNumber": 91,
     "difficulty": "İleri Düzey",
     "course": "ADULT",
-    "diagnosisId": "mdd_with_psychotic",
+    "diagnosisId": "mdd",
     "therapyId": "ect_biological",
     "category": "MOOD",
-    "patientSummary": "61 yaşında, erkek, emekli bankacı (Ağır Psikotik Depresyon Zemininde Nihilistik Sanrı)",
+    "patientSummary": "61 yaşında, erkek, emekli bankacı",
     "clues": [
       "61 yaşındaki danışan, ailesine 'Ben aslında 2 hafta önce öldüm, iç organlarım çürüdü, kalbim atmıyor ve midem olmadığı için artık yemek yiyemem' diyerek mutlak açlık grevine girdiği için acil servise getirildi.",
       "Ailesi stetoskopla kendi kalp atışını dinletmeye çalıştığında 'O duyduğunuz ses şeytanın mekanik hilesi, benim damarlarımda kan değil irin akıyor' diyerek hiçbir kanıtı kabul etmedi.",
@@ -154,7 +154,7 @@
     "diagnosisId": "rem_sleep_behavior_disorder",
     "therapyId": "safety_clonazepam",
     "category": "SLEEP",
-    "patientSummary": "64 yaşında, erkek, emekli mühendis (Prodromal Sinükleinopati Riski)",
+    "patientSummary": "64 yaşında, erkek, emekli mühendis",
     "clues": [
       "64 yaşındaki danışan, gece rüyasında vahşi bir kurtla dövüştüğünü görürken yatakta yanındaki eşine yumruk atıp kaburgasını çatlatması ve yataktan halıya uçarak kafasını çarpması üzerine getirildi.",
       "Eşi, hastanın son 2 yıldır uykunun ikinci yarısında (sabaha karşı) uykusunda bağırdığını, küfür ettiğini, tekme savurduğunu ve rüyasını fiziksel olarak canlandırdığını anlattı.",
@@ -301,7 +301,7 @@
     "diagnosisId": "major_neurocognitive_frontotemporal",
     "therapyId": "caregiver_behavioral",
     "category": "NEUROCOGNITIVE",
-    "patientSummary": "56 yaşında, erkek, eski banka müfettişi (Genç Başlangıçlı Demans)",
+    "patientSummary": "56 yaşında, erkek, eski banka müfettişi",
     "clues": [
       "56 yaşındaki saygın bankacı, son 1.5 yılda aniden değişmiş; cenazelerde kahkahalar atmaya, sokakta yabancı kadınlara uygunsuz cinsel tekliflerde bulunmaya ve marketten para ödemeden çikolata alıp yemeye başlamıştır.",
       "Eskiden son derece nazik ve disiplinli bir insanken, ailesinin acılarına karşı tamamen duygusuzlaştığı (empati ve sempati kaybı), sürekli tatlı tükettiği bildirildi.",
@@ -355,7 +355,7 @@
     "diagnosisId": "major_neurocognitive_another_medical",
     "therapyId": "surgical_shunt",
     "category": "NEUROCOGNITIVE",
-    "patientSummary": "71 yaşında, erkek, emekli memur (Geri Dönüşümlü Demans Tablosu)",
+    "patientSummary": "71 yaşında, erkek, emekli memur",
     "clues": [
       "71 yaşındaki danışan, son 8 ayda başlayan 'ayakları sanki yere mıknatısla yapışmış gibi' küçük adımlarla yürüme (manyetik yürüyüş), unutkanlık ve idrar kaçırma şikayetleriyle getirildi.",
       "Eşi, hastanın tuvalete yetişemeyip altına kaçırdığını ve düşüncelerinin çok yavaşladığını belirtti.",
@@ -504,7 +504,7 @@
     "caseNumber": 102,
     "difficulty": "Kolay",
     "course": "CHILD",
-    "diagnosisId": "specific_learning_dyslexia",
+    "diagnosisId": "specific_learning_disorder",
     "therapyId": "special_education",
     "category": "NEURODEV",
     "patientSummary": "9 yaşında, kız çocuğu, 3. sınıf öğrencisi",
@@ -556,7 +556,7 @@
     "diagnosisId": "developmental_coordination_disorder",
     "therapyId": "occupational_coop",
     "category": "NEURODEV",
-    "patientSummary": "8 yaşında, erkek çocuğu (Sakar / Beceriksiz Çocuk Sendromu)",
+    "patientSummary": "8 yaşında, erkek çocuğu",
     "clues": [
       "8 yaşındaki çocuk, ayakkabı bağcıklarını asla bağlayamaması, düğmelerini ilikleyememesi, makas kullanamaması ve düz yolda yürürken bile sürekli düşüp bir yerlerini morartması nedeniyle getirildi.",
       "Beden eğitimi derslerinde topu tutamadığı, bisiklete binmeyi öğrenemediği ve arkadaşları tarafından sakarlığı yüzünden oyunlara alınmadığı anlatıldı.",
@@ -602,10 +602,10 @@
     "caseNumber": 104,
     "difficulty": "Zor",
     "course": "FORENSIC",
-    "diagnosisId": "sleepwalking_disorder",
+    "diagnosisId": "nrem_sleep_arousal",
     "therapyId": "sleep_safety_cbt",
     "category": "SLEEP",
-    "patientSummary": "33 yaşında, erkek, evli (Adli Nitelikli NREM Parasomnisi)",
+    "patientSummary": "33 yaşında, erkek, evli",
     "clues": [
       "33 yaşındaki evli erkek, gece derin uykudayken eşine agresif biçimde cinsel ilişki girişiminde bulunduğu, eşi kendisini ittiğinde dahi mekanik olarak mastürbasyon yapmayı sürdürdüğü ve sabah uyandığında hiçbir şey hatırlamadığı için başvurdu.",
       "Bu durumun son 1 yıldır ayda 2-3 kez uykunun ilk 3 saati içinde (derin NREM yavaş dalga uykusunda) tekrarlandığı ve evliliklerinde ağır bir güven krizine yol açtığı öğrenildi.",
@@ -654,7 +654,7 @@
     "diagnosisId": "sexual_masochism",
     "therapyId": "cbt_general",
     "category": "PARAPHILIC",
-    "patientSummary": "26 yaşında, erkek, üniversite mezunu (Ölümcül Risk Taşıyan Parafili)",
+    "patientSummary": "26 yaşında, erkek, üniversite mezunu",
     "clues": [
       "26 yaşındaki genç, odasında tavana asılı bir kemerle boynunu sıkarak oksijensiz kaldığı ve mastürbasyon yaptığı sırada bayılması üzerine ailesi tarafından son anda kurtarılarak getirildi.",
       "Son 3 yıldır mastürbasyon yaparken boynunu iple sıkıp beynine giden oksijeni kısıtlamadan (hipoksi) ve boğulma tehlikesi hissetmeden orgazm olamadığını itiraf etti.",
@@ -703,7 +703,7 @@
     "diagnosisId": "sexual_sadism",
     "therapyId": "cbt_general",
     "category": "PARAPHILIC",
-    "patientSummary": "32 yaşında, erkek, güvenlik görevlisi (Adli Vaka)",
+    "patientSummary": "32 yaşında, erkek, güvenlik görevlisi",
     "clues": [
       "32 yaşındaki danışan, partnerlerini yatağa bağlayıp rızaları olmaksızın derilerini sigarayla yakarak, kemerle döverek ve acı içinde yalvarmalarını izleyerek cinsel doyum sağladığı için polise şikayet sonrası sevk edildi.",
       "Partnerlerinin fiziksel ve psikolojik acı çekmesini, korku dolu çığlıklarını görmeden hiçbir şekilde cinsel uyarılma ve ereksiyon yaşayamadığını açıkça ifade etti.",
@@ -752,7 +752,7 @@
     "diagnosisId": "other_specified_dissociative",
     "therapyId": "supportive_psychotherapy",
     "category": "DISSOCIATIVE",
-    "patientSummary": "38 yaşında, erkek, cezaevinde tutuklu (Adli Dissosiyatif Tablo)",
+    "patientSummary": "38 yaşında, erkek, cezaevinde tutuklu",
     "clues": [
       "Ağırlaştırılmış müebbet hapis istemiyle yargılanan 38 yaşındaki tutuklu, cezaevinde 'Atın kaç ayağı vardır?' sorusuna '3 ayağı vardır', '2 artı 2 kaç eder?' sorusuna '5 eder' şeklinde soruların doğru cevabını tam bilip hemen yanındaki yanlış cevabı (yaklaşık yanıtlar) verdiği için bilirkişiye sevk edildi.",
       "Haftanın hangi günü olduğu sorulduğunda dünün gününü söylemekte, ceketi pantolon gibi bacaklarına giymeye çalışmaktadır.",

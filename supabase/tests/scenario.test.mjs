@@ -36,6 +36,8 @@ await db.exec(read('migrations/0001_init.sql'));
 await db.exec(read('seed/0002_cases_answer_key.sql'));
 await db.exec(read('migrations/0002_online_ek.sql'));
 await db.exec(read('migrations/0002_online_ek.sql')); // tekrar çalıştırılabilir olmalı
+await db.exec(read('migrations/0003_gunluk_ve_hizli.sql'));
+await db.exec(read('migrations/0003_gunluk_ve_hizli.sql')); // tekrar çalıştırılabilir olmalı
 
 // ---------------------------------------------------------------- mini test aracı
 let passed = 0, failed = 0;
@@ -150,10 +152,10 @@ const casePoints = (won, g, e) => !won ? 0 : (({ 1: 100, 2: 85, 3: 70, 4: 55, 5:
 
 // =============================================================================
 console.log('\n[Kurulum]');
-await test('12 kullanıcı oluşturulur; tetikleyici profil açar, RP varsayılanı 250', async () => {
+await test('12 kullanıcı oluşturulur; tetikleyici profil açar, RP varsayılanı 0 (RP v2)', async () => {
   for (let i = 1; i <= 12; i++) await makeUser(i);
   const r = await one(`select count(*)::int as n, min(ranked_points) as lo, max(ranked_points) as hi from public.profiles`);
-  eq([r.n, r.lo, r.hi], [12, 250, 250]);
+  eq([r.n, r.lo, r.hi], [12, 0, 0]);
   eq((await one(`select display_name from public.profiles where id = $1`, [U[1]])).display_name, 'Kullanıcı 1');
 });
 
@@ -165,7 +167,7 @@ await test('USERNAME_TAKEN (büyük/küçük harf duyarsız) ve USERNAME_INVALID
 await test('İstemci ranked_points / matches_won güncelleyemez (yetki reddi)', async () => {
   await expectErr(q(U[1], `update public.profiles set ranked_points = 9999 where id = $1`, [U[1]]), DENIED);
   await expectErr(q(U[1], `update public.profiles set matches_won = 50 where id = $1`, [U[1]]), DENIED);
-  eq(await rp(U[1]), 250);
+  eq(await rp(U[1]), 0);
 });
 await test('İstemci kendi avatarını değiştirebilir, başkasınınkini değiştiremez', async () => {
   const own = await q(U[1], `update public.profiles set avatar = '{"bg":"bg_rose"}'::jsonb where id = $1`, [U[1]]);
@@ -349,11 +351,15 @@ await test('Süre dolunca tur zaman aşımıyla kapanır; son turda maç biter',
   eq(s.status, 'finished');
   eq((await one(`select close_reason from public.room_rounds where room_id = $1 and round_no = 3`, [ffa.id])).close_reason, 'timeout');
 });
-await test('RP: 1. +50 (ffa), 2. +20 (2\'den fazla oyuncu), 3. +5', async () => {
-  const res = (await admin(`select user_id, final_rank, rp_delta, rp_after from public.match_results where room_id = $1 order by final_rank`, [ffa.id])).rows;
-  eq(res.map((r) => [r.user_id, r.final_rank, r.rp_delta]), [[U[1], 1, 50], [U[2], 2, 20], [U[4], 3, 5]]);
-  eq([await rp(U[1]), await rp(U[2]), await rp(U[4])], [300, 270, 255]);
-  eq(res.map((r) => r.rp_after), [300, 270, 255]);
+await test('RP v2 (ffa): tur başına g2 +8 / g1 +10 / g3 +6 / başarısız −10, prim 1. +15 2. +5; taban 0', async () => {
+  const res = (await admin(`select user_id, final_rank, rp_delta, rp_after, rp_breakdown from public.match_results where room_id = $1 order by final_rank`, [ffa.id])).rows;
+  // U1: 8 + 10 − 10 (zaman aşımı) + 15 = 23; U2: −10 + 6 − 10 + 5 = −9; U4: pes −10, absent −10, zaman aşımı −10 = −30
+  eq(res.map((r) => [r.user_id, r.final_rank, r.rp_delta]), [[U[1], 1, 23], [U[2], 2, -9], [U[4], 3, -30]]);
+  const b1 = res[0].rp_breakdown;
+  eq([b1.total, b1.voided, b1.placement, b1.rounds], [23, false, 15, [{ delta: 8, round: 1, outcome: 'g2' }, { delta: 10, round: 2, outcome: 'g1' }, { delta: -10, round: 3, outcome: 'fail' }]]);
+  eq(res[2].rp_breakdown.rounds.map((x) => x.outcome), ['fail', 'fail', 'fail']);
+  eq([await rp(U[1]), await rp(U[2]), await rp(U[4])], [23, 0, 0], 'RP 0\'ın altına inmez');
+  eq(res.map((r) => r.rp_after), [23, 0, 0]);
 });
 await test('Maç bitirme iki kez (ve advance_if_due tekrar) çağrılsa da RP bir kez verilir', async () => {
   await admin(`select public._finish_match($1, false)`, [ffa.id]);
@@ -362,12 +368,12 @@ await test('Maç bitirme iki kez (ve advance_if_due tekrar) çağrılsa da RP bi
   // durum zorla geri alınsa bile match_results tekil anahtarı + rp_after koruması çifte ödemeyi engeller
   await admin(`update public.rooms set status = 'in_round' where id = $1`, [ffa.id]);
   await admin(`select public._finish_match($1, false)`, [ffa.id]);
-  eq([await rp(U[1]), await rp(U[2]), await rp(U[4])], [300, 270, 255]);
+  eq([await rp(U[1]), await rp(U[2]), await rp(U[4])], [23, 0, 0]);
   eq((await one(`select matches_played, matches_won from public.profiles where id = $1`, [U[1]])), { matches_played: 1, matches_won: 1 });
 });
 await test('Liderlik tablosu görünümü sıralı', async () => {
   const r = (await q(U[7], `select username, ranked_points, position from public.leaderboard order by position, username limit 3`)).rows;
-  eq(r.map((x) => [x.username, x.ranked_points, Number(x.position)]), [['user1', 300, 1], ['user2', 270, 2], ['user4', 255, 3]]);
+  eq(r.map((x) => [x.username, x.ranked_points, Number(x.position)]), [['user1', 23, 1], ['user10', 0, 2], ['user11', 0, 2]]);
 });
 
 console.log('\n[Düello lobisi: kapasite, host devri, boş oda]');
@@ -396,7 +402,7 @@ await test('Kullanıcı aynı anda tek odada: yeni odaya katılınca eskisinden 
 });
 
 console.log('\n[Turnuva: battle formatı]');
-await test('4 kişi battle: her tur en düşük puanlı elenir, elenen tahmin gönderemez, sıralama ve +75', async () => {
+await test('4 kişi battle: her tur en düşük puanlı elenir, elenen tahmin gönderemez, sıralama; RP v2: elenen sonraki turlar için cezalandırılmaz, prim 1. +25 2. +10', async () => {
   const before = { 1: await rp(U[1]), 2: await rp(U[2]), 4: await rp(U[4]), 5: await rp(U[5]) };
   const t = await setupMatch(U[1], [U[2], U[4], U[5]], { p_mode: 'tournament', p_capacity: 4, p_format: 'battle' });
   eq((await room(t.id)).round_count, 3);
@@ -420,13 +426,16 @@ await test('4 kişi battle: her tur en düşük puanlı elenir, elenen tahmin g�
   await solve(t.id, U[1]); await failRound(t.id, U[2]);
   eq((await room(t.id)).status, 'finished');
   const res = (await admin(`select user_id, final_rank, rp_delta from public.match_results where room_id = $1 order by final_rank`, [t.id])).rows;
-  eq(res.map((r) => [r.user_id, r.final_rank, r.rp_delta]), [[U[1], 1, 75], [U[2], 2, 20], [U[4], 3, 5], [U[5], 4, 5]]);
-  eq(await rp(U[1]), before[1] + 75);
-  eq(await rp(U[5]), before[5] + 5);
+  // U1: 10+10+10+25 = 55; U2: 8+8−10+10 = 16; U4: 6−10 = −4 (tur 3 yok); U5: −10 (tur 2-3 yok)
+  eq(res.map((r) => [r.user_id, r.final_rank, r.rp_delta]), [[U[1], 1, 55], [U[2], 2, 16], [U[4], 3, -4], [U[5], 4, -10]]);
+  const b5 = (await one(`select rp_breakdown from public.match_results where room_id = $1 and user_id = $2`, [t.id, U[5]])).rp_breakdown;
+  eq(b5.rounds, [{ delta: -10, round: 1, outcome: 'fail' }], 'elenen oyuncu sonraki turlar için ceza almaz');
+  eq(await rp(U[1]), before[1] + 55);
+  eq(await rp(U[5]), Math.max(0, before[5] - 10));
 });
 
 console.log('\n[Turnuva: bracket formatı (tek eleme)]');
-await test('4 kişi bracket: eşleşmeler, hükmen galibiyet (bağlantı koptu), eşitlikte erken bitiren, +75/+20/+5', async () => {
+await test('4 kişi bracket: eşleşmeler, hükmen galibiyet (bağlantı koptu), eşitlikte erken bitiren, RP v2 (+25/+10 prim)', async () => {
   const ids = [U[6], U[7], U[8], U[10]];
   const before = Object.fromEntries(await Promise.all(ids.map(async (id) => [id, await rp(id)])));
   const t = await setupMatch(U[6], [U[7], U[8], U[10]], { p_mode: 'tournament', p_capacity: 4, p_format: 'bracket', p_bracket_seeding: 'ranked' });
@@ -466,11 +475,12 @@ await test('4 kişi bracket: eşleşmeler, hükmen galibiyet (bağlantı koptu),
   const r = await room(t.id);
   eq([r.status, r.ended_early], ['finished', false]);
   const res = (await admin(`select user_id, final_rank, rp_delta from public.match_results where room_id = $1 order by final_rank`, [t.id])).rows;
-  eq(res.slice(0, 2).map((x) => [x.user_id, x.final_rank, x.rp_delta]), [[D, 1, 75], [A, 2, 20]]);
-  eq(res.slice(2).map((x) => x.rp_delta), [5, 5]);
+  // D: g4 +4, g1 +10, +25 = 39; A: g2 +8, g1 +10, +10 = 28; B (çözemedi) ve C (koptu) −10, tur 2 için ceza yok
+  eq(res.slice(0, 2).map((x) => [x.user_id, x.final_rank, x.rp_delta]), [[D, 1, 39], [A, 2, 28]]);
+  eq(res.slice(2).map((x) => x.rp_delta), [-10, -10]);
   eq(new Set(res.slice(2).map((x) => x.user_id)), new Set([B, C]));
-  eq(await rp(D), before[D] + 75);
-  eq(await rp(C), before[C] + 5);
+  eq(await rp(D), before[D] + 39);
+  eq(await rp(C), Math.max(0, before[C] - 10));
 });
 
 console.log('\n[HP düellosu]');
@@ -478,7 +488,7 @@ await test('Çarpan: tur 1-3 = 1.0, sonra +0.5', async () => {
   const r = (await admin(`select array_agg(public._hp_multiplier(g)::float8 order by g) as m from generate_series(1, 6) g`)).rows[0].m;
   eq(r, [1, 1, 1, 1.5, 2, 2.5]);
 });
-await test('HP: düşük puanlı fark × çarpan kadar can kaybeder; 0 olunca maç biter (+35 / +5)', async () => {
+await test('HP: düşük puanlı fark × çarpan kadar can kaybeder; 0 olunca maç biter (RP v2: +30 / −20)', async () => {
   const b1 = await rp(U[11]), b2 = await rp(U[12]);
   const d = await setupMatch(U[11], [U[12]], { p_mode: 'duel', p_format: 'hp' });
   const r0 = await room(d.id);
@@ -500,8 +510,8 @@ await test('HP: düşük puanlı fark × çarpan kadar can kaybeder; 0 olunca ma
   eq([r.status, r.ended_early], ['finished', false]);
   eq((await one(`select hp from public.room_players where room_id = $1 and user_id = $2`, [d.id, U[12]])).hp, 0);
   const res = (await admin(`select user_id, final_rank, rp_delta, final_hp from public.match_results where room_id = $1 order by final_rank`, [d.id])).rows;
-  eq(res.map((x) => [x.user_id, x.rp_delta, x.final_hp]), [[U[11], 35, 600], [U[12], 5, 0]]);
-  eq([await rp(U[11]), await rp(U[12])], [b1 + 35, b2 + 5]);
+  eq(res.map((x) => [x.user_id, x.rp_delta, x.final_hp]), [[U[11], 30, 600], [U[12], -20, 0]]);
+  eq([await rp(U[11]), await rp(U[12])], [b1 + 30, Math.max(0, b2 - 20)]);
 });
 await test('HP: tur sınırında canı yüksek olan kazanır', async () => {
   const d = await setupMatch(U[3], [U[9]], { p_mode: 'duel', p_format: 'hp' });
@@ -516,14 +526,17 @@ await test('HP: tur sınırında canı yüksek olan kazanır', async () => {
 });
 
 console.log('\n[Erken bitiş ve RP çiftçiliği koruması]');
-await test('Rakip ilk turda çıkarsa maç biter ama RP verilmez (turların yarısı oynanmadı)', async () => {
+await test('Rakip ilk turda çıkarsa maç biter; kalan için maç geçersiz (0), çıkan kalan turların cezasını öder (RP v2)', async () => {
   const b = await rp(U[5]);
   const d = await setupMatch(U[5], [U[6]], { p_mode: 'duel', p_format: 'rounds', p_round_count: 5 });
   await rpc(U[6], 'leave_room', { p_room_id: d.id });
   const r = await room(d.id);
   eq([r.status, r.ended_early], ['finished', true]);
   const res = (await admin(`select user_id, rp_delta, left_early from public.match_results where room_id = $1 order by final_rank`, [d.id])).rows;
-  eq(res.map((x) => [x.user_id, x.rp_delta, x.left_early]), [[U[5], 0, false], [U[6], 0, true]]);
+  // U6: tur 1 'left' −10 + oynamadığı 2-5. turlar 4 × −10 = −50; U5: geçersiz maç, 0
+  eq(res.map((x) => [x.user_id, x.rp_delta, x.left_early]), [[U[5], 0, false], [U[6], -50, true]]);
+  const b6 = (await one(`select rp_breakdown from public.match_results where room_id = $1 and user_id = $2`, [d.id, U[6]])).rp_breakdown;
+  eq([b6.voided, b6.rounds.filter((x) => x.missed).length, b6.total], [true, 4, -50]);
   eq(await rp(U[5]), b);
 });
 
