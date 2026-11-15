@@ -34,6 +34,8 @@ console.log(`Veritabanı: ${db.name}`);
 await db.exec(read('tests/00_supabase_stubs.sql'));
 await db.exec(read('migrations/0001_init.sql'));
 await db.exec(read('seed/0002_cases_answer_key.sql'));
+await db.exec(read('migrations/0002_online_ek.sql'));
+await db.exec(read('migrations/0002_online_ek.sql')); // tekrar çalıştırılabilir olmalı
 
 // ---------------------------------------------------------------- mini test aracı
 let passed = 0, failed = 0;
@@ -576,6 +578,39 @@ await test('Özel kanal yetkisi: room:<id> yalnızca üyeler; online:<id> sahibi
   eq((await q(U[3], `select * from realtime.messages`)).rows.length, 0);
   eq((await q(U[1], `select * from realtime.messages`)).rows.length, 1);
   await db.exec(`select set_config('realtime.topic', '', false)`);
+});
+
+console.log('\n[0002: lobide ayar değiştirme]');
+await test('update_room_settings: yalnızca host, yalnızca lobide; değişince diğerlerinin hazırı sıfırlanır', async () => {
+  const r = await rpc(U[4], 'create_room', { p_mode: 'ffa', p_capacity: 4 });
+  await rpc(U[5], 'join_room', { p_code: r.code });
+  await rpc(U[6], 'join_room', { p_code: r.code });
+  await rpc(U[5], 'set_ready', { p_room_id: r.id, p_ready: true });
+  await expectErr(rpc(U[5], 'update_room_settings', { p_room_id: r.id, p_target_type: 'therapy' }), 'NOT_HOST');
+  await expectErr(rpc(U[7], 'update_room_settings', { p_room_id: r.id, p_target_type: 'therapy' }), 'NOT_MEMBER');
+  await expectErr(rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_capacity: 2 }), 'INVALID_SETTINGS');
+  await expectErr(rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_round_count: 16 }), 'INVALID_SETTINGS');
+  await expectErr(rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_target_type: 'bogus' }), 'INVALID_SETTINGS');
+  const same = await rpc(U[4], 'update_room_settings', { p_room_id: r.id });
+  eq(same.changed, false);
+  eq((await one(`select is_ready from public.room_players where room_id = $1 and user_id = $2`, [r.id, U[5]])).is_ready, true, 'değişmeyince hazır kalır');
+  const ch = await rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_target_type: 'combo', p_round_count: 3, p_visibility: 'public', p_capacity: 3 });
+  eq([ch.changed, ch.target_type, ch.round_count, ch.visibility, ch.capacity, ch.round_time_limit_sec], [true, 'combo', 3, 'public', 3, 300]);
+  eq((await one(`select is_ready from public.room_players where room_id = $1 and user_id = $2`, [r.id, U[5]])).is_ready, false, 'değişince sıfırlanır');
+  const back = await rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_target_type: 'diagnosis' });
+  eq(back.round_time_limit_sec, 180, 'varsayılan süre hedefle birlikte döner');
+  await rpc(U[5], 'set_ready', { p_room_id: r.id, p_ready: true });
+  await rpc(U[6], 'set_ready', { p_room_id: r.id, p_ready: true });
+  await rpc(U[4], 'start_match', { p_room_id: r.id });
+  await expectErr(rpc(U[4], 'update_room_settings', { p_room_id: r.id, p_round_count: 2 }), 'ALREADY_STARTED');
+  for (const u of [4, 5, 6]) await rpc(U[u], 'leave_room', { p_room_id: r.id });
+});
+await test('update_room_settings: turnuvada tur sayısı kapasiteden hesaplanır; anon çağıramaz', async () => {
+  const t = await rpc(U[4], 'create_room', { p_mode: 'tournament', p_format: 'bracket', p_capacity: 4 });
+  const u = await rpc(U[4], 'update_room_settings', { p_room_id: t.id, p_capacity: 8, p_round_count: 9 });
+  eq([u.capacity, u.round_count], [8, 3]);
+  await expectErr(rpc(null, 'update_room_settings', { p_room_id: t.id }), DENIED);
+  await rpc(U[4], 'leave_room', { p_room_id: t.id });
 });
 
 console.log(`\nSonuç: ${passed} geçti, ${failed} kaldı`);

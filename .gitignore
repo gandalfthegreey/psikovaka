@@ -6,3 +6,6 @@ Thumbs.db
 .env
 .env.*
 supabase/tests/.test-credentials.json
+
+# Online geliştirme sayfası (tools/online_dev/make_harness.js üretir)
+tools/online_dev/harness.html

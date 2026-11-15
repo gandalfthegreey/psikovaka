@@ -57,12 +57,12 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // 2. Tek dosyalık taşınabilir HTML'i bellekte kur (doğrulama hatası varsa hiçbir dosya yazılmaz)
 const htmlRaw = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-// CSS dosyaları index.html'deki sırayla satır içine alınır (tokens -> style -> arena)
-const CSS_FILES = ['tokens.css', 'style.css', 'arena.css'];
+// CSS dosyaları index.html'deki sırayla satır içine alınır (tokens -> style -> arena -> online)
+const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css'];
 const cssRawByFile = Object.fromEntries(CSS_FILES.map(f => [f, fs.readFileSync(path.join(__dirname, 'css', f), 'utf8')]));
 // index.html'deki yerel script sırası. Yeni bir js/ dosyası eklenirse buraya da eklenmeli.
 // js/cases.js diskten değil, yukarıda pharmacologyId damgalanmış içerikten alınır.
-const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'online_arena.js', 'supabase_config.js', 'account.js', 'app.js'];
+const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'avatar_studio.js', 'supabase_config.js', 'account.js', 'app.js', 'online/core.js', 'online/api.js', 'online/realtime.js', 'online/views.js', 'online/friends.js', 'online/rooms.js', 'online/lobby.js', 'online/match.js', 'online/online.js'];
 const jsRawByFile = Object.fromEntries(JS_FILES.map(f => [f, f === 'cases.js' ? updatedCasesContent : fs.readFileSync(path.join(__dirname, 'js', f), 'utf8')]));
 
 let bundled = htmlRaw;

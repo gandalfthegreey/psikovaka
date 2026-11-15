@@ -410,7 +410,28 @@ const DIAGNOSES_DATABASE = [
             "Kıskançlık Sanrısı",
             "Delüzyonel Parazitoz",
             "Kötülük Görme Sanrısı",
-            "Büyüklük Sanrısı"
+            "Büyüklük Sanrısı",
+            "Sanrılı Bozukluk (Erotomanik Tip / Clérambault Sendromu)",
+            "Delusional Disorder (Erotomanic Type)",
+            "Clérambault",
+            "De Clérambault Sendromu",
+            "Sanrılı Bozukluk (Büyüklük / Grandiyöz Tip)",
+            "Delusional Disorder (Grandiose Type)",
+            "Grandiyöz Sanrı",
+            "Sanrılı Bozukluk (Kıskançlık Tipi / Othello Sendromu)",
+            "Delusional Disorder (Jealous Type)",
+            "Sanrılı Bozukluk (Kötülük Görme / Persekütuar Tip)",
+            "Delusional Disorder (Persecutory Type)",
+            "Sanrılı Bozukluk (Somatik Tip / Ekbom Sendromu)",
+            "Delusional Disorder (Somatic Type / Delusional Parasitosis)",
+            "Ekbom Sendromu",
+            "Sanrılı Bozukluk (Karışık Tip)",
+            "Delusional Disorder (Mixed Type)",
+            "Capgras Sanrısı (Dublör / Değiştirilme Hezeyanı)",
+            "Capgras Delusion / Misidentification Syndrome",
+            "Capgras",
+            "Capgras Sendromu",
+            "Capgras Sanrısı"
         ]
     },
     {
@@ -487,7 +508,14 @@ const DIAGNOSES_DATABASE = [
             "Esrar/Met Psikozu",
             "Esrarın Yol Açtığı Psikotik Bozukluk",
             "Kokain Psikozu",
-            "Metamfetamin Psikozu"
+            "Metamfetamin Psikozu",
+            "Cannabis-Induced Psychotic Disorder",
+            "Esrar Psikozu",
+            "Kokainin Yol Açtığı Psikotik Bozukluk (Paranoya)",
+            "Cocaine-Induced Psychotic Disorder",
+            "Metamfetaminin Yol Açtığı Psikotik Bozukluk (Met Böcekleri)",
+            "Methamphetamine-Induced Psychotic Disorder",
+            "Met Psikozu"
         ]
     },
     {
@@ -536,7 +564,12 @@ const DIAGNOSES_DATABASE = [
             "İndüklenmiş Sanrı",
             "Hafifletilmiş Psikoz Sendromu",
             "Süregen İşitsel Varsanılar",
-            "F28"
+            "F28",
+            "Hafifletilmiş Psikoz Sendromu (Prodromal Psikoz)",
+            "Attenuated Psychosis Syndrome",
+            "Prodromal Psikoz",
+            "Paylaşılmış Psikotik Bozukluk (Folie à Deux)",
+            "Shared Psychotic Disorder (Folie à Deux)"
         ]
     },
     {
@@ -551,7 +584,11 @@ const DIAGNOSES_DATABASE = [
             "F31.9",
             "Hızlı Döngülü Bipolar",
             "Karışık Özellikli Bipolar",
-            "Disforik Mani"
+            "Disforik Mani",
+            "Bipolar I Bozukluğu (Karışık Özellikli)",
+            "Bipolar I Disorder with Mixed Features",
+            "Bipolar I Bozukluğu (Hızlı Döngülü Tip / Rapid Cycling)",
+            "Bipolar I Disorder with Rapid Cycling"
         ]
     },
     {
@@ -642,7 +679,14 @@ const DIAGNOSES_DATABASE = [
             "Postpartum Depresyon",
             "Atipik Depresyon",
             "Melankolik Depresyon",
-            "Melankoli"
+            "Melankoli",
+            "Peripartum (Doğum Sonrası / Postpartum) Başlangıçlı Depresyon",
+            "Major Depressive Disorder with Peripartum Onset",
+            "Lohusalık Depresyonu",
+            "Atipik Özellikli Majör Depresif Bozukluk",
+            "Major Depressive Disorder with Atypical Features",
+            "Melankolik Özellikli Majör Depresif Bozukluk",
+            "Major Depressive Disorder with Melancholic Features"
         ]
     },
     {
@@ -655,7 +699,10 @@ const DIAGNOSES_DATABASE = [
             "Kronik Depresyon",
             "F33.9",
             "Mevsimsel Örüntülü Depresyon",
-            "Kış Depresyonu"
+            "Kış Depresyonu",
+            "Mevsimsel Özellik Gösteren Majör Depresyon (Kış Depresyonu)",
+            "Major Depressive Disorder with Seasonal Pattern",
+            "Mevsimsel Depresyon"
         ]
     },
     {
@@ -666,7 +713,13 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Psikotik Depresyon",
             "Hezeyanlı Depresyon",
-            "F32.3"
+            "F32.3",
+            "Cotard Sendromu (Yürüyen Ceset / Nihilistik Sanrı)",
+            "Cotard's Syndrome (Walking Corpse Delusion)",
+            "Cotard",
+            "Cotard Sendromu",
+            "Cotard Sanrısı",
+            "Nihilistik Sanrı"
         ]
     },
     {
@@ -712,7 +765,9 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Maddeye Bağlı Depresyon",
             "Alkol Çöküşü Depresyonu",
-            "Alkolün Yol Açtığı Depresif Bozukluk"
+            "Alkolün Yol Açtığı Depresif Bozukluk",
+            "Alkolün Yol Açtığı Depresif / Duygudurum Bozukluğu",
+            "Alcohol-Induced Depressive Disorder"
         ]
     },
     {
@@ -735,7 +790,11 @@ const DIAGNOSES_DATABASE = [
             "Yineleyen Kısa Depresyon",
             "Kısa Süreli Depresif Epizod",
             "Yetersiz Belirtili Depresif Epizod",
-            "F32.89"
+            "F32.89",
+            "Yineleyen Kısa Depresif Bozukluk",
+            "Recurrent Brief Depression",
+            "Kısa Süreli Depresif Epizod (4-13 Gün)",
+            "Short-Duration Depressive Episode"
         ]
     },
     {
@@ -786,7 +845,9 @@ const DIAGNOSES_DATABASE = [
             "Topluluk Önünde Konuşma Korkusu",
             "F40.10",
             "Sahne Korkusu",
-            "Performans Kaygısı"
+            "Performans Kaygısı",
+            "Sosyal Anksiyete Bozukluğu (Yalnızca Performans Tipi)",
+            "Social Anxiety Disorder (Performance Only)"
         ]
     },
     {
@@ -801,7 +862,11 @@ const DIAGNOSES_DATABASE = [
             "Emetofobi",
             "Kusma Korkusu",
             "Fagofobi",
-            "Boğulma Korkusu"
+            "Boğulma Korkusu",
+            "Özgül Fobi (Kusma Korkusu / Emetofobi)",
+            "Specific Phobia (Emetophobia)",
+            "Özgül Fobi (Boğulma/Yutma Korkusu / Fagofobi)",
+            "Specific Phobia (Phagophobia)"
         ]
     },
     {
@@ -881,7 +946,8 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Maddeye Bağlı Kaygı",
             "Kafein Anksiyetesi",
-            "Alkolün Yol Açtığı Anksiyete Bozukluğu"
+            "Alkolün Yol Açtığı Anksiyete Bozukluğu",
+            "Alcohol-Induced Anxiety Disorder"
         ]
     },
     {
@@ -911,7 +977,17 @@ const DIAGNOSES_DATABASE = [
             "Simetri Takıntısı",
             "Dini Vesvese",
             "İlişki Odaklı OKB",
-            "ROCD"
+            "ROCD",
+            "OKB (Bulaşma Obsesyonu ve Temizlik Kompulsiyonu)",
+            "OCD (Contamination/Cleaning)",
+            "OKB (Kuşku Obsesyonu ve Kontrol Kompulsiyonu)",
+            "OCD (Doubt/Checking)",
+            "OKB (Simetri, Düzen ve Sayma Kompulsiyonları)",
+            "OCD (Symmetry/Ordering)",
+            "OKB (Tabu Düşünceler: Dini Vesvese / Cinsel / Saldırganlık)",
+            "OCD (Taboo / Unacceptable Intrusive Thoughts)",
+            "İlişki Odaklı OKB (Relationship OCD / ROCD)",
+            "Relationship Obsessive-Compulsive Disorder"
         ]
     },
     {
@@ -926,7 +1002,9 @@ const DIAGNOSES_DATABASE = [
             "Estetik Takıntısı",
             "F45.22",
             "Kas Dismorfisi",
-            "Bigoreksiya"
+            "Bigoreksiya",
+            "Beden Algısı Bozukluğu (Kas Dismorfisi / Bigoreksiya)",
+            "Muscle Dysmorphia (Bigorexia)"
         ]
     },
     {
@@ -974,7 +1052,9 @@ const DIAGNOSES_DATABASE = [
             "PANDAS",
             "PANS",
             "Streptokok Sonrası OKB",
-            "F06.8"
+            "F06.8",
+            "PANDAS / PANS (Pediatrik Otoimmün Nöropsikiyatrik OKB)",
+            "PANDAS (Pediatric Autoimmune Neuropsychiatric Disorder Associated with Strep)"
         ]
     },
     {
@@ -990,7 +1070,9 @@ const DIAGNOSES_DATABASE = [
             "Kabuslar",
             "F43.10",
             "Dissosiyatif Belirtilerle TSSB",
-            "Dissosiyatif TSSB"
+            "Dissosiyatif TSSB",
+            "TSSB (Dissosiyatif Belirtilerle)",
+            "PTSD with Dissociative Symptoms"
         ]
     },
     {
@@ -1137,7 +1219,14 @@ const DIAGNOSES_DATABASE = [
             "Ele Geçirilme Transı",
             "Zorlayıcı İkna Sonrası Kimlik Bozulması",
             "Akut Dissosiyatif Tepki",
-            "F44.89"
+            "F44.89",
+            "Dissosiyatif Trans Bozukluğu",
+            "Dissociative Trance Disorder",
+            "Yoğun Zorlayıcı İkna Sonrası Kimlik Bozulması (Tarikat Travması)",
+            "Identity Disturbance Due to Prolonged Coercive Persuasion",
+            "Ganser Sendromu (Yaklaşık Yanıtlar / Cezaevi Histerisi)",
+            "Ganser Syndrome",
+            "Ganser"
         ]
     },
     {
@@ -1343,7 +1432,11 @@ const DIAGNOSES_DATABASE = [
             "F98.0",
             "Enürezis Nokturna",
             "Gece Altını Islatma",
-            "Enürezis Diürna"
+            "Enürezis Diürna",
+            "Enürezis Nokturna (Gece Altını Islatma)",
+            "Enuresis (Nocturnal Only)",
+            "Enürezis Diürna (Gündüz Altını Islatma)",
+            "Enuresis (Diurnal only)"
         ]
     },
     {
@@ -1485,7 +1578,10 @@ const DIAGNOSES_DATABASE = [
             "Somnambulizm",
             "F51.3",
             "Seksomni",
-            "Uykuda Cinsel Davranış"
+            "Uykuda Cinsel Davranış",
+            "Seksomni (Uykuda Cinsel Davranış)",
+            "Sexsomnia (Sleep Sex / NREM Parasomnia)",
+            "Sexsomnia"
         ]
     },
     {
@@ -1701,7 +1797,9 @@ const DIAGNOSES_DATABASE = [
             "Çocukluk Suç Örüntüsü",
             "F91.9",
             "Sınırlı Prososyal Duygularla",
-            "Katı-Duygusuz Özellikler"
+            "Katı-Duygusuz Özellikler",
+            "Davranım Bozukluğu (Sınırlı Prososyal Duygularla / Katı-Duygusuz Mizaç)",
+            "Conduct Disorder with Limited Prosocial Emotions"
         ]
     },
     {
@@ -2041,7 +2139,13 @@ const DIAGNOSES_DATABASE = [
             "Akut Konfüzyon",
             "Bilinç Bulanıklığı",
             "Enfeksiyona Bağlı Deliryum",
-            "F05"
+            "F05",
+            "Deliryum (Aşırı Hareketli / Hiperaktif Tip)",
+            "Delirium (Hyperactive Type)",
+            "Hiperaktif Deliryum",
+            "Deliryum (Durgun / Hipoaktif Tip)",
+            "Delirium (Hypoactive Type)",
+            "Hipoaktif Deliryum"
         ]
     },
     {
@@ -2176,7 +2280,9 @@ const DIAGNOSES_DATABASE = [
             "Normal Basınçlı Hidrosefali",
             "NPH",
             "Hakim-Adams Sendromu",
-            "Geri Dönüşümlü Demans"
+            "Geri Dönüşümlü Demans",
+            "Majör Nörobilişsel Bozukluk (Normal Basınçlı Hidrosefali / Hakim-Adams)",
+            "Major Neurocognitive Disorder Due to Normal Pressure Hydrocephalus"
         ]
     },
     {
@@ -2248,7 +2354,8 @@ const DIAGNOSES_DATABASE = [
             "Büyüsel Düşünce",
             "F21",
             "Şizotipal KB",
-            "Şizofreni Spektrumu Kişilik Bozukluğu"
+            "Şizofreni Spektrumu Kişilik Bozukluğu",
+            "Şizotipal Kişilik Bozukluğu (Küme A)"
         ]
     },
     {
@@ -2436,7 +2543,9 @@ const DIAGNOSES_DATABASE = [
             "Ayak Fetişizmi",
             "F65.0",
             "Parsiyalizm",
-            "Kısmi Fetişizm"
+            "Kısmi Fetişizm",
+            "Kısmi Fetişizm (Beden Parçası Fetişizmi / Ayak, Saç vb.)",
+            "Partialism"
         ]
     },
     {
@@ -2462,7 +2571,17 @@ const DIAGNOSES_DATABASE = [
             "Klismafili",
             "Ürofili",
             "Telefon Skatolojisi",
-            "F65.89"
+            "F65.89",
+            "Nekrofili (Ölü Sevicilik)",
+            "Necrophilic Disorder",
+            "Zoofili (Hayvan Sevicilik / Bestialite)",
+            "Zoophilic Disorder",
+            "Koprofili (Dışkı Fetişizmi)",
+            "Coprophilic Disorder",
+            "Urofili (İdrar Fetişizmi / Altın Yağmur)",
+            "Urophilic Disorder",
+            "Telefon Skatolojisi (Müstehcen Telefon Tacizi)",
+            "Telephone Scatologia"
         ]
     },
     {
@@ -2487,7 +2606,10 @@ const DIAGNOSES_DATABASE = [
             "F42.8",
             "Koku Referans Bozukluğu",
             "Beden Odaklı Yineleyici Davranış Bozukluğu",
-            "Tırnak Yeme"
+            "Tırnak Yeme",
+            "Beden Odaklı Yineleyici Davranış Bozukluğu (Tırnak Yeme vb.)",
+            "Body-Focused Repetitive Behavior Disorder",
+            "Olfactory Reference Disorder"
         ]
     },
     {
@@ -2508,7 +2630,9 @@ const DIAGNOSES_DATABASE = [
             "Kısa Süreli Somatizasyon",
             "F45.8",
             "Psödosiyezis",
-            "Yalancı Gebelik"
+            "Yalancı Gebelik",
+            "Yalancı Gebelik (Psödosiyezis)",
+            "Pseudocyesis"
         ]
     },
     {
@@ -2524,7 +2648,14 @@ const DIAGNOSES_DATABASE = [
             "Çıkarma Bozukluğu",
             "Gece Yeme Sendromu",
             "Sınırlı Tıkınma",
-            "Ortoreksiya"
+            "Ortoreksiya",
+            "Atipik Anoreksiya Nervoza (Kilo Normal Sınırlarda)",
+            "Atypical Anorexia Nervosa",
+            "Çıkarma Bozukluğu (Tıkınma Olmaksızın Kusma)",
+            "Purging Disorder",
+            "Night Eating Syndrome",
+            "Ortoreksiya Nervoza (Sağlıklı ve Saf Beslenme Takıntısı)",
+            "Orthorexia Nervosa"
         ]
     }
 ];

@@ -1,5 +1,6 @@
 /**
- * PsikoVaka 2.0 - Klinik Vaka, Terapi, Psikofarmakoloji, Tam Konsültasyon (Kombo) & Canlı Düello Motoru
+ * PsikoVaka 2.0 - Klinik Vaka, Terapi, Psikofarmakoloji ve Tam Konsültasyon (Kombo) motoru.
+ * Canlı çok oyunculu katman: js/online/ (Supabase); bu dosya yalnızca #duel= meydan okuma bağlantısını taşır
  */
 
 class PsikoVakaGame {
@@ -49,24 +50,22 @@ class PsikoVakaGame {
         this.caseStartTime = Date.now();
         this.elapsedSeconds = 0;
         this.duelTimerInterval = null;
-        this.activeDuelChallenge = null; // { caseId, mode, challengerName, challengerGuesses, challengerTimeSec, roomCode }
-        this.peer = null;
-        this.peerConn = null;
-        this.broadcastChannel = null;
+        this.activeDuelChallenge = null; // #duel= meydan okuma bağlantısı: { caseId, mode, challengerName, challengerGuesses, challengerTimeSec }
         this.duelMyNickname = localStorage.getItem('psikovaka_nickname') || 'Klinisyen';
 
         this.stats = this.loadStats();
 
         this.currentScreen = null;
         this.currentRoute = 'oyna';
+        this.libDefaultTitle = (typeof document !== 'undefined') ? document.title : '';
         this.caseTargetMode = null;
         this.playHistoryPushed = false;
 
         this.initDOM();
         this.applyActivePack(this.activePackId, false);
         this.initEventListeners();
-        if (typeof this.initOnlineArena === 'function') {
-            this.initOnlineArena();
+        if (typeof this.initAvatarStudio === 'function') {
+            this.initAvatarStudio();   // js/avatar_studio.js (canlı oyun: js/online/)
         }
         this.installProfileMirrors();
         this.initRouter();
@@ -144,6 +143,7 @@ class PsikoVakaGame {
         }
         this.currentRoute = route;
         this.showScreen(route);
+        if (route === 'kutuphane') this.renderLibraryRoute();
     }
 
     /** name: 'oyna' | 'online' | 'kutuphane' | 'profil' | 'play' */
@@ -169,6 +169,8 @@ class PsikoVakaGame {
         if (name === 'profil') this.updateProfileScreen();
 
         if (changed) {
+            this.libViewKey = null; // kütüphaneye her girişte görünüm yeniden kurulur
+            if (name !== 'kutuphane' && this.libDefaultTitle) document.title = this.libDefaultTitle;
             window.scrollTo(0, 0);
             if (this.dom.appMain && !isPlay) {
                 try { this.dom.appMain.focus({ preventScroll: true }); } catch (e) {}
@@ -302,12 +304,6 @@ class PsikoVakaGame {
             this.showToast(`Bu cihazdaki ilerlemen hesabına aktarıldı (${n} çözülen vaka).`);
         }
 
-        if (prev.state !== snap.state || ev.type === 'profile_saved') {
-            const board = document.getElementById('tabArenaScoreboard');
-            if (board && board.style.display !== 'none' && this.isModalOpen(this.dom.duelCenterModal) && typeof this.renderRankedScoreboardTab === 'function') {
-                this.renderRankedScoreboardTab();
-            }
-        }
     }
 
     /** Sunucu profilini (görünen ad, avatar) yerel oyun kimliğine yansıtır; eski arena bu değerleri kullanmaya devam eder. */
@@ -454,7 +450,7 @@ class PsikoVakaGame {
         on(a.btnEditProfile, 'click', () => this.openEditProfile());
         on(a.editProfileAvatarBtn, 'click', () => {
             this.closeModal(a.editProfileModal);
-            if (typeof this.openDuelCenterModal === 'function') this.openDuelCenterModal('tabArenaAvatar');
+            if (typeof this.openAvatarStudio === 'function') this.openAvatarStudio();
         });
         on(a.editDisplayName, 'input', () => this.setFormMessage(a.editProfileError, ''));
         on(a.editProfileForm, 'submit', (e) => { e.preventDefault(); this.submitEditProfile(); });
@@ -849,9 +845,9 @@ class PsikoVakaGame {
             if (canResume && this.dom.homeResumeLabel) this.dom.homeResumeLabel.textContent = this.currentDisplayTitle || 'Vaka';
         }
         const setCount = (el, txt) => { if (el) el.textContent = txt; };
-        setCount(this.dom.libDsmCount, `${this.diagnoses.length} tanı, ${Object.keys(this.categories).length} kategori`);
-        setCount(this.dom.libTherapyCount, `${this.therapies.length} yöntem, ${Object.keys(this.therapyFamilies).length} ekol`);
-        setCount(this.dom.libPharmaCount, `${this.pharmacology.length} protokol, ${Object.keys(this.pharmacologyFamilies).length} grup`);
+        setCount(this.dom.libDsmCount, String(this.diagnoses.length));
+        setCount(this.dom.libTherapyCount, String(this.therapies.length));
+        setCount(this.dom.libPharmaCount, String(this.pharmacology.length));
     }
 
     updateTargetHint() {
@@ -1077,9 +1073,6 @@ class PsikoVakaGame {
             themeToggleBtn: document.getElementById('themeToggleBtn'),
             statsBtn: document.getElementById('statsBtn'),
             helpBtn: document.getElementById('helpBtn'),
-            dsmGuideBtn: document.getElementById('dsmGuideBtn'),
-            therapyGuideBtn: document.getElementById('therapyGuideBtn'),
-            pharmaGuideBtn: document.getElementById('pharmaGuideBtn'),
             caseStudioBtn: document.getElementById('caseStudioBtn'),
             caseManagerBtn: document.getElementById('caseManagerBtn'),
             duelCenterBtn: document.getElementById('duelCenterBtn'),
@@ -1153,9 +1146,6 @@ class PsikoVakaGame {
             resultModal: document.getElementById('resultModal'),
             statsModal: document.getElementById('statsModal'),
             helpModal: document.getElementById('helpModal'),
-            dsmGuideModal: document.getElementById('dsmGuideModal'),
-            therapyGuideModal: document.getElementById('therapyGuideModal'),
-            pharmaGuideModal: document.getElementById('pharmaGuideModal'),
             caseStudioModal: document.getElementById('caseStudioModal'),
             caseManagerModal: document.getElementById('caseManagerModal'),
             duelCenterModal: document.getElementById('duelCenterModal'),
@@ -1190,6 +1180,17 @@ class PsikoVakaGame {
             libDsmCount: document.getElementById('libDsmCount'),
             libTherapyCount: document.getElementById('libTherapyCount'),
             libPharmaCount: document.getElementById('libPharmaCount'),
+            libHome: document.getElementById('libHome'),
+            libDetail: document.getElementById('libDetail'),
+            libraryTitle: document.getElementById('libraryTitle'),
+            libSearchInput: document.getElementById('libSearchInput'),
+            libSearchStatus: document.getElementById('libSearchStatus'),
+            libListTani: document.getElementById('libListTani'),
+            libListTerapi: document.getElementById('libListTerapi'),
+            libListIlac: document.getElementById('libListIlac'),
+            libEmpty: document.getElementById('libEmpty'),
+            playResultLinks: document.getElementById('playResultLinks'),
+            resultLibraryLinks: document.getElementById('resultLibraryLinks'),
             profileTierLabel: document.getElementById('profileTierLabel'),
             profileStatPlayed: document.getElementById('profileStatPlayed'),
             profileStatWin: document.getElementById('profileStatWin'),
@@ -1339,11 +1340,7 @@ class PsikoVakaGame {
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.addEventListener('click', () => {
-                if (this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel) {
-                    this.nextRoomDuelCase();
-                } else {
-                    this.setMode('practice');
-                }
+                this.setMode('practice');
             });
         }
         if (this.dom.btnMainShowReport) {
@@ -1362,13 +1359,6 @@ class PsikoVakaGame {
         // Kütüphane ve profil ekranlarındaki açıcılar
         this.dom.statsBtn.addEventListener('click', () => this.openStatsModal());
         this.dom.helpBtn.addEventListener('click', () => this.openModal(this.dom.helpModal));
-        this.dom.dsmGuideBtn.addEventListener('click', () => this.openDsmGuideModal());
-        if (this.dom.therapyGuideBtn) {
-            this.dom.therapyGuideBtn.addEventListener('click', () => this.openTherapyGuideModal());
-        }
-        if (this.dom.pharmaGuideBtn) {
-            this.dom.pharmaGuideBtn.addEventListener('click', () => this.openPharmaGuideModal());
-        }
         this.dom.caseStudioBtn.addEventListener('click', () => this.openModal(this.dom.caseStudioModal));
         if (this.dom.caseManagerBtn) {
             this.dom.caseManagerBtn.addEventListener('click', () => this.openCaseManagerModal());
@@ -1408,28 +1398,6 @@ class PsikoVakaGame {
         const btnResetSolved = document.getElementById('btnResetSolvedHistory');
         if (btnResetSolved) {
             btnResetSolved.addEventListener('click', () => this.resetSolvedCases());
-        }
-
-        // Duel Center Modal Actions
-        const btnStartMM = document.getElementById('btnStartMatchmaking');
-        if (btnStartMM) {
-            btnStartMM.addEventListener('click', () => this.startMatchmaking());
-        }
-        const btnCancelMM = document.getElementById('btnCancelMatchmaking');
-        if (btnCancelMM) {
-            btnCancelMM.addEventListener('click', () => this.cancelMatchmaking());
-        }
-
-        const btnCreateRoom = document.getElementById('btnCreateLiveDuelRoom');
-        if (btnCreateRoom) {
-            btnCreateRoom.addEventListener('click', () => this.createLiveDuelRoom());
-        }
-        const btnJoinRoom = document.getElementById('btnJoinLiveDuelRoom');
-        if (btnJoinRoom) {
-            btnJoinRoom.addEventListener('click', () => {
-                const code = (document.getElementById('joinRoomCodeInput').value || '').trim().toUpperCase();
-                if (code) this.joinLiveDuelRoom(code);
-            });
         }
 
         // Modal Closers
@@ -2325,8 +2293,6 @@ class PsikoVakaGame {
 
         this.playTone(isCorrect ? 'win' : (categoryMatch ? 'warm' : 'cold'));
 
-        // Broadcast live duel progress if in room duel
-        this.broadcastDuelProgress(false);
 
         if (isCorrect) {
             if (this.targetGameMode === 'combo' && this.comboStage < 3) {
@@ -2415,7 +2381,6 @@ class PsikoVakaGame {
         this.updateRemainingGuessesUI();
 
         this.recordStats(won, this.guesses.length);
-        this.broadcastDuelProgress(true, won);
 
         if (won) {
             this.launchConfetti();
@@ -2445,10 +2410,11 @@ class PsikoVakaGame {
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
-        if (this.dom.btnMainNextCase && !(this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel)) {
+        if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.disabled = false;
             this.dom.btnMainNextCase.textContent = this.currentMode === 'daily' ? 'Pratiğe devam et' : 'Sıradaki vaka';
         }
+        this.renderResultLibraryLinks();
     }
 
     openResultModal(won) {
@@ -2646,32 +2612,21 @@ class PsikoVakaGame {
         const btnNextPractice = document.getElementById('btnNextPractice');
         if (btnNextPractice) {
             btnNextPractice.onclick = () => {
-                if (this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel) {
-                    if (typeof this.areAllActivePlayersFinished === 'function' && !this.areAllActivePlayersFinished()) {
-                        this.nextRoomDuelCase();
-                        return;
-                    }
-                    this.closeModal(this.dom.resultModal);
-                    this.nextRoomDuelCase();
-                } else {
-                    btnNextPractice.disabled = false;
-                    btnNextPractice.style.opacity = '';
-                    btnNextPractice.textContent = 'Sıradaki vaka';
-                    this.closeModal(this.dom.resultModal);
-                    this.setMode('practice');
-                }
+                btnNextPractice.disabled = false;
+                btnNextPractice.textContent = 'Sıradaki vaka';
+                this.closeModal(this.dom.resultModal);
+                this.setMode('practice');
             };
         }
 
-        if (this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel && typeof this.updateRoundLockButtons === 'function') {
-            this.updateRoundLockButtons();
-        } else if (btnNextPractice) {
+        if (btnNextPractice) {
             btnNextPractice.disabled = false;
             btnNextPractice.style.opacity = '';
             btnNextPractice.style.cursor = '';
             btnNextPractice.textContent = this.currentMode === 'daily' ? 'Pratiğe devam et' : 'Sıradaki vaka';
         }
 
+        this.renderResultLibraryLinks();
         this.openModal(this.dom.resultModal);
     }
 
@@ -3118,346 +3073,14 @@ class PsikoVakaGame {
         this.showToast(`⚔️ ${duelData.challengerName || 'Arkadaşın'} sana bu vakayla meydan okudu!`);
     }
 
-    // --- Global Automatic Matchmaking ("Canlı Rakip Ara") ---
-    startMatchmaking() {
-        this.saveDuelNicknameFromModal();
-        this.cancelMatchmaking(false);
-
-        const statusBox = document.getElementById('matchmakingStatusBox');
-        const statusText = document.getElementById('matchmakingStatusText');
-        const btnStart = document.getElementById('btnStartMatchmaking');
-
-        if (statusBox) statusBox.hidden = false;
-        if (btnStart) btnStart.disabled = true;
-        if (statusText) statusText.textContent = '📡 Küresel Lobi Taranıyor... Aktif rakip aranıyor...';
-
-        this.isMatchmaking = true;
-        const myToken = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-
-        // 1. Local multi-tab instant matchmaking via BroadcastChannel
-        if (typeof BroadcastChannel !== 'undefined') {
-            this.mmChannel = new BroadcastChannel('psikovaka_global_matchmaking');
-            this.mmChannel.onmessage = (ev) => {
-                if (!this.isMatchmaking || !ev.data) return;
-                const msg = ev.data;
-                if (msg.type === 'MM_SEEK' && msg.token !== myToken) {
-                    const roomCode = 'MM' + Math.floor(10 + Math.random() * 89);
-                    this.mmChannel.postMessage({
-                        type: 'MM_PAIR',
-                        targetToken: msg.token,
-                        roomCode,
-                        hostNickname: this.duelMyNickname
-                    });
-                    this.finishMatchmakingAndLaunch(roomCode, true, msg.nickname || 'Rakip Klinisyen');
-                } else if (msg.type === 'MM_PAIR' && msg.targetToken === myToken) {
-                    this.finishMatchmakingAndLaunch(msg.roomCode, false, msg.hostNickname || 'Rakip Klinisyen');
-                }
-            };
-            this.mmChannel.postMessage({ type: 'MM_SEEK', token: myToken, nickname: this.duelMyNickname });
-        }
-
-        // 2. Worldwide cross-device matchmaking via PeerJS public lobby slot
-        if (typeof Peer !== 'undefined') {
-            const lobbyId = 'psikovaka-global-mm-lobby-v2';
-            try {
-                const seekerPeer = new Peer();
-                this.mmPeer = seekerPeer;
-                let matchedOrClaimed = false;
-
-                seekerPeer.on('open', () => {
-                    const conn = seekerPeer.connect(lobbyId, { reliable: true });
-                    const fallbackTimer = setTimeout(() => {
-                        if (!matchedOrClaimed && this.isMatchmaking) {
-                            matchedOrClaimed = true;
-                            this.claimMatchmakingLobbyHost(lobbyId, statusText);
-                        }
-                    }, 2200);
-
-                    conn.on('open', () => {
-                        clearTimeout(fallbackTimer);
-                        conn.send({ type: 'MM_JOIN_REQUEST', nickname: this.duelMyNickname });
-                    });
-
-                    conn.on('data', (data) => {
-                        if (data && data.type === 'MM_MATCH_CONFIRMED' && data.roomCode) {
-                            matchedOrClaimed = true;
-                            clearTimeout(fallbackTimer);
-                            this.finishMatchmakingAndLaunch(data.roomCode, false, data.hostNickname || 'Rakip Klinisyen');
-                        }
-                    });
-                });
-
-                seekerPeer.on('error', () => {
-                    if (!matchedOrClaimed && this.isMatchmaking) {
-                        matchedOrClaimed = true;
-                        this.claimMatchmakingLobbyHost(lobbyId, statusText);
-                    }
-                });
-            } catch (e) {
-                console.warn("Matchmaking PeerJS hatası:", e);
-            }
-        }
-    }
-
-    claimMatchmakingLobbyHost(lobbyId, statusText) {
-        if (!this.isMatchmaking) return;
-        if (this.mmPeer) {
-            try { this.mmPeer.destroy(); } catch (e) {}
-            this.mmPeer = null;
-        }
-        try {
-            const hostPeer = new Peer(lobbyId);
-            this.mmPeer = hostPeer;
-            hostPeer.on('open', () => {
-                if (statusText) {
-                    statusText.textContent = '🟢 Küresel Lobiye Bağlandı! Sitede "Rakip Ara" diyen ilk oyuncuyla otomatik eşleşeceksiniz...';
-                }
-            });
-            hostPeer.on('connection', (conn) => {
-                conn.on('data', (data) => {
-                    if (data && data.type === 'MM_JOIN_REQUEST' && this.isMatchmaking) {
-                        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-                        const roomCode = 'M' + chars.charAt(Math.floor(Math.random() * chars.length)) +
-                            chars.charAt(Math.floor(Math.random() * chars.length)) +
-                            chars.charAt(Math.floor(Math.random() * chars.length));
-                        conn.send({
-                            type: 'MM_MATCH_CONFIRMED',
-                            roomCode,
-                            hostNickname: this.duelMyNickname
-                        });
-                        setTimeout(() => {
-                            this.finishMatchmakingAndLaunch(roomCode, true, data.nickname || 'Rakip Klinisyen');
-                        }, 250);
-                    }
-                });
-            });
-        } catch (e) {}
-    }
-
-    finishMatchmakingAndLaunch(roomCode, isHost, opponentNickname) {
-        this.cancelMatchmaking(false);
-        this.closeModal(this.dom.duelCenterModal);
-        this.setupLiveRoomEngine(roomCode, isHost, null);
-        if (this.activeDuelChallenge) {
-            this.activeDuelChallenge.challengerName = opponentNickname;
-        }
-        if (this.dom.duelOpponentName) {
-            this.dom.duelOpponentName.textContent = opponentNickname;
-        }
-        this.showToast(`🔥 Eşleşme Bulundu! Rakip: ${opponentNickname} (Oda: ${roomCode})`);
-    }
-
-    cancelMatchmaking(notify = true) {
-        this.isMatchmaking = false;
-        if (this.mmChannel) {
-            try { this.mmChannel.close(); } catch (e) {}
-            this.mmChannel = null;
-        }
-        if (this.mmPeer) {
-            try { this.mmPeer.destroy(); } catch (e) {}
-            this.mmPeer = null;
-        }
-        const statusBox = document.getElementById('matchmakingStatusBox');
-        const btnStart = document.getElementById('btnStartMatchmaking');
-        if (statusBox) statusBox.hidden = true;
-        if (btnStart) btnStart.disabled = false;
-        if (notify) {
-            this.showToast("🔍 Otomatik rakip arama durduruldu.");
-        }
-    }
-
-    // --- Live P2P Room Duel (PeerJS WebRTC + BroadcastChannel + Deterministic Room Seed) ---
-    createLiveDuelRoom() {
-        this.saveDuelNicknameFromModal();
-        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        let code = '';
-        for (let i = 0; i < 4; i++) {
-            code += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        const roomBox = document.getElementById('liveRoomCreatedBox');
-        const codeDisplay = document.getElementById('generatedRoomCodeDisplay');
-        const statusEl = document.getElementById('liveRoomConnectionStatus');
-        if (roomBox && codeDisplay) {
-            roomBox.style.display = 'block';
-            codeDisplay.textContent = code;
-        }
-
-        const roomInviteUrl = `${window.location.origin}${window.location.pathname}#room=${code}`;
-        const btnCopyRoom = document.getElementById('btnCopyRoomInviteLink');
-        if (btnCopyRoom) {
-            btnCopyRoom.onclick = () => {
-                navigator.clipboard.writeText(roomInviteUrl);
-                this.showToast(`🔗 Oda davet linki (${code}) kopyalandı!`);
-            };
-        }
-        const btnWaRoom = document.getElementById('btnWhatsappRoomInvite');
-        if (btnWaRoom) {
-            btnWaRoom.onclick = () => {
-                const text = `⚔️ *PsikoVaka Canlı Düello Odası Kuruldu!*\n\n🔑 *Oda Kodu:* ${code}\n🧑‍⚕️ *Kurucu:* ${this.duelMyNickname}\n\nDoğrudan odaya katılmak için tıkla:\n${roomInviteUrl}`;
-                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-            };
-        }
-
-        this.setupLiveRoomEngine(code, true, statusEl);
-    }
-
+    /** Eski #room= işleyicisi: artık sunucu odalarına (js/online/) yönlendirir. */
     joinLiveDuelRoom(code) {
-        this.saveDuelNicknameFromModal();
-        const cleanCode = code.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 6);
-        if (!cleanCode) return;
-        this.closeModal(this.dom.duelCenterModal);
-        this.setupLiveRoomEngine(cleanCode, false, null);
-    }
-
-    getDeterministicRoomCases(roomCode) {
-        let hash = 2166136261;
-        for (let i = 0; i < roomCode.length; i++) {
-            hash ^= roomCode.charCodeAt(i);
-            hash = Math.imul(hash, 16777619);
-        }
-        const pool = [...this.allMasterCases];
-        const selected = [];
-        for (let round = 0; round < 5; round++) {
-            const idx = Math.abs(hash + round * 9973) % pool.length;
-            selected.push(pool[idx]);
-        }
-        return selected;
-    }
-
-    setupLiveRoomEngine(roomCode, isHost, statusEl) {
-        const roomCases = this.getDeterministicRoomCases(roomCode);
-        this.activeDuelChallenge = {
-            isRoomDuel: true,
-            roomCode,
-            roomCases,
-            roundIndex: 0,
-            myWins: 0,
-            opponentWins: 0,
-            challengerName: 'Rakip Bekleniyor...'
-        };
-
-        // 1. Setup BroadcastChannel for instant same-device/tab sync
-        if (typeof BroadcastChannel !== 'undefined') {
-            if (this.broadcastChannel) this.broadcastChannel.close();
-            this.broadcastChannel = new BroadcastChannel(`psikovaka_room_${roomCode}`);
-            this.broadcastChannel.onmessage = (ev) => this.handleIncomingDuelMessage(ev.data);
-            this.broadcastChannel.postMessage({ type: 'HELLO', nickname: this.duelMyNickname });
-        }
-
-        // 2. Setup PeerJS WebRTC for cross-device internet live sync
-        if (typeof Peer !== 'undefined') {
-            try {
-                if (this.peer) this.peer.destroy();
-                const hostPeerId = `psikovaka-duel-room-${roomCode.toLowerCase()}`;
-                if (isHost) {
-                    this.peer = new Peer(hostPeerId);
-                    this.peer.on('connection', (conn) => {
-                        this.peerConn = conn;
-                        this.bindPeerConnection(conn, statusEl);
-                    });
-                } else {
-                    this.peer = new Peer();
-                    this.peer.on('open', () => {
-                        const conn = this.peer.connect(hostPeerId);
-                        this.peerConn = conn;
-                        this.bindPeerConnection(conn, statusEl);
-                    });
-                }
-            } catch (e) {
-                console.warn("PeerJS P2P başlatılamadı, deterministik oda modu aktif:", e);
-            }
-        }
-
-        if (this.dom.duelHudBanner) {
-            this.dom.duelHudBanner.style.display = 'flex';
-            if (this.dom.duelMyName) this.dom.duelMyName.textContent = `${this.duelMyNickname} (Oda: ${roomCode})`;
-            if (this.dom.duelMyScoreBadge) this.dom.duelMyScoreBadge.textContent = `Tur 1/5`;
-            if (this.dom.duelOpponentName) this.dom.duelOpponentName.textContent = isHost ? 'Arkadaşın Bekleniyor...' : 'Odaya Bağlandı';
-            if (this.dom.duelOpponentStatus) this.dom.duelOpponentStatus.textContent = 'Canlı Senkron';
-        }
-
-        this.startCase(roomCases[0], `⚔️ Oda ${roomCode} • Tur 1/5`);
-        this.showToast(`⚔️ Canlı Düello Odası (${roomCode}) Başladı! Tur 1/5`);
-    }
-
-    bindPeerConnection(conn, statusEl) {
-        conn.on('open', () => {
-            if (statusEl) statusEl.textContent = '🔥 Arkadaşın odaya canlı bağlandı! Düello başladı!';
-            conn.send({ type: 'HELLO', nickname: this.duelMyNickname });
-        });
-        conn.on('data', (data) => {
-            this.handleIncomingDuelMessage(data);
-        });
-    }
-
-    sendDuelPacket(packet) {
-        if (this.peerConn && this.peerConn.open) {
-            try { this.peerConn.send(packet); } catch (e) {}
-        }
-        if (this.broadcastChannel) {
-            try { this.broadcastChannel.postMessage(packet); } catch (e) {}
-        }
-    }
-
-    broadcastDuelProgress(finished, won = false) {
-        if (!this.activeDuelChallenge) return;
-        this.sendDuelPacket({
-            type: finished ? 'FINISHED' : 'PROGRESS',
-            nickname: this.duelMyNickname,
-            guessesCount: this.guesses.length,
-            unlockedClues: this.unlockedClues,
-            won,
-            timeSec: this.elapsedSeconds
-        });
-    }
-
-    handleIncomingDuelMessage(data) {
-        if (!data || !this.activeDuelChallenge) return;
-        if (data.nickname) {
-            this.activeDuelChallenge.challengerName = data.nickname;
-            if (this.dom.duelOpponentName) this.dom.duelOpponentName.textContent = data.nickname;
-        }
-        if (data.type === 'HELLO') {
-            this.showToast(`⚔️ ${data.nickname} canlı düello odasına katıldı!`);
-            if (this.dom.duelOpponentStatus) this.dom.duelOpponentStatus.textContent = '🟢 Canlı Bağlı';
-        } else if (data.type === 'PROGRESS') {
-            if (this.dom.duelOpponentStatus) {
-                this.dom.duelOpponentStatus.textContent = `🔍 ${data.guessesCount}. Tahminde (${data.timeSec} sn)`;
-            }
-        } else if (data.type === 'FINISHED') {
-            this.activeDuelChallenge.challengerGuesses = data.won ? data.guessesCount : 7;
-            this.activeDuelChallenge.challengerTimeSec = data.timeSec;
-            if (this.dom.duelOpponentStatus) {
-                this.dom.duelOpponentStatus.textContent = data.won ?
-                    `🎉 ${data.guessesCount}/6 İpucu (${data.timeSec} sn)` :
-                    `❌ Çözemedi (${data.timeSec} sn)`;
-            }
-            this.showToast(data.won ?
-                `⚡ ${data.nickname} vakayı ${data.guessesCount}. tahminde (${data.timeSec} sn) çözdü!` :
-                `😮 ${data.nickname} bu vakada tüm haklarını doldurdu!`);
-            if (this.isGameOver) {
-                this.renderDuelPodium(this.gameWon);
-            }
-        }
-    }
-
-    nextRoomDuelCase() {
-        if (!this.activeDuelChallenge || !this.activeDuelChallenge.isRoomDuel) return;
-        this.activeDuelChallenge.roundIndex = (this.activeDuelChallenge.roundIndex + 1) % this.activeDuelChallenge.roomCases.length;
-        const round = this.activeDuelChallenge.roundIndex + 1;
-        const nextCase = this.activeDuelChallenge.roomCases[this.activeDuelChallenge.roundIndex];
-        this.activeDuelChallenge.challengerGuesses = null;
-        this.activeDuelChallenge.challengerTimeSec = null;
-        if (this.dom.duelMyScoreBadge) this.dom.duelMyScoreBadge.textContent = `Tur ${round}/5`;
-        if (this.dom.duelOpponentStatus) this.dom.duelOpponentStatus.textContent = `Tur ${round} Başladı`;
-        this.startCase(nextCase, `⚔️ Oda ${this.activeDuelChallenge.roomCode} • Tur ${round}/5`);
+        if (window.PsikoVakaOnline && window.PsikoVakaOnline.app) window.PsikoVakaOnline.app.joinByCode(code);
+        else this.showRoute('online');
     }
 
     exitDuelMode() {
         this.activeDuelChallenge = null;
-        if (this.peer) { try { this.peer.destroy(); } catch (e) {} this.peer = null; }
-        if (this.broadcastChannel) { try { this.broadcastChannel.close(); } catch (e) {} this.broadcastChannel = null; }
         if (this.dom.duelHudBanner) this.dom.duelHudBanner.style.display = 'none';
         window.location.hash = '';
         this.setMode('practice');
@@ -3644,115 +3267,623 @@ class PsikoVakaGame {
         }
     }
 
-    // --- Guides: DSM-5, Psychotherapy, and Psychopharmacology ---
-    openDsmGuideModal() {
-        const guideList = document.getElementById('dsmGuideList');
-        if (!guideList) return;
-        guideList.innerHTML = '';
+    // =====================================================================
+    // KÜTÜPHANE (ajan L): #/kutuphane, #/kutuphane/terapiler, #/kutuphane/ilaclar,
+    // #/kutuphane/tani/<id>, #/kutuphane/terapi/<id>, #/kutuphane/ilac/<id>.
+    // Liste DOM'u bir kez kurulur (açık gruplar ve kaydırma konumu korunur); arama yalnızca
+    // satırların `hidden` niteliğini değiştirir. Detay sayfaları her girişte yeniden çizilir.
+    // Tüm veri metinleri HTML olarak değil, kaçışlanmış düz metin olarak basılır.
+    // =====================================================================
 
-        Object.keys(this.categories).forEach(catKey => {
-            const cat = this.categories[catKey];
-            const catDiags = this.diagnoses.filter(d => d.category === catKey);
-            if (catDiags.length === 0) return;
-
-            const section = document.createElement('details');
-            section.className = 'guide-group';
-
-            let html = `<summary class="guide-group-head"><span class="guide-group-title">${cat.name}</span><span class="guide-group-count">${catDiags.length}</span></summary>`;
-            html += `<ul class="guide-items">`;
-            catDiags.forEach(d => {
-                html += `<li class="guide-item-simple"><span class="guide-item-name">${d.nameTr}</span> <span class="guide-item-en">${d.nameEn}</span></li>`;
-            });
-            html += `</ul>`;
-            section.innerHTML = html;
-            guideList.appendChild(section);
-        });
-
-        this.openModal(this.dom.dsmGuideModal);
+    libEsc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
-    openTherapyGuideModal() {
-        const guideList = document.getElementById('therapyGuideList');
-        if (!guideList) return;
-        guideList.innerHTML = '';
-
-        Object.keys(this.therapyFamilies).forEach(famKey => {
-            const fam = this.therapyFamilies[famKey];
-            const famTherapies = this.therapies.filter(t => t.family === famKey);
-            if (famTherapies.length === 0) return;
-
-            const section = document.createElement('details');
-            section.className = 'guide-group';
-
-            let html = `<summary class="guide-group-head"><span class="guide-group-title">${fam.name}</span><span class="guide-group-count">${famTherapies.length}</span></summary>`;
-            html += `<div class="guide-cards">`;
-
-            famTherapies.forEach(t => {
-                let stepsHTML = '';
-                if (t.protocolSteps && t.protocolSteps.length > 0) {
-                    stepsHTML = `<div class="guide-card-steps"><span class="guide-card-label">Protokol adımları</span><ul>${t.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
-                }
-                html += `
-                    <article class="guide-card">
-                        <div class="guide-card-head">
-                            <strong class="guide-item-name">${t.nameTr}</strong>
-                            <span class="guide-item-en">${t.nameEn}</span>
-                        </div>
-                        <p class="guide-card-text">${t.shortDefinition}</p>
-                        ${stepsHTML}
-                        ${t.pitfalls ? `<div class="guide-card-warn"><strong>Klinik tuzak:</strong> ${t.pitfalls}</div>` : ''}
-                    </article>
-                `;
-            });
-
-            html += `</div>`;
-            section.innerHTML = html;
-            guideList.appendChild(section);
-        });
-
-        this.openModal(this.dom.therapyGuideModal);
+    /** Aksan/Türkçe harf duyarsız arama anahtarı: "Clérambault" -> "clerambault", "İLAÇ" -> "ilac" */
+    libNorm(s) {
+        return String(s == null ? '' : s)
+            .replace(/İ/g, 'i').replace(/I/g, 'ı')
+            .toLowerCase()
+            .normalize('NFD').replace(/[̀-ͯ]/g, '')
+            .replace(/ı/g, 'i')
+            .replace(/[^a-z0-9.]+/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
     }
 
-    openPharmaGuideModal() {
-        const guideList = document.getElementById('pharmaGuideList');
-        if (!guideList) return;
-        guideList.innerHTML = '';
+    libIsCode(a) { return /^[A-Z]\d{2}(\.[0-9A-Z]{1,4})?$/.test(String(a || '').trim()); }
+    libCodesOf(item) { return (item.aliases || []).filter(a => this.libIsCode(a)); }
+    libOtherNamesOf(item) {
+        const own = new Set([this.libNorm(item.nameTr), this.libNorm(item.nameEn)]);
+        return (item.aliases || []).filter(a => !this.libIsCode(a) && !own.has(this.libNorm(a)));
+    }
 
-        Object.keys(this.pharmacologyFamilies).forEach(famKey => {
-            const fam = this.pharmacologyFamilies[famKey];
-            const famItems = this.pharmacology.filter(p => p.family === famKey);
-            if (famItems.length === 0) return;
+    libHref(kind, id) {
+        const base = { tani: '#/kutuphane/tani/', terapi: '#/kutuphane/terapi/', ilac: '#/kutuphane/ilac/' }[kind];
+        return base + encodeURIComponent(id);
+    }
 
-            const section = document.createElement('details');
-            section.className = 'guide-group';
+    libIsDesktop() {
+        return !!(window.matchMedia && window.matchMedia('(min-width: 768px)').matches);
+    }
 
-            let html = `<summary class="guide-group-head"><span class="guide-group-title">${fam.name}</span><span class="guide-group-count">${famItems.length}</span></summary>`;
-            html += `<div class="guide-cards">`;
+    /** Devam eden vaka tedavi/ilaç hedefliyse tanı↔tedavi eşleşmeleri gizlenir (cevap anahtarı olmasın) */
+    libHideTreatmentLinks() {
+        return !!(this.currentCase && !this.isGameOver && this.caseTargetMode && this.caseTargetMode !== 'diagnosis');
+    }
 
-            famItems.forEach(p => {
-                let stepsHTML = '';
-                if (p.protocolSteps && p.protocolSteps.length > 0) {
-                    stepsHTML = `<div class="guide-card-steps"><span class="guide-card-label">Uygulama ve endikasyon</span><ul>${p.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
-                }
-                html += `
-                    <article class="guide-card">
-                        <div class="guide-card-head">
-                            <strong class="guide-item-name">${p.nameTr}</strong>
-                            <span class="guide-item-en">${p.nameEn || ''}</span>
-                        </div>
-                        <p class="guide-card-text">${p.shortDefinition || ''}</p>
-                        ${stepsHTML}
-                        ${p.pitfalls ? `<div class="guide-card-warn"><strong>Kontrendikasyon ve yan etki:</strong> ${p.pitfalls}</div>` : ''}
-                    </article>
-                `;
+    /** '#/kutuphane/...' -> { view: 'list', tab } | { view: 'detail', kind, id } | { view: 'notfound' } */
+    parseLibraryHash() {
+        const m = /^#\/kutuphane(?:\/([a-z]+)(?:\/([^/?#]*))?)?\/?$/.exec(window.location.hash || '');
+        if (!m) return { view: 'list', tab: 'tani' };
+        const seg = m[1];
+        let id = m[2] || '';
+        try { id = decodeURIComponent(id); } catch (e) {}
+        if (!seg || seg === 'tanilar') return { view: 'list', tab: 'tani' };
+        if (seg === 'terapiler') return { view: 'list', tab: 'terapi' };
+        if (seg === 'ilaclar') return { view: 'list', tab: 'ilac' };
+        if ((seg === 'tani' || seg === 'terapi' || seg === 'ilac') && id) return { view: 'detail', kind: seg, id };
+        return { view: 'notfound' };
+    }
+
+    initLibrary() {
+        if (this.libInited) return;
+        this.libInited = true;
+        this.libView = null;
+        this.libViewKey = null;
+        this.libTab = 'tani';
+        this.libScroll = { tani: 0, terapi: 0, ilac: 0 };
+        this.libLastHref = { tani: null, terapi: null, ilac: null };
+        this.libIndex = {};
+        try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+
+        const d = this.dom;
+        this.buildLibraryList('tani');
+        this.buildLibraryList('terapi');
+        this.buildLibraryList('ilac');
+
+        let raf = 0;
+        window.addEventListener('scroll', () => {
+            if (raf) return;
+            raf = requestAnimationFrame(() => {
+                raf = 0;
+                if (this.currentScreen === 'kutuphane' && this.libView === 'list') this.libScroll[this.libTab] = window.scrollY;
             });
+        }, { passive: true });
 
-            html += `</div>`;
-            section.innerHTML = html;
-            guideList.appendChild(section);
+        if (d.libSearchInput) {
+            let t = 0;
+            d.libSearchInput.addEventListener('input', () => {
+                clearTimeout(t);
+                t = setTimeout(() => this.applyLibrarySearch(), 120);
+            });
+            d.libSearchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && d.libSearchInput.value) {
+                    e.stopPropagation();
+                    d.libSearchInput.value = '';
+                    this.applyLibrarySearch();
+                }
+            });
+        }
+
+        // Listeden açılan satırı hatırla (geri dönünce odak oraya)
+        [d.libListTani, d.libListTerapi, d.libListIlac].forEach((el, i) => {
+            if (!el) return;
+            const tab = ['tani', 'terapi', 'ilac'][i];
+            el.addEventListener('click', (e) => {
+                const a = e.target.closest && e.target.closest('a.lib-row');
+                if (a) this.libLastHref[tab] = a.getAttribute('href');
+            });
+            el.addEventListener('toggle', (e) => {
+                const g = e.target;
+                if (!g || !g.classList || !g.classList.contains('lib-group')) return;
+                const idx = this.libIndex[tab];
+                if (idx && !idx.searching) idx.userOpen[g.dataset.group] = g.open;
+            }, true);
         });
 
-        this.openModal(this.dom.pharmaGuideModal);
+        // Rapor penceresindeki kütüphane bağlantısı pencereyi kapatır
+        if (d.resultLibraryLinks) {
+            d.resultLibraryLinks.addEventListener('click', (e) => {
+                if (e.target.closest && e.target.closest('a')) this.closeModal(this.dom.resultModal);
+            });
+        }
+
+        if (d.libDetail) {
+            d.libDetail.addEventListener('click', (e) => {
+                const jump = e.target.closest && e.target.closest('[data-lib-jump]');
+                if (jump) {
+                    e.preventDefault();
+                    const sec = document.getElementById(jump.dataset.libJump);
+                    if (sec) {
+                        if (sec.tagName === 'DETAILS') sec.open = true;
+                        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+                        const h = sec.querySelector('.lib-sec-title');
+                        if (h) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (err) {} }
+                    }
+                    return;
+                }
+                const act = e.target.closest && e.target.closest('[data-lib-action]');
+                if (!act) return;
+                if (act.dataset.libAction === 'practice') this.startPracticeFromCategory(act.dataset.cat);
+                if (act.dataset.libAction === 'resume' && this.currentCase && !this.isGameOver) this.enterPlayScreen();
+            });
+        }
+    }
+
+    /** Bir sekmenin gruplu listesini kurar (bir kez). */
+    buildLibraryList(tab) {
+        const d = this.dom;
+        const host = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac }[tab];
+        if (!host) return;
+        let groups = [];
+        if (tab === 'tani') {
+            groups = Object.keys(this.categories).map(k => ({
+                key: k, name: this.categories[k].name, items: this.diagnoses.filter(x => x.category === k)
+            }));
+        } else if (tab === 'terapi') {
+            groups = Object.keys(this.therapyFamilies).map(k => ({
+                key: k, name: this.therapyFamilies[k].name, items: this.therapies.filter(x => x.family === k)
+            }));
+        } else {
+            groups = Object.keys(this.pharmacologyFamilies).map(k => ({
+                key: k, name: this.pharmacologyFamilies[k].name, items: this.pharmacology.filter(x => x.family === k)
+            }));
+        }
+        groups = groups.filter(g => g.items.length > 0);
+
+        const desktop = this.libIsDesktop();
+        const esc = (s) => this.libEsc(s);
+        const chevron = this.icon('chevron-right', 'lib-row-chevron');
+        let html = '';
+        groups.forEach((g, gi) => {
+            const open = desktop || gi === 0;
+            html += `<details class="lib-group" data-group="${esc(g.key)}"${open ? ' open' : ''}>`;
+            html += `<summary class="lib-group-head"><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
+            html += `<ul class="lib-rows">`;
+            g.items.forEach(it => {
+                const codes = tab === 'tani' ? this.libCodesOf(it) : [];
+                html += `<li class="lib-row-item" data-id="${esc(it.id)}"><a class="lib-row" href="${this.libHref(tab, it.id)}">` +
+                    `<span class="lib-row-text"><span class="lib-row-title">${esc(it.nameTr)}</span>` +
+                    `<span class="lib-row-sub" lang="en">${esc(it.nameEn || '')}</span></span>` +
+                    (codes.length ? `<span class="lib-row-codes">${codes.map(esc).join(', ')}</span>` : '') +
+                    `${chevron}</a></li>`;
+            });
+            html += `</ul></details>`;
+        });
+        host.innerHTML = html;
+
+        const byKey = Object.fromEntries(groups.map(g => [g.key, g]));
+        const idx = { groups: [], total: 0, searching: false, userOpen: {} };
+        host.querySelectorAll('.lib-group').forEach(gEl => {
+            const g = byKey[gEl.dataset.group];
+            const rows = [];
+            gEl.querySelectorAll('.lib-row-item').forEach((li, i) => {
+                const it = g.items[i];
+                rows.push({ el: li, hay: this.libNorm([it.nameTr, it.nameEn].concat(it.aliases || []).join(' | ')) });
+            });
+            idx.groups.push({ el: gEl, key: g.key, rows, countEl: gEl.querySelector('.lib-group-count') });
+            idx.userOpen[g.key] = gEl.open;
+            idx.total += rows.length;
+        });
+        this.libIndex[tab] = idx;
+    }
+
+    setLibraryTab(tab) {
+        const d = this.dom;
+        this.libTab = tab;
+        const lists = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac };
+        Object.keys(lists).forEach(k => { if (lists[k]) lists[k].hidden = (k !== tab); });
+        document.querySelectorAll('[data-lib-tab]').forEach(a => {
+            const on = a.dataset.libTab === tab;
+            a.classList.toggle('active', on);
+            if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        });
+        if (d.libSearchInput) {
+            const ph = {
+                tani: 'Tanı ara: ad, İngilizce ad, kod',
+                terapi: 'Terapi ara: ad, kısaltma',
+                ilac: 'İlaç ara: grup, etken madde'
+            };
+            d.libSearchInput.placeholder = ph[tab];
+            d.libSearchInput.setAttribute('aria-label', ph[tab]);
+        }
+        this.applyLibrarySearch();
+    }
+
+    applyLibrarySearch() {
+        const d = this.dom;
+        const tab = this.libTab || 'tani';
+        const idx = this.libIndex && this.libIndex[tab];
+        if (!idx) return;
+        const q = this.libNorm(d.libSearchInput ? d.libSearchInput.value : '');
+        const tokens = q ? q.split(' ').filter(Boolean) : [];
+        const searching = tokens.length > 0;
+        let shown = 0;
+        idx.groups.forEach(g => {
+            let n = 0;
+            g.rows.forEach(r => {
+                const ok = !searching || tokens.every(t => r.hay.includes(t));
+                if (r.el.hidden === ok) r.el.hidden = !ok;
+                if (ok) n++;
+            });
+            g.el.hidden = n === 0;
+            g.countEl.textContent = searching ? `${n}/${g.rows.length}` : String(g.rows.length);
+            if (searching) { if (n > 0 && !g.el.open) g.el.open = true; }
+            else if (idx.searching) g.el.open = !!idx.userOpen[g.key];
+            shown += n;
+        });
+        idx.searching = searching;
+        if (d.libSearchStatus) d.libSearchStatus.textContent = searching ? (shown ? `${shown} sonuç` : '') : '';
+        if (d.libEmpty) d.libEmpty.hidden = !(searching && shown === 0);
+    }
+
+    /** showRoute('kutuphane') sonrası çağrılır: liste ya da detay sayfası. */
+    renderLibraryRoute() {
+        this.initLibrary();
+        const d = this.dom;
+        if (!d.libHome || !d.libDetail) return;
+        const r = this.parseLibraryHash();
+        const key = r.view === 'list' ? `list/${r.tab}` : (r.view === 'detail' ? `${r.kind}/${r.id}` : 'notfound');
+        if (key === this.libViewKey) return;
+        const prevView = this.libViewKey ? this.libView : null; // null: başka ekrandan gelindi
+
+        if (r.view === 'list') {
+            const restoreY = prevView === 'detail' ? (this.libScroll[r.tab] || 0) : null;
+            d.libDetail.hidden = true;
+            d.libDetail.innerHTML = '';
+            d.libHome.hidden = false;
+            this.libView = 'list';
+            this.libViewKey = key;
+            this.setLibraryTab(r.tab);
+            if (restoreY !== null) {
+                window.scrollTo(0, restoreY);
+                const href = this.libLastHref[r.tab];
+                const link = href ? d.libHome.querySelector(`a.lib-row[href="${href.replace(/"/g, '\\"')}"]`) : null;
+                if (link) { try { link.focus({ preventScroll: true }); } catch (e) {} }
+                else this.libFocus(d.libraryTitle);
+            } else if (prevView === null) {
+                this.libFocus(d.libraryTitle);
+            }
+            return;
+        }
+
+        let html = '';
+        let found = true;
+        if (r.view === 'detail') {
+            if (r.kind === 'tani') {
+                const item = this.diagnoses.find(x => x.id === r.id);
+                html = item ? this.renderDiagnosisDetail(item) : '';
+                found = !!item;
+            } else if (r.kind === 'terapi') {
+                const item = this.therapies.find(x => x.id === r.id);
+                html = item ? this.renderTreatmentDetail('terapi', item) : '';
+                found = !!item;
+            } else {
+                const item = this.pharmacology.find(x => x.id === r.id);
+                html = item ? this.renderTreatmentDetail('ilac', item) : '';
+                found = !!item;
+            }
+        } else {
+            found = false;
+        }
+        if (!found) html = this.renderLibraryNotFound(r.kind);
+
+        d.libHome.hidden = true;
+        d.libDetail.innerHTML = html;
+        d.libDetail.hidden = false;
+        this.libView = 'detail';
+        this.libViewKey = key;
+        window.scrollTo(0, 0);
+        this.libFocus(document.getElementById('libDetailTitle'));
+        try {
+            const t = d.libDetail.querySelector('#libDetailTitle');
+            document.title = `${t ? t.textContent : 'Kütüphane'} | PsikoVaka`;
+        } catch (e) {}
+    }
+
+    libFocus(el) {
+        if (!el) return;
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        try { el.focus({ preventScroll: true }); } catch (e) {}
+    }
+
+    libBackLink(kind) {
+        const map = {
+            tani: ['#/kutuphane', 'Tanılar'],
+            terapi: ['#/kutuphane/terapiler', 'Terapiler'],
+            ilac: ['#/kutuphane/ilaclar', 'İlaçlar']
+        };
+        const [href, label] = map[kind] || map.tani;
+        return `<a class="lib-back" href="${href}">${this.icon('arrow-left')}<span>${label}</span></a>`;
+    }
+
+    renderLibraryNotFound(kind) {
+        return `${this.libBackLink(kind || 'tani')}
+            <div class="lib-notfound card">
+                <span class="card-icon">${this.icon('search')}</span>
+                <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">Bulunamadı</h1>
+                <p class="lib-notfound-text">Bu sayfa kütüphanede yok. Bağlantı eski olabilir ya da kayıt adı değişmiş olabilir.</p>
+                <a class="btn btn-secondary" href="#/kutuphane">Kütüphaneye dön</a>
+            </div>`;
+    }
+
+    libCaseNotice() {
+        if (!(this.currentCase && !this.isGameOver)) return '';
+        const hidden = this.libHideTreatmentLinks();
+        return `<div class="notice lib-case-notice" role="note">
+                ${this.icon('info')}
+                <span class="lib-case-notice-text">Devam eden bir vakan var.${hidden ? ' Tanı ile tedavi arasındaki eşleşmeler vaka bitene kadar gizli.' : ''}</span>
+                <button class="btn btn-secondary btn-sm" type="button" data-lib-action="resume">Vakaya dön</button>
+            </div>`;
+    }
+
+    libDisclaimer(kind) {
+        const extra = kind === 'tani'
+            ? 'Tanı koymak için DSM-5-TR el kitabına başvurun.'
+            : 'Tedavi kararları için güncel klinik kılavuzlara başvurun.';
+        return `<p class="lib-disclaimer">${this.icon('info')}<span>Bu özetler ${kind === 'tani' ? 'DSM-5-TR metni değildir; ' : ''}projenin kendi cümleleriyle yazılmış çalışma notlarıdır ve hata içerebilir. ${extra}</span></p>`;
+    }
+
+    /** a etiketli bağlantı listesi; çoksa ilk `limit` tanesi görünür, gerisi "daha fazla" içinde. */
+    libLinkList(items, limit = 12) {
+        const esc = (s) => this.libEsc(s);
+        const li = (x) => `<li><a class="lib-link" href="${x.href}"><span class="lib-link-title">${esc(x.title)}</span>${x.sub ? `<span class="lib-link-sub">${esc(x.sub)}</span>` : ''}${this.icon('chevron-right', 'lib-link-chevron')}</a></li>`;
+        const head = items.slice(0, limit).map(li).join('');
+        const rest = items.slice(limit);
+        let html = `<ul class="lib-links">${head}</ul>`;
+        if (rest.length) {
+            html += `<details class="lib-more"><summary class="lib-more-summary">${rest.length} kayıt daha</summary><ul class="lib-links">${rest.map(li).join('')}</ul></details>`;
+        }
+        return html;
+    }
+
+    /** Tanıya bağlı terapi ve ilaçlar (yalnızca var olan eşleşmeler: goldForDiagnoses, vakalar, ilaç haritası). */
+    libTreatmentsForDiagnosis(diagId) {
+        const casesFor = this.allMasterCases.filter(c => c.diagnosisId === diagId);
+        const therapyIds = [];
+        const pushU = (arr, v) => { if (v && !arr.includes(v)) arr.push(v); };
+        this.therapies.forEach(t => { if ((t.goldForDiagnoses || []).includes(diagId)) pushU(therapyIds, t.id); });
+        casesFor.forEach(c => pushU(therapyIds, c.therapyId));
+        const pharmaIds = [];
+        const map = (typeof DIAGNOSIS_TO_PHARMACOLOGY_MAP !== 'undefined') ? DIAGNOSIS_TO_PHARMACOLOGY_MAP : {};
+        pushU(pharmaIds, map[diagId]);
+        this.pharmacology.forEach(p => { if ((p.goldForDiagnoses || []).includes(diagId)) pushU(pharmaIds, p.id); });
+        casesFor.forEach(c => pushU(pharmaIds, c.pharmacologyId || this.getFallbackPharmacologyId(c)));
+        return {
+            therapies: therapyIds.map(id => this.therapies.find(t => t.id === id)).filter(Boolean),
+            pharma: pharmaIds.map(id => this.pharmacology.find(p => p.id === id)).filter(Boolean)
+        };
+    }
+
+    /** Terapiye/ilaca bağlı tanılar (aynı eşleşmelerin ters yönü). */
+    libDiagnosesForTreatment(kind, item) {
+        const ids = [];
+        const pushU = (v) => { if (v && !ids.includes(v)) ids.push(v); };
+        (item.goldForDiagnoses || []).forEach(pushU);
+        if (kind === 'terapi') {
+            this.allMasterCases.forEach(c => { if (c.therapyId === item.id) pushU(c.diagnosisId); });
+        } else {
+            const map = (typeof DIAGNOSIS_TO_PHARMACOLOGY_MAP !== 'undefined') ? DIAGNOSIS_TO_PHARMACOLOGY_MAP : {};
+            Object.keys(map).forEach(k => { if (map[k] === item.id) pushU(k); });
+            this.allMasterCases.forEach(c => { if ((c.pharmacologyId || this.getFallbackPharmacologyId(c)) === item.id) pushU(c.diagnosisId); });
+        }
+        // Yalnızca güncel listede olan tanılar; liste sırasıyla
+        const set = new Set(ids);
+        return this.diagnoses.filter(dg => set.has(dg.id));
+    }
+
+    renderDiagnosisDetail(item) {
+        const esc = (s) => this.libEsc(s);
+        const cat = this.categories[item.category] || { name: item.category };
+        const manual = (typeof DSM5_MANUAL !== 'undefined') ? DSM5_MANUAL[item.id] : null;
+        const codes = this.libCodesOf(item);
+        const others = this.libOtherNamesOf(item);
+        const desktop = this.libIsDesktop();
+
+        // Başlık
+        let html = this.libBackLink('tani');
+        html += this.libCaseNotice();
+        html += `<header class="lib-detail-head">
+            <div class="lib-detail-chips"><span class="chip">${esc(cat.name)}</span></div>
+            <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
+            <p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>`;
+        if (codes.length || others.length) {
+            html += `<dl class="lib-meta">`;
+            if (codes.length) html += `<div class="lib-meta-row"><dt>Kod</dt><dd class="lib-meta-codes">${codes.map(c => `<span class="lib-code">${esc(c)}</span>`).join('')}</dd></div>`;
+            if (others.length) {
+                const head = others.slice(0, 6).map(esc).join(' · ');
+                const rest = others.slice(6);
+                html += `<div class="lib-meta-row"><dt>Diğer adları</dt><dd>${head}${rest.length ? `<details class="lib-more lib-more-inline"><summary class="lib-more-summary">${rest.length} ad daha</summary><p class="lib-more-text">${rest.map(esc).join(' · ')}</p></details>` : ''}</dd></div>`;
+            }
+            html += `</dl>`;
+        }
+        html += `</header>`;
+
+        // Bölümler
+        const toc = [];
+        let body = '';
+
+        // 1. Tanı kriterleri
+        const crit = manual && Array.isArray(manual.criteriaList) ? manual.criteriaList : [];
+        toc.push(['lib-sec-criteria', 'Tanı kriterleri']);
+        body += `<section class="lib-sec" id="lib-sec-criteria" aria-labelledby="lib-h-criteria">
+            <h2 class="lib-sec-title" id="lib-h-criteria">Tanı kriterleri</h2>`;
+        if (crit.length) {
+            body += `<ol class="lib-crit-list">`;
+            crit.forEach(c => {
+                const items = Array.isArray(c.items) ? c.items : [];
+                body += `<li class="lib-crit">
+                    <div class="lib-crit-head"><span class="lib-crit-code">${esc(c.code)}</span><h3 class="lib-crit-title">${esc(c.title)}</h3></div>
+                    ${c.content ? `<p class="lib-crit-text">${esc(c.content)}</p>` : ''}
+                    ${items.length ? `<ul class="lib-crit-items">${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+                </li>`;
+            });
+            body += `</ol>`;
+        } else {
+            body += `<p class="lib-prose-text">Bu tanı için kriter özeti henüz yok.</p>`;
+        }
+        body += `</section>`;
+
+        // 2-5. Klinik özet
+        const cd = (manual && manual.clinicalDescription) || {};
+        [['overview', 'Genel bakış'], ['epidemiology', 'Epidemiyoloji'], ['etiology', 'Etiyoloji'], ['prognosis', 'Seyir ve prognoz']].forEach(([k, label]) => {
+            if (!cd[k]) return;
+            toc.push([`lib-sec-${k}`, label]);
+            body += `<details class="lib-sec lib-collapse" id="lib-sec-${k}"${desktop ? ' open' : ''}>
+                <summary class="lib-collapse-head"><h2 class="lib-sec-title">${label}</h2></summary>
+                <div class="lib-prose"><p>${esc(cd[k])}</p></div>
+            </details>`;
+        });
+
+        // 6. Ayırıcı tanı: aynı DSM-5-TR bölümündeki tanılar
+        const siblings = this.diagnoses.filter(x => x.category === item.category && x.id !== item.id);
+        if (siblings.length) {
+            toc.push(['lib-sec-diff', 'Ayırıcı tanı']);
+            body += `<section class="lib-sec" id="lib-sec-diff" aria-labelledby="lib-h-diff">
+                <h2 class="lib-sec-title" id="lib-h-diff">Ayırıcı tanı</h2>
+                <p class="lib-sec-note">Aynı DSM-5-TR bölümündeki (${esc(cat.name)}) diğer tanılar. Liste otomatik oluşturulur; klinik bir ayırıcı tanı listesi değildir.</p>
+                ${this.libLinkList(siblings.map(x => ({ href: this.libHref('tani', x.id), title: x.nameTr, sub: x.nameEn })), 10)}
+            </section>`;
+        }
+
+        // 7. Tedavi
+        const tx = this.libTreatmentsForDiagnosis(item.id);
+        if (tx.therapies.length || tx.pharma.length) {
+            toc.push(['lib-sec-tx', 'Tedavi']);
+            body += `<section class="lib-sec" id="lib-sec-tx" aria-labelledby="lib-h-tx">
+                <h2 class="lib-sec-title" id="lib-h-tx">Tedavi</h2>`;
+            if (this.libHideTreatmentLinks()) {
+                body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu tanıyla eşleşen terapi ve ilaçlar görünür.</p>`;
+            } else {
+                body += `<p class="lib-sec-note">Oyunda bu tanıyla eşleştirilen protokoller.</p>`;
+                if (tx.therapies.length) {
+                    body += `<h3 class="lib-sub-title">Psikoterapi</h3>` + this.libLinkList(tx.therapies.map(t => ({
+                        href: this.libHref('terapi', t.id), title: t.nameTr, sub: (this.therapyFamilies[t.family] || {}).name || ''
+                    })));
+                }
+                if (tx.pharma.length) {
+                    body += `<h3 class="lib-sub-title">Farmakoterapi ve biyolojik tedavi</h3>` + this.libLinkList(tx.pharma.map(p => ({
+                        href: this.libHref('ilac', p.id), title: p.nameTr, sub: (this.pharmacologyFamilies[p.family] || {}).name || ''
+                    })));
+                }
+            }
+            body += `</section>`;
+        }
+
+        // 8. Bu alandan pratik yap (kategoriye göre; tanının kendisi değil)
+        const n = this.cases.filter(c => c.category === item.category).length;
+        if (n > 0) {
+            body += `<section class="lib-practice card" aria-labelledby="lib-h-practice">
+                <div class="lib-practice-text">
+                    <h2 class="lib-sec-title" id="lib-h-practice">Bu alandan pratik yap</h2>
+                    <p class="lib-sec-note">${esc(cat.name)} bölümünden rastgele bir vaka, ${n} vaka arasından. Cevap belli olmasın diye tanı değil bölüm seçilir.</p>
+                </div>
+                <button class="btn btn-primary" type="button" data-lib-action="practice" data-cat="${esc(item.category)}">${this.icon('play')} Pratik yap</button>
+            </section>`;
+        }
+
+        body += this.libDisclaimer('tani');
+
+        html += `<div class="lib-detail-layout">
+            <nav class="lib-toc" aria-label="Bu sayfada">
+                <p class="lib-toc-title">Bu sayfada</p>
+                <ol class="lib-toc-list">${toc.map(([id, label]) => `<li><button class="lib-toc-link" type="button" data-lib-jump="${id}">${label}</button></li>`).join('')}</ol>
+            </nav>
+            <div class="lib-detail-body">${body}</div>
+        </div>`;
+        return html;
+    }
+
+    renderTreatmentDetail(kind, item) {
+        const esc = (s) => this.libEsc(s);
+        const fams = kind === 'terapi' ? this.therapyFamilies : this.pharmacologyFamilies;
+        const list = kind === 'terapi' ? this.therapies : this.pharmacology;
+        const fam = fams[item.family] || { name: item.family || '' };
+        const others = this.libOtherNamesOf(item);
+        const strip = (s) => String(s || '').replace(/^\s*\d+[.)]\s*/, '');
+
+        let html = this.libBackLink(kind);
+        html += this.libCaseNotice();
+        html += `<header class="lib-detail-head">
+            <div class="lib-detail-chips"><span class="chip">${esc(fam.name)}</span></div>
+            <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
+            ${item.nameEn ? `<p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>` : ''}
+            ${others.length ? `<dl class="lib-meta"><div class="lib-meta-row"><dt>Diğer adları</dt><dd>${others.map(esc).join(' · ')}</dd></div></dl>` : ''}
+        </header>`;
+
+        let body = '';
+        const sec = (id, title, inner) => `<section class="lib-sec" id="${id}" aria-labelledby="${id}-h"><h2 class="lib-sec-title" id="${id}-h">${title}</h2>${inner}</section>`;
+        if (item.shortDefinition) body += sec('lib-sec-def', 'Tanım', `<div class="lib-prose"><p>${esc(item.shortDefinition)}</p></div>`);
+        if (kind === 'ilac' && item.mechanism) body += sec('lib-sec-mech', 'Etki mekanizması', `<div class="lib-prose"><p>${esc(item.mechanism)}</p></div>`);
+        if (item.targetMechanism) body += sec('lib-sec-target', kind === 'terapi' ? 'Değişim mekanizması' : 'Hedef', `<div class="lib-prose"><p>${esc(item.targetMechanism)}</p></div>`);
+        if (Array.isArray(item.protocolSteps) && item.protocolSteps.length) {
+            body += sec('lib-sec-steps', kind === 'terapi' ? 'Protokol adımları' : 'Uygulama ve endikasyon',
+                `<ol class="lib-steps">${item.protocolSteps.map(s => `<li>${esc(strip(s))}</li>`).join('')}</ol>`);
+        }
+        if (item.pitfalls) {
+            body += `<aside class="lib-callout" aria-labelledby="lib-h-pit">
+                <h2 class="lib-callout-title" id="lib-h-pit">${this.icon('alert')}${kind === 'terapi' ? 'Klinik tuzak' : 'Kontrendikasyon ve yan etki'}</h2>
+                <p>${esc(item.pitfalls)}</p>
+            </aside>`;
+        }
+
+        const diags = this.libDiagnosesForTreatment(kind, item);
+        if (diags.length) {
+            body += `<section class="lib-sec" id="lib-sec-used" aria-labelledby="lib-h-used"><h2 class="lib-sec-title" id="lib-h-used">Kullanıldığı tanılar</h2>`;
+            if (this.libHideTreatmentLinks()) {
+                body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu protokolle eşleşen tanılar görünür.</p>`;
+            } else {
+                body += `<p class="lib-sec-note">Oyunda bu protokolle eşleştirilen tanılar (${diags.length}).</p>` +
+                    this.libLinkList(diags.map(x => ({ href: this.libHref('tani', x.id), title: x.nameTr, sub: (this.categories[x.category] || {}).name || '' })));
+            }
+            body += `</section>`;
+        }
+
+        const siblings = list.filter(x => x.family === item.family && x.id !== item.id);
+        if (siblings.length) {
+            body += sec('lib-sec-family', kind === 'terapi' ? 'Aynı ekolden' : 'Aynı gruptan',
+                this.libLinkList(siblings.map(x => ({ href: this.libHref(kind, x.id), title: x.nameTr, sub: x.nameEn || '' })), 8));
+        }
+
+        body += this.libDisclaimer(kind);
+        html += `<div class="lib-detail-layout lib-detail-layout-single"><div class="lib-detail-body">${body}</div></div>`;
+        return html;
+    }
+
+    /** Tanı sayfasındaki "Bu alandan pratik yap": kategori filtresiyle pratik başlatır. */
+    startPracticeFromCategory(cat) {
+        if (!cat || !this.categories[cat]) return;
+        this.activeCategoryFilter = cat;
+        this.activeCourseFilter = 'ALL';
+        if (this.dom.filterBar) this.renderCategoryFilters();
+        if (this.dom.courseNav) this.renderCourseFilters();
+        this.updatePracticeSummary();
+        this.setMode('practice');
+    }
+
+    /** Vaka sonu: doğru cevabın kütüphane sayfalarına bağlantılar (oyun sürerken çağrılmaz). */
+    libResultLinksHTML() {
+        if (!this.currentCase) return '';
+        const mode = this.caseTargetMode || this.targetGameMode;
+        const diag = this.diagnoses.find(x => x.id === this.currentCase.diagnosisId);
+        const therapy = this.therapies.find(x => x.id === (this.currentCase.therapyId || 'cbt_general'));
+        const pharma = this.pharmacology.find(x => x.id === (this.currentCase.pharmacologyId || this.getFallbackPharmacologyId(this.currentCase)));
+        const links = [];
+        if (diag) links.push([this.libHref('tani', diag.id), 'Tanı sayfasını aç', 'book']);
+        if (therapy && (mode === 'therapy' || mode === 'combo')) links.push([this.libHref('terapi', therapy.id), 'Terapi sayfasını aç', 'shield']);
+        if (pharma && (mode === 'pharmacology' || mode === 'combo')) links.push([this.libHref('ilac', pharma.id), 'İlaç sayfasını aç', 'pill']);
+        return links.map(([href, label, ic]) => `<a class="btn btn-ghost btn-sm lib-result-link" href="${href}">${this.icon(ic)}${label}</a>`).join('');
+    }
+
+    renderResultLibraryLinks() {
+        const html = this.libResultLinksHTML();
+        [this.dom.playResultLinks, this.dom.resultLibraryLinks].forEach(el => {
+            if (!el) return;
+            el.innerHTML = html;
+            el.hidden = !html;
+        });
     }
 
     // --- Statistics ---
@@ -3987,8 +4118,8 @@ window.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', savedTheme);
     applyThemeChrome(savedTheme);
 
-    if (typeof attachOnlineArenaToGame === 'function') {
-        attachOnlineArenaToGame(PsikoVakaGame);
+    if (typeof attachAvatarStudioToGame === 'function') {
+        attachAvatarStudioToGame(PsikoVakaGame);
     }
     window.game = new PsikoVakaGame();
 });

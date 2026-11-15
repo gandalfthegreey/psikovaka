@@ -794,6 +794,8 @@
         refreshProfile,
         importLocalProgressOnce,
         getLeaderboard,
+        /** Online katman (js/online/) için: hazır supabase istemcisi ya da null. */
+        getClient: () => (st.client && st.availability === 'ready' ? st.client : null),
         describeError,
         validateUsername,
         validateEmail,
