@@ -1,0 +1,8 @@
+_arsiv/
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+supabase/tests/.test-credentials.json

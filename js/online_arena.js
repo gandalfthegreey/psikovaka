@@ -1,69 +1,11 @@
 /**
  * PsikoVaka 3.0 - İnteraktif Online Arena, Turnuva, Free-For-All,
- * Komik Karakter Avatar Stüdyosu, Arkadaş Sistemi ve Top 10 Ranked Motoru
+ * Nöro Avatar Stüdyosu (js/avatar.js), Arkadaş Sistemi ve Top 10 Ranked Motoru
  */
 
-const FUNNY_AVATAR_PARTS = {
-    bgColors: [
-        { id: 'bg_indigo', name: 'Gece Nöbeti Moru', grad: 'linear-gradient(135deg, #4f46e5, #7c3aed)' },
-        { id: 'bg_emerald', name: 'Acil Servis Yeşili', grad: 'linear-gradient(135deg, #059669, #10b981)' },
-        { id: 'bg_rose', name: 'Adrenalin Pembesi', grad: 'linear-gradient(135deg, #e11d48, #fb7185)' },
-        { id: 'bg_amber', name: 'Kafein Altını', grad: 'linear-gradient(135deg, #d97706, #fbbf24)' },
-        { id: 'bg_cyan', name: 'Buzul Sakinliği', grad: 'linear-gradient(135deg, #0284c7, #38bdf8)' },
-        { id: 'bg_ cosmic', name: 'Freud Rüyası', grad: 'linear-gradient(135deg, #9333ea, #ec4899)' }
-    ],
-    skinTones: [
-        { id: 'skin_warm', name: 'Klasik Ten', fill: '#fcd34d', cheek: '#fb7185' },
-        { id: 'skin_light', name: 'Nöbet Solgunu', fill: '#fde68a', cheek: '#f43f5e' },
-        { id: 'skin_tan', name: 'Kongre Bronzu', fill: '#d97706', cheek: '#ef4444' },
-        { id: 'skin_alien', name: 'Uzaylı Yeşili', fill: '#4ade80', cheek: '#10b981' },
-        { id: 'skin_zombie', name: '72 Saat Uykusuz Mor', fill: '#c4b5fd', cheek: '#8b5cf6' },
-        { id: 'skin_robot', name: 'Sibernetik Mavi', fill: '#7dd3fc', cheek: '#0284c7' }
-    ],
-    hats: [
-        { id: 'hat_einstein', name: '⚡ Çılgın Profesör Saçı' },
-        { id: 'hat_brain', name: '🧠 Açıkta Zonklayan Beyin' },
-        { id: 'hat_funnel', name: '🎩 Parlak Huni Şapka' },
-        { id: 'hat_freud', name: '🕵️ Freud Fötr Şapkası' },
-        { id: 'hat_coffee', name: '☕ Çift Kafein Serumu Kaskı' },
-        { id: 'hat_clown', name: '🤡 Gökkuşağı Peruk' },
-        { id: 'hat_crown', name: '👑 Altın Başhekim Tacı' },
-        { id: 'hat_scrub', name: '🩺 Cerrahi Bone & Ayna' }
-    ],
-    eyes: [
-        { id: 'eye_hypno', name: '😵‍💫 Hipnoz Sarmal Gözler' },
-        { id: 'eye_ sleepless', name: '👀 72 Saat Nöbet Gözleri' },
-        { id: 'eye_monocle', name: '🧐 Dev Büyüteç Monokl' },
-        { id: 'eye_cool', name: '😎 Havalı Güneş Gözlüğü' },
-        { id: 'eye_nerd', name: '🤓 Şişe Dibi Gözlük' },
-        { id: 'eye_wink', name: '😜 Çapkın Göz Kırpma' }
-    ],
-    mouths: [
-        { id: 'mouth_freud', name: '🧔 Freud Sakalı & Pipo' },
-        { id: 'mouth_tongue', name: '🤪 Dili Dışarıda Çılgın' },
-        { id: 'mouth_mustache', name: '🥸 Burulmuş Dali Bıyığı' },
-        { id: 'mouth_coffee_jitters', name: '😬 Kafein Titremesi Dişler' },
-        { id: 'mouth_thermometer', name: '🌡️ Ağzında Derece' },
-        { id: 'mouth_laugh', name: '😂 Kahkaha Atan Ağız' }
-    ],
-    props: [
-        { id: 'prop_steth', name: '🩺 Altın Stetoskop' },
-        { id: 'prop_coffee', name: '☕ Dev "Acil Espresso" Kupası' },
-        { id: 'prop_dsm', name: '📕 10 Kiloluk DSM-5-TR' },
-        { id: 'prop_bowtie', name: '🎀 Doktor Papyonu' },
-        { id: 'prop_hypno', name: '🕰️ Sallanan Hipnoz Saati' }
-    ]
-};
+// Avatarlar: js/avatar.js (window.PsikoVakaAvatar, "Nöro" ailesi). Ligler: js/leagues.js (window.PsikoVakaLeagues).
 
-const RANKED_TIERS = [
-    { min: 0, max: 199, name: 'Stajyer Klinisyen', icon: '🥉', color: '#94a3b8' },
-    { min: 200, max: 449, name: 'Asistan Doktor', icon: '🥈', color: '#38bdf8' },
-    { min: 450, max: 799, name: 'Uzman Psikiyatrist', icon: '🥇', color: '#34d399' },
-    { min: 800, max: 1199, name: 'Doçent Doktor', icon: '💎', color: '#a855f7' },
-    { min: 1200, max: 1699, name: 'Profesör / Klinik Şefi', icon: '👑', color: '#fbbf24' },
-    { min: 1700, max: 999999, name: 'Freud Efsanesi (Grandmaster)', icon: '🔥', color: '#f43f5e' }
-];
-
+// Bot avatarları kimliklerinden tohumlanmış Nöro yapılandırmalarıdır (her yüklemede aynı).
 const FUNNY_BOT_PROFILES = [
     {
         id: 'bot_sigmund',
@@ -71,7 +13,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 1320,
         wins: 48,
         avgGuesses: 2.1,
-        avatar: { bg: 'bg_ cosmic', skin: 'skin_warm', hat: 'hat_freud', eye: 'eye_monocle', mouth: 'mouth_freud', prop: 'prop_hypno' }
+        avatar: null
     },
     {
         id: 'bot_kafein',
@@ -79,7 +21,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 1090,
         wins: 39,
         avgGuesses: 2.4,
-        avatar: { bg: 'bg_amber', skin: 'skin_light', hat: 'hat_coffee', eye: 'eye_ sleepless', mouth: 'mouth_coffee_jitters', prop: 'prop_coffee' }
+        avatar: null
     },
     {
         id: 'bot_huni',
@@ -87,7 +29,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 940,
         wins: 31,
         avgGuesses: 2.6,
-        avatar: { bg: 'bg_indigo', skin: 'skin_alien', hat: 'hat_funnel', eye: 'eye_hypno', mouth: 'mouth_tongue', prop: 'prop_dsm' }
+        avatar: null
     },
     {
         id: 'bot_nobetci',
@@ -95,7 +37,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 760,
         wins: 27,
         avgGuesses: 2.8,
-        avatar: { bg: 'bg_rose', skin: 'skin_zombie', hat: 'hat_einstein', eye: 'eye_ sleepless', mouth: 'mouth_thermometer', prop: 'prop_coffee' }
+        avatar: null
     },
     {
         id: 'bot_nöron',
@@ -103,7 +45,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 1480,
         wins: 54,
         avgGuesses: 1.9,
-        avatar: { bg: 'bg_emerald', skin: 'skin_robot', hat: 'hat_brain', eye: 'eye_cool', mouth: 'mouth_mustache', prop: 'prop_steth' }
+        avatar: null
     },
     {
         id: 'bot_dsm',
@@ -111,7 +53,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 620,
         wins: 21,
         avgGuesses: 3.1,
-        avatar: { bg: 'bg_cyan', skin: 'skin_tan', hat: 'hat_scrub', eye: 'eye_nerd', mouth: 'mouth_laugh', prop: 'prop_dsm' }
+        avatar: null
     },
     {
         id: 'bot_bashekim',
@@ -119,7 +61,7 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 1750,
         wins: 67,
         avgGuesses: 1.7,
-        avatar: { bg: 'bg_amber', skin: 'skin_warm', hat: 'hat_crown', eye: 'eye_cool', mouth: 'mouth_mustache', prop: 'prop_bowtie' }
+        avatar: null
     },
     {
         id: 'bot_palyaco',
@@ -127,101 +69,22 @@ const FUNNY_BOT_PROFILES = [
         rankedPoints: 340,
         wins: 12,
         avgGuesses: 3.5,
-        avatar: { bg: 'bg_rose', skin: 'skin_light', hat: 'hat_clown', eye: 'eye_wink', mouth: 'mouth_tongue', prop: 'prop_steth' }
+        avatar: null
     }
 ];
+FUNNY_BOT_PROFILES.forEach(b => {
+    b.avatar = (typeof PsikoVakaAvatar !== 'undefined') ? PsikoVakaAvatar.randomConfig(b.id) : {};
+});
 
-function renderFunnyAvatarSVG(avatarCfg = {}, size = 56) {
-    const bgObj = FUNNY_AVATAR_PARTS.bgColors.find(x => x.id === avatarCfg.bg) || FUNNY_AVATAR_PARTS.bgColors[0];
-    const skinObj = FUNNY_AVATAR_PARTS.skinTones.find(x => x.id === avatarCfg.skin) || FUNNY_AVATAR_PARTS.skinTones[0];
-    const hat = avatarCfg.hat || 'hat_einstein';
-    const eye = avatarCfg.eye || 'eye_hypno';
-    const mouth = avatarCfg.mouth || 'mouth_tongue';
-    const prop = avatarCfg.prop || 'prop_steth';
-
-    let hatSVG = '';
-    if (hat === 'hat_einstein') {
-        hatSVG = `<path d="M12 36 Q4 18 22 22 Q28 6 44 18 Q56 4 70 18 Q88 6 92 24 Q108 20 98 38 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>`;
-    } else if (hat === 'hat_brain') {
-        hatSVG = `<g><ellipse cx="55" cy="22" rx="28" ry="15" fill="#fb7185" stroke="#be123c" stroke-width="2.5"/><path d="M35 22 Q45 12 55 22 Q65 12 75 22 M42 15 Q55 28 68 15" fill="none" stroke="#881337" stroke-width="2.5" stroke-linecap="round"/></g>`;
-    } else if (hat === 'hat_funnel') {
-        hatSVG = `<g><polygon points="28,28 55,2 82,28" fill="#cbd5e1" stroke="#475569" stroke-width="2.5"/><rect x="51" y="-4" width="8" height="10" fill="#94a3b8" stroke="#475569" stroke-width="2"/></g>`;
-    } else if (hat === 'hat_freud') {
-        hatSVG = `<g><ellipse cx="55" cy="27" rx="38" ry="7" fill="#451a03"/><path d="M30 27 Q35 6 55 9 Q75 6 80 27 Z" fill="#78350f" stroke="#451a03" stroke-width="2"/><rect x="31" y="21" width="48" height="4" fill="#d97706"/></g>`;
-    } else if (hat === 'hat_coffee') {
-        hatSVG = `<g><path d="M26 30 A29 22 0 0 1 84 30 Z" fill="#ef4444" stroke="#991b1b" stroke-width="2"/><rect x="12" y="14" width="12" height="18" rx="3" fill="#78350f" stroke="#fde68a" stroke-width="1.5"/><rect x="86" y="14" width="12" height="18" rx="3" fill="#78350f" stroke="#fde68a" stroke-width="1.5"/></g>`;
-    } else if (hat === 'hat_clown') {
-        hatSVG = `<g><circle cx="26" cy="26" r="14" fill="#ef4444"/><circle cx="44" cy="16" r="15" fill="#eab308"/><circle cx="66" cy="16" r="15" fill="#3b82f6"/><circle cx="84" cy="26" r="14" fill="#a855f7"/></g>`;
-    } else if (hat === 'hat_crown') {
-        hatSVG = `<polygon points="26,28 32,8 46,20 55,4 64,20 78,8 84,28" fill="#fbbf24" stroke="#b45309" stroke-width="2.5"/><circle cx="55" cy="12" r="3.5" fill="#ef4444"/>`;
-    } else if (hat === 'hat_scrub') {
-        hatSVG = `<g><path d="M25 30 Q55 8 85 30 Z" fill="#14b8a6" stroke="#0f766e" stroke-width="2"/><circle cx="55" cy="22" r="8" fill="#e2e8f0" stroke="#475569" stroke-width="2"/><circle cx="55" cy="22" r="3" fill="#38bdf8"/></g>`;
-    }
-
-    let eyeSVG = '';
-    if (eye === 'eye_hypno') {
-        eyeSVG = `<g><circle cx="41" cy="48" r="10" fill="#fff" stroke="#1e293b" stroke-width="2"/><circle cx="41" cy="48" r="5" fill="none" stroke="#e11d48" stroke-width="2" stroke-dasharray="4 2"/><circle cx="41" cy="48" r="2" fill="#1e293b"/><circle cx="69" cy="48" r="10" fill="#fff" stroke="#1e293b" stroke-width="2"/><circle cx="69" cy="48" r="5" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 2"/><circle cx="69" cy="48" r="2" fill="#1e293b"/></g>`;
-    } else if (eye === 'eye_ sleepless') {
-        eyeSVG = `<g><ellipse cx="41" cy="51" rx="11" ry="6" fill="#7e22ce" opacity="0.45"/><ellipse cx="69" cy="51" rx="11" ry="6" fill="#7e22ce" opacity="0.45"/><circle cx="41" cy="47" r="10" fill="#fff" stroke="#dc2626" stroke-width="2"/><circle cx="41" cy="47" r="3" fill="#0f172a"/><circle cx="69" cy="47" r="10" fill="#fff" stroke="#dc2626" stroke-width="2"/><circle cx="69" cy="47" r="3" fill="#0f172a"/></g>`;
-    } else if (eye === 'eye_monocle') {
-        eyeSVG = `<g><circle cx="41" cy="48" r="6" fill="#fff" stroke="#1e293b" stroke-width="2"/><circle cx="41" cy="48" r="2.5" fill="#0f172a"/><circle cx="69" cy="47" r="12" fill="#e0f2fe" stroke="#eab308" stroke-width="3"/><circle cx="69" cy="47" r="4" fill="#0f172a"/><line x1="81" y1="49" x2="86" y2="75" stroke="#eab308" stroke-width="2"/></g>`;
-    } else if (eye === 'eye_cool') {
-        eyeSVG = `<g><rect x="26" y="40" width="25" height="14" rx="4" fill="#0f172a" stroke="#f8fafc" stroke-width="2"/><rect x="59" y="40" width="25" height="14" rx="4" fill="#0f172a" stroke="#f8fafc" stroke-width="2"/><line x1="51" y1="45" x2="59" y2="45" stroke="#f8fafc" stroke-width="2.5"/><line x1="30" y1="43" x2="40" y2="51" stroke="#38bdf8" stroke-width="2"/></g>`;
-    } else if (eye === 'eye_nerd') {
-        eyeSVG = `<g><rect x="27" y="38" width="24" height="18" rx="4" fill="#ffffff" fill-opacity="0.8" stroke="#1e293b" stroke-width="3"/><rect x="59" y="38" width="24" height="18" rx="4" fill="#ffffff" fill-opacity="0.8" stroke="#1e293b" stroke-width="3"/><line x1="51" y1="46" x2="59" y2="46" stroke="#f8fafc" stroke-width="4"/><circle cx="39" cy="47" r="3.5" fill="#0f172a"/><circle cx="71" cy="47" r="3.5" fill="#0f172a"/></g>`;
-    } else {
-        eyeSVG = `<g><path d="M33 48 Q41 40 49 48" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><circle cx="69" cy="47" r="8" fill="#fff" stroke="#0f172a" stroke-width="2"/><circle cx="69" cy="47" r="3.5" fill="#0f172a"/></g>`;
-    }
-
-    let mouthSVG = '';
-    if (mouth === 'mouth_freud') {
-        mouthSVG = `<g><path d="M32 64 Q55 95 78 64 Q66 60 55 64 Q44 60 32 64 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><line x1="60" y1="68" x2="88" y2="75" stroke="#78350f" stroke-width="4" stroke-linecap="round"/><rect x="85" y="68" width="8" height="10" rx="2" fill="#451a03"/></g>`;
-    } else if (mouth === 'mouth_tongue') {
-        mouthSVG = `<g><path d="M38 64 Q55 78 72 64 Z" fill="#881337" stroke="#0f172a" stroke-width="2"/><path d="M48 68 Q55 86 64 68 Z" fill="#fb7185" stroke="#be123c" stroke-width="1.5"/></g>`;
-    } else if (mouth === 'mouth_mustache') {
-        mouthSVG = `<g><path d="M55 64 Q40 56 26 66 Q18 60 24 54 M55 64 Q70 56 84 66 Q92 60 86 54" fill="none" stroke="#1e293b" stroke-width="4.5" stroke-linecap="round"/></g>`;
-    } else if (mouth === 'mouth_coffee_jitters') {
-        mouthSVG = `<g><rect x="36" y="62" width="38" height="12" rx="5" fill="#fff" stroke="#0f172a" stroke-width="2"/><line x1="45" y1="62" x2="45" y2="74" stroke="#0f172a" stroke-width="2"/><line x1="55" y1="62" x2="55" y2="74" stroke="#0f172a" stroke-width="2"/><line x1="65" y1="62" x2="65" y2="74" stroke="#0f172a" stroke-width="2"/></g>`;
-    } else if (mouth === 'mouth_thermometer') {
-        mouthSVG = `<g><line x1="43" y1="67" x2="67" y2="67" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/><line x1="58" y1="67" x2="88" y2="56" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/><circle cx="88" cy="56" r="4" fill="#ef4444"/></g>`;
-    } else {
-        mouthSVG = `<g><path d="M36 62 Q55 84 74 62 Z" fill="#be123c" stroke="#0f172a" stroke-width="2"/><rect x="42" y="62" width="26" height="5" fill="#fff"/></g>`;
-    }
-
-    let propSVG = '';
-    if (prop === 'prop_steth') {
-        propSVG = `<g><path d="M35 82 Q35 102 55 102 Q75 102 75 82" fill="none" stroke="#fbbf24" stroke-width="3.5"/><circle cx="55" cy="100" r="6" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/></g>`;
-    } else if (prop === 'prop_coffee') {
-        propSVG = `<g><rect x="68" y="76" width="22" height="26" rx="4" fill="#f8fafc" stroke="#334155" stroke-width="2"/><rect x="70" y="83" width="18" height="8" fill="#10b981"/><text x="79" y="90" font-size="6" font-weight="bold" fill="#fff" text-anchor="middle">KAFEİN</text></g>`;
-    } else if (prop === 'prop_dsm') {
-        propSVG = `<g><rect x="18" y="76" width="26" height="28" rx="3" fill="#7c3aed" stroke="#ddd6fe" stroke-width="2"/><text x="31" y="92" font-size="6.5" font-weight="900" fill="#fff" text-anchor="middle">DSM-5</text></g>`;
-    } else if (prop === 'prop_bowtie') {
-        propSVG = `<g><polygon points="40,82 55,89 40,96" fill="#f43f5e"/><polygon points="70,82 55,89 70,96" fill="#f43f5e"/><circle cx="55" cy="89" r="4" fill="#be123c"/></g>`;
-    } else if (prop === 'prop_hypno') {
-        propSVG = `<g><line x1="84" y1="68" x2="84" y2="90" stroke="#fbbf24" stroke-width="2"/><circle cx="84" cy="94" r="9" fill="#fef08a" stroke="#d97706" stroke-width="2"/><circle cx="84" cy="94" r="4" fill="#d97706"/></g>`;
-    }
-
-    return `
-    <div class="funny-avatar-badge" style="width:${size}px; height:${size}px; border-radius:50%; background:${bgObj.grad}; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.35); border:2px solid rgba(255,255,255,0.35); overflow:hidden; flex-shrink:0;">
-        <svg viewBox="0 0 110 110" width="${size}" height="${size}">
-            <!-- Doctor Coat Shoulders -->
-            <path d="M20 110 Q25 78 55 78 Q85 78 90 110 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-            <!-- Head -->
-            <circle cx="55" cy="52" r="28" fill="${skinObj.fill}" stroke="#1e293b" stroke-width="2.5"/>
-            <!-- Rosy Cheeks -->
-            <circle cx="33" cy="58" r="5" fill="${skinObj.cheek}" opacity="0.45"/>
-            <circle cx="77" cy="58" r="5" fill="${skinObj.cheek}" opacity="0.45"/>
-            ${hatSVG}
-            ${eyeSVG}
-            ${mouthSVG}
-            ${propSVG}
-        </svg>
-    </div>`;
+/** Eski çağrı yerleri için ince sarmalayıcı: her yapılandırmayı (eski v1 dahil) Nöro'ya çevirip çizer. */
+function renderFunnyAvatarSVG(avatarCfg = {}, size = 56, opts = {}) {
+    if (typeof PsikoVakaAvatar === 'undefined') return '';
+    return PsikoVakaAvatar.render(PsikoVakaAvatar.normalize(avatarCfg), Object.assign({ size }, opts));
 }
 
+/** Tek lig tablosu js/leagues.js'te; eski arena da aynı işlevi kullanır. */
 function getRankedTierInfo(rp = 0) {
-    const cleanRp = Math.max(0, Number(rp) || 0);
-    return RANKED_TIERS.find(t => cleanRp >= t.min && cleanRp <= t.max) || RANKED_TIERS[0];
+    return PsikoVakaLeagues.tierFor(rp);
 }
 
 function calculateCasePoints(won, guessesCount, elapsedSeconds) {
@@ -271,23 +134,23 @@ function attachOnlineArenaToGame(GameClass) {
         this.connectGlobalPresenceChannel();
     };
 
+    // Yerel avatar her yüklemede Nöro v2'ye normalize edilir; eski (v1) kayıt bulunursa v2 olarak geri yazılır.
     proto.loadMyAvatar = function () {
+        let parsed = null;
         try {
             const raw = localStorage.getItem('psikovaka_funny_avatar');
-            if (raw) return JSON.parse(raw);
+            if (raw) parsed = JSON.parse(raw);
         } catch (e) {}
-        return {
-            bg: 'bg_indigo',
-            skin: 'skin_warm',
-            hat: 'hat_einstein',
-            eye: 'eye_hypno',
-            mouth: 'mouth_tongue',
-            prop: 'prop_steth'
-        };
+        const cfg = PsikoVakaAvatar.normalize(parsed);
+        if (!parsed || JSON.stringify(parsed) !== JSON.stringify(cfg)) {
+            try { localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(cfg)); } catch (e) {}
+        }
+        return cfg;
     };
 
     proto.saveMyAvatar = function () {
-        localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar));
+        this.myAvatar = PsikoVakaAvatar.normalize(this.myAvatar);
+        try { localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar)); } catch (e) {}
         this.renderHeaderProfilePill();
         this.broadcastMyPresence();
     };
@@ -312,7 +175,7 @@ function attachOnlineArenaToGame(GameClass) {
         if (deltaRp !== 0) {
             const sign = deltaRp > 0 ? `+${deltaRp}` : `${deltaRp}`;
             const tier = getRankedTierInfo(this.myRankedPoints);
-            this.showToast(`🏆 ${sign} RP (${reasonLabel}) • Yeni Puan: ${this.myRankedPoints} RP (${tier.icon} ${tier.name})`);
+            this.showToast(`${sign} RP (${reasonLabel}) · Yeni puan: ${this.myRankedPoints} RP (${tier.name})`);
         }
     };
 
@@ -329,8 +192,7 @@ function attachOnlineArenaToGame(GameClass) {
             nameMount.textContent = this.duelMyNickname || 'Klinisyen';
         }
         if (rpMount) {
-            rpMount.innerHTML = `${tier.icon} ${this.myRankedPoints} RP`;
-            rpMount.style.color = tier.color;
+            rpMount.textContent = `${this.myRankedPoints} RP`;
         }
     };
 
@@ -506,19 +368,8 @@ function attachOnlineArenaToGame(GameClass) {
         const btnRandomAvatar = document.getElementById('btnRandomizeFunnyAvatar');
         if (btnRandomAvatar) {
             btnRandomAvatar.addEventListener('click', () => {
-                const pick = arr => arr[Math.floor(Math.random() * arr.length)].id;
-                this.myAvatar = {
-                    bg: pick(FUNNY_AVATAR_PARTS.bgColors),
-                    skin: pick(FUNNY_AVATAR_PARTS.skinTones),
-                    hat: pick(FUNNY_AVATAR_PARTS.hats),
-                    eye: pick(FUNNY_AVATAR_PARTS.eyes),
-                    mouth: pick(FUNNY_AVATAR_PARTS.mouths),
-                    prop: pick(FUNNY_AVATAR_PARTS.props)
-                };
-                this.saveMyAvatar();
-                this.renderAvatarStudioTab();
+                this.setStudioAvatar(PsikoVakaAvatar.randomConfig(), true);
                 this.playTone('warm');
-                this.showToast("🎲 Rastgele komik klinisyen karakteriniz oluşturuldu!");
             });
         }
 
@@ -610,166 +461,257 @@ function attachOnlineArenaToGame(GameClass) {
         this.openModal(this.dom.duelCenterModal);
     };
 
-    // --- Tab 2: Top 10 Ranked Scoreboard ---
+    // --- Tab 2: Sıralama ---
+    // Ajan D (2026-11-15): Sıralama artık yalnızca sunucudaki `leaderboard` görünümünden gelir (gerçek hesaplar).
+    // Örnek/bot oyuncular (FUNNY_BOT_PROFILES) ve doğrulanmamış yerel RP'ler hiçbir sıralamada gösterilmez.
+    // Oda içi "bot oyuncu ekle" pratik özelliği ayrıdır ve değişmedi.
     proto.renderRankedScoreboardTab = function () {
-        const myBannerEl = document.getElementById('myRankedSummaryBanner');
+        const bannerEl = document.getElementById('myRankedSummaryBanner');
         const listEl = document.getElementById('top10ScoreboardList');
         if (!listEl) return;
+        const panel = listEl.closest('.arena-hub-panel');
+        const headEl = panel ? panel.querySelector('.arena-board-head') : null;
+        const A = (typeof window !== 'undefined' && window.PsikoVakaAccount) ? window.PsikoVakaAccount : null;
+        const snap = A ? A.snapshot() : null;
+        const esc = (v) => String(v === null || v === undefined ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const avatarOf = (a, size) => renderFunnyAvatarSVG(a && typeof a === 'object' ? a : {}, size);
+        const seq = (this._rankSeq = (this._rankSeq || 0) + 1);
+        const ready = !!(snap && snap.state === 'ready' && snap.profile && snap.profile.username);
 
-        const myTier = getRankedTierInfo(this.myRankedPoints);
-        const nextTier = RANKED_TIERS.find(t => t.min > this.myRankedPoints);
-        const progressPct = nextTier ?
-            Math.min(100, Math.round(((this.myRankedPoints - myTier.min) / (nextTier.min - myTier.min)) * 100)) :
-            100;
-
-        if (myBannerEl) {
-            myBannerEl.innerHTML = `
-                <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
-                    <div style="display:flex; align-items:center; gap:0.85rem;">
-                        ${renderFunnyAvatarSVG(this.myAvatar, 58)}
-                        <div>
-                            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:${myTier.color};">${myTier.icon} ${myTier.name}</div>
-                            <div style="font-size:1.15rem; font-weight:900; color:var(--text-primary);">${this.duelMyNickname} <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);">(${this.myPlayerId})</span></div>
-                            <div style="font-size:0.82rem; color:var(--text-secondary);">Düello, Free-For-All ve Turnuvalardan RP kazanarak lig atlayın!</div>
+        // Üst kart
+        if (bannerEl) {
+            if (ready) {
+                const p = snap.profile;
+                const rp = Number(p.ranked_points) || 0;
+                const tier = getRankedTierInfo(rp);
+                const pct = tier.pct;
+                bannerEl.innerHTML = `
+                    <div class="rank-banner">
+                        <div class="rank-banner-main">
+                            <span class="rank-avatar">${avatarOf(this.myAvatar || p.avatar, 48)}</span>
+                            <div class="rank-banner-meta">
+                                <span class="rank-banner-name">${esc(p.display_name || p.username)}</span>
+                                <span class="rank-banner-sub">@${esc(p.username)}</span>
+                            </div>
+                            <span class="rank-banner-rp">${PsikoVakaLeagues.badge(rp, 22)}${rp} RP</span>
                         </div>
-                    </div>
-                    <div style="text-align:right; min-width:140px;">
-                        <div style="font-size:1.45rem; font-weight:900; font-family:var(--font-mono); color:${myTier.color};">${this.myRankedPoints} RP</div>
-                        <div style="font-size:0.73rem; color:var(--text-muted);">${nextTier ? `Sonraki Lig: ${nextTier.icon} ${nextTier.name} (${nextTier.min} RP)` : '🔥 En Üst Ligdesiniz!'}</div>
-                        <div style="width:100%; height:7px; background:rgba(255,255,255,0.1); border-radius:99px; overflow:hidden; margin-top:5px;">
-                            <div style="width:${progressPct}%; height:100%; background:${myTier.color}; border-radius:99px;"></div>
+                        <div class="rank-progress">
+                            <span class="rank-progress-track"><span class="rank-progress-fill"></span></span>
+                            <span class="rank-progress-label">${esc(tier.name)} · ${esc(PsikoVakaLeagues.progressText(rp))}</span>
                         </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Build combined leaderboard: Real Online Players + Friends + Me + Ranked Clinicians
-        const entriesMap = new Map();
-        FUNNY_BOT_PROFILES.forEach(b => entriesMap.set(b.id, { ...b, isBot: true }));
-        this.myFriends.forEach(f => {
-            entriesMap.set(f.playerId, {
-                id: f.playerId,
-                nickname: f.nickname,
-                rankedPoints: f.rankedPoints || 300,
-                wins: f.wins || 5,
-                avgGuesses: f.avgGuesses || 2.5,
-                avatar: f.avatar || FUNNY_BOT_PROFILES[0].avatar
-            });
-        });
-        this.onlinePresenceMap.forEach((p, id) => {
-            entriesMap.set(id, {
-                id,
-                nickname: p.nickname,
-                rankedPoints: p.rankedPoints || 250,
-                wins: p.wins || 1,
-                avgGuesses: p.avgGuesses || 2.5,
-                avatar: p.avatar,
-                isOnline: true
-            });
-        });
-
-        const myAvg = this.stats && this.stats.won > 0 ?
-            ((Object.entries(this.stats.guesses || {}).reduce((acc, [k, v]) => acc + Number(k) * v, 0)) / this.stats.won).toFixed(1) :
-            '2.4';
-
-        entriesMap.set(this.myPlayerId, {
-            id: this.myPlayerId,
-            nickname: `${this.duelMyNickname} (Sen)`,
-            rankedPoints: this.myRankedPoints,
-            wins: (this.stats && this.stats.won) || 0,
-            avgGuesses: myAvg,
-            avatar: this.myAvatar,
-            isMe: true
-        });
-
-        const sorted = [...entriesMap.values()]
-            .sort((a, b) => b.rankedPoints - a.rankedPoints)
-            .slice(0, 10);
-
-        listEl.innerHTML = '';
-        sorted.forEach((item, idx) => {
-            const rank = idx + 1;
-            const tier = getRankedTierInfo(item.rankedPoints);
-            const medal = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `#${rank}`));
-            const row = document.createElement('div');
-            row.className = `scoreboard-row ${item.isMe ? 'is-me' : ''}`;
-            row.innerHTML = `
-                <div style="display:flex; align-items:center; gap:0.75rem; flex:1; min-width:200px;">
-                    <div style="width:32px; font-weight:900; font-size:${rank <= 3 ? '1.25rem' : '0.9rem'}; text-align:center; color:${rank <= 3 ? '#fbbf24' : 'var(--text-muted)'};">${medal}</div>
-                    ${renderFunnyAvatarSVG(item.avatar, 42)}
-                    <div>
-                        <div style="font-weight:800; font-size:0.9rem; color:${item.isMe ? '#34d399' : 'var(--text-primary)'}; display:flex; align-items:center; gap:6px;">
-                            ${item.nickname}
-                            ${item.isOnline ? '<span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;" title="Çevrimiçi"></span>' : ''}
-                        </div>
-                        <div style="font-size:0.74rem; color:${tier.color}; font-weight:700;">${tier.icon} ${tier.name} • Ort. ${item.avgGuesses} İpucu</div>
-                    </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:0.65rem;">
-                    <div style="text-align:right;">
-                        <div style="font-family:var(--font-mono); font-weight:900; font-size:0.98rem; color:${tier.color};">${item.rankedPoints} RP</div>
-                        <div style="font-size:0.7rem; color:var(--text-muted);">${item.wins || 0} Zafer</div>
-                    </div>
-                    ${!item.isMe ? `<button class="btn-secondary btn-quick-friend" style="padding:0.3rem 0.55rem; font-size:0.74rem;" title="Arkadaş Ekle">➕</button>` : ''}
-                </div>
-            `;
-            const btnFr = row.querySelector('.btn-quick-friend');
-            if (btnFr) {
-                btnFr.onclick = () => this.addPlayerToFriends({
-                    playerId: item.id,
-                    nickname: item.nickname,
-                    rankedPoints: item.rankedPoints,
-                    avatar: item.avatar
+                    </div>`;
+                const fill = bannerEl.querySelector('.rank-progress-fill');
+                if (fill) fill.style.width = `${pct}%`;
+            } else {
+                let text = 'Sıralamada yalnızca hesabı olan oyuncular yer alır. Görmek ve sıralamaya girmek için giriş yap.';
+                let actions = `<button class="btn btn-primary btn-sm" type="button" data-rank-auth="signin">Giriş yap</button>
+                               <button class="btn btn-secondary btn-sm" type="button" data-rank-auth="signup">Kayıt ol</button>`;
+                if (!A || !snap || snap.availability === 'disabled' || snap.availability === 'unsupported' || snap.availability === 'unavailable') {
+                    text = snap && snap.availability === 'unsupported'
+                        ? 'Sıralama yalnızca sitenin çevrimiçi sürümünde görünür.'
+                        : 'Sıralama şu an yüklenemiyor: hesap hizmetine ulaşılamıyor.';
+                    actions = '';
+                } else if (snap.state === 'signed_in_no_username') {
+                    text = 'Sıralamaya girmek için önce kullanıcı adını seç.';
+                    actions = `<button class="btn btn-primary btn-sm" type="button" data-rank-username>Kullanıcı adı seç</button>`;
+                } else if (snap.state === 'ready' && !snap.profile) {
+                    text = 'Profilin yüklenemedi; sıralama gösterilemiyor.';
+                    actions = '';
+                }
+                bannerEl.innerHTML = `<div class="rank-banner"><p class="rank-banner-text">${text}</p>${actions ? `<div class="rank-banner-actions">${actions}</div>` : ''}</div>`;
+                bannerEl.querySelectorAll('[data-rank-auth]').forEach(b => {
+                    b.addEventListener('click', () => { if (typeof this.openAuthSheet === 'function') this.openAuthSheet(b.dataset.rankAuth); });
+                });
+                const bu = bannerEl.querySelector('[data-rank-username]');
+                if (bu) bu.addEventListener('click', () => {
+                    if (this.dom && this.dom.duelCenterModal) this.closeModal(this.dom.duelCenterModal);
+                    if (typeof this.openUsernameModal === 'function') this.openUsernameModal();
                 });
             }
-            listEl.appendChild(row);
+        }
+
+        if (headEl) headEl.hidden = !ready;
+        if (!ready) { listEl.innerHTML = ''; return; }
+
+        listEl.innerHTML = `<div class="rank-list" aria-busy="true" aria-label="Sıralama yükleniyor">${'<div class="rank-skeleton"></div>'.repeat(5)}</div>`;
+        const myId = snap.user ? snap.user.id : null;
+        const rowHtml = (r) => {
+            const rp = Number(r.ranked_points) || 0;
+            const isMe = r.user_id === myId;
+            const pos = Number(r.position) || 0;
+            return `<div class="rank-row${isMe ? ' is-me' : ''}${pos > 0 && pos <= 3 ? ' is-top' : ''}"${isMe ? ' aria-current="true"' : ''}>
+                <span class="rank-pos">${pos || '–'}</span>
+                <span class="rank-avatar">${avatarOf(r.avatar, 36)}</span>
+                <span class="rank-who">
+                    <span class="rank-name">${esc(r.display_name || r.username)}${isMe ? '<span class="rank-you">(sen)</span>' : ''}</span>
+                    <span class="rank-sub">@${esc(r.username)} · ${esc(getRankedTierInfo(rp).name)}</span>
+                </span>
+                <span class="rank-rp">${PsikoVakaLeagues.badge(rp, 18)}<span>${rp} RP</span></span>
+            </div>`;
+        };
+
+        A.getLeaderboard(10).then(res => {
+            if (seq !== this._rankSeq) return;
+            if (!res || !res.ok) {
+                const m = (res && res.error && res.error.message) || 'Bir şeyler ters gitti.';
+                listEl.innerHTML = `<div class="rank-state" role="alert"><span>Sıralama yüklenemedi. ${esc(m)}</span><button class="btn btn-secondary btn-sm" type="button" data-rank-retry>Tekrar dene</button></div>`;
+                const rb = listEl.querySelector('[data-rank-retry]');
+                if (rb) rb.addEventListener('click', () => this.renderRankedScoreboardTab());
+                return;
+            }
+            const rows = res.rows || [];
+            if (!rows.length) {
+                listEl.innerHTML = `<div class="rank-state">Henüz sıralamada kimse yok. İlk sen ol.</div>`;
+                return;
+            }
+            let html = rows.map(rowHtml).join('');
+            if (res.me && !rows.some(r => r.user_id === res.me.user_id)) {
+                html += `<div class="rank-gap" aria-hidden="true">···</div>` + rowHtml(res.me);
+            }
+            listEl.innerHTML = `<div class="rank-list">${html}</div>`;
+        }).catch(() => {
+            if (seq !== this._rankSeq) return;
+            listEl.innerHTML = `<div class="rank-state" role="alert">Sıralama yüklenemedi.</div>`;
         });
     };
 
-    // --- Tab 3: Funny Character Avatar Studio ---
+    // --- Tab 3: Nöro avatar stüdyosu (js/avatar.js) ---
     proto.renderAvatarStudioTab = function () {
         const previewEl = document.getElementById('funnyAvatarLivePreview');
-        const controlsEl = document.getElementById('funnyAvatarControlsGrid');
-        if (!previewEl || !controlsEl) return;
+        const tabsEl = document.getElementById('avatarSlotTabs');
+        const gridEl = document.getElementById('funnyAvatarControlsGrid');
+        if (!previewEl || !tabsEl || !gridEl) return;
+        const A = PsikoVakaAvatar;
+        this.myAvatar = A.normalize(this.myAvatar);
+        if (!this.avatarStudioSlot) this.avatarStudioSlot = 'body';
 
-        previewEl.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
-                ${renderFunnyAvatarSVG(this.myAvatar, 118)}
-                <div style="font-weight:900; font-size:1.05rem; color:var(--text-primary); margin-top:0.25rem;">${this.duelMyNickname}</div>
-                <div style="font-size:0.76rem; color:var(--text-muted);">Komik Klinisyen Kimliği: <strong style="color:#38bdf8;">${this.myPlayerId}</strong></div>
-            </div>
-        `;
-
-        const sections = [
-            { key: 'hat', label: '🎩 Komik Şapka / Saç', items: FUNNY_AVATAR_PARTS.hats },
-            { key: 'eye', label: '👀 Gözler & Gözlük', items: FUNNY_AVATAR_PARTS.eyes },
-            { key: 'mouth', label: '🤪 Ağız, Bıyık & Sakal', items: FUNNY_AVATAR_PARTS.mouths },
-            { key: 'prop', label: '🩺 Doktor Aksesuarı', items: FUNNY_AVATAR_PARTS.props },
-            { key: 'skin', label: '🎨 Ten / Nöbet Rengi', items: FUNNY_AVATAR_PARTS.skinTones },
-            { key: 'bg', label: '🌈 Arka Plan Aurası', items: FUNNY_AVATAR_PARTS.bgColors }
-        ];
-
-        controlsEl.innerHTML = '';
-        sections.forEach(sec => {
-            const box = document.createElement('div');
-            box.style.cssText = 'background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:12px; padding:0.65rem 0.8rem;';
-            let btnsHTML = `<div style="font-size:0.78rem; font-weight:800; color:var(--text-secondary); margin-bottom:0.45rem;">${sec.label}</div><div style="display:flex; flex-wrap:wrap; gap:0.35rem;">`;
-            sec.items.forEach(it => {
-                const active = this.myAvatar[sec.key] === it.id;
-                btnsHTML += `<button type="button" class="avatar-part-pill ${active ? 'active' : ''}" data-key="${sec.key}" data-val="${it.id}">${it.name}</button>`;
+        if (!this._avatarStudioBound) {
+            this._avatarStudioBound = true;
+            const icons = { body: 'av-body', color: 'av-color', tufts: 'av-tuft', eyes: 'eye', mouth: 'av-mouth', pattern: 'av-pattern', headwear: 'av-hat', accessory: 'av-acc', background: 'av-bg' };
+            tabsEl.innerHTML = A.SLOTS.map(sl => `<button type="button" class="nv-slot-tab" role="tab" id="avatarSlotTab-${sl.key}" data-slot="${sl.key}" aria-controls="avatarSlotPanel" aria-selected="false" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-${icons[sl.key]}"/></svg><span>${sl.label}</span></button>`).join('');
+            tabsEl.addEventListener('click', (e) => {
+                const b = e.target.closest('[data-slot]');
+                if (b) this.selectAvatarStudioSlot(b.dataset.slot, false);
             });
-            btnsHTML += `</div>`;
-            box.innerHTML = btnsHTML;
-            box.querySelectorAll('.avatar-part-pill').forEach(btn => {
-                btn.onclick = () => {
-                    this.myAvatar[btn.dataset.key] = btn.dataset.val;
-                    this.saveMyAvatar();
-                    this.renderAvatarStudioTab();
-                };
+            tabsEl.addEventListener('keydown', (e) => {
+                const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+                if (!keys.includes(e.key)) return;
+                e.preventDefault();
+                const order = A.SLOTS.map(s => s.key);
+                let i = order.indexOf(this.avatarStudioSlot);
+                if (e.key === 'ArrowRight') i = (i + 1) % order.length;
+                else if (e.key === 'ArrowLeft') i = (i - 1 + order.length) % order.length;
+                else if (e.key === 'Home') i = 0;
+                else i = order.length - 1;
+                this.selectAvatarStudioSlot(order[i], true);
             });
-            controlsEl.appendChild(box);
+            gridEl.addEventListener('click', (e) => {
+                const b = e.target.closest('[data-val]');
+                if (b) this.pickAvatarOption(b.dataset.val, false);
+            });
+            gridEl.addEventListener('keydown', (e) => {
+                const items = Array.from(gridEl.querySelectorAll('[data-val]'));
+                if (!items.length) return;
+                const cur = Math.max(0, items.findIndex(x => x.getAttribute('aria-checked') === 'true'));
+                let next = null;
+                const cols = Math.max(1, Math.round(gridEl.clientWidth / Math.max(1, items[0].offsetWidth)));
+                if (e.key === 'ArrowRight') next = (cur + 1) % items.length;
+                else if (e.key === 'ArrowLeft') next = (cur - 1 + items.length) % items.length;
+                else if (e.key === 'ArrowDown') next = Math.min(items.length - 1, cur + cols);
+                else if (e.key === 'ArrowUp') next = Math.max(0, cur - cols);
+                else if (e.key === 'Home') next = 0;
+                else if (e.key === 'End') next = items.length - 1;
+                else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); this.pickAvatarOption(items[cur].dataset.val, true); return; }
+                if (next === null) return;
+                e.preventDefault();
+                this.pickAvatarOption(items[next].dataset.val, true);
+            });
+            const btnReset = document.getElementById('btnResetAvatar');
+            if (btnReset) btnReset.addEventListener('click', () => this.setStudioAvatar(Object.assign({}, A.DEFAULT), true));
+        }
+        this.renderAvatarStudioPreview();
+        this.selectAvatarStudioSlot(this.avatarStudioSlot, false);
+    };
+
+    proto.renderAvatarStudioPreview = function () {
+        const A = PsikoVakaAvatar;
+        const previewEl = document.getElementById('funnyAvatarLivePreview');
+        if (previewEl) previewEl.innerHTML = A.render(this.myAvatar, { size: 200, framed: true, animated: true, title: `Avatarın: ${A.describe(this.myAvatar)}` });
+        const nameEl = document.getElementById('avatarStudioName');
+        if (nameEl) nameEl.textContent = this.duelMyNickname || 'Klinisyen';
+        const descEl = document.getElementById('avatarStudioDesc');
+        if (descEl) descEl.textContent = A.describe(this.myAvatar);
+    };
+
+    proto.selectAvatarStudioSlot = function (slot, focus) {
+        const A = PsikoVakaAvatar;
+        const sl = A.SLOTS.find(s => s.key === slot) || A.SLOTS[0];
+        this.avatarStudioSlot = sl.key;
+        const tabsEl = document.getElementById('avatarSlotTabs');
+        const gridEl = document.getElementById('funnyAvatarControlsGrid');
+        const panel = document.getElementById('avatarSlotPanel');
+        if (!tabsEl || !gridEl) return;
+        tabsEl.querySelectorAll('[data-slot]').forEach(b => {
+            const on = b.dataset.slot === sl.key;
+            b.setAttribute('aria-selected', String(on));
+            b.tabIndex = on ? 0 : -1;
+            b.classList.toggle('active', on);
+            if (on && focus) { b.focus(); }
+            if (on) { try { b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {} }
         });
+        if (panel) panel.setAttribute('aria-labelledby', `avatarSlotTab-${sl.key}`);
+        gridEl.setAttribute('aria-label', sl.label);
+        gridEl.classList.toggle('is-colors', sl.key === 'color' || sl.key === 'background');
+        const cur = this.myAvatar[sl.key];
+        gridEl.innerHTML = A.PARTS[sl.key].map(p => {
+            const cfg = Object.assign({}, this.myAvatar, { [sl.key]: p.id });
+            const framed = sl.key === 'background' ? p.id !== 'none' : true;
+            if (sl.key !== 'background' && sl.key !== 'color') cfg.background = this.myAvatar.background === 'none' ? 'lavender' : this.myAvatar.background;
+            const on = p.id === cur;
+            return `<button type="button" class="nv-swatch" role="radio" aria-checked="${on}" tabindex="${on ? 0 : -1}" data-val="${p.id}">
+                <span class="nv-swatch-art">${A.render(cfg, { size: 64, framed })}</span>
+                <span class="nv-swatch-label">${p.name}</span>
+            </button>`;
+        }).join('');
+    };
+
+    proto.pickAvatarOption = function (val, focus) {
+        const slot = this.avatarStudioSlot;
+        const gridEl = document.getElementById('funnyAvatarControlsGrid');
+        if (!gridEl) return;
+        gridEl.querySelectorAll('[data-val]').forEach(b => {
+            const on = b.dataset.val === val;
+            b.setAttribute('aria-checked', String(on));
+            b.tabIndex = on ? 0 : -1;
+            if (on && focus) b.focus();
+        });
+        if (this.myAvatar[slot] === val) return;
+        this.setStudioAvatar(Object.assign({}, this.myAvatar, { [slot]: val }), false);
+    };
+
+    /** Stüdyodan gelen değişiklik: önizleme hemen güncellenir, kayıt (yerel + hesap) kısa gecikmeyle. */
+    proto.setStudioAvatar = function (cfg, rerenderGrid) {
+        this.myAvatar = PsikoVakaAvatar.normalize(cfg);
+        this.renderAvatarStudioPreview();
+        if (rerenderGrid) this.selectAvatarStudioSlot(this.avatarStudioSlot, false);
+        clearTimeout(this._avatarSaveTimer);
+        this._avatarSaveTimer = setTimeout(() => {
+            this._avatarSaveTimer = null;
+            this.saveMyAvatar();
+            const remote = typeof this.accountReady === 'function' && this.accountReady();
+            this.setAvatarSaveStatus(remote ? 'saving' : 'saved');
+        }, 300);
+    };
+
+    /** 'saving' | 'saved' | 'error' | '' — hesap senkronu (app.js) sonucu da buraya bildirir. */
+    proto.setAvatarSaveStatus = function (state) {
+        const el = document.getElementById('avatarSaveStatus');
+        if (!el) return;
+        const text = { saving: 'Kaydediliyor…', saved: 'Kaydedildi', error: 'Sunucuya kaydedilemedi; bu cihazda kayıtlı.' }[state] || '';
+        el.textContent = text;
+        el.dataset.state = state || '';
+        clearTimeout(this._avatarStatusTimer);
+        if (state === 'saved') this._avatarStatusTimer = setTimeout(() => { el.textContent = ''; el.dataset.state = ''; }, 2500);
     };
 
     // --- Tab 4: Friends System ---
@@ -797,6 +739,7 @@ function attachOnlineArenaToGame(GameClass) {
     };
 
     proto.renderFriendsTab = function () {
+        const esc = (v) => String(v === null || v === undefined ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const listEl = document.getElementById('friendsListContainer');
         const codeEl = document.getElementById('myFriendCodeBadge');
         if (codeEl) codeEl.textContent = this.myPlayerId;
@@ -823,7 +766,7 @@ function attachOnlineArenaToGame(GameClass) {
                                 ${isOnline ? '🟢 Çevrimiçi' : '⚪ Çevrimdışı'}
                             </span>
                         </div>
-                        <div style="font-size:0.75rem; color:${tier.color};">${tier.icon} ${fr.rankedPoints || 250} RP • Kod: ${fr.playerId}</div>
+                        <div class="friend-rp-line">${PsikoVakaLeagues.badge(fr.rankedPoints || 250, 16)} ${esc(tier.name)} · ${fr.rankedPoints || 250} RP · Kod: ${esc(fr.playerId)}</div>
                     </div>
                 </div>
                 <div style="display:flex; gap:0.4rem;">

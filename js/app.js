@@ -57,14 +57,840 @@ class PsikoVakaGame {
 
         this.stats = this.loadStats();
 
+        this.currentScreen = null;
+        this.currentRoute = 'oyna';
+        this.caseTargetMode = null;
+        this.playHistoryPushed = false;
+
         this.initDOM();
         this.applyActivePack(this.activePackId, false);
         this.initEventListeners();
         if (typeof this.initOnlineArena === 'function') {
             this.initOnlineArena();
         }
+        this.installProfileMirrors();
+        this.initRouter();
         this.updateUnsolvedUI();
+        this.updateTargetHint();
+        this.updatePracticeSummary();
+        this.updateHomeMeta();
         this.checkURLForCustomOrDuelCase();
+        this.initAccountUI();
+    }
+
+    // =====================================================================
+    // ARAYÜZ: Simge yardımcısı, ekran yönlendirici (router), profil aynaları
+    // =====================================================================
+
+    /** SVG sprite'tan simge döndürür: icon('check') -> <svg class="icon"><use href="#i-check"/></svg> */
+    icon(name, extraClass = '') {
+        return `<svg class="icon${extraClass ? ' ' + extraClass : ''}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+    }
+
+    initRouter() {
+        this.routeScreens = {
+            oyna: this.dom.screenHome,
+            online: this.dom.screenOnline,
+            kutuphane: this.dom.screenLibrary,
+            profil: this.dom.screenProfile
+        };
+
+        window.addEventListener('hashchange', () => {
+            const r = this.parseRouteHash();
+            if (r) this.showRoute(r);
+        });
+
+        window.addEventListener('popstate', () => {
+            if (this.currentScreen === 'play' && this.playHistoryPushed) {
+                this.playHistoryPushed = false;
+                this.showRoute(this.parseRouteHash() || this.currentRoute || 'oyna', { fromPop: true });
+            }
+        });
+
+        document.querySelectorAll('[data-route]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const r = link.dataset.route;
+                if (window.location.hash === `#/${r}`) {
+                    e.preventDefault();
+                    this.showRoute(r);
+                }
+            });
+        });
+
+        const brand = document.querySelector('.brand');
+        if (brand) {
+            brand.addEventListener('click', (e) => {
+                if (window.location.hash === '#/oyna') {
+                    e.preventDefault();
+                    this.showRoute('oyna');
+                }
+            });
+        }
+    }
+
+    /** '#/profil' -> 'profil'. Diğer hash'ler (#room=, #duel=, #case=, #id=) için null. */
+    parseRouteHash() {
+        const m = /^#\/([a-z]+)/.exec(window.location.hash || '');
+        if (m && this.routeScreens && this.routeScreens[m[1]]) return m[1];
+        return null;
+    }
+
+    showRoute(route, opts = {}) {
+        if (!this.routeScreens || !this.routeScreens[route]) route = 'oyna';
+        if (this.currentScreen === 'play' && this.playHistoryPushed && !opts.fromPop) {
+            // Telefonun geri tuşu için eklenen geçmiş kaydını sessizce düşür
+            this.playHistoryPushed = false;
+            try { history.replaceState(null, '', window.location.href); } catch (e) {}
+        }
+        this.currentRoute = route;
+        this.showScreen(route);
+    }
+
+    /** name: 'oyna' | 'online' | 'kutuphane' | 'profil' | 'play' */
+    showScreen(name) {
+        const all = [this.dom.screenHome, this.dom.screenOnline, this.dom.screenLibrary, this.dom.screenProfile, this.dom.screenPlay];
+        const target = name === 'play' ? this.dom.screenPlay : (this.routeScreens && this.routeScreens[name]);
+        all.forEach(s => { if (s) s.hidden = (s !== target); });
+
+        const isPlay = name === 'play';
+        document.body.classList.toggle('is-playing', isPlay);
+
+        document.querySelectorAll('[data-route]').forEach(link => {
+            const active = !isPlay && link.dataset.route === name;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+        });
+
+        const changed = this.currentScreen !== name;
+        this.currentScreen = name;
+
+        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); }
+        if (name === 'profil') this.updateProfileScreen();
+
+        if (changed) {
+            window.scrollTo(0, 0);
+            if (this.dom.appMain && !isPlay) {
+                try { this.dom.appMain.focus({ preventScroll: true }); } catch (e) {}
+            }
+        }
+    }
+
+    enterPlayScreen() {
+        if (this.currentScreen !== 'play') {
+            this.showScreen('play');
+            try {
+                history.pushState({ psikovakaPlay: true }, '', window.location.href);
+                this.playHistoryPushed = true;
+            } catch (e) {
+                this.playHistoryPushed = false;
+            }
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }
+
+    leavePlayScreen() {
+        this.closeAutocomplete();
+        this.closeCategoryTree();
+        if (this.playHistoryPushed) {
+            history.back(); // popstate -> showRoute
+        } else {
+            this.showRoute(this.parseRouteHash() || this.currentRoute || 'oyna');
+        }
+    }
+
+    // =====================================================================
+    // HESAP ARAYÜZÜ (js/account.js — PsikoVakaAccount). Misafir modu kalıcı:
+    // hesap katmanı yüklenemezse bu bölüm sessizce misafir görünümünde kalır.
+    // =====================================================================
+
+    initAccountUI() {
+        const A = (typeof window !== 'undefined' && window.PsikoVakaAccount) ? window.PsikoVakaAccount : null;
+        this.account = A;
+        this.accountSnap = { state: 'guest', availability: A ? 'pending' : 'disabled', user: null, profile: null, profileError: null, remember: true, passwordMinLength: 8 };
+        if (A) {
+            try { this.accountSnap = Object.assign(this.accountSnap, A.snapshot(), { availability: A.availability }); } catch (e) {}
+        }
+        const ids = [
+            'accountGuestCard', 'accountUnavailableNote', 'btnAccountSignUp', 'btnAccountSignIn', 'btnOpenPrivacy',
+            'accountUsernameCard', 'btnAccountPickUsername', 'profileUsername', 'profileRpNote',
+            'accountProfileError', 'accountProfileErrorText', 'btnRetryProfile', 'accountSignedInGroup', 'btnEditProfile', 'btnSignOut', 'accountEmailLabel',
+            'authModal', 'authModalTitle', 'authViewForm', 'authTabSignIn', 'authTabSignUp', 'authForm', 'authEmail', 'authPassword',
+            'authPasswordToggle', 'authPasswordHint', 'authForgotLink', 'authError', 'authSubmit', 'authSubmitLabel', 'authRemember',
+            'authLegal', 'authPrivacyLink', 'authViewForgot', 'forgotForm', 'forgotEmail', 'forgotError', 'forgotSuccess', 'forgotSubmit', 'forgotBack',
+            'authViewCheckEmail', 'checkEmailAddress', 'checkEmailExisting', 'checkEmailError', 'checkEmailSuccess', 'btnResendConfirm', 'btnResendConfirmLabel', 'checkEmailToSignIn',
+            'usernameModal', 'usernameForm', 'usernameInput', 'usernameHint', 'usernameError', 'usernameSubmit', 'usernameSignOut',
+            'newPasswordModal', 'newPasswordForm', 'newPasswordInput', 'newPasswordToggle', 'newPasswordHint', 'newPasswordError', 'newPasswordSubmit',
+            'editProfileModal', 'editProfileAvatarMount', 'editProfileUsername', 'editProfileAvatarBtn', 'editProfileForm', 'editDisplayName', 'editProfileError', 'editProfileSave',
+            'privacyModal'
+        ];
+        this.adom = {};
+        ids.forEach(id => { this.adom[id] = document.getElementById(id); });
+        this.authTab = 'signin';
+        this.authEmailPending = '';
+        this.cooldowns = {};
+        this.profilePushTimer = null;
+        this.profilePushInFlight = false;
+
+        try { this.bindAccountUI(); } catch (e) { console.warn('Hesap arayüzü bağlanamadı:', e && e.message); }
+        this.renderAccountUI();
+        if (!A) return;
+
+        // Avatar stüdyosunda yapılan değişiklik giriş yapılmışsa profiles.avatar'a da yazılır
+        if (typeof this.saveMyAvatar === 'function') {
+            const origSave = this.saveMyAvatar;
+            this.saveMyAvatar = (...args) => {
+                origSave.apply(this, args);
+                this.queueProfilePush();
+            };
+        }
+
+        A.onChange((snap, ev) => {
+            try { this.handleAccountChange(snap, ev || { type: 'state' }); } catch (e) { console.warn('Hesap durumu işlenemedi:', e && e.message); }
+        });
+        try {
+            const p = A.init();
+            if (p && typeof p.catch === 'function') p.catch(() => {});
+        } catch (e) {}
+    }
+
+    accountReady() {
+        const s = this.accountSnap;
+        return !!(s && s.state === 'ready' && s.profile);
+    }
+
+    handleAccountChange(snap, ev) {
+        const prev = this.accountSnap || {};
+        this.accountSnap = snap;
+
+        if (snap.profile && snap.state === 'ready') this.applyServerIdentity(snap.profile);
+        this.renderAccountUI();
+
+        // Zorunlu kullanıcı adı adımı
+        if (snap.state === 'signed_in_no_username' && !snap.recovery) {
+            if (!this.isModalOpen(this.adom.usernameModal) && !this.isModalOpen(this.adom.newPasswordModal)) {
+                this.closeModal(this.adom.authModal);
+                this.openUsernameModal();
+            }
+        } else if (snap.state !== 'signed_in_no_username' && this.isModalOpen(this.adom.usernameModal)) {
+            this.closeModal(this.adom.usernameModal);
+        }
+
+        if (ev.type === 'password_recovery') {
+            this.closeModal(this.adom.authModal);
+            this.closeModal(this.adom.usernameModal);
+            this.openNewPasswordModal();
+        }
+
+        if (ev.type === 'redirect' && ev.result) {
+            const r = ev.result;
+            if (r.ok && !r.recovery) {
+                if (!this.parseRouteHash() && this.currentScreen !== 'play') {
+                    try { history.replaceState(null, '', window.location.pathname + window.location.search + '#/profil'); } catch (e) {}
+                    this.showRoute('profil');
+                }
+                if (snap.state !== 'signed_in_no_username') this.showToast('Giriş yapıldı.');
+            } else if (!r.ok) {
+                this.showToast(r.message);
+                if (r.info && snap.state === 'guest') this.openAuthSheet('signin');
+            }
+        }
+
+        if (ev.type === 'import' && ev.result && ev.result.status === 'imported') {
+            const n = ev.result.importedCaseCount || 0;
+            this.showToast(`Bu cihazdaki ilerlemen hesabına aktarıldı (${n} çözülen vaka).`);
+        }
+
+        if (prev.state !== snap.state || ev.type === 'profile_saved') {
+            const board = document.getElementById('tabArenaScoreboard');
+            if (board && board.style.display !== 'none' && this.isModalOpen(this.dom.duelCenterModal) && typeof this.renderRankedScoreboardTab === 'function') {
+                this.renderRankedScoreboardTab();
+            }
+        }
+    }
+
+    /** Sunucu profilini (görünen ad, avatar) yerel oyun kimliğine yansıtır; eski arena bu değerleri kullanmaya devam eder. */
+    applyServerIdentity(profile) {
+        if (!profile || this.profilePushTimer || this.profilePushInFlight || this._avatarSaveTimer) return;
+        let changed = false;
+        const av = profile.avatar;
+        const AV = window.PsikoVakaAvatar;
+        if (AV && av && typeof av === 'object' && !AV.equals(av, this.myAvatar)) {
+            this.myAvatar = AV.normalize(av);
+            try { localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar)); } catch (e) {}
+            changed = true;
+        }
+        if (profile.display_name && profile.display_name !== this.duelMyNickname) {
+            this.duelMyNickname = profile.display_name;
+            try { localStorage.setItem('psikovaka_nickname', this.duelMyNickname); } catch (e) {}
+            changed = true;
+        }
+        if (changed && typeof this.renderHeaderProfilePill === 'function') this.renderHeaderProfilePill();
+    }
+
+    /** Yerel kimlik (avatar / görünen ad) değiştiyse, giriş yapılmışsa sunucuya kısa gecikmeyle yazar. */
+    queueProfilePush() {
+        if (!this.account || !this.accountReady()) return;
+        const p = this.accountSnap.profile;
+        const patch = this.buildProfilePatch(p);
+        if (!patch) return;
+        clearTimeout(this.profilePushTimer);
+        this.profilePushTimer = setTimeout(async () => {
+            this.profilePushTimer = null;
+            const latest = this.buildProfilePatch(this.accountSnap.profile);
+            if (!latest || !this.accountReady()) return;
+            this.profilePushInFlight = true;
+            let r;
+            try { r = await this.account.saveProfile(latest); } catch (e) { r = { ok: false }; }
+            this.profilePushInFlight = false;
+            if (typeof this.setAvatarSaveStatus === 'function' && latest.avatar) this.setAvatarSaveStatus(r && r.ok ? 'saved' : 'error');
+            if (!r || !r.ok) {
+                const now = Date.now();
+                if (!this.lastPushErrorAt || now - this.lastPushErrorAt > 30000) {
+                    this.lastPushErrorAt = now;
+                    this.showToast(`Profil sunucuya kaydedilemedi. ${(r && r.error && r.error.message) || ''}`.trim());
+                }
+            }
+        }, 1200);
+    }
+
+    buildProfilePatch(p) {
+        if (!p) return null;
+        const patch = {};
+        const a = this.myAvatar;
+        const AV = window.PsikoVakaAvatar;
+        if (AV && a && !AV.equals(a, p.avatar)) patch.avatar = AV.normalize(a);
+        const nick = String(this.duelMyNickname || '').trim();
+        if (nick && nick.length <= 30 && nick !== p.display_name) patch.displayName = nick;
+        return Object.keys(patch).length ? patch : null;
+    }
+
+    isModalOpen(modal) {
+        return !!(modal && modal.classList.contains('open'));
+    }
+
+    renderAccountUI() {
+        const a = this.adom || {};
+        const s = this.accountSnap || { state: 'guest', availability: 'disabled' };
+        const show = (el, v) => { if (el) el.hidden = !v; };
+        const accountsOn = s.availability !== 'disabled';
+        const guest = s.state === 'guest';
+
+        show(a.accountGuestCard, accountsOn && guest);
+        let note = '';
+        if (s.availability === 'unsupported') note = 'Hesaplar yalnızca sitenin çevrimiçi sürümünde çalışır. Bu dosyada misafir olarak oynamaya devam edebilirsin.';
+        else if (s.availability === 'unavailable') note = 'Hesap hizmetine şu an ulaşılamıyor. Misafir olarak oynamaya devam edebilirsin.';
+        if (a.accountUnavailableNote) { a.accountUnavailableNote.textContent = note; a.accountUnavailableNote.hidden = !note; }
+        const blocked = s.availability === 'unsupported' || s.availability === 'unavailable';
+        [a.btnAccountSignUp, a.btnAccountSignIn].forEach(b => { if (b) b.disabled = blocked; });
+
+        show(a.accountUsernameCard, s.state === 'signed_in_no_username');
+        show(a.accountSignedInGroup, !guest);
+        if (a.accountEmailLabel) a.accountEmailLabel.textContent = s.user ? s.user.email : '';
+        const pErr = s.state === 'ready' && !s.profile && s.profileError;
+        show(a.accountProfileError, !!pErr);
+        if (pErr && a.accountProfileErrorText) a.accountProfileErrorText.textContent = `Profil yüklenemedi. ${s.profileError.message || ''}`.trim();
+
+        document.body.classList.toggle('is-signed-in', !guest);
+        this.syncProfileMirrors();
+    }
+
+    bindAccountUI() {
+        const a = this.adom;
+        const on = (el, ev, fn) => { if (el) el.addEventListener(ev, fn); };
+
+        on(a.btnAccountSignUp, 'click', () => this.openAuthSheet('signup'));
+        on(a.btnAccountSignIn, 'click', () => this.openAuthSheet('signin'));
+        on(a.btnOpenPrivacy, 'click', () => this.openModal(a.privacyModal));
+        on(a.authPrivacyLink, 'click', () => this.openModal(a.privacyModal));
+        on(a.btnAccountPickUsername, 'click', () => this.openUsernameModal());
+        on(a.btnRetryProfile, 'click', async () => {
+            if (!this.account) return;
+            a.btnRetryProfile.disabled = true;
+            await this.account.refreshProfile();
+            a.btnRetryProfile.disabled = false;
+        });
+
+        on(a.authTabSignIn, 'click', () => this.setAuthTab('signin'));
+        on(a.authTabSignUp, 'click', () => this.setAuthTab('signup'));
+        [a.authTabSignIn, a.authTabSignUp].forEach(t => on(t, 'keydown', (e) => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            e.preventDefault();
+            const next = this.authTab === 'signin' ? 'signup' : 'signin';
+            this.setAuthTab(next);
+            (next === 'signin' ? a.authTabSignIn : a.authTabSignUp).focus();
+        }));
+        this.bindPasswordToggle(a.authPasswordToggle, a.authPassword);
+        this.bindPasswordToggle(a.newPasswordToggle, a.newPasswordInput);
+        [a.authEmail, a.authPassword].forEach(i => on(i, 'input', () => this.setFormMessage(a.authError, '')));
+        on(a.authForm, 'submit', (e) => { e.preventDefault(); this.submitAuthForm(); });
+
+        on(a.authForgotLink, 'click', () => {
+            this.showAuthView('forgot');
+            if (a.forgotEmail && a.authEmail) a.forgotEmail.value = a.authEmail.value.trim();
+            this.setFormMessage(a.forgotError, '');
+            this.setFormMessage(a.forgotSuccess, '');
+            if (a.authModalTitle) a.authModalTitle.textContent = 'Şifremi unuttum';
+            setTimeout(() => { try { a.forgotEmail.focus(); } catch (e) {} }, 30);
+        });
+        on(a.forgotBack, 'click', () => this.openAuthSheet('signin', { keepOpen: true }));
+        on(a.forgotEmail, 'input', () => this.setFormMessage(a.forgotError, ''));
+        on(a.forgotForm, 'submit', (e) => { e.preventDefault(); this.submitForgotForm(); });
+
+        on(a.btnResendConfirm, 'click', () => this.resendConfirmation());
+        on(a.checkEmailToSignIn, 'click', () => this.openAuthSheet('signin', { keepOpen: true }));
+
+        on(a.usernameInput, 'input', () => {
+            this.setFormMessage(a.usernameError, '');
+            if (a.usernameInput) a.usernameInput.removeAttribute('aria-invalid');
+        });
+        on(a.usernameForm, 'submit', (e) => { e.preventDefault(); this.submitUsernameForm(); });
+        on(a.usernameSignOut, 'click', () => this.signOutAccount());
+
+        on(a.newPasswordInput, 'input', () => this.setFormMessage(a.newPasswordError, ''));
+        on(a.newPasswordForm, 'submit', (e) => { e.preventDefault(); this.submitNewPassword(); });
+
+        on(a.btnEditProfile, 'click', () => this.openEditProfile());
+        on(a.editProfileAvatarBtn, 'click', () => {
+            this.closeModal(a.editProfileModal);
+            if (typeof this.openDuelCenterModal === 'function') this.openDuelCenterModal('tabArenaAvatar');
+        });
+        on(a.editDisplayName, 'input', () => this.setFormMessage(a.editProfileError, ''));
+        on(a.editProfileForm, 'submit', (e) => { e.preventDefault(); this.submitEditProfile(); });
+
+        on(a.btnSignOut, 'click', () => this.signOutAccount());
+    }
+
+    bindPasswordToggle(btn, input) {
+        if (!btn || !input) return;
+        btn.addEventListener('click', () => {
+            const show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            btn.setAttribute('aria-pressed', String(show));
+            btn.setAttribute('aria-label', show ? 'Şifreyi gizle' : 'Şifreyi göster');
+            btn.innerHTML = this.icon(show ? 'eye-off' : 'eye');
+            try { input.focus({ preventScroll: true }); } catch (e) {}
+        });
+    }
+
+    resetPasswordToggle(btn, input) {
+        if (!btn || !input) return;
+        input.type = 'password';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Şifreyi göster');
+        btn.innerHTML = this.icon('eye');
+    }
+
+    setBusy(btn, busy) {
+        if (!btn) return;
+        btn.disabled = !!busy;
+        btn.classList.toggle('is-loading', !!busy);
+        if (busy) btn.setAttribute('aria-busy', 'true'); else btn.removeAttribute('aria-busy');
+    }
+
+    setFormMessage(el, text) {
+        if (!el) return;
+        el.textContent = text || '';
+        el.hidden = !text;
+    }
+
+    async waitAccountInit() {
+        if (!this.account) return;
+        try { await this.account.init(); } catch (e) {}
+    }
+
+    minPwHint() {
+        const n = (this.accountSnap && this.accountSnap.passwordMinLength) || 8;
+        return `En az ${n} karakter.`;
+    }
+
+    showAuthView(view) {
+        const a = this.adom;
+        if (a.authViewForm) a.authViewForm.hidden = view !== 'form';
+        if (a.authViewForgot) a.authViewForgot.hidden = view !== 'forgot';
+        if (a.authViewCheckEmail) a.authViewCheckEmail.hidden = view !== 'check';
+        const body = a.authModal && a.authModal.querySelector('.modal-body');
+        if (body) body.scrollTop = 0;
+    }
+
+    openAuthSheet(tab = 'signin', opts = {}) {
+        const a = this.adom;
+        if (!a || !a.authModal) return;
+        if (this.dom.duelCenterModal && this.isModalOpen(this.dom.duelCenterModal)) this.closeModal(this.dom.duelCenterModal);
+        this.showAuthView('form');
+        this.setAuthTab(tab);
+        this.setFormMessage(a.authError, '');
+        if (a.authRemember && this.account && typeof this.account.getRemember === 'function') a.authRemember.checked = this.account.getRemember();
+        if (a.authEmail && !a.authEmail.value && this.authEmailPending) a.authEmail.value = this.authEmailPending;
+        if (!this.isModalOpen(a.authModal)) this.openModal(a.authModal);
+        if (opts.keepOpen) setTimeout(() => { try { a.authEmail.focus({ preventScroll: true }); } catch (e) {} }, 30);
+    }
+
+    setAuthTab(tab) {
+        const a = this.adom;
+        this.authTab = tab === 'signup' ? 'signup' : 'signin';
+        const isUp = this.authTab === 'signup';
+        if (a.authTabSignIn) { a.authTabSignIn.classList.toggle('active', !isUp); a.authTabSignIn.setAttribute('aria-selected', String(!isUp)); a.authTabSignIn.tabIndex = isUp ? -1 : 0; }
+        if (a.authTabSignUp) { a.authTabSignUp.classList.toggle('active', isUp); a.authTabSignUp.setAttribute('aria-selected', String(isUp)); a.authTabSignUp.tabIndex = isUp ? 0 : -1; }
+        if (a.authModalTitle) a.authModalTitle.textContent = isUp ? 'Kayıt ol' : 'Giriş yap';
+        if (a.authSubmitLabel) a.authSubmitLabel.textContent = isUp ? 'Hesap oluştur' : 'Giriş yap';
+        if (a.authPassword) a.authPassword.setAttribute('autocomplete', isUp ? 'new-password' : 'current-password');
+        if (a.authPasswordHint) { a.authPasswordHint.textContent = this.minPwHint(); a.authPasswordHint.hidden = !isUp; }
+        if (a.authForgotLink) a.authForgotLink.hidden = isUp;
+        if (a.authLegal) a.authLegal.hidden = !isUp;
+        this.setFormMessage(a.authError, '');
+    }
+
+    async submitAuthForm() {
+        const a = this.adom;
+        const A = this.account;
+        if (!A || (a.authSubmit && a.authSubmit.disabled)) return;
+        const email = (a.authEmail.value || '').trim();
+        const pw = a.authPassword.value || '';
+        const isUp = this.authTab === 'signup';
+        const e1 = A.validateEmail(email);
+        if (e1) { this.setFormMessage(a.authError, e1); a.authEmail.focus(); return; }
+        const e2 = isUp ? A.validatePassword(pw) : (pw ? null : 'Şifreni gir.');
+        if (e2) { this.setFormMessage(a.authError, e2); a.authPassword.focus(); return; }
+
+        this.setBusy(a.authSubmit, true);
+        this.setFormMessage(a.authError, '');
+        await this.waitAccountInit();
+        let r;
+        const remember = a.authRemember ? !!a.authRemember.checked : true;
+        try { r = isUp ? await A.signUp(email, pw, { remember }) : await A.signIn(email, pw, { remember }); } catch (e) { r = { ok: false, error: A.describeError(e) }; }
+        this.setBusy(a.authSubmit, false);
+        this.authEmailPending = email;
+
+        if (!r.ok) {
+            if (r.error && r.error.code === 'email_not_confirmed') {
+                this.showCheckEmail(email, { fromSignIn: true });
+                return;
+            }
+            this.setFormMessage(a.authError, (r.error && r.error.message) || 'Bir şeyler ters gitti.');
+            return;
+        }
+        a.authPassword.value = '';
+        this.resetPasswordToggle(a.authPasswordToggle, a.authPassword);
+        if (isUp && r.needsConfirmation) {
+            this.showCheckEmail(email, { maybeExisting: r.maybeExisting, justSent: true });
+            return;
+        }
+        this.closeModal(a.authModal);
+        if (this.accountSnap.state !== 'signed_in_no_username') this.showToast('Giriş yapıldı.');
+    }
+
+    showCheckEmail(email, opts = {}) {
+        const a = this.adom;
+        this.showAuthView('check');
+        if (a.authModalTitle) a.authModalTitle.textContent = opts.fromSignIn ? 'E-posta onayı gerekli' : 'Kayıt ol';
+        if (a.checkEmailAddress) a.checkEmailAddress.textContent = email;
+        if (a.checkEmailExisting) a.checkEmailExisting.hidden = !opts.maybeExisting;
+        this.setFormMessage(a.checkEmailError, opts.fromSignIn ? 'E-postanı henüz onaylamadın. Gelen kutundaki bağlantıya tıkla ya da yeni bağlantı iste.' : '');
+        this.setFormMessage(a.checkEmailSuccess, '');
+        if (opts.justSent) this.startCooldown('resend', 60, a.btnResendConfirm, a.btnResendConfirmLabel, 'Tekrar gönder');
+        else this.refreshCooldown('resend', a.btnResendConfirm, a.btnResendConfirmLabel, 'Tekrar gönder');
+    }
+
+    async resendConfirmation() {
+        const a = this.adom;
+        if (!this.account || this.cooldownLeft('resend') > 0) return;
+        const email = (a.checkEmailAddress && a.checkEmailAddress.textContent) || this.authEmailPending;
+        this.setBusy(a.btnResendConfirm, true);
+        this.setFormMessage(a.checkEmailError, '');
+        this.setFormMessage(a.checkEmailSuccess, '');
+        await this.waitAccountInit();
+        const r = await this.account.resendConfirmation(email);
+        this.setBusy(a.btnResendConfirm, false);
+        if (r.ok) {
+            this.setFormMessage(a.checkEmailSuccess, 'Yeni bağlantı gönderildi.');
+            this.startCooldown('resend', 60, a.btnResendConfirm, a.btnResendConfirmLabel, 'Tekrar gönder');
+        } else {
+            this.setFormMessage(a.checkEmailError, r.error.message);
+            if (r.error.code === 'over_email_send_rate_limit' || r.error.code === 'over_request_rate_limit') {
+                this.startCooldown('resend', 60, a.btnResendConfirm, a.btnResendConfirmLabel, 'Tekrar gönder');
+            }
+        }
+    }
+
+    cooldownLeft(key) {
+        const until = this.cooldowns[key] ? this.cooldowns[key].until : 0;
+        return Math.max(0, Math.ceil((until - Date.now()) / 1000));
+    }
+
+    startCooldown(key, seconds, btn, labelEl, label) {
+        const prev = this.cooldowns[key];
+        if (prev && prev.timer) clearInterval(prev.timer);
+        this.cooldowns[key] = { until: Date.now() + seconds * 1000, timer: null };
+        this.refreshCooldown(key, btn, labelEl, label);
+    }
+
+    refreshCooldown(key, btn, labelEl, label) {
+        const c = this.cooldowns[key];
+        const tick = () => {
+            const left = this.cooldownLeft(key);
+            if (labelEl) labelEl.textContent = left > 0 ? `${label} (${left} sn)` : label;
+            if (btn && !btn.classList.contains('is-loading')) btn.disabled = left > 0;
+            if (left <= 0 && c && c.timer) { clearInterval(c.timer); c.timer = null; }
+        };
+        tick();
+        if (c && !c.timer && this.cooldownLeft(key) > 0) c.timer = setInterval(tick, 1000);
+    }
+
+    async submitForgotForm() {
+        const a = this.adom;
+        const A = this.account;
+        if (!A || this.cooldownLeft('forgot') > 0) return;
+        const email = (a.forgotEmail.value || '').trim();
+        const e1 = A.validateEmail(email);
+        if (e1) { this.setFormMessage(a.forgotError, e1); a.forgotEmail.focus(); return; }
+        this.setBusy(a.forgotSubmit, true);
+        this.setFormMessage(a.forgotError, '');
+        this.setFormMessage(a.forgotSuccess, '');
+        await this.waitAccountInit();
+        const r = await A.sendPasswordReset(email);
+        this.setBusy(a.forgotSubmit, false);
+        if (r.ok) {
+            this.authEmailPending = email;
+            this.setFormMessage(a.forgotSuccess, 'Bu adresle bir hesap varsa şifre yenileme bağlantısı gönderildi. E-postanı kontrol et.');
+            this.startCooldown('forgot', 60, a.forgotSubmit, a.forgotSubmit.querySelector('span:last-child'), 'Bağlantı gönder');
+        } else {
+            this.setFormMessage(a.forgotError, r.error.message);
+        }
+    }
+
+    openUsernameModal() {
+        const a = this.adom;
+        if (!a.usernameModal) return;
+        this.setFormMessage(a.usernameError, '');
+        if (a.usernameInput && !a.usernameInput.value) {
+            // Öneri: yerel takma addan kurala uyan bir taslak
+            const base = String(this.duelMyNickname || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+                .replace(/ı/g, 'i').replace(/İ/g, 'I').replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 20);
+            if (base.length >= 3 && base.toLowerCase() !== 'klinisyen') a.usernameInput.value = base;
+        }
+        this.openModal(a.usernameModal);
+        setTimeout(() => { try { a.usernameInput.focus({ preventScroll: true }); } catch (e) {} }, 40);
+    }
+
+    async submitUsernameForm() {
+        const a = this.adom;
+        const A = this.account;
+        if (!A || a.usernameSubmit.disabled) return;
+        const name = (a.usernameInput.value || '').trim();
+        const err = A.validateUsername(name);
+        if (err) {
+            this.setFormMessage(a.usernameError, err);
+            a.usernameInput.setAttribute('aria-invalid', 'true');
+            a.usernameInput.focus();
+            return;
+        }
+        this.setBusy(a.usernameSubmit, true);
+        const r = await A.setUsername(name);
+        this.setBusy(a.usernameSubmit, false);
+        if (!r.ok) {
+            this.setFormMessage(a.usernameError, r.error.message);
+            a.usernameInput.setAttribute('aria-invalid', 'true');
+            a.usernameInput.focus();
+            return;
+        }
+        this.closeModal(a.usernameModal);
+        this.showToast(`Hoş geldin, @${r.profile ? r.profile.username : name}.`);
+    }
+
+    openNewPasswordModal() {
+        const a = this.adom;
+        if (!a.newPasswordModal) return;
+        if (a.newPasswordInput) a.newPasswordInput.value = '';
+        this.resetPasswordToggle(a.newPasswordToggle, a.newPasswordInput);
+        if (a.newPasswordHint) a.newPasswordHint.textContent = this.minPwHint();
+        this.setFormMessage(a.newPasswordError, '');
+        this.openModal(a.newPasswordModal);
+        setTimeout(() => { try { a.newPasswordInput.focus({ preventScroll: true }); } catch (e) {} }, 40);
+    }
+
+    async submitNewPassword() {
+        const a = this.adom;
+        const A = this.account;
+        if (!A || a.newPasswordSubmit.disabled) return;
+        const pw = a.newPasswordInput.value || '';
+        const err = A.validatePassword(pw);
+        if (err) { this.setFormMessage(a.newPasswordError, err); a.newPasswordInput.focus(); return; }
+        this.setBusy(a.newPasswordSubmit, true);
+        const r = await A.updatePassword(pw);
+        this.setBusy(a.newPasswordSubmit, false);
+        if (!r.ok) { this.setFormMessage(a.newPasswordError, r.error.message); return; }
+        a.newPasswordInput.value = '';
+        this.closeModal(a.newPasswordModal);
+        this.showToast('Şifren güncellendi.');
+        if (this.accountSnap.state === 'signed_in_no_username') this.openUsernameModal();
+    }
+
+    openEditProfile() {
+        const a = this.adom;
+        const p = this.accountSnap && this.accountSnap.profile;
+        if (!a.editProfileModal || !p) return;
+        if (a.editDisplayName) a.editDisplayName.value = p.display_name || '';
+        if (a.editProfileUsername) a.editProfileUsername.textContent = p.username ? `@${p.username}` : '';
+        if (a.editProfileAvatarMount && typeof renderFunnyAvatarSVG === 'function' && this.myAvatar) {
+            a.editProfileAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 56);
+        }
+        this.setFormMessage(a.editProfileError, '');
+        this.openModal(a.editProfileModal);
+    }
+
+    async submitEditProfile() {
+        const a = this.adom;
+        const A = this.account;
+        if (!A || a.editProfileSave.disabled) return;
+        const name = (a.editDisplayName.value || '').trim();
+        const err = A.validateDisplayName(name);
+        if (err) { this.setFormMessage(a.editProfileError, err); a.editDisplayName.focus(); return; }
+        this.setBusy(a.editProfileSave, true);
+        const r = await A.saveProfile({ displayName: name });
+        this.setBusy(a.editProfileSave, false);
+        if (!r.ok) { this.setFormMessage(a.editProfileError, r.error.message); return; }
+        this.closeModal(a.editProfileModal);
+        this.showToast('Profil kaydedildi.');
+    }
+
+    async signOutAccount() {
+        if (!this.account) return;
+        clearTimeout(this.profilePushTimer);
+        this.profilePushTimer = null;
+        await this.account.signOut();
+        this.closeModal(this.adom.usernameModal);
+        this.closeModal(this.adom.editProfileModal);
+        this.showToast('Çıkış yapıldı. Misafir olarak devam ediyorsun.');
+    }
+
+    installProfileMirrors() {
+        if (typeof this.renderHeaderProfilePill === 'function') {
+            const orig = this.renderHeaderProfilePill;
+            this.renderHeaderProfilePill = (...args) => {
+                orig.apply(this, args);
+                this.syncProfileMirrors();
+            };
+        }
+        this.syncProfileMirrors();
+    }
+
+    syncProfileMirrors() {
+        // Giriş yapılmış ve profil okunmuşsa ad/RP sunucudan; değilse bu cihazdaki (misafir) değerler
+        const acct = (this.accountSnap && this.accountSnap.state === 'ready' && this.accountSnap.profile) ? this.accountSnap.profile : null;
+        const name = acct ? (acct.display_name || acct.username) : (this.duelMyNickname || 'Klinisyen');
+        const chipName = acct && acct.username ? acct.username : name;
+        const localRp = (typeof this.myRankedPoints === 'number') ? this.myRankedPoints : null;
+        const rp = acct ? acct.ranked_points : localRp;
+        const hasAvatar = typeof renderFunnyAvatarSVG === 'function' && this.myAvatar;
+        const LG = window.PsikoVakaLeagues;
+        const hasRp = rp !== null && rp !== undefined;
+        const tier = (LG && hasRp) ? LG.tierFor(rp) : null;
+
+        if (this.dom.navNameMount) this.dom.navNameMount.textContent = chipName;
+        if (this.dom.homeGreetingName) this.dom.homeGreetingName.textContent = name;
+        if (this.dom.homeRpMount) this.dom.homeRpMount.textContent = (rp !== null && rp !== undefined) ? `${rp} RP` : '';
+        if (hasAvatar) {
+            if (this.dom.navAvatarMount) this.dom.navAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 28);
+            if (this.dom.homeAvatarMount) this.dom.homeAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 44);
+            const profileAvatar = document.getElementById('headerFunnyAvatarMount');
+            if (profileAvatar) profileAvatar.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 64);
+        }
+        const nameMount = document.getElementById('headerPlayerNameMount');
+        if (nameMount) nameMount.textContent = name;
+        const rpMount = document.getElementById('headerPlayerRpMount');
+        if (rpMount && rp !== null && rp !== undefined) {
+            rpMount.textContent = `${rp} RP`;
+            rpMount.style.color = '';
+        }
+        if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = tier ? tier.name : '';
+        const tierBadge = document.getElementById('profileTierBadge');
+        if (tierBadge) tierBadge.innerHTML = tier ? LG.badge(rp, 22) : '';
+        const tierProg = document.getElementById('profileTierProgress');
+        if (tierProg) tierProg.textContent = tier ? LG.progressText(rp) : '';
+        const chip = this.dom.navProfileChip || document.getElementById('navProfileChip');
+        if (chip) chip.setAttribute('aria-label', acct ? `Profil: @${acct.username}` : 'Profil');
+
+        const a = this.adom || {};
+        if (a.profileUsername) {
+            a.profileUsername.hidden = !(acct && acct.username);
+            a.profileUsername.textContent = acct && acct.username ? `@${acct.username}` : '';
+        }
+        if (a.profileRpNote) {
+            const differs = !!(acct && localRp !== null && localRp !== acct.ranked_points);
+            a.profileRpNote.hidden = !differs;
+            if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda herkes için 250 RP ile başlar; bu cihazdaki ${localRp} RP aktarılmaz.`;
+        }
+    }
+
+    updateProfileScreen() {
+        this.syncProfileMirrors();
+        const s = this.stats || { played: 0, won: 0, currentStreak: 0 };
+        const winRate = s.played > 0 ? Math.round((s.won / s.played) * 100) : 0;
+        if (this.dom.profileStatPlayed) this.dom.profileStatPlayed.textContent = s.played;
+        if (this.dom.profileStatWin) this.dom.profileStatWin.textContent = `%${winRate}`;
+        if (this.dom.profileStatStreak) this.dom.profileStatStreak.textContent = s.currentStreak;
+        if (this.dom.profileArchiveCount) this.dom.profileArchiveCount.textContent = `${this.solvedCaseIds.size} vaka`;
+        if (this.dom.profilePackLabel && this.dom.quickPackLabel) this.dom.profilePackLabel.textContent = this.dom.quickPackLabel.textContent;
+    }
+
+    updateHomeMeta() {
+        if (this.dom.dailyDateLabel) {
+            try {
+                this.dom.dailyDateLabel.textContent = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'long' });
+            } catch (e) {
+                this.dom.dailyDateLabel.textContent = this.getDailySeed();
+            }
+        }
+        if (this.dom.homeResume) {
+            const canResume = !!(this.currentCase && !this.isGameOver && this.caseTargetMode === this.targetGameMode);
+            this.dom.homeResume.hidden = !canResume;
+            if (canResume && this.dom.homeResumeLabel) this.dom.homeResumeLabel.textContent = this.currentDisplayTitle || 'Vaka';
+        }
+        const setCount = (el, txt) => { if (el) el.textContent = txt; };
+        setCount(this.dom.libDsmCount, `${this.diagnoses.length} tanı, ${Object.keys(this.categories).length} kategori`);
+        setCount(this.dom.libTherapyCount, `${this.therapies.length} yöntem, ${Object.keys(this.therapyFamilies).length} ekol`);
+        setCount(this.dom.libPharmaCount, `${this.pharmacology.length} protokol, ${Object.keys(this.pharmacologyFamilies).length} grup`);
+    }
+
+    updateTargetHint() {
+        const hints = {
+            diagnosis: 'Vakadaki danışanın DSM-5-TR tanısını bul.',
+            therapy: 'Vaka için kanıta dayalı ilk tercih psikoterapiyi bul.',
+            pharmacology: 'Birinci basamak ilacı ya da biyolojik müdahaleyi bul.',
+            combo: 'Sırayla tanı, terapi ve ilaç. Her aşamada 6 hak.'
+        };
+        if (this.dom.targetModeHint) this.dom.targetModeHint.textContent = hints[this.targetGameMode] || hints.diagnosis;
+    }
+
+    updatePracticeSummary() {
+        if (!this.dom.practiceSummary) return;
+        const parts = [];
+        const packLabel = this.dom.quickPackLabel ? this.dom.quickPackLabel.textContent : 'Tüm vakalar';
+        parts.push(packLabel);
+        if (this.activeCourseFilter && this.activeCourseFilter !== 'ALL') {
+            const course = Object.values(this.courses).find(c => c.id === this.activeCourseFilter);
+            if (course) parts.push(course.name);
+        }
+        if (this.activeCategoryFilter && this.activeCategoryFilter !== 'ALL') {
+            const cat = this.categories[this.activeCategoryFilter];
+            if (cat) parts.push(cat.name);
+        }
+        if (this.onlyUnsolvedMode) parts.push('sadece çözülmemişler');
+        this.dom.practiceSummary.textContent = parts.join(' · ');
+    }
+
+    openPracticeSettings() {
+        this.renderCourseFilters();
+        this.renderCategoryFilters();
+        this.updateUnsolvedUI();
+        this.openModal(this.dom.practiceSettingsModal);
+    }
+
+    openArchiveModal() {
+        this.renderSolvedArchiveList();
+        this.openModal(this.dom.archiveModal);
     }
 
     getFallbackPharmacologyId(c) {
@@ -73,21 +899,15 @@ class PsikoVakaGame {
         }
         const diagId = c.diagnosisId || '';
         const cat = c.category || '';
-        if (diagId === 'neuroleptic_malignant_syndrome') return 'dantrolene_bromocriptine';
-        if (diagId === 'serotonin_syndrome') return 'cyproheptadine_serotonin';
-        if (diagId === 'tardive_dyskinesia' || diagId === 'major_neurocognitive_huntington') return 'valbenazine_vmat2';
-        if (diagId === 'medication_induced_dystonia' || diagId === 'medication_induced_parkinsonism') return 'biperiden_anticholinergic';
-        if (diagId === 'medication_induced_akathisia' || diagId === 'social_anxiety_performance') return 'propranolol_beta';
-        if (diagId === 'cotard_syndrome' || diagId === 'mdd_with_psychotic' || diagId === 'mdd_with_melancholic') return 'ect_biological_acute';
+        if (diagId === 'major_neurocognitive_huntington') return 'valbenazine_vmat2';
+        if (diagId === 'mdd_with_psychotic') return 'ect_biological_acute';
         if (diagId === 'catatonia_associated' || diagId === 'catatonia_medical') return 'lorazepam_catatonia';
-        if (diagId === 'major_neurocognitive_nph') return 'vp_shunt_neurosurgery';
         if (diagId === 'wernicke_korsakoff_syndrome') return 'thiamine_iv_wernicke';
-        if (diagId === 'narcolepsy' || diagId === 'kleine_levin_syndrome') return 'modafinil_oxybate';
-        if (diagId === 'rem_sleep_behavior_disorder' || diagId === 'sexsomnia' || diagId === 'sleepwalking_disorder') return 'clonazepam_parasomnia';
+        if (diagId === 'narcolepsy') return 'modafinil_oxybate';
+        if (diagId === 'rem_sleep_behavior_disorder' || diagId === 'sleepwalking_disorder') return 'clonazepam_parasomnia';
         if (diagId === 'restless_legs_syndrome') return 'pramipexole_gabapentin_rls';
-        if (diagId === 'enuresis' || diagId === 'enuresis_nocturna') return 'desmopressin_enuresis';
+        if (diagId === 'enuresis') return 'desmopressin_enuresis';
         if (diagId === 'bipolar_2' || diagId === 'hallucinogen_persisting_perception') return 'lamotrigine_bipolar2';
-        if (diagId === 'bipolar_1_rapid_cycling' || diagId === 'bipolar_1_mixed') return 'valproate_acute_mania';
         if (cat === 'BIPOLAR') return 'lithium_gold';
         if (cat === 'PSYCHOTIC') return 'atypical_ap_secondgen';
         if (cat === 'NEUROCOGNITIVE') return 'cholinesterase_donepezil';
@@ -104,78 +924,58 @@ class PsikoVakaGame {
     }
 
     getBuiltInPacksDefinition() {
+        // Paketler caseNumber aralığına göre tanımlanır (arşivlenen numaralar boşluk bırakır, sorun değil).
+        // Tanımlı son aralığın üstündeki (veya numarası olmayan) vakalar otomatik "Yeni vakalar" paketine girer.
+        // Sayılar her zaman gerçek vaka listesinden hesaplanır; boş kalan paket gizlenir.
+        const ranges = [
+            { id: 'pack1', title: '🏛️ Paket 1: Çekirdek Vakalar', from: 1, to: 29,
+              desc: 'Duygudurum, anksiyete, psikotik, OKB, kişilik ve yeme bozukluklarının klasik tabloları.' },
+            { id: 'pack2', title: '📘 Paket 2: Klinik Derinlik', from: 30, to: 49,
+              desc: 'Kişilik, travma, dissosiyatif, yeme, nörogelişimsel ve dürtü kontrol vakaları.' },
+            { id: 'pack3', title: '🔬 Paket 3: İleri Ayırıcı Tanı', from: 50, to: 69,
+              desc: 'Psikotik, bipolar, OKB ile ilişkili, anksiyete ve dürtü kontrol vakalarında ayırıcı tanı.' },
+            { id: 'pack4', title: '⚡ Paket 4: Özel Sendromlar', from: 70, to: 89,
+              desc: 'Parafilik, uyku-uyanıklık, cinsel işlev ve nörobilişsel bozukluk vakaları.' },
+            { id: 'pack5', title: '🧠 Paket 5: Nöropsikiyatri', from: 90, to: 109,
+              desc: 'Uyku, nörobilişsel, nörogelişimsel ve parafilik bozukluk vakaları; psikotik ve duygudurum tabloları.' },
+            { id: 'pack6', title: '🔥 Paket 6: Master Klinik & İlaç', from: 110, to: 150,
+              desc: 'Psikotik, duygudurum, anksiyete, OKB, yeme, dışa atım, uyku ve nörobilişsel bozukluk vakaları.' }
+        ];
+        const lastTo = ranges[ranges.length - 1].to;
+        const numOf = (c) => {
+            const n = Number(c && c.caseNumber);
+            return Number.isFinite(n) ? n : NaN;
+        };
         const total = this.allMasterCases.length;
-        const dynamicPacks = [];
-        if (total > 150) {
-            let startNum = 151;
-            let packIdx = 7;
-            while (startNum <= total) {
-                const endNum = Math.min(startNum + 99, total);
-                const s = startNum;
-                const e = endNum;
-                dynamicPacks.push({
-                    id: `pack${packIdx}`,
-                    title: `🚀 Paket ${packIdx}: Aylık Genişleme Paketi`,
-                    badge: `Vaka ${s}–${e}`,
-                    desc: `Sonradan eklenen kalıcı klinik vaka koleksiyonu (Vaka ${s} - ${e}).`,
-                    filterFn: (c) => c.caseNumber >= s && c.caseNumber <= e
-                });
-                startNum += 100;
-                packIdx++;
-            }
-        }
+        const defs = ranges.map(r => ({
+            id: r.id,
+            title: r.title,
+            desc: `${r.desc} (No. ${r.from}–${r.to})`,
+            filterFn: (c) => { const n = numOf(c); return n >= r.from && n <= r.to; }
+        }));
+        defs.push({
+            id: 'pack_yeni',
+            title: '🚀 Yeni Vakalar',
+            desc: `Sonradan eklenen vakalar (No. ${lastTo + 1} ve üstü).`,
+            filterFn: (c) => { const n = numOf(c); return !(n <= lastTo); }
+        });
+
+        const visible = [];
+        defs.forEach(d => {
+            const count = this.allMasterCases.filter(d.filterFn).length;
+            if (count > 0) visible.push({ ...d, count, badge: `${count} vaka` });
+        });
 
         return [
             {
                 id: 'all',
                 title: `🌟 Tüm Vakalar (Tam Koleksiyon)`,
-                badge: `${total} Vaka`,
+                badge: `${total} vaka`,
+                count: total,
                 desc: 'Sistemdeki tüm DSM-5-TR klinik vakalarının eksiksiz tam havuzu.',
                 filterFn: () => true
             },
-            ...dynamicPacks.reverse(),
-            {
-                id: 'pack6',
-                title: '🔥 Paket 6: Master Klinik & İlaç (Yeni!)',
-                badge: 'Vaka 110–150',
-                desc: 'Clérambault, Othello, Ekbom, Katatoni, PANDAS, Lewy, Wernicke, Akatizi, Distoni vb.',
-                filterFn: (c) => c.caseNumber >= 110 && c.caseNumber <= 150
-            },
-            {
-                id: 'pack5',
-                title: '🧠 Paket 5: Nadir & Nöropsikiyatri',
-                badge: 'Vaka 90–109',
-                desc: 'Capgras, Cotard, NMS, Serotonin Sendromu, Narkolepsi, RBD, Pick, NPH, Ganser, TD.',
-                filterFn: (c) => c.caseNumber >= 90 && c.caseNumber <= 109
-            },
-            {
-                id: 'pack4',
-                title: '⚡ Paket 4: Özel Sendromlar',
-                badge: 'Vaka 70–89',
-                desc: 'Cinsel işlev, uyku-uyanıklık, parafili, dürtü kontrol ve bağımlılık vakaları.',
-                filterFn: (c) => c.caseNumber >= 70 && c.caseNumber <= 89
-            },
-            {
-                id: 'pack3',
-                title: '🔬 Paket 3: İleri Ayırıcı Tanı',
-                badge: 'Vaka 50–69',
-                desc: 'Karmaşık komorbiditeler, kişilik bozuklukları ve çocuk/ergen psikopatolojisi.',
-                filterFn: (c) => c.caseNumber >= 50 && c.caseNumber <= 69
-            },
-            {
-                id: 'pack2',
-                title: '📘 Paket 2: Klinik Derinlik',
-                badge: 'Vaka 30–49',
-                desc: 'Somatik, dissosiyatif, yeme bozuklukları ve travma spektrumu vakaları.',
-                filterFn: (c) => c.caseNumber >= 30 && c.caseNumber <= 49
-            },
-            {
-                id: 'pack1',
-                title: '🏛️ Paket 1: Çekirdek Vakalar',
-                badge: 'Vaka 1–29',
-                desc: 'Temel duygudurum, anksiyete, şizofreni, OKB ve klasik klinik tablolar.',
-                filterFn: (c) => c.caseNumber >= 1 && c.caseNumber <= 29
-            }
+            ...visible.reverse()
         ];
     }
 
@@ -221,28 +1021,30 @@ class PsikoVakaGame {
     }
 
     applyActivePack(packId, launchPracticeCase = true) {
-        this.activePackId = packId;
-        localStorage.setItem('psikovaka_active_pack_id', packId);
-
+        // Kayıtlı paket kimliği artık yoksa (veya paket boşaldıysa) sessizce "Tüm Vakalar"a dön.
+        const hasDiag = (c) => !!c && this.diagnoses.some(d => d.id === c.diagnosisId);
         const builtIn = this.getBuiltInPacksDefinition().find(p => p.id === packId);
         const customPack = this.savedCustomPacks.find(p => p.id === packId);
+        const customCases = (customPack && Array.isArray(customPack.cases)) ? customPack.cases.filter(hasDiag) : [];
 
         let packTitle = 'Tüm Vakalar';
         if (builtIn) {
-            const filtered = this.allMasterCases.filter(builtIn.filterFn);
-            this.cases = filtered.length > 0 ? filtered : [...this.allMasterCases];
-            packTitle = `${builtIn.title.replace(/^[^\s]+\s/, '')} (${this.cases.length})`;
-        } else if (customPack && Array.isArray(customPack.cases) && customPack.cases.length > 0) {
-            this.cases = customPack.cases.map(c => ({
+            this.activePackId = builtIn.id;
+            this.cases = this.allMasterCases.filter(builtIn.filterFn);
+            packTitle = `${builtIn.title.replace(/^[^\wÇĞİÖŞÜçğıöşü]+\s*/, '').replace(/\s*\(.*\)\s*$/, '')} (${this.cases.length})`;
+        } else if (customPack && customCases.length > 0) {
+            this.activePackId = customPack.id;
+            this.cases = customCases.map(c => ({
                 ...c,
                 pharmacologyId: c.pharmacologyId || this.getFallbackPharmacologyId(c)
             }));
-            packTitle = `📦 ${customPack.name} (${this.cases.length})`;
+            packTitle = `${customPack.name} (${this.cases.length})`;
         } else {
             this.activePackId = 'all';
             this.cases = [...this.allMasterCases];
             packTitle = `Tüm Vakalar (${this.cases.length})`;
         }
+        localStorage.setItem('psikovaka_active_pack_id', this.activePackId);
 
         if (this.dom && this.dom.quickPackLabel) {
             this.dom.quickPackLabel.textContent = packTitle;
@@ -250,6 +1052,8 @@ class PsikoVakaGame {
 
         this.updateUnsolvedUI();
         this.renderPackShelf();
+        this.updatePracticeSummary();
+        if (this.dom && this.dom.profilePackLabel) this.dom.profilePackLabel.textContent = packTitle;
 
         if (launchPracticeCase) {
             this.setMode('practice');
@@ -264,6 +1068,7 @@ class PsikoVakaGame {
         }
         if (this.dom.btnToggleUnsolved) {
             this.dom.btnToggleUnsolved.classList.toggle('active', this.onlyUnsolvedMode);
+            this.dom.btnToggleUnsolved.setAttribute('aria-checked', String(this.onlyUnsolvedMode));
         }
     }
 
@@ -285,7 +1090,6 @@ class PsikoVakaGame {
             btnModePharmacology: document.getElementById('btnModePharmacology'),
             btnModeCombo: document.getElementById('btnModeCombo'),
 
-            navTabs: document.querySelectorAll('.nav-tab'),
             btnToggleUnsolved: document.getElementById('btnToggleUnsolved'),
             unsolvedCountBadge: document.getElementById('unsolvedCountBadge'),
             btnQuickPackIndicator: document.getElementById('btnQuickPackIndicator'),
@@ -357,7 +1161,51 @@ class PsikoVakaGame {
             duelCenterModal: document.getElementById('duelCenterModal'),
             dsmCriteriaDetailModal: document.getElementById('dsmCriteriaDetailModal'),
 
-            toastContainer: document.getElementById('toastContainer')
+            toastContainer: document.getElementById('toastContainer'),
+
+            // Yeni arayüz: ekranlar, ana sayfa, profil, pratik ayarları
+            appMain: document.getElementById('appMain'),
+            screenHome: document.getElementById('screenHome'),
+            screenOnline: document.getElementById('screenOnline'),
+            screenLibrary: document.getElementById('screenLibrary'),
+            screenProfile: document.getElementById('screenProfile'),
+            screenPlay: document.getElementById('screenPlay'),
+            navAvatarMount: document.getElementById('navAvatarMount'),
+            navNameMount: document.getElementById('navNameMount'),
+            homeAvatarMount: document.getElementById('homeAvatarMount'),
+            homeGreetingName: document.getElementById('homeGreetingName'),
+            homeRpMount: document.getElementById('homeRpMount'),
+            homeResume: document.getElementById('homeResume'),
+            homeResumeLabel: document.getElementById('homeResumeLabel'),
+            btnResumeCase: document.getElementById('btnResumeCase'),
+            targetModeHint: document.getElementById('targetModeHint'),
+            dailyDateLabel: document.getElementById('dailyDateLabel'),
+            btnStartDaily: document.getElementById('btnStartDaily'),
+            btnStartPractice: document.getElementById('btnStartPractice'),
+            btnOpenPracticeSettings: document.getElementById('btnOpenPracticeSettings'),
+            practiceSummary: document.getElementById('practiceSummary'),
+            practiceSettingsModal: document.getElementById('practiceSettingsModal'),
+            btnPracticeSheetStart: document.getElementById('btnPracticeSheetStart'),
+            btnResetPracticeFilters: document.getElementById('btnResetPracticeFilters'),
+            libDsmCount: document.getElementById('libDsmCount'),
+            libTherapyCount: document.getElementById('libTherapyCount'),
+            libPharmaCount: document.getElementById('libPharmaCount'),
+            profileTierLabel: document.getElementById('profileTierLabel'),
+            profileStatPlayed: document.getElementById('profileStatPlayed'),
+            profileStatWin: document.getElementById('profileStatWin'),
+            profileStatStreak: document.getElementById('profileStatStreak'),
+            profileArchiveCount: document.getElementById('profileArchiveCount'),
+            profilePackLabel: document.getElementById('profilePackLabel'),
+            btnOpenArchive: document.getElementById('btnOpenArchive'),
+            archiveModal: document.getElementById('archiveModal'),
+            themeToggleIcon: document.getElementById('themeToggleIcon'),
+            themeToggleLabel: document.getElementById('themeToggleLabel'),
+            btnPlayBack: document.getElementById('btnPlayBack'),
+            clueProgressLabel: document.getElementById('clueProgressLabel'),
+            playResultBox: document.getElementById('playResultBox'),
+            playResultIcon: document.getElementById('playResultIcon'),
+            playResultTitle: document.getElementById('playResultTitle'),
+            playResultAnswer: document.getElementById('playResultAnswer')
         };
     }
 
@@ -366,33 +1214,88 @@ class PsikoVakaGame {
             this.dom.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
         }
 
-        // 4-Way Target Mode Switcher
+        // Hedef seçici (ana sayfadaki segmentli kontrol): vaka başlatmaz, sadece seçimi değiştirir
         ['btnModeDiagnosis', 'btnModeTherapy', 'btnModePharmacology', 'btnModeCombo'].forEach(btnKey => {
             if (this.dom[btnKey]) {
                 this.dom[btnKey].addEventListener('click', (e) => {
                     const target = e.currentTarget.dataset.target;
-                    this.setTargetGameMode(target);
+                    this.setTargetGameMode(target, false);
+                    this.updateTargetHint();
+                    this.updateHomeMeta();
+                });
+                this.dom[btnKey].addEventListener('keydown', (e) => {
+                    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                    const keys = ['btnModeDiagnosis', 'btnModeTherapy', 'btnModePharmacology', 'btnModeCombo'];
+                    const idx = keys.indexOf(btnKey);
+                    const next = this.dom[keys[(idx + (e.key === 'ArrowRight' ? 1 : 3)) % 4]];
+                    if (next) { e.preventDefault(); next.focus(); next.click(); }
                 });
             }
         });
 
-        // Unsolved Filter Toggle
+        // Ana sayfa eylemleri
+        if (this.dom.btnStartDaily) this.dom.btnStartDaily.addEventListener('click', () => this.setMode('daily'));
+        if (this.dom.btnStartPractice) this.dom.btnStartPractice.addEventListener('click', () => this.setMode('practice'));
+        if (this.dom.btnOpenPracticeSettings) this.dom.btnOpenPracticeSettings.addEventListener('click', () => this.openPracticeSettings());
+        if (this.dom.btnPracticeSheetStart) {
+            this.dom.btnPracticeSheetStart.addEventListener('click', () => {
+                this.closeModal(this.dom.practiceSettingsModal);
+                this.setMode('practice');
+            });
+        }
+        if (this.dom.btnResetPracticeFilters) {
+            this.dom.btnResetPracticeFilters.addEventListener('click', () => {
+                this.activeCourseFilter = 'ALL';
+                this.activeCategoryFilter = 'ALL';
+                this.renderCourseFilters();
+                this.renderCategoryFilters();
+                this.updatePracticeSummary();
+            });
+        }
+        if (this.dom.btnResumeCase) {
+            this.dom.btnResumeCase.addEventListener('click', () => {
+                if (this.currentCase && !this.isGameOver) this.enterPlayScreen();
+            });
+        }
+        if (this.dom.btnPlayBack) this.dom.btnPlayBack.addEventListener('click', () => this.leavePlayScreen());
+        if (this.dom.btnOpenArchive) this.dom.btnOpenArchive.addEventListener('click', () => this.openArchiveModal());
+        document.querySelectorAll('[data-arena-tab]').forEach(btn => {
+            btn.addEventListener('click', () => this.openDuelCenterModal(btn.dataset.arenaTab));
+        });
+
+        // role="button" olan div'ler (arena mod kartları) klavyeyle de seçilebilsin
+        document.addEventListener('keydown', (e) => {
+            const el = e.target;
+            if ((e.key === 'Enter' || e.key === ' ') && el && el.getAttribute && el.getAttribute('role') === 'button' && el.tagName !== 'BUTTON') {
+                e.preventDefault();
+                el.click();
+            }
+            if (e.key === 'Escape') {
+                const open = [...document.querySelectorAll('.modal-backdrop.open')];
+                if (open.length) {
+                    const top = open[open.length - 1];
+                    if (top.dataset.locked !== 'true') this.closeModal(top);
+                } else if (this.dom.categoryTreePanel && this.dom.categoryTreePanel.classList.contains('open')) {
+                    this.closeCategoryTree();
+                }
+            }
+        });
+
+        // Sadece çözülmemişler (pratik ayarları içinde)
         if (this.dom.btnToggleUnsolved) {
             this.dom.btnToggleUnsolved.addEventListener('click', () => {
                 this.onlyUnsolvedMode = !this.onlyUnsolvedMode;
                 localStorage.setItem('psikovaka_only_unsolved', String(this.onlyUnsolvedMode));
                 this.updateUnsolvedUI();
-                this.showToast(this.onlyUnsolvedMode ?
-                    "🎯 Sadece Çözülmemiş Vakalar filtresi aktif!" :
-                    "🌟 Tüm vakalar (çözülenler dahil) gösteriliyor.");
-                if (this.currentMode === 'practice') {
-                    this.loadRandomPracticeCase();
-                }
+                this.updatePracticeSummary();
             });
         }
 
         if (this.dom.btnQuickPackIndicator) {
-            this.dom.btnQuickPackIndicator.addEventListener('click', () => this.openCaseManagerModal());
+            this.dom.btnQuickPackIndicator.addEventListener('click', () => {
+                this.closeModal(this.dom.practiceSettingsModal);
+                this.openCaseManagerModal();
+            });
         }
 
         // Category Browser Toggle & Search
@@ -422,14 +1325,6 @@ class PsikoVakaGame {
                 !this.dom.diagnosisInput.contains(e.target) && !this.dom.autocompleteDropdown.contains(e.target)) {
                 this.closeAutocomplete();
             }
-        });
-
-        // Mode Tabs
-        this.dom.navTabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                const mode = e.currentTarget.dataset.mode;
-                this.setMode(mode);
-            });
         });
 
         // Search & Submit
@@ -464,7 +1359,7 @@ class PsikoVakaGame {
             this.dom.btnExitDuel.addEventListener('click', () => this.exitDuelMode());
         }
 
-        // Header Modal Openers
+        // Kütüphane ve profil ekranlarındaki açıcılar
         this.dom.statsBtn.addEventListener('click', () => this.openStatsModal());
         this.dom.helpBtn.addEventListener('click', () => this.openModal(this.dom.helpModal));
         this.dom.dsmGuideBtn.addEventListener('click', () => this.openDsmGuideModal());
@@ -540,14 +1435,14 @@ class PsikoVakaGame {
         // Modal Closers
         document.querySelectorAll('.btn-close-modal').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const modal = e.target.closest('.modal-backdrop');
+                const modal = e.currentTarget.closest('.modal-backdrop');
                 if (modal) this.closeModal(modal);
             });
         });
 
         document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
             backdrop.addEventListener('click', (e) => {
-                if (e.target === backdrop) this.closeModal(backdrop);
+                if (e.target === backdrop && backdrop.dataset.locked !== 'true') this.closeModal(backdrop);
             });
         });
 
@@ -563,10 +1458,14 @@ class PsikoVakaGame {
     // --- URL Routing for Custom Cases, Direct Case IDs & Live/Link Duels ---
     checkURLForCustomOrDuelCase() {
         const hash = window.location.hash;
-        if (!hash) {
-            this.setMode('daily');
+        // Yeni arayüz: açılışta vaka otomatik başlamaz, ana sayfa (veya #/rota) gösterilir.
+        if (!hash || hash.startsWith('#/')) {
+            this.showRoute(this.parseRouteHash() || 'oyna');
             return;
         }
+        // Paylaşılan link vakası açılırsa geri tuşu ana sayfaya dönsün
+        this.currentRoute = 'oyna';
+        this.showScreen('oyna');
 
         if (hash.startsWith('#room=')) {
             const roomCode = hash.replace('#room=', '').trim().toUpperCase();
@@ -618,7 +1517,7 @@ class PsikoVakaGame {
             }
         }
 
-        this.setMode('daily');
+        this.showRoute('oyna');
     }
 
     // --- Effective Target Type Helper (Supports 3-Stage Combo Mode) ---
@@ -637,7 +1536,10 @@ class PsikoVakaGame {
 
         ['btnModeDiagnosis', 'btnModeTherapy', 'btnModePharmacology', 'btnModeCombo'].forEach(btnKey => {
             if (this.dom[btnKey]) {
-                this.dom[btnKey].classList.toggle('active', this.dom[btnKey].dataset.target === targetMode);
+                const isActive = this.dom[btnKey].dataset.target === targetMode;
+                this.dom[btnKey].classList.toggle('active', isActive);
+                this.dom[btnKey].setAttribute('aria-checked', String(isActive));
+                this.dom[btnKey].tabIndex = isActive ? 0 : -1;
             }
         });
 
@@ -646,8 +1548,9 @@ class PsikoVakaGame {
         document.body.classList.toggle('combo-mode-active', targetMode === 'combo');
 
         if (this.dom.comboStepperBar) {
-            this.dom.comboStepperBar.style.display = (targetMode === 'combo') ? 'grid' : 'none';
+            this.dom.comboStepperBar.hidden = (targetMode !== 'combo');
         }
+        this.updateTargetHint();
 
         this.syncInputAndBrowserLabels();
 
@@ -673,31 +1576,33 @@ class PsikoVakaGame {
     syncInputAndBrowserLabels() {
         const effectiveType = this.getEffectiveTargetType();
         if (this.dom.categoryBrowserIcon && this.dom.categoryBrowserLabel) {
+            const isCombo = this.targetGameMode === 'combo';
             if (effectiveType === 'therapy') {
-                this.dom.categoryBrowserIcon.textContent = '🛡️';
-                this.dom.categoryBrowserLabel.textContent = 'Terapi Ekolleri';
-                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = '🛡️ Terapi Ekolleri & Yöntemleri Ağacı';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = "🛡️ Altın standart psikoterapi yöntemini yazın veya soldan seçin...";
-                if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = (this.targetGameMode === 'combo') ? 'Aşama 2 Seç' : 'Tahmin Et';
+                this.dom.categoryBrowserIcon.innerHTML = this.icon('shield');
+                this.dom.categoryBrowserLabel.textContent = 'Ekoller';
+                if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'Terapi ekollerinden seç');
+                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'Terapi ekolleri';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 2: terapi yaz' : 'Terapi yöntemi yaz';
             } else if (effectiveType === 'pharmacology') {
-                this.dom.categoryBrowserIcon.textContent = '💊';
-                this.dom.categoryBrowserLabel.textContent = 'İlaç Grupları';
-                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = '💊 Psikofarmakoloji & Biyolojik Müdahale Ağacı';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = "💊 Birinci basamak ilacı/antidotu yazın veya soldaki gruplardan seçin...";
-                if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = (this.targetGameMode === 'combo') ? 'Aşama 3 Seç' : 'Tahmin Et';
+                this.dom.categoryBrowserIcon.innerHTML = this.icon('pill');
+                this.dom.categoryBrowserLabel.textContent = 'Gruplar';
+                if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'İlaç gruplarından seç');
+                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'İlaç grupları';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 3: ilaç yaz' : 'İlaç ya da müdahale yaz';
             } else {
-                this.dom.categoryBrowserIcon.textContent = '📂';
-                this.dom.categoryBrowserLabel.textContent = 'DSM-5 Kategorileri';
-                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = '📖 DSM-5 Kategori & Tanı Ağacı (297 Tanı)';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = "🔍 Bir DSM-5 tanısı yazın veya soldaki 22 kategoriden seçin...";
-                if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = (this.targetGameMode === 'combo') ? 'Aşama 1 Seç' : 'Tahmin Et';
+                this.dom.categoryBrowserIcon.innerHTML = this.icon('folder');
+                this.dom.categoryBrowserLabel.textContent = 'Kategoriler';
+                if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'DSM-5-TR kategorilerinden seç');
+                if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = `DSM-5-TR kategorileri (${this.diagnoses.length} tanı)`;
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 1: tanı yaz' : 'Tanı yaz';
             }
+            if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = 'Tahmin et';
         }
     }
 
     updateComboStepperUI() {
         if (!this.dom.comboStepperBar) return;
-        this.dom.comboStepperBar.style.display = (this.targetGameMode === 'combo') ? 'grid' : 'none';
+        this.dom.comboStepperBar.hidden = (this.targetGameMode !== 'combo');
         if (this.targetGameMode !== 'combo') return;
 
         const steps = [this.dom.comboStep1, this.dom.comboStep2, this.dom.comboStep3];
@@ -726,7 +1631,11 @@ class PsikoVakaGame {
     openCategoryTree() {
         if (!this.dom.categoryTreePanel) return;
         this.dom.categoryTreePanel.classList.add('open');
-        if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.classList.add('active');
+        this.closeAutocomplete();
+        if (this.dom.btnCategoryBrowser) {
+            this.dom.btnCategoryBrowser.classList.add('active');
+            this.dom.btnCategoryBrowser.setAttribute('aria-expanded', 'true');
+        }
         if (this.dom.categoryTreeSearchInput) {
             this.dom.categoryTreeSearchInput.value = '';
         }
@@ -739,7 +1648,10 @@ class PsikoVakaGame {
     closeCategoryTree() {
         if (!this.dom.categoryTreePanel) return;
         this.dom.categoryTreePanel.classList.remove('open');
-        if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.classList.remove('active');
+        if (this.dom.btnCategoryBrowser) {
+            this.dom.btnCategoryBrowser.classList.remove('active');
+            this.dom.btnCategoryBrowser.setAttribute('aria-expanded', 'false');
+        }
     }
 
     renderCategoryTree(filterQuery = '') {
@@ -811,22 +1723,22 @@ class PsikoVakaGame {
         groupDiv.className = `tree-category-group ${cleanQuery ? 'open' : ''}`;
 
         groupDiv.innerHTML = `
-            <button class="tree-category-btn" type="button">
-                <div class="tree-category-title-wrap">
-                    <span class="tree-category-arrow">▶</span>
-                    <span class="tree-category-name">${icon} ${groupName}</span>
-                </div>
+            <button class="tree-category-btn" type="button" aria-expanded="${cleanQuery ? 'true' : 'false'}">
+                <span class="tree-category-title-wrap">
+                    <span class="tree-category-arrow">${this.icon('chevron-right')}</span>
+                    <span class="tree-category-name">${groupName}</span>
+                </span>
                 <span class="tree-category-count">${countText}</span>
             </button>
             <div class="tree-diagnoses-list">
                 ${items.map(item => `
-                    <div class="tree-diagnosis-item" data-id="${item.id}" title="${item.shortDefinition || ''}">
-                        <div class="tree-item-main">
+                    <button class="tree-diagnosis-item" type="button" data-id="${item.id}" title="${(item.shortDefinition || '').replace(/"/g, '&quot;')}">
+                        <span class="tree-item-main">
                             <span class="tree-item-name-tr">${item.nameTr}</span>
                             <span class="tree-item-name-en">${item.nameEn || ''}</span>
-                        </div>
-                        <span class="tree-item-action-icon">⏎ Seç</span>
-                    </div>
+                        </span>
+                        <span class="tree-item-action-icon">Seç</span>
+                    </button>
                 `).join('')}
             </div>
         `;
@@ -835,6 +1747,7 @@ class PsikoVakaGame {
         btn.onclick = () => {
             const willOpen = !groupDiv.classList.contains('open');
             groupDiv.classList.toggle('open');
+            btn.setAttribute('aria-expanded', String(willOpen));
             if (willOpen) {
                 setTimeout(() => groupDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 40);
             }
@@ -855,17 +1768,6 @@ class PsikoVakaGame {
 
     setMode(mode) {
         this.currentMode = mode;
-
-        this.dom.navTabs.forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.mode === mode);
-        });
-
-        if (this.dom.filterBar) {
-            this.dom.filterBar.style.display = (mode === 'practice') ? 'flex' : 'none';
-        }
-        if (this.dom.courseNav) {
-            this.dom.courseNav.style.display = (mode === 'practice') ? 'flex' : 'none';
-        }
 
         if (mode === 'daily') {
             this.loadDailyCase();
@@ -892,7 +1794,7 @@ class PsikoVakaGame {
         const index = Math.abs(hash) % this.cases.length;
         const dailyCase = this.cases[index];
 
-        this.startCase(dailyCase, `Günün Vakası #${dailyCase.caseNumber || (index + 1)} (${seedStr})`);
+        this.startCase(dailyCase, `Günün vakası · #${dailyCase.caseNumber || (index + 1)}`);
     }
 
     loadRandomPracticeCase() {
@@ -928,17 +1830,13 @@ class PsikoVakaGame {
             this.recentPracticeIds.shift();
         }
 
-        this.startCase(selectedCase, `Pratik Vaka #${selectedCase.caseNumber || (randomIndex + 1)}`);
+        this.startCase(selectedCase, `Pratik · Vaka #${selectedCase.caseNumber || (randomIndex + 1)}`);
     }
 
     loadCustomCase(customCase) {
         this.currentMode = 'custom';
-        this.dom.navTabs.forEach(tab => tab.classList.remove('active'));
-        if (this.dom.filterBar) this.dom.filterBar.style.display = 'none';
-        if (this.dom.courseNav) this.dom.courseNav.style.display = 'none';
-
-        this.startCase(customCase, `🔗 Paylaşılan Özel Vaka`);
-        this.showToast("🎮 Paylaşılan özel vaka yüklendi!");
+        this.startCase(customCase, 'Paylaşılan vaka');
+        this.showToast('Paylaşılan vaka yüklendi.');
     }
 
     // --- Core Game Flow ---
@@ -956,9 +1854,10 @@ class PsikoVakaGame {
         this.comboStage = 1;
         this.comboResults = { stage1Guesses: 0, stage2Guesses: 0, stage3Guesses: 0 };
 
-        if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = 'Tanıyı belirleyin...';
-        if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Bekleniyor...';
-        if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Bekleniyor...';
+        this.caseTargetMode = this.targetGameMode;
+        if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = 'Tanıyı belirle';
+        if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Bekliyor';
+        if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Bekliyor';
         this.updateComboStepperUI();
         this.syncInputAndBrowserLabels();
 
@@ -969,7 +1868,7 @@ class PsikoVakaGame {
         this.startCaseTimer();
 
         // Reset UI
-        this.dom.patientId.textContent = `DOSYA NO: ${this.currentCase.id.toUpperCase()}`;
+        this.dom.patientId.textContent = String(this.currentCase.id || '').toUpperCase();
 
         let diffStr = 'Orta';
         if (typeof this.currentCase.difficulty === 'number') {
@@ -981,17 +1880,17 @@ class PsikoVakaGame {
         this.dom.difficultyBadge.className = `badge badge-difficulty-${diffStr.toLowerCase()}`;
 
         const modePrefixes = {
-            diagnosis: '🩺 TANI: ',
-            therapy: '🛡️ TERAPİ: ',
-            pharmacology: '💊 İLAÇ: ',
-            combo: '⚡ KOMBO: '
+            diagnosis: 'Tanı',
+            therapy: 'Terapi',
+            pharmacology: 'İlaç',
+            combo: 'Kombo'
         };
-        this.dom.modeBadge.textContent = (modePrefixes[this.targetGameMode] || '🩺 ') + displayModeTitle;
+        this.dom.modeBadge.textContent = `${modePrefixes[this.targetGameMode] || 'Tanı'} · ${displayModeTitle}`;
         this.dom.patientSummaryText.textContent = this.currentCase.patientSummary;
 
         if (this.dom.caseSolvedStatusBadge) {
             const isSolved = this.solvedCaseIds.has(this.currentCase.id);
-            this.dom.caseSolvedStatusBadge.style.display = isSolved ? 'inline-block' : 'none';
+            this.dom.caseSolvedStatusBadge.hidden = !isSolved;
         }
 
         this.dom.diagnosisInput.value = '';
@@ -999,12 +1898,13 @@ class PsikoVakaGame {
         this.dom.diagnosisInput.disabled = false;
         this.dom.btnSubmit.disabled = false;
 
-        if (this.dom.finishedActions) this.dom.finishedActions.style.display = 'none';
-        if (this.dom.mainInputSection) this.dom.mainInputSection.style.display = 'block';
+        if (this.dom.finishedActions) this.dom.finishedActions.hidden = true;
+        if (this.dom.mainInputSection) this.dom.mainInputSection.hidden = false;
 
         this.renderClues();
         this.renderGuesses();
         this.updateRemainingGuessesUI();
+        this.enterPlayScreen();
     }
 
     startCaseTimer() {
@@ -1027,18 +1927,19 @@ class PsikoVakaGame {
         this.dom.cluesContainer.innerHTML = '';
 
         const clueLabels = [
-            "1. İpucu • Başvuru Şikayeti & İlk İzlenim",
-            "2. İpucu • Belirti Süresi & Başlangıç",
-            "3. İpucu • İşlevsellik & Davranışsal Örüntü",
-            "4. İpucu • Tıbbi Dışlama & Tetikleyiciler",
-            "5. İpucu • Ruhsal Durum Muayenesi (MSE)",
-            "6. İpucu • DSM-5 Kilit Tanı Kriteri"
+            "Başvuru şikâyeti",
+            "Süre ve başlangıç",
+            "İşlevsellik ve davranış",
+            "Tıbbi dışlama ve tetikleyiciler",
+            "Ruhsal durum muayenesi",
+            "Kilit tanı kriteri"
         ];
 
         for (let i = 0; i < this.maxClues; i++) {
             const isUnlocked = (i < this.unlockedClues);
-            const clueBox = document.createElement('div');
-            clueBox.className = `clue-box ${isUnlocked ? 'active' : 'locked'}`;
+            const isLatest = isUnlocked && !this.isGameOver && i === this.unlockedClues - 1;
+            const clueBox = document.createElement('article');
+            clueBox.className = `clue-box ${isUnlocked ? 'active' : 'locked'}${isLatest ? ' is-latest' : ''}`;
 
             if (isUnlocked) {
                 const rawClue = (this.currentCase && this.currentCase.clues && this.currentCase.clues[i]) ? this.currentCase.clues[i] : '';
@@ -1050,7 +1951,7 @@ class PsikoVakaGame {
                             const escapedDsm = (hl.dsmMatch || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
                             const escapedText = hl.text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                             const tagLabel = hl.dsmMatch ? hl.dsmMatch.split(':')[0] : 'DSM-5';
-                            const replacement = `<span class="symptom-tag-highlight" onclick="window.game.showDsmDetail('${escapedDsm}', '${escapedText}')" title="DSM-5 Kriterini Görmek İçin Tıklayın!">🔍 ${hl.text} <span class="symptom-pill">${tagLabel}</span></span>`;
+                            const replacement = `<button type="button" class="symptom-tag-highlight" onclick="window.game.showDsmDetail('${escapedDsm}', '${escapedText}')" title="DSM-5 kriterini gör">${hl.text} <span class="symptom-pill">${tagLabel}</span></button>`;
                             clueContent = clueContent.replace(hl.text, replacement);
                         }
                     });
@@ -1058,19 +1959,19 @@ class PsikoVakaGame {
 
                 clueBox.innerHTML = `
                     <div class="clue-header">
-                        <span class="clue-tag">
-                            <span>🔍</span> ${clueLabels[i]}
-                        </span>
-                        <span style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">Açık</span>
+                        <span class="clue-num">${i + 1}</span>
+                        <span class="clue-tag">${clueLabels[i]}</span>
+                        ${isLatest && i > 0 ? '<span class="clue-new">Yeni</span>' : ''}
                     </div>
                     <div class="clue-text">${clueContent}</div>
                 `;
             } else {
                 clueBox.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">
-                        <span>🔒</span> ${clueLabels[i]}
+                    <div class="clue-header">
+                        <span class="clue-num">${this.icon('lock')}</span>
+                        <span class="clue-tag">${clueLabels[i]}</span>
                     </div>
-                    <span style="font-size: 0.75rem; color: var(--text-muted);">${i + 1}. Tahminde Açılır</span>
+                    <span class="clue-locked-note">${i}. yanlışta açılır</span>
                 `;
             }
 
@@ -1088,8 +1989,16 @@ class PsikoVakaGame {
             }
             this.dom.clueProgressTracker.appendChild(node);
         }
+        if (this.dom.clueProgressLabel) {
+            this.dom.clueProgressLabel.textContent = `İpucu ${Math.min(this.unlockedClues, this.maxClues)}/${this.maxClues}`;
+        }
 
-        this.dom.cluesContainer.scrollTop = this.dom.cluesContainer.scrollHeight;
+        // Yeni açılan ipucunu görünür alana getir (ilk ipucunda sayfa başında kal)
+        const latest = this.dom.cluesContainer.querySelector('.clue-box.is-latest');
+        if (latest && this.unlockedClues > 1 && typeof latest.scrollIntoView === 'function') {
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            setTimeout(() => latest.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }), 30);
+        }
     }
 
     showDsmDetail(dsmMatch, symptomText) {
@@ -1108,27 +2017,28 @@ class PsikoVakaGame {
         this.guesses.forEach((guess, index) => {
             const card = document.createElement('div');
             let cardClass = 'guess-card wrong';
-            let statusText = guess.wrongLabel || 'Farklı Grup';
-            let icon = '⬛';
+            let statusText = 'Farklı grup';
+            let iconName = 'x';
 
             if (guess.isCorrect) {
                 cardClass = 'guess-card correct';
-                statusText = guess.correctLabel || '✨ Tam İsabet!';
-                icon = '🟩';
+                statusText = 'Doğru';
+                iconName = 'check';
             } else if (guess.categoryMatch) {
                 cardClass = 'guess-card category-match';
-                statusText = `🟨 Grup Doğru: ${guess.categoryName}`;
-                icon = '🟨';
+                statusText = `Grup doğru: ${guess.categoryName}`;
+                iconName = 'target';
             }
 
-            const stageTag = guess.stageBadge ? `<span class="badge" style="font-size:0.68rem; background:rgba(255,255,255,0.08);">${guess.stageBadge}</span>` : '';
+            const stageTag = guess.stageBadge ? `<span class="badge badge-muted">${guess.stageBadge}</span>` : '';
 
             card.className = cardClass;
             card.innerHTML = `
+                <span class="guess-icon">${this.icon(iconName)}</span>
                 <div class="guess-name">
-                    <span>${icon}</span>
+                    <span class="guess-index">${index + 1}</span>
+                    <span class="guess-label">${guess.nameTr}</span>
                     ${stageTag}
-                    <span><strong>#${index + 1}</strong> ${guess.nameTr}</span>
                 </div>
                 <div class="guess-status-pill">${statusText}</div>
             `;
@@ -1138,7 +2048,7 @@ class PsikoVakaGame {
 
     updateRemainingGuessesUI() {
         const remaining = Math.max(0, this.maxClues - this.guesses.length);
-        this.dom.remainingGuessesText.textContent = `Kalan Hak: ${remaining}/${this.maxClues}`;
+        this.dom.remainingGuessesText.textContent = `Kalan hak ${remaining}/${this.maxClues}`;
 
         this.dom.guessDots.innerHTML = '';
         for (let i = 0; i < this.maxClues; i++) {
@@ -1487,8 +2397,11 @@ class PsikoVakaGame {
         this.dom.diagnosisInput.disabled = true;
         this.dom.btnSubmit.disabled = true;
 
-        if (this.dom.finishedActions) this.dom.finishedActions.style.display = 'flex';
-        if (this.dom.mainInputSection) this.dom.mainInputSection.style.display = 'none';
+        if (this.dom.finishedActions) this.dom.finishedActions.hidden = false;
+        if (this.dom.mainInputSection) this.dom.mainInputSection.hidden = true;
+        this.closeAutocomplete();
+        this.closeCategoryTree();
+        this.renderInlineResult(won);
 
         this.unlockedClues = this.maxClues;
         this.updateComboStepperUI();
@@ -1513,6 +2426,31 @@ class PsikoVakaGame {
         }, 500);
     }
 
+    /** Vaka bitince oyun ekranında gösterilen kısa sonuç kartı */
+    renderInlineResult(won) {
+        if (!this.currentCase) return;
+        const diag = this.diagnoses.find(d => d.id === this.currentCase.diagnosisId);
+        const therapy = this.therapies.find(t => t.id === (this.currentCase.therapyId || 'cbt_general'));
+        const pharma = this.pharmacology.find(p => p.id === (this.currentCase.pharmacologyId || this.getFallbackPharmacologyId(this.currentCase)));
+        let answer = diag ? diag.nameTr : '';
+        if (this.targetGameMode === 'therapy') answer = therapy ? therapy.nameTr : answer;
+        else if (this.targetGameMode === 'pharmacology') answer = pharma ? pharma.nameTr : answer;
+        else if (this.targetGameMode === 'combo') answer = [diag && diag.nameTr, therapy && therapy.nameTr, pharma && pharma.nameTr].filter(Boolean).join(' · ');
+
+        if (this.dom.playResultBox) this.dom.playResultBox.className = `result-inline ${won ? 'is-win' : 'is-loss'}`;
+        if (this.dom.playResultIcon) this.dom.playResultIcon.innerHTML = this.icon(won ? 'check' : 'flag');
+        if (this.dom.playResultTitle) {
+            this.dom.playResultTitle.textContent = won
+                ? `${this.guesses.length}. tahminde bildin · ${this.elapsedSeconds} sn`
+                : 'Bu sefer olmadı';
+        }
+        if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
+        if (this.dom.btnMainNextCase && !(this.activeDuelChallenge && this.activeDuelChallenge.isRoomDuel)) {
+            this.dom.btnMainNextCase.disabled = false;
+            this.dom.btnMainNextCase.textContent = this.currentMode === 'daily' ? 'Pratiğe devam et' : 'Sıradaki vaka';
+        }
+    }
+
     openResultModal(won) {
         const correctDiag = this.diagnoses.find(d => d.id === this.currentCase.diagnosisId);
         const correctName = correctDiag ? correctDiag.nameTr : "Belirtilmemiş Tanı";
@@ -1533,28 +2471,22 @@ class PsikoVakaGame {
         const dsmCriteriaEl = document.getElementById('resultDsmCriteria');
         const shareScoreTextEl = document.getElementById('shareScoreText');
 
+        banner.className = won ? 'result-banner success' : 'result-banner failure';
+        icon.innerHTML = this.icon(won ? 'check' : 'flag');
         if (this.targetGameMode === 'therapy') {
-            banner.className = won ? 'result-banner success' : 'result-banner failure';
-            icon.textContent = won ? '🛡️' : '📋';
-            heading.textContent = won ? `Harika Terapist! ${this.guesses.length}. Tahminde Bildiniz!` : `Terapi Simülasyonu Tamamlandı`;
-            diagNameEl.innerHTML = `<span style="color: #10b981;">🛡️ ${targetTherapy ? targetTherapy.nameTr : 'Kanıta Dayalı Psikoterapi'}</span>`;
-            diagEnEl.innerHTML = `Hedef DSM-5 Tanısı: <strong>${correctName}</strong> (${correctEn})`;
+            heading.textContent = won ? `${this.guesses.length}. tahminde doğru terapi` : 'Terapi vakası tamamlandı';
+            diagNameEl.textContent = targetTherapy ? targetTherapy.nameTr : 'Kanıta dayalı psikoterapi';
+            diagEnEl.innerHTML = `Tanı: <strong>${correctName}</strong>${correctEn ? ` (${correctEn})` : ''}`;
         } else if (this.targetGameMode === 'pharmacology') {
-            banner.className = won ? 'result-banner success' : 'result-banner failure';
-            icon.textContent = won ? '💊' : '📋';
-            heading.textContent = won ? `Uzman Psikofarmakolog! ${this.guesses.length}. Tahminde Bildiniz!` : `Farmakoterapi Simülasyonu Tamamlandı`;
-            diagNameEl.innerHTML = `<span style="color: #fb7185;">💊 ${targetPharma ? targetPharma.nameTr : 'Birinci Basamak Farmakoterapi'}</span>`;
-            diagEnEl.innerHTML = `Hedef DSM-5 Tanısı: <strong>${correctName}</strong> | Terapi: <strong>${targetTherapy ? targetTherapy.nameTr : ''}</strong>`;
+            heading.textContent = won ? `${this.guesses.length}. tahminde doğru protokol` : 'İlaç vakası tamamlandı';
+            diagNameEl.textContent = targetPharma ? targetPharma.nameTr : 'Birinci basamak farmakoterapi';
+            diagEnEl.innerHTML = `Tanı: <strong>${correctName}</strong> · Terapi: <strong>${targetTherapy ? targetTherapy.nameTr : '-'}</strong>`;
         } else if (this.targetGameMode === 'combo') {
-            banner.className = won ? 'result-banner success' : 'result-banner failure';
-            icon.textContent = won ? '⚡' : '🩺';
-            heading.textContent = won ? `Tam Konsültasyon Ustası! 3 Aşamayı da Tamamladınız!` : `Konsültasyon Raporu`;
+            heading.textContent = won ? 'Üç aşamayı da tamamladın' : 'Konsültasyon raporu';
             diagNameEl.textContent = correctName;
-            diagEnEl.innerHTML = `🛡️ ${targetTherapy ? targetTherapy.nameTr : ''} • 💊 ${targetPharma ? targetPharma.nameTr : ''}`;
+            diagEnEl.textContent = `${targetTherapy ? targetTherapy.nameTr : ''} · ${targetPharma ? targetPharma.nameTr : ''}`;
         } else {
-            banner.className = won ? 'result-banner success' : 'result-banner failure';
-            icon.textContent = won ? '🎉' : '🩺';
-            heading.textContent = won ? `Tebrikler! ${this.guesses.length}. İpucunda Bildiniz! (${this.elapsedSeconds} sn)` : `Vaka Tamamlandı`;
+            heading.textContent = won ? `${this.guesses.length}. ipucunda bildin · ${this.elapsedSeconds} sn` : 'Vaka tamamlandı';
             diagNameEl.textContent = correctName;
             diagEnEl.textContent = correctEn;
         }
@@ -1563,24 +2495,30 @@ class PsikoVakaGame {
         const comboBox = document.getElementById('comboSummaryBox');
         if (comboBox) {
             if (this.targetGameMode === 'combo') {
-                comboBox.style.display = 'block';
+                comboBox.hidden = false;
                 const totalScore = won ? Math.max(100, 300 - ((this.comboResults.stage1Guesses - 1) * 20) - ((this.comboResults.stage2Guesses - 1) * 20) - ((this.comboResults.stage3Guesses - 1) * 20)) : 0;
                 comboBox.innerHTML = `
-                    <div class="edu-title" style="color: #fbbf24;">⚡ 3 Aşamalı Tam Konsültasyon Karnesi (${totalScore} / 300 Puan)</div>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.5rem; font-size: 0.84rem;">
-                        <div style="background: var(--bg-secondary); padding: 0.6rem; border-radius: 8px;">
-                            <strong>1. Tanı:</strong><br>${correctName}<br><span style="color:#34d399;">${this.comboResults.stage1Guesses || '-'} deneme</span>
+                    <div class="edu-title">Kombo karnesi · ${totalScore}/300 puan</div>
+                    <div class="combo-summary-grid">
+                        <div class="combo-summary-cell">
+                            <span class="combo-summary-step">1. Tanı</span>
+                            <strong>${correctName}</strong>
+                            <span class="combo-summary-tries">${this.comboResults.stage1Guesses || '-'} deneme</span>
                         </div>
-                        <div style="background: var(--bg-secondary); padding: 0.6rem; border-radius: 8px;">
-                            <strong>2. Psikoterapi:</strong><br>${targetTherapy ? targetTherapy.nameTr : '-'}<br><span style="color:#34d399;">${this.comboResults.stage2Guesses || '-'} deneme</span>
+                        <div class="combo-summary-cell">
+                            <span class="combo-summary-step">2. Terapi</span>
+                            <strong>${targetTherapy ? targetTherapy.nameTr : '-'}</strong>
+                            <span class="combo-summary-tries">${this.comboResults.stage2Guesses || '-'} deneme</span>
                         </div>
-                        <div style="background: var(--bg-secondary); padding: 0.6rem; border-radius: 8px;">
-                            <strong>3. Farmakoterapi:</strong><br>${targetPharma ? targetPharma.nameTr : '-'}<br><span style="color:#34d399;">${this.comboResults.stage3Guesses || '-'} deneme</span>
+                        <div class="combo-summary-cell">
+                            <span class="combo-summary-step">3. İlaç</span>
+                            <strong>${targetPharma ? targetPharma.nameTr : '-'}</strong>
+                            <span class="combo-summary-tries">${this.comboResults.stage3Guesses || '-'} deneme</span>
                         </div>
                     </div>
                 `;
             } else {
-                comboBox.style.display = 'none';
+                comboBox.hidden = true;
             }
         }
 
@@ -1603,25 +2541,25 @@ class PsikoVakaGame {
                 clinicalEl.innerHTML = `
                     <div class="clinical-overview-grid">
                         <div class="clinical-subcard">
-                            <div class="clinical-subcard-title"><span>📌</span> Klinik Tablo & Genel Bakış</div>
+                            <div class="clinical-subcard-title">Genel bakış</div>
                             <div class="clinical-subcard-text">${desc.overview || ''}</div>
                         </div>
                         <div class="clinical-subcard">
-                            <div class="clinical-subcard-title"><span>📊</span> Yaygınlık & Başlangıç Yaşı</div>
+                            <div class="clinical-subcard-title">Yaygınlık ve başlangıç</div>
                             <div class="clinical-subcard-text">${desc.epidemiology || ''}</div>
                         </div>
                         <div class="clinical-subcard">
-                            <div class="clinical-subcard-title"><span>🧬</span> Etiyoloji & Bilişsel-Dinamik Model</div>
+                            <div class="clinical-subcard-title">Etiyoloji</div>
                             <div class="clinical-subcard-text">${desc.etiology || ''}</div>
                         </div>
                         <div class="clinical-subcard">
-                            <div class="clinical-subcard-title"><span>🔮</span> Klinik Seyir & Prognoz</div>
+                            <div class="clinical-subcard-title">Seyir ve prognoz</div>
                             <div class="clinical-subcard-text">${desc.prognosis || ''}</div>
                         </div>
                     </div>
                 `;
             } else {
-                clinicalEl.innerHTML = `<div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">${correctName} (${correctEn}), DSM-5-TR sınıflamasında yer alan klinik tablolardandır.</div>`;
+                clinicalEl.innerHTML = `<p class="edu-text">${correctName} (${correctEn}), DSM-5-TR sınıflamasında yer alan klinik tablolardandır.</p>`;
             }
         }
 
@@ -1653,18 +2591,19 @@ class PsikoVakaGame {
                 fullHTML += `</div>`;
                 fullCriteriaEl.innerHTML = fullHTML;
             } else {
-                fullCriteriaEl.innerHTML = `<div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">${this.currentCase.dsmCriteriaSummary || 'DSM-5 tanı kriterleri özeti mevcut.'}</div>`;
+                fullCriteriaEl.innerHTML = `<p class="edu-text">${this.currentCase.dsmCriteriaSummary || 'DSM-5 tanı kriterleri özeti mevcut.'}</p>`;
             }
         }
 
         // 3. Vakadaki Belirti ➔ DSM-5 Eşleştirmeleri
-        let criteriaHTML = `<div style="margin-bottom: 0.75rem; line-height: 1.6;">${this.currentCase.dsmCriteriaSummary || 'DSM-5 kriter özeti bulunuyor.'}</div>`;
+        let criteriaHTML = `<p class="edu-text">${this.currentCase.dsmCriteriaSummary || 'DSM-5 kriter özeti bulunuyor.'}</p>`;
         if (this.currentCase.symptomHighlights && this.currentCase.symptomHighlights.length > 0) {
-            criteriaHTML += `<div style="display: flex; flex-direction: column; gap: 0.45rem;">`;
+            criteriaHTML += `<div class="symptom-map-list">`;
             this.currentCase.symptomHighlights.forEach(hl => {
                 criteriaHTML += `
-                    <div style="background: rgba(99, 102, 241, 0.1); border-left: 3px solid var(--accent-primary); padding: 0.5rem 0.75rem; border-radius: 4px; font-size: 0.86rem; line-height: 1.5;">
-                        <span style="color: var(--text-primary); font-weight: 600;">"${hl.text}"</span> ➔ <strong style="color: #34d399;">${hl.dsmMatch}</strong>
+                    <div class="symptom-map-row">
+                        <span class="symptom-map-quote">"${hl.text}"</span>
+                        <span class="symptom-map-match">${hl.dsmMatch}</span>
                     </div>
                 `;
             });
@@ -1716,8 +2655,8 @@ class PsikoVakaGame {
                     this.nextRoomDuelCase();
                 } else {
                     btnNextPractice.disabled = false;
-                    btnNextPractice.style.opacity = '1';
-                    btnNextPractice.textContent = 'Sıradaki Vakaya Geç ➔';
+                    btnNextPractice.style.opacity = '';
+                    btnNextPractice.textContent = 'Sıradaki vaka';
                     this.closeModal(this.dom.resultModal);
                     this.setMode('practice');
                 }
@@ -1728,9 +2667,9 @@ class PsikoVakaGame {
             this.updateRoundLockButtons();
         } else if (btnNextPractice) {
             btnNextPractice.disabled = false;
-            btnNextPractice.style.opacity = '1';
-            btnNextPractice.style.cursor = 'pointer';
-            btnNextPractice.textContent = 'Sıradaki Vakaya Geç ➔';
+            btnNextPractice.style.opacity = '';
+            btnNextPractice.style.cursor = '';
+            btnNextPractice.textContent = this.currentMode === 'daily' ? 'Pratiğe devam et' : 'Sıradaki vaka';
         }
 
         this.openModal(this.dom.resultModal);
@@ -1746,34 +2685,36 @@ class PsikoVakaGame {
 
         const quizData = this.currentCase.miniQuiz;
         if (!quizData) {
-            quizBox.style.display = 'none';
+            quizBox.hidden = true;
             return;
         }
 
-        quizBox.style.display = 'block';
+        quizBox.hidden = false;
         quizQ.textContent = quizData.question;
         quizList.innerHTML = '';
-        quizExp.style.display = 'none';
+        quizExp.hidden = true;
         quizExp.innerHTML = '';
 
         quizData.options.forEach((optText, idx) => {
             const btn = document.createElement('button');
             btn.className = 'quiz-opt-btn';
-            btn.textContent = `${String.fromCharCode(65 + idx)}) ${optText}`;
+            btn.type = 'button';
+            btn.innerHTML = `<span class="quiz-opt-letter">${String.fromCharCode(65 + idx)}</span><span class="quiz-opt-text"></span>`;
+            btn.querySelector('.quiz-opt-text').textContent = optText;
 
             btn.onclick = () => {
                 quizList.querySelectorAll('.quiz-opt-btn').forEach(b => b.disabled = true);
                 if (idx === quizData.correctIndex) {
                     btn.classList.add('correct');
                     this.playTone('warm');
-                    quizExp.innerHTML = `<strong>✅ Doğru Cevap!</strong><br>${quizData.explanation}`;
+                    quizExp.innerHTML = `<strong>Doğru.</strong> ${quizData.explanation}`;
                 } else {
                     btn.classList.add('wrong');
                     const correctBtn = quizList.querySelectorAll('.quiz-opt-btn')[quizData.correctIndex];
                     if (correctBtn) correctBtn.classList.add('correct');
-                    quizExp.innerHTML = `<strong>❌ Yanıt:</strong> ${String.fromCharCode(65 + quizData.correctIndex)} seçeneği doğruydu.<br>${quizData.explanation}`;
+                    quizExp.innerHTML = `<strong>Doğru cevap ${String.fromCharCode(65 + quizData.correctIndex)}.</strong> ${quizData.explanation}`;
                 }
-                quizExp.style.display = 'block';
+                quizExp.hidden = false;
             };
 
             quizList.appendChild(btn);
@@ -1790,15 +2731,16 @@ class PsikoVakaGame {
 
         const therapyData = this.currentCase.treatmentModality;
         if (!therapyData) {
-            therapyBox.style.display = 'none';
+            therapyBox.hidden = true;
             return;
         }
 
-        therapyBox.style.display = 'block';
+        therapyBox.hidden = false;
         goldEl.textContent = therapyData.goldStandardTherapy;
         descEl.textContent = therapyData.therapyDetails;
-        const pharmaName = targetPharma ? `[${targetPharma.nameTr}] ` : '';
-        pharmEl.textContent = `💊 Birinci Basamak Farmakoterapi: ${pharmaName}${therapyData.pharmacologyNote || ''}`;
+        const pharmaName = targetPharma ? `${targetPharma.nameTr}. ` : '';
+        pharmEl.innerHTML = `<strong>Farmakoterapi:</strong> `;
+        pharmEl.appendChild(document.createTextNode(`${pharmaName}${therapyData.pharmacologyNote || ''}`));
     }
 
     // --- Built-in Pack Shelf & Custom Pack Library ---
@@ -1814,41 +2756,39 @@ class PsikoVakaGame {
 
         if (totalCountEl) {
             const solvedInActive = this.cases.filter(c => this.solvedCaseIds.has(c.id)).length;
-            totalCountEl.textContent = `${this.cases.length} Vaka (Çözülen: ${solvedInActive} / ${this.cases.length})`;
+            totalCountEl.textContent = `${this.dom && this.dom.quickPackLabel ? this.dom.quickPackLabel.textContent.replace(/\s*\(\d+\)$/, '') : 'Aktif paket'} · ${solvedInActive}/${this.cases.length} çözüldü`;
         }
 
         if (shelfEl) {
             shelfEl.innerHTML = '';
             const packs = this.getBuiltInPacksDefinition();
             packs.forEach(pk => {
-                const packCases = this.allMasterCases.filter(pk.filterFn);
+                const packCases = this.allMasterCases.filter(pk.filterFn); // pk.count ile aynı
                 const solvedCount = packCases.filter(c => this.solvedCaseIds.has(c.id)).length;
                 const pct = packCases.length > 0 ? Math.round((solvedCount / packCases.length) * 100) : 0;
 
-                const card = document.createElement('div');
+                const card = document.createElement('button');
+                card.type = 'button';
                 card.className = `pack-card ${this.activePackId === pk.id ? 'active' : ''}`;
+                if (this.activePackId === pk.id) card.setAttribute('aria-current', 'true');
+                const cleanTitle = String(pk.title).replace(/^[^\wÇĞİÖŞÜçğıöşü]+\s*/, '');
                 card.innerHTML = `
-                    <div>
-                        <div class="pack-card-header">
-                            <span class="pack-card-title">${pk.title}</span>
-                            <span class="pack-card-badge">${pk.badge}</span>
-                        </div>
-                        <p class="pack-card-desc" style="margin-top: 0.35rem;">${pk.desc}</p>
-                    </div>
-                    <div>
-                        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-muted); margin-bottom:4px;">
-                            <span>İlerleme: ${solvedCount}/${packCases.length}</span>
-                            <span>%${pct}</span>
-                        </div>
-                        <div class="pack-progress-bar">
-                            <div class="pack-progress-fill" style="width: ${pct}%;"></div>
-                        </div>
-                    </div>
+                    <span class="pack-card-header">
+                        <span class="pack-card-title">${cleanTitle}</span>
+                        <span class="pack-card-badge">${String(pk.badge).replace(/^[^\wÇĞİÖŞÜçğıöşü]+\s*/, '')}</span>
+                    </span>
+                    <span class="pack-card-desc">${pk.desc}</span>
+                    <span class="pack-progress-meta">
+                        <span>${solvedCount}/${packCases.length} çözüldü</span>
+                        <span>%${pct}</span>
+                    </span>
+                    <span class="pack-progress-bar"><span class="pack-progress-fill"></span></span>
                 `;
+                card.querySelector('.pack-progress-fill').style.width = `${pct}%`;
                 card.onclick = () => {
                     this.applyActivePack(pk.id, true);
                     this.closeModal(this.dom.caseManagerModal);
-                    this.showToast(`📦 "${pk.title}" seçildi (${packCases.length} Vaka)!`);
+                    this.showToast(`"${cleanTitle}" seçildi (${packCases.length} vaka).`);
                 };
                 shelfEl.appendChild(card);
             });
@@ -1857,26 +2797,27 @@ class PsikoVakaGame {
         if (savedListEl) {
             savedListEl.innerHTML = '';
             if (this.savedCustomPacks.length === 0) {
-                savedListEl.innerHTML = `<div style="font-size: 0.82rem; color: var(--text-muted); font-style: italic;">Henüz özel bir JSON paketi kaydetmediniz. Aşağıdan yüklediğiniz paketler burada kalıcı olarak listelenir.</div>`;
+                savedListEl.innerHTML = `<p class="empty-state">Henüz kaydettiğin paket yok. Aşağıdan eklediğin paketler burada kalır.</p>`;
             } else {
                 this.savedCustomPacks.forEach(cp => {
                     const row = document.createElement('div');
-                    row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:0.65rem 0.9rem; border-radius:10px; border:1px solid var(--border-color); gap:0.5rem;';
+                    row.className = 'row-item';
                     const isCurrent = this.activePackId === cp.id;
                     row.innerHTML = `
-                        <div>
-                            <strong style="font-size:0.88rem; color:${isCurrent ? 'var(--accent-emerald)' : 'var(--text-primary)'};">📦 ${cp.name}</strong>
-                            <span style="font-size:0.76rem; color:var(--text-muted); margin-left:6px;">(${cp.cases.length} Vaka)</span>
+                        <div class="row-item-main">
+                            <strong class="row-item-title${isCurrent ? ' is-active' : ''}"></strong>
+                            <span class="row-item-sub">${cp.cases.length} vaka</span>
                         </div>
-                        <div style="display:flex; gap:0.4rem;">
-                            <button class="btn-primary btn-play-cp" style="padding:0.35rem 0.75rem; font-size:0.78rem;">${isCurrent ? '✅ Aktif' : '▶️ Oyna'}</button>
-                            <button class="btn-secondary btn-del-cp" style="padding:0.35rem 0.6rem; font-size:0.78rem; color:#f43f5e;">🗑️</button>
+                        <div class="row-item-actions">
+                            <button type="button" class="btn ${isCurrent ? 'btn-secondary' : 'btn-primary'} btn-sm btn-play-cp">${isCurrent ? 'Aktif' : 'Oyna'}</button>
+                            <button type="button" class="icon-btn icon-btn-sm icon-btn-danger btn-del-cp" aria-label="Paketi sil">${this.icon('trash')}</button>
                         </div>
                     `;
+                    row.querySelector('.row-item-title').textContent = cp.name;
                     row.querySelector('.btn-play-cp').onclick = () => {
                         this.applyActivePack(cp.id, true);
                         this.closeModal(this.dom.caseManagerModal);
-                        this.showToast(`📦 "${cp.name}" paketi aktif edildi!`);
+                        this.showToast(`"${cp.name}" paketi seçildi.`);
                     };
                     row.querySelector('.btn-del-cp').onclick = () => {
                         this.savedCustomPacks = this.savedCustomPacks.filter(x => x.id !== cp.id);
@@ -1916,7 +2857,7 @@ class PsikoVakaGame {
         });
 
         if (solvedCases.length === 0) {
-            archiveEl.innerHTML = `<div style="font-size: 0.82rem; color: var(--text-muted); font-style: italic; padding: 0.4rem;">Henüz çözülmüş vakanız bulunmuyor. Bir vakayı doğru çözdüğünüzde otomatik olarak bu arşive eklenir.</div>`;
+            archiveEl.innerHTML = `<p class="empty-state">Henüz çözülmüş vakan yok. Doğru çözdüğün vakalar buraya eklenir.</p>`;
             return;
         }
 
@@ -1924,26 +2865,23 @@ class PsikoVakaGame {
             const diagObj = this.diagnoses.find(d => d.id === c.diagnosisId);
             const diagName = diagObj ? diagObj.nameTr : c.diagnosisId;
             const row = document.createElement('div');
-            row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:0.55rem 0.85rem; border-radius:10px; border:1px solid var(--border-color); gap:0.5rem; flex-wrap:wrap;';
+            row.className = 'row-item row-item-wrap';
             row.innerHTML = `
-                <div style="flex:1; min-width:180px;">
-                    <div style="font-size:0.84rem; font-weight:700; color:var(--text-primary);">
-                        <span style="color:#c084fc; font-family:var(--font-mono);">Vaka #${c.caseNumber}</span> • ${diagName}
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:360px;">
-                        ${c.patientSummary || ''}
-                    </div>
+                <div class="row-item-main">
+                    <span class="row-item-title"><span class="mono">#${c.caseNumber}</span> ${diagName}</span>
+                    <span class="row-item-sub row-item-ellipsis">${c.patientSummary || ''}</span>
                 </div>
-                <div style="display:flex; gap:0.35rem;">
-                    <button class="btn-secondary btn-archive-report" style="padding:0.3rem 0.65rem; font-size:0.75rem;">📋 Raporu Gör</button>
-                    <button class="btn-primary btn-archive-replay" style="padding:0.3rem 0.65rem; font-size:0.75rem;">🔄 Tekrar Çöz</button>
+                <div class="row-item-actions">
+                    <button type="button" class="btn btn-ghost btn-sm btn-archive-report">Rapor</button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-archive-replay">Tekrar çöz</button>
                 </div>
             `;
 
             row.querySelector('.btn-archive-report').onclick = () => {
                 this.closeModal(this.dom.caseManagerModal);
+                this.closeModal(this.dom.archiveModal);
                 this.currentMode = 'practice';
-                this.startCase(c, `🗄️ Arşiv: Vaka #${c.caseNumber}`);
+                this.startCase(c, `Arşiv · Vaka #${c.caseNumber}`);
                 this.unlockedClues = this.maxClues;
                 this.isGameOver = true;
                 this.gameWon = true;
@@ -1953,9 +2891,9 @@ class PsikoVakaGame {
 
             row.querySelector('.btn-archive-replay').onclick = () => {
                 this.closeModal(this.dom.caseManagerModal);
+                this.closeModal(this.dom.archiveModal);
                 this.currentMode = 'practice';
-                this.startCase(c, `🔄 Arşiv Tekrarı: Vaka #${c.caseNumber}`);
-                this.showToast(`🔄 Vaka #${c.caseNumber} arşivden tekrar çözülmek üzere açıldı!`);
+                this.startCase(c, `Tekrar · Vaka #${c.caseNumber}`);
             };
 
             archiveEl.appendChild(row);
@@ -2022,7 +2960,14 @@ class PsikoVakaGame {
         }
 
         const validCases = [];
+        let skippedUnknownDx = 0;
         rawArray.forEach((newCase, idx) => {
+            if (!newCase || typeof newCase !== 'object') return;
+            if (newCase.diagnosisId && Array.isArray(newCase.clues) && newCase.clues.length >= 6
+                && !this.diagnoses.some(d => d.id === newCase.diagnosisId)) {
+                skippedUnknownDx++;
+                return;
+            }
             if (newCase.diagnosisId && Array.isArray(newCase.clues) && newCase.clues.length >= 6) {
                 if (!newCase.id) newCase.id = `custom-pack-${Date.now()}-${idx + 1}`;
                 if (!newCase.caseNumber) newCase.caseNumber = idx + 1;
@@ -2032,7 +2977,9 @@ class PsikoVakaGame {
         });
 
         if (validCases.length === 0) {
-            throw new Error("6 ipucuna sahip geçerli klinik vaka bulunamadı.");
+            throw new Error(skippedUnknownDx > 0
+                ? `Tanısı güncel listede olmayan ${skippedUnknownDx} vaka atlandı; geçerli vaka kalmadı.`
+                : "6 ipucuna sahip geçerli klinik vaka bulunamadı.");
         }
 
         const nameInput = document.getElementById('customPackNameInput');
@@ -2050,7 +2997,7 @@ class PsikoVakaGame {
 
         this.applyActivePack(packId, true);
         this.closeModal(this.dom.caseManagerModal);
-        this.showToast(`🎉 "${customName}" (${validCases.length} vaka) kütüphaneye kaydedildi ve başlatıldı!`);
+        this.showToast(`🎉 "${customName}" (${validCases.length} vaka) kütüphaneye kaydedildi ve başlatıldı!${skippedUnknownDx > 0 ? ` ${skippedUnknownDx} vaka tanısı güncel listede olmadığı için atlandı.` : ''}`);
     }
 
     handleImportJSON(e) {
@@ -2180,7 +3127,7 @@ class PsikoVakaGame {
         const statusText = document.getElementById('matchmakingStatusText');
         const btnStart = document.getElementById('btnStartMatchmaking');
 
-        if (statusBox) statusBox.style.display = 'block';
+        if (statusBox) statusBox.hidden = false;
         if (btnStart) btnStart.disabled = true;
         if (statusText) statusText.textContent = '📡 Küresel Lobi Taranıyor... Aktif rakip aranıyor...';
 
@@ -2312,7 +3259,7 @@ class PsikoVakaGame {
         }
         const statusBox = document.getElementById('matchmakingStatusBox');
         const btnStart = document.getElementById('btnStartMatchmaking');
-        if (statusBox) statusBox.style.display = 'none';
+        if (statusBox) statusBox.hidden = true;
         if (btnStart) btnStart.disabled = false;
         if (notify) {
             this.showToast("🔍 Otomatik rakip arama durduruldu.");
@@ -2568,13 +3515,17 @@ class PsikoVakaGame {
         Object.keys(this.courses).forEach(courseKey => {
             const course = this.courses[courseKey];
             const btn = document.createElement('button');
-            btn.className = `course-pill ${this.activeCourseFilter === course.id ? 'active' : ''}`;
-            btn.innerHTML = `<span>${course.icon}</span> ${course.name}`;
+            btn.type = 'button';
+            const isActive = this.activeCourseFilter === course.id;
+            btn.className = `chip-btn course-pill ${isActive ? 'active' : ''}`;
+            btn.setAttribute('aria-pressed', String(isActive));
+            btn.textContent = course.id === 'ALL' ? 'Tümü' : course.name;
 
+            // Yeni arayüz: seçim sadece filtreyi değiştirir; vaka "Pratiğe başla" ile açılır
             btn.onclick = () => {
                 this.activeCourseFilter = course.id;
                 this.renderCourseFilters();
-                this.loadRandomPracticeCase();
+                this.updatePracticeSummary();
             };
 
             this.dom.courseNav.appendChild(btn);
@@ -2586,24 +3537,29 @@ class PsikoVakaGame {
         this.dom.filterBar.innerHTML = '';
 
         const allPill = document.createElement('button');
-        allPill.className = `filter-pill ${this.activeCategoryFilter === 'ALL' ? 'active' : ''}`;
-        allPill.textContent = "🌟 Tüm Kategoriler";
+        allPill.type = 'button';
+        allPill.className = `chip-btn filter-pill ${this.activeCategoryFilter === 'ALL' ? 'active' : ''}`;
+        allPill.setAttribute('aria-pressed', String(this.activeCategoryFilter === 'ALL'));
+        allPill.textContent = 'Tümü';
         allPill.onclick = () => {
             this.activeCategoryFilter = 'ALL';
             this.renderCategoryFilters();
-            this.loadRandomPracticeCase();
+            this.updatePracticeSummary();
         };
         this.dom.filterBar.appendChild(allPill);
 
         Object.keys(this.categories).forEach(catKey => {
             const cat = this.categories[catKey];
             const pill = document.createElement('button');
-            pill.className = `filter-pill ${this.activeCategoryFilter === catKey ? 'active' : ''}`;
-            pill.textContent = `${cat.icon} ${cat.name}`;
+            pill.type = 'button';
+            const isActive = this.activeCategoryFilter === catKey;
+            pill.className = `chip-btn filter-pill ${isActive ? 'active' : ''}`;
+            pill.setAttribute('aria-pressed', String(isActive));
+            pill.textContent = cat.name;
             pill.onclick = () => {
                 this.activeCategoryFilter = catKey;
                 this.renderCategoryFilters();
-                this.loadRandomPracticeCase();
+                this.updatePracticeSummary();
             };
             this.dom.filterBar.appendChild(pill);
         });
@@ -2672,7 +3628,7 @@ class PsikoVakaGame {
         const shareLinkInput = document.getElementById('studioShareLinkInput');
 
         if (resultContainer && shareLinkInput) {
-            resultContainer.style.display = 'block';
+            resultContainer.hidden = false;
             shareLinkInput.value = shareUrl;
 
             document.getElementById('btnCopyStudioLink').onclick = () => {
@@ -2699,14 +3655,13 @@ class PsikoVakaGame {
             const catDiags = this.diagnoses.filter(d => d.category === catKey);
             if (catDiags.length === 0) return;
 
-            const section = document.createElement('div');
-            section.className = 'edu-section';
-            section.style.marginBottom = '1rem';
+            const section = document.createElement('details');
+            section.className = 'guide-group';
 
-            let html = `<div class="edu-title">${cat.icon} ${cat.name} (${catDiags.length} Tanı)</div>`;
-            html += `<ul style="padding-left: 1.2rem; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7;">`;
+            let html = `<summary class="guide-group-head"><span class="guide-group-title">${cat.name}</span><span class="guide-group-count">${catDiags.length}</span></summary>`;
+            html += `<ul class="guide-items">`;
             catDiags.forEach(d => {
-                html += `<li><strong>${d.nameTr}</strong> <span style="font-size: 0.75rem; color: var(--text-muted);">(${d.nameEn})</span></li>`;
+                html += `<li class="guide-item-simple"><span class="guide-item-name">${d.nameTr}</span> <span class="guide-item-en">${d.nameEn}</span></li>`;
             });
             html += `</ul>`;
             section.innerHTML = html;
@@ -2726,28 +3681,27 @@ class PsikoVakaGame {
             const famTherapies = this.therapies.filter(t => t.family === famKey);
             if (famTherapies.length === 0) return;
 
-            const section = document.createElement('div');
-            section.className = 'edu-section';
-            section.style.marginBottom = '1.1rem';
+            const section = document.createElement('details');
+            section.className = 'guide-group';
 
-            let html = `<div class="edu-title">${fam.icon} ${fam.name} (${famTherapies.length} Yöntem)</div>`;
-            html += `<div style="display: flex; flex-direction: column; gap: 0.7rem; margin-top: 0.5rem;">`;
+            let html = `<summary class="guide-group-head"><span class="guide-group-title">${fam.name}</span><span class="guide-group-count">${famTherapies.length}</span></summary>`;
+            html += `<div class="guide-cards">`;
 
             famTherapies.forEach(t => {
                 let stepsHTML = '';
                 if (t.protocolSteps && t.protocolSteps.length > 0) {
-                    stepsHTML = `<div style="margin-top: 0.35rem; font-size: 0.81rem; color: var(--text-secondary);"><strong>🛠️ Protokol Adımları:</strong><ul style="padding-left: 1.1rem; margin-top: 0.2rem; line-height: 1.5;">${t.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
+                    stepsHTML = `<div class="guide-card-steps"><span class="guide-card-label">Protokol adımları</span><ul>${t.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
                 }
                 html += `
-                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-left: 3px solid #10b981; border-radius: 8px; padding: 0.75rem 0.9rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
-                            <strong style="color: var(--text-primary); font-size: 0.9rem;">${t.nameTr}</strong>
-                            <span style="font-size: 0.74rem; color: var(--text-muted);">${t.nameEn}</span>
+                    <article class="guide-card">
+                        <div class="guide-card-head">
+                            <strong class="guide-item-name">${t.nameTr}</strong>
+                            <span class="guide-item-en">${t.nameEn}</span>
                         </div>
-                        <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.3rem; line-height: 1.5;">${t.shortDefinition}</p>
+                        <p class="guide-card-text">${t.shortDefinition}</p>
                         ${stepsHTML}
-                        ${t.pitfalls ? `<div style="font-size: 0.79rem; color: #fbbf24; margin-top: 0.3rem; background: rgba(245, 158, 11, 0.08); padding: 0.3rem 0.5rem; border-radius: 4px;"><strong>⚠️ Klinik Tuzak:</strong> ${t.pitfalls}</div>` : ''}
-                    </div>
+                        ${t.pitfalls ? `<div class="guide-card-warn"><strong>Klinik tuzak:</strong> ${t.pitfalls}</div>` : ''}
+                    </article>
                 `;
             });
 
@@ -2769,28 +3723,27 @@ class PsikoVakaGame {
             const famItems = this.pharmacology.filter(p => p.family === famKey);
             if (famItems.length === 0) return;
 
-            const section = document.createElement('div');
-            section.className = 'edu-section';
-            section.style.marginBottom = '1.1rem';
+            const section = document.createElement('details');
+            section.className = 'guide-group';
 
-            let html = `<div class="edu-title" style="color: #fb7185;">${fam.icon} ${fam.name} (${famItems.length} Protokol)</div>`;
-            html += `<div style="display: flex; flex-direction: column; gap: 0.7rem; margin-top: 0.5rem;">`;
+            let html = `<summary class="guide-group-head"><span class="guide-group-title">${fam.name}</span><span class="guide-group-count">${famItems.length}</span></summary>`;
+            html += `<div class="guide-cards">`;
 
             famItems.forEach(p => {
                 let stepsHTML = '';
                 if (p.protocolSteps && p.protocolSteps.length > 0) {
-                    stepsHTML = `<div style="margin-top: 0.35rem; font-size: 0.81rem; color: var(--text-secondary);"><strong>💊 Klinik Uygulama & Endikasyon:</strong><ul style="padding-left: 1.1rem; margin-top: 0.2rem; line-height: 1.5;">${p.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
+                    stepsHTML = `<div class="guide-card-steps"><span class="guide-card-label">Uygulama ve endikasyon</span><ul>${p.protocolSteps.map(s => `<li>${s}</li>`).join('')}</ul></div>`;
                 }
                 html += `
-                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-left: 3px solid #f43f5e; border-radius: 8px; padding: 0.75rem 0.9rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.3rem;">
-                            <strong style="color: var(--text-primary); font-size: 0.9rem;">${p.nameTr}</strong>
-                            <span style="font-size: 0.74rem; color: var(--text-muted);">${p.nameEn || ''}</span>
+                    <article class="guide-card">
+                        <div class="guide-card-head">
+                            <strong class="guide-item-name">${p.nameTr}</strong>
+                            <span class="guide-item-en">${p.nameEn || ''}</span>
                         </div>
-                        <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.3rem; line-height: 1.5;">${p.shortDefinition || ''}</p>
+                        <p class="guide-card-text">${p.shortDefinition || ''}</p>
                         ${stepsHTML}
-                        ${p.pitfalls ? `<div style="font-size: 0.79rem; color: #fda4af; margin-top: 0.3rem; background: rgba(244, 63, 94, 0.08); padding: 0.3rem 0.5rem; border-radius: 4px;"><strong>⚠️ Kontrendikasyon & Yan Etki Uyarısı:</strong> ${p.pitfalls}</div>` : ''}
-                    </div>
+                        ${p.pitfalls ? `<div class="guide-card-warn"><strong>Kontrendikasyon ve yan etki:</strong> ${p.pitfalls}</div>` : ''}
+                    </article>
                 `;
             });
 
@@ -2851,15 +3804,12 @@ class PsikoVakaGame {
             const pct = Math.max(7, Math.round((count / maxVal) * 100));
 
             const row = document.createElement('div');
-            row.style.cssText = 'display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; margin-bottom:0.35rem;';
+            row.className = 'dist-row';
             row.innerHTML = `
-                <span style="width: 15px; font-weight: 700;">${i}</span>
-                <div style="flex: 1; background: var(--bg-primary); border-radius: 4px; overflow: hidden;">
-                    <div style="width: ${pct}%; background: var(--accent-primary); color: #fff; padding: 2px 8px; font-size: 0.75rem; font-weight: 700; border-radius: 4px; text-align: right;">
-                        ${count}
-                    </div>
-                </div>
+                <span class="dist-label">${i}</span>
+                <div class="dist-track"><div class="dist-bar${count > 0 ? ' has-value' : ''}">${count}</div></div>
             `;
+            row.querySelector('.dist-bar').style.width = `${pct}%`;
             distContainer.appendChild(row);
         }
 
@@ -2906,6 +3856,7 @@ class PsikoVakaGame {
     }
 
     launchConfetti() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const canvas = document.createElement('canvas');
         canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
         document.body.appendChild(canvas);
@@ -2960,11 +3911,29 @@ class PsikoVakaGame {
     }
 
     openModal(modal) {
-        if (modal) modal.classList.add('open');
+        if (!modal) return;
+        if (!modal.classList.contains('open')) {
+            modal._returnFocus = document.activeElement;
+        }
+        modal.classList.add('open');
+        document.body.classList.add('modal-open');
+        const body = modal.querySelector('.modal-body');
+        if (body) body.scrollTop = 0;
+        const focusTarget = modal.querySelector('.modal-header .btn-close-modal') || modal.querySelector('button');
+        if (focusTarget) setTimeout(() => { try { focusTarget.focus({ preventScroll: true }); } catch (e) {} }, 30);
     }
 
     closeModal(modal) {
-        if (modal) modal.classList.remove('open');
+        if (!modal) return;
+        const wasOpen = modal.classList.contains('open');
+        modal.classList.remove('open');
+        if (!document.querySelector('.modal-backdrop.open')) {
+            document.body.classList.remove('modal-open');
+        }
+        if (wasOpen && modal._returnFocus && document.body.contains(modal._returnFocus) && typeof modal._returnFocus.focus === 'function') {
+            try { modal._returnFocus.focus({ preventScroll: true }); } catch (e) {}
+        }
+        modal._returnFocus = null;
     }
 
     showToast(message) {
@@ -2989,10 +3958,18 @@ class PsikoVakaGame {
         const next = current === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('psikovaka_theme', next);
-        if (this.dom.themeToggleBtn) {
-            this.dom.themeToggleBtn.textContent = (next === 'light') ? '🌙' : '☀️';
-        }
+        applyThemeChrome(next);
     }
+}
+
+/** Tema düğmesinin simgesi/etiketi ve tarayıcı tema rengi */
+function applyThemeChrome(theme) {
+    const iconEl = document.getElementById('themeToggleIcon');
+    const labelEl = document.getElementById('themeToggleLabel');
+    if (iconEl) iconEl.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-${theme === 'light' ? 'sun' : 'moon'}"/></svg>`;
+    if (labelEl) labelEl.textContent = theme === 'light' ? 'Açık' : 'Koyu';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f7fb' : '#0f1117');
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -3008,10 +3985,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const savedTheme = localStorage.getItem('psikovaka_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    const themeBtn = document.getElementById('themeToggleBtn');
-    if (themeBtn) {
-        themeBtn.textContent = (savedTheme === 'light') ? '🌙' : '☀️';
-    }
+    applyThemeChrome(savedTheme);
 
     if (typeof attachOnlineArenaToGame === 'function') {
         attachOnlineArenaToGame(PsikoVakaGame);

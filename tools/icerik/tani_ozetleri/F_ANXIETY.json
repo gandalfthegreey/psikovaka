@@ -1,0 +1,186 @@
+{
+"specific_phobia_animal": {
+ "id": "specific_phobia_animal",
+ "nameTr": "Özgül Fobi (Hayvan Tipi: Örümcek, Yılan, Köpek)",
+ "nameEn": "Specific Phobia (Animal Type)",
+ "clinicalDescription": {
+  "overview": "Örümcek, böcek, yılan, köpek, kedi, kuş, fare gibi hayvanlara karşı duyulan, gerçek tehlikeyle orantısız, yoğun ve süregen korku ile kaçınmadır. Kişi hayvanla karşılaşacağı yerlere gitmekten kaçınabilir, hayvanın resmini görmek bile kaygıyı tetikleyebilir. Korkuda iğrenme duygusu (özellikle örümcek ve böceklerde) önemli bir bileşendir. Çocuklarda korku ağlama, öfke nöbeti, donakalma ya da bakım verene yapışma şeklinde görülebilir.",
+  "epidemiology": "Özgül fobi alt tipleri içinde en sık görülenlerdendir. Genellikle erken çocuklukta başlar ve kadınlarda belirgin olarak daha sıktır.",
+  "etiology": "Hayvanla yaşanmış olumsuz deneyim (doğrudan koşullanma), başkalarının korkusunu gözlemleme (dolaylı öğrenme), olumsuz bilgi aktarımı ve evrimsel 'hazırlanmışlık' (tehlikeli olabilecek canlılardan korkmaya biyolojik yatkınlık); iğrenme duyarlılığının yüksekliği.",
+  "prognosis": "Kademeli canlı (in vivo) maruz bırakma çok etkilidir; tek seanslık uzatılmış maruz bırakma protokolleri (Öst) ile birçok kişide hızlı ve kalıcı düzelme sağlanır. Tedavi edilmezse çocuklukta başlayan fobilerin bir kısmı yetişkinliğe uzanır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-G",
+   "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
+   "content": "Belirli bir nesne ya da durumla ilgili belirgin korku veya kaygı (A); fobik uyaranın hemen her zaman ani korku doğurması (B); uyarandan etkin olarak kaçınılması ya da yoğun korkuyla katlanılması (C); korkunun gerçek tehlike ve sosyokültürel bağlamla orantısız olması (D); süregenlik, tipik olarak 6 ay ya da daha uzun (E); belirgin sıkıntı ya da işlev bozulması (F); agorafobi, OKB, TSSB, ayrılma kaygısı ya da sosyal kaygı bozukluğu gibi başka bir bozuklukla daha iyi açıklanamama (G)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Hayvan Tipi",
+   "content": "Fobik uyaran hayvanlar ya da böceklerdir (örn. örümcek, yılan, köpek, böcek). Kişi birden fazla alt tipte fobi taşıyabilir; bu durumda her biri ayrı belirtilir."
+  }
+ ]
+},
+"specific_phobia_natural": {
+ "id": "specific_phobia_natural",
+ "nameTr": "Özgül Fobi (Doğal Çevre Tipi: Yükseklik, Fırtına, Su)",
+ "nameEn": "Specific Phobia (Natural Environment Type)",
+ "clinicalDescription": {
+  "overview": "Yükseklik, fırtına, gök gürültüsü, şimşek, su (derin su, deniz) gibi doğal çevre öğelerine karşı duyulan orantısız ve süregen korku ile kaçınmadır. Yükseklik korkusu (akrofobi) olan kişi yüksek katlarda balkona çıkamaz, köprülerden veya merdiven boşluklarından kaçınır ve yükseklikte baş dönmesi, düşme ya da 'atlama dürtüsü' korkusu yaşayabilir. Not: 'Hidrofobi' terimi tıpta kuduzun bir belirtisi için de kullanılır; suya karşı fobi için 'akuafobi' terimi daha uygundur.",
+  "epidemiology": "Yaygın bir alt tiptir; yükseklik korkusu toplumda en sık görülen özgül fobiler arasındadır. Başlangıç genellikle çocukluktadır.",
+  "etiology": "Doğrudan olumsuz deneyim, gözlemle öğrenme ve evrimsel hazırlanmışlık. Yükseklik korkusunda görsel-vestibüler uyumsuzluk ve denge sistemine ilişkin duyarlılık rol oynayabilir.",
+  "prognosis": "Kademeli maruz bırakma (canlı ya da sanal gerçeklik ile) etkilidir. Akrofobide sanal gerçeklik maruziyet terapisinin etkinliği iyi belgelenmiştir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-G",
+   "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
+   "content": "Belirli nesne/duruma karşı belirgin korku (A), hemen her karşılaşmada ani korku (B), kaçınma ya da yoğun korkuyla katlanma (C), gerçek tehlikeyle orantısızlık (D), tipik olarak 6 ay ya da daha uzun süre (E), belirgin sıkıntı/işlev bozulması (F), başka bir ruhsal bozuklukla daha iyi açıklanamama (G)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Doğal Çevre Tipi",
+   "content": "Fobik uyaran doğal çevreye ait öğelerdir (örn. yükseklik, fırtına, su). Yükseklikte baş dönmesi ve denge kaybı yakınmalarında vestibüler bozukluklar ayırıcı tanıda değerlendirilmelidir."
+  }
+ ]
+},
+"specific_phobia_situational": {
+ "id": "specific_phobia_situational",
+ "nameTr": "Özgül Fobi (Durumsal Tip: Klostrofobi, Uçak, Asansör)",
+ "nameEn": "Specific Phobia (Situational Type)",
+ "clinicalDescription": {
+  "overview": "Uçağa binme, asansör, kapalı alanlar (klostrofobi), tünel, köprü, toplu taşıma ya da araç kullanma gibi belirli durumlara karşı orantısız ve süregen korku ile kaçınmadır. Korku çoğu zaman sıkışıp kalma, kaçamama, kontrolü kaybetme ya da panik atak geçirme beklentisiyle ilişkilidir. MR çekimi gibi tıbbi işlemlerde klostrofobi önemli sorun yaratabilir.",
+  "epidemiology": "Başlangıç yaşı iki tepe gösterir: çocukluk ve 20'li yaşların ortası. Kadınlarda daha sık görülür.",
+  "etiology": "Olumsuz deneyimler (örn. asansörde mahsur kalma, türbülans), beklenmedik panik atakların belirli bir durumla ilişkilendirilmesi ve felaketleştirici yorumlar. Panik bozukluğu ve agorafobi ile sık birliktelik gösterir.",
+  "prognosis": "Kademeli maruz bırakma ve bilişsel yeniden yapılandırma etkilidir; uçuş fobisinde sanal gerçeklik uygulamaları yararlıdır. Ayırıcı tanıda agorafobi önemlidir: korku 5 agorafobik durum grubundan (toplu taşıma, açık alanlar, kapalı yerler, sıra ya da kalabalık, evin dışında yalnız olma) en az ikisini kapsıyorsa agorafobi düşünülür."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-G",
+   "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
+   "content": "Belirli nesne/duruma karşı belirgin korku (A), hemen her karşılaşmada ani korku (B), kaçınma ya da yoğun korkuyla katlanma (C), gerçek tehlike ve bağlamla orantısızlık (D), tipik olarak 6 ay ya da daha uzun süre (E), belirgin sıkıntı/işlev bozulması (F), agorafobi ve panik bozukluğu dahil başka bir bozuklukla daha iyi açıklanamama (G)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Durumsal Tip",
+   "content": "Fobik uyaran belirli durumlardır (örn. uçak, asansör, kapalı yerler, tünel, köprü). Korku tek bir durumla sınırlıysa özgül fobi, birden fazla agorafobik durum grubunu kapsıyorsa agorafobi tanısı değerlendirilir."
+  }
+ ]
+},
+"specific_phobia_phagophobia": {
+ "id": "specific_phobia_phagophobia",
+ "nameTr": "Özgül Fobi (Boğulma/Yutma Korkusu / Fagofobi)",
+ "nameEn": "Specific Phobia (Phagophobia)",
+ "clinicalDescription": {
+  "overview": "Yutkunurken boğulma ya da lokmanın boğazda kalması korkusuyla katı yiyecekleri, hapları ya da bazen sıvıları yutmaktan kaçınmadır. Çoğu zaman gerçek bir boğulma ya da boğulma tehlikesi atlatma deneyiminden sonra başlar. Kişi yalnızca püre ve sıvı gıdalarla beslenmeye, lokmaları çok küçük kesmeye, sürekli su içerek yemeye başlayabilir; kilo kaybı ve beslenme yetersizliği gelişebilir. DSM-5'te özgül fobinin 'diğer' alt tipi kapsamında (boğulma, kusma ya da hastalık kapma korkusu gibi) değerlendirilir.",
+  "epidemiology": "Seyrek görülür; güvenilir toplum yaygınlığı verisi yoktur. Çocuklarda ve yetişkinlerde görülebilir.",
+  "etiology": "Travmatik boğulma deneyimi sonrası koşullanma, boğaz duyumlarına aşırı dikkat ve felaketleştirici yorum (örn. 'boğazım kapanıyor'). Ayırıcı tanıda organik yutma güçlüğü (disfaji; özofagus ve nörolojik hastalıklar), globus hissi, kaçıngan/kısıtlayıcı yiyecek alımı bozukluğu (ARFID), panik bozukluğu ve OKB değerlendirilmelidir.",
+  "prognosis": "Organik nedenler dışlandıktan sonra kademeli yiyecek dokusu maruziyeti, interoseptif maruziyet ve BDT ile iyi yanıt alınır. Beslenme ve kilo kaybı belirgin ise ve kısıtlama klinik tabloya egemense ARFID tanısı da konabilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-G",
+   "title": "Özgül Fobi Ortak Ölçütleri (Süre tipik olarak ≥ 6 ay)",
+   "content": "Yutma/boğulmaya karşı belirgin korku (A), yutma durumlarında hemen her zaman ani korku (B), yutmadan kaçınma ya da yoğun korkuyla katlanma (C), gerçek tehlikeyle orantısızlık (D), tipik olarak 6 ay ya da daha uzun süre (E), belirgin sıkıntı/işlev bozulması (F), başka bir bozuklukla daha iyi açıklanamama (G)."
+  },
+  {
+   "code": "Alt Tip & Ayırıcı Tanı",
+   "title": "Diğer Tip ve ARFID ile İlişki",
+   "content": "Fagofobi, özgül fobinin 'diğer' alt tipi (boğulmaya ya da kusmaya yol açabilecek durumlar vb.) içinde kodlanır. Boğulma korkusuna bağlı yeme kısıtlaması belirgin kilo kaybı, beslenme yetersizliği ya da işlevsellik kaybına yol açıyorsa ARFID ölçütleri de değerlendirilmelidir."
+  }
+ ]
+},
+"substance_induced_anxiety": {
+ "id": "substance_induced_anxiety",
+ "nameTr": "Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu",
+ "nameEn": "Substance/Medication-Induced Anxiety Disorder",
+ "clinicalDescription": {
+  "overview": "Panik atakların ya da kaygının klinik tabloya egemen olduğu ve bunun bir maddenin intoksikasyonu veya yoksunluğu sırasında ya da hemen sonrasında veya bir ilaca maruziyet sonrasında ortaya çıktığı anksiyete bozukluğudur. Kafein, uyarıcılar (amfetamin, kokain), esrar ve halüsinojenler intoksikasyonla; alkol, benzodiazepin ve diğer sedatiflerin bırakılması yoksunlukla kaygıya yol açabilir. İlaçlar arasında bronkodilatörler, kortikosteroidler, tiroid hormonu, dekonjestanlar ve bazı antidepresanların başlangıç dönemi sayılabilir.",
+  "epidemiology": "Genel toplumda nadir bir tanıdır; ancak klinik örneklemlerde, özellikle madde kullanım bozukluğu olanlarda daha sık görülür.",
+  "etiology": "Noradrenerjik ve glutamaterjik etkinlik artışı, adenozin reseptör blokajı (kafein), yoksunlukta GABA-erjik ketlenmenin azalması.",
+  "prognosis": "Maddenin azaltılması ya da kesilmesiyle belirtiler genellikle düzelir. Benzodiazepin ya da alkol yoksunluğu tıbbi açıdan tehlikeli olabileceğinden kontrollü detoksifikasyon gerekir. Ayıklıkta süren kaygı bağımsız bir anksiyete bozukluğunu düşündürür."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Kaygı/Panik ve Maddeyle İlişki",
+   "content": "Panik ataklar ya da kaygı klinik tabloya egemendir (A). Öykü, muayene ya da laboratuvar bulgularında belirtilerin intoksikasyon/yoksunluk sırasında veya hemen sonrasında ya da ilaç maruziyeti sonrasında geliştiğine ve maddenin bu belirtilere yol açabileceğine dair kanıt vardır (B)."
+  },
+  {
+   "code": "Kriter C, D & E",
+   "title": "Bağımsız Anksiyete Bozukluğunun Dışlanması",
+   "content": "Maddeye bağlı olmayan bir anksiyete bozukluğuyla daha iyi açıklanamaz (belirtilerin madde kullanımından önce başlaması ya da akut yoksunluk/ağır intoksikasyon sonrasında belirgin süre, örn. yaklaşık 1 ay, sürmesi bağımsız bozukluğu düşündürür) (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar (E). Belirtiler olağan intoksikasyon/yoksunluk tablosunu aşıp klinik ilgi gerektirecek denli ağırsa bu tanı konur."
+  }
+ ]
+},
+"anxiety_due_to_medical": {
+ "id": "anxiety_due_to_medical",
+ "nameTr": "Başka Bir Sağlık Durumuna Bağlı Anksiyete Bozukluğu",
+ "nameEn": "Anxiety Disorder Due to Another Medical Condition",
+ "clinicalDescription": {
+  "overview": "Klinik tabloya egemen olan kaygı ya da panik atakların bir tıbbi hastalığın doğrudan patofizyolojik sonucu olduğu anksiyete bozukluğudur. Hastalık tanısının yarattığı psikolojik kaygıdan farklı olarak, kaygı hastalığın vücut üzerindeki doğrudan etkisiyle açıklanır. Geç yaşta (ör. 35 yaşından sonra) başlayan ilk kaygı ya da panik belirtileri, kişisel/ailesel öykünün olmaması, kaçınma davranışının belirgin olmaması ve tıbbi bulgular tıbbi bir nedeni düşündürmelidir.",
+  "epidemiology": "Yaygınlık altta yatan hastalığa göre değişir; tiroid, kalp ve solunum hastalıklarında kaygı belirtileri sıktır.",
+  "etiology": "Endokrin (hipertiroidi, feokromositoma, hipoglisemi, hiperkortizolizm), kalp-damar (aritmiler, kalp yetmezliği, pulmoner emboli), solunum (KOAH, astım, pnömoni), metabolik (B12 eksikliği, porfiri) ve nörolojik (tümörler, vestibüler bozukluk, ensefalit, nöbet bozuklukları) nedenler.",
+  "prognosis": "Altta yatan hastalığın tedavisi kaygıyı belirgin biçimde azaltır (örn. hipertiroidinin tedavisi, feokromositomanın cerrahi tedavisi). Kalıcı tıbbi durumlarda kaygıya yönelik psikoterapi ve uygun ilaç tedavisi eklenir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Tanı Ölçütleri",
+   "content": "Panik ataklar ya da kaygı klinik tabloya egemendir (A). Tablonun başka bir sağlık durumunun doğrudan patofizyolojik sonucu olduğuna dair kanıt vardır (B). Başka bir ruhsal bozuklukla daha iyi açıklanamaz (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  },
+  {
+   "code": "Ayırıcı Tanı",
+   "title": "Hastalığa Verilen Psikolojik Tepkiden Ayrım",
+   "content": "Ciddi bir tıbbi hastalık tanısına verilen kaygı tepkisi bu tanıya değil, uyum bozukluğuna (kaygı ile) ya da başka bir anksiyete bozukluğuna işaret eder. Hastalık kaygısı bozukluğunda ise kaygının odağı hastalığın kendisidir; doğrudan fizyolojik bir neden yoktur."
+  }
+ ]
+},
+"ataque_de_nervios": {
+ "id": "ataque_de_nervios",
+ "nameTr": "Kültüre Özgü Anksiyete Sendromu (Ataque de Nervios)",
+ "nameEn": "Ataque de Nervios",
+ "clinicalDescription": {
+  "overview": "Latin kökenli, özellikle Karayip kökenli topluluklarda görülen ve kültürel olarak tanınan bir sıkıntı ifadesidir (sinir krizi). Genellikle aileyle ilgili bir stres etkeni (yakının ölümü, ayrılık, eş ya da çocuklarla çatışma, bir kazaya tanık olma) sonrasında başlayan yoğun duygusal çöküntü dönemidir. Denetimsiz bağırma ve çığlık atma, ağlama nöbetleri, titreme, göğüsten başa yükselen sıcaklık hissi, sözel ya da fiziksel saldırganlık görülür; dissosiyatif yaşantılar (duyarsızlaşma, gerçekliğin değişmesi, amnezi), nöbet benzeri ya da bayılma atakları ve intihar girişimleri eşlik edebilir. Temel deneyim, kontrolün kaybedildiği duygusudur. DSM-5-TR'de bir tanı kategorisi değildir; 'Kültürel Sıkıntı Kavramları' bölümünde yer alır.",
+  "epidemiology": "Latin Amerika ve Karayip kökenli topluluklarda yaygın olarak bildirilir; kadınlarda ve düşük sosyoekonomik düzeyde daha sık olduğu belirtilmektedir. Kesin oranlar topluluğa göre değişir.",
+  "etiology": "Kültürel olarak paylaşılan bir sıkıntı ifade biçimidir; kişilerarası çatışmalar, kayıplar ve aile içi stres tetikleyicidir. Travma öyküsü ve eşlik eden anksiyete ya da depresif bozukluklar riski artırabilir.",
+  "prognosis": "Ataklar genellikle kısa sürer ve kişi kısa sürede olağan işlevselliğine döner; atak sırasında olanları hatırlamayabilir. Değerlendirmede kültürel bağlamın anlaşılması, eşlik eden ruhsal bozuklukların ve intihar riskinin araştırılması önemlidir; Kültürel Formülasyon Görüşmesi kullanılabilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kültürel Kavram",
+   "title": "Temel Özellikler (Tanı ölçütü değildir)",
+   "content": "Belirgin bir stres etkeni sonrasında ortaya çıkan, denetimsiz bağırma, ağlama, titreme, saldırganlık, dissosiyatif yaşantılar ve nöbet benzeri ya da bayılma ataklarıyla giden yoğun duygusal çöküntü; kontrolü kaybetme hissi ve atak sonrasında hızla olağan işlevselliğe dönüş."
+  },
+  {
+   "code": "İlişkili DSM Tanıları",
+   "title": "Ayırıcı Tanı ve Eşleşen Kategoriler",
+   "content": "Panik bozukluğundan farkı, atakların genellikle açık bir tetikleyiciye bağlı olması ve panik bozukluğuna özgü yoğun korku/endişenin çoğu zaman bulunmamasıdır. Klinik tabloya göre belirlenmiş diğer ya da belirtilmemiş anksiyete bozukluğu, konversiyon (işlevsel nörolojik belirti) bozukluğu, belirlenmiş diğer dissosiyatif bozukluk ya da aralıklı patlayıcı bozukluk ile ilişkilendirilebilir."
+  }
+ ]
+},
+"taijin_kyofusho": {
+ "id": "taijin_kyofusho",
+ "nameTr": "Taijin Kyofusho (Başkalarını Rahatsız Etme / Bakış Fobisi)",
+ "nameEn": "Taijin Kyofusho",
+ "clinicalDescription": {
+  "overview": "Japonya'da tanımlanmış kültürel bir sıkıntı kavramıdır ('kişilerarası korku bozukluğu'). Kişi, toplumsal etkileşimlerdeki görünüşünün ya da davranışlarının yetersiz olduğu veya başkalarını rahatsız ettiği, utandırdığı ya da incittiği düşüncesi nedeniyle kişilerarası durumlardan kaygı duyar ve kaçınır. Batı'daki sosyal kaygıda odak 'kendini küçük düşürmek' iken, taijin kyofusho'da odak çoğu zaman 'başkalarını rahatsız etmek'tir. Alt biçimleri: kızarma korkusu, göz teması/bakış korkusu, beden kokusunun başkalarını rahatsız ettiği korkusu, yüz ifadesinin ya da bedenin çirkin/kusurlu olduğu korkusu. Korku sanrı düzeyinde bir inanca ulaşabilir. DSM-5-TR'de ayrı bir tanı değil, 'Kültürel Sıkıntı Kavramları' arasında yer alır.",
+  "epidemiology": "Japonya'da ve benzer kavramların bulunduğu Kore (taein kong-po) gibi toplumlarda bildirilmektedir; genellikle ergenlik ve genç erişkinlikte başlar.",
+  "etiology": "Kişilerarası uyum, başkalarına karşı duyarlılık ve toplumsal hiyerarşiye önem veren kültürel değerler bağlamında ortaya çıktığı düşünülür; sosyal kaygıya yatkınlık ve utanç duyarlılığı rol oynar.",
+  "prognosis": "Sosyal kaygı bozukluğuna benzer biçimde BDT ve maruz bırakma, Japonya'da ise Morita terapisi gibi yaklaşımlar kullanılmaktadır. Sanrısal düzeyde inanç taşıyanlarda tedavi daha güçtür."
+ },
+ "criteriaList": [
+  {
+   "code": "Kültürel Kavram",
+   "title": "Temel Özellikler (Tanı ölçütü değildir)",
+   "content": "Toplumsal etkileşimde görünüşün, beden kokusunun, bakışın, kızarmanın ya da yüz ifadesinin başkalarını rahatsız edeceği veya incitecekleri düşüncesine bağlı kaygı ve kişilerarası durumlardan kaçınma. 'Duyarlı' biçimde aşırı toplumsal duyarlılık, 'saldırgan/rahatsız edici' biçimde ise başkalarına zarar verme kaygısı öne çıkar."
+  },
+  {
+   "code": "İlişkili DSM Tanıları",
+   "title": "Ayırıcı Tanı ve Eşleşen Kategoriler",
+   "content": "DSM-5'te sosyal kaygı bozukluğu ölçütleri, 'başkalarını rahatsız etme' korkusunu da kapsayacak biçimde tanımlanmıştır. Klinik tabloya göre sosyal kaygı bozukluğu, beden algısı bozukluğu, koku alma ile ilgili referans bozukluğu (belirlenmiş diğer obsesif-kompulsif ve ilişkili bozukluk; jikoshu-kyofu) ya da inanç sanrı düzeyindeyse sanrılı bozukluk düşünülür."
+  }
+ ]
+}
+}

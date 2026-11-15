@@ -1,0 +1,39 @@
+{
+  "other_specified_ocd": {
+    "id": "other_specified_ocd",
+    "nameTr": "Belirlenmiş Diğer Bir OKB ve İlişkili Bozukluk (Obsesyonel Kıskançlık / Koro)",
+    "nameEn": "Other Specified Obsessive-Compulsive and Related Disorder",
+    "clinicalDescription": {
+      "overview": "Belirlenmiş Diğer Bir Obsesif-Kompulsif ve İlişkili Bozukluk, OKB ve ilişkili bozukluklara özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı ve klinisyenin bunun nedenini belirttiği durumlarda kullanılır. Obsesyonel kıskançlık (partnerin sadakatsizliğine ilişkin sanrı düzeyinde olmayan, tekrarlayıcı kontrol davranışlarıyla giden uğraş), dudak ısırma veya yanak çiğneme gibi bedene yönelik yineleyici davranışlar ve penisin karna doğru çekilip kaybolacağı korkusuyla seyreden Koro sendromu bu kategoriye örnektir.",
+      "epidemiology": "Ayrı bir yaygınlık verisi yoktur; bedene yönelik yineleyici davranışlar (tırnak yeme, dudak ısırma) toplumda sık görülür, bozukluk düzeyine ulaşanlar daha azdır. Koro Güney ve Doğu Asya'da salgınlar biçiminde bildirilmiştir.",
+      "etiology": "OKB spektrumuyla ortak nörobiyolojik (kortiko-striato-talamo-kortikal devreler) ve kalıtsal etmenler ile kültürel inanç sistemleri rol oynar.",
+      "prognosis": "Tedavi en yakın özgül bozukluğun ilkelerine göre planlanır: obsesyonel kıskançlıkta maruz bırakma ve tepki önleme ile çift çalışmaları, bedene yönelik yineleyici davranışlarda alışkanlık tersine çevirme eğitimi, kültüre bağlı tablolarda psikoeğitim ve güvence."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Belirlenmiş Diğer Bir Obsesif-Kompulsif ve İlişkili Bozukluk",
+        "content": "Obsesif-Kompulsif ve İlişkili Bozukluk grubuna özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı durumlarda kullanılır. Klinisyen ölçütlerin neden karşılanmadığını belirtir (ör. 'obsesyonel kıskançlık')."
+      },
+      {
+        "code": "Örnekler",
+        "title": "DSM-5-TR'de Verilen Örnek Tablolar",
+        "content": "Bu kategoriyle belirtilebilecek tablolara örnekler:",
+        "items": [
+          "1. Gerçek kusurlarla birlikte beden algısı bozukluğu benzeri bozukluk (kusur gerçek ama uğraş açıkça aşırı).",
+          "2. Yineleyici davranışlar olmaksızın beden algısı bozukluğu benzeri bozukluk.",
+          "3. Bedene yönelik yineleyici davranış bozukluğu (dudak ısırma, yanak çiğneme, tırnak yeme vb.).",
+          "4. Obsesyonel kıskançlık (partnerin algılanan sadakatsizliğiyle sanrı düzeyinde olmayan uğraş).",
+          "5. Shubo-kyofu (aşırı beden kusuru korkusu; Japonya).",
+          "6. Koro (penisin ya da kadınlarda meme başı/vulvanın bedene çekilip kaybolacağı ve ölüme yol açacağı yönünde ani, yoğun anksiyete).",
+          "7. Jikoshu-kyofu (bedenin kötü koku yaydığı korkusu; DSM-5-TR'de koku alma referans bozukluğuyla ilişkilendirilir)."
+        ]
+      },
+      {
+        "code": "Belirtilmemiş ile Farkı",
+        "title": "Nedenin Belirtilmesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş' kategori kullanılır."
+      }
+    ]
+  }
+}

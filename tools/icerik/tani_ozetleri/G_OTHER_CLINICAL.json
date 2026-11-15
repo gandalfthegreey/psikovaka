@@ -1,0 +1,582 @@
+{
+  "medication_induced_parkinsonism": {
+    "id": "medication_induced_parkinsonism",
+    "nameTr": "Nöroleptiklerin Yol Açtığı Parkinsonizm (Rijidite / Titreme)",
+    "nameEn": "Neuroleptic-Induced Parkinsonism",
+    "clinicalDescription": {
+      "overview": "Antipsikotik İlaç ve Diğer Dopamin Reseptör Blokerlerinin Yol Açtığı Parkinsonizm (nöroleptik kaynaklı parkinsonizm), dopamin D2 reseptörlerini bloke eden ilaçların (antipsikotikler, metoklopramid, bazı antiemetikler) başlanması, dozunun artırılması ya da ekstrapiramidal belirtileri tedavi eden bir ilacın azaltılmasından sonraki birkaç hafta içinde gelişen parkinson tablosudur. İstirahat tremoru, kas rijiditesi (dişli çark), akinezi/bradikinezi, maske yüz, küçük adımlarla yürüme, salya artışı ve mikrografi görülür. DSM-5-TR'de ruhsal bozukluk değil, 'İlaca Bağlı Hareket Bozuklukları' arasında yer alır.",
+      "epidemiology": "Birinci kuşak yüksek potensli antipsikotik kullananlarda sıktır; ikinci kuşak antipsikotiklerde (özellikle risperidon gibi yüksek dozlarda) de görülür. Yaşlılar, kadınlar ve önceden nörolojik hastalığı olanlarda risk daha yüksektir.",
+      "etiology": "Nigrostriatal yolda dopamin D2 reseptörlerinin yüksek oranda (yaklaşık %80'in üzerinde) bloke edilmesi bazal ganglionlarda dopamin-asetilkolin dengesini bozar.",
+      "prognosis": "İlacın azaltılması, daha düşük ekstrapiramidal yan etki profiline sahip bir ilaca geçilmesi ya da antikolinerjik ilaç eklenmesiyle genellikle haftalar-aylar içinde düzelir; yaşlılarda bazen aylarca sürebilir. Düzelmiyorsa altta yatan bir Parkinson hastalığının açığa çıkmış olabileceği düşünülmelidir. Tablo depresyonun psikomotor yavaşlığı ya da şizofreninin negatif belirtileriyle karıştırılabilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Dopamin Blokajına Bağlı Parkinson Belirtileri",
+        "content": "Parkinson tremoru, kas rijiditesi, akinezi (hareketi başlatmada güçlük) ya da bradikinezi (hareket yavaşlığı) belirtilerinin, dopamin reseptör blokeri bir ilacın başlanması ya da dozunun artırılması veya ekstrapiramidal belirtileri tedavi eden bir ilacın azaltılmasından sonraki birkaç hafta içinde gelişmesi."
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Ayırt Edilmesi Gerekenler",
+        "content": "İdiyopatik Parkinson hastalığı (genellikle asimetrik başlangıç, ilaçla zamansal ilişki yok), Lewy cisimcikli demans, nöroleptik malign sendrom (ateş, otonom dengesizlik, CK yüksekliği), akatizi, depresyondaki psikomotor yavaşlama ve şizofrenideki negatif belirtiler."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Ruhsal Bozukluk Değil",
+        "content": "İlaca bağlı hareket bozuklukları DSM-5-TR'de ayrı bir bölümde yer alır ve ruhsal bozukluk olarak sayılmaz; ilaç tedavisinin yönetimi ve ayırıcı tanı açısından önemli oldukları için kaydedilir."
+      }
+    ]
+  },
+  "borderline_intellectual_functioning": {
+    "id": "borderline_intellectual_functioning",
+    "nameTr": "Sınırda Zeka Düzeyi (IQ 70-84)",
+    "nameEn": "Borderline Intellectual Functioning",
+    "clinicalDescription": {
+      "overview": "Sınırda Entelektüel İşlevsellik, zihinsel yetersizlik (zihinsel gelişim bozukluğu) ölçütlerini karşılamayan ancak ortalamanın belirgin altında kalan entelektüel işlevsellik düzeyinin klinik ilginin odağı olması ya da kişinin tedavisini/prognozunu etkilemesidir. Bu kişiler okulda zorlanır, karmaşık talimatları anlamakta ve yeni durumlara uyum sağlamakta güçlük çekebilir, ama günlük yaşamda büyük ölçüde bağımsızdır. DSM-5-TR'de bir ruhsal bozukluk değil, 'Klinik İlginin Odağı Olabilecek Diğer Durumlar' arasında yer alır.",
+      "epidemiology": "Ölçülen zekâ puanlarının normal dağılımı nedeniyle toplumun yaklaşık %10-15'i bu aralığa düşer; ancak bu kategori yalnızca durum klinik ilgi gerektirdiğinde kullanılır.",
+      "etiology": "Kalıtsal etmenler, gebelik ve doğum komplikasyonları, düşük sosyoekonomik düzey, yetersiz uyaran ve eğitim olanakları, beslenme bozukluğu ve erken yaşta ihmal katkıda bulunur.",
+      "prognosis": "Okul başarısızlığı, işsizlik, madde kullanımı, sömürülme ve adli sorunlar açısından risk artmıştır; eşlik eden ruhsal bozuklukların tanı ve tedavisinde (ör. BDT'nin basitleştirilmesi) bu düzey dikkate alınmalıdır. Eğitimde bireyselleştirilmiş destek ve mesleki rehberlik yararlıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Zihinsel Yetersizlik Eşiğinin Üzerinde, Ortalamanın Altında İşlevsellik",
+        "content": "Entelektüel işlevselliğin zihinsel yetersizlik tanısı gerektirmeyen ama ortalamanın belirgin altında olan bir düzeyde bulunması ve bu durumun klinik ilginin odağı olması ya da tedavi/prognozu etkilemesi."
+      },
+      {
+        "code": "Puan Aralığı Notu",
+        "title": "IQ 71-84 Aralığı Tarihseldir",
+        "content": "DSM-IV-TR bu durumu yaklaşık 71-84 IQ aralığıyla tanımlıyordu. DSM-5 ve DSM-5-TR sabit bir IQ aralığı vermez; zihinsel yetersizlikte olduğu gibi tanı yalnızca puanla değil, entelektüel ve uyumsal işlevselliğin birlikte dikkatli değerlendirilmesiyle yapılır. Ölçüm hatası (yaklaşık ±5 puan) nedeniyle sınırda puanlar ile hafif zihinsel yetersizlik ayrımı uyumsal işlevselliğe göre yapılmalıdır."
+      },
+      {
+        "code": "Kullanım Koşulu",
+        "title": "Klinik İlginin Odağı Olması",
+        "content": "Bu kategori bir ruhsal bozukluk değildir. Durum klinik ilginin odağı olduğunda ya da kişinin bir ruhsal veya bedensel bozukluğunun gidişini, prognozunu ya da tedavisini etkilediğinde kaydedilir."
+      }
+    ]
+  },
+  "relational_problem_partner": {
+    "id": "relational_problem_partner",
+    "nameTr": "Eş/Partner İlişkisi Sorunu",
+    "nameEn": "Relationship Distress With Spouse or Intimate Partner",
+    "clinicalDescription": {
+      "overview": "Eş ya da Yakın Partnerle İlişki Sıkıntısı, evlilik ya da yakın partner ilişkisinin niteliğinin klinik ilginin odağı olduğu ya da bir ruhsal veya bedensel bozukluğun gidişini, prognozunu ya da tedavisini etkilediği durumlarda kullanılır. Sıkıntı davranışsal (çatışma çözümünde güçlük, geri çekilme, aşırı müdahale), bilişsel (partnere süreğen olumsuz yüklemeler, iyi niyetli davranışları görmezden gelme) ve duygusal (süreğen üzüntü, ilgisizlik, öfke) alanlarda bozulma ile kendini gösterir. Partnerlerin cinsiyeti fark etmez.",
+      "epidemiology": "Çift ve aile terapisine başvuruların en sık nedenlerindendir. Depresyon, anksiyete ve alkol kullanım bozukluğu ile karşılıklı olarak birbirini etkiler.",
+      "etiology": "İletişim örüntüleri (eleştiri, aşağılama, savunuculuk, duvar örme gibi olumsuz döngüler), bağlanma güvensizliği, stres etmenleri (maddi sorunlar, çocuk bakımı, hastalık), sadakatsizlik ve bireysel ruhsal bozukluklar rol oynar.",
+      "prognosis": "Kanıta dayalı çift terapileri (bilişsel-davranışçı çift terapisi, duygu odaklı çift terapisi, bütünleştirici davranışçı çift terapisi) ilişki doyumunu artırır. İlişki sıkıntısı bireysel depresyonun nüks riskini artırdığından bireysel tedavide de ele alınmalıdır. Eşe yönelik şiddet varlığı mutlaka taranmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "İlişkinin Niteliğine Odaklı Klinik Sorun",
+        "content": "Eş ya da yakın partnerle ilişkinin niteliğinin klinik ilginin başlıca odağı olması ya da bir ruhsal veya bedensel bozukluğun gidişini, prognozunu veya tedavisini etkilemesi."
+      },
+      {
+        "code": "Belirtiler",
+        "title": "Bozulmanın Görüldüğü Alanlar",
+        "content": "Davranışsal (çatışmaları çözememe, geri çekilme, aşırı müdahale), bilişsel (partnerin niyetlerine süreğen olumsuz yüklemeler, olumlu davranışları göz ardı etme) ve duygusal (süreğen üzüntü, ilgisizlik ve/veya öfke) alanlarda bozulma."
+      },
+      {
+        "code": "Dışlama",
+        "title": "Ne Zaman Kullanılmaz",
+        "content": "Klinik odak eşe yönelik şiddet ya da istismar, cinsel işlev bozukluğu veya bireysel bir ruhsal bozukluksa bu durumlar ayrıca/öncelikli olarak kodlanır."
+      }
+    ]
+  },
+  "parent_child_relational_problem": {
+    "id": "parent_child_relational_problem",
+    "nameTr": "Ebeveyn-Çocuk İlişkisi Sorunu",
+    "nameEn": "Parent-Child Relational Problem",
+    "clinicalDescription": {
+      "overview": "Ebeveyn-Çocuk İlişki Sorunu, ebeveyn (biyolojik, evlat edinen, koruyucu ya da çocuğa ebeveyn işlevi gören başka bir bakım veren) ile çocuk arasındaki ilişkinin niteliğinin klinik ilginin odağı olduğu ya da bir ruhsal veya bedensel bozukluğun gidişini, prognozunu veya tedavisini etkilediği durumlarda kullanılır. Ebeveynlerin yetersiz denetimi, aşırı koruyuculuk, aşırı baskı, tehdit ya da cezaya başvurma, çocuğun ebeveyne karşı süreğen öfkesi, düşmanca yüklemeler ve duygusal uzaklaşma tipik görünümlerdir.",
+      "epidemiology": "Çocuk ve ergen ruh sağlığı başvurularında çok yaygındır; özellikle ergenlik döneminde, boşanma ve yeniden evlenme sonrası ve ebeveynin ruhsal bozukluğu olduğunda sıklaşır.",
+      "etiology": "Çocuğun mizacı ve nörogelişimsel güçlükleri (DEHB, OSB), ebeveynin ruhsal bozukluğu ya da madde kullanımı, ebeveynlik becerilerindeki eksiklik, gelişim dönemine özgü özerklik çatışmaları ve aile stres etmenleri etkileşir.",
+      "prognosis": "Ebeveyn eğitimi programları, aile terapisi ve ebeveyn-çocuk etkileşim terapisi (PCIT) etkilidir. İlişki sorunları çocuklarda davranım sorunları, depresyon ve anksiyete için risk etmenidir. İhmal ve istismar belirtileri mutlaka değerlendirilmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Ebeveyn-Çocuk İlişkisine Odaklı Klinik Sorun",
+        "content": "Ebeveyn ile çocuk arasındaki ilişkinin niteliğinin klinik ilginin başlıca odağı olması ya da bir ruhsal veya bedensel bozukluğun gidişini, prognozunu veya tedavisini etkilemesi. 'Ebeveyn', çocuğun birincil bakım vereni anlamına gelir."
+      },
+      {
+        "code": "Belirtiler",
+        "title": "Bozulmanın Görüldüğü Alanlar",
+        "content": "Davranışsal (yetersiz ebeveyn denetimi ya da ilgisi, aşırı koruyuculuk, aşırı baskı, şiddete başvurmadan tartışmaların tırmanması, sorunları çözememe), bilişsel (birbirinin niyetlerine olumsuz yüklemeler, düşmanlık, haksız yere suçlama) ve duygusal (üzüntü, ilgisizlik, öfke) alanlarda bozulma."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Bakım Verene Göre Alt Kodlar",
+        "content": "DSM-5-TR'de ilişkinin türüne göre ayrı kodlar vardır (biyolojik çocuk, evlat edinilmiş çocuk, koruyucu ailedeki çocuk, diğer bakım veren). Klinik odak istismar ya da ihmalse ilgili istismar/ihmal kodları kullanılır."
+      }
+    ]
+  },
+  "sibling_relational_problem": {
+    "id": "sibling_relational_problem",
+    "nameTr": "Kardeş İlişkisi Sorunu (Kardeş Kıskançlığı)",
+    "nameEn": "Sibling Relational Problem",
+    "clinicalDescription": {
+      "overview": "Kardeş İlişki Sorunu, kardeşler arasındaki etkileşimin bireysel ya da aile işlevselliğinde belirgin bozulmaya yol açtığı veya kardeşlerden birinde belirtilerin gelişmesine katkıda bulunduğu, ya da bir ruhsal veya bedensel bozukluğun gidişini etkilediği durumlarda kullanılır. Kardeş kıskançlığı, süreğen rekabet, saldırganlık ve ebeveynin kayırmacılığı algısı sık görülür. Kategori çocuklar kadar erişkin kardeşler için de kullanılabilir; öz, üvey, yarım ya da evlat edinilmiş kardeşleri kapsar.",
+      "epidemiology": "Hafif kardeş rekabeti gelişimin olağan bir parçasıdır; klinik ilgi gerektiren düzeye ulaşması daha azdır. Kardeşlerden birinin süreğen hastalığı ya da engeli olduğunda, yeni bir kardeşin doğumunda ve aile içi değişimlerde (boşanma, üvey aile) sıklaşır.",
+      "etiology": "Ebeveynin farklı davranması (gerçek ya da algılanan kayırma), mizaç farklılıkları, yaş farkı, aile stresi ve ebeveynler arası çatışma rol oynar.",
+      "prognosis": "Ciddi ve süreğen kardeş saldırganlığı (kardeş zorbalığı) depresyon ve anksiyete riskini artırır ve bazen istismar düzeyine ulaşabilir. Aile terapisi ve ebeveynlere yönelik eğitim (adil davranma, çatışma çözme becerileri öğretme) yararlıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Kardeş Etkileşimine Odaklı Klinik Sorun",
+        "content": "Kardeşler arasındaki etkileşim örüntüsünün bireysel ya da aile işlevselliğinde klinik açıdan belirgin bozulmaya veya kardeşlerden birinde ya da daha fazlasında belirtilerin gelişmesine yol açması, ya da bir ruhsal veya bedensel bozukluğun gidişini, prognozunu veya tedavisini etkilemesi."
+      },
+      {
+        "code": "Kullanım Koşulu",
+        "title": "Klinik İlginin Odağı Olması",
+        "content": "Bu kategori bir ruhsal bozukluk değildir. Durum klinik ilginin odağı olduğunda ya da kişinin bir ruhsal veya bedensel bozukluğunun gidişini, prognozunu ya da tedavisini etkilediğinde kaydedilir. Odak çocuk ya da erişkin kardeşler olabilir."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Kardeş İstismarı",
+        "content": "Kardeşler arası etkileşim fiziksel ya da cinsel istismar düzeyindeyse ilgili istismar kodları kullanılmalı ve koruyucu önlemler alınmalıdır."
+      }
+    ]
+  },
+  "academic_or_educational_problem": {
+    "id": "academic_or_educational_problem",
+    "nameTr": "Eğitim veya Akademik Sorun",
+    "nameEn": "Academic or Educational Problem",
+    "clinicalDescription": {
+      "overview": "Eğitim ya da Akademik Sorun, okuma-yazma ve eğitimle ilgili sorunların klinik ilginin odağı olduğu ya da tanı, tedavi veya prognozu etkilediği durumlarda kullanılır. Okuma-yazma bilmeme ya da düşük okuryazarlık, okula erişememe, sınavlarda başarısızlık, okulda beklenenin altında başarı ve öğretmenler ya da sınıf arkadaşlarıyla uyumsuzluk/çatışma bu kapsamda değerlendirilir. Sorun bir öğrenme bozukluğu, zihinsel yetersizlik ya da başka bir ruhsal bozuklukla açıklanıyorsa öncelikle o bozukluk tanılanır.",
+      "epidemiology": "Çok yaygındır; ergenlik döneminde, sınav dönemlerinde ve okul değişikliklerinde artar. Türkiye'de merkezi sınav sistemine bağlı yoğun akademik baskı bu sorunların başvuru nedeni olmasında öne çıkar.",
+      "etiology": "Bireysel (dikkat sorunları, motivasyon eksikliği, sınav kaygısı), aile (ebeveyn beklentileri, ev ortamı) ve okul etmenleri (öğretim niteliği, akran ilişkileri, zorbalık) ile sosyoekonomik koşullar etkileşir.",
+      "prognosis": "Altta yatan özgül öğrenme bozukluğu, DEHB, depresyon veya anksiyete mutlaka araştırılmalıdır. Okul ile iş birliği, çalışma becerisi eğitimi, sınav kaygısına yönelik BDT ve rehberlik hizmetleri yararlıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Eğitime İlişkin Klinik Sorun",
+        "content": "Akademik ya da eğitimle ilgili bir sorunun klinik ilginin odağı olması ya da kişinin tanı, tedavi veya prognozunu etkilemesi."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Okuma-yazma bilmeme ya da düşük okuryazarlık; okula erişememe ya da okula gidememe; okul sınavlarında başarısızlık; okulda beklenenin altında başarı; öğretmenler ve sınıf arkadaşlarıyla eğitimsel uyumsuzluk ve çatışma; yetersiz öğretim ya da eğitim ortamıyla ilgili diğer sorunlar. DSM-5-TR bu örnekler için ayrı ICD-10-CM kodları verir."
+      },
+      {
+        "code": "Dışlama",
+        "title": "Ruhsal Bozukluğa Bağlı Akademik Güçlük",
+        "content": "Akademik güçlük özgül öğrenme bozukluğu, zihinsel yetersizlik, DEHB ya da başka bir ruhsal bozukluğun sonucuysa öncelikle o bozukluk tanılanır; bu kategori yine de ek olarak kaydedilebilir."
+      }
+    ]
+  },
+  "uncomplicated_bereavement": {
+    "id": "uncomplicated_bereavement",
+    "nameTr": "Komplike Olmayan (Normal) Yas",
+    "nameEn": "Uncomplicated Bereavement",
+    "clinicalDescription": {
+      "overview": "Olağan (Komplike Olmayan) Yas, sevilen birinin ölümüne verilen olağan tepkinin klinik ilginin odağı olduğu durumlarda kullanılır. Yas sürecinde kişi üzüntü, ağlama, uykusuzluk, iştah azalması ve kilo kaybı gibi majör depresif atağa benzeyen belirtiler yaşayabilir; ancak kişi bu duygudurumunu genellikle 'normal' bir tepki olarak görür. Yasın süresi ve ifade biçimi kültürden kültüre büyük farklılık gösterir; Türkiye'de taziye, mevlit, kırk ve elli ikinci gün gibi ritüeller yasın toplumsal çerçevesini oluşturur.",
+      "epidemiology": "Yaşamın evrensel bir deneyimidir; bu kategori kişi destek, rehberlik ya da değerlendirme amacıyla başvurduğunda kullanılır.",
+      "etiology": "Bağlanma figürünün kaybına verilen doğal tepkidir. Ölümün beklenmedik ya da şiddet içerikli olması, ölenle ilişkinin niteliği (aşırı bağımlılık, çatışma), sosyal destek eksikliği ve önceki ruhsal bozukluklar yas sürecini zorlaştırabilir.",
+      "prognosis": "Belirtilerin yoğunluğu genellikle aylar içinde azalır; yas dalgalar hâlinde, anma günleri ve hatırlatıcılarla yeniden yoğunlaşabilir. Ayırıcı tanıda majör depresif bozukluk (süregen ve yaygın çökkünlük, değersizlik, benlik saygısı kaybı, ölenle ilişkisiz intihar düşünceleri) ve uzamış yas bozukluğu (erişkinlerde kayıptan en az 12 ay, çocuk ve ergenlerde en az 6 ay sonra süren yoğun özlem/uğraş ve işlevsellik kaybı) değerlendirilmelidir. Olağan yasın ilaçla tedavisi gerekmez; destek ve psikoeğitim yeterlidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Ölüme Verilen Olağan Tepki",
+        "content": "Sevilen birinin ölümüne verilen olağan tepkinin klinik ilginin odağı olması. Kayıp, depresif atağa benzer belirtilere (üzüntü, uykusuzluk, iştah azalması, kilo kaybı) yol açabilir."
+      },
+      {
+        "code": "Depresyondan Ayrım",
+        "title": "Yas ile Majör Depresif Atak Arasındaki Farklar",
+        "content": "Yasta baskın duygu boşluk ve kayıp hissidir, dalgalar hâlinde gelir ve ölene ilişkin hatırlatıcılarla tetiklenir; mizah ve olumlu duygular korunabilir; benlik saygısı genellikle korunur; ölüm düşünceleri ölene 'kavuşma' temalıdır. Depresyonda ise süregen çökkünlük, anhedoni, değersizlik ve kendini suçlama baskındır. Yas sırasında majör depresif atak ölçütleri karşılanıyorsa MDB tanısı ayrıca konabilir."
+      },
+      {
+        "code": "Uzamış Yastan Ayrım",
+        "title": "Süre ve Şiddet",
+        "content": "Kayıptan bu yana erişkinlerde en az 12 ay (çocuk ve ergenlerde en az 6 ay) geçmesine karşın yoğun özlem ya da ölenle aşırı uğraş, belirgin duygusal acı ve işlevsellik kaybı sürüyorsa Uzamış Yas Bozukluğu düşünülür."
+      }
+    ]
+  },
+  "phase_of_life_problem": {
+    "id": "phase_of_life_problem",
+    "nameTr": "Yaşam Evresi Değişimi Sorunu (Emeklilik, Üniversiteye Başlama vb.)",
+    "nameEn": "Phase of Life Problem",
+    "clinicalDescription": {
+      "overview": "Yaşam Evresi Sorunu, yaşam döngüsündeki bir geçişe ya da belirli bir gelişim dönemine uyum sağlamada yaşanan güçlüğün klinik ilginin odağı olduğu ya da tedavi veya prognozu etkilediği durumlarda kullanılır. Okula ya da üniversiteye başlama, aile evinden ayrılma, evlenme, yeni bir mesleğe başlama, ebeveyn olma, çocukların evden ayrılmasının ardından 'boş yuva' dönemi ve emeklilik tipik örneklerdir.",
+      "epidemiology": "Geçiş dönemleri herkesin yaşamında vardır; bu kategori sorun klinik başvuruya neden olduğunda kullanılır. Üniversiteye başlama ve emeklilik dönemleri ruh sağlığı başvurularında öne çıkar.",
+      "etiology": "Geçişin gerektirdiği yeni roller ve kimlik değişikliği, kayıplar (statü, sosyal ağ, rutin), beklenti ile gerçeklik arasındaki fark ve sosyal destek düzeyi belirleyicidir.",
+      "prognosis": "Çoğunlukla geçici ve kendiliğinden düzelen bir uyum sürecidir; psikoeğitim, sorun çözme odaklı kısa terapiler ve sosyal destek yararlıdır. Belirtiler bir uyum bozukluğu ya da depresif bozukluk düzeyine ulaşıyorsa o tanı konur."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Yaşam Döngüsü Geçişine Uyum Sorunu",
+        "content": "Yaşam döngüsündeki bir geçişe (belirli bir gelişim evresine) uyum sağlamada yaşanan sorunun klinik ilginin odağı olması ya da kişinin tedavi veya prognozunu etkilemesi."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Okula başlama ya da okulu bitirme, ebeveyn denetiminden çıkma, evlenme, yeni bir kariyere başlama, ebeveyn olma, çocukların evden ayrılmasına uyum, emeklilik."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Uyum Bozukluğundan Ayrım",
+        "content": "Geçişe verilen tepki beklenenle orantısız sıkıntıya ya da işlevsellikte belirgin bozulmaya yol açıyor ve uyum bozukluğu ölçütlerini karşılıyorsa uyum bozukluğu tanısı konur."
+      }
+    ]
+  },
+  "nonadherence_to_medical_treatment": {
+    "id": "nonadherence_to_medical_treatment",
+    "nameTr": "Tıbbi Tedaviye Uyumsuzluk (İlaç Reddi)",
+    "nameEn": "Nonadherence to Medical Treatment",
+    "clinicalDescription": {
+      "overview": "Tıbbi Tedaviye Uyumsuzluk, bir ruhsal bozukluk ya da bedensel hastalığa ilişkin tedavinin önemli bir bölümüne uyulmamasının klinik ilginin odağı olduğu durumlarda kullanılır. İlaçları almama ya da önerilenden farklı dozda alma, kontrollere gelmeme ve önerilen yaşam tarzı değişikliklerini uygulamama örneklerdir. Nedenler arasında tedavinin yarattığı rahatsızlık (yan etkiler), maliyet, kişisel değer yargıları ya da dinî/kültürel inançlar, yaşa bağlı güçsüzlük ve bir ruhsal bozukluğun varlığı (ör. şizofrenide içgörü eksikliği, kişilik bozukluğu) sayılabilir.",
+      "epidemiology": "Süreğen hastalıklarda uyumsuzluk çok yaygındır; uzun süreli tedavilerde hastaların önemli bir kısmının ilaçlarını önerildiği gibi almadığı bildirilmektedir. Psikiyatrik ilaçlarda, özellikle antipsikotik ve duygudurum dengeleyicilerde sıktır.",
+      "etiology": "Hasta (içgörü, inançlar, bilişsel bozukluk, madde kullanımı), tedavi (yan etkiler, karmaşık doz şeması, uzun süre), hekim-hasta ilişkisi ve sistem (maliyet, erişim) etmenleri etkileşir.",
+      "prognosis": "Uyumsuzluk nüks, yeniden yatış ve ölüm riskini artırır. Motivasyonel görüşme, psikoeğitim, ortak karar verme, doz şemasının basitleştirilmesi, yan etkilerin ele alınması ve uygun durumlarda uzun etkili enjeksiyon formları uyumu artırır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Tedavinin Önemli Bir Bölümüne Uymama",
+        "content": "Bir ruhsal bozukluk ya da başka bir sağlık durumunun tedavisinin önemli bir bölümüne uyulmamasının klinik ilginin odağı olması."
+      },
+      {
+        "code": "Nedenler",
+        "title": "Uyumsuzluğun Olası Kaynakları",
+        "content": "Tedavinin rahatsızlık vermesi (yan etkiler), tedavinin maliyeti, kişisel değer yargıları ya da dinî/kültürel inançlar, yaşa bağlı güçsüzlük ve bir ruhsal bozukluğun varlığı (ör. şizofreni, kişilik bozukluğu)."
+      },
+      {
+        "code": "Kullanım Notu",
+        "title": "Ne Zaman Kullanılır",
+        "content": "Uyumsuzluğun kendisi yeterince ciddi olup bağımsız klinik ilgi gerektirdiğinde kullanılır; ruhsal bozukluğun doğrudan belirtisi olduğunda (ör. sanrı nedeniyle ilacı reddetme) o bozukluk da ayrıca kaydedilir. DSM-5-TR'de uyumsuzluğun türüne (kasıtlı ya da kasıtsız eksik doz alma vb.) göre farklı ICD-10-CM kodları bulunur."
+      }
+    ]
+  },
+  "religious_or_spiritual_problem": {
+    "id": "religious_or_spiritual_problem",
+    "nameTr": "Dini veya Ruhsal Problem (İnanç Krizi)",
+    "nameEn": "Religious or Spiritual Problem",
+    "clinicalDescription": {
+      "overview": "Dinî ya da Manevi Sorun, klinik ilginin odağının dinî veya manevi bir sorun olduğu durumlarda kullanılır. İnancın yitirilmesi ya da sorgulanması, yeni bir inanca geçişle ilgili sorunlar ve örgütlü bir dinle ilişkili olması gerekmeyen manevi değerlerin sorgulanması gibi sıkıntı verici deneyimler bu kapsamdadır. Bu kategori, dinî/manevi deneyimlerin otomatik olarak patolojik sayılmasını önlemek amacıyla DSM-IV ile birlikte eklenmiştir.",
+      "epidemiology": "Ruh sağlığı başvurularında dinî ve manevi kaygılar sık dile getirilir; özellikle ciddi hastalık, kayıp ve yaşam krizleri sırasında belirginleşir.",
+      "etiology": "Varoluşsal sorgulamalar, travmatik yaşantılar ve kayıplar, aile ve topluluk içindeki inanç çatışmaları ile kültürel geçişler bu sorunları tetikleyebilir.",
+      "prognosis": "Kültüre duyarlı, yargılamayan bir yaklaşım ve gerektiğinde din görevlileri ya da manevi danışmanlarla iş birliği yararlıdır. Dinî temalı obsesyonlar (skrupülozite), psikotik bozukluklardaki dinî sanrılar ve depresyondaki aşırı suçluluk bu kategoriyle karıştırılmamalıdır; böyle bir bozukluk varsa ayrıca tanılanır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Dinî ya da Manevi Konulara Odaklı Klinik Sorun",
+        "content": "Klinik ilginin odağının dinî ya da manevi bir sorun olması."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "İnancın yitirilmesi ya da sorgulanması, yeni bir inanca geçişle ilişkili sorunlar, örgütlü bir din ya da kurumla ilişkili olması gerekmeyen manevi değerlerin sorgulanması."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Ruhsal Bozukluklardan Ayrım",
+        "content": "Dinî içerikli obsesyon ve kompulsiyonlar (OKB), psikotik bozukluklardaki dinî sanrılar ya da varsanılar ve depresyondaki patolojik suçluluk ayırt edilmelidir. Kişinin içinde bulunduğu kültür ya da dinî topluluk tarafından olağan kabul edilen deneyimler (ör. dua sırasında manevi yaşantılar) tek başına psikopatoloji belirtisi sayılmaz."
+      }
+    ]
+  },
+  "child_physical_abuse": {
+    "id": "child_physical_abuse",
+    "nameTr": "Çocuk Fiziksel İstismarı (Doğrulanmış)",
+    "nameEn": "Child Physical Abuse (Confirmed)",
+    "clinicalDescription": {
+      "overview": "Doğrulanmış Çocuk Fiziksel İstismarı, bir ebeveyn, bakım veren ya da çocuktan sorumlu başka bir kişi tarafından çocuğa kaza dışı yollarla verilen fiziksel yaralanmanın (küçük morluklardan ağır kırıklara ya da ölüme kadar) klinik ilginin odağı olduğu durumdur. Yaralanma vurma, tekmeleme, ısırma, sarsma, fırlatma, boğma, yakma, haşlama, zehirleme gibi yollarla oluşabilir ve bakım verenin zarar verme niyetinin olup olmamasına bakılmaksızın istismar sayılır. Bu kategori çocukta bir ruhsal bozukluk anlamına gelmez; mağduriyetin kaydedilmesi ve klinik yönetim içindir.",
+      "epidemiology": "Çocuk istismarı tüm toplumlarda yaygındır ancak büyük bölümü bildirilmez. Küçük çocuklar (özellikle 3 yaş altı) ağır yaralanma ve ölüm açısından en yüksek risk grubundadır.",
+      "etiology": "Ebeveynin genç yaşı, madde kullanımı, ruhsal bozukluğu, kendi çocukluğunda istismar öyküsü, aile içi şiddet, yoksulluk, sosyal yalıtım ve çocuğa ait etmenler (prematürelik, engellilik, zor mizaç) risk etmenleridir. Bu etmenler istismarı açıklamaz ya da hafifletmez; önleme ve tarama için önemlidir.",
+      "prognosis": "İstismar TSSB, depresyon, davranım sorunları, madde kullanımı, öğrenme güçlükleri ve erişkinlikte bedensel hastalık riskiyle ilişkilidir. Güvenliğin sağlanması, travma odaklı BDT ve aileye yönelik müdahaleler (ör. ebeveyn-çocuk etkileşim terapisi) temel yaklaşımlardır. Öyküyle uyumsuz yaralanmalar, farklı iyileşme evrelerindeki morluklar ve başvuruda gecikme istismarı düşündürmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Kaza Dışı Fiziksel Yaralanma",
+        "content": "Ebeveyn, bakım veren ya da çocuktan sorumlu başka bir kişi tarafından çocuğa kaza dışı yollarla verilen ve klinik ilginin odağı olan fiziksel yaralanma. Zarar verme niyetinin bulunup bulunmaması sonucu değiştirmez."
+      },
+      {
+        "code": "Kapsam Notu",
+        "title": "Fiziksel Disiplin",
+        "content": "Bedensel yaralanmaya yol açmayan, makul düzeydeki fiziksel disiplin DSM-5-TR'de bu tanımın dışında tutulur; ancak çocuk hakları yaklaşımı ve birçok ülkenin mevzuatı her türlü bedensel cezaya karşıdır."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Doğrulanmış / Şüpheli; İlk / Sonraki Başvuru",
+        "content": "DSM-5-TR'de doğrulanmış (T74.12X) ve şüpheli (T76.12X) durumlar ayrı kodlanır; kodun son harfi ilk başvuruyu (A) ya da sonraki başvuruyu (D) gösterir. Geçmişteki istismar/şiddet öyküsü, istismar uygulayan kişiye yönelik başvurular ve ruh sağlığı hizmeti alınması için ayrı Z kodları vardır."
+      },
+      {
+        "code": "Yasal Not",
+        "title": "Bildirim Yükümlülüğü",
+        "content": "Türkiye'de çocuğa yönelik istismar şüphesinde sağlık çalışanlarının adli makamlara bildirim yükümlülüğü vardır (Türk Ceza Kanunu m. 280); süreç Çocuk İzlem Merkezleri (ÇİM) ve sosyal hizmetlerle iş birliği içinde yürütülür. Çocuğun güvenliği her zaman önceliklidir."
+      }
+    ]
+  },
+  "child_sexual_abuse": {
+    "id": "child_sexual_abuse",
+    "nameTr": "Çocuk Cinsel İstismarı (Doğrulanmış)",
+    "nameEn": "Child Sexual Abuse (Confirmed)",
+    "clinicalDescription": {
+      "overview": "Doğrulanmış Çocuk Cinsel İstismarı, bir ebeveyn, bakım veren ya da çocuktan sorumlu başka bir kişinin cinsel doyum sağlamaya yönelik olarak çocuğu içeren her türlü cinsel eyleminin klinik ilginin odağı olduğu durumdur. Cinsel organlara dokunma, penetrasyon, ensest, tecavüz gibi temas içeren eylemlerin yanı sıra çocuğu başkalarının cinsel doyumu için kandırma, zorlama, tehdit ya da baskıyla katılmaya ikna etme gibi temas içermeyen istismar (ör. cinsel içerik izletme, çocuğu müstehcen görüntü üretiminde kullanma) da kapsama girer. Bu kategori mağdurun ruhsal bozukluğu anlamına gelmez.",
+      "epidemiology": "Bildirilen olgular gerçek sıklığın çok altındadır. Kız çocuklarında daha sık olmakla birlikte erkek çocukların da önemli bir bölümünün cinsel istismara uğradığı gösterilmiştir. Failler çoğunlukla çocuğun tanıdığı kişilerdir.",
+      "etiology": "Çocuğun yaşı ve korunmasızlığı, aile içi işlev bozukluğu, yetersiz gözetim, engellilik ve faile erişim kolaylığı risk etmenleridir. İstismarın sorumluluğu her zaman faile aittir.",
+      "prognosis": "TSSB, depresyon, kendine zarar verme, madde kullanımı, yeniden mağduriyet, cinsel işlev sorunları ve kişilik patolojisi riskini artırır. Çocuğun güvenliği, adli görüşmenin tek seferde ve uzman ortamda yapılması (Türkiye'de Çocuk İzlem Merkezleri) ve travma odaklı BDT temel yaklaşımlardır. Çocuğa yönlendirici sorular sorulmamalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Çocuğu İçeren Cinsel Eylem",
+        "content": "Ebeveyn, bakım veren ya da çocuktan sorumlu başka bir kişi tarafından cinsel doyum sağlamak amacıyla çocuğu içeren herhangi bir cinsel eylemin klinik ilginin odağı olması."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Temas İçeren ve İçermeyen İstismar",
+        "content": "Temas içeren eylemler (cinsel organlara dokunma, penetrasyon, ensest, tecavüz) ile temas içermeyen istismar (teşhir, çocuğu başkalarının cinsel doyumu için zorlama, kandırma ya da tehdit etme, cinsel içerikli materyal üretimi ya da izletme)."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Doğrulanmış / Şüpheli; İlk / Sonraki Başvuru",
+        "content": "DSM-5-TR'de doğrulanmış (T74.22X) ve şüpheli (T76.22X) durumlar ayrı kodlanır; kodun son harfi ilk başvuruyu (A) ya da sonraki başvuruyu (D) gösterir. Geçmişteki istismar/şiddet öyküsü, istismar uygulayan kişiye yönelik başvurular ve ruh sağlığı hizmeti alınması için ayrı Z kodları vardır."
+      },
+      {
+        "code": "Yasal Not",
+        "title": "Bildirim Yükümlülüğü",
+        "content": "Türkiye'de çocuğa yönelik istismar şüphesinde sağlık çalışanlarının adli makamlara bildirim yükümlülüğü vardır (Türk Ceza Kanunu m. 280); süreç Çocuk İzlem Merkezleri (ÇİM) ve sosyal hizmetlerle iş birliği içinde yürütülür. Çocuğun güvenliği her zaman önceliklidir."
+      }
+    ]
+  },
+  "child_neglect": {
+    "id": "child_neglect",
+    "nameTr": "Çocuk İhmali (Doğrulanmış)",
+    "nameEn": "Child Neglect (Confirmed)",
+    "clinicalDescription": {
+      "overview": "Doğrulanmış Çocuk İhmali, bir ebeveyn ya da bakım verenin çocuğun yaşına uygun temel gereksinimlerini karşılamaması ve bunun sonucunda çocuğun fiziksel ya da ruhsal zarar görmesi veya zarar görme olasılığının yüksek olmasıdır. Terk etme, yeterli gözetim sağlamama, duygusal/ruhsal gereksinimleri karşılamama ve gerekli eğitim, tıbbi bakım, beslenme, barınma ve/veya giyimi sağlamama örneklerdir. Bu kategori çocukta bir ruhsal bozukluk anlamına gelmez.",
+      "epidemiology": "Çocuk koruma sistemlerine bildirilen kötü muamele olguları arasında en sık türdür. Erken çocukluk döneminde etkileri en ağırdır.",
+      "etiology": "Ebeveynin ruhsal bozukluğu, madde kullanımı, zihinsel yetersizliği, yoksulluk, sosyal yalıtım ve bilgi eksikliği risk etmenleridir. Yoksulluk tek başına ihmal değildir; ancak bakım olanaklarını kısıtlayarak riski artırır.",
+      "prognosis": "İhmal büyüme geriliği, dil ve bilişsel gelişimde gecikme, bağlanma bozuklukları (tepkisel bağlanma bozukluğu, sosyal ilişkide ketlenmenin kalkması bozukluğu), okul başarısızlığı ve duygusal sorunlarla ilişkilidir. Aileye sosyal hizmet desteği, ebeveyn eğitimi ve gerektiğinde koruyucu önlemler gerekir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Temel Gereksinimlerin Karşılanmaması",
+        "content": "Ebeveyn ya da bakım verenin çocuğun yaşına uygun temel gereksinimlerini karşılamamasına yol açan ağır bir eylem ya da eylemsizlik; bunun sonucunda çocukta fiziksel/ruhsal zarar oluşması ya da oluşma olasılığının yüksek olması."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Terk etme; yeterli gözetim sağlamama; duygusal ya da ruhsal gereksinimlere ilgisizlik; gerekli eğitimi, tıbbi bakımı, beslenmeyi, barınmayı ve/veya giyimi sağlamama."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Doğrulanmış / Şüpheli; İlk / Sonraki Başvuru",
+        "content": "DSM-5-TR'de doğrulanmış (T74.02X) ve şüpheli (T76.02X) durumlar ayrı kodlanır; kodun son harfi ilk başvuruyu (A) ya da sonraki başvuruyu (D) gösterir. Geçmişteki istismar/şiddet öyküsü, istismar uygulayan kişiye yönelik başvurular ve ruh sağlığı hizmeti alınması için ayrı Z kodları vardır."
+      },
+      {
+        "code": "Yasal Not",
+        "title": "Bildirim Yükümlülüğü",
+        "content": "Türkiye'de çocuğa yönelik istismar şüphesinde sağlık çalışanlarının adli makamlara bildirim yükümlülüğü vardır (Türk Ceza Kanunu m. 280); süreç Çocuk İzlem Merkezleri (ÇİM) ve sosyal hizmetlerle iş birliği içinde yürütülür. Çocuğun güvenliği her zaman önceliklidir."
+      }
+    ]
+  },
+  "spouse_physical_violence": {
+    "id": "spouse_physical_violence",
+    "nameTr": "Eş/Partner Fiziksel Şiddeti",
+    "nameEn": "Spouse or Partner Violence, Physical",
+    "clinicalDescription": {
+      "overview": "Eş ya da Partnere Yönelik Fiziksel Şiddet, son bir yıl içinde yakın partnere yönelik olarak fiziksel zarara yol açan ya da yol açma olasılığı yüksek olan veya partnerde belirgin korku uyandıran kaza dışı fiziksel güç eylemlerinin klinik ilginin odağı olmasıdır. İtme, tokat atma, saç çekme, sarsma, ısırma, tekmeleme, yumrukla ya da bir nesneyle vurma, yakma, zehirleme, boğaza baskı, nefesi engelleme ve silah kullanma örneklerdir. Kişinin kendini ya da partnerini fiziksel olarak korumak için yaptığı eylemler bu tanımın dışındadır.",
+      "epidemiology": "Kadına yönelik şiddet dünyada ve Türkiye'de yaygın bir halk sağlığı sorunudur; kadınların önemli bir bölümü yaşamları boyunca partnerlerinden fiziksel ya da cinsel şiddete maruz kaldığını bildirmektedir. Erkekler de mağdur olabilir; ancak ağır yaralanma ve ölümle sonuçlanan şiddetin mağdurları çoğunlukla kadınlardır.",
+      "etiology": "Toplumsal cinsiyet eşitsizliği ve denetleyici tutumlar, failde alkol/madde kullanımı, çocuklukta şiddete tanıklık ya da maruz kalma, kıskançlık ve denetim davranışları, ekonomik stres ve sosyal yalıtım risk etmenleridir. Şiddetin sorumluluğu faile aittir.",
+      "prognosis": "Fiziksel yaralanmaların yanı sıra TSSB, depresyon, anksiyete, madde kullanımı ve intihar riski yüksektir; şiddete tanık olan çocuklar da olumsuz etkilenir. Ayrılma dönemi ağır şiddet ve öldürülme riskinin en yüksek olduğu dönemlerdendir. Güvenlik planlaması, sığınma evleri ve yasal koruma (Türkiye'de 6284 sayılı Kanun kapsamındaki tedbirler, ALO 183, ŞÖNİM) ile ruh sağlığı desteği birlikte sunulmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Partnere Yönelik Kaza Dışı Fiziksel Güç",
+        "content": "Son bir yıl içinde yakın partnere yönelik olarak fiziksel zarara yol açan ya da yol açma olasılığı yüksek olan veya partnerde belirgin korku uyandıran kaza dışı fiziksel güç eylemleri."
+      },
+      {
+        "code": "Dışlama",
+        "title": "Kendini Koruma",
+        "content": "Kişinin kendini ya da partnerini fiziksel olarak korumak amacıyla gerçekleştirdiği eylemler bu kapsama girmez."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Doğrulanmış / Şüpheli; İlk / Sonraki Başvuru",
+        "content": "DSM-5-TR'de doğrulanmış (T74.11X) ve şüpheli (T76.11X) durumlar ayrı kodlanır; kodun son harfi ilk başvuruyu (A) ya da sonraki başvuruyu (D) gösterir. Geçmişteki istismar/şiddet öyküsü, istismar uygulayan kişiye yönelik başvurular ve ruh sağlığı hizmeti alınması için ayrı Z kodları vardır."
+      },
+      {
+        "code": "Klinik Not",
+        "title": "Tarama ve Güvenlik",
+        "content": "Şiddet şüphesinde görüşme partnerden ayrı yapılmalı, güvenlik riski (silaha erişim, boğma öyküsü, tehditlerin artması) değerlendirilmeli ve şiddet varlığında ortak çift terapisi önerilmemelidir."
+      }
+    ]
+  },
+  "spouse_psychological_abuse": {
+    "id": "spouse_psychological_abuse",
+    "nameTr": "Eş/Partner Psikolojik İstismarı (Gaslighting)",
+    "nameEn": "Spouse or Partner Psychological Abuse",
+    "clinicalDescription": {
+      "overview": "Eş ya da Partnere Yönelik Psikolojik İstismar, partnerin diğerine belirgin zarar veren ya da verme olasılığı yüksek olan kaza dışı sözel veya sembolik eylemlerinin klinik ilginin odağı olmasıdır. Aşağılama, sorguya çekme, serbestçe gelip gitmeyi kısıtlama, yardıma (polis, hukuki, tıbbi kaynaklar) ulaşmayı engelleme, fiziksel zarar ya da cinsel saldırı tehdidi, önem verilen kişi ya da şeylere zarar verme tehdidi, ekonomik kaynaklara erişimi haksız yere kısıtlama, aileden ve arkadaşlardan yalıtma, ısrarlı takip ve partneri 'deli olduğuna' inandırmaya çalışma (gaslighting) örneklerdir.",
+      "epidemiology": "Çok yaygındır ve sıklıkla fiziksel şiddetle birlikte görülür; çoğu zaman fiziksel şiddetin öncülüdür.",
+      "etiology": "Fiziksel partner şiddetiyle benzer risk etmenleri geçerlidir; özellikle denetleyici davranış örüntüleri (zorlayıcı denetim) belirleyicidir.",
+      "prognosis": "Mağdurda depresyon, anksiyete, TSSB, benlik saygısında belirgin düşüş ve kendi algısına güvenmede bozulma görülür. Mağdurun güçlendirilmesi, güvenlik planlaması, sosyal desteğin yeniden kurulması ve hukuki destek temel yaklaşımlardır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Zarar Veren Kaza Dışı Sözel/Sembolik Eylemler",
+        "content": "Partnerin diğerine belirgin zarar veren ya da verme olasılığı yüksek olan kaza dışı sözel veya sembolik eylemleri."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Aşağılama, küçük düşürme, sorguya çekme; serbest hareketi kısıtlama; yardıma ulaşmayı engelleme; fiziksel zarar ya da cinsel saldırı tehdidi; önem verilen kişi ya da şeylere zarar verme tehdidi; ekonomik kaynaklara erişimi haksız yere kısıtlama; aileden ve arkadaşlardan yalıtma; ısrarlı takip; partneri delirdiğine inandırmaya çalışma (gaslighting)."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Doğrulanmış / Şüpheli; İlk / Sonraki Başvuru",
+        "content": "DSM-5-TR'de doğrulanmış (T74.31X) ve şüpheli (T76.31X) durumlar ayrı kodlanır; kodun son harfi ilk başvuruyu (A) ya da sonraki başvuruyu (D) gösterir. Geçmişteki istismar/şiddet öyküsü, istismar uygulayan kişiye yönelik başvurular ve ruh sağlığı hizmeti alınması için ayrı Z kodları vardır."
+      }
+    ]
+  },
+  "homelessness": {
+    "id": "homelessness",
+    "nameTr": "Evsizlik ve Barınma Sorunu",
+    "nameEn": "Homelessness",
+    "clinicalDescription": {
+      "overview": "Evsizlik, kişinin düzenli bir konutunun ya da yaşam alanının olmamasının klinik ilginin odağı olması ya da tedavi veya prognozu etkilemesidir. Kişi sokakta, araçta, terk edilmiş binalarda, barınaklarda ya da geçici olarak tanıdıklarının yanında kalıyor olabilir. DSM-5-TR barınakta kalan (korunaklı) ve barınak dışında yaşayan (korunaksız) evsizliği ayrı kodlar.",
+      "epidemiology": "Ağır ruhsal bozukluğu ve madde kullanım bozukluğu olanlarda evsizlik oranı genel topluma göre çok yüksektir; evsiz bireylerde ruhsal bozukluk yaygınlığı da belirgin olarak artmıştır.",
+      "etiology": "Yoksulluk, işsizlik, konut maliyetleri, ağır ruhsal bozukluk, madde kullanımı, aile içi şiddetten kaçma, cezaevinden ya da kurumdan çıkış ve sosyal destek kaybı etkileşir.",
+      "prognosis": "Evsizlik tedaviye erişimi, ilaç uyumunu ve izlemi ciddi biçimde zorlaştırır; ölüm oranı yüksektir. 'Önce konut' (Housing First) yaklaşımı, vaka yönetimi ve sosyal hizmetlerle iş birliği kanıta dayalı müdahalelerdir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Düzenli Konutun Olmaması",
+        "content": "Kişinin düzenli bir yaşam alanının olmamasının klinik ilginin odağı olması ya da tedavi/prognozu etkilemesi."
+      },
+      {
+        "code": "Alt Türler",
+        "title": "Korunaklı / Korunaksız Evsizlik",
+        "content": "Korunaklı evsizlik: kişi bir evsiz barınağında, sığınma evinde, motelde ya da geçici konaklama yerinde kalır. Korunaksız evsizlik: kişi insanların yaşaması için uygun olmayan bir yerde (sokak, araç, terk edilmiş bina, park) kalır."
+      },
+      {
+        "code": "Kullanım Koşulu",
+        "title": "Klinik İlginin Odağı Olması",
+        "content": "Bu kategori bir ruhsal bozukluk değildir. Durum klinik ilginin odağı olduğunda ya da kişinin bir ruhsal veya bedensel bozukluğunun gidişini, prognozunu ya da tedavisini etkilediğinde kaydedilir."
+      }
+    ]
+  },
+  "extreme_poverty": {
+    "id": "extreme_poverty",
+    "nameTr": "Aşırı Yoksulluk ve Ekonomik Yetersizlik",
+    "nameEn": "Extreme Poverty",
+    "clinicalDescription": {
+      "overview": "Aşırı Yoksulluk, kişinin temel gereksinimlerini (yeterli beslenme, barınma, giyim, ısınma, sağlık hizmeti) karşılamasını engelleyen ağır ekonomik yoksunluğun klinik ilginin odağı olması ya da tedavi veya prognozu etkilemesidir. DSM-5-TR'de 'ekonomik ve barınma sorunları' arasında yer alır.",
+      "epidemiology": "Yoksulluk ruhsal bozuklukların hemen hepsi için bilinen bir risk etmenidir; ruhsal bozukluk da gelir kaybına yol açarak yoksulluğu derinleştirir (karşılıklı nedensellik).",
+      "etiology": "İşsizlik, düşük eğitim, engellilik, ağır ruhsal hastalık, göç, ekonomik krizler ve sosyal güvenlik eksiklikleri rol oynar.",
+      "prognosis": "Yoksulluk ilaç ve tedaviye erişimi, beslenmeyi ve sağlıklı yaşam koşullarını kısıtlar. Sosyal hizmet yönlendirmesi, sosyal yardımlara erişimin desteklenmesi ve tedavinin maliyetinin göz önünde bulundurulması klinik yaklaşımın parçası olmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Temel Gereksinimleri Karşılayamayacak Kadar Ağır Yoksunluk",
+        "content": "Aşırı yoksulluğun klinik ilginin odağı olması ya da kişinin tedavi veya prognozunu etkilemesi."
+      },
+      {
+        "code": "İlişkili Kategoriler",
+        "title": "Diğer Ekonomik Sorunlar",
+        "content": "DSM-5-TR'de ayrıca yeterli gıda ya da güvenli içme suyu olmaması, düşük gelir, yetersiz sosyal sigorta ya da refah desteği ve belirtilmemiş barınma/ekonomik sorunlar için ayrı kategoriler bulunur."
+      },
+      {
+        "code": "Kullanım Koşulu",
+        "title": "Klinik İlginin Odağı Olması",
+        "content": "Bu kategori bir ruhsal bozukluk değildir. Durum klinik ilginin odağı olduğunda ya da kişinin bir ruhsal veya bedensel bozukluğunun gidişini, prognozunu ya da tedavisini etkilediğinde kaydedilir."
+      }
+    ]
+  },
+  "social_exclusion_rejection": {
+    "id": "social_exclusion_rejection",
+    "nameTr": "Sosyal Dışlanma ve Reddedilme",
+    "nameEn": "Social Exclusion or Rejection",
+    "clinicalDescription": {
+      "overview": "Sosyal Dışlanma ya da Reddedilme, toplumsal güç dengesizliği nedeniyle kişinin başkaları tarafından yineleyici biçimde dışlanmasının ya da reddedilmesinin klinik ilginin odağı olmasıdır. Zorbalık, alay, sindirme; sözlü istismar ve aşağılama; akranlar, iş arkadaşları ya da toplumsal çevredeki diğer kişilerin etkinliklerinden kasıtlı olarak dışlanma örneklerdir. Okulda akran zorbalığı ve iş yerinde psikolojik taciz (mobbing) bu kapsamda değerlendirilebilir.",
+      "epidemiology": "Okul çağındaki çocukların önemli bir bölümü akran zorbalığına maruz kaldığını bildirmektedir; siber zorbalık giderek artmaktadır. Engelli bireyler, LGBTİ+ bireyler, göçmenler ve azınlık gruplarından kişiler daha yüksek risk altındadır.",
+      "etiology": "Grup içindeki güç dengesizlikleri, farklı görülen bireylerin damgalanması, okul ve iş yeri iklimi ile yetişkin gözetiminin yetersizliği rol oynar.",
+      "prognosis": "Dışlanma ve zorbalık depresyon, anksiyete, okul reddi, kendine zarar verme ve intihar düşünceleriyle güçlü biçimde ilişkilidir. Okul temelli zorbalık önleme programları, güvenlik önlemleri ve mağdura yönelik destekleyici terapi yararlıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Yineleyici Dışlanma ya da Reddedilme",
+        "content": "Toplumsal güç dengesizliğine bağlı olarak başkaları tarafından yineleyici biçimde dışlanma ya da reddedilmenin klinik ilginin odağı olması."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Zorbalık, alay etme ve sindirme; sözlü istismar ve aşağılama; akranların, iş arkadaşlarının ya da toplumsal çevredeki diğer kişilerin etkinliklerinden kasıtlı olarak dışlanma."
+      },
+      {
+        "code": "Kullanım Koşulu",
+        "title": "Klinik İlginin Odağı Olması",
+        "content": "Bu kategori bir ruhsal bozukluk değildir. Durum klinik ilginin odağı olduğunda ya da kişinin bir ruhsal veya bedensel bozukluğunun gidişini, prognozunu ya da tedavisini etkilediğinde kaydedilir."
+      }
+    ]
+  },
+  "target_of_discrimination": {
+    "id": "target_of_discrimination",
+    "nameTr": "Ayrımcılık veya Nefret Suçu Mağduriyeti",
+    "nameEn": "Target of (Perceived) Discrimination or Persecution",
+    "clinicalDescription": {
+      "overview": "Algılanan Olumsuz Ayrımcılık ya da Zulmün Hedefi Olma, kişinin belirli bir gruba üyeliği (ya da üye olduğunun düşünülmesi) nedeniyle algıladığı ya da yaşadığı ayrımcılık veya zulmün klinik ilginin odağı olmasıdır. Bu gruplar toplumsal cinsiyet ya da cinsiyet kimliği, ırk, etnik köken, din, cinsel yönelim, köken ülkesi, siyasi görüş, engellilik, kast, toplumsal statü, kilo ve dış görünüşe göre tanımlanabilir. Nefret suçlarının mağduriyeti de bu kapsamda değerlendirilebilir.",
+      "epidemiology": "Azınlık gruplarına mensup bireylerin önemli bir kısmı yaşamları boyunca ayrımcılık deneyimi bildirmektedir. Süreğen ayrımcılığın ruh sağlığına etkisi 'azınlık stresi' kavramıyla açıklanır.",
+      "etiology": "Toplumsal önyargılar, kalıp yargılar, yapısal eşitsizlikler ve kurumsal uygulamalar ayrımcılığın kaynağıdır.",
+      "prognosis": "Ayrımcılık ve zulüm depresyon, anksiyete, TSSB, madde kullanımı ve bedensel sağlık sorunlarıyla ilişkilidir. Klinisyenin kültürel açıdan duyarlı, doğrulayıcı bir tutum benimsemesi ve kişinin deneyimini psikopatoloji gibi yorumlamaması (ör. haklı kuşkuyu paranoya sanmaması) önemlidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Grup Üyeliğine Dayalı Ayrımcılık ya da Zulüm",
+        "content": "Kişinin belirli bir gruba üyeliği ya da üye olduğunun düşünülmesi nedeniyle algıladığı ya da yaşadığı ayrımcılık veya zulmün klinik ilginin odağı olması."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Ayrımcılık Temelleri",
+        "content": "Toplumsal cinsiyet ya da cinsiyet kimliği, ırk, etnik köken, din, cinsel yönelim, köken ülkesi, siyasi görüş, engellilik, kast, toplumsal statü, kilo ve fiziksel görünüm."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Paranoid Düşünceden Ayrım",
+        "content": "Gerçek ayrımcılık deneyimlerine dayanan kuşku ve tetikte olma hâli sanrı ya da paranoid kişilik özelliği olarak yorumlanmamalıdır; değerlendirmede kişinin toplumsal bağlamı dikkate alınmalıdır."
+      }
+    ]
+  },
+  "acculturation_difficulty": {
+    "id": "acculturation_difficulty",
+    "nameTr": "Kültürleşme ve Göç Uyum Güçlüğü",
+    "nameEn": "Acculturation Difficulty",
+    "clinicalDescription": {
+      "overview": "Kültürleşme Güçlüğü, yeni bir kültüre uyum sağlamada (ör. göç sonrasında) ya da kültürler arası geçişlerde (aile içinde kuşaklar arası kültür farkları dahil) yaşanan güçlüğün klinik ilginin odağı olmasıdır. Dil engeli, iş ve eğitimde uyum sorunları, değer çatışmaları, aidiyet kaybı, kimlik karmaşası ve ebeveynler ile çocukların farklı hızlarda kültürleşmesinden kaynaklanan çatışmalar görülebilir.",
+      "epidemiology": "Göçmen ve mülteci nüfusu yüksek ülkelerde yaygın bir başvuru nedenidir. Türkiye dünyada en çok mülteci barındıran ülkeler arasındadır; yurt dışına ya da yurt içinde göç eden kişiler de benzer güçlükler yaşayabilir.",
+      "etiology": "Göçün zorunlu ya da gönüllü olması, göç öncesi travmalar, dil yeterliği, sosyal destek, ayrımcılık deneyimleri ve ev sahibi toplumun tutumu belirleyicidir. Berry'nin modeline göre bütünleşme (iki kültürü birlikte sürdürme) genellikle en iyi uyumla, marjinalleşme ise en kötü uyumla ilişkilidir.",
+      "prognosis": "Çoğu kişi zamanla uyum sağlar; ancak kültürleşme stresi depresyon, anksiyete ve somatik yakınma riskini artırabilir. Ana dilde ya da tercümanla hizmet, kültüre duyarlı değerlendirme (DSM-5-TR Kültürel Formülasyon Görüşmesi), sosyal destek ağlarının güçlendirilmesi ve dil/mesleki eğitim yararlıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Yeni Kültüre Uyum Güçlüğü",
+        "content": "Yeni bir kültüre uyum sağlamada (ör. göç sonrasında) ya da kültürler arası geçişlerde yaşanan güçlüğün klinik ilginin odağı olması ya da tedavi/prognozu etkilemesi."
+      },
+      {
+        "code": "Kapsam",
+        "title": "Örnekler",
+        "content": "Dil engeli, iş ve eğitim yaşamına uyum sorunları, değer çatışmaları, kimlik ve aidiyet sorunları, kuşaklar arası kültürel çatışmalar."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Uyum Bozukluğu ve Travma ile İlişkisi",
+        "content": "Güçlük uyum bozukluğu, depresif ya da anksiyete bozukluğu düzeyine ulaşıyorsa ilgili tanı konur; mültecilerde göç öncesi ve göç sırasında yaşanan travmalara bağlı TSSB ayrıca değerlendirilmelidir."
+      }
+    ]
+  }
+}

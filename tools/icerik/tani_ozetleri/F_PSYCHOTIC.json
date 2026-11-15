@@ -1,0 +1,209 @@
+{
+"delusional_grandiose": {
+ "id": "delusional_grandiose",
+ "nameTr": "Sanrılı Bozukluk (Büyüklük / Grandiyöz Tip)",
+ "nameEn": "Delusional Disorder (Grandiose Type)",
+ "clinicalDescription": {
+  "overview": "Sanrılı bozukluğun, ana temanın kişinin olağanüstü bir yeteneğe, kavrayışa ya da önemli bir buluşa sahip olduğu inancı olduğu alt tipidir. Kişi tanınmamış büyük bir dehası olduğuna, çığır açan bir icat yaptığına, ünlü biriyle özel bir ilişkisi bulunduğuna ya da Tanrı ile özel bir bağı olduğuna/peygamberlik gibi dinsel bir görevle seçildiğine inanabilir. Sanrı alanı dışında düşünce yapısı, davranış ve işlevsellik görece korunmuştur; bu özelliğiyle maninin büyüklük düşüncelerinden ve şizofreniden ayrılır.",
+  "epidemiology": "Sanrılı bozukluğun yaşam boyu yaygınlığı yaklaşık %0.2'dir; büyüklük tipi kötülük görme ve kıskançlık tiplerine göre daha seyrektir. Başlangıç genellikle orta ve ileri erişkinliktedir.",
+  "etiology": "Narsisistik savunmalar, toplumsal yalıtılmışlık, aşırı dopaminerjik etkinlik ve bilişsel önyargılar (sonuca atlama) düşünülmektedir. Ayırıcı tanıda manik epizod, organik nedenler (nörosifiliz, frontal lob lezyonları) ve madde kullanımı mutlaka dışlanmalıdır.",
+  "prognosis": "Kronik seyretme eğilimindedir ve içgörü çoğu zaman sınırlıdır. Güvene dayalı terapötik ilişki, psikoz için BDT ve antipsikotik tedavi uygulanır; sanrıyla doğrudan tartışmak çoğu zaman ilişkiyi bozar."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Sanrılı Bozukluk Ortak Ölçütleri (Sanrı ≥ 1 ay)",
+   "content": "En az 1 ay süren bir ya da daha çok sanrı (A); şizofreninin A ölçütü hiç karşılanmamıştır, varsanılar varsa belirgin değildir ve sanrı temasıyla ilişkilidir (B); sanrının doğrudan etkileri dışında işlevsellik belirgin bozulmamıştır ve davranış açıkça garip değildir (C); manik ya da majör depresif epizodlar olduysa sanrılı dönemlere göre kısa sürmüştür (D); madde/sağlık durumuna bağlanamaz, beden algısı bozukluğu ya da OKB gibi başka bir bozuklukla daha iyi açıklanamaz (E)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Büyüklük (Grandiyöz) Tipi",
+   "content": "Ana sanrı teması, kişinin büyük ama tanınmamış bir yeteneği ya da kavrayışı olduğu veya önemli bir buluş yaptığı inancıdır; ünlü biriyle özel ilişki ya da dinsel/tanrısal bir görev gibi temalar da bu tipe girer. Belirgin manik belirtiler sanrılı dönemin büyük bölümünde eşlik ediyorsa bipolar bozukluk düşünülmelidir."
+  }
+ ]
+},
+"delusional_persecutory": {
+ "id": "delusional_persecutory",
+ "nameTr": "Sanrılı Bozukluk (Kötülük Görme / Persekütuar Tip)",
+ "nameEn": "Delusional Disorder (Persecutory Type)",
+ "clinicalDescription": {
+  "overview": "Sanrılı bozukluğun en sık görülen alt tipidir. Ana tema, kişinin kendisine karşı komplo kurulduğu, aldatıldığı, gözetlendiği, izlendiği, zehirlendiği, kötü niyetle karalandığı, taciz edildiği ya da uzun vadeli hedeflerine ulaşması engellendiği inancıdır. Kişi algıladığı haksızlığa karşı sık sık resmi makamlara şikâyette bulunabilir, davalar açabilir (kverulans) ve öfkeyle, nadiren de şiddetle karşılık verebilir. Sanrı dışında düşünce düzenli, kişilik görece korunmuştur.",
+  "epidemiology": "Sanrılı bozukluğun yaşam boyu yaygınlığı yaklaşık %0.2'dir; kötülük görme tipi alt tipler içinde en yaygın olanıdır. Genellikle orta yaşta başlar.",
+  "etiology": "Toplumsal yalıtılmışlık, göç ve azınlık deneyimi, işitme kaybı, güvensiz bağlanma, yansıtma savunması, tehdit algısına yönelik bilişsel önyargılar ve dopaminerjik aşırı etkinlik öne sürülmektedir. Paranoid kişilik özellikleri zemin hazırlayabilir.",
+  "prognosis": "Kronikleşme eğilimi yüksektir. Güven ilişkisi kurmak tedavinin ilk adımıdır; antipsikotik tedavi ve psikoz için BDT kullanılır. Şiddet ve adli sorunlar açısından risk değerlendirmesi yapılmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Sanrılı Bozukluk Ortak Ölçütleri (Sanrı ≥ 1 ay)",
+   "content": "En az 1 ay süren sanrı(lar) (A); şizofreninin A ölçütü hiç karşılanmamıştır (B); sanrının etkileri dışında işlevsellik görece korunmuş, davranış açıkça garip değildir (C); eşlik eden duygudurum epizodları sanrılı dönemlere göre kısadır (D); madde, tıbbi durum ya da başka bir ruhsal bozuklukla daha iyi açıklanamaz (E)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Kötülük Görme (Persekütuar) Tipi",
+   "content": "Ana sanrı teması, kişinin komplo, aldatma, izlenme, takip edilme, zehirlenme ya da ilaçla uyuşturulma, kötü niyetle karalanma, taciz veya hedeflerine ulaşmasının engellenmesi gibi yollarla kötülüğe uğratıldığı inancıdır. Paranoid kişilik bozukluğundan farkı, inancın sanrı düzeyinde sarsılmaz olmasıdır."
+  }
+ ]
+},
+"delusional_mixed": {
+ "id": "delusional_mixed",
+ "nameTr": "Sanrılı Bozukluk (Karışık Tip)",
+ "nameEn": "Delusional Disorder (Mixed Type)",
+ "clinicalDescription": {
+  "overview": "Sanrılı bozukluğun, tek bir sanrı temasının baskın olmadığı alt tipidir. Örneğin kişi hem eşinin kendisini aldattığına (kıskançlık) hem de bu nedenle zehirlenmeye çalışıldığına (kötülük görme) ya da hem bedeninde bir hastalık olduğuna (bedensel) hem de bunun bilerek gizlendiğine inanabilir. Temalar arasında bir ağırlık belirlenemediğinde karışık tip; tema belirlenemiyor ya da listedeki tiplerden biri değilse (örn. referans sanrıları) belirtilmemiş tip kodlanır.",
+  "epidemiology": "Sanrılı bozukluğun genel yaygınlığı yaklaşık %0.2'dir; karışık tipe özgü güvenilir yaygınlık verisi bulunmamaktadır.",
+  "etiology": "Sanrılı bozukluğun genel etiyolojisiyle aynıdır: toplumsal yalıtılmışlık, duyusal kayıplar, bilişsel önyargılar ve dopaminerjik işlev bozukluğu.",
+  "prognosis": "Diğer alt tiplerle benzer biçimde kronik seyretme eğilimindedir; antipsikotik tedavi ve psikoz için BDT uygulanır. Yeni temaların eklenmesi ya da işlevselliğin belirgin bozulması şizofreni açısından yeniden değerlendirmeyi gerektirir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Sanrılı Bozukluk Ortak Ölçütleri (Sanrı ≥ 1 ay)",
+   "content": "En az 1 ay süren sanrı(lar); şizofreni A ölçütünün hiç karşılanmamış olması; sanrı dışında işlevselliğin görece korunması; duygudurum epizodlarının sanrılı dönemlere göre kısa olması; madde, tıbbi durum ya da başka bir bozuklukla daha iyi açıklanamaması."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Karışık Tip",
+   "content": "Birden fazla sanrı teması (erotomanik, büyüklük, kıskançlık, kötülük görme, bedensel) bulunur ve hiçbiri baskın değildir. Ayrıca 'garip (bizar) içerikli' belirleyicisi, sanrıların açıkça akla yatkın olmadığı ve sıradan yaşam deneyimlerinden kaynaklanmadığı durumlarda eklenebilir."
+  }
+ ]
+},
+"schizoaffective_bipolar": {
+ "id": "schizoaffective_bipolar",
+ "nameTr": "Şizoaffektif Bozukluk (Bipolar Tip)",
+ "nameEn": "Schizoaffective Disorder (Bipolar Type)",
+ "clinicalDescription": {
+  "overview": "Şizofreninin aktif evre belirtileriyle (sanrı, varsanı, dağınık konuşma vb.) eş zamanlı olarak majör bir duygudurum epizodunun bulunduğu ve tablonun bir parçası olarak manik epizodun yer aldığı şizoaffektif bozukluk alt tipidir; majör depresif epizodlar da görülebilir. Tanının anahtarı, duygudurum epizodu olmaksızın en az 2 hafta süren sanrı ya da varsanı döneminin bulunması ve duygudurum epizodlarının hastalığın toplam süresinin çoğunluğunu kaplamasıdır.",
+  "epidemiology": "Şizoaffektif bozukluğun yaşam boyu yaygınlığı yaklaşık %0.3'tür. Bipolar tip genç erişkinlerde, depresif tip ileri erişkinlerde görece daha sıktır.",
+  "etiology": "Şizofreni ve bipolar bozuklukla ortak genetik yatkınlık gösterir; birinci derece yakınlarında her iki bozukluğun riski de artmıştır.",
+  "prognosis": "Genel olarak prognozu şizofreniden daha iyi, bipolar bozukluktan daha kötüdür. Antipsikotik ile duygudurum dengeleyici tedavi, psikoeğitim ve psikososyal rehabilitasyon uygulanır. Tanı zaman içinde değişebileceğinden boylamsal izlem önemlidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "Şizoaffektif Bozukluk Ortak Ölçütleri",
+   "content": "Şizofreni A ölçütüyle eş zamanlı majör duygudurum epizodunun (manik ya da majör depresif; depresif epizod çökkün duygudurumu içermeli) bulunduğu kesintisiz hastalık dönemi (A). Hastalığın yaşam boyu süresince, majör duygudurum epizodu olmaksızın 2 hafta ya da daha uzun süren sanrı veya varsanılar (B). Duygudurum epizodu ölçütlerini karşılayan belirtiler hastalığın aktif ve kalıntı evrelerinin toplam süresinin çoğunluğunda bulunur (C). Madde ya da sağlık durumuna bağlanamaz (D)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Bipolar Tip",
+   "content": "Tablonun bir parçası olarak manik epizod bulunur; majör depresif epizodlar da olabilir. Yalnızca majör depresif epizodlar varsa depresif tip kodlanır. Duygudurum epizodları kısa ve hastalığın küçük bir bölümünü oluşturuyorsa şizofreni tanısı daha uygundur."
+  }
+ ]
+},
+"schizoaffective_depressive": {
+ "id": "schizoaffective_depressive",
+ "nameTr": "Şizoaffektif Bozukluk (Depresif Tip)",
+ "nameEn": "Schizoaffective Disorder (Depressive Type)",
+ "clinicalDescription": {
+  "overview": "Şizofreni aktif evre belirtileriyle eş zamanlı majör depresif epizodun görüldüğü ve hastalık boyunca hiç manik epizodun bulunmadığı şizoaffektif bozukluk alt tipidir. Depresif epizodun çökkün duygudurumu içermesi gerekir; yalnızca ilgi kaybı, şizofreninin negatif belirtileriyle karışabileceğinden yeterli sayılmaz. Duygudurum epizodu yokken de en az 2 hafta süren sanrı ya da varsanılar bulunur.",
+  "epidemiology": "Şizoaffektif bozukluğun yaşam boyu yaygınlığı yaklaşık %0.3'tür; depresif tip ileri yaşta başlayan olgularda daha sıktır ve kadınlarda daha yaygın olduğu bildirilmektedir.",
+  "etiology": "Şizofreni ve duygudurum bozukluklarıyla ortak genetik ve nörobiyolojik etkenler. Ayırıcı tanıda psikotik özellikli majör depresif bozukluk (psikotik belirtilerin yalnızca depresif epizod sırasında görülmesi) ile ayrım temel noktadır.",
+  "prognosis": "Bipolar tipe göre prognozun daha kötü olabileceği bildirilmektedir. Antipsikotik ve antidepresan tedavi, psikososyal destek ve intihar riskinin yakın izlemi gerekir; depresif dönemlerde intihar riski yüksektir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "Şizoaffektif Bozukluk Ortak Ölçütleri",
+   "content": "Şizofreni A ölçütüyle eş zamanlı majör duygudurum epizodu (A); duygudurum epizodu olmaksızın en az 2 hafta sanrı ya da varsanı (B); duygudurum epizodu belirtilerinin hastalığın toplam süresinin çoğunluğunda bulunması (C); madde ya da sağlık durumuna bağlanamaması (D)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Depresif Tip",
+   "content": "Tabloda yalnızca majör depresif epizodlar bulunur, manik epizod hiç olmamıştır. Psikotik belirtiler yalnızca depresif epizodlar sırasında görülüyorsa tanı psikotik özellikli majör depresif bozukluktur."
+  }
+ ]
+},
+"substance_induced_psychotic": {
+ "id": "substance_induced_psychotic",
+ "nameTr": "Maddenin/İlacın Yol Açtığı Psikotik Bozukluk",
+ "nameEn": "Substance/Medication-Induced Psychotic Disorder",
+ "clinicalDescription": {
+  "overview": "Sanrı ve/veya varsanıların bir maddenin zehirlenmesi (intoksikasyonu) ya da yoksunluğu sırasında veya hemen sonrasında ya da bir ilaca maruziyet sonrasında ortaya çıktığı psikotik bozukluktur. Esrar (özellikle yüksek THC içerikli ürünler ve sentetik kannabinoidler), amfetamin/metamfetamin, kokain, halüsinojenler, alkol (özellikle yoksunluk ve ağır kullanım), sedatifler ve kortikosteroid, levodopa gibi ilaçlar en sık nedenlerdir. Kişinin varsanıların maddeye bağlı olduğunun farkında olduğu, gerçeği değerlendirmenin korunduğu durumlar bu tanıya değil madde intoksikasyonu/yoksunluğuna girer.",
+  "epidemiology": "Yaygınlık kullanılan maddeye ve topluma göre büyük farklılık gösterir. Acil servis başvurularında ilk psikotik epizodların önemli bir bölümü madde kullanımıyla ilişkilidir.",
+  "etiology": "Mezolimbik dopamin artışı (uyarıcılar), kannabinoid CB1 reseptör etkileri, NMDA reseptör antagonizması (fensiklidin, ketamin), serotonin 5-HT2A agonizması (halüsinojenler). Genetik psikoz yatkınlığı ve erken ergenlikte yoğun esrar kullanımı riski artırır.",
+  "prognosis": "Madde kesildikten sonra belirtiler genellikle günler ile haftalar içinde düzelir. Ancak özellikle esrar ve amfetaminle ilişkili psikozlarda olguların önemli bir kısmı izlemde şizofreni ya da bipolar bozukluk tanısı alabilir; bu nedenle izlem ve madde kullanımı tedavisi gereklidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Psikotik Belirti ve Maddeyle Zamansal-Nedensel İlişki",
+   "content": "Sanrı ve/veya varsanıların bulunması (A). Öykü, fizik muayene ya da laboratuvar bulgularında her ikisine dair kanıt: (1) belirtiler madde intoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ya da bir ilaca maruziyet sonrasında gelişmiştir, (2) söz konusu madde bu belirtilere yol açabilecek niteliktedir (B)."
+  },
+  {
+   "code": "Kriter C, D & E",
+   "title": "Bağımsız Psikozun Dışlanması, Deliryum Dışlaması ve İşlev Bozulması",
+   "content": "Tablo maddeye bağlı olmayan bir psikotik bozuklukla daha iyi açıklanamaz; bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlaması, akut yoksunluk ya da ağır intoksikasyon bittikten sonra belirgin bir süre (örn. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen epizod öyküsü (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Klinik açıdan belirgin sıkıntı ya da işlev bozulmasına yol açar (E). Başlangıç belirleyicisi: intoksikasyon sırasında, yoksunluk sırasında ya da ilaç kullanımı sonrasında."
+  }
+ ]
+},
+"psychotic_due_to_medical": {
+ "id": "psychotic_due_to_medical",
+ "nameTr": "Başka Bir Sağlık Durumuna Bağlı Psikotik Bozukluk",
+ "nameEn": "Psychotic Disorder Due to Another Medical Condition",
+ "clinicalDescription": {
+  "overview": "Belirgin varsanı ya da sanrıların, bir tıbbi hastalığın doğrudan patofizyolojik sonucu olduğunun öykü, fizik muayene ve laboratuvar bulgularıyla gösterildiği psikotik bozukluktur. Geç yaşta (özellikle 35-40 yaş sonrası) ilk kez başlayan psikoz, aile öyküsünün olmaması, görsel, koku ya da dokunma varsanıları, bilinç ve bilişte dalgalanma ve nörolojik bulgular tıbbi bir nedeni düşündürmelidir.",
+  "epidemiology": "Yaygınlık altta yatan hastalığa göre değişir; temporal lob epilepsisi, Huntington hastalığı ve bazı otoimmün ensefalitlerde psikotik belirtiler sıktır.",
+  "etiology": "Nörolojik (temporal lob epilepsisi, beyin tümörleri, inme, multipl skleroz, Huntington ve Parkinson hastalığı, migren), endokrin (hiper/hipotiroidi, Cushing sendromu), metabolik (B12 eksikliği, hepatik ensefalopati, porfiri), enfeksiyöz (HIV, nörosifiliz, herpes ensefaliti) ve otoimmün (sistemik lupus eritematozus, anti-NMDA reseptör ensefaliti) nedenler.",
+  "prognosis": "Seyir altta yatan hastalığın tedavisine bağlıdır; neden tedavi edildiğinde psikoz çoğu zaman düzelir. Belirtilerin denetimi için antipsikotikler gerekebilir ancak bu hastalar yan etkilere daha duyarlıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Tanı Ölçütleri",
+   "content": "Belirgin varsanı ya da sanrılar (A). Öykü, muayene ya da laboratuvar bulgularında tablonun başka bir sağlık durumunun doğrudan patofizyolojik sonucu olduğuna dair kanıt (B). Başka bir ruhsal bozuklukla daha iyi açıklanamaz (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Klinik açıdan belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  },
+  {
+   "code": "Belirleyici",
+   "title": "Baskın Belirtiye Göre",
+   "content": "Sanrılarla (sanrılar baskın) ya da varsanılarla (varsanılar baskın) belirtilir. Tanı adında ilgili sağlık durumu da yazılır (örn. 'temporal lob epilepsisine bağlı psikotik bozukluk, varsanılarla')."
+  }
+ ]
+},
+"catatonia_medical": {
+ "id": "catatonia_medical",
+ "nameTr": "Başka Bir Sağlık Durumuna Bağlı Katatoni",
+ "nameEn": "Catatonic Disorder Due to Another Medical Condition",
+ "clinicalDescription": {
+  "overview": "Katatoni belirtilerinin (stupor, katalepsi, mumsu esneklik, mutizm, negativizm, postür alma, manyerizm, stereotipi, dış uyarandan etkilenmeyen ajitasyon, yüz buruşturma, ekolali, ekopraksi) bir tıbbi hastalığın doğrudan fizyolojik sonucu olarak ortaya çıktığı tablodur. Psikiyatrik bir bozukluğa eşlik eden katatoniden ayrımı için ayrıntılı tıbbi ve nörolojik inceleme gerekir.",
+  "epidemiology": "Katatoninin tıbbi nedenlere bağlı olgu oranı, genel hastane ve yoğun bakım örneklemlerinde psikiyatri servislerine göre daha yüksektir; kesin oranlar çalışmalara göre değişir.",
+  "etiology": "Nörolojik (ensefalit, özellikle anti-NMDA reseptör ensefaliti; beyin tümörleri, kafa travması, serebrovasküler hastalık, epileptik durumlar), metabolik (hepatik ensefalopati, hiperkalsemi, diyabetik ketoasidoz, homosistinüri) ve otoimmün (SLE) nedenler başlıcalarıdır. Antipsikotik kullanımıyla ilişkili nöroleptik malign sendrom ile ayrım önemlidir.",
+  "prognosis": "Tedavinin temeli altta yatan hastalığın tedavisidir; katatoni belirtilerine benzodiazepinler ve dirençli olgularda EKT uygulanır. Hareketsizliğe bağlı tromboemboli, dehidratasyon, beslenme yetersizliği ve bası yaraları önlenmelidir; malign katatoni hayatı tehdit edebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Katatoni Belirtileri (12 belirtiden en az 3'ü)",
+   "content": "Klinik tabloya aşağıdakilerden üç ya da daha fazlası egemendir: stupor, katalepsi, mumsu esneklik, mutizm, negativizm, postür alma, manyerizm, stereotipi, dış uyarandan etkilenmeyen ajitasyon, yüz buruşturma, ekolali, ekopraksi."
+  },
+  {
+   "code": "Kriter B-E",
+   "title": "Tıbbi Neden Kanıtı ve Dışlamalar",
+   "content": "Tablonun başka bir sağlık durumunun doğrudan patofizyolojik sonucu olduğuna dair kanıt (B); başka bir ruhsal bozuklukla (örn. manik epizod) daha iyi açıklanamaz (C); yalnızca deliryum sırasında ortaya çıkmaz (D); klinik açıdan belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  }
+ ]
+},
+"attenuated_psychosis_syndrome": {
+ "id": "attenuated_psychosis_syndrome",
+ "nameTr": "Hafifletilmiş Psikoz Sendromu (Prodromal Psikoz)",
+ "nameEn": "Attenuated Psychosis Syndrome",
+ "clinicalDescription": {
+  "overview": "Sanrı, varsanı ya da dağınık konuşmanın tam psikoz eşiğine ulaşmayan, hafifletilmiş biçimlerinin görüldüğü ve gerçeği değerlendirmenin görece korunduğu tablodur: kişi örneğin insanların kendisi hakkında konuştuğu şüphesini taşır ama bunun doğru olmayabileceğini kabul edebilir, ya da adının seslenildiğini duyar gibi olur. DSM-5-TR'de resmi bir tanı değildir; 'Daha Fazla Araştırma Gerektiren Durumlar' bölümünde önerilen ölçütleri bulunur ve klinikte 'Belirlenmiş diğer şizofreni spektrumu ve diğer psikotik bozukluk' altında örnek olarak kodlanabilir. Klinik yüksek risk (ultra yüksek risk) kavramıyla örtüşür.",
+  "epidemiology": "Daha çok ergenlik ve genç erişkinlikte görülür. Klinik yüksek risk ölçütlerini karşılayan yardım arayan gençlerin yaklaşık beşte biri ile üçte biri arasında bir bölümünün 2-3 yıl içinde tam psikoza geçtiği bildirilmektedir; bu oran örnekleme göre değişir.",
+  "etiology": "Psikoz için genetik yatkınlık (birinci derece yakında psikoz), erken dönem travma ve olumsuz yaşam olayları, esrar kullanımı ve kentsel/göç kaynaklı toplumsal stres etkenleri riski artırır.",
+  "prognosis": "Bireylerin çoğu psikoza geçmez; ancak eşlik eden depresyon ve anksiyete, işlevsellik kaybı ve sıkıntı sıktır. Erken müdahale hizmetleri, BDT, aile desteği, madde kullanımının azaltılması ve yakın izlem önerilir; damgalama ve gereksiz antipsikotik kullanımından kaçınılmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Önerilen Ölçütler A-C",
+   "title": "Hafifletilmiş Belirtiler, Sıklık ve Yeni Başlangıç",
+   "content": "Sanrı, varsanı ya da dağınık konuşmadan en az birinin, gerçeği değerlendirmenin görece korunduğu hafifletilmiş biçimde ve klinik ilgi gerektirecek şiddet ya da sıklıkta bulunması (A). Belirtilerin son 1 ay içinde en az haftada bir kez bulunması (B). Belirtilerin son 1 yıl içinde başlamış ya da kötüleşmiş olması (C)."
+  },
+  {
+   "code": "Önerilen Ölçütler D-F",
+   "title": "Sıkıntı ve Dışlamalar",
+   "content": "Belirtiler klinik ilgi gerektirecek kadar sıkıntı verici ve işlevsellik bozucudur (D). Psikotik özellikli depresif ya da bipolar bozukluk dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz; madde ya da sağlık durumuna bağlanamaz (E). Herhangi bir psikotik bozukluğun ölçütleri hiçbir zaman karşılanmamıştır (F)."
+  }
+ ]
+}
+}

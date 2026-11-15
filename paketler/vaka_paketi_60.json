@@ -6,7 +6,7 @@
     "course": "FORENSIC",
     "diagnosisId": "frotteuristic",
     "therapyId": "cbt_general",
-    "category": "SEXUAL",
+    "category": "PARAPHILIC",
     "patientSummary": "26 yaşında, erkek, muhasebe personeli (Adli & Parafilik Vaka)",
     "clues": [
       "26 yaşındaki danışan, kalabalık metrobüs ve otobüslerde tanımadığı kadınlara rızaları olmaksızın sürtünme eylemlerini durduramadığını ve yoğun suçluluk yaşadığını belirterek kliniğe başvurdu.",
@@ -50,7 +50,8 @@
       "explanation": "Frotteurizmde danışan eylemlerinden ötürü derin suçluluk ve utanç (ego-distonik) yaşar; Antisosyal KB'de ise kural ihlallerinde suçluluk ve empati bulunmaz."
     },
     "differentialDiagnosis": "• Ekzibisyonizm: Cinsel organı yabancıya gösterme hazzıdır; sürtünme ve fiziksel temas birincil amaç değildir.\n• Antisosyal KB: Genel suç davranışı ve vicdan azabı eksikliği hakimdir; suçluluk hissetmezler.\n• OKB (Cinsel Obsesyonlar): OKB'de düşünceler haz vermez ve eyleme dökülmez; parafilide ise eylem haz vericidir.",
-    "dsmCriteriaSummary": "DSM-5: En az 6 ay süreyle onay vermeyen kişiye dokunma/sürtünme dürtüleri + Bu dürtülerin rıza dışı eyleme dökülmesi."
+    "dsmCriteriaSummary": "DSM-5: En az 6 ay süreyle onay vermeyen kişiye dokunma/sürtünme dürtüleri + Bu dürtülerin rıza dışı eyleme dökülmesi.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-071",
@@ -59,7 +60,7 @@
     "course": "FORENSIC",
     "diagnosisId": "voyeuristic",
     "therapyId": "cbt_general",
-    "category": "SEXUAL",
+    "category": "PARAPHILIC",
     "patientSummary": "24 yaşında, erkek, üniversite son sınıf öğrencisi (Adli Vaka)",
     "clues": [
       "24 yaşındaki danışan, karşı apartmandaki komşusunun yatak odasını gizlice gözetlerken cep telefonu kamerasıyla yakalanması ve polise şikayet edilmesi üzerine adli psikiyatrik muayeneye getirildi.",
@@ -98,7 +99,8 @@
       "explanation": "DSM-5 voyöristik bozukluk için failin en az 18 yaşında olmasını kesin tanı kriteri olarak zorunlu kılar."
     },
     "differentialDiagnosis": "• Normal Merak/İnternet Pornografisi: Pornografide izlenen kişinin haberi ve rızası vardır; voyörizmde mağdur habersizdir ve uyarılma habersiz olmasıyla doğrudan bağlantılıdır.\n• Ekzibisyonizm: Kendi organını gösterme eylemidir, gözetleme değildir.",
-    "dsmCriteriaSummary": "DSM-5: ≥18 yaş + En az 6 ay habersiz kişileri çıplak/ilişki anında gözetleme dürtüleri + Eyleme dökme."
+    "dsmCriteriaSummary": "DSM-5: ≥18 yaş + En az 6 ay habersiz kişileri çıplak/ilişki anında gözetleme dürtüleri + Eyleme dökme.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-072",
@@ -107,7 +109,7 @@
     "course": "FORENSIC",
     "diagnosisId": "exhibitionistic",
     "therapyId": "cbt_general",
-    "category": "SEXUAL",
+    "category": "PARAPHILIC",
     "patientSummary": "29 yaşında, erkek, elektrik teknisyeni (Adli Vaka)",
     "clues": [
       "29 yaşındaki danışan, parkta bankta oturan yabancı bir kadının önüne geçip trençkotunu aniden açarak genital organını teşhir ederken güvenlik görevlileri tarafından suçüstü yakalandı.",
@@ -151,7 +153,8 @@
       "explanation": "Ekzibisyonizmde fail temas istemez; temel uyarılma kurbanın hazırlıksız yakalanması ve gösterdiği dehşet/şaşkınlık tepkisidir."
     },
     "differentialDiagnosis": "• Frotteurizm: Fiziksel temas ve sürtünme vardır; ekzibisyonizmde temas yoktur, sadece görsel teşhir vardır.\n• Bipolar Manik Epizod: Manide genel disinhibisyonla soyunma olabilir; ancak burada kronik ve spesifik parafilik odak vardır.",
-    "dsmCriteriaSummary": "DSM-5: En az 6 ay hazırlıksız kişiye genital organını gösterme dürtüleri + Eyleme dökme veya belirgin klinik sıkıntı."
+    "dsmCriteriaSummary": "DSM-5: En az 6 ay hazırlıksız kişiye genital organını gösterme dürtüleri + Eyleme dökme veya belirgin klinik sıkıntı.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-073",
@@ -199,7 +202,8 @@
       "explanation": "Kabus REM uykusunda olur, uyanınca rüya çok net hatırlanır ve bilinç açıktır. Uyku Terörü NREM evresindedir, amnezi ve uyanma konfüzyonu ile seyreder."
     },
     "differentialDiagnosis": "• Gece Terörü (Sleep Terror): NREM evresindedir; hasta uyanmakta zorlanır, konfüzyon yaşar ve rüyayı hatırlamaz.\n• TSSB: Kabuslar doğrudan gerçek bir travmanın aynen yeniden yaşantılanmasıdır.\n• REM Uykusu Davranış Bozukluğu: Rüyayı eyleme dökme ve yataktan fırlama/vurma hareketleri vardır.",
-    "dsmCriteriaSummary": "DSM-5: İyi hatırlanan korkutucu rüyalar + Uyanıldığında hızla tam yönelim (oryantasyon) + Belirgin gündüz sıkıntısı."
+    "dsmCriteriaSummary": "DSM-5: İyi hatırlanan korkutucu rüyalar + Uyanıldığında hızla tam yönelim (oryantasyon) + Belirgin gündüz sıkıntısı.",
+    "pharmacologyId": "prazosin_nightmares"
   },
   {
     "id": "case-074",
@@ -247,7 +251,8 @@
       "explanation": "Uyaran kontrolünün özü; yatak ile kaygı/uyanıklık koşullanmasını kırmaktır. 20 dakikada uyuyamayan kişi yataktan ayrılmalıdır."
     },
     "differentialDiagnosis": "• Uyku Apnesi: Gece horlama, boğulma hissi ve solunum durması vardır.\n• Huzursuz Bacaklar Sendromu: Bacaklarda hareket ettirme dürtüsü ve paresteziler vardır.\n• Depresyona Bağlı İnsomni: Anhedoni ve derin çökkünlük primerdir.",
-    "dsmCriteriaSummary": "DSM-5: Uyku başlatma/sürdürme güçlüğü + Haftada ≥3 gece + Süre ≥3 ay + Yeterli uyku fırsatına rağmen oluşma."
+    "dsmCriteriaSummary": "DSM-5: Uyku başlatma/sürdürme güçlüğü + Haftada ≥3 gece + Süre ≥3 ay + Yeterli uyku fırsatına rağmen oluşma.",
+    "pharmacologyId": "mirtazapine_nassa"
   },
   {
     "id": "case-075",
@@ -295,7 +300,8 @@
       "explanation": "Narkolepside 15 dakikalık şekerleme hastayı yeniler ve katapleksi eşlik edebilir. Hipersomnolans'ta ise saatlerce uyunsa bile asla dinlenilmez."
     },
     "differentialDiagnosis": "• Narkolepsi: Katapleksi, uyku felci ve dinlendirici kısa şekerlemeler vardır.\n• Uyku Apnesi: Horlama ve gece solunum durmaları vardır.\n• Yetersiz Uyku Sendromu: Kişi fırsat bulamadığı için az uyumaktadır; fırsat verildiğinde düzelir.",
-    "dsmCriteriaSummary": "DSM-5: En az 7 saatlik uykuya rağmen aşırı uyku ihtiyacı + Dinlendirmeyen uyku + Haftada ≥3 kez + Süre ≥3 ay."
+    "dsmCriteriaSummary": "DSM-5: En az 7 saatlik uykuya rağmen aşırı uyku ihtiyacı + Dinlendirmeyen uyku + Haftada ≥3 kez + Süre ≥3 ay.",
+    "pharmacologyId": "modafinil_oxybate"
   },
   {
     "id": "case-076",
@@ -343,7 +349,8 @@
       "explanation": "Vajinismus tedavisinde performans baskısını kaldıran Duyusal Odaklanma ve pelvik kasları eğiten aşamalı dilatör egzersizleri başarı oranı %95+ olan altın standarttır."
     },
     "differentialDiagnosis": "• Disparoni (Organik Ağrı): Enfeksiyon veya endometriozise bağlı organik ağrıdır.\n• Cinsel İstek Azlığı: İstek vardır ancak istemsiz spazm nedeniyle penetrasyon gerçekleşemez.",
-    "dsmCriteriaSummary": "DSM-5: Penetrasyonda belirgin güçlük + Ağrı korkusu + Pelvik taban kaslarında belirgin kasılma (Süre ≥ 6 ay)."
+    "dsmCriteriaSummary": "DSM-5: Penetrasyonda belirgin güçlük + Ağrı korkusu + Pelvik taban kaslarında belirgin kasılma (Süre ≥ 6 ay).",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-077",
@@ -391,7 +398,8 @@
       "explanation": "DSM-5 tanı kriterlerine göre erken boşalma için objektif süre eşiği penetrasyon sonrası yaklaşık 1 dakikadır."
     },
     "differentialDiagnosis": "• Erektil Bozukluk: Sertleşmeyi koruma güçlüğüdür.\n• Durumsal Erken Boşalma: Yeni partnerle ilk ilişkideki geçici heyecan durumudur.",
-    "dsmCriteriaSummary": "DSM-5: Penetrasyondan sonraki yaklaşık 1 dakika içinde boşalma + Süre ≥ 6 ay + Neredeyse tüm ilişkilerde görülme."
+    "dsmCriteriaSummary": "DSM-5: Penetrasyondan sonraki yaklaşık 1 dakika içinde boşalma + Süre ≥ 6 ay + Neredeyse tüm ilişkilerde görülme.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-078",
@@ -439,7 +447,8 @@
       "explanation": "Organik bozuklukta gece/sabah ereksiyonu da kaybolur. Psikojenik vakalarda ise sabah ereksiyonları tamdır, sorun partnere karşı performans kaygısındadır."
     },
     "differentialDiagnosis": "• Organik Erektil Disfonksiyon: Diyabet, hipertansiyon veya vasküler yetmezliktedir; sabah ereksiyonları yoktur.\n• Cinsel İstek Bozukluğu: Cinsel arzu ve fanteziler tamamen yok olmuştur.",
-    "dsmCriteriaSummary": "DSM-5: Cinsel etkinliklerin çoğunda sertliği elde edememe/sürdürememe + Süre ≥ 6 ay + Belirgin klinik sıkıntı."
+    "dsmCriteriaSummary": "DSM-5: Cinsel etkinliklerin çoğunda sertliği elde edememe/sürdürememe + Süre ≥ 6 ay + Belirgin klinik sıkıntı.",
+    "pharmacologyId": "bupropion_ndri"
   },
   {
     "id": "case-079",
@@ -492,7 +501,8 @@
       "explanation": "Demans sinsi ve aylar/yıllar içinde ilerler; deliryum ise akut başlar, dikkat çöker ve gün içinde saatten saate şiddeti dalgalanır."
     },
     "differentialDiagnosis": "• Demans (Majör Nörobilişsel B.): Sinsi başlar, aylar/yıllar sürer, bilinç açıktır ve dikkat görece korunmuştur.\n• Şizofreni: Görsel değil işitsel halüsinasyonlar ön plandadır; genel tıbbi enfeksiyon doğrudan sebep değildir.",
-    "dsmCriteriaSummary": "DSM-5: Dikkat ve farkındalıkta akut bozulma + Hızlı başlangıç ve gün içi dalgalanma + Tıbbi fizyolojik kanıt."
+    "dsmCriteriaSummary": "DSM-5: Dikkat ve farkındalıkta akut bozulma + Hızlı başlangıç ve gün içi dalgalanma + Tıbbi fizyolojik kanıt.",
+    "pharmacologyId": "haloperidol_acute"
   },
   {
     "id": "case-080",
@@ -540,14 +550,15 @@
       "explanation": "Alzheimer hipokampustan başladığı için ilk çöken alan yeni bilgileri kaydetme ve yakın bellektir; eski anılar uzun süre korunur."
     },
     "differentialDiagnosis": "• Deliryum: Hızlı başlar ve bilinç dalgalıdır; Alzheimer ise sinsi başlar ve bilinç uyanıktır.\n• Psödodemans (Depresif Yalancı Demans): Depresyon kaynaklıdır; hasta testlerde 'bilmiyorum' der ve çaba göstermez.",
-    "dsmCriteriaSummary": "DSM-5: Bir veya daha fazla bilişsel alanda belirgin gerileme + Günlük yaşam bağımsızlığının kaybı + Sinsi başlangıç."
+    "dsmCriteriaSummary": "DSM-5: Bir veya daha fazla bilişsel alanda belirgin gerileme + Günlük yaşam bağımsızlığının kaybı + Sinsi başlangıç.",
+    "pharmacologyId": "cholinesterase_donepezil"
   },
   {
     "id": "case-081",
     "caseNumber": 81,
     "difficulty": "Zor",
     "course": "NEURO_SOMATIC",
-    "diagnosisId": "pseudocyesis",
+    "diagnosisId": "other_specified_somatic",
     "therapyId": "cbt_general",
     "category": "SOMATIC",
     "patientSummary": "34 yaşında, kadın, ev hanımı",
@@ -557,7 +568,7 @@
       "Ancak yapılan acil transvajinal ultrasonografide rahim tamamen boş çıkmış ve serum Beta-hCG gebelik hormonu kesin olarak sıfır (<0.1 mIU/mL) bulunmuştur.",
       "Öyküde hastanın 8 yıldır kısırlık (infertilite) tedavisi gördüğü, 4 başarısız tüp bebek denemesi sonrası yoğun bir çocuk sahibi olma arzusu ve yas yaşadığı öğrenildi.",
       "Ruhsal Durum Muayenesinde: Ultrason sonuçlarına ilk başta inanmakta zorlanma; hezeyanlı bir psikoz tablosu olmaksızın yoğun psikosomatik inanç ve derin kayıp yası saptandı.",
-      "DSM-5'e göre: Gebe olmadığı halde gebe olduğuna dair yanlış bir inançla birlikte karın büyümesi, amenore (adetten kesilme), süt salgısı ve fetal hareket algısı gibi objektif gebelik belirtilerinin bulunması tablosudur."
+      "DSM-5'e göre: Gebe olmadığı halde gebe olduğuna dair yanlış bir inançla birlikte karın büyümesi, amenore (adetten kesilme), süt salgısı ve fetal hareket algısı gibi objektif gebelik belirtilerinin bulunması tablosudur (psödosiyezis; DSM-5-TR'de 'Belirlenmiş Diğer Bir Bedensel Belirti ve İlişkili Bozukluk' örneği)."
     ],
     "symptomHighlights": [
       {
@@ -588,14 +599,15 @@
       "explanation": "Psödosiyeziste psikolojik arzu hipotalamo-hipofizer aksı etkileyerek prolaktin artışına, amenoreye ve karın distansiyonuna yol açan gerçek bir psikonöroendokrin tablodur."
     },
     "differentialDiagnosis": "• Somatizasyon Bozukluğu: Çoklu bedensel ağrılar vardır; spesifik gebelik tablosu yoktur.\n• Psikotik Bozukluk (Gebelik Hezeyanı): Bedensel değişiklikler olmadan sadece şizofrenik hezeyan vardır.",
-    "dsmCriteriaSummary": "DSM-5: Gebe olunmadığı halde karın büyümesi, amenore ve galaktore ile giden yanlış gebelik inancı."
+    "dsmCriteriaSummary": "DSM-5-TR (belirlenmiş diğer bedensel belirti bozukluğu örneği): Gebe olunmadığı halde karın büyümesi, amenore ve galaktore ile giden yanlış gebelik inancı.",
+    "pharmacologyId": "pimozide_delusional"
   },
   {
     "id": "case-082",
     "caseNumber": 82,
     "difficulty": "Zor",
     "course": "ADULT",
-    "diagnosisId": "olfactory_reference",
+    "diagnosisId": "other_specified_ocd",
     "therapyId": "erp",
     "category": "OCD_RELATED",
     "patientSummary": "25 yaşında, erkek, yazılım mühendisi",
@@ -605,18 +617,18 @@
       "Ofiste yanındaki arkadaşı pencereyi her açtığında veya burnuna dokunduğunda 'Benim kokumdan rahatsız oldu' diyerek (referans fikirleri) masasını terk etmekte ve son 2 aydır tamamen evden çalışmaktadır.",
       "KBB, diş hekimliği ve gastroenteroloji muayenelerinde halitozis veya organik hiçbir koku kaynağı saptanmamıştır.",
       "Ruhsal Durum Muayenesinde: Kötü koku yaydığına dair aşırı zihinsel uğraş, koku kontrol kompulsiyonları (sürekli koltuk altını koklama) ve belirgin referans düşünceleri tespit edildi.",
-      "DSM-5 ve DSM-5-TR'ye göre: Başkalarınca algılanmayan ya da hafif olan kötü bir vücut kokusu yaydığına dair sürekli zihinsel uğraş ve buna eşlik eden kontrol etme/temizlik kompulsiyonları tablosudur."
+      "DSM-5 ve DSM-5-TR'ye göre: Başkalarınca algılanmayan ya da hafif olan kötü bir vücut kokusu yaydığına dair sürekli zihinsel uğraş ve buna eşlik eden kontrol etme/temizlik kompulsiyonları tablosudur (Koku Referans Bozukluğu; DSM-5-TR'de 'Belirlenmiş Diğer Bir Obsesif-Kompulsif ve İlişkili Bozukluk' örneği olarak kodlanır)."
     ],
     "symptomHighlights": [
       {
         "clueIndex": 0,
         "text": "vücudundan ve ağzından 'çürümüş et ve lağım gibi iğrenç bir koku' yayıldığına inanarak",
-        "dsmMatch": "DSM-5 Kriter A: Başkalarınca algılanmayan kötü vücut kokusu yayma inancı"
+        "dsmMatch": "Klinik özellik: Başkalarınca algılanmayan kötü vücut kokusu yayma inancı"
       },
       {
         "clueIndex": 2,
         "text": "pencereyi her açtığında",
-        "dsmMatch": "DSM-5 Kriter B: Kokudan kaynaklı referans düşünceleri ve kaçınma"
+        "dsmMatch": "Klinik özellik: Kokudan kaynaklı referans düşünceleri ve kaçınma"
       }
     ],
     "treatmentModality": {
@@ -636,7 +648,8 @@
       "explanation": "Koku referans bozukluğunda hasta etraftaki insanların her hareketini kendi kokusuna bağlar (referans) ve saatlerce yıkanarak ritüel yapar."
     },
     "differentialDiagnosis": "• Beden Algısı Bozukluğu (BDD): Odak koku değil, dış görünümdeki (burun, saç, cilt) estetik kusurlardır.\n• Şizofreni: Koku hezeyanı bizar bir uzaylı kontrolüyle ilişkilidir; referans bozukluğunda ise tablo kokuyla sınırlıdır.",
-    "dsmCriteriaSummary": "DSM-5: Başkalarınca algılanmayan kötü koku inancı + Yineleyici kontrol/temizlik davranışları + Sosyal izolasyon."
+    "dsmCriteriaSummary": "DSM-5-TR (belirlenmiş diğer OKİB örneği): Başkalarınca algılanmayan kötü koku inancı + Yineleyici kontrol/temizlik davranışları + Sosyal izolasyon.",
+    "pharmacologyId": "ssri_plus_antipsychotic"
   },
   {
     "id": "case-083",
@@ -684,55 +697,8 @@
       "explanation": "DSM-5-TR'de yetişkinler için süre eşiği en az 12 aydır (çocuk ve ergenlerde ise en az 6 aydır)."
     },
     "differentialDiagnosis": "• Normal Yas: Zamanla acının şiddeti azalır, kişi yeni ilişkilere ve hayata uyum sağlar.\n• Majör Depresyon: Genel değersizlik ve anhedoni vardır; uzatılmış yasta ise temel kilitlenme ölen kişiye duyulan yoğun hasrettir.",
-    "dsmCriteriaSummary": "DSM-5-TR: Kaybın üzerinden ≥12 ay geçmesi + Yoğun hasret/özlem + Kimlik karmaşası ve yaşama devam edememe."
-  },
-  {
-    "id": "case-084",
-    "caseNumber": 84,
-    "difficulty": "Kolay",
-    "course": "SUBSTANCE",
-    "diagnosisId": "internet_gaming_disorder",
-    "therapyId": "motivational_interviewing",
-    "category": "SUBSTANCE",
-    "patientSummary": "18 yaşında, erkek, lise son sınıf öğrencisi",
-    "clues": [
-      "18 yaşındaki genç, günde 12-14 saat aralıksız online rekabetçi video oyunları oynadığı, üniversite sınavına hazırlanmayı bıraktığı ve ailesi interneti kestiğinde kapıları kırdığı için getirildi.",
-      "Son 1 yıldır oyun oynamadığı her an yoğun huzursuzluk, titreme ve öfke patlamaları (yoksunluk) yaşadığını; aynı hazzı almak için oyunda geçirdiği süreyi sürekli artırdığını (tolerans) anlattı.",
-      "Tüm gerçek arkadaşlıklarını bitirdiğini, geceleri uyumayıp sabahladığını ve kişisel hijyenini tamamen ihmal ettiğini söyledi.",
-      "Toksikoloji taramasında madde veya alkol saptanmamıştır.",
-      "Ruhsal Durum Muayenesinde: Dijital ödül döngüsüne şartlanma, dürtüsellik, oyun dışındaki tüm yaşam aktivitelerine karşı anhedoni ve aileye karşı agresyon saptandı.",
-      "DSM-5'e göre: 12 aylık bir dönem içinde oyunla aşırı zihinsel uğraş, yoksunluk belirtileri, tolerans, kontrol kaybı ve önemli eğitim/ilişki fırsatlarını tehlikeye atma (en az 5/9 ölçüt) tablosudur."
-    ],
-    "symptomHighlights": [
-      {
-        "clueIndex": 1,
-        "text": "oyun oynamadığı her an yoğun huzursuzluk",
-        "dsmMatch": "DSM-5 Kriter A2: Oyun oynanmadığında ortaya çıkan yoksunluk belirtileri"
-      },
-      {
-        "clueIndex": 1,
-        "text": "oyunda geçirdiği süreyi sürekli artırdığını (tolerans)",
-        "dsmMatch": "DSM-5 Kriter A3: Tolerans gelişimi"
-      }
-    ],
-    "treatmentModality": {
-      "goldStandardTherapy": "Motivasyonel Görüşme & İnternet Bağımlılığı için BDT (CBT-IA)",
-      "therapyDetails": "Ekran süresini kademeli sınırlandırma, alternatif reel hobi geliştirme, tetikleyici yönetimi ve aile iletişimi.",
-      "pharmacologyNote": "Eşlik eden DEHB veya depresyon varsa medikal tedavi eklenir."
-    },
-    "miniQuiz": {
-      "question": "İnternet Oyun Oynama Bozukluğunda danışanın oyundan uzaklaştırıldığında yaşadığı huzursuzluk, sinirlilik ve öfke hangi bağımlılık fenomenidir?",
-      "options": [
-        "Yoksunluk (Withdrawal)",
-        "Tolerans",
-        "Konfabulasyon",
-        "Transfersans"
-      ],
-      "correctIndex": 0,
-      "explanation": "Bağımlılık nesnesinden uzak kalındığında ortaya çıkan negatif fiziksel/duygusal gerilim tablosuna yoksunluk denir."
-    },
-    "differentialDiagnosis": "• Kumar Oynama Bozukluğu: Maddi para bahsi ve kazanç odaklıdır; video oyununda dijital kazanım esastır.\n• Normal Rekreasyonel Oyun: Okul/iş kaybı ve agresif yoksunluk yaşanmaz.",
-    "dsmCriteriaSummary": "DSM-5: 12 aylık sürede oyunla zihinsel uğraş + Yoksunluk + Tolerans + Kontrol kaybı (en az 5/9 belirti)."
+    "dsmCriteriaSummary": "DSM-5-TR: Kaybın üzerinden ≥12 ay geçmesi + Yoğun hasret/özlem + Kimlik karmaşası ve yaşama devam edememe.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-085",
@@ -781,7 +747,8 @@
       "explanation": "İnteroseptif maruz bırakma; hastaya hiperventilasyon veya dönen sandalyeyle yapay panik duyumları yaşatarak duyarsızlaşmasını sağlar."
     },
     "differentialDiagnosis": "• Sosyal Fobi: Korku rezil olmaktır; Agorafobide ise panik anında kaçamama ve yardım bulamama korkusudur.\n• Klostrofobi: Sadece kapalı alanla sınırlıdır, spontan panik ataklar eşlik etmez.",
-    "dsmCriteriaSummary": "DSM-5: Beklenmedik panik ataklar + Atak beklentisi kaygısı + Kaçışın zor olduğu ortamlardan kaçınma (Agorafobi)."
+    "dsmCriteriaSummary": "DSM-5: Beklenmedik panik ataklar + Atak beklentisi kaygısı + Kaçışın zor olduğu ortamlardan kaçınma (Agorafobi).",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-086",
@@ -830,7 +797,8 @@
       "explanation": "Marsha Linehan tarafından geliştirilen DBT, Borderline ve kendine zarar verici davranışlar için 1 numaralı altın standart terapidir."
     },
     "differentialDiagnosis": "• Bipolar II: Epizodlar haftalar sürer ve içseldir; BPD'de dalgalanmalar saatliktir ve kişilerarası tetiklenir.\n• Tek Başına TSSB: BPD'deki gibi yaygın kimlik karmaşası, splitting ve terk edilme dehşeti TSSB'ye özgü değildir.",
-    "dsmCriteriaSummary": "DSM-5: Borderline Kişilik Örüntüsü (Terk edilme korkusu, kimlik karmaşası, NSSI) + Travmatik Yeniden Yaşantılama (TSSB)."
+    "dsmCriteriaSummary": "DSM-5: Borderline Kişilik Örüntüsü (Terk edilme korkusu, kimlik karmaşası, NSSI) + Travmatik Yeniden Yaşantılama (TSSB).",
+    "pharmacologyId": "ssri_plus_antipsychotic"
   },
   {
     "id": "case-087",
@@ -883,7 +851,8 @@
       "explanation": "Bulimiya hastaları normal kiloda veya hafif kiloludur (BKİ >= 18.5). Kusan hasta eğer aşırı zayıfsa (BKİ < 18.5) tanı kesinlikle Anoreksiya Nervoza'dır."
     },
     "differentialDiagnosis": "• Bulimiya Nervoza: Kilo normal veya normalin üzerindedir (BKİ ≥ 18.5).\n• Tıkınırcasına Yeme Bozukluğu (BED): Kusma ve çıkarma davranışları yoktur.\n• Beden Algısı Bozukluğu (BDD): Odak kilo değil, burun veya yüz kusurlarıdır.",
-    "dsmCriteriaSummary": "DSM-5: Düşük vücut ağırlığı (BKİ < 18.5) + Kilo alma korkusu + Beden algısı bozukluğu + Tıkınma/çıkarma alt tipi."
+    "dsmCriteriaSummary": "DSM-5: Düşük vücut ağırlığı (BKİ < 18.5) + Kilo alma korkusu + Beden algısı bozukluğu + Tıkınma/çıkarma alt tipi.",
+    "pharmacologyId": "atypical_ap_secondgen"
   },
   {
     "id": "case-088",
@@ -931,7 +900,8 @@
       "explanation": "Okula başlama çekingenliğini dışlamak için okulun ilk ayı hariç tutulur ve belirtilerin en az 1 ay sürmesi tanı için yeterlidir."
     },
     "differentialDiagnosis": "• Otizm Spektrum Bozukluğu: Genel sosyal iletişim defisiti vardır, çocuk evde de ilişki kuramaz.\n• İletişim/Dil Bozukluğu: Gramer ve dil kapasitesi yetersizdir, evde de konuşamaz.\n• Sosyal Anksiyete: Eşlik edebilir ancak selektif mutizmde tam konuşamama özgül tablosu vardır.",
-    "dsmCriteriaSummary": "DSM-5: Beklenen durumlarda konuşamama + Başka ortamlarda konuşma + Süre ≥ 1 ay (ilk ay hariç) + Eğitim/sosyal başarıyı engelleme."
+    "dsmCriteriaSummary": "DSM-5: Beklenen durumlarda konuşamama + Başka ortamlarda konuşma + Süre ≥ 1 ay (ilk ay hariç) + Eğitim/sosyal başarıyı engelleme.",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-089",
@@ -979,6 +949,7 @@
       "explanation": "DSM-5'te 2-3 belirti Hafif, 4-5 belirti Orta, 6 ve üzeri belirti Şiddetli (Severe) madde/alkol kullanım bozukluğu olarak derecelendirilir."
     },
     "differentialDiagnosis": "• Sosyal Alkol Tüketimi: Tolerans, sabah yoksunluğu ve sosyal yıkım yoktur.\n• Bipolar Manik Epizod: Manide epizodik aşırı kullanım olabilir; burada primer kimyasal bağımlılık vardır.",
-    "dsmCriteriaSummary": "DSM-5: 12 aylık sürede tolerans, yoksunluk, kontrol kaybı, aşerme, zarara rağmen içme (≥6 belirti = Şiddetli)."
+    "dsmCriteriaSummary": "DSM-5: 12 aylık sürede tolerans, yoksunluk, kontrol kaybı, aşerme, zarara rağmen içme (≥6 belirti = Şiddetli).",
+    "pharmacologyId": "naltrexone_acamprosate"
   }
 ]

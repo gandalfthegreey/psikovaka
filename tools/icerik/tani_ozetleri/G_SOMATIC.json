@@ -1,0 +1,36 @@
+{
+  "other_specified_somatic": {
+    "id": "other_specified_somatic",
+    "nameTr": "Belirlenmiş Diğer Bir Bedensel Belirti Bozukluğu",
+    "nameEn": "Other Specified Somatic Symptom and Related Disorder",
+    "clinicalDescription": {
+      "overview": "Belirlenmiş Diğer Bir Bedensel Belirti ve İlişkili Bozukluk, bedensel belirti bozukluklarına özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak bedensel belirti bozukluğu, hastalık kaygısı bozukluğu, işlevsel nörolojik belirti bozukluğu gibi bu gruptaki bir bozukluğun ölçütlerinin tümüyle karşılanmadığı ve klinisyenin nedenini belirttiği durumlarda kullanılır. Örnek olarak belirtilerin 6 aydan kısa sürdüğü kısa süreli bedensel belirti bozukluğu ve kişinin gebe olmadığı hâlde gebe olduğuna inandığı ve gebelik bulgularının görüldüğü yalancı gebelik (psödosiyezis) sayılabilir.",
+      "epidemiology": "Ayrı bir yaygınlık verisi yoktur; kısa süreli ve eşik altı bedensel belirti tabloları birinci basamakta yaygındır. Psödosiyezis nadirdir.",
+      "etiology": "Bedensel duyumlara aşırı dikkat, felaketleştirici yorumlama, sağlık kaygısı, stres ve öğrenilmiş hastalık davranışı rol oynar; psödosiyeziste nöroendokrin değişiklikler ve gebelik ile ilgili güçlü istek ya da korku tanımlanmıştır.",
+      "prognosis": "Kısa süreli tablolar çoğunlukla geriler; bir kısmı süreğenleşebilir. Düzenli ve planlı hekim görüşmeleri, gereksiz tetkiklerden kaçınma ve BDT temel yaklaşımlardır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Belirlenmiş Diğer Bir Bedensel Belirti ve İlişkili Bozukluk",
+        "content": "Bedensel Belirti ve İlişkili Bozukluk grubuna özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı durumlarda kullanılır. Klinisyen ölçütlerin neden karşılanmadığını belirtir (ör. 'kısa süreli bedensel belirti bozukluğu')."
+      },
+      {
+        "code": "Örnekler",
+        "title": "DSM-5-TR'de Verilen Örnek Tablolar",
+        "content": "Bu kategoriyle belirtilebilecek tablolara örnekler:",
+        "items": [
+          "1. Kısa süreli bedensel belirti bozukluğu (belirtiler 6 aydan kısa sürer).",
+          "2. Kısa süreli hastalık kaygısı bozukluğu (belirtiler 6 aydan kısa sürer).",
+          "3. Aşırı sağlıkla ilgili davranışlar olmaksızın hastalık kaygısı bozukluğu.",
+          "4. Yalancı gebelik (psödosiyezis): gebe olunduğuna dair yanlış inanç ile birlikte nesnel gebelik belirti ve bulguları."
+        ]
+      },
+      {
+        "code": "Belirtilmemiş ile Farkı",
+        "title": "Nedenin Belirtilmesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş' kategori kullanılır."
+      }
+    ]
+  }
+}

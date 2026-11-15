@@ -1,0 +1,1730 @@
+const fs = require('fs');
+const path = require('path');
+
+const newCases110to150 = [
+    // 110. Sanrılı Bozukluk (Erotomanik Tip / Clérambault Sendromu)
+    {
+        id: "case-110",
+        caseNumber: 110,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "delusional_erotomanic",
+        therapyId: "cbt_psychosis",
+        category: "PSYCHOTIC",
+        patientSummary: "34 yaşında, kadın, arşiv memuru (Clérambault Sendromu)",
+        clues: [
+            "34 yaşındaki danışan, ünlü bir televizyon haber spikerinin kendisine sırılsıklam aşık olduğunu ve her akşam ana haber bülteninde kravatının rengini değiştirerek kendisine gizli evlilik teklifi mesajları gönderdiğini iddia ederek stüdyoya girmeye çalışırken güvenlik tarafından durduruldu.",
+            "Spikerle hayatında tek bir kez bile yüz yüze görüşmemiş olmasına rağmen, son 8 aydır ona yüzlerce aşk mektubu gönderdiği ve spikerin aldığı uzaklaştırma kararını 'Eşi şüphelenmesin diye beni korumak için yaptığı romantik bir numara' olarak yorumladığı öğrenildi.",
+            "Bu erotik sanrı alanı dışında iş hayatında arşiv kayıtlarını düzenli tuttuğu, özbakımının tam olduğu ve sosyal kurallara uygun davrandığı belirlendi.",
+            "Beyin MRG ve toksikoloji taraması normaldir; şizofreniye özgü işitsel varsanılar, dezorganize konuşma veya negatif belirtiler saptanmamıştır.",
+            "Ruhsal Durum Muayenesinde: Düşünce içeriğinde yalnızca yüksek statülü bir kişinin kendisine aşık olduğuna dair sistematize erotomanik sanrılar mevcut; duygulanım sanrı içeriğiyle uyumlu ve bilişsel işlevler korunmuş.",
+            "DSM-5'e göre: En az 1 ay süren, genellikle daha yüksek statüdeki bir başkasının kendisine aşık olduğuna dair sarsılmaz sanrıyla karakterize ve genel işlevselliğin görece korunduğu Sanrılı Bozukluk (Erotomanik Tip / Clérambault Sendromu) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "ünlü bir televizyon haber spikerinin kendisine sırılsıklam aşık olduğunu", dsmMatch: "DSM-5 Belirteç: Yüksek statülü birinin kendisine aşık olduğu sanrısı (Erotomani)" },
+            { clueIndex: 2, text: "iş hayatında arşiv kayıtlarını düzenli tuttuğu, özbakımının tam olduğu", dsmMatch: "DSM-5 Kriter C: Sanrı alanı dışında işlevselliğin belirgin olarak bozulmaması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Psikoz için Bilişsel Davranışçı Terapi (CBTp)",
+            therapyDetails: "Sanrıyla doğrudan çatışmadan kanıtları nazikçe sınama, yasal sınırlar konusunda gerçeklik eğitimi ve sosyal yalnızlığı azaltma.",
+            pharmacologyNote: "İkinci kuşak antipsikotikler (Risperidon, Aripiprazol, Olanzapin) sanrısal yoğunluğu ve dürtüsel takip davranışlarını azaltmada ilk tercihtir."
+        },
+        miniQuiz: {
+            question: "Clérambault Sendromu (Erotomanik Sanrılı Bozukluk) vakalarında hastanın karşı taraftan gelen açık reddedilme ve mahkeme uzaklaştırma kararlarını bile 'Beni ne kadar çok sevdiğinin gizli kanıtı' olarak yorumlamasına ne ad verilir?",
+            options: [
+                "Paradoksal Kanıtlama / Sanrısal Rasyonalizasyon",
+                "Fikir Uçuşması (Flight of Ideas)",
+                "Konfabülasyon (Masallama)",
+                "Ekolali"
+            ],
+            correctIndex: 0,
+            explanation: "Erotomanik hastalar karşı tarafın her türlü reddedişini veya yasal engelini 'Aşkımızı gizlemek ve beni korumak için böyle yapıyor' şeklinde sanrısal sistemlerine entegre ederler."
+        },
+        differentialDiagnosis: "• Şizofreni: Bizar sanrılar, varsanılar ve belirgin işlevsellik yıkımı vardır; erotomanide ise sanrı dışında işlevsellik korunur.\n• Bipolar Manik Epizod: Grandiyöz/erotik fikirler sadece manik atak sırasında görülür ve uyku azalması eşlik eder.",
+        dsmCriteriaSummary: "DSM-5: En az 1 ay süren bir başkasının kendisine aşık olduğu sanrısı + Şizofreni A ölçütünün karşılanmaması + Korunmuş genel işlevsellik."
+    },
+
+    // 111. Sanrılı Bozukluk (Kıskançlık Tipi / Othello Sendromu)
+    {
+        id: "case-111",
+        caseNumber: 111,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "delusional_jealous",
+        therapyId: "cbt_psychosis",
+        category: "PSYCHOTIC",
+        patientSummary: "48 yaşında, erkek, mühendis (Othello Sendromu)",
+        clues: [
+            "48 yaşındaki danışan, 20 yıllık eşinin kendisini apartman görevlisi, kargo kuryesi ve hatta balkondan geçen yabancılarla aldattığına dair sarsılmaz bir inanç nedeniyle eşinin iç çamaşırlarını büyüteçle incelediği ve eve gizli kameralar yerleştirdiği için eşi tarafından kliniğe getirildi.",
+            "Son 6 aydır eşinin marketten 3 dakika geç dönmesini, perdenin 2 santim kaymış olmasını veya sokaktan geçen bir arabanın korna çalmasını 'sevgilisiyle gizli işaretleşmesi' olarak kanıt göstermektedir.",
+            "İş yerinde projelerini başarıyla yönetmeye devam etmekte, arkadaşlarıyla normal sohbet edebilmekte ancak konu eşine geldiğinde yoğun bir şüphe ve öfke sergilemektedir.",
+            "Alkol kullanım öyküsü, kranial patoloji veya demans bulgusu yoktur; işitsel/görsel halüsinasyon saptanmamıştır.",
+            "Ruhsal Durum Muayenesinde: Düşünce içeriğinde yalnızca eşinin sadakatsizliğine odaklanmış sistematize kıskançlık sanrıları (Othello sendromu) mevcut; içgörü tam olarak kapalı.",
+            "DSM-5'e göre: En az 1 aydır hiçbir nesnel kanıt olmaksızın eşinin veya cinsel partnerinin sadakatsiz olduğuna dair sabit sanrılarla seyreden Sanrılı Bozukluk (Kıskançlık Tipi / Othello Sendromu) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "eşinin iç çamaşırlarını büyüteçle incelediği ve eve gizli kameralar yerleştirdiği", dsmMatch: "DSM-5 Belirteç: Sadakatsizlik sanrısına bağlı kanıt toplama davranışları" },
+            { clueIndex: 1, text: "sokaktan geçen bir arabanın korna çalmasını 'sevgilisiyle gizli işaretleşmesi' olarak kanıt göstermektedir", dsmMatch: "DSM-5 Kriter A: Küçük rastlantısal ipuçlarına dayalı kıskançlık sanrısı (Othello)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bilişsel Davranışçı Psikoz Terapisi (CBTp) & Eş Güvenlik Planı",
+            therapyDetails: "Eşe yönelik fiziksel şiddet (homisid) riskinin titizlikle değerlendirilmesi, kontrol davranışlarının azaltılması ve şüphe döngüsünün esnetilmesi.",
+            pharmacologyNote: "Atipik antipsikotikler (Risperidon, Olanzapin) temel tedavidir; şiddet riski yüksekse yatarak tedavi planlanır."
+        },
+        miniQuiz: {
+            question: "Adli psikiyatride Othello Sendromu (Kıskançlık Tipi Sanrılı Bozukluk) neden en tehlikeli klinik tablolardan biri olarak kabul edilir?",
+            options: [
+                "Eşe yönelik ağır fiziksel şiddet ve eş cinayeti (homisid) riskinin çok yüksek olması nedeniyle",
+                "Hastanın kısa sürede kör olmasına yol açtığı için",
+                "Sadece bulaşıcı enfeksiyonlarla ortaya çıktığı için",
+                "Hastanın tüm parasını kumarda kaybetmesine yol açtığı için"
+            ],
+            correctIndex: 0,
+            explanation: "Othello sendromunda hasta sadakatsizlik sanrısına yüzde yüz inandığı için intikam veya namus dürtüsüyle eşine yönelik ölümcül şiddet uygulama riski çok yüksektir."
+        },
+        differentialDiagnosis: "• Obsesif Kıskançlık / İlişki OKB: Kişi şüphenin abartılı olduğunu bilir (egodistonik); Othello sendromunda ise hasta aldatıldığından %100 emindir (sanrısaldır).\n• Paranoid Kişilik Bozukluğu: Genel bir güvensizlik vardır ancak spesifik ve sarsılmaz bir sanrı sistemi bulunmaz.",
+        dsmCriteriaSummary: "DSM-5: En az 1 ay süren eşinin/sevgilisinin sadakatsiz olduğu sanrısı + Halüsinasyon ve dezorganizasyon yokluğu."
+    },
+
+    // 112. Sanrılı Bozukluk (Somatik Tip / Ekbom Sendromu - Delüzyonel Parazitoz)
+    {
+        id: "case-112",
+        caseNumber: 112,
+        difficulty: "Zor",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "delusional_somatic",
+        therapyId: "cbt_psychosis",
+        category: "PSYCHOTIC",
+        patientSummary: "56 yaşında, kadın, emekli öğretmen (Ekbom Sendromu / Kibrit Kutusu Belirtisi)",
+        clues: [
+            "56 yaşındaki danışan, son 5 aydır derisinin altında binlerce mikroskobik böcek ve parazitin gezindiğini, kendisini içeriden ısırarak çoğaldıklarını iddia ederek 7 farklı dermatoloji uzmanına başvurduktan sonra psikiyatriye yönlendirildi.",
+            "Muayeneye gelirken yanında getirdiği küçük bir kibrit kutusunun ve peçetenin içindeki deri kabuklarını, tüy ve toz parçalarını doktorun masasına koyarak 'İşte çıkardığım böceklerin kanıtı, mikroskopla bakın!' dedi (Kibrit Kutusu Belirtisi / Matchbox Sign).",
+            "Böcekleri öldürmek için her gün cildini çamaşır suyu ve sert liflerle kazıdığı için kollarında ve bacaklarında derin ekskoriasyon yaraları oluştuğu görüldü.",
+            "Dermatolojik biyopsi, mikroskobik inceleme, karaciğer/böbrek fonksiyonları, B12 düzeyi ve kokain/metamfetamin toksikoloji taraması tamamen negatif çıkmıştır.",
+            "Ruhsal Durum Muayenesinde: Taktil (dokunsal) karıncalanma hissine eşlik eden sarsılmaz delüzyonel parazitoz (Ekbom sendromu) sanrısı; psikiyatrik tedaviyi reddetme ve sarsılmaz somatik hezeyan.",
+            "DSM-5'e göre: En az 1 ay boyunca bedensel işlevler veya duyumlarla ilgili (deri altında parazit olması, kötü koku yayma vb.) sabit sanrılarla seyreden Sanrılı Bozukluk (Somatik Tip / Ekbom Sendromu) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "derisinin altında binlerce mikroskobik böcek ve parazitin gezindiğini", dsmMatch: "DSM-5 Belirteç: Delüzyonel parazitoz / Ekbom Sendromu (Somatik sanrı)" },
+            { clueIndex: 1, text: "Kibrit Kutusu Belirtisi / Matchbox Sign", dsmMatch: "Patognomonik Bulgular: Deri döküntülerini kutuda parazit kanıtı olarak getirme" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bilişsel Davranışçı Psikoz Terapisi (CBTp) & Dermatoloji-Psikiyatri İşbirliği",
+            therapyDetails: "Cilt yaralarının bakımı, kaşıma-kazıma döngüsünün durdurulması ve cildi tahriş eden kimyasalların uzaklaştırılması.",
+            pharmacologyNote: "İkinci kuşak antipsikotikler (Risperidon, Olanzapin) veya klasik olarak Pimozid somatik sanrılarda oldukça etkilidir."
+        },
+        miniQuiz: {
+            question: "Ekbom Sendromu (Delüzyonel Parazitoz) hastalarının deri kabuklarını ve toz parçalarını bir kutu veya poşet içinde hekime 'böcek kanıtı' olarak getirmelerine literatürde ne ad verilir?",
+            options: [
+                "Kibrit Kutusu Belirtisi (Matchbox Sign / Spesimen Belirtisi)",
+                "Russell Belirtisi",
+                "Hoover Belirtisi",
+                "Babinski Belirtisi"
+            ],
+            correctIndex: 0,
+            explanation: "Delüzyonel parazitoz hastalarının karakteristik olarak deri kırıntılarını kibrit kutusu veya peçetede hekime kanıt diye getirmesi 'Matchbox Sign' (Kibrit Kutusu Belirtisi) olarak bilinir."
+        },
+        differentialDiagnosis: "• Kokain / Metamfetamin İntoksikasyonu (Formikasyon): Uyarıcı madde kullanıcılarında deri altında böcek yürümesi hissi olur; toksikoloji ile dışlanır.\n• Hastalık Kaygısı Bozukluğu: Hasta böcek olabileceğinden endişelenir ama negatif testlerle ikna olabilir; somatik sanrıda ise ikna imkansızdır.",
+        dsmCriteriaSummary: "DSM-5: En az 1 ay süren deri altında parazit, bedenden kötü koku yayılması veya organ bozukluğu şeklindeki somatik sanrı."
+    },
+
+    // 113. Paylaşılmış Psikotik Bozukluk (Folie à Deux)
+    {
+        id: "case-113",
+        caseNumber: 113,
+        difficulty: "Zor",
+        course: "ADULT",
+        diagnosisId: "folie_a_deux",
+        therapyId: "cbt_psychosis",
+        category: "PSYCHOTIC",
+        patientSummary: "29 yaşında, kadın, dış dünyadan izole yaşayan kız kardeş (İndüklenmiş Sanrı)",
+        clues: [
+            "29 yaşındaki danışan, 5 yıldır aynı evde dış dünyadan tamamen izole yaşadığı şizofreni hastası ablasıyla birlikte 'komşuların prizlerden evin içine görünmez radyasyon gazı pompaladığını' iddia ederek evin tüm duvarlarını alüminyum folyoyla kapladıkları için sosyal hizmetler tarafından getirildi.",
+            "Öyküde ilk olarak baskın karakterli ablasının (primer/indükleyen vaka) 2 yıl önce bu radyasyon sanrısını geliştirdiği, ablasına aşırı bağımlı ve pasif yapıda olan danışanın ise (sekonder/alıcı vaka) zamanla ablasının bu sanrısını birebir benimsediği saptandı.",
+            "İki kardeşin televizyon, telefon ve internet kullanmayı bıraktıkları, market alışverişlerini bile gaz maskesiyle yaptıkları ve kimseyle görüşmedikleri öğrenildi.",
+            "Danışanın kranial MR ve kan tetkikleri normaldir; ablasından farklı olarak kendisinde işitsel varsanı veya formal düşünce bozukluğu bulunmamaktadır.",
+            "Ruhsal Durum Muayenesinde: Hastanede ablasından ayrı bir servise yatırıldıktan ve 3 hafta boyunca ablasıyla görüşmesi engellendikten sonra, danışanın radyasyon sanrısının hızla zayıfladığı ve gerçeklik algısının geri döndüğü gözlendi.",
+            "DSM-5'e göre: Yerleşik sanrısı olan baskın bir kişiyle yakın ve izole bir ilişki içinde bulunan ikinci bir kişide aynı sanrının gelişmesiyle karakterize Paylaşılmış Psikotik Bozukluk (Folie à Deux) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "ablasına aşırı bağımlı ve pasif yapıda olan danışanın ise (sekonder/alıcı vaka) zamanla ablasının bu sanrısını birebir benimsediği", dsmMatch: "DSM-5 Kriter A: Baskın psikotik bireyden pasif bireye sanrı aktarımı (Folie à Deux)" },
+            { clueIndex: 4, text: "danışanın radyasyon sanrısının hızla zayıfladığı ve gerçeklik algısının geri döndüğü", dsmMatch: "Klinik Özellik: İndükleyen kişiden ayrıldığında sanrının sönmesi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Terapötik Ayrıştırma, CBTp & Aile Sistemleri Müdahalesi",
+            therapyDetails: "En kritik ilk adım sekonder hastayı baskın (primer) hastadan fiziksel ve duygusal olarak ayırmak, bağımsız kimlik becerilerini güçlendirmek ve sosyal izolasyonu kırmaktır.",
+            pharmacologyNote: "Primer vakaya tam doz antipsikotik başlanır; sekonder vakada ayrıştırma sonrası sanrı gerilemezse düşük doz atipik antipsikotik eklenir."
+        },
+        miniQuiz: {
+            question: "Paylaşılmış Psikotik Bozukluk (Folie à Deux) tedavisinde sekonder (alıcı) hastada sanrıyı ortadan kaldıran en temel ve ilk basamak müdahale nedir?",
+            options: [
+                "Sekonder hastayı sanrıyı indükleyen baskın (primer) kişiden fiziksel olarak ayırmak ve sosyal izolasyonu sonlandırmak",
+                "Her iki hastayı aynı odada tutup tartışmalarını sağlamak",
+                "Hemen elektroşok (EKT) uygulamak",
+                "Sadece vitamin takviyesi vermek"
+            ],
+            correctIndex: 0,
+            explanation: "Folie à Deux'da alıcı (sekonder) kişi baskın psikotik bireyden ayrıldığında ve dış gerçeklikle temas ettiğinde sanrılar çoğu zaman kendiliğinden veya düşük doz destekle hızla çözülür."
+        },
+        differentialDiagnosis: "• Bağımsız Şizofreni: Kişi baskın vakadan ayrılsa bile psikotik semptomları ve halüsinasyonları hız kesmeden devam eder.\n• Bağımlı Kişilik Bozukluğu: Boyun eğicilik vardır ancak psikotik düzeyde sanrı paylaşımı görülmez.",
+        dsmCriteriaSummary: "DSM-5: Psikotik baskın bir kişiyle yakın ilişki sonucu aynı sanrı sisteminin sağlıklı/bağımlı bireye geçmesi."
+    },
+
+    // 114. Başka Bir Ruhsal Bozuklukla İlişkili Katatoni
+    {
+        id: "case-114",
+        caseNumber: 114,
+        difficulty: "İleri Düzey",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "catatonia_associated",
+        therapyId: "ect_biological",
+        category: "PSYCHOTIC",
+        patientSummary: "24 yaşında, erkek, balmumu esnekliği ve mutizm gelişen hasta",
+        clues: [
+            "24 yaşındaki hasta, son 3 gündür odasının ortasında tek ayağı havada ve kolları yukarıda sanki donmuş bir heykel gibi saatlerce hiç kıpırdamadan durduğu, tek kelime bile konuşmadığı (mutizm) ve su dahi içmediği için ambulansla acile getirildi.",
+            "Muayene sırasında hekim hastanın kolunu kaldırıp garip bir açıda bıraktığında, hasta kolunu indirmeden saatlerce o yeni pozisyonda tutmaya devam etti (Balmumu Esnekliği / Cerea Flexibilitas ve Katalepsi).",
+            "Hastanın ağızdan beslenmeyi ve komutları tamamen reddettiği (negativizm), zaman zaman doktorun söylediği kelimeleri papağan gibi tekrarladığı (ekolali) ve hareketlerini kopyaladığı (ekopraksi) görüldü.",
+            "Beyin MRG, BOS incelemesi ve anti-NMDA reseptör otoimmün ensefalit paneli normaldir; antipsikotik ilaç kullanımı yoktur, altta yatan ağır bipolar/şizofrenik süreç mevcuttur.",
+            "Ruhsal Durum ve Nörolojik Muayenede: Damar yolundan uygulanan 2 mg IV Lorazepam (Benzodiazepin) testi sonrasında hastanın 15 dakika içinde kaslarının çözüldüğü, konuşmaya başladığı ve su içtiği doğrulandı (Pozitif Lorazepam Yanıtı).",
+            "DSM-5'e göre: Stupor, katalepsi, balmumu esnekliği, mutizm, negativizm, postür alma, ekolali ve ekopraksi belirtilerinden en az 3'ünün bulunduğu Başka Bir Ruhsal Bozuklukla İlişkili Katatoni tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "Balmumu Esnekliği / Cerea Flexibilitas ve Katalepsi", dsmMatch: "DSM-5 Kriter A2-A3: Katalepsi ve Balmumu Esnekliği" },
+            { clueIndex: 4, text: "2 mg IV Lorazepam (Benzodiazepin) testi sonrasında hastanın 15 dakika içinde kaslarının çözüldüğü", dsmMatch: "Klinik Tanı ve Tedavi: Karakteristik Lorazepam (GABA-A) yanıtı" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "IV Lorazepam Protokolü & Elektrokonvülsif Terapi (EKT)",
+            therapyDetails: "Dehidratasyon ve derin ven trombozu profilaksisi, yüksek doz Lorazepam (GABA-A agonisti) ve yanıt alınamayan/malign vakalarda acil bilateral EKT.",
+            pharmacologyNote: "İlk tercih Benzodiazepin (Lorazepam) ve EKT'dir; yüksek potensli tipik antipsikotikler (Haloperidol) katatoniyi Nöroleptik Malign Sendroma çevirebileceği için KONTRENDİKEDİR!"
+        },
+        miniQuiz: {
+            question: "Akut Katatoni tablosunda (stupor, mutizm, balmumu esnekliği) tanı koymak ve semptomları dakikalar içinde çözmek için uygulanan ilk sıra ilaç testi ve kesin tedavi ikilisi hangisidir?",
+            options: [
+                "Lorazepam (Benzodiazepin) Challenge Testi ve Elektrokonvülsif Terapi (EKT)",
+                "Yüksek doz Haloperidol enjeksiyonu",
+                "Sadece Bilişsel Davranışçı Terapi",
+                "Metilfenidat (Uyarıcı) tedavisi"
+            ],
+            correctIndex: 0,
+            explanation: "Katatonide GABA-A hipofonksiyonu vardır; IV Lorazepam hastayı dakikalar içinde açar. Dirençli veya malign katatonide ise EKT %85-90 başarıyla hayat kurtarıcı altın standarttır."
+        },
+        differentialDiagnosis: "• Nöroleptik Malign Sendrom (NMS): Antipsikotik sonrası gelişir, 40°C ateş ve kurşun boru rijiditesi vardır.\n• Akinetik Mutizm / Locked-in Sendromu: Beyin sapı/frontal inme lezyonlarında görülür, MR ile ayrılır.",
+        dsmCriteriaSummary: "DSM-5 (En az 3/12): Stupor, katalepsi, balmumu esnekliği, mutizm, negativizm, postür alma, manyerizm, stereotipi, ajitasyon, grimas, ekolali, ekopraksi."
+    },
+
+    // 115. Bipolar II Bozukluğu (Hipomani ve Majör Depresyon)
+    {
+        id: "case-115",
+        caseNumber: 115,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "bipolar_2",
+        therapyId: "ipsrt",
+        category: "BIPOLAR",
+        patientSummary: "27 yaşında, kadın, grafik tasarımcı (Hipomani + Ağır Depresyon Döngüsü)",
+        clues: [
+            "27 yaşındaki danışan, son 1 aydır yataktan çıkamadığı, işlerini teslim edemediği, günde 14 saat uyumasına rağmen bitkin olduğu ve yoğun değersizlik düşünceleri yaşadığı ağır bir depresyon tablosuyla başvurdu.",
+            "Ayrıntılı öykü alındığında, bu çöküşten 2 ay önce yaklaşık 6 gün süren ve arkadaşlarının da fark ettiği çok farklı bir dönem yaşadığı; o günlerde sadece 4 saat uykuyla zımba gibi uyandığı, her zamankinden çok daha neşeli, konuşkan ve üretken olduğu öğrenildi.",
+            "Bu 6 günlük enerjik dönemde (hipomani) 3 tasarım projesini tek başına bitirdiği, aşırı sosyalleştiği ancak işlevselliğinin bozulmadığı, psikotik bir sanrı yaşamadığı ve hastaneye yatış gerekmediği belirlendi.",
+            "Tiroid fonksiyon testleri ve madde taraması normaldir; hastanın yaşamı boyunca hiçbir zaman tam bir Manik Epizod geçirmediği doğrulandı.",
+            "Ruhsal Durum Muayenesinde: Şu anki muayenede çökkün duygulanım, anhedoni ve psikomotor yavaşlama mevcut; geçmiş öyküde net 6 günlük Hipomanik Epizod saptandı.",
+            "DSM-5'e göre: En az bir Majör Depresif Epizod ve en az bir Hipomanik Epizod (en az 4 gün süren) öyküsü bulunan, hiçbir zaman tam Manik Epizod geçirmemiş Bipolar II Bozukluğu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "sadece 4 saat uykuyla zımba gibi uyandığı, her zamankinden çok daha neşeli, konuşkan ve üretken olduğu", dsmMatch: "DSM-5 Kriter A: En az 4 gün süren Hipomanik Epizod" },
+            { clueIndex: 2, text: "işlevselliğinin bozulmadığı, psikotik bir sanrı yaşamadığı ve hastaneye yatış gerekmediği", dsmMatch: "DSM-5 Hipomani Ölçütü: Mani'den farklı olarak ağır yıkım veya psikoz olmaması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Kişilerarası ve Sosyal Ritim Terapisi (IPSRT)",
+            therapyDetails: "Uyku-uyanıklık saatlerini sabitleme, hipomanik kaymaları erken fark etme ve depresif dönemlerde sirkadiyen ritmi koruma.",
+            pharmacologyNote: "Ketiapin, Lamotrijin (özellikle bipolar depresyon profilaksisinde) veya Lityum kullanılır; tek başına (monoterapi) antidepresan verilmesi kaymayı (switch) tetikleyebilir."
+        },
+        miniQuiz: {
+            question: "DSM-5'e göre 'Hipomanik Epizod' ile 'Manik Epizod' arasındaki en belirleyici klinik farklar nelerdir?",
+            options: [
+                "Hipomani en az 4 gün sürer, hastaneye yatış gerektirmez ve ASLA psikotik belirti içermez; Mani ise en az 1 hafta sürer, ağır yıkım/yatış veya psikoz içerir.",
+                "Hipomanide hasta sürekli ağlar, manide ise güler.",
+                "Hipomani sadece 60 yaş üstünde görülür.",
+                "Manide uyku artar, hipomanide uyku azalır."
+            ],
+            correctIndex: 0,
+            explanation: "Hipomani en az 4 ardışık gün sürer, işlevsellikte ağır yıkıma/yatışa yol açmaz ve psikotik belirti içermez (eğer psikoz veya yatış varsa süreye bakılmaksızın tanı Bipolar I / Mani olur)."
+        },
+        differentialDiagnosis: "• Bipolar I Bozukluğu: En az 1 hafta süren veya yatış/psikoz gerektiren tam Manik Epizod vardır.\n• Ünipolar Majör Depresyon: Hastalar genellikle hipomaniyi 'normal mutlu halim' sanıp anlatmazlar; sorgulanmazsa yanlışlıkla ünipolar depresyon tanısı alırlar.",
+        dsmCriteriaSummary: "DSM-5: En az 1 Hipomanik Epizod (≥4 gün) + En az 1 Majör Depresif Epizod (≥2 hafta) + Hiçbir zaman Manik Epizod olmaması."
+    },
+
+    // 116. Bipolar I Bozukluğu (Hızlı Döngülü Tip / Rapid Cycling)
+    {
+        id: "case-116",
+        caseNumber: 116,
+        difficulty: "Zor",
+        course: "ADULT",
+        diagnosisId: "bipolar_1_rapid_cycling",
+        therapyId: "ipsrt",
+        category: "BIPOLAR",
+        patientSummary: "35 yaşında, kadın, son 1 yılda 5 farklı duygudurum atağı geçiren danışan",
+        clues: [
+            "35 yaşındaki danışan, son 12 ay içinde birbirinden bağımsız 3 ağır depresif atak ve 2 tam manik atak (toplam 5 duygudurum epizodu) geçirdiği için tedaviye dirençli duygudurum kliniğine sevk edildi.",
+            "Ocak ve Mayıs aylarında haftalarca süren, 1 saat uykuyla durduğu, kendisini 'dünya ekonomisini yönetecek deha' ilan edip tüm birikimini dağıttığı manik ataklar nedeniyle iki kez servise yatırıldığı öğrenildi.",
+            "Mart, Ağustos ve Kasım aylarında ise haftalarca yataktan çıkamadığı, intihar düşünceleriyle boğuştuğu ağır majör depresif dönemler yaşadığı; ataklar arasında ya kısa süreli düzelmeler olduğu ya da doğrudan karşı kutba (depresyondan maniye) geçiş yaptığı saptandı.",
+            "Tetkiklerde daha önce reçete edilen yüksek doz Venlafaksin (SNRI) kullanımının ve gizli subklinik hipotiroidinin bu hızlı döngülülüğü tetiklediği tespit edildi.",
+            "Ruhsal Durum Muayenesinde: Duygudurum grafik çizelgesinde (Life Chart) 1 yıl içinde DSM-5 süre kriterlerini tam karşılayan 4'ten fazla ayrı manik ve depresif epizod doğrulandı.",
+            "DSM-5'e göre: Son 12 aylık süre içinde mani, hipomani ya da majör depresyon ölçütlerini karşılayan en az 4 ayrı duygudurum döneminin bulunmasıyla tanımlanan Bipolar I Bozukluğu (Hızlı Döngülü / Rapid Cycling) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "son 12 ay içinde birbirinden bağımsız 3 ağır depresif atak ve 2 tam manik atak (toplam 5 duygudurum epizodu)", dsmMatch: "DSM-5 Hızlı Döngülü Belirteci: 12 ayda en az 4 duygudurum atağı" },
+            { clueIndex: 3, text: "yüksek doz Venlafaksin (SNRI) kullanımının ve gizli subklinik hipotiroidinin", dsmMatch: "Etiyolojik Tetikleyiciler: Antidepresanlar ve hipotiroidi hızlı döngüyü tetikler" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Kişilerarası ve Sosyal Ritim Terapisi (IPSRT) & Yaşam Çizelgesi İzlemi",
+            therapyDetails: "Antidepresanların derhal kesilmesi, tiroid hormon replasmanı, günlük duygudurum-uyku çizelgesi ve katı sirkadiyen hijyen.",
+            pharmacologyNote: "Hızlı döngülü bipolarda Valproat (Valproik Asit), Karbamazepin, Lamotrijin ve Ketiapin Lityuma göre daha üstün yanıt verebilir; tüm antidepresanlar kesilmelidir."
+        },
+        miniQuiz: {
+            question: "DSM-5'e göre Bipolar Bozuklukta 'Hızlı Döngülü' (Rapid Cycling) belirtecinin konulabilmesi için 1 yıl (12 ay) içinde en az kaç duygudurum epizodu yaşanmış olmalıdır?",
+            options: [
+                "Yılda en az 4 ayrı duygudurum atağı (Mani, Hipomani veya Majör Depresyon)",
+                "Günde 4 kez duygudurum değişimi",
+                "Yılda en az 20 atak",
+                "Hayatı boyunca toplam 2 atak"
+            ],
+            correctIndex: 0,
+            explanation: "DSM-5'e göre Hızlı Döngülü (Rapid Cycling) belirteci, son 12 ay içinde en az 4 ayrı duygudurum epizodunun (mani, hipomani veya majör depresyon) yaşanmasıdır."
+        },
+        differentialDiagnosis: "• Borderline Kişilik Bozukluğu: Duygudurum saatler içinde terk edilme stresiyle değişir; hızlı döngülü bipolarda ise her bir atak DSM-5 süre kriterlerini (günler/haftalar) tam karşılar.\n• Maddeye Bağlı Duygudurum Bozukluğu: Kokain/amfetamin döngüleriyle karışabilir.",
+        dsmCriteriaSummary: "DSM-5: Bipolar I veya II + Son 12 ayda en az 4 ayrı duygudurum epizodu (arada en az 2 ay remisyon veya karşı kutba tam geçiş)."
+    },
+
+    // 117. Peripartum (Doğum Sonrası / Postpartum) Başlangıçlı Majör Depresyon
+    {
+        id: "case-117",
+        caseNumber: 117,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "mdd_with_peripartum",
+        therapyId: "ipt",
+        category: "MOOD",
+        patientSummary: "29 yaşında, kadın, 3 hafta önce doğum yapmış yeni anne",
+        clues: [
+            "29 yaşındaki danışan, ilk bebeğini dünyaya getirdikten 10 gün sonra başlayan ve 3 haftadır giderek ağırlaşan durdurulamaz ağlama nöbetleri, derin çökkünlük ve 'Ben çok kötü, yetersiz bir anneyim, bebeğime bakamıyorum' suçluluk düşünceleriyle eşiyle birlikte başvurdu.",
+            "Bebek uyuduğunda bile aşırı kaygı ve kederden uyuyamadığını (insomni), iştahının tamamen kesildiğini ve bebeğine karşı hiçbir sevgi ya da bağ hissedemediği için kendisinden nefret ettiğini ifade ediyor.",
+            "Doğum sonrası ilk günlerde görülen hafif 'annelik hüznü'nün (baby blues) aksine, belirtilerin 10. günden sonra yatışmayıp tam bir çöküşe dönüştüğü ve annenin özbakımını dahi yapamadığı öğrenildi.",
+            "Hastada bebeğin şeytan olduğuna dair psikotik sanrılar veya infatisid (bebeği öldürme) komutu veren varsanılar yoktur; tiroid ve hemoglobin değerleri normaldir.",
+            "Ruhsal Durum Muayenesinde: Ağır depresif duygulanım, annelik rolüne ilişkin yoğun suçluluk ve değersizlik fikirleri, anhedoni ve psikomotor retardasyon saptandı (Edinburgh Doğum Sonrası Depresyon Ölçeği: 24/30).",
+            "DSM-5'e göre: Gebelik sırasında ya da doğumdan sonraki ilk 4 hafta içinde başlayan majör depresif epizod kriterlerini karşılayan Peripartum Başlangıçlı Majör Depresif Bozukluk tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "ilk bebeğini dünyaya getirdikten 10 gün sonra başlayan ve 3 haftadır giderek ağırlaşan durdurulamaz ağlama nöbetleri", dsmMatch: "DSM-5 Belirteç: Doğum sonrası ilk 4 hafta içinde başlayan Peripartum Depresyon" },
+            { clueIndex: 2, text: "hafif 'annelik hüznü'nün (baby blues) aksine, belirtilerin 10. günden sonra yatışmayıp", dsmMatch: "Ayırıcı Tanı: İlk 2 haftada kendiliğinden geçen Baby Blues'dan ayrımı" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Kişilerarası İlişkiler Terapisi (IPT - Rol Geçişi Odağı)",
+            therapyDetails: "Kadının 'annelik rolüne geçiş' sürecindeki kayıplarını ve beklenti çatışmalarını çalışma, eş ve aile destek ağını organize etme, anne-bebek bağlanmasını destekleme.",
+            pharmacologyNote: "Emzirme döneminde süte en az geçen ve en güvenli SSRI olan Sertralin birinci basamak ilaçtır; ağır vakalarda Breksanolon / Zuranolon (nörosteroid) onaylıdır."
+        },
+        miniQuiz: {
+            question: "Doğum sonrası kadınların %70'inde görülen fizyolojik 'Annelik Hüznü' (Baby Blues) ile 'Peripartum (Postpartum) Depresyon' arasındaki en temel klinik fark nedir?",
+            options: [
+                "Annelik hüznü hafif seyreder ve en geç 10-14 gün içinde kendiliğinden düzelir; Peripartum Depresyon ise 2 haftadan uzun sürer, işlevselliği çökertir ve tedavi gerektirir.",
+                "Annelik hüznünde ağır halüsinasyonlar görülür.",
+                "Peripartum depresyon sadece doğumdan 5 yıl sonra başlar.",
+                "Annelik hüznü sadece erkeklerde görülür."
+            ],
+            correctIndex: 0,
+            explanation: "Baby Blues (Annelik Hüznü) doğumdan sonraki 3-5. günlerde östrojen/progesteron düşüşüyle başlar ve 2 hafta içinde tedavisiz geçer. 2 haftayı aşan, anhedoni ve suçluluk içeren tablo Peripartum Majör Depresyondur."
+        },
+        differentialDiagnosis: "• Annelik Hüznü (Baby Blues): İlk 10-14 günde kendiliğinden geçer, işlevselliği bozmaz.\n• Postpartum Psikoz: Doğum sonrası ilk 2 haftada başlar; bebeğin kusurlu/şeytan olduğu sanrıları ve infatisid (bebeğe zarar verme) riski taşıyan psikiyatrik acildir.",
+        dsmCriteriaSummary: "DSM-5: Gebelikte veya doğum sonrası ilk 4 haftada başlayan Majör Depresif Epizod (En az 2 hafta, ≥5 belirti)."
+    },
+
+    // 118. Atipik Özellikli Majör Depresif Bozukluk
+    {
+        id: "case-118",
+        caseNumber: 118,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "mdd_with_atypical",
+        therapyId: "behavioral_activation",
+        category: "MOOD",
+        patientSummary: "26 yaşında, kadın, yüksek lisans öğrencisi (Kurşun Felci ve Hipersomni)",
+        clues: [
+            "26 yaşındaki danışan, son 2 aydır devam eden çökkünlük, günde 12-14 saat uyumasına rağmen sabahları uyanamama (hipersomni) ve yoğun karbonhidrat/çikolata aşermesine bağlı 8 kilo alma yakınmalarıyla başvurdu.",
+            "Klasik depresyon hastalarının aksine, yakın bir arkadaşı sürpriz yapıp onu konsere götürdüğünde veya güzel bir haber aldığında neşesinin birkaç saatliğine tamamen yerine geldiğini (duygudurum tepkiselliği / mood reactivity), ancak yalnız kalınca tekrar çöktüğünü anlattı.",
+            "Kollarının ve bacaklarının sanki 'içine tonlarca kurşun dökülmüş gibi ağırlaştığını' ve kolunu kaldıracak gücü bile bulamadığını (kurşun boru / kurşun felci - leaden paralysis) ifade etti.",
+            "Ergenliğinden beri insanlardan gelen en ufak bir eleştiriye veya mesajına geç cevap verilmesine aşırı yıkıcı tepkiler verdiği (uzun süreli kişilerarası reddedilme duyarlılığı) öğrenildi.",
+            "Ruhsal Durum Muayenesinde: Pozitif olaylarla geçici olarak açılan çökkün duygulanım, vejetatif ters (tersine) belirtiler (aşırı uyku ve aşırı yeme) ve ağır kurşun felci hissi saptandı.",
+            "DSM-5'e göre: Duygudurum tepkiselliği (olumlu olaylarla neşelenebilme) ile birlikte kilo alımı/iştah artışı, hipersomni, kurşun felci ve reddedilme duyarlılığı kriterlerini karşılayan Atipik Özellikli Majör Depresif Bozukluk tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "güzel bir haber aldığında neşesinin birkaç saatliğine tamamen yerine geldiğini (duygudurum tepkiselliği", dsmMatch: "DSM-5 Kriter A: Duygudurum tepkiselliği (Olumlu olaylarla neşelenebilme)" },
+            { clueIndex: 2, text: "kurşun felci - leaden paralysis", dsmMatch: "DSM-5 Kriter B3: Kollarda ve bacaklarda kurşun gibi ağırlık hissi (Leaden Paralysis)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Davranışsal Aktivasyon (BA) & Kişilerarası BDT",
+            therapyDetails: "Aşırı uyku ve yatakta kalma süresini kademeli kısıtlama, duygusal yeme/karbonhidrat ataklarını düzenleme ve reddedilme alınganlığını bilişsel olarak yeniden çerçeveleme.",
+            pharmacologyNote: "SSRI/SNRI veya Bupropion (hipersomni ve kilo alımını azaltmak için) tercih edilir; klasik psikofarmakolojide Atipik Depresyon MAO İnhibitörlerine (Moklobemid, Fenelzin) trisikliklerden çok daha iyi yanıt vermesiyle ünlüdür."
+        },
+        miniQuiz: {
+            question: "Atipik Özellikli Majör Depresyonu klasik (melankolik) depresyondan ayıran en temel 4 karakteristik belirti kümesi hangisidir?",
+            options: [
+                "Duygudurum tepkiselliği (iyi olayla neşelenme), aşırı uyuma (hipersomni), aşırı yeme/kilo alımı ve kollarda-bacaklarda kurşun felci (ağırlık) hissi",
+                "Sabah erken uyanma, şiddetli iştahsızlık ve hiçbir şeye sevinememe",
+                "Yüksek ateş, kas sertliği ve halüsinasyonlar",
+                "Günde sadece 2 saat uyuma ve aşırı para harcama"
+            ],
+            correctIndex: 0,
+            explanation: "Atipik depresyonda klasik depresyonun tam tersi vejetatif belirtiler (uyku ve iştah artışı), olumlu olaylarla geçici neşelenebilme (reaktivite), kurşun felci ve reddedilme duyarlılığı görülür."
+        },
+        differentialDiagnosis: "• Melankolik Depresyon: Duygudurum tepkiselliği yoktur (hiçbir iyi haber neşelendirmez), sabah erken uyanma ve kilo kaybı vardır.\n• Hipotiroidi: Aşırı uyku ve kilo alımı yapar; TSH testi ile dışlanır.",
+        dsmCriteriaSummary: "DSM-5: Duygudurum tepkiselliği (zorunlu) + En az 2'si: Kilo alımı/iştah artışı, Hipersomni, Kurşun felci, Reddedilme duyarlılığı."
+    },
+
+    // 119. Melankolik Özellikli Majör Depresif Bozukluk
+    {
+        id: "case-119",
+        caseNumber: 119,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "mdd_with_melancholic",
+        therapyId: "ect_biological",
+        category: "MOOD",
+        patientSummary: "59 yaşında, erkek, emekli müdür (Sabah Kötüleşmesi ve Tam Anhedoni)",
+        clues: [
+            "59 yaşındaki danışan, son 6 haftadır yaşamdan aldığı tüm zevkin tamamen silindiğini, çok sevdiği ilk torununun doğumu haberini aldığında bile içinde en ufak bir sıcaklık veya sevinç kıpırtısı oluşmadığını (tam anhedoni ve reaktivite kaybı) belirterek getirildi.",
+            "Her gece saat 03:30'da sanki bir alarm çalmış gibi kendiliğinden uyandığını (terminal insomni / sabah erken uyanma) ve bir daha uyuyamadığını; depresif kederinin özellikle sabah saatlerinde dayanılmaz düzeyde ağır olduğunu, akşama doğru ise nispeten hafiflediğini (diürnal varyasyon) anlattı.",
+            "Yemeklerin kendisine saman gibi geldiğini ve son 1.5 ayda 9 kilo kaybettiğini, geçmişteki küçük hataları yüzünden ailesini felakete sürüklediğine dair aşırı ve uygunsuz suçluluk duyduğunu söyledi.",
+            "Hareketlerinin ve konuşmasının dışarıdan herkesin fark edeceği derecede ağır çekime alınmış gibi yavaşladığı (belirgin psikomotor retardasyon) gözlendi.",
+            "Ruhsal Durum Muayenesinde: Omega melankolik yüz ifadesi, tam duygudurum tepkisizliği, sabahları kötüleşen derin çökkünlük ve vejetatif çöküş saptandı.",
+            "DSM-5'e göre: Tam anhedoni ve olumlu uyaranlara tepkisizlik ile birlikte sabahları kötüleşme, sabah erken uyanma (en az 2 saat önce), belirgin psikomotor retardasyon/ajitasyon, belirgin anoreksi/kilo kaybı ve aşırı suçluluk kriterlerini karşılayan Melankolik Özellikli Majör Depresif Bozukluk tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "çok sevdiği ilk torununun doğumu haberini aldığında bile içinde en ufak bir sıcaklık veya sevinç kıpırtısı oluşmadığını", dsmMatch: "DSM-5 Kriter A: Tam anhedoni ve olumlu olaylara duygudurum tepkiselliğinin kaybı" },
+            { clueIndex: 1, text: "depresif kederinin özellikle sabah saatlerinde dayanılmaz düzeyde ağır olduğunu", dsmMatch: "DSM-5 Kriter B2-B3: Sabah erken uyanma ve sabahları depresyonun daha ağır olması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Biyolojik Tedavi (SNRI / Trisiklik / EKT) & Yapılandırılmış BDT",
+            therapyDetails: "Ağır biyolojik/endojen depresyonda öncelikle farmakoterapi veya EKT ile psikomotor enerjinin açılması, ardından bilişsel yeniden yapılandırma ve intihar takibi.",
+            pharmacologyNote: "Melankolik depresyon plaseboya ve tek başına psikoterapiye zayıf yanıt verir; çift etkili antidepresanlar (Venlafaksin, Duloksetin), Trisiklikler ve ağır vakalarda EKT altın standarttır."
+        },
+        miniQuiz: {
+            question: "Melankolik Özellikli Majör Depresyonda hastanın kederinin günün hangi saatinde en şiddetli olması ve uyku bozukluğunun hangi tipte olması tipiktir?",
+            options: [
+                "Sabah saatlerinde depresyonun en ağır olması ve normalden en az 2 saat erken uyanıp tekrar uyuyamama (Terminal İnsomni)",
+                "Gece yarısı neşelenip günde 16 saat uyuma (Hipersomni)",
+                "Sadece öğle yemeklerinden sonra uyuklama",
+                "Uyurgezerlik atakları"
+            ],
+            correctIndex: 0,
+            explanation: "Melankolik depresyonda kortizol ve sirkadiyen ritim bozulmasına bağlı olarak sabah erken uyanma (terminal insomni) ve sabah saatlerinde kederin en ağır olması (diürnal varyasyon) tipiktir."
+        },
+        differentialDiagnosis: "• Atipik Depresyon: Olumlu olaylarla neşelenebilir, çok uyur ve kilo alır; melankolik depresyonun tam zıttıdır.\n• Normal Yas: Yasta acı dalgalar halindedir ve olumlu anılarla gülümseyebilir; melankolide ise reaktivite tamamen sönmüştür.",
+        dsmCriteriaSummary: "DSM-5: Tam anhedoni / Olumlu uyaranlara tepkisizlik + Sabah kötüleşmesi, sabah erken uyanma, psikomotor yavaşlama/ajitasyon, belirgin kilo kaybı, aşırı suçluluk."
+    },
+
+    // 120. Özgül Fobi (Kan-Enjeksiyon-Yara Tipi / Vazovagal Senkop)
+    {
+        id: "case-120",
+        caseNumber: 120,
+        difficulty: "Kolay",
+        course: "ADULT",
+        diagnosisId: "specific_phobia_blood",
+        therapyId: "invivo_exposure",
+        category: "ANXIETY",
+        patientSummary: "25 yaşında, erkek, stajyer öğretmen (Kan Görünce Bayılma / Bifazik Yanıt)",
+        clues: [
+            "25 yaşındaki danışan, öğretmenlik ataması için zorunlu olan basit bir kan tahlilini yaptırmaktan dehşetle korktuğu ve 8 yıldır hiçbir hastane veya laboratuvara adım atamadığı için başvurdu.",
+            "Geçmişte ne zaman bir enjektör görse veya parmağından bir damla kan çıksa önce kalbinin hızlandığını, ancak birkaç saniye içinde tansiyonunun ve nabzının aniden düşerek gözlerinin karardığını, soğuk ter döktüğünü ve tam bayılma (vazovagal senkop) yaşadığını anlattı.",
+            "Televizyonda ameliyat sahnesi çıktığında bile başının döndüğünü, bu yüzden diş tedavisini 4 yıldır ertelediğini ve apse yapan dişini çektiremediğini belirtti.",
+            "Kardiyolojik muayene, EKG ve Tilt testi sonucunda organik bir aritmi saptanmamış; yalnızca kan/iğne uyaranıyla tetiklenen nörokardiyojenik vazovagal refleks doğrulanmıştır.",
+            "Ruhsal Durum Muayenesinde: Diğer tüm fobilerden farklı olarak sempatik deşarjı izleyen ani parasempatik (vagal) bradikardi/hipotansiyon (bifazik otonomik yanıt) ve yoğun kaçınma davranışı saptandı.",
+            "DSM-5'e göre: En az 6 aydır süren, kan görme, iğne olma veya tıbbi işlemlere karşı aşırı korku, kaçınma ve karakteristik vazovagal bayılma yanıtıyla seyreden Özgül Fobi (Kan-Enjeksiyon-Yara Tipi) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "tansiyonunun ve nabzının aniden düşerek gözlerinin karardığını, soğuk ter döktüğünü ve tam bayılma (vazovagal senkop)", dsmMatch: "Klinik Özellik: Kan-Enjeksiyon fobisine özgü bifazik vazovagal senkop yanıtı" },
+            { clueIndex: 0, text: "8 yıldır hiçbir hastane veya laboratuvara adım atamadığı", dsmMatch: "DSM-5 Kriter C & E: En az 6 aydır süren aktif kaçınma davranışı" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Uygulamalı Kas Gerdirme (Applied Tension - Öst Protokolü) & Kademeli Maruz Bırakma",
+            therapyDetails: "Kan/iğne maruziyeti sırasında kol, gövde ve bacak kaslarını 15-20 saniye boyunca sıkarak kan basıncını yükseltmek ve vazovagal bayılmayı fizyolojik olarak engellemek.",
+            pharmacologyNote: "İlaç tedavisi genellikle gerekmez; işlem öncesi gevşetici/tansiyon düşürücü ilaçlar senkopu artırabileceği için önerilmez."
+        },
+        miniQuiz: {
+            question: "Diğer tüm anksiyete bozukluklarında 'gevşeme egzersizi' uygulanırken, Kan-Enjeksiyon-Yara fobisinde neden gevşeme YASAKLANIP yerine 'Uygulamalı Kas Gerdirme' (Applied Tension) tekniği kullanılır?",
+            options: [
+                "Çünkü kan fobisinde vagal refleksle tansiyon düşüp bayılma olur; gevşeme tansiyonu daha da düşürür, kasları germek ise tansiyonu yükselterek bayılmayı önler.",
+                "Çünkü hastanın kasları erimiştir.",
+                "Çünkü gevşeme egzersizi iğnenin kırılmasına yol açar.",
+                "Çünkü kan fobisinde tansiyon 300'e çıkar."
+            ],
+            correctIndex: 0,
+            explanation: "Kan-Enjeksiyon-Yara fobisi bifazik yanıt (önce kısa taşikardi, ardından ani bradikardi ve hipotansiyonla bayılma) gösteren tek fobidir. Kasları sıkmak (Applied Tension) venöz dönüşü ve tansiyonu artırarak bayılmayı engeller."
+        },
+        differentialDiagnosis: "• Panik Bozukluk: Hasta bayılacağından korkar ancak tansiyonu yükseldiği için ASLA bayılmaz; kan fobisinde ise gerçek fizyolojik bayılma (senkop) görülür.\n• Hastalık Kaygısı Bozukluğu: İğneden değil, tahlil sonucunda kanser çıkacağından korkar.",
+        dsmCriteriaSummary: "DSM-5: En az 6 ay süren kan/iğne/yaralanma korkusu + Aktif kaçınma + Karakteristik vazovagal bayılma (senkop) yanıtı."
+    },
+
+    // 121. Özgül Fobi (Kusma Korkusu / Emetofobi)
+    {
+        id: "case-121",
+        caseNumber: 121,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "specific_phobia_emetophobia",
+        therapyId: "invivo_exposure",
+        category: "ANXIETY",
+        patientSummary: "24 yaşında, kadın, diyetisyen (Kusma Korkusu / Emetofobi)",
+        clues: [
+            "24 yaşındaki danışan, kendisinin kusmasından veya başkasının kustuğunu görmekten/duymaktan ölümcül düzeyde korktuğu için son 2 yıldır restoranlarda yemek yiyemediğini, toplu taşımaya binemediğini ve çantasından antiemetik (bulantı önleyici) ilaçları hiç çıkarmadığını belirterek başvurdu.",
+            "Midesinde en ufak bir guruldama veya şişkinlik hissettiğinde 'Ya şimdi kusarsam, kontrolümü kaybedip boğulursam' diyerek panik atak geçirmekte ve günlerce sadece kraker ve suyla beslenmektedir.",
+            "Bu kısıtlı beslenme nedeniyle 6 kilo kaybettiği, ancak zayıflama veya güzel görünme arzusunun kesinlikle olmadığı; tek amacının midesini boş tutarak kusma ihtimalini sıfırlamak olduğu saptandı.",
+            "Gastroenterolojik endoskopi ve tetkikler tamamen normaldir; danışan son 12 yıldır tek bir kez bile kusmamıştır.",
+            "Ruhsal Durum Muayenesinde: Mide duyumlarına aşırı hipervijilans (içsel tarama), güvenlik arama davranışları (son kullanma tarihlerini 10 kez okuma, naneli şeker çiğneme) ve kusma uyaranlarına fobik kaçınma gözlendi.",
+            "DSM-5'e göre: En az 6 aydır devam eden, kusma eylemine karşı orantısız ve yoğun korku, içsel/dışsal tetikleyicilerden kaçınma ve belirgin işlevsellik kaybıyla seyreden Özgül Fobi (Diğer Tip: Kusma Korkusu / Emetofobi) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "kendisinin kusmasından veya başkasının kustuğunu görmekten/duymaktan ölümcül düzeyde korktuğu", dsmMatch: "DSM-5 Kriter A: Özgül kusma korkusu (Emetofobi)" },
+            { clueIndex: 2, text: "zayıflama veya güzel görünme arzusunun kesinlikle olmadığı; tek amacının midesini boş tutarak kusma ihtimalini sıfırlamak olduğu", dsmMatch: "Ayırıcı Tanı: Anoreksiya Nervozadan ayrım kriteri" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Kademeli Canlı ve İnteroseptif Maruz Bırakma (BDT)",
+            therapyDetails: "Bulantı önleyici ilaç ve naneli şeker gibi güvenlik davranışlarını bırakma, kusma kelimesi/sesi/videolarına kademeli maruziyet ve mide doluluk hissine interoseptif alışma.",
+            pharmacologyNote: "Ağır kaçınma ve eşlik eden panik/anksiyete varlığında SSRI (Sertralin, Essitalopram) maruz bırakma terapisini kolaylaştırır."
+        },
+        miniQuiz: {
+            question: "Kusma korkusu (Emetofobi) nedeniyle yemek yemeyi kısıtlayan ve kilo kaybeden bir hastayı Anoreksiya Nervozadan ayıran en temel klinik kriter nedir?",
+            options: [
+                "Emetofobide hastanın kilo alma korkusu veya beden imajı bozukluğunun olmaması; yemeyi sadece mide bulantısı ve kusmayı önlemek için kısıtlaması",
+                "Emetofobi hastalarının günde 10 kez bilerek kusması",
+                "Anoreksiya hastalarının hiç kilo kaybetmemesi",
+                "Emetofobinin sadece bebeklerde görülmesi"
+            ],
+            correctIndex: 0,
+            explanation: "Emetofobi hastaları şişmanlamaktan korkmazlar, aksine zayıflamaktan üzüntü duyabilirler; gıda kısıtlamasının tek nedeni mideyi boş tutarak kusma riskini engellemektir."
+        },
+        differentialDiagnosis: "• Anoreksiya Nervoza: Temel motivasyon zayıf olma arzusu ve kilo alma korkusudur.\n• OKB: Bulaşma/mikrop obsesyonuna ikincil hastalık korkusu olabilir; emetofobide ise odak doğrudan kusma eyleminin kendisidir.",
+        dsmCriteriaSummary: "DSM-5: En az 6 ay süren kusma veya başkalarının kusmasını görme korkusu + Güvenlik davranışları ve kaçınma."
+    },
+
+    // 122. Sosyal Anksiyete Bozukluğu (Yalnızca Performans Tipi)
+    {
+        id: "case-122",
+        caseNumber: 122,
+        difficulty: "Kolay",
+        course: "ADULT",
+        diagnosisId: "social_anxiety_performance",
+        therapyId: "cbt_general",
+        category: "ANXIETY",
+        patientSummary: "31 yaşında, erkek, senfoni orkestrası keman sanatçısı (Sahne Korkusu)",
+        clues: [
+            "31 yaşındaki profesyonel keman sanatçısı, son 8 aydır sadece sahneye çıkıp izleyicilerin önünde solo performans sergileyeceği zaman başlayan şiddetli el titremesi, taşikardi ve 'Yay elimden kayacak, yanlış nota basıp tüm orkestraya rezil olacağım' korkusuyla başvurdu.",
+            "İlginç bir şekilde, konser dışındaki sosyal hayatında son derece dışadönük olduğu; partilerde, restoranlarda, arkadaş toplantılarında veya tanımadığı insanlarla sohbet ederken hiçbir kaygı yaşamadığı öğrenildi.",
+            "Yalnızca sahneye çıkma veya jüri önünde çalma durumlarında kilitlendiği, bu yüzden son 3 konser öncesinde 'kolum incindi' bahanesiyle rapor alarak sahneye çıkmaktan kaçındığı ve mesleğini kaybetme tehlikesi yaşadığı belirlendi.",
+            "Tiroid fonksiyon testleri ve nörolojik muayenesi normaldir; evde tek başına prova yaparken ellerinde hiçbir titreme olmamaktadır.",
+            "Ruhsal Durum Muayenesinde: Genel sosyal etkileşimlerde tam rahatlık, yalnızca topluluk önünde performans sergileme veya konuşma durumlarına sınırlı yoğun olumsuz değerlendirilme anksiyetesi saptandı.",
+            "DSM-5'e göre: En az 6 aydır süren ve korkunun yalnızca topluluk önünde konuşma ya da performans gösterme (sahne, konser, sunum) ile sınırlı olduğu Sosyal Anksiyete Bozukluğu (Yalnızca Performans Tipi) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "sadece sahneye çıkıp izleyicilerin önünde solo performans sergileyeceği zaman başlayan şiddetli el titremesi", dsmMatch: "DSM-5 Belirteç: Yalnızca Performans Tipi (Sahne/Sunum anksiyetesi)" },
+            { clueIndex: 1, text: "partilerde, restoranlarda, arkadaş toplantılarında veya tanımadığı insanlarla sohbet ederken hiçbir kaygı yaşamadığı", dsmMatch: "DSM-5 Ayırıcı Kriter: Performans dışı sosyal etkileşimlerde korku olmaması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bilişsel Davranışçı Terapi (BDT) & Sahne Maruziyeti",
+            therapyDetails: "Dikkati kendi el titremesinden (içsel odaklanma) müziğe ve dışarıya yönlendirme, video geri bildirimi ile felaketleştirici tahminleri çürütme ve kademeli seyircili provalar.",
+            pharmacologyNote: "Yalnızca Performans Tipi Sosyal Anksiyetede sahneye/sunuma çıkmadan 45-60 dakika önce alınan tek doz Beta-Bloker (Propranolol 10-40 mg) el titremesi ve çarpıntıyı hızla kesen altın standart medikal destektir."
+        },
+        miniQuiz: {
+            question: "Sosyal Anksiyete Bozukluğunun 'Yalnızca Performans Tipi'nde (örneğin müzisyenlerde sahne korkusu veya önemli bir sunum öncesi) otonomik titreme ve çarpıntıyı önlemek için performanstan 1 saat önce kullanılan en etkili ilaç hangisidir?",
+            options: [
+                "Beta-Bloker (Propranolol)",
+                "Yüksek doz Haloperidol",
+                "Lityum",
+                "Disülfiram"
+            ],
+            correctIndex: 0,
+            explanation: "Performans anksiyetesinde performanstan 30-60 dakika önce alınan Propranolol (non-selektif beta-bloker), sedasyon veya zihinsel uyuşukluk yapmadan periferik el titremesini ve taşikardiyi bloke eder."
+        },
+        differentialDiagnosis: "• Yaygın Sosyal Anksiyete Bozukluğu: Kişi tanışmaktan, yemek yemekten ve günlük sohbetlerden de korkar.\n• Esansiyel Tremor: Kişi evde yalnızken çay içerken de eli titrer; performans anksiyetesinde ise yalnızken titreme yoktur.",
+        dsmCriteriaSummary: "DSM-5: En az 6 ay süren olumsuz değerlendirilme korkusu + Korkunun yalnızca topluluk önünde konuşma veya performans sergilemeyle sınırlı olması."
+    },
+
+    // 123. Beden Algısı Bozukluğu (Kas Dismorfisi / Bigoreksiya)
+    {
+        id: "case-123",
+        caseNumber: 123,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "muscle_dysmorphia",
+        therapyId: "erp",
+        category: "OCD_RELATED",
+        patientSummary: "24 yaşında, erkek, amatör vücut geliştirici (Kas Dismorfisi / Ters Anoreksiya)",
+        clues: [
+            "24 yaşındaki danışan, 1.82 boyunda, 98 kilo ağırlığında ve %8 vücut yağ oranıyla dışarıdan bakıldığında aşırı kaslı ve iri bir fiziğe sahip olmasına rağmen, kendisini 'kürdan gibi cılız, çelimsiz ve küçük' gördüğü için kliniğe başvurdu.",
+            "Günde 4 saat ağırlık antrenmanı yaptığını, kaslarının küçüleceği korkusuyla 2 yıldır hiçbir aile yemeğine veya tatile gitmediğini ve sıcak yaz günlerinde bile vücudunun 'cılızlığını' gizlemek için üst üste iki kalın kapüşonlu sweatshirt giydiğini anlattı.",
+            "Günde en az 30 kez aynada omuz ve kol ölçülerini kontrol ettiği, spor salonundaki diğer erkeklerle vücudunu kıyasladığı ve kas hacmini artırmak için yasadışı anabolik-androjenik steroid kürleri kullandığı öğrenildi.",
+            "Omuz liflerinde yırtık olmasına rağmen antrenmanı 1 gün bile aksatırsa 'tüm kaslarının eriyip yok olacağı' düşüncesiyle yoğun panik ve öfke yaşamaktadır.",
+            "Ruhsal Durum Muayenesinde: Beden yapısının yeterince kaslı olmadığına dair aşırı değerlenmiş/sanrısal boyutta zihinsel uğraş, kompulsif ayna kontrolü ve kamuflaj davranışları saptandı.",
+            "DSM-5'e göre: Kişinin gerçekte normal ya da çok kaslı olmasına karşın bedeninin çok küçük ya da yeterince kaslı olmadığı düşüncesiyle aşırı uğraşıp yineleyici kontrol davranışları sergilediği Beden Algısı Bozukluğu (Kas Dismorfisi / Bigoreksiya) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "aşırı kaslı ve iri bir fiziğe sahip olmasına rağmen, kendisini 'kürdan gibi cılız, çelimsiz ve küçük' gördüğü", dsmMatch: "DSM-5 Kas Dismorfisi Belirteci: Beden yapısının çok küçük veya yetersiz kaslı olduğu algısı" },
+            { clueIndex: 2, text: "Günde en az 30 kez aynada omuz ve kol ölçülerini kontrol ettiği", dsmMatch: "DSM-5 Kriter B: Yineleyici ayna kontrolü, kıyaslama ve tehlikeli steroid kullanımı" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Tepki Önleme ile Maruz Bırakma (ERP) & Beden Algısı BDT'si",
+            therapyDetails: "Ayna kontrolü ve mezura ile ölçüm ritüellerini durdurma, kalın kamuflaj kıyafetleri olmadan tişörtle sokağa çıkma maruziyeti ve egzersiz süresini sağlıklı sınıra çekme.",
+            pharmacologyNote: "Yüksek doz SSRI (Fluoksetin, Fluvoksamin, Sertralin) obsesif beden uğraşısını azaltır; anabolik steroidlerin endokrinolojik kontrolle kesilmesi şarttır."
+        },
+        miniQuiz: {
+            question: "DSM-5'te 'Kas Dismorfisi' (Bigoreksiya / Ters Anoreksiya) hangi ana tanı başlığının bir alt belirteci olarak sınıflandırılmıştır?",
+            options: [
+                "Obsesif-Kompulsif ve İlişkili Bozukluklar -> Beden Algısı Bozukluğu (Body Dysmorphic Disorder)",
+                "Beslenme ve Yeme Bozuklukları -> Bulimiya Nervoza",
+                "Şizofreni Spektrumu",
+                "Uyku-Uyanıklık Bozuklukları"
+            ],
+            correctIndex: 0,
+            explanation: "Kas Dismorfisi (Bigoreksiya), DSM-5'te Yeme Bozuklukları altında değil, Obsesif-Kompulsif ve İlişkili Bozukluklar kategorisindeki 'Beden Algısı Bozukluğu'nun (BDD) resmi bir belirteci olarak yer alır."
+        },
+        differentialDiagnosis: "• Anoreksiya Nervoza: Kişi zayıf olmak ister ve şişman görünmekten korkar; Kas Dismorfisinde ise kişi iri/kaslı olmak ister ve cılız görünmekten korkar.\n• Sağlıklı Vücut Geliştirme: İşlevsellik bozulmaz, kamuflaj ve kompulsif ayna kontrolü yoktur.",
+        dsmCriteriaSummary: "DSM-5: Beden Algısı Bozukluğu kriterleri + Vücut yapısının çok küçük veya yeterince kaslı olmadığına dair aşırı zihinsel uğraş."
+    },
+
+    // 124. PANDAS / PANS (Pediatrik Otoimmün Nöropsikiyatrik OKB)
+    {
+        id: "case-124",
+        caseNumber: 124,
+        difficulty: "İleri Düzey",
+        course: "CHILD",
+        diagnosisId: "pandas_syndrome",
+        therapyId: "erp",
+        category: "OCD_RELATED",
+        patientSummary: "8 yaşında, erkek, ilkokul 3. sınıf öğrencisi (Bir Gecede Başlayan Akut OKB ve Tik)",
+        clues: [
+            "8 yaşındaki çocuk, 2 hafta önce geçirdiği ateşli bir boğaz enfeksiyonunun (tonsillit) ardından kelimenin tam anlamıyla 'bir gecede' başlayan şiddetli el yıkama kompulsiyonları, göz kırpma/omuz silkme tikleri ve annesinden ayrılamama krizleriyle çocuk psikiyatrisine getirildi.",
+            "Annesi, çocuğun Çarşamba akşamı tamamen sağlıklı, neşeli ve takıntısız bir çocuk olarak uyuduğunu; Perşembe sabahı ise 'Ellerime zehirli mikrop bulaştı' diyerek çığlıklarla uyandığını ve elleri kanayana kadar musluk başından ayrılmadığını anlattı.",
+            "Okul öğretmenleri, daha önce sınıfın en güzel el yazısına sahip olan çocuğun son 3 günde el yazısının okunaksız kargacık burgacık bir hale geldiğini (akut disgrafi) ve sık sık tuvalete koştuğunu (pollakiüri / enürezis) bildirdi.",
+            "Laboratuvar tetkiklerinde Boğaz Kültüründe A Grubu Beta Hemolitik Streptokok (GAS) üremesi ve serum Anti-Streptolizin O (ASO) ile Anti-DNase B antikor titrelerinde 4 kat artış saptandı.",
+            "Ruhsal Durum ve Nörolojik Muayenede: Bazal ganglionlara karşı gelişen otoimmün çapraz reaksiyona bağlı hiperakut (yıldırım) başlangıçlı OKB, koreiform parmak hareketleri ve motor tikler tespit edildi.",
+            "Klinik ve DSM-5 (Diğer Tıbbi Duruma Bağlı OKB) kriterlerine göre: Streptokok enfeksiyonu sonrası bazal ganglion otoimmünitesiyle bir gecede başlayan OKB ve tiklerle karakterize PANDAS (Pediatrik Otoimmün Nöropsikiyatrik Bozukluk) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "boğaz enfeksiyonunun (tonsillit) ardından kelimenin tam anlamıyla 'bir gecede' başlayan şiddetli el yıkama kompulsiyonları, göz kırpma/omuz silkme tikleri", dsmMatch: "PANDAS Kriterleri: Streptokok sonrası yıldırım (overnight) başlangıçlı OKB ve tikler" },
+            { clueIndex: 2, text: "el yazısının okunaksız kargacık burgacık bir hale geldiğini (akut disgrafi)", dsmMatch: "Nörolojik Belirteç: Bazal ganglion tutulumuna bağlı akut el yazısı bozulması ve sık idrara çıkma" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Antibiyotik/İmmünoterapi + Tepki Önleme ile Maruz Bırakma (ERP)",
+            therapyDetails: "Streptokok eradikasyonu, anti-inflamatuar tedavi (NSAID / IVIG) ve eşzamanlı olarak çocuğa uyarlanmış oyun temelli ERP protokolü.",
+            pharmacologyNote: "Aktif streptokok enfeksiyonuna yönelik antibiyotik (Penisilin/Amoksisilin veya Azitromisin) ve çok düşük dozdan başlanan SSRI (otoimmün beyinde SSRI aktivasyon yan etkisine dikkat!)."
+        },
+        miniQuiz: {
+            question: "PANDAS sendromunu klasik çocukluk çağı OKB'sinden ayıran en çarpıcı klinik başlangıç özelliği nedir?",
+            options: [
+                "A Grubu Beta Hemolitik Streptokok (boğaz) enfeksiyonu sonrasında semptomların sinsi değil, 24-48 saat içinde 'yıldırım hızıyla / bir gecede' patlak vermesi",
+                "Semptomların sadece 18 yaşından sonra başlaması",
+                "Hastada hiçbir zaman el yıkama veya tik görülmemesi",
+                "Bozukluğun sadece vitamin eksikliğinden kaynaklanması"
+            ],
+            correctIndex: 0,
+            explanation: "Klasik OKB aylar içinde sinsi başlar; PANDAS'ta ise streptokok antikorlarının bazal ganglionlarla çapraz reaksiyona girmesi sonucu OKB, tikler, el yazısı bozulması ve ayrılık anksiyetesi bir gecede (dramatik akut başlangıç) ortaya çıkar."
+        },
+        differentialDiagnosis: "• Klasik Çocukluk OKB'si: Sinsi başlangıçlıdır, streptokok enfeksiyonu, akut disgrafi ve koreiform hareketlerle ilişkisi yoktur.\n• Sydenham Koresi: Akut romatizmal ateşin nörolojik bulgusudur, belirgin dans benzeri kore hareketleri ön plandadır.",
+        dsmCriteriaSummary: "PANDAS Kriterleri: Prepüberal başlangıç + GAS (Streptokok) enfeksiyonu kanıtı + Bir gecede (akut) başlayan OKB ve/veya tik bozukluğu + Nörolojik bulgular (disgrafi, koreiform hareketler)."
+    },
+
+    // 125. OKB (Tabu Düşünceler: Dini Vesvese / Cinsel / Saldırganlık - "Pure O")
+    {
+        id: "case-125",
+        caseNumber: 125,
+        difficulty: "Zor",
+        course: "ADULT",
+        diagnosisId: "ocd_taboo_thoughts",
+        therapyId: "erp",
+        category: "OCD_RELATED",
+        patientSummary: "28 yaşında, erkek, yazılımcı (Egodistonik Saldırganlık ve Dini Obsesyonlar)",
+        clues: [
+            "28 yaşındaki danışan, çok sevdiği yeni doğmuş bebeğini kucağına aldığında zihnine aniden 'Ya şimdi bebeği balkondan aşağı atarsam' veya mutfakta eşiyle yemek yaparken 'Ya elimdeki bıçağı eşime saplarsam' şeklinde dehşet verici görüntülerin hücum etmesi nedeniyle ağlayarak başvurdu.",
+            "Ayrıca namaz kılarken veya dua ederken zihnine istemsizce küfürlü ve dine hakaret içeren sözcüklerin (dini obsesyon / vesvese) geldiğini, kendisini 'dünyanın en ahlaksız canavarı' gibi hissettiğini anlattı.",
+            "Bu düşüncelerden o kadar korkmaktadır ki evdeki tüm bıçakları çöp kutusuna atmış, bebeğiyle yalnız kalmamak için odaya girmemeye başlamış ve zihnindeki küfürleri silmek için içinden günde 500 kez sessizce tövbe duası okuyup düşünceleri nötralize etmeye (zihinsel kompulsiyon) çalışmaktadır.",
+            "Danışanın geçmişinde hiçbir şiddet eylemi, dürtü kontrol bozukluğu veya psikoz öyküsü yoktur; eşine ve bebeğine zarar verme arzusu KESİNLİKLE bulunmamaktadır (tam egodistonik yapı).",
+            "Ruhsal Durum Muayenesinde: Dışarıdan gözlenen el yıkama gibi motor kompulsiyonları olmayan, ancak yoğun intruzif tabu obsesyonlar (zarar verme/dini) ve gizli zihinsel kompulsiyonlarla giden OKB tablosu saptandı.",
+            "DSM-5'e göre: Kişinin değerlerine tamamen ters düşen (egodistonik) saldırganlık, dini veya cinsel içerikli intruzif obsesyonlar ve bunları bastırmak için yapılan kaçınma/zihinsel ritüellerle seyreden Obsesif-Kompulsif Bozukluk (Tabu Düşünceler) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "'Ya elimdeki bıçağı eşime saplarsam' şeklinde dehşet verici görüntülerin hücum etmesi", dsmMatch: "DSM-5 Kriter A: Egodistonik saldırganlık/zarar verme obsesyonları (Tabu düşünceler)" },
+            { clueIndex: 2, text: "içinden günde 500 kez sessizce tövbe duası okuyup düşünceleri nötralize etmeye (zihinsel kompulsiyon)", dsmMatch: "DSM-5 Kriter B: Obsesyonu etkisizleştirmeye yönelik örtük zihinsel kompulsiyonlar" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Tepki Önleme ile Maruz Bırakma (ERP) & Düşünce-Eylem Kaynaşmasını Çözme",
+            therapyDetails: "Saklanan bıçakları mutfağa geri koyma, bebekle yalnız kalma maruziyeti, zihinsel dua/nötralizasyon ritüellerini durdurma ve 'Bir şeyi düşünmek onu yapmakla aynı şeydir' (Thought-Action Fusion) yanılgısını çürütme.",
+            pharmacologyNote: "Yüksek doz SSRI (Sertralin, Fluoksetin, Essitalopram) veya Klomipramin intruzif obsesyonların sıklığını ve yarattığı dehşeti belirgin şekilde azaltır."
+        },
+        miniQuiz: {
+            question: "Saldırganlık veya zarar verme obsesyonu olan bir OKB hastasını ('Ya çocuğuma zarar verirsem diye ödüm kopuyor') gerçek bir antisosyal/psikopat saldırgandan ayıran en temel özellik nedir?",
+            options: [
+                "OKB hastasında düşüncenin tamamen 'egodistonik' (değerlerine aykırı ve dehşet verici) olması ve kişinin bu düşünceden kaçmak için bıçakları saklaması; düşüncenin eyleme dökülme riskinin olmaması",
+                "OKB hastalarının bu düşüncelerden büyük keyif alması",
+                "OKB hastalarının hemen polis tarafından tutuklanması",
+                "Antisosyal kişilerin günde 500 kez tövbe etmesi"
+            ],
+            correctIndex: 0,
+            explanation: "OKB'deki tabu düşünceler kişinin en çok değer verdiği şeylere (bebeğine, inancına) saldırdığı için yoğun dehşet yaratır (egodistoniktir). Hasta düşünceden korktuğu için kaçınır ve bu düşünceleri asla eyleme dökmez."
+        },
+        differentialDiagnosis: "• Psikotik Bozukluk / Komut Halüsinasyonları: Psikozda hasta dışarıdan ses duyar ve içgörüsü yoktur; OKB'de kişi düşüncenin kendi zihninden çıktığını ve saçma olduğunu bilir.\n• Antisosyal Kişilik: Zarar verme düşüncesi egosintoniktir, vicdan azabı veya korku yoktur.",
+        dsmCriteriaSummary: "DSM-5: İstenmeyen saldırganlık/dini/cinsel intruzif düşünceler (Obsesyon) + Zihinsel nötralizasyon, güvence arama ve kaçınma (Kompulsiyon)."
+    },
+
+    // 126. Tepkisel Bağlanma Bozukluğu (Reactive Attachment Disorder - RAD)
+    {
+        id: "case-126",
+        caseNumber: 126,
+        difficulty: "Orta",
+        course: "CHILD",
+        diagnosisId: "reactive_attachment_disorder",
+        therapyId: "parent_training",
+        category: "TRAUMA",
+        patientSummary: "3.5 yaşında, erkek, ağır ihmal sonrası koruyucu aileye verilen çocuk",
+        clues: [
+            "3.5 yaşındaki çocuk, ilk 3 yılını ağır duygusal ve fiziksel ihmal altında, sürekli değişen bakıcıların olduğu aşırı kalabalık bir yetiştirme kurumunda geçirdikten sonra kendisini evlat edinen koruyucu ailesi tarafından getirildi.",
+            "Koruyucu annesi, çocuk düştüğünde ve dizini kanattığında bile sessizce köşede ağladığını, teselli edilmek veya kucağa alınmak için asla yetişkinlere yönelmediğini (avutulma arayışının olmaması) ve sarıldıklarında kaskatı kesilerek tepkisiz kaldığını anlattı.",
+            "Evde oyun oynanırken hiçbir olumlu duygu (gülümseme, neşe) paylaşmadığı, çevreye karşı sürekli donuk, korkulu ve üzgün bir duygulanım sergilediği gözlemlendi.",
+            "Çocukta Otizm Spektrum Bozukluğuna özgü basmakalıp (stereotipik) el çırpma hareketleri, ekolali veya dar ilgi alanları YOKTUR; sosyal bilişsel kapasitesi korunmuştur.",
+            "Ruhsal Durum Muayenesinde: Ağır erken dönem bakım eksikliğine bağlı içe kapanık, duygusal olarak ketlenmiş bağlanma örüntüsü ve açıklanamayan korku/huzursuzluk dönemleri saptandı.",
+            "DSM-5'e göre: Yetersiz/ihmalkar bakım öyküsü zemininde, 5 yaşından önce başlayan, sıkıntılı olduğunda avutulma arayışında olmama ve toplumsal/duygusal tepkisizlik ile karakterize Tepkisel Bağlanma Bozukluğu (RAD) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "teselli edilmek veya kucağa alınmak için asla yetişkinlere yönelmediğini (avutulma arayışının olmaması)", dsmMatch: "DSM-5 Kriter A1 & A2: Sıkıntılı olduğunda avutulma aramama ve avutulmaya tepki vermeme" },
+            { clueIndex: 3, text: "Otizm Spektrum Bozukluğuna özgü basmakalıp (stereotipik) el çırpma hareketleri, ekolali veya dar ilgi alanları YOKTUR", dsmMatch: "DSM-5 Kriter D: Otizm Spektrum Bozukluğu ölçütlerinin karşılanmaması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bağlanma Odaklı Ebeveyn Eğitimi (ABC / Çember Güvenliği - Circle of Security)",
+            therapyDetails: "Sabit, sıcak, öngörülebilir ve duyarlı bir birincil bakımveren ortamı sağlama; çocuk istemese bile nazik ve istikrarlı duygusal mevcudiyet sunma.",
+            pharmacologyNote: "Tepkisel Bağlanma Bozukluğunun spesifik bir ilaç tedavisi yoktur; temel tedavi güvenli ve sevgi dolu bakım çevresinin inşasıdır."
+        },
+        miniQuiz: {
+            question: "Tepkisel Bağlanma Bozukluğu (RAD) ile Sınırsız Toplumsal Katılım Bozukluğu (DSED) her ikisi de ağır çocukluk ihmali sonucu gelişmesine rağmen aralarındaki en temel davranışsal fark nedir?",
+            options: [
+                "RAD'da çocuk içe kapanıktır ve kimseye (bakımverene bile) yakınlık/teselli aramaz; DSED'de ise çocuk hiç yabancılık çekmez ve ilk kez gördüğü yabancının bile kucağına atlar.",
+                "RAD sadece ergenlikte başlar, DSED ise yaşlılıkta başlar.",
+                "RAD'da çocuk aşırı konuşkandır.",
+                "İkisi arasında hiçbir fark yoktur."
+            ],
+            correctIndex: 0,
+            explanation: "Aynı ihmal etiyolojisinden iki farklı fenotip doğar: RAD (İnhibe/Ketlenmiş tip) kimseden teselli aramaz ve içe çekilir; DSED (Dezinhibe tip) ise sınır tanımadan her yabancıya sarılır ve yabancılarla çekinmeden gider."
+        },
+        differentialDiagnosis: "• Otizm Spektrum Bozukluğu (OSB): OSB'de sıcak ve sevgi dolu aile ortamına rağmen sosyal kopukluk ve stereotipik hareketler vardır; RAD'da ise ağır ihmal öyküsü şarttır ve sıcak bakımla hızla düzelir.\n• Sınırsız Toplumsal Katılım Bozukluğu: Yabancılara aşırı sırnaşma vardır.",
+        dsmCriteriaSummary: "DSM-5: Ağır ihmal/kurum bakımı öyküsü + 9 ay-5 yaş arası başlangıç + Avutulma aramama/tepki vermeme + OSB dışlanması."
+    },
+
+    // 127. Sınırsız Toplumsal Katılım Bozukluğu (Disinhibited Social Engagement Disorder - DSED)
+    {
+        id: "case-127",
+        caseNumber: 127,
+        difficulty: "Orta",
+        course: "CHILD",
+        diagnosisId: "disinhibited_social_engagement",
+        therapyId: "parent_training",
+        category: "TRAUMA",
+        patientSummary: "4 yaşında, kız, koruyucu ailedeki çocuk (Yabancılarla Sınırsız Yakınlık)",
+        clues: [
+            "4 yaşındaki kız çocuğu, yaşamının ilk 2.5 yılını ihmal nedeniyle çocuk esirgeme kurumunda geçirdikten sonra evlat edinildiği ailesi tarafından 'parkta gördüğü hiç tanımadığı yabancıların elini tutup onlarla gitmeye çalıştığı' için endişeyle kliniğe getirildi.",
+            "Klinik bekleme salonuna girer girmez, hayatında ilk kez gördüğü erkek bir hastanın kucağına hiçbir çekingenlik göstermeden oturduğu, boynuna sarıldığı ve çantasını karıştırdığı gözlemlendi.",
+            "Parkta veya alışveriş merkezinde koruyucu annesinden hızla uzaklaştığı, korkutucu veya yabancı ortamlarda bile ebeveynine dönüp bakmadığı (sosyal referans almama) ve herhangi bir yabancıyla kolayca uzaklaşabildiği öğrenildi.",
+            "Çocukta DEHB'ye özgü dikkat süresi kısalığı veya akademik dürtüsellik olmadan da bu sosyal sınır kaybının sürdüğü doğrulandı.",
+            "Ruhsal Durum Muayenesinde: Yaşa uygun yabancı kaygısının (stranger anxiety) tamamen yokluğu, tanımadığı yetişkinlerle aşırı tanıdıkmış gibi sözel ve fiziksel temas kurma (sınırsız sosyal katılım) saptandı.",
+            "DSM-5'e göre: Erken çocukluk dönemindeki ağır bakım eksikliği/ihmal sonucunda gelişen, yabancı yetişkinlere yaklaşmada ve etkileşim kurmada kültürel açıdan uygunsuz, aşırı teklifsiz davranışlarla seyreden Sınırsız Toplumsal Katılım Bozukluğu (DSED) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "parkta gördüğü hiç tanımadığı yabancıların elini tutup onlarla gitmeye çalıştığı", dsmMatch: "DSM-5 Kriter A4: Çok az tereddüt ederek ya da hiç tereddüt etmeden bir yabancıyla çekip gitme" },
+            { clueIndex: 1, text: "hayatında ilk kez gördüğü erkek bir hastanın kucağına hiçbir çekingenlik göstermeden oturduğu", dsmMatch: "DSM-5 Kriter A1-A2: Yabancı yetişkinlere yaklaşmada çekingenlik olmaması ve aşırı fiziksel yakınlık" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Sınır Eğitimi & Bağlanma Temelli Ebeveyn Müdahalesi",
+            therapyDetails: "Çocuğun kaçırılma/istismar riskine karşı yakın güvenlik gözetimi, 'Güvenli Çember' görselleriyle kimlere sarılınabileceği ve yabancılarla fiziksel mesafe kurallarının somut olarak öğretilmesi.",
+            pharmacologyNote: "Spesifik bir ilaç tedavisi yoktur; eşlik eden DEHB varsa tedavi edilir ancak temel müdahale davranışsal sınır ve bağlanma eğitimidir."
+        },
+        miniQuiz: {
+            question: "Sınırsız Toplumsal Katılım Bozukluğu (DSED) olan bir çocuğu sadece 'çok sıcakkanlı ve sosyal' normal bir çocuktan veya DEHB'den ayıran en kritik özellik nedir?",
+            options: [
+                "Erken dönemde ağır ihmal/bakıcı değişimi öyküsü olması ve çocuğun bakımvereninden onay almadan hiç tanımadığı bir yabancıyla çekinmeden çekip gidebilmesi",
+                "Çocuğun hiç konuşamaması",
+                "Çocuğun yabancılardan korkup ağlaması",
+                "Sadece okulda ders çalışırken ortaya çıkması"
+            ],
+            correctIndex: 0,
+            explanation: "Normal dışadönük çocuklar yabancı bir ortamda ebeveynine bakarak güvenlik kontrolü (social referencing) yapar ve yabancıyla gitmez; DSED'de ise ağır ihmal öyküsü vardır ve çocuk hiç tanımadığı biriyle tereddütsüz gider."
+        },
+        differentialDiagnosis: "• Tepkisel Bağlanma Bozukluğu (RAD): Çocuk içine kapanıktır ve kimseye yaklaşmaz; DSED ise tam tersine her yabancıya aşırı yaklaşır.\n• DEHB: Genel motor hareketlilik ve dikkat dağınıklığı vardır, yabancılarla çekip gitme davranışı tipik değildir.",
+        dsmCriteriaSummary: "DSM-5: Ağır ihmal öyküsü + Yabancı yetişkinlere çekinmeden yaklaşma + Aşırı teklifsiz sözel/fiziksel temas + Yabancıyla gitmeye hazır olma (Gelişimsel yaş ≥ 9 ay)."
+    },
+
+    // 128. Dissosiyatif Füg (Dissociative Amnesia with Dissociative Fugue)
+    {
+        id: "case-128",
+        caseNumber: 128,
+        difficulty: "Zor",
+        course: "ADULT",
+        diagnosisId: "dissociative_fugue",
+        therapyId: "phase_oriented_trauma",
+        category: "DISSOCIATIVE",
+        patientSummary: "41 yaşında, erkek, iflas eden iş insanı (Kimliğini Unutup Başka Şehre Yolculuk)",
+        clues: [
+            "41 yaşındaki erkek hasta, İstanbul'daki şirketinin ağır haciz ve iflas kararı aldığı gün evinden çıktıktan 4 gün sonra, 600 kilometre uzaktaki Antalya otogarında bir polis devriyesi tarafından kimliksiz ve şaşkın halde bulunarak acil servise getirildi.",
+            "Hasta polislere ve hekimlere adının ne olduğunu, nerede yaşadığını, evli olup olmadığını ve İstanbul'dan Antalya'ya nasıl geldiğini kesinlikle hatırlamadığını (otobiyografik retrograd amnezi) söyledi.",
+            "Otobüs bileti ve otel kayıtları incelendiğinde, hastanın bu 4 gün boyunca gayet sakin ve amaca yönelik bir şekilde bilet aldığı, küçük bir pansiyonda 'Ali Yılmaz' takma adıyla kayıt yaptırdığı ve dışarıdan bakıldığında hiçbir taşkınlık veya konfüzyon sergilemediği anlaşıldı.",
+            "Kranial MRG, Difüzyon MR, elektroensefalografi (EEG) ve toksikoloji taramaları tamamen normaldir; temporal lob epilepsisi, kafa travması veya geçici global amnezi dışlanmıştır.",
+            "Ruhsal Durum Muayenesinde: Genel dünya bilgisi, dil ve hesaplama becerileri (semantik bellek) sağlam olmasına karşın, ağır finansal yıkım stresöründen kaçışa bağlı tam kimlik amnezisi ve amaçlı seyahat (füg) saptandı.",
+            "DSM-5'e göre: Otobiyografik bilgileri anımsayamama ile birlikte evinden veya işyerinden beklenmedik biçimde ayrılıp amaçlı yolculuk yapma ya da şaşkın dolaşma ile karakterize Dissosiyatif Füg ile Giden Dissosiyatif Amnezi tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "600 kilometre uzaktaki Antalya otogarında bir polis devriyesi tarafından kimliksiz ve şaşkın halde bulunarak", dsmMatch: "DSM-5 Dissosiyatif Füg Belirteci: Evden uzakta amaçlı yolculuk veya şaşkın dolaşma" },
+            { clueIndex: 1, text: "adının ne olduğunu, nerede yaşadığını, evli olup olmadığını ve İstanbul'dan Antalya'ya nasıl geldiğini kesinlikle hatırlamadığını", dsmMatch: "DSM-5 Kriter A: Otobiyografik bellek ve kişisel kimlik amnezisi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Faz Odaklı Travma Terapisi & Güvenli Kimlik Entegrasyonu",
+            therapyDetails: "Hastayı güvenli ve destekleyici bir ortamda stabilize etme, aile üyeleriyle kademeli temas, tetikleyici ağır stresörle (iflas/travma) baş etme becerileri ve psikodinamik/hipnoterapötik bellek entegrasyonu.",
+            pharmacologyNote: "Spesifik bir ilaç tedavisi yoktur; eşlik eden akut anksiyete ve uykusuzluk için kısa süreli düşük doz anksiyolitik destek verilebilir."
+        },
+        miniQuiz: {
+            question: "Dissosiyatif Füg (Kaçış) ile organik 'Geçici Global Amnezi' (TGA) veya 'Demans' arasındaki en temel klinik ayrım nedir?",
+            options: [
+                "Dissosiyatif Fügte ağır bir psikolojik travma/stresör sonrası kişi kendi adını ve kimliğini unutarak başka bir şehre düzenli yolculuk yapar; TGA ve demansta ise kişi kendi adını ASLA unutmaz, sadece yeni bilgileri kaydedemez.",
+                "Dissosiyatif Füg sadece 80 yaş üstünde görülür.",
+                "Geçici Global Amnezide hasta yeni bir kimlikle işe girer.",
+                "Dissosiyatif Füg beyin tümöründen kaynaklanır."
+            ],
+            correctIndex: 0,
+            explanation: "Nörolojik amnezilerde (TGA, Korsakoff, erken Alzheimer) kişi yeni olayları unutur (anterograd amnezi) ama kendi adını ve kimliğini bilir. Kişinin yeni olayları kaydedebildiği halde kendi adını/kimliğini unutup başka şehre gitmesi Dissosiyatif Fügtür."
+        },
+        differentialDiagnosis: "• Geçici Global Amnezi (TGA): Hasta kendi adını bilir, yeni bilgileri kaydedemediği için sürekli 'Ben neredeyim?' diye aynı soruyu tekrarlar ve 24 saat içinde düzelir.\n• Kompleks Parsiyel Epilepsi (Postiktal Füg): Amaçsız otomatizmalar vardır, EEG'de epileptiform deşarj görülür.",
+        dsmCriteriaSummary: "DSM-5: Travmatik/stresli olay sonrası kişisel kimlik ve geçmiş amnezisi + Evden/işten uzaklaşarak amaçlı yolculuk yapma (Dissosiyatif Füg)."
+    },
+
+    // 129. Konversiyon Bozukluğu (Psödonöbet / Psikojenik Non-Epileptik Nöbet - PNES)
+    {
+        id: "case-129",
+        caseNumber: 129,
+        difficulty: "Zor",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "conversion_seizures",
+        therapyId: "cbt_general",
+        category: "SOMATIC",
+        patientSummary: "22 yaşında, kadın, üniversite öğrencisi (Psikojenik Non-Epileptik Nöbet / PNES)",
+        clues: [
+            "22 yaşındaki danışan, son 3 aydır ailesiyle tartıştığında veya sınav stresi yaşadığında insanların yanında yere yavaşça kayarak düştüğü ve 15-20 dakika boyunca kollarını-bacaklarını asenkron (birbiriyle uyumsuz) şekilde çırparak nöbet geçirdiği için nöroloji servisine yatırıldı.",
+            "Nöbet sırasında başını sağa-sola 'hayır' der gibi salladığı, pelvik itme hareketleri yaptığı ve nöbet boyunca gözlerini sımsıkı kapalı tuttuğu; hekim göz kapaklarını açmaya çalıştığında ise aktif olarak direnç gösterdiği (Epilepside gözler açıktır!) saptandı.",
+            "Nöbet esnasında dil ısırma, idrar kaçırma veya siyanoz (morarma) olmadığı; nöbet biter bitmez postiktal konfüzyon yaşamadan hemen ağlayarak konuşmaya başladığı görüldü.",
+            "Altın standart tanı testi olan Eşzamanlı Video-EEG monitörizasyonunda, hasta tam nöbet geçirip sarsılırken beyin dalgalarının tamamen normal uyanıklık alfa ritminde olduğu (epileptik deşarj olmadığı) ve serum Prolaktin/CK düzeylerinin yükselmediği kanıtlandı.",
+            "Ruhsal Durum Muayenesinde: Bastırılmış aile içi çatışma ve duygusal stresi bedensel nöbet üzerinden ifade etme (birincil kazanç); hastanın nöbetleri bilerek/numaradan yapmadığı (bilinçdışı konversiyon) doğrulandı.",
+            "DSM-5'e göre: Nörolojik epilepsi ile bağdaşmayan, Video-EEG'de normal beyin aktivitesi gösteren ve psikolojik stresörlerle tetiklenen Konversiyon Bozukluğu (Ataklar ya da Nöbetlerle Giden / PNES) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "nöbet boyunca gözlerini sımsıkı kapalı tuttuğu; hekim göz kapaklarını açmaya çalıştığında ise aktif olarak direnç gösterdiği", dsmMatch: "DSM-5 Kriter B: Gerçek epilepsiyle bağdaşmayan klinik bulgu (Zorlu göz kapatma)" },
+            { clueIndex: 3, text: "Eşzamanlı Video-EEG monitörizasyonunda, hasta tam nöbet geçirip sarsılırken beyin dalgalarının tamamen normal uyanıklık alfa ritminde olduğu", dsmMatch: "Altın Standart Tanı: Video-EEG'de nöbet anında epileptiform deşarj olmaması (PNES)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "PNES Odaklı Bilişsel Davranışçı Terapi (Codes / Goldstein Protokolü)",
+            therapyDetails: "Tanıyı yargılamadan 'Beynin aşırı stres altında donanım arızası değil, yazılımsal kilitlenme yaşıyor' şeklinde empatik açıklama, gereksiz antiepileptik ilaçları kademeli kesme ve duygusal çatışmaları sözel ifade etme eğitimi.",
+            pharmacologyNote: "Antiepileptik ilaçlar PNES'te etkisizdir ve kesilmelidir; eşlik eden depresyon veya anksiyete için SSRI başlanabilir."
+        },
+        miniQuiz: {
+            question: "Gerçek bir Epilepsi (Grand Mal / Tonik-Klonik) nöbeti ile Konversiyon Bozukluğuna bağlı Psödonöbeti (PNES) birbirinden kesin olarak ayıran altın standart tanı yöntemi ve tipik fizik muayene bulgusu nedir?",
+            options: [
+                "Video-EEG'de nöbet anında epileptik dalga olmaması ve hastanın nöbet sırasında gözlerini sımsıkı kapatıp açılmasına direnç göstermesi",
+                "Hastanın nöbet sırasında dilini yan taraftan ısırması",
+                "Nöbetin uykuda tek başınayken olması",
+                "Nöbet sonrası 1 saat süren derin postiktal uyku"
+            ],
+            correctIndex: 0,
+            explanation: "Gerçek tonik-klonik epilepsi nöbetinde gözler açıktır, EEG'de diken-dalga deşarjı vardır ve postiktal konfüzyon görülür. PNES'te ise gözler sımsıkı kapalıdır, baş sağa-sola sallanır ve Video-EEG'de normal uyanıklık alfa ritmi izlenir."
+        },
+        differentialDiagnosis: "• Gerçek Epilepsi: Gözler açıktır, dil ısırılır, idrar kaçırılır, uykuda da olur ve Video-EEG'de epileptiform deşarj görülür.\n• Temarruz (Malingering): Kişi askerlikten/hapisten kaçmak için bilinçli rol yapar; PNES'te ise süreç bilinçdışıdır.",
+        dsmCriteriaSummary: "DSM-5: İstemsiz motor/duyusal nöbetler + Video-EEG ile epilepsi dışlanması + Nörolojik uyumsuzluk kanıtı."
+    },
+
+    // 130. Yapay Bozukluk (Başkasına Yüklenen / Münchausen by Proxy Sendromu)
+    {
+        id: "case-130",
+        caseNumber: 130,
+        difficulty: "İleri Düzey",
+        course: "FORENSIC",
+        diagnosisId: "factitious_another",
+        therapyId: "supportive_psychotherapy",
+        category: "SOMATIC",
+        patientSummary: "31 yaşında, kadın, 4 yaşındaki çocuğunu 18 kez hastaneye yatıran anne (Münchausen by Proxy)",
+        clues: [
+            "31 yaşındaki anne, 4 yaşındaki oğlunu son 1 yıl içinde tekrarlayan 'açıklanamayan kanlı ishal, hipoglisemi koması ve yüksek ateş' şikayetleriyle 6 farklı üniversite hastanesine yatırdı; hastane personeli anneyi 'çocuğunun başından bir saniye bile ayrılmayan, tıbbi terimleri çok iyi bilen fedakar ve melek gibi bir anne' olarak tanımlıyordu.",
+            "Çocuğun tüm genetik, metabolik ve enfeksiyöz tetkikleri normal çıkmasına rağmen sadece annenin odada yalnız kaldığı saatlerde çocuğun kan şekerinin aniden 25 mg/dL'ye düştüğü ve bezinde kan görüldüğü fark edildi.",
+            "Yoğun bakım odasındaki güvenlik kamerası incelendiğinde, annenin çantasından çıkardığı insülin kalemini gizlice çocuğun damar yoluna enjekte ettiği ve kendi parmağını iğneyle delip çocuğun dışkı kabına kendi kanını damlattığı şok edici bir şekilde görüntülendi.",
+            "Annenin bu eylemden hiçbir maddi tazminat, miras veya dışsal kazanç elde etmediği; tek motivasyonunun doktorlardan ve çevreden 'kahraman, acılı anne' ilgisi ve şefkati toplamak olduğu saptandı.",
+            "Anne odadan uzaklaştırılıp çocuk devlet korumasına alındığı andan itibaren çocuğun tüm hipoglisemi ve kanama atakları tamamen kesildi.",
+            "DSM-5'e göre: Dışsal bir ödül olmaksızın bir başkasında (genellikle kendi çocuğunda) kasıtlı olarak hastalık belirtileri üretme ve onu hasta/mağdur olarak sunma ile karakterize Başkasına Yüklenen Yapay Bozukluk (Münchausen by Proxy) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 2, text: "annenin çantasından çıkardığı insülin kalemini gizlice çocuğun damar yoluna enjekte ettiği", dsmMatch: "DSM-5 Kriter A: Bir başkasında kasıtlı olarak fiziksel/ruhsal hastalık üretme ve sahtekarlık" },
+            { clueIndex: 3, text: "hiçbir maddi tazminat, miras veya dışsal kazanç elde etmediği; tek motivasyonunun doktorlardan ve çevreden 'kahraman, acılı anne' ilgisi", dsmMatch: "DSM-5 Kriter C: Dışsal kazanç yokluğunda psikolojik ilgi/bakım rolü arzusu" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Acil Çocuk Koruma Bildirimi (Adli Müdahale) & Uzun Süreli Psikoterapi",
+            therapyDetails: "İlk ve zorunlu adım çocuğun hayati tehlikesi nedeniyle derhal Sosyal Hizmetler / Adli makamlara bildirim yapılarak çocuğun anneden ayrılmasıdır; ardından anneye kişilik/travma odaklı psikoterapi uygulanır.",
+            pharmacologyNote: "DSM-5'e göre tanı kurban olan çocuğa değil, FAİL olan anneye/bakımverene ('Başkasına Yüklenen Yapay Bozukluk') konur; çocuk ise 'Fiziksel Çocuk İstismarı' koduyla korunur."
+        },
+        miniQuiz: {
+            question: "DSM-5'e göre Münchausen by Proxy (Başkasına Yüklenen Yapay Bozukluk) vakasında psikiyatrik tanı kime konulur ve hekimin yapması gereken İLK ZORUNLU eylem nedir?",
+            options: [
+                "Tanı çocuğa değil FAİL olan bakımverene (anneye) konur; ilk zorunlu adım ise ölümcül çocuk istismarı nedeniyle çocuğu korumaya alıp adli bildirim yapmaktır.",
+                "Tanı sadece küçük çocuğa konur ve çocuk taburcu edilir.",
+                "Anneye ödül verilip eve gönderilir.",
+                "Hiçbir bildirim yapılmadan sadece çocuğa antidepresan başlanır."
+            ],
+            correctIndex: 0,
+            explanation: "Münchausen by Proxy'de mortalite (çocuğun ölümü) oranı %6-10 gibi çok yüksek bir düzeydedir. DSM-5'te tanı fail olan ebeveyne konur ve hekimin ilk görevi çocuğu derhal koruma altına almaktır."
+        },
+        differentialDiagnosis: "• Pediatrik Hastalık Kaygısı: Ebeveyn çocuğun hasta olduğundan gerçekten korkar ancak çocuğa gizlice ilaç/zehir vererek hastalık ÜRETMEZ.\n• Temarruz (Malingering): Çocuğu hasta göstererek devletten maaş veya tazminat alma (maddi çıkar) amacı vardır.",
+        dsmCriteriaSummary: "DSM-5: Başka birinde (çocukta) kasıtlı hastalık üretme + Onu hasta/yaralı olarak sunma + Dışsal maddi çıkar olmaması (Tanı faile konur)."
+    },
+
+    // 131. Geri Çıkarma (Geviş Getirme / Ruminasyon) Bozukluğu
+    {
+        id: "case-131",
+        caseNumber: 131,
+        difficulty: "Orta",
+        course: "CHILD",
+        diagnosisId: "rumination_disorder",
+        therapyId: "habit_reversal",
+        category: "EATING",
+        patientSummary: "9 yaşında, erkek, ilkokul öğrencisi (Öğürmeden Yiyeceği Ağıza Geri Getirme)",
+        clues: [
+            "9 yaşındaki erkek çocuk, son 4 aydır her yemekten 15-20 dakika sonra yuttuğu yiyecekleri hiçbir mide bulantısı, öğürme veya iğrenme olmaksızın zahmetsizce ağzına geri getirdiği (regürjitasyon), ağzında tekrar çiğneyip yeniden yuttuğu için pediatri tarafından yönlendirildi.",
+            "Diş hekimi muayenesinde mide asidinin sürekli ağza gelmesine bağlı diş minesinde erozyon ve kronik ağız kokusu (halitozis) saptanmış; sınıf arkadaşları bu kokudan dolayı çocukla alay etmeye başlamıştır.",
+            "Çocuğun bu davranışı özellikle ders çalışırken, sıkıldığında veya stres altındayken karın kaslarını ritmik olarak kasarak kendini rahatlatmak için yaptığı gözlemlendi.",
+            "Pediatrik gastroenteroloji tarafından yapılan özofagogastroduodenoskopi, pH-metri ve baryumlu grafide gastroözofageal reflü (GÖRH), akalazya veya pilor stenozu tamamen dışlanmıştır.",
+            "Ruhsal Durum Muayenesinde: Kilo alma korkusu veya beden algısı bozukluğu olmaksızın, öğrenilmiş diyafram/karın kası kasılmasıyla giden alışkanlık niteliğinde regürjitasyon saptandı.",
+            "DSM-5'e göre: En az 1 ay boyunca, tıbbi bir reflü hastalığı veya anoreksiya/bulimiya olmaksızın yutulan yiyeceklerin öğürme olmadan tekrarlı biçimde ağza geri getirilip yeniden çiğnenmesi/yutulması ile karakterize Geri Çıkarma (Ruminasyon) Bozukluğu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "yuttuğu yiyecekleri hiçbir mide bulantısı, öğürme veya iğrenme olmaksızın zahmetsizce ağzına geri getirdiği (regürjitasyon), ağzında tekrar çiğneyip yeniden yuttuğu", dsmMatch: "DSM-5 Kriter A: Yiyeceklerin öğürme olmadan ağza geri getirilip tekrar çiğnenmesi" },
+            { clueIndex: 3, text: "gastroözofageal reflü (GÖRH), akalazya veya pilor stenozu tamamen dışlanmıştır", dsmMatch: "DSM-5 Kriter B: Bağlantılı bir mide-bağırsak hastalığının dışlanması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Alışkanlığı Tersine Çevirme Eğitimi (HRT) & Diyafram Nefesi",
+            therapyDetails: "Yemeklerden hemen sonra karın kaslarını kasma dürtüsü geldiğinde, regürjitasyonla fiziksel olarak bağdaşmayan 'yarışan tepki' olarak yavaş ve derin diyafram (karın) nefesi alma egzersizi uygulama.",
+            pharmacologyNote: "İlaç tedavisi ilk basamak değildir; yemek sonrası sakız çiğneme ve diyafram nefesi biofeedback eğitimiyle %85 üzerinde tam düzelme sağlanır."
+        },
+        miniQuiz: {
+            question: "Geri Çıkarma (Ruminasyon) Bozukluğunda yemek sonrası yiyeceğin ağza geri gelmesini engellemek için kullanılan en etkili kanıta dayalı davranışçı teknik (yarışan tepki) nedir?",
+            options: [
+                "Diyafram Nefesi Eğitimi (Habit Reversal / Karın duvarı kasılmasını diyafram solunumuyla bloke etme)",
+                "Çocuğa ceza verip odasına kilitleme",
+                "Yüksek doz antipsikotik verme",
+                "Mide küçültme ameliyatı"
+            ],
+            correctIndex: 0,
+            explanation: "Ruminasyon karın duvarı kaslarının bilinçdışı kasılmasıyla oluşur. Yemekten sonra 30 dakika boyunca yapılan derin diyafram solunumu (Habit Reversal) bu kasılmayı fiziksel olarak imkansız kılar."
+        },
+        differentialDiagnosis: "• Bulimiya Nervoza: Kişi kilo almamak için parmağını boğazına sokup öğürerek kusar; Ruminasyonda ise kilo kaygısı ve öğürme yoktur, yiyecek tekrar çiğnenip yutulur.\n• Gastroözofageal Reflü (GÖRH): İstemsiz asit kaçışıdır, pH-metri ile ayrılır.",
+        dsmCriteriaSummary: "DSM-5: En az 1 ay boyunca yiyeceklerin öğürme/bulantı olmadan ağza geri getirilmesi (yeniden çiğnenmesi/yutulması) + Reflü ve diğer yeme bozukluklarının dışlanması."
+    },
+
+    // 132. Gece Yeme Sendromu (Night Eating Syndrome)
+    {
+        id: "case-132",
+        caseNumber: 132,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "night_eating_syndrome",
+        therapyId: "cbt_e",
+        category: "EATING",
+        patientSummary: "37 yaşında, erkek, banka çalışanı (Sabah Anoreksisi ve Gece Uyanıp Yeme)",
+        clues: [
+            "37 yaşındaki danışan, sabahları uyandığında midesinin tamamen kilitlendiğini ve öğleden sonra saat 14:00'e kadar tek lokma bile yiyemediğini (sabah anoreksisi); ancak akşam yemeğinden sonra ve gece uykusundan uyanarak günlük kalorisinin yarısından fazlasını tükettiğini belirterek başvurdu.",
+            "Her gece saat 01:30 ve 04:00 civarında uykusundan tam bilinci açık olarak uyandığını ve mutfağa gidip ekmek arası kaşar, makarna veya tatlı yemeden kesinlikle tekrar uykuya dalamadığını ifade etti.",
+            "Uyurgezerlikten (uykuyla ilişkili yeme bozukluğu) farklı olarak, gece mutfakta ne yediğinin tamamen farkında olduğunu ve sabah uyandığında yediği her şeyi net bir şekilde hatırladığını belirtti.",
+            "Tıkınırcasına Yeme Bozukluğundan farklı olarak, gece yediği porsiyonların devasa boyutlarda olmadığı, ancak gece boyunca sık sık atıştırma şeklinde sürdüğü ve 'Yemezsem sabaha kadar uyuyamam' inancının hakim olduğu saptandı.",
+            "Ruhsal Durum Muayenesinde: Yeme sirkadiyen ritminin geceye kayması, akşam saatlerinde kötüleşen duygudurum ve uyku-yeme şartlanması gözlendi.",
+            "DSM-5 (Tanımlanmış Diğer Beslenme ve Yeme Bozukluğu) kriterlerine göre: Akşam yemeğinden sonra aşırı yeme (günlük gıdanın >%25'i) ve/veya gece uykudan uyanıp bilinçli olarak yeme ataklarıyla seyreden Gece Yeme Sendromu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "uykusundan tam bilinci açık olarak uyandığını ve mutfağa gidip ekmek arası kaşar, makarna veya tatlı yemeden kesinlikle tekrar uykuya dalamadığını", dsmMatch: "DSM-5 Belirteç: Gece uykudan uyanıp yemek yeme ve yemeden uyuyamama inancı" },
+            { clueIndex: 2, text: "gece mutfakta ne yediğinin tamamen farkında olduğunu ve sabah uyandığında yediği her şeyi net bir şekilde hatırladığını", dsmMatch: "DSM-5 Farkındalık Kriteri: Gece yeme ataklarının bilincinde olma ve hatırlama" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Geliştirilmiş BDT (CBT-E) & Sirkadiyen Beslenme Düzenlemesi",
+            therapyDetails: "Sabah kahvaltısını kademeli olarak başlatma, kalori alımını gündüz saatlerine kaydırma, 'Yemezsem uyuyamam' bilişsel çarpıtmasını kırma ve mutfak uyaran kontrolü.",
+            pharmacologyNote: "Sertralin (SSRI) ve Melatonerjik ajanlar gece uyanıp yeme ataklarını azaltmada klinik çalışmalarda en güçlü kanıta sahip ilaçlardır."
+        },
+        miniQuiz: {
+            question: "Gece Yeme Sendromunu (Night Eating Syndrome), NREM parasomnisi olan 'Uykuyla İlişkili Yeme Bozukluğu'ndan (SRED) ayıran en kritik kriter nedir?",
+            options: [
+                "Gece Yeme Sendromunda kişinin bilinci tam açıktır ve sabah ne yediğini tamamen hatırlar; SRED'de ise kişi uyurgezer halde bilinçsizce (hatta çiğ et/sigara külü gibi tuhaf şeyleri) yer ve sabah hatırlamaz.",
+                "Gece Yeme Sendromunda kişinin sabahları çok büyük kahvaltı yapması",
+                "SRED hastalarının hiç uyumaması",
+                "Gece Yeme Sendromunun sadece çocuklarda görülmesi"
+            ],
+            correctIndex: 0,
+            explanation: "DSM-5'e göre Gece Yeme Sendromunda farkındalık ve anımsama tamdır (kişi uyanıp bilinçli yer). NREM parasomnisi olan SRED'de ise kişi uyurgezerdir ve sabah mutfağı dağılmış bulup ne yediğini hatırlamaz."
+        },
+        differentialDiagnosis: "• Uykuyla İlişkili Yeme Bozukluğu (SRED): Uyurgezerlik (NREM) sırasında bilinçsiz yeme ve sabah amnezisi vardır.\n• Tıkınırcasına Yeme Bozukluğu (BED): Gündüz veya akşam tek oturuşta çok büyük miktarda gıda tüketilir, gece uykudan uyanma şart değildir.",
+        dsmCriteriaSummary: "DSM-5: Gece uykudan uyanıp yeme veya akşam yemeğinden sonra günlük kalorinin >%25'ini alma + Bilincin açık olması ve hatırlama + Sabah iştahsızlığı."
+    },
+
+    // 133. Ortoreksiya Nervoza (Sağlıklı ve Saf Beslenme Takıntısı)
+    {
+        id: "case-133",
+        caseNumber: 133,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "orthorexia_nervosa",
+        therapyId: "cbt_e",
+        category: "EATING",
+        patientSummary: "29 yaşında, kadın, pilates eğitmeni (Saf ve Temiz Beslenme Obsesyonu)",
+        clues: [
+            "29 yaşındaki danışan, son 1.5 yıldır yalnızca 'yüzde yüz saf, organik, çiğ ve işlenmemiş' gıdalar tüketme takıntısı nedeniyle besin çeşitliliğini sadece 6 sebze ve tohuma indirdiği, B12/demir eksikliği anemisi ve aşırı halsizlik geliştirdiği için başvurdu.",
+            "Gününün 5 saatini gıdaların tarım ilacı (pestisit) oranlarını, pişirme derecelerini ve ambalaj materyallerini araştırmakla geçirmekte; plastik kaba değmiş veya 42 derecenin üzerinde ısınmış hiçbir besini 'toksik ve kirli' olduğu gerekçesiyle ağzına sürmemektedir.",
+            "Arkadaşlarıyla ve ailesiyle dışarıda yemek yemeyi tamamen bıraktığı, annesinin pişirdiği çorbadan bir kaşık içtiğinde 'Bedenimi kirlettim, saflığımı bozdum' diyerek yoğun suçluluk ve panik yaşadığı, ardından 2 gün detoks açlığı yaptığı öğrenildi.",
+            "Anoreksiya Nervozadan farklı olarak danışanın zayıflama, kalori sayma veya kilo verme gibi bir hedefinin OLMADIĞI; temel kaygısının bedensel ağırlık değil, yiyeceğin 'saflığı ve kusursuz sağlığı' olduğu saptandı.",
+            "Ruhsal Durum Muayenesinde: Besinlerin saflığına dair katı ve obsesif kurallar, kurallara uymayanlara karşı ahlaki üstünlük hissi, diyet ihlalinde yoğun suçluluk ve sosyal izolasyon gözlendi.",
+            "Klinik psikiyatri ve DSM-5 Yeme/OKB spektrumuna göre: Yiyeceğin miktarından ziyade 'kalitesi ve saflığı' üzerine patolojik saplantı, katı diyet kısıtlamaları, malnütrisyon ve sosyal işlev kaybıyla seyreden Ortoreksiya Nervoza tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "yalnızca 'yüzde yüz saf, organik, çiğ ve işlenmemiş' gıdalar tüketme takıntısı", dsmMatch: "Klinik Tanım: Sağlıklı ve saf beslenme üzerine patolojik obsesyon (Ortoreksiya)" },
+            { clueIndex: 3, text: "zayıflama, kalori sayma veya kilo verme gibi bir hedefinin OLMADIĞI; temel kaygısının bedensel ağırlık değil, yiyeceğin 'saflığı ve kusursuz sağlığı' olduğu", dsmMatch: "Ayırıcı Tanı: Anoreksiyadaki nicelik (miktar/kilo) odaklılıktan nitelik (saflık) odaklılığıyla ayrımı" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Geliştirilmiş BDT (CBT-E) & Besin Maruziyeti (ERP)",
+            therapyDetails: "Yiyecekleri 'saf/kutsal' ve 'zehirli/kirli' olarak ikiye bölen bilişsel çarpıtmaları esnetme, 'yasaklı' gıdalara kademeli maruz bırakma ve öz-değeri diyet kurallarından ayrıştırma.",
+            pharmacologyNote: "Eşlik eden yoğun obsesif-kompulsif kaygı ve katılık varlığında SSRI grubu antidepresanlar (Fluoksetin, Sertralin) kullanılabilir."
+        },
+        miniQuiz: {
+            question: "Ortoreksiya Nervoza ile Anoreksiya Nervoza arasındaki en temel bilişsel odak farkı nedir?",
+            options: [
+                "Anoreksiyada odak yiyeceğin 'miktarı/kalorisi' ve zayıf kalmaktır; Ortoreksiyada ise odak yiyeceğin 'kalitesi/saflığı' ve bedeni toksinlerden koruma takıntısıdır.",
+                "Ortoreksiyada hastalar sadece fast-food ve şeker tüketir.",
+                "Anoreksiyada hastalar kilo almaya çalışır.",
+                "Ortoreksiya sadece 70 yaş üstü erkeklerde görülür."
+            ],
+            correctIndex: 0,
+            explanation: "Anoreksiya Nervoza nicelik (kalori, gramaj, zayıflık) odaklıdır; Steven Bratman'ın tanımladığı Ortoreksiya Nervoza ise nitelik (organiklik, saflık, temiz içerik) odaklı obsesif bir kısıtlamadır."
+        },
+        differentialDiagnosis: "• Anoreksiya Nervoza: Çarpık beden algısı ve kilo alma korkusu vardır.\n• ARFID: Yiyeceğin dokusu/kokusuna duyusal hassasiyet veya boğulma korkusu vardır, ideolojik 'temiz beslenme' üstünlüğü yoktur.",
+        dsmCriteriaSummary: "Klinik Kriterler: Sağlıklı/saf besinlere patolojik saplantı + Diyet ihlalinde yoğun suçluluk + Besin gruplarını eleme sonucu malnütrisyon ve sosyal izolasyon."
+    },
+
+    // 134. Enürezis Nokturna (Gece Altını Islatma)
+    {
+        id: "case-134",
+        caseNumber: 134,
+        difficulty: "Kolay",
+        course: "CHILD",
+        diagnosisId: "enuresis_nocturna",
+        therapyId: "habit_reversal",
+        category: "ELIMINATION",
+        patientSummary: "7 yaşında, erkek, ilkokul 2. sınıf öğrencisi (Birincil Gece Altını Islatma)",
+        clues: [
+            "7 yaşındaki erkek çocuk, bebekliğinden beri gece uykusunda altını ıslatmasının hiç kesilmemesi (primer/birincil enürezis) ve son 6 aydır haftada 4-5 gece yatağını sırılsıklam yapması nedeniyle ailesi tarafından getirildi.",
+            "Gündüz okulda veya evde uyanıkken tuvalet kontrolünün tamamen normal olduğu, ancak gece uykusunun çok ağır olduğu ve mesanesi dolduğunda uyanamayıp uykusunda idrarını kaçırdığı öğrenildi.",
+            "Okulun düzenlediği 3 günlük izcilik kampına 'Arkadaşlarım bez bağladığımı veya yatağı ıslattığımı görürse rezil olurum' diyerek gitmeyi reddettiği ve özgüveninin ciddi biçimde sarsıldığı belirtildi.",
+            "Pediatrik nefroloji ve üroloji muayenesinde idrar yolu enfeksiyonu, diyabet (DM/DI), spina bifida veya anatomik mesane patolojisi saptanmamıştır; babasının da 9 yaşına kadar gece altını ıslattığı (güçlü genetik öykü) öğrenildi.",
+            "Ruhsal Durum Muayenesinde: Kronolojik ve gelişimsel yaşı 5'in üzerinde olan çocukta, utanç duygulanımı ve derin uyku uyanma eşiği yüksekliğine bağlı yalnız gece (nokturnal) enürezis saptandı.",
+            "DSM-5'e göre: En az 5 yaşındaki bir çocukta, en az 3 ay boyunca haftada en az 2 kez ortaya çıkan, tıbbi bir duruma bağlı olmayan istemsiz gece idrar kaçırma (Enürezis - Yalnızca Gece) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "son 6 aydır haftada 4-5 gece yatağını sırılsıklam yapması", dsmMatch: "DSM-5 Kriter A, B & C: ≥5 yaş, en az 3 ay boyunca haftada ≥2 kez idrar kaçırma" },
+            { clueIndex: 1, text: "Gündüz okulda veya evde uyanıkken tuvalet kontrolünün tamamen normal olduğu", dsmMatch: "DSM-5 Belirteç: Yalnızca Gece (Monosemptomatik Enürezis Nokturna)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Enürezis Alarm Cihazı (Zil ve Ped / Klasik Koşullanma) & Takvim Yöntemi",
+            therapyDetails: "İlk damla idrar geldiğinde çalan nem sensörlü Enürezis Alarmı ile dolu mesane duyumunu uyanma refleksiyle şartlandırma, akşam sıvı kısıtlaması, gece uyandırıp tuvalete götürme ve Kuru Geceler (Güneş) ödül takvimi.",
+            pharmacologyNote: "En yüksek kalıcı başarı ve en düşük nüks oranı Enürezis Alarmındadır; kamp/yatılı misafirlik gibi acil durumlarda veya alarma dirençte oral Desmopressin (DDAVP - sentetik ADH) veya İmipramin kullanılır."
+        },
+        miniQuiz: {
+            question: "DSM-5'e göre bir çocuğa 'Enürezis' (Altını Islatma) tanısı konulabilmesi için çocuğun takvim/gelişim yaşı EN AZ kaç olmalı ve altın standart, nüks oranı en düşük davranışçı tedavisi nedir?",
+            options: [
+                "En az 5 yaş olmalı; altın standart ve en kalıcı tedavisi klasik koşullanmaya dayanan 'Enürezis Alarmı' (Zil ve Ped) yöntemidir.",
+                "En az 2 yaş olmalı; tedavisi çocuğu azarlamaktır.",
+                "En az 12 yaş olmalı; tedavisi elektroşoktur.",
+                "En az 1 yaş olmalı; tedavisi ömür boyu antibiyotiktir."
+            ],
+            correctIndex: 0,
+            explanation: "DSM-5'e göre Enürezis tanısı için alt yaş sınırı 5'tir (en az 3 ay boyunca haftada en az 2 kez). Klasik koşullanma prensibiyle çalışan Enürezis Alarmı en yüksek kür ve en düşük nüks oranına sahip birinci basamak tedavidir."
+        },
+        differentialDiagnosis: "• Diyabetes Mellitus / İnsipidus ve İYE: Poliüri ve dizüri eşlik eder; tam idrar tetkiki ve kan şekeri ile dışlanır.\n• Epilepsi: Gece nöbetlerine bağlı idrar kaçırma olabilir ancak sabah dil ısırma ve kas ağrısı görülür.",
+        dsmCriteriaSummary: "DSM-5: Yaş ≥ 5 + En az 3 ay boyunca haftada ≥ 2 kez yatak/giysi ıslatma + Organik nedenlerin (İYE, diyabet) dışlanması."
+    },
+
+    // 135. Enkoprezis (İstemsiz Kaka Kaçırma / Taşma İnkontinansı)
+    {
+        id: "case-135",
+        caseNumber: 135,
+        difficulty: "Orta",
+        course: "CHILD",
+        diagnosisId: "encopresis",
+        therapyId: "parent_training",
+        category: "ELIMINATION",
+        patientSummary: "6.5 yaşında, erkek, ilkokul 1. sınıf öğrencisi (Kabızlık ve Taşma İnkontinansı)",
+        clues: [
+            "6.5 yaşındaki erkek çocuk, son 5 aydır haftada 3-4 kez okulda ve evde iç çamaşırına sıvı-çamur kıvamında dışkı kaçırdığı ve kirli çamaşırlarını utancından yatağının altına sakladığı için annesi tarafından getirildi.",
+            "Annesi aslında çocuğun ishal olduğunu sanmaktadır; ancak ayrıntılı öyküde çocuğun 6 ay önce sert dışkılama sırasında makatında oluşan ağrılı bir çatlak (anal fissür) yüzünden tuvalete gitmekten korktuğu ve köşelere saklanıp bacaklarını çaprazlayarak kakasını günlerce tuttuğu öğrenildi.",
+            "Batın grafisi ve pediatrik muayenede rektumun taşlaşmış dev bir dışkı kitlesiyle (fekalom) tamamen tıkandığı, yukarıdan gelen yeni sıvı dışkının ise bu sert tıkaç etrafından sızarak çocuğun haberi bile olmadan iç çamaşırına aktığı (Paradoksal İshal / Taşma İnkontinansı) tespit edildi.",
+            "Kronik rektal genişleme nedeniyle çocuğun rektal doluluk hissini ve kaka kokusunu artık algılayamadığı (olfaktör/duyusal alışma); Hirschsprung hastalığı veya spina bifida olmadığı doğrulandı.",
+            "Ruhsal Durum Muayenesinde: Ebeveynlerin 'Bilerek tembelliğinden altına yapıyor' diyerek çocuğu cezalandırmasına bağlı yoğun utanç, düşük benlik saygısı ve tuvalet fobisi saptandı.",
+            "DSM-5'e göre: En az 4 yaşındaki bir çocukta, en az 3 ay boyunca ayda en az 1 kez uygunsuz yerlere dışkı kaçırma ile karakterize Enkoprezis (Kabızlık ve Taşma İnkontinansı ile Giden) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 2, text: "rektumun taşlaşmış dev bir dışkı kitlesiyle (fekalom) tamamen tıkandığı", dsmMatch: "DSM-5 Belirteç: Kabızlık ve Taşma İnkontinansı ile Giden Enkoprezis (%80-90 en sık tip)" },
+            { clueIndex: 4, text: "Ebeveynlerin 'Bilerek tembelliğinden altına yapıyor' diyerek çocuğu cezalandırmasına bağlı yoğun utanç", dsmMatch: "Klinik Psiko-eğitim: Sızıntının kasıtlı değil, fizyolojik taşma olduğunun aileye anlatılması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Davranışsal Tuvalet Eğitimi, Ebeveyn Psiko-eğitimi & Medikal Boşaltım",
+            therapyDetails: "Aileye çocuğun bunu bilerek yapmadığını (taşma mekanizmasını) çizerek anlatıp cezaları derhal durdurma; her ana yemekten 15 dakika sonra (gastrokolik refleks) çocuğu ayaklarının altına tabure koyarak 5-10 dakika tuvalete oturtma ve Yıldız Tablosu ile ödüllendirme.",
+            pharmacologyNote: "Önce lavman/polietilen glikol (PEG) ile taşlaşmış dışkı tıkacının (fekalom) boşaltılması ve rektum çapı normale dönene kadar dışkı yumuşatıcı idame tedavisi şarttır."
+        },
+        miniQuiz: {
+            question: "Enkoprezis vakalarının %85'ini oluşturan 'Retansiyonlu (Kabızlık ve Taşma İnkontinansı ile Giden) Enkoprezis'te, çocuğun iç çamaşırına sürekli sıvı dışkı bulaşmasının (ailenin ishal sanmasının) gerçek mekanizması nedir?",
+            options: [
+                "Rektumu tıkayan sertleşmiş dev dışkı kitlesinin (fekalom) etrafından üstteki sıvı dışkının istemsizce sızması (Taşma İnkontinansı / Overflow Incontinence)",
+                "Çocuğun kolera enfeksiyonu geçirmesi",
+                "Çocuğun annesinden intikam almak için bilerek su içmesi",
+                "Bağırsakların normalden 10 kat hızlı çalışması"
+            ],
+            correctIndex: 0,
+            explanation: "Enkopreziste çocuk ağrılı dışkılama korkusuyla kakasını tutar; rektumda taşlaşmış fekalom oluşur ve rektal duyu kaybolur. Üstten gelen sıvı dışkı bu tıkacın yanından sızar (paradoksal ishal / taşma inkontinansı)."
+        },
+        differentialDiagnosis: "• Hirschsprung Hastalığı (Aganglionik Megakolon): Doğumdan itibaren mekonyum çıkaramama vardır, iç çamaşırına sızıntı/kirlenme olmaz; biyopsi ile ayrılır.\n• KOKGB: Nadir olan 'kabızlık olmayan' tipte kasıtlı dışkı sürme görülebilir.",
+        dsmCriteriaSummary: "DSM-5: Yaş ≥ 4 + En az 3 ay boyunca ayda ≥ 1 kez uygunsuz yerlere dışkılama (En sık: Kabızlık ve Taşma İnkontinansı ile giden tip)."
+    },
+
+    // 136. Kleine-Levin Sendromu (Uyuyan Güzel Sendromu)
+    {
+        id: "case-136",
+        caseNumber: 136,
+        difficulty: "İleri Düzey",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "kleine_levin_syndrome",
+        therapyId: "sleep_hygiene_stimulants",
+        category: "SLEEP",
+        patientSummary: "16 yaşında, erkek, lise öğrencisi (Epizodik Hipersomni, Megafaji ve Hiperseksüalite)",
+        clues: [
+            "16 yaşındaki erkek ergen, son 1 yıl içinde 3 kez tekrarlayan ve her biri yaklaşık 10-12 gün süren 'günde 20 saat kesintisiz uyuma, uyandırıldığında aşırı sinirli ve rüyada gibi olma' atakları nedeniyle nöropsikiyatri kliniğine yatırıldı.",
+            "Atak sırasında sadece tuvalete gitmek ve yemek yemek için uyandığı; mutfağa girdiğinde ne bulursa (tencere dolusu soğuk makarna, çiğ hamur, kilolarca tatlı) oburca ve mekanik bir şekilde tükettiği (megafaji / kompulsif hiperfaji) öğrenildi.",
+            "Yine bu 10 günlük atak dönemlerinde normalde çok utangaç ve terbiyeli bir genç olmasına rağmen, hemşirelere ve çevresindekilere açık cinsel içerikli sözler söylediği ve uluorta mastürbasyon yapmaya çalıştığı (hiperseksüalite ve frontal disinhibisyon) görüldü.",
+            "En çarpıcı klinik bulgu olarak; 12. günün sonunda hasta bir sabah tamamen normal olarak uyanmakta, atak sırasındaki günleri sisli bir rüya gibi (derealizasyon) hatırlamakta ve bir sonraki atağa kadar aylarca %100 sağlıklı, başarılı ve normal bir öğrenciye dönüşmektedir.",
+            "Beyin MRG, BOS, EEG ve metabolik taramalar normaldir; hipotalamik-talamik perfüzyon SPECT'te sadece atak sırasında hipoperfüzyon saptanmıştır.",
+            "DSM-5 (Hipersomnolans / Yineleyen Hipersomni) kriterlerine göre: Ergen erkeklerde görülen, günler/haftalar süren aşırı uyku (hipersomni), aşırı yeme (megafaji), hiperseksüalite ve ataklar arası tam normallikle seyreden Kleine-Levin Sendromu (Uyuyan Güzel Sendromu) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "her biri yaklaşık 10-12 gün süren 'günde 20 saat kesintisiz uyuma", dsmMatch: "Kleine-Levin Triadı 1: Periyodik/Yineleyen Hipersomni atakları" },
+            { clueIndex: 1, text: "megafaji / kompulsif hiperfaji", dsmMatch: "Kleine-Levin Triadı 2 & 3: Kompulsif aşırı yeme (Megafaji) ve Hiperseksüalite" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Atak Dönemi Ev Güvenliği, Uyku Yönetimi & Lityum Profilaksisi",
+            therapyDetails: "Atak sırasında hastayı okula/işe zorlamadan evde güvenli gözetim altında tutma, derealizasyon ve konfüzyonu yatıştırma, ataklar arası dönemde tetikleyicilerden (alkol, enfeksiyon, uykusuzluk) koruma.",
+            pharmacologyNote: "Atak sıklığını ve süresini azaltmada en güçlü kanıta sahip profilaktik ilaç Lityum'dur; atak sonuna doğru uyanıklığı desteklemek için Modafinil/Amantadin kullanılabilir."
+        },
+        miniQuiz: {
+            question: "Genellikle ergen erkeklerde görülen Kleine-Levin Sendromunun ('Uyuyan Güzel Sendromu') klasik klinik triadı (üçlüsü) ve ataklar arası seyri nasıldır?",
+            options: [
+                "Epizodik Hipersomni (günlerce 18-20 saat uyuma) + Megafaji (oburca yeme) + Hiperseksüalite/Derealizasyon; ataklar arasında hasta tamamen (%100) normaldir.",
+                "Sürekli uykusuzluk + İştahsızlık + Kalıcı demans",
+                "Gülerken kasların felç olması (Katapleksi) + Uyku felci",
+                "Sadece gece yürüyüşleri ve sabah amnezisi"
+            ],
+            correctIndex: 0,
+            explanation: "Kleine-Levin Sendromu, hipotalamik disfonksiyona bağlı gelişen yineleyen hipersomni (günlerce uyuma), megafaji (aşırı yeme) ve hiperseksüalite/disinhibisyon triadıdır. Ataklar arasında hasta tamamen sağlıklıdır."
+        },
+        differentialDiagnosis: "• Narkolepsi: Uyku atakları günler sürmez, 15-20 dakikalıktır ve katapleksi eşlik eder.\n• Bipolar Bozukluk: Depresyonda hipersomni, manide hiperseksüalite ayrı dönemlerde olur; Kleine-Levin'de ise hepsi aynı 10 günlük uyku atağında bir aradadır.",
+        dsmCriteriaSummary: "DSM-5: Yılda birkaç kez tekrarlayan, 2 gün ile 5 hafta arası süren aşırı uyku dönemleri + Bilişsel değişim/derealizasyon + Megafaji ve hiperseksüalite."
+    },
+
+    // 137. Huzursuz Bacaklar Sendromu (Restless Legs Syndrome / Willis-Ekbom)
+    {
+        id: "case-137",
+        caseNumber: 137,
+        difficulty: "Kolay",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "restless_legs_syndrome",
+        therapyId: "cbt_i",
+        category: "SLEEP",
+        patientSummary: "44 yaşında, kadın, muhasebeci (Akşamları Başlayan Bacakları Hareket Ettirme Dürtüsü)",
+        clues: [
+            "44 yaşındaki danışan, son 6 aydır her akşam koltuğa uzandığında veya gece yatağa girdiğinde baldırlarının derinliklerinde 'karıncalanma, çekilme, ürperme ve içsel bir kaşıntı' hissi başladığını ve bacaklarını hareket ettirmek için karşı konulamaz bir dürtü duyduğunu belirterek başvurdu.",
+            "Bu rahatsız edici duyumların gündüz yürürken veya çalışırken hiç olmadığını, yalnızca dinlenme/hareketsizlik sırasında başladığını ve özellikle akşam/gece saatlerinde zirve yaptığını anlattı.",
+            "Yataktan kalkıp odanın içinde yürüdüğünde veya bacaklarını gerdiğinde bu huzursuzluğun anında geçtiğini, ancak tekrar yatağa uzandığında birkaç dakika içinde yeniden başladığını ve bu yüzden saat 03:00'e kadar uyuyamadığını söyledi.",
+            "Laboratuvar tetkiklerinde Serum Ferritin düzeyinin 11 ng/mL (ciddi demir deposu eksikliği) olduğu saptandı; ayrıca yakın zamanda başlanan Mirtazapin ve antihistaminik kullanımının tabloyu şiddetlendirdiği belirlendi.",
+            "Ruhsal Durum ve Uyku Muayenesinde: Uykuya dalma güçlüğüne (initial insomni) ve gündüz tükenmişliğine yol açan sirkadiyen sensorimotor hareket bozukluğu (Willis-Ekbom hastalığı) doğrulandı.",
+            "DSM-5'e göre: En az 3 aydır haftada en az 3 kez ortaya çıkan, dinlenmeyle başlayan, hareketle düzelen ve akşam/gece kötüleşen bacakları hareket ettirme dürtüsüyle karakterize Huzursuz Bacaklar Sendromu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "yalnızca dinlenme/hareketsizlik sırasında başladığını ve özellikle akşam/gece saatlerinde zirve yaptığını", dsmMatch: "DSM-5 Kriter A1 & A3: Dinlenmeyle başlama ve akşam/gece saatlerinde kötüleşme" },
+            { clueIndex: 2, text: "Yataktan kalkıp odanın içinde yürüdüğünde veya bacaklarını gerdiğinde bu huzursuzluğun anında geçtiğini", dsmMatch: "DSM-5 Kriter A2: Hareket ettirmeyle kısmen ya da tamamen rahatlama" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Demir Replasmanı, Tetikleyici İlaç Kesimi & BDT-I / Dopaminerjik Tedavi",
+            therapyDetails: "Kafein, alkol, antihistaminik ve serotonerjik/antidopaminerjik ilaçların kesilmesi, uyku hijyeni, akşam ılık bacak banyosu/masajı ve demir depolarının (Ferritin > 75 ng/mL) doldurulması.",
+            pharmacologyNote: "Ferritin < 75 ng/mL ise ilk basamak Demir + C vitamini replasmanıdır; medikal tedavide Alfa-2-delta ligandları (Pregabalin, Gabapentin) veya düşük doz Dopamin Agonistleri (Pramipeksol, Ropinirol) kullanılır."
+        },
+        miniQuiz: {
+            question: "Huzursuz Bacaklar Sendromu (Willis-Ekbom) olan bir hastada ilk bakılması gereken laboratuvar parametresi hangisidir ve hangi psikiyatrik durumla en sık karıştırılır?",
+            options: [
+                "Serum Ferritin (Demir deposu) düzeyi; en sık antipsikotik yan etkisi olan 'Akatizi' ile karıştırılır (Akatizi gece-gündüz sürer ve yürümekle tam geçmez).",
+                "Sadece Kalsiyum düzeyi; şizofreni ile karıştırılır.",
+                "Amilaz düzeyi; uyurgezerlikle karıştırılır.",
+                "B12 düzeyi; narkolepsi ile karıştırılır."
+            ],
+            correctIndex: 0,
+            explanation: "Beyinde dopamin sentezi yapan tirozin hidroksilaz enziminin kofaktörü demirdir; bu nedenle Ferritin düşüklüğü HBS'nin en önemli nedenidir. Akatiziden farkı; HBS'nin sadece akşam/dinlenmede olması ve yürüyünce anında geçmesidir."
+        },
+        differentialDiagnosis: "• İlacın Yol Açtığı Akatizi: Antipsikotik/SSRI sonrası gelişir, akşam sirkadiyen ritmi yoktur (gündüz de aynıdır) ve yürümekle bacaklardaki his kaybolmaz.\n• Periferik Nöropati / Venöz Yetmezlik: Yürümekle anında rahatlama özelliği yoktur.",
+        dsmCriteriaSummary: "DSM-5 (URGE Kısaltması): U (Urge to move: Bacağı hareket ettirme dürtüsü) + R (Rest: Dinlenmede başlar) + G (Gets better with movement: Yürümekle geçer) + E (Evening: Akşam/gece kötüleşir)."
+    },
+
+    // 138. NREM Uykusundan Uyanma Bozukluğu (Uyurgezerlik / Somnambulizm)
+    {
+        id: "case-138",
+        caseNumber: 138,
+        difficulty: "Orta",
+        course: "ADULT",
+        diagnosisId: "sleepwalking_disorder",
+        therapyId: "safety_clonazepam",
+        category: "SLEEP",
+        patientSummary: "23 yaşında, erkek, mimarlık öğrencisi (NREM Derin Uykusunda Yürüme)",
+        clues: [
+            "23 yaşındaki danışan, son 4 aydır uykuya daldıktan yaklaşık 1-1.5 saat sonra (gecenin ilk üçte birlik diliminde) yatağından kalkıp evin içinde dolaştığı ve geçen gece dış kapıyı açıp apartman merdivenlerinden inerken ev arkadaşı tarafından yakalandığı için başvurdu.",
+            "Ev arkadaşı, bu ataklar sırasında danışanın gözlerinin açık ancak cam gibi boş ve donuk bir ifadeye sahip olduğunu, kendisine seslenildiğinde cevap vermediğini ve uyandırılmasının neredeyse imkansız olduğunu anlattı.",
+            "Sabah uyandığında gece yataktan kalktığına veya merdivenlere indiğine dair HİÇBİR ŞEY hatırlamadığı (tam amnezi) ve rüya da görmediği öğrenildi.",
+            "Mimarlık jüri teslimleri nedeniyle yaşadığı ağır uyku yoksunluğunun atakları tetiklediği; polisomnografide (PSG) atakların REM uykusunda değil, NREM Evre 3 (derin yavaş dalga / delta uykusu) sırasında ortaya çıktığı doğrulandı.",
+            "Ruhsal Durum Muayenesinde: Gündüz psikiyatrik muayenesi tamamen normal; NREM derin uykusundan kortikal tam uyanma olmadan motor aktivasyonla giden parasomni saptandı.",
+            "DSM-5'e göre: Gecenin ilk üçte birinde NREM uykusundan uyanma, yataktan kalkıp yürüme, boş bakışlar, uyandırılma güçlüğü ve sabah tam amnezi ile karakterize NREM Uykusundan Uyanma Bozukluğu (Uyurgezerlik Tipi) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "uykuya daldıktan yaklaşık 1-1.5 saat sonra (gecenin ilk üçte birlik diliminde) yatağından kalkıp evin içinde dolaştığı", dsmMatch: "DSM-5 Kriter A: Gecenin ilk üçte birinde NREM derin uykusunda yataktan kalkıp yürüme" },
+            { clueIndex: 1, text: "gözlerinin açık ancak cam gibi boş ve donuk bir ifadeye sahip olduğunu", dsmMatch: "DSM-5 Kriter A1: Boş ve dik gözlerle bakma, uyandırılma güçlüğü ve sabah amnezisi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Yatak Odası/Ev Güvenlik Protokolü, Uyku Hijyeni & Düşük Doz Klonazepam",
+            therapyDetails: "Balkon ve dış kapıların kilitlenmesi, kapılara zil/alarm takılması, merdiven başlarına güvenlik kapısı konulması, uyku yoksunluğunun önlenmesi ve atak sırasında hastayı sarsarak uyandırmak yerine sakin bir sesle yatağına yönlendirme.",
+            pharmacologyNote: "Yaralanma riski taşıyan yetişkin uyurgezerliğinde NREM Evre 3 uyanma dalgalanmalarını baskılamak için gece yatmadan önce düşük doz Klonazepam birinci basamak medikal tedavidir."
+        },
+        miniQuiz: {
+            question: "Uyurgezerlik (Somnambulizm) ile REM Uykusu Davranış Bozukluğu (RBD) arasındaki en temel polisomnografik ve klinik fark nedir?",
+            options: [
+                "Uyurgezerlik gecenin ilk 1/3'ünde NREM Evre 3 (derin yavaş dalga) uykusunda olur, gözler açıktır ve sabah rüya hatırlanmaz; RBD ise gecenin son 1/3'ünde REM uykusunda olur, gözler kapalıdır ve hasta gördüğü kabusları hatırlar.",
+                "Uyurgezerlik sadece 70 yaş üstü Parkinson hastalarında görülür.",
+                "Uyurgezerlikte hasta sabah her adımı saniyesi saniyesine hatırlar.",
+                "RBD'de hasta mutfağa gidip yemek pişirir."
+            ],
+            correctIndex: 0,
+            explanation: "Uyurgezerlik bir NREM Evre 3 (delta uykusu) parasomnisidir; uykunun ilk 1-2 saatinde olur, gözler boş bakar ve sabah tam amnezi vardır. RBD ise sabaha karşı REM uykusunda olur ve hasta gördüğü aksiyon rüyasını hatırlar."
+        },
+        differentialDiagnosis: "• REM Uykusu Davranış Bozukluğu (RBD): Sabaha karşı olur, yumruk/tekme atma vardır ve uyandırıldığında rüyasını anlatır.\n• Dissosiyatif Füg: Uyanıkken gerçekleşir ve günler sürebilir; uyurgezerlik ise uykuda dakikalar sürer.",
+        dsmCriteriaSummary: "DSM-5: Uyku döneminin ilk 1/3'ünde NREM'den uyanıp yürüme + Boş bakışlar ve uyandırılma güçlüğü + Sabah epizoda dair tam amnezi."
+    },
+
+    // 139. NREM Uykusundan Uyanma Bozukluğu (Gece Terörü / Uyku Terörü - Pavor Nocturnus)
+    {
+        id: "case-139",
+        caseNumber: 139,
+        difficulty: "Orta",
+        course: "CHILD",
+        diagnosisId: "sleep_terrors",
+        therapyId: "cbt_i",
+        category: "SLEEP",
+        patientSummary: "6 yaşında, erkek, anaokulu öğrencisi (Çığlıkla Fırlama, Otonomik Fırtına ve Sabah Amnezisi)",
+        clues: [
+            "6 yaşındaki erkek çocuk, son 3 aydır uykuya daldıktan yaklaşık 60-90 dakika sonra (gecenin ilk üçte birinde) aniden kulakları sağır eden dehşet verici bir çığlıkla yatağında doğrulduğu için korku içindeki anne-babası tarafından getirildi.",
+            "Ebeveynleri odaya koştuklarında çocuğun gözlerinin kocaman açık olduğunu, kalbinin dakikada 150 atacak gibi çarptığını, sırılsıklam terlediğini, hızlı nefes aldığını ve pupillalarının genişlediğini (yoğun otonomik deşarj) anlattı.",
+            "Anne-babası çocuğa sarılıp 'Korkma yavrum, biz buradayız' diyerek teselli etmeye çalıştığında çocuğun anne-babasını tanımadığı, onları iterek çırpındığı (avutulamama / inconsolability) ve 10 dakika sonra aniden derin uykuya geri daldığı öğrenildi.",
+            "Ertesi sabah uyandığında neşesinin yerinde olduğu, gece çığlık attığını veya herhangi bir korkutucu rüya/kabus gördüğünü KESİNLİKLE hatırlamadığı (tam amnezi) saptandı.",
+            "Ruhsal Durum ve Nörolojik Muayenede: EEG'de nokturnal frontal lob epilepsisi dışlanmış; NREM Evre 3 (yavaş dalga) uykusundan kısmi otonomik uyanmayla seyreden Pavor Nocturnus tespit edilmiştir.",
+            "DSM-5'e göre: Gecenin ilk üçte birinde NREM uykusundan panik çığlığıyla uyanma, yoğun otonomik uyarılma, başkalarının avutma çabalarına yanıtsızlık ve sabah tam amnezi ile karakterize NREM Uykusundan Uyanma Bozukluğu (Uyku Terörü Tipi) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "uykuya daldıktan yaklaşık 60-90 dakika sonra (gecenin ilk üçte birinde) aniden kulakları sağır eden dehşet verici bir çığlıkla", dsmMatch: "DSM-5 Kriter A: Gecenin ilk 1/3'ünde NREM uykusundan panik çığlığıyla uyanma" },
+            { clueIndex: 2, text: "anne-babasını tanımadığı, onları iterek çırpındığı (avutulamama / inconsolability)", dsmMatch: "DSM-5 Kriter A2 & B: Avutma çabalarına yanıtsızlık ve sabah rüya/olay amnezisi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Planlı Uyandırma Tekniği (Scheduled Awakenings) & Aile Psiko-eğitimi",
+            therapyDetails: "Aileye atak sırasında çocuğu zorla uyandırmamaları (uyandırmaya çalışmak atağı uzatır ve ajitasyonu artırır) gerektiğini anlatma; atağın her gece geldiği saatten 15-20 dakika önce çocuğu nazikçe hafif uyandırıp NREM döngüsünü sıfırlama (Planlı Uyandırma).",
+            pharmacologyNote: "Çocukluk çağında gelişimsel olarak kendiliğinden geçtiği için ilaç nadiren gerekir; çok ağır vakalarda kısa süreli düşük doz benzodiazepin kullanılabilir."
+        },
+        miniQuiz: {
+            question: "Çocuklarda sık karışan 'Uyku Terörü' (Pavor Nocturnus - NREM) ile 'Kabus Bozukluğu' (Nightmare - REM) arasındaki en temel klinik farklar nelerdir?",
+            options: [
+                "Uyku Terörü gecenin ilk 1/3'ünde (NREM) çığlık ve terlemeyle olur, çocuk anne-babasını tanımaz (avutulamaz) ve sabah hiçbir şey hatırlamaz; Kabusta ise çocuk sabaha karşı (REM) uyanır, hemen bilinci açılır, rüyasını ayrıntılı anlatır ve annesine sarılarak sakinleşir.",
+                "Uyku teröründe çocuk gördüğü rüyayı 2 sayfa resim çizerek anlatır.",
+                "Kabusta çocuk uyurgezerlik yapar ve sabah hiçbir şey hatırlamaz.",
+                "İkisi de tamamen aynı uyku evresinde olur."
+            ],
+            correctIndex: 0,
+            explanation: "Uyku terörü (NREM Evre 3) gecenin ilk saatlerinde olur, otonomik fırtına vardır, çocuk avutulamaz ve sabah tam amnezi vardır. Kabus (REM) ise gecenin son üçte birinde olur, çocuk uyanınca oryantedir ve rüyasını hatırlar."
+        },
+        differentialDiagnosis: "• Kabus Bozukluğu: Sabaha karşı (REM) olur, otonomik deşarj hafiftir, uyanınca bilinci tam açılır ve korkunç rüyayı hatırlar.\n• Nokturnal Epilepsi: Stereotipik tonik/distonik postürler vardır, gündüz de nöbet olabilir.",
+        dsmCriteriaSummary: "DSM-5: Gecenin ilk 1/3'ünde panik çığlığıyla uyanma + Taşikardi/terleme/midriyazis + Avutulamama + Sabah tam amnezi."
+    },
+
+    // 140. Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu (SSRI İlişkili Anorgazmi ve İstek Kaybı)
+    {
+        id: "case-140",
+        caseNumber: 140,
+        difficulty: "Kolay",
+        course: "ADULT",
+        diagnosisId: "substance_induced_sexual_dysfunction",
+        therapyId: "sensate_focus",
+        category: "SEXUAL",
+        patientSummary: "33 yaşında, erkek, evli mühendis (Paroksetin Kullanımı Sonrası Gelişen Anorgazmi)",
+        clues: [
+            "33 yaşındaki evli danışan, 3 ay önce Yaygın Anksiyete Bozukluğu nedeniyle başlanan Paroksetin (SSRI) 20 mg/gün tedavisinden sonra kaygılarının tamamen geçtiğini; ancak son 2.5 aydır cinsel birleşme sırasında ne kadar uğraşırsa uğraşsın boşalamadığını (gecikmiş ejakülasyon / anorgazmi) ve cinsel isteğinin belirgin azaldığını belirterek başvurdu.",
+            "İlacı kullanmaya başlamadan önce eşiyle tamamen sağlıklı, istekli ve doyurucu bir cinsel yaşamı olduğu; daha önce hayatında hiçbir zaman sertleşme veya boşalma sorunu yaşamadığı öğrenildi.",
+            "Cinsel isteksizlik ve boşalamama sorununun hem eşiyle olan ilişkide hem de yalnız başına mastürbasyon sırasında (her koşulda / yaygın) aynı şekilde devam ettiği saptandı.",
+            "Ürolojik muayene, total/serbest testosteron, prolaktin ve tiroid hormon düzeyleri tamamen normaldir; evlilik ilişkisinde bir çatışma yoktur.",
+            "Ruhsal Durum Muayenesinde: Anksiyete semptomları tam remisyonda; ancak sinaptik aralıkta artan serotoninin 5-HT2A ve 5-HT2C reseptörlerini uyararak dopamin ve nitrik oksit yolaklarını baskılamasına bağlı iyatrojenik cinsel disfonksiyon saptandı.",
+            "DSM-5'e göre: Bir ilacın (SSRI/SNRI) başlanmasından kısa süre sonra gelişen ve ilacın doğrudan fizyolojik etkileriyle açıklanan Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "cinsel birleşme sırasında ne kadar uğraşırsa uğraşsın boşalamadığını (gecikmiş ejakülasyon / anorgazmi)", dsmMatch: "DSM-5 Kriter A & B: SSRI kullanımıyla doğrudan zamansal ilişkili anorgazmi/gecikmiş ejakülasyon" },
+            { clueIndex: 4, text: "sinaptik aralıkta artan serotoninin 5-HT2A ve 5-HT2C reseptörlerini uyararak dopamin ve nitrik oksit yolaklarını baskılamasına bağlı", dsmMatch: "Nörofarmakoloji: 5-HT2 reseptör uyarımına bağlı cinsel disfonksiyon mekanizması" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Farmakolojik Antidot/Geçiş Stratejisi (Bupropion) & Çift Cinsel Terapisi",
+            therapyDetails: "Hastanın ilacı kendi başına aniden kesmesini önlemek, performans baskısını azaltmak için Sensate Focus ilkelerini paylaşmak ve cinsel yan etkisi olmayan antidepresana geçiş/ekleme yapmak.",
+            pharmacologyNote: "SSRI kaynaklı cinsel işlev bozukluğunda altın standart yönetim; tedaviye Bupropion (NDRI - dopamin/noradrenalin artırıcı) eklemek/geçmek veya Mirtazapin, Vortioksetin, Agomelatin gibi 5-HT2'yi bloke eden ajanlara geçmektir (Erkeklerde PDE-5 inhibitörü Sildenafil/Tadalafil de eklenebilir)."
+        },
+        miniQuiz: {
+            question: "SSRI (özellikle Paroksetin, Sertralin, Fluoksetin) kullanımına bağlı gelişen Cinsel İşlev Bozukluğunu (anorgazmi, libido kaybı) düzeltmek için kullanılan ve cinsel yan etkisi EN DÜŞÜK olan antidepresan hangisidir?",
+            options: [
+                "Bupropion (NDRI - Noradrenalin/Dopamin Geri Alım İnhibitörü) veya Mirtazapin / Vortioksetin",
+                "Daha yüksek doz Paroksetin",
+                "Haloperidol",
+                "Risperidon"
+            ],
+            correctIndex: 0,
+            explanation: "SSRI'lar 5-HT2 reseptörlerini uyararak dopamini baskılar ve %40-60 oranında anorgazmi/istek kaybı yapar. Bupropion serotonerjik etkisi olmadığı ve dopamini artırdığı için cinsel yan etki yapmaz, aksine SSRI kaynaklı cinsel disfonksiyonun antidotu olarak kullanılır."
+        },
+        differentialDiagnosis: "• Birincil Geç Boşalma / Düşük İstek Bozukluğu: İlaç başlanmadan önce de vardır; burada ise semptomlar Paroksetin başlandıktan hemen sonra ortaya çıkmıştır.\n• Depresyona Bağlı Libido Kaybı: Hastanın depresyon/anksiyetesi düzeldiği halde cinsel sorun devam etmektedir.",
+        dsmCriteriaSummary: "DSM-5: İlaç/madde (özellikle SSRI, SNRI, antipsikotik) maruziyeti sonrası gelişen belirgin cinsel istek, uyarılma veya orgazm bozukluğu."
+    },
+
+    // 141. Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans)
+    {
+        id: "case-141",
+        caseNumber: 141,
+        difficulty: "Zor",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "major_neurocognitive_lewy_body",
+        therapyId: "caregiver_behavioral",
+        category: "NEUROCOGNITIVE",
+        patientSummary: "71 yaşında, erkek, emekli albay (Görsel Halüsinasyonlar, Bilişsel Dalgalanma ve Parkinsonizm)",
+        clues: [
+            "71 yaşındaki hasta, son 1 yıldır bilişsel durumunda garip bir dalgalanma olması (bazı saatler son derece uyanık, mantıklı ve zeki iken, birkaç saat sonra tamamen konfüze, dalgın ve uykulu hale gelmesi) nedeniyle ailesi tarafından getirildi.",
+            "Salonda koltukta hiç kimse yokken 'Şu köşede kırmızı şapkalı iki küçük çocuk ve yerde yürüyen tüylü bir kedi var' diyerek son derece canlı, renkli ve ayrıntılı görsel halüsinasyonlar tarif ettiği öğrenildi.",
+            "Son 6 aydır yürüyüşünün küçük adımlarla yavaşladığı, yüz ifadesinin donuklaştığı (spontan parkinsonizm) ve özgeçmişinde 5 yıldır uykusunda rüyalarını yumruk atarak canlandırdığı (REM Uykusu Davranış Bozukluğu - RBD) saptandı.",
+            "Acil serviste halüsinasyonları için verilen 1 ampul Haloperidol (antipsikotik) sonrasında hastanın saatler içinde kaskatı kesildiği, yatağa bağımlı hale geldiği ve ağır bilinç bulanıklığı (şiddetli nöroleptik duyarlılığı) geliştirdiği görüldü.",
+            "Ruhsal Durum ve Nörolojik Muayenede: Erken dönemde bellekten ziyade görsel-mekansal (saat çizme) ve yürütücü işlevlerde bozulma; DaTscan görüntülemede bazal ganglionlarda azalmış dopamin taşıyıcı tutulumu doğrulandı.",
+            "DSM-5'e göre: Dalgalanan bilişsel işlevler, yineleyen ayrıntılı görsel varsanılar, spontan parkinsonizm, REM uykusu davranış bozukluğu ve ağır antipsikotik duyarlılığı ile karakterize Lewy Cisimcikli Majör Nörobilişsel Bozukluk tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "bilişsel durumunda garip bir dalgalanma olması", dsmMatch: "DSM-5 Çekirdek Kriter 1: Dikkat ve uyanıklıkta belirgin dalgalanmalar (Fluktuasyon)" },
+            { clueIndex: 1, text: "canlı, renkli ve ayrıntılı görsel halüsinasyonlar", dsmMatch: "DSM-5 Çekirdek Kriter 2 & 3: Ayrıntılı görsel varsanılar ve spontan Parkinsonizm" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bakıcı Eğitimi, Çevresel Aydınlatma & Kolinesteraz İnhibitörü (Rivastigmin)",
+            therapyDetails: "Görsel halüsinasyonlarla tartışmak yerine dikkati dağıtma, akşam gölgelerini azaltmak için ev içi iyi aydınlatma, düşme önlemleri ve bakıcı desteği.",
+            pharmacologyNote: "Hem bilişsel dalgalanmaları hem de görsel halüsinasyonları düzeltmede ilk tercih Rivastigmin / Donepezil'dir. Tipik antipsikotikler (Haloperidol) ölümcül rijidite yaptığı için KESİNLİKLE KONTRENDİKEDİR (Gerekirse sadece çok düşük doz Ketiapin, Klozapin veya Pimavanserin verilir)."
+        },
+        miniQuiz: {
+            question: "Lewy Cisimcikli Demans (DLB) tanı kriterlerinde yer alan 3 çekirdek klinik özellik ve bu hastalarda kullanımı ÖLÜMCÜL reaksiyonlara yol açabilen kontrendike ilaç grubu hangisidir?",
+            options: [
+                "1) Bilişsel dalgalanma, 2) Canlı görsel halüsinasyonlar (küçük insan/hayvan), 3) Spontan Parkinsonizm; Tipik Antipsikotikler (Haloperidol) ağır nöroleptik duyarlılık yaptığı için kontrendikedir.",
+                "Sadece yakın bellek kaybı; B12 vitamini kontrendikedir.",
+                "Aşırı tatlı yeme ve küfür etme; Antidepresanlar kontrendikedir.",
+                "Sadece yürüme apraksisi ve idrar kaçırma; Şant ameliyatı kontrendikedir."
+            ],
+            correctIndex: 0,
+            explanation: "Lewy Cisimcikli Demansın 3 temel çekirdek bulgusu: Bilişsel dalgalanma, canlı görsel halüsinasyonlar ve parkinsonizmdir (RBD de eşlik eder). Bu hastalarda D2 reseptör blokajı yapan antipsikotikler (özellikle Haloperidol) ağır, geri dönüşsüz rijidite ve ölüme yol açabilir."
+        },
+        differentialDiagnosis: "• Alzheimer Hastalığı: İlk bulgu yakın bellek kaybıdır; görsel halüsinasyon ve parkinsonizm ancak çok ileri (son) evrede görülür.\n• Parkinson Hastalığı Demansı (1 Yıl Kuralı): Önce Parkinson başlar, demans en az 1 yıl (çoğunlukla yıllar) sonra eklenirse Parkinson Demansı; demans ve parkinsonizm 1 yıl içinde birlikte başlarsa Lewy Cisimcikli Demans denir.",
+        dsmCriteriaSummary: "DSM-5: İlerleyici nörobilişsel yıkım + Çekirdek özellikler (Bilişsel dalgalanma, Canlı görsel halüsinasyonlar, Spontan Parkinsonizm) + Destekleyici özellikler (RBD, Ağır antipsikotik duyarlılığı)."
+    },
+
+    // 142. Majör Nörobilişsel Bozukluk (Prion Hastalığı / Creutzfeldt-Jakob Hastalığı - CJD)
+    {
+        id: "case-142",
+        caseNumber: 142,
+        difficulty: "İleri Düzey",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "major_neurocognitive_prion",
+        therapyId: "caregiver_behavioral",
+        category: "NEUROCOGNITIVE",
+        patientSummary: "62 yaşında, kadın, emekli memur (Haftalar İçinde Çöken Demans ve Miyoklonik Sıçramalar)",
+        clues: [
+            "62 yaşındaki hasta, sadece 6 hafta öncesine kadar tamamen sağlıklı, araba kullanan ve hesap işlerini yürüten biriyken; son 1.5 ay içinde korkutucu bir hızla ilerleyen unutkanlık, kişilik değişimi, konuşma kaybı ve yürüme dengesizliği (ataksi) ile nöroloji-psikiyatri konseyine getirildi.",
+            "Muayene sırasında odanın kapısı kapandığında veya el çırpıldığında hastanın tüm vücudunda ve kollarında ani, şimşek çakar tarzda istemsiz kas sıçramaları (irkilme miyoklonusu / startle myoclonus) olduğu gözlendi.",
+            "Alzheimer gibi yıllar içinde değil, haftalar ve günler içinde gözlerinin önünde eriyen bu yıkıma görsel bozukluklar, paranoya ve ağır dezoryantasyonun eşlik ettiği öğrenildi.",
+            "Kranial Difüzyon MRG'de bazal ganglionlarda (kaudat ve putamen) ve serebral kortekste karakteristik 'kortikal şeritlenme' (cortical ribboning / hokey sopası belirtisi) hiperintensitesi saptandı.",
+            "Nörolojik ve Laboratuvar İncelemede: EEG'de saniyede 1 kez tekrarlayan karakteristik 'Periyodik Keskin Dalga Kompleksleri' (PSWC) ve BOS incelemesinde 14-3-3 proteini ile RT-QuIC testinin pozitif olduğu doğrulandı.",
+            "DSM-5'e göre: Anormal katlanmış prion proteininin (PrPSc) beyinde süngerimsi (spongiform) yıkım yapması sonucu çok hızlı (haftalar/aylar içinde) ilerleyen demans, miyoklonus ve ataksi ile seyreden Prion Hastalığına Bağlı Majör Nörobilişsel Bozukluk (Creutzfeldt-Jakob) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "son 1.5 ay içinde korkutucu bir hızla ilerleyen unutkanlık, kişilik değişimi, konuşma kaybı ve yürüme dengesizliği (ataksi)", dsmMatch: "DSM-5 Kriter A & B: Haftalar/aylar içinde çok hızlı ilerleyen yıkıcı demans" },
+            { clueIndex: 1, text: "ani, şimşek çakar tarzda istemsiz kas sıçramaları (irkilme miyoklonusu / startle myoclonus)", dsmMatch: "DSM-5 Kriter B: Prion hastalığının motor özellikleri (Miyoklonus ve ataksi)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Palyatif Bakım, Semptomatik Miyoklonus Kontrolü & Aile Desteği",
+            therapyDetails: "Hastalığın hızlı ve ölümcül seyri hakkında aileye şefkatli bilgilendirme, aşırı ses/ışık uyaranlarını azaltarak irkilme miyoklonuslarını önleme ve konfor odaklı palyatif bakım.",
+            pharmacologyNote: "Hastalığı durduran bir tedavi yoktur (genellikle 6-12 ay içinde ölümle sonuçlanır); ağrılı miyoklonik sıçramaları yatıştırmak için Klonazepam veya Levetirasetam/Valproat kullanılır."
+        },
+        miniQuiz: {
+            question: "Yıllar içinde sinsi ilerleyen Alzheimer'dan farklı olarak, birkaç hafta/ay içinde hızla yıkıma götüren Creutzfeldt-Jakob Hastalığının (Prion Demansı) en karakteristik motor bulgusu ve BOS/EEG belirteci nedir?",
+            options: [
+                "İrkilme Miyoklonusu (Startle Myoclonus) + EEG'de Periyodik Keskin Dalga Kompleksleri ve BOS'ta 14-3-3 proteini pozitifliği",
+                "Sadece istirahat tremoru + Normal EEG",
+                "Yıllar süren yavaş unutkanlık + Yüksek B12 düzeyi",
+                "Sadece uyurgezerlik + BOS'ta hipokretin düşüklüğü"
+            ],
+            correctIndex: 0,
+            explanation: "Creutzfeldt-Jakob Hastalığı (CJD), psikiyatride ve nörolojide en hızlı ilerleyen demanstır. Hızlı kognitif yıkım + Miyoklonus (özellikle sese karşı irkilme miyoklonusu) + Serebellar ataksi + EEG'de trifazik/periyodik keskin dalgalar ve BOS 14-3-3 proteini tanı koydurur."
+        },
+        differentialDiagnosis: "• Otoimmün / Paraneoplastik Ensefalit (Anti-NMDA vb.): Hızlı ilerler ve miyoklonus yapabilir; tedavi edilebilir olduğu için mutlaka antikor paneli ile dışlanmalıdır.\n• Alzheimer / Lewy Cisimcikli Demans: Yıllar içinde yavaş ilerler.",
+        dsmCriteriaSummary: "DSM-5: Çok hızlı (haftalar-aylar içinde) ilerleyen nörobilişsel yıkım + Miyoklonus, ataksi veya kore + MRG (kortikal şeritlenme), EEG ve BOS (14-3-3 / RT-QuIC) kanıtı."
+    },
+
+    // 143. Majör Nörobilişsel Bozukluk (Huntington Hastalığına Bağlı)
+    {
+        id: "case-143",
+        caseNumber: 143,
+        difficulty: "Zor",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "major_neurocognitive_huntington",
+        therapyId: "caregiver_behavioral",
+        category: "NEUROCOGNITIVE",
+        patientSummary: "41 yaşında, erkek, öğretmen (Koreiform Dans Hareketleri, Öfke ve Subkortikal Demans)",
+        clues: [
+            "41 yaşındaki erkek hasta, son 2 yıldır giderek artan aşırı sinirlilik, dürtüsel öfke patlamaları, okulda ders planlarını organize edememe (yürütücü işlev kaybı) ve ellerinde-yüzünde durduramadığı istemsiz kıvrılma/sıçrama hareketleri nedeniyle getirildi.",
+            "Muayenede hastanın parmaklarında piyano çalar gibi, omuzlarında ve gövdesinde ise sanki dans ediyormuş gibi akan, düzensiz, istemsiz ve ani koreoatetoid hareketler (kore) olduğu; yürürken kollarını ve bacaklarını savurduğu gözlendi.",
+            "Soygeçmişinde (aile öyküsünde) babasının ve halasının da 40'lı yaşlarda benzer istemsiz sıçrama hareketleri, ağır depresyon ve bunama geliştirerek 55 yaşında vefat ettikleri öğrenildi.",
+            "Kranial MRG'de bazal ganglionlarda bilateral kaudat çekirdek başı atrofisinin yan ventriküllerin ön boynuzlarında 'kutu benzeri' genişlemeye (boxcar ventricles) yol açtığı; genetik testte 4. kromozomdaki HTT geninde 46 adet CAG trinükleotid tekrarı saptandı.",
+            "Ruhsal Durum Muayenesinde: Bellekten önce işlem hızı ve yürütücü işlevlerin bozulduğu subkortikal demans, apati, irritabilite ve yüksek intihar riski tespit edildi.",
+            "DSM-5'e göre: Otozomal dominant CAG trinükleotid tekrar artışına (Huntington gen mutasyonu) bağlı gelişen, ilerleyici yürütücü bilişsel yıkım, koreiform hareket bozukluğu ve psikiyatrik semptomlarla karakterize Huntington Hastalığına Bağlı Majör Nörobilişsel Bozukluk tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "sanki dans ediyormuş gibi akan, düzensiz, istemsiz ve ani koreoatetoid hareketler (kore)", dsmMatch: "DSM-5 Kriter B: Huntington hastalığının karakteristik motor bulgusu (Kore)" },
+            { clueIndex: 3, text: "4. kromozomdaki HTT geninde 46 adet CAG trinükleotid tekrarı saptandı", dsmMatch: "DSM-5 Genetik ve Nörogörüntüleme Kriteri: Otozomal dominant HTT (CAG ≥36) mutasyonu ve kaudat atrofi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Multidisipliner Bakım, Genetik Danışmanlık & VMAT2 İnhibitörü Tedavisi",
+            therapyDetails: "Yutma güçlüğü (disfaji) ve aspirasyon önlemleri, düşmeye karşı güvenli ev ortamı, öfke/depresyon yönetimi, intihar riski takibi ve aileye genetik danışmanlık.",
+            pharmacologyNote: "Koreiform hareketleri azaltmak için VMAT2 inhibitörleri (Tetrabenazin, Dötetrabenazin) veya atipik antipsikotikler (Olanzapin, Risperidon) kullanılır; depresyon ve irritabilite için SSRI eklenir."
+        },
+        miniQuiz: {
+            question: "Otozomal dominant geçişli Huntington Hastalığının klasik klinik triadı (3'lüsü) ve beyin MR'ında atrofiye (küçülmeye) uğrayan karakteristik anatomik yapı hangisidir?",
+            options: [
+                "Kore (dans benzeri istemsiz hareketler) + Yürütücü işlev kaybı/Demans + Psikiyatrik belirtiler (depresyon/psikoz/öfke); MR'da 'Kaudat Çekirdek' (Striatum) atrofisi görülür.",
+                "Sadece görme kaybı + İşitme kaybı; MR'da oksipital lob büyümesi görülür.",
+                "Sabah erken uyanma + Kilo alımı; MR tamamen normaldir.",
+                "El yıkama takıntısı + Boğaz enfeksiyonu; MR'da hipofiz adenomu görülür."
+            ],
+            correctIndex: 0,
+            explanation: "Huntington hastalığı 4. kromozomdaki CAG tekrar artışıyla (≥36 tekrar) oluşur; striatumdaki (özellikle kaudat çekirdek) GABAerjik orta boy dikenli nöronların yıkımı sonucu Kore, Subkortikal Demans ve ağır Psikiyatrik semptomlar (yüksek intihar oranı) gelişir."
+        },
+        differentialDiagnosis: "• Tardif Diskinezi: Uzun süreli antipsikotik kullanım öyküsü vardır, ailevi otozomal dominant geçiş ve ilerleyici demans yoktur.\n• Wilson Hastalığı: Genç yaşta kore/distoni ve psikiyatrik belirti yapar; gözde Kayser-Fleischer halkası ve düşük seruloplazmin ile ayrılır.",
+        dsmCriteriaSummary: "DSM-5: Yürütücü işlevlerde ve işlem hızında ilerleyici yıkım + Koreiform motor bozukluk + Otozomal dominant aile öyküsü veya HTT (CAG) gen mutasyonu."
+    },
+
+    // 144. Maddenin Yol Açtığı Kalıcı Bellek Bozukluğu (Wernicke-Korsakoff Sendromu)
+    {
+        id: "case-144",
+        caseNumber: 144,
+        difficulty: "Zor",
+        course: "SUBSTANCE",
+        diagnosisId: "wernicke_korsakoff_syndrome",
+        therapyId: "motivational_interviewing",
+        category: "NEUROCOGNITIVE",
+        patientSummary: "54 yaşında, erkek, kronik alkol bağımlısı (Konfabülasyon ve Anterograd Amnezi)",
+        clues: [
+            "54 yaşındaki hasta, 20 yıldır her gün 1 şişe ağır alkol tüketmekte ve yemek yemeden sadece alkolle beslenmekteyken; 3 hafta önce acil servise 'göz kaslarında felç ve çift görme (oftalmopleji/nistagmus), geniş tabanlı dengesiz yürüyüş (ataksi) ve konfüzyon' (Akut Wernicke Ensefalopatisi) tablosuyla getirilip yatırıldı.",
+            "Yoğun bakımdan servise çıktığında bilincinin açıldığı, ancak 5 dakika önce odaya giren doktorunu hiç tanımadığı ve az önce ne yemek yediğini kesinlikle hatırlayamadığı (ağır anterograd amnezi) tespit edildi.",
+            "Doktor kendisine 'Dün akşam neredeydiniz?' diye sorduğunda, hasta 3 haftadır hastanede yatıyor olmasına rağmen son derece kendinden emin ve ciddi bir ifadeyle 'Dün akşam bakanla Boğaz'da balık yedik, oradan uçağa binip Ankara'daki toplantıya katıldım' diyerek boşlukları hayali anılarla doldurdu (Konfabülasyon / Masallama).",
+            "Kranial MRG'de hipotalamustaki mamiller cisimciklerde (corpora mamillaria) ve dorsomedial talamik çekirdeklerde bilateral atrofi ve sinyal artışı; kanda ağır Tiamin (B1 vitamini) eksikliği saptandı.",
+            "Ruhsal Durum Muayenesinde: Anlık bellek (sayı menzili) ve genel zeka korunmuş olmasına karşın, kısa süreli belleği uzun süreli belleğe aktarma yetisinin tamamen yıkıldığı ve samimi konfabülasyonların eşlik ettiği Korsakoff amnestik sendromu doğrulandı.",
+            "DSM-5'e göre: Kronik alkol kullanımına ve Tiamin (B1) eksikliğine bağlı gelişen, alkol kesildikten sonra da kalıcı olarak süren ağır yeni bilgi öğrenememe ve konfabülasyonla karakterize Alkolün Yol Açtığı Kalıcı Majör Nörobilişsel Bozukluk (Amnestik-Konfabulatuar Tip / Wernicke-Korsakoff) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "oftalmopleji/nistagmus), geniş tabanlı dengesiz yürüyüş (ataksi) ve konfüzyon' (Akut Wernicke Ensefalopatisi)", dsmMatch: "Wernicke Triadı: Konfüzyon + Oftalmopleji (6. kraniyal sinir felci/nistagmus) + Serebellar Ataksi" },
+            { clueIndex: 2, text: "boşlukları hayali anılarla doldurdu (Konfabülasyon / Masallama)", dsmMatch: "Korsakoff Belirteci: Ağır anterograd amnezi ve bellek boşluklarını konfabülasyonla doldurma" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Acil Parenteral Yüksek Doz Tiamin (B1) Replasmanı, Tam Alkol Bırakma & Bellek Rehabilitasyonu",
+            therapyDetails: "Alkolün kesin olarak kesilmesi, harici bellek yardımcıları (günlük defteri, telefon alarmları, oda içi yönlendirici etiketler) kullanımı ve yapılandırılmış bakım desteği.",
+            pharmacologyNote: "ALTIN KURAL: Acile gelen alkol bağımlısı veya malnütrisyonlu hastaya DAMARDAN DEKSTROZ (GLUKOZ) VERİLMEDEN ÖNCE mutlaka yüksek doz IV/IM TİAMİN (B1 Vitamini) verilmelidir! Önce glukoz verilirse kalan son tiamin de tükenir ve Wernicke-Korsakoff koması/kalıcı beyin hasarı tetiklenir."
+        },
+        miniQuiz: {
+            question: "Acil servise getirilen kronik alkol kullanım bozukluğu olan bir hastada 'Wernicke-Korsakoff Sendromu'nu önlemek için uygulanması gereken hayati tıbbi kural nedir?",
+            options: [
+                "Damar yolundan Glukoz (Dekstroz) içeren sıvı verilmeden ÖNCE mutlaka yüksek doz parenteral Tiamin (B1 vitamini) uygulanmalıdır.",
+                "Önce 2 litre şekerli su (dekstroz) verilip 3 gün sonra B12 vitamini yapılmalıdır.",
+                "Hastaya hemen Haloperidol ve Lityum başlanmalıdır.",
+                "Hastanın konfabülasyonlarıyla sertçe tartışılmalıdır."
+            ],
+            correctIndex: 0,
+            explanation: "Tiamin (B1), glukoz metabolizmasının kofaktörüdür. Tiamin eksikliği olan alkol bağımlısına önce glukoz/dekstroz yüklenirse beyindeki son tiamin rezervi de harcanır ve mamiller cisimciklerde kanama/nekroz gelişerek geri dönüşsüz Korsakoff amnezisi oluşur."
+        },
+        differentialDiagnosis: "• Alzheimer Hastalığı: Kortikal demanstır; afazi, apraksi, agnozi eşlik eder. Korsakoff'ta ise genel zeka ve dil korunmuşken izole mamillo-talamik bellek yıkımı vardır.\n• Temarruz / Yalan Söyleme: Korsakoff hastası çıkar için bilerek yalan söylemez; bellek boşluğunu farkında olmadan samimi konfabülasyonla doldurur.",
+        dsmCriteriaSummary: "DSM-5: Kronik alkol/tiamin eksikliği + Wernicke triadı (Konfüzyon, Oftalmopleji, Ataksi) sonrası kalıcı Korsakoff tablosu (Ağır anterograd amnezi + Konfabülasyon)."
+    },
+
+    // 145. Geçici Global Amnezi (Transient Global Amnesia - TGA)
+    {
+        id: "case-145",
+        caseNumber: 145,
+        difficulty: "Orta",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "transient_global_amnesia",
+        therapyId: "supportive_psychotherapy",
+        category: "NEUROCOGNITIVE",
+        patientSummary: "61 yaşında, erkek, üniversite profesörü (Kendi Adını Bilip 30 Saniyede Bir Aynı Soruyu Sorma)",
+        clues: [
+            "61 yaşındaki profesör, sabah soğuk deniz suyuna girip çıktıktan ve yoğun bir egzersiz yaptıktan hemen sonra aniden şaşkınlaşarak eşine 'Biz buraya ne zaman geldik? Bugün günlerden ne? Arabayı nereye park ettik?' diye sormaya başladığı için acil servise getirildi.",
+            "Eşi sorulara sabırla cevap vermesine rağmen, hasta cevabı aldıktan sadece 45 saniye sonra sanki hiç sormamış gibi kelime kelimesine aynı soruyu ('Biz neredeyiz? Buraya nasıl geldik?') 50 kez üst üste tekrarladı (bozuk plak fenomeni / ağır anterograd amnezi).",
+            "En kritik muayene bulgusu olarak; hastaya 'Adınız ne, mesleğiniz ne, eşinizin adı ne?' diye sorulduğunda kendi adını, kimliğini ve adresini eksiksiz ve doğru bildiği (kişisel kimlik belleğinin tam korunduğu) saptandı.",
+            "Nörolojik muayenesinde konuşma bozukluğu (afazi), kol-bacak güçsüzlüğü veya bilinç kaybı yoktur; Difüzyon MR'da hipokampüs CA1 bölgesinde milimetrik noktasal difüzyon kısıtlaması görülmüş, inme ve epilepsi dışlanmıştır.",
+            "Acil serviste gözlem altına alınan hastanın yaklaşık 7 saat sonra yeni bilgileri tekrar kaydetmeye başladığı ve ertesi sabah sadece o 7 saatlik boşluk dışında %100 normale döndüğü izlendi.",
+            "Nöropsikiyatri ve DSM-5 nörobilişsel tanı ilkelerine göre: Genellikle 50-70 yaş arasında fiziksel/duygusal efor sonrası aniden başlayan, kişisel kimliğin korunduğu, tekrarlayıcı sorularla giden ve 24 saat içinde tam düzelen Geçici Global Amnezi (TGA) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "cevabı aldıktan sadece 45 saniye sonra sanki hiç sormamış gibi kelime kelimesine aynı soruyu ('Biz neredeyiz? Buraya nasıl geldik?') 50 kez üst üste tekrarladı", dsmMatch: "Klinik Özellik: Geçici hipokampal disfonksiyona bağlı ağır anterograd amnezi ve tekrarlayıcı sorular" },
+            { clueIndex: 2, text: "kendi adını, kimliğini ve adresini eksiksiz ve doğru bildiği (kişisel kimlik belleğinin tam korunduğu)", dsmMatch: "Ayırıcı Tanı: Dissosiyatif amnezi/fügten ayıran en kritik bulgu (Kimlik belleğinin korunması)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Nörolojik Gözlem, Güvence Verme & Destekleyici Yaklaşım",
+            therapyDetails: "Hastaya ve panik yaşayan ailesine tablonun inme veya kalıcı bunama olmadığını, en geç 24 saat içinde tamamen düzeleceğini anlatarak anksiyeteyi yatıştırma ve gözlem altında tutma.",
+            pharmacologyNote: "Geçici Global Amnezi benign (iyi huylu) ve kendi kendini sınırlayan bir tablodur; spesifik bir ilaç tedavisi gerekmez, 6-24 saat içinde kendiliğinden tam şifayla düzelir."
+        },
+        miniQuiz: {
+            question: "Acil servise ani hafıza kaybıyla gelen bir hastada 'Geçici Global Amnezi' (TGA) ile psikojenik 'Dissosiyatif Amnezi / Füg'ü birbirinden saniyeler içinde ayıran altın standart soru nedir?",
+            options: [
+                "'Adınız ve soyadınız nedir?' sorusu: TGA hastası kendi adını ve kimliğini ASLA unutmaz (sadece yeni anı kaydedemez); Dissosiyatif Amnezi/Füg hastası ise kendi adını ve kim olduğunu unutur.",
+                "'Kaç yaşındasınız?' sorusunda TGA hastası kendini 5 yaşında sanır.",
+                "TGA hastası sağ kolunu ve bacağını hareket ettiremez.",
+                "Dissosiyatif amnezi sadece 2 saat sürer, TGA ise 10 yıl sürer."
+            ],
+            correctIndex: 0,
+            explanation: "Geçici Global Amnezide (TGA) geçici bilateral hipokampal (CA1) iskemi/venöz konjesyon nedeniyle kişi yeni bilgi kaydedemez ve sürekli 'Neredeyim?' diye sorar; ancak kimlik belleği kortikal olduğu için kendi adını ve ailesini her zaman bilir. Kendi adını unutan hasta dissosiyatiftir!"
+        },
+        differentialDiagnosis: "• Dissosiyatif Amnezi / Füg: Kişi kendi adını/kimliğini unutur ama yeni bilgileri kaydedebilir (TGA'nın tam tersidir!).\n• Geçici İskemik Atak (TİA) / İnme: Motor güçsüzlük, dizartri, görme alanı kaybı gibi fokal nörolojik defisitler eşlik eder.",
+        dsmCriteriaSummary: "Hodges & Warlow Kriterleri: Tanıklı başlayan akut anterograd amnezi + Kişisel kimliğin korunması + Fokal nörolojik bulgu olmaması + 24 saat içinde tam düzelme."
+    },
+
+    // 146. Temarruz (Malingering - Maddi/Yasal Kazanç Amaçlı Sahte Hastalık)
+    {
+        id: "case-146",
+        caseNumber: 146,
+        difficulty: "Orta",
+        course: "FORENSIC",
+        diagnosisId: "malingering",
+        therapyId: "supportive_psychotherapy",
+        category: "OTHER_CLINICAL",
+        patientSummary: "30 yaşında, erkek, zimmet davası sanığı (Cezaevinden Kaçmak İçin Kasıtlı Psikoz Rolü)",
+        clues: [
+            "30 yaşındaki danışan, çalıştığı şirketten 15 milyon TL zimmetine geçirdiği gerekçesiyle tutuklanma talebiyle mahkemeye sevk edildiği günün sabahında aniden 'Kulağıma yeşil uzaylılar fısıldıyor, bana 100 milyon lira tazminat vermezseniz kendimi uzaya ışınlayacağım' diyerek adli psikiyatri servisine getirildi.",
+            "Görüşme odasında doktor varken gözlerini devirip tuhaf el hareketleri yaptığı ve anlamsız kelimeler sıraladığı; ancak doktor odadan çıkıp tek yönlü aynadan (veya koridor kamerasından) izlediğinde tüm garip hareketlerini anında kesip diğer hastalarla son derece mantıklı bir şekilde futbol maçı konuştuğu ve avukatına taktik verdiği saptandı.",
+            "Kلينik psikolog tarafından uygulanan Semptom Geçerlilik Testlerinde (TOMM ve MMPI-2 F / F-K abartma indeksleri) şans düzeyinin bile altında puan alarak bilerek yanlış cevap verdiği ve semptomları kasıtlı olarak uydurduğu kanıtlandı.",
+            "Şizofreni fizyolojisiyle bağdaşmayacak şekilde, günde 8 saat deliksiz uyuduğu, işitsel halüsinasyonların '24 saat hiç susmadan kesintisiz bağırdığını' iddia etmesine rağmen duygulanımının rahat ve kurnaz olduğu görüldü.",
+            "Ruhsal Durum Muayenesinde: Cezai sorumluluktan (hapisten) kurtulmak ve 'cezai ehliyeti yoktur' raporu almak (ikincil kazanç) amacıyla bilinçli ve kasıtlı olarak sahte psikotik semptom üretimi tespit edildi.",
+            "DSM-5 (Klinik İlgi Odağı Olabilecek Diğer Durumlar - V65.2) kriterlerine göre: Dışsal bir dürtüyle (askerlikten kaçma, cezai kovuşturmadan kurtulma, maddi tazminat alma veya ilaç temin etme) kasıtlı olarak sahte ya da abartılı fiziksel/ruhsal belirtiler üretme (Temarruz / Malingering) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "izlediğinde tüm garip hareketlerini anında kesip diğer hastalarla son derece mantıklı bir şekilde futbol maçı konuştuğu", dsmMatch: "Adli Gözlem: İzlenmediğini sandığı anda semptomların tamamen kaybolması" },
+            { clueIndex: 4, text: "Cezai sorumluluktan (hapisten) kurtulmak ve 'cezai ehliyeti yoktur' raporu almak (ikincil kazanç) amacıyla bilinçli ve kasıtlı", dsmMatch: "DSM-5 Tanımı: Dışsal kazanç (ikincil kazanç) için kasıtlı sahte semptom üretimi (Temarruz)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Adli Bilirkişi Raporlaması, Çatışmasız Yüzleştirme & Sınır Koyma",
+            therapyDetails: "Hastayla öfkeli bir kavgaya girmeden, nesnel test ve gözlem bulgularının klinik tabloyla uyuşmadığını nötr bir dille belirtme ve adli makama tam cezai ehliyet raporu düzenleme.",
+            pharmacologyNote: "Temarruz bir ruhsal bozukluk değildir (DSM-5 V/Z kodudur); gereksiz antipsikotik veya narkotik ilaç kesinlikle reçete edilmez."
+        },
+        miniQuiz: {
+            question: "Psikiyatride 'Temarruz' (Malingering), 'Yapay Bozukluk' (Münchausen) ve 'Konversiyon Bozukluğu' arasındaki 'Bilinçlilik' ve 'Kazanç Türü' ayrımı hangi seçenekte doğru verilmiştir?",
+            options: [
+                "Temarruz: Bilinçli + İkincil Kazanç (para/hapisten kaçma); Yapay Bozukluk: Bilinçli + Birincil/Hasta rolü kazancı (dış çıkar yok); Konversiyon: Bilinçdışı + Birincil kazanç (çatışmayı bastırma).",
+                "Üçünde de hasta para kazanmak için bilerek yalan söyler.",
+                "Temarruzda hasta belirtileri tamamen bilinçdışı üretir.",
+                "Konversiyon bozukluğunda hasta tazminat almak için rol yapar."
+            ],
+            correctIndex: 0,
+            explanation: "Bu tablo tüm sınavların en klasik sorusudur: Semptom üretimi Temarruz ve Yapay Bozuklukta BİLİNÇLİ (kasıtlı), Konversiyon ve Somatik Belirti Bozukluğunda ise BİLİNÇDIŞIDIR. Temarruzda dışsal/maddi çıkar (ikincil kazanç) varken, Yapay Bozuklukta amaç sadece 'hasta rolü ve tıbbi ilgi'dir."
+        },
+        differentialDiagnosis: "• Yapay Bozukluk (Münchausen): Kişi bilerek hastalık üretir ama maddi/adli çıkarı yoktur; ameliyat olmaya bile razı olur.\n• Ganser Sendromu: Cezaevinde görülür ancak gerçek dissosiyatif alacakaranlık bilinci vardır.",
+        dsmCriteriaSummary: "DSM-5 (V65.2 / Z76.5): Dışsal/somut bir kazanç (cezaevinden kaçma, tazminat, askerlik, ilaç) amacıyla kasıtlı ve bilinçli olarak sahte semptom üretme."
+    },
+
+    // 147. İlacın Yol Açtığı Akut Akatizi (İçsel Yerinde Duramama)
+    {
+        id: "case-147",
+        caseNumber: 147,
+        difficulty: "Orta",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "medication_induced_akathisia",
+        therapyId: "medical_stabilization",
+        category: "OTHER_CLINICAL",
+        patientSummary: "26 yaşında, erkek, antipsikotik doz artışı sonrası gelişen içsel huzursuzluk",
+        clues: [
+            "26 yaşındaki hasta, şizofreni tedavisi için Risperidon dozunun 6 mg/gün'e çıkarılmasından 4 gün sonra 'İçime sanki elektrik verdiler, derimin altında bir motor çalışıyor, bir saniye bile sandalyede oturamıyorum!' diyerek acil polikliniğe başvurdu.",
+            "Görüşme boyunca muayene odasında bir uçtan diğer uca durmaksızın volta attığı, ayakta dururken bir bacağından diğerine ağırlık aktardığı (yerinde sayma / marching in place) ve oturtulduğunda bacaklarını sürekli sallayıp 10 saniye sonra tekrar ayağa fırladığı gözlemlendi.",
+            "Huzursuz Bacaklar Sendromundan farklı olarak bu dayanılmaz hareket etme dürtüsünün sadece gece değil sabah-öğle-akşam tüm gün boyunca kesintisiz sürdüğü ve yürümekle de tam olarak geçmediği saptandı.",
+            "Hasta bu içsel kıvranma ve huzursuzluk hissinin o kadar işkence verici olduğunu belirtti ki, 'Eğer bu içimdeki sıkışma bugün geçmezse kendimi pencereden atacağım' diyerek yoğun intihar/ajitasyon sinyali verdi.",
+            "Ruhsal Durum ve Nörolojik Muayenede: Psikotik alevlenme veya mani değil, striatal dopamin D2 reseptör blokajına bağlı subjektif içsel huzursuzluk ve objektif motor yerinde duramama (Barnes Akatizi Ölçeği: Ağır) tespit edildi.",
+            "DSM-5'e göre: Nöroleptik (antipsikotik) veya SSRI kullanımından ya da doz artışından sonraki birkaç gün/hafta içinde gelişen, bacakları sallama, yerinde sayma ve oturamama ile karakterize İlacın Yol Açtığı Akut Akatizi tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "'İçime sanki elektrik verdiler, derimin altında bir motor çalışıyor, bir saniye bile sandalyede oturamıyorum!'", dsmMatch: "DSM-5 Subjektif Bileşen: Dayanılmaz içsel huzursuzluk ve yerinde duramama hissi" },
+            { clueIndex: 1, text: "ayakta dururken bir bacağından diğerine ağırlık aktardığı (yerinde sayma / marching in place)", dsmMatch: "DSM-5 Objektif Bileşen: Volta atma, bacak sallama ve yerinde sayma hareketleri" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Antipsikotik Doz Azaltımı/Değişimi & Beta-Bloker (Propranolol) Protokolü",
+            therapyDetails: "En tehlikeli klinik hata akatiziyi 'psikotik ajitasyon' sanıp antipsikotik dozunu artırmaktır! İlaç dozu düşürülmeli veya Ketiapin/Olanzapin gibi düşük EPSE riskli ajana geçilmeli ve derhal spesifik akatizi tedavisi başlanmalıdır.",
+            pharmacologyNote: "İlacın yol açtığı Akatizide BİRİNCİ BASAMAK (Altın Standart) ilaç lipofilik Beta-Bloker olan Propranolol (30-80 mg/gün)'dür; alternatif olarak Mirtazapin (düşük doz 15 mg - 5-HT2A antagonisti) veya Benzodiazepin (Lorazepam) kullanılır (Antikolinerjikler akatizide zayıf etkilidir!)."
+        },
+        miniQuiz: {
+            question: "Antipsikotik kullanan bir hastada gelişen 'Akut Akatizi'de (içsel yerinde duramama ve volta atma) en sık yapılan ÖLÜMCÜL klinik hata nedir ve birinci basamak spesifik ilacı hangisidir?",
+            options: [
+                "Akatiziyi 'psikotik ajitasyon/anksiyete' sanıp antipsikotik dozunu daha da artırmak (tabloyu ve intihar riskini ağırlaştırır); birinci basamak spesifik ilacı ise 'Propranolol'dür (Beta-Bloker).",
+                "Hastaya su içirmek; birinci basamak ilacı antibiyotiktir.",
+                "Hastayı yürütmek; birinci basamak ilacı Haloperidol'dür.",
+                "Tansiyonunu ölçmek; birinci basamak ilacı Lityum'dur."
+            ],
+            correctIndex: 0,
+            explanation: "Akatizi hastaya dayanılmaz bir içsel işkence yaşatır ve dürtüsel intihar girişimlerini tetikler. Hekim bunu 'hastalığı azdı, ajite oldu' sanıp antipsikotik dozunu artırırsa tablo felakete dönüşür. Doz azaltılmalı ve 1. tercih olarak Propranolol verilmelidir."
+        },
+        differentialDiagnosis: "• Psikotik Ajitasyon: Antipsikotik dozu artırıldığında psikotik ajitasyon yatışır, akatizi ise ŞİDDETLENİR.\n• Huzursuz Bacaklar Sendromu: Sadece akşam/gece yatınca olur ve yürüyünce anında geçer; akatizi ise tüm gün sürer.",
+        dsmCriteriaSummary: "DSM-5: Antipsikotik/SSRI başlanması veya doz artışı sonrası gelişen subjektif içsel huzursuzluk + Objektif yerinde duramama (volta atma, ayak sallama)."
+    },
+
+    // 148. İlacın Yol Açtığı Akut Distoni (Tortikollis ve Okülogirik Kriz)
+    {
+        id: "case-148",
+        caseNumber: 148,
+        difficulty: "Kolay",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "medication_induced_dystonia",
+        therapyId: "medical_stabilization",
+        category: "OTHER_CLINICAL",
+        patientSummary: "21 yaşında, erkek, Haloperidol enjeksiyonundan 6 saat sonra gelişen göz ve boyun kasılması",
+        clues: [
+            "21 yaşındaki genç erkek hasta, dün akşam acil serviste ajitasyon nedeniyle yapılan 10 mg kas içi (IM) Haloperidol enjeksiyonundan 6 saat sonra boynunun şiddetle sağa ve arkaya doğru kasılarak kilitlenmesi (spazmodik tortikollis) ve göz kürelerinin yukarı doğru kayıp tavana dikili kalması (okülogirik kriz) nedeniyle panik içinde getirildi.",
+            "Hastanın çenesinin kasıldığı (trismus), dilinin dışarı doğru büyümüş gibi sertleştiği ve konuşmakta/yutkunmakta güçlük çektiği görüldü.",
+            "Hasta bilincinin tamamen açık olduğunu, gözlerini aşağı indirmeye ve boynunu düzeltmeye çalıştığını ancak kaslarının demir gibi kasıldığını ve çok şiddetli ağrı çektiğini ifade etti.",
+            "Ateşi (36.6°C) ve tansiyonu normaldir; yaygın kurşun boru rijiditesi veya CK yüksekliği yoktur (NMS dışlandı).",
+            "Ruhsal Durum ve Nörolojik Muayenede: Nigrostriatal yolakta akut dopamin D2 blokajı sonucu oluşan nigrostriatal dopamin-asetilkolin dengesizliği (aşırı kolinerjik baskınlık) tespit edildi; yapılan 1 ampul (5 mg) IM Biperiden (Akineton) enjeksiyonundan 10 dakika sonra gözlerin ve boynun tamamen normale döndüğü gözlendi.",
+            "DSM-5'e göre: Nöroleptik (antipsikotik) veya antiemetik (Metoklopramid) uygulamasından sonraki ilk saatler/günler içinde ortaya çıkan, boyun, göz, çene ve dil kaslarında anormal ve ağrılı спаzm/postürlerle karakterize İlacın Yol Açtığı Akut Distoni tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 0, text: "boynunun şiddetle sağa ve arkaya doğru kasılarak kilitlenmesi (spazmodik tortikollis) ve göz kürelerinin yukarı doğru kayıp tavana dikili kalması (okülogirik kriz)", dsmMatch: "DSM-5 Kriter A: Akut distonik kasılmalar (Tortikollis ve Okülogirik Kriz)" },
+            { clueIndex: 4, text: "1 ampul (5 mg) IM Biperiden (Akineton) enjeksiyonundan 10 dakika sonra gözlerin ve boynun tamamen normale döndüğü", dsmMatch: "Tanı ve Tedavi: Parenteral Antikolinerjik (Biperiden) uygulamasına dramatik hızlı yanıt" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Acil Parenteral Antikolinerjik (Biperiden / Akineton) veya Antihistaminik (Difenhidramin)",
+            therapyDetails: "Laringospazm (boğaz kaslarının kasılmasıyla boğulma) riskine karşı hava yolu güvenliğini kontrol etme, hemen IM/IV Biperiden uygulama ve hastanın korkusunu yatıştırma.",
+            pharmacologyNote: "Akut Distoninin hayat kurtarıcı ve dakikalar içinde etki eden tedavisi IM veya IV Biperiden (Akineton 5 mg) ya da Difenhidramin'dir; tekrarını önlemek için birkaç gün oral Biperiden devam edilir ve atipik antipsikotiğe geçilir."
+        },
+        miniQuiz: {
+            question: "Yüksek potensli tipik antipsikotik (Haloperidol) veya bulantı ilacı (Metoklopramid) verildikten sonraki ilk 24-48 saatte gelişen, gözlerin tavana dikilmesi (okülogirik kriz) ve boyun tutulması (tortikollis) ile seyreden 'Akut Distoni'nin en büyük risk grubu ve acil tedavisi nedir?",
+            options: [
+                "En yüksek risk grubu 'Genç Erkekler'dir; acil tedavisi ise parenteral (IM/IV) Antikolinerjik (Biperiden / Akineton) enjeksiyonudur.",
+                "En yüksek risk grubu 80 yaş üstü kadınlardır; tedavisi Valbenazin'dir.",
+                "En yüksek risk grubu bebeklerdir; tedavisi Lityum'dur.",
+                "Tedavisi antipsikotik dozunu iki katına çıkarmaktır."
+            ],
+            correctIndex: 0,
+            explanation: "Ekstrapiramidal yan etkilerden Tardif Diskinezi yaşlı kadınlarda yıllar sonra görülürken, Akut Distoni genç ve kaslı erkeklerde ilacın ilk saatlerinde/günlerinde görülür. Tedavisi IM/IV Biperiden (Akineton)'dur."
+        },
+        differentialDiagnosis: "• Tardif Diskinezi: Yıllar sonra başlar, ağrısız koreoatetoid dil-dudak hareketleri vardır ve Biperiden ile KÖTÜLEŞİR.\n• Konversiyon / Tetanoz: İlaç kullanım öyküsü ve Biperiden ile 10 dakikada tam düzelme öyküsüyle ayrılır.",
+        dsmCriteriaSummary: "DSM-5: Dopamin antagonisti ilaç alımından sonraki ilk saatler/günlerde gelişen kraniyal, servikal veya oküler kas spazmları (Okülogirik kriz, tortikollis, trismus, laringospazm)."
+    },
+
+    // 149. Antidepresan Bırakma Sendromu (Kesilme Belirtileri - Beyin Elektriklenmesi / Brain Zaps)
+    {
+        id: "case-149",
+        caseNumber: 149,
+        difficulty: "Kolay",
+        course: "NEURO_SOMATIC",
+        diagnosisId: "antidepressant_discontinuation",
+        therapyId: "cbt_general",
+        category: "OTHER_CLINICAL",
+        patientSummary: "32 yaşında, kadın, Venlafaksin'i aniden bırakan danışan (Beyinde Elektrik Çarpması / Brain Zaps)",
+        clues: [
+            "32 yaşındaki danışan, 1 yıldır Majör Depresyon nedeniyle kullandığı Venlafaksin (SNRI) 150 mg/gün ilacını 'Artık tamamen iyileştim, ilaca ihtiyacım kalmadı' diyerek 3 gün önce kendi kararıyla bir anda (aniden) kestiğini ve dün sabahtan beri çok tuhaf nörolojik belirtiler yaşadığını belirterek başvurdu.",
+            "Özellikle gözlerini veya başını sağa-sola çevirdiğinde kafasının içinde 'sanki yarım saniyelik bir elektrik çarpması, şimşek çakması veya titreme' (Brain Zaps / Lhermitte benzeri parestezi) hissettiğini ve başının fırıldak gibi döndüğünü anlattı.",
+            "Buna ek olarak ateş basması, aşırı terleme, mide bulantısı (grip benzeri tablo), gece çok canlı ve korkutucu rüyalar görme ve sebepsiz ağlama/irritabilite atakları başladığını ifade etti.",
+            "Nörolojik muayene, ateş ve enfeksiyon parametreleri normaldir; belirtilerin depresyon nüksünden (relaps) çok farklı olarak ilacın kesilmesinden sadece 36 saat sonra akut fiziksel-duyusal semptomlarla başladığı saptandı.",
+            "Ruhsal Durum Muayenesinde: Kısa yarı ömürlü serotonerjik/noradrenerjik ilacın (Venlafaksin/Paroksetin) aniden kesilmesine bağlı akut sinaptik reseptör adaptasyon krizi doğrulandı.",
+            "DSM-5'e göre: En az 1-2 ay düzenli kullanılan bir antidepresanın aniden kesilmesi sonrasında 2-4 gün içinde başlayan, 'beyinde elektrik çarpması' (brain zaps), baş dönmesi, bulantı, canlı rüyalar ve grip benzeri belirtilerle karakterize Antidepresan Bırakma Sendromu tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "gözlerini veya başını sağa-sola çevirdiğinde kafasının içinde 'sanki yarım saniyelik bir elektrik çarpması, şimşek çakması veya titreme' (Brain Zaps", dsmMatch: "DSM-5 Patognomonik Semptom: Göz hareketleriyle tetiklenen beyinde elektrik çarpması (Brain Zaps)" },
+            { clueIndex: 0, text: "3 gün önce kendi kararıyla bir anda (aniden) kestiğini", dsmMatch: "DSM-5 Etiyoloji: Kısa yarı ömürlü antidepresanın (Venlafaksin/Paroksetin) aniden kesilmesi" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "İlacın Yeniden Başlanıp Kademeli Azaltılması (Tapering) & Psiko-eğitim",
+            therapyDetails: "Hastaya bu tablonun ilaç bağımlılığı veya delirme olmadığını anlatma, kesilen antidepresanı tekrar başlayıp semptomları 24 saat içinde geçirdikten sonra haftalar/aylar içinde çok yavaş doz azaltarak (veya uzun yarı ömürlü Fluoksetin köprülemesiyle) kesme.",
+            pharmacologyNote: "En sık ve en şiddetli bırakma sendromu yapan iki ilaç yarı ömrü en kısa olan VENLAFAKSİN ve PAROKSETİN'dir. En az yapan ise yarı ömrü en uzun (aktif metaboliti norfluoksetin 1-2 hafta) olan FLUOKSETİN'dir."
+        },
+        miniQuiz: {
+            question: "Yarı ömrü çok kısa olduğu için aniden bırakıldığında 'Beyinde Elektrik Çarpması' (Brain Zaps) ve baş dönmesiyle giden Antidepresan Bırakma Sendromuna EN SIK yol açan iki antidepresan hangisidir?",
+            options: [
+                "Venlafaksin (SNRI) ve Paroksetin (SSRI) — Yarı ömrü en uzun olduğu için EN AZ yol açan ise Fluoksetin'dir.",
+                "Fluoksetin ve Lityum",
+                "Bupropion ve Melatonin",
+                "Haloperidol ve Diazepam"
+            ],
+            correctIndex: 0,
+            explanation: "FINSH kısaltmasıyla bilinen Antidepresan Bırakma Sendromu (Flu-like, Insomnia/vivid dreams, Nausea, Sensory 'Brain Zaps', Hyperarousal) en şiddetli olarak yarı ömrü en kısa olan Venlafaksin ve Paroksetin'de görülür. Fluoksetin kendi kendini yavaşça temizlediği için en az riskli olandır."
+        },
+        differentialDiagnosis: "• Depresyon Nüksü (Relaps): İlaç kesildikten haftalar/aylar sonra yavaş yavaş başlar ve 'beyinde elektrik çarpması / baş dönmesi' yapmaz; Bırakma sendromu ise 2-4 günde başlar ve tek doz ilaç alınınca birkaç saatte tamamen kaybolur.\n• Viral Enfeksiyon / Vertigo: İlaç kesme öyküsü ve brain zaps ile ayrılır.",
+        dsmCriteriaSummary: "DSM-5 (FINSH): Antidepresanın aniden kesilmesi sonrası 2-4 günde başlayan; Grip benzeri belirtiler, Canlı kabuslar/uykusuzluk, Bulantı, Denge bozukluğu, Duyusal 'Brain Zaps' (elektriklenme) ve Anksiyete."
+    },
+
+    // 150. Tükenmişlik Sendromu (Burnout Syndrome - Mesleki Yıpranma)
+    {
+        id: "case-150",
+        caseNumber: 150,
+        difficulty: "Kolay",
+        course: "ADULT",
+        diagnosisId: "burnout_syndrome",
+        therapyId: "cbt_general",
+        category: "OTHER_CLINICAL",
+        patientSummary: "35 yaşında, erkek, acil servis hekimi (Maslach Triadı: Duygusal Tükenme, Duyarsızlaşma ve Düşük Başarı)",
+        clues: [
+            "35 yaşındaki acil servis hekimi, son 8 aydır ayda 12 nöbet tuttuğu yoğun çalışma temposu nedeniyle 'Sabahları hastane binasını gördüğüm an midem bulanıyor, enerjim sıfırlandı, ruhsal olarak tamamen kurudum' yakınmasıyla başvurdu.",
+            "Mesleğinin ilk yıllarında hastalarına karşı son derece şefkatli ve empatik bir hekimken, son aylarda hastaları birer insan olarak değil 'bitirilmesi gereken mekanik birer dosya numarası' gibi gördüğünü ve onların acılarına karşı tamamen alaycı, soğuk ve umursamaz (duyarsızlaşma / sinisizm) bir tutum geliştirdiğini anlattı.",
+            "Ne kadar çalışırsa çalışsın kendisini mesleki olarak tamamen yetersiz, verimsiz ve başarısız hissettiğini ('Yaptığım hiçbir işin anlamı yok' - kişisel başarı algısında düşme) belirtti.",
+            "Majör Depresyondan farklı olarak; yıllık izne çıkıp tatile gittiğinde, hafta sonu ailesiyle doğa yürüyüşü yaptığında veya gitar çaldığında keyfinin ve enerjisinin tamamen yerinde olduğu, anhedoni veya intihar düşüncesinin OLMADIĞI, tüm semptomların yalnızca 'iş ve hastane bağlamıyla' sınırlı olduğu saptandı.",
+            "Ruhsal Durum Muayenesinde: Maslach Tükenmişlik Envanteri'nin 3 boyutu olan 'Duygusal Tükenme, Duyarsızlaşma (Depersonalizasyon/Sinisizm) ve Düşük Kişisel Başarı Hissi' tam olarak doğrulandı.",
+            "ICD-11 (QD85) ve DSM-5 (Mesleki Sorun / Z56) kriterlerine göre: Başarıyla yönetilemeyen kronik işyeri stresinden kaynaklanan ve yalnızca mesleki bağlamla sınırlı olan Tükenmişlik Sendromu (Burnout) tablosudur."
+        ],
+        symptomHighlights: [
+            { clueIndex: 1, text: "hastaları birer insan olarak değil 'bitirilmesi gereken mekanik birer dosya numarası' gibi gördüğünü ve onların acılarına karşı tamamen alaycı, soğuk ve umursamaz (duyarsızlaşma / sinisizm)", dsmMatch: "Maslach Triadı 2: Hizmet verilen kişilere karşı duygusal kopukluk ve sinisizm (Duyarsızlaşma)" },
+            { clueIndex: 3, text: "tüm semptomların yalnızca 'iş ve hastane bağlamıyla' sınırlı olduğu saptandı", dsmMatch: "Ayırıcı Tanı: Majör Depresyondan ayrım kriteri (Belirtilerin sadece iş alanıyla sınırlı olması)" }
+        ],
+        treatmentModality: {
+            goldStandardTherapy: "Bilişsel Davranışçı Stres Yönetimi, Sınır Koyma & Organizasyonel Düzenleme",
+            therapyDetails: "Aşırı sorumluluk ve 'hayır diyememe' şemalarını esnetme, iş-yaşam sınırlarını (nöbet sayısı, mesai dışı telefon kapatma) yeniden çizme, bilinçli farkındalık (Mindfulness) ve dinlenme molaları oluşturma.",
+            pharmacologyNote: "Tükenmişlik Sendromu medikal bir hastalık değil, mesleki bir olgudur; tek başına antidepresan vermek çalışma koşulları değişmedikçe sorunu çözmez (komorbid majör depresyon gelişirse SSRI başlanır)."
+        },
+        miniQuiz: {
+            question: "Christina Maslach ve ICD-11 tarafından tanımlanan 'Tükenmişlik Sendromu'nun (Burnout) 3 temel bileşeni nedir ve bu tabloyu Majör Depresyondan ayıran en kritik fark hangisidir?",
+            options: [
+                "1) Duygusal Tükenme, 2) Duyarsızlaşma/Sinisizm, 3) Düşük Kişisel Başarı Hissi; Depresyon yaşamın tüm alanlarını (tatil, hobi, aile) çökertirken, Tükenmişlik yalnızca 'iş/meslek bağlamıyla' sınırlıdır.",
+                "Halüsinasyon + Hezeyan + Katatoni; sadece emeklilerde görülür.",
+                "Aşırı neşe + Az uyku + Çok konuşma",
+                "Sadece fiziksel kas ağrısı ve yüksek ateş"
+            ],
+            correctIndex: 0,
+            explanation: "Maslach Tükenmişlik Modeli 3 boyuttan oluşur: Duygusal tükenme, Duyarsızlaşma (hizmet verilen insanlara nesne gibi soğuk davranma) ve Kişisel başarıda düşme hissi. Majör depresyondan en önemli farkı, iş dışındaki sosyal/tatil alanlarında kişinin zevk alabilmesidir."
+        },
+        differentialDiagnosis: "• Majör Depresif Bozukluk: Tatilde ve hobilerde de zevk alamama (yaygın anhedoni), suçluluk ve intihar düşünceleri vardır; tükenmişlik ise işe özgüdür.\n• Uyum Bozukluğu: Yeni bir yaşam değişikliğinden sonraki 3 ay içinde başlar.",
+        dsmCriteriaSummary: "ICD-11 / DSM-5 (Mesleki Sorun): Kronik işyeri stresine bağlı 1) Enerji tükenmesi, 2) İşe karşı zihinsel mesafe/sinisizm (duyarsızlaşma), 3) Mesleki yeterlilikte azalma hissi."
+    }
+];
+
+// Write to vaka_paketi_150.json
+fs.writeFileSync(path.join(__dirname, 'vaka_paketi_150.json'), JSON.stringify(newCases110to150, null, 2), 'utf8');
+console.log('Successfully written vaka_paketi_150.json with', newCases110to150.length, 'cases!');

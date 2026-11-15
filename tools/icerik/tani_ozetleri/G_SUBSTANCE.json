@@ -1,0 +1,1112 @@
+{
+  "alcohol_intoxication": {
+    "id": "alcohol_intoxication",
+    "nameTr": "Alkol Zehirlenmesi (İntoksikasyonu)",
+    "nameEn": "Alcohol Intoxication",
+    "clinicalDescription": {
+      "overview": "Alkol Entoksikasyonu, yakın zamanda alkol alınmasının ardından ortaya çıkan, klinik açıdan anlamlı sorunlu davranışsal ya da psikolojik değişikliklerin (uygunsuz cinsel ya da saldırgan davranış, duygudurum dalgalanmaları, yargılama bozukluğu) nörolojik bulgularla (dizartri, koordinasyon bozukluğu, nistagmus) birlikte görüldüğü akut ve geri dönüşümlü bir tablodur. Ağır olgularda solunum depresyonu, bilinç kaybı ve kusmuk aspirasyonu yaşamı tehdit eder.",
+      "epidemiology": "Alkol kullanan erişkinlerin büyük çoğunluğu yaşamları boyunca en az bir kez entoksikasyon yaşar. Gençlerde ve kısa sürede çok miktarda içmede (binge içme) sıktır. Trafik kazaları, şiddet olayları, düşmeler ve intihar girişimlerinin önemli bir kısmında alkol entoksikasyonu bulunur.",
+      "etiology": "Alkol GABA-A reseptörlerinde etkiyi artırır, NMDA (glutamat) reseptörlerini baskılar; beyincik, prefrontal korteks ve retiküler aktive edici sistem etkilenir. Kan alkol düzeyi; alınan miktar, içme hızı, vücut ağırlığı, cinsiyet, mide doluluğu ve toleransa göre değişir.",
+      "prognosis": "Genellikle saatler içinde kendiliğinden düzelir. Ağır entoksikasyonda hava yolu güvenliği, hipoglisemi, hipotermi ve kafa travmasının dışlanması önemlidir; kronik kullanıcılarda tiamin eksikliği (Wernicke) riski akılda tutulmalıdır. Bilinç değişikliğinin yalnızca alkole bağlanması başka nedenlerin gözden kaçmasına yol açabilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Yakın Zamanda Alkol Alımı",
+        "content": "Yakın zamanda alkol alınmış olması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Sorunlu Davranışsal / Psikolojik Değişiklikler",
+        "content": "Alım sırasında ya da kısa süre sonra gelişen, klinik açıdan anlamlı sorunlu davranışsal ya da psikolojik değişiklikler (ör. uygunsuz cinsel ya da saldırgan davranış, duygudurum değişkenliği, yargılama bozukluğu)."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Nörolojik Bulgular (En az 1/6)",
+        "content": "Alım sırasında ya da kısa süre sonra aşağıdakilerden en az birinin gelişmesi:",
+        "items": [
+          "1. Peltek/bulanık konuşma (dizartri).",
+          "2. Koordinasyon bozukluğu.",
+          "3. Dengesiz yürüme.",
+          "4. Nistagmus.",
+          "5. Dikkat ya da bellekte bozulma.",
+          "6. Stupor ya da koma."
+        ]
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Belirti ve bulgular başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "alcohol_withdrawal": {
+    "id": "alcohol_withdrawal",
+    "nameTr": "Alkol Yoksunluğu",
+    "nameEn": "Alcohol Withdrawal",
+    "clinicalDescription": {
+      "overview": "Alkol Yoksunluğu, uzun süreli ve yoğun alkol kullanımının bırakılması ya da azaltılmasından sonraki birkaç saat ile birkaç gün içinde ortaya çıkan, otonom aşırı etkinlik (terleme, taşikardi), el titremesi, uykusuzluk, bulantı, anksiyete ve ajitasyonla seyreden bir sendromdur. Ağır biçimde jeneralize tonik-klonik nöbetler ve yoksunluk deliryumu (delirium tremens) gelişebilir; bu nedenle tıbbi açıdan tehlikeli olabilen bir yoksunluk tablosudur.",
+      "epidemiology": "Alkol kullanım bozukluğu olan bireylerin önemli bir kısmı yaşamları boyunca yoksunluk yaşar; oran hastanede yatan ve evsiz alkol bağımlılarında çok daha yüksektir. Nöbet ve deliryum gibi ağır komplikasyonlar yoksunluk yaşayanların küçük bir bölümünde görülür.",
+      "etiology": "Süreğen alkol maruziyeti GABA-A reseptörlerinde duyarlılık azalmasına ve NMDA reseptörlerinde artışa (yukarı düzenleme) yol açar. Alkol ani kesildiğinde baskılanmamış glutamaterjik ve noradrenerjik aşırı etkinlik ortaya çıkar. Önceki yoksunluk atakları sonrakileri ağırlaştırır (tutuşma / kindling).",
+      "prognosis": "Belirtiler genellikle son içkiden sonraki ilk gün içinde başlar, ikinci-üçüncü günlerde zirve yapar ve çoğu hastada birkaç gün ile bir hafta içinde geriler; uyku ve duygudurum değişiklikleri haftalarca sürebilir. Tedavide benzodiazepinlerle denetimli detoksifikasyon ve tiamin desteği temel yaklaşımdır; nöbet ya da deliryum öyküsü olanlar yatarak izlenmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Yoğun ve Uzun Süreli Kullanımın Kesilmesi",
+        "content": "Yoğun ve uzun süreli alkol kullanımının bırakılması ya da azaltılması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (En az 2/8)",
+        "content": "Kesilmeden sonraki birkaç saat ile birkaç gün içinde aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Otonom aşırı etkinlik (ör. terleme ya da 100/dk üzerinde nabız).",
+          "2. El titremesinde artma.",
+          "3. Uykusuzluk.",
+          "4. Bulantı ya da kusma.",
+          "5. Geçici görsel, dokunsal ya da işitsel varsanılar veya yanılsamalar.",
+          "6. Psikomotor ajitasyon.",
+          "7. Anksiyete.",
+          "8. Jeneralize tonik-klonik nöbetler."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon ya da yoksunluk dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Algı Bozukluklarıyla Birlikte",
+        "content": "Gerçeği değerlendirme korunmuşken varsanılar (çoğunlukla görsel ya da dokunsal) ya da deliryum olmaksızın işitsel, görsel veya dokunsal yanılsamalar varsa belirtilir."
+      }
+    ]
+  },
+  "alcohol_withdrawal_delirium": {
+    "id": "alcohol_withdrawal_delirium",
+    "nameTr": "Alkol Yoksunluğu Deliryumu (Delirium Tremens)",
+    "nameEn": "Alcohol Withdrawal Delirium (Delirium Tremens)",
+    "clinicalDescription": {
+      "overview": "Alkol Yoksunluğu Deliryumu (Delirium Tremens), alkol yoksunluğu sırasında ya da hemen sonrasında gelişen; dikkat ve bilinçte dalgalı bozulma, yönelim bozukluğu, canlı görsel/dokunsal varsanılar, belirgin ajitasyon, ağır titreme ve otonom dengesizlikle (ateş, taşikardi, hipertansiyon, terleme) seyreden tıbbi bir acil durumdur. Hemen her zaman yıllarca süren ağır alkol kullanımı zemininde ortaya çıkar.",
+      "epidemiology": "Alkol yoksunluğu yaşayan bireylerin küçük bir bölümünde gelişir. Risk etmenleri arasında daha önce yoksunluk deliryumu ya da nöbet geçirmiş olmak, ileri yaş, eşlik eden tıbbi hastalıklar (enfeksiyon, karaciğer hastalığı, elektrolit bozukluğu) ve son içkiden sonra yüksek kan alkol düzeyi bulunur.",
+      "etiology": "Yoksunluk sırasındaki glutamaterjik ve noradrenerjik aşırı etkinlik, GABAerjik baskılamanın yetersizliği ile birleşir; eşlik eden enfeksiyon, hipoglisemi, elektrolit bozukluğu, kafa travması ve tiamin eksikliği tabloyu ağırlaştırır.",
+      "prognosis": "Genellikle son içkiden 2-3 gün sonra başlar ve birkaç gün sürer. Tedavi edilmezse ölüm oranı yüksektir; yoğun destek tedavisi (sıvı-elektrolit, tiamin, benzodiazepinler, eşlik eden hastalıkların tedavisi) ile ölüm oranı belirgin biçimde düşer. Çoğunlukla yoğun bakım ya da yakın izlem gerektirir."
+    },
+    "criteriaList": [
+      {
+        "code": "Deliryum Ölçütleri",
+        "title": "Dikkat / Farkındalık Bozukluğu, Hızlı Başlangıç, Ek Bilişsel Bozulma",
+        "content": "Deliryum ölçütleri karşılanır: dikkat ve farkındalıkta bozulma; kısa sürede (saatler-günler) gelişen ve gün içinde dalgalanan seyir; bellek, yönelim, dil, görsel-uzamsal yeti ya da algıda ek bozulma; bu bozukluklar önceden var olan bir nörobilişsel bozuklukla açıklanamaz ve koma gibi ağır uyarılmışlık azalması bağlamında ortaya çıkmaz."
+      },
+      {
+        "code": "Etiyolojik Kanıt",
+        "title": "Alkol Yoksunluğuyla İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulguları, deliryum belirtilerinin alkol yoksunluk sendromu sırasında ya da kısa süre sonra geliştiğini gösterir."
+      },
+      {
+        "code": "Tanı Kuralı",
+        "title": "Yoksunluk Tanısı Yerine Konması",
+        "content": "Bu tanı, alkol yoksunluğu tanısı yerine, deliryum belirtileri klinik tabloya baskın olduğunda ve kendi başına klinik ilgi gerektirdiğinde konur. Akut (saatler-günler) ya da süreğen (haftalar-aylar) ve hiperaktif / hipoaktif / karışık etkinlik düzeyi belirtilebilir."
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Ayırt Edilmesi Gerekenler",
+        "content": "Wernicke ensefalopatisi (oftalmopleji, ataksi, konfüzyon), hepatik ensefalopati, kafa travması (subdural hematom), enfeksiyon (menenjit, pnömoni) ve başka madde yoksunlukları ayırt edilmelidir."
+      }
+    ]
+  },
+  "alcohol_induced_mood": {
+    "id": "alcohol_induced_mood",
+    "nameTr": "Alkolün Yol Açtığı Depresif / Duygudurum Bozukluğu",
+    "nameEn": "Alcohol-Induced Depressive Disorder",
+    "clinicalDescription": {
+      "overview": "Alkolün Yol Açtığı Depresif Bozukluk, belirgin ve süreğen çökkün duygudurum ya da ilgi/zevk kaybının, alkol entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı ve alkolün fizyolojik etkileriyle açıklandığı tablodur. Alkol bağımlılarında depresif belirtiler çok sıktır; ayırıcı soru bunların bağımsız bir majör depresif bozukluğu mu yoksa alkolün doğrudan etkisini mi yansıttığıdır.",
+      "epidemiology": "Alkol kullanım bozukluğu olan bireylerde depresif belirtiler çok yaygındır; bunların önemli bir bölümü birkaç haftalık ayıklıkla belirgin biçimde azalır. Alkol kullanım bozukluğu ile bağımsız majör depresyonun birlikteliği de genel topluma göre yüksektir.",
+      "etiology": "Alkolün merkezi sinir sistemini baskılayıcı etkisi, serotonerjik ve dopaminerjik sistemlerdeki değişiklikler, uyku yapısının bozulması ve yoksunluğun disforik etkileri rol oynar; iş kaybı, ilişki sorunları gibi alkolün yol açtığı psikososyal kayıplar tabloyu ağırlaştırır.",
+      "prognosis": "Ayıklıkla birlikte belirtiler genellikle haftalar içinde düzelir; bu nedenle antidepresan başlamadan önce mümkünse bir süre ayıklık sonrası yeniden değerlendirme önerilir. Ayıklığa karşın süren belirtiler bağımsız bir depresif bozukluğu düşündürür. Alkol kullanımı sürerken intihar riski özellikle yüksektir ve dikkatle değerlendirilmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Baskın Depresif Belirtiler",
+        "content": "Klinik tabloda belirgin ve süreğen çökkün duygudurum ya da tüm/çoğu etkinliğe karşı ilgi ve zevkte belirgin azalma baskındır."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Maddeyle Zamansal ve Nedensel İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulgularıyla hem (1) belirtilerin alkol entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı, hem de (2) bu maddenin bu tür belirtileri oluşturabilecek nitelikte olduğu gösterilir."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bağımsız Bozukluk Dışlaması",
+        "content": "Tablo maddeye bağlı olmayan bağımsız bir bozuklukla daha iyi açıklanamaz. Bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlamış olması, akut yoksunluk ya da ağır entoksikasyon sona erdikten sonra uzun bir süre (ör. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen ataklar öyküsü."
+      },
+      {
+        "code": "Kriter D & E",
+        "title": "Deliryum Dışlaması ve Klinik Önem",
+        "content": "Bozukluk yalnızca bir deliryum sırasında ortaya çıkmaz ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar."
+      },
+      {
+        "code": "Belirleyici / Ayırıcı Not",
+        "title": "Entoksikasyon ya da Yoksunluk Sırasında Başlayan",
+        "content": "Başlangıcın entoksikasyon mu yoksunluk mu sırasında olduğu belirtilir. Bu tanı, entoksikasyon ya da yoksunluk tanısı yerine, ancak belirtiler tabloya baskın olduğunda ve ayrıca klinik ilgi gerektirecek kadar ağır olduğunda konur."
+      }
+    ]
+  },
+  "alcohol_induced_anxiety": {
+    "id": "alcohol_induced_anxiety",
+    "nameTr": "Alkolün Yol Açtığı Anksiyete Bozukluğu",
+    "nameEn": "Alcohol-Induced Anxiety Disorder",
+    "clinicalDescription": {
+      "overview": "Alkolün Yol Açtığı Anksiyete Bozukluğu, panik atakları ya da yaygın anksiyetenin, alkol entoksikasyonu ya da (çok daha sık olarak) yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı ve alkolün fizyolojik etkileriyle açıklandığı tablodur. 'Ertesi gün kaygısı' ve yoksunluğun erken dönemindeki kaygı belirtileri tipik örneklerdir; kişi kaygıyı yatıştırmak için yeniden içerek bir kısır döngüye girebilir.",
+      "epidemiology": "Alkol kullanım bozukluğu olanlarda anksiyete belirtileri çok sıktır. Sosyal anksiyete bozukluğu ve panik bozukluğu gibi bağımsız anksiyete bozuklukları da alkol kullanım bozukluğu ile sık birlikte görülür; bu da ayırıcı tanıyı güçleştirir.",
+      "etiology": "Yoksunluk sırasında artan noradrenerjik etkinlik ve GABA-glutamat dengesizliği fizyolojik anksiyete belirtilerine yol açar. Kaygıyı alkolle azaltma (kendi kendini tedavi etme) davranışı negatif pekiştirme yoluyla kullanımı sürdürür.",
+      "prognosis": "Ayıklıkla belirtiler genellikle haftalar içinde azalır. Ayıklığa karşın süren ya da alkol kullanımından önce başlamış belirtiler bağımsız bir anksiyete bozukluğunu düşündürür. Tedavide alkol kullanımının ele alınması öncelikli olup bağımlılık riski taşıyan anksiyolitiklerden kaçınılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Baskın Anksiyete Belirtiler",
+        "content": "Klinik tabloda panik ataklar ya da anksiyete baskındır."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Maddeyle Zamansal ve Nedensel İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulgularıyla hem (1) belirtilerin alkol entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı, hem de (2) bu maddenin bu tür belirtileri oluşturabilecek nitelikte olduğu gösterilir."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bağımsız Bozukluk Dışlaması",
+        "content": "Tablo maddeye bağlı olmayan bağımsız bir bozuklukla daha iyi açıklanamaz. Bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlamış olması, akut yoksunluk ya da ağır entoksikasyon sona erdikten sonra uzun bir süre (ör. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen ataklar öyküsü."
+      },
+      {
+        "code": "Kriter D & E",
+        "title": "Deliryum Dışlaması ve Klinik Önem",
+        "content": "Bozukluk yalnızca bir deliryum sırasında ortaya çıkmaz ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar."
+      },
+      {
+        "code": "Belirleyici / Ayırıcı Not",
+        "title": "Entoksikasyon ya da Yoksunluk Sırasında Başlayan",
+        "content": "Başlangıcın entoksikasyon mu yoksunluk mu sırasında olduğu belirtilir. Bu tanı, entoksikasyon ya da yoksunluk tanısı yerine, ancak belirtiler tabloya baskın olduğunda ve ayrıca klinik ilgi gerektirecek kadar ağır olduğunda konur."
+      }
+    ]
+  },
+  "cannabis_use_disorder": {
+    "id": "cannabis_use_disorder",
+    "nameTr": "Esrar (Kannabis) Kullanım Bozukluğu",
+    "nameEn": "Cannabis Use Disorder",
+    "clinicalDescription": {
+      "overview": "Esrar (Kannabis) Kullanım Bozukluğu, esrar kullanımının denetim kaybı, toplumsal bozulma, riskli kullanım ve farmakolojik ölçütlerle (tolerans, yoksunluk) tanımlanan, klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açan sorunlu bir örüntü göstermesidir. Kullanıcılar sıklıkla esrarın 'bağımlılık yapmadığı' inancıyla sorunu küçümser; motivasyon kaybı, okul/iş başarısında düşme ve aile çatışmaları başvuru nedenleri arasındadır.",
+      "epidemiology": "Dünyada en yaygın kullanılan yasa dışı maddedir. Yıllık kannabis kullanım bozukluğu yaygınlığı ergenlerde erişkinlere göre daha yüksektir ve genç erişkin erkeklerde en sıktır. Yüksek THC içerikli ürünlerin yaygınlaşmasıyla risk artmaktadır.",
+      "etiology": "THC, CB1 reseptörleri üzerinden mezolimbik dopaminerjik ödül sistemini etkiler. Erken ergenlikte başlama, sık (günlük) kullanım, yüksek potensli ürünler, eşlik eden davranım bozukluğu/DEHB, anksiyete ve depresyon ile aile ve akranlarda madde kullanımı risk etmenleridir.",
+      "prognosis": "Ergenlikte başlayan yoğun kullanım dikkat, bellek ve eğitim başarısında olumsuz etkiler ile psikotik bozukluk riskinde artışla ilişkilidir. Motivasyonel görüşme, BDT ve olumsallık yönetimi kanıta dayalı yaklaşımlardır; onaylanmış özgül bir ilaç tedavisi yoktur."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Esrar çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir."
+      }
+    ]
+  },
+  "cannabis_intoxication": {
+    "id": "cannabis_intoxication",
+    "nameTr": "Esrar Zehirlenmesi (İntoksikasyonu)",
+    "nameEn": "Cannabis Intoxication",
+    "clinicalDescription": {
+      "overview": "Esrar Entoksikasyonu, yakın zamanda esrar kullanımının ardından gelişen klinik açıdan anlamlı sorunlu davranışsal/psikolojik değişiklikler (motor koordinasyon bozukluğu, öfori, anksiyete, zamanın yavaşladığı duygusu, yargılama bozukluğu, toplumsal geri çekilme) ile konjonktival kızarıklık, iştah artışı, ağız kuruluğu ve taşikardi gibi bedensel bulgularla tanımlanır. Bazı kişilerde, özellikle deneyimsiz kullanıcılarda ya da yüksek dozda, panik atak benzeri yoğun anksiyete ve paranoid düşünceler görülür.",
+      "epidemiology": "Esrar kullanan herkeste entoksikasyon gelişebilir; tanı ancak belirgin sorunlu değişiklikler olduğunda konur. Yenilebilir ürünlerde etkinin geç başlaması nedeniyle fazla doz alma ve acil başvurular daha sıktır.",
+      "etiology": "THC'nin CB1 reseptörleri üzerinden hipokampus, beyincik, bazal ganglionlar ve prefrontal korteksteki etkileri bellek, koordinasyon ve zaman algısını bozar. Etki içilen/buharlaştırılan ürünlerde dakikalar içinde, yenilebilir ürünlerde saatler içinde başlar.",
+      "prognosis": "Belirtiler genellikle birkaç saat içinde geriler; yenilebilir ürünlerde daha uzun sürebilir. Araç kullanma ve kaza riski artar. Yoğun anksiyete ya da psikotik belirtilerde sakin bir ortam ve destek yeterli olabilir; belirtiler sürüyorsa esrarın yol açtığı psikotik ya da anksiyete bozukluğu düşünülmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A & B",
+        "title": "Yakın Kullanım ve Sorunlu Değişiklikler",
+        "content": "Yakın zamanda esrar kullanımı ve bunun sırasında ya da kısa süre sonra gelişen, klinik açıdan anlamlı sorunlu davranışsal/psikolojik değişiklikler (ör. motor koordinasyon bozukluğu, öfori, anksiyete, zamanın yavaşladığı duygusu, yargılama bozukluğu, toplumsal geri çekilme)."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bedensel Bulgular (2 saat içinde, en az 2/4)",
+        "content": "Kullanımdan sonraki 2 saat içinde aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Konjonktival kızarıklık (kanlanmış gözler).",
+          "2. İştah artışı.",
+          "3. Ağız kuruluğu.",
+          "4. Taşikardi."
+        ]
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Belirtiler başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Algı Bozukluklarıyla Birlikte",
+        "content": "Gerçeği değerlendirme korunmuşken varsanılar ya da deliryum olmaksızın işitsel, görsel veya dokunsal yanılsamalar varsa belirtilir."
+      }
+    ]
+  },
+  "cannabis_withdrawal": {
+    "id": "cannabis_withdrawal",
+    "nameTr": "Esrar Yoksunluğu",
+    "nameEn": "Cannabis Withdrawal",
+    "clinicalDescription": {
+      "overview": "Esrar Yoksunluğu, uzun süreli ve yoğun (genellikle aylarca, günlük ya da neredeyse günlük) esrar kullanımının bırakılmasından sonraki yaklaşık bir hafta içinde ortaya çıkan; irritabilite, sinirlilik, uyku güçlüğü ve rahatsız edici rüyalar, iştah azalması, huzursuzluk, çökkün duygudurum ve bedensel rahatsızlıklarla seyreden sendromdur. DSM-5 ile resmî tanı olarak tanımlanmıştır; belirtilerin yatıştırılması için yeniden kullanım nüksün önemli bir nedenidir.",
+      "epidemiology": "Düzenli esrar kullanıcılarının önemli bir kısmında, tedaviye başvuran yoğun kullanıcıların ise çoğunluğunda bildirilir.",
+      "etiology": "Süreğen THC maruziyeti CB1 reseptörlerinde duyarlılık azalmasına yol açar; madde kesilince endokannabinoid sistemin yeniden dengelenmesi sırasında duygusal ve bedensel belirtiler ortaya çıkar.",
+      "prognosis": "Belirtiler genellikle ilk hafta içinde başlar, ilk haftalarda zirve yapar ve çoğunlukla birkaç hafta içinde geriler; uyku sorunları daha uzun sürebilir. Yaşamı tehdit edici değildir. Destekleyici yaklaşım, uyku hijyeni ve nüks önleme çalışmaları kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Yoğun ve Uzun Süreli Kullanımın Kesilmesi",
+        "content": "Yoğun ve uzun süreli (genellikle en az birkaç ay boyunca günlük ya da neredeyse günlük) esrar kullanımının bırakılması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (Yaklaşık 1 hafta içinde, en az 3/7)",
+        "content": "Kesilmeden sonraki yaklaşık bir hafta içinde aşağıdakilerden en az üçünün gelişmesi:",
+        "items": [
+          "1. İrritabilite, öfke ya da saldırganlık.",
+          "2. Sinirlilik ya da anksiyete.",
+          "3. Uyku güçlüğü (uykusuzluk, rahatsız edici rüyalar).",
+          "4. İştah azalması ya da kilo kaybı.",
+          "5. Huzursuzluk.",
+          "6. Çökkün duygudurum.",
+          "7. Belirgin rahatsızlık veren en az bir bedensel belirti: karın ağrısı, titreme, terleme, ateş, üşüme ya da baş ağrısı."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "cannabis_induced_psychotic": {
+    "id": "cannabis_induced_psychotic",
+    "nameTr": "Esrarın Yol Açtığı Psikotik Bozukluk",
+    "nameEn": "Cannabis-Induced Psychotic Disorder",
+    "clinicalDescription": {
+      "overview": "Esrarın Yol Açtığı Psikotik Bozukluk, esrar entoksikasyonu sırasında ya da hemen sonrasında ortaya çıkan, gerçeği değerlendirme yetisinin bozulduğu sanrılar (çoğunlukla perseküsyon) ve/veya varsanılarla seyreden tablodur. Entoksikasyondaki geçici paranoid düşüncelerden farkı, belirtilerin tabloya baskın olması ve kendi başına klinik ilgi gerektirecek ağırlıkta olmasıdır.",
+      "epidemiology": "Esrar kullanıcılarının küçük bir bölümünde görülür. Günlük kullanım ve yüksek THC içerikli ürünler riski belirgin biçimde artırır. Bu tanıyı alanların önemli bir kısmının (izlem çalışmalarına göre değişen oranlarda) sonraki yıllarda şizofreni ya da bipolar bozukluk tanısı aldığı bildirilmiştir.",
+      "etiology": "THC'nin dopaminerjik iletimi artırıcı ve bilişsel süreçleri bozucu etkileri, kalıtsal psikoz yatkınlığı ve erken ergenlikte başlayan yoğun kullanımla etkileşir. CBD'nin göreli olarak koruyucu olabileceği öne sürülmektedir.",
+      "prognosis": "Kullanım bırakılınca belirtiler genellikle günler-haftalar içinde geriler; ayıklığa karşın uzun süre (ör. yaklaşık bir ay) süren belirtiler bağımsız bir psikotik bozukluğu düşündürür. Kullanımın sürmesi nüks ve birincil psikotik bozukluğa geçiş riskini artırır; bu nedenle izlem önemlidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Baskın Psikotik Belirtiler",
+        "content": "Klinik tabloda sanrılar ve/veya varsanılar baskındır."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Maddeyle Zamansal ve Nedensel İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulgularıyla hem (1) belirtilerin esrar entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı, hem de (2) bu maddenin bu tür belirtileri oluşturabilecek nitelikte olduğu gösterilir."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bağımsız Bozukluk Dışlaması",
+        "content": "Tablo maddeye bağlı olmayan bağımsız bir bozuklukla daha iyi açıklanamaz. Bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlamış olması, akut yoksunluk ya da ağır entoksikasyon sona erdikten sonra uzun bir süre (ör. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen ataklar öyküsü."
+      },
+      {
+        "code": "Kriter D & E",
+        "title": "Deliryum Dışlaması ve Klinik Önem",
+        "content": "Bozukluk yalnızca bir deliryum sırasında ortaya çıkmaz ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar."
+      },
+      {
+        "code": "Belirleyici / Ayırıcı Not",
+        "title": "Entoksikasyon ya da Yoksunluk Sırasında Başlayan",
+        "content": "Başlangıcın entoksikasyon mu yoksunluk mu sırasında olduğu belirtilir. Bu tanı, entoksikasyon ya da yoksunluk tanısı yerine, ancak belirtiler tabloya baskın olduğunda ve ayrıca klinik ilgi gerektirecek kadar ağır olduğunda konur."
+      }
+    ]
+  },
+  "synthetic_cannabinoid_intoxication": {
+    "id": "synthetic_cannabinoid_intoxication",
+    "nameTr": "Sentetik Kannabinoid Zehirlenmesi (Bonzai / Spice)",
+    "nameEn": "Synthetic Cannabinoid Intoxication",
+    "clinicalDescription": {
+      "overview": "Sentetik Kannabinoid Entoksikasyonu, 'bonzai', 'spice' ya da 'K2' gibi adlarla bitkisel karışımlara emdirilerek satılan, CB1 reseptörlerinde THC'den çok daha güçlü ve tam agonist etkili sentetik maddelerin kullanımından sonra gelişen tablodur. Esrar entoksikasyonuna göre çok daha ağır ve öngörülemezdir: belirgin ajitasyon, saldırganlık, akut psikoz, taşikardi, hipertansiyon, kusma, nöbetler, böbrek hasarı ve ölümle sonuçlanabilen olgular bildirilmiştir. DSM-5-TR'de ayrı bir başlığı yoktur; genellikle 'diğer (ya da bilinmeyen) madde entoksikasyonu' olarak kodlanır.",
+      "epidemiology": "Türkiye dahil birçok ülkede özellikle gençler, ekonomik açıdan dezavantajlı gruplar ve cezaevi/denetimli ortamlarda bulunan kişiler arasında yaygınlaşmıştır. Standart idrar tarama testlerinde genellikle saptanmaması kullanım nedenlerinden biridir.",
+      "etiology": "Sentetik kannabinoidler CB1 reseptörlerinde kısmi agonist olan THC'nin aksine tam ve çok güçlü agonistlerdir; CBD gibi dengeleyici bileşenler içermez. Ürünlerin içeriği ve dozu partiden partiye çok değişkendir ve sürekli yeni türevler piyasaya çıkar.",
+      "prognosis": "Belirtiler çoğunlukla saatler içinde geriler ancak ağır olgularda yoğun bakım gerekebilir. Tedavi destekleyicidir (ajitasyonun güvenli biçimde yatıştırılması, kardiyak ve böbrek izlemi, nöbet tedavisi). Tekrarlayan kullanımda psikotik bozukluk, bağımlılık ve yoksunluk gelişebilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Yakın Zamanda Kullanım",
+        "content": "Yakın zamanda sentetik kannabinoid içeren bir ürünün kullanılmış olması (çoğu zaman öykü ile saptanır; rutin idrar testleri genellikle negatif kalır)."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Sorunlu Davranışsal / Psikolojik Değişiklikler",
+        "content": "Kullanım sırasında ya da kısa süre sonra gelişen ve maddenin merkezi sinir sistemi etkilerine bağlanan klinik açıdan anlamlı sorunlu değişiklikler: ajitasyon, saldırganlık, anksiyete/panik, paranoya, varsanılar, konfüzyon, yargılama bozukluğu."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bedensel Bulgular",
+        "content": "Esrara benzer bulgulara (taşikardi, konjonktival kızarıklık) ek olarak sıklıkla hipertansiyon, bulantı-kusma, nöbet, bilinç bulanıklığı, hipokalemi ve akut böbrek hasarı gibi daha ağır bulgular."
+      },
+      {
+        "code": "Kriter D & Kodlama",
+        "title": "Dışlama ve Kodlama",
+        "content": "Belirtiler başka bir sağlık durumu ya da başka bir ruhsal bozuklukla daha iyi açıklanamaz. DSM-5-TR'de 'Diğer (ya da Bilinmeyen) Madde Entoksikasyonu' başlığı altında kodlanır; belirgin psikoz ya da deliryum varsa ilgili madde kaynaklı tanı konur."
+      }
+    ]
+  },
+  "sedative_hypnotic_use_disorder": {
+    "id": "sedative_hypnotic_use_disorder",
+    "nameTr": "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin)",
+    "nameEn": "Sedative, Hypnotic, or Anxiolytic Use Disorder",
+    "clinicalDescription": {
+      "overview": "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu, benzodiazepinler (alprazolam, diazepam, klonazepam vb.), benzodiazepin benzeri uyku ilaçları (zolpidem gibi 'Z-ilaçları') ve barbitüratlar gibi maddelerin denetimsiz ve sorunlu kullanımıdır. İki tipik yol vardır: reçeteyle başlayıp doz artırma ve birden çok hekimden ilaç toplama ile süren kullanım ve keyif amaçlı/diğer maddelerle birlikte (ör. opioid, alkol) yasa dışı kullanım.",
+      "epidemiology": "Yıllık yaygınlığı erişkinlerde düşük (binde birkaç düzeyinde) olarak bildirilir; ancak uzun süreli reçeteli kullanım çok daha yaygındır. Yaşlılarda ve kadınlarda reçete yoluyla, genç erişkinlerde ise keyif amaçlı kullanım daha sıktır.",
+      "etiology": "Bu maddeler GABA-A reseptörünü olumlu yönde düzenler; süreğen kullanım tolerans ve fizyolojik bağımlılık oluşturur. Anksiyete ve uyku bozuklukları, alkol ya da opioid kullanım bozukluğu, kolay erişim ve uzun süreli reçeteleme risk etmenleridir.",
+      "prognosis": "Opioid ve alkolle birlikte kullanımda ölümcül solunum depresyonu riski belirgin olarak artar. Ani bırakma tehlikeli yoksunluk (nöbet, deliryum) yaratabileceğinden ilacın hekim denetiminde ve kademeli olarak azaltılması gerekir; BDT ve altta yatan anksiyete/uykusuzluğun tedavisi azaltmanın başarısını artırır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Sedatif, hipnotik ya da anksiyolitik madde çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Not",
+        "title": "Tıbbi Gözetim Altında Kullanım",
+        "content": "Madde yalnızca uygun tıbbi gözetim altında reçeteyle kullanılıyorsa tolerans ve yoksunluk ölçütleri tek başına sayılmaz; bu kişiler yalnızca bu iki ölçüte dayanarak tanı almaz."
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir."
+      }
+    ]
+  },
+  "sedative_withdrawal": {
+    "id": "sedative_withdrawal",
+    "nameTr": "Sedatif/Benzodiazepin Yoksunluğu",
+    "nameEn": "Sedative, Hypnotic, or Anxiolytic Withdrawal",
+    "clinicalDescription": {
+      "overview": "Sedatif, Hipnotik ya da Anksiyolitik Yoksunluğu, bu maddelerin uzun süreli kullanımının bırakılması ya da azaltılmasından sonraki birkaç saat ile birkaç gün içinde gelişen; otonom aşırı etkinlik, titreme, uykusuzluk, anksiyete, ajitasyon, algı bozuklukları ve jeneralize nöbetlerle seyreden sendromdur. Klinik görünüm alkol yoksunluğuna çok benzer; alkol yoksunluğu gibi yaşamı tehdit edebilir. Yoksunluk deliryumu da gelişebilir.",
+      "epidemiology": "Reçeteyle uzun süre (aylarca) düzenli benzodiazepin kullanan bireylerin önemli bir kısmında ilaç birden kesildiğinde yoksunluk belirtileri görülür. Yüksek doz ve uzun süreli kullanım riski artırır.",
+      "etiology": "Süreğen kullanım GABA-A reseptör duyarlılığını azaltır; madde çekilince baskılanmamış uyarıcı etkinlik ortaya çıkar. Kısa yarı ömürlü maddelerde (ör. alprazolam) belirtiler daha erken ve daha şiddetli başlar; uzun yarı ömürlülerde (ör. diazepam) başlangıç birkaç gün gecikebilir ve daha uzun sürer.",
+      "prognosis": "Ani kesilmede nöbet ve deliryum riski nedeniyle doz genellikle haftalar-aylar içinde kademeli olarak azaltılır. Azaltma sonrası bazı hastalarda anksiyete ve uykusuzluk haftalar-aylar sürebilir; altta yatan bozukluğun nüksü ile yoksunluk belirtileri ayırt edilmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Uzun Süreli Kullanımın Kesilmesi",
+        "content": "Uzun süreli sedatif, hipnotik ya da anksiyolitik kullanımının bırakılması ya da azaltılması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (En az 2/8)",
+        "content": "Kesilmeden sonraki birkaç saat ile birkaç gün içinde aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Otonom aşırı etkinlik (ör. terleme ya da 100/dk üzerinde nabız).",
+          "2. El titremesi.",
+          "3. Uykusuzluk.",
+          "4. Bulantı ya da kusma.",
+          "5. Geçici görsel, dokunsal ya da işitsel varsanılar veya yanılsamalar.",
+          "6. Psikomotor ajitasyon.",
+          "7. Anksiyete.",
+          "8. Jeneralize tonik-klonik (grand mal) nöbetler."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon ya da yoksunluk dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Algı Bozukluklarıyla Birlikte",
+        "content": "Gerçeği değerlendirme korunmuşken varsanılar ya da deliryum olmaksızın işitsel, görsel veya dokunsal yanılsamalar varsa belirtilir."
+      }
+    ]
+  },
+  "opioid_use_disorder": {
+    "id": "opioid_use_disorder",
+    "nameTr": "Opioid Kullanım Bozukluğu (Eroin / Morfin)",
+    "nameEn": "Opioid Use Disorder",
+    "clinicalDescription": {
+      "overview": "Opioid Kullanım Bozukluğu, eroin gibi yasa dışı opioidlerin ya da morfin, oksikodon, tramadol, fentanil gibi reçeteli opioidlerin denetimsiz, zorlantılı ve zarar verici kullanımıdır. Belirgin tolerans ve fizyolojik bağımlılık, aşerme, maddeyi elde etmek için yasa dışı yollara başvurma ve doz aşımı ölümleri tablonun belirleyici özellikleridir. Damar içi kullanımda HIV, hepatit B/C ve endokardit riski yüksektir.",
+      "epidemiology": "Yıllık yaygınlığı erişkinlerde yaklaşık %0,4 düzeyinde bildirilmiştir; ABD'de reçeteli opioid ve fentanil kaynaklı bir salgın yaşanmaktadır. Erkeklerde daha sıktır. Türkiye'de eroin kullanımına bağlı tedavi başvuruları özellikle genç erişkinlerde önemli bir yer tutar.",
+      "etiology": "Opioidler mü-opioid reseptörleri üzerinden ödül sistemini güçlü biçimde etkinleştirir ve hızla tolerans ile bağımlılık oluşturur. Kalıtsal yatkınlık, erken madde kullanımı, travma öyküsü, eşlik eden ruhsal bozukluklar, süreğen ağrı ve kolay erişim risk etmenleridir.",
+      "prognosis": "Doz aşımına bağlı ölüm riski özellikle tolerans kaybından sonra (detoks ya da cezaevi çıkışı) yüksektir. Opioid agonist idame tedavisi (metadon, buprenorfin) ölüm, nüks ve suç oranlarını belirgin olarak azaltan kanıta dayalı tedavidir; nalokson doz aşımında hayat kurtarır. Psikososyal destek ve zarar azaltma programları tedavinin parçasıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Opioid çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Not",
+        "title": "Tıbbi Gözetim Altında Kullanım",
+        "content": "Madde yalnızca uygun tıbbi gözetim altında reçeteyle kullanılıyorsa tolerans ve yoksunluk ölçütleri tek başına sayılmaz; bu kişiler yalnızca bu iki ölçüte dayanarak tanı almaz."
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Ayrıca 'idame tedavisi altında' belirleyicisi (metadon, buprenorfin gibi bir agonist ya da antagonist tedavi alırken başka ölçüt kalmaması) kullanılır."
+      }
+    ]
+  },
+  "opioid_intoxication": {
+    "id": "opioid_intoxication",
+    "nameTr": "Opioid Zehirlenmesi (Miyozis, Solunum Depresyonu)",
+    "nameEn": "Opioid Intoxication",
+    "clinicalDescription": {
+      "overview": "Opioid Entoksikasyonu, yakın zamanda opioid kullanımının ardından başlangıçtaki öforiyi izleyen apati, disfori, psikomotor değişiklikler ve yargılama bozukluğu ile birlikte göz bebeklerinde küçülme (miyozis), uyuklama, peltek konuşma ve dikkat/bellek bozulmasıyla seyreden tablodur. Ağır entoksikasyonda koma, toplu iğne başı göz bebekleri ve solunum depresyonu (opioid doz aşımı üçlüsü) görülür ve tablo ölümcül olabilir.",
+      "epidemiology": "Opioid kullanan herkeste gelişebilir; ölümcül doz aşımları özellikle fentanil ve türevlerinin yaygınlaştığı bölgelerde ve opioidin benzodiazepin ya da alkolle birlikte kullanıldığı durumlarda artmıştır.",
+      "etiology": "Opioidlerin beyin sapındaki mü reseptörleri üzerindeki etkisi solunum merkezini baskılar; okülomotor çekirdek üzerinden miyozis oluşur. Tolerans kaybı, saflığı bilinmeyen ürünler ve diğer santral sinir sistemi baskılayıcılarıyla birlikte kullanım riski artırır.",
+      "prognosis": "Hafif entoksikasyon saatler içinde geçer. Solunum depresyonu acil durumdur: hava yolu ve solunum desteği ile opioid antagonisti nalokson uygulanır; uzun etkili opioidlerde naloksonun etkisi geçtikten sonra solunum depresyonu yinelenebileceğinden izlem sürdürülmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A & B",
+        "title": "Yakın Kullanım ve Sorunlu Değişiklikler",
+        "content": "Yakın zamanda opioid kullanımı ve bunun sırasında ya da kısa süre sonra gelişen klinik açıdan anlamlı sorunlu davranışsal/psikolojik değişiklikler (ör. başlangıçtaki öforiyi izleyen apati ve disfori, psikomotor ajitasyon ya da yavaşlama, yargılama bozukluğu)."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Miyozis + En az 1 Bulgu",
+        "content": "Göz bebeklerinde küçülme (ağır doz aşımına bağlı anoksi varsa büyüme görülebilir) ve buna ek olarak aşağıdakilerden en az birinin gelişmesi:",
+        "items": [
+          "1. Uyuklama ya da koma.",
+          "2. Peltek konuşma.",
+          "3. Dikkat ya da bellekte bozulma."
+        ]
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Belirtiler başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Algı Bozukluklarıyla Birlikte",
+        "content": "Gerçeği değerlendirme korunmuşken varsanılar ya da deliryum olmaksızın yanılsamalar varsa belirtilir (nadir)."
+      }
+    ]
+  },
+  "opioid_withdrawal": {
+    "id": "opioid_withdrawal",
+    "nameTr": "Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis)",
+    "nameEn": "Opioid Withdrawal",
+    "clinicalDescription": {
+      "overview": "Opioid Yoksunluğu, yoğun ve uzun süreli opioid kullanımının bırakılması ya da azaltılmasından veya kullanım sürerken bir opioid antagonistinin (nalokson, naltrekson) verilmesinden sonra gelişen; disforik duygudurum, bulantı-kusma, kas ağrıları, gözyaşı ve burun akıntısı, göz bebeklerinde büyüme, tüylerin dikleşmesi, terleme, ishal, esneme, ateş ve uykusuzlukla seyreden sendromdur. Belirtiler 'ağır bir grip' tablosunu andırır; çok rahatsız edicidir ancak sağlıklı erişkinlerde genellikle yaşamı tehdit etmez.",
+      "epidemiology": "Opioid kullanım bozukluğu olan bireylerin büyük çoğunluğu yoksunluk yaşar; uzun süre opioid ağrı kesici kullanan hastalarda da ilacın ani kesilmesiyle görülebilir.",
+      "etiology": "Süreğen opioid maruziyeti mü reseptörlerinde uyumsal değişikliklere ve locus coeruleus'ta noradrenerjik etkinliğin yukarı düzenlenmesine yol açar; opioid çekilince ortaya çıkan noradrenerjik aşırı etkinlik birçok belirtiden sorumludur.",
+      "prognosis": "Kısa etkili opioidlerde (eroin) belirtiler son dozdan sonraki saatler içinde başlar, 1-3 gün içinde zirve yapar ve 5-7 gün içinde geriler; uzun etkililerde (metadon) başlangıç ve seyir daha geç ve uzundur. Disfori, uykusuzluk ve aşerme haftalar-aylar sürebilir (uzamış yoksunluk). Tolerans kaybı nedeniyle detoks sonrası doz aşımı riski yüksektir; tedavide agonist idamesi ya da denetimli azaltma ve belirtiye yönelik ilaçlar kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Kesilme ya da Antagonist Verilmesi",
+        "content": "Aşağıdakilerden biri: (1) yoğun ve uzun süreli (birkaç hafta ya da daha uzun) opioid kullanımının bırakılması ya da azaltılması; (2) bir opioid kullanımı döneminden sonra opioid antagonisti verilmesi."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (En az 3/9)",
+        "content": "Ölçüt A'dan sonraki dakikalar ile birkaç gün içinde aşağıdakilerden en az üçünün gelişmesi:",
+        "items": [
+          "1. Disforik duygudurum.",
+          "2. Bulantı ya da kusma.",
+          "3. Kas ağrıları.",
+          "4. Gözyaşı akması ya da burun akıntısı.",
+          "5. Göz bebeklerinde büyüme, tüylerin dikleşmesi (piloereksiyon) ya da terleme.",
+          "6. İshal.",
+          "7. Esneme.",
+          "8. Ateş.",
+          "9. Uykusuzluk."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon ya da yoksunluk dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "cocaine_use_disorder": {
+    "id": "cocaine_use_disorder",
+    "nameTr": "Kokain Kullanım Bozukluğu",
+    "nameEn": "Cocaine Use Disorder",
+    "clinicalDescription": {
+      "overview": "Kokain Kullanım Bozukluğu, DSM-5-TR'de 'Uyarıcı Kullanım Bozukluğu' başlığı altında etken maddenin kokain olarak belirtildiği tablodur. Kokain burundan çekme, damar içi ya da 'crack' biçiminde içilerek kullanılır; özellikle içilen ve damar içi formlarda kısa süreli yoğun öforiyi hızla 'çöküş' izler ve bu döngü kısa sürede çok sık ve yüksek dozda tekrarlayan kullanıma (binge) yol açar. Maddi kayıplar, kardiyovasküler komplikasyonlar ve paranoya sık görülür.",
+      "epidemiology": "Yıllık kokain kullanım bozukluğu yaygınlığı erişkinlerde düşük (binde birkaç düzeyinde) bildirilir; yaygınlık ülkeler arasında belirgin farklılık gösterir ve Avrupa'da son yıllarda kokain kullanımında artış rapor edilmektedir. 18-29 yaş grubunda ve erkeklerde daha sıktır.",
+      "etiology": "Kokain dopamin (ve noradrenalin, serotonin) geri alımını engelleyerek ödül devresinde hızlı ve yoğun dopamin artışı yaratır. Kalıtsal yatkınlık, DEHB, davranım bozukluğu, travma öyküsü ve madde kullanan akran ortamı risk etmenleridir.",
+      "prognosis": "Kokaine özgü onaylanmış bir ilaç tedavisi yoktur. Olumsallık yönetimi, BDT ve topluluk pekiştirme yaklaşımı kanıta dayalı psikososyal tedavilerdir. Miyokard enfarktüsü, inme, aritmi ve ani ölüm riski vardır; alkolle birlikte kullanımda toksik kokaetilen oluşur."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Kokain çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Not",
+        "title": "Tıbbi Gözetim Altında Kullanım",
+        "content": "Madde yalnızca uygun tıbbi gözetim altında reçeteyle kullanılıyorsa tolerans ve yoksunluk ölçütleri tek başına sayılmaz; bu kişiler yalnızca bu iki ölçüte dayanarak tanı almaz."
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Etken madde (kokain / amfetamin türü / diğer) ayrıca belirtilir."
+      }
+    ]
+  },
+  "cocaine_intoxication": {
+    "id": "cocaine_intoxication",
+    "nameTr": "Kokain Zehirlenmesi (Taşikardi, Midriyazis, Öfori)",
+    "nameEn": "Cocaine Intoxication",
+    "clinicalDescription": {
+      "overview": "Kokain Entoksikasyonu, DSM-5-TR'de 'Uyarıcı Entoksikasyonu' başlığı altında etken maddenin kokain olarak belirtildiği tablodur. Öfori, enerji artışı, konuşkanlık ve aşırı uyanıklığın yanında taşikardi, midriyazis, hipertansiyon ve terleme görülür; yüksek dozda anksiyete, paranoya, saldırganlık, basmakalıp davranışlar, göğüs ağrısı, aritmi, nöbet ve hipertermi gelişebilir. Etki kısa sürer (özellikle içilen ve damar içi formda dakikalar düzeyinde).",
+      "epidemiology": "Kokain kullananların çoğunda entoksikasyon belirtileri görülür; acil servis başvurularında göğüs ağrısı, anksiyete ve ajitasyon sık nedenlerdir.",
+      "etiology": "Dopamin, noradrenalin ve serotonin geri alımının engellenmesi santral uyarılmaya ve sempatik aşırı etkinliğe yol açar; kokain ayrıca sodyum kanallarını bloke eder (lokal anestezik etki) ve aritmiye zemin hazırlar.",
+      "prognosis": "Hafif entoksikasyon saatler içinde geçer. Ağır olgularda ajitasyonun güvenli biçimde yatıştırılması, hipertermi, kardiyak iskemi ve nöbetlerin tedavisi gerekir. Entoksikasyonu genellikle disforik bir 'çöküş' izler."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A & B",
+        "title": "Yakın Kullanım ve Sorunlu Değişiklikler",
+        "content": "Yakın zamanda uyarıcı kullanımı ve bunun sırasında ya da kısa süre sonra gelişen klinik açıdan anlamlı sorunlu davranışsal/psikolojik değişiklikler (ör. öfori ya da duygulanımda küntleşme, toplumsallıkta değişme, aşırı uyanıklık, kişilerarası aşırı duyarlılık, anksiyete-gerginlik-öfke, basmakalıp davranışlar, yargılama bozukluğu)."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bedensel Bulgular (En az 2/9)",
+        "content": "Kullanım sırasında ya da kısa süre sonra aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Taşikardi ya da bradikardi.",
+          "2. Midriyazis (göz bebeklerinde büyüme).",
+          "3. Kan basıncında yükselme ya da düşme.",
+          "4. Terleme ya da üşüme.",
+          "5. Bulantı ya da kusma.",
+          "6. Kilo kaybı kanıtı.",
+          "7. Psikomotor ajitasyon ya da yavaşlama.",
+          "8. Kas güçsüzlüğü, solunum depresyonu, göğüs ağrısı ya da kardiyak aritmi.",
+          "9. Konfüzyon, nöbet, diskinezi, distoni ya da koma."
+        ]
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Belirtiler başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Madde Türü ve Algı Bozuklukları",
+        "content": "Etken madde (amfetamin türü, kokain, diğer uyarıcı) belirtilir; gerçeği değerlendirme korunmuşken varsanılar ya da deliryum olmaksızın yanılsamalar varsa 'algı bozukluklarıyla birlikte' eklenir."
+      }
+    ]
+  },
+  "cocaine_withdrawal": {
+    "id": "cocaine_withdrawal",
+    "nameTr": "Kokain Yoksunluğu (Ağır Çöküş / Crash)",
+    "nameEn": "Cocaine Withdrawal",
+    "clinicalDescription": {
+      "overview": "Kokain Yoksunluğu, DSM-5-TR'de 'Uyarıcı Yoksunluğu' başlığı altında etken maddenin kokain olarak belirtildiği tablodur. Yoğun kullanımın (özellikle günlerce süren binge dönemlerinin) ardından gelişen 'çöküş' (crash) evresinde belirgin disforik duygudurum, aşırı yorgunluk, uyku artışı ya da uykusuzluk, canlı ve hoş olmayan rüyalar, iştah artışı ve psikomotor yavaşlama görülür. Belirgin bedensel tehlike oluşturmaz, ancak ağır depresif belirtiler ve intihar düşünceleri ortaya çıkabilir.",
+      "epidemiology": "Düzenli ya da binge tarzı kokain kullanıcılarının çoğunda kullanımın bırakılmasından sonra yoksunluk belirtileri görülür.",
+      "etiology": "Süreğen uyarıcı kullanımının ödül devresinde yarattığı dopamin tükenmesi ve reseptör düzeyindeki uyumsal değişiklikler anhedoni ve disforiye yol açar.",
+      "prognosis": "Akut belirtiler genellikle birkaç gün içinde azalır; anhedoni ve aşerme haftalarca sürebilir ve nüksün başlıca nedenidir. Tedavi destekleyicidir; ağır depresif belirtiler ve intihar riski izlenmelidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Uzun Süreli Kullanımın Kesilmesi",
+        "content": "Uzun süreli uyarıcı (amfetamin türü madde, kokain ya da diğer uyarıcı) kullanımının bırakılması ya da azaltılması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Disforik Duygudurum + Fizyolojik Değişiklikler (En az 2/5)",
+        "content": "Kesilmeden sonraki birkaç saat ile birkaç gün içinde disforik duygudurum ve buna ek olarak aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Yorgunluk.",
+          "2. Canlı, hoş olmayan rüyalar.",
+          "3. Uykusuzluk ya da aşırı uyuma.",
+          "4. İştah artışı.",
+          "5. Psikomotor yavaşlama ya da ajitasyon."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "cocaine_induced_psychosis": {
+    "id": "cocaine_induced_psychosis",
+    "nameTr": "Kokainin Yol Açtığı Psikotik Bozukluk (Paranoya)",
+    "nameEn": "Cocaine-Induced Psychotic Disorder",
+    "clinicalDescription": {
+      "overview": "Kokainin Yol Açtığı Psikotik Bozukluk, DSM-5-TR'de 'Uyarıcının Yol Açtığı Psikotik Bozukluk' içinde etken maddenin kokain olduğu tablodur. Yoğun ya da binge tarzı kullanım sırasında veya hemen sonrasında gelişen perseküsyon sanrıları (izlendiği, takip edildiği, polisin geldiği inancı), aşırı kuşkuculuk, işitsel ve dokunsal varsanılar (deri altında böcek dolaşması hissi, formikasyon) ve basmakalıp davranışlarla seyreder. Saldırgan ya da kendine zarar verici davranış riski vardır.",
+      "epidemiology": "Kokain kullanıcılarında geçici paranoid düşünceler çok sıktır; tam psikotik bozukluk daha azında gelişir. Yüksek doz, crack/damar içi kullanım ve uzun süreli kullanım riski artırır.",
+      "etiology": "Dopaminerjik iletimin mezolimbik bölgede aşırı artması temel mekanizmadır; tekrarlayan kullanımla psikotik belirtilere duyarlılık artabilir (duyarlılaşma). Uyku yoksunluğu ve kalıtsal yatkınlık katkıda bulunur.",
+      "prognosis": "Kullanım bırakılınca belirtiler genellikle günler içinde (çoğunlukla amfetamin psikozundan daha hızlı) geriler. Uzun süre devam eden belirtiler bağımsız bir psikotik bozukluğu düşündürür. Akut dönemde güvenlik, ajitasyonun yatıştırılması ve tıbbi izlem gerekir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Baskın Psikotik Belirtiler",
+        "content": "Klinik tabloda sanrılar ve/veya varsanılar baskındır."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Maddeyle Zamansal ve Nedensel İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulgularıyla hem (1) belirtilerin kokain entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı, hem de (2) bu maddenin bu tür belirtileri oluşturabilecek nitelikte olduğu gösterilir."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bağımsız Bozukluk Dışlaması",
+        "content": "Tablo maddeye bağlı olmayan bağımsız bir bozuklukla daha iyi açıklanamaz. Bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlamış olması, akut yoksunluk ya da ağır entoksikasyon sona erdikten sonra uzun bir süre (ör. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen ataklar öyküsü."
+      },
+      {
+        "code": "Kriter D & E",
+        "title": "Deliryum Dışlaması ve Klinik Önem",
+        "content": "Bozukluk yalnızca bir deliryum sırasında ortaya çıkmaz ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar."
+      },
+      {
+        "code": "Belirleyici / Ayırıcı Not",
+        "title": "Entoksikasyon ya da Yoksunluk Sırasında Başlayan",
+        "content": "Başlangıcın entoksikasyon mu yoksunluk mu sırasında olduğu belirtilir. Bu tanı, entoksikasyon ya da yoksunluk tanısı yerine, ancak belirtiler tabloya baskın olduğunda ve ayrıca klinik ilgi gerektirecek kadar ağır olduğunda konur."
+      }
+    ]
+  },
+  "amphetamine_use_disorder": {
+    "id": "amphetamine_use_disorder",
+    "nameTr": "Amfetamin / Metamfetamin Kullanım Bozukluğu (Kristal Met)",
+    "nameEn": "Amphetamine-Type Substance Use Disorder",
+    "clinicalDescription": {
+      "overview": "Amfetamin Türü Madde Kullanım Bozukluğu, DSM-5-TR'de 'Uyarıcı Kullanım Bozukluğu' başlığı altında etken maddenin amfetamin türü bir madde (amfetamin, metamfetamin/kristal met, metilfenidat gibi uyarıcılar) olduğu tablodur. Metamfetamin uzun etkili ve güçlü bir uyarıcıdır; günlerce uykusuz süren yoğun kullanım dönemleri, kilo kaybı, diş çürümeleri ('met ağzı'), deri lezyonları, paranoya ve saldırganlık görülebilir. Reçeteli uyarıcıların (DEHB ilaçları) kötüye kullanımı da bu tanı kapsamındadır.",
+      "epidemiology": "Yıllık yaygınlığı erişkinlerde düşüktür (binde birkaç düzeyinde) ancak bölgesel farklar çok büyüktür; Doğu ve Güneydoğu Asya, Okyanusya ve Kuzey Amerika'nın bazı bölgelerinde metamfetamin kullanımı ciddi bir halk sağlığı sorunudur. Türkiye'de de son yıllarda metamfetamin ele geçirme ve tedavi başvurularının arttığı bildirilmektedir.",
+      "etiology": "Amfetaminler dopamin ve noradrenalinin salınımını artırır ve geri alımını engeller; metamfetamin ayrıca dopaminerjik nöronlarda nörotoksik hasar oluşturabilir. Kalıtsal yatkınlık, DEHB, davranım bozukluğu ve çevresel etmenler risk oluşturur.",
+      "prognosis": "Onaylanmış özgül bir ilaç tedavisi yoktur; olumsallık yönetimi ve BDT kanıta dayalı yaklaşımlardır. Uzun süreli metamfetamin kullanımı bilişsel bozulma, psikotik bozukluk ve kardiyovasküler hastalık riskiyle ilişkilidir; bir kısmı uzun süreli ayıklıkla kısmen düzelir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Amfetamin türü madde çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Not",
+        "title": "Tıbbi Gözetim Altında Kullanım",
+        "content": "Madde yalnızca uygun tıbbi gözetim altında reçeteyle kullanılıyorsa tolerans ve yoksunluk ölçütleri tek başına sayılmaz; bu kişiler yalnızca bu iki ölçüte dayanarak tanı almaz."
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Etken madde (amfetamin türü / kokain / diğer) ayrıca belirtilir."
+      }
+    ]
+  },
+  "amphetamine_withdrawal": {
+    "id": "amphetamine_withdrawal",
+    "nameTr": "Amfetamin/Uyarıcı Yoksunluğu",
+    "nameEn": "Amphetamine Withdrawal",
+    "clinicalDescription": {
+      "overview": "Amfetamin Yoksunluğu, DSM-5-TR'de 'Uyarıcı Yoksunluğu' başlığı altında etken maddenin amfetamin türü bir madde olduğu tablodur. Uzun süreli kullanımın bırakılmasının ardından belirgin disforik duygudurum, aşırı yorgunluk, uyku artışı ya da uykusuzluk, canlı kâbuslar, iştah artışı ve psikomotor yavaşlama görülür. Metamfetaminde belirtiler kokaine göre genellikle daha uzun sürer.",
+      "epidemiology": "Düzenli metamfetamin/amfetamin kullanıcılarının çoğunda kullanım bırakıldıktan sonra yoksunluk belirtileri görülür.",
+      "etiology": "Süreğen uyarıcı kullanımına bağlı dopaminerjik tükenme ve reseptör uyumu anhedoni ve disforiye yol açar.",
+      "prognosis": "Akut evre genellikle birkaç gün ile bir-iki hafta sürer; anhedoni, depresif belirtiler ve aşerme haftalarca sürebilir. Ağır depresif belirtilerde intihar riski izlenmelidir; tedavi destekleyicidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Uzun Süreli Kullanımın Kesilmesi",
+        "content": "Uzun süreli uyarıcı (amfetamin türü madde, kokain ya da diğer uyarıcı) kullanımının bırakılması ya da azaltılması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Disforik Duygudurum + Fizyolojik Değişiklikler (En az 2/5)",
+        "content": "Kesilmeden sonraki birkaç saat ile birkaç gün içinde disforik duygudurum ve buna ek olarak aşağıdakilerden en az ikisinin gelişmesi:",
+        "items": [
+          "1. Yorgunluk.",
+          "2. Canlı, hoş olmayan rüyalar.",
+          "3. Uykusuzluk ya da aşırı uyuma.",
+          "4. İştah artışı.",
+          "5. Psikomotor yavaşlama ya da ajitasyon."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "methamphetamine_psychosis": {
+    "id": "methamphetamine_psychosis",
+    "nameTr": "Metamfetaminin Yol Açtığı Psikotik Bozukluk (Met Böcekleri)",
+    "nameEn": "Methamphetamine-Induced Psychotic Disorder",
+    "clinicalDescription": {
+      "overview": "Metamfetaminin Yol Açtığı Psikotik Bozukluk, DSM-5-TR'de 'Uyarıcının Yol Açtığı Psikotik Bozukluk' içinde etken maddenin amfetamin türü bir madde (metamfetamin) olduğu tablodur. Belirgin perseküsyon sanrıları, işitsel varsanılar ve tipik olarak deri altında böcekler dolaştığı hissi (formikasyon) ve buna bağlı deriyi kaşıyıp yaralama görülür. Klinik görünüm paranoid şizofreniden ayırt edilemeyecek kadar benzer olabilir.",
+      "epidemiology": "Metamfetamin kullanıcılarında psikotik belirtiler sıktır; düzenli kullanıcıların önemli bir kısmında yaşam boyu en az bir psikotik dönem bildirilir. Yoğun ve uzun süreli kullanım, uyku yoksunluğu ve kalıtsal psikoz yatkınlığı riski artırır.",
+      "etiology": "Mezolimbik dopaminerjik aşırı etkinlik ve tekrarlayan kullanımla gelişen duyarlılaşma temel mekanizmalardır; uzun süreli kullanımda gelişen nörotoksik değişiklikler belirtilerin sürmesine katkıda bulunabilir.",
+      "prognosis": "Çoğu olguda belirtiler kullanım bırakıldıktan sonra günler-haftalar içinde geriler, ancak bir kısmında uzun süre devam eder ya da küçük dozlarla veya stresle hızla yinelenir; bu durumda bağımsız psikotik bozukluk ayırıcı tanısı gerekir. Akut dönemde antipsikotik tedavi ve güvenlik önlemleri gerekebilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Baskın Psikotik Belirtiler",
+        "content": "Klinik tabloda sanrılar ve/veya varsanılar baskındır."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Maddeyle Zamansal ve Nedensel İlişki",
+        "content": "Öykü, muayene ya da laboratuvar bulgularıyla hem (1) belirtilerin metamfetamin (amfetamin türü uyarıcı) entoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ortaya çıktığı, hem de (2) bu maddenin bu tür belirtileri oluşturabilecek nitelikte olduğu gösterilir."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Bağımsız Bozukluk Dışlaması",
+        "content": "Tablo maddeye bağlı olmayan bağımsız bir bozuklukla daha iyi açıklanamaz. Bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlamış olması, akut yoksunluk ya da ağır entoksikasyon sona erdikten sonra uzun bir süre (ör. yaklaşık 1 ay) sürmesi ya da maddeyle ilişkisiz yineleyen ataklar öyküsü."
+      },
+      {
+        "code": "Kriter D & E",
+        "title": "Deliryum Dışlaması ve Klinik Önem",
+        "content": "Bozukluk yalnızca bir deliryum sırasında ortaya çıkmaz ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar."
+      },
+      {
+        "code": "Belirleyici / Ayırıcı Not",
+        "title": "Entoksikasyon ya da Yoksunluk Sırasında Başlayan",
+        "content": "Başlangıcın entoksikasyon mu yoksunluk mu sırasında olduğu belirtilir. Bu tanı, entoksikasyon ya da yoksunluk tanısı yerine, ancak belirtiler tabloya baskın olduğunda ve ayrıca klinik ilgi gerektirecek kadar ağır olduğunda konur."
+      }
+    ]
+  },
+  "phencyclidine_use_disorder": {
+    "id": "phencyclidine_use_disorder",
+    "nameTr": "Fensiklidin (PCP) Kullanım Bozukluğu",
+    "nameEn": "Phencyclidine Use Disorder",
+    "clinicalDescription": {
+      "overview": "Fensiklidin (PCP) Kullanım Bozukluğu, PCP ('melek tozu') ve ketamin gibi benzer etkili disosiyatif anestezik maddelerin sorunlu kullanımıdır. Bu maddeler bedenden ayrılma, gerçekdışılık, uyuşukluk ve yüksek dozda saldırganlık, psikoz ve öngörülemeyen davranışlara yol açar. DSM-5-TR'de hallüsinojenle ilişkili bozukluklar bölümünde yer alır; yoksunluk sendromu insanlarda net olarak tanımlanmadığından yoksunluk ölçütü içermez.",
+      "epidemiology": "PCP kullanımı günümüzde nadirdir ve coğrafi olarak belirli bölgelerde yoğunlaşır; ketaminin keyif amaçlı kullanımı ise bazı ülkelerde artmaktadır. Genç erişkin erkeklerde daha sıktır.",
+      "etiology": "PCP ve ketamin NMDA tipi glutamat reseptörlerini bloke eder (kanal blokajı) ve dopaminerjik etkinliği dolaylı olarak artırır; bu mekanizma şizofreninin glutamat hipotezine de temel oluşturmuştur.",
+      "prognosis": "Uzun süreli kullanımda bellek ve bilişsel bozulma, tekrarlayan psikotik dönemler ve (ketaminde) ağır mesane hasarı (ketamin sistiti) görülebilir. Özgül bir ilaç tedavisi yoktur; psikososyal yaklaşımlar kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/10)",
+        "content": "12 aylık bir dönemde aşağıdaki 10 ölçütten en az ikisinin bulunması (bu madde grubu için yoksunluk ölçütü tanımlanmamıştır):",
+        "items": [
+          "1. Fensiklidin (ya da benzeri madde) çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki."
+        ]
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir."
+      }
+    ]
+  },
+  "hallucinogen_use_disorder": {
+    "id": "hallucinogen_use_disorder",
+    "nameTr": "Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA)",
+    "nameEn": "Hallucinogen Use Disorder",
+    "clinicalDescription": {
+      "overview": "Hallüsinojen Kullanım Bozukluğu (DSM-5-TR'de 'Diğer Hallüsinojen Kullanım Bozukluğu'), LSD, psilosibin içeren mantarlar, meskalin, DMT ve MDMA gibi hallüsinojenlerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açan sorunlu kullanımıdır. Bu maddeler ile fiziksel bağımlılık ve belirgin yoksunluk görülmediğinden yoksunluk ölçütü yoktur; sorun daha çok denetim kaybı, riskli durumlarda kullanım ve psikolojik zararlar etrafında gelişir. PCP ayrı bir başlıkta yer alır.",
+      "epidemiology": "Hallüsinojen kullanım bozukluğu nadir olup yıllık yaygınlığı ergenlerde erişkinlere göre daha yüksektir; erkeklerde daha sıktır. Deneme amaçlı kullanım bozukluk düzeyindeki kullanımdan çok daha yaygındır.",
+      "etiology": "Klasik hallüsinojenler (LSD, psilosibin, meskalin, DMT) esas olarak serotonin 5-HT2A reseptör agonistleridir; MDMA ise serotonin (ve dopamin, noradrenalin) salınımını artırır. Toleransın çok hızlı gelişmesi günlük kullanımı sınırlar.",
+      "prognosis": "Başlıca riskler 'kötü yolculuk' (yoğun panik, paranoya), yargılama bozukluğuna bağlı kazalar, psikoz yatkınlığı olanlarda psikotik bozukluğun ortaya çıkması ve hallüsinojen kalıcı algı bozukluğudur. MDMA'da hipertermi, hiponatremi ve serotonin sendromu riski vardır. Tedavi psikososyaldir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/10)",
+        "content": "12 aylık bir dönemde aşağıdaki 10 ölçütten en az ikisinin bulunması (bu madde grubu için yoksunluk ölçütü tanımlanmamıştır):",
+        "items": [
+          "1. Hallüsinojen çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki."
+        ]
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Etken hallüsinojen belirtilir."
+      }
+    ]
+  },
+  "inhalant_use_disorder": {
+    "id": "inhalant_use_disorder",
+    "nameTr": "Uçucu Madde Kullanım Bozukluğu (Tiner / Bali / Çakmak Gazı)",
+    "nameEn": "Inhalant Use Disorder",
+    "clinicalDescription": {
+      "overview": "Uçucu Madde Kullanım Bozukluğu, tiner, yapıştırıcı ('bali'), çakmak gazı, boya, benzin ve aerosol gibi hidrokarbon bazlı uçucu maddelerin solunarak sarhoşluk amacıyla sorunlu kullanımıdır. Ucuz ve kolay erişilebilir olduğundan özellikle çocuk ve genç ergenlerde, sokakta yaşayan ya da çalışan çocuklarda görülür. Nitritler ve nitröz oksit (gülme gazı) farklı etkileri nedeniyle bu tanının dışında tutulur ve 'diğer madde' olarak ele alınır. Belirgin bir yoksunluk sendromu tanımlanmadığından yoksunluk ölçütü yoktur.",
+      "epidemiology": "Uçucu madde deneme kullanımı erken ergenlikte (12-14 yaş) en sıktır; kullanım bozukluğu ergenlerde binde birkaç, erişkinlerde çok daha düşük düzeyde bildirilir. Sosyoekonomik yoksunluk, sokakta yaşama ve davranım bozukluğu ile güçlü ilişkilidir.",
+      "etiology": "Uçucu hidrokarbonlar yağda çözünür olup hızla beyne geçer ve GABA-A ve NMDA reseptörleri üzerinden alkol ve sedatiflere benzer baskılayıcı etki gösterir. Erken madde kullanımı, aile içi sorunlar, istismar, davranım bozukluğu ve diğer maddelere erişimin kısıtlı olması risk etmenleridir.",
+      "prognosis": "Kardiyak aritmiye bağlı ani ölüm ('ani koklama ölümü') ilk kullanımda bile görülebilir. Uzun süreli kullanım beyaz cevher hasarı (lökoensefalopati), bilişsel bozulma, periferik nöropati, işitme kaybı, karaciğer ve böbrek hasarına yol açar. Sosyal hizmetleri de içeren kapsamlı psikososyal müdahale gerekir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/10)",
+        "content": "12 aylık bir dönemde aşağıdaki 10 ölçütten en az ikisinin bulunması (bu madde grubu için yoksunluk ölçütü tanımlanmamıştır):",
+        "items": [
+          "1. Uçucu madde çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki."
+        ]
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Kullanılan madde belirtilir (ör. tiner, yapıştırıcı, çakmak gazı)."
+      }
+    ]
+  },
+  "tobacco_use_disorder": {
+    "id": "tobacco_use_disorder",
+    "nameTr": "Tütün (Nikotin) Kullanım Bozukluğu",
+    "nameEn": "Tobacco Use Disorder",
+    "clinicalDescription": {
+      "overview": "Tütün Kullanım Bozukluğu, sigara, nargile, puro, çiğneme tütünü ve elektronik sigara gibi nikotin içeren ürünlerin denetimsiz ve zarar verici kullanımıdır. Kullanıcıların çoğu bırakmak istemesine karşın başaramaz; kalkıştan sonraki ilk dakikalar içinde sigara içme, tolerans, yoksunluk ve güçlü aşerme tipiktir. Önlenebilir ölümlerin dünyadaki başlıca nedenidir.",
+      "epidemiology": "Dünyada en yaygın madde kullanım bozukluklarından biridir; günlük sigara içenlerin büyük çoğunluğu tanı ölçütlerini karşılar. Türkiye, erişkin sigara içme oranının yüksek olduğu ülkeler arasındadır. Ruhsal bozukluğu olan bireylerde (şizofreni, bipolar bozukluk, diğer madde kullanım bozuklukları) oran çok daha yüksektir.",
+      "etiology": "Nikotin, nikotinik asetilkolin reseptörleri (özellikle α4β2) üzerinden mezolimbik dopamin salınımını artırır. Kalıtsal katkı belirgindir (nikotin metabolizması ve reseptör genleri); ergenlikte başlama, çevrede sigara içilmesi ve koşullanmış ipuçları kullanımı sürdürür.",
+      "prognosis": "Kendi başına bırakma girişimlerinin uzun dönem başarısı düşüktür. Davranışsal destek ile ilaç tedavisinin (nikotin replasmanı, vareniklin, bupropion) birlikte kullanılması başarıyı belirgin olarak artırır. Bırakmak her yaşta sağlık yararı sağlar."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Sorunlu Kullanım Örüntüsü (12 ayda en az 2/11)",
+        "content": "12 aylık bir dönemde aşağıdaki 11 ölçütten en az ikisinin bulunması:",
+        "items": [
+          "1. Tütün çoğu zaman amaçlanandan daha fazla miktarda ya da daha uzun süre kullanılır.",
+          "2. Kullanımı bırakma ya da azaltma yönünde süreğen bir istek ya da başarısız çabalar vardır.",
+          "3. Maddeyi elde etmek, kullanmak ya da etkilerinden kurtulmak için çok zaman harcanır.",
+          "4. Kullanma yönünde yoğun istek ya da aşerme (craving) duyulur.",
+          "5. Yineleyici kullanım nedeniyle iş, okul ya da evdeki temel yükümlülükler yerine getirilemez.",
+          "6. Kullanımın yol açtığı ya da alevlendirdiği süreğen toplumsal/kişilerarası sorunlara karşın kullanım sürer.",
+          "7. Kullanım nedeniyle önemli toplumsal, mesleki ya da eğlenceye yönelik etkinlikler bırakılır ya da azaltılır.",
+          "8. Fiziksel açıdan tehlikeli durumlarda yineleyici kullanım (ör. araç kullanırken).",
+          "9. Maddenin yol açtığı ya da alevlendirdiği süreğen bedensel/ruhsal bir sorun bilindiği hâlde kullanım sürer.",
+          "10. Tolerans: aynı etki için belirgin olarak artan miktarlar gerekmesi ya da aynı miktarla belirgin olarak azalan etki.",
+          "11. Yoksunluk: maddeye özgü yoksunluk sendromu ya da yoksunluktan kaçınmak veya kurtulmak için aynı (ya da yakın) maddeyi alma."
+        ]
+      },
+      {
+        "code": "Şiddet ve Seyir Belirleyicileri",
+        "title": "Hafif / Orta / Ağır; Erken / Süreğen Düzelme",
+        "content": "Hafif: 2-3 ölçüt, Orta: 4-5 ölçüt, Ağır: 6 ya da daha çok ölçüt. Erken düzelme: en az 3 ay ama 12 aydan kısa süre (aşerme dışında) hiçbir ölçüt yok; süreğen düzelme: 12 ay ya da daha uzun süre. 'Denetimli bir ortamda' belirleyicisi de kullanılabilir. Ayrıca 'idame tedavisi altında' (ör. nikotin replasmanı, vareniklin kullanırken başka ölçüt kalmaması) belirleyicisi kullanılabilir."
+      },
+      {
+        "code": "Not",
+        "title": "Tütüne Özgü Örnekler",
+        "content": "Tütünde rol yükümlülüklerini aksatma ve toplumsal sorunlar diğer maddelere göre daha az belirgindir; tanıda daha çok denetim kaybı (bırakamama), aşerme, tolerans, yoksunluk ve sağlık sorunlarına karşın sürdürme ölçütleri öne çıkar."
+      }
+    ]
+  },
+  "tobacco_withdrawal": {
+    "id": "tobacco_withdrawal",
+    "nameTr": "Tütün (Nikotin) Yoksunluğu",
+    "nameEn": "Tobacco Withdrawal",
+    "clinicalDescription": {
+      "overview": "Tütün Yoksunluğu, en az birkaç hafta günlük tütün kullanımından sonra kullanımın ani bırakılması ya da azaltılmasını izleyen 24 saat içinde başlayan; irritabilite, anksiyete, odaklanma güçlüğü, iştah artışı, huzursuzluk, çökkün duygudurum ve uykusuzlukla seyreden sendromdur. Belirtiler bırakma girişimlerinin başarısız olmasının en önemli nedenlerindendir.",
+      "epidemiology": "Sigarayı bırakmaya çalışan günlük içicilerin yaklaşık yarısı ya da daha fazlasında yoksunluk belirtileri görülür.",
+      "etiology": "Süreğen nikotin maruziyeti nikotinik reseptörlerin sayısını ve duyarlılığını değiştirir; nikotin kesilince dopaminerjik ve noradrenerjik iletimdeki düşüş belirtilere yol açar.",
+      "prognosis": "Belirtiler genellikle ilk günlerde (ilk hafta) zirve yapar ve 2-4 hafta içinde geriler; iştah artışı ve aşerme daha uzun sürebilir. Bırakma sonrası kilo alımı sıktır. Nikotin replasmanı ve diğer ilaç tedavileri yoksunluk belirtilerini hafifletir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Günlük Kullanım",
+        "content": "En az birkaç hafta süren günlük tütün kullanımı."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (24 saat içinde, en az 4/7)",
+        "content": "Kullanımın ani bırakılması ya da azaltılmasından sonraki 24 saat içinde aşağıdakilerden en az dördünün gelişmesi:",
+        "items": [
+          "1. İrritabilite, engellenmişlik duygusu ya da öfke.",
+          "2. Anksiyete.",
+          "3. Odaklanma güçlüğü.",
+          "4. İştah artışı.",
+          "5. Huzursuzluk.",
+          "6. Çökkün duygudurum.",
+          "7. Uykusuzluk."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon ya da yoksunluk dahil başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "caffeine_intoxication": {
+    "id": "caffeine_intoxication",
+    "nameTr": "Kafein Zehirlenmesi (İntoksikasyonu)",
+    "nameEn": "Caffeine Intoxication",
+    "clinicalDescription": {
+      "overview": "Kafein Entoksikasyonu, yakın zamanda yüksek miktarda kafein alınmasının (çoğunlukla günlük 250 mg'ın belirgin olarak üzerinde; kahve, enerji içeceği, kafein tableti) ardından gelişen huzursuzluk, sinirlilik, heyecan, uykusuzluk, yüzde kızarma, sık idrara çıkma, sindirim yakınmaları, kas seğirmeleri, düşünce ve konuşmada dağınıklık, taşikardi/aritmi, yorulmazlık dönemleri ve psikomotor ajitasyonla seyreden tablodur. Çok yüksek dozlarda nöbet, ağır aritmi ve ölüm bildirilmiştir.",
+      "epidemiology": "Kesin yaygınlık bilinmemektedir. Kafein toleransı olmayan kişilerde, enerji içeceği ve kafein takviyesi tüketen gençlerde ve yüksek dozda saf kafein tozu/tablet kullanımında risk artar.",
+      "etiology": "Kafein adenozin reseptör antagonistidir; adenozinin baskılayıcı etkisini engelleyerek santral uyarılma ve sempatik etkinlik yaratır. Kafein metabolizmasını yavaşlatan durumlar (gebelik, bazı ilaçlar ör. fluvoksamin, karaciğer hastalığı) duyarlılığı artırır.",
+      "prognosis": "Kafeinin yarı ömrü birkaç saat olduğundan belirtiler genellikle bir gün içinde geçer. Panik bozukluk ve anksiyete bozukluklarıyla karışabilir; tekrarlayan başvurularda kafein tüketimi mutlaka sorgulanmalıdır. Ağır toksisite acil tıbbi tedavi gerektirir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Yüksek Doz Kafein Alımı",
+        "content": "Yakın zamanda yüksek miktarda kafein alınmış olması (tipik olarak 250 mg'ın belirgin olarak üzerinde)."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Entoksikasyon Belirtileri (En az 5/12)",
+        "content": "Alım sırasında ya da kısa süre sonra aşağıdakilerden en az beşinin gelişmesi:",
+        "items": [
+          "1. Huzursuzluk.",
+          "2. Sinirlilik.",
+          "3. Heyecan / aşırı uyarılmışlık.",
+          "4. Uykusuzluk.",
+          "5. Yüzde kızarma.",
+          "6. Sık idrara çıkma (diürez).",
+          "7. Sindirim sistemi yakınmaları.",
+          "8. Kas seğirmeleri.",
+          "9. Düşünce ve konuşma akışında dağınıklık.",
+          "10. Taşikardi ya da kardiyak aritmi.",
+          "11. Yorulmazlık dönemleri.",
+          "12. Psikomotor ajitasyon."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumuna bağlanamaz ve başka bir maddeyle entoksikasyon dahil başka bir ruhsal bozuklukla (ör. anksiyete bozukluğu) daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "caffeine_withdrawal": {
+    "id": "caffeine_withdrawal",
+    "nameTr": "Kafein Yoksunluğu (Baş Ağrısı, Yorgunluk)",
+    "nameEn": "Caffeine Withdrawal",
+    "clinicalDescription": {
+      "overview": "Kafein Yoksunluğu, uzun süreli günlük kafein kullanımının ani bırakılması ya da azaltılmasından sonraki 24 saat içinde başlayan baş ağrısı, belirgin yorgunluk ya da uyuklama, disforik/çökkün duygudurum ya da irritabilite, odaklanma güçlüğü ve grip benzeri bedensel belirtilerle (bulantı, kusma, kas ağrısı/sertliği) seyreden sendromdur. Hafta sonu ya da tatilde kahve içmemeye bağlı baş ağrıları ve ameliyat öncesi açlık döneminde görülen baş ağrıları tipik örneklerdir.",
+      "epidemiology": "Düzenli kafein tüketenlerin önemli bir kısmında kafein kesildiğinde yoksunluk belirtileri görülür; görece düşük günlük dozlarda bile ortaya çıkabilir.",
+      "etiology": "Süreğen kafein kullanımı adenozin reseptörlerinin sayısında artışa yol açar; kafein kesilince artan adenozin etkisi serebral damarlarda genişleme (baş ağrısı) ve uyuklamaya neden olur.",
+      "prognosis": "Belirtiler genellikle 12-24 saat içinde başlar, 1-2 gün içinde zirve yapar ve 2-9 gün içinde geriler. Yaşamı tehdit etmez; kafein alımının kademeli olarak azaltılması belirtileri önler."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Uzun Süreli Günlük Kullanım",
+        "content": "Uzun süreli günlük kafein kullanımı."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Yoksunluk Belirtileri (24 saat içinde, en az 3/5)",
+        "content": "Kafein kullanımının ani bırakılması ya da azaltılmasından sonraki 24 saat içinde aşağıdakilerden en az üçünün gelişmesi:",
+        "items": [
+          "1. Baş ağrısı.",
+          "2. Belirgin yorgunluk ya da uyuklama.",
+          "3. Disforik ya da çökkün duygudurum veya irritabilite.",
+          "4. Odaklanma güçlüğü.",
+          "5. Grip benzeri belirtiler (bulantı, kusma ya da kas ağrısı/sertliği)."
+        ]
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Klinik Önem ve Dışlama",
+        "content": "Belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; başka bir sağlık durumunun (ör. migren, viral hastalık) fizyolojik etkilerine bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  }
+}

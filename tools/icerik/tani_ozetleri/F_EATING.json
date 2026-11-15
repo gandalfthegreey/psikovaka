@@ -1,0 +1,94 @@
+{
+"anorexia_restricting": {
+ "id": "anorexia_restricting",
+ "nameTr": "Anoreksiya Nervoza (Kısıtlayıcı Tip)",
+ "nameEn": "Anorexia Nervosa (Restricting Type)",
+ "clinicalDescription": {
+  "overview": "Anoreksiya nervozanın, son 3 ay içinde yineleyen tıkınırcasına yeme ya da çıkarma davranışının (kendini kusturma, laksatif, diüretik ya da lavman kötüye kullanımı) bulunmadığı alt tipidir. Kilo kaybı başlıca diyet, açlık ve/veya aşırı egzersizle sağlanır. Kişi belirgin düşük kiloya karşın kilo almaktan yoğun korku duyar, beden algısı bozuktur ve düşük kilonun ciddiyetini çoğu zaman kabul etmez.",
+  "epidemiology": "Anoreksiya nervozanın genç kadınlarda 12 aylık yaygınlığı yaklaşık %0.4 civarındadır; kadın/erkek oranı yaklaşık 10/1'dir. Genellikle ergenlik ya da genç erişkinlikte başlar.",
+  "etiology": "Genetik yatkınlık, mükemmeliyetçilik ve kaygılı mizaç, denetim gereksinimi, incelik idealini öne çıkaran sosyokültürel baskılar ve ergenlik geçişi. Açlığın kendisi bilişsel katılığı ve yemekle uğraşı artırarak tabloyu sürdürür.",
+  "prognosis": "Psikiyatrik bozukluklar içinde ölüm oranı en yüksek olanlardandır (tıbbi komplikasyonlar ve intihar). Ergenlerde aile temelli tedavi (Maudsley), yetişkinlerde geliştirilmiş BDT (CBT-E) ve MANTRA gibi yaklaşımlar, tıbbi izlem ve beslenme rehabilitasyonu (yeniden beslenme sendromuna dikkat) uygulanır. Kısıtlayıcı tipteki kişilerin bir kısmı zamanla tıkınma/çıkarma tipine geçer."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Anoreksiya Nervoza Ortak Ölçütleri",
+   "content": "Gereksinime göre enerji alımının kısıtlanması ve bunun yaş, cinsiyet, gelişim ve bedensel sağlık bağlamında belirgin düşük vücut ağırlığına yol açması (asgari normalin altı; çocuk ve ergende beklenenin altı) (A). Belirgin düşük kiloya karşın kilo almaktan ya da şişmanlamaktan yoğun korku veya kilo alımını engelleyen süregen davranış (B). Vücut ağırlığı ya da biçiminin algılanmasında bozukluk, kendini değerlendirmede bunların aşırı etkisi ya da düşük kilonun ciddiyetini süregen biçimde kabul etmeme (C)."
+  },
+  {
+   "code": "Alt Tip & Şiddet",
+   "title": "Kısıtlayıcı Tip ve Yetişkinde BKİ'ye Göre Şiddet",
+   "content": "Son 3 ayda yineleyen tıkınma ya da çıkarma davranışı yoktur. Yetişkinde şiddet BKİ'ye göre: hafif ≥ 17, orta 16-16.99, ağır 15-15.99, aşırı < 15 kg/m²; çocuk ve ergenlerde BKİ persentilleri kullanılır. Kısmi ve tam yatışma belirleyicileri eklenebilir."
+  }
+ ]
+},
+"anorexia_binge_purge": {
+ "id": "anorexia_binge_purge",
+ "nameTr": "Anoreksiya Nervoza (Tıkınma/Çıkarma Tipi)",
+ "nameEn": "Anorexia Nervosa (Binge-Eating/Purging Type)",
+ "clinicalDescription": {
+  "overview": "Anoreksiya nervozanın, son 3 ay içinde yineleyen tıkınırcasına yeme ya da çıkarma davranışlarının (kendini kusturma, laksatif, diüretik ya da lavman kötüye kullanımı) bulunduğu alt tipidir. Bazı kişiler tıkınma olmadan yalnızca küçük miktarlar yedikten sonra çıkarma yapar. Belirgin düşük kilo bulunduğu için bulimia nervozadan ayrılır: düşük kilo ölçütü karşılanıyorsa tanı bulimia değil anoreksiyadır.",
+  "epidemiology": "Anoreksiya nervozalı kişilerin önemli bir kısmında izlemde tıkınma/çıkarma davranışları ortaya çıkar; alt tipler arası geçiş sıktır.",
+  "etiology": "Anoreksiyanın genel etiyolojisine ek olarak bu tipte dürtüsellik, duygu düzenleme güçlükleri, madde kullanımı ve kendine zarar verme davranışları daha sık görülür.",
+  "prognosis": "Çıkarma davranışları hipokalemi, metabolik alkaloz, aritmi, diş minesi erozyonu, tükürük bezi büyümesi ve el sırtında nasırlaşma (Russell belirtisi) gibi ek tıbbi riskler doğurur; elektrolit izlemi zorunludur. İntihar riski kısıtlayıcı tipe göre daha yüksek olabilir. Tedavi ilkeleri kısıtlayıcı tiple aynıdır (aile temelli tedavi, CBT-E, tıbbi izlem)."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Anoreksiya Nervoza Ortak Ölçütleri",
+   "content": "Enerji alımının kısıtlanmasıyla belirgin düşük vücut ağırlığı (A); düşük kiloya karşın kilo alma korkusu ya da kilo alımını engelleyen süregen davranış (B); beden algısında bozukluk, kendini değerlendirmede kilo/biçimin aşırı etkisi ya da düşük kilonun ciddiyetini kabul etmeme (C)."
+  },
+  {
+   "code": "Alt Tip & Şiddet",
+   "title": "Tıkınma/Çıkarma Tipi",
+   "content": "Son 3 ayda yineleyen tıkınırcasına yeme ya da çıkarma davranışı (kendini kusturma, laksatif, diüretik, lavman kötüye kullanımı) vardır. Şiddet yetişkinde BKİ'ye göre belirlenir (hafif ≥ 17, orta 16-16.99, ağır 15-15.99, aşırı < 15 kg/m²)."
+  }
+ ]
+},
+"atypical_anorexia": {
+ "id": "atypical_anorexia",
+ "nameTr": "Atipik Anoreksiya Nervoza (Kilo Normal Sınırlarda)",
+ "nameEn": "Atypical Anorexia Nervosa",
+ "clinicalDescription": {
+  "overview": "Anoreksiya nervozanın tüm ölçütlerinin karşılandığı, ancak belirgin kilo kaybına karşın kişinin kilosunun normal aralıkta ya da üzerinde kaldığı tablodur. DSM-5'te 'Belirlenmiş diğer beslenme ve yeme bozukluğu' altında örnek olarak yer alır. Kilo 'normal' göründüğü için sıklıkla gözden kaçar; oysa hızlı ve büyük kilo kaybına bağlı bradikardi, ortostatik hipotansiyon, elektrolit bozuklukları ve adet düzensizliği gibi tıbbi komplikasyonlar tipik anoreksiyadaki kadar ağır olabilir.",
+  "epidemiology": "Toplum çalışmalarında tipik anoreksiya nervozadan daha sık görülebileceği bildirilmektedir; özellikle önceden fazla kilolu olan ergenlerde görülür.",
+  "etiology": "Anoreksiya nervoza ile ortak etkenler; kilo damgalanması, kilo verme sonrasında çevreden gelen olumlu geri bildirimler kısıtlamayı pekiştirebilir.",
+  "prognosis": "Tedavi ilkeleri anoreksiya nervozayla aynıdır. Kilo kaybının miktarı ve hızı tıbbi risk değerlendirmesinde BKİ'den daha önemlidir; 'normal kilo' tedavi gereksinimini dışlamaz."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Belirlenmiş Diğer Beslenme ve Yeme Bozukluğu Örneği",
+   "content": "Anoreksiya nervoza ölçütlerinin tümü karşılanır; ancak belirgin kilo kaybına karşın kişinin vücut ağırlığı normal aralıkta ya da üzerindedir."
+  },
+  {
+   "code": "Not",
+   "title": "Tıbbi Risk Değerlendirmesi",
+   "content": "DSM-5 'belirgin kilo kaybı' için sayısal bir eşik vermez; değerlendirme klinik yargıya dayanır. Kilo kaybının hızı ve miktarı, yaşamsal bulgular ve elektrolitler tıbbi risk açısından izlenmelidir."
+  }
+ ]
+},
+"purging_disorder": {
+ "id": "purging_disorder",
+ "nameTr": "Çıkarma Bozukluğu (Tıkınma Olmaksızın Kusma)",
+ "nameEn": "Purging Disorder",
+ "clinicalDescription": {
+  "overview": "Kilo ya da beden biçimini etkilemek amacıyla kendini kusturma, laksatif, diüretik ya da başka ilaçların kötüye kullanımı gibi yineleyen çıkarma davranışlarının, tıkınırcasına yeme epizodları olmaksızın görüldüğü tablodur. DSM-5'te 'Belirlenmiş diğer beslenme ve yeme bozukluğu' altında örnek olarak yer alır. Kişi düşük kilolu değildir (düşük kiloluysa anoreksiya nervoza, tıkınma/çıkarma tipi düşünülür). Kişi normal ya da küçük miktarda yemeği bile 'fazla' algılayıp çıkarma yapabilir.",
+  "epidemiology": "Genç kadınlarda yaşam boyu birkaç yüzde düzeyinde bildirilmektedir; kesin oranlar kullanılan ölçütlere göre değişir.",
+  "etiology": "Bulimia nervoza ile benzer biçimde beden memnuniyetsizliği, kendini kilo ve biçimle değerlendirme, duygu düzenleme güçlükleri ve sosyokültürel incelik baskısı.",
+  "prognosis": "Çıkarma davranışlarına bağlı hipokalemi, aritmi, diş erozyonu ve sindirim sistemi sorunları açısından tıbbi izlem gerekir. Bulimia nervozaya yönelik geliştirilmiş BDT (CBT-E) uyarlanarak kullanılır."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Belirlenmiş Diğer Beslenme ve Yeme Bozukluğu Örneği",
+   "content": "Tıkınırcasına yeme olmaksızın, kilo ya da beden biçimini etkilemek amacıyla yineleyen çıkarma davranışları (kendini kusturma; laksatif, diüretik ya da diğer ilaçların kötüye kullanımı)."
+  },
+  {
+   "code": "Ayırıcı Tanı",
+   "title": "Anoreksiya ve Bulimia ile Ayrım",
+   "content": "Belirgin düşük kilo varsa anoreksiya nervoza (tıkınma/çıkarma tipi); nesnel tıkınma epizodları da varsa bulimia nervoza değerlendirilir. DSM-5 bu örnek için sıklık ve süre eşiği belirtmez; araştırmalarda çoğunlukla bulimia nervozaya benzer eşikler kullanılmıştır."
+  }
+ ]
+}
+}

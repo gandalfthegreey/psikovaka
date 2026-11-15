@@ -1,0 +1,37 @@
+{
+  "other_specified_feeding": {
+    "id": "other_specified_feeding",
+    "nameTr": "Belirlenmiş Diğer Bir Beslenme ve Yeme Bozukluğu (Sınırlı Tıkınma)",
+    "nameEn": "Other Specified Feeding or Eating Disorder",
+    "clinicalDescription": {
+      "overview": "Belirlenmiş Diğer Bir Beslenme ya da Yeme Bozukluğu (OSFED), beslenme ve yeme bozukluklarına özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak anoreksiya nervoza, bulimiya nervoza, tıkınırcasına yeme bozukluğu, ARFID, pika ya da geviş getirme bozukluğunun ölçütlerinin tümüyle karşılanmadığı ve klinisyenin nedenini belirttiği durumlarda kullanılır. DSM-IV'teki 'başka türlü adlandırılamayan yeme bozukluğu' (EDNOS) kategorisinin yerini almıştır. Bu kategori 'hafif' bir yeme bozukluğu anlamına gelmez; tıbbi riskler tam ölçütlü bozukluklar kadar ağır olabilir.",
+      "epidemiology": "Klinik örneklemlerde yeme bozukluğu tanısı alanların önemli bir bölümü bu kategoriye girer; özellikle atipik anoreksiya nervoza ergen ve genç kadınlarda sık görülür.",
+      "etiology": "Etiyoloji özgül yeme bozukluklarıyla ortaktır: kalıtsal yatkınlık, mükemmeliyetçilik, beden memnuniyetsizliği, diyet yapma, zayıflık idealinin içselleştirilmesi ve duygudurum düzenleme güçlükleri.",
+      "prognosis": "Gidiş ve tıbbi riskler özgül bozukluklara benzer; atipik anoreksiyada kilo normal aralıkta olsa bile elektrolit bozukluğu ve bradikardi gibi ağır komplikasyonlar görülebilir. Tedavi en yakın özgül bozukluğun ilkelerine (ör. yeme bozukluklarına yönelik BDT, aile temelli tedavi) göre planlanır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Belirlenmiş Diğer Bir Beslenme ya da Yeme Bozukluğu",
+        "content": "Beslenme ya da Yeme Bozukluğu grubuna özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı durumlarda kullanılır. Klinisyen ölçütlerin neden karşılanmadığını belirtir (ör. 'düşük sıklıkta tıkınırcasına yeme bozukluğu')."
+      },
+      {
+        "code": "Örnekler",
+        "title": "DSM-5-TR'de Verilen Örnek Tablolar",
+        "content": "Bu kategoriyle belirtilebilecek tablolara örnekler:",
+        "items": [
+          "1. Atipik anoreksiya nervoza: anoreksiya ölçütleri karşılanır, ancak belirgin kilo kaybına karşın kilo normal aralıkta ya da üzerindedir.",
+          "2. Düşük sıklıkta ve/veya kısa süreli bulimiya nervoza: tıkınma ve uygunsuz telafi davranışları ortalama haftada birden az ve/veya 3 aydan kısa süredir.",
+          "3. Düşük sıklıkta ve/veya kısa süreli tıkınırcasına yeme bozukluğu: tıkınma atakları ortalama haftada birden az ve/veya 3 aydan kısa süredir.",
+          "4. Çıkarma bozukluğu (purging disorder): tıkınma olmaksızın kilo ya da beden şeklini etkilemek için yineleyici çıkarma davranışları (kendini kusturma, laksatif, diüretik).",
+          "5. Gece yeme sendromu: uykudan uyanıp yeme ya da akşam yemeğinden sonra aşırı yiyecek tüketme; kişi bunun farkındadır ve hatırlar."
+        ]
+      },
+      {
+        "code": "Belirtilmemiş ile Farkı",
+        "title": "Nedenin Belirtilmesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş' kategori kullanılır."
+      }
+    ]
+  }
+}

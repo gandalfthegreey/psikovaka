@@ -1,0 +1,71 @@
+{
+"dissociative_trance": {
+ "id": "dissociative_trance",
+ "nameTr": "Dissosiyatif Trans Bozukluğu",
+ "nameEn": "Dissociative Trance Disorder",
+ "clinicalDescription": {
+  "overview": "Kişinin yakın çevresine ilişkin farkındalığının akut olarak daraldığı ya da tümüyle kaybolduğu, çevresel uyaranlara karşı derin bir tepkisizlik ve duyarsızlıkla kendini gösteren tablodur. Tepkisizliğe kişinin farkında olmadığı ya da denetleyemediği küçük kalıplaşmış davranışlar (örn. parmak hareketleri), geçici felç ya da bilinç kaybı eşlik edebilir. Tanı için trans durumunun geniş kabul gören ortak bir kültürel ya da dinsel uygulamanın olağan parçası olmaması ve istem dışı, sıkıntı verici olması gerekir. DSM-5-TR'de ayrı bir tanı değil, 'Belirlenmiş diğer dissosiyatif bozukluk' altında örnek olarak yer alır; ICD-11'de ise 'Trans bozukluğu' ayrı bir tanıdır.",
+  "epidemiology": "Güney ve Güneydoğu Asya, Afrika ve Latin Amerika'daki klinik örneklemlerde daha sık bildirilmektedir; kesin yaygınlık bilinmemektedir.",
+  "etiology": "Travmatik ya da yoğun stres etkenleri, dissosiyasyona yatkınlık, telkine yatkınlık ve kültürel olarak paylaşılan anlam sistemleri rol oynar.",
+  "prognosis": "Ataklar genellikle kısa sürelidir. Tedavide kültürel açıdan duyarlı bir yaklaşım, stres etkenlerinin ve travmanın ele alınması, eşlik eden ruhsal bozuklukların tedavisi önerilir. Epilepsi, katatoni ve diğer tıbbi nedenler ayırıcı tanıda dışlanmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Farkındalığın Akut Daralması/Kaybı",
+   "content": "Yakın çevreye ilişkin farkındalığın akut olarak daralması ya da tamamen kaybı; çevresel uyaranlara derin tepkisizlik ya da duyarsızlık. Kişinin farkında olmadığı küçük kalıplaşmış hareketler, geçici felç ya da bilinç kaybı eşlik edebilir."
+  },
+  {
+   "code": "Dışlama",
+   "title": "Kültürel Uygulamalardan Ayrım ve Diğer Nedenler",
+   "content": "Trans, geniş kabul gören ortak kültürel ya da dinsel bir uygulamanın olağan parçası değildir; belirgin sıkıntı ya da işlev bozulmasına yol açar. Ayrı kimlik durumlarının belirgin olduğu ve bunların bir 'ele geçiren' varlık olarak yaşandığı tablolarda dissosiyatif kimlik bozukluğu değerlendirilir. Madde, nöbet bozukluğu ve diğer tıbbi durumlar dışlanmalıdır."
+  }
+ ]
+},
+"possession_trance": {
+ "id": "possession_trance",
+ "nameTr": "Ele Geçirilme Transı Bozukluğu (Cin/Ruh Çarpması İnancı)",
+ "nameEn": "Possession Trance Disorder",
+ "clinicalDescription": {
+  "overview": "Kişinin olağan kimlik duygusunun yerini, dışarıdan gelen bir 'ele geçiren' kimliğin (ruh, cin, tanrısal güç ya da başka bir kişi) aldığı ve bu dönemde konuşma, davranış ve hareketlerin bu varlık tarafından yönetiliyormuş gibi yaşandığı trans durumudur. Dönemler sıklıkla epizodiktir ve sonrasında kısmi ya da tam amnezi bulunabilir. Ele geçirilme yaşantıları birçok kültürde dinsel ve geleneksel uygulamaların olağan bir parçası olabilir; bu durumlar bozukluk sayılmaz. Bozukluktan söz edebilmek için yaşantının istem dışı, yineleyici ve sıkıntı verici olması, işlevselliği bozması ve kültürel bağlamda bile olağan dışı (zamanı ve yeri uygunsuz, uzun süren) görülmesi gerekir. DSM-5-TR'de ayrı bir tanı değildir: kimlikte belirgin süreksizlik ve amnezi ölçütleri karşılanıyorsa dissosiyatif kimlik bozukluğu (ölçütleri açıkça 'ele geçirilme' biçimindeki sunumu da kapsar), karşılanmıyorsa belirlenmiş diğer dissosiyatif bozukluk olarak kodlanır. ICD-11'de ise 'Ele geçirilme transı bozukluğu' ayrı bir tanıdır.",
+  "epidemiology": "Hindistan, Sri Lanka, Güneydoğu Asya, Afrika ve Orta Doğu dahil birçok toplumda bildirilmektedir; Türkiye'de 'cin çarpması' inancıyla ilişkili başvurular klinikte karşılaşılan bir durumdur. Kesin yaygınlık bilinmemektedir.",
+  "etiology": "Travma, çatışmalı aile ilişkileri, ifade edilemeyen duygusal sıkıntı ve güçsüzlük durumları, dissosiyatif yatkınlık ve yaşantıyı anlamlandıran kültürel-dinsel inanç sistemleri birlikte rol oynar. Ele geçirilme yaşantısı kimi zaman kişinin doğrudan dile getiremediği sıkıntıyı kültürel olarak kabul gören bir dille ifade etmesine olanak tanır.",
+  "prognosis": "Kültürel açıdan duyarlı, kişinin ve ailesinin inançlarını küçümsemeyen bir yaklaşım tedaviye uyumun anahtarıdır. Travma odaklı ve dissosiyasyona yönelik psikoterapiler uygulanır. Ayırıcı tanıda psikotik bozukluklar (gerçeği değerlendirme bozuksa), epilepsi (özellikle temporal lob), işlevsel nöbetler ve madde kullanımı dışlanmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Ele Geçirilme Biçiminde Kimlik Değişikliği",
+   "content": "Olağan kimlik duygusunun, dışarıdan gelen bir ruh, güç, tanrısal varlık ya da başka bir kişiye ait kimlik tarafından geçici olarak yerinden edildiği; davranış ve hareketlerin bu varlık tarafından denetleniyormuş gibi yaşandığı istem dışı trans dönemleri. Dönemler sonrasında amnezi olabilir."
+  },
+  {
+   "code": "DSM-5-TR'de Kodlama",
+   "title": "Kültürel Uygulamadan Ayrım ve Tanı Seçimi",
+   "content": "Yaşantı, geniş kabul gören kültürel ya da dinsel bir uygulamanın olağan parçasıysa tanı konmaz. Belirgin sıkıntı ya da işlev bozulması varsa: ayrı kimlik durumları ve yineleyen amnezi ölçütleri karşılanıyorsa dissosiyatif kimlik bozukluğu (ele geçirilme biçimli), karşılanmıyorsa belirlenmiş diğer dissosiyatif bozukluk tanısı konur."
+  }
+ ]
+},
+"coercive_persuasion_dissociation": {
+ "id": "coercive_persuasion_dissociation",
+ "nameTr": "Yoğun Zorlayıcı İkna Sonrası Kimlik Bozulması (Tarikat Travması)",
+ "nameEn": "Identity Disturbance Due to Prolonged Coercive Persuasion",
+ "clinicalDescription": {
+  "overview": "Uzun süreli ve yoğun zorlayıcı ikna süreçlerine (beyin yıkama, düşünce reformu, esaret altında ideolojik telkin, işkence, uzun süreli siyasi tutukluluk, tarikat/kült ya da terör örgütlerince devşirilme) maruz kalan kişilerde kimlik duygusunda süregen değişiklikler ya da kimliğin bilinçli olarak sorgulanmasıyla giden tablodur. Kişi kendi değerlerine, inançlarına, geçmişine ve ilişkilerine yabancılaşabilir; örgütten ayrıldıktan sonra 'iki kimlik arasında kalma', karar verememe ve kimlik karmaşası yaşayabilir. DSM-5-TR'de 'Belirlenmiş diğer dissosiyatif bozukluk' altında örnek olarak yer alır.",
+  "epidemiology": "Güvenilir yaygınlık verisi yoktur; kült ve yüksek denetimli grup deneyimi olan kişilerde, eski esir ve siyasi tutuklularda bildirilmektedir.",
+  "etiology": "Yalıtılma, uyku ve besin kısıtlaması, korku ve suçluluk aracılığıyla denetim, eski kimlik ve ilişkilerin sistematik olarak değersizleştirilmesi, bağımlılık yaratan ödül-ceza döngüleri ve dissosiyasyona yatkınlık.",
+  "prognosis": "Güvenli bir ortamda kimliğin ve özerkliğin yeniden inşasına yönelik psikoterapi, psikoeğitim (zorlayıcı denetim süreçlerinin anlaşılması), travma odaklı tedavi ve sosyal ağların yeniden kurulması yararlıdır. Eşlik eden TSSB, depresyon ve anksiyete sık görülür ve ayrıca ele alınmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Belirlenmiş Diğer Dissosiyatif Bozukluk Örneği",
+   "content": "Yoğun ve uzun süreli zorlayıcı ikna sürecine (beyin yıkama, düşünce reformu, esaret altında telkin, işkence, uzun süreli siyasi tutukluluk, tarikat ya da terör örgütlerince devşirilme) maruz kalmış kişilerde kimlikte süregen değişiklikler ya da kimliğin bilinçli olarak sorgulanması."
+  },
+  {
+   "code": "Not",
+   "title": "Klinik Eşik ve Ayırıcı Tanı",
+   "content": "Belirtiler belirgin sıkıntı ya da işlev bozulmasına yol açmalıdır. Dissosiyatif kimlik bozukluğu, TSSB (dissosiyatif belirtilerle), majör depresif bozukluk ve psikotik bozukluklar ayırıcı tanıda değerlendirilir; yalnızca inanç ya da ideoloji değişikliği tek başına bozukluk değildir."
+  }
+ ]
+}
+}

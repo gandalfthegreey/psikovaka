@@ -1,0 +1,186 @@
+{
+"narcolepsy_without_cataplexy": {
+ "id": "narcolepsy_without_cataplexy",
+ "nameTr": "Narkolepsi (Katapleksi Olmayan Tip)",
+ "nameEn": "Narcolepsy without Cataplexy",
+ "clinicalDescription": {
+  "overview": "Karşı konulamaz uyku ihtiyacı, gün içinde uykuya dalma ya da şekerleme atakları ile seyreden ancak katapleksinin (duygularla tetiklenen ani kas tonusu kaybı) bulunmadığı narkolepsi biçimidir. Uyku felci ve uykuya dalarken/uyanırken görülen canlı varsanılar (hipnagojik/hipnopompik) eşlik edebilir. DSM-5'te tanı, katapleksi yoksa beyin-omurilik sıvısında hipokretin eksikliği ya da uyku laboratuvarı (polisomnografi ve Çoklu Uyku Latansı Testi, MSLT) bulgularıyla konur. DSM-5'in özgül alt tipi 'katapleksi olmaksızın ancak hipokretin eksikliği ile' biçimidir; uluslararası uyku sınıflamasında (ICSD-3) katapleksisiz ve hipokretin düzeyi normal ya da ölçülmemiş olgular 'Narkolepsi Tip 2' olarak adlandırılır.",
+  "epidemiology": "Narkolepsinin genel yaygınlığı yaklaşık on binde 2-5'tir. Başlangıç çoğunlukla ergenlik ve genç erişkinliktedir.",
+  "etiology": "Tip 1 narkolepside lateral hipotalamustaki hipokretin (oreksin) nöronlarının otoimmün kaybı ve HLA-DQB1*06:02 ile güçlü ilişki bilinmektedir; katapleksisiz biçimde hipokretin düzeyi çoğu zaman normaldir ve mekanizma daha az aydınlatılmıştır.",
+  "prognosis": "Ömür boyu süren bir durumdur. Planlı kısa şekerlemeler, düzenli uyku-uyanıklık programı, uyanıklığı artırıcı ilaçlar ve araç kullanımı ile iş güvenliği konusunda danışmanlık uygulanır. Bazı olgularda izlemde katapleksi gelişerek tablo Tip 1'e dönüşebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Karşı Konulamaz Uyku İhtiyacı (≥ 3 gün/hafta, ≥ 3 ay)",
+   "content": "Aynı gün içinde yineleyen karşı konulamaz uyku ihtiyacı, uykuya dalma ya da şekerleme dönemleri; son 3 ay boyunca haftada en az 3 kez."
+  },
+  {
+   "code": "Kriter B",
+   "title": "Doğrulayıcı Bulgu (Katapleksi yoksa)",
+   "content": "Katapleksi bulunmadığında aşağıdakilerden en az biri gerekir: beyin-omurilik sıvısında hipokretin-1 eksikliği (sağlıklı bireylerin değerlerinin üçte biri ya da daha azı veya ≤ 110 pg/mL) veya gece polisomnografisinde REM uyku latansının ≤ 15 dakika olması ya da MSLT'de ortalama uyku latansının ≤ 8 dakika olup iki ya da daha fazla uykuya dalış REM döneminin (SOREMP) saptanması."
+  }
+ ]
+},
+"obstructive_sleep_apnea": {
+ "id": "obstructive_sleep_apnea",
+ "nameTr": "Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi",
+ "nameEn": "Obstructive Sleep Apnea Hypopnea",
+ "clinicalDescription": {
+  "overview": "Uyku sırasında üst solunum yolunun yineleyen biçimde tamamen (apne) ya da kısmen (hipopne) tıkanmasıyla giden solunumla ilişkili uyku bozukluğudur. Gece horlama, horultu, soluk kesilmesi ve nefes nefese uyanma; gündüz aşırı uykululuk, yorgunluk, sabah baş ağrısı ve dinlendirmeyen uyku tipiktir. Dikkat ve bellek güçlükleri, irritabilite ve depresif belirtiler eşlik edebileceğinden psikiyatrik yakınmalarla başvurabilir.",
+  "epidemiology": "Çocuklarda yaklaşık %1-2, orta yaşlı erişkinlerde %2-15 civarında, ileri yaşlarda daha da yüksek oranlarda görülür. Erkeklerde daha sıktır; kadınlarda menopoz sonrası risk artar.",
+  "etiology": "Obezite (en önemli risk etkeni), boyun çevresinin kalınlığı, kraniyofasiyal yapı özellikleri, büyük bademcik/geniz eti (çocuklarda), ileri yaş, erkek cinsiyet, alkol ve sedatif kullanımı.",
+  "prognosis": "Tedavi edilmezse hipertansiyon, kalp-damar hastalığı, inme, metabolik bozukluklar ve trafik kazası riskini artırır. Sürekli pozitif hava yolu basıncı (CPAP) ilk basamak tedavidir; kilo verme, ağız içi aygıtlar ve uygun olgularda cerrahi seçeneklerdir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Polisomnografi Bulgusu (AHİ ölçütleri)",
+   "content": "1 ya da 2: (1) Polisomnografide uyku saati başına en az 5 tıkayıcı apne ya da hipopne ve şu belirtilerden biri: gece solunum bozuklukları (horlama, horultu/nefes nefese kalma, solunum duraklamaları) veya yeterli uyku fırsatına karşın gündüz uykululuk, yorgunluk ya da dinlendirmeyen uyku (başka bir ruhsal bozukluk ya da tıbbi durumla daha iyi açıklanamayan). (2) Eşlik eden belirtilerden bağımsız olarak uyku saati başına 15 ya da daha fazla tıkayıcı apne ve/veya hipopne."
+  },
+  {
+   "code": "Şiddet Belirleyicisi",
+   "title": "Apne-Hipopne İndeksine (AHİ) Göre",
+   "content": "Hafif: AHİ 15'ten az; orta: AHİ 15-30; ağır: AHİ 30'dan fazla."
+  }
+ ]
+},
+"central_sleep_apnea": {
+ "id": "central_sleep_apnea",
+ "nameTr": "Santral Uyku Apnesi (Cheyne-Stokes)",
+ "nameEn": "Central Sleep Apnea",
+ "clinicalDescription": {
+  "overview": "Solunum yolu tıkanıklığı olmaksızın, beyin sapındaki solunum denetiminin değişkenliğine bağlı olarak uykuda solunum çabasının durduğu ya da azaldığı (santral apne ve hipopneler) solunumla ilişkili uyku bozukluğudur. Gece sık uyanmalar, uykusuzluk, dinlendirmeyen uyku ve gündüz uykululuk görülür. Cheyne-Stokes solunumu bu bozukluğun bir alt tipidir: soluk hacminin periyodik olarak artıp azaldığı (kreşendo-dekreşendo) bir örüntüdür ve sıklıkla kalp yetmezliği ya da inmeyle ilişkilidir.",
+  "epidemiology": "Genel toplumda seyrektir; kalp yetmezliği, inme sonrası ve uzun süreli opioid kullanan hastalarda belirgin olarak sıktır. İleri yaş ve erkek cinsiyette daha yaygındır.",
+  "etiology": "Kalp yetmezliğinde dolaşım süresinin uzaması ve karbondioksite aşırı duyarlılık, nörolojik hastalıklar (inme, beyin sapı lezyonları), opioidlerin solunum merkezini baskılaması; idiyopatik biçimde belirgin bir neden saptanmaz.",
+  "prognosis": "Altta yatan hastalığın (kalp yetmezliği) en uygun tedavisi, opioid dozunun gözden geçirilmesi ve uygun olgularda pozitif hava yolu basıncı tedavileri uygulanır. Prognoz büyük ölçüde altta yatan hastalığa bağlıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Polisomnografi Bulgusu ve Dışlama",
+   "content": "Polisomnografide uyku saati başına 5 ya da daha fazla santral apne (A). Bozukluk başka bir güncel uyku bozukluğuyla daha iyi açıklanamaz (B)."
+  },
+  {
+   "code": "Alt Tipler",
+   "title": "İdiyopatik, Cheyne-Stokes, Opioid Kullanımıyla Birlikte",
+   "content": "İdiyopatik santral uyku apnesi (solunum çabasının değişkenliğine bağlı, yol tıkanıklığı olmayan yineleyen apne ve hipopneler); Cheyne-Stokes solunumu (saatte en az 5 olay sıklığında santral apne ve hipopnelere yol açan periyodik kreşendo-dekreşendo örüntüsü ve sık uyanmalar); opioid kullanımıyla birlikte santral uyku apnesi. Şiddet, solunum bozukluklarının sıklığı, oksijen desatürasyonu ve uyku bölünmesine göre değerlendirilir."
+  }
+ ]
+},
+"sleep_related_hypoventilation": {
+ "id": "sleep_related_hypoventilation",
+ "nameTr": "Uykuda Hipoventilasyon (Ondine Laneti Dahil)",
+ "nameEn": "Sleep-Related Hypoventilation",
+ "clinicalDescription": {
+  "overview": "Uykuda solunumun azalmasına bağlı olarak kanda karbondioksit düzeyinin yükseldiği (hiperkapni) solunumla ilişkili uyku bozukluğudur. Sabah baş ağrısı, dinlendirmeyen uyku, gündüz uykululuk ve ilerleyen olgularda sağ kalp yetmezliği bulguları görülebilir. Doğuştan santral alveoler hipoventilasyon sendromu ('Ondine laneti') bu grubun nadir bir alt tipidir: yenidoğan döneminde başlayan, özellikle uykuda otomatik solunum denetiminin yetersizliğiyle giden genetik bir durumdur.",
+  "epidemiology": "İdiyopatik ve doğuştan biçimler çok nadirdir. Eşlik eden (komorbid) biçim çok daha sıktır; özellikle obezite hipoventilasyon sendromu, KOAH ve nöromüsküler hastalıklarda görülür.",
+  "etiology": "Doğuştan biçimde PHOX2B gen mutasyonu; eşlik eden biçimde akciğer hastalıkları (interstisyel akciğer hastalığı, KOAH), nöromüsküler ve göğüs duvarı hastalıkları, ağır obezite ve solunumu baskılayan ilaçlar (benzodiazepinler, opioidler).",
+  "prognosis": "Noninvaziv mekanik ventilasyon temel tedavidir; doğuştan biçimde çoğu zaman yaşam boyu solunum desteği gerekir. Solunumu baskılayan ilaçlardan kaçınılmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Polisomnografi Bulgusu ve Dışlama",
+   "content": "Polisomnografide artmış karbondioksit düzeyiyle ilişkili azalmış solunum dönemleri; nesnel karbondioksit ölçümü yoksa apne/hipopne olaylarıyla ilişkili olmayan süregen düşük oksijen satürasyonu hipoventilasyonu düşündürebilir (A). Başka bir güncel uyku bozukluğuyla daha iyi açıklanamaz (B)."
+  },
+  {
+   "code": "Alt Tipler",
+   "title": "İdiyopatik, Doğuştan Santral Alveoler, Eşlik Eden",
+   "content": "İdiyopatik hipoventilasyon (belirli bir nedene bağlanamaz); doğuştan santral alveoler hipoventilasyon (Ondine laneti; doğumda ya da erken dönemde başlayan, uykuda ağırlaşan yüzeyel solunum); eşlik eden uykuya bağlı hipoventilasyon (akciğer, nöromüsküler ya da göğüs duvarı hastalığı, ilaç kullanımı gibi bir tıbbi durumun sonucu)."
+  }
+ ]
+},
+"circadian_delayed_sleep": {
+ "id": "circadian_delayed_sleep",
+ "nameTr": "Sirkadiyen Ritim Bozukluğu (Gecikmiş Uyku Evresi Tipi)",
+ "nameEn": "Circadian Rhythm Sleep Disorder (Delayed Sleep Phase Type)",
+ "clinicalDescription": {
+  "overview": "Ana uyku döneminin istenen ya da toplumsal olarak beklenen saatlere göre belirgin biçimde (genellikle 2 saatten fazla) geç olduğu sirkadiyen ritim uyku-uyanıklık bozukluğudur. Kişi geceyarısından çok sonra uyuyabilir ve sabah okula ya da işe uygun saatte uyanmakta büyük güçlük çeker; buna karşın kendi programına bırakıldığında uyku süresi ve niteliği yaşına göre normaldir. Uykusuzluk bozukluğu ya da 'tembellik' ile karıştırılabilir.",
+  "epidemiology": "Ergen ve genç erişkinlerde en sık görülen sirkadiyen ritim bozukluğudur; bu yaş grubunda oran belirgin olarak daha yüksektir. Ailesel olgular bildirilmiştir.",
+  "etiology": "Biyolojik saatin doğal olarak geç ayarlı olması, akşam ışığına aşırı duyarlılık, ergenlikteki biyolojik evre kayması, gece ekran ve ışık maruziyeti; saat genlerinde (örn. CRY1) çeşitlemeler.",
+  "prognosis": "Sabah parlak ışık maruziyeti, akşam ışıktan kaçınma, uygun zamanda melatonin ve düzenli uyku programı etkilidir. Akademik ve mesleki işlevsellik etkilenebilir; depresyon ve madde kullanımı ile ilişkili olabilir. Tedavi bırakıldığında yineleme sıktır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
+   "content": "Başlıca sirkadiyen sistemdeki değişikliğe ya da içsel ritim ile fiziksel çevre veya toplumsal/mesleki programın gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen ya da yineleyen uyku bölünmesi (A); bunun aşırı uykululuk, uykusuzluk ya da her ikisine yol açması (B); belirgin sıkıntı ya da işlev bozulması (C)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Gecikmiş Uyku Evresi Tipi",
+   "content": "Ana uyku döneminin başlangıç ve uyanma saatlerinde gecikme örüntüsü; istenen ya da toplumsal olarak kabul edilen saatte uykuya dalamama ve uyanamama. Ailesel ve 24 saatlik olmayan tiple örtüşen biçimler belirtilebilir. Tanıda uyku günlüğü ve aktigrafi kullanılır."
+  }
+ ]
+},
+"circadian_advanced_sleep": {
+ "id": "circadian_advanced_sleep",
+ "nameTr": "Sirkadiyen Ritim Bozukluğu (Erken Uyku Evresi Tipi)",
+ "nameEn": "Circadian Rhythm Sleep Disorder (Advanced Sleep Phase Type)",
+ "clinicalDescription": {
+  "overview": "Ana uyku döneminin istenen ya da toplumsal olarak beklenen saatlere göre birkaç saat erken olduğu sirkadiyen ritim uyku-uyanıklık bozukluğudur. Kişi akşam erken saatlerde karşı konulamaz uykululuk yaşar ve sabahın çok erken saatlerinde uyanır; uyanmak istediği saate kadar uyuyamaz. Sabah erken uyanma yakınması nedeniyle depresyonla karıştırılabilir; ancak uyku süresi ve niteliği kendi programında normaldir.",
+  "epidemiology": "Orta yaş ve üzerinde daha sık görülür ve yaşla birlikte artar. Ailesel (otozomal dominant) biçimleri tanımlanmıştır.",
+  "etiology": "Yaşlanmayla birlikte sirkadiyen evrenin öne kayması; ailesel biçimlerde saat genlerinde (örn. PER2) mutasyonlar.",
+  "prognosis": "Akşam saatlerinde parlak ışık tedavisi ve uyku programının düzenlenmesi yararlıdır. Erken uyanmanın nedeni olarak depresyon ve uykusuzluk bozukluğu ayırıcı tanıda değerlendirilmelidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
+   "content": "Sirkadiyen sistem değişikliği ya da içsel ritim ile istenen program arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Erken Uyku Evresi Tipi",
+   "content": "Ana uyku döneminin başlangıç ve uyanma saatlerinin istenenden birkaç saat erken olduğu örüntü; erken sabah uykusuzluğu ve akşam aşırı uykululuk. Ailesel biçim belirtilebilir."
+  }
+ ]
+},
+"circadian_shift_work": {
+ "id": "circadian_shift_work",
+ "nameTr": "Sirkadiyen Ritim Bozukluğu (Vardiyalı Çalışma Tipi)",
+ "nameEn": "Circadian Rhythm Sleep Disorder (Shift Work Type)",
+ "clinicalDescription": {
+  "overview": "Olağan gündüz çalışma saatleri dışında (özellikle gece) düzenli olarak çalışmayı gerektiren iş programıyla ilişkili olarak ana uyku döneminde uykusuzluk ve/veya ana uyanıklık döneminde (iş sırasında) aşırı uykululukla giden sirkadiyen ritim uyku-uyanıklık bozukluğudur. Gece vardiyası sonrası gündüz uykusu kısa ve bölünmüştür; iş sırasında dikkat azalır ve kaza riski artar.",
+  "epidemiology": "Vardiyalı çalışanlar iş gücünün önemli bir kısmını oluşturur; gece çalışanların bir bölümünde bozukluk düzeyinde belirtiler görülür. Belirtiler yaş ilerledikçe ve 'sabahçıl' kronotipte daha belirgindir.",
+  "etiology": "İçsel sirkadiyen ritim ile dayatılan uyku-uyanıklık programı arasındaki uyumsuzluk; işe gidip gelirken gün ışığına maruziyet, gündüz uyku ortamının gürültülü ve aydınlık olması, sık değişen vardiya düzenleri.",
+  "prognosis": "Vardiya bırakıldığında genellikle düzelir. Planlı şekerleme, iş sırasında parlak ışık, eve dönüşte güneş gözlüğü, karanlık ve sessiz uyku ortamı ve vardiyaların ileri yönde (sabah→akşam→gece) döndürülmesi yararlıdır. Uzun dönemde metabolik, kalp-damar ve duygudurum sorunları riski artar."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
+   "content": "İçsel ritim ile iş programının gerektirdiği uyku-uyanıklık takvimi arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Vardiyalı Çalışma Tipi",
+   "content": "Olağan sabah-akşam (yaklaşık 08.00-18.00) aralığı dışında, özellikle gece, düzenli olarak çalışmayı gerektiren vardiya programıyla ilişkili ana uyku döneminde uykusuzluk ve/veya ana uyanıklık döneminde aşırı uykululuk."
+  }
+ ]
+},
+"circadian_non_24_hour": {
+ "id": "circadian_non_24_hour",
+ "nameTr": "Sirkadiyen Ritim Bozukluğu (24 Saate Uymayan Tip)",
+ "nameEn": "Circadian Rhythm Sleep Disorder (Non-24-Hour Type)",
+ "clinicalDescription": {
+  "overview": "İçsel sirkadiyen ritmin 24 saatlik çevre döngüsüne (gece-gündüz) eşlenemediği ve uyku-uyanıklık döngüsünün her gün tutarlı biçimde (genellikle giderek daha geç saatlere) kaydığı sirkadiyen ritim bozukluğudur. Kişinin ritmi çevreyle uyumlu olduğu dönemlerde yakınması azdır; ritim kaydıkça uykusuzluk ve gündüz uykululuk dönemleri yineler ('serbest döngü').",
+  "epidemiology": "Tamamen görme kaybı olan bireylerde sıktır (yaklaşık yarısında bildirilir). Görmesi olan bireylerde nadirdir; bu grupta erkeklerde ve gecikmiş uyku evresi öyküsü olanlarda daha sık görülür.",
+  "etiology": "Işığın biyolojik saati ayarlayamaması (görme kaybında retinal ışık algısının yokluğu); görmesi olanlarda ışık maruziyetinin azlığı, uzun içsel döngü süresi, toplumsal ipuçlarının azlığı ve bazı nörolojik durumlar.",
+  "prognosis": "Düzenli zamanlanmış melatonin ya da melatonin reseptör agonistleri ve görmesi olanlarda zamanlanmış ışık tedavisi ile ritim 24 saate eşlenebilir. Tedavi bırakıldığında genellikle yineler."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu Ortak Ölçütleri",
+   "content": "İçsel ritim ile çevrenin 24 saatlik döngüsü arasındaki uyumsuzluğa bağlı süregen/yineleyen uyku bölünmesi (A); aşırı uykululuk ve/veya uykusuzluk (B); belirgin sıkıntı ya da işlev bozulması (C)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "24 Saate Uymayan Tip",
+   "content": "Uyku-uyanıklık döngüsünün 24 saatlik çevreyle eşlenmediği, uyku başlangıcı ve uyanma saatlerinin tutarlı günlük kaymayla (genellikle her gün daha geç) ilerlediği örüntü; uykusuzluk ve aşırı uykululuk dönemleri. Tanıda uzun süreli (çoğunlukla birkaç hafta) uyku günlüğü ve aktigrafi gerekir."
+  }
+ ]
+}
+}

@@ -1,7 +1,7 @@
 {
   "name": "PsikoVaka | DSM-5-TR Klinik Konsültasyon & Düello Simülatörü",
   "short_name": "PsikoVaka",
-  "description": "297 DSM-5-TR Tanısı, 150 Klinik Vaka, Terapi & Psikofarmakoloji Simülatörü ve Canlı Düello Platformu",
+  "description": "DSM-5-TR tabanlı klinik vaka, terapi ve psikofarmakoloji simülatörü ile canlı düello platformu",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#060b19",

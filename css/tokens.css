@@ -1,0 +1,167 @@
+/* ==========================================================================
+   PsikoVaka — Tasarım değişkenleri (design tokens)
+   Tüm renk, boşluk, köşe, yazı ve gölge değerleri buradan gelir.
+   Tema: <html data-theme="dark|light">  (localStorage: psikovaka_theme)
+   ========================================================================== */
+
+:root {
+    /* Yazı */
+    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --text-xs: 0.75rem;    /* 12 */
+    --text-sm: 0.875rem;   /* 14 */
+    --text-base: 1rem;     /* 16 */
+    --text-md: 1.0625rem;  /* 17 */
+    --text-lg: 1.25rem;    /* 20 */
+    --text-xl: 1.5rem;     /* 24 */
+    --text-2xl: 1.875rem;  /* 30 */
+
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.65;
+
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* Boşluk ölçeği: 4 / 8 / 12 / 16 / 24 / 32 / 48 */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+
+    /* Köşeler */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-full: 999px;
+
+    /* Ölçüler */
+    --tap: 44px;               /* en küçük dokunma hedefi */
+    --header-h: 56px;
+    --tabbar-h: 60px;
+    --content-max: 960px;
+    --play-max: 720px;
+
+    /* Hareket */
+    --duration-fast: 120ms;
+    --duration: 200ms;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    /* Katmanlar */
+    --z-dock: 40;
+    --z-header: 50;
+    --z-tabbar: 60;
+    --z-popover: 70;
+    --z-modal: 100;
+    --z-toast: 200;
+
+    /* Hedef türüne göre küçük vurgu (ilerleme çubuğu, çip) */
+    --target-diagnosis: #6366f1;
+    --target-therapy: #10b981;
+    --target-pharmacology: #f43f5e;
+    --target-combo: #f59e0b;
+    --color-target: var(--target-diagnosis);
+}
+
+/* ---------- Koyu tema (varsayılan) ---------- */
+:root,
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-bg: #0f1117;
+    --color-surface: #161922;
+    --color-surface-2: #1c202b;
+    --color-surface-3: #252a37;
+    --color-border: #262b38;
+    --color-border-strong: #353c4d;
+
+    --color-text: #eef0f5;
+    --color-text-2: #b7bdcb;
+    --color-text-3: #8d94a6;
+
+    --color-accent: #8b93ff;          /* metin/kenar vurgusu */
+    --color-accent-bg: #5457e6;       /* dolu düğme zemini (beyaz yazıyla AA) */
+    --color-accent-bg-hover: #4a4dd6;
+    --color-accent-contrast: #ffffff;
+    --color-accent-soft: rgba(99, 102, 241, 0.16);
+
+    --color-success: #34d399;
+    --color-success-soft: rgba(52, 211, 153, 0.13);
+    --color-warning: #fbbf24;
+    --color-warning-soft: rgba(251, 191, 36, 0.13);
+    --color-danger: #f87171;
+    --color-danger-soft: rgba(248, 113, 113, 0.13);
+
+    --color-overlay: rgba(6, 8, 13, 0.64);
+    --color-focus: #a5b4fc;
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.35);
+    --shadow-3: 0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Açık tema ---------- */
+[data-theme="light"] {
+    color-scheme: light;
+
+    --color-bg: #f6f7fb;
+    --color-surface: #ffffff;
+    --color-surface-2: #f2f4f8;
+    --color-surface-3: #e8ebf2;
+    --color-border: #e2e5ee;
+    --color-border-strong: #cbd0dc;
+
+    --color-text: #12151d;
+    --color-text-2: #454c5e;
+    --color-text-3: #646b7e;
+
+    --color-accent: #4f46e5;
+    --color-accent-bg: #4f46e5;
+    --color-accent-bg-hover: #4338ca;
+    --color-accent-contrast: #ffffff;
+    --color-accent-soft: rgba(79, 70, 229, 0.09);
+
+    --color-success: #047857;
+    --color-success-soft: rgba(4, 120, 87, 0.09);
+    --color-warning: #a16207;
+    --color-warning-soft: rgba(161, 98, 7, 0.1);
+    --color-danger: #c62828;
+    --color-danger-soft: rgba(198, 40, 40, 0.08);
+
+    --color-overlay: rgba(18, 21, 29, 0.42);
+    --color-focus: #4f46e5;
+
+    --shadow-1: 0 1px 2px rgba(18, 21, 29, 0.06);
+    --shadow-2: 0 6px 20px rgba(18, 21, 29, 0.08);
+    --shadow-3: 0 18px 48px rgba(18, 21, 29, 0.16);
+}
+
+body.therapy-mode-active { --color-target: var(--target-therapy); }
+body.pharmacology-mode-active { --color-target: var(--target-pharmacology); }
+body.combo-mode-active { --color-target: var(--target-combo); }
+
+/* ---------- Eski değişken adları (online_arena.js ve eski satır içi stiller için) ----------
+   online_arena.js yeniden yazılınca bu blok kaldırılabilir. */
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+    --bg-primary: var(--color-bg);
+    --bg-secondary: var(--color-surface-2);
+    --bg-tertiary: var(--color-surface-3);
+    --border-color: var(--color-border);
+    --border-highlight: var(--color-accent);
+    --text-primary: var(--color-text);
+    --text-secondary: var(--color-text-2);
+    --text-muted: var(--color-text-3);
+    --accent-primary: var(--color-accent-bg);
+    --accent-emerald: var(--color-success);
+    --accent-amber: var(--color-warning);
+    --accent-rose: var(--color-danger);
+}

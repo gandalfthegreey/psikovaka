@@ -1,0 +1,99 @@
+{
+"ptsd_dissociative": {
+ "id": "ptsd_dissociative",
+ "nameTr": "TSSB (Dissosiyatif Belirtilerle Giden / C-PTSD)",
+ "nameEn": "PTSD with Dissociative Symptoms",
+ "clinicalDescription": {
+  "overview": "TSSB ölçütlerinin tam karşılandığı ve buna ek olarak kişinin stres etkenine tepki olarak süregen ya da yineleyen duyarsızlaşma (kendi zihninden ya da bedeninden kopmuş, dışarıdan izliyormuş gibi hissetme) veya gerçeklikten uzaklaşma (çevrenin gerçek dışı, rüya gibi, uzak ya da çarpık algılanması) yaşadığı TSSB biçimidir. Önemli terim notu: 'Karmaşık TSSB (C-PTSD)' DSM-5-TR'de yer almayan, ICD-11'de tanımlanmış ayrı bir tanıdır; TSSB belirtilerine ek olarak duygu düzenleme güçlüğü, olumsuz benlik algısı ve ilişki sorunlarını içerir. Dissosiyatif alt tip ile örtüşebilir ama aynı şey değildir.",
+  "epidemiology": "TSSB'li kişilerin yaklaşık %15-30'unda dissosiyatif belirtilerin eşlik ettiği bildirilmektedir. Çocukluk çağı travması, tekrarlayan ve kişilerarası travmalar bu alt tiple daha sık ilişkilidir.",
+  "etiology": "Nörobiyolojik modeller (Lanius ve ark.), klasik TSSB'deki limbik aşırı uyarılmaya karşın bu alt tipte prefrontal bölgelerin limbik sistemi aşırı ketlediği bir 'duygusal aşırı-modülasyon' örüntüsü önermektedir. Dissosiyasyon, kaçılamayan tehdit karşısında bir 'donma/kapanma' savunması olarak ele alınır.",
+  "prognosis": "Travma odaklı tedaviler (uzatılmış maruz bırakma, bilişsel işleme terapisi, EMDR) bu alt tipte de etkilidir; ancak tedaviye duygu düzenleme ve topraklama (grounding) becerileriyle başlanması, aşamalı yaklaşım önerilebilir. Daha ağır işlev kaybı ve intihar riskiyle ilişkili olabilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-H",
+   "title": "TSSB Ortak Ölçütleri (Süre > 1 ay)",
+   "content": "Travmatik olaya maruziyet (A), en az 1 istenmeden gelen yeniden yaşantılama belirtisi (B), en az 1 kaçınma belirtisi (C), biliş ve duygudurumda en az 2 olumsuz değişiklik (D), en az 2 aşırı uyarılmışlık belirtisi (E), belirtilerin 1 aydan uzun sürmesi (F), belirgin sıkıntı ya da işlev bozulması (G), madde ya da tıbbi duruma bağlanamaması (H)."
+  },
+  {
+   "code": "Belirleyici",
+   "title": "Dissosiyatif Belirtilerle (Duyarsızlaşma ve/veya Gerçeklikten Uzaklaşma)",
+   "content": "TSSB ölçütlerine ek olarak süregen ya da yineleyen duyarsızlaşma veya gerçeklikten uzaklaşma yaşantıları bulunur. Bu belirtiler bir maddenin fizyolojik etkilerine (örn. alkol zehirlenmesinde 'bellek kaybı' dönemleri) ya da başka bir sağlık durumuna (örn. karmaşık parsiyel nöbetler) bağlanamaz. Ayrıca 'gecikmeli başlangıçlı' belirleyicisi (tam ölçütlerin olaydan en az 6 ay sonra karşılanması) eklenebilir."
+  }
+ ]
+},
+"ptsd_preschool": {
+ "id": "ptsd_preschool",
+ "nameTr": "6 Yaş ve Altı Çocuklarda Travma Sonrası Stres Bozukluğu",
+ "nameEn": "PTSD for Children 6 Years and Younger",
+ "clinicalDescription": {
+  "overview": "Küçük çocukların gelişim düzeyine uyarlanmış TSSB ölçütleridir. Küçük çocuklar iç yaşantılarını sözel olarak anlatamadığından ölçütler daha davranışsal ve gözlemlenebilir belirtilere dayanır ve gereken belirti sayısı daha azdır. Yeniden yaşantılama çoğu zaman travma temalı tekrarlayıcı oyunla (travmatik oyun) ortaya çıkar; anılar her zaman sıkıntılı görünmeyebilir, kabusların içeriği travmayla açıkça ilişkili olmayabilir. Kaçınma ve olumsuz bilişler tek bir ölçütte birleştirilmiştir. Öfke nöbetleri, yapışkanlık, kazanılmış becerilerde gerileme (örn. tuvalet eğitimi, konuşma) sık görülür.",
+  "epidemiology": "Travmaya maruz kalan okul öncesi çocuklarda yetişkin ölçütleri TSSB'yi olduğundan az saptar; gelişime uyarlanmış ölçütlerle daha fazla çocuk tanı alır.",
+  "etiology": "Travmanın türü ve şiddeti, bakım verenin travmaya verdiği tepki ve kendi ruh sağlığı, bağlanma güvenliği ve aile içi şiddet küçük çocuklarda en önemli belirleyicilerdir.",
+  "prognosis": "Ebeveyn katılımı tedavinin merkezindedir: Çocuk-Ebeveyn Psikoterapisi (CPP) ve Travma Odaklı BDT'nin küçük yaşlara uyarlanmış biçimleri etkilidir. Tedavi edilmezse belirtiler süregenleşebilir ve gelişimi olumsuz etkileyebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Travma Maruziyeti ve Yeniden Yaşantılama (En az 1)",
+   "content": "Gerçek ya da ölüm tehdidi, ağır yaralanma veya cinsel şiddete doğrudan maruz kalma, başkasının (özellikle birincil bakım verenlerin) başına geldiğine yüz yüze tanık olma ya da bir ebeveynin/bakım verenin başına geldiğini öğrenme; yalnızca elektronik medya ve görüntülerle tanık olma bu kapsama girmez (A). Yeniden yaşantılama belirtilerinden en az biri: istenmeden gelen anılar (oyunda yeniden canlandırma olarak görülebilir), sıkıntılı rüyalar, dissosiyatif tepkiler, hatırlatıcılarla yoğun psikolojik sıkıntı ya da belirgin fizyolojik tepkiler (B)."
+  },
+  {
+   "code": "Kriter C & D",
+   "title": "Kaçınma veya Olumsuz Değişiklikler (En az 1) ve Uyarılmışlık (En az 2)",
+   "content": "Kaçınma ya da biliş/duygudurumda olumsuz değişiklik belirtilerinden en az biri: hatırlatıcı etkinlik, yer ve nesnelerden kaçınma; hatırlatıcı kişi, konuşma ve durumlardan kaçınma; olumsuz duygu durumlarında (korku, suçluluk, üzüntü, utanç, kafa karışıklığı) belirgin artış; oyunun kısıtlanması dahil ilgi azalması; toplumsal geri çekilme; olumlu duygu ifadesinde süregen azalma (C). Uyarılmışlık belirtilerinden en az ikisi: öfke patlamaları/ağır öfke nöbetleri dahil irritabl davranış, aşırı tetikte olma, abartılı irkilme, odaklanma güçlüğü, uyku bozukluğu (D)."
+  },
+  {
+   "code": "Kriter E-G",
+   "title": "Süre, İşlevsellik ve Dışlama",
+   "content": "Belirtiler 1 aydan uzun sürer (E); ebeveynler, kardeşler, yaşıtlar ya da diğer bakım verenlerle ilişkilerde veya okul davranışında belirgin sıkıntı ya da bozulmaya yol açar (F); madde ya da tıbbi duruma bağlanamaz (G). 'Dissosiyatif belirtilerle' ve 'gecikmeli başlangıçlı' belirleyicileri kullanılabilir."
+  }
+ ]
+},
+"adjustment_disorder_depressed": {
+ "id": "adjustment_disorder_depressed",
+ "nameTr": "Uyum Bozukluğu (Çökkün Duygudurum ile)",
+ "nameEn": "Adjustment Disorder with Depressed Mood",
+ "clinicalDescription": {
+  "overview": "Belirlenebilir bir stres etkenine (ayrılık, iş kaybı, taşınma, hastalık, akademik başarısızlık vb.) yanıt olarak stres etkeninin başlamasından sonraki 3 ay içinde ortaya çıkan ve klinik tabloda çökkün duygudurum, ağlamaklılık ve umutsuzluk duygularının baskın olduğu uyum bozukluğu alt tipidir. Belirtiler stres etkeninin ağırlığıyla orantısız sıkıntı ya da belirgin işlev bozulmasına yol açar ancak majör depresif epizod ölçütlerini karşılamaz.",
+  "epidemiology": "Uyum bozuklukları ayaktan ruh sağlığı başvurularında sık görülür (yaklaşık %5-20); konsültasyon-liyezon psikiyatrisinde en sık konan tanılardandır. Çökkün duygudurumlu alt tip en sık alt tiplerdendir.",
+  "etiology": "Stres etkeninin niteliği ve kişinin baş etme kapasitesi, toplumsal destek, önceki ruhsal durum ve kişilik özellikleri belirleyicidir. Dezavantajlı yaşam koşulları stres etkenlerine maruziyeti ve riski artırır.",
+  "prognosis": "Çoğu yetişkinde iyi seyreder; stres etkeni ve sonuçları sona erdikten sonra belirtiler 6 ay içinde geriler. Ergenlerde daha uzun sürebilir ve sonradan başka ruhsal bozukluklar gelişebilir. İntihar düşünce ve davranışları açısından (özellikle ergenlerde) dikkatli olunmalıdır. Kısa süreli destekleyici, sorun çözme odaklı ve bilişsel-davranışçı yaklaşımlar ilk seçenektir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Uyum Bozukluğu Ortak Ölçütleri",
+   "content": "Belirlenebilir stres etken(ler)ine yanıt olarak, etkenin başlamasından sonraki 3 ay içinde ortaya çıkan duygusal ya da davranışsal belirtiler (A). Belirtiler klinik açıdan belirgindir: dış bağlam ve kültürel etkenler göz önüne alındığında etkenin şiddetiyle orantısız belirgin sıkıntı ve/veya önemli işlev bozulması (B). Başka bir ruhsal bozukluğun ölçütlerini karşılamaz ve önceden var olan bir bozukluğun yalnızca alevlenmesi değildir (C). Olağan yas tepkisini yansıtmaz ve uzamış yas bozukluğuyla daha iyi açıklanamaz (D). Stres etkeni ya da sonuçları sona erdikten sonra belirtiler 6 aydan uzun sürmez (E)."
+  },
+  {
+   "code": "Alt Tip & Belirleyici",
+   "title": "Çökkün Duygudurumla",
+   "content": "Çökkün duygudurum, ağlamaklılık ya da umutsuzluk duyguları baskındır. Süre belirleyicisi: akut (belirtiler 6 aydan kısa) ya da süregen (6 ay veya daha uzun; süregen bir stres etkenine ya da kalıcı sonuçları olan bir etkene yanıt olarak). Majör depresif epizod ölçütleri karşılanıyorsa stres etkeni olsa bile majör depresif bozukluk tanısı konur."
+  }
+ ]
+},
+"adjustment_disorder_anxious": {
+ "id": "adjustment_disorder_anxious",
+ "nameTr": "Uyum Bozukluğu (Kaygı ile)",
+ "nameEn": "Adjustment Disorder with Anxiety",
+ "clinicalDescription": {
+  "overview": "Belirlenebilir bir stres etkenine yanıt olarak 3 ay içinde ortaya çıkan ve klinik tabloda sinirlilik, endişe, gerginlik, huzursuzluk ya da (çocuklarda) ayrılma kaygısının baskın olduğu uyum bozukluğu alt tipidir. Belirtiler stres etkeniyle orantısız sıkıntıya ya da belirgin işlev bozulmasına yol açar ancak yaygın anksiyete bozukluğu, TSSB ya da akut stres bozukluğu gibi başka bir bozukluğun ölçütlerini karşılamaz.",
+  "epidemiology": "Uyum bozuklukları ayaktan ruh sağlığı başvurularında sık görülür (yaklaşık %5-20). Kaygılı alt tip, çökkün duygudurumlu ve karışık alt tiplerle birlikte en sık görülenlerdendir.",
+  "etiology": "Stres etkeninin belirsizlik içermesi (örn. tıbbi tetkik sonucu bekleme, iş güvencesizliği), kaygıya yatkın mizaç, sınırlı baş etme becerileri ve zayıf toplumsal destek riski artırır.",
+  "prognosis": "Stres etkeni ortadan kalktığında ya da kişi uyum sağladığında genellikle düzelir. Sorun çözme terapisi, gevşeme ve stres yönetimi becerileri, kısa süreli BDT etkilidir. Uzun süreli benzodiazepin kullanımından kaçınılmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Uyum Bozukluğu Ortak Ölçütleri",
+   "content": "Stres etkenine yanıt olarak 3 ay içinde başlayan belirtiler (A); etkenle orantısız sıkıntı ve/veya işlev bozulması (B); başka bir ruhsal bozukluğun ölçütlerini karşılamama ve önceki bir bozukluğun alevlenmesi olmama (C); olağan yas ya da uzamış yas bozukluğu ile açıklanamama (D); etken ve sonuçları sona erdikten sonra belirtilerin 6 aydan uzun sürmemesi (E)."
+  },
+  {
+   "code": "Alt Tip & Belirleyici",
+   "title": "Kaygıyla",
+   "content": "Sinirlilik, endişe, gerginlik ya da ayrılma kaygısı baskındır. Süre belirleyicisi: akut (6 aydan kısa) ya da süregen (6 ay veya daha uzun). Travmatik bir olay sonrası belirtiler TSSB ya da akut stres bozukluğu ölçütlerini karşılıyorsa o tanılar konur; karşılamıyorsa uyum bozukluğu uygundur."
+  }
+ ]
+}
+}

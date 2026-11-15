@@ -44,7 +44,9 @@
       "explanation": "DSM-5'e göre Agorafobi tanısı koyabilmek için 5 tipik durumdan en az 2 veya daha fazlasında belirgin korku/kaygı ve kaçınma olması şarttır."
     },
     "differentialDiagnosis": "• Özgül Fobi (Durumsal): Sadece tek bir özgül nesne/ortamdan korkulur (örn: sadece uçak). Agorafobide ise kaçmanın zor olacağı en az 2 farklı alan korkusu vardır.\n• Sosyal Fobi: Odak noktası rezil olma/küçük düşme korkusudur; agorafobide ise kaçamama veya panik anında yardım bulamama korkusudur.",
-    "dsmCriteriaSummary": "DSM-5: En az 2 alanda (toplu taşıma, açık alan, kapalı alan, kalabalık, ev dışı) kaçamama/yardım alamama korkusu ve kaçınma. Süre ≥ 6 ay."
+    "dsmCriteriaSummary": "DSM-5: En az 2 alanda (toplu taşıma, açık alan, kapalı alan, kalabalık, ev dışı) kaçamama/yardım alamama korkusu ve kaçınma. Süre ≥ 6 ay.",
+    "therapyId": "invivo_exposure",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-031",
@@ -91,7 +93,9 @@
       "explanation": "DSM-5'te süre sınırları çok nettir: Kısa Psikotik Bozukluk < 1 ay; Şizofreniform Bozukluk 1-6 ay arası; Şizofreni ise ≥ 6 aydır."
     },
     "differentialDiagnosis": "• Şizofreniform Bozukluk: Belirtiler 1 aydan uzun, 6 aydan kısa sürer.\n• Şizofreni: Toplam süre en az 6 aydır.\n• Maddeye Bağlı Psikotik Bozukluk: Toksikoloji negatiftir.",
-    "dsmCriteriaSummary": "DSM-5: En az 1 psikotik belirti (sanrı, varsanı, dezorganize konuşma). Süre: 1 gün ile 1 ay arası + Hastalık öncesi düzeye tam dönüş."
+    "dsmCriteriaSummary": "DSM-5: En az 1 psikotik belirti (sanrı, varsanı, dezorganize konuşma). Süre: 1 gün ile 1 ay arası + Hastalık öncesi düzeye tam dönüş.",
+    "therapyId": "cbtp",
+    "pharmacologyId": "atypical_ap_secondgen"
   },
   {
     "id": "case-032",
@@ -138,7 +142,9 @@
       "explanation": "PMS hafif bedensel ve duygusal dalgalanmalar içerirken, PMDD şiddetli afektif labilite, disfori ve ilişkisel/mesleki işlev kaybı yaratan psikiyatrik bir duygudurum bozukluğudur."
     },
     "differentialDiagnosis": "• Majör Depresif Bozukluk: Depresyonda çökkünlük menstrüel döngüden bağımsız olarak en az 2 hafta kesintisiz sürer; PMDD ise döngüseldir.\n• Bipolar Bozukluk: Bipolar ataklar hormonal döngüyle birebir kilitli değildir.",
-    "dsmCriteriaSummary": "DSM-5: Luteal fazda en az 5 belirti (afektif labilite, öfke/çatışma, çökkünlük, anksiyete, iştah/uyku değişimi) + Kanamadan sonraki günlerde tam düzelme."
+    "dsmCriteriaSummary": "DSM-5: Luteal fazda en az 5 belirti (afektif labilite, öfke/çatışma, çökkünlük, anksiyete, iştah/uyku değişimi) + Kanamadan sonraki günlerde tam düzelme.",
+    "therapyId": "cbt_general",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-033",
@@ -190,7 +196,9 @@
       "explanation": "Şizoid sadece ilişkisiz ve duygusal olarak düzdür; Şizotipal ise büyüsel inançlar, olağandışı algılar, tuhaf giyim ve eksantrik düşünce yapısıyla karakterizedir."
     },
     "differentialDiagnosis": "• Şizofreni: Şizotipalde sabit, yıkıcı hezeyanlar veya açık halüsinasyonlar yoktur; düşünceler daha çok büyüsel/eksantriktir.\n• Şizoid KB: Şizoidde büyüsel inanç ve tuhaf konuşma bulunmaz.",
-    "dsmCriteriaSummary": "DSM-5 (En az 5/9): Alınma fikirleri, büyüsel düşünüş, olağandışı algılar, garip konuşma, kuşkuculuk, uygunsuz duygulanım, tuhaf görünüm, yakın arkadaş yokluğu, toplumsal anksiyete."
+    "dsmCriteriaSummary": "DSM-5 (En az 5/9): Alınma fikirleri, büyüsel düşünüş, olağandışı algılar, garip konuşma, kuşkuculuk, uygunsuz duygulanım, tuhaf görünüm, yakın arkadaş yokluğu, toplumsal anksiyete.",
+    "therapyId": "cbtp",
+    "pharmacologyId": "atypical_ap_secondgen"
   },
   {
     "id": "case-034",
@@ -237,7 +245,9 @@
       "explanation": "Borderline terk edilme tehdidinde yoğun öfke, kendine zarar ve suçlama sergiler. Bağımlı birey ise tamamen itaatkarlaşır, boyun eğer ve hemen başka bir bakıcı ilişkiye sığınır."
     },
     "differentialDiagnosis": "• Sınırda (Borderline) KB: BPD'de öfke patlamaları ve duygusal dengesizlik baskındır; Bağımlı KB'de ise pasif boyun eğicilik vardır.\n• Çekingen (Kaçıngan) KB: Kaçıngan kişi reddedilme korkusuyla ilişkiden uzak durur; Bağımlı kişi ise ilişkiye yapışır.",
-    "dsmCriteriaSummary": "DSM-5 (En az 5/8): Karar vermede aşırı güvence arama, sorumluluğu başkasına devretme, görüş ayrılığını ifade edememe, tek başına iş başlatamama, destek için hoş olmayan şeyleri yapma, tek başına çaresizlik, ilişki bitince hemen yenisini arama."
+    "dsmCriteriaSummary": "DSM-5 (En az 5/8): Karar vermede aşırı güvence arama, sorumluluğu başkasına devretme, görüş ayrılığını ifade edememe, tek başına iş başlatamama, destek için hoş olmayan şeyleri yapma, tek başına çaresizlik, ilişki bitince hemen yenisini arama.",
+    "therapyId": "schema_therapy",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-035",
@@ -289,7 +299,9 @@
       "explanation": "Narsist hayranlık ve özel statü arar. Histriyonik ise hayranlık olmasa bile sadece dikkat çekmek, sevimli/kırılgan veya baştan çıkarıcı görünmekle yetinir."
     },
     "differentialDiagnosis": "• Narsisistik KB: Üstünlük ve hayranlık arar; Histriyonik ise sadece ilgi odağı olmak ister.\n• Sınırda KB: Histriyonikte kronik boşluk hissi ve kendine zarar verme tipik değildir.",
-    "dsmCriteriaSummary": "DSM-5 (En az 5/8): İlgi odağı olamayınca rahatsızlık, cinsel ayartıcılık, sığ/oynak duygular, dış görünümü dikkat için kullanma, teatral/abartılı konuşma, telkine yatkınlık, ilişkileri olduğundan daha yakın sanma."
+    "dsmCriteriaSummary": "DSM-5 (En az 5/8): İlgi odağı olamayınca rahatsızlık, cinsel ayartıcılık, sığ/oynak duygular, dış görünümü dikkat için kullanma, teatral/abartılı konuşma, telkine yatkınlık, ilişkileri olduğundan daha yakın sanma.",
+    "therapyId": "psychodynamic",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-036",
@@ -341,7 +353,9 @@
       "explanation": "Sanrılı bozuklukta spesifik ve sabit bir hezeyan (delüzyon) vardır. Paranoid KB'de ise spesifik tek bir sanrı yerine hayatın her alanına yayılmış genel bir güvensizlik ve alınganlık karakter özelliği hakimdir."
     },
     "differentialDiagnosis": "• Sanrılı Bozukluk: Sabit ve net sanrılar vardır. Paranoid KB'de ise genel kuşkuculuk vardır.\n• Şizotipal KB: Büyüsel düşünce ve tuhaflıklar Paranoid KB'de görülmez.",
-    "dsmCriteriaSummary": "DSM-5 (En az 4/7): Zarar göreceğinden kuşkulanma, sadakatten şüphe duyma, sır vermekten korkma, masum sözlerden tehdit çıkarma, kin besleme, saldırılara öfkeyle karşılık verme, partner sadakatini haksız yere sorgulama."
+    "dsmCriteriaSummary": "DSM-5 (En az 4/7): Zarar göreceğinden kuşkulanma, sadakatten şüphe duyma, sır vermekten korkma, masum sözlerden tehdit çıkarma, kin besleme, saldırılara öfkeyle karşılık verme, partner sadakatini haksız yere sorgulama.",
+    "therapyId": "schema_therapy",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-037",
@@ -388,7 +402,9 @@
       "explanation": "Alışkanlığı Tersine Çevirme Eğitimi (HRT), beden odaklı tekrarlayıcı davranışlarda (saç yolma, deri yolma, tırnak yeme) altın standart davranışçı terapi protokolüdür."
     },
     "differentialDiagnosis": "• Alopesi Areata: Otoimmün saç dökülmesidir, yolma davranışı yoktur.\n• Beden Algısı Bozukluğu (BDD): Saç kusurlu bulunduğu için düzeltme amacıyla çekilir; Trikotillomanide ise amaç gerginliği dindirmektir.",
-    "dsmCriteriaSummary": "DSM-5: Saç kaybına yol açan yineleyici saç yolma + Durdurmaya yönelik başarısız girişimler + Klinik belirgin sıkıntı/işlev kaybı."
+    "dsmCriteriaSummary": "DSM-5: Saç kaybına yol açan yineleyici saç yolma + Durdurmaya yönelik başarısız girişimler + Klinik belirgin sıkıntı/işlev kaybı.",
+    "therapyId": "hrt",
+    "pharmacologyId": "clomipramine_ocd"
   },
   {
     "id": "case-038",
@@ -435,7 +451,9 @@
       "explanation": "Kokain/amfetamin kullanımı 'formikasyon' denen deride böcek geziniyor hissine ve ağır deri yolmaya yol açabilir; organik dışlama şarttır."
     },
     "differentialDiagnosis": "• Beden Algısı Bozukluğu (BDD): BDD'de amaç algılanan cilt kusurunu düzeltmektir; Ekskoriasyonda ise dürtüsel gerilim boşaltma hakimdir.\n• Maddeye Bağlı Kaşıntı: Toksikoloji temizdir.",
-    "dsmCriteriaSummary": "DSM-5: Deri lezyonlarına yol açan yineleyici deri yolma + Durdurma girişimlerinde başarısızlık + Belirgin sıkıntı/işlevsellik kaybı."
+    "dsmCriteriaSummary": "DSM-5: Deri lezyonlarına yol açan yineleyici deri yolma + Durdurma girişimlerinde başarısızlık + Belirgin sıkıntı/işlevsellik kaybı.",
+    "therapyId": "hrt",
+    "pharmacologyId": "clomipramine_ocd"
   },
   {
     "id": "case-039",
@@ -482,7 +500,9 @@
       "explanation": "Akut Stres Bozukluğu süresi travma sonrası 3 gün ile 1 ay arasındadır. Belirtiler 1 ayı aştığı anda tanı otomatik olarak Travma Sonrası Stres Bozukluğu (TSSB) olur."
     },
     "differentialDiagnosis": "• TSSB: Belirtiler 1 aydan uzun sürmelidir. Bu vakada henüz 10. gündür.\n• Uyum Bozukluğu: Travmatik ölüm tehlikesi yerine yaşam stresörlerine (boşanma, iflas) yanıttır.",
-    "dsmCriteriaSummary": "DSM-5: Travmatik olaya maruz kalma + İstilacı anılar, olumsuz duygudurum, dissosiyasyon, kaçınma ve uyarılmışlık belirtilerinden en az 9'u. Süre: 3 gün - 1 ay."
+    "dsmCriteriaSummary": "DSM-5: Travmatik olaya maruz kalma + İstilacı anılar, olumsuz duygudurum, dissosiyasyon, kaçınma ve uyarılmışlık belirtilerinden en az 9'u. Süre: 3 gün - 1 ay.",
+    "therapyId": "emdr",
+    "pharmacologyId": "hydroxyzine_buspirone"
   },
   {
     "id": "case-040",
@@ -529,7 +549,9 @@
       "explanation": "DSM-5'e göre Uyum Bozukluğunda duygusal/davranışsal belirtiler stresörün ortaya çıkmasından sonraki ilk 3 ay içinde başlamalıdır."
     },
     "differentialDiagnosis": "• Majör Depresif Bozukluk: Majör depresyon kriterleri tam karşılanıyorsa öncelikli tanı MDD olur.\n• TSSB: Yaşamı tehdit eden ağır travma (ölüm tehdidi) gerektirir; boşanma yaşam stresörüdür.",
-    "dsmCriteriaSummary": "DSM-5: Stresörden sonraki 3 ay içinde ortaya çıkan duygusal/davranışsal belirtiler + Stresörün ağırlığıyla orantısız sıkıntı veya işlev kaybı."
+    "dsmCriteriaSummary": "DSM-5: Stresörden sonraki 3 ay içinde ortaya çıkan duygusal/davranışsal belirtiler + Stresörün ağırlığıyla orantısız sıkıntı veya işlev kaybı.",
+    "therapyId": "ipt",
+    "pharmacologyId": "hydroxyzine_buspirone"
   },
   {
     "id": "case-041",
@@ -576,7 +598,9 @@
       "explanation": "BED hastaları tıpkı bulimikler gibi kontrolsüzce tıkınırlar ANCAK asla kusma, laksatif veya telafi edici aç kalma döngüsüne girmezler."
     },
     "differentialDiagnosis": "• Bulimiya Nervoza: Telafi edici kusma/laksatif vardır; BED'de yoktur.\n• Anoreksiya Nervoza: Anoreksiyada belirgin düşük kilo (BKİ < 18.5) zorunludur; BED'de hastalar genelde aşırı kilolu/obezdir.",
-    "dsmCriteriaSummary": "DSM-5: Yineleyen tıkınma nöbetleri (en az 3 ay, haftada ≥ 1) + Hızlı yeme, patlayana kadar yeme, aç olmadan yeme, suçluluk + Telafi edici kusma/laksatif OLMAMASI."
+    "dsmCriteriaSummary": "DSM-5: Yineleyen tıkınma nöbetleri (en az 3 ay, haftada ≥ 1) + Hızlı yeme, patlayana kadar yeme, aç olmadan yeme, suçluluk + Telafi edici kusma/laksatif OLMAMASI.",
+    "therapyId": "cbt_e",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-042",
@@ -623,7 +647,9 @@
       "explanation": "Bebekler ilk 18-24 ayda dünyayı ağızlarıyla keşfederler. Pika tanısı için çocuğun gelişimsel olarak yenmeyen maddeleri ayırt edebileceği yaşta (genellikle > 2 yaş) olması gerekir."
     },
     "differentialDiagnosis": "• Otizm Spektrum Bozukluğu: OSB'de duyusal arayış sonucu pika görülebilir; ancak bu vakada otizm bulgusu yoktur.\n• Anoreksiya Nervoza: Kalori almamak için peçete yeme gibi durumlardan ayrılmalıdır.",
-    "dsmCriteriaSummary": "DSM-5: En az 1 ay süren besin değeri olmayan maddeleri yeme + Gelişimsel düzeye uygun olmama + Kültürel/dini uygulamanın parçası olmama."
+    "dsmCriteriaSummary": "DSM-5: En az 1 ay süren besin değeri olmayan maddeleri yeme + Gelişimsel düzeye uygun olmama + Kültürel/dini uygulamanın parçası olmama.",
+    "therapyId": "pmt",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-043",
@@ -670,7 +696,9 @@
       "explanation": "Bedensel Belirti Bozukluğunda hasta gerçekten rahatsız edici fiziksel ağrılardan yakınır. Hastalık Kaygısında ise bedensel belirti ya hiç yoktur ya da çok hafiftir; kaygı soyut bir 'hasta olma korkusu'dur."
     },
     "differentialDiagnosis": "• Hastalık Kaygısı Bozukluğu: Bedensel semptom yoktur veya hafiftir.\n• Dönüşüm (Konversiyon) Bozukluğu: Spesifik nörolojik kayıp (felç, körlük, nöbet) ön plandadır.",
-    "dsmCriteriaSummary": "DSM-5: Sıkıntı veren bedensel belirtiler + Belirtilere ilişkin aşırı düşünce, kaygı veya zaman/enerji harcama. Süre ≥ 6 ay."
+    "dsmCriteriaSummary": "DSM-5: Sıkıntı veren bedensel belirtiler + Belirtilere ilişkin aşırı düşünce, kaygı veya zaman/enerji harcama. Süre ≥ 6 ay.",
+    "therapyId": "cbt_general",
+    "pharmacologyId": "snri_dualex"
   },
   {
     "id": "case-044",
@@ -722,7 +750,9 @@
       "explanation": "DSM-5 Kriter B gereğince Depersonalizasyon/Derealizasyon yaşantıları sırasında bireyin gerçeği değerlendirme yetisi (insight / reality testing) daima tam ve sağlam kalır."
     },
     "differentialDiagnosis": "• Şizofreni: Şizofrenide sanrılar ve gerçeklik kaybı vardır; burada içgörü tamdır.\n• Temporal Lob Epilepsisi: EEG ile dışlanmıştır.\n• Madde Etkisi: Toksikoloji temizdir.",
-    "dsmCriteriaSummary": "DSM-5: Depersonalizasyon (kendine yabancılaşma) ve/veya Derealizasyon (çevreye yabancılaşma) + Gerçeği değerlendirme yetisinin sağlam olması."
+    "dsmCriteriaSummary": "DSM-5: Depersonalizasyon (kendine yabancılaşma) ve/veya Derealizasyon (çevreye yabancılaşma) + Gerçeği değerlendirme yetisinin sağlam olması.",
+    "therapyId": "act",
+    "pharmacologyId": "lamotrigine_bipolar2"
   },
   {
     "id": "case-045",
@@ -769,7 +799,9 @@
       "explanation": "Kişinin kimlik amnezisiyle birlikte evinden veya işinden uzakta amaçlı bir seyahate çıkması veya şaşkınca gezinmesi tablosu DSM-5'te 'Dissosiyatif Füg ile birlikte' belirleyicisi alır."
     },
     "differentialDiagnosis": "• Organik Amnezi (Demans/Kafa Travması): Organikte yeni bilgileri öğrenme bozulur (anterograd); dissosiyatif amnezide ise geçmiş otobiyografik anılar silinir.\n• Temarruz (Numara Yapma): Adli kazanç için taklit edilir.",
-    "dsmCriteriaSummary": "DSM-5: Önemli otobiyografik bilgileri hatırlayamama + Olağan unutkanlıkla açıklanamama + Tıbbi/madde nedeni olmaması (± Füg belirleyicisi)."
+    "dsmCriteriaSummary": "DSM-5: Önemli otobiyografik bilgileri hatırlayamama + Olağan unutkanlıkla açıklanamama + Tıbbi/madde nedeni olmaması (± Füg belirleyicisi).",
+    "therapyId": "emdr",
+    "pharmacologyId": "psychotherapy_first_no_drug"
   },
   {
     "id": "case-046",
@@ -821,7 +853,9 @@
       "explanation": "DSM-5 revizyonunda Asperger Sendromu, Dezintegratif Bozukluk ve Yaygın Gelişimsel Bozukluk (YYB-BTA) birleştirilerek tek bir 'Otizm Spektrum Bozukluğu' çatısı altında toplanmıştır."
     },
     "differentialDiagnosis": "• Sosyal Anksiyete Bozukluğu: Sosyal fobide kişi sosyal ipuçlarını anlar ama olumsuz değerlendirilmekten korkar; ASD'de ise sosyal ipuçlarını çözümleme yetisi nörogelişimsel olarak kısıtlıdır.\n• Şizoid KB: Şizoidde kısıtlı ilgi alanı ve rutin ısrarı tipik değildir.",
-    "dsmCriteriaSummary": "DSM-5: 1. Toplumsal iletişimde eksiklik (duygusal karşılıklılık, sözel olmayan iletişim), 2. Kısıtlı/yineleyici davranış ve ilgi alanları (en az 2/4), 3. Erken gelişim döneminde başlamış olması."
+    "dsmCriteriaSummary": "DSM-5: 1. Toplumsal iletişimde eksiklik (duygusal karşılıklılık, sözel olmayan iletişim), 2. Kısıtlı/yineleyici davranış ve ilgi alanları (en az 2/4), 3. Erken gelişim döneminde başlamış olması.",
+    "therapyId": "pmt",
+    "pharmacologyId": "atypical_ap_secondgen"
   },
   {
     "id": "case-047",
@@ -868,7 +902,9 @@
       "explanation": "Tourette tanısı için hem çoklu motor hem de en az bir ses/vokal tikin bulunması ve sürenin en az 1 yılı aşması şarttır (Koprolali/küfür tiki hastaların sadece %10-15'inde görülür, tanı için zorunlu değildir)."
     },
     "differentialDiagnosis": "• Süreğen Motor veya Vokal Tik Bozukluğu: Sadece motor YA DA sadece vokal tik vardır (ikisi birden olmaz).\n• Geçici Tik Bozukluğu: Süre 1 yıldan azdır.",
-    "dsmCriteriaSummary": "DSM-5: Çoklu motor + En az 1 vokal tik + Süre > 1 yıl + 18 yaşından önce başlamış olması."
+    "dsmCriteriaSummary": "DSM-5: Çoklu motor + En az 1 vokal tik + Süre > 1 yıl + 18 yaşından önce başlamış olması.",
+    "therapyId": "cbit",
+    "pharmacologyId": "alpha2_agonist_tic"
   },
   {
     "id": "case-048",
@@ -915,7 +951,9 @@
       "explanation": "Aralıklı Patlayıcı Bozuklukta öfke dürtüseldir, maddi çıkar amacı taşımaz ve sonrasında samimi bir suçluluk hissedilir. Antisosyal KB'de ise empati yoksunluğu ve pişmanlık duymama karakteristiktir."
     },
     "differentialDiagnosis": "• Antisosyal Kişilik Bozukluğu: Suçluluk/pişmanlık duyulmaz ve empati yoktur.\n• Bipolar Bozukluk (Mani): Manideki öfke kabarmış duygudurum ve grandiyözite eşliğindedir.\n• Davranım Bozukluğu: Çocuk/ergenlerde sinsi kuralları çiğneme vardır.",
-    "dsmCriteriaSummary": "DSM-5: Saldırgan dürtüleri kontrol edememe patlamaları (mala zarar, yaralama) + Stresörle tamamen orantısız olması + Planlı olmaması + Süreklilik göstermesi."
+    "dsmCriteriaSummary": "DSM-5: Saldırgan dürtüleri kontrol edememe patlamaları (mala zarar, yaralama) + Stresörle tamamen orantısız olması + Planlı olmaması + Süreklilik göstermesi.",
+    "therapyId": "cbt_general",
+    "pharmacologyId": "ssri_firstline"
   },
   {
     "id": "case-049",
@@ -967,6 +1005,8 @@
       "explanation": "Nörobiyolojik araştırmalar, patolojik kumarın beyindeki ventral striatum ve dopaminerjik ödül devresini madde bağımlılığı ile tamamen aynı şekilde aktive ettiğini gösterdiği için DSM-5'te madde bağımlılığı kategorisine alınmıştır."
     },
     "differentialDiagnosis": "• Profesyonel/Sosyal Kumar: Riskler kontrol altındadır, tolerans veya işlev kaybı yoktur.\n• Bipolar Manik Epizod: Manideki kontrolsüz harcama genel grandiyözite ve taşkınlık döneminde ortaya çıkar.",
-    "dsmCriteriaSummary": "DSM-5 (En az 4/9): Artan miktarda para gereksinimi (tolerans), bırakınca huzursuzluk (yoksunluk), kontrol çabalarında başarısızlık, zihinsel uğraş, kayıpları kovalama, yalan söyleme, ilişkileri tehlikeye atma."
+    "dsmCriteriaSummary": "DSM-5 (En az 4/9): Artan miktarda para gereksinimi (tolerans), bırakınca huzursuzluk (yoksunluk), kontrol çabalarında başarısızlık, zihinsel uğraş, kayıpları kovalama, yalan söyleme, ilişkileri tehlikeye atma.",
+    "therapyId": "motivational_interviewing",
+    "pharmacologyId": "naltrexone_acamprosate"
   }
 ]

@@ -1,0 +1,48 @@
+{
+"enuresis": {
+ "id": "enuresis",
+ "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
+ "nameEn": "Enuresis",
+ "clinicalDescription": {
+  "overview": "Takvim yaşı en az 5 (ya da buna eşdeğer gelişim düzeyinde) olan bir çocukta yatağa ya da giysilere yineleyen biçimde idrar kaçırmadır; kaçırma çoğunlukla istemsizdir, nadiren istemli olabilir. Alt türleri: yalnızca gece (en sık), yalnızca gündüz ve gece-gündüz birlikte. Çocuğun hiç kuru kalmadığı biçim birincil (primer), bir kuru kalma döneminden sonra başlayan biçim ikincil (sekonder) enürezis olarak adlandırılır; ikincil biçim sıklıkla stres etkenleriyle (kardeş doğumu, taşınma, boşanma) ilişkilidir.",
+  "epidemiology": "5 yaşındaki çocukların yaklaşık %5-10'unda, 10 yaşındakilerin %3-5'inde, 15 yaş ve üzerinde yaklaşık %1'inde görülür. Gece enürezisi erkeklerde, gündüz enürezisi kızlarda daha sıktır.",
+  "etiology": "Güçlü ailesel geçiş, gece vazopressin salınımında yetersizlik, işlevsel mesane kapasitesinin küçüklüğü, uykudan uyanma eşiğinin yüksekliği, kabızlık ve gelişimsel gecikme. Psikososyal stres özellikle ikincil enüreziste rol oynar.",
+  "prognosis": "Her yıl çocukların bir kısmında kendiliğinden düzelir. Enürezis alarmı, davranışsal yöntemler ve gerektiğinde desmopressin etkilidir; çocuğun suçlanmaması ve cezalandırılmaması önemlidir. İdrar yolu enfeksiyonu, diyabet ve nörolojik nedenler dışlanmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "İdrar Kaçırma, Sıklık ve Yaş (≥ 5 yaş)",
+   "content": "Yatağa ya da giysilere yineleyen idrar kaçırma (istemsiz ya da istemli) (A). Klinik açıdan belirgindir: art arda en az 3 ay süreyle haftada en az 2 kez ya da belirgin sıkıntı veya toplumsal, okul ve diğer alanlarda işlev bozulması (B). Takvim yaşı en az 5'tir ya da buna eşdeğer gelişim düzeyindedir (C)."
+  },
+  {
+   "code": "Kriter D & Alt Tipler",
+   "title": "Dışlama ve Alt Tipler",
+   "content": "Bir maddenin (örn. diüretik, antipsikotik) fizyolojik etkisine ya da başka bir sağlık durumuna (örn. diyabet, spina bifida, nöbet bozukluğu) bağlanamaz (D). Alt tipler: yalnızca gece, yalnızca gündüz, gece ve gündüz birlikte."
+  }
+ ]
+},
+"enuresis_diurna": {
+ "id": "enuresis_diurna",
+ "nameTr": "Enürezis Diürna (Gündüz Altını Islatma)",
+ "nameEn": "Enuresis (Diurnal only)",
+ "clinicalDescription": {
+  "overview": "Enürezisin yalnızca uyanıklık saatlerinde idrar kaçırmayla giden alt tipidir. İki ana örüntü tanımlanır: 'sıkışma (urge) inkontinansı' (ani sıkışma hissi ve mesane kas aşırı etkinliğiyle kaçırma) ve 'idrarı erteleme' (çocuğun oyuna dalması ya da tuvalet kullanmaktan kaçınması nedeniyle idrar yapma isteğini kaçırana dek ertelemesi). İdrarı erteleme örüntüsü yıkıcı davranış sorunlarıyla ve okulda tuvalete gitme kaygısıyla ilişkili olabilir.",
+  "epidemiology": "Gece enürezisinden daha seyrektir; kızlarda daha sık görülür ve 9 yaşından sonra nadirdir.",
+  "etiology": "Mesane-bağırsak işlev bozukluğu (özellikle kabızlık eşlik eder), mesane kas aşırı etkinliği, işeme alışkanlıklarında bozukluk; DEHB ve karşıt olma-karşı gelme davranışları ile birliktelik. İdrar yolu enfeksiyonu ve yapısal ürolojik nedenler dışlanmalıdır.",
+  "prognosis": "Üroterapi (düzenli zamanlı işeme, yeterli sıvı alımı, doğru işeme duruşu), kabızlığın tedavisi ve davranışsal pekiştirme yöntemleri etkilidir. Eşlik eden davranış ve dikkat sorunları ayrıca ele alınmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "Enürezis Ortak Ölçütleri",
+   "content": "Yineleyen idrar kaçırma (A); art arda en az 3 ay haftada en az 2 kez ya da belirgin sıkıntı/işlev bozulması (B); takvim ya da gelişim yaşının en az 5 olması (C); madde ya da tıbbi duruma bağlanamaması (D)."
+  },
+  {
+   "code": "Alt Tip",
+   "title": "Yalnızca Gündüz",
+   "content": "İdrar kaçırma yalnızca uyanıklık saatlerinde olur. Klinik örüntü olarak sıkışma inkontinansı ve idrarı erteleme ayırt edilir; gece kaçırma da varsa 'gece ve gündüz birlikte' alt tipi belirtilir."
+  }
+ ]
+}
+}

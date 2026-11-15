@@ -1,0 +1,454 @@
+{
+ "intellectual_disability_mild": {
+  "id": "intellectual_disability_mild",
+  "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
+  "nameEn": "Intellectual Disability (Mild)",
+  "clinicalDescription": {
+   "overview": "Gelişim döneminde başlayan, hem zihinsel (entelektüel) işlevlerde hem de kavramsal, toplumsal ve uygulamaya dönük (pratik) alanlarda uyumsal işlevsellikte yetersizlikle giden tablonun en hafif düzeyidir. Okul öncesinde çoğu zaman fark edilmez; okul çağında okuma, yazma, aritmetik, zaman ve para kavramlarında güçlük belirginleşir. Toplumsal ilişkilerde yaşıtlarına göre daha 'çocuksu' kalabilir, sosyal ipuçlarını okumakta ve risk değerlendirmekte zorlanır, bu nedenle istismar ve kandırılmaya açıktır. Öz bakımda çoğunlukla bağımsızdır; yetişkinlikte kavramsal beceri gerektirmeyen işlerde çalışabilir ancak para yönetimi, sağlık ve hukuki kararlar gibi karmaşık konularda desteğe ihtiyaç duyar. DSM-5'te düzey IQ puanına göre değil, uyumsal işlevselliğe göre belirlenir.",
+   "epidemiology": "Zihinsel yetiyitiminin genel toplumdaki yaygınlığı yaklaşık %1'dir. Olguların büyük çoğunluğu (geleneksel olarak yaklaşık %85) hafif düzeydedir. Erkeklerde biraz daha sık görülür.",
+   "etiology": "Hafif düzeyde çoğu zaman belirli bir organik neden saptanamaz; poligenik kalıtım ile yoksulluk, yetersiz uyaran ve eğitim olanaklarının kısıtlılığı gibi psikososyal etkenler birlikte rol oynar. Bir kısmında genetik sendromlar (örn. frajil X), doğum öncesi alkol maruziyeti veya doğum çevresi komplikasyonlar bulunur.",
+   "prognosis": "Erken tanı, bireyselleştirilmiş eğitim programı (özel eğitim/kaynaştırma), sosyal beceri eğitimi ve mesleki rehabilitasyon ile birçok kişi yarı bağımsız ya da bağımsız yaşam sürdürebilir. Eşlik eden DEHB, anksiyete ve depresyon sık görülür ve gözden kaçırılmamalıdır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A, B & C",
+    "title": "Üç Temel Ölçüt (Zihinsel İşlev + Uyumsal İşlev + Gelişimsel Başlangıç)",
+    "content": "A: Akıl yürütme, sorun çözme, planlama, soyut düşünme, yargılama, akademik öğrenme ve deneyimden öğrenme gibi zihinsel işlevlerde, klinik değerlendirme ve bireysel uygulanan standart zekâ testleriyle doğrulanan yetersizlik (genellikle ortalamanın yaklaşık 2 standart sapma altı; ölçüm hatası payıyla IQ yaklaşık 65-75 ve altı). B: Kişisel bağımsızlık ve toplumsal sorumluluk açısından gelişimsel ve sosyokültürel standartları karşılayamayan, desteğe gereksinim doğuran uyumsal işlevsellik yetersizliği. C: Her ikisinin de gelişim döneminde başlaması."
+   },
+   {
+    "code": "Şiddet Belirleyicisi",
+    "title": "Hafif Düzeyi Belirleyen Özellikler",
+    "content": "Kavramsal alanda akademik becerilerde ve yürütücü işlevlerde güçlük; toplumsal alanda yaşıtlara göre olgunlaşmamış iletişim ve yargı; pratik alanda öz bakımda yaşa uygun işlev, ancak alışveriş, ulaşım, ev düzeni, para ve sağlık kararları gibi karmaşık günlük işlerde desteğe gereksinim. Geleneksel (ICD-10) sınıflamada karşılık gelen IQ aralığı yaklaşık 50-69'dur; DSM-5'te düzey belirlenirken IQ değil uyumsal işlevsellik esas alınır."
+   }
+  ]
+ },
+ "intellectual_disability_moderate": {
+  "id": "intellectual_disability_moderate",
+  "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
+  "nameEn": "Intellectual Disability (Moderate)",
+  "clinicalDescription": {
+   "overview": "Zihinsel yetiyitiminin, gelişim boyunca kavramsal becerilerin yaşıtlardan belirgin biçimde geride kaldığı orta düzeyidir. Okul öncesi dönemde dil ve okul öncesi beceriler yavaş gelişir; akademik beceriler çoğunlukla ilkokul düzeyinde kalır. Konuşma dili toplumsal iletişimde başlıca araçtır ancak yaşıtlarına göre çok daha basittir. Uzun süreli öğretim ve destekle yemek yeme, giyinme, tuvalet ve temizlik gibi öz bakım becerilerinde bağımsızlık kazanılabilir; yetişkinlikte kavramsal ve iletişim gereksinimi az olan işlerde, belirgin destekle çalışabilir.",
+   "epidemiology": "Zihinsel yetiyitimi olan bireylerin yaklaşık %10'u orta düzeydedir (geleneksel tahmin).",
+   "etiology": "Hafif düzeye göre belirli bir biyolojik nedenin saptanma olasılığı daha yüksektir: Down sendromu (trizomi 21), frajil X sendromu, diğer kromozom anomalileri, doğum öncesi enfeksiyonlar, fetal alkol maruziyeti, doğum çevresi hipoksi ve erken çocukluk dönemi merkezi sinir sistemi enfeksiyonları ya da travmaları sayılabilir.",
+   "prognosis": "Yaşam boyu değişen yoğunlukta desteğe gereksinim sürer. Erken müdahale, yapılandırılmış özel eğitim, iletişim desteği ve korumalı/destekli istihdam ile öz bakım ve topluma katılım belirgin artar. Davranış sorunlarına uygulamalı davranış analizi temelli yaklaşımlar kullanılır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A, B & C",
+    "title": "Ortak Tanı Ölçütleri",
+    "content": "Standart testler ve klinik değerlendirmeyle doğrulanan zihinsel işlev yetersizliği (A), kişisel bağımsızlık ve toplumsal sorumluluğu sınırlayan uyumsal işlevsellik yetersizliği (B) ve bunların gelişim döneminde başlaması (C). Düzey uyumsal işlevselliğe göre belirlenir."
+   },
+   {
+    "code": "Şiddet Belirleyicisi",
+    "title": "Orta Düzeyi Belirleyen Özellikler",
+    "content": "Kavramsal alanda okuma-yazma ve sayı becerileri temel düzeyde kalır, iş ve günlük yaşamdaki kavramsal görevler için sürekli destek gerekir; toplumsal alanda arkadaşlık kurulabilse de sosyal ipuçlarını yorumlamada ve kararlarda bakım verenlerin yardımına gereksinim vardır; pratik alanda öz bakım uzun bir öğretim süreciyle kazanılır, bağımsız yaşam ve iş için kalıcı destek gerekir. Geleneksel (ICD-10) karşılığı yaklaşık IQ 35-49'dur."
+   }
+  ]
+ },
+ "intellectual_disability_severe": {
+  "id": "intellectual_disability_severe",
+  "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
+  "nameEn": "Intellectual Disability (Severe)",
+  "clinicalDescription": {
+   "overview": "Kavramsal becerilerin çok sınırlı kaldığı ağır düzeyde kişi, yazılı dil ve sayı, nicelik, zaman ve para kavramlarını çok az anlar. Konuşma sözcük ve kısa ifadelerle sınırlıdır, çoğunlukla 'şimdi ve burada' olan olaylara yöneliktir; basit konuşmayı ve jestleri anlayabilir. Yemek, giyinme, banyo ve tuvalet dahil tüm günlük yaşam etkinliklerinde desteğe ve sürekli gözetime gereksinim duyar; kendisi ve başkalarının iyiliği için sorumluluk gerektiren kararlar alamaz. Bir azınlıkta kendine zarar verme gibi uyumsuz davranışlar görülür.",
+   "epidemiology": "Zihinsel yetiyitimi olan bireylerin yaklaşık %3-4'ü ağır düzeydedir (geleneksel tahmin). Ağır zihinsel yetiyitiminin toplumdaki yaygınlığı binde 6 civarında bildirilmektedir.",
+   "etiology": "Olguların çoğunda belirlenebilir bir organik neden vardır: kromozom ve tek gen bozuklukları, metabolik hastalıklar, beyin gelişim anomalileri, ağır doğum öncesi/doğum çevresi beyin hasarı. Epilepsi, serebral palsi ve duyusal yetersizlikler sık eşlik eder.",
+   "prognosis": "Yaşam boyu yoğun destek gerekir. Erken dönemden itibaren yapılandırılmış öğretim, alternatif ve destekleyici iletişim yöntemleri, eşlik eden tıbbi sorunların (epilepsi, beslenme, motor sorunlar) yönetimi ve aile desteği yaşam kalitesini artırır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A, B & C",
+    "title": "Ortak Tanı Ölçütleri",
+    "content": "Zihinsel işlev yetersizliği (A), gündelik yaşamın birden fazla alanında desteğe gereksinim doğuran uyumsal işlevsellik yetersizliği (B) ve gelişim döneminde başlangıç (C). Ağır düzeyde standart zekâ testleri çoğu zaman güvenilir biçimde uygulanamaz; değerlendirme uyumsal işlevsellik ölçeklerine ve klinik gözleme dayanır."
+   },
+   {
+    "code": "Şiddet Belirleyicisi",
+    "title": "Ağır Düzeyi Belirleyen Özellikler",
+    "content": "Kavramsal alanda sembolik kavramların çok sınırlı kavranması; toplumsal alanda sözcük/kısa ifade düzeyinde konuşma ve aile ile tanıdıklarla kurulan ilişkilerden haz alma; pratik alanda tüm günlük etkinliklerde sürekli destek ve gözetime gereksinim. Geleneksel (ICD-10) karşılığı yaklaşık IQ 20-34'tür."
+   }
+  ]
+ },
+ "intellectual_disability_profound": {
+  "id": "intellectual_disability_profound",
+  "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
+  "nameEn": "Intellectual Disability (Profound)",
+  "clinicalDescription": {
+   "overview": "Zihinsel yetiyitiminin en ağır düzeyidir. Kavramsal beceriler sembolik süreçlerden çok fiziksel dünyaya ilişkindir; kişi nesneleri amaca yönelik olarak (örn. eşleştirme, sıralama gibi basit görsel-uzamsal becerilerle) kullanabilir. Konuşma ve jestlerin sembolik iletişimini anlaması çok sınırlıdır; isteklerini ve duygularını büyük ölçüde sözel olmayan yollarla ifade eder. Eşlik eden motor ve duyusal yetersizlikler sıktır. Bedensel bakım, sağlık ve güvenliğin tüm yönlerinde başkalarına bağımlıdır.",
+   "epidemiology": "Zihinsel yetiyitimi olan bireylerin yaklaşık %1-2'si ileri derecede ağır düzeydedir (geleneksel tahmin).",
+   "etiology": "Hemen her zaman belirgin bir nörolojik/biyolojik neden vardır: ağır kromozom anomalileri, metabolik ve nörodejeneratif hastalıklar, yaygın beyin malformasyonları, ağır hipoksik-iskemik hasar. Tedaviye dirençli epilepsi, serebral palsi, görme ve işitme kayıpları sık eşlik eder.",
+   "prognosis": "Yaşam boyu tam bakım gerekir. Tıbbi sorunların özenli yönetimi, duyusal uyaran ve basit iletişim yöntemlerine dayalı programlar ve bakım verenlerin desteklenmesi yaşam kalitesini korumada temeldir. Eşlik eden tıbbi durumlar nedeniyle yaşam beklentisi kısalabilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A, B & C",
+    "title": "Ortak Tanı Ölçütleri",
+    "content": "Zihinsel işlev yetersizliği (A), uyumsal işlevselliğin tüm alanlarında belirgin yetersizlik (B) ve gelişim döneminde başlangıç (C). Bu düzeyde değerlendirme ağırlıklı olarak uyumsal işlevselliğe ve gözleme dayanır."
+   },
+   {
+    "code": "Şiddet Belirleyicisi",
+    "title": "İleri Derecede Ağır Düzeyi Belirleyen Özellikler",
+    "content": "Kavramsal alanda sembolik değil somut/fiziksel düzeyde beceriler; toplumsal alanda basit yönerge ve jestleri sınırlı anlama, iletişimin büyük ölçüde sözel olmayan yollarla kurulması; pratik alanda bedensel bakım, sağlık ve güvenliğin her yönünde başkalarına bağımlılık (bazı basit ev işlerine destekle katılabilir). Geleneksel (ICD-10) karşılığı IQ yaklaşık 20'nin altıdır."
+   }
+  ]
+ },
+ "global_developmental_delay": {
+  "id": "global_developmental_delay",
+  "nameTr": "Küresel Gelişimsel Gecikme",
+  "nameEn": "Global Developmental Delay",
+  "clinicalDescription": {
+   "overview": "5 yaşından küçük bir çocukta, zihinsel işlevselliğin birden fazla alanında beklenen gelişim basamaklarına ulaşılamadığı, ancak klinik şiddetin henüz güvenilir biçimde değerlendirilemediği durumlarda konulan tanıdır. Çocuk standart zekâ testlerine katılamayacak kadar küçük olduğu için zihinsel yetiyitimi tanısı ve düzeyi kesinleştirilemez. Geçici bir tanı niteliği taşır ve belirli bir süre sonra yeniden değerlendirme gerektirir.",
+   "epidemiology": "5 yaş altı çocuklarda yaklaşık %1-3 oranında bildirilmektedir.",
+   "etiology": "Genetik (kromozom anomalileri, tek gen bozuklukları), doğum öncesi (enfeksiyon, alkol/madde maruziyeti), doğum çevresi (prematürite, hipoksi) ve doğum sonrası (merkezi sinir sistemi enfeksiyonu, travma, ağır ihmal) nedenler araştırılmalıdır. Genetik testler, metabolik tarama, işitme-görme değerlendirmesi ve gerektiğinde nörogörüntüleme önerilir.",
+   "prognosis": "Bir kısmı izlemde zihinsel yetiyitimi tanısı alırken bir kısmı yaşıtlarını büyük ölçüde yakalar. Erken müdahale programları (özel eğitim, dil-konuşma ve fizyoterapi) sonuçları belirgin biçimde iyileştirir."
+  },
+  "criteriaList": [
+   {
+    "code": "Tanım",
+    "title": "Kullanım Koşulları (5 Yaş Altı)",
+    "content": "5 yaşından küçük bireylerde, zihinsel işlevselliğin birkaç alanında beklenen gelişim basamaklarına ulaşamama durumunda kullanılır. Çocuğun yaşı nedeniyle sistematik zekâ ve uyumsal işlev değerlendirmeleri yapılamadığında, klinik şiddet güvenilir biçimde belirlenemediğinde konur."
+   },
+   {
+    "code": "Yeniden Değerlendirme",
+    "title": "Geçici Tanı Niteliği",
+    "content": "Tanı belirli bir süre sonra yeniden değerlendirilmeyi gerektirir; değerlendirme yapılabilir hale geldiğinde zihinsel yetiyitimi (ve düzeyi), başka bir nörogelişimsel bozukluk ya da tanı gerektirmeyen bir gelişim örüntüsü açısından karar verilir."
+   }
+  ]
+ },
+ "unspecified_intellectual_disability": {
+  "id": "unspecified_intellectual_disability",
+  "nameTr": "Belirtilmemiş Zihinsel Yetiyitimi",
+  "nameEn": "Unspecified Intellectual Disability",
+  "clinicalDescription": {
+   "overview": "5 yaşından büyük bireylerde, zihinsel yetiyitimi bulunduğu düşünülmekle birlikte eşlik eden duyusal ya da bedensel yetersizlikler (körlük, dil öncesi dönemde başlayan sağırlık), hareket yetersizliği, ağır davranış sorunları veya eşlik eden bir ruhsal bozukluk nedeniyle yerel olarak uygulanabilir yöntemlerle düzeyin belirlenmesinin güç ya da olanaksız olduğu durumlarda kullanılan tanıdır.",
+   "epidemiology": "Yalnızca istisnai durumlarda kullanılması öngörülen bir kategoridir; ayrı yaygınlık verisi yoktur.",
+   "etiology": "Altta yatan nedenler zihinsel yetiyitiminin genel nedenleriyle aynıdır; değerlendirmeyi zorlaştıran ek yetersizlikler (ör. ağır serebral palsi, çoğul duyusal kayıp) bu grupta özellikle sıktır.",
+   "prognosis": "Bireye uyarlanmış değerlendirme araçları (sözel olmayan testler, duyusal yetersizliğe uygun ölçekler) kullanılabilir hale geldiğinde tanı ve düzey yeniden değerlendirilmelidir."
+  },
+  "criteriaList": [
+   {
+    "code": "Tanım",
+    "title": "Kullanım Koşulları (5 Yaş ve Üzeri)",
+    "content": "5 yaş ve üzerindeki bireylerde, zihinsel yetiyitiminin düzeyini belirlemenin duyusal/bedensel yetersizlik, hareket yetersizliği, ağır sorun davranışlar veya eşlik eden ruhsal bozukluk nedeniyle güç ya da olanaksız olduğu durumlarda konur."
+   },
+   {
+    "code": "Not",
+    "title": "İstisnai Kullanım ve Yeniden Değerlendirme",
+    "content": "Bu kategori yalnızca istisnai durumlarda kullanılmalı ve belirli aralıklarla yeniden değerlendirme yapılmalıdır. 5 yaş altındaki çocuklarda aynı durumda Küresel Gelişimsel Gecikme tanısı tercih edilir."
+   }
+  ]
+ },
+ "language_disorder": {
+  "id": "language_disorder",
+  "nameTr": "Dil Bozukluğu",
+  "nameEn": "Language Disorder",
+  "clinicalDescription": {
+   "overview": "Dili anlama ya da üretmedeki yetersizlikler nedeniyle konuşma, yazı veya işaret dili gibi farklı kipliklerde dilin edinilmesi ve kullanılmasında süregen güçlüklerle tanımlanan iletişim bozukluğudur. Sözcük dağarcığı dardır, cümle yapıları yaşa göre basit kalır ve kişi olayları anlatırken ya da bir konuyu açıklarken düşüncelerini birbirine bağlamakta zorlanır. Alıcı (anlama) güçlükleri olan çocuklarda prognoz, yalnızca ifade edici güçlüğü olanlara göre daha kötüdür.",
+   "epidemiology": "Okul öncesi çocuklarda sık görülür; okula başlama yaşında yaklaşık %7 civarında bildirilmektedir. Ailede dil bozukluğu öyküsü önemli bir risk etkenidir.",
+   "etiology": "Güçlü genetik katkısı vardır (ikiz ve aile çalışmalarında yüksek kalıtılabilirlik). İşitme kaybı, zihinsel yetiyitimi ve otizm spektrum bozukluğu ayırıcı tanıda mutlaka dışlanmalı ya da eşlik eden tanı olarak değerlendirilmelidir.",
+   "prognosis": "4 yaşından sonra belirgin olan dil güçlükleri genellikle zaman içinde kalıcıdır ve okuma bozukluğu (özgül öğrenme bozukluğu), sosyal ve duygusal sorunlar için risk oluşturur. Erken dil ve konuşma terapisi en etkili yaklaşımdır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A",
+    "title": "Dil Edinimi ve Kullanımında Süregen Güçlük",
+    "content": "Anlama ya da üretme yetersizliğine bağlı, farklı kipliklerde (konuşma, yazı, işaret dili) dilin edinilmesi ve kullanılmasında süregen güçlük:",
+    "items": [
+     "1. Sözcük dağarcığının kısıtlı olması (sözcük bilgisi ve kullanımı).",
+     "2. Cümle yapısının sınırlı olması (dilbilgisi ve biçimbilgisi kurallarına göre sözcükleri birleştirme).",
+     "3. Söylem becerilerinde yetersizlik (bir konuyu, olayı açıklamak ya da konuşmayı sürdürmek için cümleleri birbirine bağlamada güçlük)."
+    ]
+   },
+   {
+    "code": "Kriter B, C & D",
+    "title": "Belirgin Yetersizlik, Erken Başlangıç ve Dışlama",
+    "content": "Dil becerileri yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır ve iletişim, toplumsal katılım, akademik ya da mesleki başarıda işlevsel kısıtlılığa yol açar (B). Belirtiler erken gelişim döneminde başlar (C). Güçlükler işitme ya da başka bir duyu yetersizliğine, motor işlev bozukluğuna veya başka bir tıbbi/nörolojik duruma bağlanamaz; zihinsel yetiyitimi ya da küresel gelişimsel gecikmeyle daha iyi açıklanamaz (D)."
+   }
+  ]
+ },
+ "speech_sound_disorder": {
+  "id": "speech_sound_disorder",
+  "nameTr": "Konuşma Sesi Bozukluğu (Fonolojik Bozukluk)",
+  "nameEn": "Speech Sound Disorder",
+  "clinicalDescription": {
+   "overview": "Çocuğun yaşına ve gelişim düzeyine göre beklenen konuşma seslerini üretmede süregen güçlük çektiği, bunun konuşmanın anlaşılırlığını bozduğu ya da sözel iletişimi engellediği bozukluktur. Ses atlama (örn. 'top' yerine 'to'), ses değiştirme (örn. 'r' yerine 'y') veya ses bozulmaları görülür. Güçlük, seslerin dil sistemindeki kurallarının (fonoloji) ya da seslerin motor olarak üretiminin (artikülasyon) bilgisi ve becerisiyle ilişkili olabilir.",
+   "epidemiology": "Okul öncesi ve erken okul çağında sık görülen bir iletişim bozukluğudur; erkek çocuklarda daha sıktır. Tipik gelişen çocukların çoğu 4 yaşına kadar büyük ölçüde anlaşılır konuşur.",
+   "etiology": "Genetik yatkınlık ve aile öyküsü önemlidir. Dil bozukluğu ve okuma güçlükleriyle sık birliktelik gösterir. Ayırıcı tanıda işitme kaybı, yarık damak, serebral palsi gibi yapısal/nörolojik nedenler ve dizartri dışlanmalıdır.",
+   "prognosis": "Dil ve konuşma terapisine iyi yanıt verir; çocukların çoğunda belirgin düzelme sağlanır. Eşlik eden dil bozukluğu varsa prognoz daha sınırlıdır ve okuma-yazma güçlükleri açısından izlem gerekir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A & B",
+    "title": "Ses Üretiminde Süregen Güçlük ve İşlevsel Etki",
+    "content": "Konuşmanın anlaşılırlığını bozan ya da sözel iletişimi engelleyen, konuşma seslerini üretmede süregen güçlük (A). Bu güçlük etkili iletişimi kısıtlar ve toplumsal katılım, akademik ya da mesleki başarıyı tek başına ya da birlikte olumsuz etkiler (B)."
+   },
+   {
+    "code": "Kriter C & D",
+    "title": "Erken Başlangıç ve Dışlama",
+    "content": "Belirtiler erken gelişim döneminde başlar (C). Güçlükler serebral palsi, yarık damak, sağırlık/işitme kaybı, kafa travması gibi doğuştan ya da edinilmiş durumlara veya başka tıbbi/nörolojik durumlara bağlanamaz (D)."
+   }
+  ]
+ },
+ "social_communication_disorder": {
+  "id": "social_communication_disorder",
+  "nameTr": "Toplumsal (Pragmatik) İletişim Bozukluğu",
+  "nameEn": "Social (Pragmatic) Communication Disorder",
+  "clinicalDescription": {
+   "overview": "Sözcük ve dilbilgisi becerileri görece korunmuş olmasına karşın, dilin toplumsal amaçlarla kullanımında (pragmatik) süregen güçlüklerle tanımlanan bozukluktur. Kişi selamlaşma ve bilgi paylaşma gibi iletişimi bağlama uygun kullanmakta, konuştuğu kişiye ve ortama göre konuşma biçimini değiştirmekte, söz sırasına uymakta ve açıkça söylenmeyeni (çıkarım, ima, mecaz, şaka) anlamakta zorlanır. Otizm spektrum bozukluğundan temel farkı, sınırlı ve yineleyici davranış, ilgi ve etkinliklerin bulunmamasıdır.",
+   "epidemiology": "Yaygınlığı kesin olarak bilinmemektedir. Dil gelişiminin yeterli düzeye ulaşması gerektiğinden 4 yaşından önce nadiren konulur; hafif biçimleri ergenliğe kadar fark edilmeyebilir.",
+   "etiology": "Ailede otizm spektrum bozukluğu, iletişim bozukluğu ya da özgül öğrenme bozukluğu öyküsü riski artırır. DEHB, dil bozukluğu ve öğrenme bozukluklarıyla sık birlikte görülür.",
+   "prognosis": "Sosyal iletişim becerilerine yönelik dil-konuşma terapisi ve sosyal beceri eğitimleri yararlıdır. Pek çok çocukta zamanla iyileşme görülür; ancak erken dönemdeki güçlükler ilişkilerde ve akademik alanda kalıcı sorunlara yol açabilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A",
+    "title": "Sözel ve Sözel Olmayan İletişimin Toplumsal Kullanımında Süregen Güçlük (4 alanın tümü)",
+    "content": "Aşağıdaki alanların tümünde kendini gösteren güçlük:",
+    "items": [
+     "1. İletişimi selamlaşma, bilgi paylaşma gibi toplumsal amaçlarla ve bağlama uygun biçimde kullanmada yetersizlik.",
+     "2. İletişimi bağlama ya da dinleyicinin gereksinimlerine göre ayarlayamama (örn. sınıfta ve oyun alanında, çocukla ve yetişkinle farklı konuşamama; aşırı resmi dilden kaçınamama).",
+     "3. Konuşma ve öykü anlatma kurallarına uymada güçlük (söz sırası, yanlış anlaşıldığında yeniden ifade etme, etkileşimi düzenleyen sözel ve sözel olmayan işaretleri kullanma).",
+     "4. Açıkça söylenmeyeni (çıkarımlar) ve düz anlamı dışındaki ya da belirsiz dili (deyimler, mizah, mecaz, bağlama göre değişen anlamlar) anlamada güçlük."
+    ]
+   },
+   {
+    "code": "Kriter B, C & D",
+    "title": "İşlevsel Etki, Başlangıç ve Dışlama",
+    "content": "Güçlükler etkili iletişim, toplumsal katılım, ilişkiler, akademik ya da mesleki başarıda işlevsel kısıtlılığa yol açar (B). Belirtiler erken gelişim döneminde başlar, ancak toplumsal iletişim talepleri kapasiteyi aşana dek tam olarak ortaya çıkmayabilir (C). Başka bir tıbbi/nörolojik duruma ya da sözcük yapısı ve dilbilgisindeki düşük becerilere bağlanamaz; otizm spektrum bozukluğu, zihinsel yetiyitimi, küresel gelişimsel gecikme veya başka bir ruhsal bozuklukla daha iyi açıklanamaz (D)."
+   }
+  ]
+ },
+ "unspecified_communication_disorder": {
+  "id": "unspecified_communication_disorder",
+  "nameTr": "Belirtilmemiş İletişim Bozukluğu",
+  "nameEn": "Unspecified Communication Disorder",
+  "clinicalDescription": {
+   "overview": "İletişim bozukluğunun karakteristik belirtilerinin klinik açıdan belirgin sıkıntı ya da işlevsellikte bozulmaya yol açtığı, ancak iletişim bozuklukları ya da diğer nörogelişimsel bozukluklar sınıfındaki herhangi bir tanının ölçütlerini tam olarak karşılamadığı durumlarda kullanılır. Genellikle bilgi yetersiz olduğunda veya klinisyen tam ölçütlerin neden karşılanmadığını belirtmemeyi seçtiğinde konur.",
+   "epidemiology": "Artık (rezidüel) bir kategori olduğundan ayrı yaygınlık verisi bulunmamaktadır.",
+   "etiology": "Altta yatan nedenler dil bozukluğu, konuşma sesi bozukluğu, çocuklukta başlayan akıcılık bozukluğu ve toplumsal (pragmatik) iletişim bozukluğuyla benzerdir.",
+   "prognosis": "Ayrıntılı dil-konuşma değerlendirmesi sonrasında tanı çoğu zaman özgül bir iletişim bozukluğuna dönüştürülür ya da tanı gerektirmediği anlaşılır; bu nedenle izlem ve yeniden değerlendirme önemlidir."
+  },
+  "criteriaList": [
+   {
+    "code": "Tanım",
+    "title": "Ölçütleri Tam Karşılamayan İletişim Bozukluğu",
+    "content": "İletişim bozukluğuna özgü belirtiler baskındır ve klinik açıdan belirgin sıkıntı ya da toplumsal, mesleki veya diğer önemli işlevsellik alanlarında bozulmaya yol açar; ancak iletişim bozukluklarından ya da nörogelişimsel bozukluklardan herhangi birinin ölçütleri tam olarak karşılanmaz."
+   },
+   {
+    "code": "Not",
+    "title": "Kullanım Biçimi",
+    "content": "Klinisyenin ölçütlerin neden karşılanmadığını belirtmemeyi seçtiği ve özgül tanı koymak için yeterli bilginin bulunmadığı durumlarda kullanılır. DSM-5'te iletişim bozuklukları için ayrı bir 'belirlenmiş diğer' kategorisi yoktur."
+   }
+  ]
+ },
+ "adhd_inattentive": {
+  "id": "adhd_inattentive",
+  "nameTr": "DEHB (Dikkatsizliğin Baskın Olduğu Görünüm)",
+  "nameEn": "ADHD (Predominantly Inattentive Presentation)",
+  "clinicalDescription": {
+   "overview": "DEHB tanı ölçütlerinin karşılandığı ve son 6 ayda dikkatsizlik belirtileri ölçütünün (A1) karşılanıp aşırı hareketlilik-dürtüsellik ölçütünün (A2) karşılanmadığı görünümdür. Klinik tabloda dalgınlık, unutkanlık, ayrıntıları kaçırma, işleri düzenleyememe, eşyaları kaybetme ve zihinsel çaba gerektiren görevleri erteleme ön plandadır. Belirgin yıkıcı davranış olmadığı için özellikle kız çocuklarında ve yetişkinlerde geç tanınabilir; 'tembel' ya da 'hayalperest' olarak etiketlenebilir.",
+   "epidemiology": "Toplumda örneklerinde en sık görülen DEHB görünümlerindendir. Kızlarda ve yetişkinlerde dikkatsizliğin baskın olduğu görünüm, hiperaktivitenin baskın olduğu görünüme göre görece daha sıktır.",
+   "etiology": "DEHB'nin genel etiyolojisiyle aynıdır: yüksek kalıtılabilirlik, prefrontal-striatal ağlarda dopamin ve noradrenalin işlevinde farklılıklar, yürütücü işlev ve dikkat ağlarında gelişimsel gecikme; düşük doğum ağırlığı, prematürite ve doğum öncesi sigara/alkol maruziyeti risk etkenleridir.",
+   "prognosis": "Görünüm zaman içinde değişebilir; çocuklukta birleşik görünümde olan birçok kişide hiperaktivite yaşla azalır ve tablo dikkatsizliğin baskın olduğu görünüme döner. İlaç tedavisi (uyarıcılar ve uyarıcı olmayan ajanlar), aile eğitimi, okul düzenlemeleri ve yetişkinlerde BDT temelli beceri programları etkilidir. Eşlik eden öğrenme bozuklukları, anksiyete ve depresyon taranmalıdır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A1",
+    "title": "Dikkatsizlik Belirtileri (En az 6/9; 17 yaş ve üzerinde en az 5/9; en az 6 ay)",
+    "content": "Gelişim düzeyiyle uyumsuz, toplumsal ve akademik/mesleki etkinlikleri doğrudan olumsuz etkileyen belirtiler: ayrıntılara dikkat etmeme ve dikkatsizce hata yapma, dikkati sürdürmede güçlük, doğrudan konuşulduğunda dinlemiyor görünme, yönergeleri izleyip işleri bitirememe, görevleri düzenlemede güçlük, sürekli zihinsel çaba gerektiren işlerden kaçınma, gerekli eşyaları kaybetme, dış uyaranlarla kolay dağılma, günlük etkinliklerde unutkanlık."
+   },
+   {
+    "code": "Kriter B-E",
+    "title": "Ortak DEHB Ölçütleri",
+    "content": "Belirtilerin birkaçı 12 yaşından önce vardır (B), birkaçı iki ya da daha fazla ortamda (ev, okul, iş, arkadaş ortamı) görülür (C), işlevselliği bozduğuna ya da niteliğini düşürdüğüne dair açık kanıt vardır (D) ve belirtiler yalnızca şizofreni ya da başka bir psikotik bozukluk sırasında ortaya çıkmaz, başka bir ruhsal bozuklukla daha iyi açıklanamaz (E)."
+   },
+   {
+    "code": "Görünüm Belirleyicisi",
+    "title": "Dikkatsizliğin Baskın Olduğu Görünüm",
+    "content": "Son 6 ayda A1 (dikkatsizlik) ölçütü karşılanmış, A2 (aşırı hareketlilik-dürtüsellik) ölçütü karşılanmamıştır. Her iki ölçüt de karşılanıyorsa birleşik görünüm, yalnızca A2 karşılanıyorsa aşırı hareketlilik/dürtüselliğin baskın olduğu görünüm belirtilir."
+   }
+  ]
+ },
+ "adhd_hyperactive": {
+  "id": "adhd_hyperactive",
+  "nameTr": "DEHB (Aşırı Hareketlilik/Dürtüsellik Baskın Görünüm)",
+  "nameEn": "ADHD (Predominantly Hyperactive/Impulsive Presentation)",
+  "clinicalDescription": {
+   "overview": "DEHB tanı ölçütlerinin karşılandığı ve son 6 ayda aşırı hareketlilik-dürtüsellik ölçütünün (A2) karşılanıp dikkatsizlik ölçütünün (A1) karşılanmadığı görünümdür. Yerinde duramama, kıpırdanma, sırada bekleyememe, aşırı konuşma, başkalarının sözünü kesme ve sonuçlarını düşünmeden hareket etme ön plandadır. Kaza ve yaralanma riski yüksektir; okul öncesi dönemde en belirgin olan görünümdür.",
+   "epidemiology": "En çok okul öncesi ve erken okul çağı çocuklarında görülür; erkek çocuklarda belirgin olarak daha sıktır. Ergenlik ve yetişkinlikte saf hiperaktif-dürtüsel görünüm görece seyrektir.",
+   "etiology": "DEHB'nin genel etiyolojisiyle aynıdır; dürtü denetimi ve yanıt ketlemesiyle ilişkili fronto-striatal devrelerdeki farklılıklar öne çıkar. Yüksek kalıtılabilirlik ve doğum öncesi risk etkenleri rol oynar.",
+   "prognosis": "Motor hiperaktivite yaşla birlikte genellikle azalır ve yerini iç huzursuzluk hissine bırakır; bir kısım çocukta ilerleyen yıllarda dikkatsizlik belirtileri belirginleşerek birleşik görünüme geçiş olur. Davranışçı aile eğitimi (özellikle okul öncesi dönemde ilk basamak), okul temelli müdahaleler ve ilaç tedavisi etkilidir. Karşıt olma-karşı gelme bozukluğu ve davranım bozukluğu eşlik edebilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A2",
+    "title": "Aşırı Hareketlilik ve Dürtüsellik Belirtileri (En az 6/9; 17 yaş ve üzerinde en az 5/9; en az 6 ay)",
+    "content": "Gelişim düzeyiyle uyumsuz ve işlevselliği doğrudan olumsuz etkileyen belirtiler: elleri ayakları kıpır kıpır, oturması beklenen yerde kalkma, uygunsuz ortamda koşuşturma/tırmanma (ergen ve yetişkinde huzursuzluk hissi), sakin oyun oynayamama, sürekli hareket halinde olma ('motor takılmış gibi'), aşırı konuşma, soru bitmeden yanıt verme, sırasını bekleyememe, başkalarının sözünü kesme ya da işlerine karışma."
+   },
+   {
+    "code": "Kriter B-E",
+    "title": "Ortak DEHB Ölçütleri",
+    "content": "Belirtilerin birkaçı 12 yaşından önce vardır (B), birkaçı iki ya da daha fazla ortamda görülür (C), işlevselliğin bozulduğuna dair açık kanıt vardır (D), belirtiler yalnızca psikotik bir bozukluk sırasında ortaya çıkmaz ve başka bir ruhsal bozuklukla (duygudurum, anksiyete, dissosiyatif, kişilik bozukluğu, madde etkisi/yoksunluğu) daha iyi açıklanamaz (E)."
+   },
+   {
+    "code": "Görünüm Belirleyicisi",
+    "title": "Aşırı Hareketlilik/Dürtüselliğin Baskın Olduğu Görünüm",
+    "content": "Son 6 ayda A2 ölçütü karşılanmış, A1 (dikkatsizlik) ölçütü karşılanmamıştır. Ayırıcı tanıda gelişim düzeyine uygun yüksek etkinlik, karşıt olma-karşı gelme bozukluğu, kaygı ve travmaya bağlı huzursuzluk değerlendirilmelidir."
+   }
+  ]
+ },
+ "specific_learning_dysgraphia": {
+  "id": "specific_learning_dysgraphia",
+  "nameTr": "Özgül Öğrenme Bozukluğu (Yazılı Anlatım Bozukluğu / Disgrafi)",
+  "nameEn": "Specific Learning Disorder with Impairment in Written Expression",
+  "clinicalDescription": {
+   "overview": "Özgül öğrenme bozukluğunun, yazılı anlatım alanında belirgin güçlükle giden biçimidir. Yazım (heceleme/imla) doğruluğu, dilbilgisi ve noktalama doğruluğu ile yazılı anlatımın açıklığı ve düzenlenmesi etkilenir: çocuk sesleri harflere dönüştürürken hata yapar, cümleleri noktalama olmadan birbirine ekler, paragrafları düzenleyemez ve düşüncelerini yazıda açıkça aktaramaz. DSM-5'te salt el yazısının motor olarak kötü olması (yazının okunaksızlığı) tek başına bu tanının özü değildir; ince motor koordinasyon sorunları gelişimsel koordinasyon bozukluğu açısından değerlendirilir. Türkçede 'disgrafi' terimi çoğu zaman el yazısı güçlüğü anlamında da kullanıldığından ayrım önemlidir.",
+   "epidemiology": "Özgül öğrenme bozukluğunun (tüm alanlar) okul çağındaki yaygınlığı farklı dil ve kültürlerde yaklaşık %5-15'tir. Yazılı anlatım güçlüğü çoğunlukla okuma bozukluğuyla birlikte görülür.",
+   "etiology": "Genetik yatkınlık güçlüdür; fonolojik işlemleme, çalışma belleği ve yürütücü işlevlerdeki yetersizlikler, dil bozukluğu öyküsü ve DEHB ile birliktelik sıktır. Yetersiz öğretim, öğretim dilinde yetersizlik ve görme/işitme sorunları dışlanmalıdır.",
+   "prognosis": "Açık ve sistematik yazım-yazma öğretimi, yazma süreçlerini (planlama, taslak, gözden geçirme) adım adım öğreten stratejiler, klavye ve dikte yazılımı gibi destekleyici teknolojiler ile sınav düzenlemeleri işlevselliği artırır. Güçlük yaşam boyu sürebilir ancak telafi stratejileriyle büyük ölçüde azaltılabilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A",
+    "title": "Akademik Becerilerde Güçlük (En az 6 ay, müdahaleye rağmen)",
+    "content": "Bu güçlükleri hedefleyen müdahalelere karşın en az 6 aydır süren akademik beceri güçlüğü; yazılı anlatım alanında özellikle yazım (heceleme) güçlüğü ve yazılı anlatımda güçlük (birçok dilbilgisi ve noktalama hatası, paragraf düzenlemede yetersizlik, düşüncelerin yazıda açıkça ifade edilememesi)."
+   },
+   {
+    "code": "Kriter B, C & D",
+    "title": "Ölçülebilir Düşüklük, Okul Çağında Başlangıç ve Dışlama",
+    "content": "Etkilenen beceriler yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır ve okul, iş ya da günlük yaşamı belirgin biçimde etkiler; bu durum bireysel uygulanan standart başarı testleri ve kapsamlı klinik değerlendirmeyle doğrulanır (17 yaş ve üzerinde belgelenmiş öğrenme güçlüğü öyküsü yerine geçebilir) (B). Güçlükler okul çağında başlar, ancak talepler kapasiteyi aşana dek tam olarak ortaya çıkmayabilir (C). Zihinsel yetiyitimi, düzeltilmemiş görme/işitme sorunları, başka ruhsal ya da nörolojik bozukluklar, psikososyal güçlükler, öğretim dilinde yetersizlik ya da yetersiz eğitimle daha iyi açıklanamaz (D)."
+   },
+   {
+    "code": "Belirleyiciler",
+    "title": "Yazılı Anlatım Alt Becerileri ve Şiddet",
+    "content": "Yazılı anlatımda bozulma ile: yazım (heceleme) doğruluğu, dilbilgisi ve noktalama doğruluğu, yazılı anlatımın açıklığı ya da düzenlenmesi. Şiddet hafif, orta ya da ağır olarak belirtilir."
+   }
+  ]
+ },
+ "specific_learning_dyscalculia": {
+  "id": "specific_learning_dyscalculia",
+  "nameTr": "Özgül Öğrenme Bozukluğu (Matematik Bozukluğu / Diskalkuli)",
+  "nameEn": "Specific Learning Disorder with Impairment in Mathematics (Dyscalculia)",
+  "clinicalDescription": {
+   "overview": "Özgül öğrenme bozukluğunun matematik alanında belirgin güçlükle giden biçimidir. Sayı duyusunun (nicelikleri sezgisel kavrama, sayıların büyüklüğünü karşılaştırma) zayıf olması, temel aritmetik bilgilerin (örn. çarpım tablosu) belleğe alınamaması, hesaplamanın yavaş ve hatalı olması ve matematiksel akıl yürütmede (problem çözmede kavram ve işlemleri uygulama) güçlük görülür. Çocuk büyük yaşlarda bile parmakla saymayı sürdürebilir, işlem basamaklarını karıştırabilir. 'Diskalkuli' terimi, sayısal bilgiyi işleme, aritmetik bilgileri öğrenme ve akıcı hesaplamadaki bu güçlük örüntüsü için kullanılan alternatif bir terimdir.",
+   "epidemiology": "Özgül öğrenme bozukluğunun tüm alanlarda okul çağı yaygınlığı yaklaşık %5-15'tir; matematik alanındaki güçlük için çalışmalarda yaklaşık %3-7 arasında oranlar bildirilmektedir. Okuma bozukluğu ve DEHB ile birliktelik sıktır.",
+   "etiology": "Genetik etkenler ve parietal korteksteki (özellikle intraparietal oluk) sayısal büyüklük işlemleme ağlarındaki farklılıklar sorumlu tutulmaktadır. Çalışma belleği, görsel-uzamsal işlemleme ve işlemleme hızı zayıflıkları katkıda bulunur. Prematürite, fetal alkol maruziyeti ve bazı genetik sendromlar (örn. Turner sendromu) risk etkenleridir. Matematik kaygısı ikincil olarak gelişip tabloyu ağırlaştırabilir.",
+   "prognosis": "Açık ve sistematik, somuttan soyuta ilerleyen matematik öğretimi, sayı doğrusu ve somut materyallerle çalışma, akıcılık çalışmaları ve sınavlarda ek süre/hesap makinesi gibi düzenlemeler yararlıdır. Güçlükler yetişkinlikte günlük para ve zaman yönetimini etkileyebilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A",
+    "title": "Akademik Becerilerde Güçlük (En az 6 ay, müdahaleye rağmen)",
+    "content": "Hedefli müdahalelere karşın en az 6 aydır süren güçlük; matematik alanında özellikle sayı duyusu, aritmetik bilgiler ya da hesaplamada ustalaşma güçlüğü (sayıları, büyüklükleri ve aralarındaki ilişkileri kavrayamama, toplama işlemlerini akılda tutamayıp parmakla sayma, işlemin ortasında kaybolma) ve matematiksel akıl yürütmede güçlük (nicel problemleri çözmek için kavram, bilgi ve işlemleri uygulayamama)."
+   },
+   {
+    "code": "Kriter B, C & D",
+    "title": "Ölçülebilir Düşüklük, Okul Çağında Başlangıç ve Dışlama",
+    "content": "Matematik becerileri yaşa göre beklenenin belirgin ve ölçülebilir biçimde altındadır, akademik/mesleki ya da günlük yaşamı belirgin biçimde etkiler ve bu, bireysel standart başarı testleri ile kapsamlı klinik değerlendirmeyle doğrulanır (B). Güçlükler okul çağında başlar (C). Zihinsel yetiyitimi, duyusal sorunlar, başka ruhsal/nörolojik bozukluklar, psikososyal güçlükler, öğretim dilinde yetersizlik ya da yetersiz eğitimle daha iyi açıklanamaz (D)."
+   },
+   {
+    "code": "Belirleyiciler",
+    "title": "Matematik Alt Becerileri ve Şiddet",
+    "content": "Matematikte bozulma ile: sayı duyusu, aritmetik bilgilerin belleğe alınması, doğru ya da akıcı hesaplama, doğru matematiksel akıl yürütme. Şiddet hafif, orta ya da ağır olarak belirtilir."
+   }
+  ]
+ },
+ "stereotypic_movement_disorder": {
+  "id": "stereotypic_movement_disorder",
+  "nameTr": "Stereotipik Hareket Bozukluğu",
+  "nameEn": "Stereotypic Movement Disorder",
+  "clinicalDescription": {
+   "overview": "Erken gelişim döneminde başlayan; el sallama, el çırpma, gövdeyi öne arkaya sallama, başı vurma, kendini ısırma ya da vurma gibi yineleyici, içten gelen bir zorlantıyla yapılıyormuş gibi görünen ve görünürde amacı olmayan motor davranışlarla tanımlanan bozukluktur. Davranışlar toplumsal, akademik ya da diğer etkinliklere engel olur ve kendine zarar vermeye yol açabilir. Tiklerden farklı olarak daha erken yaşta başlar, daha ritmik ve kalıplaşmıştır, uğraş ya da heyecan anlarında artar ve dikkat başka yöne çekildiğinde çoğu zaman durur.",
+   "epidemiology": "Basit stereotipik hareketler (sallanma gibi) tipik gelişen küçük çocuklarda oldukça yaygındır ve çoğu zaman bozukluk düzeyine ulaşmaz. Kendine zarar veren ağır stereotipiler zihinsel yetiyitimi olan bireylerde, özellikle kurum bakımında yaşayanlarda daha sık görülür. Genellikle yaşamın ilk 3 yılında başlar.",
+   "etiology": "Duyusal ve toplumsal uyaran yoksunluğu, zihinsel yetiyitimi ve bazı genetik sendromlar (örn. Lesch-Nyhan sendromu, Rett sendromu) ile ilişkilidir. Doğum öncesi alkol maruziyeti gibi çevresel etkenler de bildirilmektedir.",
+   "prognosis": "Basit stereotipiler çoğu zaman yaşla azalır. Kendine zarar veren biçimlerde koruyucu önlemler, işlevsel davranış analizi, alışkanlığı tersine çevirme ve rekabet eden yanıt eğitimi gibi davranışçı yöntemler temel yaklaşımdır; altta yatan nörogelişimsel ve tıbbi durumlar ele alınmalıdır."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A-D",
+    "title": "Tanı Ölçütleri",
+    "content": "Yineleyici, içten zorlanıyormuş gibi ve görünürde amaçsız motor davranış (A). Davranış toplumsal, akademik ya da diğer etkinlikleri bozar ve kendine zarar vermeye yol açabilir (B). Erken gelişim döneminde başlar (C). Bir maddenin fizyolojik etkilerine ya da nörolojik bir duruma bağlanamaz; başka bir nörogelişimsel ya da ruhsal bozuklukla (örn. trikotilomani, OKB) daha iyi açıklanamaz (D)."
+   },
+   {
+    "code": "Belirleyiciler",
+    "title": "Kendine Zarar Verme, Eşlik Eden Durum ve Şiddet",
+    "content": "Kendine zarar verme davranışıyla ya da olmaksızın; bilinen bir genetik ya da tıbbi durum, nörogelişimsel bozukluk veya çevresel etkenle ilişkili olup olmadığı. Şiddet: hafif (duyusal uyaranla ya da dikkat başka yöne çekilerek kolayca bastırılabilir), orta (açık koruyucu önlemler ve davranış değişikliği gerekir), ağır (ciddi yaralanmayı önlemek için sürekli izlem ve koruyucu önlem gerekir). Otizm spektrum bozukluğunda stereotipiler ancak kendine zarar veriyorsa ya da tedavinin odağı olacak denli ağırsa ayrıca tanılanır."
+   }
+  ]
+ },
+ "chronic_motor_vocal_tic": {
+  "id": "chronic_motor_vocal_tic",
+  "nameTr": "Süregen (Kronik) Motor ya da Vokal Tik Bozukluğu",
+  "nameEn": "Persistent (Chronic) Motor or Vocal Tic Disorder",
+  "clinicalDescription": {
+   "overview": "18 yaşından önce başlayan ve 1 yıldan uzun süren, tek ya da çok sayıda motor tik VEYA vokal tikin bulunduğu, ancak her iki tik türünün birlikte görülmediği tik bozukluğudur. Göz kırpma, yüz buruşturma, omuz silkme gibi motor tikler ya da boğaz temizleme, burun çekme, homurdanma gibi vokal tikler görülür. Tikler ani, hızlı, yineleyici ve ritmik olmayan hareket ya da seslerdir; sıklıkları zaman içinde artıp azalır ve çoğunlukla öncesinde bir 'dürtü' hissi (premonitör dürtü) bulunur.",
+   "epidemiology": "Tourette bozukluğundan daha sık görülür; erkeklerde daha yaygındır. Başlangıç genellikle 4-6 yaşları arasındadır.",
+   "etiology": "Kortiko-striato-talamo-kortikal devrelerde işlev bozukluğu ve dopaminerjik sistem aşırı duyarlılığı düşünülmektedir. Tourette bozukluğu ile aynı genetik yatkınlık spektrumunda yer alır; OKB ve DEHB ile birliktelik sıktır. Stres, yorgunluk ve heyecan tikleri artırır.",
+   "prognosis": "Tikler genellikle 10-12 yaşlarında en yoğun düzeye ulaşır ve ergenlik sonrası çoğu kişide belirgin azalır. Psikoeğitim, Tikler İçin Kapsamlı Davranışçı Müdahale (CBIT) ve alışkanlığı tersine çevirme eğitimi ilk basamak yaklaşımlardır; ağır olgularda ilaç tedavisi eklenebilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A-E",
+    "title": "Tanı Ölçütleri (Süre > 1 yıl, Başlangıç < 18 yaş)",
+    "content": "Tek ya da çok sayıda motor tik veya vokal tik bulunur, ancak hastalık süresince ikisi birlikte bulunmaz (A). Tiklerin sıklığı artıp azalabilir, ancak ilk tikin başlangıcından bu yana 1 yıldan uzun süredir devam eder (B). Başlangıç 18 yaşından öncedir (C). Bir maddenin (örn. kokain) fizyolojik etkilerine ya da başka bir sağlık durumuna (örn. Huntington hastalığı, viral ensefalit sonrası) bağlanamaz (D). Tourette bozukluğu ölçütleri hiçbir zaman karşılanmamıştır (E)."
+   },
+   {
+    "code": "Belirleyici",
+    "title": "Tik Türü",
+    "content": "Yalnızca motor tiklerle ya da yalnızca vokal tiklerle belirtilir. Hem motor hem vokal tikler 1 yıldan uzun süre bulunuyorsa tanı Tourette bozukluğudur; toplam süre 1 yıldan kısaysa geçici tik bozukluğu düşünülür."
+   }
+  ]
+ },
+ "provisional_tic_disorder": {
+  "id": "provisional_tic_disorder",
+  "nameTr": "Geçici Tik Bozukluğu",
+  "nameEn": "Provisional Tic Disorder",
+  "clinicalDescription": {
+   "overview": "18 yaşından önce başlayan, tek ya da çok sayıda motor ve/veya vokal tikin bulunduğu ve ilk tikin başlangıcından bu yana 1 yıldan kısa süredir devam eden tik bozukluğudur. Çoğunlukla göz kırpma, yüz buruşturma gibi basit motor tiklerle başlar. Zaman ölçütü nedeniyle 'geçici' adını taşır: tikler 1 yılı aşarsa tanı süregen tik bozukluğu ya da Tourette bozukluğu olarak değiştirilir.",
+   "epidemiology": "Okul çağı çocuklarında tikler oldukça yaygındır ve tik bozuklukları içinde en sık görülendir; erkek çocuklarda daha sıktır.",
+   "etiology": "Diğer tik bozukluklarıyla ortak nörobiyolojik ve genetik temel; stres, yorgunluk, heyecan ve uyarıcı maddeler tikleri artırabilir.",
+   "prognosis": "Çoğu çocukta tikler birkaç hafta ile birkaç ay içinde kendiliğinden geçer; bir kısmında süregen tik bozukluğuna ya da Tourette bozukluğuna ilerler. Ailenin psikoeğitimi ve tiklere aşırı dikkat çekilmemesi temel yaklaşımdır; işlevselliği bozan tiklerde davranışçı müdahaleler uygulanabilir."
+  },
+  "criteriaList": [
+   {
+    "code": "Kriter A-C",
+    "title": "Tik Varlığı, Süre (< 1 yıl) ve Başlangıç (< 18 yaş)",
+    "content": "Tek ya da çok sayıda motor ve/veya vokal tik (A). Tikler ilk başlangıçtan bu yana 1 yıldan kısa süredir bulunmaktadır (B). Başlangıç 18 yaşından öncedir (C)."
+   },
+   {
+    "code": "Kriter D & E",
+    "title": "Dışlama Ölçütleri",
+    "content": "Bir maddenin fizyolojik etkilerine ya da başka bir sağlık durumuna bağlanamaz (D). Tourette bozukluğu ya da süregen (kronik) motor veya vokal tik bozukluğu ölçütleri hiçbir zaman karşılanmamıştır (E)."
+   }
+  ]
+ },
+ "other_specified_neurodevelopmental": {
+  "id": "other_specified_neurodevelopmental",
+  "nameTr": "Belirlenmiş Diğer Bir Nörogelişimsel Bozukluk (FAS Dahil)",
+  "nameEn": "Other Specified Neurodevelopmental Disorder",
+  "clinicalDescription": {
+   "overview": "Bir nörogelişimsel bozukluğun karakteristik belirtilerinin işlevsellikte bozulmaya yol açtığı ancak bu sınıftaki herhangi bir bozukluğun ölçütlerini tam karşılamadığı, klinisyenin bunun nedenini belirtmeyi seçtiği durumlarda kullanılır (örn. 'doğum öncesi alkol maruziyetiyle ilişkili nörogelişimsel bozukluk'). DSM-5'in verdiği başlıca örnek, Doğum Öncesi Alkol Maruziyetiyle İlişkili Nörogelişimsel Bozukluktur (ND-PAE): rahim içinde alkole maruz kalma sonrasında ortaya çıkan, nörobilişsel işlevlerde, öz-düzenlemede ve uyumsal işlevsellikte yetersizliklerle giden tablo. Fetal Alkol Sendromu (FAS) bu spektrumun, tipik yüz bulguları (düz filtrum, ince üst dudak, kısa palpebral aralıklar), büyüme geriliği ve merkezi sinir sistemi anomalileriyle tanımlanan uç biçimidir; ancak ND-PAE tanısı için yüz dismorfolojisi gerekmez.",
+   "epidemiology": "Fetal alkol spektrum bozukluklarının okul çağı çocuklarındaki yaygınlığı bazı Batı ülkeleri çalışmalarında %1-5 arasında tahmin edilmektedir; yaygın biçimde tanı almadığı düşünülmektedir.",
+   "etiology": "Alkolün gelişmekte olan beyin üzerindeki doğrudan nörotoksik etkisi (nöron göçü ve sinaptogenezde bozulma). Gebelikte güvenli bir alkol miktarı tanımlanmamıştır; risk alınan miktar, süre ve gebelik dönemine göre değişir.",
+   "prognosis": "Yaşam boyu süren bir durumdur. Erken tanı, özel eğitim, yürütücü işlev ve öz-düzenleme becerilerine yönelik müdahaleler, aile desteği ve yapılandırılmış çevre ikincil sorunları (okul başarısızlığı, madde kullanımı, adli sorunlar) azaltır. Eşlik eden DEHB sık görülür."
+  },
+  "criteriaList": [
+   {
+    "code": "Tanım",
+    "title": "Belirlenmiş Diğer Kategorisinin Kullanımı",
+    "content": "Nörogelişimsel bozukluk belirtileri klinik açıdan belirgin sıkıntı ya da işlevsellikte bozulmaya yol açar ancak bu sınıftaki herhangi bir bozukluğun ölçütleri tam karşılanmaz; klinisyen tanının yanına özgül nedeni yazar."
+   },
+   {
+    "code": "Örnek: ND-PAE",
+    "title": "Doğum Öncesi Alkol Maruziyetiyle İlişkili Nörogelişimsel Bozukluk (Önerilen ölçütler)",
+    "content": "DSM-5 'Daha Fazla Araştırma Gerektiren Durumlar' bölümünde önerilen ölçütlerin özeti:",
+    "items": [
+     "1. Gebelikte en az asgari düzeyin üzerinde alkol maruziyeti (öykü, kayıt ya da klinik gözlemle).",
+     "2. Nörobilişsel işlevlerde bozulma (genel zihinsel işlev, yürütücü işlev, öğrenme, bellek ya da görsel-uzamsal akıl yürütme).",
+     "3. Öz-düzenlemede bozulma (duygudurum/davranış düzenleme, dikkat ya da dürtü denetimi).",
+     "4. Uyumsal işlevsellikte en az iki alanda bozulma; bunlardan biri iletişim ya da toplumsal etkileşim alanı olmalıdır.",
+     "5. Başlangıcın çocuklukta olması, belirgin sıkıntı/işlev bozulması ve başka bir nedenle daha iyi açıklanamaması."
+    ]
+   }
+  ]
+ }
+}

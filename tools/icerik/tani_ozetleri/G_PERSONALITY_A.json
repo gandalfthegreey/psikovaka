@@ -1,0 +1,41 @@
+{
+  "schizotypal_pd_cluster": {
+    "id": "schizotypal_pd_cluster",
+    "nameTr": "Şizotipal Kişilik Bozukluğu (Küme A)",
+    "nameEn": "Schizotypal Personality Disorder",
+    "clinicalDescription": {
+      "overview": "Şizotipal Kişilik Bozukluğu, Küme A ('tuhaf-eksantrik' küme) kişilik bozuklukları arasında yer alan; yakın ilişkilerde belirgin rahatsızlık ve bu ilişkileri kurma yetisinin azalması ile birlikte bilişsel-algısal çarpıklıklar ve tuhaf davranışlarla tanımlanan, erken erişkinlikte başlayan yaygın bir örüntüdür. Büyüsel düşünce (telepati, altıncı his, batıl inançlarla aşırı meşguliyet), alınma fikirleri, olağandışı algısal deneyimler, tuhaf konuşma ve giyim, kuşkuculuk ve tanışıklıkla azalmayan sosyal anksiyete tipiktir. Belirtiler psikotik düzeye ulaşmaz; şizofreni spektrumunun hafif ucu olarak kabul edilir ve DSM-5-TR'de hem kişilik bozuklukları hem de şizofreni spektrumu bölümünde anılır.",
+      "epidemiology": "Toplum örneklemlerinde yaygınlık çalışmalara göre yaklaşık %0,6 ile %4,6 arasında değişir. Erkeklerde biraz daha sık olabilir. Şizofreni hastalarının birinci derece yakınlarında belirgin olarak daha sıktır.",
+      "etiology": "Şizofreniyle ortak kalıtsal yatkınlık en güçlü etmendir; göz izleme (smooth pursuit) bozuklukları, dikkat ve çalışma belleği eksiklikleri ve beyin görüntüleme bulguları şizofreniye benzer ama daha hafiftir. Çocukluk travması ve olumsuz erken yaşantılar katkıda bulunabilir.",
+      "prognosis": "Seyir genellikle durağandır; küçük bir kısmı zamanla şizofreni ya da başka bir psikotik bozukluk geliştirir. Stres altında kısa psikotik dönemler görülebilir. Sıklıkla depresyon ve anksiyete nedeniyle başvururlar; destekleyici psikoterapi, BDT ve sosyal beceri eğitimi yararlıdır, belirgin algısal belirtilerde düşük dozlu antipsikotikler denenebilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Kişilerarası Yetersizlik + Bilişsel/Algısal Çarpıklıklar (En az 5/9)",
+        "content": "Yakın ilişkilerde rahatsızlık ve bu ilişkileri kurma yetisinde azalma ile birlikte bilişsel ya da algısal çarpıklıklar ve tuhaf davranışlarla belirli, erken erişkinlikte başlayan ve çeşitli bağlamlarda görülen yaygın bir toplumsal ve kişilerarası yetersizlik örüntüsü; aşağıdakilerden en az beşi:",
+        "items": [
+          "1. Alınma (referans) fikirleri (sanrı düzeyinde olmayan).",
+          "2. Davranışı etkileyen ve alt kültürün olağan normlarıyla bağdaşmayan tuhaf inançlar ya da büyüsel düşünce (batıl inanç, basiret, telepati, 'altıncı his'; çocuk ve ergenlerde tuhaf fantezi ya da uğraşlar).",
+          "3. Bedensel yanılsamalar dahil olağandışı algısal deneyimler.",
+          "4. Tuhaf düşünce ve konuşma (belirsiz, dolambaçlı, mecazlı, aşırı ayrıntılı ya da basmakalıp).",
+          "5. Kuşkuculuk ya da paranoid düşünceler.",
+          "6. Uygunsuz ya da kısıtlı duygulanım.",
+          "7. Tuhaf, eksantrik ya da alışılmadık davranış veya görünüm.",
+          "8. Birinci derece akrabalar dışında yakın arkadaş ya da sırdaş olmaması.",
+          "9. Tanışıklıkla azalmayan ve kendisi hakkındaki olumsuz yargılardan çok paranoid korkularla ilişkili aşırı sosyal anksiyete."
+        ]
+      },
+      {
+        "code": "Kriter B",
+        "title": "Dışlama",
+        "content": "Yalnızca şizofreni, psikotik özellikli bipolar ya da depresif bozukluk, başka bir psikotik bozukluk ya da otizm spektrum bozukluğu seyri sırasında ortaya çıkmaz. Şizofreni başlangıcından önce varsa 'premorbid' eki kullanılır."
+      },
+      {
+        "code": "Küme A Bağlamı",
+        "title": "Paranoid ve Şizoid KB'den Ayrım",
+        "content": "Paranoid KB'de kuşkuculuk baskındır ama bilişsel-algısal tuhaflıklar ve eksantrik davranış belirgin değildir; şizoid KB'de toplumsal ilgisizlik ve duygusal soğukluk vardır, ancak büyüsel düşünce, algısal çarpıklık ve tuhaf konuşma yoktur. Şizotipalde kişi yakın ilişkiden çoğunlukla korku/kuşku nedeniyle kaçınır."
+      }
+    ]
+  }
+}

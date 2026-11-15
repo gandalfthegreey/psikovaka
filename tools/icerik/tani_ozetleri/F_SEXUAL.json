@@ -1,0 +1,148 @@
+{
+"delayed_ejaculation": {
+ "id": "delayed_ejaculation",
+ "nameTr": "Geç Boşalma (Gecikmiş Ejakülasyon)",
+ "nameEn": "Delayed Ejaculation",
+ "clinicalDescription": {
+  "overview": "Partnerle cinsel etkinliğin hemen her durumunda, kişi istemediği halde boşalmanın belirgin biçimde gecikmesi ya da belirgin seyrekliği veya hiç olmaması ile tanımlanan cinsel işlev bozukluğudur. DSM-5 'gecikme' için kesin bir süre eşiği vermez; değerlendirme kişinin ve partnerinin deneyimine ve klinik yargıya dayanır. Uzayan cinsel birleşme yorgunluk, ağrı ve partnerde kendini çekici bulmama duygularına yol açabilir; bazı erkekler boşalmaktan kaçınmak için cinsel etkinliği sonlandırır.",
+  "epidemiology": "Erkek cinsel yakınmaları içinde en seyrek görülenlerdendir. Yaşla birlikte sıklığı artar.",
+  "etiology": "İlaçlar (özellikle SSRI'lar, antipsikotikler, bazı tansiyon ilaçları), alkol, diyabetik nöropati, pelvik cerrahi, androjen düzeyinde azalma; psikolojik olarak performans kaygısı, alışkanlık haline gelmiş özgün mastürbasyon biçimi (partnerle sağlanamayan yoğun ya da özel uyarım), partnerle ilişki sorunları ve dinsel/kültürel suçluluk.",
+  "prognosis": "Neden olan ilacın gözden geçirilmesi, tıbbi nedenlerin tedavisi, cinsel terapi (duyusal odaklanma, mastürbasyon alışkanlıklarının değiştirilmesi) ve çift terapisi uygulanır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Boşalmada Gecikme ya da Yokluk (Partnerli etkinliğin ~%75-100'ünde)",
+   "content": "Partnerle cinsel etkinliğin hemen her ya da her durumunda (yaklaşık %75-100), kişi gecikme istemediği halde şunlardan biri: (1) boşalmada belirgin gecikme, (2) boşalmanın belirgin seyrekliği ya da hiç olmaması."
+  },
+  {
+   "code": "Kriter B-D & Belirleyiciler",
+   "title": "Süre (~6 ay), Sıkıntı ve Dışlama",
+   "content": "Belirtiler en az yaklaşık 6 aydır sürer (B), kişide belirgin sıkıntıya yol açar (C) ve cinsel olmayan bir ruhsal bozuklukla, ağır ilişki sıkıntısıyla (örn. eş şiddeti) ya da diğer önemli stres etkenleriyle daha iyi açıklanamaz; bir madde/ilaç ya da tıbbi duruma bağlanamaz (D). Belirleyiciler: yaşam boyu ya da edinilmiş; genel ya da duruma özgü; şiddet hafif, orta ya da ağır."
+  }
+ ]
+},
+"male_hypoactive_desire": {
+ "id": "male_hypoactive_desire",
+ "nameTr": "Erkekte Düşük Cinsel İstek Bozukluğu",
+ "nameEn": "Male Hypoactive Sexual Desire Disorder",
+ "clinicalDescription": {
+  "overview": "Erkekte cinsel ya da erotik düşünce ve fantezilerin ve cinsel etkinlik isteğinin süregen ya da yineleyen biçimde yetersiz olması veya hiç olmamasıdır. Yetersizlik yargısı klinisyen tarafından yaş ile genel ve sosyokültürel bağlam göz önüne alınarak verilir. Çiftler arasındaki istek farkı tek başına bu tanı için yeterli değildir; kişinin isteği kendi yaşamı ve bağlamı açısından düşük olmalı ve sıkıntı yaratmalıdır.",
+  "epidemiology": "Cinsel istek sorunu bildiren erkeklerin oranı yaşla belirgin biçimde artar; 6 ay ya da daha uzun süren ve sıkıntı veren düşük istek ise daha az sıktır.",
+  "etiology": "Depresyon ve anksiyete, ilişki sorunları, stres, erektil işlev bozukluğu ya da erken boşalmanın ikincil etkisi; düşük testosteron, hiperprolaktinemi, hipotiroidi, kronik hastalıklar ve ilaçlar (SSRI'lar, antiandrojenler, opioidler) değerlendirilmelidir.",
+  "prognosis": "Altta yatan tıbbi ve psikiyatrik nedenlerin tedavisi, cinsel terapi ve çift terapisi uygulanır; hipogonadizm gösterilirse hormon tedavisi düşünülebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Cinsel Düşünce/Fantezi ve İstekte Yetersizlik",
+   "content": "Cinsel/erotik düşünce ya da fantezilerin ve cinsel etkinlik isteğinin süregen ya da yineleyen biçimde yetersiz olması veya hiç olmaması. Yetersizlik yargısı yaş, genel ve sosyokültürel bağlam gibi cinsel işlevi etkileyen etkenler göz önüne alınarak klinisyence verilir."
+  },
+  {
+   "code": "Kriter B-D & Belirleyiciler",
+   "title": "Süre (~6 ay), Sıkıntı ve Dışlama",
+   "content": "En az yaklaşık 6 ay süre (B); kişide belirgin sıkıntı (C); cinsel olmayan bir ruhsal bozukluk, ağır ilişki sıkıntısı ya da diğer stres etkenleriyle daha iyi açıklanamama ve madde/ilaç ya da tıbbi duruma bağlanamama (D). Belirleyiciler: yaşam boyu ya da edinilmiş; genel ya da duruma özgü; şiddet hafif, orta ya da ağır."
+  }
+ ]
+},
+"female_sexual_interest_arousal": {
+ "id": "female_sexual_interest_arousal",
+ "nameTr": "Kadında Cinsel İlgi/Uyarılma Bozukluğu",
+ "nameEn": "Female Sexual Interest/Arousal Disorder",
+ "clinicalDescription": {
+  "overview": "DSM-5'te kadında düşük cinsel istek ve cinsel uyarılma bozuklukları, kadın cinselliğinde bu iki sürecin iç içe olduğu bulgularından hareketle tek bir tanıda birleştirilmiştir. Cinsel ilgi ya da uyarılmanın belirgin biçimde azalması veya yokluğu; cinsel düşünce ve fantezilerde azalma, cinsel etkinliği başlatmama ve partnerin girişimlerine kapalı olma, cinsel etkinlik sırasında heyecan ve haz ile genital ya da genital olmayan duyumlarda azalma şeklinde görülür. Kadınlarda isteğin çoğu zaman kendiliğinden değil cinsel uyarana yanıt olarak ortaya çıktığı ('yanıtsal istek', Basson modeli) göz önüne alınmalıdır. Yaşam boyu cinsel istek eksikliği kişinin kendini aseksüel olarak tanımlamasıyla açıklanıyorsa tanı konmaz.",
+  "epidemiology": "Düşük cinsel istek, kadınlarda en sık bildirilen cinsel yakınmalardandır; ancak sıkıntı veren ve 6 ay süren düşük istek/uyarılma daha az sıktır. Oranlar yaş, kültür ve kullanılan tanıma göre büyük farklılık gösterir.",
+  "etiology": "İlişki sorunları ve partnerin cinsel işlev bozukluğu, depresyon, anksiyete, beden imajı sorunları, cinsel istismar öyküsü, stres ve yorgunluk; tıbbi olarak menopoz, doğum sonrası dönem, hormonal ilaçlar, SSRI'lar ve kronik hastalıklar.",
+  "prognosis": "Cinsel terapi, bilinçli farkındalık temelli yaklaşımlar, BDT ve çift terapisi etkilidir. Tıbbi ve ilaçla ilişkili nedenler gözden geçirilmelidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Cinsel İlgi/Uyarılmada Azalma (6 belirtiden en az 3'ü)",
+   "content": "Cinsel ilgi ya da uyarılmanın yokluğu veya belirgin azalması; aşağıdakilerden en az üçü ile kendini gösterir:",
+   "items": [
+    "1. Cinsel etkinliğe karşı ilginin yokluğu ya da azalması.",
+    "2. Cinsel/erotik düşünce ya da fantezilerin yokluğu ya da azalması.",
+    "3. Cinsel etkinliği başlatmama ya da az başlatma ve genellikle partnerin girişimlerine kapalı olma.",
+    "4. Cinsel karşılaşmaların hemen hepsinde ya da hepsinde (yaklaşık %75-100) cinsel etkinlik sırasında heyecan ya da hazzın yokluğu veya azalması.",
+    "5. Herhangi bir iç ya da dış cinsel/erotik uyarana (yazılı, sözel, görsel) yanıt olarak cinsel ilgi/uyarılmanın yokluğu veya azalması.",
+    "6. Cinsel karşılaşmaların hemen hepsinde ya da hepsinde (yaklaşık %75-100) cinsel etkinlik sırasında genital ya da genital olmayan duyumların yokluğu veya azalması."
+   ]
+  },
+  {
+   "code": "Kriter B-D & Belirleyiciler",
+   "title": "Süre (~6 ay), Sıkıntı ve Dışlama",
+   "content": "En az yaklaşık 6 ay süre (B); kişide belirgin sıkıntı (C); cinsel olmayan ruhsal bozukluk, ağır ilişki sıkıntısı (örn. eş şiddeti) ya da diğer stres etkenleriyle daha iyi açıklanamama, madde/ilaç ya da tıbbi duruma bağlanamama (D). Belirleyiciler: yaşam boyu ya da edinilmiş; genel ya da duruma özgü; şiddet hafif, orta ya da ağır."
+  }
+ ]
+},
+"female_orgasmic_disorder": {
+ "id": "female_orgasmic_disorder",
+ "nameTr": "Kadında Orgazm Bozukluğu (Anorgazmi)",
+ "nameEn": "Female Orgasmic Disorder",
+ "clinicalDescription": {
+  "overview": "Cinsel etkinliğin hemen her durumunda orgazmın belirgin biçimde gecikmesi, seyrekleşmesi ya da hiç olmaması veya orgazm duyumlarının yoğunluğunun belirgin biçimde azalmasıyla tanımlanan cinsel işlev bozukluğudur. Kadınlar orgazm için gereken uyarım türü ve yoğunluğu açısından büyük farklılık gösterir; örneğin yalnızca vajinal birleşmeyle orgazm olamayıp klitoral uyarıma gereksinim duymak olağan bir çeşitliliktir ve tek başına bozukluk değildir.",
+  "epidemiology": "Kadınlarda orgazm sorunlarının bildirilen oranı çalışmalar arasında geniş bir aralıkta değişir (yaş, kültür, süre ve sıkıntı ölçütüne göre); ancak bu kadınların yalnızca bir kısmı belirgin sıkıntı bildirir. Kadınların küçük bir bölümü yaşamı boyunca hiç orgazm deneyimlememiştir.",
+  "etiology": "Cinsel bilgi ve deneyim eksikliği, kaygı, beden imajı sorunları, ilişki sorunları, kültürel/dinsel tutumlar ve cinsel istismar öyküsü; tıbbi olarak SSRI'lar, nörolojik hastalıklar (multipl skleroz, nöropati), pelvik cerrahi ve menopoz.",
+  "prognosis": "Yönlendirilmiş mastürbasyon gibi davranışçı cinsel terapi yöntemleri, duyusal odaklanma egzersizleri, psikoeğitim ve çift terapisi etkilidir; özellikle yaşam boyu biçimde yönlendirilmiş mastürbasyonun başarısı yüksektir. İlaçla ilişkili olgularda ilacın gözden geçirilmesi gerekir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A",
+   "title": "Orgazmda Gecikme, Yokluk ya da Yoğunlukta Azalma (~%75-100)",
+   "content": "Cinsel etkinliğin hemen her ya da her durumunda (yaklaşık %75-100) şunlardan biri: (1) orgazmda belirgin gecikme, belirgin seyreklik ya da orgazmın olmaması, (2) orgazm duyumlarının yoğunluğunda belirgin azalma."
+  },
+  {
+   "code": "Kriter B-D & Belirleyiciler",
+   "title": "Süre (~6 ay), Sıkıntı ve Dışlama",
+   "content": "En az yaklaşık 6 ay süre (B); kişide belirgin sıkıntı (C); cinsel olmayan ruhsal bozukluk, ağır ilişki sıkıntısı ya da diğer stres etkenleriyle daha iyi açıklanamama, madde/ilaç ya da tıbbi duruma bağlanamama (D). Belirleyiciler: yaşam boyu ya da edinilmiş; genel ya da duruma özgü; hiçbir durumda orgazm deneyimlememiş olma; şiddet hafif, orta ya da ağır."
+  }
+ ]
+},
+"persistent_genital_arousal": {
+ "id": "persistent_genital_arousal",
+ "nameTr": "Kalıcı Genital Uyarılma Bozukluğu (PGAD)",
+ "nameEn": "Persistent Genital Arousal Disorder (PGAD)",
+ "clinicalDescription": {
+  "overview": "Cinsel istek, düşünce ya da fanteziyle ilişkili olmayan, istenmeyen, araya giren ve sıkıntı veren genital uyarılma duyumlarının (zonklama, ıslaklık, şişkinlik, orgazmın eşiğinde olma hissi) saatler ya da günler boyunca sürmesi veya yinelemesidir. Orgazm duyumları rahatlatmaz ya da yalnızca kısa süreli rahatlama sağlar. Çoğunlukla kadınlarda tanımlanmıştır; erkeklerde de bildirilmektedir. DSM-5-TR'de ayrı bir tanı değildir; klinikte 'belirlenmiş diğer cinsel işlev bozukluğu' olarak kodlanabilir. Uluslararası uzman uzlaşı metinlerinde 'Kalıcı Genital Uyarılma Bozukluğu / Genito-Pelvik Disestezi (PGAD/GPD)' adıyla tanımlanmıştır.",
+  "epidemiology": "Seyrek olduğu düşünülmektedir; utanç nedeniyle az bildirildiği ve kesin yaygınlığın bilinmediği kabul edilir.",
+  "etiology": "Pudendal sinir sıkışması ya da nöropatisi, sakral Tarlov kistleri, pelvik venöz yetmezlik, SSRI kesilmesi ya da başlanması, huzursuz bacaklar sendromu ile birliktelik; anksiyete ve duyumlara dikkatin yoğunlaşması belirtileri ağırlaştırabilir.",
+  "prognosis": "Altta yatan nörolojik, vasküler ya da ilaçla ilişkili nedenlerin araştırılıp tedavisi, pelvik taban fizyoterapisi, BDT ve bilinçli farkındalık temelli yaklaşımlar uygulanır. Belirgin sıkıntı, depresyon ve intihar düşünceleri bildirilmiştir; ruhsal değerlendirme önemlidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Temel Özellikler",
+   "title": "Uzman Uzlaşısına Göre Tanımlayıcı Özellikler (DSM tanısı değildir)",
+   "content": "Cinsel ilgi, düşünce ya da fantezilerle ilişkili olmayan; istenmeyen, araya giren ve sıkıntı veren, süregen ya da yineleyen genital uyarılma veya orgazm eşiğinde olma duyumları. Duyumlar orgazmla genellikle geçmez ya da kısa süre sonra geri döner; kişide belirgin sıkıntıya yol açar."
+  },
+  {
+   "code": "Ayırıcı Tanı & Kodlama",
+   "title": "Hiperseksüellik ve Diğer Durumlardan Ayrım",
+   "content": "Tablo cinsel istek artışı (hiperseksüellik) değildir; kişi duyumları istemez ve haz vermez. Nörolojik, vasküler ve ilaçla ilişkili nedenler araştırılmalıdır. DSM-5-TR'de 'belirlenmiş diğer cinsel işlev bozukluğu' altında kodlanabilir."
+  }
+ ]
+},
+"unspecified_sexual_dysfunction": {
+ "id": "unspecified_sexual_dysfunction",
+ "nameTr": "Belirtilmemiş Cinsel İşlev Bozukluğu",
+ "nameEn": "Unspecified Sexual Dysfunction",
+ "clinicalDescription": {
+  "overview": "Cinsel işlev bozukluğuna özgü belirtilerin kişide klinik açıdan belirgin sıkıntıya yol açtığı ancak cinsel işlev bozuklukları sınıfındaki herhangi bir tanının ölçütlerini tam olarak karşılamadığı ve klinisyenin bunun nedenini belirtmemeyi seçtiği durumlarda kullanılır; özgül tanı için yeterli bilginin bulunmadığı durumları da kapsar.",
+  "epidemiology": "Artık (rezidüel) bir kategori olduğundan ayrı yaygınlık verisi yoktur.",
+  "etiology": "Cinsel işlev bozukluklarıyla ortak tıbbi, ilaçla ilişkili, psikolojik ve ilişkisel etkenler.",
+  "prognosis": "Ayrıntılı cinsel öykü, tıbbi değerlendirme ve gerekirse partnerle görüşme sonrasında tanı çoğu zaman özgül bir cinsel işlev bozukluğuna dönüştürülür."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Ölçütleri Tam Karşılamayan Cinsel İşlev Bozukluğu",
+   "content": "Cinsel işlev bozukluğu belirtileri baskındır ve kişide belirgin sıkıntıya yol açar; ancak cinsel işlev bozuklukları sınıfındaki tanılardan herhangi birinin ölçütleri tam karşılanmaz."
+  },
+  {
+   "code": "Not",
+   "title": "Belirlenmiş Diğer Kategorisinden Farkı",
+   "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmez ya da yeterli bilgi yoktur; özgül bir neden yazılabiliyorsa (örn. cinsel tiksinti) 'belirlenmiş diğer cinsel işlev bozukluğu' tercih edilir."
+  }
+ ]
+}
+}

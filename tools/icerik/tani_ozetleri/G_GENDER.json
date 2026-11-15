@@ -1,0 +1,109 @@
+{
+  "gender_dysphoria_children": {
+    "id": "gender_dysphoria_children",
+    "nameTr": "Çocuklarda Cinsiyet Disforisi",
+    "nameEn": "Gender Dysphoria in Children",
+    "clinicalDescription": {
+      "overview": "Çocuklarda Cinsiyet Disforisi, çocuğun yaşadığı/ifade ettiği cinsiyet ile doğumda atanan cinsiyeti arasındaki belirgin uyumsuzluğun en az 6 ay sürmesi ve buna klinik açıdan belirgin sıkıntı ya da işlevsellik kaybının eşlik etmesidir. DSM-5-TR'de klinik odak kimliğin kendisi değil, uyumsuzluğa eşlik eden sıkıntıdır (disfori). Tanı, oyun, giysi, oyuncak ve arkadaş tercihleri gibi gözlenebilir davranışların yanı sıra çocuğun karşı (ya da başka bir) cinsiyetten olma isteğini ısrarla dile getirmesine dayanır.",
+      "epidemiology": "Kesin yaygınlık bilinmemektedir; klinik başvuru verileri gerçek sıklığı yansıtmaz. Klinik örneklemlerde atanmış erkek çocuklar daha sık başvururken son yıllarda bu oran değişmektedir. Çocuklukta başlayan disforinin ergenlik ve erişkinliğe sürme oranı çalışmalar arasında büyük farklılık gösterir ve tartışmalıdır.",
+      "etiology": "Kesin bir neden tanımlanmamıştır. İkiz ve aile çalışmaları bir miktar kalıtsal katkıya işaret eder; doğum öncesi hormonal etkiler (ör. konjenital adrenal hiperplazi gibi cinsiyet gelişimi farklılıklarında) incelenmiştir. Psikososyal etmenler disforinin ortaya çıkışından çok eşlik eden sıkıntının şiddetini (damgalanma, akran zorbalığı, aile kabulü) etkiler.",
+      "prognosis": "Seyir bireyden bireye değişir; disforinin bir kısmı ergenlikte azalırken bir kısmında ergenlik değişimleriyle belirginleşir. Aile desteği ve kabul edici okul ortamı anksiyete, depresyon ve okul sorunlarını azaltır. Yaklaşım genellikle değerlendirme, aileye danışmanlık ve çocuğun izlenmesidir; ergenlik öncesinde tıbbi müdahale yapılmaz."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Belirgin Cinsiyet Uyumsuzluğu (En az 6 ay; en az 6/8 belirti, A1 zorunlu)",
+        "content": "Yaşanan/ifade edilen cinsiyet ile atanan cinsiyet arasında en az 6 ay süren belirgin uyumsuzluk; aşağıdakilerden en az altısı bulunmalı ve bunlardan biri mutlaka A1 olmalıdır:",
+        "items": [
+          "A1. Karşı cinsiyetten (ya da atanandan farklı başka bir cinsiyetten) olmayı güçlü biçimde isteme veya öyle olduğunda ısrar etme.",
+          "A2. Atanan cinsiyete göre karşı cinsiyete özgü kabul edilen giysileri giymeyi güçlü biçimde tercih etme ve kendi cinsiyetine özgü giysilere güçlü direnç gösterme.",
+          "A3. Hayali/rol oyunlarında karşı cinsiyet rollerini güçlü biçimde tercih etme.",
+          "A4. Karşı cinsiyete özgü sayılan oyuncak, oyun ve etkinlikleri güçlü biçimde tercih etme.",
+          "A5. Karşı cinsiyetten oyun arkadaşlarını güçlü biçimde tercih etme.",
+          "A6. Atanan cinsiyete özgü sayılan oyuncak, oyun ve etkinlikleri güçlü biçimde reddetme (ör. atanmış erkeklerde boğuşmalı oyunlardan kaçınma).",
+          "A7. Kendi cinsel anatomisinden güçlü biçimde hoşlanmama.",
+          "A8. Yaşadığı cinsiyete uyan birincil ve/veya ikincil cinsiyet özelliklerine sahip olmayı güçlü biçimde isteme."
+        ]
+      },
+      {
+        "code": "Kriter B",
+        "title": "Klinik Sıkıntı ve İşlevsellik Kaybı",
+        "content": "Durum klinik açıdan belirgin sıkıntıya ya da toplumsal, okul veya diğer önemli işlevsellik alanlarında bozulmaya yol açar."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Cinsiyet Gelişimi Farklılığı ile Birlikte",
+        "content": "Bir cinsiyet gelişimi farklılığı/bozukluğu (ör. konjenital adrenal hiperplazi, androjen duyarsızlık sendromu) eşlik ediyorsa belirtilir ve o durum ayrıca kodlanır."
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Cinsiyet Rolüne Uymama ile Karışıklık",
+        "content": "Kalıp yargılara uymayan oyun ve giysi tercihleri tek başına tanı koydurmaz; belirleyici olan, güçlü ve ısrarlı karşı cinsiyetten olma isteği ile eşlik eden sıkıntıdır."
+      }
+    ]
+  },
+  "gender_dysphoria_adolescents_adults": {
+    "id": "gender_dysphoria_adolescents_adults",
+    "nameTr": "Ergen ve Erişkinlerde Cinsiyet Disforisi",
+    "nameEn": "Gender Dysphoria in Adolescents and Adults",
+    "clinicalDescription": {
+      "overview": "Ergen ve Erişkinlerde Cinsiyet Disforisi, kişinin yaşadığı/ifade ettiği cinsiyet ile atanan cinsiyeti (ve buna bağlı bedensel cinsiyet özellikleri) arasındaki belirgin uyumsuzluğun en az 6 ay sürmesi ve buna klinik açıdan belirgin sıkıntı veya işlevsellik kaybının eşlik etmesidir. Transgender ya da cinsiyet çeşitliliği gösteren kimlik tek başına bir bozukluk değildir; tanı, uyumsuzluğa eşlik eden disforinin klinik ilgi gerektirdiği durumlar için kullanılır. ICD-11'de bu tablo ruhsal bozukluklar bölümünden çıkarılarak 'cinsiyet uyumsuzluğu' adıyla cinsel sağlık bölümüne taşınmıştır.",
+      "epidemiology": "Klinik başvurulara dayanan eski DSM tahminleri çok düşük oranlar verirken nüfus temelli güncel anketler transgender kimlik bildiren kişilerin oranını çok daha yüksek bulmaktadır; bu nedenle kesin yaygınlık belirsizdir. Son yıllarda özellikle ergen başvurularında belirgin artış ve atanmış kız ergenlerin oranında yükselme bildirilmiştir.",
+      "etiology": "Çok etmenlidir; kalıtsal ve doğum öncesi biyolojik etkilerin rol oynadığı düşünülmektedir. Sıkıntının şiddetini damgalanma, ayrımcılık, aile ve toplum desteğinin yokluğu gibi 'azınlık stresi' etmenleri belirgin biçimde artırır.",
+      "prognosis": "Disfori genellikle kalıcıdır. Depresyon, anksiyete, kendine zarar verme ve intihar riski genel topluma göre yüksektir; sosyal destek ve uygun, kapsamlı değerlendirmeye dayalı bakım (psikososyal destek; uygun durumlarda tıbbi/cerrahi geçiş süreçleri) ile sıkıntının azaldığı bildirilmektedir. Ergenlerde tıbbi müdahalelerin kanıt düzeyi güncel olarak tartışmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Belirgin Cinsiyet Uyumsuzluğu (En az 6 ay; en az 2/6 belirti)",
+        "content": "Yaşanan/ifade edilen cinsiyet ile atanan cinsiyet arasında en az 6 ay süren belirgin uyumsuzluk; aşağıdakilerden en az ikisi:",
+        "items": [
+          "1. Yaşanan cinsiyet ile birincil/ikincil cinsiyet özellikleri (genç ergenlerde beklenen ikincil özellikler) arasında belirgin uyumsuzluk.",
+          "2. Bu uyumsuzluk nedeniyle kendi birincil/ikincil cinsiyet özelliklerinden kurtulma (genç ergenlerde gelişmelerini önleme) yönünde güçlü istek.",
+          "3. Karşı cinsiyetin birincil/ikincil cinsiyet özelliklerine sahip olma yönünde güçlü istek.",
+          "4. Karşı cinsiyetten (ya da başka bir cinsiyetten) olma yönünde güçlü istek.",
+          "5. Karşı cinsiyetten (ya da başka bir cinsiyetten) biri olarak görülme ve davranılma yönünde güçlü istek.",
+          "6. Karşı cinsiyetin (ya da başka bir cinsiyetin) tipik duygu ve tepkilerine sahip olduğuna dair güçlü inanç."
+        ]
+      },
+      {
+        "code": "Kriter B",
+        "title": "Klinik Sıkıntı ve İşlevsellik Kaybı",
+        "content": "Durum klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Cinsiyet Gelişimi Farklılığı ile Birlikte / Geçiş Sonrası",
+        "content": "'Cinsiyet gelişimi farklılığı ile birlikte' (o durum ayrıca kodlanır) ve 'Geçiş sonrası' (kişi istediği cinsiyette tam zamanlı yaşamaya geçmiş ve en az bir tıbbi geçiş işlemi ya da tedavi rejimi geçirmiş/hazırlanıyor) belirleyicileri kullanılabilir."
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Ayırt Edilmesi Gereken Durumlar",
+        "content": "Cinsiyet rolüne uymama, karşıgiyim (travestik) bozukluğu (kimlik değil cinsel uyarılma odaklı), beden algısı bozukluğu (belirli bir beden bölümüne odaklı) ve psikotik bozukluklarda görülen cinsiyetle ilgili sanrılar ayırt edilmelidir."
+      }
+    ]
+  },
+  "unspecified_gender_dysphoria": {
+    "id": "unspecified_gender_dysphoria",
+    "nameTr": "Belirtilmemiş Cinsiyet Disforisi",
+    "nameEn": "Unspecified Gender Dysphoria",
+    "clinicalDescription": {
+      "overview": "Belirtilmemiş Cinsiyet Disforisi, cinsiyet disforisine özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak cinsiyet disforisi tanı ölçütlerinin tümüyle karşılanmadığı ve klinisyenin bunun nedenini belirtmemeyi seçtiği durumlarda kullanılır. Acil servis gibi ayrıntılı değerlendirmenin yapılamadığı ortamlarda da kullanılabilir.",
+      "epidemiology": "Ayrı bir yaygınlık verisi yoktur; yetersiz bilgiyle yapılan ilk değerlendirmelerde ve geçiş dönemindeki tanılarda kullanılan artık bir kategoridir.",
+      "etiology": "Cinsiyet disforisiyle aynı etmenler geçerlidir; kategori bir etiyolojiyi değil, tanısal bilginin eksikliğini ya da belirtilerin eşik altında kalmasını yansıtır.",
+      "prognosis": "Ek bilgi toplandıkça tanı genellikle cinsiyet disforisi ya da belirlenmiş diğer bir cinsiyet disforisi olarak netleştirilir. Klinik yaklaşım, kapsamlı değerlendirme ve eşlik eden sıkıntıya yönelik destektir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Tam Ölçütleri Karşılamayan Cinsiyet Disforisi",
+        "content": "Cinsiyet disforisine özgü belirtiler baskındır ve klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açar; ancak cinsiyet disforisi ölçütlerinin tümü karşılanmaz."
+      },
+      {
+        "code": "Belirlenmiş Diğer ile Farkı",
+        "title": "Nedenin Belirtilmemesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmek istediğinde 'Belirlenmiş Diğer Bir Cinsiyet Disforisi' (ör. 6 aydan kısa süren uyumsuzluk) kullanılır; neden belirtilmeyecekse ya da bilgi yetersizse bu kategori kullanılır."
+      }
+    ]
+  }
+}

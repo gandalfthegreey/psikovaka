@@ -1,6 +1,7 @@
 /**
- * PsikoVaka - DSM-5 & DSM-5-TR Tam Kapsamlı 297 Tanı Kütüphanesi
- * 22 Ana Kategori ve Tüm Resmi DSM-5 Tanı Listesi
+ * PsikoVaka - DSM-5-TR Tanı Listesi: 207 Resmî Tanı, 21 Ana Kategori
+ * Yalnızca resmî DSM-5-TR Bölüm II ruhsal bozukluk tanıları (resmî "belirlenmiş diğer/belirtilmemiş" kategoriler ve ayrı kodlanan görünümler dahil).
+ * 2026-11-15 tanı temizliği: kararlar tools/icerik/tani_temizligi/KARAR_TABLOSU.md, listeden çıkan kavramlar liste_disi_kavramlar.json.
  */
 
 const DSM_CATEGORIES = {
@@ -129,12 +130,6 @@ const DSM_CATEGORIES = {
         "name": "Parafili (Cinsel Sapma) Bozuklukları",
         "icon": "🔞",
         "color": "#f43f5e"
-    },
-    "OTHER_CLINICAL": {
-        "id": "OTHER_CLINICAL",
-        "name": "Klinik İlgi Odağı Olabilecek Diğer Durumlar",
-        "icon": "📑",
-        "color": "#94a3b8"
     }
 };
 
@@ -142,44 +137,40 @@ const DIAGNOSES_DATABASE = [
     {
         "id": "intellectual_disability_mild",
         "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
-        "nameEn": "Intellectual Disability (Mild)",
+        "nameEn": "Intellectual Developmental Disorder (Intellectual Disability), Mild",
         "category": "NEURODEV",
         "aliases": [
             "Hafif Zeka Geriliği",
-            "IQ 50-69",
             "F70"
         ]
     },
     {
         "id": "intellectual_disability_moderate",
         "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
-        "nameEn": "Intellectual Disability (Moderate)",
+        "nameEn": "Intellectual Developmental Disorder (Intellectual Disability), Moderate",
         "category": "NEURODEV",
         "aliases": [
             "Orta Zeka Geriliği",
-            "IQ 35-49",
             "F71"
         ]
     },
     {
         "id": "intellectual_disability_severe",
         "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
-        "nameEn": "Intellectual Disability (Severe)",
+        "nameEn": "Intellectual Developmental Disorder (Intellectual Disability), Severe",
         "category": "NEURODEV",
         "aliases": [
             "Ağır Zeka Geriliği",
-            "IQ 20-34",
             "F72"
         ]
     },
     {
         "id": "intellectual_disability_profound",
         "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
-        "nameEn": "Intellectual Disability (Profound)",
+        "nameEn": "Intellectual Developmental Disorder (Intellectual Disability), Profound",
         "category": "NEURODEV",
         "aliases": [
             "Çok Ağır Zeka Geriliği",
-            "IQ < 20",
             "F73"
         ]
     },
@@ -197,7 +188,7 @@ const DIAGNOSES_DATABASE = [
     {
         "id": "unspecified_intellectual_disability",
         "nameTr": "Belirtilmemiş Zihinsel Yetiyitimi",
-        "nameEn": "Unspecified Intellectual Disability",
+        "nameEn": "Unspecified Intellectual Developmental Disorder (Intellectual Disability)",
         "category": "NEURODEV",
         "aliases": [
             "F79"
@@ -211,7 +202,7 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Gelişimsel Dil Bozukluğu",
             "Ekspresif Dil Bozukluğu",
-            "F80.9"
+            "F80.2"
         ]
     },
     {
@@ -244,7 +235,7 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Pragmatik Dil Bozukluğu",
             "SPCD",
-            "F80.89"
+            "F80.82"
         ]
     },
     {
@@ -394,23 +385,13 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "other_specified_neurodevelopmental",
-        "nameTr": "Belirlenmiş Diğer Bir Nörogelişimsel Bozukluk (FAS Dahil)",
+        "nameTr": "Belirlenmiş Diğer Bir Nörogelişimsel Bozukluk",
         "nameEn": "Other Specified Neurodevelopmental Disorder",
         "category": "NEURODEV",
         "aliases": [
-            "Fetal Alkol Sendromu",
-            "F88"
-        ]
-    },
-    {
-        "id": "schizotypal_pd",
-        "nameTr": "Şizotipal Kişilik Bozukluğu",
-        "nameEn": "Schizotypal Personality Disorder",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Şizotipal Bozukluk",
-            "Büyüsel Düşünce",
-            "F21"
+            "F88",
+            "Doğum Öncesi Alkol Maruziyetiyle İlişkili Nörogelişimsel Bozukluk",
+            "ND-PAE"
         ]
     },
     {
@@ -422,74 +403,14 @@ const DIAGNOSES_DATABASE = [
             "Paranoya",
             "Hezeyanlı Bozukluk",
             "Sanrı",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_erotomanic",
-        "nameTr": "Sanrılı Bozukluk (Erotomanik Tip / Clérambault)",
-        "nameEn": "Delusional Disorder (Erotomanic Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
+            "F22",
             "Erotomani",
-            "Clerambault Sendromu",
-            "Aşk Sanrısı",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_grandiose",
-        "nameTr": "Sanrılı Bozukluk (Büyüklük / Grandiyöz Tip)",
-        "nameEn": "Delusional Disorder (Grandiose Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Megaloman Sanrı",
-            "Peygamberlik/Zenginlik Sanrısı",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_jealous",
-        "nameTr": "Sanrılı Bozukluk (Kıskançlık Tipi / Othello)",
-        "nameEn": "Delusional Disorder (Jealous Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
+            "Clérambault Sendromu",
             "Othello Sendromu",
-            "Aldatılma Hezeyanı",
-            "Patolojik Kıskançlık",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_persecutory",
-        "nameTr": "Sanrılı Bozukluk (Kötülük Görme / Persekütuar Tip)",
-        "nameEn": "Delusional Disorder (Persecutory Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Takip Edilme Sanrısı",
-            "Perseküsyon Hezeyanı",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_somatic",
-        "nameTr": "Sanrılı Bozukluk (Somatik Tip / Ekbom Sendromu)",
-        "nameEn": "Delusional Disorder (Somatic Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Ekbom Sendromu",
-            "Deri Altı Parazit Sanrısı",
-            "F22"
-        ]
-    },
-    {
-        "id": "delusional_mixed",
-        "nameTr": "Sanrılı Bozukluk (Karışık Tip)",
-        "nameEn": "Delusional Disorder (Mixed Type)",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Karışık Sanrı",
-            "F22"
+            "Kıskançlık Sanrısı",
+            "Delüzyonel Parazitoz",
+            "Kötülük Görme Sanrısı",
+            "Büyüklük Sanrısı"
         ]
     },
     {
@@ -533,8 +454,7 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "Schizoaffective Disorder",
         "category": "PSYCHOTIC",
         "aliases": [
-            "Şizoafektif Bozukluk",
-            "F25.9"
+            "Şizoafektif Bozukluk"
         ]
     },
     {
@@ -565,7 +485,9 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Maddeye Bağlı Psikoz",
             "Esrar/Met Psikozu",
-            "F19.959"
+            "Esrarın Yol Açtığı Psikotik Bozukluk",
+            "Kokain Psikozu",
+            "Metamfetamin Psikozu"
         ]
     },
     {
@@ -576,7 +498,8 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Organik Psikoz",
             "Tümöre Bağlı Psikoz",
-            "F06.2"
+            "F06.2",
+            "F06.0"
         ]
     },
     {
@@ -602,44 +525,18 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "attenuated_psychosis_syndrome",
-        "nameTr": "Hafifletilmiş Psikoz Sendromu (Prodromal Psikoz)",
-        "nameEn": "Attenuated Psychosis Syndrome",
+        "id": "other_specified_schizophrenia_spectrum",
+        "nameTr": "Belirlenmiş Diğer Bir Şizofreni Açılımı ve Diğer Psikotik Bozukluk",
+        "nameEn": "Other Specified Schizophrenia Spectrum and Other Psychotic Disorder",
         "category": "PSYCHOTIC",
         "aliases": [
-            "Psikoz Riski",
-            "Prodrom"
-        ]
-    },
-    {
-        "id": "folie_a_deux",
-        "nameTr": "Paylaşılmış Psikotik Bozukluk (Folie à Deux)",
-        "nameEn": "Shared Psychotic Disorder (Folie à Deux)",
-        "category": "PSYCHOTIC",
-        "aliases": [
+            "Paylaşılmış Psikotik Bozukluk",
+            "Folie à Deux",
             "İkili Delilik",
-            "Paylaşılmış Sanrı",
-            "F24"
-        ]
-    },
-    {
-        "id": "capgras_syndrome",
-        "nameTr": "Capgras Sanrısı (Dublör / Değiştirilme Hezeyanı)",
-        "nameEn": "Capgras Delusion / Misidentification",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Capgras Sendromu",
-            "Sahtesiyle Değiştirilme"
-        ]
-    },
-    {
-        "id": "cotard_syndrome",
-        "nameTr": "Cotard Sendromu (Yürüyen Ceset / Nihilistik Sanrı)",
-        "nameEn": "Cotard's Syndrome (Walking Corpse Delusion)",
-        "category": "PSYCHOTIC",
-        "aliases": [
-            "Cotard Sanrısı",
-            "Ölü Olduğu Hezeyanı"
+            "İndüklenmiş Sanrı",
+            "Hafifletilmiş Psikoz Sendromu",
+            "Süregen İşitsel Varsanılar",
+            "F28"
         ]
     },
     {
@@ -651,7 +548,10 @@ const DIAGNOSES_DATABASE = [
             "Bipolar 1",
             "Mani",
             "Manik Depresif",
-            "F31.9"
+            "F31.9",
+            "Hızlı Döngülü Bipolar",
+            "Karışık Özellikli Bipolar",
+            "Disforik Mani"
         ]
     },
     {
@@ -662,27 +562,6 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Bipolar Depresyon",
             "F31.3"
-        ]
-    },
-    {
-        "id": "bipolar_1_mixed",
-        "nameTr": "Bipolar I Bozukluğu (Karışık Özellikli)",
-        "nameEn": "Bipolar I Disorder with Mixed Features",
-        "category": "BIPOLAR",
-        "aliases": [
-            "Karışık Mani",
-            "Disforik Mani",
-            "F31.6"
-        ]
-    },
-    {
-        "id": "bipolar_1_rapid_cycling",
-        "nameTr": "Bipolar I Bozukluğu (Hızlı Döngülü Tip / Rapid Cycling)",
-        "nameEn": "Bipolar I Disorder with Rapid Cycling",
-        "category": "BIPOLAR",
-        "aliases": [
-            "Hızlı Döngülü Bipolar",
-            "Yılda 4+ Epizod"
         ]
     },
     {
@@ -726,7 +605,8 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Organik Bipolar",
             "Hipertiroidi Manisi",
-            "F06.3"
+            "F06.33",
+            "F06.34"
         ]
     },
     {
@@ -757,7 +637,12 @@ const DIAGNOSES_DATABASE = [
             "Depresyon",
             "Klinik Depresyon",
             "Tek Atak Depresyon",
-            "F32.9"
+            "F32.9",
+            "Peripartum Başlangıçlı Depresyon",
+            "Postpartum Depresyon",
+            "Atipik Depresyon",
+            "Melankolik Depresyon",
+            "Melankoli"
         ]
     },
     {
@@ -768,7 +653,9 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Tekrarlayan Depresyon",
             "Kronik Depresyon",
-            "F33.9"
+            "F33.9",
+            "Mevsimsel Örüntülü Depresyon",
+            "Kış Depresyonu"
         ]
     },
     {
@@ -780,50 +667,6 @@ const DIAGNOSES_DATABASE = [
             "Psikotik Depresyon",
             "Hezeyanlı Depresyon",
             "F32.3"
-        ]
-    },
-    {
-        "id": "mdd_with_peripartum",
-        "nameTr": "Peripartum (Doğum Sonrası / Postpartum) Başlangıçlı Depresyon",
-        "nameEn": "Major Depressive Disorder with Peripartum Onset",
-        "category": "MOOD",
-        "aliases": [
-            "Postpartum Depresyon",
-            "Lohusalık Depresyonu",
-            "F53.0"
-        ]
-    },
-    {
-        "id": "mdd_with_seasonal",
-        "nameTr": "Mevsimsel Özellik Gösteren Majör Depresyon (Kış Depresyonu)",
-        "nameEn": "Major Depressive Disorder with Seasonal Pattern",
-        "category": "MOOD",
-        "aliases": [
-            "Mevsimsel Depresyon",
-            "SAD",
-            "Kış Depresyonu"
-        ]
-    },
-    {
-        "id": "mdd_with_atypical",
-        "nameTr": "Atipik Özellikli Majör Depresif Bozukluk",
-        "nameEn": "Major Depressive Disorder with Atypical Features",
-        "category": "MOOD",
-        "aliases": [
-            "Atipik Depresyon",
-            "Kurşun Felci",
-            "Aşırı Uyku ve İştah"
-        ]
-    },
-    {
-        "id": "mdd_with_melancholic",
-        "nameTr": "Melankolik Özellikli Majör Depresif Bozukluk",
-        "nameEn": "Major Depressive Disorder with Melancholic Features",
-        "category": "MOOD",
-        "aliases": [
-            "Melankoli",
-            "Melankolik Depresyon",
-            "Sabah Erken Uyanma"
         ]
     },
     {
@@ -858,7 +701,7 @@ const DIAGNOSES_DATABASE = [
             "PMDD",
             "Adet Öncesi Disfori",
             "Şiddetli PMS",
-            "N94.3"
+            "F32.81"
         ]
     },
     {
@@ -868,7 +711,8 @@ const DIAGNOSES_DATABASE = [
         "category": "MOOD",
         "aliases": [
             "Maddeye Bağlı Depresyon",
-            "Alkol Çöküşü Depresyonu"
+            "Alkol Çöküşü Depresyonu",
+            "Alkolün Yol Açtığı Depresif Bozukluk"
         ]
     },
     {
@@ -883,22 +727,15 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "recurrent_brief_depression",
-        "nameTr": "Yineleyen Kısa Depresif Bozukluk",
-        "nameEn": "Recurrent Brief Depression",
+        "id": "other_specified_depressive",
+        "nameTr": "Belirlenmiş Diğer Bir Depresif Bozukluk",
+        "nameEn": "Other Specified Depressive Disorder",
         "category": "MOOD",
         "aliases": [
-            "Aylık Kısa Depresyon Atakları",
-            "F38.1"
-        ]
-    },
-    {
-        "id": "short_duration_depressive",
-        "nameTr": "Kısa Süreli Depresif Epizod (4-13 Gün)",
-        "nameEn": "Short-Duration Depressive Episode",
-        "category": "MOOD",
-        "aliases": [
-            "Kısa Süreli Depresyon"
+            "Yineleyen Kısa Depresyon",
+            "Kısa Süreli Depresif Epizod",
+            "Yetersiz Belirtili Depresif Epizod",
+            "F32.89"
         ]
     },
     {
@@ -947,15 +784,7 @@ const DIAGNOSES_DATABASE = [
             "Sosyal Fobi",
             "Rezil Olma Korkusu",
             "Topluluk Önünde Konuşma Korkusu",
-            "F40.10"
-        ]
-    },
-    {
-        "id": "social_anxiety_performance",
-        "nameTr": "Sosyal Anksiyete Bozukluğu (Yalnızca Performans Tipi)",
-        "nameEn": "Social Anxiety Disorder (Performance Only)",
-        "category": "ANXIETY",
-        "aliases": [
+            "F40.10",
             "Sahne Korkusu",
             "Performans Kaygısı"
         ]
@@ -968,7 +797,11 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Fobi",
             "Korku",
-            "F40.298"
+            "F40.298",
+            "Emetofobi",
+            "Kusma Korkusu",
+            "Fagofobi",
+            "Boğulma Korkusu"
         ]
     },
     {
@@ -1020,26 +853,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "specific_phobia_emetophobia",
-        "nameTr": "Özgül Fobi (Kusma Korkusu / Emetofobi)",
-        "nameEn": "Specific Phobia (Emetophobia)",
-        "category": "ANXIETY",
-        "aliases": [
-            "Emetofobi",
-            "Kusma Fobisi"
-        ]
-    },
-    {
-        "id": "specific_phobia_phagophobia",
-        "nameTr": "Özgül Fobi (Boğulma/Yutma Korkusu / Fagofobi)",
-        "nameEn": "Specific Phobia (Phagophobia)",
-        "category": "ANXIETY",
-        "aliases": [
-            "Fagofobi",
-            "Yutkunamama Korkusu"
-        ]
-    },
-    {
         "id": "separation_anxiety",
         "nameTr": "Ayrılma Kaygısı Bozukluğu",
         "nameEn": "Separation Anxiety Disorder",
@@ -1067,7 +880,8 @@ const DIAGNOSES_DATABASE = [
         "category": "ANXIETY",
         "aliases": [
             "Maddeye Bağlı Kaygı",
-            "Kafein Anksiyetesi"
+            "Kafein Anksiyetesi",
+            "Alkolün Yol Açtığı Anksiyete Bozukluğu"
         ]
     },
     {
@@ -1082,25 +896,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "ataque_de_nervios",
-        "nameTr": "Kültüre Özgü Anksiyete Sendromu (Ataque de Nervios)",
-        "nameEn": "Ataque de Nervios",
-        "category": "ANXIETY",
-        "aliases": [
-            "Sinir Krizi Sendromu"
-        ]
-    },
-    {
-        "id": "taijin_kyofusho",
-        "nameTr": "Taijin Kyofusho (Başkalarını Rahatsız Etme / Bakış Fobisi)",
-        "nameEn": "Taijin Kyofusho",
-        "category": "ANXIETY",
-        "aliases": [
-            "Bakış Fobisi",
-            "Japonya Kültürel Fobisi"
-        ]
-    },
-    {
         "id": "ocd",
         "nameTr": "Obsesif-Kompulsif Bozukluk (OKB)",
         "nameEn": "Obsessive-Compulsive Disorder (OCD)",
@@ -1110,59 +905,13 @@ const DIAGNOSES_DATABASE = [
             "OCD",
             "Takıntı Hastalığı",
             "Saplantı ve Zorlantı",
-            "F42"
-        ]
-    },
-    {
-        "id": "ocd_contamination",
-        "nameTr": "OKB (Bulaşma Obsesyonu ve Temizlik Kompulsiyonu)",
-        "nameEn": "OCD (Contamination/Cleaning)",
-        "category": "OCD_RELATED",
-        "aliases": [
+            "F42.2",
             "Temizlik Takıntısı",
-            "Mikrop Obsesyonu",
-            "El Yıkama"
-        ]
-    },
-    {
-        "id": "ocd_checking",
-        "nameTr": "OKB (Kuşku Obsesyonu ve Kontrol Kompulsiyonu)",
-        "nameEn": "OCD (Doubt/Checking)",
-        "category": "OCD_RELATED",
-        "aliases": [
             "Kontrol Takıntısı",
-            "Kapı/Ocak Kontrolü"
-        ]
-    },
-    {
-        "id": "ocd_symmetry",
-        "nameTr": "OKB (Simetri, Düzen ve Sayma Kompulsiyonları)",
-        "nameEn": "OCD (Symmetry/Ordering)",
-        "category": "OCD_RELATED",
-        "aliases": [
             "Simetri Takıntısı",
-            "Düzenleme Kompulsiyonu"
-        ]
-    },
-    {
-        "id": "ocd_taboo_thoughts",
-        "nameTr": "OKB (Tabu Düşünceler: Dini Vesvese / Cinsel / Saldırganlık)",
-        "nameEn": "OCD (Taboo / Intrusive Thoughts)",
-        "category": "OCD_RELATED",
-        "aliases": [
             "Dini Vesvese",
-            "Kötü Düşünce Takıntısı",
-            "Zarar Verme Korkusu"
-        ]
-    },
-    {
-        "id": "rocd",
-        "nameTr": "İlişki Odaklı OKB (Relationship OCD / ROCD)",
-        "nameEn": "Relationship Obsessive-Compulsive Disorder (ROCD)",
-        "category": "OCD_RELATED",
-        "aliases": [
-            "ROCD",
-            "Partnerine Aşkından Sürekli Şüphe Etme"
+            "İlişki Odaklı OKB",
+            "ROCD"
         ]
     },
     {
@@ -1175,18 +924,9 @@ const DIAGNOSES_DATABASE = [
             "BDD",
             "Kusur Takıntısı",
             "Estetik Takıntısı",
-            "F45.22"
-        ]
-    },
-    {
-        "id": "muscle_dysmorphia",
-        "nameTr": "Beden Algısı Bozukluğu (Kas Dismorfisi / Bigoreksiya)",
-        "nameEn": "Muscle Dysmorphia (Bigorexia)",
-        "category": "OCD_RELATED",
-        "aliases": [
-            "Bigoreksiya",
-            "Kas Yetersizliği Takıntısı",
-            "Ters Anoreksiya"
+            "F45.22",
+            "Kas Dismorfisi",
+            "Bigoreksiya"
         ]
     },
     {
@@ -1225,38 +965,16 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "olfactory_reference",
-        "nameTr": "Koku Referans Bozukluğu (Olfactory Reference Disorder)",
-        "nameEn": "Olfactory Reference Disorder",
+        "id": "ocd_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Obsesif-Kompulsif ve İlişkili Bozukluk",
+        "nameEn": "Obsessive-Compulsive and Related Disorder Due to Another Medical Condition",
         "category": "OCD_RELATED",
         "aliases": [
-            "Kötü Koku Takıntısı",
-            "Vücut Kokusu Referansı",
-            "ORBD",
-            "F22"
-        ]
-    },
-    {
-        "id": "body_focused_repetitive",
-        "nameTr": "Beden Odaklı Yineleyici Davranış Bozukluğu (Tırnak Yeme vb.)",
-        "nameEn": "Body-Focused Repetitive Behavior Disorder",
-        "category": "OCD_RELATED",
-        "aliases": [
-            "Onikofaji",
-            "Tırnak Yeme",
-            "Dudak Isırma",
-            "F42.8"
-        ]
-    },
-    {
-        "id": "pandas_syndrome",
-        "nameTr": "PANDAS / PANS (Pediatrik Otoimmün Nöropsikiyatrik OKB)",
-        "nameEn": "PANDAS (Pediatric Autoimmune Neuropsychiatric Disorder Associated with Strep)",
-        "category": "OCD_RELATED",
-        "aliases": [
+            "Organik OKB",
             "PANDAS",
             "PANS",
-            "Streptokok Sonrası Ani Başlayan OKB"
+            "Streptokok Sonrası OKB",
+            "F06.8"
         ]
     },
     {
@@ -1270,19 +988,9 @@ const DIAGNOSES_DATABASE = [
             "Travma",
             "Flashback",
             "Kabuslar",
-            "F43.10"
-        ]
-    },
-    {
-        "id": "ptsd_dissociative",
-        "nameTr": "TSSB (Dissosiyatif Belirtilerle Giden / C-PTSD)",
-        "nameEn": "PTSD with Dissociative Symptoms",
-        "category": "TRAUMA",
-        "aliases": [
-            "Dissosiyatif TSSB",
-            "Karmaşık Travma",
-            "C-PTSD",
-            "F43.12"
+            "F43.10",
+            "Dissosiyatif Belirtilerle TSSB",
+            "Dissosiyatif TSSB"
         ]
     },
     {
@@ -1291,7 +999,8 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "PTSD for Children 6 Years and Younger",
         "category": "TRAUMA",
         "aliases": [
-            "Okul Öncesi Travma"
+            "Okul Öncesi Travma",
+            "F43.10"
         ]
     },
     {
@@ -1365,7 +1074,8 @@ const DIAGNOSES_DATABASE = [
             "Komplike Yas",
             "Kronik Yas",
             "PGD",
-            "F43.8"
+            "F43.81",
+            "Süregen Karmaşık Yas"
         ]
     },
     {
@@ -1417,44 +1127,17 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "dissociative_trance",
-        "nameTr": "Dissosiyatif Trans Bozukluğu",
-        "nameEn": "Dissociative Trance Disorder",
-        "category": "DISSOCIATIVE",
-        "aliases": [
-            "Trans Durumu",
-            "Ele Geçirilme Transı"
-        ]
-    },
-    {
-        "id": "ganser_syndrome",
-        "nameTr": "Ganser Sendromu (Yaklaşık Yanıtlar / Cezaevi Psikozu)",
-        "nameEn": "Ganser Syndrome",
+        "id": "other_specified_dissociative",
+        "nameTr": "Belirlenmiş Diğer Bir Dissosiyatif Bozukluk",
+        "nameEn": "Other Specified Dissociative Disorder",
         "category": "DISSOCIATIVE",
         "aliases": [
             "Ganser Sendromu",
-            "Saçma Yanıtlar Sendromu",
+            "Dissosiyatif Trans",
+            "Ele Geçirilme Transı",
+            "Zorlayıcı İkna Sonrası Kimlik Bozulması",
+            "Akut Dissosiyatif Tepki",
             "F44.89"
-        ]
-    },
-    {
-        "id": "possession_trance",
-        "nameTr": "Ele Geçirilme Transı Bozukluğu (Cin/Ruh Çarpması İnancı)",
-        "nameEn": "Possession Trance Disorder",
-        "category": "DISSOCIATIVE",
-        "aliases": [
-            "Cin Çarpması Transı",
-            "Ele Geçirilme"
-        ]
-    },
-    {
-        "id": "coercive_persuasion_dissociation",
-        "nameTr": "Yoğun Zorlayıcı İkna Sonrası Kimlik Bozulması (Tarikat Travması)",
-        "nameEn": "Identity Disturbance Due to Prolonged Coercive Persuasion",
-        "category": "DISSOCIATIVE",
-        "aliases": [
-            "Beyin Yıkama",
-            "Kült/Tarikat Travması"
         ]
     },
     {
@@ -1490,7 +1173,7 @@ const DIAGNOSES_DATABASE = [
             "Konversiyon",
             "Histeri",
             "Psikojenik Felç/Körlük/Bayılma",
-            "F44.4"
+            "İşlevsel Nörolojik Belirti Bozukluğu"
         ]
     },
     {
@@ -1501,7 +1184,8 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Psikojenik Felç",
             "Histerik Paralizi",
-            "F44.4"
+            "F44.4",
+            "Psikojenik Afoni"
         ]
     },
     {
@@ -1518,12 +1202,11 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "conversion_sensory",
-        "nameTr": "Konversiyon Bozukluğu (Duyusal: Histerik Körlük / Afoni)",
-        "nameEn": "Conversion Disorder (Sensory / Blindness / Aphonia)",
+        "nameTr": "Konversiyon Bozukluğu (Duyusal Belirtiler: Duyu Kaybı / Histerik Körlük)",
+        "nameEn": "Conversion Disorder (With Anesthesia or Sensory Loss / Special Sensory Symptom)",
         "category": "SOMATIC",
         "aliases": [
             "Histerik Körlük",
-            "Psikojenik Afoni",
             "F44.6"
         ]
     },
@@ -1546,18 +1229,7 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Münchausen by Proxy",
             "Vekaleten Yapay Bozukluk",
-            "T74.8"
-        ]
-    },
-    {
-        "id": "pseudocyesis",
-        "nameTr": "Yalancı Gebelik (Psödosiyezis)",
-        "nameEn": "Pseudocyesis",
-        "category": "SOMATIC",
-        "aliases": [
-            "Psödosiyezis",
-            "Hayali Hamilelik",
-            "F45.8"
+            "F68.A"
         ]
     },
     {
@@ -1578,8 +1250,7 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Anoreksiya",
             "Yememe Hastalığı",
-            "Aşırı Zayıflık",
-            "F50.00"
+            "Aşırı Zayıflık"
         ]
     },
     {
@@ -1604,16 +1275,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "atypical_anorexia",
-        "nameTr": "Atipik Anoreksiya Nervoza (Kilo Normal Sınırlarda)",
-        "nameEn": "Atypical Anorexia Nervosa",
-        "category": "EATING",
-        "aliases": [
-            "Normal Kilolu Anoreksiya",
-            "F50.89"
-        ]
-    },
-    {
         "id": "bulimia_nervosa",
         "nameTr": "Bulimiya Nervoza",
         "nameEn": "Bulimia Nervosa",
@@ -1634,16 +1295,6 @@ const DIAGNOSES_DATABASE = [
             "BED",
             "Kusmasız Aşırı Tıkınma",
             "F50.81"
-        ]
-    },
-    {
-        "id": "purging_disorder",
-        "nameTr": "Çıkarma Bozukluğu (Tıkınma Olmaksızın Kusma)",
-        "nameEn": "Purging Disorder",
-        "category": "EATING",
-        "aliases": [
-            "Sadece Kusma",
-            "F50.89"
         ]
     },
     {
@@ -1682,26 +1333,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "night_eating_syndrome",
-        "nameTr": "Gece Yeme Sendromu",
-        "nameEn": "Night Eating Syndrome",
-        "category": "EATING",
-        "aliases": [
-            "Gece Uykudan Kalkıp Yeme",
-            "F50.89"
-        ]
-    },
-    {
-        "id": "orthorexia_nervosa",
-        "nameTr": "Ortoreksiya Nervoza (Sağlıklı ve Saf Beslenme Takıntısı)",
-        "nameEn": "Orthorexia Nervosa",
-        "category": "EATING",
-        "aliases": [
-            "Ortoreksiya",
-            "Temiz Beslenme Takıntısı"
-        ]
-    },
-    {
         "id": "enuresis",
         "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
         "nameEn": "Enuresis",
@@ -1709,28 +1340,10 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Alt Islatma",
             "İdrar Kaçırma",
-            "F98.0"
-        ]
-    },
-    {
-        "id": "enuresis_nocturna",
-        "nameTr": "Enürezis Nokturna (Gece Altını Islatma)",
-        "nameEn": "Enuresis (Nocturnal only)",
-        "category": "ELIMINATION",
-        "aliases": [
-            "Gece İdrar Kaçırma",
-            "Noktüri",
-            "F98.0"
-        ]
-    },
-    {
-        "id": "enuresis_diurna",
-        "nameTr": "Enürezis Diürna (Gündüz Altını Islatma)",
-        "nameEn": "Enuresis (Diurnal only)",
-        "category": "ELIMINATION",
-        "aliases": [
-            "Gündüz İdrar Kaçırma",
-            "F98.0"
+            "F98.0",
+            "Enürezis Nokturna",
+            "Gece Altını Islatma",
+            "Enürezis Diürna"
         ]
     },
     {
@@ -1753,7 +1366,7 @@ const DIAGNOSES_DATABASE = [
             "İnsomni",
             "Uykuya Dalamama",
             "Uykuyu Sürdürememe",
-            "G74.0"
+            "F51.01"
         ]
     },
     {
@@ -1764,7 +1377,7 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Hipersomni",
             "Dinlendirmeyen Uzun Uyku",
-            "G47.10"
+            "F51.11"
         ]
     },
     {
@@ -1803,12 +1416,13 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "central_sleep_apnea",
-        "nameTr": "Santral Uyku Apnesi (Cheyne-Stokes)",
+        "nameTr": "Santral Uyku Apnesi",
         "nameEn": "Central Sleep Apnea",
         "category": "SLEEP",
         "aliases": [
             "Merkezi Uyku Apnesi",
-            "G47.31"
+            "G47.31",
+            "Cheyne-Stokes Solunumu"
         ]
     },
     {
@@ -1869,17 +1483,9 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Uyurgezerlik",
             "Somnambulizm",
-            "F51.3"
-        ]
-    },
-    {
-        "id": "sexsomnia",
-        "nameTr": "Seksomni (Uykuda Cinsel Davranış / Uyurgezerlik Alt Tipi)",
-        "nameEn": "Sexsomnia (Sleep Sex)",
-        "category": "SLEEP",
-        "aliases": [
+            "F51.3",
             "Seksomni",
-            "Uykuda Cinsel İlişkiye Girme"
+            "Uykuda Cinsel Davranış"
         ]
     },
     {
@@ -1926,17 +1532,6 @@ const DIAGNOSES_DATABASE = [
             "RLS",
             "Bacaklarda Gece Karıncalanma",
             "G25.81"
-        ]
-    },
-    {
-        "id": "kleine_levin_syndrome",
-        "nameTr": "Kleine-Levin Sendromu (Uyuyan Güzel Sendromu)",
-        "nameEn": "Kleine-Levin Syndrome",
-        "category": "SLEEP",
-        "aliases": [
-            "Uyuyan Güzel Sendromu",
-            "Dönemlik Aşırı Uyku ve Hiperfaji",
-            "G47.13"
         ]
     },
     {
@@ -2023,22 +1618,12 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "substance_induced_sexual_dysfunction",
-        "nameTr": "Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu (SSRI Disfonksiyonu)",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu",
         "nameEn": "Substance/Medication-Induced Sexual Dysfunction",
         "category": "SEXUAL",
         "aliases": [
             "SSRI Cinsel Yan Etkisi",
             "Antidepresan Cinsel İsteksizliği"
-        ]
-    },
-    {
-        "id": "persistent_genital_arousal",
-        "nameTr": "Kalıcı Genital Uyarılma Bozukluğu (PGAD)",
-        "nameEn": "Persistent Genital Arousal Disorder (PGAD)",
-        "category": "SEXUAL",
-        "aliases": [
-            "PGAD",
-            "İstemsiz Sürekli Genital Uyarılma"
         ]
     },
     {
@@ -2114,7 +1699,9 @@ const DIAGNOSES_DATABASE = [
             "Davranış Bozukluğu",
             "Kural Tanımazlık",
             "Çocukluk Suç Örüntüsü",
-            "F91.9"
+            "F91.9",
+            "Sınırlı Prososyal Duygularla",
+            "Katı-Duygusuz Özellikler"
         ]
     },
     {
@@ -2135,16 +1722,6 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Ergenlik Tipi Davranım",
             "F91.2"
-        ]
-    },
-    {
-        "id": "conduct_callous_unemotional",
-        "nameTr": "Davranım Bozukluğu (Sınırlı Prososyal Duygularla / Katı-Duygusuz Mizaç)",
-        "nameEn": "Conduct Disorder with Limited Prosocial Emotions",
-        "category": "IMPULSE",
-        "aliases": [
-            "Katı Duygusuz Tip",
-            "Erken Psikopati"
         ]
     },
     {
@@ -2213,26 +1790,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "alcohol_induced_mood",
-        "nameTr": "Alkolün Yol Açtığı Depresif / Duygudurum Bozukluğu",
-        "nameEn": "Alcohol-Induced Depressive Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Alkole Bağlı Depresyon",
-            "F10.24"
-        ]
-    },
-    {
-        "id": "alcohol_induced_anxiety",
-        "nameTr": "Alkolün Yol Açtığı Anksiyete Bozukluğu",
-        "nameEn": "Alcohol-Induced Anxiety Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Alkol Sonrası Kaygı",
-            "F10.280"
-        ]
-    },
-    {
         "id": "cannabis_use_disorder",
         "nameTr": "Esrar (Kannabis) Kullanım Bozukluğu",
         "nameEn": "Cannabis Use Disorder",
@@ -2261,26 +1818,6 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "Esrar Bırakma Sendromu",
             "F12.288"
-        ]
-    },
-    {
-        "id": "cannabis_induced_psychotic",
-        "nameTr": "Esrarın Yol Açtığı Psikotik Bozukluk",
-        "nameEn": "Cannabis-Induced Psychotic Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Esrar Psikozu",
-            "F12.259"
-        ]
-    },
-    {
-        "id": "synthetic_cannabinoid_intoxication",
-        "nameTr": "Sentetik Kannabinoid Zehirlenmesi (Bonzai / Spice)",
-        "nameEn": "Synthetic Cannabinoid Intoxication",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Bonzai Zehirlenmesi",
-            "Spice"
         ]
     },
     {
@@ -2339,76 +1876,60 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "cocaine_use_disorder",
-        "nameTr": "Kokain Kullanım Bozukluğu",
-        "nameEn": "Cocaine Use Disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Kokain)",
+        "nameEn": "Stimulant Use Disorder (Cocaine)",
         "category": "SUBSTANCE",
         "aliases": [
             "Kokain Bağımlılığı",
             "Crack Bağımlılığı",
-            "F14.20"
+            "F14.20",
+            "Kokain Kullanım Bozukluğu"
         ]
     },
     {
         "id": "cocaine_intoxication",
-        "nameTr": "Kokain Zehirlenmesi (Taşikardi, Midriyazis, Öfori)",
-        "nameEn": "Cocaine Intoxication",
+        "nameTr": "Uyarıcı Zehirlenmesi (Kokain)",
+        "nameEn": "Stimulant Intoxication (Cocaine)",
         "category": "SUBSTANCE",
         "aliases": [
             "Kokain Doz Aşımı",
-            "F14.129"
+            "F14.129",
+            "Kokain Zehirlenmesi"
         ]
     },
     {
         "id": "cocaine_withdrawal",
-        "nameTr": "Kokain Yoksunluğu (Ağır Çöküş / Crash)",
-        "nameEn": "Cocaine Withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Kokain)",
+        "nameEn": "Stimulant Withdrawal (Cocaine)",
         "category": "SUBSTANCE",
         "aliases": [
             "Kokain Çöküşü",
-            "F14.23"
-        ]
-    },
-    {
-        "id": "cocaine_induced_psychosis",
-        "nameTr": "Kokainin Yol Açtığı Psikotik Bozukluk (Paranoya)",
-        "nameEn": "Cocaine-Induced Psychotic Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Kokain Paranoyası",
-            "F14.259"
+            "F14.23",
+            "Kokain Yoksunluğu"
         ]
     },
     {
         "id": "amphetamine_use_disorder",
-        "nameTr": "Amfetamin / Metamfetamin Kullanım Bozukluğu (Kristal Met)",
-        "nameEn": "Amphetamine-Type Substance Use Disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin)",
+        "nameEn": "Stimulant Use Disorder (Amphetamine-Type Substance)",
         "category": "SUBSTANCE",
         "aliases": [
             "Met Bağımlılığı",
             "Metamfetamin",
             "Kristal",
-            "F15.20"
+            "F15.20",
+            "Amfetamin Kullanım Bozukluğu"
         ]
     },
     {
         "id": "amphetamine_withdrawal",
-        "nameTr": "Amfetamin/Uyarıcı Yoksunluğu",
-        "nameEn": "Amphetamine Withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Amfetamin Türü Madde)",
+        "nameEn": "Stimulant Withdrawal (Amphetamine-Type Substance)",
         "category": "SUBSTANCE",
         "aliases": [
             "Met Yoksunluğu",
-            "F15.23"
-        ]
-    },
-    {
-        "id": "methamphetamine_psychosis",
-        "nameTr": "Metamfetaminin Yol Açtığı Psikotik Bozukluk (Met Böcekleri)",
-        "nameEn": "Methamphetamine-Induced Psychotic Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Met Psikozu",
-            "Formikasyon",
-            "Deri Altı Böcek Sanrısı"
+            "F15.23",
+            "Amfetamin Yoksunluğu"
         ]
     },
     {
@@ -2419,13 +1940,13 @@ const DIAGNOSES_DATABASE = [
         "aliases": [
             "PCP Bağımlılığı",
             "Melek Tozu",
-            "F19.20"
+            "F16.20"
         ]
     },
     {
         "id": "hallucinogen_use_disorder",
         "nameTr": "Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA)",
-        "nameEn": "Hallucinogen Use Disorder",
+        "nameEn": "Other Hallucinogen Use Disorder",
         "category": "SUBSTANCE",
         "aliases": [
             "LSD Bağımlılığı",
@@ -2512,27 +2033,6 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "internet_gaming_disorder",
-        "nameTr": "İnternet Oyun Oynama Bozukluğu (Gaming Disorder)",
-        "nameEn": "Internet Gaming Disorder",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Oyun Bağımlılığı",
-            "Video Oyunu Bağımlılığı",
-            "Dijital Bağımlılık"
-        ]
-    },
-    {
-        "id": "compulsive_buying_disorder",
-        "nameTr": "Kompulsif Satın Alma Bozukluğu (Oniomani / Alışveriş Bağımlılığı)",
-        "nameEn": "Compulsive Buying Disorder (Oniomania)",
-        "category": "SUBSTANCE",
-        "aliases": [
-            "Oniomani",
-            "Alışveriş Bağımlılığı"
-        ]
-    },
-    {
         "id": "delirium",
         "nameTr": "Deliryum (Akut Bilinç Bulanıklığı)",
         "nameEn": "Delirium",
@@ -2541,27 +2041,6 @@ const DIAGNOSES_DATABASE = [
             "Akut Konfüzyon",
             "Bilinç Bulanıklığı",
             "Enfeksiyona Bağlı Deliryum",
-            "F05"
-        ]
-    },
-    {
-        "id": "delirium_hyperactive",
-        "nameTr": "Deliryum (Aşırı Hareketli / Hiperaktif Tip)",
-        "nameEn": "Delirium (Hyperactive Type)",
-        "category": "NEUROCOGNITIVE",
-        "aliases": [
-            "Ajite Deliryum",
-            "F05"
-        ]
-    },
-    {
-        "id": "delirium_hypoactive",
-        "nameTr": "Deliryum (Durgun / Hipoaktif Tip)",
-        "nameEn": "Delirium (Hypoactive Type)",
-        "category": "NEUROCOGNITIVE",
-        "aliases": [
-            "Sessiz Deliryum",
-            "Uykulu Deliryum",
             "F05"
         ]
     },
@@ -2640,19 +2119,18 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "Major Neurocognitive Disorder Due to Parkinson's Disease",
         "category": "NEUROCOGNITIVE",
         "aliases": [
-            "Parkinson Demansı",
-            "G31.83"
+            "Parkinson Demansı"
         ]
     },
     {
         "id": "major_neurocognitive_tbi",
-        "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı / CTE)",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı)",
         "nameEn": "Major Neurocognitive Disorder Due to Traumatic Brain Injury",
         "category": "NEUROCOGNITIVE",
         "aliases": [
             "TBI Demansı",
             "Boksör Demansı",
-            "F07.81"
+            "Kronik Travmatik Ensefalopati"
         ]
     },
     {
@@ -2690,37 +2168,29 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
+        "id": "major_neurocognitive_another_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Majör Nörobilişsel Bozukluk",
+        "nameEn": "Major Neurocognitive Disorder Due to Another Medical Condition",
+        "category": "NEUROCOGNITIVE",
+        "aliases": [
+            "Normal Basınçlı Hidrosefali",
+            "NPH",
+            "Hakim-Adams Sendromu",
+            "Geri Dönüşümlü Demans"
+        ]
+    },
+    {
         "id": "wernicke_korsakoff_syndrome",
-        "nameTr": "Maddenin Yol Açtığı Kalıcı Bellek Bozukluğu (Wernicke-Korsakoff)",
-        "nameEn": "Substance-Induced Persisting Amnestic Disorder (Korsakoff)",
+        "nameTr": "Alkolün Yol Açtığı Majör Nörobilişsel Bozukluk (Amnestik-Konfabulatuvar Tip / Korsakoff)",
+        "nameEn": "Alcohol-Induced Major Neurocognitive Disorder, Amnestic-Confabulatory Type",
         "category": "NEUROCOGNITIVE",
         "aliases": [
             "Korsakoff Sendromu",
             "Alkolik Amnezi",
             "Konfabulasyon (Masallama)",
-            "F10.26"
-        ]
-    },
-    {
-        "id": "major_neurocognitive_nph",
-        "nameTr": "Majör Nörobilişsel Bozukluk (Normal Basınçlı Hidrosefali / Hakim-Adams)",
-        "nameEn": "Major Neurocognitive Disorder Due to Normal Pressure Hydrocephalus",
-        "category": "NEUROCOGNITIVE",
-        "aliases": [
-            "NPH",
-            "Hakim Adams Sendromu",
-            "Yürüme Bozukluğu, İdrar Kaçırma, Demans Triadı"
-        ]
-    },
-    {
-        "id": "transient_global_amnesia",
-        "nameTr": "Geçici Global Amnezi (TGA)",
-        "nameEn": "Transient Global Amnesia (TGA)",
-        "category": "NEUROCOGNITIVE",
-        "aliases": [
-            "TGA",
-            "24 Saatlik Akut Bellek Kaybı",
-            "G45.4"
+            "F10.26",
+            "Wernicke-Korsakoff",
+            "Maddenin Yol Açtığı Kalıcı Bellek Bozukluğu"
         ]
     },
     {
@@ -2739,7 +2209,7 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "Unspecified Neurocognitive Disorder",
         "category": "NEUROCOGNITIVE",
         "aliases": [
-            "F03.90"
+            "R41.9"
         ]
     },
     {
@@ -2769,15 +2239,16 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "schizotypal_pd_cluster",
-        "nameTr": "Şizotipal Kişilik Bozukluğu (Küme A)",
+        "id": "schizotypal_pd",
+        "nameTr": "Şizotipal Kişilik Bozukluğu",
         "nameEn": "Schizotypal Personality Disorder",
         "category": "PERSONALITY_A",
         "aliases": [
-            "Şizotipal KB",
+            "Şizotipal Bozukluk",
             "Büyüsel Düşünce",
-            "Garip Davranışlar",
-            "F21"
+            "F21",
+            "Şizotipal KB",
+            "Şizofreni Spektrumu Kişilik Bozukluğu"
         ]
     },
     {
@@ -2876,24 +2347,13 @@ const DIAGNOSES_DATABASE = [
     },
     {
         "id": "personality_change_due_to_medical",
-        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği (Frontal Lob)",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği",
         "nameEn": "Personality Change Due to Another Medical Condition",
         "category": "PERSONALITY_B",
         "aliases": [
             "Phineas Gage",
             "Frontal Lob Sendromu",
             "F07.0"
-        ]
-    },
-    {
-        "id": "passive_aggressive_pd",
-        "nameTr": "Pasif-Agresif (Olumsuzlamacı) Kişilik Örüntüsü",
-        "nameEn": "Passive-Aggressive Personality Traits",
-        "category": "PERSONALITY_C",
-        "aliases": [
-            "Pasif Agresyon",
-            "Gizli İnatlaşma",
-            "Erteleme"
         ]
     },
     {
@@ -2974,7 +2434,9 @@ const DIAGNOSES_DATABASE = [
             "Fetişizm",
             "Cansız Nesnelere Cinsel İlgi",
             "Ayak Fetişizmi",
-            "F65.0"
+            "F65.0",
+            "Parsiyalizm",
+            "Kısmi Fetişizm"
         ]
     },
     {
@@ -2989,390 +2451,43 @@ const DIAGNOSES_DATABASE = [
         ]
     },
     {
-        "id": "necrophilia",
-        "nameTr": "Nekrofili (Ölü Sevicilik)",
-        "nameEn": "Necrophilic Disorder",
+        "id": "other_specified_paraphilic",
+        "nameTr": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "nameEn": "Other Specified Paraphilic Disorder",
         "category": "PARAPHILIC",
         "aliases": [
             "Nekrofili",
-            "Ölü Bedenlere Cinsel Çekim",
-            "F65.89"
-        ]
-    },
-    {
-        "id": "zoophilia",
-        "nameTr": "Zoofili (Hayvan Sevicilik / Bestialite)",
-        "nameEn": "Zoophilic Disorder",
-        "category": "PARAPHILIC",
-        "aliases": [
             "Zoofili",
-            "Bestialite",
-            "F65.89"
-        ]
-    },
-    {
-        "id": "coprophilia",
-        "nameTr": "Koprofili (Dışkı Fetişizmi)",
-        "nameEn": "Coprophilic Disorder",
-        "category": "PARAPHILIC",
-        "aliases": [
             "Koprofili",
-            "Dışkıdan Cinsel Haz",
+            "Klismafili",
+            "Ürofili",
+            "Telefon Skatolojisi",
             "F65.89"
-        ]
-    },
-    {
-        "id": "urophilia",
-        "nameTr": "Urofili (İdrar Fetişizmi / Altın Yağmur)",
-        "nameEn": "Urophilic Disorder",
-        "category": "PARAPHILIC",
-        "aliases": [
-            "Urofili",
-            "Altın Yağmur",
-            "F65.89"
-        ]
-    },
-    {
-        "id": "telephone_scatologia",
-        "nameTr": "Telefon Skatolojisi (Müstehcen Telefon Tacizi)",
-        "nameEn": "Telephone Scatologia",
-        "category": "PARAPHILIC",
-        "aliases": [
-            "Telefonda Müstehcen Konuşma"
-        ]
-    },
-    {
-        "id": "partialism",
-        "nameTr": "Kısmi Fetişizm (Beden Parçası Fetişizmi / Ayak, Saç vb.)",
-        "nameEn": "Partialism",
-        "category": "PARAPHILIC",
-        "aliases": [
-            "Ayak Fetişi",
-            "Podofili"
-        ]
-    },
-    {
-        "id": "malingering",
-        "nameTr": "Temarruz (Malingering - Maddi/Yasal Kazanç Amaçlı Sahte Hastalık)",
-        "nameEn": "Malingering",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Temarruz",
-            "Numara Yapma",
-            "Askerlikten/Hapisten Kaçma Sahtekarlığı",
-            "Z76.5"
-        ]
-    },
-    {
-        "id": "neuroleptic_malignant_syndrome",
-        "nameTr": "Nöroleptik Malign Sendrom (NMS - Antipsikotik Acili)",
-        "nameEn": "Neuroleptic Malignant Syndrome",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "NMS",
-            "Kurşun Boru Rijiditesi",
-            "Yüksek Ateş ve CK",
-            "G21.0"
-        ]
-    },
-    {
-        "id": "serotonin_syndrome",
-        "nameTr": "Serotonin Sendromu (Toksisitesi)",
-        "nameEn": "Serotonin Syndrome",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Serotonerjik Kriz",
-            "Klonus, Terleme, Hipertermi",
-            "T43.205A"
-        ]
-    },
-    {
-        "id": "tardive_dyskinesia",
-        "nameTr": "İlacın Yol Açtığı Tardif Diskinezi (İstemsiz Yüz/Dil Hareketleri)",
-        "nameEn": "Medication-Induced Tardive Dyskinesia",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Tardif Diskinezi",
-            "Orofasial Diskinezi",
-            "G24.01"
-        ]
-    },
-    {
-        "id": "medication_induced_akathisia",
-        "nameTr": "İlacın Yol Açtığı Akatizi (İçsel Yerinde Duramama)",
-        "nameEn": "Medication-Induced Acute Akathisia",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Akatizi",
-            "Yerinde Duramama",
-            "G21.4"
-        ]
-    },
-    {
-        "id": "medication_induced_dystonia",
-        "nameTr": "İlacın Yol Açtığı Akut Distoni (Tortikollis / Okülogirik Kriz)",
-        "nameEn": "Medication-Induced Acute Dystonia",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Akut Distoni",
-            "Göz Kayması",
-            "Boyun Tutulması",
-            "G24.02"
-        ]
-    },
-    {
-        "id": "medication_induced_parkinsonism",
-        "nameTr": "Nöroleptiklerin Yol Açtığı Parkinsonizm (Rijidite / Titreme)",
-        "nameEn": "Neuroleptic-Induced Parkinsonism",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "İlaç Parkinsonizmi",
-            "Maske Yüz",
-            "G21.11"
-        ]
-    },
-    {
-        "id": "antidepressant_discontinuation",
-        "nameTr": "Antidepresan Bırakma Sendromu (Kesilme Belirtileri)",
-        "nameEn": "Antidepressant Discontinuation Syndrome",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Antidepresan Kesilmesi",
-            "Elektrik Çarpması Hissi",
-            "F32.89"
-        ]
-    },
-    {
-        "id": "borderline_intellectual_functioning",
-        "nameTr": "Sınırda Zeka Düzeyi (IQ 70-84)",
-        "nameEn": "Borderline Intellectual Functioning",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Sınır Zeka",
-            "Donuk Zeka",
-            "BIF",
-            "IQ 70-84",
-            "R41.83"
-        ]
-    },
-    {
-        "id": "relational_problem_partner",
-        "nameTr": "Eş/Partner İlişkisi Sorunu",
-        "nameEn": "Relationship Distress With Spouse or Intimate Partner",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Evlilik Çatışması",
-            "Boşanma Krizi",
-            "Z63.0"
-        ]
-    },
-    {
-        "id": "parent_child_relational_problem",
-        "nameTr": "Ebeveyn-Çocuk İlişkisi Sorunu",
-        "nameEn": "Parent-Child Relational Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Kuşak Çatışması",
-            "Ergen İletişimsizliği",
-            "Z62.820"
-        ]
-    },
-    {
-        "id": "sibling_relational_problem",
-        "nameTr": "Kardeş İlişkisi Sorunu (Kardeş Kıskançlığı)",
-        "nameEn": "Sibling Relational Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Kardeş Kıskançlığı",
-            "Z62.891"
-        ]
-    },
-    {
-        "id": "burnout_syndrome",
-        "nameTr": "Tükenmişlik Sendromu (Mesleki Yıpranma)",
-        "nameEn": "Burnout Syndrome / Occupational Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Tükenmişlik",
-            "Burnout",
-            "İş Stresi",
-            "Z73.0"
-        ]
-    },
-    {
-        "id": "academic_or_educational_problem",
-        "nameTr": "Eğitim veya Akademik Sorun",
-        "nameEn": "Academic or Educational Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Okul Başarısızlığı",
-            "Sınav Kaygısı Yıkımı",
-            "Z55.9"
-        ]
-    },
-    {
-        "id": "uncomplicated_bereavement",
-        "nameTr": "Komplike Olmayan (Normal) Yas",
-        "nameEn": "Uncomplicated Bereavement",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Normal Yas",
-            "Kayıp Tepkisi",
-            "Z63.4"
-        ]
-    },
-    {
-        "id": "phase_of_life_problem",
-        "nameTr": "Yaşam Evresi Değişimi Sorunu (Emeklilik, Üniversiteye Başlama vb.)",
-        "nameEn": "Phase of Life Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Yaşam Dönemi Krizi",
-            "Z60.0"
-        ]
-    },
-    {
-        "id": "nonadherence_to_medical_treatment",
-        "nameTr": "Tıbbi Tedaviye Uyumsuzluk (İlaç Reddi)",
-        "nameEn": "Nonadherence to Medical Treatment",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "İlaçları İhmal Etme",
-            "Tedavi Reddi",
-            "Z91.19"
-        ]
-    },
-    {
-        "id": "religious_or_spiritual_problem",
-        "nameTr": "Dini veya Ruhsal Problem (İnanç Krizi)",
-        "nameEn": "Religious or Spiritual Problem",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "İnanç Krizi",
-            "Varoluşsal Kriz",
-            "Z71.8"
-        ]
-    },
-    {
-        "id": "child_physical_abuse",
-        "nameTr": "Çocuk Fiziksel İstismarı (Doğrulanmış)",
-        "nameEn": "Child Physical Abuse (Confirmed)",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Çocuk Dayak",
-            "T74.12XA"
-        ]
-    },
-    {
-        "id": "child_sexual_abuse",
-        "nameTr": "Çocuk Cinsel İstismarı (Doğrulanmış)",
-        "nameEn": "Child Sexual Abuse (Confirmed)",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Pedofilik İstismar Mağduru",
-            "T74.22XA"
-        ]
-    },
-    {
-        "id": "child_neglect",
-        "nameTr": "Çocuk İhmali (Doğrulanmış)",
-        "nameEn": "Child Neglect (Confirmed)",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Çocuk Bakımsızlığı",
-            "T74.02XA"
-        ]
-    },
-    {
-        "id": "spouse_physical_violence",
-        "nameTr": "Eş/Partner Fiziksel Şiddeti",
-        "nameEn": "Spouse or Partner Violence, Physical",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Aile İçi Şiddet",
-            "T74.11XA"
-        ]
-    },
-    {
-        "id": "spouse_psychological_abuse",
-        "nameTr": "Eş/Partner Psikolojik İstismarı (Gaslighting)",
-        "nameEn": "Spouse or Partner Psychological Abuse",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Psikolojik Şiddet",
-            "Gaslighting",
-            "T74.31XA"
-        ]
-    },
-    {
-        "id": "homelessness",
-        "nameTr": "Evsizlik ve Barınma Sorunu",
-        "nameEn": "Homelessness",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Evsizlik",
-            "Z59.0"
-        ]
-    },
-    {
-        "id": "extreme_poverty",
-        "nameTr": "Aşırı Yoksulluk ve Ekonomik Yetersizlik",
-        "nameEn": "Extreme Poverty",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Maddi Yıkım",
-            "Z59.5"
-        ]
-    },
-    {
-        "id": "social_exclusion_rejection",
-        "nameTr": "Sosyal Dışlanma ve Reddedilme",
-        "nameEn": "Social Exclusion or Rejection",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Sosyal İzolasyon",
-            "Z60.4"
-        ]
-    },
-    {
-        "id": "target_of_discrimination",
-        "nameTr": "Ayrımcılık veya Nefret Suçu Mağduriyeti",
-        "nameEn": "Target of (Perceived) Discrimination or Persecution",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Ayrımcılık",
-            "Z60.5"
-        ]
-    },
-    {
-        "id": "acculturation_difficulty",
-        "nameTr": "Kültürleşme ve Göç Uyum Güçlüğü",
-        "nameEn": "Acculturation Difficulty",
-        "category": "OTHER_CLINICAL",
-        "aliases": [
-            "Göçmen Uyumsuzluğu",
-            "Z60.3"
         ]
     },
     {
         "id": "other_specified_anxiety",
-        "nameTr": "Belirlenmiş Diğer Bir Anksiyete Bozukluğu (Sınırlı Belirtili Panik vb.)",
+        "nameTr": "Belirlenmiş Diğer Bir Anksiyete Bozukluğu",
         "nameEn": "Other Specified Anxiety Disorder",
         "category": "ANXIETY",
         "aliases": [
             "Kısa Süreli Anksiyete",
-            "F41.8"
+            "F41.8",
+            "Sınırlı Belirtili Panik Atak"
         ]
     },
     {
         "id": "other_specified_ocd",
-        "nameTr": "Belirlenmiş Diğer Bir OKB ve İlişkili Bozukluk (Obsesyonel Kıskançlık / Koro)",
+        "nameTr": "Belirlenmiş Diğer Bir Obsesif-Kompulsif ve İlişkili Bozukluk",
         "nameEn": "Other Specified Obsessive-Compulsive and Related Disorder",
         "category": "OCD_RELATED",
         "aliases": [
             "Koro Sendromu",
             "Obsesyonel Kıskançlık",
-            "F42.8"
+            "F42.8",
+            "Koku Referans Bozukluğu",
+            "Beden Odaklı Yineleyici Davranış Bozukluğu",
+            "Tırnak Yeme"
         ]
     },
     {
@@ -3381,8 +2496,7 @@ const DIAGNOSES_DATABASE = [
         "nameEn": "Other Specified Trauma- and Stressor-Related Disorder",
         "category": "TRAUMA",
         "aliases": [
-            "Süregen Karmaşık Yas",
-            "F43.8"
+            "F43.89"
         ]
     },
     {
@@ -3392,18 +2506,25 @@ const DIAGNOSES_DATABASE = [
         "category": "SOMATIC",
         "aliases": [
             "Kısa Süreli Somatizasyon",
-            "F45.8"
+            "F45.8",
+            "Psödosiyezis",
+            "Yalancı Gebelik"
         ]
     },
     {
         "id": "other_specified_feeding",
-        "nameTr": "Belirlenmiş Diğer Bir Beslenme ve Yeme Bozukluğu (Sınırlı Tıkınma)",
+        "nameTr": "Belirlenmiş Diğer Bir Beslenme ve Yeme Bozukluğu",
         "nameEn": "Other Specified Feeding or Eating Disorder",
         "category": "EATING",
         "aliases": [
             "OSFED",
             "EDNOS",
-            "F50.89"
+            "F50.89",
+            "Atipik Anoreksiya",
+            "Çıkarma Bozukluğu",
+            "Gece Yeme Sendromu",
+            "Sınırlı Tıkınma",
+            "Ortoreksiya"
         ]
     }
 ];

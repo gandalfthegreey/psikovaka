@@ -1,0 +1,36 @@
+{
+  "other_specified_trauma": {
+    "id": "other_specified_trauma",
+    "nameTr": "Belirlenmiş Diğer Bir Travma ve Stresörle İlişkili Bozukluk",
+    "nameEn": "Other Specified Trauma- and Stressor-Related Disorder",
+    "clinicalDescription": {
+      "overview": "Belirlenmiş Diğer Bir Travma ve Stresörle İlişkili Bozukluk, travma ve stresörle ilişkili bozukluklara özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak TSSB, akut stres bozukluğu, uyum bozukluğu, uzamış yas bozukluğu gibi bu gruptaki bir bozukluğun ölçütlerinin tümüyle karşılanmadığı ve klinisyenin nedenini belirttiği durumlarda kullanılır. Örneğin belirtilerin stresörden 3 aydan daha uzun süre sonra başladığı uyum bozukluğu benzeri tablolar. Not: diagnoses.js'deki 'Süregen Karmaşık Yas' takma adı DSM-5'e aittir; DSM-5-TR'de bu tablo Uzamış Yas Bozukluğu adıyla ayrı bir tanı olmuştur ve artık bu kategorinin örneği değildir.",
+      "epidemiology": "Ayrı bir yaygınlık verisi yoktur. Travma sonrası eşik altı tablolar (TSSB ölçütlerini tam karşılamayan) toplumda tam TSSB'den daha sıktır.",
+      "etiology": "Stresör ya da travmatik olaya maruz kalma, bireysel yatkınlık (önceki travmalar, ruhsal bozukluk öyküsü) ve sosyal destek eksikliği etkileşir; kültüre özgü sıkıntı ifadeleri (ataque de nervios) tabloyu biçimlendirir.",
+      "prognosis": "Gidiş stresörün niteliğine ve sürmesine bağlıdır; bir kısmı kendiliğinden düzelir, bir kısmı tam ölçütlü bir bozukluğa dönüşebilir. Travma odaklı psikoterapiler ve destekleyici yaklaşımlar kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Belirlenmiş Diğer Bir Travma ve Stresörle İlişkili Bozukluk",
+        "content": "Travma ve Stresörle İlişkili Bozukluk grubuna özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı durumlarda kullanılır. Klinisyen ölçütlerin neden karşılanmadığını belirtir (ör. 'stresörden 3 aydan uzun süre sonra başlayan uyum bozukluğu benzeri tablo')."
+      },
+      {
+        "code": "Örnekler",
+        "title": "DSM-5-TR'de Verilen Örnek Tablolar",
+        "content": "Bu kategoriyle belirtilebilecek tablolara örnekler:",
+        "items": [
+          "1. Belirtilerin stresörden 3 aydan daha uzun süre sonra başladığı uyum bozukluğu benzeri bozukluklar (gecikmiş başlangıçlı).",
+          "2. Stresör uzun sürmediği hâlde 6 aydan uzun süren uyum bozukluğu benzeri bozukluklar.",
+          "3. Ataque de nervios.",
+          "4. Diğer kültürel sendromlar."
+        ]
+      },
+      {
+        "code": "Belirtilmemiş ile Farkı",
+        "title": "Nedenin Belirtilmesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş' kategori kullanılır."
+      }
+    ]
+  }
+}

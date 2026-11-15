@@ -1,0 +1,154 @@
+{
+"bipolar_1_depressed": {
+ "id": "bipolar_1_depressed",
+ "nameTr": "Bipolar I Bozukluğu (Şu Anki Epizod Depresif)",
+ "nameEn": "Bipolar I Disorder, Current Episode Depressed",
+ "clinicalDescription": {
+  "overview": "Yaşamı boyunca en az bir kez manik epizod geçirmiş bir kişinin şu anda majör depresif epizod içinde olduğu tablodur. Depresif dönem, tek kutuplu depresyondan belirti düzeyinde çoğu zaman ayırt edilemez; ancak erken başlangıç, aşırı uyku, aşırı yeme ve kurşun gibi ağırlık hissi (atipik özellikler), belirgin psikomotor yavaşlama, psikotik özellikler, doğum sonrası başlangıç, çok sayıda epizod ve ailede bipolar bozukluk öyküsü bipolar depresyonu düşündürür. Tanının anahtarı geçmişteki manik epizodun ayrıntılı öykü ve yakınlardan alınan bilgiyle sorgulanmasıdır.",
+  "epidemiology": "Bipolar I bozukluğu olan kişiler uzun dönem izlemde zamanlarının belirgin biçimde daha büyük bölümünü depresif belirtilerle geçirir; bu nedenle hastalık yükünün ve intihar riskinin önemli kısmı depresif dönemlerle ilişkilidir.",
+  "etiology": "Bipolar I bozukluğunun genel etiyolojisiyle aynıdır: yüksek kalıtılabilirlik, sirkadiyen ritim bozuklukları, monoaminerjik ve hücre içi sinyal yolaklarında işlev bozukluğu; uyku yoksunluğu ve stresli yaşam olayları epizodları tetikler.",
+  "prognosis": "Bipolar depresyon tek kutuplu depresyona göre tedaviye daha dirençli olabilir. Antidepresanların tek başına kullanımı manik/hipomanik kaymaya ve hızlı döngülülüğe yol açabileceğinden önerilmez; duygudurum dengeleyiciler ve depresyonda etkinliği gösterilmiş bazı atipik antipsikotikler, psikoeğitim, kişilerarası ve sosyal ritim terapisi kullanılır. İntihar riski yakından izlenmelidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter 1",
+   "title": "En Az Bir Manik Epizod Öyküsü",
+   "content": "Yaşam boyunca en az bir kez manik epizod ölçütleri karşılanmıştır (en az 1 hafta ya da yatış gerektiriyorsa herhangi bir süre; en az 3, yalnızca irritabl duygudurumda en az 4 manik belirti; belirgin işlev bozulması, yatış gereksinimi ya da psikotik özellikler). Manik ve majör depresif epizodlar şizoaffektif bozukluk, şizofreni ya da diğer psikotik bozukluklarla daha iyi açıklanamaz."
+  },
+  {
+   "code": "Şu Anki Epizod",
+   "title": "Majör Depresif Epizod (≥ 2 hafta, 9 belirtiden en az 5'i)",
+   "content": "Şu anda, en az biri çökkün duygudurum ya da ilgi/zevk kaybı olmak üzere en az 5 depresif belirtinin 2 hafta boyunca bulunduğu, sıkıntı ya da işlev bozulmasına yol açan ve madde/sağlık durumuna bağlanamayan bir majör depresif epizod vardır. Şiddet (hafif, orta, ağır), psikotik özellikler, kaygılı sıkıntı, karışık, melankolik, atipik, doğum dönemi başlangıçlı ve mevsimsel örüntü belirleyicileri eklenebilir."
+  }
+ ]
+},
+"bipolar_1_mixed": {
+ "id": "bipolar_1_mixed",
+ "nameTr": "Bipolar I Bozukluğu (Karışık Özellikli)",
+ "nameEn": "Bipolar I Disorder with Mixed Features",
+ "clinicalDescription": {
+  "overview": "DSM-IV'teki 'karışık epizod' kavramı DSM-5'te kaldırılmış ve yerine her epizod türüne eklenebilen 'karışık özellikli' belirleyicisi getirilmiştir. Bipolar I bozuklukta en sık manik epizodla birlikte kullanılır: kişi manik epizodun tüm ölçütlerini karşılarken aynı zamanda belirgin disfori, umutsuzluk, değersizlik ve suçluluk duyguları, ölüm ya da intihar düşünceleri gibi depresif belirtiler yaşar. Klinik olarak huzursuz, gergin, disforik bir taşkınlık görülür. Hem manik hem depresif epizod ölçütleri aynı anda karşılanıyorsa, maninin klinik ağırlığı nedeniyle tanı 'karışık özellikli manik epizod' olarak konur.",
+  "epidemiology": "Bipolar I bozuklukta epizodların önemli bir kısmında karışık özellikler bulunduğu bildirilmektedir; kadınlarda ve erken başlangıçlı olgularda daha sık olduğu düşünülmektedir.",
+  "etiology": "Bipolar bozukluğun genel etiyolojisi; uyku yoksunluğu, madde kullanımı ve antidepresan kullanımı karışık durumları tetikleyebilir.",
+  "prognosis": "Karışık özellikler daha ağır seyir, daha fazla eşlik eden anksiyete ve madde kullanımı, tedaviye daha zayıf yanıt ve özellikle yüksek intihar riskiyle ilişkilidir. Antidepresanlardan kaçınılması, uygun duygudurum dengeleyici ve atipik antipsikotik tedavi ile yakın intihar risk izlemi gerekir."
+ },
+ "criteriaList": [
+  {
+   "code": "Manik Epizod + Karışık Özellik",
+   "title": "Manik Epizodda En Az 3 Depresif Belirti",
+   "content": "Manik epizod ölçütleri tam karşılanırken epizodun hemen her gününde aşağıdakilerden en az üçü bulunur; belirtiler başkalarınca gözlenebilir ve kişinin olağan davranışından bir değişikliği gösterir:",
+   "items": [
+    "1. Belirgin disfori ya da çökkün duygudurum.",
+    "2. Tüm ya da hemen tüm etkinliklere karşı ilgi ya da zevk almada azalma.",
+    "3. Hemen her gün psikomotor yavaşlama.",
+    "4. Yorgunluk ya da enerji kaybı.",
+    "5. Değersizlik ya da aşırı/uygunsuz suçluluk duyguları.",
+    "6. Yineleyen ölüm düşünceleri, intihar düşünceleri, girişimi ya da planı."
+   ]
+  },
+  {
+   "code": "Not",
+   "title": "Dışlama ve Kodlama",
+   "content": "Karışık belirtiler bir maddenin (kötüye kullanılan madde, ilaç ya da başka tedavi) fizyolojik etkilerine bağlanamaz. Hem mani hem majör depresyon ölçütleri aynı anda tam karşılanıyorsa 'manik epizod, karışık özellikli' tanısı konur. DSM-5'te tanı kodu şu anki epizodun türüne (manik/depresif) göre verilir; belirleyici ayrıca kodlanmaz."
+  }
+ ]
+},
+"substance_induced_bipolar": {
+ "id": "substance_induced_bipolar",
+ "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
+ "nameEn": "Substance/Medication-Induced Bipolar Disorder",
+ "clinicalDescription": {
+  "overview": "Kabarmış, taşkın ya da irritabl duygudurum ile anormal artmış etkinlik veya enerjiden oluşan belirgin ve süregen duygudurum bozukluğunun bir maddenin intoksikasyonu/yoksunluğu sırasında ya da hemen sonrasında veya bir ilaca maruziyet sonrasında ortaya çıktığı tablodur. Sık nedenler arasında kortikosteroidler, amfetamin ve kokain gibi uyarıcılar, levodopa ve dopamin agonistleri, bazı halüsinojenler ve antidepresanlar sayılabilir. Önemli bir istisna: antidepresan tedavisi (ilaç ya da EKT) sırasında ortaya çıkan ve tedavinin fizyolojik etkisinin ötesinde tam sendrom düzeyinde süren manik ya da hipomanik epizod, maddeye bağlı değil bipolar I ya da II tanısı için yeterli kanıt sayılır.",
+  "epidemiology": "Kesin yaygınlık bilinmemektedir; yüksek doz kortikosteroid tedavisi alan hastalarda duygudurum belirtileri sık görülür.",
+  "etiology": "Dopaminerjik ve noradrenerjik etkinliğin artışı, HPA ekseni ve glukokortikoid reseptör etkileri. Kişide altta yatan bipolar yatkınlık bulunabilir.",
+  "prognosis": "Maddenin kesilmesi ya da dozunun azaltılmasıyla belirtiler genellikle düzelir; gerektiğinde kısa süreli duygudurum dengeleyici ya da antipsikotik kullanılır. Madde kesildikten sonra belirtilerin sürmesi bağımsız bir bipolar bozukluğu düşündürür."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Duygudurum Bozukluğu ve Maddeyle İlişki",
+   "content": "Klinik tabloya egemen, kabarmış, taşkın ya da irritabl duygudurum (depresif duygudurum ya da ilgi kaybıyla birlikte veya olmaksızın) ve anormal artmış etkinlik ya da enerji ile giden belirgin ve süregen bir dönem (A). Öykü, muayene ya da laboratuvar bulgularında belirtilerin intoksikasyon/yoksunluk sırasında veya hemen sonrasında ya da ilaç maruziyeti sonrasında geliştiğine ve maddenin bu belirtilere yol açabileceğine dair kanıt (B)."
+  },
+  {
+   "code": "Kriter C, D & E",
+   "title": "Bağımsız Bipolar Bozukluğun Dışlanması",
+   "content": "Maddeye bağlı olmayan bir bipolar bozuklukla daha iyi açıklanamaz; bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlaması, akut yoksunluk ya da ağır intoksikasyon sona erdikten sonra belirgin süre (örn. yaklaşık 1 ay) devam etmesi ya da maddeyle ilişkisiz yineleyen epizod öyküsü (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  }
+ ]
+},
+"bipolar_due_to_medical": {
+ "id": "bipolar_due_to_medical",
+ "nameTr": "Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk",
+ "nameEn": "Bipolar Disorder Due to Another Medical Condition",
+ "clinicalDescription": {
+  "overview": "Anormal kabarmış, taşkın ya da irritabl duygudurum ve artmış etkinlik ya da enerjinin bir tıbbi hastalığın doğrudan patofizyolojik sonucu olarak ortaya çıktığı tablodur ('ikincil mani'). İleri yaşta, kişisel ya da ailesel duygudurum bozukluğu öyküsü olmadan ilk kez ortaya çıkan mani, nörolojik bulgular ve bilişsel bozulma tıbbi bir nedeni düşündürmelidir.",
+  "epidemiology": "Yaygınlık altta yatan hastalığa göre değişir; özellikle inme, travmatik beyin hasarı, multipl skleroz ve Cushing sendromu sonrasında bildirilmektedir.",
+  "etiology": "Nörolojik (sağ hemisfer ağırlıklı inme, travmatik beyin hasarı, multipl skleroz, Huntington hastalığı, beyin tümörleri, frontal ve temporal lob lezyonları), endokrin (hipertiroidi, Cushing sendromu), enfeksiyöz (HIV, nörosifiliz) ve otoimmün nedenler.",
+  "prognosis": "Altta yatan hastalığın tedavisi esastır; duygudurum belirtileri için duygudurum dengeleyiciler ya da antipsikotikler kullanılabilir. Seyir tıbbi tabloya bağlıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Tanı Ölçütleri",
+   "content": "Klinik tabloya egemen, anormal kabarmış, taşkın ya da irritabl duygudurum ve anormal artmış etkinlik ya da enerji ile giden belirgin ve süregen bir dönem (A). Tablonun başka bir sağlık durumunun doğrudan patofizyolojik sonucu olduğuna dair kanıt (B). Başka bir ruhsal bozuklukla daha iyi açıklanamaz (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar, kendine/başkalarına zararı önlemek için yatış gerektirir ya da psikotik özellikler vardır (E)."
+  },
+  {
+   "code": "Belirleyiciler",
+   "title": "Tablonun Niteliği",
+   "content": "Manik özelliklerle (manik ya da hipomanik epizod ölçütlerinin tamamı karşılanmıyor), manik ya da hipomanik benzeri epizodla (tıbbi neden ölçütü dışındaki tüm ölçütler karşılanıyor) veya karışık özelliklerle (depresif belirtiler de var ancak baskın değil) belirtilir."
+  }
+ ]
+},
+"other_specified_bipolar": {
+ "id": "other_specified_bipolar",
+ "nameTr": "Belirlenmiş Diğer Bir Bipolar ve İlişkili Bozukluk",
+ "nameEn": "Other Specified Bipolar Disorder",
+ "clinicalDescription": {
+  "overview": "Bipolar ve ilişkili bozukluklara özgü belirtilerin belirgin sıkıntı ya da işlev bozulmasına yol açtığı, ancak bu sınıftaki tanılardan hiçbirinin ölçütlerini tam karşılamadığı ve klinisyenin bunun nedenini belirttiği durumlarda kullanılır. En sık örneği, majör depresif epizodlarla birlikte yalnızca 2-3 gün süren kısa hipomanik dönemlerdir. Bu tablolar tek kutuplu depresyon gibi görünse de bipolar spektrumda yer aldığından antidepresan tedavi kararında önemlidir.",
+  "epidemiology": "Toplum çalışmalarında eşik altı bipolar tabloların tam ölçütlü bipolar bozukluklardan daha yaygın olduğu bildirilmektedir; kesin oranlar kullanılan tanıma göre değişir.",
+  "etiology": "Bipolar bozuklukla ortak genetik ve nörobiyolojik yatkınlık; aile öyküsünde bipolar bozukluk sık olarak bulunur.",
+  "prognosis": "Bir kısmı zaman içinde bipolar I ya da II bozukluğa ilerler; bu nedenle düzenli izlem, uyku ve sosyal ritim düzenlemesi, antidepresan kullanımında dikkat önerilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Örnekler",
+   "title": "DSM-5'te Verilen Başlıca Örnekler",
+   "content": "Klinisyen 'belirlenmiş diğer' tanısının yanına özgül nedeni yazar:",
+   "items": [
+    "1. Kısa süreli hipomanik epizodlar (2-3 gün) ve majör depresif epizodlar: hipomani ölçütlerini karşılayan ancak 4 günden kısa süren dönemler ile en az bir majör depresif epizod öyküsü.",
+    "2. Yetersiz belirtili hipomanik epizodlar ve majör depresif epizodlar: en az 4 gün süren ancak hipomani belirti sayısını karşılamayan dönemler ile majör depresif epizod öyküsü.",
+    "3. Daha önce majör depresif epizod olmaksızın hipomanik epizod.",
+    "4. Kısa süreli siklotimi: hipomanik ve depresif belirtilerin siklotimik bozukluk için gereken süreden (yetişkinde 24 ay, çocuk ve ergende 12 ay) kısa sürdüğü, ancak ölçütleri başka yönden karşıladığı tablolar."
+   ]
+  },
+  {
+   "code": "Not",
+   "title": "Dışlamalar",
+   "content": "Bu örneklerde kişinin tablosu hiçbir zaman majör depresif, manik ya da hipomanik epizod ölçütlerini daha uygun bir tanıyı gerektirecek biçimde karşılamamış olmalıdır (örn. kısa hipomani örneklerinde tam hipomanik epizod öyküsü yoktur) ve belirtiler bir psikotik bozuklukla, maddeyle ya da tıbbi durumla daha iyi açıklanmamalıdır."
+  }
+ ]
+},
+"unspecified_bipolar": {
+ "id": "unspecified_bipolar",
+ "nameTr": "Belirtilmemiş Bipolar ve İlişkili Bozukluk",
+ "nameEn": "Unspecified Bipolar Disorder",
+ "clinicalDescription": {
+  "overview": "Bipolar ve ilişkili bozukluklara özgü belirtilerin belirgin sıkıntı ya da işlev bozulmasına yol açtığı, ancak bu sınıftaki tanılardan hiçbirinin ölçütlerinin tam karşılanmadığı ve klinisyenin nedenini belirtmemeyi seçtiği durumlarda kullanılır. Özellikle daha özgül bir tanı koymak için yeterli bilginin bulunmadığı acil servis koşullarında sık kullanılır.",
+  "epidemiology": "Artık (rezidüel) bir kategori olduğundan ayrı yaygınlık verisi yoktur.",
+  "etiology": "Bipolar ve ilişkili bozukluklarla ortak etiyolojik etkenler. Madde ve tıbbi nedenler değerlendirilmeli; bilgi toplandıkça tanı gözden geçirilmelidir.",
+  "prognosis": "Ek öykü, yakın bilgisi ve izlemle tanı çoğu zaman özgül bir bipolar bozukluğa ya da başka bir tanıya dönüştürülür."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Ölçütleri Tam Karşılamayan Bipolar Tablo",
+   "content": "Bipolar ve ilişkili bozukluk belirtileri baskındır, klinik açıdan belirgin sıkıntıya ya da işlevsellikte bozulmaya yol açar; ancak bu tanı sınıfındaki herhangi bir bozukluğun ölçütleri tam karşılanmaz."
+  },
+  {
+   "code": "Not",
+   "title": "Belirlenmiş Diğer Kategorisinden Farkı",
+   "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmez; özgül bir neden yazılabiliyorsa 'belirlenmiş diğer bipolar ve ilişkili bozukluk' tercih edilir."
+  }
+ ]
+}
+}

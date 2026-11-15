@@ -1,0 +1,114 @@
+{
+  "conduct_childhood": {
+    "id": "conduct_childhood",
+    "nameTr": "Davranım Bozukluğu (Çocuklukta Başlayan Tip)",
+    "nameEn": "Conduct Disorder (Childhood-Onset Type)",
+    "clinicalDescription": {
+      "overview": "Davranım Bozukluğunun Çocuklukta Başlayan Tipi, 10 yaşından önce en az bir davranım bozukluğu ölçütünün ortaya çıktığı alt tiptir. Bu çocuklarda erken dönemde genellikle Karşıt Olma-Karşı Gelme Bozukluğu (KOKGB) öyküsü, belirgin fiziksel saldırganlık ve akran ilişkilerinde bozulma görülür. Davranım bozukluğu alt tipleri içinde en kötü gidişe sahip olanıdır.",
+      "epidemiology": "Davranım bozukluğunun yıllık yaygınlığı %2 ile %10'un üzeri arasında (ortanca yaklaşık %4) bildirilir. Çocuklukta başlayan tipte erkek baskınlığı ergenlikte başlayan tipe göre çok daha belirgindir. Sıklıkla DEHB ve öğrenme güçlükleri eşlik eder.",
+      "etiology": "Zor mizaç, düşük sözel zekâ, DEHB, yürütücü işlev zayıflığı gibi nörogelişimsel etmenler ile sert/tutarsız disiplin, ebeveyn reddi, istismar, ebeveyn madde kullanımı ve antisosyal davranışı gibi aile etmenlerinin etkileşimi rol oynar. Kalıtsal katkı belirgindir.",
+      "prognosis": "Ergenlik ve erişkinliğe süreğenleşme olasılığı yüksektir; erişkinlikte Antisosyal Kişilik Bozukluğu, madde kullanım bozuklukları ve adli sorunlar açısından en yüksek risk bu gruptadır. Erken başlanan ebeveyn yönetimi eğitimi (ör. Ebeveyn Yönetimi Eğitimi, PCIT) ve okul temelli çok bileşenli müdahaleler gidişi iyileştirir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Ağır Hak ve Kural İhlalleri (Son 12 ayda en az 3/15; en az 1'i son 6 ayda)",
+        "content": "Başkalarının temel haklarının ya da yaşa uygun toplumsal kuralların çiğnendiği yineleyici ve süreğen bir davranış örüntüsü; aşağıdaki dört gruptaki 15 ölçütten en az üçü son 12 ayda bulunmalı, en az biri son 6 ayda görülmüş olmalıdır:",
+        "items": [
+          "İnsanlara ve hayvanlara saldırganlık: başkalarına sık sık zorbalık/gözdağı; sık kavga başlatma; ciddi zarar verebilecek silah kullanma; insanlara fiziksel acımasızlık; hayvanlara fiziksel acımasızlık; kurbanla yüz yüze gelerek çalma (gasp, kapkaç, silahlı soygun); birini cinsel etkinliğe zorlama.",
+          "Mala zarar verme: ciddi hasar verme niyetiyle bilerek yangın çıkarma; başkasının malını (yangın dışında yollarla) bilerek tahrip etme.",
+          "Dolandırıcılık veya hırsızlık: başkasının evine, binasına ya da arabasına zorla girme; çıkar sağlamak ya da yükümlülükten kaçmak için sık yalan söyleme ('işletme'); kurbanla yüz yüze gelmeden değerli eşya çalma (ör. dükkândan aşırma, sahtecilik).",
+          "Kuralları ağır biçimde çiğneme: 13 yaşından önce başlayan, yasaklara rağmen geceleri dışarıda kalma; ebeveyn evinden en az iki kez geceyi dışarıda geçirecek şekilde (ya da bir kez uzun süre dönmemek üzere) kaçma; 13 yaşından önce başlayan okul kaçamakları."
+        ]
+      },
+      {
+        "code": "Kriter B & C",
+        "title": "İşlevsellik Kaybı ve Antisosyal KB Dışlaması",
+        "content": "Davranış bozukluğu toplumsal, okul veya iş işlevselliğinde klinik açıdan belirgin bozulmaya yol açar. Kişi 18 yaşında ya da daha büyükse Antisosyal Kişilik Bozukluğu ölçütleri karşılanmamalıdır."
+      },
+      {
+        "code": "Alt Tip",
+        "title": "Çocuklukta Başlayan Tip",
+        "content": "10 yaşından önce en az bir davranım bozukluğu ölçütüne özgü belirti ortaya çıkmıştır. (Ergenlikte başlayan tipte 10 yaşından önce hiçbir belirti yoktur; başlangıç yaşı için yeterli bilgi yoksa 'Başlangıcı belirtilmemiş' kullanılır.)"
+      },
+      {
+        "code": "Şiddet Belirleyicisi",
+        "title": "Hafif / Orta / Ağır",
+        "content": "Hafif: tanı için gerekenin ötesinde az sayıda sorun ve başkalarına görece küçük zarar (yalan, okul kaçamağı). Orta: sorun sayısı ve zarar ikisinin arasında. Ağır: çok sayıda sorun ya da başkalarına ciddi zarar (zorla cinsel etkinlik, fiziksel acımasızlık, silah kullanımı, zorla girme)."
+      }
+    ]
+  },
+  "conduct_adolescent": {
+    "id": "conduct_adolescent",
+    "nameTr": "Davranım Bozukluğu (Ergenlikte Başlayan Tip)",
+    "nameEn": "Conduct Disorder (Adolescent-Onset Type)",
+    "clinicalDescription": {
+      "overview": "Davranım Bozukluğunun Ergenlikte Başlayan Tipi, 10 yaşından önce davranım bozukluğu ölçütlerine özgü hiçbir belirtinin bulunmadığı alt tiptir. Davranışlar daha çok akran grubu içinde ortaya çıkar (grupla hırsızlık, okul kaçamakları, kural ihlalleri); fiziksel saldırganlık çocuklukta başlayan tipe göre daha az belirgindir ve akran ilişkileri daha olağandır.",
+      "epidemiology": "Davranım bozukluğu tanılı ergenlerin büyük bölümü bu alt tiptedir. Erkek/kız oranı çocuklukta başlayan tipe göre daha dengelidir.",
+      "etiology": "Normatif ergen özerklik arayışının, antisosyal akranlarla takılma (akran etkisi), yetersiz ebeveyn gözetimi ve çevresel risklerle birleşmesi öne çıkar. Nörogelişimsel risk etmenleri çocuklukta başlayan tipe göre daha zayıf rol oynar.",
+      "prognosis": "Gidiş genellikle daha iyidir; davranışların çoğu erişkinliğe geçerken azalır ve Antisosyal Kişilik Bozukluğuna ilerleme olasılığı daha düşüktür. Ancak madde kullanımı, okul bırakma ve adli kayıt gibi kalıcı sonuçlar yaşamı etkileyebilir. Aile temelli ve çok sistemli tedaviler (ör. Çok Sistemli Terapi, İşlevsel Aile Terapisi) kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Ağır Hak ve Kural İhlalleri (Son 12 ayda en az 3/15; en az 1'i son 6 ayda)",
+        "content": "Başkalarının temel haklarının ya da yaşa uygun toplumsal kuralların çiğnendiği yineleyici ve süreğen bir davranış örüntüsü; aşağıdaki dört gruptaki 15 ölçütten en az üçü son 12 ayda bulunmalı, en az biri son 6 ayda görülmüş olmalıdır:",
+        "items": [
+          "İnsanlara ve hayvanlara saldırganlık: başkalarına sık sık zorbalık/gözdağı; sık kavga başlatma; ciddi zarar verebilecek silah kullanma; insanlara fiziksel acımasızlık; hayvanlara fiziksel acımasızlık; kurbanla yüz yüze gelerek çalma (gasp, kapkaç, silahlı soygun); birini cinsel etkinliğe zorlama.",
+          "Mala zarar verme: ciddi hasar verme niyetiyle bilerek yangın çıkarma; başkasının malını (yangın dışında yollarla) bilerek tahrip etme.",
+          "Dolandırıcılık veya hırsızlık: başkasının evine, binasına ya da arabasına zorla girme; çıkar sağlamak ya da yükümlülükten kaçmak için sık yalan söyleme ('işletme'); kurbanla yüz yüze gelmeden değerli eşya çalma (ör. dükkândan aşırma, sahtecilik).",
+          "Kuralları ağır biçimde çiğneme: 13 yaşından önce başlayan, yasaklara rağmen geceleri dışarıda kalma; ebeveyn evinden en az iki kez geceyi dışarıda geçirecek şekilde (ya da bir kez uzun süre dönmemek üzere) kaçma; 13 yaşından önce başlayan okul kaçamakları."
+        ]
+      },
+      {
+        "code": "Kriter B & C",
+        "title": "İşlevsellik Kaybı ve Antisosyal KB Dışlaması",
+        "content": "Davranış bozukluğu toplumsal, okul veya iş işlevselliğinde klinik açıdan belirgin bozulmaya yol açar. Kişi 18 yaşında ya da daha büyükse Antisosyal Kişilik Bozukluğu ölçütleri karşılanmamalıdır."
+      },
+      {
+        "code": "Alt Tip",
+        "title": "Ergenlikte Başlayan Tip",
+        "content": "10 yaşından önce davranım bozukluğu ölçütlerine özgü hiçbir belirti yoktur."
+      },
+      {
+        "code": "Şiddet Belirleyicisi",
+        "title": "Hafif / Orta / Ağır",
+        "content": "Hafif: tanı için gerekenin ötesinde az sayıda sorun ve başkalarına görece küçük zarar (yalan, okul kaçamağı). Orta: sorun sayısı ve zarar ikisinin arasında. Ağır: çok sayıda sorun ya da başkalarına ciddi zarar (zorla cinsel etkinlik, fiziksel acımasızlık, silah kullanımı, zorla girme)."
+      }
+    ]
+  },
+  "conduct_callous_unemotional": {
+    "id": "conduct_callous_unemotional",
+    "nameTr": "Davranım Bozukluğu (Sınırlı Prososyal Duygularla / Katı-Duygusuz Mizaç)",
+    "nameEn": "Conduct Disorder with Limited Prosocial Emotions",
+    "clinicalDescription": {
+      "overview": "'Sınırlı Prososyal Duygularla Birlikte' belirleyicisi, davranım bozukluğu tanısı alan çocuk ve ergenlerde katı-duygusuz (callous-unemotional) özelliklerin süreğen biçimde bulunduğunu gösterir. Bu çocuklar başkalarına zarar verdiklerinde pişmanlık duymaz, başkalarının duygularını önemsemez, kendi performanslarıyla ilgilenmez ve sığ duygulanım gösterirler. Saldırganlıkları daha çok planlı ve araçsal (çıkar amaçlı) niteliktedir. Erişkin psikopatinin gelişimsel öncülü olarak incelenmektedir; ancak çocuklara 'psikopat' etiketi verilmemelidir.",
+      "epidemiology": "Davranım bozukluğu tanılı bireylerin yalnızca bir azınlığında görülür; klinik ve adli örneklemlerde oran daha yüksektir. Çocuklukta başlayan tipte daha sıktır.",
+      "etiology": "Kalıtsal katkı bu alt grupta daha belirgindir. Korku koşullanmasında zayıflık, cezaya ve başkalarının sıkıntı işaretlerine (korku/üzüntü yüz ifadeleri) karşı azalmış duyarlılık ve amigdala yanıtında azalma bildirilmiştir. Sıcak, duyarlı ebeveynlik bu özelliklerin gelişimini hafifletebilir.",
+      "prognosis": "Daha ağır, daha süreğen ve daha saldırgan bir gidişle ilişkilidir; erişkinlikte antisosyal davranış riski yüksektir. Ceza temelli yaklaşımlara yanıt zayıftır; sıcaklığı ve ödülü öne çıkaran ebeveyn eğitimi ile duygu tanıma çalışmaları yararlı olabilir."
+    },
+    "criteriaList": [
+      {
+        "code": "Ön Koşul",
+        "title": "Davranım Bozukluğu Tanısı",
+        "content": "Bu belirleyici yalnızca davranım bozukluğu ölçütlerini (son 12 ayda en az 3/15 belirti, işlevsellik kaybı) karşılayan bireylerde kullanılır."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Sınırlı Prososyal Duygular (En az 12 ay; en az 2/4 özellik)",
+        "content": "Aşağıdaki özelliklerden en az ikisinin, en az 12 ay boyunca ve birden çok ilişki ve ortamda süreğen olarak gösterilmesi gerekir. Bu özellikler kişinin o dönemdeki tipik kişilerarası ve duygusal işlevselliğini yansıtmalıdır; yalnızca ara sıra bazı durumlarda görülmesi yetmez. Değerlendirmede birden çok kaynaktan (aile, öğretmen, akran) bilgi alınmalıdır.",
+        "items": [
+          "1. Pişmanlık ya da suçluluk duymama (yakalanma ya da cezalandırılma kaygısı dışında).",
+          "2. Katılık / eşduyum (empati) eksikliği: başkalarının duygularını umursamama, soğuk ve ilgisiz görünme.",
+          "3. Performansını umursamama: okulda, işte ya da önemli etkinliklerde kötü performansa aldırmama, çaba göstermeme.",
+          "4. Sığ ya da yetersiz duygulanım: duygularını göstermeme ya da yalnızca sığ, samimiyetsiz ya da çıkar sağlamak için duygu gösterme."
+        ]
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Çocuklukta / Ergenlikte Başlayan Tip ile İlişkisi",
+        "content": "Bu belirleyici başlangıç alt tipinden bağımsızdır; her iki alt tiple birlikte kullanılabilir (ör. Davranım Bozukluğu, çocuklukta başlayan tip, sınırlı prososyal duygularla birlikte, ağır)."
+      }
+    ]
+  }
+}

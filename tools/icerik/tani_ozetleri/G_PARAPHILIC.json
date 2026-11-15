@@ -1,0 +1,294 @@
+{
+  "pedophilic_disorder": {
+    "id": "pedophilic_disorder",
+    "nameTr": "Pedofili Bozukluğu",
+    "nameEn": "Pedophilic Disorder",
+    "clinicalDescription": {
+      "overview": "Pedofilik Bozukluk, ergenlik öncesi (genellikle 13 yaş ve altı) bir çocuk ya da çocuklarla cinsel etkinliğe yönelik en az 6 ay süren, yineleyici ve yoğun cinsel uyarılma (fantezi, dürtü ya da davranış) bulunması ve kişinin bu dürtüleri eyleme dökmüş olması ya da dürtülerin belirgin sıkıntı veya kişilerarası güçlüğe yol açmasıdır. Pedofilik ilgi ile çocuğa yönelik cinsel istismar eşanlamlı değildir: istismar edenlerin bir kısmı pedofilik değildir, pedofilik ilgisi olan kişilerin bir kısmı ise hiç eyleme dökmez. Türkiye'de çocuğa yönelik her türlü cinsel davranış ağır bir suçtur; bu tanının konması kendiliğinden cezai sorumluluğu ortadan kaldırmaz.",
+      "epidemiology": "Kesin yaygınlık bilinmemektedir; erkeklerde en yüksek olası yaygınlığın birkaç yüzde düzeyinde olduğu tahmin edilir, kadınlarda çok daha düşüktür. İlgi genellikle ergenlik döneminde fark edilir.",
+      "etiology": "Nörogelişimsel etmenler (erken kafa travması, daha düşük ortalama zekâ ve boy, solak olma oranında artış gibi bulgular), çocuklukta cinsel istismara uğrama, antisosyal özellikler ve kalıtsal etmenler incelenmiştir; tek başına belirleyici bir neden yoktur. Pedofilik cinsel ilginin yaşam boyu süreğen olduğu düşünülmektedir.",
+      "prognosis": "Cinsel ilginin kendisi genellikle süreğendir; ancak eyleme dökme davranışı yaş, antisosyallik ve tedaviyle değişebilir. Tedavide amaç zararı önlemektir: BDT temelli nüks önleme, ilgiyi fark eden ama eyleme dökmemiş kişilere yönelik önleyici programlar (ör. Almanya'daki 'Dunkelfeld' projesi) ve uygun durumlarda cinsel dürtüyü azaltan ilaç tedavisi uygulanır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "En Az 6 Ay Süren Pedofilik Cinsel Uyarılma",
+        "content": "En az 6 ay boyunca, ergenlik öncesi bir çocuk ya da çocuklarla (genellikle 13 yaş ya da daha küçük) cinsel etkinliğe ilişkin yineleyici ve yoğun cinsel uyarılma yaratan fanteziler, cinsel dürtüler ya da davranışlar."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Eyleme Dökme ya da Sıkıntı",
+        "content": "Kişi bu cinsel dürtüleri eyleme dökmüştür ya da bu dürtüler veya fanteziler belirgin sıkıntıya ya da kişilerarası güçlüğe yol açar."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Yaş Koşulu",
+        "content": "Kişi en az 16 yaşındadır ve Kriter A'daki çocuk(lar)dan en az 5 yaş büyüktür. Not: Ergenliğin sonlarında olup 12-13 yaşındaki biriyle süregiden bir ilişkisi olan kişi bu tanıya dahil edilmez."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Tip ve Hedef",
+        "content": "Özel tip (yalnızca çocuklara ilgi) ya da özel olmayan tip; erkeklere, kadınlara ya da her ikisine cinsel ilgi; yalnızca ensestle sınırlı olup olmadığı belirtilir."
+      }
+    ]
+  },
+  "fetishistic_disorder": {
+    "id": "fetishistic_disorder",
+    "nameTr": "Fetişizm Bozukluğu",
+    "nameEn": "Fetishistic Disorder",
+    "clinicalDescription": {
+      "overview": "Fetişizm Bozukluğu, cansız nesnelerin (ör. iç çamaşırı, ayakkabı, lateks/deri ürünler) kullanımından ya da genital olmayan belirli bir beden bölümüne (ör. ayak, saç) yönelik oldukça özgül bir odaktan kaynaklanan, en az 6 ay süren yineleyici ve yoğun cinsel uyarılmanın belirgin sıkıntı ya da işlevsellik kaybına yol açmasıdır. DSM-5 ile beden bölümüne yönelik ilgi (eskiden 'parsiyalizm') bu tanının içine alınmıştır. Fetiş nesnesi cinsel uyarılma için gerekli ya da çok tercih edilen hâle gelebilir ve ilişkilerde soruna yol açabilir.",
+      "epidemiology": "Kesin yaygınlık bilinmemektedir; fetişistik ilgiler genel toplumda nispeten yaygın olmakla birlikte bozukluk düzeyine ulaşanlar azdır. Klinik olguların neredeyse tamamı erkektir.",
+      "etiology": "Cinsel uyarılmanın nesneyle tekrarlanan eşleşmesi yoluyla klasik koşullanma, mastürbasyonla pekiştirme ve erken cinsel deneyimler öne sürülmüştür. Eşlik eden diğer parafiliker ve hiperseksüellik görülebilir.",
+      "prognosis": "Fetişistik ilgi genellikle süreğendir ancak yoğunluğu ve yarattığı sıkıntı dalgalanabilir. Sıkıntı yoksa tedavi gerekmez; sorunlu olgularda BDT, çift terapisi ve cinsel terapi kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "En Az 6 Ay Süren Fetişistik Uyarılma",
+        "content": "En az 6 ay boyunca, cansız nesnelerin kullanımından ya da genital olmayan beden bölüm(ler)ine yönelik çok özgül bir odaktan kaynaklanan, fantezi, dürtü ya da davranış biçiminde yineleyici ve yoğun cinsel uyarılma."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Klinik Önem",
+        "content": "Bu fanteziler, dürtüler ya da davranışlar klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Dışlama",
+        "content": "Fetiş nesneleri karşıgiyimde kullanılan giysilerle (karşıgiyim bozukluğu) ya da genital uyarım için özel olarak tasarlanmış araçlarla (ör. vibratör) sınırlı değildir."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Odak Türü",
+        "content": "Beden bölüm(ler)i, cansız nesne(ler) ya da diğer; ayrıca 'denetimli bir ortamda' ve 'tam düzelmede' (denetimsiz ortamda en az 5 yıl sorun olmaması) belirtilebilir."
+      }
+    ]
+  },
+  "transvestic_disorder": {
+    "id": "transvestic_disorder",
+    "nameTr": "Karşıgiyim (Travestik) Bozukluğu",
+    "nameEn": "Transvestic Disorder",
+    "clinicalDescription": {
+      "overview": "Karşıgiyim (Travestik) Bozukluğu, karşı cinsiyetin giysilerini giymekten (karşıgiyim) kaynaklanan, en az 6 ay süren yineleyici ve yoğun cinsel uyarılmanın belirgin sıkıntı ya da işlevsellik kaybına yol açmasıdır. Tanının özü kimlik değil cinsel uyarılmadır; bu yönüyle cinsiyet disforisinden ayrılır. Karşıgiyim keyif amaçlı yapılan bir eylem (drag performansı gibi) ya da transgender bireylerin kendi cinsiyet ifadesi ise bu tanı konmaz.",
+      "epidemiology": "Neredeyse tamamı heteroseksüel erkeklerde bildirilir. Erkeklerin küçük bir bölümü yaşamlarında karşıgiyimle cinsel uyarılma yaşadığını bildirir; bozukluk düzeyindeki oran daha düşüktür.",
+      "etiology": "Ergenlikte ya da öncesinde karşıgiyim ile cinsel uyarılmanın eşleşmesi (koşullanma) öne sürülmüştür. 'Otojinefili' (kendini kadın olarak düşünmekten uyarılma) bazı olgularda tabloya eşlik eder; bu olguların bir kısmında ileri yaşta cinsiyet disforisi gelişebilir.",
+      "prognosis": "Karşıgiyimin cinsel uyarıcı etkisi yaşla azalabilir, ancak karşıgiyimin kendisi rahatlatıcı bir işlev kazanarak sürebilir. Sıkıntı ve çift sorunlarına yönelik psikoterapi ve çift terapisi kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "En Az 6 Ay Süren Karşıgiyimle Uyarılma",
+        "content": "En az 6 ay boyunca, karşıgiyimden kaynaklanan, fantezi, dürtü ya da davranış biçiminde yineleyici ve yoğun cinsel uyarılma."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Klinik Önem",
+        "content": "Bu fanteziler, dürtüler ya da davranışlar klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Fetişizmle / Otojinefiliyle Birlikte",
+        "content": "'Fetişizmle birlikte' (kumaş, malzeme ya da giysiden cinsel uyarılma) ve 'otojinefiliyle birlikte' (kendini kadın olarak düşünmekten ya da hayal etmekten cinsel uyarılma) belirtilebilir."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Denetimli Ortamda / Tam Düzelmede",
+        "content": "'Denetimli bir ortamda' (ör. kurum ya da cezaevinde, eyleme dökme olanağının kısıtlı olduğu durumlarda) ve 'tam düzelmede' (denetimsiz bir ortamda en az 5 yıl boyunca ilgili sıkıntı, işlevsellik bozulması ya da davranış olmaması) belirleyicileri kullanılabilir."
+      }
+    ]
+  },
+  "necrophilia": {
+    "id": "necrophilia",
+    "nameTr": "Nekrofili (Ölü Sevicilik)",
+    "nameEn": "Necrophilic Disorder",
+    "clinicalDescription": {
+      "overview": "Nekrofili, ölü bedenlere yönelik yineleyici ve yoğun cinsel uyarılmadır. DSM-5-TR'de ayrı bir tanı olarak yer almaz; belirgin sıkıntı ya da işlevsellik kaybına yol açtığında 'Belirlenmiş Diğer Bir Parafilik Bozukluk' kapsamında tanılanır. Ölü bedenle cinsel temas Türkiye dahil birçok ülkede suç teşkil eder; çok nadir olmakla birlikte adli psikiyatride önem taşır.",
+      "epidemiology": "Son derece nadirdir; bilgiler büyük ölçüde adli olgu serilerine dayanır. Bildirilen olguların çoğu erkektir ve bir kısmı ölü bedenlere erişimi olan mesleklerde çalışır.",
+      "etiology": "Olgu serilerinde en sık güdü, direnç göstermeyen ve reddetmeyen bir partnere sahip olma isteğidir; bu da yoğun reddedilme korkusu ve düşük benlik saygısıyla ilişkilendirilmiştir. Psikoz, zihinsel yetersizlik ve kişilik bozukluğu bazı olgularda eşlik eder.",
+      "prognosis": "Prognoz hakkında sistematik veri yoktur. Adli süreç, kapsamlı ruhsal değerlendirme ve eşlik eden bozuklukların tedavisi ön plandadır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "content": "DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'nekrofili' örneği belirlenmiş diğer bir parafilik bozukluk kapsamında verilir ve klinisyen tanıyı bu adla belirtir (ör. 'Belirlenmiş Diğer Bir Parafilik Bozukluk, nekrofili')."
+      },
+      {
+        "code": "Süre ve İçerik",
+        "title": "En Az 6 Ay Süren Yoğun Cinsel Uyarılma",
+        "content": "Ölü bedenlerle (cesetlerle) ile ilgili yineleyici ve yoğun cinsel uyarılmanın (fantezi, dürtü ya da davranış biçiminde) en az 6 aydır bulunması."
+      },
+      {
+        "code": "Klinik Önem",
+        "title": "Sıkıntı, İşlevsellik Kaybı ya da Zarar",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar ya da başkalarına zarar verme/zarar riskini içerir. Sıkıntı ve zarar olmayan parafilik ilgi tek başına bozukluk sayılmaz."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Parafili ile Parafilik Bozukluk Ayrımı",
+        "content": "DSM-5-TR, olağandışı cinsel ilgiyi (parafili) bozukluktan ayırır; tanı için kişinin kendisinde sıkıntı/işlevsellik kaybı ya da başkalarına zarar (rıza veremeyecek kişileri içeren eylemler) gerekir."
+      }
+    ]
+  },
+  "zoophilia": {
+    "id": "zoophilia",
+    "nameTr": "Zoofili (Hayvan Sevicilik / Bestialite)",
+    "nameEn": "Zoophilic Disorder",
+    "clinicalDescription": {
+      "overview": "Zoofili, hayvanlara yönelik yineleyici ve yoğun cinsel uyarılmadır. DSM-5-TR'de ayrı bir tanı olarak yer almaz; belirgin sıkıntı, işlevsellik kaybı ya da zarara yol açtığında 'Belirlenmiş Diğer Bir Parafilik Bozukluk' kapsamında tanılanır. Hayvanlar rıza veremeyeceğinden hayvanla cinsel temas hayvan istismarı olarak kabul edilir ve birçok ülkede suçtur.",
+      "epidemiology": "Kesin yaygınlık bilinmez. Erken dönem anket çalışmalarında kırsal kesimde yetişmiş erkeklerde ara sıra hayvanla cinsel temas bildirimleri olmakla birlikte, kalıcı ve baskın bir cinsel ilgi olarak zoofili nadirdir.",
+      "etiology": "Erişim kolaylığı ve sosyal yalıtım, insan partnerle ilişki kurmada güçlük, bazı olgularda zihinsel yetersizlik ya da psikoz ve erken cinsel koşullanma öne sürülmüştür.",
+      "prognosis": "Sistematik prognoz verisi yoktur. Hayvan refahı ve adli boyut nedeniyle değerlendirme gerekir; eşlik eden diğer parafiliker ve ruhsal bozukluklar araştırılmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "content": "DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'zoofili' örneği belirlenmiş diğer bir parafilik bozukluk kapsamında verilir ve klinisyen tanıyı bu adla belirtir (ör. 'Belirlenmiş Diğer Bir Parafilik Bozukluk, zoofili')."
+      },
+      {
+        "code": "Süre ve İçerik",
+        "title": "En Az 6 Ay Süren Yoğun Cinsel Uyarılma",
+        "content": "Hayvanlarla ile ilgili yineleyici ve yoğun cinsel uyarılmanın (fantezi, dürtü ya da davranış biçiminde) en az 6 aydır bulunması."
+      },
+      {
+        "code": "Klinik Önem",
+        "title": "Sıkıntı, İşlevsellik Kaybı ya da Zarar",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar ya da başkalarına zarar verme/zarar riskini içerir. Sıkıntı ve zarar olmayan parafilik ilgi tek başına bozukluk sayılmaz."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Parafili ile Parafilik Bozukluk Ayrımı",
+        "content": "DSM-5-TR, olağandışı cinsel ilgiyi (parafili) bozukluktan ayırır; tanı için kişinin kendisinde sıkıntı/işlevsellik kaybı ya da başkalarına zarar (rıza veremeyecek kişileri içeren eylemler) gerekir."
+      }
+    ]
+  },
+  "coprophilia": {
+    "id": "coprophilia",
+    "nameTr": "Koprofili (Dışkı Fetişizmi)",
+    "nameEn": "Coprophilic Disorder",
+    "clinicalDescription": {
+      "overview": "Koprofili, dışkı ile ilgili yineleyici ve yoğun cinsel uyarılmadır (dışkıyı görme, dokunma, koklama ya da bedende dışkı bulunması). DSM-5-TR'de ayrı bir tanı olarak yer almaz; belirgin sıkıntı ya da işlevsellik kaybına yol açtığında 'Belirlenmiş Diğer Bir Parafilik Bozukluk' kapsamında tanılanır.",
+      "epidemiology": "Nadirdir; güvenilir yaygınlık verisi yoktur. Bildirilen olguların çoğu erkektir ve sıklıkla mazoşistik ya da diğer parafilik ilgilerle birlikte görülür.",
+      "etiology": "Klasik psikanalitik kuram anal döneme saplanmayı öne sürmüştür; davranışçı açıklamalar koşullanmaya vurgu yapar. Aşağılanma ile ilişkili mazoşistik öğeler sık eşlik eder.",
+      "prognosis": "Sistematik prognoz verisi yoktur. Enfeksiyon riski (hepatit A, bakteriyel enfeksiyonlar, parazitler) önemli tıbbi bir sorundur; sıkıntı varsa BDT ve cinsel terapi kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "content": "DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'koprofili' örneği belirlenmiş diğer bir parafilik bozukluk kapsamında verilir ve klinisyen tanıyı bu adla belirtir (ör. 'Belirlenmiş Diğer Bir Parafilik Bozukluk, koprofili')."
+      },
+      {
+        "code": "Süre ve İçerik",
+        "title": "En Az 6 Ay Süren Yoğun Cinsel Uyarılma",
+        "content": "Dışkı ile ile ilgili yineleyici ve yoğun cinsel uyarılmanın (fantezi, dürtü ya da davranış biçiminde) en az 6 aydır bulunması."
+      },
+      {
+        "code": "Klinik Önem",
+        "title": "Sıkıntı, İşlevsellik Kaybı ya da Zarar",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar ya da başkalarına zarar verme/zarar riskini içerir. Sıkıntı ve zarar olmayan parafilik ilgi tek başına bozukluk sayılmaz."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Parafili ile Parafilik Bozukluk Ayrımı",
+        "content": "DSM-5-TR, olağandışı cinsel ilgiyi (parafili) bozukluktan ayırır; tanı için kişinin kendisinde sıkıntı/işlevsellik kaybı ya da başkalarına zarar (rıza veremeyecek kişileri içeren eylemler) gerekir."
+      }
+    ]
+  },
+  "urophilia": {
+    "id": "urophilia",
+    "nameTr": "Urofili (İdrar Fetişizmi / Altın Yağmur)",
+    "nameEn": "Urophilic Disorder",
+    "clinicalDescription": {
+      "overview": "Urofili, idrar ile ilgili yineleyici ve yoğun cinsel uyarılmadır (idrarın kişinin üzerine yapılması, idrar yapan birini izleme ya da idrara dokunma). DSM-5-TR'de ayrı bir tanı olarak yer almaz; belirgin sıkıntı ya da işlevsellik kaybına yol açtığında 'Belirlenmiş Diğer Bir Parafilik Bozukluk' kapsamında tanılanır.",
+      "epidemiology": "Güvenilir yaygınlık verisi yoktur. Rızaya dayalı yetişkin cinsel pratikleri arasında rastlanmakla birlikte, sıkıntıya yol açan bozukluk düzeyi nadir görülür. Sıklıkla mazoşizm ya da diğer parafilik ilgilerle birliktedir.",
+      "etiology": "Koşullanma ve aşağılanma/egemenlik temalarıyla ilişkili mazoşistik ya da sadistik öğeler öne sürülmüştür.",
+      "prognosis": "Sistematik prognoz verisi yoktur. Rızaya dayalı ve sıkıntı yaratmayan uygulamalar bozukluk sayılmaz; sıkıntı varsa BDT ve cinsel terapi kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "content": "DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'urofili' örneği belirlenmiş diğer bir parafilik bozukluk kapsamında verilir ve klinisyen tanıyı bu adla belirtir (ör. 'Belirlenmiş Diğer Bir Parafilik Bozukluk, urofili')."
+      },
+      {
+        "code": "Süre ve İçerik",
+        "title": "En Az 6 Ay Süren Yoğun Cinsel Uyarılma",
+        "content": "İdrar ile ile ilgili yineleyici ve yoğun cinsel uyarılmanın (fantezi, dürtü ya da davranış biçiminde) en az 6 aydır bulunması."
+      },
+      {
+        "code": "Klinik Önem",
+        "title": "Sıkıntı, İşlevsellik Kaybı ya da Zarar",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar ya da başkalarına zarar verme/zarar riskini içerir. Sıkıntı ve zarar olmayan parafilik ilgi tek başına bozukluk sayılmaz."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Parafili ile Parafilik Bozukluk Ayrımı",
+        "content": "DSM-5-TR, olağandışı cinsel ilgiyi (parafili) bozukluktan ayırır; tanı için kişinin kendisinde sıkıntı/işlevsellik kaybı ya da başkalarına zarar (rıza veremeyecek kişileri içeren eylemler) gerekir."
+      }
+    ]
+  },
+  "telephone_scatologia": {
+    "id": "telephone_scatologia",
+    "nameTr": "Telefon Skatolojisi (Müstehcen Telefon Tacizi)",
+    "nameEn": "Telephone Scatologia",
+    "clinicalDescription": {
+      "overview": "Telefon Skatolojisi, rızası olmayan kişilere müstehcen telefon aramaları (ya da günümüzde istenmeyen müstehcen mesaj ve görüntü gönderme) ile ilgili yineleyici ve yoğun cinsel uyarılmadır. DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'Belirlenmiş Diğer Bir Parafilik Bozukluk' kapsamında tanılanır. Rızası olmayan bir kişiye yönelik olduğundan teşhircilik ve röntgencilik ile benzerlik gösterir; mağdurda korku ve sıkıntı yaratması bu davranışı aynı zamanda cinsel taciz kapsamına sokar.",
+      "epidemiology": "Kesin yaygınlık bilinmez; mağduriyet çalışmalarında kadınların önemli bir bölümünün yaşamları boyunca istenmeyen müstehcen arama ya da mesaj aldığını bildirdiği görülür. Failler çoğunlukla erkektir.",
+      "etiology": "Sosyal beceri yetersizliği, yakın ilişki kurmada güçlük ve mağdurun şok/korku tepkisinden haz alma öne sürülmüştür. Teşhircilik ve röntgencilik gibi diğer parafilik ilgilerle sık birlikte görülür.",
+      "prognosis": "Davranış genellikle tekrarlayıcıdır. Adli süreçlerle birlikte BDT temelli dürtü denetimi ve nüks önleme programları kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Belirlenmiş Diğer Bir Parafilik Bozukluk",
+        "content": "DSM-5-TR'de ayrı bir tanı olarak yer almaz; 'telefon skatolojisi' örneği belirlenmiş diğer bir parafilik bozukluk kapsamında verilir ve klinisyen tanıyı bu adla belirtir (ör. 'Belirlenmiş Diğer Bir Parafilik Bozukluk, telefon skatolojisi')."
+      },
+      {
+        "code": "Süre ve İçerik",
+        "title": "En Az 6 Ay Süren Yoğun Cinsel Uyarılma",
+        "content": "Rızası olmayan kişilere müstehcen telefon aramaları (ya da benzeri dijital iletiler) ile ile ilgili yineleyici ve yoğun cinsel uyarılmanın (fantezi, dürtü ya da davranış biçiminde) en az 6 aydır bulunması."
+      },
+      {
+        "code": "Klinik Önem",
+        "title": "Sıkıntı, İşlevsellik Kaybı ya da Zarar",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar ya da başkalarına zarar verme/zarar riskini içerir. Sıkıntı ve zarar olmayan parafilik ilgi tek başına bozukluk sayılmaz."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Parafili ile Parafilik Bozukluk Ayrımı",
+        "content": "DSM-5-TR, olağandışı cinsel ilgiyi (parafili) bozukluktan ayırır; tanı için kişinin kendisinde sıkıntı/işlevsellik kaybı ya da başkalarına zarar (rıza veremeyecek kişileri içeren eylemler) gerekir."
+      }
+    ]
+  },
+  "partialism": {
+    "id": "partialism",
+    "nameTr": "Kısmi Fetişizm (Beden Parçası Fetişizmi / Ayak, Saç vb.)",
+    "nameEn": "Partialism",
+    "clinicalDescription": {
+      "overview": "Parsiyalizm, genital olmayan belirli bir beden bölümüne (ör. ayak [podofili], saç, burun, kulak, karın) yönelik yineleyici, yoğun ve çok özgül cinsel ilgidir. DSM-IV'te 'başka türlü adlandırılamayan parafili' örnekleri arasında ayrı anılırken, DSM-5 ve DSM-5-TR'de Fetişizm Bozukluğunun içine alınmıştır: tanı, 'beden bölüm(ler)i' belirleyicisiyle Fetişizm Bozukluğu olarak konur.",
+      "epidemiology": "Genital olmayan beden bölümlerine yönelik ilgiler (özellikle ayak) cinsel tercihler arasında görece yaygındır; bozukluk düzeyine ulaşan, yani belirgin sıkıntı ya da işlevsellik kaybı yaratan olgular azdır ve çoğunlukla erkektir.",
+      "etiology": "Fetişizm bozukluğundaki gibi koşullanma, erken cinsel deneyimler ve mastürbasyonla pekiştirme öne sürülmüştür.",
+      "prognosis": "İlgi genellikle süreğendir. Sıkıntı ya da işlevsellik kaybı yoksa tedavi gerekmez; sorunlu olgularda BDT, çift ve cinsel terapi kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanı Kategorisi",
+        "title": "Fetişizm Bozukluğu (Beden Bölümü Belirleyicisi)",
+        "content": "DSM-5-TR'de ayrı bir tanı değildir; ölçütler karşılandığında 'Fetişizm Bozukluğu, beden bölüm(ler)i' olarak tanılanır."
+      },
+      {
+        "code": "Kriter A",
+        "title": "En Az 6 Ay Süren Özgül Beden Bölümü Odaklı Uyarılma",
+        "content": "En az 6 ay boyunca, genital olmayan bir beden bölümüne yönelik çok özgül bir odaktan kaynaklanan, fantezi, dürtü ya da davranış biçiminde yineleyici ve yoğun cinsel uyarılma."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Klinik Önem",
+        "content": "Bu ilgi klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte bozulmaya yol açar. Yalnızca bir cinsel tercih olarak bulunan, sıkıntı yaratmayan ilgi bozukluk sayılmaz."
+      }
+    ]
+  }
+}

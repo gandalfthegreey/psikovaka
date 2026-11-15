@@ -1106,7 +1106,7 @@ const PHARMACOLOGY_DATABASE = [
 ];
 
 /**
- * Tüm 297 DSM-5 tanısını en uygun altın standart farmakoloji/biyolojik protokole eşleştiren tablo
+ * Tüm DSM-5-TR tanılarını (DIAGNOSES_DATABASE ile birebir) en uygun altın standart farmakoloji/biyolojik protokole eşleştiren tablo
  */
 const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     // 1. NÖROGELİŞİMSEL BOZUKLUKLAR
@@ -1138,12 +1138,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     // 2. ŞİZOFRENİ SPEKTRUMU VE DİĞER PSİKOTİK BOZUKLUKLAR
     "schizotypal_pd": "atypical_ap_secondgen",
     "delusional_disorder": "pimozide_delusional",
-    "delusional_erotomanic": "pimozide_delusional",
-    "delusional_grandiose": "pimozide_delusional",
-    "delusional_jealous": "pimozide_delusional",
-    "delusional_persecutory": "pimozide_delusional",
-    "delusional_somatic": "pimozide_delusional",
-    "delusional_mixed": "pimozide_delusional",
     "brief_psychotic": "atypical_ap_secondgen",
     "schizophreniform": "atypical_ap_secondgen",
     "schizophrenia": "atypical_ap_secondgen",
@@ -1154,16 +1148,11 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "psychotic_due_to_medical": "atypical_ap_secondgen",
     "catatonia_associated": "lorazepam_catatonia",
     "catatonia_medical": "lorazepam_catatonia",
-    "attenuated_psychosis_syndrome": "atypical_ap_secondgen",
-    "folie_a_deux": "atypical_ap_secondgen",
-    "capgras_syndrome": "atypical_ap_secondgen",
-    "cotard_syndrome": "ect_biological_acute",
+    "other_specified_schizophrenia_spectrum": "atypical_ap_secondgen",
 
     // 3. BİPOLAR VE İLİŞKİLİ BOZUKLUKLAR
     "bipolar_1": "lithium_gold",
     "bipolar_1_depressed": "lithium_gold",
-    "bipolar_1_mixed": "valproate_acute_mania",
-    "bipolar_1_rapid_cycling": "valproate_acute_mania",
     "bipolar_2": "lamotrigine_bipolar2",
     "cyclothymia": "lithium_gold",
     "substance_induced_bipolar": "valproate_acute_mania",
@@ -1175,59 +1164,40 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "mdd": "ssri_firstline",
     "mdd_recurrent": "ssri_firstline",
     "mdd_with_psychotic": "ssri_plus_antipsychotic",
-    "mdd_with_peripartum": "ssri_firstline",
-    "mdd_with_seasonal": "bupropion_ndri",
-    "mdd_with_atypical": "bupropion_ndri",
-    "mdd_with_melancholic": "ect_biological_acute",
     "dysthymia": "ssri_firstline",
     "dmdd": "atypical_ap_secondgen",
     "pmdd": "ssri_firstline",
     "substance_induced_depressive": "ssri_firstline",
     "depressive_due_to_medical": "ssri_firstline",
-    "recurrent_brief_depression": "ssri_firstline",
-    "short_duration_depressive": "ssri_firstline",
+    "other_specified_depressive": "ssri_firstline",
 
     // 5. ANKSİYETE BOZUKLUKLARI
     "gad": "snri_dualex",
     "panic_disorder": "ssri_firstline",
     "agoraphobia": "ssri_firstline",
     "social_anxiety": "ssri_firstline",
-    "social_anxiety_performance": "propranolol_beta",
     "specific_phobia": "psychotherapy_first_no_drug",
     "specific_phobia_animal": "psychotherapy_first_no_drug",
     "specific_phobia_natural": "psychotherapy_first_no_drug",
     "specific_phobia_blood": "psychotherapy_first_no_drug",
     "specific_phobia_situational": "psychotherapy_first_no_drug",
-    "specific_phobia_emetophobia": "psychotherapy_first_no_drug",
-    "specific_phobia_phagophobia": "psychotherapy_first_no_drug",
     "separation_anxiety": "ssri_firstline",
     "selective_mutism": "ssri_firstline",
     "substance_induced_anxiety": "hydroxyzine_buspirone",
     "anxiety_due_to_medical": "hydroxyzine_buspirone",
-    "ataque_de_nervios": "ssri_firstline",
-    "taijin_kyofusho": "ssri_firstline",
     "other_specified_anxiety": "ssri_firstline",
 
     // 6. OKB VE İLİŞKİLİ BOZUKLUKLAR
     "ocd": "ssri_firstline",
-    "ocd_contamination": "ssri_firstline",
-    "ocd_checking": "ssri_firstline",
-    "ocd_symmetry": "ssri_firstline",
-    "ocd_taboo_thoughts": "ssri_firstline",
-    "rocd": "ssri_firstline",
     "bdd": "ssri_firstline",
-    "muscle_dysmorphia": "ssri_firstline",
     "hoarding_disorder": "ssri_firstline",
     "trichotillomania": "clomipramine_ocd",
     "excoriation": "clomipramine_ocd",
-    "olfactory_reference": "ssri_plus_antipsychotic",
-    "body_focused_repetitive": "clomipramine_ocd",
-    "pandas_syndrome": "ssri_firstline",
     "other_specified_ocd": "ssri_firstline",
+    "ocd_due_to_medical": "ssri_firstline",
 
     // 7. TRAVMA VE STRESÖRLE İLİŞKİLİ BOZUKLUKLAR
     "ptsd": "ssri_firstline",
-    "ptsd_dissociative": "prazosin_nightmares",
     "ptsd_preschool": "alpha2_agonist_tic",
     "acute_stress_disorder": "hydroxyzine_buspirone",
     "adjustment_disorder": "hydroxyzine_buspirone",
@@ -1243,10 +1213,7 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "dissociative_amnesia": "psychotherapy_first_no_drug",
     "dissociative_fugue": "psychotherapy_first_no_drug",
     "depersonalization_derealization": "lamotrigine_bipolar2",
-    "dissociative_trance": "psychotherapy_first_no_drug",
-    "ganser_syndrome": "psychotherapy_first_no_drug",
-    "possession_trance": "psychotherapy_first_no_drug",
-    "coercive_persuasion_dissociation": "psychotherapy_first_no_drug",
+    "other_specified_dissociative": "psychotherapy_first_no_drug",
 
     // 9. BEDENSEL BELİRTİ VE İLİŞKİLİ BOZUKLUKLAR
     "somatic_symptom_disorder": "snri_dualex",
@@ -1257,7 +1224,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "conversion_sensory": "psychotherapy_first_no_drug",
     "factitious_disorder": "psychotherapy_first_no_drug",
     "factitious_another": "psychotherapy_first_no_drug",
-    "pseudocyesis": "pimozide_delusional",
     "psychological_factors_affecting_medical": "snri_dualex",
     "other_specified_somatic": "snri_dualex",
 
@@ -1265,21 +1231,15 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "anorexia_nervosa": "psychotherapy_first_no_drug",
     "anorexia_restricting": "psychotherapy_first_no_drug",
     "anorexia_binge_purge": "atypical_ap_secondgen",
-    "atypical_anorexia": "psychotherapy_first_no_drug",
     "bulimia_nervosa": "ssri_firstline",
     "binge_eating": "ssri_firstline",
-    "purging_disorder": "ssri_firstline",
     "arfid": "mirtazapine_nassa",
     "pica": "psychotherapy_first_no_drug",
     "rumination_disorder": "psychotherapy_first_no_drug",
-    "night_eating_syndrome": "ssri_firstline",
-    "orthorexia_nervosa": "ssri_firstline",
     "other_specified_feeding": "ssri_firstline",
 
     // 11. DIŞA ATIM BOZUKLUKLARI
     "enuresis": "desmopressin_enuresis",
-    "enuresis_nocturna": "desmopressin_enuresis",
-    "enuresis_diurna": "desmopressin_enuresis",
     "encopresis": "psychotherapy_first_no_drug",
 
     // 12. UYKU-UYANIKLIK BOZUKLUKLARI
@@ -1295,12 +1255,10 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "circadian_shift_work": "modafinil_oxybate",
     "circadian_non_24_hour": "clonazepam_parasomnia",
     "sleepwalking_disorder": "clonazepam_parasomnia",
-    "sexsomnia": "clonazepam_parasomnia",
     "sleep_terrors": "clonazepam_parasomnia",
     "nightmare_disorder": "prazosin_nightmares",
     "rem_sleep_behavior_disorder": "clonazepam_parasomnia",
     "restless_legs_syndrome": "pramipexole_gabapentin_rls",
-    "kleine_levin_syndrome": "lithium_gold",
 
     // 13. CİNSEL İŞLEV BOZUKLUKLARI VE CİNSİYET DİSFORİSİ
     "erectile_disorder": "bupropion_ndri",
@@ -1311,7 +1269,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "female_orgasmic_disorder": "bupropion_ndri",
     "genito_pelvic_pain": "psychotherapy_first_no_drug",
     "substance_induced_sexual_dysfunction": "bupropion_ndri",
-    "persistent_genital_arousal": "pramipexole_gabapentin_rls",
     "unspecified_sexual_dysfunction": "psychotherapy_first_no_drug",
     "gender_dysphoria_children": "psychotherapy_first_no_drug",
     "gender_dysphoria_adolescents_adults": "psychotherapy_first_no_drug",
@@ -1323,7 +1280,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "conduct_disorder": "alpha2_agonist_tic",
     "conduct_childhood": "alpha2_agonist_tic",
     "conduct_adolescent": "alpha2_agonist_tic",
-    "conduct_callous_unemotional": "alpha2_agonist_tic",
     "pyromania": "naltrexone_acamprosate",
     "kleptomania": "naltrexone_acamprosate",
 
@@ -1332,13 +1288,9 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "alcohol_intoxication": "thiamine_iv_wernicke",
     "alcohol_withdrawal": "lorazepam_catatonia",
     "alcohol_withdrawal_delirium": "lorazepam_catatonia",
-    "alcohol_induced_mood": "ssri_firstline",
-    "alcohol_induced_anxiety": "hydroxyzine_buspirone",
     "cannabis_use_disorder": "hydroxyzine_buspirone",
     "cannabis_intoxication": "hydroxyzine_buspirone",
     "cannabis_withdrawal": "hydroxyzine_buspirone",
-    "cannabis_induced_psychotic": "atypical_ap_secondgen",
-    "synthetic_cannabinoid_intoxication": "haloperidol_acute",
     "sedative_hypnotic_use_disorder": "hydroxyzine_buspirone",
     "sedative_withdrawal": "lorazepam_catatonia",
     "opioid_use_disorder": "buprenorphine_naloxone",
@@ -1347,10 +1299,8 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "cocaine_use_disorder": "bupropion_ndri",
     "cocaine_intoxication": "lorazepam_catatonia",
     "cocaine_withdrawal": "bupropion_ndri",
-    "cocaine_induced_psychosis": "atypical_ap_secondgen",
     "amphetamine_use_disorder": "bupropion_ndri",
     "amphetamine_withdrawal": "bupropion_ndri",
-    "methamphetamine_psychosis": "atypical_ap_secondgen",
     "phencyclidine_use_disorder": "haloperidol_acute",
     "hallucinogen_use_disorder": "lorazepam_catatonia",
     "hallucinogen_persisting_perception": "lamotrigine_bipolar2",
@@ -1360,13 +1310,9 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "caffeine_intoxication": "hydroxyzine_buspirone",
     "caffeine_withdrawal": "psychotherapy_first_no_drug",
     "gambling_disorder": "naltrexone_acamprosate",
-    "internet_gaming_disorder": "naltrexone_acamprosate",
-    "compulsive_buying_disorder": "naltrexone_acamprosate",
 
     // 16. NÖROBİLİŞSEL BOZUKLUKLAR
     "delirium": "haloperidol_acute",
-    "delirium_hyperactive": "haloperidol_acute",
-    "delirium_hypoactive": "haloperidol_acute",
     "major_neurocognitive_alzheimer": "cholinesterase_donepezil",
     "mild_neurocognitive_alzheimer": "cholinesterase_donepezil",
     "major_neurocognitive_vascular": "cholinesterase_donepezil",
@@ -1378,16 +1324,14 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "major_neurocognitive_hiv": "psychotherapy_first_no_drug",
     "major_neurocognitive_prion": "psychotherapy_first_no_drug",
     "major_neurocognitive_huntington": "valbenazine_vmat2",
+    "major_neurocognitive_another_medical": "cholinesterase_donepezil",
     "wernicke_korsakoff_syndrome": "thiamine_iv_wernicke",
-    "major_neurocognitive_nph": "vp_shunt_neurosurgery",
-    "transient_global_amnesia": "psychotherapy_first_no_drug",
     "major_neurocognitive_multiple": "cholinesterase_donepezil",
     "unspecified_neurocognitive": "cholinesterase_donepezil",
 
     // 17. KİŞİLİK BOZUKLUKLARI (KÜME A, B, C)
     "paranoid_pd": "psychotherapy_first_no_drug",
     "schizoid_pd": "psychotherapy_first_no_drug",
-    "schizotypal_pd_cluster": "atypical_ap_secondgen",
     "antisocial_pd": "psychotherapy_first_no_drug",
     "borderline_pd": "psychotherapy_first_no_drug",
     "histrionic_pd": "psychotherapy_first_no_drug",
@@ -1396,7 +1340,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "dependent_pd": "psychotherapy_first_no_drug",
     "ocpd": "psychotherapy_first_no_drug",
     "personality_change_due_to_medical": "atypical_ap_secondgen",
-    "passive_aggressive_pd": "psychotherapy_first_no_drug",
 
     // 18. PARAFİLİK BOZUKLUKLAR
     "voyeuristic": "ssri_firstline",
@@ -1407,46 +1350,12 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "pedophilic_disorder": "ssri_firstline",
     "fetishistic_disorder": "ssri_firstline",
     "transvestic_disorder": "ssri_firstline",
-    "necrophilia": "ssri_firstline",
-    "zoophilia": "ssri_firstline",
-    "coprophilia": "ssri_firstline",
-    "urophilia": "ssri_firstline",
-    "telephone_scatologia": "ssri_firstline",
-    "partialism": "ssri_firstline",
+    "other_specified_paraphilic": "ssri_firstline"
 
-    // 19. DİĞER KLİNİK DURUMLAR & İLAÇ HAREKET BOZUKLUKLARI
-    "malingering": "psychotherapy_first_no_drug",
-    "neuroleptic_malignant_syndrome": "dantrolene_bromocriptine",
-    "serotonin_syndrome": "cyproheptadine_serotonin",
-    "tardive_dyskinesia": "valbenazine_vmat2",
-    "medication_induced_akathisia": "propranolol_beta",
-    "medication_induced_dystonia": "biperiden_anticholinergic",
-    "medication_induced_parkinsonism": "biperiden_anticholinergic",
-    "antidepressant_discontinuation": "ssri_firstline",
-    "borderline_intellectual_functioning": "psychotherapy_first_no_drug",
-    "relational_problem_partner": "psychotherapy_first_no_drug",
-    "parent_child_relational_problem": "psychotherapy_first_no_drug",
-    "sibling_relational_problem": "psychotherapy_first_no_drug",
-    "burnout_syndrome": "psychotherapy_first_no_drug",
-    "academic_or_educational_problem": "psychotherapy_first_no_drug",
-    "uncomplicated_bereavement": "psychotherapy_first_no_drug",
-    "phase_of_life_problem": "psychotherapy_first_no_drug",
-    "nonadherence_to_medical_treatment": "psychotherapy_first_no_drug",
-    "religious_or_spiritual_problem": "psychotherapy_first_no_drug",
-    "child_physical_abuse": "psychotherapy_first_no_drug",
-    "child_sexual_abuse": "psychotherapy_first_no_drug",
-    "child_neglect": "psychotherapy_first_no_drug",
-    "spouse_physical_violence": "psychotherapy_first_no_drug",
-    "spouse_psychological_abuse": "psychotherapy_first_no_drug",
-    "homelessness": "psychotherapy_first_no_drug",
-    "extreme_poverty": "psychotherapy_first_no_drug",
-    "social_exclusion_rejection": "psychotherapy_first_no_drug",
-    "target_of_discrimination": "psychotherapy_first_no_drug",
-    "acculturation_difficulty": "psychotherapy_first_no_drug"
 };
 
 /**
- * Her klinik vaka (1'den 150+'ya kadar) için en doğru altın standart pharmacologyId'yi çözer.
+ * Her klinik vaka (tüm numaralar) için en doğru altın standart pharmacologyId'yi çözer.
  * Vakanın doğrudan pharmacologyId alanı varsa onu kullanır; yoksa vaka ID'si, klinik ipuçları,
  * diagnosisId, therapyId ve kategori bilgilerini birlikte değerlendirerek nokta atışı eşleştirir.
  *
@@ -1512,7 +1421,7 @@ function resolvePharmacologyIdForCase(caseObj) {
         }
     }
 
-    // 3. Doğrudan 297 DSM-5 Tanı Haritasından Eşleştirme
+    // 3. Doğrudan DSM-5-TR Tanı Haritasından Eşleştirme
     if (DIAGNOSIS_TO_PHARMACOLOGY_MAP[diagId]) {
         return DIAGNOSIS_TO_PHARMACOLOGY_MAP[diagId];
     }

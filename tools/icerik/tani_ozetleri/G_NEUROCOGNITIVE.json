@@ -1,0 +1,328 @@
+{
+  "delirium_hyperactive": {
+    "id": "delirium_hyperactive",
+    "nameTr": "Deliryum (Aşırı Hareketli / Hiperaktif Tip)",
+    "nameEn": "Delirium (Hyperactive Type)",
+    "clinicalDescription": {
+      "overview": "Hiperaktif deliryum, deliryum tablosuna psikomotor etkinlikte belirgin artışın eşlik ettiği alt tiptir. Huzursuzluk, ajitasyon, saldırganlık, sonda ve serumları çekme, yataktan kalkmaya çalışma, duygudurum dalgalanmaları, bakıma karşı çıkma ve sıklıkla canlı görsel varsanılar görülür. Gürültülü görünümü nedeniyle tanınması kolaydır ancak psikotik bozukluk ya da 'huzursuz yaşlı' olarak yanlış değerlendirilebilir. Alkol ve sedatif yoksunluğu, antikolinerjik toksisite ve uyarıcı entoksikasyonu tipik nedenlerdir.",
+      "epidemiology": "Deliryum olgularının bir azınlığını oluşturur; hastanede en sık görülen alt tipler hipoaktif ve karışık tiptir. Daha genç hastalarda ve madde yoksunluğunda daha sıktır.",
+      "etiology": "Altta yatan tıbbi neden (enfeksiyon, metabolik bozukluk, ilaç, yoksunluk, hipoksi) beyin işlevini yaygın olarak bozar; kolinerjik eksiklik ve dopaminerjik görece fazlalık, inflamasyon ve stres yanıtı (kortizol) mekanizmalar arasında yer alır.",
+      "prognosis": "Altta yatan nedenin hızla bulunup tedavi edilmesi esastır. Düşme, kendine/başkasına zarar ve tedaviyi kesintiye uğratma riski yüksektir. Önceliği ilaç dışı önlemler (yönelim sağlama, uyku düzeni, gözlük/işitme cihazı, aile katılımı) ve güvenliktir; fiziksel kısıtlamadan mümkün olduğunca kaçınılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Deliryum Ölçütleri",
+        "title": "Dikkat ve Farkındalık Bozukluğu, Hızlı Başlangıç ve Dalgalanma",
+        "content": "Dikkati yöneltme, sürdürme ve kaydırmada bozulma ile çevreye yönelimde azalma; kısa sürede (saatler-birkaç gün) gelişme ve gün içinde dalgalanma; bellek, yönelim, dil, görsel-uzamsal yeti ya da algıda ek bozulma; bu bozuklukların önceden var olan bir nörobilişsel bozuklukla açıklanamaması ve koma gibi ağır uyarılmışlık azalması bağlamında ortaya çıkmaması; öykü, muayene ya da laboratuvarda bir tıbbi durum, madde entoksikasyonu/yoksunluğu, toksin ya da birden çok etiyolojiye ait kanıt bulunması."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Hiperaktif Tip",
+        "content": "Kişinin psikomotor etkinlik düzeyi artmıştır; buna duygudurum dalgalanması, ajitasyon ve/veya tıbbi bakıma iş birliği yapmayı reddetme eşlik edebilir. (Diğer seçenekler: hipoaktif, karışık etkinlik düzeyi; ayrıca akut ya da süreğen seyir belirtilir.)"
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Psikotik Bozukluk ve Manik Ataktan Ayrım",
+        "content": "Deliryumda dikkat ve farkındalık bozulması, hızlı başlangıç, gün içi dalgalanma ve belirgin yönelim bozukluğu vardır; varsanılar çoğunlukla görseldir. Yeni başlayan ajitasyon/psikoz özellikle yaşlılarda önce tıbbi nedenler açısından değerlendirilmelidir."
+      }
+    ]
+  },
+  "delirium_hypoactive": {
+    "id": "delirium_hypoactive",
+    "nameTr": "Deliryum (Durgun / Hipoaktif Tip)",
+    "nameEn": "Delirium (Hypoactive Type)",
+    "clinicalDescription": {
+      "overview": "Hipoaktif deliryum, deliryum tablosuna psikomotor etkinlikte azalmanın eşlik ettiği alt tiptir. Hasta uykulu, durgun, yavaş, çevreye ilgisiz ve az konuşan görünür; letarji stupora yaklaşabilir. Sessiz görünümü nedeniyle sıklıkla gözden kaçar ya da depresyon, yorgunluk veya demans ile karıştırılır. Bu nedenle 'sessiz deliryum' olarak da anılır.",
+      "epidemiology": "Hastanede yatan yaşlılarda ve yoğun bakım hastalarında en sık görülen alt tiplerdendir. İleri yaş, demans, ağır tıbbi hastalık ve metabolik/enfeksiyon nedenleri bu tiple daha sık ilişkilidir.",
+      "etiology": "Altta yatan tıbbi neden (sepsis, hipoksi, hepatik/üremik ensefalopati, elektrolit bozukluğu, sedatif ve opioid ilaçlar) yaygın beyin işlev bozukluğuna yol açar.",
+      "prognosis": "Geç tanınması nedeniyle hiperaktif tipe göre daha uzun yatış, daha fazla komplikasyon (bası yarası, aspirasyon, düşme) ve daha yüksek ölüm oranıyla ilişkilidir. Yaşlı hastada yeni başlayan uykululuk ve ilgisizlik deliryum açısından tarama testleriyle (ör. CAM) değerlendirilmelidir. Tedavinin özü altta yatan nedenin düzeltilmesidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Deliryum Ölçütleri",
+        "title": "Dikkat ve Farkındalık Bozukluğu, Hızlı Başlangıç ve Dalgalanma",
+        "content": "Dikkati yöneltme, sürdürme ve kaydırmada bozulma ile çevreye yönelimde azalma; kısa sürede (saatler-birkaç gün) gelişme ve gün içinde dalgalanma; bellek, yönelim, dil, görsel-uzamsal yeti ya da algıda ek bozulma; bu bozuklukların önceden var olan bir nörobilişsel bozuklukla açıklanamaması ve koma gibi ağır uyarılmışlık azalması bağlamında ortaya çıkmaması; öykü, muayene ya da laboratuvarda bir tıbbi durum, madde entoksikasyonu/yoksunluğu, toksin ya da birden çok etiyolojiye ait kanıt bulunması."
+      },
+      {
+        "code": "Belirleyici",
+        "title": "Hipoaktif Tip",
+        "content": "Kişinin psikomotor etkinlik düzeyi azalmıştır; buna stupora yaklaşan durgunluk ve letarji eşlik edebilir. (Diğer seçenekler: hiperaktif, karışık etkinlik düzeyi; ayrıca akut ya da süreğen seyir belirtilir.)"
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Depresyon ve Demanstan Ayrım",
+        "content": "Depresyonda bilinç ve dikkat genellikle korunur ve başlangıç daha yavaştır; demansta (Lewy cisimcikli demans dışında) gün içi belirgin dalgalanma ve akut başlangıç beklenmez. Önceki işlevselliğin yakınlardan öğrenilmesi ayrımı kolaylaştırır."
+      }
+    ]
+  },
+  "mild_neurocognitive_alzheimer": {
+    "id": "mild_neurocognitive_alzheimer",
+    "nameTr": "Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI)",
+    "nameEn": "Mild Neurocognitive Disorder Due to Alzheimer's Disease",
+    "clinicalDescription": {
+      "overview": "Alzheimer Hastalığına Bağlı Hafif Nörobilişsel Bozukluk, Alzheimer patolojisine bağlı olarak başta öğrenme ve bellek olmak üzere bilişsel işlevlerde ölçülebilir ama günlük yaşamda bağımsızlığı bozmayan ılımlı gerilemedir. Kişi ve yakınları unutkanlıkta artış fark eder; testlerde yaşa ve eğitime göre beklenenin altında performans görülür, ancak kişi daha fazla çaba ve hatırlatıcılarla işlerini sürdürür. Klinik literatürdeki 'hafif bilişsel bozukluk' (MCI) kavramıyla büyük ölçüde örtüşür.",
+      "epidemiology": "65 yaş üstünde hafif bilişsel bozukluk yaygınlığı çalışmalara göre yaklaşık %10-20 arasında bildirilir; bunların önemli bir kısmının nedeni Alzheimer hastalığıdır. Klinik örneklemlerde her yıl hastaların bir bölümü demansa ilerler; toplum örneklemlerinde bu oran daha düşüktür.",
+      "etiology": "Amiloid-beta birikimi ve tau patolojisi (nörofibriler yumaklar) belirtiler başlamadan yıllar önce başlar; hipokampus ve entorinal korteks erken etkilenir. APOE ε4 taşıyıcılığı en önemli kalıtsal risk etmenidir; nadir ailesel formlarda APP, PSEN1, PSEN2 mutasyonları bulunur.",
+      "prognosis": "Seyir ilerleyicidir; bir kısmı yıllar içinde majör nörobilişsel bozukluğa geçer, bir kısmı ise uzun süre durağan kalır (özellikle biyobelirteç kanıtı olmayanlarda). Vasküler risk etmenlerinin denetimi, fiziksel ve bilişsel etkinlik ve düzenli izlem önerilir. Yeni amiloid hedefli tedaviler bu erken evre için geliştirilmiştir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Hafif Nörobilişsel Bozukluk",
+        "content": "Hafif nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda önceki düzeye göre ılımlı gerileme (kaygı + test ile belgelenmiş ılımlı bozulma); eksiklikler günlük etkinliklerde bağımsızlığı bozmaz (daha fazla çaba, telafi stratejileri ya da uyum gerekebilir); yalnızca deliryum sırasında ortaya çıkmaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Kriter B & C",
+        "title": "Sinsi Başlangıç ve Tedrici İlerleme",
+        "content": "Bir ya da daha fazla bilişsel alanda sinsi başlangıç ve tedrici ilerleme vardır."
+      },
+      {
+        "code": "Olası / Muhtemel Ayrımı",
+        "title": "Alzheimer Etiyolojisinin Kesinlik Düzeyi",
+        "content": "Hafif NBB'de 'muhtemel' Alzheimer hastalığı ancak genetik test ya da aile öyküsünden Alzheimer'a yol açan bir gen mutasyonu kanıtı varsa söylenir. Bu kanıt yoksa ve şu üç özelliğin tümü varsa 'olası' Alzheimer hastalığı denir: (1) bellek ve öğrenmede gerilemenin açık kanıtı, (2) uzun duraklama dönemleri olmaksızın süregiden tedrici gerileme, (3) karışık etiyoloji kanıtı olmaması (başka nörodejeneratif ya da serebrovasküler hastalık, başka nörolojik/ruhsal ya da sistemik hastalık yok)."
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Bozukluk serebrovasküler hastalık, başka bir nörodejeneratif hastalık, madde etkisi ya da başka bir ruhsal, nörolojik veya sistemik bozuklukla daha iyi açıklanamaz."
+      }
+    ]
+  },
+  "major_neurocognitive_vascular": {
+    "id": "major_neurocognitive_vascular",
+    "nameTr": "Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans)",
+    "nameEn": "Major Vascular Neurocognitive Disorder",
+    "clinicalDescription": {
+      "overview": "Majör Vasküler Nörobilişsel Bozukluk (vasküler demans), serebrovasküler hastalığa (büyük damar inmeleri, çok sayıda küçük enfarkt, yaygın küçük damar hastalığı/beyaz cevher lezyonları) bağlı olarak gelişen ve günlük yaşamda bağımsızlığı bozan bilişsel gerilemedir. Bellekten çok karmaşık dikkat, işlem hızı ve yönetsel işlevlerde bozulma öne çıkar; inme sonrası ani ya da basamaklı kötüleşme, yürüme bozukluğu, idrar sıkışması, duygusal değişkenlik, apati ve depresyon sık görülür.",
+      "epidemiology": "Alzheimer hastalığından sonra en sık ikinci demans nedenidir. Yaşla birlikte artar; hipertansiyon, diyabet, sigara, hiperlipidemi, atriyal fibrilasyon ve inme öyküsü olanlarda daha sıktır. Alzheimer patolojisiyle birlikteliği (karışık demans) çok yaygındır.",
+      "etiology": "İskemik ya da hemorajik inmeler, kortikal-subkortikal bağlantıları kesen lakün enfarktlar, beyaz cevher hiperintensiteleri ve mikrokanamalar başlıca patolojilerdir. CADASIL gibi kalıtsal küçük damar hastalıkları nadir nedenlerdir.",
+      "prognosis": "Seyir değişkendir: inmelerle basamaklı kötüleşme, küçük damar hastalığında yavaş ilerleme ya da dönemsel duraklama görülebilir. Vasküler risk etmenlerinin sıkı denetimi ve ikincil inme önlemi ilerlemeyi yavaşlatabilir; rehabilitasyon ve bakım veren desteği önemlidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Majör Nörobilişsel Bozukluk",
+        "content": "Majör nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda (karmaşık dikkat, yönetsel işlev, öğrenme ve bellek, dil, algısal-motor, toplumsal biliş) önceki düzeye göre belirgin gerileme (kişinin, yakınının ya da klinisyenin kaygısı ve tercihen standart testlerle belgelenmiş belirgin bozulma) ve bu eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozması; yalnızca deliryum sırasında ortaya çıkmaması ve başka bir ruhsal bozuklukla daha iyi açıklanmaması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Vasküler Etiyolojiyle Uyumlu Klinik Özellikler",
+        "content": "Aşağıdakilerden biri: (1) bilişsel eksikliklerin başlangıcının bir ya da daha fazla serebrovasküler olayla zamansal ilişkili olması; (2) gerilemenin özellikle karmaşık dikkat (işlem hızı dahil) ve ön-yönetsel işlevlerde belirgin olması."
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Serebrovasküler Hastalık Kanıtı ve Dışlama",
+        "content": "Öykü, fizik muayene ve/veya nörogörüntülemede bilişsel eksiklikleri açıklamaya yetecek serebrovasküler hastalık kanıtı bulunur; belirtiler başka bir beyin hastalığı ya da sistemik bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Muhtemel / Olası",
+        "title": "Kesinlik Düzeyi",
+        "content": "Klinik ölçütler nörogörüntülemede belirgin parankim hasarıyla destekleniyorsa, bilişsel bozulma belgelenmiş serebrovasküler olay(lar)la zamansal ilişkiliyse ya da hem klinik hem genetik (ör. CADASIL) kanıt varsa 'muhtemel'; klinik ölçütler karşılanıp nörogörüntüleme yapılamamışsa ya da zamansal ilişki kurulamıyorsa 'olası' denir."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Davranış Bozukluğu ve Şiddet",
+        "content": "Davranışsal bozukluk eşlik edip etmediği (psikotik belirtiler, duygudurum belirtileri, ajitasyon, apati vb.) belirtilir. Majör NBB'de şiddet: Hafif (araçsal günlük etkinliklerde, ör. ev işi, para yönetimi, güçlük), Orta (temel günlük etkinliklerde, ör. yemek yeme, giyinme, güçlük), Ağır (tamamen bağımlı)."
+      }
+    ]
+  },
+  "mild_neurocognitive_vascular": {
+    "id": "mild_neurocognitive_vascular",
+    "nameTr": "Hafif Vasküler Nörobilişsel Bozukluk",
+    "nameEn": "Mild Vascular Neurocognitive Disorder",
+    "clinicalDescription": {
+      "overview": "Hafif Vasküler Nörobilişsel Bozukluk, serebrovasküler hastalığa bağlı olarak özellikle dikkat, işlem hızı ve yönetsel işlevlerde ılımlı gerileme bulunması, ancak günlük yaşamda bağımsızlığın korunmasıdır. Kişi işlerini yavaş, daha çok çabayla ya da listeler/hatırlatıcılar gibi telafi yöntemleriyle sürdürür. İnme sonrası bilişsel bozulmanın ve 'vasküler hafif bilişsel bozukluk' tablolarının önemli bir kısmı bu tanıyla karşılanır.",
+      "epidemiology": "İnme geçiren hastaların önemli bir kısmında sonraki aylarda bir düzeyde bilişsel bozulma saptanır. Vasküler risk etmenleri yüksek yaşlılarda küçük damar hastalığına bağlı hafif tablolar yaygındır.",
+      "etiology": "Majör vasküler nörobilişsel bozuklukla aynıdır: inmeler, lakün enfarktlar ve yaygın beyaz cevher hastalığı ile ön-subkortikal devrelerin bozulması.",
+      "prognosis": "Bir kısmı majör vasküler nörobilişsel bozukluğa ilerler, bir kısmı (özellikle tek inme sonrası) durağan kalır ya da kısmen düzelir. Risk etmenlerinin (hipertansiyon, diyabet, sigara, atriyal fibrilasyon) sıkı denetimi ilerlemeyi önlemede temel yaklaşımdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Hafif Nörobilişsel Bozukluk",
+        "content": "Hafif nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda önceki düzeye göre ılımlı gerileme (kaygı + test ile belgelenmiş ılımlı bozulma); eksiklikler günlük etkinliklerde bağımsızlığı bozmaz (daha fazla çaba, telafi stratejileri ya da uyum gerekebilir); yalnızca deliryum sırasında ortaya çıkmaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Vasküler Etiyolojiyle Uyumlu Klinik Özellikler",
+        "content": "Bilişsel eksikliklerin başlangıcının serebrovasküler olay(lar)la zamansal ilişkili olması ya da gerilemenin özellikle karmaşık dikkat (işlem hızı dahil) ve ön-yönetsel işlevlerde belirgin olması."
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Serebrovasküler Hastalık Kanıtı ve Dışlama",
+        "content": "Öykü, muayene ve/veya nörogörüntülemede eksiklikleri açıklamaya yetecek serebrovasküler hastalık kanıtı bulunur; tablo başka bir beyin hastalığı ya da sistemik bozuklukla daha iyi açıklanamaz. 'Muhtemel' ve 'olası' ayrımı majör vasküler NBB'deki ile aynıdır."
+      },
+      {
+        "code": "Majör Tipten Farkı",
+        "title": "Bağımsızlığın Korunması",
+        "content": "Majör tipten tek ayırıcı özellik, eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozmaması ve test performansındaki düşüşün daha ılımlı olmasıdır."
+      }
+    ]
+  },
+  "major_neurocognitive_parkinson": {
+    "id": "major_neurocognitive_parkinson",
+    "nameTr": "Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı)",
+    "nameEn": "Major Neurocognitive Disorder Due to Parkinson's Disease",
+    "clinicalDescription": {
+      "overview": "Parkinson Hastalığına Bağlı Majör Nörobilişsel Bozukluk, tanısı yerleşmiş Parkinson hastalığı seyrinde, motor belirtilerden yıllar sonra sinsi başlayan ve tedrici ilerleyen bilişsel gerilemedir. Yönetsel işlev bozukluğu, dikkatte dalgalanma, düşünce yavaşlığı (bradifreni), görsel-uzamsal güçlükler ve bellekte geri çağırma sorunları öne çıkar; apati, depresyon, anksiyete, görsel varsanılar ve REM uykusu davranış bozukluğu sık eşlik eder.",
+      "epidemiology": "Parkinson hastalarında demans görülme oranı yüksektir ve hastalık süresi uzadıkça artar; uzun izlem çalışmalarında hastaların çoğunluğunun zamanla demans geliştirdiği bildirilmiştir. İleri yaş, ağır motor tablo (özellikle postüral instabilite-yürüme bozukluğu baskın tip) ve erken görsel varsanılar risk etmenleridir.",
+      "etiology": "Alfa-sinüklein patolojisinin (Lewy cisimcikleri) beyin sapından kortikal ve limbik bölgelere yayılması; kolinerjik (Meynert çekirdeği), dopaminerjik ve noradrenerjik sistemlerde kayıp. Eşlik eden Alzheimer patolojisi sık görülür.",
+      "prognosis": "İlerleyicidir; demansın gelişmesi düşme, bakım evine yerleşme ve ölüm riskini artırır. Kolinesteraz inhibitörleri bazı hastalarda yarar sağlar. Antipsikotiklere aşırı duyarlılık nedeniyle varsanılarda ilaç seçimi dikkatle yapılmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Majör Nörobilişsel Bozukluk",
+        "content": "Majör nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda (karmaşık dikkat, yönetsel işlev, öğrenme ve bellek, dil, algısal-motor, toplumsal biliş) önceki düzeye göre belirgin gerileme (kişinin, yakınının ya da klinisyenin kaygısı ve tercihen standart testlerle belgelenmiş belirgin bozulma) ve bu eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozması; yalnızca deliryum sırasında ortaya çıkmaması ve başka bir ruhsal bozuklukla daha iyi açıklanmaması."
+      },
+      {
+        "code": "Kriter B & C",
+        "title": "Parkinson Hastalığı Zemini, Sinsi Başlangıç",
+        "content": "Bozukluk tanısı yerleşmiş Parkinson hastalığı seyrinde ortaya çıkar; sinsi başlangıç ve tedrici ilerleme gösterir."
+      },
+      {
+        "code": "Kriter D",
+        "title": "Dışlama",
+        "content": "Bilişsel bozukluk başka bir sağlık durumuna bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Muhtemel / Olası",
+        "title": "Kesinlik Düzeyi",
+        "content": "Hem (1) karışık etiyoloji kanıtı olmaması hem de (2) Parkinson hastalığının bilişsel gerilemenin başlangıcından açıkça önce başlamış olması durumunda 'muhtemel'; bunlardan yalnızca biri karşılanıyorsa 'olası' denir."
+      },
+      {
+        "code": "Ayırıcı Tanı",
+        "title": "Lewy Cisimcikli Nörobilişsel Bozukluktan Ayrım",
+        "content": "Bilişsel gerileme motor belirtilerden önce ya da yaklaşık aynı dönemde (klinik uzlaşıda kullanılan kural: motor belirtilerden sonraki ilk bir yıl içinde) başlıyorsa Lewy cisimcikli demans düşünülür; motor belirtiler yıllarca önce başlamışsa Parkinson hastalığına bağlı demans tanısı konur."
+      }
+    ]
+  },
+  "major_neurocognitive_tbi": {
+    "id": "major_neurocognitive_tbi",
+    "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı / CTE)",
+    "nameEn": "Major Neurocognitive Disorder Due to Traumatic Brain Injury",
+    "clinicalDescription": {
+      "overview": "Travmatik Beyin Hasarına Bağlı Majör Nörobilişsel Bozukluk, kafaya çarpma ya da beynin kafatası içinde hızla yer değiştirmesine yol açan bir travmanın ardından hemen (ya da bilinç geri geldikten hemen sonra) ortaya çıkan ve akut dönemin ötesinde süren, günlük yaşamda bağımsızlığı bozan bilişsel bozulmadır. Karmaşık dikkat, işlem hızı, yönetsel işlevler ve bellek sık etkilenir; irritabilite, dürtüsellik, duygudurum değişkenliği, apati, kişilik değişiklikleri, baş ağrısı ve uyku sorunları eşlik edebilir. Tekrarlayan kafa darbelerine bağlı kronik travmatik ensefalopati (KTE; boksörler, Amerikan futbolcuları) DSM'de ayrı bir tanı değildir, ancak bu bağlamda tartışılır.",
+      "epidemiology": "Travmatik beyin hasarı gençlerde (trafik kazaları, spor, şiddet) ve yaşlılarda (düşmeler) en sıktır; erkeklerde daha yaygındır. Hafif travmaların çoğunda kalıcı nörobilişsel bozukluk gelişmez; majör tablo genellikle orta-ağır travma sonrasında görülür.",
+      "etiology": "Fokal kontüzyonlar ve kanamalar ile yaygın aksonal hasar (özellikle frontal ve temporal loblar ile beyaz cevher yolları) başlıca mekanizmalardır. KTE'de tau proteini birikimi tanımlanmıştır.",
+      "prognosis": "Tek bir travma sonrasında bozulma genellikle ilk aylarda en belirgindir ve zamanla kısmen düzelebilir; ağır travma, ileri yaş ve tekrarlayan travmalar kalıcı bozulma riskini artırır. Bilişsel rehabilitasyon, davranışsal belirtilerin tedavisi ve aileye destek temel yaklaşımlardır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Majör Nörobilişsel Bozukluk",
+        "content": "Majör nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda (karmaşık dikkat, yönetsel işlev, öğrenme ve bellek, dil, algısal-motor, toplumsal biliş) önceki düzeye göre belirgin gerileme (kişinin, yakınının ya da klinisyenin kaygısı ve tercihen standart testlerle belgelenmiş belirgin bozulma) ve bu eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozması; yalnızca deliryum sırasında ortaya çıkmaması ve başka bir ruhsal bozuklukla daha iyi açıklanmaması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Travmatik Beyin Hasarı Kanıtı",
+        "content": "Kafaya çarpma ya da beynin kafatası içinde hızla yer değiştirmesine yol açan başka bir mekanizmayla oluşmuş travmatik beyin hasarı ve buna ek olarak aşağıdakilerden en az biri:",
+        "items": [
+          "1. Bilinç kaybı.",
+          "2. Travma sonrası bellek yitimi (amnezi).",
+          "3. Yönelim bozukluğu ve konfüzyon.",
+          "4. Nörolojik bulgular (ör. nörogörüntülemede hasar, yeni başlayan nöbetler ya da var olan nöbet bozukluğunun belirgin kötüleşmesi, görme alanı kaybı, koku kaybı, hemiparezi)."
+        ]
+      },
+      {
+        "code": "Kriter C",
+        "title": "Zamansal İlişki ve Süreklilik",
+        "content": "Nörobilişsel bozukluk travmadan hemen sonra ya da bilinç geri geldikten hemen sonra ortaya çıkar ve akut travma sonrası dönemin ötesinde sürer."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Travma Sonrası Stres Bozukluğu ve Madde Kullanımı",
+        "content": "TSSB'ye bağlı dikkat/bellek yakınmaları, eşlik eden madde kullanımı ve özellikle adli ya da tazminat süreçlerinde semptom abartması (geçerlilik testleri) ayırıcı tanıda değerlendirilmelidir."
+      }
+    ]
+  },
+  "major_neurocognitive_hiv": {
+    "id": "major_neurocognitive_hiv",
+    "nameTr": "Majör Nörobilişsel Bozukluk (HIV Enfeksiyonuna Bağlı)",
+    "nameEn": "Major Neurocognitive Disorder Due to HIV Infection",
+    "clinicalDescription": {
+      "overview": "HIV Enfeksiyonuna Bağlı Majör Nörobilişsel Bozukluk, belgelenmiş HIV enfeksiyonu olan bir kişide virüsün beyin üzerindeki etkilerine bağlanan ve günlük yaşamda bağımsızlığı bozan bilişsel gerilemedir. Tipik olarak 'subkortikal' bir örüntü görülür: düşünce ve hareketlerde yavaşlama, dikkat ve yönetsel işlevlerde bozulma, yeni bilgiyi öğrenme ve geri çağırma güçlüğü, apati ve motor yavaşlık. Klinik literatürde HIV ile ilişkili nörobilişsel bozukluklar (HAND) asemptomatik, hafif ve demans düzeyinde sınıflandırılır; bu tanı en ağır uçta (HIV ilişkili demans) yer alır.",
+      "epidemiology": "Etkili antiretroviral tedavinin (ART) yaygınlaşmasıyla HIV ilişkili demans belirgin olarak azalmıştır; ancak daha hafif nörobilişsel bozulmalar HIV ile yaşayan bireylerde hâlâ sık görülür. Tedavisiz, ileri evre (düşük CD4) enfeksiyonda risk yüksektir.",
+      "etiology": "HIV beyne enfekte monosit/makrofajlar aracılığıyla erken dönemde girer; mikroglia etkinleşmesi, inflamatuvar sitokinler ve viral proteinlerin nörotoksik etkileri özellikle bazal ganglionlar ve beyaz cevheri etkiler.",
+      "prognosis": "ART ile bilişsel işlevlerde durağanlaşma ya da düzelme görülebilir. Fırsatçı enfeksiyonlar (PML, kriptokok menenjiti, toksoplazmoz), lenfoma, madde kullanımı ve depresyon gibi geri döndürülebilir nedenler mutlaka dışlanmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Majör Nörobilişsel Bozukluk",
+        "content": "Majör nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda (karmaşık dikkat, yönetsel işlev, öğrenme ve bellek, dil, algısal-motor, toplumsal biliş) önceki düzeye göre belirgin gerileme (kişinin, yakınının ya da klinisyenin kaygısı ve tercihen standart testlerle belgelenmiş belirgin bozulma) ve bu eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozması; yalnızca deliryum sırasında ortaya çıkmaması ve başka bir ruhsal bozuklukla daha iyi açıklanmaması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Belgelenmiş HIV Enfeksiyonu",
+        "content": "İnsan bağışıklık yetmezliği virüsü (HIV) enfeksiyonu belgelenmiştir."
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Dışlama",
+        "content": "Nörobilişsel bozukluk, HIV dışı durumlarla (ilerleyici multifokal lökoensefalopati, kriptokok menenjiti gibi ikincil beyin hastalıkları dahil) daha iyi açıklanamaz; başka bir sağlık durumuna bağlanamaz ve başka bir ruhsal bozuklukla daha iyi açıklanamaz."
+      },
+      {
+        "code": "Belirleyiciler",
+        "title": "Davranış Bozukluğu ve Şiddet",
+        "content": "Davranışsal bozukluk eşlik edip etmediği (psikotik belirtiler, duygudurum belirtileri, ajitasyon, apati vb.) belirtilir. Majör NBB'de şiddet: Hafif (araçsal günlük etkinliklerde, ör. ev işi, para yönetimi, güçlük), Orta (temel günlük etkinliklerde, ör. yemek yeme, giyinme, güçlük), Ağır (tamamen bağımlı)."
+      }
+    ]
+  },
+  "major_neurocognitive_multiple": {
+    "id": "major_neurocognitive_multiple",
+    "nameTr": "Birden Fazla Etiyolojiye Bağlı Majör Nörobilişsel Bozukluk (Miks Demans)",
+    "nameEn": "Major Neurocognitive Disorder Due to Multiple Etiologies",
+    "clinicalDescription": {
+      "overview": "Birden Fazla Etiyolojiye Bağlı Majör Nörobilişsel Bozukluk, bilişsel gerilemenin tek bir nedenle değil, birden çok patolojik sürecin (en sık Alzheimer hastalığı + serebrovasküler hastalık; ayrıca Alzheimer + Lewy cisimcikli hastalık vb.) birlikte etkisiyle açıklandığı tablodur. Klinik görünümde her iki sürecin özellikleri (ör. bellek baskın sinsi gerileme ile inmelere bağlı basamaklı kötüleşme) birlikte görülebilir.",
+      "epidemiology": "Özellikle ileri yaşlarda çok yaygındır; otopsi çalışmalarında demanslı yaşlıların önemli bir kısmında birden çok nörodejeneratif ve/veya vasküler patoloji birlikte saptanmaktadır.",
+      "etiology": "Amiloid ve tau patolojisi, serebrovasküler hasar, alfa-sinüklein, TDP-43 ve diğer patolojiler birbirinin etkisini artırır; tek başına eşik altında kalacak patolojiler birlikte belirgin demansa yol açabilir.",
+      "prognosis": "Gidiş katkıda bulunan etiyolojilere göre değişir; genellikle tek etiyolojiliye göre daha hızlı ilerler. Her bir etiyolojiye yönelik önlemler (ör. vasküler risk denetimi) birlikte uygulanır."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Majör Nörobilişsel Bozukluk",
+        "content": "Majör nörobilişsel bozukluk ölçütleri karşılanır: bir ya da daha fazla bilişsel alanda (karmaşık dikkat, yönetsel işlev, öğrenme ve bellek, dil, algısal-motor, toplumsal biliş) önceki düzeye göre belirgin gerileme (kişinin, yakınının ya da klinisyenin kaygısı ve tercihen standart testlerle belgelenmiş belirgin bozulma) ve bu eksikliklerin günlük yaşam etkinliklerinde bağımsızlığı bozması; yalnızca deliryum sırasında ortaya çıkmaması ve başka bir ruhsal bozuklukla daha iyi açıklanmaması."
+      },
+      {
+        "code": "Kriter B",
+        "title": "Birden Çok Etiyolojik Süreç Kanıtı",
+        "content": "Öykü, fizik muayene ya da laboratuvar bulguları, bozukluğun madde kullanımı dışındaki birden çok etiyolojik sürecin fizyolojik sonucu olduğunu gösterir (ör. Alzheimer hastalığına bağlı NBB ve ardından gelişen vasküler NBB)."
+      },
+      {
+        "code": "Kriter C",
+        "title": "Dışlama",
+        "content": "Bilişsel eksiklikler başka bir ruhsal bozuklukla daha iyi açıklanamaz ve yalnızca bir deliryum sırasında ortaya çıkmaz."
+      },
+      {
+        "code": "Kodlama Notu",
+        "title": "Her Etiyolojinin Ayrıca Kodlanması",
+        "content": "Katkıda bulunan her etiyolojik durum (ör. Alzheimer hastalığı, serebrovasküler hastalık) ayrıca kodlanır. Maddenin katkısı varsa ilgili maddenin yol açtığı NBB ayrıca belirtilir."
+      }
+    ]
+  },
+  "unspecified_neurocognitive": {
+    "id": "unspecified_neurocognitive",
+    "nameTr": "Belirtilmemiş Nörobilişsel Bozukluk",
+    "nameEn": "Unspecified Neurocognitive Disorder",
+    "clinicalDescription": {
+      "overview": "Belirtilmemiş Nörobilişsel Bozukluk, nörobilişsel bozukluğa özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak nörobilişsel bozukluklar bölümündeki herhangi bir tanının ölçütlerinin tümüyle karşılanmadığı ya da kesin etiyolojinin bir nedene bağlanabilecek kesinlikte belirlenemediği durumlarda kullanılır.",
+      "epidemiology": "Ayrı bir yaygınlık verisi yoktur. Ayrıntılı değerlendirmenin henüz yapılmadığı ya da yapılamadığı durumlarda (ör. ilk başvuru, ileri evrede başvuran hasta) sık kullanılır.",
+      "etiology": "Kategori belirli bir etiyolojiyi değil, etiyolojik belirsizliği ya da tanısal bilginin yetersizliğini yansıtır.",
+      "prognosis": "Nörogörüntüleme, laboratuvar ve nöropsikolojik değerlendirme ile tanı çoğunlukla belirli bir etiyolojiye bağlanabilir; özellikle geri döndürülebilir nedenler (B12 eksikliği, hipotiroidi, normal basınçlı hidrosefali, depresyon, ilaç yan etkileri) araştırılmalıdır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Etiyolojisi Belirlenemeyen Nörobilişsel Tablo",
+        "content": "Nörobilişsel bozukluğa özgü belirtiler klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açar; ancak nörobilişsel bozukluklar bölümündeki tanılardan hiçbirinin ölçütleri tümüyle karşılanmaz ya da etiyoloji yeterli kesinlikle belirlenemez."
+      },
+      {
+        "code": "Ayırıcı Not",
+        "title": "Deliryum ve Diğer Tanılarla İlişki",
+        "content": "Tablo bir deliryumu düşündürüyorsa 'belirlenmiş diğer / belirtilmemiş deliryum' kategorileri kullanılır. Etiyoloji netleştiğinde tanı ilgili özgül nörobilişsel bozukluk olarak değiştirilir."
+      }
+    ]
+  }
+}

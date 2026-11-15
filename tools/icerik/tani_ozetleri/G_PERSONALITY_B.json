@@ -1,0 +1,40 @@
+{
+  "personality_change_due_to_medical": {
+    "id": "personality_change_due_to_medical",
+    "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği (Frontal Lob)",
+    "nameEn": "Personality Change Due to Another Medical Condition",
+    "clinicalDescription": {
+      "overview": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği, kişinin önceki karakteristik kişilik örüntüsünden belirgin bir değişimi temsil eden ve bir tıbbi durumun (en sık frontal ya da temporal lob hasarı) doğrudan fizyolojik sonucu olan süreğen kişilik bozulmasıdır. Klasik örnek, frontal lobu demir çubukla hasar gören ve sonrasında dürtüsel, saygısız ve plansız birine dönüşen Phineas Gage'dir. Duygusal değişkenlik, ketlenme kaybı (uygunsuz cinsel ya da toplumsal davranış), saldırganlık, apati ya da paranoid düşünceler görülebilir.",
+      "epidemiology": "Kesin yaygınlık bilinmez. Orta-ağır kafa travması, inme, beyin tümörü, epilepsi (özellikle temporal lob), merkezi sinir sistemi enfeksiyonları, multipl skleroz, Huntington hastalığı ve endokrin bozukluklar sonrasında sık görülür.",
+      "etiology": "Orbitofrontal hasar ketlenme kaybı ve dürtüselliğe, dorsolateral prefrontal hasar planlama bozukluğuna, medial frontal/ön singulat hasar apati ve isteksizliğe yol açar. Altta yatan tıbbi durumun lokalizasyonu ve yaygınlığı klinik alt tipi belirler.",
+      "prognosis": "Gidiş altta yatan duruma bağlıdır: ilerleyici hastalıklarda kötüleşir, travma ya da inme sonrasında kısmen düzelebilir ya da kalıcı olabilir. Davranışsal yönetim, aile eğitimi ve çevresel düzenlemeler temel yaklaşımlardır; belirli belirtilere yönelik ilaç tedavisi uygulanabilir. Adli ve toplumsal sorunlar sık görülür."
+    },
+    "criteriaList": [
+      {
+        "code": "Kriter A",
+        "title": "Önceki Kişilikten Belirgin Değişim",
+        "content": "Kişinin önceki karakteristik kişilik örüntüsünden bir değişimi temsil eden süreğen kişilik bozulması. (Çocuklarda bu, olağan gelişimden belirgin sapma ya da olağan davranış örüntülerinde en az 1 yıl süren belirgin değişiklik olarak görülür.)"
+      },
+      {
+        "code": "Kriter B",
+        "title": "Tıbbi Duruma Bağlılık Kanıtı",
+        "content": "Öykü, fizik muayene ya da laboratuvar bulguları, bozulmanın başka bir sağlık durumunun doğrudan fizyolojik sonucu olduğunu gösterir."
+      },
+      {
+        "code": "Kriter C & D",
+        "title": "Dışlama",
+        "content": "Bozulma başka bir ruhsal bozuklukla (başka bir sağlık durumuna bağlı diğer ruhsal bozukluklar dahil) daha iyi açıklanamaz ve yalnızca bir deliryum sırasında ortaya çıkmaz."
+      },
+      {
+        "code": "Kriter E",
+        "title": "Klinik Önem",
+        "content": "Bozulma klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlevsellikte düşmeye yol açar."
+      },
+      {
+        "code": "Alt Tipler",
+        "title": "Baskın Özelliğe Göre",
+        "content": "Değişken (duygusal değişkenlik), Ketlenmemiş (dürtü denetimi kaybı, uygunsuz cinsel davranış), Saldırgan, Apatik (belirgin ilgisizlik), Paranoid, Diğer, Birleşik ya da Belirtilmemiş tip."
+      }
+    ]
+  }
+}

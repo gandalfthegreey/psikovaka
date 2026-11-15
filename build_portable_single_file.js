@@ -1,5 +1,5 @@
 /**
- * PsikoVaka 2.0 - Tüm 150 Vakaya pharmacologyId Ekleme, Doğrulama & Tek Dosyalık Taşınabilir HTML Derleyicisi
+ * PsikoVaka 2.0 - Tüm vakalara pharmacologyId Ekleme, Doğrulama & Tek Dosyalık Taşınabilir HTML Derleyicisi
  */
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ const { DSM5_MANUAL } = require('./js/dsm_manual.js');
 const { THERAPIES_DATABASE } = require('./js/therapies.js');
 const { PHARMACOLOGY_DATABASE, resolvePharmacologyIdForCase } = require('./js/pharmacology.js');
 
-// 1. Stamp pharmacologyId onto all 150 cases and validate
+// 1. Stamp pharmacologyId onto all cases and validate
 let errors = 0;
 CLINICAL_CASES.forEach((c, idx) => {
     c.pharmacologyId = resolvePharmacologyIdForCase(c);
@@ -36,9 +36,14 @@ CLINICAL_CASES.forEach((c, idx) => {
     }
 });
 
+// Başlıktaki tarihli notlar (" * 2026-11-15: ...") korunur; vaka sayısı her seferinde gerçek sayıdan yazılır.
+const existingCasesSrc = fs.readFileSync(path.join(__dirname, 'js', 'cases.js'), 'utf8');
+const headerNotes = (/^\/\*\*[\s\S]*?\*\//.exec(existingCasesSrc) || [''])[0]
+    .split('\n').filter(l => /^ \* \d{4}-\d{2}-\d{2}:/.test(l)).join('\n');
+
 const updatedCasesContent = `/**
- * PsikoVaka 2.0 - Zengin Klinik Vaka Veritabanı (150 DSM-5-TR Vakası)
- * Tanı, Psikoterapi, Psikofarmakoloji ve 3 Aşamalı Kombo Modu destekli.
+ * PsikoVaka 2.0 - Zengin Klinik Vaka Veritabanı (${CLINICAL_CASES.length} DSM-5-TR Vakası)
+ * Tanı, Psikoterapi, Psikofarmakoloji ve 3 Aşamalı Kombo Modu destekli.${headerNotes ? '\n' + headerNotes : ''}
  */
 
 const COURSE_CATEGORIES = ${JSON.stringify(COURSE_CATEGORIES, null, 4)};
@@ -50,47 +55,55 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 `;
 
-fs.writeFileSync(path.join(__dirname, 'js', 'cases.js'), updatedCasesContent, 'utf8');
-console.log(`✅ 150 Vaka doğrulandı (Hata: ${errors}). Tanı: ${DIAGNOSES_DATABASE.length}, Terapi: ${THERAPIES_DATABASE.length}, Farmakoterapi: ${PHARMACOLOGY_DATABASE.length}`);
-
-// 2. Build Portable Single-File HTML
+// 2. Tek dosyalık taşınabilir HTML'i bellekte kur (doğrulama hatası varsa hiçbir dosya yazılmaz)
 const htmlRaw = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-const cssRaw = fs.readFileSync(path.join(__dirname, 'css', 'style.css'), 'utf8');
-const diagnosesRaw = fs.readFileSync(path.join(__dirname, 'js', 'diagnoses.js'), 'utf8');
-const manualRaw = fs.readFileSync(path.join(__dirname, 'js', 'dsm_manual.js'), 'utf8');
-const therapiesRaw = fs.readFileSync(path.join(__dirname, 'js', 'therapies.js'), 'utf8');
-const pharmaRaw = fs.readFileSync(path.join(__dirname, 'js', 'pharmacology.js'), 'utf8');
-const casesRaw = fs.readFileSync(path.join(__dirname, 'js', 'cases.js'), 'utf8');
-const arenaRaw = fs.readFileSync(path.join(__dirname, 'js', 'online_arena.js'), 'utf8');
-const appRaw = fs.readFileSync(path.join(__dirname, 'js', 'app.js'), 'utf8');
+// CSS dosyaları index.html'deki sırayla satır içine alınır (tokens -> style -> arena)
+const CSS_FILES = ['tokens.css', 'style.css', 'arena.css'];
+const cssRawByFile = Object.fromEntries(CSS_FILES.map(f => [f, fs.readFileSync(path.join(__dirname, 'css', f), 'utf8')]));
+// index.html'deki yerel script sırası. Yeni bir js/ dosyası eklenirse buraya da eklenmeli.
+// js/cases.js diskten değil, yukarıda pharmacologyId damgalanmış içerikten alınır.
+const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'online_arena.js', 'supabase_config.js', 'account.js', 'app.js'];
+const jsRawByFile = Object.fromEntries(JS_FILES.map(f => [f, f === 'cases.js' ? updatedCasesContent : fs.readFileSync(path.join(__dirname, 'js', f), 'utf8')]));
 
 let bundled = htmlRaw;
 
-bundled = bundled.replace(
-    '<link rel="stylesheet" href="css/style.css">',
-    `<style>\n${cssRaw}\n</style>`
-);
+CSS_FILES.forEach(f => {
+    const tag = `<link rel="stylesheet" href="css/${f}">`;
+    if (!bundled.includes(tag)) {
+        console.error('UYARI: index.html içinde bulunamadı:', tag);
+        errors++;
+    }
+    // Fonksiyonlu replace: CSS içindeki "$" karakterleri özel desen sayılmasın
+    bundled = bundled.replace(tag, () => `<style>\n${cssRawByFile[f]}\n</style>`);
+});
 
 bundled = bundled.replace('<link rel="manifest" href="manifest.json">', '');
 
-const scriptsTarget = `    <script src="js/diagnoses.js"></script>
-    <script src="js/dsm_manual.js"></script>
-    <script src="js/therapies.js"></script>
-    <script src="js/pharmacology.js"></script>
-    <script src="js/cases.js"></script>
-    <script src="js/online_arena.js"></script>
-    <script src="js/app.js"></script>`;
+// Script etiketleri birebir eşleştirilir (dış CDN etiketleri — PeerJS, supabase-js — dışarıda kalır)
+const scriptsTarget = JS_FILES.map(f => `    <script src="js/${f}"></script>`).join('\n');
+const inlineScripts = JS_FILES.map(f => `<script>\n${jsRawByFile[f]}\n</script>`).join('\n');
 
-const inlineScripts = `<script>\n${diagnosesRaw}\n</script>
-<script>\n${manualRaw}\n</script>
-<script>\n${therapiesRaw}\n</script>
-<script>\n${pharmaRaw}\n</script>
-<script>\n${casesRaw}\n</script>
-<script>\n${arenaRaw}\n</script>
-<script>\n${appRaw}\n</script>`;
+if (!bundled.includes(scriptsTarget)) {
+    console.error("UYARI: script etiketleri index.html içinde bulunamadı (JS_FILES listesi index.html ile aynı sırada olmalı)");
+    errors++;
+}
+bundled = bundled.replace(scriptsTarget, () => inlineScripts);
 
-bundled = bundled.replace(scriptsTarget, inlineScripts);
+if (/src="js\//.test(bundled) || /href="css\//.test(bundled)) {
+    console.error('UYARI: tek dosyalık çıktıda hâlâ yerel dosya bağlantısı var (src="js/ veya href="css/).');
+    errors++;
+}
 
+// Özet satırı: deploy_to_github.js bu satırdaki "Hata: N" değerini okur; biçimi değiştirmeyin.
+console.log(`✅ ${CLINICAL_CASES.length} Vaka doğrulandı (Hata: ${errors}). Tanı: ${DIAGNOSES_DATABASE.length}, Terapi: ${THERAPIES_DATABASE.length}, Farmakoterapi: ${PHARMACOLOGY_DATABASE.length}`);
+
+if (errors > 0) {
+    console.error(`❌ ${errors} hata var: js/cases.js ve PsikoVaka_Tam_Surum.html YAZILMADI.`);
+    process.exit(1);
+}
+
+// 3. Dosyaları yaz
+fs.writeFileSync(path.join(__dirname, 'js', 'cases.js'), updatedCasesContent, 'utf8');
 const outPath = path.join(__dirname, 'PsikoVaka_Tam_Surum.html');
 fs.writeFileSync(outPath, bundled, 'utf8');
 console.log('✅ Taşınabilir tek dosyalık sürüm oluşturuldu:', outPath, 'Boyut:', Math.round(fs.statSync(outPath).size / 1024), 'KB');

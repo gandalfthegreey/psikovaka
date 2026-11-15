@@ -1,0 +1,36 @@
+{
+  "other_specified_anxiety": {
+    "id": "other_specified_anxiety",
+    "nameTr": "Belirlenmiş Diğer Bir Anksiyete Bozukluğu (Sınırlı Belirtili Panik vb.)",
+    "nameEn": "Other Specified Anxiety Disorder",
+    "clinicalDescription": {
+      "overview": "Belirlenmiş Diğer Bir Anksiyete Bozukluğu, anksiyete bozukluklarına özgü belirtilerin klinik açıdan belirgin sıkıntı ya da işlevsellik kaybına yol açtığı, ancak panik bozukluğu, yaygın anksiyete bozukluğu, sosyal anksiyete bozukluğu gibi özgül bir anksiyete bozukluğunun ölçütlerinin tümüyle karşılanmadığı ve klinisyenin bunun nedenini belirttiği durumlarda kullanılır. Örneğin tam panik atak için gereken belirti sayısına ulaşmayan sınırlı belirtili ataklar ya da belirtilerin süre ölçütünü karşılamadığı yaygın anksiyete.",
+      "epidemiology": "Eşik altı anksiyete tabloları toplumda tam ölçütlü bozukluklar kadar ya da daha yaygındır ve birinci basamakta sık görülür; ayrı bir yaygınlık verisi bulunmaz.",
+      "etiology": "Etmenler özgül anksiyete bozukluklarıyla benzerdir: kalıtsal yatkınlık, davranışsal ketlenme mizacı, stresli yaşam olayları ve bilişsel yatkınlıklar. Kültüre bağlı tablolar (ataque de nervios, khyâl cap) kültürel açıklama modelleriyle birlikte değerlendirilir.",
+      "prognosis": "Bir kısmı zamanla tam ölçütlü bir anksiyete ya da depresif bozukluğa dönüşebilir. Tedavi ilkeleri özgül bozukluklardaki gibidir (BDT, psikoeğitim); kültürel tablolarda kültüre duyarlı yaklaşım önemlidir."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanımlama",
+        "title": "Belirlenmiş Diğer Bir Anksiyete Bozukluğu",
+        "content": "Anksiyete Bozukluğu grubuna özgü belirtilerin baskın olduğu ve klinik açıdan belirgin sıkıntıya ya da işlevsellik kaybına yol açtığı, ancak bu gruptaki hiçbir bozukluğun ölçütlerinin tümüyle karşılanmadığı durumlarda kullanılır. Klinisyen ölçütlerin neden karşılanmadığını belirtir (ör. 'sınırlı belirtili ataklar')."
+      },
+      {
+        "code": "Örnekler",
+        "title": "DSM-5-TR'de Verilen Örnek Tablolar",
+        "content": "Bu kategoriyle belirtilebilecek tablolara örnekler:",
+        "items": [
+          "1. Sınırlı belirtili ataklar (panik atak ölçütündeki belirti sayısına ulaşmayan ataklar).",
+          "2. Belirtilerin 'çoğu günde' bulunmadığı yaygın anksiyete.",
+          "3. Khyâl cap ('rüzgâr atakları'; Kamboçya kültürüne özgü).",
+          "4. Ataque de nervios ('sinir krizi'; Latin Amerika kültürüne özgü)."
+        ]
+      },
+      {
+        "code": "Belirtilmemiş ile Farkı",
+        "title": "Nedenin Belirtilmesi",
+        "content": "Klinisyen ölçütlerin neden karşılanmadığını belirtmeyi seçmezse ya da bilgi yetersizse (ör. acil servis) 'Belirtilmemiş' kategori kullanılır."
+      }
+    ]
+  }
+}

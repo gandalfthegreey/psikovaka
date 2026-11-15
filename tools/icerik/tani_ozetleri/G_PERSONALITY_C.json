@@ -1,0 +1,39 @@
+{
+  "passive_aggressive_pd": {
+    "id": "passive_aggressive_pd",
+    "nameTr": "Pasif-Agresif (Olumsuzlamacı) Kişilik Örüntüsü",
+    "nameEn": "Passive-Aggressive Personality Traits",
+    "clinicalDescription": {
+      "overview": "Pasif-Agresif (Olumsuzlamacı / Negativistik) Kişilik Örüntüsü, başkalarının yeterli performans beklentilerine karşı edilgin direnç (erteleme, 'unutma', kasıtlı verimsizlik, inatlaşma) ve olumsuzlamacı tutumlarla belirlenen yaygın bir örüntüdür. Kişi açıkça karşı çıkmak yerine işleri savsaklayarak, surat asarak ve yetkiyi gizlice baltalayarak öfkesini dolaylı yoldan ifade eder; kendini yanlış anlaşılmış ve takdir edilmemiş hisseder. Önemli not: DSM-5 ve DSM-5-TR'de resmî bir kişilik bozukluğu tanısı değildir; DSM-IV-TR'de ek bölümde 'ileri araştırma gerektiren' öneri ölçütleriyle yer almıştı. Günümüzde klinik olarak gerekli olduğunda 'Belirlenmiş Diğer Bir Kişilik Bozukluğu' olarak kodlanabilir.",
+      "epidemiology": "Resmî tanı olmadığından güvenilir yaygınlık verisi yoktur. Pasif-agresif özellikler genel toplumda ve diğer kişilik bozukluklarıyla (özellikle bağımlı, kaçıngan, borderline, narsisistik) birlikte sık görülür.",
+      "etiology": "Kuramsal açıklamalar, öfkenin açıkça ifade edilmesinin cezalandırıldığı ya da tutarsız, denetleyici ebeveynlikle büyüme, bağımlılık ile özerklik arasındaki çatışma ve yetkeye karşı çözülmemiş öfke üzerinde durur. Ampirik kanıt sınırlıdır.",
+      "prognosis": "Örüntü genellikle süreğendir ve iş ile yakın ilişkilerde tekrarlayan çatışmalara yol açar; depresyon, alkol kullanımı ve somatik yakınmalar eşlik edebilir. Dolaylı öfke ifadesini fark etmeye ve doğrudan, girişken iletişim kurmaya yönelik psikoterapi (BDT, psikodinamik terapi) kullanılır."
+    },
+    "criteriaList": [
+      {
+        "code": "Tanısal Durum",
+        "title": "DSM-5-TR'de Resmî Tanı Değildir",
+        "content": "Bu örüntü DSM-5-TR'de ayrı bir kişilik bozukluğu olarak yer almaz. Klinik açıdan belirgin sıkıntı ya da işlevsellik kaybı yaratıyor ve genel kişilik bozukluğu ölçütleri karşılanıyorsa 'Belirlenmiş Diğer Bir Kişilik Bozukluğu (pasif-agresif özelliklerle)' olarak kodlanabilir."
+      },
+      {
+        "code": "Tarihsel Öneri Ölçütleri",
+        "title": "DSM-IV-TR Araştırma Ölçütlerinin Özeti (En az 4/7)",
+        "content": "Erken erişkinlikte başlayan, çeşitli bağlamlarda görülen olumsuzlamacı tutum ve yeterli performans beklentilerine edilgin direnç örüntüsü; aşağıdakilerden en az dördü:",
+        "items": [
+          "1. Olağan toplumsal ve mesleki görevleri yerine getirmeye edilgin biçimde direnme.",
+          "2. Başkalarınca yanlış anlaşıldığından ve takdir edilmediğinden yakınma.",
+          "3. Somurtkan ve tartışmacı olma.",
+          "4. Yetkili kişileri haksız yere eleştirme ve küçümseme.",
+          "5. Kendinden daha şanslı görünenlere karşı kıskançlık ve kırgınlık ifade etme.",
+          "6. Kişisel talihsizliklerinden abartılı ve sürekli yakınma.",
+          "7. Düşmanca karşı gelme ile pişmanlık arasında gidip gelme."
+        ]
+      },
+      {
+        "code": "Dışlama",
+        "title": "Duygudurum Bozukluklarından Ayrım",
+        "content": "Örüntü yalnızca majör depresif ataklar sırasında ortaya çıkmamalı ve süreğen depresif bozuklukla (distimi) daha iyi açıklanmamalıdır. Karşıt olma-karşı gelme bozukluğu (çocukluk) ve bağımlı KB'deki boyun eğici tutum ile karıştırılmamalıdır."
+      }
+    ]
+  }
+}

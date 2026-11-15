@@ -1,0 +1,169 @@
+/* ==========================================================================
+   PsikoVaka — Online arena (geçici)
+   js/online_arena.js yeniden yazılana kadar mevcut arena merkezini düz,
+   değişkenlerle uyumlu biçimde gösterir. Arena kodu içindeki satır içi stiller
+   bilerek olduğu gibi bırakıldı.
+   ========================================================================== */
+
+.arena-hub-tabs {
+    display: flex;
+    gap: var(--space-1);
+    flex-shrink: 0;
+    padding: var(--space-2) var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.arena-hub-tabs::-webkit-scrollbar { display: none; }
+.arena-hub-tab-btn {
+    flex: 1 0 auto;
+    min-height: var(--tap);
+    padding: 0 var(--space-3);
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-align: center;
+    white-space: nowrap;
+}
+.arena-hub-tab-btn:hover { color: var(--color-text); }
+.arena-hub-tab-btn.active { color: var(--color-text); border-bottom-color: var(--color-accent); }
+
+/* Yalnızca ilk sekme açık başlar; online_arena.js açılışta style.display atar */
+.arena-hub-panel:not(#tabArenaPlay) { display: none; }
+
+.arena-profile-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-2);
+}
+.arena-nick { flex: 1 1 200px; }
+.arena-bot-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--tap);
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+}
+.arena-bot-toggle input { width: 18px; height: 18px; accent-color: var(--color-accent-bg); }
+
+.arena-step-label {
+    margin: var(--space-5) 0 var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-3);
+}
+
+.arena-mode-cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+.arena-mode-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition: border-color var(--duration-fast);
+}
+.arena-mode-card:hover { border-color: var(--color-border-strong); }
+.arena-mode-card.active { border-color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
+.arena-mode-title { font-weight: var(--weight-semibold); }
+.arena-mode-desc { font-size: var(--text-sm); color: var(--color-text-2); }
+.arena-mode-rp { align-self: flex-start; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-success); }
+
+.arena-launch-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-3); }
+.arena-action-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+}
+.arena-action-title { font-weight: var(--weight-semibold); }
+.arena-action-desc { font-size: var(--text-sm); color: var(--color-text-2); }
+.matchmaking-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+}
+.matchmaking-status-text { font-size: var(--text-sm); color: var(--color-text-2); }
+.arena-room-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.arena-room-row > .btn-secondary { flex: 1 1 120px; }
+.arena-join-group { display: flex; gap: var(--space-2); flex: 1 1 180px; }
+.arena-join-group .form-input { min-width: 0; }
+
+.arena-share-strip {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-2);
+}
+.arena-share-label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-text-2); }
+.arena-share-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.arena-share-controls .form-input { flex: 1 1 200px; min-width: 0; font-size: 16px; }
+
+.arena-rank-banner { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-2); margin-bottom: var(--space-4); }
+.arena-board-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2); margin-bottom: var(--space-2); }
+.arena-board-title { font-weight: var(--weight-semibold); }
+.arena-board-note { font-size: var(--text-xs); color: var(--color-text-3); }
+.arena-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.arena-list-title { margin: var(--space-4) 0 var(--space-2); font-weight: var(--weight-semibold); }
+
+.scoreboard-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    flex-wrap: wrap;
+}
+.scoreboard-row.is-me { border-color: var(--color-accent); }
+
+
+.friend-code-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-2);
+}
+.friend-code-label { font-size: var(--text-xs); font-weight: var(--weight-semibold); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-3); }
+.friend-code { font-family: var(--font-mono); font-size: var(--text-xl); font-weight: var(--weight-bold); letter-spacing: 0.04em; }
+.friend-add-row { display: flex; flex-wrap: wrap; gap: var(--space-2); flex: 1 1 280px; }
+.friend-add-row .form-input { flex: 1 1 110px; min-width: 0; }
+
+@media (min-width: 600px) {
+    .arena-mode-cards-grid { grid-template-columns: repeat(3, 1fr); }
+    .arena-launch-grid { grid-template-columns: 1fr 1fr; }
+}
+.friend-rp-line { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-xs); color: var(--color-text-2); }

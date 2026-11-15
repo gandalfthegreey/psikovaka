@@ -1,0 +1,163 @@
+{
+"mdd_recurrent": {
+ "id": "mdd_recurrent",
+ "nameTr": "Majör Depresif Bozukluk (Yineleyici / Tekrarlayan)",
+ "nameEn": "Major Depressive Disorder (Recurrent)",
+ "clinicalDescription": {
+  "overview": "Kişinin yaşamı boyunca birden fazla majör depresif epizod geçirdiği majör depresif bozukluk biçimidir. İki epizodun ayrı sayılabilmesi için, aralarında majör depresif epizod ölçütlerinin karşılanmadığı ardışık en az 2 aylık bir dönem bulunmalıdır. 'Yineleyici' terimi 'kronik' ile aynı anlamda değildir: belirtilerin 2 yıldan uzun süre kesintisiz devam ettiği tablolar süregen depresif bozukluk (distimi) olarak ayrıca değerlendirilir.",
+  "epidemiology": "Majör depresif bozukluğu olan kişilerin önemli bir çoğunluğu yaşamı boyunca birden fazla epizod geçirir. Her yeni epizodla birlikte yineleme riski artar.",
+  "etiology": "Erken başlangıç, önceki epizod sayısı, tam olmayan iyileşme (kalıntı belirtiler), eşlik eden anksiyete bozuklukları, kişilik özellikleri (yüksek nevrotiklik), süregen stres ve olumsuz bilişsel şemalar yineleme riskini artırır. Epizodlar arttıkça daha küçük stres etkenlerinin epizodu tetikleyebildiği 'duyarlılaşma (kindling)' modeli öne sürülmüştür.",
+  "prognosis": "Bir epizod sonrası yineleme riski yaklaşık %50, iki epizod sonrası %70, üç epizod sonrası %80-90 civarında bildirilir. Bu nedenle yineleyici olgularda idame (koruyucu) antidepresan tedavisi ve yinelemeyi önleyici psikoterapiler (BDT, bilinçli farkındalığa dayalı bilişsel terapi) önerilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Majör Depresif Bozukluk Ölçütleri",
+   "content": "2 haftalık dönemde, en az biri çökkün duygudurum ya da ilgi/zevk kaybı olan en az 5 depresif belirti (A); belirgin sıkıntı ya da işlev bozulması (B); madde ya da tıbbi duruma bağlanamama (C); şizofreni spektrumu bozukluklarıyla daha iyi açıklanamama (D); hiçbir zaman manik ya da hipomanik epizod geçirmemiş olma (E)."
+  },
+  {
+   "code": "Seyir Belirleyicisi",
+   "title": "Yineleyici Epizod (En az 2 epizod, aralarında ≥ 2 ay)",
+   "content": "En az iki majör depresif epizod bulunur; epizodların ayrı sayılması için aralarında majör depresif epizod ölçütlerinin karşılanmadığı ardışık en az 2 aylık bir dönem olmalıdır. Şu anki şiddet (hafif, orta, ağır), psikotik özellikler, kısmi/tam yatışma ve diğer belirleyiciler (kaygılı sıkıntı, melankolik, atipik, mevsimsel örüntü vb.) eklenir."
+  }
+ ]
+},
+"mdd_with_psychotic": {
+ "id": "mdd_with_psychotic",
+ "nameTr": "Psikotik Özellikli Majör Depresif Bozukluk",
+ "nameEn": "Major Depressive Disorder with Psychotic Features",
+ "clinicalDescription": {
+  "overview": "Majör depresif epizodun herhangi bir döneminde sanrı ve/veya varsanıların eşlik ettiği ağır depresyon biçimidir. Psikotik belirtiler çoğunlukla duygudurumla uyumludur: kişisel yetersizlik, suçluluk, hastalık, yok olma (nihilistik sanrılar, örn. Cotard), hak edilmiş cezalandırma ya da yoksullaşma temaları görülür; kişi işlediği 'günahlar' için cezalandırılacağına inanabilir veya kendisini suçlayan sesler duyabilir. Duygudurumla uyumsuz temalar (örn. düşünce sokulması) da görülebilir. Psikotik belirtiler yalnızca depresif epizod sırasında görülür; epizod dışında da sürüyorsa şizoaffektif bozukluk düşünülür.",
+  "epidemiology": "Yatarak tedavi gören depresyon hastalarında psikotik özellikler sık görülür; yaşlılarda daha sıktır.",
+  "etiology": "HPA ekseni aşırı etkinliği ve yüksek kortizol düzeyi, dopaminerjik etkinlik artışı öne sürülmektedir. Bipolar bozukluk açısından aile öyküsü ve sonraki yıllarda bipolar tanısına geçiş riski daha yüksektir.",
+  "prognosis": "İntihar riski psikotik olmayan depresyona göre belirgin yüksektir. Tek başına antidepresan tedavisi genellikle yetersizdir; antidepresan ile antipsikotik birlikte kullanılır ya da elektrokonvülsif tedavi (EKT) uygulanır. EKT bu grupta özellikle yüksek yanıt oranına sahiptir. Yineleme ve kronikleşme riski yüksektir."
+ },
+ "criteriaList": [
+  {
+   "code": "Temel Ölçüt",
+   "title": "Majör Depresif Epizod + Psikotik Belirtiler",
+   "content": "Majör depresif bozukluk ölçütleri karşılanır ve epizodun herhangi bir anında sanrılar ve/veya varsanılar bulunur. Psikotik belirtiler bulunduğunda bu belirleyici, epizodun şiddet düzeyinden bağımsız olarak belirtilir."
+  },
+  {
+   "code": "Belirleyici",
+   "title": "Duygudurumla Uyumlu / Uyumsuz",
+   "content": "Duygudurumla uyumlu psikotik özellikler: tüm sanrı ve varsanıların içeriği kişisel yetersizlik, suçluluk, hastalık, ölüm, nihilizm ya da hak edilmiş ceza gibi tipik depresif temalarla tutarlıdır. Duygudurumla uyumsuz psikotik özellikler: içerik bu temaları içermez ya da uyumlu ve uyumsuz temalar karışıktır."
+  }
+ ]
+},
+"mdd_with_seasonal": {
+ "id": "mdd_with_seasonal",
+ "nameTr": "Mevsimsel Özellik Gösteren Majör Depresyon (Kış Depresyonu)",
+ "nameEn": "Major Depressive Disorder with Seasonal Pattern",
+ "clinicalDescription": {
+  "overview": "Yineleyici majör depresif bozuklukta (ve bipolar bozukluklardaki depresif epizodlarda) kullanılan, epizodların yılın belirli bir döneminde düzenli olarak başlayıp başka bir döneminde düzeldiği örüntüyü tanımlayan seyir belirleyicisidir. En sık örüntü sonbahar-kış başlangıcı ve ilkbaharda düzelmedir. Klinik tabloda enerji azlığı, aşırı uyku, aşırı yeme, karbonhidrat isteği ve kilo alımı gibi 'atipik' belirtiler öne çıkar. Yaz döneminde başlayan biçimi de vardır ancak daha seyrektir.",
+  "epidemiology": "Yaygınlık enlemle birlikte artar; kuzey enlemlerde daha sıktır. Gençlerde ve kadınlarda daha sık görülür.",
+  "etiology": "Kısalan gün ışığı süresine bağlı sirkadiyen ritim kayması, melatonin salgısının uzaması ve serotonin işlevindeki mevsimsel değişiklikler düşünülmektedir.",
+  "prognosis": "Parlak ışık tedavisi kanıtı güçlü bir yaklaşımdır; antidepresan ilaçlar ve kış depresyonuna uyarlanmış BDT de etkilidir. Yinelemeleri önlemek için tedaviye belirti başlamadan önce başlanabilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Mevsimle Düzenli Başlangıç ve Yatışma",
+   "content": "Majör depresif epizodların başlangıcı ile yılın belirli bir zamanı (örn. sonbahar ya da kış) arasında düzenli bir zamansal ilişki vardır; mevsimsel işsizlik gibi açık bir mevsimsel psikososyal stres etkeninin bulunduğu durumlar sayılmaz (A). Tam yatışmalar (ya da depresyondan mani/hipomaniye geçiş) da yılın belirli bir zamanında (örn. ilkbahar) olur (B)."
+  },
+  {
+   "code": "Kriter C & D",
+   "title": "Son 2 Yıl ve Yaşam Boyu Örüntü",
+   "content": "Son 2 yılda bu mevsimsel ilişkiyi gösteren iki majör depresif epizod olmuş ve aynı dönemde mevsimsel olmayan epizod görülmemiştir (C). Yaşam boyunca mevsimsel epizodlar mevsimsel olmayanlardan belirgin biçimde fazladır (D)."
+  }
+ ]
+},
+"substance_induced_depressive": {
+ "id": "substance_induced_depressive",
+ "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
+ "nameEn": "Substance/Medication-Induced Depressive Disorder",
+ "clinicalDescription": {
+  "overview": "Çökkün duygudurum ya da tüm veya hemen tüm etkinliklere karşı belirgin ilgi/zevk kaybıyla giden belirgin ve süregen duygudurum bozukluğunun bir maddenin intoksikasyonu ya da yoksunluğu sırasında veya hemen sonrasında ya da bir ilaca maruziyet sonrasında ortaya çıktığı tablodur. Alkol, opioidler, sedatif-hipnotikler, uyarıcıların yoksunluğu ('kokain/amfetamin çöküşü') ve kortikosteroid, interferon, bazı antikonvülzanlar ve hormonal ilaçlar gibi tedaviler sık nedenlerdir.",
+  "epidemiology": "Madde kullanım bozukluğu olan kişilerde sık görülür; özellikle alkol kullanım bozukluğunda depresif belirtilerin önemli bir bölümü maddeye bağlıdır.",
+  "etiology": "Maddenin monoaminerjik sistemler, HPA ekseni ve ödül devreleri üzerindeki akut ve süregen etkileri; yoksunlukta dopaminerjik etkinliğin düşmesi.",
+  "prognosis": "Maddenin kesilmesiyle belirtiler çoğunlukla birkaç hafta içinde belirgin olarak düzelir; bu nedenle mümkünse antidepresan başlamadan önce bir süre ayıklık döneminde izlem önerilir. İntihar riski yüksek olabilir ve mutlaka değerlendirilmelidir. Belirtiler ayıklıkta sürerse bağımsız depresif bozukluk düşünülür."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A & B",
+   "title": "Depresif Duygudurum ve Maddeyle İlişki",
+   "content": "Klinik tabloya egemen, çökkün duygudurum ya da tüm/hemen tüm etkinliklerde belirgin ilgi veya zevk kaybıyla giden belirgin ve süregen duygudurum bozukluğu (A). Öykü, muayene ya da laboratuvar bulgularında belirtilerin intoksikasyon/yoksunluk sırasında veya hemen sonrasında ya da ilaç maruziyeti sonrasında geliştiğine ve maddenin bu belirtilere yol açabileceğine dair kanıt (B)."
+  },
+  {
+   "code": "Kriter C, D & E",
+   "title": "Bağımsız Depresif Bozukluğun Dışlanması",
+   "content": "Maddeye bağlı olmayan bir depresif bozuklukla daha iyi açıklanamaz; bağımsız bozukluğu düşündüren durumlar: belirtilerin madde kullanımından önce başlaması, akut yoksunluk ya da ağır intoksikasyon sona erdikten sonra belirgin süre (örn. yaklaşık 1 ay) devam etmesi ya da maddeyle ilişkisiz yineleyen epizod öyküsü (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  }
+ ]
+},
+"depressive_due_to_medical": {
+ "id": "depressive_due_to_medical",
+ "nameTr": "Başka Bir Sağlık Durumuna Bağlı Depresif Bozukluk",
+ "nameEn": "Depressive Disorder Due to Another Medical Condition",
+ "clinicalDescription": {
+  "overview": "Çökkün duygudurum ya da belirgin ilgi/zevk kaybının bir tıbbi hastalığın doğrudan patofizyolojik sonucu olarak ortaya çıktığı tablodur. Burada belirleyici olan, depresyonun hastalığa verilen psikolojik bir tepki olmaması, hastalığın beyin işlevi üzerindeki doğrudan etkisiyle açıklanmasıdır. Ciddi bir hastalık tanısının yarattığı stres sonrası gelişen tepki ise çoğu zaman uyum bozukluğu ya da majör depresif bozukluk olarak değerlendirilir.",
+  "epidemiology": "İnme, Parkinson hastalığı, Huntington hastalığı, travmatik beyin hasarı ve hipotiroidi gibi durumlarda depresif belirtiler genel topluma göre belirgin biçimde daha sıktır.",
+  "etiology": "Nörolojik (inme, Parkinson, Huntington, multipl skleroz, travmatik beyin hasarı), endokrin (hipotiroidi, Cushing sendromu, Addison hastalığı), metabolik (B12 eksikliği), enfeksiyöz ve otoimmün hastalıklar ile bazı kanserler (örn. pankreas kanseri) başlıca nedenlerdir. Ortak mekanizmalar arasında monoaminerjik devrelerin hasarı, inflamatuvar sitokinler ve hormonal dengesizlikler sayılabilir.",
+  "prognosis": "Altta yatan hastalığın tedavisi (örn. tiroid hormon replasmanı) belirtileri düzeltebilir. Kalıcı nörolojik hastalıklarda antidepresan tedavi ve psikoterapi gerekir; depresyonun tedavisi tıbbi hastalığın seyrini ve rehabilitasyonu da olumlu etkiler."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-E",
+   "title": "Tanı Ölçütleri",
+   "content": "Klinik tabloya egemen, çökkün duygudurum ya da tüm/hemen tüm etkinliklerde belirgin ilgi veya zevk kaybıyla giden belirgin ve süregen bir dönem (A). Tablonun başka bir sağlık durumunun doğrudan patofizyolojik sonucu olduğuna dair kanıt (B). Başka bir ruhsal bozuklukla (örn. stres etkeninin ciddi bir tıbbi hastalık olduğu çökkün duygudurumlu uyum bozukluğu) daha iyi açıklanamaz (C). Yalnızca deliryum sırasında ortaya çıkmaz (D). Belirgin sıkıntı ya da işlev bozulmasına yol açar (E)."
+  },
+  {
+   "code": "Belirleyiciler",
+   "title": "Tablonun Niteliği",
+   "content": "Depresif özelliklerle (majör depresif epizod ölçütleri tam karşılanmıyor), majör depresif benzeri epizodla (tıbbi neden dışlaması dışında tüm epizod ölçütleri karşılanıyor) ya da karışık özelliklerle (manik/hipomanik belirtiler de var ancak baskın değil) belirtilir."
+  }
+ ]
+},
+"recurrent_brief_depression": {
+ "id": "recurrent_brief_depression",
+ "nameTr": "Yineleyen Kısa Depresif Bozukluk",
+ "nameEn": "Recurrent Brief Depression",
+ "clinicalDescription": {
+  "overview": "Majör depresif epizod düzeyinde şiddetli ancak yalnızca 2-13 gün süren depresif dönemlerin en az 12 ay boyunca ayda en az bir kez yinelediği tablodur. DSM-5'te ayrı bir tanı değil, 'Belirlenmiş diğer depresif bozukluk' kategorisi altında verilen bir örnektir. Epizodlar adet döngüsüyle ilişkili değildir (ilişkiliyse adet öncesi disforik bozukluk düşünülür). Kısa sürmesine karşın işlev kaybı ve intihar riski önemli olabilir.",
+  "epidemiology": "Toplum çalışmalarında yaşam boyu yaygınlığın birkaç yüzde düzeyinde olduğu bildirilmiştir; kesin oranlar kullanılan ölçütlere göre değişir.",
+  "etiology": "Majör depresif bozuklukla ortak etiyolojik etkenler düşünülmektedir; kişilik özellikleri ve duygu düzenleme güçlükleriyle ilişkili olabilir. Ayırıcı tanıda siklotimi, bipolar II bozukluk ve sınırda kişilik bozukluğundaki duygusal dalgalanmalar değerlendirilmelidir.",
+  "prognosis": "Bir kısmında zaman içinde majör depresif epizodlar gelişebilir. Kısa epizodlar nedeniyle tedavi yanıtını değerlendirmek güçtür; psikoterapi, duygu düzenleme becerileri ve yakın izlem önerilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Kısa ve Yineleyen Depresif Dönemler (2-13 gün, ayda ≥ 1, ≥ 12 ay)",
+   "content": "Çökkün duygudurum ile en az 4 diğer depresif belirtinin 2-13 gün boyunca birlikte bulunduğu dönemlerin, en az ardışık 12 ay boyunca ayda en az bir kez yinelemesi. Dönemler adet döngüsüyle ilişkili değildir."
+  },
+  {
+   "code": "Dışlamalar",
+   "title": "Diğer Duygudurum ve Psikotik Bozuklukların Dışlanması",
+   "content": "Kişinin tablosu hiçbir zaman başka bir depresif ya da bipolar bozukluğun ölçütlerini karşılamamıştır ve şu anda herhangi bir psikotik bozukluğun aktif ya da kalıntı evre ölçütlerini karşılamamaktadır. Belirgin sıkıntı ya da işlev bozulmasına yol açar."
+  }
+ ]
+},
+"short_duration_depressive": {
+ "id": "short_duration_depressive",
+ "nameTr": "Kısa Süreli Depresif Epizod (4-13 Gün)",
+ "nameEn": "Short-Duration Depressive Episode",
+ "clinicalDescription": {
+  "overview": "Majör depresif epizodun belirti sayısını karşılayan ancak 2 haftalık süre ölçütüne ulaşmayan, en az 4 gün süren tek bir depresif dönemdir. DSM-5'te 'Belirlenmiş diğer depresif bozukluk' kategorisi altında verilen bir örnektir. Yineleyen kısa depresyondan farkı, ayda bir yineleme örüntüsünün bulunmamasıdır.",
+  "epidemiology": "Ayrı ve güvenilir yaygınlık verisi sınırlıdır; birinci basamak ve toplum örneklemlerinde eşik altı depresif tabloların sık olduğu bilinmektedir.",
+  "etiology": "Majör depresif bozuklukla benzer biyolojik ve psikososyal etkenler; çoğu zaman belirgin bir stres etkeni sonrasında ortaya çıkar. Stres etkeniyle ilişkisi belirginse uyum bozukluğu ayırıcı tanıda düşünülmelidir.",
+  "prognosis": "Çoğu kişide kendiliğinden düzelir ancak bir kısmında ilerleyen dönemde majör depresif epizod gelişebilir. Destekleyici yaklaşım, psikoeğitim ve izlem önerilir; intihar düşünceleri mutlaka sorgulanmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Kısa Süreli Depresif Dönem (en az 4 gün, 14 günden kısa)",
+   "content": "Çökkün duygudurum ile majör depresif epizodun diğer 8 belirtisinden en az 4'ünün birlikte bulunduğu, klinik açıdan belirgin sıkıntı ya da işlev bozulmasına yol açan ve en az 4 gün, ancak 14 günden kısa süren dönem."
+  },
+  {
+   "code": "Dışlamalar",
+   "title": "Diğer Tanıların Dışlanması",
+   "content": "Kişinin tablosu hiçbir zaman başka bir depresif ya da bipolar bozukluğun ölçütlerini karşılamamış, şu anda herhangi bir psikotik bozukluğun aktif ya da kalıntı evre ölçütlerini karşılamamakta ve yineleyen kısa depresyon ölçütlerini karşılamamaktadır."
+  }
+ ]
+}
+}

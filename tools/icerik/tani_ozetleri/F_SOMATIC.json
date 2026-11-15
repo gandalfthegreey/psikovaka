@@ -1,0 +1,71 @@
+{
+"conversion_motor": {
+ "id": "conversion_motor",
+ "nameTr": "Konversiyon Bozukluğu (Motor Belirtiler: Felç / Yürüme Bozukluğu)",
+ "nameEn": "Conversion Disorder (Motor Symptoms)",
+ "clinicalDescription": {
+  "overview": "DSM-5-TR'deki adıyla 'Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu)'nun istemli motor işlevin etkilendiği biçimidir: bir ya da daha fazla uzuvda güçsüzlük veya felç, yürüme bozuklukları, titreme, distoni, miyoklonus gibi anormal hareketler, yutma ya da konuşma belirtileri görülür. Tanı, belirtilerin bilinen nörolojik hastalıklarla bağdaşmadığını gösteren olumlu klinik bulgulara dayanır; yalnızca 'tetkiklerin normal çıkması' yeterli değildir. Örnek bulgular: Hoover belirtisi (felçli bacakta istemli kalça ekstansiyonu zayıfken karşı kalça fleksiyonunda otomatik ekstansiyonun güçlü olması), kas gücü muayenesinde 'birden bırakma', dikkat dağıtılınca ya da başka bir ritme uydurulunca değişen titreme. Belirtilerin bilinçli olarak üretilmediği kabul edilir; DSM-5 itibarıyla tanı için psikolojik bir stres etkeni gösterilmesi şart değildir.",
+  "epidemiology": "Nöroloji polikliniklerine başvuranların önemli bir bölümünde işlevsel nörolojik belirtiler saptanır. Kadınlarda 2-3 kat daha sık görülür; her yaşta başlayabilir.",
+  "etiology": "Biyopsikososyal model: travma ve olumsuz yaşam olayları (her olguda bulunmaz), dissosiyasyon eğilimi, beklenti ve dikkatin bedene aşırı yönelmesi, öncül fiziksel hastalık ya da yaralanma. İşlevsel görüntüleme çalışmaları istemli hareket duygusu (faillik) ve dikkatle ilişkili beyin ağlarında değişiklikler göstermektedir.",
+  "prognosis": "Belirtilerin kısa süreli olması, akut başlangıç ve tanının hasta tarafından kabul edilmesi iyi prognozla ilişkilidir. Tanının açık ve inandırıcı biçimde açıklanması tedavinin ilk adımıdır; işlevsel nörolojik bozukluğa özgü fizyoterapi ve BDT etkilidir. Gereksiz tetkik ve girişimlerden kaçınılmalıdır."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "Konversiyon (İşlevsel Nörolojik Belirti) Bozukluğu Ölçütleri",
+   "content": "Bir ya da daha fazla istemli motor ya da duyusal işlev değişikliği belirtisi (A). Klinik bulgular belirti ile bilinen nörolojik veya tıbbi durumlar arasında bağdaşmazlık olduğunu gösterir (B). Belirti başka bir tıbbi ya da ruhsal bozuklukla daha iyi açıklanamaz (C). Belirti belirgin sıkıntıya, işlev bozulmasına yol açar ya da tıbbi değerlendirme gerektirir (D)."
+  },
+  {
+   "code": "Belirleyiciler",
+   "title": "Motor Belirti Türleri ve Seyir",
+   "content": "Motor belirti türleri: güçsüzlük ya da felçle; anormal hareketle (titreme, distoni, miyoklonus, yürüme bozukluğu); yutma belirtileriyle; konuşma belirtisiyle (ses kısıklığı/afoni, peltek konuşma). Ek belirleyiciler: akut epizod (6 aydan kısa) ya da süregen (6 ay veya daha uzun); psikolojik stres etkeniyle ya da olmaksızın."
+  }
+ ]
+},
+"conversion_sensory": {
+ "id": "conversion_sensory",
+ "nameTr": "Konversiyon Bozukluğu (Duyusal: Histerik Körlük / Afoni)",
+ "nameEn": "Conversion Disorder (Sensory / Blindness / Aphonia)",
+ "clinicalDescription": {
+  "overview": "Konversiyon bozukluğunun (işlevsel nörolojik belirti bozukluğu) duyusal belirtilerle giden biçimidir: deride uyuşma ya da duyu kaybı (anestezi), görme kaybı ya da görme alanı daralması, işitme kaybı gibi özel duyu belirtileri görülür. Olumlu bulgular arasında anatomik sinir dağılımına uymayan duyu kaybı (örn. eldiven-çorap biçiminde ya da tam orta hatta sonlanan uyuşma), uzaklık arttıkça genişlemeyen 'tüp biçiminde' görme alanı daralması ve optokinetik nistagmus gibi görmenin sürdüğünü gösteren bulgular sayılabilir. Önemli not: başlıkta geçen afoni (ses kaybı) DSM-5'te duyusal değil, 'konuşma belirtisiyle' giden motor alt türler arasında sınıflanır.",
+  "epidemiology": "Kadınlarda daha sık görülür. Duyusal belirtiler çoğu zaman motor belirtilerle birlikte bulunur; tek başına işlevsel körlük görece seyrektir.",
+  "etiology": "Motor tiple ortak biyopsikososyal etkenler: stres ve travma (zorunlu değildir), dissosiyatif yatkınlık, dikkat ve beklentinin algıyı biçimlendirmesi, önceki hastalık ya da yaralanma deneyimi.",
+  "prognosis": "Akut ve kısa süreli duyusal belirtilerde prognoz genellikle iyidir. Tanının açıkça açıklanması, nedenin 'hayal ürünü' olmadığının vurgulanması, BDT ve rehabilitasyon yaklaşımları önerilir. Nörolojik ve oftalmolojik nedenler (örn. multipl skleroz, optik nörit) dikkatle dışlanmalıdır; işlevsel belirti ile organik hastalık birlikte de bulunabilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "Konversiyon (İşlevsel Nörolojik Belirti) Bozukluğu Ölçütleri",
+   "content": "İstemli motor ya da duyusal işlevde değişiklik belirtisi (A); belirti ile bilinen nörolojik/tıbbi durumlar arasında bağdaşmazlığı gösteren klinik bulgular (B); başka bir tıbbi ya da ruhsal bozuklukla daha iyi açıklanamama (C); belirgin sıkıntı, işlev bozulması ya da tıbbi değerlendirme gereksinimi (D)."
+  },
+  {
+   "code": "Belirleyiciler",
+   "title": "Duyusal Belirti Türleri ve Seyir",
+   "content": "Duyusal belirti türleri: anestezi ya da duyu kaybıyla; özel duyu belirtisiyle (görme, koku alma ya da işitme bozukluğu). Hem motor hem duyusal belirtiler varsa 'karışık belirtilerle' kodlanır. Ek belirleyiciler: akut epizod (6 aydan kısa) ya da süregen (6 ay veya daha uzun); psikolojik stres etkeniyle ya da olmaksızın."
+  }
+ ]
+},
+"psychological_factors_affecting_medical": {
+ "id": "psychological_factors_affecting_medical",
+ "nameTr": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenler",
+ "nameEn": "Psychological Factors Affecting Other Medical Conditions",
+ "clinicalDescription": {
+  "overview": "Bir ruhsal bozukluk dışındaki tıbbi bir hastalığın ya da belirtinin bulunduğu ve psikolojik ya da davranışsal etkenlerin bu tıbbi durumu olumsuz etkilediği tablodur. Örnekler: kaygının astım ataklarını ağırlaştırması, göğüs ağrısına rağmen tedavi gereksinimini inkar etme, kilo vermek isteyen diyabetli bir kişinin insülin dozunu bilerek azaltması, stresin hipertansiyon ya da irritabl bağırsak sendromunu kötüleştirmesi, ilaç önerilerine uyumsuzluk. Burada odak, ruhsal belirtilerin kendisi değil, bunların tıbbi hastalığın seyri üzerindeki etkisidir.",
+  "epidemiology": "Yaygınlığı net değildir; birinci basamak ve hastane ortamlarında sık karşılaşılan bir durum olduğu düşünülmektedir. Her yaşta görülebilir.",
+  "etiology": "Stres hormonlarının (kortizol, katekolaminler) ve otonom sinir sisteminin bağışıklık, kalp-damar ve sindirim sistemleri üzerindeki etkileri; olumsuz sağlık davranışları (sigara, hareketsizlik, beslenme), tedavi uyumsuzluğu, inkar ve kaçınma gibi baş etme biçimleri; kişilik özellikleri.",
+  "prognosis": "Tıbbi ve psikolojik tedavinin birlikte yürütüldüğü bütüncül (konsültasyon-liyezon) yaklaşım, stres yönetimi, tedavi uyumunu artırmaya yönelik görüşmeler (motivasyonel görüşme) ve BDT tıbbi sonuçları iyileştirebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-C",
+   "title": "Tanı Ölçütleri",
+   "content": "Ruhsal bozukluk dışında bir tıbbi belirti ya da hastalık bulunur (A). Psikolojik ya da davranışsal etkenler tıbbi durumu şu yollardan biriyle olumsuz etkiler: tıbbi durumun gelişimi, alevlenmesi ya da iyileşmenin gecikmesiyle yakın zamansal ilişki içinde seyrin etkilenmesi; tedaviye engel olma (örn. kötü uyum); bilinen ek sağlık riskleri oluşturma; altta yatan patofizyolojiyi etkileyerek belirtileri tetikleme, ağırlaştırma ya da tıbbi ilgi gerektirme (B). Etkenler başka bir ruhsal bozuklukla (örn. panik bozukluğu, majör depresif bozukluk, TSSB) daha iyi açıklanamaz (C)."
+  },
+  {
+   "code": "Şiddet Belirleyicisi",
+   "title": "Hafif, Orta, Ağır, Aşırı",
+   "content": "Hafif: tıbbi riski artırır (örn. antihipertansif tedaviye düzensiz uyum). Orta: altta yatan tıbbi durumu ağırlaştırır (örn. kaygının astımı kötüleştirmesi). Ağır: hastaneye yatış ya da acil başvuruya yol açar. Aşırı: ağır, yaşamı tehdit eden riskle sonuçlanır (örn. kalp krizi belirtilerini görmezden gelme)."
+  }
+ ]
+}
+}

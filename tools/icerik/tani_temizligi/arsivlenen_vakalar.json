@@ -1,0 +1,641 @@
+{
+  "aciklama": "DSM-5-TR resmî tanısına dürüstçe bağlanamadığı için 2026-11-15 tanı temizliğinde CLINICAL_CASES dışına alınan vakalar. \"vaka\" alanı js/cases.js şemasıyla birebir aynıdır; geri almak için karar.js ARCHIVE satırını silip uygula.js çalıştırın.",
+  "vakalar": [
+    {
+      "arsivNedeni": "İnternet oyun oynama bozukluğu Bölüm III önerisi; DSM-5-TR'de karşılayan resmî tanı yok.",
+      "eskiTaniId": "internet_gaming_disorder",
+      "vaka": {
+        "id": "case-084",
+        "caseNumber": 84,
+        "difficulty": "Kolay",
+        "course": "SUBSTANCE",
+        "diagnosisId": "internet_gaming_disorder",
+        "therapyId": "motivational_interviewing",
+        "category": "SUBSTANCE",
+        "patientSummary": "18 yaşında, erkek, lise son sınıf öğrencisi",
+        "clues": [
+          "18 yaşındaki genç, günde 12-14 saat aralıksız online rekabetçi video oyunları oynadığı, üniversite sınavına hazırlanmayı bıraktığı ve ailesi interneti kestiğinde kapıları kırdığı için getirildi.",
+          "Son 1 yıldır oyun oynamadığı her an yoğun huzursuzluk, titreme ve öfke patlamaları (yoksunluk) yaşadığını; aynı hazzı almak için oyunda geçirdiği süreyi sürekli artırdığını (tolerans) anlattı.",
+          "Tüm gerçek arkadaşlıklarını bitirdiğini, geceleri uyumayıp sabahladığını ve kişisel hijyenini tamamen ihmal ettiğini söyledi.",
+          "Toksikoloji taramasında madde veya alkol saptanmamıştır.",
+          "Ruhsal Durum Muayenesinde: Dijital ödül döngüsüne şartlanma, dürtüsellik, oyun dışındaki tüm yaşam aktivitelerine karşı anhedoni ve aileye karşı agresyon saptandı.",
+          "DSM-5'e göre: 12 aylık bir dönem içinde oyunla aşırı zihinsel uğraş, yoksunluk belirtileri, tolerans, kontrol kaybı ve önemli eğitim/ilişki fırsatlarını tehlikeye atma (en az 5/9 ölçüt) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "oyun oynamadığı her an yoğun huzursuzluk",
+            "dsmMatch": "DSM-5 Kriter A2: Oyun oynanmadığında ortaya çıkan yoksunluk belirtileri"
+          },
+          {
+            "clueIndex": 1,
+            "text": "oyunda geçirdiği süreyi sürekli artırdığını (tolerans)",
+            "dsmMatch": "DSM-5 Kriter A3: Tolerans gelişimi"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Motivasyonel Görüşme & İnternet Bağımlılığı için BDT (CBT-IA)",
+          "therapyDetails": "Ekran süresini kademeli sınırlandırma, alternatif reel hobi geliştirme, tetikleyici yönetimi ve aile iletişimi.",
+          "pharmacologyNote": "Eşlik eden DEHB veya depresyon varsa medikal tedavi eklenir."
+        },
+        "miniQuiz": {
+          "question": "İnternet Oyun Oynama Bozukluğunda danışanın oyundan uzaklaştırıldığında yaşadığı huzursuzluk, sinirlilik ve öfke hangi bağımlılık fenomenidir?",
+          "options": [
+            "Yoksunluk (Withdrawal)",
+            "Tolerans",
+            "Konfabulasyon",
+            "Transfersans"
+          ],
+          "correctIndex": 0,
+          "explanation": "Bağımlılık nesnesinden uzak kalındığında ortaya çıkan negatif fiziksel/duygusal gerilim tablosuna yoksunluk denir."
+        },
+        "differentialDiagnosis": "• Kumar Oynama Bozukluğu: Maddi para bahsi ve kazanç odaklıdır; video oyununda dijital kazanım esastır.\n• Normal Rekreasyonel Oyun: Okul/iş kaybı ve agresif yoksunluk yaşanmaz.",
+        "dsmCriteriaSummary": "DSM-5: 12 aylık sürede oyunla zihinsel uğraş + Yoksunluk + Tolerans + Kontrol kaybı (en az 5/9 belirti).",
+        "pharmacologyId": "naltrexone_acamprosate"
+      }
+    },
+    {
+      "arsivNedeni": "Nöroleptik malign sendrom ilaca bağlı tıbbi tablo; ruhsal bozukluk değil.",
+      "eskiTaniId": "neuroleptic_malignant_syndrome",
+      "vaka": {
+        "id": "case-092",
+        "caseNumber": 92,
+        "difficulty": "Zor",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "neuroleptic_malignant_syndrome",
+        "therapyId": "medical_stabilization",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "28 yaşında, erkek, psikiyatri servisinde yatan şizofreni hastası (Acil Klinik Tablo)",
+        "clues": [
+          "28 yaşındaki hasta, ajitasyon nedeniyle yüksek doz kas içi Haloperidol uygulamasının 3. gününde aniden 40.2°C'ye fırlayan yüksek ateş, yoğun terleme ve bilinç bulanıklığı geliştirdi.",
+          "Fizik muayenede kollarında ve bacaklarında bükülmeye karşı aşırı sertlik ve direnç (kurşun boru rijiditesi) tespit edildi; hasta konuşamamakta ve yutkunamamaktadır.",
+          "Otonomik instabilite bulguları olarak tansiyonu dakikalar içinde 180/110 mmHg ile 90/60 mmHg arasında dalgalanmakta, nabzı 135/dk seyretmektedir.",
+          "Laboratuvar tetkiklerinde Serum Kreatin Kinaz (CK) düzeyi 28.000 U/L (aşırı yüksek), lökositoz ve miyoglobinüri saptandı; enfeksiyon kaynağı veya menenjit dışlandı.",
+          "Ruhsal Durum Muayenesinde: Stupor düzeyinde bilinç baskılanması, mutizm, santral dopamin D2 blokajına bağlı termoregülasyon çöküşü ve rabdomiyoliz tablosu belirlendi.",
+          "DSM-5 ve tıbbi acil kriterlerine göre: Antipsikotik kullanımı zemininde gelişen hipertermi, kurşun boru rijiditesi, aşırı CK yüksekliği ve otonomik dengesizlikle seyreden Nöroleptik Malign Sendrom (NMS) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "kurşun boru rijiditesi",
+            "dsmMatch": "Klinik Belirteç: Nöromüsküler kurşun boru (lead-pipe) sertliği"
+          },
+          {
+            "clueIndex": 3,
+            "text": "Serum Kreatin Kinaz (CK) düzeyi 28.000 U/L",
+            "dsmMatch": "Laboratuvar Kriteri: Masif rabdomiyoliz ve CK yüksekliği"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Acil Tıbbi Stabilizasyon & Antidot Protokolü",
+          "therapyDetails": "Tüm antipsikotiklerin derhal stoplanması, yoğun bakımda aktif soğutma, hidrasyon ve kas gevşetici Dantrolen / dopamin agonisti Bromokriptin.",
+          "pharmacologyNote": "Dantrolen (kalsiyum salınım inhibitörü) ve Bromokriptin (dopamin agonisti) hayat kurtarıcı antidotlardır."
+        },
+        "miniQuiz": {
+          "question": "Nöroleptik Malign Sendrom (NMS) ile Serotonin Sendromunu nörolojik muayenede birbirinden ayıran en kritik kas tonusu bulgusu nedir?",
+          "options": [
+            "NMS'de 'kurşun boru' şeklinde yaygın rijidite görülürken, Serotonin Sendromunda 'klonus ve hiperrefleksi' ön plandadır.",
+            "NMS'de hastanın kasları tamamen gevşektir (felç).",
+            "Serotonin sendromunda ateş hiç yükselmez.",
+            "İkisinde de kas muayenesi tamamen normaldir."
+          ],
+          "correctIndex": 0,
+          "explanation": "NMS dopamin blokajına bağlı plastik kurşun boru rijiditesi yapar. Serotonin sendromu ise hiperrefleksi ve ayak bileği klonusu (spontan/indüklenebilir klonus) ile karakterizedir."
+        },
+        "differentialDiagnosis": "• Serotonin Sendromu: Klonus, hiperrefleksi ve ishal vardır; rijidite yerine aşırı refleks artışı belirgindir.\n• Malign Hipertermi: İnhalasyon anestezikleri ve süksinilkolin sonrası ameliyathanede gelişir.\n• Santral Sinir Sistemi Enfeksiyonu (Menenjit): Nöroleptik ilişkisi ve masif CK yüksekliği yoktur.",
+        "dsmCriteriaSummary": "DSM-5: Nöroleptik kullanımı + Hipertermi (>38°C) + Kurşun boru rijiditesi + Otonomik labilite + CK yüksekliği.",
+        "pharmacologyId": "dantrolene_bromocriptine"
+      }
+    },
+    {
+      "arsivNedeni": "Serotonin sendromu tıbbi ilaç toksisitesi; DSM-5-TR'de yok.",
+      "eskiTaniId": "serotonin_syndrome",
+      "vaka": {
+        "id": "case-093",
+        "caseNumber": 93,
+        "difficulty": "Zor",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "serotonin_syndrome",
+        "therapyId": "medical_stabilization",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "35 yaşında, kadın, ofis çalışanı (Polifarmasi Toksisitesi Acili)",
+        "clues": [
+          "35 yaşındaki danışan, kullandığı yüksek doz Essitalopram (SSRI) ilacına ek olarak migren atağı için triptan ve aktardan aldığı Sarı Kantaron çayını aynı gün içtikten 4 saat sonra acile getirildi.",
+          "Acil serviste hastanın yerinde duramadığı (aşırı ajitasyon), ellerinde şiddetli titreme, terleme, ishal ve göz bebeklerinde aşırı büyüme (midriyazis) olduğu görüldü.",
+          "Nörolojik muayenede kritik ayırt edici bulgu: Ayak bileklerine vurulduğunda kendiliğinden durmayan klonus, bacaklarda belirgin hiperrefleksi ve titreme saptandı.",
+          "Vücut sıcaklığı 38.8°C ölçüldü; kurşun boru rijiditesi YOKTUR (kaslar spastik değil hiperreflektif ve kloniktir).",
+          "Ruhsal Durum Muayenesinde: Hızlı başlangıçlı konfüzyon, hipomani benzeri basınçlı konuşma, aşırı irkilme ve santral serotonerjik aşırı uyarılma tablosu gözlendi.",
+          "Hunter kriterlerine göre: Birden fazla serotonerjik ajanın eşzamanlı kullanımıyla tetiklenen, spontan klonus, ajitasyon, hipertermi, terleme ve otonomik hiperaktivite ile giden Serotonin Sendromu tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 2,
+            "text": "kendiliğinden durmayan klonus, bacaklarda belirgin hiperrefleksi",
+            "dsmMatch": "Hunter Kriteri: Nöromüsküler eksitasyon (spontan klonus ve hiperrefleksi)"
+          },
+          {
+            "clueIndex": 0,
+            "text": "Essitalopram (SSRI) ilacına ek olarak migren atağı için triptan ve",
+            "dsmMatch": "Etiyoloji: Çoklu serotonerjik ajan polifarmasisi"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Serotonerjik Ajan Kesimi & Siproheptadin Protokolü",
+          "therapyDetails": "Tüm serotonerjik ilaçların kesilmesi, Benzodiazepin (sedasyon ve ajitasyon için) ve 5-HT2A antagonisti Siproheptadin verilmesi.",
+          "pharmacologyNote": "Siproheptadin spesifik serotonin reseptör antagonistidir; soğutma ve hidrasyon esastır."
+        },
+        "miniQuiz": {
+          "question": "Serotonin Sendromu tanısında Hunter Kriterlerine göre en spesifik ve tanı koydurucu tek nörolojik bulgu nedir?",
+          "options": [
+            "Spontan veya indüklenebilir Klonus (Ayak bileği vurularında sürekli atım)",
+            "Kurşun boru rijiditesi",
+            "Koku alma kaybı",
+            "Deri döküntüsü"
+          ],
+          "correctIndex": 0,
+          "explanation": "Hunter Toksisite Kriterlerine göre serotonerjik ilaç öyküsü olan bir hastada spontan klonus varlığı Serotonin Sendromu için tek başına kesin tanı koydurucudur."
+        },
+        "differentialDiagnosis": "• Nöroleptik Malign Sendrom (NMS): Dopamin blokajında olur; klonus yerine kurşun boru rijiditesi vardır.\n• Antikolinerjik Toksisite: Cilt kuru ve kırmızıyken Serotonin sendromunda bol terleme ve ishal vardır.",
+        "dsmCriteriaSummary": "DSM-5 / Hunter: Serotonerjik ajan kullanımı + Spontan klonus / ajitasyon / terleme / hiperrefleksi / hipertermi.",
+        "pharmacologyId": "cyproheptadine_serotonin"
+      }
+    },
+    {
+      "arsivNedeni": "Kompulsif satın alma DSM'de yok; dürüstçe bağlanabilecek resmî tanı listede yok.",
+      "eskiTaniId": "compulsive_buying_disorder",
+      "vaka": {
+        "id": "case-108",
+        "caseNumber": 108,
+        "difficulty": "Orta",
+        "course": "IMPULSE",
+        "diagnosisId": "compulsive_buying_disorder",
+        "therapyId": "cbt_general",
+        "category": "SUBSTANCE",
+        "patientSummary": "36 yaşında, kadın, şirket yöneticisi",
+        "clues": [
+          "36 yaşındaki danışan, 14 adet kredi kartını tamamen doldurup 800.000 TL borç batağına saplanmasına rağmen her gün internetten ihtiyacı olmayan yüzlerce ayakkabı ve kıyafeti almayı durduramadığını belirterek başvurdu.",
+          "Alışveriş yapmadan hemen önce içinde karşı konulamaz bir gerilim hissettiğini; 'Satın Al' butonuna bastığı an derin bir öfori yaşadığını, ancak 10 dakika sonra paketleri açmadan dolaba tıkıp derin bir suçluluk duyduğunu anlattı.",
+          "Evinde etiketleri dahi sökülmemiş, kutuları hiç açılmamış 80 çift ayakkabı ve onlarca aynı model ceket bulunduğu görüldü.",
+          "Bipolar Bozukluk öyküsü KESİNLİKLE yoktur; hastada uyku azalması, grandiyöz sanrılar veya manik epizod kriterleri bulunmamaktadır.",
+          "Ruhsal Durum Muayenesinde: Negatif duygulanımı bastırmak için dopaminerjik satın alma döngüsüne sığınma, tolerans ve kontrol kaybı saptandı.",
+          "Klinik psikiyatri ve DSM-5 davranışsal bağımlılık spektrumuna göre: Dayanılmaz satın alma dürtüleri, gereksiz harcamalar, geçici rahatlama ve ardından gelen ağır borçla seyreden Kompulsif Satın Alma Bozukluğu (Oniomani) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "Satın Al' butonuna bastığı an derin bir öfori yaşadığını, ancak 10 dakika sonra paketleri açmadan dolaba tıkıp",
+            "dsmMatch": "Klinik Fenomen: Satın alma anında haz/rahatlama ve ardından gelen suçluluk"
+          },
+          {
+            "clueIndex": 3,
+            "text": "Bipolar Bozukluk öyküsü KESİNLİKLE yoktur",
+            "dsmMatch": "Ayırıcı Tanı: Manik aşırı harcama periyodunun dışlanması"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Kompulsif Alışveriş için BDT & Mali Uyaran Kontrolü",
+          "therapyDetails": "Kredi kartlarını iptal etme, 48 saatlik satın almayı erteleme kuralı, tetikleyici e-ticaret uygulamalarını silme ve bütçe yönetimi.",
+          "pharmacologyNote": "Dürtüsellik ve eşlik eden depresyon/anksiyete için SSRI grubu ilaçlar veya Naltrekson (dürtü blokajı)."
+        },
+        "miniQuiz": {
+          "question": "Kompulsif Satın Alma Bozukluğunda (Oniomani) kişiyi alışveriş yapmaya iten temel psikolojik pekiştireç nedir?",
+          "options": [
+            "Eşyayı kullanma ihtiyacı değil, satın alma anında yaşanan gerilim azalması ve dopaminerjik haz dalgası",
+            "Eşyaları yüksek fiyata satıp zengin olma arzusu",
+            "Evini müzeye çevirme planı",
+            "Açlıktan ölme korkusu"
+          ],
+          "correctIndex": 0,
+          "explanation": "Oniomanide eşyanın kendisine ihtiyaç yoktur (kutusu bile açılmaz); temel amaç satın alma eyleminin yarattığı kısa süreli haz ve içsel sıkıntıyı bastırmaktır."
+        },
+        "differentialDiagnosis": "• Bipolar Manik Epizod: Aşırı harcama sadece manik dönemdedir, grandiyöz fikirler ve uyku azalması eşlik eder.\n• İstifçilik (Hoarding): Eşyaları atmakta zorlanırlar ve ev çöp eve döner; oniomanide ise temel sorun satın alma dürtüsüdür.",
+        "dsmCriteriaSummary": "DSM-5 / ICD-11: Dayanılmaz satın alma dürtüleri + Kontrol kaybı + Ağır finansal zarar + Eşyaları kullanmama.",
+        "pharmacologyId": "naltrexone_acamprosate"
+      }
+    },
+    {
+      "arsivNedeni": "Tardif diskinezi ilaca bağlı hareket bozukluğu; ruhsal bozukluk değil.",
+      "eskiTaniId": "tardive_dyskinesia",
+      "vaka": {
+        "id": "case-109",
+        "caseNumber": 109,
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "tardive_dyskinesia",
+        "therapyId": "vmat2_inhibitor",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "58 yaşında, kadın, 12 yıldır antipsikotik kullanan danışan",
+        "clues": [
+          "58 yaşındaki danışan, son 6 aydır ağzında, dilinde ve dudaklarında kendi kontrolü dışında istemsiz çiğneme, dudak şapırdatma ve dilini sürekli dışarı çıkarma hareketleri başladığı için getirildi.",
+          "Hasta bu hareketleri durdurmak istediğinde durduramadığını, dişlerini sürekli sıktığı için protezlerinin kırıldığını ve utancından ağzını eliyle kapatmak zorunda kaldığını söyledi.",
+          "Öyküde 12 yıldır kronik olarak Tipik/Birinci Kuşak Antipsikotik (Haloperidol) kullandığı öğrenildi.",
+          "Nörolojik muayenede koreoatetoid orofasial istemsiz hareketler objektif olarak görüldü; Parkinson tremorundan farklı olarak hareketler ritmik değil hızlı ve kıvrılma şeklindedir.",
+          "Ruhsal Durum Muayenesinde: Yıllarca süren dopamin D2 blokajına bağlı bazal ganglionlarda gelişen postsinaptik dopamin reseptör aşırı duyarlılığı tablosu tespit edildi.",
+          "DSM-5'e göre: En az birkaç aydır nöroleptik kullanımı zemininde gelişen, dil, dudak, çene ve ekstremitelerde istemsiz hareketlerle seyreden İlacın Yol Açtığı Tardif Diskinezi tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 0,
+            "text": "istemsiz çiğneme, dudak şapırdatma ve dilini sürekli dışarı çıkarma",
+            "dsmMatch": "DSM-5 Kriter A: Orofasial ve lingual istemsiz koreoatetoid hareketler"
+          },
+          {
+            "clueIndex": 2,
+            "text": "12 yıldır kronik olarak Tipik/Birinci Kuşak Antipsikotik (Haloperidol) kullandığı",
+            "dsmMatch": "DSM-5 Kriter B: En az birkaç aylık nöroleptik maruziyeti öyküsü"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "VMAT2 İnhibitörü Tedavisi & Antipsikotik Optimizasyonu",
+          "therapyDetails": "Valbenazin veya Dötetrabenazin başlanması, mevcut tipik antipsikotiğin azaltılarak atipik ajana (Klozapin) geçilmesi.",
+          "pharmacologyNote": "Valbenazin ve Dötetrabenazin FDA onaylı VMAT2 inhibitörleridir; Antikolinerjikler (Biperiden/Akineton) durumu daha da KÖTÜLEŞTİRİR."
+        },
+        "miniQuiz": {
+          "question": "Tardif Diskinezi tedavisinde aşağıdaki ilaç gruplarından hangisi istemsiz dil-dudak hareketlerini DAHA DA KÖTÜLEŞTİRDİĞİ için kesinlikle KONTRENDİKEDİR?",
+          "options": [
+            "Antikolinerjik İlaçlar (Biperiden / Akineton / Triheksifenidil)",
+            "VMAT2 İnhibitörleri (Valbenazin)",
+            "Klozapin",
+            "Melatonin"
+          ],
+          "correctIndex": 0,
+          "explanation": "Antikolinerjikler (Akineton) akut distoniyi düzeltir ancak Tardif Diskinezide dopamin aşırı duyarlılığını daha da artırarak istemsiz hareketleri şiddetlendirir!"
+        },
+        "differentialDiagnosis": "• Akut Distoni: İlacın ilk günlerinde başlar ve göz kayması/boyun tutulması yapar; tardif diskinezi ise yıllar sonra gelişir.\n• Parkinsonizm: Hareketlerde yavaşlama (bradikinezi) ve istirahat tremoru vardır; TD'de ise istemsiz kıvrılma hareketleri mevcuttur.",
+        "dsmCriteriaSummary": "DSM-5: Uzun süreli nöroleptik kullanımı + Yüz, dil, çene veya gövdede istemsiz koreoatetoid hareketler.",
+        "pharmacologyId": "valbenazine_vmat2"
+      }
+    },
+    {
+      "arsivNedeni": "Kleine-Levin sendromu epizodik; hipersomnolans bozukluğunun süre ölçütünü (≥ 3 ay, haftada ≥ 3) karşılamıyor. Belirlenmiş diğer hipersomnolans bozukluğu listede yok.",
+      "eskiTaniId": "kleine_levin_syndrome",
+      "vaka": {
+        "id": "case-136",
+        "caseNumber": 136,
+        "difficulty": "İleri Düzey",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "kleine_levin_syndrome",
+        "therapyId": "sleep_hygiene_stimulants",
+        "category": "SLEEP",
+        "patientSummary": "16 yaşında, erkek, lise öğrencisi (Epizodik Hipersomni, Megafaji ve Hiperseksüalite)",
+        "clues": [
+          "16 yaşındaki erkek ergen, son 1 yıl içinde 3 kez tekrarlayan ve her biri yaklaşık 10-12 gün süren 'günde 20 saat kesintisiz uyuma, uyandırıldığında aşırı sinirli ve rüyada gibi olma' atakları nedeniyle nöropsikiyatri kliniğine yatırıldı.",
+          "Atak sırasında sadece tuvalete gitmek ve yemek yemek için uyandığı; mutfağa girdiğinde ne bulursa (tencere dolusu soğuk makarna, çiğ hamur, kilolarca tatlı) oburca ve mekanik bir şekilde tükettiği (megafaji / kompulsif hiperfaji) öğrenildi.",
+          "Yine bu 10 günlük atak dönemlerinde normalde çok utangaç ve terbiyeli bir genç olmasına rağmen, hemşirelere ve çevresindekilere açık cinsel içerikli sözler söylediği ve uluorta mastürbasyon yapmaya çalıştığı (hiperseksüalite ve frontal disinhibisyon) görüldü.",
+          "En çarpıcı klinik bulgu olarak; 12. günün sonunda hasta bir sabah tamamen normal olarak uyanmakta, atak sırasındaki günleri sisli bir rüya gibi (derealizasyon) hatırlamakta ve bir sonraki atağa kadar aylarca %100 sağlıklı, başarılı ve normal bir öğrenciye dönüşmektedir.",
+          "Beyin MRG, BOS, EEG ve metabolik taramalar normaldir; hipotalamik-talamik perfüzyon SPECT'te sadece atak sırasında hipoperfüzyon saptanmıştır.",
+          "DSM-5 (Hipersomnolans / Yineleyen Hipersomni) kriterlerine göre: Ergen erkeklerde görülen, günler/haftalar süren aşırı uyku (hipersomni), aşırı yeme (megafaji), hiperseksüalite ve ataklar arası tam normallikle seyreden Kleine-Levin Sendromu (Uyuyan Güzel Sendromu) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 0,
+            "text": "her biri yaklaşık 10-12 gün süren 'günde 20 saat kesintisiz uyuma",
+            "dsmMatch": "Kleine-Levin Triadı 1: Periyodik/Yineleyen Hipersomni atakları"
+          },
+          {
+            "clueIndex": 1,
+            "text": "megafaji / kompulsif hiperfaji",
+            "dsmMatch": "Kleine-Levin Triadı 2 & 3: Kompulsif aşırı yeme (Megafaji) ve Hiperseksüalite"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Atak Dönemi Ev Güvenliği, Uyku Yönetimi & Lityum Profilaksisi",
+          "therapyDetails": "Atak sırasında hastayı okula/işe zorlamadan evde güvenli gözetim altında tutma, derealizasyon ve konfüzyonu yatıştırma, ataklar arası dönemde tetikleyicilerden (alkol, enfeksiyon, uykusuzluk) koruma.",
+          "pharmacologyNote": "Atak sıklığını ve süresini azaltmada en güçlü kanıta sahip profilaktik ilaç Lityum'dur; atak sonuna doğru uyanıklığı desteklemek için Modafinil/Amantadin kullanılabilir."
+        },
+        "miniQuiz": {
+          "question": "Genellikle ergen erkeklerde görülen Kleine-Levin Sendromunun ('Uyuyan Güzel Sendromu') klasik klinik triadı (üçlüsü) ve ataklar arası seyri nasıldır?",
+          "options": [
+            "Epizodik Hipersomni (günlerce 18-20 saat uyuma) + Megafaji (oburca yeme) + Hiperseksüalite/Derealizasyon; ataklar arasında hasta tamamen (%100) normaldir.",
+            "Sürekli uykusuzluk + İştahsızlık + Kalıcı demans",
+            "Gülerken kasların felç olması (Katapleksi) + Uyku felci",
+            "Sadece gece yürüyüşleri ve sabah amnezisi"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kleine-Levin Sendromu, hipotalamik disfonksiyona bağlı gelişen yineleyen hipersomni (günlerce uyuma), megafaji (aşırı yeme) ve hiperseksüalite/disinhibisyon triadıdır. Ataklar arasında hasta tamamen sağlıklıdır."
+        },
+        "differentialDiagnosis": "• Narkolepsi: Uyku atakları günler sürmez, 15-20 dakikalıktır ve katapleksi eşlik eder.\n• Bipolar Bozukluk: Depresyonda hipersomni, manide hiperseksüalite ayrı dönemlerde olur; Kleine-Levin'de ise hepsi aynı 10 günlük uyku atağında bir aradadır.",
+        "dsmCriteriaSummary": "DSM-5: Yılda birkaç kez tekrarlayan, 2 gün ile 5 hafta arası süren aşırı uyku dönemleri + Bilişsel değişim/derealizasyon + Megafaji ve hiperseksüalite.",
+        "pharmacologyId": "lithium_gold"
+      }
+    },
+    {
+      "arsivNedeni": "Geçici global amnezi nörolojik tablo; ruhsal bozukluk değil.",
+      "eskiTaniId": "transient_global_amnesia",
+      "vaka": {
+        "id": "case-145",
+        "caseNumber": 145,
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "transient_global_amnesia",
+        "therapyId": "supportive_psychotherapy",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "61 yaşında, erkek, üniversite profesörü (Kendi Adını Bilip 30 Saniyede Bir Aynı Soruyu Sorma)",
+        "clues": [
+          "61 yaşındaki profesör, sabah soğuk deniz suyuna girip çıktıktan ve yoğun bir egzersiz yaptıktan hemen sonra aniden şaşkınlaşarak eşine 'Biz buraya ne zaman geldik? Bugün günlerden ne? Arabayı nereye park ettik?' diye sormaya başladığı için acil servise getirildi.",
+          "Eşi sorulara sabırla cevap vermesine rağmen, hasta cevabı aldıktan sadece 45 saniye sonra sanki hiç sormamış gibi kelime kelimesine aynı soruyu ('Biz neredeyiz? Buraya nasıl geldik?') 50 kez üst üste tekrarladı (bozuk plak fenomeni / ağır anterograd amnezi).",
+          "En kritik muayene bulgusu olarak; hastaya 'Adınız ne, mesleğiniz ne, eşinizin adı ne?' diye sorulduğunda kendi adını, kimliğini ve adresini eksiksiz ve doğru bildiği (kişisel kimlik belleğinin tam korunduğu) saptandı.",
+          "Nörolojik muayenesinde konuşma bozukluğu (afazi), kol-bacak güçsüzlüğü veya bilinç kaybı yoktur; Difüzyon MR'da hipokampüs CA1 bölgesinde milimetrik noktasal difüzyon kısıtlaması görülmüş, inme ve epilepsi dışlanmıştır.",
+          "Acil serviste gözlem altına alınan hastanın yaklaşık 7 saat sonra yeni bilgileri tekrar kaydetmeye başladığı ve ertesi sabah sadece o 7 saatlik boşluk dışında %100 normale döndüğü izlendi.",
+          "Nöropsikiyatri ve DSM-5 nörobilişsel tanı ilkelerine göre: Genellikle 50-70 yaş arasında fiziksel/duygusal efor sonrası aniden başlayan, kişisel kimliğin korunduğu, tekrarlayıcı sorularla giden ve 24 saat içinde tam düzelen Geçici Global Amnezi (TGA) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "cevabı aldıktan sadece 45 saniye sonra sanki hiç sormamış gibi kelime kelimesine aynı soruyu ('Biz neredeyiz? Buraya nasıl geldik?') 50 kez üst üste tekrarladı",
+            "dsmMatch": "Klinik Özellik: Geçici hipokampal disfonksiyona bağlı ağır anterograd amnezi ve tekrarlayıcı sorular"
+          },
+          {
+            "clueIndex": 2,
+            "text": "kendi adını, kimliğini ve adresini eksiksiz ve doğru bildiği (kişisel kimlik belleğinin tam korunduğu)",
+            "dsmMatch": "Ayırıcı Tanı: Dissosiyatif amnezi/fügten ayıran en kritik bulgu (Kimlik belleğinin korunması)"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Nörolojik Gözlem, Güvence Verme & Destekleyici Yaklaşım",
+          "therapyDetails": "Hastaya ve panik yaşayan ailesine tablonun inme veya kalıcı bunama olmadığını, en geç 24 saat içinde tamamen düzeleceğini anlatarak anksiyeteyi yatıştırma ve gözlem altında tutma.",
+          "pharmacologyNote": "Geçici Global Amnezi benign (iyi huylu) ve kendi kendini sınırlayan bir tablodur; spesifik bir ilaç tedavisi gerekmez, 6-24 saat içinde kendiliğinden tam şifayla düzelir."
+        },
+        "miniQuiz": {
+          "question": "Acil servise ani hafıza kaybıyla gelen bir hastada 'Geçici Global Amnezi' (TGA) ile psikojenik 'Dissosiyatif Amnezi / Füg'ü birbirinden saniyeler içinde ayıran altın standart soru nedir?",
+          "options": [
+            "'Adınız ve soyadınız nedir?' sorusu: TGA hastası kendi adını ve kimliğini ASLA unutmaz (sadece yeni anı kaydedemez); Dissosiyatif Amnezi/Füg hastası ise kendi adını ve kim olduğunu unutur.",
+            "'Kaç yaşındasınız?' sorusunda TGA hastası kendini 5 yaşında sanır.",
+            "TGA hastası sağ kolunu ve bacağını hareket ettiremez.",
+            "Dissosiyatif amnezi sadece 2 saat sürer, TGA ise 10 yıl sürer."
+          ],
+          "correctIndex": 0,
+          "explanation": "Geçici Global Amnezide (TGA) geçici bilateral hipokampal (CA1) iskemi/venöz konjesyon nedeniyle kişi yeni bilgi kaydedemez ve sürekli 'Neredeyim?' diye sorar; ancak kimlik belleği kortikal olduğu için kendi adını ve ailesini her zaman bilir. Kendi adını unutan hasta dissosiyatiftir!"
+        },
+        "differentialDiagnosis": "• Dissosiyatif Amnezi / Füg: Kişi kendi adını/kimliğini unutur ama yeni bilgileri kaydedebilir (TGA'nın tam tersidir!).\n• Geçici İskemik Atak (TİA) / İnme: Motor güçsüzlük, dizartri, görme alanı kaybı gibi fokal nörolojik defisitler eşlik eder.",
+        "dsmCriteriaSummary": "Hodges & Warlow Kriterleri: Tanıklı başlayan akut anterograd amnezi + Kişisel kimliğin korunması + Fokal nörolojik bulgu olmaması + 24 saat içinde tam düzelme.",
+        "pharmacologyId": "psychotherapy_first_no_drug"
+      }
+    },
+    {
+      "arsivNedeni": "Temarruz Z76.5; ruhsal bozukluk değil.",
+      "eskiTaniId": "malingering",
+      "vaka": {
+        "id": "case-146",
+        "caseNumber": 146,
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "malingering",
+        "therapyId": "supportive_psychotherapy",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "30 yaşında, erkek, zimmet davası sanığı (Cezaevinden Kaçmak İçin Kasıtlı Psikoz Rolü)",
+        "clues": [
+          "30 yaşındaki danışan, çalıştığı şirketten 15 milyon TL zimmetine geçirdiği gerekçesiyle tutuklanma talebiyle mahkemeye sevk edildiği günün sabahında aniden 'Kulağıma yeşil uzaylılar fısıldıyor, bana 100 milyon lira tazminat vermezseniz kendimi uzaya ışınlayacağım' diyerek adli psikiyatri servisine getirildi.",
+          "Görüşme odasında doktor varken gözlerini devirip tuhaf el hareketleri yaptığı ve anlamsız kelimeler sıraladığı; ancak doktor odadan çıkıp tek yönlü aynadan (veya koridor kamerasından) izlediğinde tüm garip hareketlerini anında kesip diğer hastalarla son derece mantıklı bir şekilde futbol maçı konuştuğu ve avukatına taktik verdiği saptandı.",
+          "Kلينik psikolog tarafından uygulanan Semptom Geçerlilik Testlerinde (TOMM ve MMPI-2 F / F-K abartma indeksleri) şans düzeyinin bile altında puan alarak bilerek yanlış cevap verdiği ve semptomları kasıtlı olarak uydurduğu kanıtlandı.",
+          "Şizofreni fizyolojisiyle bağdaşmayacak şekilde, günde 8 saat deliksiz uyuduğu, işitsel halüsinasyonların '24 saat hiç susmadan kesintisiz bağırdığını' iddia etmesine rağmen duygulanımının rahat ve kurnaz olduğu görüldü.",
+          "Ruhsal Durum Muayenesinde: Cezai sorumluluktan (hapisten) kurtulmak ve 'cezai ehliyeti yoktur' raporu almak (ikincil kazanç) amacıyla bilinçli ve kasıtlı olarak sahte psikotik semptom üretimi tespit edildi.",
+          "DSM-5 (Klinik İlgi Odağı Olabilecek Diğer Durumlar - V65.2) kriterlerine göre: Dışsal bir dürtüyle (askerlikten kaçma, cezai kovuşturmadan kurtulma, maddi tazminat alma veya ilaç temin etme) kasıtlı olarak sahte ya da abartılı fiziksel/ruhsal belirtiler üretme (Temarruz / Malingering) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "izlediğinde tüm garip hareketlerini anında kesip diğer hastalarla son derece mantıklı bir şekilde futbol maçı konuştuğu",
+            "dsmMatch": "Adli Gözlem: İzlenmediğini sandığı anda semptomların tamamen kaybolması"
+          },
+          {
+            "clueIndex": 4,
+            "text": "Cezai sorumluluktan (hapisten) kurtulmak ve 'cezai ehliyeti yoktur' raporu almak (ikincil kazanç) amacıyla bilinçli ve kasıtlı",
+            "dsmMatch": "DSM-5 Tanımı: Dışsal kazanç (ikincil kazanç) için kasıtlı sahte semptom üretimi (Temarruz)"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Adli Bilirkişi Raporlaması, Çatışmasız Yüzleştirme & Sınır Koyma",
+          "therapyDetails": "Hastayla öfkeli bir kavgaya girmeden, nesnel test ve gözlem bulgularının klinik tabloyla uyuşmadığını nötr bir dille belirtme ve adli makama tam cezai ehliyet raporu düzenleme.",
+          "pharmacologyNote": "Temarruz bir ruhsal bozukluk değildir (DSM-5 V/Z kodudur); gereksiz antipsikotik veya narkotik ilaç kesinlikle reçete edilmez."
+        },
+        "miniQuiz": {
+          "question": "Psikiyatride 'Temarruz' (Malingering), 'Yapay Bozukluk' (Münchausen) ve 'Konversiyon Bozukluğu' arasındaki 'Bilinçlilik' ve 'Kazanç Türü' ayrımı hangi seçenekte doğru verilmiştir?",
+          "options": [
+            "Temarruz: Bilinçli + İkincil Kazanç (para/hapisten kaçma); Yapay Bozukluk: Bilinçli + Birincil/Hasta rolü kazancı (dış çıkar yok); Konversiyon: Bilinçdışı + Birincil kazanç (çatışmayı bastırma).",
+            "Üçünde de hasta para kazanmak için bilerek yalan söyler.",
+            "Temarruzda hasta belirtileri tamamen bilinçdışı üretir.",
+            "Konversiyon bozukluğunda hasta tazminat almak için rol yapar."
+          ],
+          "correctIndex": 0,
+          "explanation": "Bu tablo tüm sınavların en klasik sorusudur: Semptom üretimi Temarruz ve Yapay Bozuklukta BİLİNÇLİ (kasıtlı), Konversiyon ve Somatik Belirti Bozukluğunda ise BİLİNÇDIŞIDIR. Temarruzda dışsal/maddi çıkar (ikincil kazanç) varken, Yapay Bozuklukta amaç sadece 'hasta rolü ve tıbbi ilgi'dir."
+        },
+        "differentialDiagnosis": "• Yapay Bozukluk (Münchausen): Kişi bilerek hastalık üretir ama maddi/adli çıkarı yoktur; ameliyat olmaya bile razı olur.\n• Ganser Sendromu: Cezaevinde görülür ancak gerçek dissosiyatif alacakaranlık bilinci vardır.",
+        "dsmCriteriaSummary": "DSM-5 (V65.2 / Z76.5): Dışsal/somut bir kazanç (cezaevinden kaçma, tazminat, askerlik, ilaç) amacıyla kasıtlı ve bilinçli olarak sahte semptom üretme.",
+        "pharmacologyId": "psychotherapy_first_no_drug"
+      }
+    },
+    {
+      "arsivNedeni": "Akatizi ilaca bağlı hareket bozukluğu; ruhsal bozukluk değil.",
+      "eskiTaniId": "medication_induced_akathisia",
+      "vaka": {
+        "id": "case-147",
+        "caseNumber": 147,
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "medication_induced_akathisia",
+        "therapyId": "medical_stabilization",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "26 yaşında, erkek, antipsikotik doz artışı sonrası gelişen içsel huzursuzluk",
+        "clues": [
+          "26 yaşındaki hasta, şizofreni tedavisi için Risperidon dozunun 6 mg/gün'e çıkarılmasından 4 gün sonra 'İçime sanki elektrik verdiler, derimin altında bir motor çalışıyor, bir saniye bile sandalyede oturamıyorum!' diyerek acil polikliniğe başvurdu.",
+          "Görüşme boyunca muayene odasında bir uçtan diğer uca durmaksızın volta attığı, ayakta dururken bir bacağından diğerine ağırlık aktardığı (yerinde sayma / marching in place) ve oturtulduğunda bacaklarını sürekli sallayıp 10 saniye sonra tekrar ayağa fırladığı gözlemlendi.",
+          "Huzursuz Bacaklar Sendromundan farklı olarak bu dayanılmaz hareket etme dürtüsünün sadece gece değil sabah-öğle-akşam tüm gün boyunca kesintisiz sürdüğü ve yürümekle de tam olarak geçmediği saptandı.",
+          "Hasta bu içsel kıvranma ve huzursuzluk hissinin o kadar işkence verici olduğunu belirtti ki, 'Eğer bu içimdeki sıkışma bugün geçmezse kendimi pencereden atacağım' diyerek yoğun intihar/ajitasyon sinyali verdi.",
+          "Ruhsal Durum ve Nörolojik Muayenede: Psikotik alevlenme veya mani değil, striatal dopamin D2 reseptör blokajına bağlı subjektif içsel huzursuzluk ve objektif motor yerinde duramama (Barnes Akatizi Ölçeği: Ağır) tespit edildi.",
+          "DSM-5'e göre: Nöroleptik (antipsikotik) veya SSRI kullanımından ya da doz artışından sonraki birkaç gün/hafta içinde gelişen, bacakları sallama, yerinde sayma ve oturamama ile karakterize İlacın Yol Açtığı Akut Akatizi tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 0,
+            "text": "'İçime sanki elektrik verdiler, derimin altında bir motor çalışıyor, bir saniye bile sandalyede oturamıyorum!'",
+            "dsmMatch": "DSM-5 Subjektif Bileşen: Dayanılmaz içsel huzursuzluk ve yerinde duramama hissi"
+          },
+          {
+            "clueIndex": 1,
+            "text": "ayakta dururken bir bacağından diğerine ağırlık aktardığı (yerinde sayma / marching in place)",
+            "dsmMatch": "DSM-5 Objektif Bileşen: Volta atma, bacak sallama ve yerinde sayma hareketleri"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Antipsikotik Doz Azaltımı/Değişimi & Beta-Bloker (Propranolol) Protokolü",
+          "therapyDetails": "En tehlikeli klinik hata akatiziyi 'psikotik ajitasyon' sanıp antipsikotik dozunu artırmaktır! İlaç dozu düşürülmeli veya Ketiapin/Olanzapin gibi düşük EPSE riskli ajana geçilmeli ve derhal spesifik akatizi tedavisi başlanmalıdır.",
+          "pharmacologyNote": "İlacın yol açtığı Akatizide BİRİNCİ BASAMAK (Altın Standart) ilaç lipofilik Beta-Bloker olan Propranolol (30-80 mg/gün)'dür; alternatif olarak Mirtazapin (düşük doz 15 mg - 5-HT2A antagonisti) veya Benzodiazepin (Lorazepam) kullanılır (Antikolinerjikler akatizide zayıf etkilidir!)."
+        },
+        "miniQuiz": {
+          "question": "Antipsikotik kullanan bir hastada gelişen 'Akut Akatizi'de (içsel yerinde duramama ve volta atma) en sık yapılan ÖLÜMCÜL klinik hata nedir ve birinci basamak spesifik ilacı hangisidir?",
+          "options": [
+            "Akatiziyi 'psikotik ajitasyon/anksiyete' sanıp antipsikotik dozunu daha da artırmak (tabloyu ve intihar riskini ağırlaştırır); birinci basamak spesifik ilacı ise 'Propranolol'dür (Beta-Bloker).",
+            "Hastaya su içirmek; birinci basamak ilacı antibiyotiktir.",
+            "Hastayı yürütmek; birinci basamak ilacı Haloperidol'dür.",
+            "Tansiyonunu ölçmek; birinci basamak ilacı Lityum'dur."
+          ],
+          "correctIndex": 0,
+          "explanation": "Akatizi hastaya dayanılmaz bir içsel işkence yaşatır ve dürtüsel intihar girişimlerini tetikler. Hekim bunu 'hastalığı azdı, ajite oldu' sanıp antipsikotik dozunu artırırsa tablo felakete dönüşür. Doz azaltılmalı ve 1. tercih olarak Propranolol verilmelidir."
+        },
+        "differentialDiagnosis": "• Psikotik Ajitasyon: Antipsikotik dozu artırıldığında psikotik ajitasyon yatışır, akatizi ise ŞİDDETLENİR.\n• Huzursuz Bacaklar Sendromu: Sadece akşam/gece yatınca olur ve yürüyünce anında geçer; akatizi ise tüm gün sürer.",
+        "dsmCriteriaSummary": "DSM-5: Antipsikotik/SSRI başlanması veya doz artışı sonrası gelişen subjektif içsel huzursuzluk + Objektif yerinde duramama (volta atma, ayak sallama).",
+        "pharmacologyId": "propranolol_beta"
+      }
+    },
+    {
+      "arsivNedeni": "Akut distoni ilaca bağlı hareket bozukluğu; ruhsal bozukluk değil.",
+      "eskiTaniId": "medication_induced_dystonia",
+      "vaka": {
+        "id": "case-148",
+        "caseNumber": 148,
+        "difficulty": "Kolay",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "medication_induced_dystonia",
+        "therapyId": "medical_stabilization",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "21 yaşında, erkek, Haloperidol enjeksiyonundan 6 saat sonra gelişen göz ve boyun kasılması",
+        "clues": [
+          "21 yaşındaki genç erkek hasta, dün akşam acil serviste ajitasyon nedeniyle yapılan 10 mg kas içi (IM) Haloperidol enjeksiyonundan 6 saat sonra boynunun şiddetle sağa ve arkaya doğru kasılarak kilitlenmesi (spazmodik tortikollis) ve göz kürelerinin yukarı doğru kayıp tavana dikili kalması (okülogirik kriz) nedeniyle panik içinde getirildi.",
+          "Hastanın çenesinin kasıldığı (trismus), dilinin dışarı doğru büyümüş gibi sertleştiği ve konuşmakta/yutkunmakta güçlük çektiği görüldü.",
+          "Hasta bilincinin tamamen açık olduğunu, gözlerini aşağı indirmeye ve boynunu düzeltmeye çalıştığını ancak kaslarının demir gibi kasıldığını ve çok şiddetli ağrı çektiğini ifade etti.",
+          "Ateşi (36.6°C) ve tansiyonu normaldir; yaygın kurşun boru rijiditesi veya CK yüksekliği yoktur (NMS dışlandı).",
+          "Ruhsal Durum ve Nörolojik Muayenede: Nigrostriatal yolakta akut dopamin D2 blokajı sonucu oluşan nigrostriatal dopamin-asetilkolin dengesizliği (aşırı kolinerjik baskınlık) tespit edildi; yapılan 1 ampul (5 mg) IM Biperiden (Akineton) enjeksiyonundan 10 dakika sonra gözlerin ve boynun tamamen normale döndüğü gözlendi.",
+          "DSM-5'e göre: Nöroleptik (antipsikotik) veya antiemetik (Metoklopramid) uygulamasından sonraki ilk saatler/günler içinde ortaya çıkan, boyun, göz, çene ve dil kaslarında anormal ve ağrılı спаzm/postürlerle karakterize İlacın Yol Açtığı Akut Distoni tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 0,
+            "text": "boynunun şiddetle sağa ve arkaya doğru kasılarak kilitlenmesi (spazmodik tortikollis) ve göz kürelerinin yukarı doğru kayıp tavana dikili kalması (okülogirik kriz)",
+            "dsmMatch": "DSM-5 Kriter A: Akut distonik kasılmalar (Tortikollis ve Okülogirik Kriz)"
+          },
+          {
+            "clueIndex": 4,
+            "text": "1 ampul (5 mg) IM Biperiden (Akineton) enjeksiyonundan 10 dakika sonra gözlerin ve boynun tamamen normale döndüğü",
+            "dsmMatch": "Tanı ve Tedavi: Parenteral Antikolinerjik (Biperiden) uygulamasına dramatik hızlı yanıt"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Acil Parenteral Antikolinerjik (Biperiden / Akineton) veya Antihistaminik (Difenhidramin)",
+          "therapyDetails": "Laringospazm (boğaz kaslarının kasılmasıyla boğulma) riskine karşı hava yolu güvenliğini kontrol etme, hemen IM/IV Biperiden uygulama ve hastanın korkusunu yatıştırma.",
+          "pharmacologyNote": "Akut Distoninin hayat kurtarıcı ve dakikalar içinde etki eden tedavisi IM veya IV Biperiden (Akineton 5 mg) ya da Difenhidramin'dir; tekrarını önlemek için birkaç gün oral Biperiden devam edilir ve atipik antipsikotiğe geçilir."
+        },
+        "miniQuiz": {
+          "question": "Yüksek potensli tipik antipsikotik (Haloperidol) veya bulantı ilacı (Metoklopramid) verildikten sonraki ilk 24-48 saatte gelişen, gözlerin tavana dikilmesi (okülogirik kriz) ve boyun tutulması (tortikollis) ile seyreden 'Akut Distoni'nin en büyük risk grubu ve acil tedavisi nedir?",
+          "options": [
+            "En yüksek risk grubu 'Genç Erkekler'dir; acil tedavisi ise parenteral (IM/IV) Antikolinerjik (Biperiden / Akineton) enjeksiyonudur.",
+            "En yüksek risk grubu 80 yaş üstü kadınlardır; tedavisi Valbenazin'dir.",
+            "En yüksek risk grubu bebeklerdir; tedavisi Lityum'dur.",
+            "Tedavisi antipsikotik dozunu iki katına çıkarmaktır."
+          ],
+          "correctIndex": 0,
+          "explanation": "Ekstrapiramidal yan etkilerden Tardif Diskinezi yaşlı kadınlarda yıllar sonra görülürken, Akut Distoni genç ve kaslı erkeklerde ilacın ilk saatlerinde/günlerinde görülür. Tedavisi IM/IV Biperiden (Akineton)'dur."
+        },
+        "differentialDiagnosis": "• Tardif Diskinezi: Yıllar sonra başlar, ağrısız koreoatetoid dil-dudak hareketleri vardır ve Biperiden ile KÖTÜLEŞİR.\n• Konversiyon / Tetanoz: İlaç kullanım öyküsü ve Biperiden ile 10 dakikada tam düzelme öyküsüyle ayrılır.",
+        "dsmCriteriaSummary": "DSM-5: Dopamin antagonisti ilaç alımından sonraki ilk saatler/günlerde gelişen kraniyal, servikal veya oküler kas spazmları (Okülogirik kriz, tortikollis, trismus, laringospazm).",
+        "pharmacologyId": "biperiden_anticholinergic"
+      }
+    },
+    {
+      "arsivNedeni": "Antidepresan bırakma sendromu ilacın olumsuz etkisi (T43.205x); ruhsal bozukluk değil.",
+      "eskiTaniId": "antidepressant_discontinuation",
+      "vaka": {
+        "id": "case-149",
+        "caseNumber": 149,
+        "difficulty": "Kolay",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "antidepressant_discontinuation",
+        "therapyId": "cbt_general",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "32 yaşında, kadın, Venlafaksin'i aniden bırakan danışan (Beyinde Elektrik Çarpması / Brain Zaps)",
+        "clues": [
+          "32 yaşındaki danışan, 1 yıldır Majör Depresyon nedeniyle kullandığı Venlafaksin (SNRI) 150 mg/gün ilacını 'Artık tamamen iyileştim, ilaca ihtiyacım kalmadı' diyerek 3 gün önce kendi kararıyla bir anda (aniden) kestiğini ve dün sabahtan beri çok tuhaf nörolojik belirtiler yaşadığını belirterek başvurdu.",
+          "Özellikle gözlerini veya başını sağa-sola çevirdiğinde kafasının içinde 'sanki yarım saniyelik bir elektrik çarpması, şimşek çakması veya titreme' (Brain Zaps / Lhermitte benzeri parestezi) hissettiğini ve başının fırıldak gibi döndüğünü anlattı.",
+          "Buna ek olarak ateş basması, aşırı terleme, mide bulantısı (grip benzeri tablo), gece çok canlı ve korkutucu rüyalar görme ve sebepsiz ağlama/irritabilite atakları başladığını ifade etti.",
+          "Nörolojik muayene, ateş ve enfeksiyon parametreleri normaldir; belirtilerin depresyon nüksünden (relaps) çok farklı olarak ilacın kesilmesinden sadece 36 saat sonra akut fiziksel-duyusal semptomlarla başladığı saptandı.",
+          "Ruhsal Durum Muayenesinde: Kısa yarı ömürlü serotonerjik/noradrenerjik ilacın (Venlafaksin/Paroksetin) aniden kesilmesine bağlı akut sinaptik reseptör adaptasyon krizi doğrulandı.",
+          "DSM-5'e göre: En az 1-2 ay düzenli kullanılan bir antidepresanın aniden kesilmesi sonrasında 2-4 gün içinde başlayan, 'beyinde elektrik çarpması' (brain zaps), baş dönmesi, bulantı, canlı rüyalar ve grip benzeri belirtilerle karakterize Antidepresan Bırakma Sendromu tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "gözlerini veya başını sağa-sola çevirdiğinde kafasının içinde 'sanki yarım saniyelik bir elektrik çarpması, şimşek çakması veya titreme' (Brain Zaps",
+            "dsmMatch": "DSM-5 Patognomonik Semptom: Göz hareketleriyle tetiklenen beyinde elektrik çarpması (Brain Zaps)"
+          },
+          {
+            "clueIndex": 0,
+            "text": "3 gün önce kendi kararıyla bir anda (aniden) kestiğini",
+            "dsmMatch": "DSM-5 Etiyoloji: Kısa yarı ömürlü antidepresanın (Venlafaksin/Paroksetin) aniden kesilmesi"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "İlacın Yeniden Başlanıp Kademeli Azaltılması (Tapering) & Psiko-eğitim",
+          "therapyDetails": "Hastaya bu tablonun ilaç bağımlılığı veya delirme olmadığını anlatma, kesilen antidepresanı tekrar başlayıp semptomları 24 saat içinde geçirdikten sonra haftalar/aylar içinde çok yavaş doz azaltarak (veya uzun yarı ömürlü Fluoksetin köprülemesiyle) kesme.",
+          "pharmacologyNote": "En sık ve en şiddetli bırakma sendromu yapan iki ilaç yarı ömrü en kısa olan VENLAFAKSİN ve PAROKSETİN'dir. En az yapan ise yarı ömrü en uzun (aktif metaboliti norfluoksetin 1-2 hafta) olan FLUOKSETİN'dir."
+        },
+        "miniQuiz": {
+          "question": "Yarı ömrü çok kısa olduğu için aniden bırakıldığında 'Beyinde Elektrik Çarpması' (Brain Zaps) ve baş dönmesiyle giden Antidepresan Bırakma Sendromuna EN SIK yol açan iki antidepresan hangisidir?",
+          "options": [
+            "Venlafaksin (SNRI) ve Paroksetin (SSRI) — Yarı ömrü en uzun olduğu için EN AZ yol açan ise Fluoksetin'dir.",
+            "Fluoksetin ve Lityum",
+            "Bupropion ve Melatonin",
+            "Haloperidol ve Diazepam"
+          ],
+          "correctIndex": 0,
+          "explanation": "FINSH kısaltmasıyla bilinen Antidepresan Bırakma Sendromu (Flu-like, Insomnia/vivid dreams, Nausea, Sensory 'Brain Zaps', Hyperarousal) en şiddetli olarak yarı ömrü en kısa olan Venlafaksin ve Paroksetin'de görülür. Fluoksetin kendi kendini yavaşça temizlediği için en az riskli olandır."
+        },
+        "differentialDiagnosis": "• Depresyon Nüksü (Relaps): İlaç kesildikten haftalar/aylar sonra yavaş yavaş başlar ve 'beyinde elektrik çarpması / baş dönmesi' yapmaz; Bırakma sendromu ise 2-4 günde başlar ve tek doz ilaç alınınca birkaç saatte tamamen kaybolur.\n• Viral Enfeksiyon / Vertigo: İlaç kesme öyküsü ve brain zaps ile ayrılır.",
+        "dsmCriteriaSummary": "DSM-5 (FINSH): Antidepresanın aniden kesilmesi sonrası 2-4 günde başlayan; Grip benzeri belirtiler, Canlı kabuslar/uykusuzluk, Bulantı, Denge bozukluğu, Duyusal 'Brain Zaps' (elektriklenme) ve Anksiyete.",
+        "pharmacologyId": "ssri_firstline"
+      }
+    },
+    {
+      "arsivNedeni": "Tükenmişlik ICD-11 mesleki fenomeni; DSM-5-TR tanısı değil.",
+      "eskiTaniId": "burnout_syndrome",
+      "vaka": {
+        "id": "case-150",
+        "caseNumber": 150,
+        "difficulty": "Kolay",
+        "course": "ADULT",
+        "diagnosisId": "burnout_syndrome",
+        "therapyId": "cbt_general",
+        "category": "OTHER_CLINICAL",
+        "patientSummary": "35 yaşında, erkek, acil servis hekimi (Maslach Triadı: Duygusal Tükenme, Duyarsızlaşma ve Düşük Başarı)",
+        "clues": [
+          "35 yaşındaki acil servis hekimi, son 8 aydır ayda 12 nöbet tuttuğu yoğun çalışma temposu nedeniyle 'Sabahları hastane binasını gördüğüm an midem bulanıyor, enerjim sıfırlandı, ruhsal olarak tamamen kurudum' yakınmasıyla başvurdu.",
+          "Mesleğinin ilk yıllarında hastalarına karşı son derece şefkatli ve empatik bir hekimken, son aylarda hastaları birer insan olarak değil 'bitirilmesi gereken mekanik birer dosya numarası' gibi gördüğünü ve onların acılarına karşı tamamen alaycı, soğuk ve umursamaz (duyarsızlaşma / sinisizm) bir tutum geliştirdiğini anlattı.",
+          "Ne kadar çalışırsa çalışsın kendisini mesleki olarak tamamen yetersiz, verimsiz ve başarısız hissettiğini ('Yaptığım hiçbir işin anlamı yok' - kişisel başarı algısında düşme) belirtti.",
+          "Majör Depresyondan farklı olarak; yıllık izne çıkıp tatile gittiğinde, hafta sonu ailesiyle doğa yürüyüşü yaptığında veya gitar çaldığında keyfinin ve enerjisinin tamamen yerinde olduğu, anhedoni veya intihar düşüncesinin OLMADIĞI, tüm semptomların yalnızca 'iş ve hastane bağlamıyla' sınırlı olduğu saptandı.",
+          "Ruhsal Durum Muayenesinde: Maslach Tükenmişlik Envanteri'nin 3 boyutu olan 'Duygusal Tükenme, Duyarsızlaşma (Depersonalizasyon/Sinisizm) ve Düşük Kişisel Başarı Hissi' tam olarak doğrulandı.",
+          "ICD-11 (QD85) ve DSM-5 (Mesleki Sorun / Z56) kriterlerine göre: Başarıyla yönetilemeyen kronik işyeri stresinden kaynaklanan ve yalnızca mesleki bağlamla sınırlı olan Tükenmişlik Sendromu (Burnout) tablosudur."
+        ],
+        "symptomHighlights": [
+          {
+            "clueIndex": 1,
+            "text": "hastaları birer insan olarak değil 'bitirilmesi gereken mekanik birer dosya numarası' gibi gördüğünü ve onların acılarına karşı tamamen alaycı, soğuk ve umursamaz (duyarsızlaşma / sinisizm)",
+            "dsmMatch": "Maslach Triadı 2: Hizmet verilen kişilere karşı duygusal kopukluk ve sinisizm (Duyarsızlaşma)"
+          },
+          {
+            "clueIndex": 3,
+            "text": "tüm semptomların yalnızca 'iş ve hastane bağlamıyla' sınırlı olduğu saptandı",
+            "dsmMatch": "Ayırıcı Tanı: Majör Depresyondan ayrım kriteri (Belirtilerin sadece iş alanıyla sınırlı olması)"
+          }
+        ],
+        "treatmentModality": {
+          "goldStandardTherapy": "Bilişsel Davranışçı Stres Yönetimi, Sınır Koyma & Organizasyonel Düzenleme",
+          "therapyDetails": "Aşırı sorumluluk ve 'hayır diyememe' şemalarını esnetme, iş-yaşam sınırlarını (nöbet sayısı, mesai dışı telefon kapatma) yeniden çizme, bilinçli farkındalık (Mindfulness) ve dinlenme molaları oluşturma.",
+          "pharmacologyNote": "Tükenmişlik Sendromu medikal bir hastalık değil, mesleki bir olgudur; tek başına antidepresan vermek çalışma koşulları değişmedikçe sorunu çözmez (komorbid majör depresyon gelişirse SSRI başlanır)."
+        },
+        "miniQuiz": {
+          "question": "Christina Maslach ve ICD-11 tarafından tanımlanan 'Tükenmişlik Sendromu'nun (Burnout) 3 temel bileşeni nedir ve bu tabloyu Majör Depresyondan ayıran en kritik fark hangisidir?",
+          "options": [
+            "1) Duygusal Tükenme, 2) Duyarsızlaşma/Sinisizm, 3) Düşük Kişisel Başarı Hissi; Depresyon yaşamın tüm alanlarını (tatil, hobi, aile) çökertirken, Tükenmişlik yalnızca 'iş/meslek bağlamıyla' sınırlıdır.",
+            "Halüsinasyon + Hezeyan + Katatoni; sadece emeklilerde görülür.",
+            "Aşırı neşe + Az uyku + Çok konuşma",
+            "Sadece fiziksel kas ağrısı ve yüksek ateş"
+          ],
+          "correctIndex": 0,
+          "explanation": "Maslach Tükenmişlik Modeli 3 boyuttan oluşur: Duygusal tükenme, Duyarsızlaşma (hizmet verilen insanlara nesne gibi soğuk davranma) ve Kişisel başarıda düşme hissi. Majör depresyondan en önemli farkı, iş dışındaki sosyal/tatil alanlarında kişinin zevk alabilmesidir."
+        },
+        "differentialDiagnosis": "• Majör Depresif Bozukluk: Tatilde ve hobilerde de zevk alamama (yaygın anhedoni), suçluluk ve intihar düşünceleri vardır; tükenmişlik ise işe özgüdür.\n• Uyum Bozukluğu: Yeni bir yaşam değişikliğinden sonraki 3 ay içinde başlar.",
+        "dsmCriteriaSummary": "ICD-11 / DSM-5 (Mesleki Sorun): Kronik işyeri stresine bağlı 1) Enerji tükenmesi, 2) İşe karşı zihinsel mesafe/sinisizm (duyarsızlaşma), 3) Mesleki yeterlilikte azalma hissi.",
+        "pharmacologyId": "psychotherapy_first_no_drug"
+      }
+    }
+  ]
+}

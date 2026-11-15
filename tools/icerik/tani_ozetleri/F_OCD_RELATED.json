@@ -1,0 +1,94 @@
+{
+"ocd_contamination": {
+ "id": "ocd_contamination",
+ "nameTr": "OKB (Bulaşma Obsesyonu ve Temizlik Kompulsiyonu)",
+ "nameEn": "OCD (Contamination/Cleaning)",
+ "clinicalDescription": {
+  "overview": "OKB'nin en sık görülen belirti boyutudur. Mikrop, kir, vücut salgıları, kimyasallar ya da hastalık bulaşacağına dair istenmeyen, sıkıntı veren obsesyonlar; bunları nötralize etmek için uzun süreli ve kurallı el yıkama, banyo yapma, temizlik ve dezenfeksiyon kompulsiyonları ile 'kirli' sayılan nesne, yer ve kişilerden kaçınma görülür. Kaygının yanında belirgin bir iğrenme duygusu bulunur; bazı kişilerde fiziksel temas olmadan da 'zihinsel kirlenme' (ahlaki ya da kişilerarası kirlenme hissi) yaşanır. Ellerde yıkamaya bağlı tahriş ve egzama sık görülür. DSM-5'te ayrı bir alt tip değildir; OKB'nin belirti boyutlarından biridir.",
+  "epidemiology": "OKB'nin yaşam boyu yaygınlığı yaklaşık %2-3'tür. Bulaşma/temizlik boyutu OKB'li hastaların önemli bir kısmında bulunur ve kadınlarda daha sıktır.",
+  "etiology": "Kortiko-striato-talamo-kortikal devrede (orbitofrontal korteks, kaudat çekirdek) aşırı etkinlik, serotonerjik işlev bozukluğu, iğrenme duyarlılığının yüksekliği, tehdidin abartılması ve belirsizliğe tahammülsüzlük gibi bilişsel etkenler; kaçınma ve temizliğin olumsuz pekiştirme ile sürmesi.",
+  "prognosis": "Maruz bırakma ve tepki önleme (ERP) ilk basamak psikoterapidir; SSRI'lar etkilidir. Bu boyut genellikle ERP'ye iyi yanıt verir. İçgörü düzeyi ve aile uyumu (ailenin ritüellere katılması) tedavi sonucunu etkiler."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "OKB Ortak Ölçütleri",
+   "content": "Obsesyonlar (yineleyen, istenmeyen, sıkıntı veren düşünce, dürtü ya da imgeler ve bunları bastırma/nötralize etme çabası) ve/veya kompulsiyonlar (obsesyona yanıt olarak ya da katı kurallara göre yapılan, kaygıyı azaltmayı ya da korkulan bir olayı önlemeyi amaçlayan ancak bununla gerçekçi bağı olmayan ya da açıkça aşırı yineleyici davranış veya zihinsel eylemler) (A). Belirtiler zaman alır (örn. günde 1 saatten fazla) ya da belirgin sıkıntı/işlev bozulmasına yol açar (B). Madde ya da sağlık durumuna bağlanamaz (C). Başka bir ruhsal bozuklukla daha iyi açıklanamaz (D)."
+  },
+  {
+   "code": "Belirti Boyutu & Belirleyiciler",
+   "title": "Bulaşma/Temizlik Boyutu",
+   "content": "Bulaşma, kir, mikrop ya da hastalık kapma obsesyonları ile yıkama, temizleme ve kaçınma kompulsiyonları. Belirleyiciler: içgörü (iyi ya da orta, kötü, içgörüsüz/sanrısal inançlarla) ve tikle ilişkili. Hastalık kaygısı bozukluğundan farkı, kişinin hastalığa sahip olmaktan çok bulaşmadan korkması ve ritüellerin belirgin olmasıdır."
+  }
+ ]
+},
+"ocd_checking": {
+ "id": "ocd_checking",
+ "nameTr": "OKB (Kuşku Obsesyonu ve Kontrol Kompulsiyonu)",
+ "nameEn": "OCD (Doubt/Checking)",
+ "clinicalDescription": {
+  "overview": "Kendisine ya da başkalarına zarar gelebileceğine, bir felakete (yangın, hırsızlık, kaza) neden olabileceğine ya da önemli bir hata yaptığına dair kuşku obsesyonları ve bunları gidermek için kapı, ocak, musluk, elektrikli aletleri tekrar tekrar kontrol etme, geri dönüp bakma, başkalarına güvence sorma gibi kompulsiyonlarla seyreden OKB belirti boyutudur. Kişi kontrolü yaptığını bildiği halde 'emin olma' hissine ulaşamaz; tekrar eden kontrol, belleğe olan güveni daha da azaltarak kuşkuyu artırır. DSM-5'te ayrı bir alt tip değil, OKB'nin bir belirti boyutudur.",
+  "epidemiology": "OKB'nin yaşam boyu yaygınlığı yaklaşık %2-3'tür; kontrol kompulsiyonları en sık görülen kompulsiyon türleri arasındadır.",
+  "etiology": "Kortiko-striato-talamo-kortikal devre işlev bozukluğuna ek olarak bilişsel modeller (Salkovskis) öne çıkar: zarar için aşırı sorumluluk duygusu, düşüncelere aşırı önem verme, belirsizliğe tahammülsüzlük ve mükemmeliyetçilik. Kontrol ve güvence arama kısa vadede kaygıyı azaltarak olumsuz pekiştirme yoluyla sürer.",
+  "prognosis": "ERP (kontrol etmeden ayrılma, güvence aramayı bırakma) ve sorumluluk inançlarını hedefleyen bilişsel terapi etkilidir; SSRI'lar destekleyicidir. Ailenin güvence verme döngüsünü sürdürmemesi tedavide önemlidir."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "OKB Ortak Ölçütleri",
+   "content": "Obsesyonlar ve/veya kompulsiyonların bulunması (A); belirtilerin zaman alması (örn. günde 1 saatten fazla) ya da belirgin sıkıntı/işlev bozulmasına yol açması (B); madde ya da sağlık durumuna bağlanamaması (C); yaygın anksiyete bozukluğundaki endişeler gibi başka bir bozuklukla daha iyi açıklanamaması (D)."
+  },
+  {
+   "code": "Belirti Boyutu & Belirleyiciler",
+   "title": "Kuşku/Kontrol Boyutu",
+   "content": "Zarar verme, hata yapma ya da sorumluluk temalı kuşku obsesyonları ile kontrol etme, tekrar etme, güvence arama kompulsiyonları. Yaygın anksiyete bozukluğundan farkı, düşüncelerin gerçek yaşam sorunlarına ilişkin endişeler değil, istenmeyen ve yabancı (ego-distonik) yaşanması ile ritüellerin varlığıdır. Belirleyiciler: içgörü düzeyi ve tikle ilişkili."
+  }
+ ]
+},
+"ocd_symmetry": {
+ "id": "ocd_symmetry",
+ "nameTr": "OKB (Simetri, Düzen ve Sayma Kompulsiyonları)",
+ "nameEn": "OCD (Symmetry/Ordering)",
+ "clinicalDescription": {
+  "overview": "Nesnelerin simetrik, düzenli, belirli bir sırada ya da 'tam olması gerektiği gibi' durması gerekliliğine ilişkin obsesyonlar ve bunlara eşlik eden düzenleme, hizalama, sayma, belirli sayıda tekrarlama, dokunma kompulsiyonlarıyla seyreden OKB belirti boyutudur. Bu boyutta itici güç çoğu zaman bir felaket korkusundan çok 'tamamlanmamışlık' ya da 'tam olmamışlık' (not just right) hissidir; kişi bir eylemi doğru hissedene kadar tekrarlar. Bazen 'düzgün yapmazsam annem ölecek' gibi büyüsel düşünceler eşlik eder. DSM-5'te ayrı bir alt tip değil, OKB'nin bir belirti boyutudur.",
+  "epidemiology": "OKB'nin yaşam boyu yaygınlığı yaklaşık %2-3'tür. Simetri/düzen boyutu erken başlangıçlı OKB ve tik bozukluğu öyküsüyle daha sık ilişkilidir.",
+  "etiology": "Duyusal-motor devreleri de içeren kortiko-striatal işlev bozukluğu ve tik bozukluklarıyla ortak nörobiyolojik etkenler düşünülmektedir; tamamlanmamışlık hissi duyusal fenomenlerle (premonitör dürtülere benzer) ilişkilendirilir.",
+  "prognosis": "ERP etkilidir; ancak korku yerine tamamlanmamışlık hissi baskınsa maruziyet bu hissin 'eksik' bırakılmasına (bilerek asimetrik bırakma) odaklanır. Tikle ilişkili olgularda SSRI'lara yanıt daha sınırlı olabilir ve antipsikotik güçlendirme gerekebilir. Obsesif-kompulsif kişilik bozukluğundan (OKKB) ayırt edilmelidir: OKKB'de düzen ve mükemmeliyetçilik ego-sintoniktir ve gerçek obsesyon/kompulsiyon yoktur."
+ },
+ "criteriaList": [
+  {
+   "code": "Kriter A-D",
+   "title": "OKB Ortak Ölçütleri",
+   "content": "Obsesyonlar ve/veya kompulsiyonlar (A); günde 1 saatten fazla zaman alma ya da belirgin sıkıntı/işlev bozulması (B); madde ya da sağlık durumuna bağlanamama (C); otizm spektrum bozukluğundaki yineleyici davranışlar, tik bozuklukları veya OKKB gibi durumlarla daha iyi açıklanamama (D)."
+  },
+  {
+   "code": "Belirti Boyutu & Belirleyiciler",
+   "title": "Simetri/Düzen Boyutu ve Tikle İlişkili Belirleyici",
+   "content": "Simetri, kesinlik ve düzen obsesyonları ile düzenleme, sayma, tekrarlama ve dokunma kompulsiyonları. 'Tikle ilişkili' belirleyicisi, kişide şu an ya da geçmişte tik bozukluğu varsa eklenir. İçgörü düzeyi ayrıca belirtilir."
+  }
+ ]
+},
+"body_focused_repetitive": {
+ "id": "body_focused_repetitive",
+ "nameTr": "Beden Odaklı Yineleyici Davranış Bozukluğu (Tırnak Yeme vb.)",
+ "nameEn": "Body-Focused Repetitive Behavior Disorder",
+ "clinicalDescription": {
+  "overview": "Saç yolma (trikotilomani) ve deri yolma (ekskoriasyon) dışındaki, bedene yönelik yineleyici davranışların (tırnak yeme, dudak ısırma, yanak içini çiğneme gibi) belirgin sıkıntı ya da işlev bozulmasına yol açtığı ve kişinin bu davranışları azaltma ya da bırakma girişimlerinin tekrar tekrar başarısız olduğu durumdur. DSM-5'te 'Belirlenmiş diğer obsesif-kompulsif ve ilişkili bozukluk' kategorisi altında örnek olarak yer alır. Davranış çoğu zaman can sıkıntısı, gerginlik ya da kaygı sırasında, bazen de farkında olmadan (otomatik) yapılır; ardından rahatlama ve sonrasında utanç görülebilir.",
+  "epidemiology": "Tırnak yeme çocuk ve ergenlerde oldukça yaygındır, ancak çoğu durumda bozukluk düzeyine ulaşmaz. Bozukluk tanısı ancak belirgin sıkıntı, doku hasarı ya da işlev bozulması ve tekrarlayan bırakma girişimleri varsa konur.",
+  "etiology": "Duygu düzenleme işlevi (gerginlik ve can sıkıntısını azaltma), alışkanlık oluşumu ve olumsuz pekiştirme; trikotilomani ve ekskoriasyon bozukluğuyla ortak nörobiyolojik ve ailesel etkenler. OKB, anksiyete bozuklukları ve DEHB ile birliktelik gösterebilir.",
+  "prognosis": "Alışkanlığı tersine çevirme eğitimi (farkındalık eğitimi + rekabet eden yanıt) ve kapsamlı davranışçı modeller (ComB) ilk basamak tedavidir. Kabul ve kararlılık terapisi ile duygu düzenleme becerileri eklenebilir. Tırnak çevresi enfeksiyonları ve diş sorunları açısından tıbbi değerlendirme gerekebilir."
+ },
+ "criteriaList": [
+  {
+   "code": "Tanım",
+   "title": "Belirlenmiş Diğer OKİB Örneği",
+   "content": "Saç ve deri yolma dışındaki, bedene yönelik yineleyici davranışlar (örn. tırnak yeme, dudak ısırma, yanak çiğneme) ve bu davranışları azaltma ya da bırakmaya yönelik yinelenen girişimler."
+  },
+  {
+   "code": "Not",
+   "title": "Klinik Eşik ve Dışlamalar",
+   "content": "Davranışlar klinik açıdan belirgin sıkıntıya ya da toplumsal, mesleki veya diğer önemli alanlarda işlev bozulmasına yol açmalıdır. Stereotipik hareket bozukluğu, OKB, otizm spektrum bozukluğu, psikotik bozukluk ya da madde/tıbbi durum ile daha iyi açıklanmamalıdır. Saç yolma ise trikotilomani, deri yolma ise ekskoriasyon bozukluğu tanısı konur."
+  }
+ ]
+}
+}

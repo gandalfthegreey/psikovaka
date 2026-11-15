@@ -1,0 +1,9 @@
+{
+  "name": "psikovaka-supabase-tests",
+  "private": true,
+  "type": "module",
+  "description": "Supabase şemasının senaryo testleri. Varsayılan: PGlite (WASM Postgres, kurulum gerektirmez). DATABASE_URL verilirse gerçek Postgres (pg).",
+  "scripts": { "test": "node scenario.test.mjs" },
+  "dependencies": { "@electric-sql/pglite": "^0.5.16" },
+  "optionalDependencies": { "pg": "^8.13.0" }
+}
