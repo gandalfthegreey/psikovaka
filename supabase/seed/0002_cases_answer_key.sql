@@ -1,6 +1,6 @@
 -- OTOMATİK ÜRETİLDİ — elle düzenlemeyin.
 -- Üretici: supabase/seed/generate_answer_key.js
--- Kaynak: js/cases.js (138 vaka), js/diagnoses.js (179),
+-- Kaynak: js/cases.js (158 vaka), js/diagnoses.js (179),
 --         js/therapies.js (45), js/pharmacology.js (34)
 -- GitHub Actions (supabase-cevap-anahtari.yml) bu dosyayı her push'ta yeniden üretip Supabase'e uygular.
 -- Elle yedek yol: dosyanın tamamını Supabase SQL Editor'de çalıştırın. Tekrar çalıştırmak güvenlidir.
@@ -408,7 +408,27 @@ values
   ('case-141', 141, 'major_neurocognitive_lewy_body', 'caregiver_behavioral', 'cholinesterase_donepezil', 'NEUROCOGNITIVE', 'Zor', 'NEURO_SOMATIC'),
   ('case-142', 142, 'major_neurocognitive_prion', 'caregiver_behavioral', 'psychotherapy_first_no_drug', 'NEUROCOGNITIVE', 'İleri Düzey', 'NEURO_SOMATIC'),
   ('case-143', 143, 'major_neurocognitive_huntington', 'caregiver_behavioral', 'valbenazine_vmat2', 'NEUROCOGNITIVE', 'Zor', 'NEURO_SOMATIC'),
-  ('case-144', 144, 'wernicke_korsakoff_syndrome', 'motivational_interviewing', 'thiamine_iv_wernicke', 'NEUROCOGNITIVE', 'Zor', 'SUBSTANCE')
+  ('case-144', 144, 'wernicke_korsakoff_syndrome', 'motivational_interviewing', 'thiamine_iv_wernicke', 'NEUROCOGNITIVE', 'Zor', 'SUBSTANCE'),
+  ('case-151', 151, 'language_disorder', 'speech_therapy', 'psychotherapy_first_no_drug', 'NEURODEV', 'Kolay', 'CHILD'),
+  ('case-152', 152, 'provisional_tic_disorder', 'cbit', 'alpha2_agonist_tic', 'NEURODEV', 'Kolay', 'CHILD'),
+  ('case-153', 153, 'social_communication_disorder', 'speech_therapy', 'psychotherapy_first_no_drug', 'NEURODEV', 'Zor', 'CHILD'),
+  ('case-154', 154, 'substance_induced_psychotic', 'motivational_interviewing', 'atypical_ap_secondgen', 'PSYCHOTIC', 'Orta', 'ADULT'),
+  ('case-155', 155, 'catatonia_medical', 'medical_stabilization', 'lorazepam_catatonia', 'PSYCHOTIC', 'İleri Düzey', 'NEURO_SOMATIC'),
+  ('case-156', 156, 'bipolar_due_to_medical', 'supportive_psychotherapy', 'valproate_acute_mania', 'BIPOLAR', 'Zor', 'NEURO_SOMATIC'),
+  ('case-157', 157, 'depressive_due_to_medical', 'supportive_psychotherapy', 'ssri_firstline', 'MOOD', 'Orta', 'NEURO_SOMATIC'),
+  ('case-158', 158, 'anxiety_due_to_medical', 'supportive_psychotherapy', 'hydroxyzine_buspirone', 'ANXIETY', 'Orta', 'NEURO_SOMATIC'),
+  ('case-159', 159, 'ptsd_preschool', 'parent_training', 'psychotherapy_first_no_drug', 'TRAUMA', 'Orta', 'CHILD'),
+  ('case-160', 160, 'psychological_factors_affecting_medical', 'motivational_interviewing', 'psychotherapy_first_no_drug', 'SOMATIC', 'Zor', 'NEURO_SOMATIC'),
+  ('case-161', 161, 'obstructive_sleep_apnea', 'cbt_i', 'psychotherapy_first_no_drug', 'SLEEP', 'Kolay', 'ADULT'),
+  ('case-162', 162, 'circadian_rhythm_sleep_wake', 'cbt_i', 'psychotherapy_first_no_drug', 'SLEEP', 'Orta', 'ADULT'),
+  ('case-163', 163, 'delayed_ejaculation', 'sensate_focus', 'bupropion_ndri', 'SEXUAL', 'Orta', 'ADULT'),
+  ('case-164', 164, 'female_sexual_interest_arousal', 'sensate_focus', 'bupropion_ndri', 'SEXUAL', 'Orta', 'ADULT'),
+  ('case-165', 165, 'alcohol_withdrawal_delirium', 'medical_stabilization', 'lorazepam_catatonia', 'SUBSTANCE', 'Kolay', 'SUBSTANCE'),
+  ('case-166', 166, 'opioid_withdrawal', 'motivational_interviewing', 'buprenorphine_naloxone', 'SUBSTANCE', 'Orta', 'SUBSTANCE'),
+  ('case-167', 167, 'cannabis_use_disorder', 'motivational_interviewing', 'hydroxyzine_buspirone', 'SUBSTANCE', 'Orta', 'SUBSTANCE'),
+  ('case-168', 168, 'major_neurocognitive_vascular', 'caregiver_behavioral', 'cholinesterase_donepezil', 'NEUROCOGNITIVE', 'Zor', 'NEURO_SOMATIC'),
+  ('case-169', 169, 'major_neurocognitive_parkinson', 'caregiver_behavioral', 'cholinesterase_donepezil', 'NEUROCOGNITIVE', 'Zor', 'NEURO_SOMATIC'),
+  ('case-170', 170, 'personality_change_due_to_medical', 'caregiver_behavioral', 'atypical_ap_secondgen', 'PERSONALITY_B', 'Zor', 'FORENSIC')
 on conflict (case_id) do update set
   case_number     = excluded.case_number,
   diagnosis_id    = excluded.diagnosis_id,
@@ -422,7 +442,7 @@ on conflict (case_id) do update set
 
 -- Listeden çıkan vakalar pasif (silinmez; eski maçlar onlara bağlı olabilir)
 update public.cases_answer_key set is_active = false, updated_at = now()
- where is_active and case_id not in ('case-001', 'case-002', 'case-003', 'case-004', 'case-005', 'case-006', 'case-007', 'case-008', 'case-009', 'case-010', 'case-011', 'case-012', 'case-013', 'case-014', 'case-015', 'case-016', 'case-017', 'case-018', 'case-019', 'case-020', 'case-021', 'case-022', 'case-023', 'case-024', 'case-025', 'case-026', 'case-027', 'case-028', 'case-029', 'case-030', 'case-031', 'case-032', 'case-033', 'case-034', 'case-035', 'case-036', 'case-037', 'case-038', 'case-039', 'case-040', 'case-041', 'case-042', 'case-043', 'case-044', 'case-045', 'case-046', 'case-047', 'case-048', 'case-049', 'case-050', 'case-051', 'case-052', 'case-053', 'case-054', 'case-055', 'case-056', 'case-057', 'case-058', 'case-059', 'case-060', 'case-061', 'case-062', 'case-063', 'case-064', 'case-065', 'case-066', 'case-067', 'case-068', 'case-069', 'case-070', 'case-071', 'case-072', 'case-073', 'case-074', 'case-075', 'case-076', 'case-077', 'case-078', 'case-079', 'case-080', 'case-081', 'case-082', 'case-083', 'case-085', 'case-086', 'case-087', 'case-088', 'case-089', 'case-090', 'case-091', 'case-094', 'case-095', 'case-096', 'case-097', 'case-098', 'case-099', 'case-100', 'case-101', 'case-102', 'case-103', 'case-104', 'case-105', 'case-106', 'case-107', 'case-110', 'case-111', 'case-112', 'case-113', 'case-114', 'case-115', 'case-116', 'case-117', 'case-118', 'case-119', 'case-120', 'case-121', 'case-122', 'case-123', 'case-124', 'case-125', 'case-126', 'case-127', 'case-128', 'case-129', 'case-130', 'case-131', 'case-132', 'case-133', 'case-134', 'case-135', 'case-137', 'case-138', 'case-139', 'case-140', 'case-141', 'case-142', 'case-143', 'case-144');
+ where is_active and case_id not in ('case-001', 'case-002', 'case-003', 'case-004', 'case-005', 'case-006', 'case-007', 'case-008', 'case-009', 'case-010', 'case-011', 'case-012', 'case-013', 'case-014', 'case-015', 'case-016', 'case-017', 'case-018', 'case-019', 'case-020', 'case-021', 'case-022', 'case-023', 'case-024', 'case-025', 'case-026', 'case-027', 'case-028', 'case-029', 'case-030', 'case-031', 'case-032', 'case-033', 'case-034', 'case-035', 'case-036', 'case-037', 'case-038', 'case-039', 'case-040', 'case-041', 'case-042', 'case-043', 'case-044', 'case-045', 'case-046', 'case-047', 'case-048', 'case-049', 'case-050', 'case-051', 'case-052', 'case-053', 'case-054', 'case-055', 'case-056', 'case-057', 'case-058', 'case-059', 'case-060', 'case-061', 'case-062', 'case-063', 'case-064', 'case-065', 'case-066', 'case-067', 'case-068', 'case-069', 'case-070', 'case-071', 'case-072', 'case-073', 'case-074', 'case-075', 'case-076', 'case-077', 'case-078', 'case-079', 'case-080', 'case-081', 'case-082', 'case-083', 'case-085', 'case-086', 'case-087', 'case-088', 'case-089', 'case-090', 'case-091', 'case-094', 'case-095', 'case-096', 'case-097', 'case-098', 'case-099', 'case-100', 'case-101', 'case-102', 'case-103', 'case-104', 'case-105', 'case-106', 'case-107', 'case-110', 'case-111', 'case-112', 'case-113', 'case-114', 'case-115', 'case-116', 'case-117', 'case-118', 'case-119', 'case-120', 'case-121', 'case-122', 'case-123', 'case-124', 'case-125', 'case-126', 'case-127', 'case-128', 'case-129', 'case-130', 'case-131', 'case-132', 'case-133', 'case-134', 'case-135', 'case-137', 'case-138', 'case-139', 'case-140', 'case-141', 'case-142', 'case-143', 'case-144', 'case-151', 'case-152', 'case-153', 'case-154', 'case-155', 'case-156', 'case-157', 'case-158', 'case-159', 'case-160', 'case-161', 'case-162', 'case-163', 'case-164', 'case-165', 'case-166', 'case-167', 'case-168', 'case-169', 'case-170');
 
 -- Kaynaktan çıkan seçenekler katalogdan silinir; herhangi bir vakanın (pasif dahil)
 -- doğru cevabı olanlar korunur.
