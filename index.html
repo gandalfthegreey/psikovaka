@@ -23,7 +23,7 @@
     <meta name="twitter:image" content="https://gandalfthegreey.github.io/psikovaka/assets/og.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f1117">
+    <meta name="theme-color" content="#15181e">
     <script>
         (function () {
             try {
@@ -32,11 +32,27 @@
             } catch (e) {}
         })();
     </script>
+    <script>
+        /* Tasarım pilotu "Danışan dosyası" (ajan D2): ?tasarim=dosya açar, ?tasarim=eski kapatır; seçim
+           localStorage 'psikovaka_tasarim' anahtarında kalır. Açıkken <html class="tasarim-dosya"> (css/dosya.css, js/tasarim_dosya.js). */
+        (function () {
+            var on = false, q = null;
+            try { q = (window.location.search.match(/[?&]tasarim=([a-z]+)/) || [])[1] || null; } catch (e) {}
+            try {
+                if (q === 'dosya') localStorage.setItem('psikovaka_tasarim', 'dosya');
+                else if (q) localStorage.removeItem('psikovaka_tasarim');
+                on = localStorage.getItem('psikovaka_tasarim') === 'dosya';
+            } catch (e) { on = q === 'dosya'; }
+            if (q === 'dosya') on = true;
+            if (on) document.documentElement.classList.add('tasarim-dosya');
+            if (q) { try { var u = new URL(window.location.href); u.searchParams.delete('tasarim'); history.replaceState(history.state, '', u.pathname + u.search + u.hash); } catch (e) {} }
+        })();
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600..800&family=Atkinson+Hyperlegible+Next:wght@400..700&display=swap" rel="stylesheet">
 
     <!-- PeerJS (online katman için; çevrimdışıysa sessizce devre dışı kalır) -->
 
@@ -48,7 +64,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/arena.css">
     <link rel="stylesheet" href="css/online.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%236366f1%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+    <link rel="stylesheet" href="css/dosya.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
 <body>
     <!-- Simge seti: <svg class="icon"><use href="#i-ad"/></svg> ile kullanılır (JS: icon('ad')) -->
@@ -1296,5 +1313,6 @@
     <script src="js/online/quick.js"></script>
     <script src="js/online/daily.js"></script>
     <script src="js/online/online.js"></script>
+    <script src="js/tasarim_dosya.js"></script>
 </body>
 </html>

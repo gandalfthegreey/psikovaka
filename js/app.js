@@ -4372,7 +4372,7 @@ class PsikoVakaGame {
         canvas.height = window.innerHeight;
 
         const particles = [];
-        const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#38bdf8', '#a855f7'];
+        const colors = ['#3b6fd6', '#2f9e62', '#e0a800', '#e5484d', '#7ea6ff', '#c93838'];
 
         for (let i = 0; i < 90; i++) {
             particles.push({
@@ -4478,7 +4478,7 @@ function applyThemeChrome(theme) {
     if (iconEl) iconEl.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-${theme === 'light' ? 'sun' : 'moon'}"/></svg>`;
     if (labelEl) labelEl.textContent = theme === 'light' ? 'Açık' : 'Koyu';
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f7fb' : '#0f1117');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef0f3' : '#15181e');
 }
 
 window.addEventListener('DOMContentLoaded', () => {

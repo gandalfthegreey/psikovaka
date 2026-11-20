@@ -23,7 +23,7 @@
     <meta name="twitter:image" content="https://gandalfthegreey.github.io/psikovaka/assets/og.png">
     
     
-    <meta name="theme-color" content="#0f1117">
+    <meta name="theme-color" content="#15181e">
     <script>
         (function () {
             try {
@@ -32,11 +32,27 @@
             } catch (e) {}
         })();
     </script>
+    <script>
+        /* Tasarım pilotu "Danışan dosyası" (ajan D2): ?tasarim=dosya açar, ?tasarim=eski kapatır; seçim
+           localStorage 'psikovaka_tasarim' anahtarında kalır. Açıkken <html class="tasarim-dosya"> (css/dosya.css, js/tasarim_dosya.js). */
+        (function () {
+            var on = false, q = null;
+            try { q = (window.location.search.match(/[?&]tasarim=([a-z]+)/) || [])[1] || null; } catch (e) {}
+            try {
+                if (q === 'dosya') localStorage.setItem('psikovaka_tasarim', 'dosya');
+                else if (q) localStorage.removeItem('psikovaka_tasarim');
+                on = localStorage.getItem('psikovaka_tasarim') === 'dosya';
+            } catch (e) { on = q === 'dosya'; }
+            if (q === 'dosya') on = true;
+            if (on) document.documentElement.classList.add('tasarim-dosya');
+            if (q) { try { var u = new URL(window.location.href); u.searchParams.delete('tasarim'); history.replaceState(history.state, '', u.pathname + u.search + u.hash); } catch (e) {} }
+        })();
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600..800&family=Atkinson+Hyperlegible+Next:wght@400..700&display=swap" rel="stylesheet">
 
     <!-- PeerJS (online katman için; çevrimdışıysa sessizce devre dışı kalır) -->
 
@@ -53,8 +69,11 @@
 
 :root {
     /* Yazı */
-    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    /* Bilgi Kartı yönü (Emre kararı 2026-11-20): metin Atkinson Hyperlegible Next, başlık Bitter. Ayrı mono yok:
+       kodlar/sayaçlar metin yüzüyle çizilir, rakamlar style.css'te tabular-nums ile hizalanır. */
+    --font-sans: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Atkinson Hyperlegible Next', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-display: 'Bitter', Georgia, 'Times New Roman', serif;
 
     --text-xs: 0.75rem;    /* 12 */
     --text-sm: 0.875rem;   /* 14 */
@@ -110,25 +129,25 @@
     --z-toast: 200;
 
     /* Hedef türüne göre küçük vurgu (ilerleme çubuğu, çip) */
-    --target-diagnosis: #6366f1;
-    --target-therapy: #10b981;
-    --target-pharmacology: #f43f5e;
-    --target-combo: #f59e0b;
+    --target-diagnosis: #3b6fd6;
+    --target-therapy: #2f9e62;
+    --target-pharmacology: #e5484d;
+    --target-combo: #e0a800;
     --color-target: var(--target-diagnosis);
 
     /* Hedef rengini METİN olarak kullanırken (çip yazısı). Koyu temada aynı; açık temada koyu varyant (H9) */
-    --target-diagnosis-text: #8b93ff;   /* koyu zeminde #6366f1 metin 3.6:1 kalıyordu */
-    --target-therapy-text: var(--target-therapy);
-    --target-pharmacology-text: #fb7185; /* #f43f5e metin 4.4:1 kalıyordu */
-    --target-combo-text: var(--target-combo);
+    --target-diagnosis-text: #8db0ff;  /* koyu zeminde ≥4.5:1 */
+    --target-therapy-text: #62d08e;
+    --target-pharmacology-text: #ff8a8d;
+    --target-combo-text: #f2c45a;
     /* Hedef renginde DOLU zemin + beyaz yazı (ipucu numarası); beyazla en az 4.5:1 (H9) */
-    --target-diagnosis-strong: #4f46e5;
-    --target-therapy-strong: #047857;
-    --target-pharmacology-strong: #be123c;
-    --target-combo-strong: #a16207;
+    --target-diagnosis-strong: #2354b0;  /* dolu zemin + beyaz yazı */
+    --target-therapy-strong: #1d7444;
+    --target-pharmacology-strong: #b42330;
+    --target-combo-strong: #7f5800;
     --color-target-strong: var(--target-diagnosis-strong);
     /* Sayı rozeti zemini (beyaz yazıyla 4.83:1) */
-    --color-badge-bg: #dc2626;
+    --color-badge-bg: #c93838;  /* kart kırmızısı; beyaz yazıyla ≥4.5:1 */
 }
 
 /* ---------- Koyu tema (varsayılan) ---------- */
@@ -136,33 +155,33 @@
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --color-bg: #0f1117;
-    --color-surface: #161922;
-    --color-surface-2: #1c202b;
-    --color-surface-3: #252a37;
-    --color-border: #262b38;
-    --color-border-strong: #353c4d;
-    --color-input-border: #636b80;    /* form alanı sınırı: kart zemininde 3:1 (H10) */
+    --color-bg: #15181e;
+    --color-surface: #1d2129;
+    --color-surface-2: #232833;
+    --color-surface-3: #2c3240;
+    --color-border: #2a303c;
+    --color-border-strong: #3c4454;
+    --color-input-border: #717b8f;
 
-    --color-text: #eef0f5;
-    --color-text-2: #b7bdcb;
-    --color-text-3: #8d94a6;
+    --color-text: #eef0f4;
+    --color-text-2: #c0c6d2;
+    --color-text-3: #98a0b0;
 
-    --color-accent: #8b93ff;          /* metin/kenar vurgusu */
-    --color-accent-bg: #5457e6;       /* dolu düğme zemini (beyaz yazıyla AA) */
-    --color-accent-bg-hover: #4a4dd6;
+    --color-accent: #7ea6ff;
+    --color-accent-bg: #2f63c9;
+    --color-accent-bg-hover: #2655b4;
     --color-accent-contrast: #ffffff;
-    --color-accent-soft: rgba(99, 102, 241, 0.16);
+    --color-accent-soft: rgba(126, 166, 255, 0.14);
 
-    --color-success: #34d399;
-    --color-success-soft: rgba(52, 211, 153, 0.13);
-    --color-warning: #fbbf24;
-    --color-warning-soft: rgba(251, 191, 36, 0.13);
-    --color-danger: #f87171;
-    --color-danger-soft: rgba(248, 113, 113, 0.13);
+    --color-success: #62d08e;
+    --color-success-soft: rgba(98, 208, 142, 0.13);
+    --color-warning: #f2c45a;
+    --color-warning-soft: rgba(242, 196, 90, 0.13);
+    --color-danger: #ff8f8f;
+    --color-danger-soft: rgba(255, 143, 143, 0.13);
 
-    --color-overlay: rgba(6, 8, 13, 0.64);
-    --color-focus: #a5b4fc;
+    --color-overlay: rgba(6, 8, 12, 0.66);
+    --color-focus: #a9c4ff;
 
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35);
     --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.35);
@@ -173,43 +192,44 @@
 [data-theme="light"] {
     color-scheme: light;
 
-    --color-bg: #f6f7fb;
+    --color-bg: #eef0f3;
     --color-surface: #ffffff;
-    --color-surface-2: #f2f4f8;
-    --color-surface-3: #e8ebf2;
-    --color-border: #e2e5ee;
-    --color-border-strong: #cbd0dc;
-    --color-input-border: #878ea0;    /* form alanı sınırı: beyaz zeminde 3:1 (H10) */
+    --color-surface-2: #f5f6f8;
+    --color-surface-3: #e6e9ee;
+    --color-border: #dcdfe6;
+    --color-border-strong: #bcc2cd;
+    --color-input-border: #7e8697;
 
-    --color-text: #12151d;
-    --color-text-2: #454c5e;
-    --color-text-3: #646b7e;
+    --color-text: #1a1e27;
+    --color-text-2: #424958;
+    --color-text-3: #5a6273;
 
-    --color-accent: #4f46e5;
-    --color-accent-bg: #4f46e5;
-    --color-accent-bg-hover: #4338ca;
+    --color-accent: #2354b0;
+    --color-accent-bg: #2354b0;
+    --color-accent-bg-hover: #1c4795;
     --color-accent-contrast: #ffffff;
-    --color-accent-soft: rgba(79, 70, 229, 0.09);
+    --color-accent-soft: rgba(35, 84, 176, 0.09);
 
-    --color-success: #047857;
-    --color-success-soft: rgba(4, 120, 87, 0.09);
-    --color-warning: #a16207;
-    --color-warning-soft: rgba(161, 98, 7, 0.1);
-    --color-danger: #c62828;
-    --color-danger-soft: rgba(198, 40, 40, 0.08);
+    --color-success: #1d7444;
+    --color-success-soft: rgba(29, 116, 68, 0.09);
+    --color-warning: #8a5a00;
+    --color-warning-soft: rgba(138, 90, 0, 0.1);
+    --color-danger: #a51d2d;
+    --color-danger-soft: rgba(165, 29, 45, 0.08);
 
-    --color-overlay: rgba(18, 21, 29, 0.42);
-    --color-focus: #4f46e5;
+    --color-overlay: rgba(26, 30, 39, 0.42);
+    --color-focus: #2354b0;
 
-    --target-diagnosis-text: #4f46e5;
-    --target-therapy-text: #047857;
-    --target-pharmacology-text: #be123c;
-    --target-combo-text: #92400e;
-    --color-warning-text-strong: #854d0e; /* sarı zemin üstünde küçük metin (zorluk "Orta") */
+    --target-combo: #bc8d00;   /* açık zeminde işaret ≥3:1 */
+    --target-diagnosis-text: #2354b0;
+    --target-therapy-text: #1d7444;
+    --target-pharmacology-text: #b42330;
+    --target-combo-text: #7f5800;
+    --color-warning-text-strong: #8a5a00;
 
-    --shadow-1: 0 1px 2px rgba(18, 21, 29, 0.06);
-    --shadow-2: 0 6px 20px rgba(18, 21, 29, 0.08);
-    --shadow-3: 0 18px 48px rgba(18, 21, 29, 0.16);
+    --shadow-1: 0 1px 2px rgba(26, 30, 39, 0.06);
+    --shadow-2: 0 6px 20px rgba(26, 30, 39, 0.08);
+    --shadow-3: 0 18px 48px rgba(26, 30, 39, 0.16);
 }
 
 body.therapy-mode-active { --color-target: var(--target-therapy); }
@@ -2900,6 +2920,26 @@ a.list-row { color: inherit; text-decoration: none; }
     .modal-backdrop.is-sheet .modal-header { padding-top: var(--space-2); }
 }
 
+/* ==========================================================================
+   Bilgi Kartı yönü (Emre kararı 2026-11-20) — başlık yüzü (Bitter) ve rakam hizası.
+   Yalnızca yazı tipi: boyut, yerleşim ve metin değişmez. Renkler css/tokens.css'te.
+   ========================================================================== */
+/* Ayrı mono yazı tipi yok (--font-mono = metin yüzü): kod, sayaç, puan ve RP sütunları eşit genişlikli rakamla hizalı kalır. */
+body { font-variant-numeric: tabular-nums; }
+h1, h2, h3, h4,
+.brand-name, .screen-title, .home-title, .card-hero-title, .card-title, .lib-detail-title, .lib-sec-title,
+.profile-name, .stat-strip-value, .result-inline-title, .modal-title, .result-heading, .result-diagnosis-name, .stat-value,
+.auth-status-title, .rank-banner-rp, .welcome-title, .noro-nudge-title, .ol-h2, .ol-sheet-title, .ol-cta-title, .ol-section-title,
+.ol-gate-title, .ol-hud-timer, .ol-wait-title, .ol-count-num, .ol-answer-text, .ol-topbar-title, .lg-head-title,
+.section-title, .play-title, .daily-result-title, .duel-podium-title, .edu-title, .lib-group-title, .lib-callout-title,
+.lib-crit-title, .lib-sub-title, .studio-result-title, .therapy-title, .category-tree-title, .clinical-subcard-title,
+.lg-sec-title, .lg-hist-title, .profile-streaks-title, .ol-lc-title, .ol-pub-title, .ol-search-title, .ol-opt-title,
+.resume-title, .combo-step-title, .pack-card-title {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+}
+.home-title, .screen-title, .card-hero-title, .result-heading, .lib-detail-title, .brand-name { font-weight: 750; }
+
 </style>
     <style>
 /* ==========================================================================
@@ -4035,7 +4075,580 @@ body.ol-banners-docked .ol-banners { display: none; }
 @media (min-width: 768px) { .ol-roster { display: none; } }
 
 </style>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%236366f1%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+    <style>
+/* ==========================================================================
+   PsikoVaka — Tasarım pilotu "Danışan dosyası" (ajan D2, 2026-11-20)
+   YALNIZCA <html class="tasarim-dosya"> iken etkilidir (?tasarim=dosya). Bayrak kapalıyken hiçbir kural
+   eşleşmez: site bugünküyle birebir aynı. Yapıyı js/tasarim_dosya.js kurar (.dosya-folder/.dosya-tabs/
+   .dosya-sheet/.dosya-stamp); bu dosya yalnızca oyun ekranını (#screenPlay) biçimler.
+   Benzetme: vaka bir danışan dosyası / bilgi kartı. Klasör sekmesi (vaka no + zorluk), tek kâğıt,
+   kırmızı başlık çizgisi, mavi satır çizgileri, kenar boşluğunda not numaraları, en yeni not fosforlu
+   kalemle, tahminler kurşun kalem karalaması, vaka sonu mürekkep mührü.
+   ========================================================================== */
+
+/* ---------- Değişkenler (yalnızca pilot) ---------- */
+.tasarim-dosya {
+    --dosya-paper: #20242c;
+    --dosya-edge: #353c4a;
+    --dosya-tape: #2b313c;
+    --dosya-rule: rgba(126, 166, 255, 0.14);
+    --dosya-red: #ff8a8a;              /* kâğıtta metin olarak ≥4.5:1 */
+    --dosya-red-line: rgba(255, 123, 123, 0.55);
+    --dosya-hl: rgba(242, 196, 90, 0.26);
+    --dosya-hl-strong: #f2c45a;
+    --dosya-ink-win: #8db0ff;
+    --dosya-ink-loss: #ff8f8f;
+    --dosya-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 14px 28px -18px rgba(0, 0, 0, 0.8);
+    --dosya-lh: 28px;                  /* satır aralığı = satır çizgisi aralığı */
+    --dosya-m: 36px;                   /* kenar boşluğu (not numaraları) */
+    --dosya-pad: 14px;
+    --dosya-margin-col: 232px;         /* masaüstü tahmin sütunu */
+    --dosya-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+.tasarim-dosya[data-theme="light"] {
+    --dosya-paper: #fffdf8;
+    --dosya-edge: #cfd3db;
+    --dosya-tape: #eceef2;
+    --dosya-rule: rgba(35, 84, 176, 0.16);
+    --dosya-red: #b42330;
+    --dosya-red-line: rgba(201, 56, 56, 0.62);
+    --dosya-hl: rgba(255, 196, 30, 0.34);
+    --dosya-hl-strong: #a87600;
+    --dosya-ink-win: #2354b0;
+    --dosya-ink-loss: #a51d2d;
+    --dosya-shadow: 0 1px 0 rgba(26, 30, 39, 0.06), 0 12px 26px -16px rgba(26, 30, 39, 0.28);
+}
+
+/* ---------- Oyun çubuğu: sade, başlık yüzüyle; vaka no + zorluk sekmeye taşındı ---------- */
+.tasarim-dosya .screen-play { gap: var(--space-3); }
+.tasarim-dosya .screen-play .play-meta { display: none; }
+.tasarim-dosya .screen-play .play-title { font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; }
+
+/* ---------- Klasör ---------- */
+.tasarim-dosya .dosya-folder { display: flex; flex-direction: column; min-width: 0; margin: var(--space-1) calc(-1 * var(--space-2)) 0; }
+.tasarim-dosya .dosya-tabs {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    min-width: 0;
+    padding: 0 var(--space-2) 0 10px;
+}
+.tasarim-dosya .dosya-tab,
+.tasarim-dosya .dosya-tabs .combo-step-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+    margin-bottom: -1px;
+    padding: 7px 14px 7px;
+    border: 1px solid var(--dosya-edge);
+    border-bottom: 0;
+    border-radius: 9px 9px 0 0;
+    background: var(--dosya-paper);
+    color: var(--color-text);
+}
+.tasarim-dosya .dosya-tab-case { font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tasarim-dosya .dosya-tab-diff { display: inline-flex; align-items: center; gap: 5px; color: var(--color-text-2); font-size: 0.8125rem; white-space: nowrap; }
+/* Zorluk: yazı + üç küçük kare (renge dayanmaz) */
+.tasarim-dosya .dosya-tab-diff::after { content: ''; width: 22px; height: 6px; background: linear-gradient(90deg, currentColor 0 6px, transparent 6px 8px, var(--d2, transparent) 8px 14px, transparent 14px 16px, var(--d3, transparent) 16px 22px); box-shadow: inset 0 0 0 1px transparent; border-radius: 1px; opacity: 0.9; }
+.tasarim-dosya .dosya-tab-diff { --d2: color-mix(in srgb, currentColor 28%, transparent); --d3: color-mix(in srgb, currentColor 28%, transparent); }
+.tasarim-dosya .dosya-tab-diff.is-orta { --d2: currentColor; }
+.tasarim-dosya .dosya-tab-diff.is-zor { --d2: currentColor; --d3: currentColor; }
+
+/* İpucu sayacı: sekmelerin sağında, masada */
+.tasarim-dosya .dosya-tabs .play-progress { margin-left: auto; align-self: center; padding-bottom: 2px; }
+.tasarim-dosya .dosya-tabs .clue-progress-tracker { display: none; }
+.tasarim-dosya .dosya-tabs .play-progress-label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-text-2); }
+
+/* Kombo: aşamalar klasör sekmeleri (hap değil). Etkin sekme kâğıtla birleşir, diğerleri arkada. */
+.tasarim-dosya .dosya-tabs .combo-stepper-bar { display: flex; gap: 4px; flex: 1 1 auto; min-width: 0; margin: 0; padding: 0; list-style: none; }
+.tasarim-dosya .dosya-tabs .combo-step-item {
+    flex: 1 1 0;
+    max-width: 15rem;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--color-surface-2);
+    color: var(--color-text-2);
+    border-color: var(--color-border-strong);
+    margin-bottom: 0;
+}
+.tasarim-dosya .dosya-tabs .combo-step-item.active {
+    margin-bottom: -1px;
+    padding-bottom: 7px;
+    background: var(--dosya-paper);
+    border-color: var(--dosya-edge);
+    color: var(--color-text);
+}
+.tasarim-dosya .dosya-tabs .combo-step-num {
+    width: auto; height: auto; padding: 0; border-radius: 0; background: none; color: inherit;
+    font-family: var(--font-display); font-size: 0.875rem; font-weight: 700;
+}
+.tasarim-dosya .dosya-tabs .combo-step-item.active .combo-step-num { background: none; color: var(--dosya-red); }
+.tasarim-dosya .dosya-tabs .combo-step-item.completed .combo-step-num { background: none; color: var(--color-success); font-size: 0; }
+.tasarim-dosya .dosya-tabs .combo-step-item.completed .combo-step-num::before { content: '✓'; font-size: 0.9375rem; }
+.tasarim-dosya .dosya-tabs .combo-step-title { font-family: var(--font-display); font-size: 0.875rem; font-weight: 700; }
+.tasarim-dosya .dosya-tabs .combo-step-val { font-size: 0.75rem; color: var(--color-text-2); }
+.tasarim-dosya .dosya-tabs .combo-step-item:not(.active):not(.completed) .combo-step-val { display: none; }
+/* Kombo sürerken vaka no sekmesi yerine sağda düz yazı (iki etkin sekme olmasın) */
+.tasarim-dosya .dosya-tabs:has(.combo-stepper-bar:not([hidden])) .dosya-tab-main {
+    order: 3; align-self: center; margin: 0 0 2px; padding: 0; border: 0; background: none;
+}
+.tasarim-dosya .dosya-tabs:has(.combo-stepper-bar:not([hidden])) .dosya-tab-main .dosya-tab-diff { display: none; }
+.tasarim-dosya .dosya-tabs:has(.combo-stepper-bar:not([hidden])) .play-progress { display: none; }
+@media (max-width: 599px) { .tasarim-dosya .dosya-tabs:has(.combo-stepper-bar:not([hidden])) .dosya-tab-main { display: none; } }
+
+/* ---------- Kâğıt ---------- */
+.tasarim-dosya .dosya-sheet {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--dosya-pad) var(--dosya-pad) 18px 0;
+    border: 1px solid var(--dosya-edge);
+    border-radius: 3px 8px 6px 6px;
+    background: var(--dosya-paper);
+    box-shadow: var(--dosya-shadow);
+}
+/* Kıvrık köşe (yalnızca süs) */
+.tasarim-dosya .dosya-sheet::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 0 8px 0 4px;
+    background: linear-gradient(225deg, var(--color-bg) 0 50%, color-mix(in srgb, var(--dosya-edge) 70%, var(--dosya-paper)) 50% 100%);
+    pointer-events: none;
+}
+
+/* Hasta özeti: daktilo etiketi. Başlık etiketi (eyebrow) yok. */
+.tasarim-dosya .screen-play .patient-card {
+    padding: 2px 0 12px var(--dosya-m);
+    margin-right: calc(-1 * var(--dosya-pad));
+    padding-right: var(--dosya-pad);
+    border: 0;
+    border-bottom: 2px solid var(--dosya-red-line);
+    border-radius: 0;
+    background: none;
+}
+.tasarim-dosya .patient-card-head .eyebrow { display: none; }
+.tasarim-dosya .patient-card-head { justify-content: flex-start; margin-bottom: 6px; }
+.tasarim-dosya .patient-card-head:not(:has(.badge:not([hidden]))) { display: none; }
+.tasarim-dosya .patient-card-head .badge { padding: 0; background: none; color: var(--color-success); font-size: var(--text-xs); }
+.tasarim-dosya .screen-play .patient-summary {
+    display: inline;
+    padding: 3px 7px;
+    border-radius: 2px;
+    background: var(--dosya-tape);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--dosya-edge) 55%, transparent);
+    font-family: var(--dosya-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 2;
+    letter-spacing: 0;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+.tasarim-dosya .screen-play .patient-summary::before { content: 'Danışan: '; color: var(--color-text-2); }
+@media (max-width: 479px) { .tasarim-dosya .screen-play .patient-summary::before { content: none; } }
+
+/* ---------- Notlar (ipuçları): satır çizgili kâğıt ---------- */
+.tasarim-dosya .screen-play .clues-container {
+    gap: 0;
+    padding-top: var(--dosya-lh);
+    background-image: repeating-linear-gradient(to bottom,
+        transparent 0, transparent calc(var(--dosya-lh) - 1px),
+        var(--dosya-rule) calc(var(--dosya-lh) - 1px), var(--dosya-rule) var(--dosya-lh));
+    background-position: 0 4px;
+    margin-right: calc(-1 * var(--dosya-pad));
+    padding-right: var(--dosya-pad);
+}
+.tasarim-dosya .screen-play .clue-box,
+.tasarim-dosya .screen-play .clue-box.active,
+.tasarim-dosya .screen-play .clue-box.is-latest,
+.tasarim-dosya .screen-play .clue-box.is-latest.is-flash {
+    position: relative;
+    padding: 0 0 0 var(--dosya-m);
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    animation: none;
+    line-height: var(--dosya-lh);
+}
+.tasarim-dosya .screen-play .clue-box.active { padding-bottom: var(--dosya-lh); max-width: calc(68ch + var(--dosya-m)); }
+.tasarim-dosya .screen-play .clue-box.active .clue-header { display: inline; margin: 0; }
+.tasarim-dosya .screen-play .clue-box.active .clue-text {
+    display: inline;
+    font-size: 1.0625rem;
+    line-height: var(--dosya-lh);
+    color: var(--color-text);
+}
+/* Kenar boşluğundaki not numarası */
+.tasarim-dosya .screen-play .clue-num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--dosya-m);
+    height: var(--dosya-lh);
+    border-radius: 0;
+    background: none;
+    color: var(--dosya-red);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+/* En yeni notun numarası kırmızı kalemle daire içine alınmış */
+.tasarim-dosya .screen-play .clue-box.is-latest .clue-num { background: none; color: var(--dosya-red); }
+.tasarim-dosya .screen-play .clue-box.is-latest .clue-num::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 22px;
+    border: 1.5px solid var(--dosya-red);
+    border-radius: 52% 48% 55% 45% / 50% 55% 45% 50%;
+    transform: translate(-52%, -50%) rotate(-8deg);
+}
+/* Konu başlığı: satır başı (run-in) başlık, büyük harf etiketi değil */
+.tasarim-dosya .screen-play .clue-box.active .clue-tag {
+    display: inline;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: normal;
+    overflow: visible;
+}
+.tasarim-dosya .screen-play .clue-box.active .clue-tag::after { content: '.\00a0'; }
+/* "Yeni": kenarda küçük kırmızı not */
+.tasarim-dosya .screen-play .clue-new {
+    position: absolute;
+    left: 0;
+    top: var(--dosya-lh);
+    width: var(--dosya-m);
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--dosya-red);
+    font-size: 0.75rem;
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    text-align: center;
+}
+/* En yeni not: fosforlu kalem şeridi (bir kez süpürülür; hareket azaltmada doğrudan görünür) */
+.tasarim-dosya .screen-play .clue-box.is-latest:not(:first-child) .clue-text {
+    background-image: linear-gradient(transparent 52%, var(--dosya-hl) 52%, var(--dosya-hl) 90%, transparent 90%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.tasarim-dosya .screen-play .clue-box.is-latest.is-flash .clue-text { animation: dosya-sweep 640ms cubic-bezier(0.4, 0, 0.6, 1) both; }
+@keyframes dosya-sweep { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+
+/* Kapalı notlar: boş satırlar (kural metni korunur: "N. yanlışta açılır") */
+.tasarim-dosya .screen-play .clue-box.locked {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 0;
+    height: var(--dosya-lh);
+    padding: 0 0 0 var(--dosya-m);
+    border: 0;
+    background: none;
+    color: var(--color-text-3);
+}
+.tasarim-dosya .screen-play .clue-box.locked .clue-num { color: var(--color-text-3); }
+.tasarim-dosya .screen-play .clue-box.locked .clue-num .icon { width: 12px; height: 12px; }
+.tasarim-dosya .screen-play .clue-box.locked .clue-tag { font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-3); }
+.tasarim-dosya .screen-play .clue-locked-note { font-size: var(--text-xs); color: var(--color-text-3); }
+
+/* Vaka sonu: belirti vurguları satır yüksekliğini bozmasın */
+.tasarim-dosya .screen-play .symptom-tag-highlight { padding: 0 1px; border-radius: 1px; line-height: inherit; }
+.tasarim-dosya .screen-play .symptom-pill { line-height: 16px; vertical-align: 2px; border-radius: 2px; }
+
+/* ---------- Tahminler: kurşun kalem ---------- */
+/* Vaka sürerken (telefon): kâğıdın üstünde yapışkan ince şerit */
+.tasarim-dosya .screen-play .guess-strip {
+    gap: 4px 16px;
+    margin: calc(-1 * var(--dosya-pad)) calc(-1 * var(--dosya-pad)) 10px 0;
+    padding: 6px var(--dosya-pad) 6px var(--dosya-m);
+    border-radius: 3px 8px 0 0;
+    background: var(--dosya-paper);
+    border-bottom: 1px dashed var(--dosya-edge);
+    scrollbar-width: none;
+}
+.tasarim-dosya .screen-play .guess-strip::-webkit-scrollbar { display: none; }
+.tasarim-dosya .screen-play .guess-chip {
+    gap: 0;
+    min-height: 32px;
+    max-width: 200px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text-2);
+    font-size: var(--text-sm);
+    animation: none;
+}
+.tasarim-dosya .screen-play .guess-chip-ico { display: none; }
+.tasarim-dosya .screen-play .guess-chip-name { font-weight: var(--weight-regular); }
+.tasarim-dosya .screen-play .guess-chip.is-wrong .guess-chip-name {
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    text-decoration-color: currentColor;
+}
+.tasarim-dosya .screen-play .guess-chip.is-close { background: none; border: 0; }
+.tasarim-dosya .screen-play .guess-chip.is-close .guess-chip-name {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--dosya-hl-strong);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+    text-decoration-skip-ink: none;
+}
+.tasarim-dosya .screen-play .guess-chip-sub { color: var(--color-text-2); font-size: 0.75rem; }
+.tasarim-dosya .screen-play .guess-chip-sub::before { content: 'grup: '; }
+.tasarim-dosya .screen-play .guess-chip:last-child .guess-chip-name { color: var(--color-text); }
+
+/* Vaka bitince tam liste: kâğıtta karalama satırları */
+.tasarim-dosya .screen-play .guesses-feed {
+    gap: 0;
+    padding: 4px 0 0 var(--dosya-m);
+}
+.tasarim-dosya .screen-play .guesses-feed::before {
+    content: 'Tahminler';
+    margin-bottom: 2px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+}
+.tasarim-dosya .screen-play .guess-card,
+.tasarim-dosya .screen-play .guess-card.correct,
+.tasarim-dosya .screen-play .guess-card.category-match {
+    align-items: baseline;
+    gap: 8px;
+    min-height: 0;
+    padding: 5px 0;
+    border: 0;
+    border-bottom: 1px solid var(--dosya-rule);
+    border-radius: 0;
+    background: none;
+}
+.tasarim-dosya .screen-play .guess-icon,
+.tasarim-dosya .screen-play .guess-card .guess-icon { width: 16px; height: 16px; background: none; align-self: center; }
+.tasarim-dosya .screen-play .guess-icon .icon { width: 14px; height: 14px; }
+.tasarim-dosya .screen-play .guess-index { font-family: var(--font-display); color: var(--color-text-3); }
+.tasarim-dosya .screen-play .guess-card.wrong .guess-label { color: var(--color-text-2); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.tasarim-dosya .screen-play .guess-card.category-match .guess-label { text-decoration: underline; text-decoration-color: var(--dosya-hl-strong); text-decoration-thickness: 3px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
+.tasarim-dosya .screen-play .guess-card.correct .guess-label { font-weight: var(--weight-bold); }
+.tasarim-dosya .screen-play .guess-status-pill { max-width: 46%; font-weight: var(--weight-medium); }
+.tasarim-dosya .screen-play .guess-card.wrong .guess-status-pill { color: var(--color-text-3); }
+
+/* ---------- Vaka sonu: aynı kâğıdın alt kısmı + mühür ---------- */
+.tasarim-dosya .screen-play .finished-actions {
+    gap: var(--space-4);
+    margin: var(--space-3) calc(-1 * var(--dosya-pad)) 0 0;
+    padding: var(--space-5) var(--dosya-pad) var(--space-2) var(--dosya-m);
+    border: 0;
+    border-top: 2px solid var(--dosya-red-line);
+    border-radius: 0;
+    background: none;
+}
+.tasarim-dosya .screen-play .result-inline { align-items: flex-start; }
+.tasarim-dosya .screen-play .result-inline-icon { display: none; }
+.tasarim-dosya .screen-play .result-inline-title { font-family: var(--font-display); font-size: 1.1875rem; font-weight: 700; }
+/* Doğru cevap mühürde yazılı; ekran okuyucu için metin yerinde kalır */
+.tasarim-dosya .screen-play .finished-actions:has(.dosya-stamp:not([hidden])) .result-inline-answer {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.tasarim-dosya .dosya-stamp { align-self: flex-start; max-width: 100%; margin: 0 0 var(--space-1) -4px; }
+.tasarim-dosya .dosya-stamp-ink {
+    --rot: -3deg;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    max-width: min(100%, 26rem);
+    padding: 10px 16px 9px;
+    border: 4px double currentColor;
+    border-radius: 6px;
+    color: var(--dosya-ink-win);
+    font-family: var(--font-display);
+    transform: rotate(var(--rot));
+    transform-origin: 30% 50%;
+    /* hafif mürekkep dokusu */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.5 1.25'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.5 1.25'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: dosya-stamp 460ms cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+.tasarim-dosya .dosya-stamp.is-loss .dosya-stamp-ink { --rot: 2deg; border: 2px dashed currentColor; color: var(--dosya-ink-loss); padding: 11px 17px 10px; }
+.tasarim-dosya .dosya-stamp-head { display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; font-weight: 800; letter-spacing: 0.08em; line-height: 1.2; }
+.tasarim-dosya .dosya-stamp-mark { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.tasarim-dosya .dosya-stamp-name { font-size: 1.375rem; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.tasarim-dosya .dosya-stamp-row { font-size: 1rem; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.tasarim-dosya .dosya-stamp-k { font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.06em; }
+.tasarim-dosya .dosya-stamp-foot { margin-top: 2px; font-family: var(--dosya-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; }
+@keyframes dosya-stamp {
+    0% { opacity: 0; transform: rotate(var(--rot)) scale(1.7); }
+    55% { opacity: 1; transform: rotate(var(--rot)) scale(0.97); }
+    100% { opacity: 1; transform: rotate(var(--rot)) scale(1); }
+}
+
+/* Akılda kalsın: fosforlu kalemle işaretli not */
+.tasarim-dosya .screen-play .finished-actions .xp-takeaway {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    line-height: var(--leading-relaxed);
+}
+.tasarim-dosya .screen-play .xp-takeaway > .icon { display: none; }
+.tasarim-dosya .screen-play .xp-takeaway-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    background: linear-gradient(transparent 50%, var(--dosya-hl) 50%, var(--dosya-hl) 92%, transparent 92%);
+}
+.tasarim-dosya .screen-play .finished-actions .btn { border-radius: 6px; }
+.tasarim-dosya .screen-play .finished-actions .btn-secondary { background: transparent; border-color: var(--dosya-edge); }
+
+/* Online tur bekleme paneli kâğıdın içinde */
+.tasarim-dosya .screen-play .dosya-sheet .ol-wait {
+    margin: var(--space-3) calc(-1 * var(--dosya-pad)) 0 0;
+    padding: var(--space-4) var(--dosya-pad) var(--space-2) var(--dosya-m);
+    border: 0;
+    border-top: 2px solid var(--dosya-red-line);
+    border-radius: 0;
+    background: none;
+}
+
+/* ---------- Online HUD: düz şerit ---------- */
+.tasarim-dosya .screen-play .ol-hud { border-radius: 6px; box-shadow: none; background: transparent; }
+.tasarim-dosya .screen-play .ol-hud-timer { font-family: var(--font-display); border-radius: 6px; font-variant-numeric: tabular-nums; }
+
+/* ---------- Tahmin alanı: yazı satırı ---------- */
+.tasarim-dosya .screen-play .diagnosis-input {
+    padding-left: 32px;
+    border: 0;
+    border-bottom: 2px solid var(--color-input-border);
+    border-radius: 0;
+    background: transparent;
+    font-size: 17px;
+}
+.tasarim-dosya .screen-play .search-icon { left: 4px; }
+.tasarim-dosya .screen-play .diagnosis-input:focus {
+    border-bottom-color: var(--color-accent);
+    box-shadow: 0 1px 0 0 var(--color-accent);
+    background: var(--color-accent-soft);
+    outline: none;
+}
+.tasarim-dosya .screen-play .btn-submit { border-radius: 6px; }
+.tasarim-dosya .screen-play .btn-category-browser { border-radius: 6px; background: transparent; }
+.tasarim-dosya .screen-play .game-controls { margin-top: var(--space-2); }
+/* Kalan hak: çentikler */
+.tasarim-dosya .screen-play .guess-dots { gap: 3px; }
+.tasarim-dosya .screen-play .guess-dot { width: 3px; height: 12px; border-radius: 1px; }
+.tasarim-dosya .screen-play .guess-dot.used { background: var(--color-text-3); opacity: 0.55; }
+
+/* Öneri listesi ve kategori paneli: kâğıt fişler */
+.tasarim-dosya .screen-play .autocomplete-dropdown,
+.tasarim-dosya .screen-play .category-tree-panel { border-radius: 6px; background: var(--dosya-paper); border-color: var(--dosya-edge); }
+.tasarim-dosya .screen-play .autocomplete-item { border-radius: 3px; }
+.tasarim-dosya .screen-play .autocomplete-item + .autocomplete-item { box-shadow: 0 -1px 0 var(--dosya-rule); }
+.tasarim-dosya .screen-play .coach-tip { border-radius: 6px; }
+
+/* ---------- Geniş ekran: tahminler kâğıdın sağ kenar sütununda ---------- */
+@media (min-width: 768px) {
+    .tasarim-dosya .dosya-folder { margin-inline: 0; }
+    .tasarim-dosya { --dosya-m: 44px; --dosya-pad: 20px; }
+    .tasarim-dosya .screen-play .input-dock { border-radius: 6px 6px 0 0; background: var(--dosya-paper); border-color: var(--dosya-edge); }
+}
+@media (min-width: 1024px) {
+    .tasarim-dosya { --dosya-lh: 30px; }
+    .tasarim-dosya .screen-play { max-width: none; }
+    .tasarim-dosya .screen-play .clue-box.active .clue-text { font-size: 1.125rem; }
+    .tasarim-dosya .screen-play .clue-box.active .clue-tag { font-size: 1.0625rem; }
+    .tasarim-dosya .dosya-sheet {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) var(--dosya-margin-col);
+        grid-template-rows: auto auto auto auto 1fr;
+        align-items: start;
+        padding-right: 0;
+    }
+    .tasarim-dosya .dosya-sheet > * { grid-column: 1; }
+    .tasarim-dosya .screen-play .patient-card { grid-row: 1; margin-right: 0; padding-right: var(--dosya-pad); }
+    .tasarim-dosya .screen-play .clues-container { grid-row: 2; margin-right: 0; }
+    .tasarim-dosya .screen-play .dosya-sheet .ol-wait { grid-row: 3; margin-right: 0; }
+    .tasarim-dosya .screen-play .finished-actions { grid-row: 4; margin-right: 0; }
+    /* kenar sütunu: dikey çizgi + tahminler */
+    .tasarim-dosya .dosya-sheet::after {
+        content: 'Tahminlerin bu kenara yazılır.';
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: start;
+        padding: 6px 18px 0 16px;
+        color: var(--color-text-3);
+        font-size: var(--text-sm);
+        line-height: 1.5;
+    }
+    .tasarim-dosya .dosya-sheet:has(.guess-strip:not([hidden]))::after,
+    .tasarim-dosya .screen-play.dosya-over .dosya-sheet::after { content: none; }
+    .tasarim-dosya .screen-play .dosya-sheet { background-image: linear-gradient(var(--dosya-edge), var(--dosya-edge)); background-size: 1px 100%; background-repeat: no-repeat; background-position: calc(100% - var(--dosya-margin-col)) 0; }
+    .tasarim-dosya .screen-play .guess-strip,
+    .tasarim-dosya .screen-play .guesses-feed {
+        grid-column: 2;
+        grid-row: 1 / span 4;
+        position: sticky;
+        top: calc(var(--play-bar-bottom, 64px) + var(--space-3));
+        flex-direction: column;
+        gap: 2px;
+        margin: 0;
+        padding: 4px 18px 8px 16px;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: none;
+    }
+    .tasarim-dosya .screen-play .guess-strip::before {
+        content: 'Tahminler';
+        margin-bottom: 4px;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text);
+    }
+    .tasarim-dosya .screen-play .guess-chip { max-width: none; min-height: 30px; font-size: var(--text-base); }
+    .tasarim-dosya .screen-play .guess-chip-sub { font-size: var(--text-xs); }
+    .tasarim-dosya .screen-play .guess-chip-text { gap: 1px; }
+    .tasarim-dosya .screen-play .guess-chip-name { white-space: normal; }
+    .tasarim-dosya .screen-play .guess-card { flex-wrap: wrap; row-gap: 0; }
+    .tasarim-dosya .screen-play .guess-status-pill { flex-basis: 100%; max-width: none; text-align: left; padding-left: 24px; }
+    .tasarim-dosya .screen-play .input-dock { margin-right: calc(var(--dosya-margin-col) + 1px); }
+}
+
+/* ---------- Kısa ekran (yatay telefon, açık klavye): yalnızca sıradaki kapalı not görünür ---------- */
+@media (max-height: 520px) {
+    .tasarim-dosya .screen-play .clue-box.locked ~ .clue-box.locked { display: none; }
+    .tasarim-dosya .dosya-folder { margin-top: 0; }
+}
+
+/* ---------- Hareket azaltma ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .tasarim-dosya .dosya-stamp-ink,
+    .tasarim-dosya .screen-play .clue-box.is-latest.is-flash .clue-text { animation: none; }
+}
+
+</style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
 <body>
     <!-- Simge seti: <svg class="icon"><use href="#i-ad"/></svg> ile kullanılır (JS: icon('ad')) -->
@@ -32225,7 +32838,7 @@ class PsikoVakaGame {
         canvas.height = window.innerHeight;
 
         const particles = [];
-        const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#38bdf8', '#a855f7'];
+        const colors = ['#3b6fd6', '#2f9e62', '#e0a800', '#e5484d', '#7ea6ff', '#c93838'];
 
         for (let i = 0; i < 90; i++) {
             particles.push({
@@ -32331,7 +32944,7 @@ function applyThemeChrome(theme) {
     if (iconEl) iconEl.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-${theme === 'light' ? 'sun' : 'moon'}"/></svg>`;
     if (labelEl) labelEl.textContent = theme === 'light' ? 'Açık' : 'Koyu';
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#f7f7fb' : '#0f1117');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef0f3' : '#15181e');
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -37000,6 +37613,140 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(init, 0));
     else setTimeout(init, 0);
 })(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+/**
+ * PsikoVaka — Tasarım pilotu "Danışan dosyası" (ajan D2, 2026-11-20)
+ *
+ * Yalnızca <html class="tasarim-dosya"> iken çalışır. Sınıfı index.html <head>'deki küçük betik koyar:
+ *   ?tasarim=dosya  -> açar ve localStorage 'psikovaka_tasarim' = 'dosya' olarak hatırlar
+ *   ?tasarim=eski   -> kapatır (anahtar silinir)
+ * Bayrak kapalıyken bu dosya hiçbir şey yapmaz: DOM ve görünüm bugünküyle birebir aynıdır.
+ *
+ * Açıkken oyun ekranında (#screenPlay) yalnızca YERLEŞİM değişir:
+ *   - .dosya-folder > .dosya-tabs (klasör sekmesi: vaka no + zorluk, kombo aşama sekmeleri, ipucu sayacı)
+ *                   > .dosya-sheet (tek kâğıt: tahmin şeridi, hasta özeti, ipuçları, tahmin listesi, vaka sonu)
+ *   - vaka sonunda #finishedActions'ın başına mühür (.dosya-stamp, aria-hidden; aynı bilgi #playResultAnswer'da)
+ * Hiçbir kimlik (id) değişmez, öğeler yalnızca taşınır; oyun motoru öğeleri kimlikle bulduğu için etkilenmez.
+ * Görünüm: css/dosya.css (tüm kurallar .tasarim-dosya altında).
+ */
+(function () {
+    'use strict';
+    var root = document.documentElement;
+    if (!root.classList.contains('tasarim-dosya')) return;
+
+    var scr = document.getElementById('screenPlay');
+    if (!scr || scr.querySelector('.dosya-folder')) return;
+    var $ = function (id) { return document.getElementById(id); };
+
+    // ---- Yapı: klasör (sekmeler + kâğıt) ----
+    var folder = document.createElement('div');
+    folder.className = 'dosya-folder';
+    var tabs = document.createElement('div');
+    tabs.className = 'dosya-tabs';
+    var mainTab = document.createElement('div');
+    mainTab.className = 'dosya-tab dosya-tab-main';
+    mainTab.innerHTML = '<span class="dosya-tab-case" id="dosyaTabCase">Vaka</span><span class="dosya-tab-diff" id="dosyaTabDiff"></span>';
+    tabs.appendChild(mainTab);
+    var sheet = document.createElement('div');
+    sheet.className = 'dosya-sheet';
+    folder.appendChild(tabs);
+    folder.appendChild(sheet);
+
+    var patient = scr.querySelector('.patient-card');
+    var progress = scr.querySelector('.play-progress');
+    var combo = $('comboStepperBar');
+    var strip = $('guessStrip');
+    var clues = $('cluesContainer');
+    var feed = $('guessesFeed');
+    var finished = $('finishedActions');
+    if (!patient || !clues || !feed || !finished) return;
+
+    patient.parentNode.insertBefore(folder, patient);
+    if (combo) tabs.appendChild(combo);
+    if (progress) tabs.appendChild(progress);
+    [strip, patient, clues, feed, finished].forEach(function (el) { if (el) sheet.appendChild(el); });
+
+    // ---- Mühür ----
+    var stamp = document.createElement('div');
+    stamp.className = 'dosya-stamp';
+    stamp.setAttribute('aria-hidden', 'true');
+    stamp.hidden = true;
+    finished.insertBefore(stamp, finished.firstChild);
+
+    function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function upTr(t) { try { return String(t).toLocaleUpperCase('tr-TR'); } catch (e) { return String(t).toUpperCase(); } }
+
+    function answers(g) {
+        var c = g.currentCase || {};
+        var d = (g.diagnoses || []).find(function (x) { return x.id === c.diagnosisId; });
+        var tId = c.therapyId || 'cbt_general';
+        var t = (g.therapies || []).find(function (x) { return x.id === tId; });
+        var pId = c.pharmacologyId || (typeof g.getFallbackPharmacologyId === 'function' ? g.getFallbackPharmacologyId(c) : '');
+        var p = (g.pharmacology || []).find(function (x) { return x.id === pId; });
+        return { d: d && d.nameTr, t: t && t.nameTr, p: p && p.nameTr };
+    }
+
+    function renderStamp(g) {
+        if (!g || !g.isGameOver || finished.hidden || !g.currentCase) { stamp.hidden = true; stamp.innerHTML = ''; return; }
+        var won = !!g.gameWon;
+        var mode = g.targetGameMode || 'diagnosis';
+        var a = answers(g);
+        var rows;
+        var label = { diagnosis: 'Tanı', therapy: 'Terapi', pharmacology: 'İlaç' };
+        if (mode === 'combo') {
+            rows = [['Tanı', a.d], ['Terapi', a.t], ['İlaç', a.p]].filter(function (r) { return r[1]; });
+        } else {
+            rows = [[label[mode] || 'Tanı', mode === 'therapy' ? a.t : mode === 'pharmacology' ? a.p : a.d]];
+        }
+        if (!rows.length || !rows[0][1]) { stamp.hidden = true; return; }
+        var head = mode === 'combo'
+            ? (won ? 'Hepsi doğru' : 'Doğru cevap')
+            : (won ? rows[0][0] : 'Doğru ' + rows[0][0].toLocaleLowerCase('tr-TR'));
+        var mark = won
+            ? '<svg viewBox="0 0 24 24" class="dosya-stamp-mark" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+            : '<svg viewBox="0 0 24 24" class="dosya-stamp-mark" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>';
+        var body = mode === 'combo'
+            ? rows.map(function (r) { return '<span class="dosya-stamp-row"><span class="dosya-stamp-k">' + esc(upTr(r[0])) + ':</span> ' + esc(r[1]) + '</span>'; }).join('')
+            : '<span class="dosya-stamp-name">' + esc(rows[0][1]) + '</span>';
+        var d = new Date();
+        var date = String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + d.getFullYear();
+        var n = (g.guesses || []).length;
+        var foot = won ? (n + '. tahmin · ' + date) : ('Kapatıldı · ' + date);
+        stamp.className = 'dosya-stamp ' + (won ? 'is-win' : 'is-loss') + (mode === 'combo' ? ' is-combo' : '');
+        stamp.innerHTML = '<span class="dosya-stamp-ink">'
+            + '<span class="dosya-stamp-head">' + mark + '<span>' + esc(upTr(head)) + (mode === 'combo' ? '' : ':') + '</span></span>'
+            + body
+            + '<span class="dosya-stamp-foot">' + esc(foot) + '</span>'
+            + '</span>';
+        stamp.hidden = false;
+    }
+
+    function renderTab(g) {
+        var c = g && g.currentCase;
+        var caseEl = $('dosyaTabCase'), diffEl = $('dosyaTabDiff');
+        if (!c || !caseEl) return;
+        var pid = $('patientId');
+        caseEl.textContent = c.caseNumber ? ('Vaka #' + c.caseNumber) : (pid ? pid.textContent : 'Vaka');
+        var db = $('difficultyBadge');
+        var diff = db ? db.textContent.trim() : '';
+        diffEl.textContent = diff;
+        diffEl.hidden = !diff;
+        diffEl.className = 'dosya-tab-diff is-' + diff.toLocaleLowerCase('tr-TR').replace(/[^a-zçğıöşü]/g, '');
+    }
+
+    function sync() {
+        var g = window.game;
+        if (!g) return;
+        renderTab(g);
+        renderStamp(g);
+        scr.classList.toggle('dosya-over', !!g.isGameOver);
+    }
+    document.addEventListener('psikovaka:playstate', sync);
+    // İlk çizim: oyun nesnesi DOMContentLoaded'da kurulur
+    if (window.game) sync(); else document.addEventListener('DOMContentLoaded', function () { setTimeout(sync, 0); });
+})();
 
 </script>
 </body>

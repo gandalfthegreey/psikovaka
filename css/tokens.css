@@ -6,8 +6,11 @@
 
 :root {
     /* Yazı */
-    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    /* Bilgi Kartı yönü (Emre kararı 2026-11-20): metin Atkinson Hyperlegible Next, başlık Bitter. Ayrı mono yok:
+       kodlar/sayaçlar metin yüzüyle çizilir, rakamlar style.css'te tabular-nums ile hizalanır. */
+    --font-sans: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Atkinson Hyperlegible Next', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-display: 'Bitter', Georgia, 'Times New Roman', serif;
 
     --text-xs: 0.75rem;    /* 12 */
     --text-sm: 0.875rem;   /* 14 */
@@ -63,25 +66,25 @@
     --z-toast: 200;
 
     /* Hedef türüne göre küçük vurgu (ilerleme çubuğu, çip) */
-    --target-diagnosis: #6366f1;
-    --target-therapy: #10b981;
-    --target-pharmacology: #f43f5e;
-    --target-combo: #f59e0b;
+    --target-diagnosis: #3b6fd6;
+    --target-therapy: #2f9e62;
+    --target-pharmacology: #e5484d;
+    --target-combo: #e0a800;
     --color-target: var(--target-diagnosis);
 
     /* Hedef rengini METİN olarak kullanırken (çip yazısı). Koyu temada aynı; açık temada koyu varyant (H9) */
-    --target-diagnosis-text: #8b93ff;   /* koyu zeminde #6366f1 metin 3.6:1 kalıyordu */
-    --target-therapy-text: var(--target-therapy);
-    --target-pharmacology-text: #fb7185; /* #f43f5e metin 4.4:1 kalıyordu */
-    --target-combo-text: var(--target-combo);
+    --target-diagnosis-text: #8db0ff;  /* koyu zeminde ≥4.5:1 */
+    --target-therapy-text: #62d08e;
+    --target-pharmacology-text: #ff8a8d;
+    --target-combo-text: #f2c45a;
     /* Hedef renginde DOLU zemin + beyaz yazı (ipucu numarası); beyazla en az 4.5:1 (H9) */
-    --target-diagnosis-strong: #4f46e5;
-    --target-therapy-strong: #047857;
-    --target-pharmacology-strong: #be123c;
-    --target-combo-strong: #a16207;
+    --target-diagnosis-strong: #2354b0;  /* dolu zemin + beyaz yazı */
+    --target-therapy-strong: #1d7444;
+    --target-pharmacology-strong: #b42330;
+    --target-combo-strong: #7f5800;
     --color-target-strong: var(--target-diagnosis-strong);
     /* Sayı rozeti zemini (beyaz yazıyla 4.83:1) */
-    --color-badge-bg: #dc2626;
+    --color-badge-bg: #c93838;  /* kart kırmızısı; beyaz yazıyla ≥4.5:1 */
 }
 
 /* ---------- Koyu tema (varsayılan) ---------- */
@@ -89,33 +92,33 @@
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --color-bg: #0f1117;
-    --color-surface: #161922;
-    --color-surface-2: #1c202b;
-    --color-surface-3: #252a37;
-    --color-border: #262b38;
-    --color-border-strong: #353c4d;
-    --color-input-border: #636b80;    /* form alanı sınırı: kart zemininde 3:1 (H10) */
+    --color-bg: #15181e;
+    --color-surface: #1d2129;
+    --color-surface-2: #232833;
+    --color-surface-3: #2c3240;
+    --color-border: #2a303c;
+    --color-border-strong: #3c4454;
+    --color-input-border: #717b8f;
 
-    --color-text: #eef0f5;
-    --color-text-2: #b7bdcb;
-    --color-text-3: #8d94a6;
+    --color-text: #eef0f4;
+    --color-text-2: #c0c6d2;
+    --color-text-3: #98a0b0;
 
-    --color-accent: #8b93ff;          /* metin/kenar vurgusu */
-    --color-accent-bg: #5457e6;       /* dolu düğme zemini (beyaz yazıyla AA) */
-    --color-accent-bg-hover: #4a4dd6;
+    --color-accent: #7ea6ff;
+    --color-accent-bg: #2f63c9;
+    --color-accent-bg-hover: #2655b4;
     --color-accent-contrast: #ffffff;
-    --color-accent-soft: rgba(99, 102, 241, 0.16);
+    --color-accent-soft: rgba(126, 166, 255, 0.14);
 
-    --color-success: #34d399;
-    --color-success-soft: rgba(52, 211, 153, 0.13);
-    --color-warning: #fbbf24;
-    --color-warning-soft: rgba(251, 191, 36, 0.13);
-    --color-danger: #f87171;
-    --color-danger-soft: rgba(248, 113, 113, 0.13);
+    --color-success: #62d08e;
+    --color-success-soft: rgba(98, 208, 142, 0.13);
+    --color-warning: #f2c45a;
+    --color-warning-soft: rgba(242, 196, 90, 0.13);
+    --color-danger: #ff8f8f;
+    --color-danger-soft: rgba(255, 143, 143, 0.13);
 
-    --color-overlay: rgba(6, 8, 13, 0.64);
-    --color-focus: #a5b4fc;
+    --color-overlay: rgba(6, 8, 12, 0.66);
+    --color-focus: #a9c4ff;
 
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35);
     --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.35);
@@ -126,43 +129,44 @@
 [data-theme="light"] {
     color-scheme: light;
 
-    --color-bg: #f6f7fb;
+    --color-bg: #eef0f3;
     --color-surface: #ffffff;
-    --color-surface-2: #f2f4f8;
-    --color-surface-3: #e8ebf2;
-    --color-border: #e2e5ee;
-    --color-border-strong: #cbd0dc;
-    --color-input-border: #878ea0;    /* form alanı sınırı: beyaz zeminde 3:1 (H10) */
+    --color-surface-2: #f5f6f8;
+    --color-surface-3: #e6e9ee;
+    --color-border: #dcdfe6;
+    --color-border-strong: #bcc2cd;
+    --color-input-border: #7e8697;
 
-    --color-text: #12151d;
-    --color-text-2: #454c5e;
-    --color-text-3: #646b7e;
+    --color-text: #1a1e27;
+    --color-text-2: #424958;
+    --color-text-3: #5a6273;
 
-    --color-accent: #4f46e5;
-    --color-accent-bg: #4f46e5;
-    --color-accent-bg-hover: #4338ca;
+    --color-accent: #2354b0;
+    --color-accent-bg: #2354b0;
+    --color-accent-bg-hover: #1c4795;
     --color-accent-contrast: #ffffff;
-    --color-accent-soft: rgba(79, 70, 229, 0.09);
+    --color-accent-soft: rgba(35, 84, 176, 0.09);
 
-    --color-success: #047857;
-    --color-success-soft: rgba(4, 120, 87, 0.09);
-    --color-warning: #a16207;
-    --color-warning-soft: rgba(161, 98, 7, 0.1);
-    --color-danger: #c62828;
-    --color-danger-soft: rgba(198, 40, 40, 0.08);
+    --color-success: #1d7444;
+    --color-success-soft: rgba(29, 116, 68, 0.09);
+    --color-warning: #8a5a00;
+    --color-warning-soft: rgba(138, 90, 0, 0.1);
+    --color-danger: #a51d2d;
+    --color-danger-soft: rgba(165, 29, 45, 0.08);
 
-    --color-overlay: rgba(18, 21, 29, 0.42);
-    --color-focus: #4f46e5;
+    --color-overlay: rgba(26, 30, 39, 0.42);
+    --color-focus: #2354b0;
 
-    --target-diagnosis-text: #4f46e5;
-    --target-therapy-text: #047857;
-    --target-pharmacology-text: #be123c;
-    --target-combo-text: #92400e;
-    --color-warning-text-strong: #854d0e; /* sarı zemin üstünde küçük metin (zorluk "Orta") */
+    --target-combo: #bc8d00;   /* açık zeminde işaret ≥3:1 */
+    --target-diagnosis-text: #2354b0;
+    --target-therapy-text: #1d7444;
+    --target-pharmacology-text: #b42330;
+    --target-combo-text: #7f5800;
+    --color-warning-text-strong: #8a5a00;
 
-    --shadow-1: 0 1px 2px rgba(18, 21, 29, 0.06);
-    --shadow-2: 0 6px 20px rgba(18, 21, 29, 0.08);
-    --shadow-3: 0 18px 48px rgba(18, 21, 29, 0.16);
+    --shadow-1: 0 1px 2px rgba(26, 30, 39, 0.06);
+    --shadow-2: 0 6px 20px rgba(26, 30, 39, 0.08);
+    --shadow-3: 0 18px 48px rgba(26, 30, 39, 0.16);
 }
 
 body.therapy-mode-active { --color-target: var(--target-therapy); }
