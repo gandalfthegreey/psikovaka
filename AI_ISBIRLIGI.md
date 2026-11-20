@@ -127,11 +127,18 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-21 01:32 — Gemini — Yeni vakalar: 20 vaka (case-171 – case-190)
+- **Dosyalar:** js/cases.js, PsikoVaka_Tam_Surum.html, supabase/seed/0002_cases_answer_key.sql, tools/vaka_ekle/taslaklar/2026-11-21_20_b.json
+- **Ne değişti:** case-171: chronic_motor_vocal_tic (CHILD, Orta); case-172: speech_sound_disorder (CHILD, Kolay); case-173: stereotypic_movement_disorder (CHILD, Zor); case-174: psychotic_due_to_medical (NEURO_SOMATIC, Zor); case-175: substance_induced_bipolar (ADULT, Orta); case-176: substance_induced_depressive (ADULT, Orta); case-177: substance_induced_anxiety (ADULT, Kolay); case-178: central_sleep_apnea (NEURO_SOMATIC, Zor); case-179: sleep_related_hypoventilation (NEURO_SOMATIC, İleri Düzey); case-180: female_orgasmic_disorder (ADULT, Orta); case-181: male_hypoactive_desire (ADULT, Orta); case-182: alcohol_intoxication (SUBSTANCE, Kolay); case-183: cocaine_intoxication (SUBSTANCE, Orta); case-184: sedative_withdrawal (SUBSTANCE, Zor); case-185: caffeine_intoxication (SUBSTANCE, Kolay); case-186: mild_neurocognitive_alzheimer (NEURO_SOMATIC, Orta); case-187: major_neurocognitive_tbi (NEURO_SOMATIC, Zor); case-188: major_neurocognitive_hiv (NEURO_SOMATIC, Zor); case-189: fetishistic_disorder (FORENSIC, Orta); case-190: transvestic_disorder (FORENSIC, Orta)
+- **Neden:** Emre'nin isteği (50 vaka — 2/3. parti: 20 vaka); vakası olmayan tanılar dolduruldu.
+- **Doğrulama:** tools/vaka_ekle/dogrula.js hata 0 (uyarı 0), ekle.js + derleme 0 hata; yayın: bekleniyor
+- **Açık kalan / dikkat:** İçerik yapay zekâ tarafından yazıldı; Emre/uzman gözden geçirmeli.
+
 ### 2026-11-21 01:25 — Gemini — Yeni vakalar: 20 vaka (case-151 – case-170)
 - **Dosyalar:** js/cases.js, PsikoVaka_Tam_Surum.html, supabase/seed/0002_cases_answer_key.sql, tools/vaka_ekle/taslaklar/2026-11-21_20.json
 - **Ne değişti:** case-151: language_disorder (CHILD, Kolay); case-152: provisional_tic_disorder (CHILD, Kolay); case-153: social_communication_disorder (CHILD, Zor); case-154: substance_induced_psychotic (ADULT, Orta); case-155: catatonia_medical (NEURO_SOMATIC, İleri Düzey); case-156: bipolar_due_to_medical (NEURO_SOMATIC, Zor); case-157: depressive_due_to_medical (NEURO_SOMATIC, Orta); case-158: anxiety_due_to_medical (NEURO_SOMATIC, Orta); case-159: ptsd_preschool (CHILD, Orta); case-160: psychological_factors_affecting_medical (NEURO_SOMATIC, Zor); case-161: obstructive_sleep_apnea (ADULT, Kolay); case-162: circadian_rhythm_sleep_wake (ADULT, Orta); case-163: delayed_ejaculation (ADULT, Orta); case-164: female_sexual_interest_arousal (ADULT, Orta); case-165: alcohol_withdrawal_delirium (SUBSTANCE, Kolay); case-166: opioid_withdrawal (SUBSTANCE, Orta); case-167: cannabis_use_disorder (SUBSTANCE, Orta); case-168: major_neurocognitive_vascular (NEURO_SOMATIC, Zor); case-169: major_neurocognitive_parkinson (NEURO_SOMATIC, Zor); case-170: personality_change_due_to_medical (FORENSIC, Zor)
 - **Neden:** Emre'nin isteği (50 vaka — 1/3. parti: 20 vaka); vakası olmayan tanılar dolduruldu.
-- **Doğrulama:** tools/vaka_ekle/dogrula.js hata 0 (uyarı 2 — klinik gerekçeli ilaçsız seçim), ekle.js + derleme 0 hata; yayın: bekleniyor
+- **Doğrulama:** tools/vaka_ekle/dogrula.js hata 0 (uyarı 2 — klinik gerekçeli ilaçsız seçim), ekle.js + derleme 0 hata; yayın: YAYINLANDI (bc0f9cf)
 - **Açık kalan / dikkat:** İçerik yapay zekâ tarafından yazıldı; Emre/uzman gözden geçirmeli.
 
 ### 2026-11-21 — Claude — Ana sayfa "çalışma masası" + Kütüphane "ders kitabı" canlı koda alındı (ajan R3)
