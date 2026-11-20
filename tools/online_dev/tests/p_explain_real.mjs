@@ -11,6 +11,8 @@ for (const vp of [{ w: 390, h: 844, dark: true }, { w: 1440, h: 900, dark: false
     const w = c.explanation.whyNot[c.explanation.whyNot.length - 1].diagnosisId; const d = g.diagnoses.find(x => x.id === w);
     g.dom.diagnosisInput.value = d.nameTr; g.dom.diagnosisInput.dataset.selectedId = w; g.submitGuess(); g.giveUp(); return { n: withX.length, total: g.cases.length, w }; });
   await sleep(900);
+  // Ajan U (H3): rapor kendiliğinden açılmaz; düğmeyle açılır
+  await p.click('#btnMainShowReport'); await sleep(500);
   check(r.n === r.total, `tüm vakalarda açıklama var (${r.n}/${r.total})`);
   check(await p.locator('#resultExplainBox .xp-alt').first().evaluate(e => e.classList.contains('is-mine')), 'gerçek veride "Senin tahminin" üstte');
   if (vp.w < 768) await p.locator('#resultExplainBox .xp-summary').click();

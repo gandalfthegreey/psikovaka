@@ -35,7 +35,7 @@ const BRANCH = 'main';
 // Diskte olan yollar + git'in zaten izlediği (taşınmış/silinmiş) yollar eklenir;
 // ikisinde de olmayan yol atlanır, böylece git add hata vermez.
 const CANDIDATE_PATHS = [
-    'index.html', 'manifest.json', 'css', 'js', 'PsikoVaka_Tam_Surum.html',
+    'index.html', '404.html', 'manifest.json', 'assets', 'css', 'js', 'PsikoVaka_Tam_Surum.html',
     'paketler', 'build_portable_single_file.js', 'deploy_to_github.js', 'GITHUBA_YUKLE.bat',
     '.gitignore', '.github', 'CLAUDE.md', 'GEMINI.md', 'AI_ISBIRLIGI.md', 'tools', 'supabase',
     // eski konumlar: kökten paketler/ altına taşındı, silinmeleri de kayda geçsin

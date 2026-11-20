@@ -273,8 +273,8 @@
             finishLocal(d.won, d.points, d.answer, d.elapsed_sec, d.won ? 'solved' : 'failed');
         } else {
             gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
-            if (d.same_group) gm.showToast(`Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}`);
-            NS.announce(`Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
+            // Bilgi bildirimi yok (H1): tahmin şeridi "grup doğru"yu gösterir
+            NS.announce(d.same_group ? `Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.` : `Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
         }
         updateHud();
         if (d.room && (d.room.status !== s.room.status || (d.room.round && d.room.round.closed_at))) NS.rooms.refresh();
@@ -317,6 +317,7 @@
         if (won && typeof gm.launchConfetti === 'function' && !NS.util.reducedMotion()) gm.launchConfetti();
         const ans = answer || roundAnswer();
         renderWaitPanel(won, points, ans, elapsed, reason);
+        try { document.dispatchEvent(new CustomEvent('psikovaka:playstate')); } catch (e) {}
         NS.announce(won ? `Doğru. ${points} puan.` : 'Bu turu bitirdin.');
     }
 

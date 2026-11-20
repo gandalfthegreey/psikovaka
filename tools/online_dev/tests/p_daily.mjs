@@ -42,6 +42,9 @@ for (const vp of [{ w: 360, h: 740, dark: false }, { w: 390, h: 844, dark: true 
   await guess(p, info.right);
   await sleep(900);
   check(await p.evaluate(() => window.game.isGameOver && window.game.gameWon), 'sunucu kararıyla kazandı');
+  // Ajan U (H3): rapor kendiliğinden açılmaz; seri sonuç kartında da görünür
+  check(await p.locator('#playResultStreak').isVisible() && /4 günlük seri/.test(await p.locator('#playResultStreak').innerText()), 'sonuç kartında güncel seri (4)');
+  await p.click('#btnMainShowReport'); await sleep(400);
   check(await p.locator('#resultStreakNote').isVisible() && /4 günlük seri/.test(await p.locator('#resultStreakNote').innerText()), 'raporda güncel seri (4)');
   check(!/RP/.test(await p.locator('#resultModal .result-banner').innerText()), 'raporda RP yok');
   if (vp.w === 390) await p.screenshot({ path: `${SHOTS}/gunluk_rapor_${tag}.png` });
@@ -78,6 +81,8 @@ for (const vp of [{ w: 360, h: 740, dark: false }, { w: 390, h: 844, dark: true 
   await p.click('#btnStartDaily'); await p.waitForFunction(() => window.game.currentScreen === 'play');
   await p.evaluate(() => window.game.giveUp()); await sleep(900);
   check(await p.evaluate(() => window.game.isGameOver && !window.game.gameWon), 'pes etti (sunucu)');
+  check(/Seri sıfırlandı/.test(await p.locator('#playResultStreak').innerText()), 'sonuç kartında: seri sıfırlandı');
+  await p.click('#btnMainShowReport'); await sleep(400);
   check(/Seri sıfırlandı/.test(await p.locator('#resultStreakNote').innerText()), 'raporda: seri sıfırlandı');
   check(await p.locator('#resultExplainBox').count() === 1, 'rapor açık');
   await p.evaluate(() => { window.game.closeModal(window.game.dom.resultModal); location.hash = '#/gunluk'; }); await sleep(600);

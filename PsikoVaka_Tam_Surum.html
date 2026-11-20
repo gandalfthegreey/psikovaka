@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>PsikoVaka | DSM-5-TR klinik vaka oyunu</title>
     <meta name="description" content="Psikoloji öğrencileri için klinik vaka oyunu: ipuçlarını aç, tanıyı, terapiyi ve ilacı bul.">
+    <link rel="canonical" href="https://gandalfthegreey.github.io/psikovaka/">
+    <!-- Bağlantı önizlemesi (WhatsApp, Telegram, X…) — mutlak adresler (GitHub Pages) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PsikoVaka">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="PsikoVaka · Danışanı dinle, tanıyı bul.">
+    <meta property="og:description" content="Psikoloji öğrencileri için klinik vaka oyunu: ipuçlarını aç, tanıyı, terapiyi ve ilacı bul. Günün vakası, pratik ve arkadaşlarla düello.">
+    <meta property="og:url" content="https://gandalfthegreey.github.io/psikovaka/">
+    <meta property="og:image" content="https://gandalfthegreey.github.io/psikovaka/assets/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="PsikoVaka: el sallayan Nöro ve &quot;Danışanı dinle, tanıyı bul.&quot; yazısı">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PsikoVaka · Danışanı dinle, tanıyı bul.">
+    <meta name="twitter:description" content="Psikoloji öğrencileri için klinik vaka oyunu: ipuçlarını aç, tanıyı, terapiyi ve ilacı bul.">
+    <meta name="twitter:image" content="https://gandalfthegreey.github.io/psikovaka/assets/og.png">
+    
     
     <meta name="theme-color" content="#0f1117">
     <script>
@@ -98,6 +115,20 @@
     --target-pharmacology: #f43f5e;
     --target-combo: #f59e0b;
     --color-target: var(--target-diagnosis);
+
+    /* Hedef rengini METİN olarak kullanırken (çip yazısı). Koyu temada aynı; açık temada koyu varyant (H9) */
+    --target-diagnosis-text: #8b93ff;   /* koyu zeminde #6366f1 metin 3.6:1 kalıyordu */
+    --target-therapy-text: var(--target-therapy);
+    --target-pharmacology-text: #fb7185; /* #f43f5e metin 4.4:1 kalıyordu */
+    --target-combo-text: var(--target-combo);
+    /* Hedef renginde DOLU zemin + beyaz yazı (ipucu numarası); beyazla en az 4.5:1 (H9) */
+    --target-diagnosis-strong: #4f46e5;
+    --target-therapy-strong: #047857;
+    --target-pharmacology-strong: #be123c;
+    --target-combo-strong: #a16207;
+    --color-target-strong: var(--target-diagnosis-strong);
+    /* Sayı rozeti zemini (beyaz yazıyla 4.83:1) */
+    --color-badge-bg: #dc2626;
 }
 
 /* ---------- Koyu tema (varsayılan) ---------- */
@@ -111,6 +142,7 @@
     --color-surface-3: #252a37;
     --color-border: #262b38;
     --color-border-strong: #353c4d;
+    --color-input-border: #636b80;    /* form alanı sınırı: kart zemininde 3:1 (H10) */
 
     --color-text: #eef0f5;
     --color-text-2: #b7bdcb;
@@ -147,6 +179,7 @@
     --color-surface-3: #e8ebf2;
     --color-border: #e2e5ee;
     --color-border-strong: #cbd0dc;
+    --color-input-border: #878ea0;    /* form alanı sınırı: beyaz zeminde 3:1 (H10) */
 
     --color-text: #12151d;
     --color-text-2: #454c5e;
@@ -168,6 +201,12 @@
     --color-overlay: rgba(18, 21, 29, 0.42);
     --color-focus: #4f46e5;
 
+    --target-diagnosis-text: #4f46e5;
+    --target-therapy-text: #047857;
+    --target-pharmacology-text: #be123c;
+    --target-combo-text: #92400e;
+    --color-warning-text-strong: #854d0e; /* sarı zemin üstünde küçük metin (zorluk "Orta") */
+
     --shadow-1: 0 1px 2px rgba(18, 21, 29, 0.06);
     --shadow-2: 0 6px 20px rgba(18, 21, 29, 0.08);
     --shadow-3: 0 18px 48px rgba(18, 21, 29, 0.16);
@@ -176,6 +215,9 @@
 body.therapy-mode-active { --color-target: var(--target-therapy); }
 body.pharmacology-mode-active { --color-target: var(--target-pharmacology); }
 body.combo-mode-active { --color-target: var(--target-combo); }
+body.therapy-mode-active { --color-target-strong: var(--target-therapy-strong); }
+body.pharmacology-mode-active { --color-target-strong: var(--target-pharmacology-strong); }
+body.combo-mode-active { --color-target-strong: var(--target-combo-strong); }
 
 /* ---------- Eski değişken adları (online_arena.js ve eski satır içi stiller için) ----------
    online_arena.js yeniden yazılınca bu blok kaldırılabilir. */
@@ -529,6 +571,7 @@ body.is-playing .profile-chip { visibility: hidden; }
 .badge-muted { background: var(--color-surface-3); color: var(--color-text-3); }
 .badge-difficulty-kolay { background: var(--color-success-soft); color: var(--color-success); }
 .badge-difficulty-orta { background: var(--color-warning-soft); color: var(--color-warning); }
+[data-theme="light"] .badge-difficulty-orta { color: var(--color-warning-text-strong); }
 .badge-difficulty-zor,
 .badge-difficulty-ileri,
 .badge-difficulty-ileri\ düzey { background: var(--color-danger-soft); color: var(--color-danger); }
@@ -647,7 +690,7 @@ body.is-playing .profile-chip { visibility: hidden; }
     min-height: var(--tap);
     padding: var(--space-2) var(--space-3);
     background: var(--color-surface);
-    border: 1px solid var(--color-border-strong);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
     font-size: 16px; /* iOS yakınlaştırmasını engeller */
@@ -1383,8 +1426,7 @@ body.is-playing .app-main { padding-top: 0; padding-bottom: 0; }
     font-weight: var(--weight-bold);
 }
 .clue-num .icon { width: 12px; height: 12px; stroke-width: 2.2; }
-.clue-box.is-latest .clue-num { background: var(--color-target); color: #fff; }
-body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
+.clue-box.is-latest .clue-num { background: var(--color-target-strong); color: #fff; }
 .clue-tag {
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
@@ -1470,6 +1512,58 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .guess-card.category-match .guess-status-pill { color: var(--color-warning); }
 .guess-card.correct .guess-status-pill { color: var(--color-success); }
 
+/* Tahmin şeridi (H2): vaka sürerken ilerleme çubuğunun altında yapışkan */
+.guess-strip {
+    position: sticky;
+    top: var(--play-bar-bottom, 0px);
+    z-index: var(--z-dock);
+    display: flex;
+    gap: var(--space-2);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-4)) 0;
+    padding: var(--space-2) var(--space-4);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    list-style: none;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+.guess-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 0 0 auto;
+    max-width: 220px;
+    min-height: 36px;
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--color-surface-3);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: var(--leading-tight);
+}
+.guess-chip-ico { display: inline-flex; color: var(--color-text-3); }
+.guess-chip-ico .icon { width: 16px; height: 16px; }
+.guess-chip-text { display: flex; flex-direction: column; min-width: 0; }
+.guess-chip-name { font-weight: var(--weight-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.guess-chip-sub { font-size: var(--text-xs); color: var(--color-warning); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.guess-chip.is-close { background: var(--color-warning-soft); border-color: var(--color-warning); }
+.guess-chip.is-close .guess-chip-ico { color: var(--color-warning); }
+.guess-chip.is-correct { background: var(--color-success-soft); border-color: var(--color-success); }
+.guess-chip.is-correct .guess-chip-ico { color: var(--color-success); }
+.guess-chip:last-child { animation: clue-in var(--duration) var(--ease); }
+/* Vaka sürerken tam liste gizli (şerit gösteriyor); vaka bitince görünür */
+.screen-play.has-guess-strip .guesses-feed { display: none; }
+
+/* Yeni açılan ipucu bir kez parlar (H1) */
+.clue-box.is-latest.is-flash { animation: clue-in var(--duration) var(--ease), clue-flash 600ms var(--ease); }
+@keyframes clue-flash {
+    0% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 0 var(--color-accent); }
+    35% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 6px var(--color-accent-soft); border-color: var(--color-accent); }
+    100% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 0 transparent; }
+}
+
 /* Vaka sonu */
 .finished-actions {
     display: flex;
@@ -1480,6 +1574,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     margin-bottom: var(--space-5);
+    scroll-margin-top: calc(var(--play-bar-bottom, 64px) + var(--space-3));
 }
 .result-inline { display: flex; align-items: center; gap: var(--space-3); }
 .result-inline-icon {
@@ -1532,6 +1627,56 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .btn-category-browser:hover, .btn-category-browser.active { color: var(--color-text); border-color: var(--color-accent); }
 .category-browser-icon { display: inline-flex; }
 .category-browser-label { display: none; }
+/* Telefonda klasör simgesinin altında kısa "Liste" etiketi (H8) */
+.category-browser-label-short { font-size: var(--text-xs); line-height: 1; font-weight: var(--weight-semibold); }
+@media (max-width: 479px) {
+    .search-and-browser-container .btn-category-browser { flex-direction: column; gap: 2px; padding: 0 var(--space-2); }
+    .btn-category-browser .icon { width: 18px; height: 18px; }
+}
+@media (min-width: 480px) { .category-browser-label-short { display: none; } }
+/* Gönder düğmesi: dar ekranda yalnızca ok simgesi (adı aria-label'da), genişte yazı */
+.btn-submit-icon { display: none; }
+@media (max-width: 479px) {
+    .input-group .btn-submit { width: 48px; min-width: 48px; padding: 0; }
+    .btn-submit-icon { display: inline-block; }
+    .btn-submit-label { display: none; }
+    .diagnosis-input::placeholder { font-size: var(--text-sm); }
+}
+.diagnosis-input { text-overflow: ellipsis; }
+
+/* İlk vakada liste ipucu balonu (H8) */
+.coach-tip {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + var(--space-3));
+    z-index: var(--z-popover);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: max-content;
+    max-width: min(320px, calc(100vw - 2 * var(--space-4)));
+    padding: var(--space-3);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-2);
+    animation: clue-in var(--duration) var(--ease);
+}
+.coach-tip::after {
+    content: '';
+    position: absolute;
+    left: 18px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    border-right: 1px solid var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    background: var(--color-surface);
+    transform: rotate(45deg);
+}
+.coach-tip .btn { flex-shrink: 0; }
 
 .search-container { flex: 1; min-width: 0; } /* öneri listesi tüm tahmin satırı genişliğinde açılır */
 .input-group { display: flex; gap: var(--space-2); }
@@ -1550,7 +1695,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     width: 100%;
     height: 48px;
     padding: 0 var(--space-3) 0 40px;
-    border: 1px solid var(--color-border-strong);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
@@ -1605,6 +1750,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .item-main { display: flex; flex-direction: column; min-width: 0; }
 .item-name-tr { font-weight: var(--weight-medium); }
 .item-name-en { font-size: var(--text-xs); color: var(--color-text-3); }
+.group-dot { display: inline-block; width: 8px; height: 8px; margin-right: var(--space-2); border-radius: 50%; background: var(--group-color, var(--color-text-3)); vertical-align: 1px; flex-shrink: 0; }
 .item-category-badge, .therapy-family-tag, .pharma-family-tag {
     flex-shrink: 0;
     max-width: 45%;
@@ -1824,6 +1970,15 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     background: var(--color-surface-2);
 }
 .duel-podium-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-2); margin-top: var(--space-3); }
+.duel-podium-title { font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-3); }
+.duel-podium-verdict { margin-top: var(--space-1); font-weight: var(--weight-semibold); }
+.duel-podium-verdict.is-win { color: var(--color-success); }
+.duel-podium-verdict.is-loss { color: var(--color-danger); }
+.duel-podium-verdict.is-wait, .duel-podium-verdict.is-tie { color: var(--color-text-2); }
+.duel-podium-side { padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.duel-podium-side.is-me { border-color: var(--color-success); }
+.duel-podium-name { font-weight: var(--weight-semibold); }
+.duel-podium-sub { margin-top: var(--space-1); font-size: var(--text-sm); color: var(--color-text-2); }
 
 .edu-section {
     padding: var(--space-4);
@@ -2101,6 +2256,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
     animation: toast-in var(--duration) var(--ease);
 }
 @keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.toast.is-leaving { opacity: 0; transform: translateY(10px) scale(0.97); transition: opacity 0.35s ease, transform 0.35s ease; }
 
 /* ---------- 10b. Hesap (giriş, kayıt, kullanıcı adı, profil) ---------- */
 .text-link {
@@ -2276,6 +2432,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
         background: var(--color-surface);
     }
     .card-hero { padding: var(--space-6); }
+    .guess-strip { margin-inline: 0; padding-inline: 0; }
     .toast-container { bottom: var(--space-5); }
     body.is-playing .toast-container { bottom: calc(var(--space-5) + 120px); }
 
@@ -2539,6 +2696,7 @@ a.list-row { color: inherit; text-decoration: none; }
 .daily-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-3); }
 .streak-chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 2px 10px; border-radius: var(--radius-full); background: var(--color-warning-soft); color: var(--color-warning); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
 .streak-chip .icon { width: 16px; height: 16px; }
+[data-theme="light"] .streak-chip { color: var(--color-warning-text-strong); }
 .daily-result { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-2); }
 .daily-result-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; background: var(--color-surface-3); }
 .daily-result.is-win .daily-result-icon { background: var(--color-success-soft); color: var(--color-success); }
@@ -2601,6 +2759,65 @@ a.list-row { color: inherit; text-decoration: none; }
 .dl-gate-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .dl-controls-row .dl-seg { grid-template-columns: repeat(2, 1fr); }
 .dl-row.is-pinned { background: linear-gradient(var(--color-accent-soft), var(--color-accent-soft)), var(--color-surface); }
+
+/* ---------- Dokunmatik ekranlarda en az 44 px dokunma hedefi (ajan U, H11) ---------- */
+@media (pointer: coarse) {
+    .btn-sm,
+    .segmented-btn,
+    .chip-btn { min-height: var(--tap); }
+    .icon-btn-sm { width: var(--tap); height: var(--tap); }
+    a.rp-chip-link,
+    a.profile-league-link { min-height: var(--tap); }
+    /* Metin bağlantıları: görünür boyut aynı, dokunma alanı görünmez dolguyla büyür */
+    .text-link { padding-block: 12px; margin-block: -12px; }
+    .text-link.account-cta-privacy,
+    .text-link.profile-league-cta { display: inline-flex; align-items: center; min-height: var(--tap); padding-block: 0; margin-block: 0; align-self: flex-start; }
+}
+
+/* ---------- Bilinmeyen adres ekranı (ajan U, H13) ---------- */
+.notfound-state { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-7) var(--space-4); text-align: center; }
+.notfound-noro { display: inline-flex; width: 120px; height: 120px; }
+.notfound-noro svg { width: 100%; height: 100%; }
+.notfound-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* ---------- Ses ayarı satırı (ajan U, H14) ---------- */
+.list-row-switch .switch { margin-left: auto; background: var(--color-input-border); }
+.list-row-switch[aria-checked="true"] .switch { background: var(--color-accent-bg); }
+.list-row-switch[aria-checked="true"] .switch-knob { transform: translateX(18px); }
+
+/* ---------- İlk ziyaret kartı ve "Nasıl oynanır" bağlantısı (ajan U) ---------- */
+.welcome-card { display: flex; align-items: center; gap: var(--space-4); border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border)); }
+.welcome-noro { display: inline-flex; flex-shrink: 0; width: 96px; height: 96px; }
+.welcome-noro svg { width: 100%; height: 100%; }
+.welcome-body { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.welcome-title { font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: var(--leading-tight); }
+.welcome-steps { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; list-style: none; color: var(--color-text-2); font-size: var(--text-sm); }
+.welcome-steps li { display: flex; align-items: center; gap: var(--space-2); }
+.welcome-steps .icon { width: 18px; height: 18px; color: var(--color-accent); }
+.welcome-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+@media (max-width: 479px) {
+    .welcome-card { flex-direction: column; align-items: flex-start; }
+    .welcome-noro { width: 80px; height: 80px; }
+}
+@media (min-width: 600px) { .welcome-steps { flex-direction: row; flex-wrap: wrap; gap: var(--space-2) var(--space-4); } }
+
+.target-hint-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-3); }
+.home-help-link { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); }
+.home-help-link .icon { width: 16px; height: 16px; }
+@media (pointer: coarse) { .text-link.home-help-link { min-height: var(--tap); padding-block: 0; margin-block: 0; } }
+
+/* ---------- Kısa ekran: yatay telefon (ajan U, S11'in ilk adımı) ----------
+   Üst başlık gizlenir, oyun çubuğu en üste yapışır, tahmin alanı sabit değil akışta kalır: ilk ipucu görünür. */
+@media (max-height: 520px) {
+    body.is-playing .app-header { display: none; }
+    body.is-playing .play-bar { top: 0; padding-top: calc(var(--space-1) + env(safe-area-inset-top)); padding-bottom: var(--space-1); }
+    body.is-playing .app-main { padding-top: 0; }
+    .screen-play { min-height: 0; gap: var(--space-3); }
+    .screen-play .input-dock { position: relative; bottom: auto; }
+    .autocomplete-dropdown { max-height: 40vh; }
+    body.is-playing .toast-container { bottom: var(--space-3); }
+}
+.profile-league-cta { font-size: var(--text-sm); text-align: left; }
 
 </style>
     <style>
@@ -2817,7 +3034,7 @@ a.list-row { color: inherit; text-decoration: none; }
 .ol-nav-badge {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 18px; height: 18px; padding: 0 5px; margin-left: 4px;
-    border-radius: var(--radius-full); background: var(--color-danger); color: #fff;
+    border-radius: var(--radius-full); background: var(--color-badge-bg); color: #fff;
     font-size: 11px; font-weight: var(--weight-bold); line-height: 1;
 }
 .tab-bar-link { position: relative; }
@@ -2900,17 +3117,14 @@ body.ol-sheet-open { overflow: hidden; }
     transition: border-color var(--duration-fast), transform var(--duration-fast), background var(--duration-fast);
 }
 button.ol-cta-card:hover { border-color: var(--color-accent); transform: translateY(-1px); }
-.ol-cta-primary {
-    background: linear-gradient(135deg, var(--color-accent-bg) 0%, var(--color-accent-bg-hover) 100%);
-    border-color: transparent; color: var(--color-accent-contrast);
-}
-button.ol-cta-primary:hover { border-color: transparent; }
+/* "Oda kur" kartı yüzey renginde; vurgu yalnızca mor ikon kutusunda (S9: her bölümde tek dolu düğme) */
+.ol-cta-primary { border-color: var(--color-border-strong); }
 .ol-cta-icon {
     display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
     width: 52px; height: 52px; border-radius: var(--radius-lg);
     background: var(--color-accent-soft); color: var(--color-accent);
 }
-.ol-cta-primary .ol-cta-icon { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.ol-cta-primary .ol-cta-icon { background: var(--color-accent-bg); color: var(--color-accent-contrast); }
 .ol-cta-icon .icon { width: 26px; height: 26px; }
 .ol-cta-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
 .ol-cta-title { font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
@@ -2954,10 +3168,10 @@ button.ol-cta-primary:hover { border-color: transparent; }
     .ol-pub-row { grid-template-columns: auto 1fr auto; }
     .ol-pub-count { display: none; }
 }
-.ol-t-diagnosis { --ol-tc: var(--target-diagnosis); }
-.ol-t-therapy { --ol-tc: var(--target-therapy); }
-.ol-t-pharmacology { --ol-tc: var(--target-pharmacology); }
-.ol-t-combo { --ol-tc: var(--target-combo); }
+.ol-t-diagnosis { --ol-tc: var(--target-diagnosis-text); }
+.ol-t-therapy { --ol-tc: var(--target-therapy-text); }
+.ol-t-pharmacology { --ol-tc: var(--target-pharmacology-text); }
+.ol-t-combo { --ol-tc: var(--target-combo-text); }
 
 .ol-gate {
     display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4);
@@ -3076,7 +3290,7 @@ body.ol-layer-open .tab-bar { display: none; }
 }
 .ol-topbar-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
 .ol-topbar-title { font-size: var(--text-md); font-weight: var(--weight-bold); letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ol-topbar-chips { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.ol-topbar-chips { display: flex; gap: 6px; flex-wrap: wrap; } /* H16: kesilmesin, alt satıra kaysın */
 .ol-topbar-chips::-webkit-scrollbar { display: none; }
 .ol-chip-static {
     display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px;
@@ -3255,7 +3469,7 @@ body.ol-layer-open .tab-bar { display: none; }
     .ol-stage-layer[data-count="5"] .ol-p-state, .ol-stage-layer[data-count="6"] .ol-p-state,
     .ol-stage-layer[data-count="7"] .ol-p-state, .ol-stage-layer[data-count="8"] .ol-p-state { display: none; }
     .ol-stage-layer[data-count="5"] .ol-p-plate, .ol-stage-layer[data-count="6"] .ol-p-plate,
-    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 108px; }
+    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 116px; } /* H16: 10 karakterlik ad sığsın */
     .ol-stage-layer[data-count="5"] .ol-p-badge, .ol-stage-layer[data-count="6"] .ol-p-badge,
     .ol-stage-layer[data-count="7"] .ol-p-badge, .ol-stage-layer[data-count="8"] .ol-p-badge { display: none; }
     .ol-stage[data-count="5"], .ol-stage[data-count="6"], .ol-stage[data-count="7"], .ol-stage[data-count="8"] { min-height: clamp(360px, 56vh, 620px); }
@@ -3704,6 +3918,41 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
 @keyframes ol-lc-drop { 0% { transform: translateY(-14px); opacity: 0; } 100% { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .ol-lc-new { animation: none; } }
 
+/* Açık temada AA altında kalan küçük metinler (ajan U, H9) */
+[data-theme="light"] .ol-qmode-n,
+[data-theme="light"] .ol-res-pos,
+[data-theme="light"] .ol-res-sub { color: var(--color-text-2); }
+[data-theme="light"] .ol-res-rp.is-plus { color: #065f46; }
+[data-theme="light"] .ol-br-note { color: var(--color-warning-text-strong); }
+
+/* Vaka sürerken davet afişi oyun çubuğunda küçük hap (ajan U, H17) */
+body.ol-banners-docked .ol-banners { display: none; }
+.play-invite-pill {
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    min-height: var(--tap); padding: 0 var(--space-3);
+    border: 1px solid var(--color-accent); border-radius: var(--radius-full);
+    background: var(--color-accent-soft); color: var(--color-accent);
+    font-size: var(--text-sm); font-weight: var(--weight-semibold); white-space: nowrap;
+}
+.play-invite-pill .icon { width: 16px; height: 16px; }
+.play-invite-pill[hidden] { display: none; }
+
+/* Lobi: telefonda sahnenin altında açılır oyuncu listesi (ajan U, H16) */
+.ol-roster { max-width: 1100px; width: calc(100% - 2 * var(--space-4)); margin: var(--space-2) auto 0; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.ol-roster-sum { display: flex; align-items: center; justify-content: space-between; min-height: var(--tap); padding: 0 var(--space-4); font-size: var(--text-sm); font-weight: var(--weight-semibold); cursor: pointer; list-style: none; }
+.ol-roster-sum::-webkit-details-marker { display: none; }
+.ol-roster-sum .icon { width: 18px; height: 18px; transition: transform var(--duration) var(--ease); }
+.ol-roster[open] .ol-roster-sum .icon { transform: rotate(180deg); }
+.ol-roster-list { list-style: none; margin: 0; padding: 0 var(--space-4) var(--space-2); }
+.ol-roster-row { display: flex; align-items: center; gap: var(--space-2); min-height: 40px; border-top: 1px solid var(--color-border); font-size: var(--text-sm); }
+.ol-roster-badge { display: inline-flex; flex-shrink: 0; }
+.ol-roster-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.ol-roster-me { color: var(--color-text-3); }
+.ol-roster-state { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; color: var(--color-text-2); font-size: var(--text-xs); }
+.ol-roster-state.is-ok { color: var(--color-success); }
+.ol-roster-state .icon { width: 14px; height: 14px; }
+@media (min-width: 768px) { .ol-roster { display: none; } }
+
 </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%236366f1%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
@@ -3730,6 +3979,9 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
             <symbol id="i-package" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></symbol>
             <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
             <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+            <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+            <symbol id="i-volume-x" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></symbol>
+            <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
             <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></symbol>
             <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
             <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
@@ -3811,8 +4063,25 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                     <p class="eyebrow">Hoş geldin</p>
                     <h1 class="home-title" id="homeTitle"><span id="homeGreetingName">Klinisyen</span></h1>
                 </div>
-                <a class="rp-chip rp-chip-link" id="homeRpMount" href="#/ligler" aria-label="Lig bilgisi">0 RP</a>
+                <a class="rp-chip rp-chip-link" id="homeRpMount" href="#/ligler" aria-label="Lig bilgisi" hidden></a>
             </div>
+
+            <!-- İlk ziyaret (localStorage psikovaka_onboarded yoksa ve geçmiş yoksa); atlanabilir, bir kez -->
+            <article class="card welcome-card" id="homeWelcome" aria-labelledby="welcomeTitle" hidden>
+                <span class="welcome-noro" id="welcomeNoro" aria-hidden="true"></span>
+                <div class="welcome-body">
+                    <h2 class="welcome-title" id="welcomeTitle">Danışanı dinle, tanıyı bul.</h2>
+                    <ol class="welcome-steps">
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span>İpucunu oku</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span>Tahmin et</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span>Yanlışta yeni ipucu açılır</span></li>
+                    </ol>
+                    <div class="welcome-actions">
+                        <button class="btn btn-primary" id="btnWelcomePlay" type="button"><svg class="icon"><use href="#i-play"/></svg> İlk vakayı oyna</button>
+                        <button class="btn btn-ghost" id="btnWelcomeSkip" type="button">Geç</button>
+                    </div>
+                </div>
+            </article>
 
             <div class="resume-banner" id="homeResume" hidden>
                 <div class="resume-text">
@@ -3829,7 +4098,10 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                     <button class="segmented-btn target-mode-btn" id="btnModePharmacology" data-target="pharmacology" type="button" role="radio" aria-checked="false">İlaç</button>
                     <button class="segmented-btn target-mode-btn" id="btnModeCombo" data-target="combo" type="button" role="radio" aria-checked="false">Kombo</button>
                 </div>
-                <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
+                <div class="target-hint-row">
+                    <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
+                    <button class="text-link home-help-link" id="btnHomeHelp" type="button"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Nasıl oynanır</button>
+                </div>
             </div>
 
             <article class="card card-hero">
@@ -3915,6 +4187,19 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
             <div id="dailyMount" class="dl-mount"></div>
         </section>
 
+        <!-- EKRAN: Bilinmeyen adres (#/...) — app.js parseRouteHash -> 'notfound' (H13) -->
+        <section class="screen screen-notfound" id="screenNotFound" data-screen="notfound" aria-labelledby="notFoundTitle" hidden>
+            <div class="notfound-state">
+                <span class="notfound-noro" id="notFoundNoro" aria-hidden="true"></span>
+                <h1 class="screen-title" id="notFoundTitle">Bu sayfa yok</h1>
+                <p class="screen-sub">Bağlantı eski olabilir.</p>
+                <div class="notfound-actions">
+                    <a class="btn btn-primary" href="#/oyna"><svg class="icon"><use href="#i-home"/></svg> Ana sayfa</a>
+                    <a class="btn btn-secondary" href="#/kutuphane"><svg class="icon"><use href="#i-book"/></svg> Kütüphane</a>
+                </div>
+            </div>
+        </section>
+
         <!-- EKRAN: Kütüphane — #/kutuphane[/terapiler|/ilaclar] liste, #/kutuphane/(tani|terapi|ilac)/<id> detay (app.js: renderLibraryRoute) -->
         <section class="screen screen-library" id="screenLibrary" data-screen="kutuphane" aria-labelledby="libraryTitle" hidden>
             <div class="lib-home" id="libHome">
@@ -3990,13 +4275,14 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                     <div class="profile-meta">
                         <strong class="profile-name" id="headerPlayerNameMount">Klinisyen</strong>
                         <span class="profile-username" id="profileUsername" hidden></span>
-                        <a class="profile-league profile-league-link" href="#/ligler" aria-label="Lig bilgisi">
+                        <a class="profile-league profile-league-link" id="profileLeagueLink" href="#/ligler" aria-label="Lig bilgisi" hidden>
                             <span class="profile-league-badge" id="profileTierBadge"></span>
-                            <span class="profile-rp" id="headerPlayerRpMount">0 RP</span>
+                            <span class="profile-rp" id="headerPlayerRpMount"></span>
                             <span class="profile-tier" id="profileTierLabel"></span>
                         </a>
                         <span class="profile-tier-progress" id="profileTierProgress"></span>
                         <span class="profile-rp-note" id="profileRpNote" hidden></span>
+                        <button class="text-link profile-league-cta" id="profileLeagueCta" type="button" hidden>Online liglere katılmak için hesap aç</button>
                     </div>
                 </div>
                 <button class="btn btn-secondary btn-sm" id="btnHeaderProfilePill" type="button">
@@ -4007,7 +4293,7 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
             <div class="stat-strip">
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatPlayed">0</span><span class="stat-strip-label">Oynanan</span></div>
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatWin">%0</span><span class="stat-strip-label">Başarı</span></div>
-                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Seri</span></div>
+                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Kazanma serisi</span></div>
             </div>
 
             <div class="card profile-streaks" id="profileStreaks" hidden aria-labelledby="profileStreaksTitle">
@@ -4018,7 +4304,7 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
             <div class="list-group">
                 <button class="list-row" id="statsBtn" type="button">
                     <span class="list-row-icon"><svg class="icon"><use href="#i-chart"/></svg></span>
-                    <span class="list-row-text"><span class="list-row-title">İstatistikler</span><span class="list-row-sub">Tahmin dağılımı ve seriler</span></span>
+                    <span class="list-row-text"><span class="list-row-title">İstatistikler</span><span class="list-row-sub">Tahmin dağılımı ve kazanma serisi</span></span>
                     <svg class="icon list-row-chevron"><use href="#i-chevron-right"/></svg>
                 </button>
                 <a class="list-row" id="btnOpenLeagues" href="#/ligler">
@@ -4065,6 +4351,11 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                     <span class="list-row-icon" id="themeToggleIcon"><svg class="icon"><use href="#i-moon"/></svg></span>
                     <span class="list-row-text"><span class="list-row-title">Tema</span><span class="list-row-sub" id="themeToggleLabel">Koyu</span></span>
                 </button>
+                <button class="list-row list-row-switch" id="soundToggleBtn" type="button" role="switch" aria-checked="true" aria-labelledby="soundToggleTitle">
+                    <span class="list-row-icon" id="soundToggleIcon"><svg class="icon"><use href="#i-volume"/></svg></span>
+                    <span class="list-row-text"><span class="list-row-title" id="soundToggleTitle">Ses ve titreşim</span><span class="list-row-sub" id="soundToggleLabel">Açık</span></span>
+                    <span class="switch" aria-hidden="true"><span class="switch-knob"></span></span>
+                </button>
                 <button class="list-row" id="helpBtn" type="button">
                     <span class="list-row-icon"><svg class="icon"><use href="#i-help"/></svg></span>
                     <span class="list-row-text"><span class="list-row-title">Nasıl oynanır</span><span class="list-row-sub">Modlar, ipuçları, renkler</span></span>
@@ -4086,6 +4377,7 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                         <span class="badge badge-difficulty-orta" id="difficultyBadge">Orta</span>
                     </div>
                 </div>
+                <button class="play-invite-pill" id="playInvitePill" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span data-pill-text>1 davet</span></button>
                 <button class="icon-btn" id="btnQuickChallengeCase" type="button" aria-label="Bu vakayla arkadaşına meydan oku">
                     <svg class="icon"><use href="#i-swords"/></svg>
                 </button>
@@ -4095,6 +4387,10 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                 <div class="clue-progress-tracker" id="clueProgressTracker" aria-hidden="true"></div>
                 <span class="play-progress-label" id="clueProgressLabel">İpucu 1/6</span>
             </div>
+
+            <!-- Tahmin şeridi (H2): vaka sürerken yapışkan; vaka bitince alttaki tam liste görünür -->
+            <ol class="guess-strip" id="guessStrip" aria-label="Tahminlerin" hidden></ol>
+            <div class="visually-hidden" id="playAnnouncer" role="status" aria-live="polite"></div>
 
             <!-- Canlı düello / meydan okuma şeridi (online katman doldurur) -->
             <div class="duel-hud-banner" id="duelHudBanner">
@@ -4169,10 +4465,14 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                 </div>
                 <p class="xp-takeaway" id="playResultTakeaway" hidden><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="xp-takeaway-label">Akılda kalsın:</span> <span data-xp-text></span></span></p>
                 <div class="finished-links" id="playResultLinks" hidden></div>
+                <p class="streak-note result-inline-streak" id="playResultStreak" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="playResultStreakText"></span></p>
                 <div class="finished-actions-row">
-                    <button class="btn btn-primary btn-lg" id="btnMainNextCase" type="button">Sıradaki vaka</button>
-                    <button class="btn btn-secondary" id="btnMainShowReport" type="button">
-                        <svg class="icon"><use href="#i-file"/></svg> Rapor ve mini quiz
+                    <button class="btn btn-primary btn-lg" id="btnMainShowReport" type="button">
+                        <svg class="icon"><use href="#i-file"/></svg> Raporu ve açıklamayı aç
+                    </button>
+                    <button class="btn btn-secondary" id="btnMainNextCase" type="button">Sıradaki vaka</button>
+                    <button class="btn btn-secondary" id="btnMainShare" type="button">
+                        <svg class="icon"><use href="#i-share"/></svg> Paylaş
                     </button>
                     <button class="btn btn-ghost" id="btnMainDuelShare" type="button">
                         <svg class="icon"><use href="#i-swords"/></svg> Meydan oku
@@ -4187,7 +4487,12 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                         <button class="btn-category-browser" id="btnCategoryBrowser" type="button" aria-label="Kategorilerden seç" aria-haspopup="true">
                             <span class="category-browser-icon" id="categoryBrowserIcon"><svg class="icon"><use href="#i-folder"/></svg></span>
                             <span class="category-browser-label" id="categoryBrowserLabel">Kategoriler</span>
+                            <span class="category-browser-label-short" aria-hidden="true">Liste</span>
                         </button>
+                        <div class="coach-tip" id="listCoachTip" role="note" hidden>
+                            <span>Tanının adını bilmiyorsan listeden seç.</span>
+                            <button class="btn btn-secondary btn-sm" id="btnListCoachOk" type="button">Tamam</button>
+                        </div>
 
                         <div class="category-tree-panel" id="categoryTreePanel" role="dialog" aria-labelledby="treePanelTitle">
                             <div class="category-tree-header">
@@ -4208,10 +4513,11 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                         <div class="input-group">
                             <div class="search-input-box">
                                 <svg class="icon search-icon"><use href="#i-search"/></svg>
-                                <input type="text" id="diagnosisInput" class="diagnosis-input" placeholder="Tanı yaz" autocomplete="off" spellcheck="false" enterkeyhint="send" aria-label="Tahminin">
+                                <input type="text" id="diagnosisInput" class="diagnosis-input" placeholder="Tanı yaz ya da listeden seç" autocomplete="off" spellcheck="false" enterkeyhint="send" aria-label="Tahminin">
                             </div>
-                            <button class="btn btn-primary btn-submit" id="btnSubmit" type="button">
-                                <span id="btnSubmitLabel">Tahmin et</span>
+                            <button class="btn btn-primary btn-submit" id="btnSubmit" type="button" aria-label="Tahmin et">
+                                <svg class="icon btn-submit-icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                                <span class="btn-submit-label" id="btnSubmitLabel">Tahmin et</span>
                             </button>
                         </div>
                     </div>
@@ -4538,8 +4844,8 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
                 <div class="stats-grid">
                     <div class="stat-item"><div class="stat-value" id="statPlayed">0</div><div class="stat-label">Oynanan</div></div>
                     <div class="stat-item"><div class="stat-value" id="statWinRate">%0</div><div class="stat-label">Başarı</div></div>
-                    <div class="stat-item"><div class="stat-value" id="statStreak">0</div><div class="stat-label">Seri</div></div>
-                    <div class="stat-item"><div class="stat-value" id="statMaxStreak">0</div><div class="stat-label">En iyi seri</div></div>
+                    <div class="stat-item"><div class="stat-value" id="statStreak">0</div><div class="stat-label">Kazanma serisi</div></div>
+                    <div class="stat-item"><div class="stat-value" id="statMaxStreak">0</div><div class="stat-label">En iyi kazanma serisi</div></div>
                 </div>
                 <h3 class="section-title">Kaçıncı tahminde bildin</h3>
                 <div class="stat-distribution" id="statDistribution"></div>
@@ -27169,6 +27475,7 @@ class PsikoVakaGame {
             this.initAvatarStudio();   // js/avatar_studio.js (canlı oyun: js/online/)
         }
         this.installProfileMirrors();
+        this.initGroupColors();
         this.initRouter();
         this.updateUnsolvedUI();
         this.updateTargetHint();
@@ -27194,7 +27501,8 @@ class PsikoVakaGame {
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
             ligler: document.getElementById('screenLeagues'),
-            gunluk: document.getElementById('screenDaily')
+            gunluk: document.getElementById('screenDaily'),
+            notfound: document.getElementById('screenNotFound')
         };
         // Alt ekranlar: menüde hangi ana sekme etkin görünsün
         this.routeNavParent = { ligler: 'profil', gunluk: 'oyna' };
@@ -27235,9 +27543,21 @@ class PsikoVakaGame {
 
     /** '#/profil' -> 'profil'. Diğer hash'ler (#room=, #duel=, #case=, #id=) için null. */
     parseRouteHash() {
-        const m = /^#\/([a-z]+)/.exec(window.location.hash || '');
-        if (m && this.routeScreens && this.routeScreens[m[1]]) return m[1];
+        const h = window.location.hash || '';
+        const m = /^#\/([a-z]+)/.exec(h);
+        if (m && this.routeScreens && this.routeScreens[m[1]] && m[1] !== 'notfound') return m[1];
+        // Bilinmeyen "#/..." adresi: ayrı "Bu sayfa yok" ekranı (H13)
+        if (/^#\/./.test(h) && this.routeScreens && this.routeScreens.notfound) return 'notfound';
         return null;
+    }
+
+    /** Oyuncunun kendi Nöro'su (yoksa misafir için sabit bir Nöro), isteğe bağlı hareketle. */
+    renderNoro(emote, size) {
+        const AV = window.PsikoVakaAvatar;
+        if (!AV) return '';
+        let cfg = null;
+        try { cfg = this.myAvatar ? AV.normalize(this.myAvatar) : AV.randomConfig('misafir'); } catch (e) { cfg = AV.randomConfig('misafir'); }
+        return AV.render(cfg, { size: size || 96, framed: false, emote: emote || null, animated: true });
     }
 
     showRoute(route, opts = {}) {
@@ -27272,8 +27592,13 @@ class PsikoVakaGame {
         const changed = this.currentScreen !== name;
         this.currentScreen = name;
 
-        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); }
+        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard(); }
         if (name === 'profil') this.updateProfileScreen();
+        if (name === 'notfound') {
+            const m = document.getElementById('notFoundNoro');
+            if (m) m.innerHTML = this.renderNoro('think', 120);
+        }
+        if (changed) this.emitPlayState();
         const hook = this.screenHooks && this.screenHooks[name];
         if (hook) { try { hook({ changed }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
 
@@ -27291,13 +27616,33 @@ class PsikoVakaGame {
      * Modüllerin ekran kancası (ör. js/online/ligler.js -> 'ligler'). Ekran açık görünürken kayıt olursa hemen çağrılır.
      * fn({ changed }) her showScreen(name) çağrısında.
      */
+    /** Vaka başladı/bitti/ekran değişti: online katmanı (davet afişi) dinler. */
+    emitPlayState() {
+        try { document.dispatchEvent(new CustomEvent('psikovaka:playstate')); } catch (e) {}
+    }
+
     registerScreen(name, fn) {
         this.screenHooks = this.screenHooks || {};
         this.screenHooks[name] = fn;
         if (this.currentScreen === name) { try { fn({ changed: true }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
     }
 
+    /** Tahmin şeridinin yapışacağı yükseklik = oyun çubuğunun alt kenarı (telefonda 0'dan, masaüstünde başlığın altından). */
+    updatePlayStickyOffset() {
+        const scr = this.dom.screenPlay;
+        const bar = scr && scr.querySelector('.play-bar');
+        if (!bar) return;
+        const top = parseFloat(getComputedStyle(bar).top) || 0;
+        scr.style.setProperty('--play-bar-bottom', `${Math.round(top + bar.offsetHeight)}px`);
+        if (!this._playBarObserved && typeof ResizeObserver === 'function') {
+            this._playBarObserved = true;
+            new ResizeObserver(() => this.updatePlayStickyOffset()).observe(bar);
+            window.addEventListener('resize', () => this.updatePlayStickyOffset());
+        }
+    }
+
     enterPlayScreen() {
+        this.updatePlayStickyOffset();
         if (this.currentScreen !== 'play') {
             this.showScreen('play');
             try {
@@ -27517,6 +27862,7 @@ class PsikoVakaGame {
 
         on(a.btnAccountSignUp, 'click', () => this.openAuthSheet('signup'));
         on(a.btnAccountSignIn, 'click', () => this.openAuthSheet('signin'));
+        on(document.getElementById('profileLeagueCta'), 'click', () => this.openAuthSheet('signup'));
         on(a.btnOpenPrivacy, 'click', () => this.openModal(a.privacyModal));
         on(a.authPrivacyLink, 'click', () => this.openModal(a.privacyModal));
         on(a.btnAccountPickUsername, 'click', () => this.openUsernameModal());
@@ -27905,7 +28251,19 @@ class PsikoVakaGame {
 
         if (this.dom.navNameMount) this.dom.navNameMount.textContent = chipName;
         if (this.dom.homeGreetingName) this.dom.homeGreetingName.textContent = name;
-        if (this.dom.homeRpMount) this.dom.homeRpMount.textContent = (rp !== null && rp !== undefined) ? `${rp} RP` : '';
+        // RP yalnızca online maçlardan gelir: misafirde RP hapı ve "0 RP" gösterilmez (H5)
+        if (this.dom.homeRpMount) {
+            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} RP` : '';
+            this.dom.homeRpMount.hidden = !(acct && hasRp);
+        }
+        const leagueLink = document.getElementById('profileLeagueLink');
+        if (leagueLink) leagueLink.hidden = !acct;
+        const leagueCta = document.getElementById('profileLeagueCta');
+        if (leagueCta) {
+            const snap = this.accountSnap || {};
+            const canSignUp = snap.availability === 'ready' || snap.availability === 'pending';
+            leagueCta.hidden = !!acct || !canSignUp || snap.state !== 'guest';
+        }
         if (hasAvatar) {
             if (this.dom.navAvatarMount) this.dom.navAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 28);
             if (this.dom.homeAvatarMount) this.dom.homeAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 44);
@@ -27915,15 +28273,15 @@ class PsikoVakaGame {
         const nameMount = document.getElementById('headerPlayerNameMount');
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
-        if (rpMount && rp !== null && rp !== undefined) {
+        if (rpMount && acct && hasRp) {
             rpMount.textContent = `${rp} RP`;
             rpMount.style.color = '';
         }
-        if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = tier ? tier.name : '';
+        if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = (acct && tier) ? tier.name : '';
         const tierBadge = document.getElementById('profileTierBadge');
-        if (tierBadge) tierBadge.innerHTML = tier ? LG.badge(rp, 22) : '';
+        if (tierBadge) tierBadge.innerHTML = (acct && tier) ? LG.badge(rp, 22) : '';
         const tierProg = document.getElementById('profileTierProgress');
-        if (tierProg) tierProg.textContent = tier ? LG.progressText(rp) : '';
+        if (tierProg) { tierProg.textContent = (acct && tier) ? LG.progressText(rp) : ''; tierProg.hidden = !acct; }
         const chip = this.dom.navProfileChip || document.getElementById('navProfileChip');
         if (chip) chip.setAttribute('aria-label', acct ? `Profil: @${acct.username}` : 'Profil');
 
@@ -27937,6 +28295,39 @@ class PsikoVakaGame {
             a.profileRpNote.hidden = !differs;
             if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda tutulur; bu cihazdaki ${localRp} RP aktarılmaz.`;
         }
+    }
+
+    /** İlk ziyaret kartı: yalnızca hiç oynamamış ve kartı geçmemiş kişide; dönen kullanıcıyı asla bekletmez. */
+    updateWelcomeCard() {
+        const card = document.getElementById('homeWelcome');
+        if (!card) return;
+        let flag = false;
+        try { flag = localStorage.getItem('psikovaka_onboarded') === '1'; } catch (e) { flag = true; }
+        const hasHistory = (this.stats && this.stats.played > 0) || (this.solvedCaseIds && this.solvedCaseIds.size > 0);
+        if (!flag && hasHistory) { this.markOnboarded(); flag = true; }
+        card.hidden = flag;
+        if (!flag) {
+            const m = document.getElementById('welcomeNoro');
+            if (m && !m.firstChild) m.innerHTML = this.renderNoro('wave', 96);
+        }
+    }
+
+    markOnboarded() {
+        try { localStorage.setItem('psikovaka_onboarded', '1'); } catch (e) {}
+        const card = document.getElementById('homeWelcome');
+        if (card) card.hidden = true;
+    }
+
+    /** "İlk vakayı oyna": elle seçilmiş kolay bir vaka (tipik majör depresyon), tanı hedefiyle. */
+    startFirstCase() {
+        this.markOnboarded();
+        const easy = this.cases.find(c => c.diagnosisId === 'mdd' && /kolay/i.test(String(c.difficulty)))
+            || this.cases.find(c => /kolay/i.test(String(c.difficulty)))
+            || this.cases[0];
+        if (!easy) { this.setMode('practice'); return; }
+        if (this.targetGameMode !== 'diagnosis') this.setTargetGameMode('diagnosis', false);
+        this.currentMode = 'practice';
+        this.startCase(easy, `Pratik · Vaka #${easy.caseNumber || 1}`);
     }
 
     updateProfileScreen() {
@@ -28042,17 +28433,17 @@ class PsikoVakaGame {
         // Tanımlı son aralığın üstündeki (veya numarası olmayan) vakalar otomatik "Yeni vakalar" paketine girer.
         // Sayılar her zaman gerçek vaka listesinden hesaplanır; boş kalan paket gizlenir.
         const ranges = [
-            { id: 'pack1', title: '🏛️ Paket 1: Çekirdek Vakalar', from: 1, to: 29,
+            { id: 'pack1', title: 'Paket 1: Çekirdek Vakalar', from: 1, to: 29,
               desc: 'Duygudurum, anksiyete, psikotik, OKB, kişilik ve yeme bozukluklarının klasik tabloları.' },
-            { id: 'pack2', title: '📘 Paket 2: Klinik Derinlik', from: 30, to: 49,
+            { id: 'pack2', title: 'Paket 2: Klinik Derinlik', from: 30, to: 49,
               desc: 'Kişilik, travma, dissosiyatif, yeme, nörogelişimsel ve dürtü kontrol vakaları.' },
-            { id: 'pack3', title: '🔬 Paket 3: İleri Ayırıcı Tanı', from: 50, to: 69,
+            { id: 'pack3', title: 'Paket 3: İleri Ayırıcı Tanı', from: 50, to: 69,
               desc: 'Psikotik, bipolar, OKB ile ilişkili, anksiyete ve dürtü kontrol vakalarında ayırıcı tanı.' },
-            { id: 'pack4', title: '⚡ Paket 4: Özel Sendromlar', from: 70, to: 89,
+            { id: 'pack4', title: 'Paket 4: Özel Sendromlar', from: 70, to: 89,
               desc: 'Parafilik, uyku-uyanıklık, cinsel işlev ve nörobilişsel bozukluk vakaları.' },
-            { id: 'pack5', title: '🧠 Paket 5: Nöropsikiyatri', from: 90, to: 109,
+            { id: 'pack5', title: 'Paket 5: Nöropsikiyatri', from: 90, to: 109,
               desc: 'Uyku, nörobilişsel, nörogelişimsel ve parafilik bozukluk vakaları; psikotik ve duygudurum tabloları.' },
-            { id: 'pack6', title: '🔥 Paket 6: Master Klinik & İlaç', from: 110, to: 150,
+            { id: 'pack6', title: 'Paket 6: Master Klinik & İlaç', from: 110, to: 150,
               desc: 'Psikotik, duygudurum, anksiyete, OKB, yeme, dışa atım, uyku ve nörobilişsel bozukluk vakaları.' }
         ];
         const lastTo = ranges[ranges.length - 1].to;
@@ -28069,7 +28460,7 @@ class PsikoVakaGame {
         }));
         defs.push({
             id: 'pack_yeni',
-            title: '🚀 Yeni Vakalar',
+            title: 'Yeni Vakalar',
             desc: `Sonradan eklenen vakalar (No. ${lastTo + 1} ve üstü).`,
             filterFn: (c) => { const n = numOf(c); return !(n <= lastTo); }
         });
@@ -28083,7 +28474,7 @@ class PsikoVakaGame {
         return [
             {
                 id: 'all',
-                title: `🌟 Tüm Vakalar (Tam Koleksiyon)`,
+                title: `Tüm Vakalar (Tam Koleksiyon)`,
                 badge: `${total} vaka`,
                 count: total,
                 desc: 'Sistemdeki tüm DSM-5-TR klinik vakalarının eksiksiz tam havuzu.',
@@ -28131,7 +28522,7 @@ class PsikoVakaGame {
         localStorage.removeItem('psikovaka_solved_cases');
         this.updateUnsolvedUI();
         this.renderPackShelf();
-        this.showToast("🧹 Çözülen vaka geçmişi sıfırlandı! Tüm vakalar tekrar yeni olarak işaretlendi.");
+        this.showToast('Çözülen vaka geçmişi sıfırlandı.');
     }
 
     applyActivePack(packId, launchPracticeCase = true) {
@@ -28234,6 +28625,7 @@ class PsikoVakaGame {
             clueProgressTracker: document.getElementById('clueProgressTracker'),
             cluesContainer: document.getElementById('cluesContainer'),
             guessesFeed: document.getElementById('guessesFeed'),
+            guessStrip: document.getElementById('guessStrip'),
 
             // Input & Autocomplete
             diagnosisInput: document.getElementById('diagnosisInput'),
@@ -28466,6 +28858,8 @@ class PsikoVakaGame {
         if (this.dom.btnMainShowReport) {
             this.dom.btnMainShowReport.addEventListener('click', () => this.openResultModal(this.gameWon));
         }
+        const btnMainShare = document.getElementById('btnMainShare');
+        if (btnMainShare) btnMainShare.addEventListener('click', () => this.shareResult());
         if (this.dom.btnMainDuelShare) {
             this.dom.btnMainDuelShare.addEventListener('click', () => this.openDuelCenterModal());
         }
@@ -28479,6 +28873,15 @@ class PsikoVakaGame {
         // Kütüphane ve profil ekranlarındaki açıcılar
         this.dom.statsBtn.addEventListener('click', () => this.openStatsModal());
         this.dom.helpBtn.addEventListener('click', () => this.openModal(this.dom.helpModal));
+        const homeHelp = document.getElementById('btnHomeHelp');
+        if (homeHelp) homeHelp.addEventListener('click', () => this.openModal(this.dom.helpModal));
+        const wPlay = document.getElementById('btnWelcomePlay');
+        if (wPlay) wPlay.addEventListener('click', () => this.startFirstCase());
+        const wSkip = document.getElementById('btnWelcomeSkip');
+        if (wSkip) wSkip.addEventListener('click', () => { this.markOnboarded(); const t = document.getElementById('homeTitle'); if (t) { t.setAttribute('tabindex', '-1'); try { t.focus(); } catch (e) {} } });
+        const soundBtn = document.getElementById('soundToggleBtn');
+        if (soundBtn) soundBtn.addEventListener('click', () => this.setSoundOn(!this.isSoundOn()));
+        this.syncSoundToggle();
         this.dom.caseStudioBtn.addEventListener('click', () => this.openModal(this.dom.caseStudioModal));
         if (this.dom.caseManagerBtn) {
             this.dom.caseManagerBtn.addEventListener('click', () => this.openCaseManagerModal());
@@ -28511,7 +28914,7 @@ class PsikoVakaGame {
             btnRestore.addEventListener('click', () => {
                 this.applyActivePack('all', true);
                 this.closeModal(this.dom.caseManagerModal);
-                this.showToast(`🌟 Tüm ${this.allMasterCases.length} vaka aktif havuza alındı!`);
+                this.showToast(`Tüm vakalar (${this.allMasterCases.length}) havuzda.`);
             });
         }
 
@@ -28651,10 +29054,10 @@ class PsikoVakaGame {
         }
 
         const modeMessages = {
-            diagnosis: "🩺 DSM-5 Tanı Avcısı Modu Aktif!",
-            therapy: "🛡️ Terapi Simülatörü Aktif! Altın standart psikoterapiyi bulun.",
-            pharmacology: "💊 Farmakoterapi Avcısı Aktif! Birinci basamak ilacı/müdahaleyi seçin.",
-            combo: "⚡ Tam Konsültasyon (Kombo) Modu! Sırasıyla Tanı ➔ Terapi ➔ İlaç belirleyin!"
+            diagnosis: 'Hedef: tanı.',
+            therapy: 'Hedef: terapi.',
+            pharmacology: 'Hedef: ilaç.',
+            combo: 'Hedef: kombo (tanı → terapi → ilaç).'
         };
         if (restartCurrentCase) {
             this.showToast(modeMessages[targetMode] || "Mod değiştirildi.");
@@ -28670,19 +29073,19 @@ class PsikoVakaGame {
                 this.dom.categoryBrowserLabel.textContent = 'Ekoller';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'Terapi ekollerinden seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'Terapi ekolleri';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 2: terapi yaz' : 'Terapi yöntemi yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'Terapi yaz ya da listeden seç';
             } else if (effectiveType === 'pharmacology') {
                 this.dom.categoryBrowserIcon.innerHTML = this.icon('pill');
                 this.dom.categoryBrowserLabel.textContent = 'Gruplar';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'İlaç gruplarından seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'İlaç grupları';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 3: ilaç yaz' : 'İlaç ya da müdahale yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'İlaç yaz ya da listeden seç';
             } else {
                 this.dom.categoryBrowserIcon.innerHTML = this.icon('folder');
                 this.dom.categoryBrowserLabel.textContent = 'Kategoriler';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'DSM-5-TR kategorilerinden seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = `DSM-5-TR kategorileri (${this.diagnoses.length} tanı)`;
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 1: tanı yaz' : 'Tanı yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'Tanı yaz ya da listeden seç';
             }
             if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = 'Tahmin et';
         }
@@ -28765,7 +29168,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(fam.icon || '🛡️', fam.name, `${items.length} Yöntem`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(fam.color || '', fam.name, `${items.length} Yöntem`, items, cleanQuery, (id) => {
                     return this.therapies.find(t => t.id === id);
                 }));
             });
@@ -28781,7 +29184,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(fam.icon || '💊', fam.name, `${items.length} Protokol`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(fam.color || '', fam.name, `${items.length} Protokol`, items, cleanQuery, (id) => {
                     return this.pharmacology.find(p => p.id === id);
                 }));
             });
@@ -28797,7 +29200,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(cat.icon || '🏷️', cat.name, `${items.length} Tanı`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(cat.color || '', cat.name, `${items.length} Tanı`, items, cleanQuery, (id) => {
                     return this.diagnoses.find(d => d.id === id);
                 }));
             });
@@ -28806,7 +29209,26 @@ class PsikoVakaGame {
         container.appendChild(fragment);
     }
 
-    buildTreeGroupElement(icon, groupName, countText, items, cleanQuery, finderFn) {
+    /** Kategori/ekol rengi küçük nokta olarak (H6: emoji yerine). Renkler initGroupColors'ta tek stil bloğuna yazılır. */
+    groupDot(kind, key) {
+        return key ? `<span class="group-dot" data-g="${kind}-${String(key).replace(/[^A-Za-z0-9_-]/g, '')}" aria-hidden="true"></span>` : '';
+    }
+
+    initGroupColors() {
+        if (document.getElementById('groupColorStyles')) return;
+        const rules = [];
+        const add = (kind, obj) => Object.keys(obj || {}).forEach(k => {
+            const c = obj[k] && obj[k].color;
+            if (c && /^#[0-9a-fA-F]{3,8}$/.test(c)) rules.push(`.group-dot[data-g="${kind}-${k.replace(/[^A-Za-z0-9_-]/g, '')}"]{--group-color:${c}}`);
+        });
+        add('dx', this.categories); add('th', this.therapyFamilies); add('ph', this.pharmacologyFamilies);
+        const st = document.createElement('style');
+        st.id = 'groupColorStyles';
+        st.textContent = rules.join('\n');
+        document.head.appendChild(st);
+    }
+
+    buildTreeGroupElement(color, groupName, countText, items, cleanQuery, finderFn) {
         const groupDiv = document.createElement('div');
         groupDiv.className = `tree-category-group ${cleanQuery ? 'open' : ''}`;
 
@@ -28901,7 +29323,7 @@ class PsikoVakaGame {
             if (unsolvedPool.length > 0) {
                 pool = unsolvedPool;
             } else if (pool.length > 0) {
-                this.showToast("🎉 Bu filtredeki tüm vakaları çözdünüz! Havuz baştan karıştırılıyor.");
+                this.showToast('Bu filtredeki tüm vakaları çözdün. Havuz baştan karıştırıldı.');
             }
         }
 
@@ -28941,6 +29363,9 @@ class PsikoVakaGame {
         this.gameWon = false;
         this.comboStage = 1;
         this.comboResults = { stage1Guesses: 0, stage2Guesses: 0, stage3Guesses: 0 };
+        this.shareStreak = 0;     // günlük seri (js/online/daily.js bildirir; paylaşım satırı)
+        this.setResultStreak('');
+        this.stageGuessLog = {};  // kombo: biten aşamaların tahminleri (paylaşım satırı için)
         this.diagWrongLog = [];   // yanlış TANI tahminleri (açıklamadaki "Senin tahminin" için; kombo aşamaları sıfırlansa da kalır)
 
         this.caseTargetMode = this.targetGameMode;
@@ -28994,6 +29419,33 @@ class PsikoVakaGame {
         this.renderGuesses();
         this.updateRemainingGuessesUI();
         this.enterPlayScreen();
+        this.markOnboarded();
+        this.emitPlayState();
+        this.maybeShowListCoachTip();
+    }
+
+    /** İlk vakada bir kez: liste düğmesini gösteren küçük balon (H8). Atlanabilir, bir daha çıkmaz. */
+    maybeShowListCoachTip() {
+        const tip = document.getElementById('listCoachTip');
+        if (!tip) return;
+        let seen = false;
+        try { seen = localStorage.getItem('psikovaka_hint_list') === '1'; } catch (e) { seen = true; }
+        if (seen || this.currentMode === 'online') { tip.hidden = true; return; }
+        tip.hidden = false;
+        if (!this._coachBound) {
+            this._coachBound = true;
+            const done = () => this.dismissListCoachTip();
+            const ok = document.getElementById('btnListCoachOk');
+            if (ok) ok.addEventListener('click', (e) => { e.stopPropagation(); done(); });
+            if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.addEventListener('click', done);
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !tip.hidden) done(); });
+        }
+    }
+
+    dismissListCoachTip() {
+        const tip = document.getElementById('listCoachTip');
+        if (tip) tip.hidden = true;
+        try { localStorage.setItem('psikovaka_hint_list', '1'); } catch (e) {}
     }
 
     startCaseTimer() {
@@ -29084,8 +29536,15 @@ class PsikoVakaGame {
 
         // Yeni açılan ipucunu görünür alana getir (ilk ipucunda sayfa başında kal)
         const latest = this.dom.cluesContainer.querySelector('.clue-box.is-latest');
-        if (latest && this.unlockedClues > 1 && typeof latest.scrollIntoView === 'function') {
+        if (latest && this.unlockedClues > 1 && !this.isGameOver && typeof latest.scrollIntoView === 'function') {
             const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // Yeni açılan ipucu bir kez parlar (H1); aynı ipucu yeniden çizilince tekrar parlamaz
+            const key = `${this.currentCase && this.currentCase.id}:${this.comboStage}:${this.unlockedClues}`;
+            if (this._lastFlashKey !== key) {
+                this._lastFlashKey = key;
+                latest.classList.add('is-flash');
+                setTimeout(() => latest.classList.remove('is-flash'), 700);
+            }
             setTimeout(() => latest.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }), 30);
         }
     }
@@ -29101,6 +29560,9 @@ class PsikoVakaGame {
     }
 
     renderGuesses() {
+        this.renderGuessStrip();
+        // İlk tahminden sonra liste ipucu balonu kendiliğinden kapanır (yerel, günlük ve online yolların hepsi buradan geçer)
+        if ((this.guesses || []).length > 0) { const tip = document.getElementById('listCoachTip'); if (tip && !tip.hidden) this.dismissListCoachTip(); }
         this.dom.guessesFeed.innerHTML = '';
 
         this.guesses.forEach((guess, index) => {
@@ -29133,6 +29595,34 @@ class PsikoVakaGame {
             `;
             this.dom.guessesFeed.appendChild(card);
         });
+    }
+
+    /**
+     * Tahmin şeridi (H2): ilerleme çubuğunun altında yapışkan, yatay kayan çipler.
+     * Vaka sürerken alttaki tam liste gizlenir; vaka bitince tam liste görünür, şerit kalkar.
+     */
+    renderGuessStrip() {
+        const strip = this.dom.guessStrip || document.getElementById('guessStrip');
+        if (!strip) return;
+        const list = this.guesses || [];
+        const playing = !this.isGameOver;
+        strip.hidden = !(playing && list.length > 0);
+        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('has-guess-strip', playing && list.length > 0);
+        if (strip.hidden) { strip.innerHTML = ''; return; }
+        const short = (t) => { const x = String(t || ''); return x.length > 22 ? x.slice(0, 21).trimEnd() + '…' : x; };
+        const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        strip.innerHTML = list.map((g, i) => {
+            const kind = g.isCorrect ? 'is-correct' : (g.categoryMatch ? 'is-close' : 'is-wrong');
+            const ico = g.isCorrect ? 'check' : (g.categoryMatch ? 'target' : 'x');
+            const state = g.isCorrect ? 'doğru' : (g.categoryMatch ? `grup doğru: ${g.categoryName}` : 'farklı grup');
+            return `<li class="guess-chip ${kind}" title="${esc(g.nameTr)}">
+                <span class="guess-chip-ico">${this.icon(ico)}</span>
+                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${g.categoryMatch && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
+                <span class="visually-hidden">${i + 1}. tahmin, ${esc(state)}</span>
+            </li>`;
+        }).join('');
+        // En yeni çip görünür kalsın
+        try { strip.scrollLeft = strip.scrollWidth; } catch (e) {}
     }
 
     updateRemainingGuessesUI() {
@@ -29220,22 +29710,22 @@ class PsikoVakaGame {
             div.className = 'autocomplete-item';
 
             if (effectiveType === 'therapy') {
-                const fam = this.therapyFamilies[item.family] || { name: item.family, icon: '🛡️' };
+                const fam = this.therapyFamilies[item.family] || { name: item.family };
                 div.innerHTML = `
                     <div class="item-main">
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="therapy-family-tag">${fam.icon || '🛡️'} ${fam.name}</span>
+                    <span class="therapy-family-tag">${this.groupDot('th', item.family)}${fam.name}</span>
                 `;
             } else if (effectiveType === 'pharmacology') {
-                const fam = this.pharmacologyFamilies[item.family] || { name: item.family, icon: '💊' };
+                const fam = this.pharmacologyFamilies[item.family] || { name: item.family };
                 div.innerHTML = `
                     <div class="item-main">
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="pharma-family-tag">${fam.icon || '💊'} ${fam.name}</span>
+                    <span class="pharma-family-tag">${this.groupDot('ph', item.family)}${fam.name}</span>
                 `;
             } else {
                 const categoryObj = this.categories[item.category] || { name: item.category };
@@ -29244,7 +29734,7 @@ class PsikoVakaGame {
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="item-category-badge">${categoryObj.icon || '🏷️'} ${categoryObj.name}</span>
+                    <span class="item-category-badge">${this.groupDot('dx', item.category)}${categoryObj.name}</span>
                 `;
             }
 
@@ -29311,7 +29801,7 @@ class PsikoVakaGame {
         const effectiveType = this.getEffectiveTargetType();
 
         if (!inputVal) {
-            this.showToast("Lütfen bir seçim yazın veya soldaki kategorilerden seçin.");
+            this.showToast("Bir seçenek yaz ya da listeden seç.");
             return;
         }
 
@@ -29334,7 +29824,7 @@ class PsikoVakaGame {
                     (t.aliases && t.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Terapi listede bulunamadı! Lütfen önerilen listeden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             const targetTherapyId = this.currentCase.therapyId || 'cbt_general';
@@ -29343,7 +29833,7 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && targetTherapyObj && chosenObj.family === targetTherapyObj.family);
             const famObj = this.therapyFamilies[chosenObj.family] || {};
             categoryName = famObj.name || chosenObj.family;
-            correctLabel = '🛡️ Altın Standart Terapi!';
+            correctLabel = 'Doğru terapi';
             wrongLabel = 'Farklı Terapi Ekolü';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 2 • Terapi';
         } else if (effectiveType === 'pharmacology') {
@@ -29354,7 +29844,7 @@ class PsikoVakaGame {
                     (p.aliases && p.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Farmakoterapi protokolü bulunamadı! Lütfen listeden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             const targetPharmaId = this.currentCase.pharmacologyId || this.getFallbackPharmacologyId(this.currentCase);
@@ -29363,7 +29853,7 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && targetPharmaObj && chosenObj.family === targetPharmaObj.family);
             const famObj = this.pharmacologyFamilies[chosenObj.family] || {};
             categoryName = famObj.name || chosenObj.family;
-            correctLabel = '💊 Doğru Farmakoterapi Protokolü!';
+            correctLabel = 'Doğru protokol';
             wrongLabel = 'Farklı İlaç Grubu';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 3 • İlaç';
         } else {
@@ -29374,7 +29864,7 @@ class PsikoVakaGame {
                     (d.aliases && d.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Tanı listede bulunamadı! Lütfen önerilen tanı listesinden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             isCorrect = (chosenObj.id === this.currentCase.diagnosisId);
@@ -29382,13 +29872,13 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && correctDiagnosisObj && chosenObj.category === correctDiagnosisObj.category);
             const categoryObj = this.categories[chosenObj.category] || {};
             categoryName = categoryObj.name || chosenObj.category;
-            correctLabel = '🩺 Kesin DSM-5 Tanısı!';
+            correctLabel = 'Doğru tanı';
             wrongLabel = 'Farklı Tanı Grubu';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 1 • Tanı';
         }
 
         if (this.guesses.some(g => g.itemId === chosenObj.id && g.stage === this.comboStage)) {
-            this.showToast("⚠️ Bu seçeneği zaten tahmin ettiniz!");
+            this.showToast("Bunu zaten denedin.");
             return;
         }
 
@@ -29421,34 +29911,36 @@ class PsikoVakaGame {
                 // Advance to next Combo Stage!
                 if (this.comboStage === 1) {
                     this.comboResults.stage1Guesses = this.guesses.filter(g => g.stage === 1).length;
-                    if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = `✅ ${chosenObj.nameTr}`;
-                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Şimdi Terapiyi Seçin!';
+                    if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = chosenObj.nameTr;
+                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Şimdi terapiyi seç';
+                    this.archiveStageGuesses();
                     this.comboStage = 2;
                     this.guesses = []; // Reset 6-guess allowance for Stage 2
                     this.updateComboStepperUI();
                     this.syncInputAndBrowserLabels();
                     this.renderGuesses();
                     this.updateRemainingGuessesUI();
-                    this.showToast("🎉 Aşama 1 (Tanı) Tamamlandı! Şimdi Aşama 2: Altın Standart Psikoterapiyi Seçin!");
+                    this.showToast('Tanı doğru. Şimdi terapiyi seç.');
                     return;
                 } else if (this.comboStage === 2) {
                     this.comboResults.stage2Guesses = this.guesses.filter(g => g.stage === 2).length;
-                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = `✅ ${chosenObj.nameTr}`;
-                    if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Şimdi Farmakoterapiyi Seçin!';
+                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = chosenObj.nameTr;
+                    if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Şimdi ilacı seç';
+                    this.archiveStageGuesses();
                     this.comboStage = 3;
                     this.guesses = []; // Reset 6-guess allowance for Stage 3
                     this.updateComboStepperUI();
                     this.syncInputAndBrowserLabels();
                     this.renderGuesses();
                     this.updateRemainingGuessesUI();
-                    this.showToast("🛡️ Aşama 2 (Terapi) Tamamlandı! Şimdi Aşama 3: Birinci Basamak İlacı/Müdahaleyi Seçin!");
+                    this.showToast('Terapi doğru. Şimdi ilacı seç.');
                     return;
                 }
             }
 
             if (this.targetGameMode === 'combo' && this.comboStage === 3) {
                 this.comboResults.stage3Guesses = this.guesses.filter(g => g.stage === 3).length;
-                if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = `✅ ${chosenObj.nameTr}`;
+                if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = chosenObj.nameTr;
             }
 
             this.handleGameEnd(true);
@@ -29464,13 +29956,24 @@ class PsikoVakaGame {
                 this.renderGuesses();
                 this.updateRemainingGuessesUI();
 
-                if (categoryMatch) {
-                    this.showToast(`🟨 Sıcak! Grup Doğru (${guessData.categoryName}), spesifik seçeneği daraltın!`);
-                } else {
-                    this.showToast(`Yeni ipucu açıldı! 🔍 (${this.unlockedClues}/${this.maxClues})`);
-                }
+                // Bilgi bildirimi yok (H1): yeni ipucu kartı parlar ve görünür alana kayar; tahmin şeridi grubu gösterir.
+                this.announcePlay(categoryMatch ? `Grup doğru: ${guessData.categoryName}. İpucu ${this.unlockedClues}/${this.maxClues} açıldı.` : `Yanlış. İpucu ${this.unlockedClues}/${this.maxClues} açıldı.`);
             }
         }
+    }
+
+    /** Ekran okuyucuya kısa oyun duyurusu (bildirim baloncuğu olmadan). */
+    announcePlay(msg) {
+        const el = document.getElementById('playAnnouncer');
+        if (!el) return;
+        el.textContent = '';
+        setTimeout(() => { el.textContent = msg; }, 30);
+    }
+
+    /** Kombo: aşama değişmeden önce o aşamanın tahminlerini sakla (paylaşım satırı için). */
+    archiveStageGuesses() {
+        this.stageGuessLog = this.stageGuessLog || {};
+        this.stageGuessLog[this.comboStage] = this.guesses.map(g => ({ isCorrect: !!g.isCorrect, categoryMatch: !!g.categoryMatch }));
     }
 
     giveUp() {
@@ -29508,9 +30011,37 @@ class PsikoVakaGame {
             this.launchConfetti();
         }
 
+        this.emitPlayState();
+        // Rapor kendiliğinden açılmaz (H3): sonuç kartı görünür alana gelir; rapor bir dokunuş uzakta.
+        this.focusResultCard();
+    }
+
+    /** 72 -> "1 dk 12 sn", 45 -> "45 sn" */
+    formatDuration(sec) {
+        const n = Math.max(0, Math.round(Number(sec) || 0));
+        const m = Math.floor(n / 60), r = n % 60;
+        return m > 0 ? `${m} dk${r ? ` ${r} sn` : ''}` : `${r} sn`;
+    }
+
+    /** Sonuç kartında günlük seri satırı (js/online/daily.js çağırır). text boşsa gizlenir. */
+    setResultStreak(text, isLoss) {
+        const el = document.getElementById('playResultStreak');
+        const t = document.getElementById('playResultStreakText');
+        if (!el || !t) return;
+        t.textContent = text || '';
+        el.hidden = !text;
+        el.classList.toggle('is-loss', !!isLoss);
+    }
+
+    focusResultCard() {
+        const card = this.dom.finishedActions;
+        if (!card || card.hidden) return;
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         setTimeout(() => {
-            this.openResultModal(won);
-        }, 500);
+            try { card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (e) {}
+            const btn = this.dom.btnMainShowReport;
+            if (btn) { try { btn.focus({ preventScroll: true }); } catch (e) {} }
+        }, 60);
     }
 
     /** Vaka bitince oyun ekranında gösterilen kısa sonuç kartı */
@@ -29528,7 +30059,7 @@ class PsikoVakaGame {
         if (this.dom.playResultIcon) this.dom.playResultIcon.innerHTML = this.icon(won ? 'check' : 'flag');
         if (this.dom.playResultTitle) {
             this.dom.playResultTitle.textContent = won
-                ? `${this.guesses.length}. tahminde bildin · ${this.elapsedSeconds} sn`
+                ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
@@ -29580,7 +30111,7 @@ class PsikoVakaGame {
             diagNameEl.textContent = correctName;
             diagEnEl.textContent = `${targetTherapy ? targetTherapy.nameTr : ''} · ${targetPharma ? targetPharma.nameTr : ''}`;
         } else {
-            heading.textContent = won ? `${this.guesses.length}. ipucunda bildin · ${this.elapsedSeconds} sn` : 'Vaka tamamlandı';
+            heading.textContent = won ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}` : 'Bu sefer olmadı';
             diagNameEl.textContent = correctName;
             diagEnEl.textContent = correctEn;
         }
@@ -29715,27 +30246,24 @@ class PsikoVakaGame {
 
         const btnCopyScore = document.getElementById('btnCopyScore');
         if (btnCopyScore) {
-            btnCopyScore.onclick = () => {
-                navigator.clipboard.writeText(shareString);
-                this.showToast("📋 Skor ve vaka linki panoya kopyalandı!");
+            btnCopyScore.onclick = async () => {
+                const ok = await this.copyText(this.generateShareString(this.gameWon));
+                this.showToast(ok ? 'Sonuç panoya kopyalandı.' : 'Kopyalanamadı. Metni elle kopyala.');
             };
         }
 
         const btnShareWA = document.getElementById('btnShareWhatsApp');
         if (btnShareWA) {
             btnShareWA.onclick = () => {
-                const duelUrl = this.buildCurrentCaseDuelLink();
-                const waText = `${shareString}\n⚔️ Aynı vakada beni geçebilir misin? Tıkla ve çöz:\n${duelUrl}`;
-                window.open(`https://wa.me/?text=${encodeURIComponent(waText)}`, '_blank');
+                window.open(`https://wa.me/?text=${encodeURIComponent(this.generateShareString(this.gameWon))}`, '_blank', 'noopener');
             };
         }
 
         const btnChallengeLink = document.getElementById('btnChallengeFriendLink');
         if (btnChallengeLink) {
-            btnChallengeLink.onclick = () => {
-                const duelUrl = this.buildCurrentCaseDuelLink();
-                navigator.clipboard.writeText(duelUrl);
-                this.showToast("⚔️ Meydan okuma düello linki kopyalandı! Arkadaşına gönder!");
+            btnChallengeLink.onclick = async () => {
+                const ok = await this.copyText(this.buildCurrentCaseDuelLink());
+                this.showToast(ok ? 'Meydan okuma bağlantısı kopyalandı.' : 'Kopyalanamadı.');
             };
         }
 
@@ -30042,7 +30570,7 @@ class PsikoVakaGame {
         URL.revokeObjectURL(url);
 
         this.renderPackShelf();
-        this.showToast(`🚀 Toplam ${merged.length} vakalık "cases.js" indirildi! GitHub'daki js/cases.js üzerine yükleyebilirsiniz!`);
+        this.showToast(`${merged.length} vakalık cases.js indirildi.`);
     }
 
     exportCasesJSON() {
@@ -30058,7 +30586,7 @@ class PsikoVakaGame {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        this.showToast("💾 Aktif vaka paketi JSON olarak indirildi!");
+        this.showToast('Vaka paketi JSON olarak indirildi.');
     }
 
     processAndSaveImportedCases(rawArray, defaultName) {
@@ -30104,7 +30632,7 @@ class PsikoVakaGame {
 
         this.applyActivePack(packId, true);
         this.closeModal(this.dom.caseManagerModal);
-        this.showToast(`🎉 "${customName}" (${validCases.length} vaka) kütüphaneye kaydedildi ve başlatıldı!${skippedUnknownDx > 0 ? ` ${skippedUnknownDx} vaka tanısı güncel listede olmadığı için atlandı.` : ''}`);
+        this.showToast(`"${customName}" (${validCases.length} vaka) kaydedildi ve başlatıldı.${skippedUnknownDx > 0 ? ` ${skippedUnknownDx} vaka tanısı güncel listede olmadığı için atlandı.` : ''}`);
     }
 
     handleImportJSON(e) {
@@ -30119,7 +30647,7 @@ class PsikoVakaGame {
                 this.processAndSaveImportedCases(imported, cleanFileName);
                 e.target.value = '';
             } catch (err) {
-                this.showToast("⚠️ Geçersiz JSON dosyası! " + (err.message || ""));
+                this.showToast(`Geçersiz JSON dosyası. ${err.message || ''}`.trim());
             }
         };
         reader.readAsText(file);
@@ -30128,7 +30656,7 @@ class PsikoVakaGame {
     handleImportPastedJSON() {
         const textarea = document.getElementById('pasteJsonTextarea');
         if (!textarea || !textarea.value.trim()) {
-            this.showToast("⚠️ Lütfen önce JSON metnini kutuya yapıştırın.");
+            this.showToast('Önce JSON metnini kutuya yapıştır.');
             return;
         }
         try {
@@ -30136,7 +30664,7 @@ class PsikoVakaGame {
             this.processAndSaveImportedCases(parsed, `Yapıştırılan Paket #${this.savedCustomPacks.length + 1}`);
             textarea.value = '';
         } catch (err) {
-            this.showToast("⚠️ Yapıştırılan JSON formatı hatalı: " + (err.message || ""));
+            this.showToast(`JSON biçimi hatalı. ${err.message || ''}`.trim());
         }
     }
 
@@ -30163,7 +30691,7 @@ class PsikoVakaGame {
                 const link = this.buildCurrentCaseDuelLink();
                 if (duelLinkInput) duelLinkInput.value = link;
                 navigator.clipboard.writeText(link);
-                this.showToast("⚔️ Düello linki kopyalandı! Arkadaşına gönder!");
+                this.showToast('Düello bağlantısı kopyalandı.');
             };
         }
 
@@ -30215,14 +30743,14 @@ class PsikoVakaGame {
             if (this.dom.duelOpponentName) this.dom.duelOpponentName.textContent = duelData.challengerName || 'Rakip Klinisyen';
             if (this.dom.duelOpponentStatus) {
                 if (duelData.challengerGuesses) {
-                    this.dom.duelOpponentStatus.textContent = `🎯 ${duelData.challengerGuesses}/6 İpucu • ${duelData.challengerTimeSec || 30} sn`;
+                    this.dom.duelOpponentStatus.textContent = `${duelData.challengerGuesses}/6 tahmin · ${duelData.challengerTimeSec || 30} sn`;
                 } else {
-                    this.dom.duelOpponentStatus.textContent = `⚔️ Meydan Okudu`;
+                    this.dom.duelOpponentStatus.textContent = 'Meydan okudu';
                 }
             }
         }
-        this.startCase(caseObj, `⚔️ Düello: Vaka #${caseObj.caseNumber}`);
-        this.showToast(`⚔️ ${duelData.challengerName || 'Arkadaşın'} sana bu vakayla meydan okudu!`);
+        this.startCase(caseObj, `Düello · Vaka #${caseObj.caseNumber}`);
+        this.showToast(`${duelData.challengerName || 'Arkadaşın'} sana bu vakayla meydan okudu.`);
     }
 
     /** Eski #room= işleyicisi: artık sunucu odalarına (js/online/) yönlendirir. */
@@ -30255,29 +30783,25 @@ class PsikoVakaGame {
         const oppGuesses = this.activeDuelChallenge.challengerGuesses;
         const oppTime = this.activeDuelChallenge.challengerTimeSec;
 
-        let verdictHTML = `<span style="color: #fbbf24;">⏳ Rakibin vakayı tamamlaması bekleniyor veya skorunuzu gönderin!</span>`;
+        const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        let verdict = { cls: 'is-wait', text: 'Rakibin sonucu bekleniyor.' };
         if (oppGuesses) {
-            if (myGuesses < oppGuesses || (myGuesses === oppGuesses && myTime < oppTime)) {
-                verdictHTML = `<span style="color: #34d399; font-size: 1.05rem; font-weight: 800;">🏆 DÜELLOYU SEN KAZANDIN! (${oppName}'i geçtin!)</span>`;
-            } else if (myGuesses > oppGuesses || (myGuesses === oppGuesses && myTime > oppTime)) {
-                verdictHTML = `<span style="color: #fb7185; font-size: 1.05rem; font-weight: 800;">⚔️ Bu turu ${oppName} kazandı! Rövanş için sıradaki vakaya geç!</span>`;
-            } else {
-                verdictHTML = `<span style="color: #38bdf8; font-size: 1.05rem; font-weight: 800;">🤝 TAM BERABERLİK! İkiniz de aynı sürede ve ipucunda bildiniz!</span>`;
-            }
+            if (myGuesses < oppGuesses || (myGuesses === oppGuesses && myTime < oppTime)) verdict = { cls: 'is-win', text: `Düelloyu kazandın: ${oppName} geride kaldı.` };
+            else if (myGuesses > oppGuesses || (myGuesses === oppGuesses && myTime > oppTime)) verdict = { cls: 'is-loss', text: `Bu turu ${oppName} kazandı. Rövanş için sıradaki vakaya geç.` };
+            else verdict = { cls: 'is-tie', text: 'Berabere: aynı tahmin sayısı, aynı süre.' };
         }
-
         podiumEl.innerHTML = `
-            <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: #fda4af; letter-spacing: 0.8px;">⚔️ Klinik Düello Karşılaştırma Podyumu</div>
-            <div style="margin-top: 0.35rem;">${verdictHTML}</div>
+            <div class="duel-podium-title">Düello karşılaştırması</div>
+            <div class="duel-podium-verdict ${verdict.cls}">${esc(verdict.text)}</div>
             <div class="duel-podium-grid">
-                <div style="background: var(--bg-secondary); padding: 0.7rem; border-radius: 10px; border: 1px solid var(--accent-emerald);">
-                    <div style="font-weight: 800; color: #34d399;">🧑‍⚕️ ${this.duelMyNickname} (Sen)</div>
-                    <div style="font-size: 0.85rem; margin-top: 4px;">${won ? `${this.guesses.length}/6 İpucu` : 'Çözemedi'} • ⏱️ ${myTime} sn</div>
+                <div class="duel-podium-side is-me">
+                    <div class="duel-podium-name">${esc(this.duelMyNickname)} (sen)</div>
+                    <div class="duel-podium-sub">${won ? `${this.guesses.length}/6 tahmin` : 'Çözemedi'} · ${this.formatDuration(myTime)}</div>
                 </div>
                 <div class="duel-vs-badge">VS</div>
-                <div style="background: var(--bg-secondary); padding: 0.7rem; border-radius: 10px; border: 1px solid var(--accent-rose);">
-                    <div style="font-weight: 800; color: #fda4af;">⚔️ ${oppName}</div>
-                    <div style="font-size: 0.85rem; margin-top: 4px;">${oppGuesses ? (oppGuesses <= 6 ? `${oppGuesses}/6 İpucu • ⏱️ ${oppTime || '-'} sn` : 'Çözemedi') : 'Oynuyor...'}</div>
+                <div class="duel-podium-side is-opp">
+                    <div class="duel-podium-name">${esc(oppName)}</div>
+                    <div class="duel-podium-sub">${oppGuesses ? (oppGuesses <= 6 ? `${oppGuesses}/6 tahmin · ${oppTime ? this.formatDuration(oppTime) : '-'}` : 'Çözemedi') : 'Oynuyor…'}</div>
                 </div>
             </div>
         `;
@@ -30340,25 +30864,77 @@ class PsikoVakaGame {
         });
     }
 
+    /**
+     * Paylaşım metni (H7, Wordle tarzı, cevabı söylemez):
+     *   PsikoVaka · Günün vakası · 16 Kasım
+     *   Tanı 4/6 · 1 dk 12 sn · 🔥 4 gün
+     *   🟥🟨🟨🟩⬜⬜
+     *   https://gandalfthegreey.github.io/psikovaka/
+     * 🟥 farklı grup, 🟨 grup doğru, 🟩 doğru, ⬜ kullanılmayan hak. Kombo: aşama başına bir satır.
+     */
     generateShareString(won) {
-        const caseNumber = this.currentCase.caseNumber || 1;
-        const guessCount = won ? this.guesses.length : 'X';
-        const modeLabels = {
-            diagnosis: '🩺 PsikoVaka Tanı',
-            therapy: '🛡️ PsikoTerapi',
-            pharmacology: '💊 PsikoFarmakoloji',
-            combo: '⚡ PsikoVaka Tam Konsültasyon'
+        const SITE = 'https://gandalfthegreey.github.io/psikovaka/';
+        const max = this.maxClues || 6;
+        const sq = (list) => {
+            const row = (list || []).slice(0, max).map(g => g.isCorrect ? '🟩' : (g.categoryMatch ? '🟨' : '🟥'));
+            while (row.length < max) row.push('⬜');
+            return row.join('');
         };
-        const gameName = modeLabels[this.targetGameMode] || '🧠 PsikoVaka';
-        let str = `${gameName} Vaka #${caseNumber} (${guessCount}/${this.maxClues}) • ⏱️ ${this.elapsedSeconds} sn\n\n`;
+        let title = 'PsikoVaka';
+        if (this.currentMode === 'daily') {
+            let day = '';
+            try { day = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', timeZone: 'Europe/Istanbul' }); }
+            catch (e) { day = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' }); }
+            title += ` · Günün vakası · ${day}`;
+        } else if (this.currentMode === 'practice') {
+            title += ` · Pratik · Vaka #${this.currentCase.caseNumber || '?'}`;
+        } else {
+            title += ` · Vaka #${this.currentCase.caseNumber || '?'}`;
+        }
+        const extra = [this.formatDuration(this.elapsedSeconds)];
+        if (won && this.currentMode === 'daily' && this.shareStreak > 0) extra.push(`🔥 ${this.shareStreak} gün`);
+        const lines = [title];
+        if (this.targetGameMode === 'combo') {
+            lines.push(['Kombo'].concat(extra).join(' · '));
+            const log = Object.assign({}, this.stageGuessLog || {});
+            log[this.comboStage] = this.guesses;
+            [['Tanı', 1], ['Terapi', 2], ['İlaç', 3]].forEach(([label, st]) => {
+                const list = log[st];
+                if (!list) { lines.push(`${label} –`); return; }
+                const ok = list.some(g => g.isCorrect);
+                lines.push(`${label} ${ok ? list.length : 'X'}/${max} ${sq(list)}`);
+            });
+        } else {
+            const label = { diagnosis: 'Tanı', therapy: 'Terapi', pharmacology: 'İlaç' }[this.targetGameMode] || 'Tanı';
+            lines.push([`${label} ${won ? this.guesses.length : 'X'}/${max}`].concat(extra).join(' · '));
+            lines.push(sq(this.guesses));
+        }
+        lines.push(SITE);
+        return lines.join('\n');
+    }
 
-        this.guesses.forEach(g => {
-            if (g.isCorrect) str += '🟩🟩🟩🟩\n';
-            else if (g.categoryMatch) str += '🟨🟨⬛⬛\n';
-            else str += '⬛⬛⬛⬛\n';
-        });
+    /** Sonucu paylaş: telefonda paylaşım menüsü, yoksa panoya kopyala (onay bildirimiyle). */
+    async shareResult() {
+        if (!this.currentCase || !this.isGameOver) return;
+        const text = this.generateShareString(this.gameWon);
+        if (navigator.share && (!navigator.canShare || navigator.canShare({ text }))) {
+            try { await navigator.share({ text }); return; }
+            catch (e) { if (e && e.name === 'AbortError') return; }
+        }
+        const ok = await this.copyText(text);
+        this.showToast(ok ? 'Sonuç panoya kopyalandı.' : 'Kopyalanamadı. Rapordaki metni elle kopyala.');
+    }
 
-        return str.trim();
+    async copyText(text) {
+        try {
+            if (navigator.clipboard && window.isSecureContext !== false) { await navigator.clipboard.writeText(text); return true; }
+        } catch (e) {}
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.setAttribute('readonly', ''); ta.className = 'visually-hidden';
+            document.body.appendChild(ta); ta.select();
+            const ok = document.execCommand('copy'); ta.remove(); return !!ok;
+        } catch (e) { return false; }
     }
 
     handleCreateCustomCase(e) {
@@ -30377,7 +30953,7 @@ class PsikoVakaGame {
         const dsmSummary = document.getElementById('studioDsmSummary').value.trim();
 
         if (!diagnosisId || !patientSummary || !clue1 || !clue2 || !clue3 || !clue4 || !clue5 || !clue6) {
-            this.showToast("⚠️ Lütfen tüm 6 ipucunu ve vaka bilgilerini doldurun.");
+            this.showToast('Altı ipucunu ve vaka bilgilerini doldur.');
             return;
         }
 
@@ -30408,7 +30984,7 @@ class PsikoVakaGame {
 
             document.getElementById('btnCopyStudioLink').onclick = () => {
                 navigator.clipboard.writeText(shareUrl);
-                this.showToast("🔗 Özel vaka linki kopyalandı!");
+                this.showToast('Özel vaka bağlantısı kopyalandı.');
             };
 
             document.getElementById('btnPlayStudioCase').onclick = () => {
@@ -31099,41 +31675,78 @@ class PsikoVakaGame {
         this.openModal(this.dom.statsModal);
     }
 
+    /** Ses ve titreşim ayarı (H14): localStorage psikovaka_sound, varsayılan açık. */
+    isSoundOn() {
+        try { return localStorage.getItem('psikovaka_sound') !== '0'; } catch (e) { return true; }
+    }
+
+    setSoundOn(on) {
+        try { localStorage.setItem('psikovaka_sound', on ? '1' : '0'); } catch (e) {}
+        this.syncSoundToggle();
+        if (on) this.playTone('warm');
+    }
+
+    syncSoundToggle() {
+        const btn = document.getElementById('soundToggleBtn');
+        if (!btn) return;
+        const on = this.isSoundOn();
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        const lbl = document.getElementById('soundToggleLabel');
+        if (lbl) lbl.textContent = on ? 'Açık' : 'Kapalı';
+        const ico = document.getElementById('soundToggleIcon');
+        if (ico) ico.innerHTML = this.icon(on ? 'volume' : 'volume-x');
+    }
+
+    /** Tek paylaşılan AudioContext (her ses için yenisi açılmaz). */
+    getAudioCtx() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        if (!this._audioCtx) this._audioCtx = new AudioCtx();
+        if (this._audioCtx.state === 'suspended' && this._audioCtx.resume) { try { this._audioCtx.resume(); } catch (e) {} }
+        return this._audioCtx;
+    }
+
     playTone(type) {
+        if (!this.isSoundOn()) return;
+        // Telefonda kısa titreşim (yalnızca vaka ekranında; ses ayarı kapalıysa titreşim de yok)
+        if (this.currentScreen === 'play' && navigator.vibrate) {
+            try { navigator.vibrate(type === 'win' ? 30 : [20, 40, 20]); } catch (e) {}
+        }
         try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (!AudioCtx) return;
-            const ctx = new AudioCtx();
+            const ctx = this.getAudioCtx();
+            if (!ctx) return;
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
             gain.connect(ctx.destination);
+            const t = ctx.currentTime;
 
             if (type === 'win') {
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-                osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
-                osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.6);
+                osc.frequency.setValueAtTime(523.25, t);
+                osc.frequency.setValueAtTime(659.25, t + 0.1);
+                osc.frequency.setValueAtTime(783.99, t + 0.2);
+                osc.frequency.setValueAtTime(1046.50, t + 0.3);
+                gain.gain.setValueAtTime(0.15, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                osc.start(t);
+                osc.stop(t + 0.6);
             } else if (type === 'warm') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, ctx.currentTime);
-                osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.1, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(440, t);
+                osc.frequency.setValueAtTime(554.37, t + 0.1);
+                gain.gain.setValueAtTime(0.1, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.start(t);
+                osc.stop(t + 0.25);
             } else {
+                // yanlış: yumuşak tek nota (bölüm 3: 250 Hz yerine 330 Hz sinüs)
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(250, ctx.currentTime);
-                gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.2);
+                osc.frequency.setValueAtTime(330, t);
+                gain.gain.setValueAtTime(0.08, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.start(t);
+                osc.stop(t + 0.2);
             }
         } catch (e) {}
     }
@@ -31219,21 +31832,23 @@ class PsikoVakaGame {
         modal._returnFocus = null;
     }
 
-    showToast(message) {
+    /**
+     * Kısa bildirim. Aynı anda tek bildirim: yenisi gelince eskisi kalkar (H1).
+     * Oyun ekranında yalnızca hata/uyarı bildirimleri kullanılır; bilgi zaten ekranda (ipucu kartı, tahmin şeridi).
+     */
+    showToast(message, opts = {}) {
         if (!this.dom || !this.dom.toastContainer) return;
+        const box = this.dom.toastContainer;
+        Array.from(box.children).forEach(el => el.remove());
+        clearTimeout(this._toastTimer); clearTimeout(this._toastTimer2);
         const toast = document.createElement('div');
         toast.className = 'toast';
         toast.textContent = message;
-        this.dom.toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-            toast.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(10px) scale(0.95)';
-            setTimeout(() => {
-                if (toast && typeof toast.remove === 'function') toast.remove();
-            }, 350);
-        }, 3000);
+        box.appendChild(toast);
+        this._toastTimer = setTimeout(() => {
+            toast.classList.add('is-leaving');
+            this._toastTimer2 = setTimeout(() => { if (toast.parentNode) toast.remove(); }, 350);
+        }, opts.duration || 3000);
     }
 
     toggleTheme() {
@@ -32003,13 +32618,37 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         }
         return bannerHost;
     }
+    // Vaka çözülürken afiş ekranı örtmez (H17): oyun çubuğunda küçük "N davet" hapı; dokununca afiş açılır, vaka bitince tam afiş.
+    let bannerPeek = false;
+    function caseActive() {
+        const gm = NS.game && NS.game();
+        return document.body.classList.contains('is-playing') && !!gm && !gm.isGameOver;
+    }
     function syncBannerSpace() {
         if (!bannerHost) return;
         const live = Array.from(bannerHost.children).filter(el => !el.classList.contains('is-leaving'));
-        const h = live.length && !document.body.classList.contains('ol-sheet-open') ? Math.ceil(bannerHost.getBoundingClientRect().height) + 8 : 0;
+        if (!live.length) bannerPeek = false;
+        const docked = live.length > 0 && caseActive() && !bannerPeek;
+        document.body.classList.toggle('ol-banners-docked', docked);
+        const pill = document.getElementById('playInvitePill');
+        if (pill) {
+            pill.hidden = !docked;
+            const t = pill.querySelector('[data-pill-text]');
+            if (t) t.textContent = live.length === 1 ? '1 davet' : `${live.length} davet`;
+        }
+        const h = live.length && !docked && !document.body.classList.contains('ol-sheet-open') ? Math.ceil(bannerHost.getBoundingClientRect().height) + 8 : 0;
         document.documentElement.style.setProperty('--ol-banner-space', h + 'px');
         document.body.classList.toggle('ol-has-banner', h > 0);
     }
+    document.addEventListener('psikovaka:playstate', () => { if (!caseActive()) bannerPeek = false; syncBannerSpace(); });
+    document.addEventListener('click', (e) => {
+        const pill = e.target.closest && e.target.closest('#playInvitePill');
+        if (!pill) return;
+        bannerPeek = true;
+        syncBannerSpace();
+        const first = bannerHost && bannerHost.querySelector('.ol-banner:not(.is-leaving) [data-ol-b]');
+        if (first) { try { first.focus(); } catch (err) {} }
+    });
     /** opts: { key, html, actions:[{id,label,kind}], onAction(id), ttlMs } */
     function banner(opts) {
         const host = bannerArea();
@@ -32214,7 +32853,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     <span class="ol-pub-sub">${NS.avatar(host.avatar, { size: 20, framed: true })}<span>${esc(host.username || 'Oyuncu')}</span></span>
                 </span>
                 <span class="ol-pub-count" aria-label="${r.player_count} / ${r.capacity} oyuncu">${icon('users')}${r.player_count}/${r.capacity}</span>
-                <button class="btn btn-sm btn-primary" type="button" data-ol-joincode="${esc(r.code)}" ${myRoom === r.id ? 'disabled' : ''}>Katıl</button>
+                <button class="btn btn-sm btn-secondary" type="button" data-ol-joincode="${esc(r.code)}" ${myRoom === r.id ? 'disabled' : ''}>Katıl</button>
             </div>`;
         }).join('');
     }
@@ -32568,7 +33207,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         return `<li class="ol-friend" data-uid="${esc(u.id)}">
             <span class="ol-friend-av">${NS.avatar(u.avatar, { size: 40, framed: true })}<span class="ol-dot ol-dot-${st.cls}" aria-hidden="true"></span></span>
             <span class="ol-friend-text"><span class="ol-friend-name">${esc(u.username)}</span><span class="ol-friend-sub">${NS.leagueBadge(u.ranked_points, 14)}<span>${esc(st.text)}</span></span></span>
-            ${opts && opts.challenge ? `<button class="btn btn-sm btn-primary ol-friend-duel" type="button" data-ol-f="challenge" aria-label="${esc(u.username)} kişisini düelloya çağır">${icon('swords')}<span class="ol-lg-only">Düelloya çağır</span><span class="ol-sm-only">Çağır</span></button>` : ''}
+            ${opts && opts.challenge ? `<button class="btn btn-sm btn-secondary ol-friend-duel" type="button" data-ol-f="challenge" aria-label="${esc(u.username)} kişisini düelloya çağır">${icon('swords')}<span class="ol-lg-only">Düelloya çağır</span><span class="ol-sm-only">Çağır</span></button>` : ''}
             ${canInvite ? `<button class="btn btn-sm btn-primary" type="button" data-ol-f="invite" ${opts.invited && opts.invited.has(u.id) ? 'disabled' : ''}>${opts.invited && opts.invited.has(u.id) ? 'Davet edildi' : 'Davet et'}</button>` : ''}
             ${opts && opts.manage ? `<button class="icon-btn icon-btn-sm icon-btn-danger" type="button" data-ol-f="remove" aria-label="${esc(u.username)} arkadaşlıktan çıkar">${icon('x')}</button>` : ''}
         </li>`;
@@ -33218,6 +33857,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 <div class="ol-stage-layer" id="olStageLayer"></div>
                 <div class="ol-stage-hint" id="olStageHint">Boş bir yere dokun, Nöro'n oraya zıplasın.</div>
             </div>
+            <details class="ol-roster" id="olRoster">
+                <summary class="ol-roster-sum"><span id="olRosterTitle">Oyuncular</span>${icon('chevron-down')}</summary>
+                <ul class="ol-roster-list" id="olRosterList"></ul>
+            </details>
             <div class="ol-lobby-dock">
                 <div class="ol-react-bar" role="toolbar" aria-label="Tepkiler">
                     ${Object.keys(T.emotes).map(e => `<button class="ol-react" type="button" data-ol-emote="${e}" aria-label="${esc(T.emotes[e])}" title="${esc(T.emotes[e])}">${icon(T.emoteIcon[e])}</button>`).join('')}
@@ -33278,9 +33921,31 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const setBtn = $('#olLobbySettingsBtn', L.root);
         if (setBtn) setBtn.hidden = quick || !NS.rooms.isHost();
         updatePlayers();
+        updateRoster();
         updateCta();
         updateChallenge();
         announceDiff();
+    }
+
+    /** Telefonda sahnenin altındaki açılır oyuncu listesi (H16): tam ad, lig rozeti, hazır durumu. */
+    function updateRoster() {
+        const s = NS.rooms.state;
+        const box = L.root && $('#olRoster', L.root);
+        if (!s || !box) return;
+        const act = s.players.filter(p => !p.left_at);
+        const myId = NS.api.myId();
+        const quick = !!s.room.is_quick;
+        $('#olRosterTitle', L.root).textContent = `Oyuncular (${act.length}/${s.room.capacity})`;
+        $('#olRosterList', L.root).innerHTML = act.map(p => {
+            const disc = NS.rooms.isDisconnected(p.user_id);
+            const st = disc ? 'Bağlantı koptu' : quick ? (p.user_id === myId ? 'Sen' : 'Geldi') : p.is_host ? 'Oda sahibi' : p.is_ready ? 'Hazır' : 'Bekliyor';
+            const ok = !disc && (p.is_host || p.is_ready || quick);
+            return `<li class="ol-roster-row${p.user_id === myId ? ' is-me' : ''}">
+                <span class="ol-roster-badge" title="${esc(NS.leagueName(p.ranked_points))}">${NS.leagueBadge(p.ranked_points, 18)}</span>
+                <span class="ol-roster-name">${esc(p.username || p.display_name || 'Oyuncu')}${p.user_id === myId ? ' <span class="ol-roster-me">(sen)</span>' : ''}</span>
+                <span class="ol-roster-state${ok ? ' is-ok' : ''}">${ok ? icon('check') : ''}${esc(st)}</span>
+            </li>`;
+        }).join('');
     }
 
     /** Düello çağrısı: davet edilen arkadaşın durumu (bekleniyor / reddetti / süresi doldu / gönderilemedi). */
@@ -33362,7 +34027,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             node.classList.toggle('is-host', !!p.is_host);
             node.classList.toggle('is-away', disc);
             node.querySelector('.ol-p-crown').hidden = !p.is_host || !!s.room.is_quick;
-            node.querySelector('.ol-p-name').textContent = p.username || p.display_name || 'Oyuncu';
+            const fullName = p.username || p.display_name || 'Oyuncu';
+            // Sahnede ad 10 karakterde kesilir (H16); tam ad aşağıdaki "Oyuncular" listesinde ve aria-label'da
+            node.querySelector('.ol-p-name').textContent = fullName.length > 10 ? fullName.slice(0, 10) + '…' : fullName;
             const b = node.querySelector('.ol-p-badge');
             if (b.dataset.rp !== String(p.ranked_points)) { b.innerHTML = NS.leagueBadge(p.ranked_points, 16); b.dataset.rp = String(p.ranked_points); b.title = NS.leagueName(p.ranked_points); }
             const stEl = node.querySelector('.ol-p-state');
@@ -33914,8 +34581,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             finishLocal(d.won, d.points, d.answer, d.elapsed_sec, d.won ? 'solved' : 'failed');
         } else {
             gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
-            if (d.same_group) gm.showToast(`Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}`);
-            NS.announce(`Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
+            // Bilgi bildirimi yok (H1): tahmin şeridi "grup doğru"yu gösterir
+            NS.announce(d.same_group ? `Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.` : `Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
         }
         updateHud();
         if (d.room && (d.room.status !== s.room.status || (d.room.round && d.room.round.closed_at))) NS.rooms.refresh();
@@ -33958,6 +34625,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (won && typeof gm.launchConfetti === 'function' && !NS.util.reducedMotion()) gm.launchConfetti();
         const ans = answer || roundAnswer();
         renderWaitPanel(won, points, ans, elapsed, reason);
+        try { document.dispatchEvent(new CustomEvent('psikovaka:playstate')); } catch (e) {}
         NS.announce(won ? `Doğru. ${points} puan.` : 'Bu turu bitirdin.');
     }
 
@@ -35068,6 +35736,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             if (!x.correct) { wrong++; if (kind === 'diagnosis') gm.diagWrongLog.push(x.item_id); }
             if (D.active.target === 'combo' && x.correct && x.stage < stage) { const el = gm.dom['comboStep' + x.stage + 'Val']; if (el) el.textContent = itemName(kind, x.item_id); }
             if (x.stage === stage) gm.guesses.push(guessView(kind, x.item_id, x.correct, x.same_group, x.stage));
+            else { gm.stageGuessLog = gm.stageGuessLog || {}; (gm.stageGuessLog[x.stage] = gm.stageGuessLog[x.stage] || []).push({ isCorrect: !!x.correct, categoryMatch: !!x.same_group }); }
         });
         gm.comboStage = stage;
         gm.unlockedClues = Math.min(gm.maxClues, 1 + wrong);
@@ -35119,6 +35788,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (d.correct && d.next_stage && !d.finished) {
             const el = gm.dom['comboStep' + d.stage + 'Val']; if (el) el.textContent = ch.obj.nameTr;
             const nx = gm.dom['comboStep' + d.next_stage + 'Val']; if (nx) nx.textContent = d.next_stage === 2 ? 'Şimdi terapiyi seç' : 'Şimdi ilacı seç';
+            if (typeof gm.archiveStageGuesses === 'function') gm.archiveStageGuesses();
             gm.comboStage = d.next_stage; gm.guesses = [];
             gm.updateComboStepperUI(); gm.syncInputAndBrowserLabels(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
             gm.showToast(d.next_stage === 2 ? 'Tanı doğru. Şimdi terapiyi seç.' : 'Terapi doğru. Şimdi ilacı seç.');
@@ -35130,8 +35800,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             return;
         }
         gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
-        if (d.same_group) gm.showToast(`Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}`);
-        else gm.showToast(`Yeni ipucu açıldı (${gm.unlockedClues}/${gm.maxClues})`);
+        // Bilgi bildirimi yok (H1): ipucu kartı parlar, tahmin şeridi grubu gösterir
+        if (typeof gm.announcePlay === 'function') gm.announcePlay(d.same_group ? `Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.` : `Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
     }
     async function serverGiveUp() {
         const gm = g();
@@ -35168,6 +35838,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             : `Seri sıfırlandı · En iyi ${sk.best_streak}`;
         el.classList.toggle('is-loss', !won);
         el.hidden = false;
+        // Rapor artık kendiliğinden açılmıyor: seri sonuç kartında da görünsün, paylaşım satırına girsin
+        const gm = g();
+        if (gm) {
+            gm.shareStreak = won ? sk.current_streak : 0;
+            if (typeof gm.setResultStreak === 'function') gm.setResultStreak($('resultStreakText').textContent, !won);
+        }
         renderCard(target, D.ch[target]);
     }
 

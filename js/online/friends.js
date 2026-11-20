@@ -142,7 +142,7 @@
         return `<li class="ol-friend" data-uid="${esc(u.id)}">
             <span class="ol-friend-av">${NS.avatar(u.avatar, { size: 40, framed: true })}<span class="ol-dot ol-dot-${st.cls}" aria-hidden="true"></span></span>
             <span class="ol-friend-text"><span class="ol-friend-name">${esc(u.username)}</span><span class="ol-friend-sub">${NS.leagueBadge(u.ranked_points, 14)}<span>${esc(st.text)}</span></span></span>
-            ${opts && opts.challenge ? `<button class="btn btn-sm btn-primary ol-friend-duel" type="button" data-ol-f="challenge" aria-label="${esc(u.username)} kişisini düelloya çağır">${icon('swords')}<span class="ol-lg-only">Düelloya çağır</span><span class="ol-sm-only">Çağır</span></button>` : ''}
+            ${opts && opts.challenge ? `<button class="btn btn-sm btn-secondary ol-friend-duel" type="button" data-ol-f="challenge" aria-label="${esc(u.username)} kişisini düelloya çağır">${icon('swords')}<span class="ol-lg-only">Düelloya çağır</span><span class="ol-sm-only">Çağır</span></button>` : ''}
             ${canInvite ? `<button class="btn btn-sm btn-primary" type="button" data-ol-f="invite" ${opts.invited && opts.invited.has(u.id) ? 'disabled' : ''}>${opts.invited && opts.invited.has(u.id) ? 'Davet edildi' : 'Davet et'}</button>` : ''}
             ${opts && opts.manage ? `<button class="icon-btn icon-btn-sm icon-btn-danger" type="button" data-ol-f="remove" aria-label="${esc(u.username)} arkadaşlıktan çıkar">${icon('x')}</button>` : ''}
         </li>`;

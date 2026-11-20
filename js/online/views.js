@@ -101,13 +101,37 @@
         }
         return bannerHost;
     }
+    // Vaka çözülürken afiş ekranı örtmez (H17): oyun çubuğunda küçük "N davet" hapı; dokununca afiş açılır, vaka bitince tam afiş.
+    let bannerPeek = false;
+    function caseActive() {
+        const gm = NS.game && NS.game();
+        return document.body.classList.contains('is-playing') && !!gm && !gm.isGameOver;
+    }
     function syncBannerSpace() {
         if (!bannerHost) return;
         const live = Array.from(bannerHost.children).filter(el => !el.classList.contains('is-leaving'));
-        const h = live.length && !document.body.classList.contains('ol-sheet-open') ? Math.ceil(bannerHost.getBoundingClientRect().height) + 8 : 0;
+        if (!live.length) bannerPeek = false;
+        const docked = live.length > 0 && caseActive() && !bannerPeek;
+        document.body.classList.toggle('ol-banners-docked', docked);
+        const pill = document.getElementById('playInvitePill');
+        if (pill) {
+            pill.hidden = !docked;
+            const t = pill.querySelector('[data-pill-text]');
+            if (t) t.textContent = live.length === 1 ? '1 davet' : `${live.length} davet`;
+        }
+        const h = live.length && !docked && !document.body.classList.contains('ol-sheet-open') ? Math.ceil(bannerHost.getBoundingClientRect().height) + 8 : 0;
         document.documentElement.style.setProperty('--ol-banner-space', h + 'px');
         document.body.classList.toggle('ol-has-banner', h > 0);
     }
+    document.addEventListener('psikovaka:playstate', () => { if (!caseActive()) bannerPeek = false; syncBannerSpace(); });
+    document.addEventListener('click', (e) => {
+        const pill = e.target.closest && e.target.closest('#playInvitePill');
+        if (!pill) return;
+        bannerPeek = true;
+        syncBannerSpace();
+        const first = bannerHost && bannerHost.querySelector('.ol-banner:not(.is-leaving) [data-ol-b]');
+        if (first) { try { first.focus(); } catch (err) {} }
+    });
     /** opts: { key, html, actions:[{id,label,kind}], onAction(id), ttlMs } */
     function banner(opts) {
         const host = bannerArea();
@@ -312,7 +336,7 @@
                     <span class="ol-pub-sub">${NS.avatar(host.avatar, { size: 20, framed: true })}<span>${esc(host.username || 'Oyuncu')}</span></span>
                 </span>
                 <span class="ol-pub-count" aria-label="${r.player_count} / ${r.capacity} oyuncu">${icon('users')}${r.player_count}/${r.capacity}</span>
-                <button class="btn btn-sm btn-primary" type="button" data-ol-joincode="${esc(r.code)}" ${myRoom === r.id ? 'disabled' : ''}>Katıl</button>
+                <button class="btn btn-sm btn-secondary" type="button" data-ol-joincode="${esc(r.code)}" ${myRoom === r.id ? 'disabled' : ''}>Katıl</button>
             </div>`;
         }).join('');
     }

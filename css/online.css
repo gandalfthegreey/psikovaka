@@ -39,7 +39,7 @@
 .ol-nav-badge {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 18px; height: 18px; padding: 0 5px; margin-left: 4px;
-    border-radius: var(--radius-full); background: var(--color-danger); color: #fff;
+    border-radius: var(--radius-full); background: var(--color-badge-bg); color: #fff;
     font-size: 11px; font-weight: var(--weight-bold); line-height: 1;
 }
 .tab-bar-link { position: relative; }
@@ -122,17 +122,14 @@ body.ol-sheet-open { overflow: hidden; }
     transition: border-color var(--duration-fast), transform var(--duration-fast), background var(--duration-fast);
 }
 button.ol-cta-card:hover { border-color: var(--color-accent); transform: translateY(-1px); }
-.ol-cta-primary {
-    background: linear-gradient(135deg, var(--color-accent-bg) 0%, var(--color-accent-bg-hover) 100%);
-    border-color: transparent; color: var(--color-accent-contrast);
-}
-button.ol-cta-primary:hover { border-color: transparent; }
+/* "Oda kur" kartı yüzey renginde; vurgu yalnızca mor ikon kutusunda (S9: her bölümde tek dolu düğme) */
+.ol-cta-primary { border-color: var(--color-border-strong); }
 .ol-cta-icon {
     display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
     width: 52px; height: 52px; border-radius: var(--radius-lg);
     background: var(--color-accent-soft); color: var(--color-accent);
 }
-.ol-cta-primary .ol-cta-icon { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.ol-cta-primary .ol-cta-icon { background: var(--color-accent-bg); color: var(--color-accent-contrast); }
 .ol-cta-icon .icon { width: 26px; height: 26px; }
 .ol-cta-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
 .ol-cta-title { font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
@@ -176,10 +173,10 @@ button.ol-cta-primary:hover { border-color: transparent; }
     .ol-pub-row { grid-template-columns: auto 1fr auto; }
     .ol-pub-count { display: none; }
 }
-.ol-t-diagnosis { --ol-tc: var(--target-diagnosis); }
-.ol-t-therapy { --ol-tc: var(--target-therapy); }
-.ol-t-pharmacology { --ol-tc: var(--target-pharmacology); }
-.ol-t-combo { --ol-tc: var(--target-combo); }
+.ol-t-diagnosis { --ol-tc: var(--target-diagnosis-text); }
+.ol-t-therapy { --ol-tc: var(--target-therapy-text); }
+.ol-t-pharmacology { --ol-tc: var(--target-pharmacology-text); }
+.ol-t-combo { --ol-tc: var(--target-combo-text); }
 
 .ol-gate {
     display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4);
@@ -298,7 +295,7 @@ body.ol-layer-open .tab-bar { display: none; }
 }
 .ol-topbar-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
 .ol-topbar-title { font-size: var(--text-md); font-weight: var(--weight-bold); letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ol-topbar-chips { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.ol-topbar-chips { display: flex; gap: 6px; flex-wrap: wrap; } /* H16: kesilmesin, alt satıra kaysın */
 .ol-topbar-chips::-webkit-scrollbar { display: none; }
 .ol-chip-static {
     display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px;
@@ -477,7 +474,7 @@ body.ol-layer-open .tab-bar { display: none; }
     .ol-stage-layer[data-count="5"] .ol-p-state, .ol-stage-layer[data-count="6"] .ol-p-state,
     .ol-stage-layer[data-count="7"] .ol-p-state, .ol-stage-layer[data-count="8"] .ol-p-state { display: none; }
     .ol-stage-layer[data-count="5"] .ol-p-plate, .ol-stage-layer[data-count="6"] .ol-p-plate,
-    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 108px; }
+    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 116px; } /* H16: 10 karakterlik ad sığsın */
     .ol-stage-layer[data-count="5"] .ol-p-badge, .ol-stage-layer[data-count="6"] .ol-p-badge,
     .ol-stage-layer[data-count="7"] .ol-p-badge, .ol-stage-layer[data-count="8"] .ol-p-badge { display: none; }
     .ol-stage[data-count="5"], .ol-stage[data-count="6"], .ol-stage[data-count="7"], .ol-stage[data-count="8"] { min-height: clamp(360px, 56vh, 620px); }
@@ -925,3 +922,38 @@ body.ol-sheet-open .ol-banners { visibility: hidden; }
 @keyframes ol-lc-pop { 0% { transform: scale(.4) rotate(-12deg); opacity: 0; } 60% { transform: scale(1.15) rotate(4deg); opacity: 1; } 100% { transform: none; } }
 @keyframes ol-lc-drop { 0% { transform: translateY(-14px); opacity: 0; } 100% { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .ol-lc-new { animation: none; } }
+
+/* Açık temada AA altında kalan küçük metinler (ajan U, H9) */
+[data-theme="light"] .ol-qmode-n,
+[data-theme="light"] .ol-res-pos,
+[data-theme="light"] .ol-res-sub { color: var(--color-text-2); }
+[data-theme="light"] .ol-res-rp.is-plus { color: #065f46; }
+[data-theme="light"] .ol-br-note { color: var(--color-warning-text-strong); }
+
+/* Vaka sürerken davet afişi oyun çubuğunda küçük hap (ajan U, H17) */
+body.ol-banners-docked .ol-banners { display: none; }
+.play-invite-pill {
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    min-height: var(--tap); padding: 0 var(--space-3);
+    border: 1px solid var(--color-accent); border-radius: var(--radius-full);
+    background: var(--color-accent-soft); color: var(--color-accent);
+    font-size: var(--text-sm); font-weight: var(--weight-semibold); white-space: nowrap;
+}
+.play-invite-pill .icon { width: 16px; height: 16px; }
+.play-invite-pill[hidden] { display: none; }
+
+/* Lobi: telefonda sahnenin altında açılır oyuncu listesi (ajan U, H16) */
+.ol-roster { max-width: 1100px; width: calc(100% - 2 * var(--space-4)); margin: var(--space-2) auto 0; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.ol-roster-sum { display: flex; align-items: center; justify-content: space-between; min-height: var(--tap); padding: 0 var(--space-4); font-size: var(--text-sm); font-weight: var(--weight-semibold); cursor: pointer; list-style: none; }
+.ol-roster-sum::-webkit-details-marker { display: none; }
+.ol-roster-sum .icon { width: 18px; height: 18px; transition: transform var(--duration) var(--ease); }
+.ol-roster[open] .ol-roster-sum .icon { transform: rotate(180deg); }
+.ol-roster-list { list-style: none; margin: 0; padding: 0 var(--space-4) var(--space-2); }
+.ol-roster-row { display: flex; align-items: center; gap: var(--space-2); min-height: 40px; border-top: 1px solid var(--color-border); font-size: var(--text-sm); }
+.ol-roster-badge { display: inline-flex; flex-shrink: 0; }
+.ol-roster-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.ol-roster-me { color: var(--color-text-3); }
+.ol-roster-state { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; color: var(--color-text-2); font-size: var(--text-xs); }
+.ol-roster-state.is-ok { color: var(--color-success); }
+.ol-roster-state .icon { width: 14px; height: 14px; }
+@media (min-width: 768px) { .ol-roster { display: none; } }

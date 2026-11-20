@@ -165,6 +165,7 @@
             if (!x.correct) { wrong++; if (kind === 'diagnosis') gm.diagWrongLog.push(x.item_id); }
             if (D.active.target === 'combo' && x.correct && x.stage < stage) { const el = gm.dom['comboStep' + x.stage + 'Val']; if (el) el.textContent = itemName(kind, x.item_id); }
             if (x.stage === stage) gm.guesses.push(guessView(kind, x.item_id, x.correct, x.same_group, x.stage));
+            else { gm.stageGuessLog = gm.stageGuessLog || {}; (gm.stageGuessLog[x.stage] = gm.stageGuessLog[x.stage] || []).push({ isCorrect: !!x.correct, categoryMatch: !!x.same_group }); }
         });
         gm.comboStage = stage;
         gm.unlockedClues = Math.min(gm.maxClues, 1 + wrong);
@@ -216,6 +217,7 @@
         if (d.correct && d.next_stage && !d.finished) {
             const el = gm.dom['comboStep' + d.stage + 'Val']; if (el) el.textContent = ch.obj.nameTr;
             const nx = gm.dom['comboStep' + d.next_stage + 'Val']; if (nx) nx.textContent = d.next_stage === 2 ? 'Şimdi terapiyi seç' : 'Şimdi ilacı seç';
+            if (typeof gm.archiveStageGuesses === 'function') gm.archiveStageGuesses();
             gm.comboStage = d.next_stage; gm.guesses = [];
             gm.updateComboStepperUI(); gm.syncInputAndBrowserLabels(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
             gm.showToast(d.next_stage === 2 ? 'Tanı doğru. Şimdi terapiyi seç.' : 'Terapi doğru. Şimdi ilacı seç.');
@@ -227,8 +229,8 @@
             return;
         }
         gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
-        if (d.same_group) gm.showToast(`Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}`);
-        else gm.showToast(`Yeni ipucu açıldı (${gm.unlockedClues}/${gm.maxClues})`);
+        // Bilgi bildirimi yok (H1): ipucu kartı parlar, tahmin şeridi grubu gösterir
+        if (typeof gm.announcePlay === 'function') gm.announcePlay(d.same_group ? `Grup doğru: ${gm.guesses[gm.guesses.length - 1].categoryName}. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.` : `Yanlış. İpucu ${gm.unlockedClues}/${gm.maxClues} açıldı.`);
     }
     async function serverGiveUp() {
         const gm = g();
@@ -265,6 +267,12 @@
             : `Seri sıfırlandı · En iyi ${sk.best_streak}`;
         el.classList.toggle('is-loss', !won);
         el.hidden = false;
+        // Rapor artık kendiliğinden açılmıyor: seri sonuç kartında da görünsün, paylaşım satırına girsin
+        const gm = g();
+        if (gm) {
+            gm.shareStreak = won ? sk.current_streak : 0;
+            if (typeof gm.setResultStreak === 'function') gm.setResultStreak($('resultStreakText').textContent, !won);
+        }
         renderCard(target, D.ch[target]);
     }
 

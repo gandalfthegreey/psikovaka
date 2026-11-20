@@ -68,6 +68,20 @@
     --target-pharmacology: #f43f5e;
     --target-combo: #f59e0b;
     --color-target: var(--target-diagnosis);
+
+    /* Hedef rengini METİN olarak kullanırken (çip yazısı). Koyu temada aynı; açık temada koyu varyant (H9) */
+    --target-diagnosis-text: #8b93ff;   /* koyu zeminde #6366f1 metin 3.6:1 kalıyordu */
+    --target-therapy-text: var(--target-therapy);
+    --target-pharmacology-text: #fb7185; /* #f43f5e metin 4.4:1 kalıyordu */
+    --target-combo-text: var(--target-combo);
+    /* Hedef renginde DOLU zemin + beyaz yazı (ipucu numarası); beyazla en az 4.5:1 (H9) */
+    --target-diagnosis-strong: #4f46e5;
+    --target-therapy-strong: #047857;
+    --target-pharmacology-strong: #be123c;
+    --target-combo-strong: #a16207;
+    --color-target-strong: var(--target-diagnosis-strong);
+    /* Sayı rozeti zemini (beyaz yazıyla 4.83:1) */
+    --color-badge-bg: #dc2626;
 }
 
 /* ---------- Koyu tema (varsayılan) ---------- */
@@ -81,6 +95,7 @@
     --color-surface-3: #252a37;
     --color-border: #262b38;
     --color-border-strong: #353c4d;
+    --color-input-border: #636b80;    /* form alanı sınırı: kart zemininde 3:1 (H10) */
 
     --color-text: #eef0f5;
     --color-text-2: #b7bdcb;
@@ -117,6 +132,7 @@
     --color-surface-3: #e8ebf2;
     --color-border: #e2e5ee;
     --color-border-strong: #cbd0dc;
+    --color-input-border: #878ea0;    /* form alanı sınırı: beyaz zeminde 3:1 (H10) */
 
     --color-text: #12151d;
     --color-text-2: #454c5e;
@@ -138,6 +154,12 @@
     --color-overlay: rgba(18, 21, 29, 0.42);
     --color-focus: #4f46e5;
 
+    --target-diagnosis-text: #4f46e5;
+    --target-therapy-text: #047857;
+    --target-pharmacology-text: #be123c;
+    --target-combo-text: #92400e;
+    --color-warning-text-strong: #854d0e; /* sarı zemin üstünde küçük metin (zorluk "Orta") */
+
     --shadow-1: 0 1px 2px rgba(18, 21, 29, 0.06);
     --shadow-2: 0 6px 20px rgba(18, 21, 29, 0.08);
     --shadow-3: 0 18px 48px rgba(18, 21, 29, 0.16);
@@ -146,6 +168,9 @@
 body.therapy-mode-active { --color-target: var(--target-therapy); }
 body.pharmacology-mode-active { --color-target: var(--target-pharmacology); }
 body.combo-mode-active { --color-target: var(--target-combo); }
+body.therapy-mode-active { --color-target-strong: var(--target-therapy-strong); }
+body.pharmacology-mode-active { --color-target-strong: var(--target-pharmacology-strong); }
+body.combo-mode-active { --color-target-strong: var(--target-combo-strong); }
 
 /* ---------- Eski değişken adları (online_arena.js ve eski satır içi stiller için) ----------
    online_arena.js yeniden yazılınca bu blok kaldırılabilir. */

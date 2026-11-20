@@ -102,6 +102,10 @@
                 <div class="ol-stage-layer" id="olStageLayer"></div>
                 <div class="ol-stage-hint" id="olStageHint">Boş bir yere dokun, Nöro'n oraya zıplasın.</div>
             </div>
+            <details class="ol-roster" id="olRoster">
+                <summary class="ol-roster-sum"><span id="olRosterTitle">Oyuncular</span>${icon('chevron-down')}</summary>
+                <ul class="ol-roster-list" id="olRosterList"></ul>
+            </details>
             <div class="ol-lobby-dock">
                 <div class="ol-react-bar" role="toolbar" aria-label="Tepkiler">
                     ${Object.keys(T.emotes).map(e => `<button class="ol-react" type="button" data-ol-emote="${e}" aria-label="${esc(T.emotes[e])}" title="${esc(T.emotes[e])}">${icon(T.emoteIcon[e])}</button>`).join('')}
@@ -162,9 +166,31 @@
         const setBtn = $('#olLobbySettingsBtn', L.root);
         if (setBtn) setBtn.hidden = quick || !NS.rooms.isHost();
         updatePlayers();
+        updateRoster();
         updateCta();
         updateChallenge();
         announceDiff();
+    }
+
+    /** Telefonda sahnenin altındaki açılır oyuncu listesi (H16): tam ad, lig rozeti, hazır durumu. */
+    function updateRoster() {
+        const s = NS.rooms.state;
+        const box = L.root && $('#olRoster', L.root);
+        if (!s || !box) return;
+        const act = s.players.filter(p => !p.left_at);
+        const myId = NS.api.myId();
+        const quick = !!s.room.is_quick;
+        $('#olRosterTitle', L.root).textContent = `Oyuncular (${act.length}/${s.room.capacity})`;
+        $('#olRosterList', L.root).innerHTML = act.map(p => {
+            const disc = NS.rooms.isDisconnected(p.user_id);
+            const st = disc ? 'Bağlantı koptu' : quick ? (p.user_id === myId ? 'Sen' : 'Geldi') : p.is_host ? 'Oda sahibi' : p.is_ready ? 'Hazır' : 'Bekliyor';
+            const ok = !disc && (p.is_host || p.is_ready || quick);
+            return `<li class="ol-roster-row${p.user_id === myId ? ' is-me' : ''}">
+                <span class="ol-roster-badge" title="${esc(NS.leagueName(p.ranked_points))}">${NS.leagueBadge(p.ranked_points, 18)}</span>
+                <span class="ol-roster-name">${esc(p.username || p.display_name || 'Oyuncu')}${p.user_id === myId ? ' <span class="ol-roster-me">(sen)</span>' : ''}</span>
+                <span class="ol-roster-state${ok ? ' is-ok' : ''}">${ok ? icon('check') : ''}${esc(st)}</span>
+            </li>`;
+        }).join('');
     }
 
     /** Düello çağrısı: davet edilen arkadaşın durumu (bekleniyor / reddetti / süresi doldu / gönderilemedi). */
@@ -246,7 +272,9 @@
             node.classList.toggle('is-host', !!p.is_host);
             node.classList.toggle('is-away', disc);
             node.querySelector('.ol-p-crown').hidden = !p.is_host || !!s.room.is_quick;
-            node.querySelector('.ol-p-name').textContent = p.username || p.display_name || 'Oyuncu';
+            const fullName = p.username || p.display_name || 'Oyuncu';
+            // Sahnede ad 10 karakterde kesilir (H16); tam ad aşağıdaki "Oyuncular" listesinde ve aria-label'da
+            node.querySelector('.ol-p-name').textContent = fullName.length > 10 ? fullName.slice(0, 10) + '…' : fullName;
             const b = node.querySelector('.ol-p-badge');
             if (b.dataset.rp !== String(p.ranked_points)) { b.innerHTML = NS.leagueBadge(p.ranked_points, 16); b.dataset.rp = String(p.ranked_points); b.title = NS.leagueName(p.ranked_points); }
             const stEl = node.querySelector('.ol-p-state');

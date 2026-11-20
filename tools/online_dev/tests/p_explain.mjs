@@ -25,8 +25,11 @@ for (const vp of [{ w: 390, h: 844, dark: true }, { w: 360, h: 740, dark: false 
   await p.evaluate((id) => { const g = window.game; const d = g.diagnoses.find(x => x.id === id); g.dom.diagnosisInput.value = d.nameTr; g.dom.diagnosisInput.dataset.selectedId = id; g.submitGuess(); }, caseId.wrong);
   check((await p.locator('.xp').count()) === 0, 'yanlış tahminden sonra açıklama yok');
   await p.evaluate(() => window.game.giveUp());
-  await p.waitForSelector('#resultModal.open, #resultModal.is-open, #resultModal[aria-hidden="false"]', { timeout: 3000 }).catch(() => {});
+  // Ajan U (H3): rapor artık kendiliğinden açılmıyor; sonuç kartındaki düğmeyle açılır
   await sleep(800);
+  check(!(await p.evaluate(() => window.game.dom.resultModal.classList.contains('open'))), 'rapor kendiliğinden açılmadı');
+  await p.click('#btnMainShowReport');
+  await sleep(500);
   check(await p.locator('#resultExplainBox').isVisible(), 'raporda açıklama görünür');
   const firstMine = await p.locator('#resultExplainBox .xp-alt').first().evaluate(e => e.classList.contains('is-mine'));
   check(firstMine, '"Senin tahminin" satırı en üstte');

@@ -78,6 +78,8 @@ CSS_FILES.forEach(f => {
 });
 
 bundled = bundled.replace('<link rel="manifest" href="manifest.json">', '');
+// Tek dosyada göreli ikon yolu çalışmaz (file://); bağlantı önizlemesi etiketleri mutlak adres olduğu için kalır
+bundled = bundled.replace('<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">', '');
 
 // Script etiketleri birebir eşleştirilir (dış CDN etiketleri — PeerJS, supabase-js — dışarıda kalır)
 const scriptsTarget = JS_FILES.map(f => `    <script src="js/${f}"></script>`).join('\n');

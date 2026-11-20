@@ -329,6 +329,7 @@ body.is-playing .profile-chip { visibility: hidden; }
 .badge-muted { background: var(--color-surface-3); color: var(--color-text-3); }
 .badge-difficulty-kolay { background: var(--color-success-soft); color: var(--color-success); }
 .badge-difficulty-orta { background: var(--color-warning-soft); color: var(--color-warning); }
+[data-theme="light"] .badge-difficulty-orta { color: var(--color-warning-text-strong); }
 .badge-difficulty-zor,
 .badge-difficulty-ileri,
 .badge-difficulty-ileri\ düzey { background: var(--color-danger-soft); color: var(--color-danger); }
@@ -447,7 +448,7 @@ body.is-playing .profile-chip { visibility: hidden; }
     min-height: var(--tap);
     padding: var(--space-2) var(--space-3);
     background: var(--color-surface);
-    border: 1px solid var(--color-border-strong);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
     font-size: 16px; /* iOS yakınlaştırmasını engeller */
@@ -1183,8 +1184,7 @@ body.is-playing .app-main { padding-top: 0; padding-bottom: 0; }
     font-weight: var(--weight-bold);
 }
 .clue-num .icon { width: 12px; height: 12px; stroke-width: 2.2; }
-.clue-box.is-latest .clue-num { background: var(--color-target); color: #fff; }
-body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
+.clue-box.is-latest .clue-num { background: var(--color-target-strong); color: #fff; }
 .clue-tag {
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
@@ -1270,6 +1270,58 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .guess-card.category-match .guess-status-pill { color: var(--color-warning); }
 .guess-card.correct .guess-status-pill { color: var(--color-success); }
 
+/* Tahmin şeridi (H2): vaka sürerken ilerleme çubuğunun altında yapışkan */
+.guess-strip {
+    position: sticky;
+    top: var(--play-bar-bottom, 0px);
+    z-index: var(--z-dock);
+    display: flex;
+    gap: var(--space-2);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-4)) 0;
+    padding: var(--space-2) var(--space-4);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    list-style: none;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+.guess-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 0 0 auto;
+    max-width: 220px;
+    min-height: 36px;
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--color-surface-3);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: var(--leading-tight);
+}
+.guess-chip-ico { display: inline-flex; color: var(--color-text-3); }
+.guess-chip-ico .icon { width: 16px; height: 16px; }
+.guess-chip-text { display: flex; flex-direction: column; min-width: 0; }
+.guess-chip-name { font-weight: var(--weight-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.guess-chip-sub { font-size: var(--text-xs); color: var(--color-warning); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.guess-chip.is-close { background: var(--color-warning-soft); border-color: var(--color-warning); }
+.guess-chip.is-close .guess-chip-ico { color: var(--color-warning); }
+.guess-chip.is-correct { background: var(--color-success-soft); border-color: var(--color-success); }
+.guess-chip.is-correct .guess-chip-ico { color: var(--color-success); }
+.guess-chip:last-child { animation: clue-in var(--duration) var(--ease); }
+/* Vaka sürerken tam liste gizli (şerit gösteriyor); vaka bitince görünür */
+.screen-play.has-guess-strip .guesses-feed { display: none; }
+
+/* Yeni açılan ipucu bir kez parlar (H1) */
+.clue-box.is-latest.is-flash { animation: clue-in var(--duration) var(--ease), clue-flash 600ms var(--ease); }
+@keyframes clue-flash {
+    0% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 0 var(--color-accent); }
+    35% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 6px var(--color-accent-soft); border-color: var(--color-accent); }
+    100% { box-shadow: 0 0 0 1px var(--color-target), 0 0 0 0 transparent; }
+}
+
 /* Vaka sonu */
 .finished-actions {
     display: flex;
@@ -1280,6 +1332,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     margin-bottom: var(--space-5);
+    scroll-margin-top: calc(var(--play-bar-bottom, 64px) + var(--space-3));
 }
 .result-inline { display: flex; align-items: center; gap: var(--space-3); }
 .result-inline-icon {
@@ -1332,6 +1385,56 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .btn-category-browser:hover, .btn-category-browser.active { color: var(--color-text); border-color: var(--color-accent); }
 .category-browser-icon { display: inline-flex; }
 .category-browser-label { display: none; }
+/* Telefonda klasör simgesinin altında kısa "Liste" etiketi (H8) */
+.category-browser-label-short { font-size: var(--text-xs); line-height: 1; font-weight: var(--weight-semibold); }
+@media (max-width: 479px) {
+    .search-and-browser-container .btn-category-browser { flex-direction: column; gap: 2px; padding: 0 var(--space-2); }
+    .btn-category-browser .icon { width: 18px; height: 18px; }
+}
+@media (min-width: 480px) { .category-browser-label-short { display: none; } }
+/* Gönder düğmesi: dar ekranda yalnızca ok simgesi (adı aria-label'da), genişte yazı */
+.btn-submit-icon { display: none; }
+@media (max-width: 479px) {
+    .input-group .btn-submit { width: 48px; min-width: 48px; padding: 0; }
+    .btn-submit-icon { display: inline-block; }
+    .btn-submit-label { display: none; }
+    .diagnosis-input::placeholder { font-size: var(--text-sm); }
+}
+.diagnosis-input { text-overflow: ellipsis; }
+
+/* İlk vakada liste ipucu balonu (H8) */
+.coach-tip {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + var(--space-3));
+    z-index: var(--z-popover);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: max-content;
+    max-width: min(320px, calc(100vw - 2 * var(--space-4)));
+    padding: var(--space-3);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-2);
+    animation: clue-in var(--duration) var(--ease);
+}
+.coach-tip::after {
+    content: '';
+    position: absolute;
+    left: 18px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    border-right: 1px solid var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    background: var(--color-surface);
+    transform: rotate(45deg);
+}
+.coach-tip .btn { flex-shrink: 0; }
 
 .search-container { flex: 1; min-width: 0; } /* öneri listesi tüm tahmin satırı genişliğinde açılır */
 .input-group { display: flex; gap: var(--space-2); }
@@ -1350,7 +1453,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     width: 100%;
     height: 48px;
     padding: 0 var(--space-3) 0 40px;
-    border: 1px solid var(--color-border-strong);
+    border: 1px solid var(--color-input-border);
     border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
@@ -1405,6 +1508,7 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
 .item-main { display: flex; flex-direction: column; min-width: 0; }
 .item-name-tr { font-weight: var(--weight-medium); }
 .item-name-en { font-size: var(--text-xs); color: var(--color-text-3); }
+.group-dot { display: inline-block; width: 8px; height: 8px; margin-right: var(--space-2); border-radius: 50%; background: var(--group-color, var(--color-text-3)); vertical-align: 1px; flex-shrink: 0; }
 .item-category-badge, .therapy-family-tag, .pharma-family-tag {
     flex-shrink: 0;
     max-width: 45%;
@@ -1624,6 +1728,15 @@ body.combo-mode-active .clue-box.is-latest .clue-num { color: #1a1300; }
     background: var(--color-surface-2);
 }
 .duel-podium-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-2); margin-top: var(--space-3); }
+.duel-podium-title { font-size: var(--text-xs); font-weight: var(--weight-semibold); letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-3); }
+.duel-podium-verdict { margin-top: var(--space-1); font-weight: var(--weight-semibold); }
+.duel-podium-verdict.is-win { color: var(--color-success); }
+.duel-podium-verdict.is-loss { color: var(--color-danger); }
+.duel-podium-verdict.is-wait, .duel-podium-verdict.is-tie { color: var(--color-text-2); }
+.duel-podium-side { padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.duel-podium-side.is-me { border-color: var(--color-success); }
+.duel-podium-name { font-weight: var(--weight-semibold); }
+.duel-podium-sub { margin-top: var(--space-1); font-size: var(--text-sm); color: var(--color-text-2); }
 
 .edu-section {
     padding: var(--space-4);
@@ -1901,6 +2014,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
     animation: toast-in var(--duration) var(--ease);
 }
 @keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.toast.is-leaving { opacity: 0; transform: translateY(10px) scale(0.97); transition: opacity 0.35s ease, transform 0.35s ease; }
 
 /* ---------- 10b. Hesap (giriş, kayıt, kullanıcı adı, profil) ---------- */
 .text-link {
@@ -2076,6 +2190,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
         background: var(--color-surface);
     }
     .card-hero { padding: var(--space-6); }
+    .guess-strip { margin-inline: 0; padding-inline: 0; }
     .toast-container { bottom: var(--space-5); }
     body.is-playing .toast-container { bottom: calc(var(--space-5) + 120px); }
 
@@ -2339,6 +2454,7 @@ a.list-row { color: inherit; text-decoration: none; }
 .daily-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-3); }
 .streak-chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 2px 10px; border-radius: var(--radius-full); background: var(--color-warning-soft); color: var(--color-warning); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
 .streak-chip .icon { width: 16px; height: 16px; }
+[data-theme="light"] .streak-chip { color: var(--color-warning-text-strong); }
 .daily-result { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-2); }
 .daily-result-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; background: var(--color-surface-3); }
 .daily-result.is-win .daily-result-icon { background: var(--color-success-soft); color: var(--color-success); }
@@ -2401,3 +2517,62 @@ a.list-row { color: inherit; text-decoration: none; }
 .dl-gate-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .dl-controls-row .dl-seg { grid-template-columns: repeat(2, 1fr); }
 .dl-row.is-pinned { background: linear-gradient(var(--color-accent-soft), var(--color-accent-soft)), var(--color-surface); }
+
+/* ---------- Dokunmatik ekranlarda en az 44 px dokunma hedefi (ajan U, H11) ---------- */
+@media (pointer: coarse) {
+    .btn-sm,
+    .segmented-btn,
+    .chip-btn { min-height: var(--tap); }
+    .icon-btn-sm { width: var(--tap); height: var(--tap); }
+    a.rp-chip-link,
+    a.profile-league-link { min-height: var(--tap); }
+    /* Metin bağlantıları: görünür boyut aynı, dokunma alanı görünmez dolguyla büyür */
+    .text-link { padding-block: 12px; margin-block: -12px; }
+    .text-link.account-cta-privacy,
+    .text-link.profile-league-cta { display: inline-flex; align-items: center; min-height: var(--tap); padding-block: 0; margin-block: 0; align-self: flex-start; }
+}
+
+/* ---------- Bilinmeyen adres ekranı (ajan U, H13) ---------- */
+.notfound-state { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-7) var(--space-4); text-align: center; }
+.notfound-noro { display: inline-flex; width: 120px; height: 120px; }
+.notfound-noro svg { width: 100%; height: 100%; }
+.notfound-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* ---------- Ses ayarı satırı (ajan U, H14) ---------- */
+.list-row-switch .switch { margin-left: auto; background: var(--color-input-border); }
+.list-row-switch[aria-checked="true"] .switch { background: var(--color-accent-bg); }
+.list-row-switch[aria-checked="true"] .switch-knob { transform: translateX(18px); }
+
+/* ---------- İlk ziyaret kartı ve "Nasıl oynanır" bağlantısı (ajan U) ---------- */
+.welcome-card { display: flex; align-items: center; gap: var(--space-4); border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border)); }
+.welcome-noro { display: inline-flex; flex-shrink: 0; width: 96px; height: 96px; }
+.welcome-noro svg { width: 100%; height: 100%; }
+.welcome-body { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.welcome-title { font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: var(--leading-tight); }
+.welcome-steps { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; list-style: none; color: var(--color-text-2); font-size: var(--text-sm); }
+.welcome-steps li { display: flex; align-items: center; gap: var(--space-2); }
+.welcome-steps .icon { width: 18px; height: 18px; color: var(--color-accent); }
+.welcome-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+@media (max-width: 479px) {
+    .welcome-card { flex-direction: column; align-items: flex-start; }
+    .welcome-noro { width: 80px; height: 80px; }
+}
+@media (min-width: 600px) { .welcome-steps { flex-direction: row; flex-wrap: wrap; gap: var(--space-2) var(--space-4); } }
+
+.target-hint-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-3); }
+.home-help-link { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); }
+.home-help-link .icon { width: 16px; height: 16px; }
+@media (pointer: coarse) { .text-link.home-help-link { min-height: var(--tap); padding-block: 0; margin-block: 0; } }
+
+/* ---------- Kısa ekran: yatay telefon (ajan U, S11'in ilk adımı) ----------
+   Üst başlık gizlenir, oyun çubuğu en üste yapışır, tahmin alanı sabit değil akışta kalır: ilk ipucu görünür. */
+@media (max-height: 520px) {
+    body.is-playing .app-header { display: none; }
+    body.is-playing .play-bar { top: 0; padding-top: calc(var(--space-1) + env(safe-area-inset-top)); padding-bottom: var(--space-1); }
+    body.is-playing .app-main { padding-top: 0; }
+    .screen-play { min-height: 0; gap: var(--space-3); }
+    .screen-play .input-dock { position: relative; bottom: auto; }
+    .autocomplete-dropdown { max-height: 40vh; }
+    body.is-playing .toast-container { bottom: var(--space-3); }
+}
+.profile-league-cta { font-size: var(--text-sm); text-align: left; }

@@ -68,6 +68,7 @@ class PsikoVakaGame {
             this.initAvatarStudio();   // js/avatar_studio.js (canlı oyun: js/online/)
         }
         this.installProfileMirrors();
+        this.initGroupColors();
         this.initRouter();
         this.updateUnsolvedUI();
         this.updateTargetHint();
@@ -93,7 +94,8 @@ class PsikoVakaGame {
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
             ligler: document.getElementById('screenLeagues'),
-            gunluk: document.getElementById('screenDaily')
+            gunluk: document.getElementById('screenDaily'),
+            notfound: document.getElementById('screenNotFound')
         };
         // Alt ekranlar: menüde hangi ana sekme etkin görünsün
         this.routeNavParent = { ligler: 'profil', gunluk: 'oyna' };
@@ -134,9 +136,21 @@ class PsikoVakaGame {
 
     /** '#/profil' -> 'profil'. Diğer hash'ler (#room=, #duel=, #case=, #id=) için null. */
     parseRouteHash() {
-        const m = /^#\/([a-z]+)/.exec(window.location.hash || '');
-        if (m && this.routeScreens && this.routeScreens[m[1]]) return m[1];
+        const h = window.location.hash || '';
+        const m = /^#\/([a-z]+)/.exec(h);
+        if (m && this.routeScreens && this.routeScreens[m[1]] && m[1] !== 'notfound') return m[1];
+        // Bilinmeyen "#/..." adresi: ayrı "Bu sayfa yok" ekranı (H13)
+        if (/^#\/./.test(h) && this.routeScreens && this.routeScreens.notfound) return 'notfound';
         return null;
+    }
+
+    /** Oyuncunun kendi Nöro'su (yoksa misafir için sabit bir Nöro), isteğe bağlı hareketle. */
+    renderNoro(emote, size) {
+        const AV = window.PsikoVakaAvatar;
+        if (!AV) return '';
+        let cfg = null;
+        try { cfg = this.myAvatar ? AV.normalize(this.myAvatar) : AV.randomConfig('misafir'); } catch (e) { cfg = AV.randomConfig('misafir'); }
+        return AV.render(cfg, { size: size || 96, framed: false, emote: emote || null, animated: true });
     }
 
     showRoute(route, opts = {}) {
@@ -171,8 +185,13 @@ class PsikoVakaGame {
         const changed = this.currentScreen !== name;
         this.currentScreen = name;
 
-        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); }
+        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard(); }
         if (name === 'profil') this.updateProfileScreen();
+        if (name === 'notfound') {
+            const m = document.getElementById('notFoundNoro');
+            if (m) m.innerHTML = this.renderNoro('think', 120);
+        }
+        if (changed) this.emitPlayState();
         const hook = this.screenHooks && this.screenHooks[name];
         if (hook) { try { hook({ changed }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
 
@@ -190,13 +209,33 @@ class PsikoVakaGame {
      * Modüllerin ekran kancası (ör. js/online/ligler.js -> 'ligler'). Ekran açık görünürken kayıt olursa hemen çağrılır.
      * fn({ changed }) her showScreen(name) çağrısında.
      */
+    /** Vaka başladı/bitti/ekran değişti: online katmanı (davet afişi) dinler. */
+    emitPlayState() {
+        try { document.dispatchEvent(new CustomEvent('psikovaka:playstate')); } catch (e) {}
+    }
+
     registerScreen(name, fn) {
         this.screenHooks = this.screenHooks || {};
         this.screenHooks[name] = fn;
         if (this.currentScreen === name) { try { fn({ changed: true }); } catch (e) { console.warn('[PsikoVaka] ekran', name, e); } }
     }
 
+    /** Tahmin şeridinin yapışacağı yükseklik = oyun çubuğunun alt kenarı (telefonda 0'dan, masaüstünde başlığın altından). */
+    updatePlayStickyOffset() {
+        const scr = this.dom.screenPlay;
+        const bar = scr && scr.querySelector('.play-bar');
+        if (!bar) return;
+        const top = parseFloat(getComputedStyle(bar).top) || 0;
+        scr.style.setProperty('--play-bar-bottom', `${Math.round(top + bar.offsetHeight)}px`);
+        if (!this._playBarObserved && typeof ResizeObserver === 'function') {
+            this._playBarObserved = true;
+            new ResizeObserver(() => this.updatePlayStickyOffset()).observe(bar);
+            window.addEventListener('resize', () => this.updatePlayStickyOffset());
+        }
+    }
+
     enterPlayScreen() {
+        this.updatePlayStickyOffset();
         if (this.currentScreen !== 'play') {
             this.showScreen('play');
             try {
@@ -416,6 +455,7 @@ class PsikoVakaGame {
 
         on(a.btnAccountSignUp, 'click', () => this.openAuthSheet('signup'));
         on(a.btnAccountSignIn, 'click', () => this.openAuthSheet('signin'));
+        on(document.getElementById('profileLeagueCta'), 'click', () => this.openAuthSheet('signup'));
         on(a.btnOpenPrivacy, 'click', () => this.openModal(a.privacyModal));
         on(a.authPrivacyLink, 'click', () => this.openModal(a.privacyModal));
         on(a.btnAccountPickUsername, 'click', () => this.openUsernameModal());
@@ -804,7 +844,19 @@ class PsikoVakaGame {
 
         if (this.dom.navNameMount) this.dom.navNameMount.textContent = chipName;
         if (this.dom.homeGreetingName) this.dom.homeGreetingName.textContent = name;
-        if (this.dom.homeRpMount) this.dom.homeRpMount.textContent = (rp !== null && rp !== undefined) ? `${rp} RP` : '';
+        // RP yalnızca online maçlardan gelir: misafirde RP hapı ve "0 RP" gösterilmez (H5)
+        if (this.dom.homeRpMount) {
+            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} RP` : '';
+            this.dom.homeRpMount.hidden = !(acct && hasRp);
+        }
+        const leagueLink = document.getElementById('profileLeagueLink');
+        if (leagueLink) leagueLink.hidden = !acct;
+        const leagueCta = document.getElementById('profileLeagueCta');
+        if (leagueCta) {
+            const snap = this.accountSnap || {};
+            const canSignUp = snap.availability === 'ready' || snap.availability === 'pending';
+            leagueCta.hidden = !!acct || !canSignUp || snap.state !== 'guest';
+        }
         if (hasAvatar) {
             if (this.dom.navAvatarMount) this.dom.navAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 28);
             if (this.dom.homeAvatarMount) this.dom.homeAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 44);
@@ -814,15 +866,15 @@ class PsikoVakaGame {
         const nameMount = document.getElementById('headerPlayerNameMount');
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
-        if (rpMount && rp !== null && rp !== undefined) {
+        if (rpMount && acct && hasRp) {
             rpMount.textContent = `${rp} RP`;
             rpMount.style.color = '';
         }
-        if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = tier ? tier.name : '';
+        if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = (acct && tier) ? tier.name : '';
         const tierBadge = document.getElementById('profileTierBadge');
-        if (tierBadge) tierBadge.innerHTML = tier ? LG.badge(rp, 22) : '';
+        if (tierBadge) tierBadge.innerHTML = (acct && tier) ? LG.badge(rp, 22) : '';
         const tierProg = document.getElementById('profileTierProgress');
-        if (tierProg) tierProg.textContent = tier ? LG.progressText(rp) : '';
+        if (tierProg) { tierProg.textContent = (acct && tier) ? LG.progressText(rp) : ''; tierProg.hidden = !acct; }
         const chip = this.dom.navProfileChip || document.getElementById('navProfileChip');
         if (chip) chip.setAttribute('aria-label', acct ? `Profil: @${acct.username}` : 'Profil');
 
@@ -836,6 +888,39 @@ class PsikoVakaGame {
             a.profileRpNote.hidden = !differs;
             if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda tutulur; bu cihazdaki ${localRp} RP aktarılmaz.`;
         }
+    }
+
+    /** İlk ziyaret kartı: yalnızca hiç oynamamış ve kartı geçmemiş kişide; dönen kullanıcıyı asla bekletmez. */
+    updateWelcomeCard() {
+        const card = document.getElementById('homeWelcome');
+        if (!card) return;
+        let flag = false;
+        try { flag = localStorage.getItem('psikovaka_onboarded') === '1'; } catch (e) { flag = true; }
+        const hasHistory = (this.stats && this.stats.played > 0) || (this.solvedCaseIds && this.solvedCaseIds.size > 0);
+        if (!flag && hasHistory) { this.markOnboarded(); flag = true; }
+        card.hidden = flag;
+        if (!flag) {
+            const m = document.getElementById('welcomeNoro');
+            if (m && !m.firstChild) m.innerHTML = this.renderNoro('wave', 96);
+        }
+    }
+
+    markOnboarded() {
+        try { localStorage.setItem('psikovaka_onboarded', '1'); } catch (e) {}
+        const card = document.getElementById('homeWelcome');
+        if (card) card.hidden = true;
+    }
+
+    /** "İlk vakayı oyna": elle seçilmiş kolay bir vaka (tipik majör depresyon), tanı hedefiyle. */
+    startFirstCase() {
+        this.markOnboarded();
+        const easy = this.cases.find(c => c.diagnosisId === 'mdd' && /kolay/i.test(String(c.difficulty)))
+            || this.cases.find(c => /kolay/i.test(String(c.difficulty)))
+            || this.cases[0];
+        if (!easy) { this.setMode('practice'); return; }
+        if (this.targetGameMode !== 'diagnosis') this.setTargetGameMode('diagnosis', false);
+        this.currentMode = 'practice';
+        this.startCase(easy, `Pratik · Vaka #${easy.caseNumber || 1}`);
     }
 
     updateProfileScreen() {
@@ -941,17 +1026,17 @@ class PsikoVakaGame {
         // Tanımlı son aralığın üstündeki (veya numarası olmayan) vakalar otomatik "Yeni vakalar" paketine girer.
         // Sayılar her zaman gerçek vaka listesinden hesaplanır; boş kalan paket gizlenir.
         const ranges = [
-            { id: 'pack1', title: '🏛️ Paket 1: Çekirdek Vakalar', from: 1, to: 29,
+            { id: 'pack1', title: 'Paket 1: Çekirdek Vakalar', from: 1, to: 29,
               desc: 'Duygudurum, anksiyete, psikotik, OKB, kişilik ve yeme bozukluklarının klasik tabloları.' },
-            { id: 'pack2', title: '📘 Paket 2: Klinik Derinlik', from: 30, to: 49,
+            { id: 'pack2', title: 'Paket 2: Klinik Derinlik', from: 30, to: 49,
               desc: 'Kişilik, travma, dissosiyatif, yeme, nörogelişimsel ve dürtü kontrol vakaları.' },
-            { id: 'pack3', title: '🔬 Paket 3: İleri Ayırıcı Tanı', from: 50, to: 69,
+            { id: 'pack3', title: 'Paket 3: İleri Ayırıcı Tanı', from: 50, to: 69,
               desc: 'Psikotik, bipolar, OKB ile ilişkili, anksiyete ve dürtü kontrol vakalarında ayırıcı tanı.' },
-            { id: 'pack4', title: '⚡ Paket 4: Özel Sendromlar', from: 70, to: 89,
+            { id: 'pack4', title: 'Paket 4: Özel Sendromlar', from: 70, to: 89,
               desc: 'Parafilik, uyku-uyanıklık, cinsel işlev ve nörobilişsel bozukluk vakaları.' },
-            { id: 'pack5', title: '🧠 Paket 5: Nöropsikiyatri', from: 90, to: 109,
+            { id: 'pack5', title: 'Paket 5: Nöropsikiyatri', from: 90, to: 109,
               desc: 'Uyku, nörobilişsel, nörogelişimsel ve parafilik bozukluk vakaları; psikotik ve duygudurum tabloları.' },
-            { id: 'pack6', title: '🔥 Paket 6: Master Klinik & İlaç', from: 110, to: 150,
+            { id: 'pack6', title: 'Paket 6: Master Klinik & İlaç', from: 110, to: 150,
               desc: 'Psikotik, duygudurum, anksiyete, OKB, yeme, dışa atım, uyku ve nörobilişsel bozukluk vakaları.' }
         ];
         const lastTo = ranges[ranges.length - 1].to;
@@ -968,7 +1053,7 @@ class PsikoVakaGame {
         }));
         defs.push({
             id: 'pack_yeni',
-            title: '🚀 Yeni Vakalar',
+            title: 'Yeni Vakalar',
             desc: `Sonradan eklenen vakalar (No. ${lastTo + 1} ve üstü).`,
             filterFn: (c) => { const n = numOf(c); return !(n <= lastTo); }
         });
@@ -982,7 +1067,7 @@ class PsikoVakaGame {
         return [
             {
                 id: 'all',
-                title: `🌟 Tüm Vakalar (Tam Koleksiyon)`,
+                title: `Tüm Vakalar (Tam Koleksiyon)`,
                 badge: `${total} vaka`,
                 count: total,
                 desc: 'Sistemdeki tüm DSM-5-TR klinik vakalarının eksiksiz tam havuzu.',
@@ -1030,7 +1115,7 @@ class PsikoVakaGame {
         localStorage.removeItem('psikovaka_solved_cases');
         this.updateUnsolvedUI();
         this.renderPackShelf();
-        this.showToast("🧹 Çözülen vaka geçmişi sıfırlandı! Tüm vakalar tekrar yeni olarak işaretlendi.");
+        this.showToast('Çözülen vaka geçmişi sıfırlandı.');
     }
 
     applyActivePack(packId, launchPracticeCase = true) {
@@ -1133,6 +1218,7 @@ class PsikoVakaGame {
             clueProgressTracker: document.getElementById('clueProgressTracker'),
             cluesContainer: document.getElementById('cluesContainer'),
             guessesFeed: document.getElementById('guessesFeed'),
+            guessStrip: document.getElementById('guessStrip'),
 
             // Input & Autocomplete
             diagnosisInput: document.getElementById('diagnosisInput'),
@@ -1365,6 +1451,8 @@ class PsikoVakaGame {
         if (this.dom.btnMainShowReport) {
             this.dom.btnMainShowReport.addEventListener('click', () => this.openResultModal(this.gameWon));
         }
+        const btnMainShare = document.getElementById('btnMainShare');
+        if (btnMainShare) btnMainShare.addEventListener('click', () => this.shareResult());
         if (this.dom.btnMainDuelShare) {
             this.dom.btnMainDuelShare.addEventListener('click', () => this.openDuelCenterModal());
         }
@@ -1378,6 +1466,15 @@ class PsikoVakaGame {
         // Kütüphane ve profil ekranlarındaki açıcılar
         this.dom.statsBtn.addEventListener('click', () => this.openStatsModal());
         this.dom.helpBtn.addEventListener('click', () => this.openModal(this.dom.helpModal));
+        const homeHelp = document.getElementById('btnHomeHelp');
+        if (homeHelp) homeHelp.addEventListener('click', () => this.openModal(this.dom.helpModal));
+        const wPlay = document.getElementById('btnWelcomePlay');
+        if (wPlay) wPlay.addEventListener('click', () => this.startFirstCase());
+        const wSkip = document.getElementById('btnWelcomeSkip');
+        if (wSkip) wSkip.addEventListener('click', () => { this.markOnboarded(); const t = document.getElementById('homeTitle'); if (t) { t.setAttribute('tabindex', '-1'); try { t.focus(); } catch (e) {} } });
+        const soundBtn = document.getElementById('soundToggleBtn');
+        if (soundBtn) soundBtn.addEventListener('click', () => this.setSoundOn(!this.isSoundOn()));
+        this.syncSoundToggle();
         this.dom.caseStudioBtn.addEventListener('click', () => this.openModal(this.dom.caseStudioModal));
         if (this.dom.caseManagerBtn) {
             this.dom.caseManagerBtn.addEventListener('click', () => this.openCaseManagerModal());
@@ -1410,7 +1507,7 @@ class PsikoVakaGame {
             btnRestore.addEventListener('click', () => {
                 this.applyActivePack('all', true);
                 this.closeModal(this.dom.caseManagerModal);
-                this.showToast(`🌟 Tüm ${this.allMasterCases.length} vaka aktif havuza alındı!`);
+                this.showToast(`Tüm vakalar (${this.allMasterCases.length}) havuzda.`);
             });
         }
 
@@ -1550,10 +1647,10 @@ class PsikoVakaGame {
         }
 
         const modeMessages = {
-            diagnosis: "🩺 DSM-5 Tanı Avcısı Modu Aktif!",
-            therapy: "🛡️ Terapi Simülatörü Aktif! Altın standart psikoterapiyi bulun.",
-            pharmacology: "💊 Farmakoterapi Avcısı Aktif! Birinci basamak ilacı/müdahaleyi seçin.",
-            combo: "⚡ Tam Konsültasyon (Kombo) Modu! Sırasıyla Tanı ➔ Terapi ➔ İlaç belirleyin!"
+            diagnosis: 'Hedef: tanı.',
+            therapy: 'Hedef: terapi.',
+            pharmacology: 'Hedef: ilaç.',
+            combo: 'Hedef: kombo (tanı → terapi → ilaç).'
         };
         if (restartCurrentCase) {
             this.showToast(modeMessages[targetMode] || "Mod değiştirildi.");
@@ -1569,19 +1666,19 @@ class PsikoVakaGame {
                 this.dom.categoryBrowserLabel.textContent = 'Ekoller';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'Terapi ekollerinden seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'Terapi ekolleri';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 2: terapi yaz' : 'Terapi yöntemi yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'Terapi yaz ya da listeden seç';
             } else if (effectiveType === 'pharmacology') {
                 this.dom.categoryBrowserIcon.innerHTML = this.icon('pill');
                 this.dom.categoryBrowserLabel.textContent = 'Gruplar';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'İlaç gruplarından seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = 'İlaç grupları';
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 3: ilaç yaz' : 'İlaç ya da müdahale yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'İlaç yaz ya da listeden seç';
             } else {
                 this.dom.categoryBrowserIcon.innerHTML = this.icon('folder');
                 this.dom.categoryBrowserLabel.textContent = 'Kategoriler';
                 if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.setAttribute('aria-label', 'DSM-5-TR kategorilerinden seç');
                 if (this.dom.treePanelTitle) this.dom.treePanelTitle.textContent = `DSM-5-TR kategorileri (${this.diagnoses.length} tanı)`;
-                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = isCombo ? 'Aşama 1: tanı yaz' : 'Tanı yaz';
+                if (this.dom.diagnosisInput) this.dom.diagnosisInput.placeholder = 'Tanı yaz ya da listeden seç';
             }
             if (this.dom.btnSubmitLabel) this.dom.btnSubmitLabel.textContent = 'Tahmin et';
         }
@@ -1664,7 +1761,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(fam.icon || '🛡️', fam.name, `${items.length} Yöntem`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(fam.color || '', fam.name, `${items.length} Yöntem`, items, cleanQuery, (id) => {
                     return this.therapies.find(t => t.id === id);
                 }));
             });
@@ -1680,7 +1777,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(fam.icon || '💊', fam.name, `${items.length} Protokol`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(fam.color || '', fam.name, `${items.length} Protokol`, items, cleanQuery, (id) => {
                     return this.pharmacology.find(p => p.id === id);
                 }));
             });
@@ -1696,7 +1793,7 @@ class PsikoVakaGame {
                     );
                 }
                 if (items.length === 0) return;
-                fragment.appendChild(this.buildTreeGroupElement(cat.icon || '🏷️', cat.name, `${items.length} Tanı`, items, cleanQuery, (id) => {
+                fragment.appendChild(this.buildTreeGroupElement(cat.color || '', cat.name, `${items.length} Tanı`, items, cleanQuery, (id) => {
                     return this.diagnoses.find(d => d.id === id);
                 }));
             });
@@ -1705,7 +1802,26 @@ class PsikoVakaGame {
         container.appendChild(fragment);
     }
 
-    buildTreeGroupElement(icon, groupName, countText, items, cleanQuery, finderFn) {
+    /** Kategori/ekol rengi küçük nokta olarak (H6: emoji yerine). Renkler initGroupColors'ta tek stil bloğuna yazılır. */
+    groupDot(kind, key) {
+        return key ? `<span class="group-dot" data-g="${kind}-${String(key).replace(/[^A-Za-z0-9_-]/g, '')}" aria-hidden="true"></span>` : '';
+    }
+
+    initGroupColors() {
+        if (document.getElementById('groupColorStyles')) return;
+        const rules = [];
+        const add = (kind, obj) => Object.keys(obj || {}).forEach(k => {
+            const c = obj[k] && obj[k].color;
+            if (c && /^#[0-9a-fA-F]{3,8}$/.test(c)) rules.push(`.group-dot[data-g="${kind}-${k.replace(/[^A-Za-z0-9_-]/g, '')}"]{--group-color:${c}}`);
+        });
+        add('dx', this.categories); add('th', this.therapyFamilies); add('ph', this.pharmacologyFamilies);
+        const st = document.createElement('style');
+        st.id = 'groupColorStyles';
+        st.textContent = rules.join('\n');
+        document.head.appendChild(st);
+    }
+
+    buildTreeGroupElement(color, groupName, countText, items, cleanQuery, finderFn) {
         const groupDiv = document.createElement('div');
         groupDiv.className = `tree-category-group ${cleanQuery ? 'open' : ''}`;
 
@@ -1800,7 +1916,7 @@ class PsikoVakaGame {
             if (unsolvedPool.length > 0) {
                 pool = unsolvedPool;
             } else if (pool.length > 0) {
-                this.showToast("🎉 Bu filtredeki tüm vakaları çözdünüz! Havuz baştan karıştırılıyor.");
+                this.showToast('Bu filtredeki tüm vakaları çözdün. Havuz baştan karıştırıldı.');
             }
         }
 
@@ -1840,6 +1956,9 @@ class PsikoVakaGame {
         this.gameWon = false;
         this.comboStage = 1;
         this.comboResults = { stage1Guesses: 0, stage2Guesses: 0, stage3Guesses: 0 };
+        this.shareStreak = 0;     // günlük seri (js/online/daily.js bildirir; paylaşım satırı)
+        this.setResultStreak('');
+        this.stageGuessLog = {};  // kombo: biten aşamaların tahminleri (paylaşım satırı için)
         this.diagWrongLog = [];   // yanlış TANI tahminleri (açıklamadaki "Senin tahminin" için; kombo aşamaları sıfırlansa da kalır)
 
         this.caseTargetMode = this.targetGameMode;
@@ -1893,6 +2012,33 @@ class PsikoVakaGame {
         this.renderGuesses();
         this.updateRemainingGuessesUI();
         this.enterPlayScreen();
+        this.markOnboarded();
+        this.emitPlayState();
+        this.maybeShowListCoachTip();
+    }
+
+    /** İlk vakada bir kez: liste düğmesini gösteren küçük balon (H8). Atlanabilir, bir daha çıkmaz. */
+    maybeShowListCoachTip() {
+        const tip = document.getElementById('listCoachTip');
+        if (!tip) return;
+        let seen = false;
+        try { seen = localStorage.getItem('psikovaka_hint_list') === '1'; } catch (e) { seen = true; }
+        if (seen || this.currentMode === 'online') { tip.hidden = true; return; }
+        tip.hidden = false;
+        if (!this._coachBound) {
+            this._coachBound = true;
+            const done = () => this.dismissListCoachTip();
+            const ok = document.getElementById('btnListCoachOk');
+            if (ok) ok.addEventListener('click', (e) => { e.stopPropagation(); done(); });
+            if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.addEventListener('click', done);
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !tip.hidden) done(); });
+        }
+    }
+
+    dismissListCoachTip() {
+        const tip = document.getElementById('listCoachTip');
+        if (tip) tip.hidden = true;
+        try { localStorage.setItem('psikovaka_hint_list', '1'); } catch (e) {}
     }
 
     startCaseTimer() {
@@ -1983,8 +2129,15 @@ class PsikoVakaGame {
 
         // Yeni açılan ipucunu görünür alana getir (ilk ipucunda sayfa başında kal)
         const latest = this.dom.cluesContainer.querySelector('.clue-box.is-latest');
-        if (latest && this.unlockedClues > 1 && typeof latest.scrollIntoView === 'function') {
+        if (latest && this.unlockedClues > 1 && !this.isGameOver && typeof latest.scrollIntoView === 'function') {
             const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // Yeni açılan ipucu bir kez parlar (H1); aynı ipucu yeniden çizilince tekrar parlamaz
+            const key = `${this.currentCase && this.currentCase.id}:${this.comboStage}:${this.unlockedClues}`;
+            if (this._lastFlashKey !== key) {
+                this._lastFlashKey = key;
+                latest.classList.add('is-flash');
+                setTimeout(() => latest.classList.remove('is-flash'), 700);
+            }
             setTimeout(() => latest.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }), 30);
         }
     }
@@ -2000,6 +2153,9 @@ class PsikoVakaGame {
     }
 
     renderGuesses() {
+        this.renderGuessStrip();
+        // İlk tahminden sonra liste ipucu balonu kendiliğinden kapanır (yerel, günlük ve online yolların hepsi buradan geçer)
+        if ((this.guesses || []).length > 0) { const tip = document.getElementById('listCoachTip'); if (tip && !tip.hidden) this.dismissListCoachTip(); }
         this.dom.guessesFeed.innerHTML = '';
 
         this.guesses.forEach((guess, index) => {
@@ -2032,6 +2188,34 @@ class PsikoVakaGame {
             `;
             this.dom.guessesFeed.appendChild(card);
         });
+    }
+
+    /**
+     * Tahmin şeridi (H2): ilerleme çubuğunun altında yapışkan, yatay kayan çipler.
+     * Vaka sürerken alttaki tam liste gizlenir; vaka bitince tam liste görünür, şerit kalkar.
+     */
+    renderGuessStrip() {
+        const strip = this.dom.guessStrip || document.getElementById('guessStrip');
+        if (!strip) return;
+        const list = this.guesses || [];
+        const playing = !this.isGameOver;
+        strip.hidden = !(playing && list.length > 0);
+        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('has-guess-strip', playing && list.length > 0);
+        if (strip.hidden) { strip.innerHTML = ''; return; }
+        const short = (t) => { const x = String(t || ''); return x.length > 22 ? x.slice(0, 21).trimEnd() + '…' : x; };
+        const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        strip.innerHTML = list.map((g, i) => {
+            const kind = g.isCorrect ? 'is-correct' : (g.categoryMatch ? 'is-close' : 'is-wrong');
+            const ico = g.isCorrect ? 'check' : (g.categoryMatch ? 'target' : 'x');
+            const state = g.isCorrect ? 'doğru' : (g.categoryMatch ? `grup doğru: ${g.categoryName}` : 'farklı grup');
+            return `<li class="guess-chip ${kind}" title="${esc(g.nameTr)}">
+                <span class="guess-chip-ico">${this.icon(ico)}</span>
+                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${g.categoryMatch && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
+                <span class="visually-hidden">${i + 1}. tahmin, ${esc(state)}</span>
+            </li>`;
+        }).join('');
+        // En yeni çip görünür kalsın
+        try { strip.scrollLeft = strip.scrollWidth; } catch (e) {}
     }
 
     updateRemainingGuessesUI() {
@@ -2119,22 +2303,22 @@ class PsikoVakaGame {
             div.className = 'autocomplete-item';
 
             if (effectiveType === 'therapy') {
-                const fam = this.therapyFamilies[item.family] || { name: item.family, icon: '🛡️' };
+                const fam = this.therapyFamilies[item.family] || { name: item.family };
                 div.innerHTML = `
                     <div class="item-main">
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="therapy-family-tag">${fam.icon || '🛡️'} ${fam.name}</span>
+                    <span class="therapy-family-tag">${this.groupDot('th', item.family)}${fam.name}</span>
                 `;
             } else if (effectiveType === 'pharmacology') {
-                const fam = this.pharmacologyFamilies[item.family] || { name: item.family, icon: '💊' };
+                const fam = this.pharmacologyFamilies[item.family] || { name: item.family };
                 div.innerHTML = `
                     <div class="item-main">
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="pharma-family-tag">${fam.icon || '💊'} ${fam.name}</span>
+                    <span class="pharma-family-tag">${this.groupDot('ph', item.family)}${fam.name}</span>
                 `;
             } else {
                 const categoryObj = this.categories[item.category] || { name: item.category };
@@ -2143,7 +2327,7 @@ class PsikoVakaGame {
                         <span class="item-name-tr">${item.nameTr}</span>
                         <span class="item-name-en">${item.nameEn}</span>
                     </div>
-                    <span class="item-category-badge">${categoryObj.icon || '🏷️'} ${categoryObj.name}</span>
+                    <span class="item-category-badge">${this.groupDot('dx', item.category)}${categoryObj.name}</span>
                 `;
             }
 
@@ -2210,7 +2394,7 @@ class PsikoVakaGame {
         const effectiveType = this.getEffectiveTargetType();
 
         if (!inputVal) {
-            this.showToast("Lütfen bir seçim yazın veya soldaki kategorilerden seçin.");
+            this.showToast("Bir seçenek yaz ya da listeden seç.");
             return;
         }
 
@@ -2233,7 +2417,7 @@ class PsikoVakaGame {
                     (t.aliases && t.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Terapi listede bulunamadı! Lütfen önerilen listeden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             const targetTherapyId = this.currentCase.therapyId || 'cbt_general';
@@ -2242,7 +2426,7 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && targetTherapyObj && chosenObj.family === targetTherapyObj.family);
             const famObj = this.therapyFamilies[chosenObj.family] || {};
             categoryName = famObj.name || chosenObj.family;
-            correctLabel = '🛡️ Altın Standart Terapi!';
+            correctLabel = 'Doğru terapi';
             wrongLabel = 'Farklı Terapi Ekolü';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 2 • Terapi';
         } else if (effectiveType === 'pharmacology') {
@@ -2253,7 +2437,7 @@ class PsikoVakaGame {
                     (p.aliases && p.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Farmakoterapi protokolü bulunamadı! Lütfen listeden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             const targetPharmaId = this.currentCase.pharmacologyId || this.getFallbackPharmacologyId(this.currentCase);
@@ -2262,7 +2446,7 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && targetPharmaObj && chosenObj.family === targetPharmaObj.family);
             const famObj = this.pharmacologyFamilies[chosenObj.family] || {};
             categoryName = famObj.name || chosenObj.family;
-            correctLabel = '💊 Doğru Farmakoterapi Protokolü!';
+            correctLabel = 'Doğru protokol';
             wrongLabel = 'Farklı İlaç Grubu';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 3 • İlaç';
         } else {
@@ -2273,7 +2457,7 @@ class PsikoVakaGame {
                     (d.aliases && d.aliases.some(a => this.normalizeTurkish(a) === clean))
                 );
             if (!chosenObj) {
-                this.showToast("❓ Tanı listede bulunamadı! Lütfen önerilen tanı listesinden seçin.");
+                this.showToast("Listede yok; öneriden seç.");
                 return;
             }
             isCorrect = (chosenObj.id === this.currentCase.diagnosisId);
@@ -2281,13 +2465,13 @@ class PsikoVakaGame {
             categoryMatch = (!isCorrect && correctDiagnosisObj && chosenObj.category === correctDiagnosisObj.category);
             const categoryObj = this.categories[chosenObj.category] || {};
             categoryName = categoryObj.name || chosenObj.category;
-            correctLabel = '🩺 Kesin DSM-5 Tanısı!';
+            correctLabel = 'Doğru tanı';
             wrongLabel = 'Farklı Tanı Grubu';
             if (this.targetGameMode === 'combo') stageBadge = 'Aşama 1 • Tanı';
         }
 
         if (this.guesses.some(g => g.itemId === chosenObj.id && g.stage === this.comboStage)) {
-            this.showToast("⚠️ Bu seçeneği zaten tahmin ettiniz!");
+            this.showToast("Bunu zaten denedin.");
             return;
         }
 
@@ -2320,34 +2504,36 @@ class PsikoVakaGame {
                 // Advance to next Combo Stage!
                 if (this.comboStage === 1) {
                     this.comboResults.stage1Guesses = this.guesses.filter(g => g.stage === 1).length;
-                    if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = `✅ ${chosenObj.nameTr}`;
-                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Şimdi Terapiyi Seçin!';
+                    if (this.dom.comboStep1Val) this.dom.comboStep1Val.textContent = chosenObj.nameTr;
+                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = 'Şimdi terapiyi seç';
+                    this.archiveStageGuesses();
                     this.comboStage = 2;
                     this.guesses = []; // Reset 6-guess allowance for Stage 2
                     this.updateComboStepperUI();
                     this.syncInputAndBrowserLabels();
                     this.renderGuesses();
                     this.updateRemainingGuessesUI();
-                    this.showToast("🎉 Aşama 1 (Tanı) Tamamlandı! Şimdi Aşama 2: Altın Standart Psikoterapiyi Seçin!");
+                    this.showToast('Tanı doğru. Şimdi terapiyi seç.');
                     return;
                 } else if (this.comboStage === 2) {
                     this.comboResults.stage2Guesses = this.guesses.filter(g => g.stage === 2).length;
-                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = `✅ ${chosenObj.nameTr}`;
-                    if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Şimdi Farmakoterapiyi Seçin!';
+                    if (this.dom.comboStep2Val) this.dom.comboStep2Val.textContent = chosenObj.nameTr;
+                    if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = 'Şimdi ilacı seç';
+                    this.archiveStageGuesses();
                     this.comboStage = 3;
                     this.guesses = []; // Reset 6-guess allowance for Stage 3
                     this.updateComboStepperUI();
                     this.syncInputAndBrowserLabels();
                     this.renderGuesses();
                     this.updateRemainingGuessesUI();
-                    this.showToast("🛡️ Aşama 2 (Terapi) Tamamlandı! Şimdi Aşama 3: Birinci Basamak İlacı/Müdahaleyi Seçin!");
+                    this.showToast('Terapi doğru. Şimdi ilacı seç.');
                     return;
                 }
             }
 
             if (this.targetGameMode === 'combo' && this.comboStage === 3) {
                 this.comboResults.stage3Guesses = this.guesses.filter(g => g.stage === 3).length;
-                if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = `✅ ${chosenObj.nameTr}`;
+                if (this.dom.comboStep3Val) this.dom.comboStep3Val.textContent = chosenObj.nameTr;
             }
 
             this.handleGameEnd(true);
@@ -2363,13 +2549,24 @@ class PsikoVakaGame {
                 this.renderGuesses();
                 this.updateRemainingGuessesUI();
 
-                if (categoryMatch) {
-                    this.showToast(`🟨 Sıcak! Grup Doğru (${guessData.categoryName}), spesifik seçeneği daraltın!`);
-                } else {
-                    this.showToast(`Yeni ipucu açıldı! 🔍 (${this.unlockedClues}/${this.maxClues})`);
-                }
+                // Bilgi bildirimi yok (H1): yeni ipucu kartı parlar ve görünür alana kayar; tahmin şeridi grubu gösterir.
+                this.announcePlay(categoryMatch ? `Grup doğru: ${guessData.categoryName}. İpucu ${this.unlockedClues}/${this.maxClues} açıldı.` : `Yanlış. İpucu ${this.unlockedClues}/${this.maxClues} açıldı.`);
             }
         }
+    }
+
+    /** Ekran okuyucuya kısa oyun duyurusu (bildirim baloncuğu olmadan). */
+    announcePlay(msg) {
+        const el = document.getElementById('playAnnouncer');
+        if (!el) return;
+        el.textContent = '';
+        setTimeout(() => { el.textContent = msg; }, 30);
+    }
+
+    /** Kombo: aşama değişmeden önce o aşamanın tahminlerini sakla (paylaşım satırı için). */
+    archiveStageGuesses() {
+        this.stageGuessLog = this.stageGuessLog || {};
+        this.stageGuessLog[this.comboStage] = this.guesses.map(g => ({ isCorrect: !!g.isCorrect, categoryMatch: !!g.categoryMatch }));
     }
 
     giveUp() {
@@ -2407,9 +2604,37 @@ class PsikoVakaGame {
             this.launchConfetti();
         }
 
+        this.emitPlayState();
+        // Rapor kendiliğinden açılmaz (H3): sonuç kartı görünür alana gelir; rapor bir dokunuş uzakta.
+        this.focusResultCard();
+    }
+
+    /** 72 -> "1 dk 12 sn", 45 -> "45 sn" */
+    formatDuration(sec) {
+        const n = Math.max(0, Math.round(Number(sec) || 0));
+        const m = Math.floor(n / 60), r = n % 60;
+        return m > 0 ? `${m} dk${r ? ` ${r} sn` : ''}` : `${r} sn`;
+    }
+
+    /** Sonuç kartında günlük seri satırı (js/online/daily.js çağırır). text boşsa gizlenir. */
+    setResultStreak(text, isLoss) {
+        const el = document.getElementById('playResultStreak');
+        const t = document.getElementById('playResultStreakText');
+        if (!el || !t) return;
+        t.textContent = text || '';
+        el.hidden = !text;
+        el.classList.toggle('is-loss', !!isLoss);
+    }
+
+    focusResultCard() {
+        const card = this.dom.finishedActions;
+        if (!card || card.hidden) return;
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         setTimeout(() => {
-            this.openResultModal(won);
-        }, 500);
+            try { card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (e) {}
+            const btn = this.dom.btnMainShowReport;
+            if (btn) { try { btn.focus({ preventScroll: true }); } catch (e) {} }
+        }, 60);
     }
 
     /** Vaka bitince oyun ekranında gösterilen kısa sonuç kartı */
@@ -2427,7 +2652,7 @@ class PsikoVakaGame {
         if (this.dom.playResultIcon) this.dom.playResultIcon.innerHTML = this.icon(won ? 'check' : 'flag');
         if (this.dom.playResultTitle) {
             this.dom.playResultTitle.textContent = won
-                ? `${this.guesses.length}. tahminde bildin · ${this.elapsedSeconds} sn`
+                ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
@@ -2479,7 +2704,7 @@ class PsikoVakaGame {
             diagNameEl.textContent = correctName;
             diagEnEl.textContent = `${targetTherapy ? targetTherapy.nameTr : ''} · ${targetPharma ? targetPharma.nameTr : ''}`;
         } else {
-            heading.textContent = won ? `${this.guesses.length}. ipucunda bildin · ${this.elapsedSeconds} sn` : 'Vaka tamamlandı';
+            heading.textContent = won ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}` : 'Bu sefer olmadı';
             diagNameEl.textContent = correctName;
             diagEnEl.textContent = correctEn;
         }
@@ -2614,27 +2839,24 @@ class PsikoVakaGame {
 
         const btnCopyScore = document.getElementById('btnCopyScore');
         if (btnCopyScore) {
-            btnCopyScore.onclick = () => {
-                navigator.clipboard.writeText(shareString);
-                this.showToast("📋 Skor ve vaka linki panoya kopyalandı!");
+            btnCopyScore.onclick = async () => {
+                const ok = await this.copyText(this.generateShareString(this.gameWon));
+                this.showToast(ok ? 'Sonuç panoya kopyalandı.' : 'Kopyalanamadı. Metni elle kopyala.');
             };
         }
 
         const btnShareWA = document.getElementById('btnShareWhatsApp');
         if (btnShareWA) {
             btnShareWA.onclick = () => {
-                const duelUrl = this.buildCurrentCaseDuelLink();
-                const waText = `${shareString}\n⚔️ Aynı vakada beni geçebilir misin? Tıkla ve çöz:\n${duelUrl}`;
-                window.open(`https://wa.me/?text=${encodeURIComponent(waText)}`, '_blank');
+                window.open(`https://wa.me/?text=${encodeURIComponent(this.generateShareString(this.gameWon))}`, '_blank', 'noopener');
             };
         }
 
         const btnChallengeLink = document.getElementById('btnChallengeFriendLink');
         if (btnChallengeLink) {
-            btnChallengeLink.onclick = () => {
-                const duelUrl = this.buildCurrentCaseDuelLink();
-                navigator.clipboard.writeText(duelUrl);
-                this.showToast("⚔️ Meydan okuma düello linki kopyalandı! Arkadaşına gönder!");
+            btnChallengeLink.onclick = async () => {
+                const ok = await this.copyText(this.buildCurrentCaseDuelLink());
+                this.showToast(ok ? 'Meydan okuma bağlantısı kopyalandı.' : 'Kopyalanamadı.');
             };
         }
 
@@ -2941,7 +3163,7 @@ class PsikoVakaGame {
         URL.revokeObjectURL(url);
 
         this.renderPackShelf();
-        this.showToast(`🚀 Toplam ${merged.length} vakalık "cases.js" indirildi! GitHub'daki js/cases.js üzerine yükleyebilirsiniz!`);
+        this.showToast(`${merged.length} vakalık cases.js indirildi.`);
     }
 
     exportCasesJSON() {
@@ -2957,7 +3179,7 @@ class PsikoVakaGame {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        this.showToast("💾 Aktif vaka paketi JSON olarak indirildi!");
+        this.showToast('Vaka paketi JSON olarak indirildi.');
     }
 
     processAndSaveImportedCases(rawArray, defaultName) {
@@ -3003,7 +3225,7 @@ class PsikoVakaGame {
 
         this.applyActivePack(packId, true);
         this.closeModal(this.dom.caseManagerModal);
-        this.showToast(`🎉 "${customName}" (${validCases.length} vaka) kütüphaneye kaydedildi ve başlatıldı!${skippedUnknownDx > 0 ? ` ${skippedUnknownDx} vaka tanısı güncel listede olmadığı için atlandı.` : ''}`);
+        this.showToast(`"${customName}" (${validCases.length} vaka) kaydedildi ve başlatıldı.${skippedUnknownDx > 0 ? ` ${skippedUnknownDx} vaka tanısı güncel listede olmadığı için atlandı.` : ''}`);
     }
 
     handleImportJSON(e) {
@@ -3018,7 +3240,7 @@ class PsikoVakaGame {
                 this.processAndSaveImportedCases(imported, cleanFileName);
                 e.target.value = '';
             } catch (err) {
-                this.showToast("⚠️ Geçersiz JSON dosyası! " + (err.message || ""));
+                this.showToast(`Geçersiz JSON dosyası. ${err.message || ''}`.trim());
             }
         };
         reader.readAsText(file);
@@ -3027,7 +3249,7 @@ class PsikoVakaGame {
     handleImportPastedJSON() {
         const textarea = document.getElementById('pasteJsonTextarea');
         if (!textarea || !textarea.value.trim()) {
-            this.showToast("⚠️ Lütfen önce JSON metnini kutuya yapıştırın.");
+            this.showToast('Önce JSON metnini kutuya yapıştır.');
             return;
         }
         try {
@@ -3035,7 +3257,7 @@ class PsikoVakaGame {
             this.processAndSaveImportedCases(parsed, `Yapıştırılan Paket #${this.savedCustomPacks.length + 1}`);
             textarea.value = '';
         } catch (err) {
-            this.showToast("⚠️ Yapıştırılan JSON formatı hatalı: " + (err.message || ""));
+            this.showToast(`JSON biçimi hatalı. ${err.message || ''}`.trim());
         }
     }
 
@@ -3062,7 +3284,7 @@ class PsikoVakaGame {
                 const link = this.buildCurrentCaseDuelLink();
                 if (duelLinkInput) duelLinkInput.value = link;
                 navigator.clipboard.writeText(link);
-                this.showToast("⚔️ Düello linki kopyalandı! Arkadaşına gönder!");
+                this.showToast('Düello bağlantısı kopyalandı.');
             };
         }
 
@@ -3114,14 +3336,14 @@ class PsikoVakaGame {
             if (this.dom.duelOpponentName) this.dom.duelOpponentName.textContent = duelData.challengerName || 'Rakip Klinisyen';
             if (this.dom.duelOpponentStatus) {
                 if (duelData.challengerGuesses) {
-                    this.dom.duelOpponentStatus.textContent = `🎯 ${duelData.challengerGuesses}/6 İpucu • ${duelData.challengerTimeSec || 30} sn`;
+                    this.dom.duelOpponentStatus.textContent = `${duelData.challengerGuesses}/6 tahmin · ${duelData.challengerTimeSec || 30} sn`;
                 } else {
-                    this.dom.duelOpponentStatus.textContent = `⚔️ Meydan Okudu`;
+                    this.dom.duelOpponentStatus.textContent = 'Meydan okudu';
                 }
             }
         }
-        this.startCase(caseObj, `⚔️ Düello: Vaka #${caseObj.caseNumber}`);
-        this.showToast(`⚔️ ${duelData.challengerName || 'Arkadaşın'} sana bu vakayla meydan okudu!`);
+        this.startCase(caseObj, `Düello · Vaka #${caseObj.caseNumber}`);
+        this.showToast(`${duelData.challengerName || 'Arkadaşın'} sana bu vakayla meydan okudu.`);
     }
 
     /** Eski #room= işleyicisi: artık sunucu odalarına (js/online/) yönlendirir. */
@@ -3154,29 +3376,25 @@ class PsikoVakaGame {
         const oppGuesses = this.activeDuelChallenge.challengerGuesses;
         const oppTime = this.activeDuelChallenge.challengerTimeSec;
 
-        let verdictHTML = `<span style="color: #fbbf24;">⏳ Rakibin vakayı tamamlaması bekleniyor veya skorunuzu gönderin!</span>`;
+        const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        let verdict = { cls: 'is-wait', text: 'Rakibin sonucu bekleniyor.' };
         if (oppGuesses) {
-            if (myGuesses < oppGuesses || (myGuesses === oppGuesses && myTime < oppTime)) {
-                verdictHTML = `<span style="color: #34d399; font-size: 1.05rem; font-weight: 800;">🏆 DÜELLOYU SEN KAZANDIN! (${oppName}'i geçtin!)</span>`;
-            } else if (myGuesses > oppGuesses || (myGuesses === oppGuesses && myTime > oppTime)) {
-                verdictHTML = `<span style="color: #fb7185; font-size: 1.05rem; font-weight: 800;">⚔️ Bu turu ${oppName} kazandı! Rövanş için sıradaki vakaya geç!</span>`;
-            } else {
-                verdictHTML = `<span style="color: #38bdf8; font-size: 1.05rem; font-weight: 800;">🤝 TAM BERABERLİK! İkiniz de aynı sürede ve ipucunda bildiniz!</span>`;
-            }
+            if (myGuesses < oppGuesses || (myGuesses === oppGuesses && myTime < oppTime)) verdict = { cls: 'is-win', text: `Düelloyu kazandın: ${oppName} geride kaldı.` };
+            else if (myGuesses > oppGuesses || (myGuesses === oppGuesses && myTime > oppTime)) verdict = { cls: 'is-loss', text: `Bu turu ${oppName} kazandı. Rövanş için sıradaki vakaya geç.` };
+            else verdict = { cls: 'is-tie', text: 'Berabere: aynı tahmin sayısı, aynı süre.' };
         }
-
         podiumEl.innerHTML = `
-            <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: #fda4af; letter-spacing: 0.8px;">⚔️ Klinik Düello Karşılaştırma Podyumu</div>
-            <div style="margin-top: 0.35rem;">${verdictHTML}</div>
+            <div class="duel-podium-title">Düello karşılaştırması</div>
+            <div class="duel-podium-verdict ${verdict.cls}">${esc(verdict.text)}</div>
             <div class="duel-podium-grid">
-                <div style="background: var(--bg-secondary); padding: 0.7rem; border-radius: 10px; border: 1px solid var(--accent-emerald);">
-                    <div style="font-weight: 800; color: #34d399;">🧑‍⚕️ ${this.duelMyNickname} (Sen)</div>
-                    <div style="font-size: 0.85rem; margin-top: 4px;">${won ? `${this.guesses.length}/6 İpucu` : 'Çözemedi'} • ⏱️ ${myTime} sn</div>
+                <div class="duel-podium-side is-me">
+                    <div class="duel-podium-name">${esc(this.duelMyNickname)} (sen)</div>
+                    <div class="duel-podium-sub">${won ? `${this.guesses.length}/6 tahmin` : 'Çözemedi'} · ${this.formatDuration(myTime)}</div>
                 </div>
                 <div class="duel-vs-badge">VS</div>
-                <div style="background: var(--bg-secondary); padding: 0.7rem; border-radius: 10px; border: 1px solid var(--accent-rose);">
-                    <div style="font-weight: 800; color: #fda4af;">⚔️ ${oppName}</div>
-                    <div style="font-size: 0.85rem; margin-top: 4px;">${oppGuesses ? (oppGuesses <= 6 ? `${oppGuesses}/6 İpucu • ⏱️ ${oppTime || '-'} sn` : 'Çözemedi') : 'Oynuyor...'}</div>
+                <div class="duel-podium-side is-opp">
+                    <div class="duel-podium-name">${esc(oppName)}</div>
+                    <div class="duel-podium-sub">${oppGuesses ? (oppGuesses <= 6 ? `${oppGuesses}/6 tahmin · ${oppTime ? this.formatDuration(oppTime) : '-'}` : 'Çözemedi') : 'Oynuyor…'}</div>
                 </div>
             </div>
         `;
@@ -3239,25 +3457,77 @@ class PsikoVakaGame {
         });
     }
 
+    /**
+     * Paylaşım metni (H7, Wordle tarzı, cevabı söylemez):
+     *   PsikoVaka · Günün vakası · 16 Kasım
+     *   Tanı 4/6 · 1 dk 12 sn · 🔥 4 gün
+     *   🟥🟨🟨🟩⬜⬜
+     *   https://gandalfthegreey.github.io/psikovaka/
+     * 🟥 farklı grup, 🟨 grup doğru, 🟩 doğru, ⬜ kullanılmayan hak. Kombo: aşama başına bir satır.
+     */
     generateShareString(won) {
-        const caseNumber = this.currentCase.caseNumber || 1;
-        const guessCount = won ? this.guesses.length : 'X';
-        const modeLabels = {
-            diagnosis: '🩺 PsikoVaka Tanı',
-            therapy: '🛡️ PsikoTerapi',
-            pharmacology: '💊 PsikoFarmakoloji',
-            combo: '⚡ PsikoVaka Tam Konsültasyon'
+        const SITE = 'https://gandalfthegreey.github.io/psikovaka/';
+        const max = this.maxClues || 6;
+        const sq = (list) => {
+            const row = (list || []).slice(0, max).map(g => g.isCorrect ? '🟩' : (g.categoryMatch ? '🟨' : '🟥'));
+            while (row.length < max) row.push('⬜');
+            return row.join('');
         };
-        const gameName = modeLabels[this.targetGameMode] || '🧠 PsikoVaka';
-        let str = `${gameName} Vaka #${caseNumber} (${guessCount}/${this.maxClues}) • ⏱️ ${this.elapsedSeconds} sn\n\n`;
+        let title = 'PsikoVaka';
+        if (this.currentMode === 'daily') {
+            let day = '';
+            try { day = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', timeZone: 'Europe/Istanbul' }); }
+            catch (e) { day = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' }); }
+            title += ` · Günün vakası · ${day}`;
+        } else if (this.currentMode === 'practice') {
+            title += ` · Pratik · Vaka #${this.currentCase.caseNumber || '?'}`;
+        } else {
+            title += ` · Vaka #${this.currentCase.caseNumber || '?'}`;
+        }
+        const extra = [this.formatDuration(this.elapsedSeconds)];
+        if (won && this.currentMode === 'daily' && this.shareStreak > 0) extra.push(`🔥 ${this.shareStreak} gün`);
+        const lines = [title];
+        if (this.targetGameMode === 'combo') {
+            lines.push(['Kombo'].concat(extra).join(' · '));
+            const log = Object.assign({}, this.stageGuessLog || {});
+            log[this.comboStage] = this.guesses;
+            [['Tanı', 1], ['Terapi', 2], ['İlaç', 3]].forEach(([label, st]) => {
+                const list = log[st];
+                if (!list) { lines.push(`${label} –`); return; }
+                const ok = list.some(g => g.isCorrect);
+                lines.push(`${label} ${ok ? list.length : 'X'}/${max} ${sq(list)}`);
+            });
+        } else {
+            const label = { diagnosis: 'Tanı', therapy: 'Terapi', pharmacology: 'İlaç' }[this.targetGameMode] || 'Tanı';
+            lines.push([`${label} ${won ? this.guesses.length : 'X'}/${max}`].concat(extra).join(' · '));
+            lines.push(sq(this.guesses));
+        }
+        lines.push(SITE);
+        return lines.join('\n');
+    }
 
-        this.guesses.forEach(g => {
-            if (g.isCorrect) str += '🟩🟩🟩🟩\n';
-            else if (g.categoryMatch) str += '🟨🟨⬛⬛\n';
-            else str += '⬛⬛⬛⬛\n';
-        });
+    /** Sonucu paylaş: telefonda paylaşım menüsü, yoksa panoya kopyala (onay bildirimiyle). */
+    async shareResult() {
+        if (!this.currentCase || !this.isGameOver) return;
+        const text = this.generateShareString(this.gameWon);
+        if (navigator.share && (!navigator.canShare || navigator.canShare({ text }))) {
+            try { await navigator.share({ text }); return; }
+            catch (e) { if (e && e.name === 'AbortError') return; }
+        }
+        const ok = await this.copyText(text);
+        this.showToast(ok ? 'Sonuç panoya kopyalandı.' : 'Kopyalanamadı. Rapordaki metni elle kopyala.');
+    }
 
-        return str.trim();
+    async copyText(text) {
+        try {
+            if (navigator.clipboard && window.isSecureContext !== false) { await navigator.clipboard.writeText(text); return true; }
+        } catch (e) {}
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.setAttribute('readonly', ''); ta.className = 'visually-hidden';
+            document.body.appendChild(ta); ta.select();
+            const ok = document.execCommand('copy'); ta.remove(); return !!ok;
+        } catch (e) { return false; }
     }
 
     handleCreateCustomCase(e) {
@@ -3276,7 +3546,7 @@ class PsikoVakaGame {
         const dsmSummary = document.getElementById('studioDsmSummary').value.trim();
 
         if (!diagnosisId || !patientSummary || !clue1 || !clue2 || !clue3 || !clue4 || !clue5 || !clue6) {
-            this.showToast("⚠️ Lütfen tüm 6 ipucunu ve vaka bilgilerini doldurun.");
+            this.showToast('Altı ipucunu ve vaka bilgilerini doldur.');
             return;
         }
 
@@ -3307,7 +3577,7 @@ class PsikoVakaGame {
 
             document.getElementById('btnCopyStudioLink').onclick = () => {
                 navigator.clipboard.writeText(shareUrl);
-                this.showToast("🔗 Özel vaka linki kopyalandı!");
+                this.showToast('Özel vaka bağlantısı kopyalandı.');
             };
 
             document.getElementById('btnPlayStudioCase').onclick = () => {
@@ -3998,41 +4268,78 @@ class PsikoVakaGame {
         this.openModal(this.dom.statsModal);
     }
 
+    /** Ses ve titreşim ayarı (H14): localStorage psikovaka_sound, varsayılan açık. */
+    isSoundOn() {
+        try { return localStorage.getItem('psikovaka_sound') !== '0'; } catch (e) { return true; }
+    }
+
+    setSoundOn(on) {
+        try { localStorage.setItem('psikovaka_sound', on ? '1' : '0'); } catch (e) {}
+        this.syncSoundToggle();
+        if (on) this.playTone('warm');
+    }
+
+    syncSoundToggle() {
+        const btn = document.getElementById('soundToggleBtn');
+        if (!btn) return;
+        const on = this.isSoundOn();
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        const lbl = document.getElementById('soundToggleLabel');
+        if (lbl) lbl.textContent = on ? 'Açık' : 'Kapalı';
+        const ico = document.getElementById('soundToggleIcon');
+        if (ico) ico.innerHTML = this.icon(on ? 'volume' : 'volume-x');
+    }
+
+    /** Tek paylaşılan AudioContext (her ses için yenisi açılmaz). */
+    getAudioCtx() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return null;
+        if (!this._audioCtx) this._audioCtx = new AudioCtx();
+        if (this._audioCtx.state === 'suspended' && this._audioCtx.resume) { try { this._audioCtx.resume(); } catch (e) {} }
+        return this._audioCtx;
+    }
+
     playTone(type) {
+        if (!this.isSoundOn()) return;
+        // Telefonda kısa titreşim (yalnızca vaka ekranında; ses ayarı kapalıysa titreşim de yok)
+        if (this.currentScreen === 'play' && navigator.vibrate) {
+            try { navigator.vibrate(type === 'win' ? 30 : [20, 40, 20]); } catch (e) {}
+        }
         try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (!AudioCtx) return;
-            const ctx = new AudioCtx();
+            const ctx = this.getAudioCtx();
+            if (!ctx) return;
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
             gain.connect(ctx.destination);
+            const t = ctx.currentTime;
 
             if (type === 'win') {
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-                osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
-                osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.6);
+                osc.frequency.setValueAtTime(523.25, t);
+                osc.frequency.setValueAtTime(659.25, t + 0.1);
+                osc.frequency.setValueAtTime(783.99, t + 0.2);
+                osc.frequency.setValueAtTime(1046.50, t + 0.3);
+                gain.gain.setValueAtTime(0.15, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                osc.start(t);
+                osc.stop(t + 0.6);
             } else if (type === 'warm') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, ctx.currentTime);
-                osc.frequency.setValueAtTime(554.37, ctx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.1, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(440, t);
+                osc.frequency.setValueAtTime(554.37, t + 0.1);
+                gain.gain.setValueAtTime(0.1, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.start(t);
+                osc.stop(t + 0.25);
             } else {
+                // yanlış: yumuşak tek nota (bölüm 3: 250 Hz yerine 330 Hz sinüs)
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(250, ctx.currentTime);
-                gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.2);
+                osc.frequency.setValueAtTime(330, t);
+                gain.gain.setValueAtTime(0.08, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.start(t);
+                osc.stop(t + 0.2);
             }
         } catch (e) {}
     }
@@ -4118,21 +4425,23 @@ class PsikoVakaGame {
         modal._returnFocus = null;
     }
 
-    showToast(message) {
+    /**
+     * Kısa bildirim. Aynı anda tek bildirim: yenisi gelince eskisi kalkar (H1).
+     * Oyun ekranında yalnızca hata/uyarı bildirimleri kullanılır; bilgi zaten ekranda (ipucu kartı, tahmin şeridi).
+     */
+    showToast(message, opts = {}) {
         if (!this.dom || !this.dom.toastContainer) return;
+        const box = this.dom.toastContainer;
+        Array.from(box.children).forEach(el => el.remove());
+        clearTimeout(this._toastTimer); clearTimeout(this._toastTimer2);
         const toast = document.createElement('div');
         toast.className = 'toast';
         toast.textContent = message;
-        this.dom.toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-            toast.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(10px) scale(0.95)';
-            setTimeout(() => {
-                if (toast && typeof toast.remove === 'function') toast.remove();
-            }, 350);
-        }, 3000);
+        box.appendChild(toast);
+        this._toastTimer = setTimeout(() => {
+            toast.classList.add('is-leaving');
+            this._toastTimer2 = setTimeout(() => { if (toast.parentNode) toast.remove(); }, 350);
+        }, opts.duration || 3000);
     }
 
     toggleTheme() {
