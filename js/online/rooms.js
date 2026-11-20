@@ -66,6 +66,8 @@
                 if (ev === 'move' && isFinite(p.x) && isFinite(p.y)) {
                     R.presence[p.user_id] = Object.assign({}, R.presence[p.user_id], { x: clampPos(p.x), y: clampPos(p.y), at: Date.now() });
                 }
+                // Bir oyuncu avatarını değiştirdi: yeni hâli sunucudan oku (yayındaki veriye güvenilmez)
+                if (ev === 'profile') refreshSoon();
                 R.bus.emit('broadcast', ev, p);
             },
             onStatus: (s) => R.bus.emit('conn', s)
@@ -305,6 +307,21 @@
         if (!isHost()) return { can: false, reason: 'Oda sahibinin başlatması bekleniyor.', code: 'NOT_HOST' };
         return { can: true, reason: 'Herkes hazır.' };
     }
+
+    // ------------------------------------------------------------ kendi profilim değişti (ajan G2)
+    /** app.js profil yazımı başarılı olunca: kendi satırımı hemen güncelle, odadakilere "yeniden oku" de. */
+    function onMyProfileSaved(e) {
+        if (!R.roomId || !R.state) return;
+        const d = (e && e.detail) || {};
+        const m = me();
+        if (!m || m.left_at) return;
+        const AV = global.PsikoVakaAvatar;
+        if (d.avatar && AV) m.avatar = AV.normalize(d.avatar);
+        if (d.displayName) m.display_name = d.displayName;
+        R.bus.emit('state', R.state, R.state);
+        send('profile', {});
+    }
+    if (global.addEventListener) global.addEventListener('psikovaka:profile-saved', onMyProfileSaved);
 
     NS.rooms = {
         get roomId() { return R.roomId; },

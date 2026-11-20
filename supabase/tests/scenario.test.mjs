@@ -40,6 +40,8 @@ await db.exec(read('migrations/0003_gunluk_ve_hizli.sql'));
 await db.exec(read('migrations/0003_gunluk_ve_hizli.sql')); // tekrar çalıştırılabilir olmalı
 await db.exec(read('migrations/0004_kural_duzeltmeleri.sql'));
 await db.exec(read('migrations/0004_kural_duzeltmeleri.sql')); // tekrar çalıştırılabilir olmalı
+await db.exec(read('migrations/0005_isim_filtresi.sql'));
+await db.exec(read('migrations/0005_isim_filtresi.sql')); // tekrar çalıştırılabilir olmalı
 
 // ---------------------------------------------------------------- mini test aracı
 let passed = 0, failed = 0;

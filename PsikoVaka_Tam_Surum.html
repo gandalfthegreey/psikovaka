@@ -381,21 +381,27 @@ strong { font-weight: var(--weight-semibold); }
 .top-nav-link:hover { color: var(--color-text); background: var(--color-surface-2); }
 .top-nav-link.active { color: var(--color-text); background: var(--color-surface-3); }
 
-.profile-chip {
+/* Üst çubuk profil çipi: avatar düğmesi (stüdyoyu açar) + ad bağlantısı (Profil) — ajan G2 */
+.profile-chip-group {
     display: none;
     align-items: center;
-    gap: var(--space-2);
-    min-height: 40px;
-    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+    gap: var(--space-1);
+    margin-left: auto;
+    padding: 1px var(--space-1) 1px 1px;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+}
+.profile-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 var(--space-3) 0 var(--space-2);
     border-radius: var(--radius-full);
     color: var(--color-text);
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
-    margin-left: auto;
 }
 .profile-chip:hover { background: var(--color-surface-2); }
-.profile-chip-avatar { display: inline-flex; }
 .profile-chip-name { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .app-main {
@@ -454,7 +460,7 @@ strong { font-weight: var(--weight-semibold); }
 /* Oyun sırasında menüler gizlenir */
 body.is-playing .tab-bar { display: none; }
 body.is-playing .top-nav,
-body.is-playing .profile-chip { visibility: hidden; }
+body.is-playing .profile-chip-group { visibility: hidden; }
 
 /* ---------- 4. Temel bileşenler ---------- */
 .btn,
@@ -780,7 +786,6 @@ body.is-playing .profile-chip { visibility: hidden; }
     align-items: center;
     gap: var(--space-3);
 }
-.home-avatar { display: inline-flex; flex-shrink: 0; }
 .home-greeting-text { flex: 1; min-width: 0; }
 .home-title {
     font-size: var(--text-xl);
@@ -1271,7 +1276,6 @@ body.is-playing .profile-chip { visibility: hidden; }
     gap: var(--space-4);
 }
 .profile-card-main { display: flex; align-items: center; gap: var(--space-4); min-width: 0; }
-.profile-avatar { display: inline-flex; flex-shrink: 0; }
 .profile-meta { display: flex; flex-direction: column; min-width: 0; }
 .profile-name { font-size: var(--text-lg); font-weight: var(--weight-bold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .profile-rp { font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-accent); }
@@ -2418,7 +2422,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
 
 @media (min-width: 768px) {
     .top-nav { display: flex; }
-    .profile-chip { display: inline-flex; }
+    .profile-chip-group { display: inline-flex; }
     .tab-bar { display: none; }
     .app-main { padding-top: var(--space-6); padding-bottom: var(--space-7); }
     .screen-play { min-height: calc(100dvh - var(--header-h)); }
@@ -2818,6 +2822,83 @@ a.list-row { color: inherit; text-decoration: none; }
     body.is-playing .toast-container { bottom: var(--space-3); }
 }
 .profile-league-cta { font-size: var(--text-sm); text-align: left; }
+
+/* ---------- Avatara dokun, düzenle + Nöro hatırlatması (ajan G2, 2026-11-20) ----------
+   Ana sayfa selamı, üst çubuk çipi ve Profil kartındaki avatar birer düğme: stüdyoyu açar.
+   Kalem rozeti yalnızca görsel (düğmenin adı "Avatarı düzenle"). */
+.avatar-edit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.avatar-edit-art { display: inline-flex; border-radius: var(--radius-full); transition: transform var(--duration-fast) var(--ease); }
+.avatar-edit-art svg { display: block; }
+.avatar-edit:hover .avatar-edit-art { transform: scale(1.04); }
+.avatar-edit:active .avatar-edit-art { transform: scale(0.97); }
+.avatar-edit:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.avatar-edit-badge {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-bg);
+    color: var(--color-accent-contrast);
+    box-shadow: 0 0 0 2px var(--color-bg);
+    pointer-events: none;
+}
+.avatar-edit-badge .icon { width: 11px; height: 11px; stroke-width: 2.4; }
+.avatar-edit-sm .avatar-edit-badge { width: 16px; height: 16px; right: -1px; bottom: 0; box-shadow: 0 0 0 2px var(--color-surface); }
+.avatar-edit-sm .avatar-edit-badge .icon { width: 9px; height: 9px; }
+.avatar-edit-sm { min-width: 40px; min-height: 40px; }
+.avatar-edit-lg .avatar-edit-badge { width: 24px; height: 24px; right: 0; bottom: 0; box-shadow: 0 0 0 2px var(--color-surface); }
+.avatar-edit-lg .avatar-edit-badge .icon { width: 13px; height: 13px; }
+.app-header .avatar-edit-badge { box-shadow: 0 0 0 2px var(--color-surface); }
+
+/* Ana sayfa: Nöro hatırlatma kartı (günün vakasının altında; ekranı itmez) */
+.noro-nudge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+}
+.noro-nudge-art { display: inline-flex; flex-shrink: 0; width: 72px; height: 72px; }
+.noro-nudge-art svg { width: 100%; height: 100%; }
+.noro-nudge-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); min-width: 0; flex: 1; padding-right: var(--space-6); }
+.noro-nudge-title { font-size: var(--text-md); font-weight: var(--weight-bold); line-height: var(--leading-tight); }
+.noro-nudge-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: var(--leading-normal); }
+.noro-nudge-close { position: absolute; top: var(--space-1); right: var(--space-1); color: var(--color-text-3); }
+.noro-nudge-close:hover { color: var(--color-text); }
+
+/* Lobiden açılınca stüdyo telefonda alt sayfa olur: lobi üstte görünür kalır */
+@media (max-width: 767px) {
+    .modal-backdrop.is-sheet .modal-window {
+        height: auto;
+        max-height: 90dvh;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        border: 1px solid var(--color-border);
+        border-bottom: 0;
+        box-shadow: var(--shadow-3);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .modal-backdrop.is-sheet .modal-header { padding-top: var(--space-2); }
+}
 
 </style>
     <style>
@@ -4047,10 +4128,15 @@ body.ol-banners-docked .ol-banners { display: none; }
                 <a class="top-nav-link" href="#/profil" data-route="profil">Profil</a>
             </nav>
 
-            <a class="profile-chip" id="navProfileChip" href="#/profil" aria-label="Profil">
-                <span class="profile-chip-avatar" id="navAvatarMount"></span>
-                <span class="profile-chip-name" id="navNameMount">Klinisyen</span>
-            </a>
+            <div class="profile-chip-group">
+                <button class="avatar-edit avatar-edit-sm profile-chip-avatar" id="navAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                    <span class="avatar-edit-art" id="navAvatarMount"></span>
+                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                </button>
+                <a class="profile-chip" id="navProfileChip" href="#/profil" aria-label="Profil">
+                    <span class="profile-chip-name" id="navNameMount">Klinisyen</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -4058,7 +4144,10 @@ body.ol-banners-docked .ol-banners { display: none; }
         <!-- EKRAN: Oyna (ana sayfa) -->
         <section class="screen screen-home" id="screenHome" data-screen="oyna" aria-labelledby="homeTitle">
             <div class="home-greeting">
-                <span class="home-avatar" id="homeAvatarMount"></span>
+                <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                    <span class="avatar-edit-art" id="homeAvatarMount"></span>
+                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                </button>
                 <div class="home-greeting-text">
                     <p class="eyebrow">Hoş geldin</p>
                     <h1 class="home-title" id="homeTitle"><span id="homeGreetingName">Klinisyen</span></h1>
@@ -4125,6 +4214,17 @@ body.ol-banners-docked .ol-banners { display: none; }
                     </button>
                     <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
                 </div>
+            </article>
+
+            <!-- Nöro hatırlatması (js/avatar_studio.js): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
+            <article class="card noro-nudge" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
+                <span class="noro-nudge-art" id="noroNudgeArt" aria-hidden="true"></span>
+                <div class="noro-nudge-body">
+                    <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
+                    <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
+                    <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg> Özelleştir</button>
+                </div>
+                <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
             </article>
 
             <div class="home-grid">
@@ -4271,7 +4371,10 @@ body.ol-banners-docked .ol-banners { display: none; }
 
             <article class="card profile-card">
                 <div class="profile-card-main">
-                    <span class="profile-avatar" id="headerFunnyAvatarMount"></span>
+                    <button class="avatar-edit avatar-edit-lg profile-avatar" id="profileAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                        <span class="avatar-edit-art" id="headerFunnyAvatarMount"></span>
+                        <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                    </button>
                     <div class="profile-meta">
                         <strong class="profile-name" id="headerPlayerNameMount">Klinisyen</strong>
                         <span class="profile-username" id="profileUsername" hidden></span>
@@ -26367,6 +26470,10 @@ if (typeof module !== 'undefined' && module.exports) {
  *     loadMyAvatar, saveMyAvatar, renderHeaderProfilePill, renderAvatarStudioTab, renderAvatarStudioPreview,
  *     selectAvatarStudioSlot, pickAvatarOption, setStudioAvatar, setAvatarSaveStatus
  * Pencere: #avatarStudioModal (Profil > "Avatar ve ad" ve profil düzenleme > "Avatarı değiştir").
+ * Ajan G2 (2026-11-20): avatara dokununca düzenleme (ana sayfa selamı #homeAvatarEdit, üst çubuk #navAvatarEdit,
+ *   Profil kartı #profileAvatarEdit), ana sayfada Nöro hatırlatması #homeNoroNudge (updateNoroNudge), lobi düğmesi
+ *   (js/online/lobby.js openAvatarStudio({ sheet: true })). openAvatarStudio(opts): { returnFocus, sheet }.
+ *   Stüdyo kapanınca bekleyen kayıt hemen yapılır (onAvatarStudioClosed → app.js flushProfilePush).
  */
 
 /** Her yapılandırmayı (eski v1 dahil) Nöro'ya çevirip çizer. */
@@ -26385,13 +26492,96 @@ function attachAvatarStudioToGame(GameClass) {
         if (pill) pill.addEventListener('click', () => this.openAvatarStudio());
         const rnd = document.getElementById('btnRandomizeFunnyAvatar');
         if (rnd) rnd.addEventListener('click', () => { this.setStudioAvatar(PsikoVakaAvatar.randomConfig(), true); this.playTone('warm'); });
+
+        // Avatara dokun → stüdyo; kapanınca odak aynı avatara döner
+        ['homeAvatarEdit', 'navAvatarEdit', 'profileAvatarEdit'].forEach(id => {
+            const b = document.getElementById(id);
+            if (b) b.addEventListener('click', () => this.openAvatarStudio({ returnFocus: b }));
+        });
+        const nudgeOpen = document.getElementById('btnNoroNudgeOpen');
+        if (nudgeOpen) nudgeOpen.addEventListener('click', () => {
+            // kart kaydedince kaybolur: odak ana sayfadaki avatara döner
+            this.openAvatarStudio({ returnFocus: document.getElementById('homeAvatarEdit') || nudgeOpen });
+        });
+        const nudgeClose = document.getElementById('btnNoroNudgeClose');
+        if (nudgeClose) nudgeClose.addEventListener('click', () => {
+            try { localStorage.setItem('psikovaka_noro_nudge_off', '1'); } catch (e) { /* yok */ }
+            this.updateNoroNudge();
+            const av = document.getElementById('homeAvatarEdit');
+            if (av) { try { av.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
+        });
+
+        // Stüdyo hangi yoldan kapanırsa kapansın (Tamam, X, Esc, arka plan) bekleyen kayıt hemen yapılır
+        const origClose = this.closeModal;
+        this.closeModal = (modal, ...rest) => {
+            const studio = document.getElementById('avatarStudioModal');
+            const wasStudio = !!(modal && modal === studio && modal.classList.contains('open'));
+            const r = origClose.call(this, modal, ...rest);
+            if (wasStudio) { try { this.onAvatarStudioClosed(); } catch (e) { /* yok */ } }
+            return r;
+        };
+        this.updateNoroNudge();
     };
 
-    proto.openAvatarStudio = function () {
+    /** opts: { returnFocus: Element (kapanınca odak), sheet: true (telefonda alt sayfa; lobi) } */
+    proto.openAvatarStudio = function (opts) {
+        const o = opts || {};
         const modal = document.getElementById('avatarStudioModal');
         if (!modal) return;
+        modal.classList.toggle('is-sheet', !!o.sheet);
         this.renderAvatarStudioTab();
         this.openModal(modal);
+        if (o.returnFocus) modal._returnFocus = o.returnFocus;
+    };
+
+    proto.onAvatarStudioClosed = function () {
+        if (this._avatarSaveTimer) {
+            clearTimeout(this._avatarSaveTimer);
+            this._avatarSaveTimer = null;
+            this.saveMyAvatar();
+        }
+        if (typeof this.flushProfilePush === 'function') this.flushProfilePush();
+        this.updateNoroNudge();
+    };
+
+    /** Avatar hâlâ varsayılan Nöro mu (hiç kaydedilmemiş yerel avatar da varsayılandır)? */
+    proto.isDefaultAvatar = function () {
+        const A = window.PsikoVakaAvatar;
+        if (!A) return false;
+        let saved = false;
+        try { saved = localStorage.getItem('psikovaka_noro_saved') === '1'; } catch (e) { /* yok */ }
+        if (saved) return false;
+        return A.equals(this.myAvatar || null, A.DEFAULT);
+    };
+
+    /**
+     * Ana sayfa hatırlatma kartı: avatar varsayılansa, kart kapatılmadıysa ve ilk ziyaret kartı görünmüyorsa.
+     * İlk kayıttan sonra (psikovaka_noro_saved) kendiliğinden kaybolur.
+     */
+    proto.updateNoroNudge = function () {
+        const card = document.getElementById('homeNoroNudge');
+        if (!card) return;
+        let off = false;
+        try { off = localStorage.getItem('psikovaka_noro_nudge_off') === '1'; } catch (e) { off = true; }
+        const welcome = document.getElementById('homeWelcome');
+        const welcomeShown = !!(welcome && !welcome.hidden);
+        const show = !off && !welcomeShown && this.isDefaultAvatar();
+        if (!show) {
+            if (!card.hidden && card.contains(document.activeElement)) {
+                const av = document.getElementById('homeAvatarEdit');
+                if (av) { try { av.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
+            }
+            card.hidden = true;
+            return;
+        }
+        card.hidden = false;
+        const art = document.getElementById('noroNudgeArt');
+        const A = window.PsikoVakaAvatar;
+        const sig = JSON.stringify(A.normalize(this.myAvatar));
+        if (art && art.dataset.sig !== sig) {
+            art.dataset.sig = sig;
+            art.innerHTML = A.render(A.normalize(this.myAvatar), { size: 72, framed: true, animated: true, emote: 'wave' });
+        }
     };
 
     // Yerel avatar her yüklemede Nöro v2'ye normalize edilir; eski (v1) kayıt bulunursa v2 olarak geri yazılır.
@@ -26410,7 +26600,10 @@ function attachAvatarStudioToGame(GameClass) {
 
     proto.saveMyAvatar = function () {
         this.myAvatar = PsikoVakaAvatar.normalize(this.myAvatar);
-        try { localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar)); } catch (e) { /* yok */ }
+        try {
+            localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar));
+            localStorage.setItem('psikovaka_noro_saved', '1');   // ilk kayıt: ana sayfa hatırlatması bir daha çıkmaz
+        } catch (e) { /* yok */ }
         this.renderHeaderProfilePill();
     };
 
@@ -26593,6 +26786,167 @@ if (typeof module !== 'undefined' && module.exports) {
 
 </script>
 <script>
+/* OTOMATİK ÜRETİLDİ — elle düzenleme. Kaynak: tools/isim_filtresi/liste.json + cekirdek.js
+ * Yeniden üret: node tools/isim_filtresi/uret.js   (sunucu: --yeni-migration)
+ * Kullanım: PsikoVakaIsimFiltresi.check(metin) -> { ok, reason: null | 'uygunsuz' | 'ayrilmis' }
+ * Sunucu aynı kuralları uygular (public.isim_kontrol_ayrinti); burası yalnızca anında geri bildirim içindir.
+ */
+(function (global) {
+    'use strict';
+    /**
+     * PsikoVaka — isim filtresi çekirdeği (kullanıcı adı ve görünen ad).
+     *
+     * Bu dosya TEK normalleştirme/eşleştirme uygulamasıdır. `tools/isim_filtresi/uret.js` bunu derlenmiş
+     * veriyle birlikte `js/isim_filtresi.js` içine yazar; sunucudaki SQL (`public.isim_kontrol_ayrinti`)
+     * aynı adımları aynı sırayla uygular ve `tools/isim_filtresi/test/calistir.mjs` ikisini aynı derlemle
+     * karşılaştırır. Bir adımı burada değiştirirsen SQL'de de değiştir (0005 migration'ı, §2) ve testi çalıştır.
+     *
+     * Adımlar (her iki tarafta aynı):
+     *  1. ilk 64 karakter; görünmez karakterler silinir
+     *  2. benzer harf tablosu (Kiril/Yunan benzerleri, ı -> i, ß -> ss ...)
+     *  3. Unicode NFKD + birleşen işaretlerin (U+0300–U+036F) silinmesi (ş -> s, ğ -> g, ç -> c, ö -> o, ü -> u, İ -> I)
+     *  4. sözcük sınırı: "AMYalamak" -> "AM Yalamak", "AliVeli" -> "Ali Veli"
+     *  5. ASCII küçük harf
+     *  6. iki varyant: 'leet' (0->o 1->i 3->e 4->a 5->s 7->t 8->b 9->g @->a $->s !->i |->i €->e) ve
+     *     'rakamsiz' (rakam/işaretler ayraç)
+     *  7. [a-z] dışı her şey ayraç; sözcükler = ayraçlar arası parçalar; bütün = sözcüklerin birleşimi
+     * Eşleştirme: her terim, harf tekrarlarını kabul eden bir desendir (siktir -> s+i+k+t+i+r+; kökte çift
+     * harf varsa o harf en az iki kez: yarrak -> y+a+r{2,}a+k+). 'alt' terimler bütünün herhangi bir yerinde,
+     * 'kelime'/'kelime_ek'/'tam' bir sözcüğün (ya da bütünün) tamamında, 'bas'/'son' başında/sonunda aranır.
+     * Bir eşleşme, aynı dizgedeki bir beyaz liste eşleşmesinin TAMAMEN içindeyse yok sayılır.
+     */
+    function psikoVakaIsimFiltresiOlustur(V) {
+        'use strict';
+        var KATEGORI_SIRASI = ['tr', 'kalip', 'en', 'ayrilmis'];
+
+        function harfDizisi(s) { return Array.from(String(s)); }
+        var gorunmez = {};
+        harfDizisi(V.gorunmez).forEach(function (c) { gorunmez[c] = true; });
+
+        function onIsle(girdi) {
+            var s = harfDizisi(girdi == null ? '' : girdi).slice(0, 64);
+            var out = '';
+            for (var i = 0; i < s.length; i++) {
+                var c = s[i];
+                if (gorunmez[c]) continue;
+                out += Object.prototype.hasOwnProperty.call(V.benzer, c) ? V.benzer[c] : c;
+            }
+            out = out.normalize('NFKD').replace(/[̀-ͯ]/g, '');
+            out = out.replace(/([A-Z])([A-Z][a-z])/g, '$1 $2').replace(/([a-z])([A-Z])/g, '$1 $2');
+            return out.replace(/[A-Z]/g, function (c) { return c.toLowerCase(); });
+        }
+
+        /** -> [{varyant, butun, sozcukler[]}] (boş varyant atlanır) */
+        function varyantlar(girdi) {
+            var on = onIsle(girdi);
+            var sonuc = [];
+            ['leet', 'rakamsiz'].forEach(function (v) {
+                var t = on;
+                if (v === 'leet') {
+                    var x = '';
+                    harfDizisi(t).forEach(function (c) { x += Object.prototype.hasOwnProperty.call(V.leet, c) ? V.leet[c] : c; });
+                    t = x;
+                }
+                var soz = t.split(/[^a-z]+/).filter(Boolean);
+                var butun = soz.join('');
+                if (butun) sonuc.push({ varyant: v, butun: butun, sozcukler: soz });
+            });
+            return sonuc;
+        }
+
+        function derle(d) { return { bas: new RegExp('^(?:' + d + ')'), tam: new RegExp('^(?:' + d + ')$') }; }
+        var terimler = V.terimler.map(function (t) {
+            var r = { tur: t.tur, kip: t.kip, re: derle(t.desen) };
+            if (t.kip === 'kelime') r.kelime = new RegExp(t.ek ? '^(?:' + t.desen + ')(?:' + t.ek + '){0,2}$' : '^(?:' + t.desen + ')$');
+            if (t.kip === 'kelime_ek') r.kelime = new RegExp('^(?:' + t.desen + ')(?:' + t.ek + '){1,2}$');
+            return r;
+        });
+        var beyaz = V.beyaz.map(function (d) { return new RegExp('^(?:' + d + ')'); });
+
+        /** dizgedeki bütün beyaz liste aralıkları [baş, son) */
+        function beyazAraliklar(s) {
+            var a = [];
+            for (var i = 0; i < s.length; i++) {
+                var k = s.slice(i);
+                for (var j = 0; j < beyaz.length; j++) {
+                    var m = beyaz[j].exec(k);
+                    if (m) a.push([i, i + m[0].length]);
+                }
+            }
+            return a;
+        }
+        function kapsanmis(araliklar, bas, son) {
+            for (var i = 0; i < araliklar.length; i++) if (araliklar[i][0] <= bas && son <= araliklar[i][1]) return true;
+            return false;
+        }
+        /** terimin s içindeki eşleşme aralıkları */
+        function eslesmeler(t, s, butunMu) {
+            var a = [], i, m;
+            if (t.kip === 'alt') {
+                if (!butunMu) return a;
+                for (i = 0; i < s.length; i++) { m = t.re.bas.exec(s.slice(i)); if (m) a.push([i, i + m[0].length]); }
+            } else if (t.kip === 'kelime' || t.kip === 'kelime_ek') {
+                if (t.kelime.test(s)) a.push([0, s.length]);
+            } else if (t.kip === 'tam') {
+                if (t.re.tam.test(s)) a.push([0, s.length]);
+            } else if (t.kip === 'bas') {
+                m = t.re.bas.exec(s); if (m) a.push([0, m[0].length]);
+            } else if (t.kip === 'son') {
+                for (i = 0; i < s.length; i++) { if (t.re.tam.test(s.slice(i))) { a.push([i, s.length]); break; } }
+            }
+            return a;
+        }
+
+        /** -> null (uygun) ya da kategori: 'tr' | 'kalip' | 'en' | 'ayrilmis' */
+        function kategori(girdi) {
+            var vs = varyantlar(girdi);
+            if (!vs.length) return null;
+            var dizgeler = [];
+            vs.forEach(function (v) {
+                var gorulen = {};
+                [v.butun].concat(v.sozcukler).forEach(function (s, idx) {
+                    if (gorulen[s] && idx > 0) return;
+                    gorulen[s] = true;
+                    dizgeler.push({ s: s, butun: idx === 0 });
+                });
+            });
+            var beyazOnbellek = {};
+            for (var k = 0; k < KATEGORI_SIRASI.length; k++) {
+                var kat = KATEGORI_SIRASI[k];
+                for (var ti = 0; ti < terimler.length; ti++) {
+                    var t = terimler[ti];
+                    if (t.tur !== kat) continue;
+                    for (var di = 0; di < dizgeler.length; di++) {
+                        var d = dizgeler[di];
+                        var es = eslesmeler(t, d.s, d.butun);
+                        if (!es.length) continue;
+                        var ar = beyazOnbellek[d.s] || (beyazOnbellek[d.s] = beyazAraliklar(d.s));
+                        for (var e = 0; e < es.length; e++) if (!kapsanmis(ar, es[e][0], es[e][1])) return kat;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /** { ok, reason }  reason: 'uygunsuz' | 'ayrilmis' | null. Eşleşen sözcük hiçbir zaman döndürülmez. */
+        function check(girdi) {
+            var k = kategori(girdi);
+            if (!k) return { ok: true, reason: null };
+            return { ok: false, reason: k === 'ayrilmis' ? 'ayrilmis' : 'uygunsuz' };
+        }
+
+        return { check: check, kategori: kategori, varyantlar: varyantlar, onIsle: onIsle, surum: V.surum };
+    }
+
+    var VERI = {"surum":1,"gorunmez":"­͏᠎​‌‍‎‏⁠⁡⁢⁣⁤﻿","benzer":{"ı":"i","ß":"ss","æ":"ae","Æ":"AE","œ":"oe","Œ":"OE","ø":"o","Ø":"O","đ":"d","Đ":"D","ł":"l","Ł":"L","ħ":"h","а":"a","А":"A","в":"b","В":"B","с":"c","С":"C","е":"e","Е":"E","ё":"e","Ё":"E","н":"h","Н":"H","і":"i","І":"I","ј":"j","Ј":"J","к":"k","К":"K","м":"m","М":"M","о":"o","О":"O","р":"p","Р":"P","ѕ":"s","Ѕ":"S","т":"t","Т":"T","у":"y","У":"Y","х":"x","Х":"X","α":"a","Α":"A","β":"b","Β":"B","ε":"e","Ε":"E","ι":"i","Ι":"I","κ":"k","Κ":"K","ο":"o","Ο":"O","ρ":"p","Ρ":"P","τ":"t","Τ":"T","υ":"u","Υ":"Y","χ":"x","Χ":"X","ν":"v","Ν":"N","μ":"m","Μ":"M"},"leet":{"0":"o","1":"i","3":"e","4":"a","5":"s","7":"t","8":"b","9":"g","@":"a","$":"s","!":"i","|":"i","€":"e"},"terimler":[{"tur":"tr","kip":"alt","desen":"o+r+o+s+p+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+s+p+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+u+s+p+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+o+s+b+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+s+b+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+u+s+b+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+o+z+b+u+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+t+i+r+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+t+r+","ek":""},{"tur":"tr","kip":"alt","desen":"s+k+t+i+r+","ek":""},{"tur":"tr","kip":"alt","desen":"s+k+t+r+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+t+i+g+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+t+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+t+i+n+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+r+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+y+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+y+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+y+i+n+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+r+l+e+r+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+c+e+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+e+c+e+g+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+c+e+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+s+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+n+i+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+m+e+k+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+m+i+s+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k+i+l+m+i+s+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+k{2,}o+","ek":""},{"tur":"tr","kip":"kelime","desen":"s+i+k+","ek":"i+m+|i+n+|i+|e+|l+e+r+|i+k+|e+r+|e+r+i+m+|e+y+i+m+|t+i+r+|t+i+m+|t+i+|i+c+i+|i+m+e+|i+m+i+|i+n+i+|i+n+e+|s+i+n+|m+e+k+|e+c+e+m+|i+c+e+m+|i+s+|i+s+i+|i+s+m+e+|l+e+r+i+m+|k+o+|k+a+f+a+"},{"tur":"tr","kip":"alt","desen":"a+m+c+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+c+u+k+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+c+i+g+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+a+k+o+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+i+k+o+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+a+g+o+y+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+a+k+o+y+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+n+a+k+o+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+i+s+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+a+s+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+i+n+i+y+a+l+a+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+y+a+l+a+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+y+a+l+a+r+","ek":""},{"tur":"tr","kip":"alt","desen":"a+m+l+i+g+o+t+","ek":""},{"tur":"tr","kip":"kelime","desen":"a+m+","ek":"c+i+k+|c+u+k+|i+n+a+|i+n+i+|i+n+|i+|l+a+r+|c+i+"},{"tur":"tr","kip":"kelime","desen":"a+m+k+","ek":""},{"tur":"tr","kip":"bas","desen":"a+m+k+","ek":""},{"tur":"tr","kip":"son","desen":"a+m+k+","ek":""},{"tur":"tr","kip":"kelime","desen":"a+m+q+","ek":""},{"tur":"tr","kip":"bas","desen":"a+m+q+","ek":""},{"tur":"tr","kip":"son","desen":"a+m+q+","ek":""},{"tur":"tr","kip":"kelime","desen":"a+q+","ek":""},{"tur":"tr","kip":"kelime","desen":"a+m+g+","ek":""},{"tur":"tr","kip":"kelime","desen":"s+k+m+","ek":""},{"tur":"tr","kip":"kelime","desen":"s+k+r+m+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+r{2,}a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+r{2,}a+g+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+r{2,}a+m+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+r{2,}a+n+","ek":""},{"tur":"tr","kip":"alt","desen":"d+a+l+y+a+r+a+k+","ek":""},{"tur":"tr","kip":"bas","desen":"y+a+r+a+k+","ek":""},{"tur":"tr","kip":"kelime","desen":"y+a+r+a+k+","ek":"l+e+r+|l+a+r+|i+|u+|e+|a+|i+n+|u+n+|i+m+|u+m+|d+e+|d+a+|d+e+n+|d+a+n+|c+i+|c+u+|l+i+k+|l+u+k+|l+i+|l+u+|n+e+|n+a+|n+i+|n+u+|n+i+n+|n+u+n+|s+|e+s+|y+|i+e+|z+"},{"tur":"tr","kip":"alt","desen":"t+a+s+a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"t+a+s{2,}a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"t+a+s+a+g+","ek":""},{"tur":"tr","kip":"alt","desen":"d+a+l+t+a+s+a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+v+e+r+e+n+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+l+e+k+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+o+s+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+u+n+u+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+u+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+u+n+d+e+n+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+u+m+","ek":""},{"tur":"tr","kip":"alt","desen":"g+o+t+v+e+r+i+c+i+","ek":""},{"tur":"tr","kip":"kelime","desen":"g+t+v+r+n+","ek":""},{"tur":"tr","kip":"kelime_ek","desen":"g+o+t+","ek":"u+|u+n+|u+n+e+|u+n+u+|u+n+d+e+n+|e+|t+e+|t+e+n+|l+e+r+|l+e+k+|o+s+|v+e+r+e+n+|l+u+|u+n+u+z+|u+m+e+"},{"tur":"tr","kip":"kelime","desen":"p+i+c+","ek":"l+e+r+|l+i+k+|i+|i+n+|e+|k+u+r+u+s+u+|l+a+r+"},{"tur":"tr","kip":"alt","desen":"p+i+c+k+u+r+u+s+u+","ek":""},{"tur":"tr","kip":"alt","desen":"p+i+c+l+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"i+b+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"i+p+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"i+b+i+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"p+e+z+e+v+e+n+k+","ek":""},{"tur":"tr","kip":"alt","desen":"p+e+z+e+v+e+k+","ek":""},{"tur":"tr","kip":"kelime","desen":"p+e+z+o+","ek":""},{"tur":"tr","kip":"alt","desen":"g+a+v+a+t+","ek":""},{"tur":"tr","kip":"alt","desen":"k+a+h+p+e+","ek":""},{"tur":"tr","kip":"alt","desen":"k+a+l+t+a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"s+u+r+t+u+k+","ek":""},{"tur":"tr","kip":"alt","desen":"f+a+h+i+s+e+","ek":""},{"tur":"tr","kip":"alt","desen":"k+e+v+a+s+e+","ek":""},{"tur":"tr","kip":"alt","desen":"o+g+l+a+n+c+i+","ek":""},{"tur":"tr","kip":"alt","desen":"d+u+r+z+u+","ek":""},{"tur":"tr","kip":"alt","desen":"k+e+r+h+a+n+e+","ek":""},{"tur":"tr","kip":"alt","desen":"a+s+i+f+t+e+","ek":""},{"tur":"tr","kip":"alt","desen":"k+a+n+c+i+k+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+v+s+a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"y+a+v+s+a+g+","ek":""},{"tur":"tr","kip":"kelime","desen":"p+u+s+t+","ek":"l+a+r+|l+u+k+|u+|u+n+|t+"},{"tur":"tr","kip":"alt","desen":"s+e+r+e+f+s+i+z+","ek":""},{"tur":"tr","kip":"alt","desen":"s+e+r+e+f+s+z+","ek":""},{"tur":"tr","kip":"alt","desen":"s+a+k+s+o+","ek":""},{"tur":"tr","kip":"alt","desen":"s+a+k+s+o+c+u+","ek":""},{"tur":"tr","kip":"kelime","desen":"o+c+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+o+s+p+u+c+o+c+u+g+u+","ek":""},{"tur":"tr","kip":"alt","desen":"o+r+o+s+p+u+e+v+l+a+d+i+","ek":""},{"tur":"tr","kip":"alt","desen":"o+t+u+z+b+i+r+c+i+","ek":""},{"tur":"tr","kip":"alt","desen":"o+t+u+z+b+i+r+c+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+c+m+a+k+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+c+t+i+g+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+c+a+r+i+m+","ek":""},{"tur":"tr","kip":"alt","desen":"s+i+c+a+y+i+m+","ek":""},{"tur":"tr","kip":"kelime","desen":"b+o+k+","ek":"u+|u+n+|l+u+|t+a+n+|c+u+|c+a+|k+a+f+a+|y+i+y+e+n+"},{"tur":"tr","kip":"alt","desen":"b+o+k+t+a+n+","ek":""},{"tur":"tr","kip":"alt","desen":"b+o+k{2,}a+f+a+","ek":""},{"tur":"tr","kip":"alt","desen":"a+v+r+a+d+i+n+i+","ek":""},{"tur":"tr","kip":"alt","desen":"b+a+c+i+n+i+","ek":""},{"tur":"tr","kip":"kelime","desen":"g+a+v+u+r+","ek":"l+e+r+|l+a+r+|i+|u+|e+|a+|i+n+|u+n+|i+m+|u+m+|d+e+|d+a+|d+e+n+|d+a+n+|c+i+|c+u+|l+i+k+|l+u+k+|l+i+|l+u+|n+e+|n+a+|n+i+|n+u+|n+i+n+|n+u+n+|s+|e+s+|y+|i+e+|z+"},{"tur":"tr","kip":"kelime","desen":"p+e+d+o+f+i+l+","ek":"l+e+r+|l+a+r+|i+|u+|e+|a+|i+n+|u+n+|i+m+|u+m+|d+e+|d+a+|d+e+n+|d+a+n+|c+i+|c+u+|l+i+k+|l+u+k+|l+i+|l+u+|n+e+|n+a+|n+i+|n+u+|n+i+n+|n+u+n+|s+|e+s+|y+|i+e+|z+"},{"tur":"tr","kip":"kelime","desen":"p+e+d+o+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+n+a+s+i+n+i+s+i+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+n+a+n+i+s+i+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+n+a+n+i+s+k+m+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+n+a+n+i+a+v+r+a+d+","ek":""},{"tur":"kalip","kip":"alt","desen":"b+a+c+i+n+i+s+i+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+g+z+i+n+a+s+i+c+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+g+z+i+n+i+s+i+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"o+r+o+s+p+u+c+o+c+u+","ek":""},{"tur":"kalip","kip":"alt","desen":"o+r+o+s+b+u+c+o+c+u+","ek":""},{"tur":"kalip","kip":"alt","desen":"p+i+s+a+r+a+p+","ek":""},{"tur":"kalip","kip":"alt","desen":"p+i+s+e+r+m+e+n+i+","ek":""},{"tur":"kalip","kip":"alt","desen":"p+i+s+y+a+h+u+d+i+","ek":""},{"tur":"kalip","kip":"alt","desen":"p+i+s+k+u+r+t+","ek":""},{"tur":"kalip","kip":"alt","desen":"p+i+s+z+e+n+c+i+","ek":""},{"tur":"kalip","kip":"alt","desen":"e+r+m+e+n+i+d+o+l+u+","ek":""},{"tur":"kalip","kip":"alt","desen":"y+a+h+u+d+i+d+o+l+u+","ek":""},{"tur":"kalip","kip":"alt","desen":"k+u+r+t+d+o+l+u+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+m+i+n+a+k+o+y+i+m+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+m+i+n+a+k+o+d+u+m+","ek":""},{"tur":"kalip","kip":"alt","desen":"a+m+i+n+a+k+o+y+d+u+g+","ek":""},{"tur":"kalip","kip":"alt","desen":"s+u+c+k+m+y+d+i+c+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"s+u+c+k+m+y+c+o+c+k+","ek":""},{"tur":"kalip","kip":"alt","desen":"e+a+t+m+y+a+s{2,}","ek":""},{"tur":"kalip","kip":"alt","desen":"k+i+l{2,}a+l{2,}j+","ek":""},{"tur":"kalip","kip":"alt","desen":"g+a+s+t+h+e+j+","ek":""},{"tur":"en","kip":"alt","desen":"f+u+c+k+","ek":""},{"tur":"en","kip":"kelime","desen":"f+u+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"f+c+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"f+c+u+k+","ek":""},{"tur":"en","kip":"alt","desen":"p+h+u+c+k+","ek":""},{"tur":"en","kip":"kelime","desen":"p+h+u+k+","ek":""},{"tur":"en","kip":"alt","desen":"f+u+k{2,}","ek":""},{"tur":"en","kip":"alt","desen":"s+h+i+t+","ek":""},{"tur":"en","kip":"alt","desen":"c+u+n+t+","ek":""},{"tur":"en","kip":"alt","desen":"b+i+t+c+h+","ek":""},{"tur":"en","kip":"alt","desen":"b+i+a+t+c+h+","ek":""},{"tur":"en","kip":"alt","desen":"w+h+o+r+e+","ek":""},{"tur":"en","kip":"alt","desen":"s+l+u+t+","ek":""},{"tur":"en","kip":"alt","desen":"a+s{2,}h+o+l+e+","ek":""},{"tur":"en","kip":"alt","desen":"a+r+s+e+h+o+l+e+","ek":""},{"tur":"en","kip":"alt","desen":"d+u+m+b+a+s{2,}","ek":""},{"tur":"en","kip":"alt","desen":"f+a+t+a+s{2,}","ek":""},{"tur":"en","kip":"alt","desen":"j+a+c+k+a+s{2,}","ek":""},{"tur":"en","kip":"kelime","desen":"a+s{2,}","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"a+r+s+e+","ek":""},{"tur":"en","kip":"alt","desen":"d+i+c+k+h+e+a+d+","ek":""},{"tur":"en","kip":"kelime","desen":"d+i+c+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"c+o+c+k+s+u+c+k+e+r+","ek":""},{"tur":"en","kip":"kelime","desen":"c+o+c+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"b+a+s+t+a+r+d+","ek":""},{"tur":"en","kip":"alt","desen":"b+o+l{2,}o+c+k+s+","ek":""},{"tur":"en","kip":"alt","desen":"w+a+n+k+e+r+","ek":""},{"tur":"en","kip":"alt","desen":"w+a+n+k+","ek":""},{"tur":"en","kip":"alt","desen":"t+w+a+t+","ek":""},{"tur":"en","kip":"kelime","desen":"p+r+i+c+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"p+u+s{2,}y+","ek":""},{"tur":"en","kip":"alt","desen":"d+i+l+d+o+","ek":""},{"tur":"en","kip":"alt","desen":"b+l+o+w+j+o+b+","ek":""},{"tur":"en","kip":"alt","desen":"h+a+n+d+j+o+b+","ek":""},{"tur":"en","kip":"alt","desen":"r+i+m+j+o+b+","ek":""},{"tur":"en","kip":"alt","desen":"f+o{2,}t+j+o+b+","ek":""},{"tur":"en","kip":"alt","desen":"j+i+z{2,}","ek":""},{"tur":"en","kip":"alt","desen":"c+u+m+s+h+o+t+","ek":""},{"tur":"en","kip":"kelime","desen":"c+u+m+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"c+r+e+a+m+p+i+e+","ek":""},{"tur":"en","kip":"alt","desen":"g+a+n+g+b+a+n+g+","ek":""},{"tur":"en","kip":"alt","desen":"b+u+k{2,}a+k+e+","ek":""},{"tur":"en","kip":"alt","desen":"p+o+r+n+","ek":""},{"tur":"en","kip":"alt","desen":"h+e+n+t+a+i+","ek":""},{"tur":"en","kip":"alt","desen":"m+i+l+f+","ek":""},{"tur":"en","kip":"alt","desen":"t+i+t{2,}i+e+s+","ek":""},{"tur":"en","kip":"kelime","desen":"t+i+t+s+","ek":""},{"tur":"en","kip":"kelime","desen":"t+i+t{2,}y+","ek":""},{"tur":"en","kip":"kelime","desen":"b+o{2,}b+s+","ek":""},{"tur":"en","kip":"kelime","desen":"b+o{2,}b+","ek":""},{"tur":"en","kip":"kelime","desen":"h+o+r+n+y+","ek":""},{"tur":"en","kip":"kelime","desen":"r+a+p+e+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"r+a+p+i+s+t+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"r+a+p+i+n+g+","ek":""},{"tur":"en","kip":"alt","desen":"m+o+t+h+e+r+f+u+c+k+","ek":""},{"tur":"en","kip":"kelime","desen":"m+o+f+o+","ek":""},{"tur":"en","kip":"kelime","desen":"s+t+f+u+","ek":""},{"tur":"en","kip":"kelime","desen":"g+t+f+o+","ek":""},{"tur":"en","kip":"alt","desen":"n+i+g{2,}e+r+","ek":""},{"tur":"en","kip":"alt","desen":"n+i+g{2,}a+","ek":""},{"tur":"en","kip":"alt","desen":"n+i+g{2,}a+h+","ek":""},{"tur":"en","kip":"kelime","desen":"n+e+g+r+o+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"f+a+g{2,}o+t+","ek":""},{"tur":"en","kip":"kelime","desen":"f+a+g+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"r+e+t+a+r+d+","ek":""},{"tur":"en","kip":"alt","desen":"t+r+a+n{2,}y+","ek":""},{"tur":"en","kip":"alt","desen":"s+h+e+m+a+l+e+","ek":""},{"tur":"en","kip":"kelime","desen":"k+i+k+e+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"s+p+i+c+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"c+h+i+n+k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"g+o{2,}k+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"c+o{2,}n+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"w+e+t+b+a+c+k+","ek":""},{"tur":"en","kip":"alt","desen":"b+e+a+n+e+r+","ek":""},{"tur":"en","kip":"alt","desen":"r+a+g+h+e+a+d+","ek":""},{"tur":"en","kip":"alt","desen":"t+o+w+e+l+h+e+a+d+","ek":""},{"tur":"en","kip":"alt","desen":"j+i+g+a+b+o{2,}","ek":""},{"tur":"en","kip":"alt","desen":"j+i+g{2,}a+b+o{2,}","ek":""},{"tur":"en","kip":"kelime","desen":"d+a+r+k+i+e+","ek":""},{"tur":"en","kip":"kelime","desen":"d+y+k+e+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"kelime","desen":"p+a+k+i+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"s+l+a+n+t+e+y+e+","ek":""},{"tur":"en","kip":"alt","desen":"h+i+t+l+e+r+","ek":""},{"tur":"en","kip":"alt","desen":"n+e+o+n+a+z+i+","ek":""},{"tur":"en","kip":"kelime","desen":"n+a+z+i+","ek":"s+|e+s+|z+|h+e+a+d+|i+n+g+|e+d+|h+o+l+e+|f+a+c+e+|b+o+y+|g+i+r+l+"},{"tur":"en","kip":"alt","desen":"s+i+e+g+h+e+i+l+","ek":""},{"tur":"en","kip":"alt","desen":"h+e+i+l+h+i+t+l+e+r+","ek":""},{"tur":"en","kip":"alt","desen":"w+h+i+t+e+p+o+w+e+r+","ek":""},{"tur":"en","kip":"alt","desen":"s+w+a+s+t+i+k+a+","ek":""},{"tur":"en","kip":"kelime","desen":"k{2,}","ek":""},{"tur":"en","kip":"alt","desen":"p+e+d+o+p+h+i+l+e+","ek":""},{"tur":"en","kip":"alt","desen":"p+a+e+d+o+p+h+i+l+e+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"a+d+m+i+n+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"a+d+m+i+n+i+s+t+r+a+t+o+r+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"m+o+d+e+r+a+t+o+r+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"y+o+n+e+t+i+c+i+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"y+o+n+e+t+i+m+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"y+e+t+k+i+l+i+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"p+s+i+k+o+v+a+k+a+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"a+n+t+h+r+o+p+i+c+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"s+u+p+a+b+a+s+e+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"m+o+d+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"m+o+d+s+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"d+e+s+t+e+k+","ek":""},{"tur":"ayrilmis","kip":"alt","desen":"d+e+s+t+e+k+e+k+i+b+i+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+u+p{2,}o+r+t+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+i+s+t+e+m+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+y+s+t+e+m+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"r+o{2,}t+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+t+a+f{2,}","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"c+l+a+u+d+e+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"o+f{2,}i+c+i+a+l+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"r+e+s+m+i+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"y+a+r+d+i+m+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"h+e+l+p+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+y+s+o+p+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"s+u+p+e+r+u+s+e+r+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"o+w+n+e+r+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"k+u+r+u+c+u+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"g+e+m+i+n+i+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"c+h+a+t+g+p+t+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"o+p+e+n+a+i+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"a+n+o+n+y+m+o+u+s+","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"n+u+l{2,}","ek":""},{"tur":"ayrilmis","kip":"tam","desen":"u+n+d+e+f+i+n+e+d+","ek":""}],"beyaz":["a+m+a+","a+m+a+c+","a+m+a+c+i+","a+m+a+t+e+u+r+","a+m+a+t+o+r+","a+m+a+z+e+","a+m+a+z+i+n+g+","a+m+a+z+o+n+","a+m+b+a+l+a+j+","a+m+b+a+r+","a+m+b+a+s{2,}a+d+o+r+","a+m+b+l+e+m+","a+m+b+u+l+a+n+s+","a+m+c+a+","a+m+c+a+l+a+r+","a+m+c+a+m+","a+m+c+a+n+","a+m+c+a+s+i+","a+m+c+a+z+a+d+e+","a+m+e+l+","a+m+e+l+e+","a+m+e+l+i+y+a+t+","a+m+e+r+i+c+a+n+","a+m+e+r+i+k+a+","a+m+f+i+","a+m+f+i+b+i+","a+m+i+g+o+","a+m+i+l+","a+m+i+n+","a+m+i+n+e+","a+m+i+n+o+","a+m+i+n+o+a+s+i+t+","a+m+i+r+","a+m+i+r+a+l+","a+m+l+a+","a+m+o+n+y+a+k+","a+m+p+e+r+","a+m+p+u+l+","a+m+s+t+e+r+d+a+m+","a+s{2,}a+m+","a+s{2,}a+s{2,}i+n+","a+s{2,}a+u+l+t+","a+s{2,}e+s{2,}","a+s{2,}e+t+","a+s{2,}i+s+t+","a+s{2,}i+s+t+a+n+t+","b+a+s{2,}","b+o+k+s+","b+o+k+s+e+r+","b+o+k+s+o+r+","b+o{2,}b+o{2,}k+","b+o+x+e+r+","c+a+s{2,}a+n+d+r+a+","c+l+a+s{2,}","c+l+a+s{2,}i+c+","c+o+c+k+a+t+o{2,}","c+o+c+k+p+i+t+","c+o+c+k+r+o+a+c+h+","c+o+c+k+t+a+i+l+","c+o+m+p+a+s{2,}","c+u+c+u+m+b+e+r+","c+u+m+a+","c+u+m+a+r+t+e+s+i+","c+u+m+h+u+r+","c+u+m+h+u+r+i+y+e+t+","c+u+m+u+l+u+s+","d+i+c+k+e+n+s+","d+i+c+k+i+n+s+o+n+","d+i+c+k+s+o+n+","d+o+c+u+m+e+n+t+","d+r+a+p+e+","e+m+b+a+s{2,}y+","g+l+a+s{2,}","g+o+t+a+n+","g+o+t+h+a+m+","g+o+t+i+k+","g+o+t+l+a+n+d+","g+o+t+u+r+","g+o+t+u+r+m+e+k+","g+o+t+u+r+u+","g+r+a+p+e+","g+r+a+s{2,}","h+a+n+c+o+c+k+","h+a+r+a+s{2,}","i+b+n+e+s+i+n+a+","i+b+n+h+a+l+d+u+n+","i+b+n+i+h+a+l+d+u+n+","i+b+n+i+s+i+n+a+","i+s+i+k+","k+a+n+c+i+k{2,}o+p+e+k+","k+a+s+i+m+","k+a+s+i+m+p+a+s+a+","k+i+s+k+i+r+t+","l+a+s{2,}o+","m+a+s+i+k+l+e+r+","m+a+s{2,}","m+a+t+s+u+s+h+i+t+a+","n+a+z+i+f+e+","n+a+z+i+k+","n+a+z+i+l{2,}i+","p+a+r+a+p+e+t+","p+a+s{2,}","p+a+s{2,}i+o+n+","p+e+a+c+o+c+k+","p+i+k+a+c+h+u+","p+i+k+n+i+k+","p+u+s{2,}y+c+a+t+","r+a+p+e+s+e{2,}d+","r+e+t+a+r+d+a+n+t+","s+a+k+s+o+f+o+n+","s+a+s{2,}y+","s+a+x+o+p+h+o+n+e+","s+c+r+a+p+e+","s+c+u+m+","s+c+u+n+t+h+o+r+p+e+","s+h+i{2,}t+a+k+e+","s+h+i+t+a+k+e+","s+i+k+c+a+","s+i+k+i+","s+i+k+i+c+i+","s+i+k+i+l+a+s+m+a+","s+i+k+i+l+d+i+m+","s+i+k+i+l+m+a+","s+i+k+i+l+m+a+k+","s+i+k+i+n+t+i+","s+i+k+i+n+t+i+l+i+","s+i+k+i+s+i+k+","s+i+k+i+s+m+a+","s+i+k+i+s+m+a+k+","s+i+k+i+s+t+i+r+","s+i+k+i+y+o+n+e+t+i+m+","s+i+k{2,}e+","s+i+k{2,}e+l+e+r+","s+i+k+l+e+t+","s+i+k+m+a+","s+i+k+m+a+k+","s+n+i+g{2,}e+r+","s+n+i+g{2,}e+r+i+n+g+","s+p+i+c+e+","s+p+i+c+y+","s+w+a+n+k+","t+e+r+a+p+i+s+t+","t+h+e+r+a+p+e+u+t+i+c+","t+h+e+r+a+p+i+s+t+","t+i+t+a+n+","t+i+t+a+n+i+c+","y+a+r+a+s+a+"]};
+    var f = psikoVakaIsimFiltresiOlustur(VERI);
+    var api = { check: f.check, surum: f.surum };
+    if (typeof module !== 'undefined' && module.exports) module.exports = { check: f.check, kategori: f.kategori, varyantlar: f.varyantlar, surum: f.surum };
+    if (global) global.PsikoVakaIsimFiltresi = api;
+})(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this));
+
+</script>
+<script>
 /**
  * PsikoVaka — Hesap katmanı (Supabase Auth + profiles).
  *
@@ -26603,7 +26957,9 @@ if (typeof module !== 'undefined' && module.exports) {
  *
  * Durumlar (state):
  *   'guest'                  oturum yok (veya hesap hizmeti kullanılamıyor)
- *   'signed_in_no_username'  oturum var, profil okundu ama kullanıcı adı seçilmemiş
+ *   'signed_in_no_username'  oturum var, profil okundu ama kullanıcı adı seçilmemiş — YA DA sunucu adı topluluk
+ *                            kurallarına uymadığı için işaretledi (profiles.needs_rename, 0005): aynı zorunlu adım,
+ *                            snapshot.renameRequired = true
  *   'ready'                  oturum var, kullanıcı adı var (profil null olabilir: okunamadıysa profileError dolu)
  * Hizmet durumu (availability): 'pending' | 'ready' | 'unavailable' | 'disabled' | 'unsupported'
  *
@@ -26632,6 +26988,10 @@ if (typeof module !== 'undefined' && module.exports) {
     const USERNAME_RE = /^[A-Za-z0-9_]{3,20}$/;
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PROFILE_COLUMNS = 'id,username,display_name,avatar,ranked_points,matches_played,matches_won';
+    // 0005 (isim filtresi) sütunu; sunucuda yoksa (42703) bir kez düşülür ve bu sayfa ömrü boyunca sorulmaz.
+    const RENAME_COLUMN = 'needs_rename';
+    const RENAME_NOTE = 'Kullanıcı adın topluluk kurallarına uymadığı için değiştirmen gerekiyor.';
+    const NAME_BLOCKED = 'Bu ad kullanılamıyor. Lütfen başka bir ad seç.';
     const IMPORT_FLAG_PREFIX = 'psikovaka_progress_imported_';
     const LIB_TIMEOUT_MS = 10000;
     const AUTH_URL_PARAMS = ['code', 'error', 'error_code', 'error_description', 'type'];
@@ -26649,7 +27009,8 @@ if (typeof module !== 'undefined' && module.exports) {
         _loading: false,
         syncedUserId: null,
         importedThisSession: false,
-        loadSeq: 0
+        loadSeq: 0,
+        renameColumn: true
     };
     let initPromise = null;
 
@@ -26794,6 +27155,9 @@ if (typeof module !== 'undefined' && module.exports) {
         USERNAME_INVALID: 'Kullanıcı adı 3-20 karakter olmalı; yalnızca harf, rakam ve _ kullanılabilir.',
         USERNAME_TAKEN: 'Bu kullanıcı adı alınmış. Başka bir ad dene.',
         USERNAME_REQUIRED: 'Önce bir kullanıcı adı seçmelisin.',
+        USERNAME_INAPPROPRIATE: NAME_BLOCKED,
+        USERNAME_RESERVED: 'Bu ad ayrılmış. Lütfen başka bir ad seç.',
+        DISPLAY_NAME_INAPPROPRIATE: NAME_BLOCKED,
         ALREADY_IMPORTED: 'Bu cihazdaki ilerleme daha önce hesaba aktarılmış.',
         INVALID_PROGRESS: 'Yerel ilerleme aktarılamadı (geçersiz vaka listesi).',
         INVALID_STATS: 'Yerel istatistikler aktarılamadı (geçersiz biçim).',
@@ -26870,9 +27234,21 @@ if (typeof module !== 'undefined' && module.exports) {
     }
 
     // ---------------------------------------------------------------- doğrulama (sunucuyla aynı kurallar)
+    /** İsim filtresi (js/isim_filtresi.js; yüklenmediyse yalnızca sunucu denetler). Eşleşen sözcük hiç gösterilmez. */
+    function nameFilter(v) {
+        try {
+            const F = global.PsikoVakaIsimFiltresi;
+            if (!F || typeof F.check !== 'function') return null;
+            const r = F.check(v);
+            if (r && r.ok === false) return r.reason === 'ayrilmis' ? 'ayrilmis' : 'uygunsuz';
+        } catch (e) {}
+        return null;
+    }
     function validateUsername(name) {
         const v = String(name || '').trim();
         if (!USERNAME_RE.test(v)) return msg('USERNAME_INVALID');
+        const f = nameFilter(v);
+        if (f) return msg(f === 'ayrilmis' ? 'USERNAME_RESERVED' : 'USERNAME_INAPPROPRIATE');
         return null;
     }
     function validateEmail(email) {
@@ -26884,7 +27260,8 @@ if (typeof module !== 'undefined' && module.exports) {
     }
     function validateDisplayName(name) {
         const v = String(name || '').trim();
-        return v.length >= 1 && v.length <= 30 ? null : 'Görünen ad 1-30 karakter olmalı.';
+        if (!(v.length >= 1 && v.length <= 30)) return 'Görünen ad 1-30 karakter olmalı.';
+        return nameFilter(v) ? msg('DISPLAY_NAME_INAPPROPRIATE') : null;
     }
 
     // ---------------------------------------------------------------- olaylar
@@ -26896,12 +27273,14 @@ if (typeof module !== 'undefined' && module.exports) {
             profile: st.profile ? JSON.parse(JSON.stringify(st.profile)) : null,
             profileError: st.profileError,
             recovery: st.recovery,
+            renameRequired: !!(st.user && st.profile && st.profile.username && st.profile.needs_rename),
             remember: getRemember(),
             passwordMinLength: passwordMinLength()
         };
     }
     function emit(event) {
         const snap = snapshot();
+        scheduleNameUi(snap);
         const ev = event || { type: 'state' };
         listeners.forEach(fn => {
             try { fn(snap, ev); } catch (e) { try { console.warn('[PsikoVakaAccount] dinleyici hatası:', e && e.message); } catch (_) {} }
@@ -26992,10 +27371,80 @@ if (typeof module !== 'undefined' && module.exports) {
         emit({ type: 'redirect', result });
     }
 
+    // ---------------------------------------------------------------- isim filtresi (0005) yardımcıları
+    /** needs_rename sütunuyla sorgular; sunucuda sütun yoksa (0005 öncesi) sütunsuz bir kez daha dener. */
+    async function profileQuery(run) {
+        if (st.renameColumn) {
+            const r = await run(PROFILE_COLUMNS + ',' + RENAME_COLUMN);
+            const e = r && r.error;
+            const missing = e && (e.code === '42703' || e.code === 'PGRST204' || /needs_rename/.test(String(e.message || '')));
+            if (!missing) return r;
+            st.renameColumn = false;
+        }
+        return run(PROFILE_COLUMNS);
+    }
+    function byId(id) { try { return global.document ? global.document.getElementById(id) : null; } catch (e) { return null; } }
+    function showFieldMessage(el, text) {
+        if (!el) return;
+        el.textContent = text || '';
+        el.hidden = !text;
+    }
+    let nameUiBound = false;
+    /** Ad alanlarında anında geri bildirim (uygulamanın kendi 'input' dinleyicisinden SONRA çalışır). */
+    function bindNameUi() {
+        if (nameUiBound || !global.document || !global.document.addEventListener) return;
+        nameUiBound = true;
+        global.document.addEventListener('input', (ev) => {
+            const t = ev && ev.target;
+            if (!t || !t.id) return;
+            if (t.id === 'usernameInput') {
+                const v = String(t.value || '').trim();
+                const f = v.length >= 3 ? nameFilter(v) : null;
+                if (f) {
+                    showFieldMessage(byId('usernameError'), msg(f === 'ayrilmis' ? 'USERNAME_RESERVED' : 'USERNAME_INAPPROPRIATE'));
+                    t.setAttribute('aria-invalid', 'true');
+                }
+            } else if (t.id === 'editDisplayName') {
+                const v = String(t.value || '').trim();
+                if (v && nameFilter(v)) showFieldMessage(byId('editProfileError'), msg('DISPLAY_NAME_INAPPROPRIATE'));
+            }
+        });
+    }
+    /** Zorunlu yeniden adlandırmada kullanıcı adı penceresine tek satır açıklama; uygunsuz ön dolguyu temizler. */
+    function applyNameUi(snap) {
+        bindNameUi();
+        const modal = byId('usernameModal');
+        if (!modal) return;
+        let note = byId('usernameRenameNote');
+        if (snap.renameRequired && snap.state === 'signed_in_no_username') {
+            if (!note) {
+                note = global.document.createElement('p');
+                note.id = 'usernameRenameNote';
+                note.className = 'section-text';
+                note.setAttribute('role', 'status');
+                const form = byId('usernameForm');
+                if (form && form.parentNode) form.parentNode.insertBefore(note, form);
+                else (modal.querySelector('.modal-body') || modal).appendChild(note);
+            }
+            note.textContent = RENAME_NOTE;
+            note.hidden = false;
+            const input = byId('usernameInput');
+            if (input && input.value && nameFilter(String(input.value).trim())) input.value = '';
+        } else if (note) {
+            note.hidden = true;
+        }
+    }
+    function scheduleNameUi(snap) {
+        if (!global.document) return;
+        try { applyNameUi(snap); } catch (e) {}
+        // Uygulama pencereyi bu olayın dinleyicisinde açar: açıldıktan sonra bir kez daha
+        setTimeout(() => { try { applyNameUi(snapshot()); } catch (e) {} }, 0);
+    }
+
     // ---------------------------------------------------------------- oturum ve profil
     function computeState() {
         if (!st.user) return 'guest';
-        if (st.profile && !st.profile.username) return 'signed_in_no_username';
+        if (st.profile && (!st.profile.username || st.profile.needs_rename)) return 'signed_in_no_username';
         return 'ready';
     }
     function setState() {
@@ -27047,13 +27496,13 @@ if (typeof module !== 'undefined' && module.exports) {
         const seq = ++st.loadSeq;
         st._loading = true;
         try {
-            const { data, error } = await st.client.from('profiles').select(PROFILE_COLUMNS).eq('id', st.user.id).maybeSingle();
+            const { data, error } = await profileQuery((cols) => st.client.from('profiles').select(cols).eq('id', st.user.id).maybeSingle());
             if (seq !== st.loadSeq) return;
             if (error) throw error;
             // Tetikleyici profili açmamışsa (olmamalı) kullanıcı adı adımı set_username ile satırı oluşturur.
             st.profile = data || { id: st.user.id, username: null, display_name: DEFAULT_DISPLAY_NAME, avatar: { ...DEFAULT_AVATAR }, ranked_points: 250, matches_played: 0, matches_won: 0 };
             st.profileError = null;
-            if (st.profile.username) await afterReady();
+            if (st.profile.username && !st.profile.needs_rename) await afterReady();
         } catch (e) {
             if (seq !== st.loadSeq) return;
             st.profile = null;
@@ -27081,7 +27530,7 @@ if (typeof module !== 'undefined' && module.exports) {
             patch.avatar = localAvatar;
         }
         const localNick = String(safeLocalGet('psikovaka_nickname') || '').trim().slice(0, 30);
-        if (localNick && localNick !== DEFAULT_DISPLAY_NAME && st.profile.display_name === DEFAULT_DISPLAY_NAME) {
+        if (localNick && localNick !== DEFAULT_DISPLAY_NAME && st.profile.display_name === DEFAULT_DISPLAY_NAME && !nameFilter(localNick)) {
             patch.displayName = localNick;
         }
         if (Object.keys(patch).length) await saveProfile(patch, { silent: true });
@@ -27264,7 +27713,7 @@ if (typeof module !== 'undefined' && module.exports) {
         const nc = requireClient(); if (nc) return nc;
         if (!st.user) return fail('NOT_AUTHENTICATED');
         try {
-            const { data, error } = await st.client.from('profiles').update(patch).eq('id', st.user.id).select(PROFILE_COLUMNS).maybeSingle();
+            const { data, error } = await profileQuery((cols) => st.client.from('profiles').update(patch).eq('id', st.user.id).select(cols).maybeSingle());
             if (error) return fail(error);
             if (!data) return fail('UNKNOWN');
             st.profile = data;
@@ -27793,23 +28242,37 @@ class PsikoVakaGame {
         const patch = this.buildProfilePatch(p);
         if (!patch) return;
         clearTimeout(this.profilePushTimer);
-        this.profilePushTimer = setTimeout(async () => {
-            this.profilePushTimer = null;
-            const latest = this.buildProfilePatch(this.accountSnap.profile);
-            if (!latest || !this.accountReady()) return;
-            this.profilePushInFlight = true;
-            let r;
-            try { r = await this.account.saveProfile(latest); } catch (e) { r = { ok: false }; }
-            this.profilePushInFlight = false;
-            if (typeof this.setAvatarSaveStatus === 'function' && latest.avatar) this.setAvatarSaveStatus(r && r.ok ? 'saved' : 'error');
-            if (!r || !r.ok) {
-                const now = Date.now();
-                if (!this.lastPushErrorAt || now - this.lastPushErrorAt > 30000) {
-                    this.lastPushErrorAt = now;
-                    this.showToast(`Profil sunucuya kaydedilemedi. ${(r && r.error && r.error.message) || ''}`.trim());
-                }
+        this.profilePushTimer = setTimeout(() => { this.profilePushTimer = null; this.runProfilePush(); }, 1200);
+    }
+
+    /** Bekleyen profil yazımını beklemeden yapar (ör. avatar stüdyosu kapanınca; lobide herkes hemen görsün). */
+    flushProfilePush() {
+        if (!this.profilePushTimer) return;
+        clearTimeout(this.profilePushTimer);
+        this.profilePushTimer = null;
+        this.runProfilePush();
+    }
+
+    async runProfilePush() {
+        if (!this.accountSnap || !this.accountReady()) return;
+        const latest = this.buildProfilePatch(this.accountSnap.profile);
+        if (!latest) return;
+        if (this.profilePushInFlight) { this.queueProfilePush(); return; }
+        this.profilePushInFlight = true;
+        let r;
+        try { r = await this.account.saveProfile(latest); } catch (e) { r = { ok: false }; }
+        this.profilePushInFlight = false;
+        if (typeof this.setAvatarSaveStatus === 'function' && latest.avatar) this.setAvatarSaveStatus(r && r.ok ? 'saved' : 'error');
+        if (r && r.ok) {
+            // Online lobi bunu dinler: odadakilere yeni avatarı duyurur (js/online/lobby.js)
+            try { window.dispatchEvent(new CustomEvent('psikovaka:profile-saved', { detail: { avatar: latest.avatar || null, displayName: latest.displayName || null } })); } catch (e) {}
+        } else {
+            const now = Date.now();
+            if (!this.lastPushErrorAt || now - this.lastPushErrorAt > 30000) {
+                this.lastPushErrorAt = now;
+                this.showToast(`Profil sunucuya kaydedilemedi. ${(r && r.error && r.error.message) || ''}`.trim());
             }
-        }, 1200);
+        }
     }
 
     buildProfilePatch(p) {
@@ -28267,6 +28730,7 @@ class PsikoVakaGame {
             const profileAvatar = document.getElementById('headerFunnyAvatarMount');
             if (profileAvatar) profileAvatar.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 64);
         }
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
         const nameMount = document.getElementById('headerPlayerNameMount');
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
@@ -28307,12 +28771,14 @@ class PsikoVakaGame {
             const m = document.getElementById('welcomeNoro');
             if (m && !m.firstChild) m.innerHTML = this.renderNoro('wave', 96);
         }
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
     }
 
     markOnboarded() {
         try { localStorage.setItem('psikovaka_onboarded', '1'); } catch (e) {}
         const card = document.getElementById('homeWelcome');
         if (card) card.hidden = true;
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
     }
 
     /** "İlk vakayı oyna": elle seçilmiş kolay bir vaka (tipik majör depresyon), tanı hedefiyle. */
@@ -31813,7 +32279,8 @@ class PsikoVakaGame {
         const body = modal.querySelector('.modal-body');
         if (body) body.scrollTop = 0;
         const focusTarget = modal.querySelector('.modal-header .btn-close-modal') || modal.querySelector('button');
-        if (focusTarget) setTimeout(() => { try { focusTarget.focus({ preventScroll: true }); } catch (e) {} }, 30);
+        // pencere bu arada kapandıysa (ör. hemen Esc) odağı gizli düğmeye taşıma
+        if (focusTarget) setTimeout(() => { if (!modal.classList.contains('open')) return; try { focusTarget.focus({ preventScroll: true }); } catch (e) {} }, 30);
     }
 
     closeModal(modal) {
@@ -32322,7 +32789,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 /**
  * PsikoVaka Online — Realtime kanal yönetimi (supabase-js v2).
  *  - online:<user_id>  (özel)  kendi çevrimiçi durumum (presence track); arkadaşlarınkini okurum
- *  - room:<room_id>    (özel)  lobi presence (konum) + broadcast: move / emote / say / rematch
+ *  - room:<room_id>    (özel)  lobi presence (konum) + broadcast: move / emote / say / rematch / profile (avatar değişti → yeniden oku)
  *  - pg-*              (genel) postgres_changes; yetkiyi RLS verir
  * Kanal koparsa/hata verirse kademeli geri çekilmeyle yeniden kurulur; yeniden bağlanınca onResync çağrılır.
  * Bu katmandan gelen hiçbir bilgi otoriter değildir (TASARIM.md §6.2): puan/hazır/kazanan yalnızca tablolardan.
@@ -32488,7 +32955,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         });
         const rt = managed('room:' + roomId, { private: true, presenceKey: uid, onResync: handlers.onResync }, (ch) => {
             ch.on('presence', { event: 'sync' }, () => handlers.onPresence && handlers.onPresence(ch.presenceState()));
-            ['move', 'emote', 'say', 'rematch'].forEach(ev => {
+            ['move', 'emote', 'say', 'rematch', 'profile'].forEach(ev => {
                 ch.on('broadcast', { event: ev }, (msg) => handlers.onBroadcast && handlers.onBroadcast(ev, msg && msg.payload));
             });
         });
@@ -33500,6 +33967,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 if (ev === 'move' && isFinite(p.x) && isFinite(p.y)) {
                     R.presence[p.user_id] = Object.assign({}, R.presence[p.user_id], { x: clampPos(p.x), y: clampPos(p.y), at: Date.now() });
                 }
+                // Bir oyuncu avatarını değiştirdi: yeni hâli sunucudan oku (yayındaki veriye güvenilmez)
+                if (ev === 'profile') refreshSoon();
                 R.bus.emit('broadcast', ev, p);
             },
             onStatus: (s) => R.bus.emit('conn', s)
@@ -33740,6 +34209,21 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         return { can: true, reason: 'Herkes hazır.' };
     }
 
+    // ------------------------------------------------------------ kendi profilim değişti (ajan G2)
+    /** app.js profil yazımı başarılı olunca: kendi satırımı hemen güncelle, odadakilere "yeniden oku" de. */
+    function onMyProfileSaved(e) {
+        if (!R.roomId || !R.state) return;
+        const d = (e && e.detail) || {};
+        const m = me();
+        if (!m || m.left_at) return;
+        const AV = global.PsikoVakaAvatar;
+        if (d.avatar && AV) m.avatar = AV.normalize(d.avatar);
+        if (d.displayName) m.display_name = d.displayName;
+        R.bus.emit('state', R.state, R.state);
+        send('profile', {});
+    }
+    if (global.addEventListener) global.addEventListener('psikovaka:profile-saved', onMyProfileSaved);
+
     NS.rooms = {
         get roomId() { return R.roomId; },
         get state() { return R.state; },
@@ -33849,6 +34333,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             </header>
             <div class="ol-lobby-tools" id="olLobbyTools">
                 <button class="btn btn-secondary btn-sm" type="button" data-ol-l="invite">${icon('user-plus')}<span>Arkadaş davet et</span></button>
+                <button class="btn btn-ghost btn-sm" type="button" data-ol-l="noro" id="olLobbyNoroBtn" aria-label="Nöro'nu değiştir">${icon('pen')}<span class="ol-lg-only">Nöro'nu değiştir</span><span class="ol-sm-only">Nöro</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="copy-link" aria-label="Davet bağlantısını kopyala">${icon('link')}<span class="ol-lg-only">Davet bağlantısını kopyala</span><span class="ol-sm-only">Bağlantı</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="settings" id="olLobbySettingsBtn">${icon('settings')}<span>Ayarlar</span></button>
             </div>
@@ -34237,6 +34722,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (act === 'invite') { NS.friends.openInvitePicker(s.room); return; }
         if (act === 'reinvite') { NS.app.reinviteChallenge(b); return; }
         if (act === 'settings') { openSettings(); return; }
+        if (act === 'noro') {
+            // Avatar stüdyosu lobinin üstünde alt sayfa olarak; kayıt → rooms.js odaya duyurur
+            const gm = NS.game();
+            if (gm && typeof gm.openAvatarStudio === 'function') gm.openAvatarStudio({ sheet: true, returnFocus: b });
+            return;
+        }
         if (act === 'ready') {
             const me = NS.rooms.me();
             L.busy = true; updateCta();

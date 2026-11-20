@@ -1,0 +1,113 @@
+/* ==========================================================================
+   PsikoVaka — GÖRSEL YÖN ÖNİZLEMESİ 1: "Fosforlu Kalem"  (ajan G2, 2026-11-20)
+   YALNIZCA ÖNİZLEME. index.html bu dosyayı BAĞLAMAZ; canlı site css/tokens.css ile çalışır.
+   css/tokens.css'teki değişken adlarını ezer; yerleşim aynı. Seçilirse: bu değerler tokens.css'e
+   taşınır, Google Fonts bağlantısı index.html'de değişir ve aşağıdaki "başlık yüzü" bloğu style.css'e eklenir.
+   Yazı tipleri: Recursive 400–800, CASL 0–1 (Google Fonts, SIL Open Font License 1.1)
+   Koyu tema adlı renkler:
+   Lacivert kapak     bg       #0f1a2e
+   Kapak içi          surface  #16233b
+   Tebeşir            text     #eef2fb
+   Silik              muted    #94a2bd
+   Fosfor sarısı      brand    #ffd23f
+   Tükenmez mavisi    accent   #8cb4ff
+   Yeşil fosfor       success  #5fd69a
+   Kırmızı kalem      danger   #ff8a90
+   Açık tema adlı renkler:
+   Kâğıt              bg       #edf2f8
+   Sayfa              surface  #ffffff
+   Mürekkep           text     #15233f
+   Kurşun             muted    #56637d
+   Fosfor sarısı      brand    #ffd23f
+   Tükenmez mavisi    accent   #1f55b0
+   Yeşil fosfor       success  #16794a
+   Kırmızı kalem      danger   #c0303a
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght,CASL@400..800,0..1&display=swap');
+
+:root {
+    --font-sans: 'Recursive', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-mono: 'Recursive', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-display: 'Recursive', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --target-diagnosis: #f2c200;
+    --target-therapy: #3ccf72;
+    --target-pharmacology: #ff5fa2;
+    --target-combo: #3ea6f2;
+    --target-diagnosis-text: #ffd64d;
+    --target-therapy-text: #66e394;
+    --target-pharmacology-text: #ff8cbd;
+    --target-combo-text: #7cc4ff;
+    --target-diagnosis-strong: #7a5900;
+    --target-therapy-strong: #11713f;
+    --target-pharmacology-strong: #b3175d;
+    --target-combo-strong: #0b5f9e;
+    --color-badge-bg: #c0303a;
+}
+
+:root,
+[data-theme="dark"] {
+    --color-bg: #0f1a2e;
+    --color-surface: #16233b;
+    --color-surface-2: #1c2b47;
+    --color-surface-3: #243656;
+    --color-border: #22324f;
+    --color-border-strong: #33486f;
+    --color-input-border: #6c80a8;
+    --color-text: #eef2fb;
+    --color-text-2: #bcc7dc;
+    --color-text-3: #94a2bd;
+    --color-accent: #8cb4ff;
+    --color-accent-bg: #ffd23f;
+    --color-accent-bg-hover: #ffc61a;
+    --color-accent-contrast: #14203a;
+    --color-accent-soft: rgba(255, 210, 63, 0.16);
+    --color-success: #5fd69a;
+    --color-warning: #ffcf5c;
+    --color-danger: #ff8a90;
+    --color-overlay: rgba(5, 10, 20, 0.66);
+    --color-focus: #ffe27a;
+}
+
+[data-theme="light"] {
+    --color-bg: #edf2f8;
+    --color-surface: #ffffff;
+    --color-surface-2: #f4f7fb;
+    --color-surface-3: #e4eaf3;
+    --color-border: #d8e0eb;
+    --color-border-strong: #b6c3d6;
+    --color-input-border: #7a879e;
+    --color-text: #15233f;
+    --color-text-2: #3d4b66;
+    --color-text-3: #56637d;
+    --color-accent: #1f55b0;
+    --color-accent-bg: #ffd23f;
+    --color-accent-bg-hover: #ffc61a;
+    --color-accent-contrast: #15233f;
+    --color-accent-soft: rgba(255, 210, 63, 0.32);
+    --color-success: #16794a;
+    --color-warning: #8a5d00;
+    --color-danger: #c0303a;
+    --color-overlay: rgba(15, 26, 46, 0.42);
+    --color-focus: #1f55b0;
+    --target-diagnosis: #b28f00;
+    --target-therapy: #2aa959;
+    --target-pharmacology: #ff529b;
+    --target-combo: #249af0;
+    --target-diagnosis-text: #7a5900;
+    --target-therapy-text: #11713f;
+    --target-pharmacology-text: #b3175d;
+    --target-combo-text: #0b5f9e;
+    --color-warning-text-strong: #8a5d00;
+}
+
+/* ---------- başlık yüzü (tokens'ta yok; seçilirse style.css'e eklenecek tek blok) ---------- */
+body { font-variation-settings: 'CASL' 0; }
+h1, h2, h3, .brand-name, .screen-title, .home-title, .card-hero-title, .card-title, .lib-detail-title, .lib-sec-title,
+.profile-name, .stat-strip-value, .result-inline-title, .modal-title, .result-heading, .result-diagnosis-name, .stat-value,
+.auth-status-title, .rank-banner-rp, .welcome-title, .noro-nudge-title, .ol-h2, .ol-sheet-title, .ol-cta-title, .ol-section-title,
+.ol-gate-title, .ol-hud-timer, .ol-wait-title, .ol-count-num, .ol-answer-text, .ol-topbar-title, .lg-head-title {
+    font-family: var(--font-display);
+    font-variation-settings: 'CASL' 1;
+    letter-spacing: -0.015em;
+}
+.home-title, .screen-title, .card-hero-title, .result-heading, .lib-detail-title, .brand-name { font-weight: 750; }

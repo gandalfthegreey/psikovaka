@@ -14,6 +14,10 @@ Supabase tarafını içerir. Site yine GitHub Pages'te statik kalır; tarayıcı
 > turların RP'sini alır ama galibiyet primi almaz (`rp_breakdown.erken_bitis`); günlük sıralama artık önce kazananlar (az tahmin,
 > sonra kısa süre), sonra kaybedenler (çok tahmin önde); puan sırayı etkilemez. Kurallar `TASARIM.md` §13.1 ve §13.4. Yerelde
 > test edildi (PGlite + PostgreSQL 16); bir sonraki yayında GitHub Actions canlıya uygular.
+>
+> **2026-11-20:** `migrations/0005_isim_filtresi.sql` eklendi (Emre kararı): kullanıcı adı ve görünen adda Türkçe/İngilizce
+> küfür, hakaret ve nefret ifadesi sunucuda engellenir; mevcut uygunsuz adlı hesaplar işaretlenir (`needs_rename`), sıralama/arkadaş
+> arama/açık oda listesinden gizlenir ve sonraki girişte yeni ad seçer. Sözleşme `TASARIM.md` §14. Bir sonraki yayında Actions uygular.
 
 Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.supabase.co`**
 
@@ -23,6 +27,7 @@ Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.s
 |---|---|
 | `migrations/0001_init.sql` | Bütün tablolar, güvenlik kuralları (RLS), sunucu fonksiyonları, Realtime ayarları. Canlı projede elle çalıştırıldı; bir daha çalıştırılmaz. |
 | `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql`, `migrations/0004_kural_duzeltmeleri.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2; erken ayrılma RP kuralı + günlük sıralama). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
+| `migrations/0005_isim_filtresi.sql` | İsim filtresi (fonksiyonlar + ilk liste + mevcut profillerin taranması). Sonraki liste değişiklikleri `NNNN_isim_filtresi_veri.sql` (yalnızca veri). |
 | `tools/apply_migrations.sh` | Uygulanmamış migration dosyalarını sırayla uygulayan betik (GitHub Actions çalıştırır). Hangi dosyanın uygulandığı veritabanında `public._migrations` tablosunda tutulur. |
 | `tools/workflow/supabase-migrasyon.yml` | Yeni GitHub Actions akışının hazır kopyası (bir kez yerine konacak; bkz. aşağıda "Kurulum (bir kez)"). |
 | `seed/0002_cases_answer_key.sql` | Vakaların doğru cevapları + seçenek listesi. Otomatik üretilir; elle düzenlemeyin. |
@@ -275,13 +280,25 @@ Tur süresi, HP düellosu canı/çarpanı, RP kuralları (RP v2: `rp_round_g1`�
 `public.game_config` tablosundadır. Günlük vaka RP vermez. Örnek: `update public.game_config set value = 800 where key = 'hp_start';`
 Değişiklik yeni başlayan maçlara uygulanır.
 
+## İsim filtresine sözcük eklemek / çıkarmak
+
+Liste tek yerde: `tools/isim_filtresi/liste.json` (bölümler: `turkce`, `ingilizce`, `kaliplar`, `ayrilmis`, `beyaz_liste`; kiplerin
+anlamı dosyanın başında). Sözcüğü ekle (kısa kökleri `"m": "kelime"` ile), sonra depo kökünde
+`node tools/isim_filtresi/uret.js --yeni-migration` çalıştır: istemci dosyası `js/isim_filtresi.js` yenilenir ve
+`supabase/migrations/` altına sıradaki numarayla **yalnızca veri içeren** bir migration yazılır (terim tablosunu listeye eşitler,
+kayıtlı profilleri yeniden tarar: yeni listeye takılanlar `needs_rename` olur). Ardından `node tools/isim_filtresi/test/calistir.mjs`
+(izin verilen 597 ad hâlâ geçiyor mu; yanlış engel çıkarsa sözcüğü `beyaz_liste`'ye ekle) ve yayınla: Actions migration'ı
+canlıya uygular. Sözcükler hiçbir ekranda ya da hata mesajında gösterilmez.
+
 ## 10. Testler (geliştiriciler için)
 
 ```
 cd supabase/tests
 npm install
-npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs
+npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs + isim_filtresi.test.mjs
 ```
+İsim filtresi derlemi ve sunucu/istemci eşliği (depo kökünde): `node tools/isim_filtresi/test/calistir.mjs --sql`;
+tarayıcı testi: `node tools/isim_filtresi/test/istemci.mjs` (yerel sunucu `python3 -m http.server 8899`).
 Migration betiği yerelde: `DATABASE_URL=postgres://...test-db bash supabase/tools/apply_migrations.sh` (yalnızca test veritabanı).
 Gerçek bir Postgres ile: `DATABASE_URL=postgres://...  npm test` — **yalnızca boş, atılabilir bir
 test veritabanı**; Supabase projesine bağlamayın (test, stub şema kurar).

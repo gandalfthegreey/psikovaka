@@ -7,6 +7,10 @@
  *     loadMyAvatar, saveMyAvatar, renderHeaderProfilePill, renderAvatarStudioTab, renderAvatarStudioPreview,
  *     selectAvatarStudioSlot, pickAvatarOption, setStudioAvatar, setAvatarSaveStatus
  * Pencere: #avatarStudioModal (Profil > "Avatar ve ad" ve profil düzenleme > "Avatarı değiştir").
+ * Ajan G2 (2026-11-20): avatara dokununca düzenleme (ana sayfa selamı #homeAvatarEdit, üst çubuk #navAvatarEdit,
+ *   Profil kartı #profileAvatarEdit), ana sayfada Nöro hatırlatması #homeNoroNudge (updateNoroNudge), lobi düğmesi
+ *   (js/online/lobby.js openAvatarStudio({ sheet: true })). openAvatarStudio(opts): { returnFocus, sheet }.
+ *   Stüdyo kapanınca bekleyen kayıt hemen yapılır (onAvatarStudioClosed → app.js flushProfilePush).
  */
 
 /** Her yapılandırmayı (eski v1 dahil) Nöro'ya çevirip çizer. */
@@ -25,13 +29,96 @@ function attachAvatarStudioToGame(GameClass) {
         if (pill) pill.addEventListener('click', () => this.openAvatarStudio());
         const rnd = document.getElementById('btnRandomizeFunnyAvatar');
         if (rnd) rnd.addEventListener('click', () => { this.setStudioAvatar(PsikoVakaAvatar.randomConfig(), true); this.playTone('warm'); });
+
+        // Avatara dokun → stüdyo; kapanınca odak aynı avatara döner
+        ['homeAvatarEdit', 'navAvatarEdit', 'profileAvatarEdit'].forEach(id => {
+            const b = document.getElementById(id);
+            if (b) b.addEventListener('click', () => this.openAvatarStudio({ returnFocus: b }));
+        });
+        const nudgeOpen = document.getElementById('btnNoroNudgeOpen');
+        if (nudgeOpen) nudgeOpen.addEventListener('click', () => {
+            // kart kaydedince kaybolur: odak ana sayfadaki avatara döner
+            this.openAvatarStudio({ returnFocus: document.getElementById('homeAvatarEdit') || nudgeOpen });
+        });
+        const nudgeClose = document.getElementById('btnNoroNudgeClose');
+        if (nudgeClose) nudgeClose.addEventListener('click', () => {
+            try { localStorage.setItem('psikovaka_noro_nudge_off', '1'); } catch (e) { /* yok */ }
+            this.updateNoroNudge();
+            const av = document.getElementById('homeAvatarEdit');
+            if (av) { try { av.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
+        });
+
+        // Stüdyo hangi yoldan kapanırsa kapansın (Tamam, X, Esc, arka plan) bekleyen kayıt hemen yapılır
+        const origClose = this.closeModal;
+        this.closeModal = (modal, ...rest) => {
+            const studio = document.getElementById('avatarStudioModal');
+            const wasStudio = !!(modal && modal === studio && modal.classList.contains('open'));
+            const r = origClose.call(this, modal, ...rest);
+            if (wasStudio) { try { this.onAvatarStudioClosed(); } catch (e) { /* yok */ } }
+            return r;
+        };
+        this.updateNoroNudge();
     };
 
-    proto.openAvatarStudio = function () {
+    /** opts: { returnFocus: Element (kapanınca odak), sheet: true (telefonda alt sayfa; lobi) } */
+    proto.openAvatarStudio = function (opts) {
+        const o = opts || {};
         const modal = document.getElementById('avatarStudioModal');
         if (!modal) return;
+        modal.classList.toggle('is-sheet', !!o.sheet);
         this.renderAvatarStudioTab();
         this.openModal(modal);
+        if (o.returnFocus) modal._returnFocus = o.returnFocus;
+    };
+
+    proto.onAvatarStudioClosed = function () {
+        if (this._avatarSaveTimer) {
+            clearTimeout(this._avatarSaveTimer);
+            this._avatarSaveTimer = null;
+            this.saveMyAvatar();
+        }
+        if (typeof this.flushProfilePush === 'function') this.flushProfilePush();
+        this.updateNoroNudge();
+    };
+
+    /** Avatar hâlâ varsayılan Nöro mu (hiç kaydedilmemiş yerel avatar da varsayılandır)? */
+    proto.isDefaultAvatar = function () {
+        const A = window.PsikoVakaAvatar;
+        if (!A) return false;
+        let saved = false;
+        try { saved = localStorage.getItem('psikovaka_noro_saved') === '1'; } catch (e) { /* yok */ }
+        if (saved) return false;
+        return A.equals(this.myAvatar || null, A.DEFAULT);
+    };
+
+    /**
+     * Ana sayfa hatırlatma kartı: avatar varsayılansa, kart kapatılmadıysa ve ilk ziyaret kartı görünmüyorsa.
+     * İlk kayıttan sonra (psikovaka_noro_saved) kendiliğinden kaybolur.
+     */
+    proto.updateNoroNudge = function () {
+        const card = document.getElementById('homeNoroNudge');
+        if (!card) return;
+        let off = false;
+        try { off = localStorage.getItem('psikovaka_noro_nudge_off') === '1'; } catch (e) { off = true; }
+        const welcome = document.getElementById('homeWelcome');
+        const welcomeShown = !!(welcome && !welcome.hidden);
+        const show = !off && !welcomeShown && this.isDefaultAvatar();
+        if (!show) {
+            if (!card.hidden && card.contains(document.activeElement)) {
+                const av = document.getElementById('homeAvatarEdit');
+                if (av) { try { av.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
+            }
+            card.hidden = true;
+            return;
+        }
+        card.hidden = false;
+        const art = document.getElementById('noroNudgeArt');
+        const A = window.PsikoVakaAvatar;
+        const sig = JSON.stringify(A.normalize(this.myAvatar));
+        if (art && art.dataset.sig !== sig) {
+            art.dataset.sig = sig;
+            art.innerHTML = A.render(A.normalize(this.myAvatar), { size: 72, framed: true, animated: true, emote: 'wave' });
+        }
     };
 
     // Yerel avatar her yüklemede Nöro v2'ye normalize edilir; eski (v1) kayıt bulunursa v2 olarak geri yazılır.
@@ -50,7 +137,10 @@ function attachAvatarStudioToGame(GameClass) {
 
     proto.saveMyAvatar = function () {
         this.myAvatar = PsikoVakaAvatar.normalize(this.myAvatar);
-        try { localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar)); } catch (e) { /* yok */ }
+        try {
+            localStorage.setItem('psikovaka_funny_avatar', JSON.stringify(this.myAvatar));
+            localStorage.setItem('psikovaka_noro_saved', '1');   // ilk kayıt: ana sayfa hatırlatması bir daha çıkmaz
+        } catch (e) { /* yok */ }
         this.renderHeaderProfilePill();
     };
 

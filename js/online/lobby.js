@@ -93,6 +93,7 @@
             </header>
             <div class="ol-lobby-tools" id="olLobbyTools">
                 <button class="btn btn-secondary btn-sm" type="button" data-ol-l="invite">${icon('user-plus')}<span>Arkadaş davet et</span></button>
+                <button class="btn btn-ghost btn-sm" type="button" data-ol-l="noro" id="olLobbyNoroBtn" aria-label="Nöro'nu değiştir">${icon('pen')}<span class="ol-lg-only">Nöro'nu değiştir</span><span class="ol-sm-only">Nöro</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="copy-link" aria-label="Davet bağlantısını kopyala">${icon('link')}<span class="ol-lg-only">Davet bağlantısını kopyala</span><span class="ol-sm-only">Bağlantı</span></button>
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="settings" id="olLobbySettingsBtn">${icon('settings')}<span>Ayarlar</span></button>
             </div>
@@ -481,6 +482,12 @@
         if (act === 'invite') { NS.friends.openInvitePicker(s.room); return; }
         if (act === 'reinvite') { NS.app.reinviteChallenge(b); return; }
         if (act === 'settings') { openSettings(); return; }
+        if (act === 'noro') {
+            // Avatar stüdyosu lobinin üstünde alt sayfa olarak; kayıt → rooms.js odaya duyurur
+            const gm = NS.game();
+            if (gm && typeof gm.openAvatarStudio === 'function') gm.openAvatarStudio({ sheet: true, returnFocus: b });
+            return;
+        }
         if (act === 'ready') {
             const me = NS.rooms.me();
             L.busy = true; updateCta();

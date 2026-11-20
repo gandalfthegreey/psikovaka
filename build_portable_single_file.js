@@ -62,7 +62,7 @@ const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css'];
 const cssRawByFile = Object.fromEntries(CSS_FILES.map(f => [f, fs.readFileSync(path.join(__dirname, 'css', f), 'utf8')]));
 // index.html'deki yerel script sırası. Yeni bir js/ dosyası eklenirse buraya da eklenmeli.
 // js/cases.js diskten değil, yukarıda pharmacologyId damgalanmış içerikten alınır.
-const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'explain.js', 'avatar_studio.js', 'supabase_config.js', 'account.js', 'app.js', 'online/core.js', 'online/api.js', 'online/realtime.js', 'online/views.js', 'online/friends.js', 'online/rooms.js', 'online/lobby.js', 'online/match.js', 'online/ligler.js', 'online/quick.js', 'online/daily.js', 'online/online.js'];
+const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'explain.js', 'avatar_studio.js', 'supabase_config.js', 'isim_filtresi.js', 'account.js', 'app.js', 'online/core.js', 'online/api.js', 'online/realtime.js', 'online/views.js', 'online/friends.js', 'online/rooms.js', 'online/lobby.js', 'online/match.js', 'online/ligler.js', 'online/quick.js', 'online/daily.js', 'online/online.js'];
 const jsRawByFile = Object.fromEntries(JS_FILES.map(f => [f, f === 'cases.js' ? updatedCasesContent : fs.readFileSync(path.join(__dirname, 'js', f), 'utf8')]));
 
 let bundled = htmlRaw;

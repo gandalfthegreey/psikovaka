@@ -8,7 +8,9 @@
  *
  * Durumlar (state):
  *   'guest'                  oturum yok (veya hesap hizmeti kullanılamıyor)
- *   'signed_in_no_username'  oturum var, profil okundu ama kullanıcı adı seçilmemiş
+ *   'signed_in_no_username'  oturum var, profil okundu ama kullanıcı adı seçilmemiş — YA DA sunucu adı topluluk
+ *                            kurallarına uymadığı için işaretledi (profiles.needs_rename, 0005): aynı zorunlu adım,
+ *                            snapshot.renameRequired = true
  *   'ready'                  oturum var, kullanıcı adı var (profil null olabilir: okunamadıysa profileError dolu)
  * Hizmet durumu (availability): 'pending' | 'ready' | 'unavailable' | 'disabled' | 'unsupported'
  *
@@ -37,6 +39,10 @@
     const USERNAME_RE = /^[A-Za-z0-9_]{3,20}$/;
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const PROFILE_COLUMNS = 'id,username,display_name,avatar,ranked_points,matches_played,matches_won';
+    // 0005 (isim filtresi) sütunu; sunucuda yoksa (42703) bir kez düşülür ve bu sayfa ömrü boyunca sorulmaz.
+    const RENAME_COLUMN = 'needs_rename';
+    const RENAME_NOTE = 'Kullanıcı adın topluluk kurallarına uymadığı için değiştirmen gerekiyor.';
+    const NAME_BLOCKED = 'Bu ad kullanılamıyor. Lütfen başka bir ad seç.';
     const IMPORT_FLAG_PREFIX = 'psikovaka_progress_imported_';
     const LIB_TIMEOUT_MS = 10000;
     const AUTH_URL_PARAMS = ['code', 'error', 'error_code', 'error_description', 'type'];
@@ -54,7 +60,8 @@
         _loading: false,
         syncedUserId: null,
         importedThisSession: false,
-        loadSeq: 0
+        loadSeq: 0,
+        renameColumn: true
     };
     let initPromise = null;
 
@@ -199,6 +206,9 @@
         USERNAME_INVALID: 'Kullanıcı adı 3-20 karakter olmalı; yalnızca harf, rakam ve _ kullanılabilir.',
         USERNAME_TAKEN: 'Bu kullanıcı adı alınmış. Başka bir ad dene.',
         USERNAME_REQUIRED: 'Önce bir kullanıcı adı seçmelisin.',
+        USERNAME_INAPPROPRIATE: NAME_BLOCKED,
+        USERNAME_RESERVED: 'Bu ad ayrılmış. Lütfen başka bir ad seç.',
+        DISPLAY_NAME_INAPPROPRIATE: NAME_BLOCKED,
         ALREADY_IMPORTED: 'Bu cihazdaki ilerleme daha önce hesaba aktarılmış.',
         INVALID_PROGRESS: 'Yerel ilerleme aktarılamadı (geçersiz vaka listesi).',
         INVALID_STATS: 'Yerel istatistikler aktarılamadı (geçersiz biçim).',
@@ -275,9 +285,21 @@
     }
 
     // ---------------------------------------------------------------- doğrulama (sunucuyla aynı kurallar)
+    /** İsim filtresi (js/isim_filtresi.js; yüklenmediyse yalnızca sunucu denetler). Eşleşen sözcük hiç gösterilmez. */
+    function nameFilter(v) {
+        try {
+            const F = global.PsikoVakaIsimFiltresi;
+            if (!F || typeof F.check !== 'function') return null;
+            const r = F.check(v);
+            if (r && r.ok === false) return r.reason === 'ayrilmis' ? 'ayrilmis' : 'uygunsuz';
+        } catch (e) {}
+        return null;
+    }
     function validateUsername(name) {
         const v = String(name || '').trim();
         if (!USERNAME_RE.test(v)) return msg('USERNAME_INVALID');
+        const f = nameFilter(v);
+        if (f) return msg(f === 'ayrilmis' ? 'USERNAME_RESERVED' : 'USERNAME_INAPPROPRIATE');
         return null;
     }
     function validateEmail(email) {
@@ -289,7 +311,8 @@
     }
     function validateDisplayName(name) {
         const v = String(name || '').trim();
-        return v.length >= 1 && v.length <= 30 ? null : 'Görünen ad 1-30 karakter olmalı.';
+        if (!(v.length >= 1 && v.length <= 30)) return 'Görünen ad 1-30 karakter olmalı.';
+        return nameFilter(v) ? msg('DISPLAY_NAME_INAPPROPRIATE') : null;
     }
 
     // ---------------------------------------------------------------- olaylar
@@ -301,12 +324,14 @@
             profile: st.profile ? JSON.parse(JSON.stringify(st.profile)) : null,
             profileError: st.profileError,
             recovery: st.recovery,
+            renameRequired: !!(st.user && st.profile && st.profile.username && st.profile.needs_rename),
             remember: getRemember(),
             passwordMinLength: passwordMinLength()
         };
     }
     function emit(event) {
         const snap = snapshot();
+        scheduleNameUi(snap);
         const ev = event || { type: 'state' };
         listeners.forEach(fn => {
             try { fn(snap, ev); } catch (e) { try { console.warn('[PsikoVakaAccount] dinleyici hatası:', e && e.message); } catch (_) {} }
@@ -397,10 +422,80 @@
         emit({ type: 'redirect', result });
     }
 
+    // ---------------------------------------------------------------- isim filtresi (0005) yardımcıları
+    /** needs_rename sütunuyla sorgular; sunucuda sütun yoksa (0005 öncesi) sütunsuz bir kez daha dener. */
+    async function profileQuery(run) {
+        if (st.renameColumn) {
+            const r = await run(PROFILE_COLUMNS + ',' + RENAME_COLUMN);
+            const e = r && r.error;
+            const missing = e && (e.code === '42703' || e.code === 'PGRST204' || /needs_rename/.test(String(e.message || '')));
+            if (!missing) return r;
+            st.renameColumn = false;
+        }
+        return run(PROFILE_COLUMNS);
+    }
+    function byId(id) { try { return global.document ? global.document.getElementById(id) : null; } catch (e) { return null; } }
+    function showFieldMessage(el, text) {
+        if (!el) return;
+        el.textContent = text || '';
+        el.hidden = !text;
+    }
+    let nameUiBound = false;
+    /** Ad alanlarında anında geri bildirim (uygulamanın kendi 'input' dinleyicisinden SONRA çalışır). */
+    function bindNameUi() {
+        if (nameUiBound || !global.document || !global.document.addEventListener) return;
+        nameUiBound = true;
+        global.document.addEventListener('input', (ev) => {
+            const t = ev && ev.target;
+            if (!t || !t.id) return;
+            if (t.id === 'usernameInput') {
+                const v = String(t.value || '').trim();
+                const f = v.length >= 3 ? nameFilter(v) : null;
+                if (f) {
+                    showFieldMessage(byId('usernameError'), msg(f === 'ayrilmis' ? 'USERNAME_RESERVED' : 'USERNAME_INAPPROPRIATE'));
+                    t.setAttribute('aria-invalid', 'true');
+                }
+            } else if (t.id === 'editDisplayName') {
+                const v = String(t.value || '').trim();
+                if (v && nameFilter(v)) showFieldMessage(byId('editProfileError'), msg('DISPLAY_NAME_INAPPROPRIATE'));
+            }
+        });
+    }
+    /** Zorunlu yeniden adlandırmada kullanıcı adı penceresine tek satır açıklama; uygunsuz ön dolguyu temizler. */
+    function applyNameUi(snap) {
+        bindNameUi();
+        const modal = byId('usernameModal');
+        if (!modal) return;
+        let note = byId('usernameRenameNote');
+        if (snap.renameRequired && snap.state === 'signed_in_no_username') {
+            if (!note) {
+                note = global.document.createElement('p');
+                note.id = 'usernameRenameNote';
+                note.className = 'section-text';
+                note.setAttribute('role', 'status');
+                const form = byId('usernameForm');
+                if (form && form.parentNode) form.parentNode.insertBefore(note, form);
+                else (modal.querySelector('.modal-body') || modal).appendChild(note);
+            }
+            note.textContent = RENAME_NOTE;
+            note.hidden = false;
+            const input = byId('usernameInput');
+            if (input && input.value && nameFilter(String(input.value).trim())) input.value = '';
+        } else if (note) {
+            note.hidden = true;
+        }
+    }
+    function scheduleNameUi(snap) {
+        if (!global.document) return;
+        try { applyNameUi(snap); } catch (e) {}
+        // Uygulama pencereyi bu olayın dinleyicisinde açar: açıldıktan sonra bir kez daha
+        setTimeout(() => { try { applyNameUi(snapshot()); } catch (e) {} }, 0);
+    }
+
     // ---------------------------------------------------------------- oturum ve profil
     function computeState() {
         if (!st.user) return 'guest';
-        if (st.profile && !st.profile.username) return 'signed_in_no_username';
+        if (st.profile && (!st.profile.username || st.profile.needs_rename)) return 'signed_in_no_username';
         return 'ready';
     }
     function setState() {
@@ -452,13 +547,13 @@
         const seq = ++st.loadSeq;
         st._loading = true;
         try {
-            const { data, error } = await st.client.from('profiles').select(PROFILE_COLUMNS).eq('id', st.user.id).maybeSingle();
+            const { data, error } = await profileQuery((cols) => st.client.from('profiles').select(cols).eq('id', st.user.id).maybeSingle());
             if (seq !== st.loadSeq) return;
             if (error) throw error;
             // Tetikleyici profili açmamışsa (olmamalı) kullanıcı adı adımı set_username ile satırı oluşturur.
             st.profile = data || { id: st.user.id, username: null, display_name: DEFAULT_DISPLAY_NAME, avatar: { ...DEFAULT_AVATAR }, ranked_points: 250, matches_played: 0, matches_won: 0 };
             st.profileError = null;
-            if (st.profile.username) await afterReady();
+            if (st.profile.username && !st.profile.needs_rename) await afterReady();
         } catch (e) {
             if (seq !== st.loadSeq) return;
             st.profile = null;
@@ -486,7 +581,7 @@
             patch.avatar = localAvatar;
         }
         const localNick = String(safeLocalGet('psikovaka_nickname') || '').trim().slice(0, 30);
-        if (localNick && localNick !== DEFAULT_DISPLAY_NAME && st.profile.display_name === DEFAULT_DISPLAY_NAME) {
+        if (localNick && localNick !== DEFAULT_DISPLAY_NAME && st.profile.display_name === DEFAULT_DISPLAY_NAME && !nameFilter(localNick)) {
             patch.displayName = localNick;
         }
         if (Object.keys(patch).length) await saveProfile(patch, { silent: true });
@@ -669,7 +764,7 @@
         const nc = requireClient(); if (nc) return nc;
         if (!st.user) return fail('NOT_AUTHENTICATED');
         try {
-            const { data, error } = await st.client.from('profiles').update(patch).eq('id', st.user.id).select(PROFILE_COLUMNS).maybeSingle();
+            const { data, error } = await profileQuery((cols) => st.client.from('profiles').update(patch).eq('id', st.user.id).select(cols).maybeSingle());
             if (error) return fail(error);
             if (!data) return fail('UNKNOWN');
             st.profile = data;

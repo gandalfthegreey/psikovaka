@@ -267,7 +267,7 @@ istemci `server_time` ile kendi saat farkını hesaplayıp geri sayımı `starts
 
 | RPC | Parametreler | Dönüş | Hatalar |
 |---|---|---|---|
-| `set_username` | `p_username text` | `profiles` satırı | `USERNAME_INVALID`, `USERNAME_TAKEN` |
+| `set_username` | `p_username text` | `profiles` satırı | `USERNAME_INVALID`, `USERNAME_TAKEN`, `USERNAME_INAPPROPRIATE`, `USERNAME_RESERVED` (**0005**, §14) |
 | `send_friend_request` | `p_username text` | `{friendship_id, status}` (karşı taraf zaten istemişse `accepted`) | `USERNAME_REQUIRED`, `USER_NOT_FOUND`, `CANNOT_FRIEND_SELF`, `ALREADY_FRIENDS`, `TOO_MANY_REQUESTS` |
 | `respond_friend_request` | `p_friendship_id uuid, p_accept bool` | `{friendship_id, status}` | `REQUEST_NOT_FOUND`, `FRIEND_LIMIT` |
 | `remove_friend` | `p_user_id uuid` | `{friendship_id, status:'removed'}` (giden bekleyen isteği iptal de eder) | `NOT_FRIENDS` |
@@ -287,7 +287,8 @@ istemci `server_time` ile kendi saat farkını hesaplayıp geri sayımı `starts
 | `import_local_progress` | `p_solved_case_ids text[], p_stats jsonb` (`psikovaka_stats` biçimi) | `{ok, imported_case_count, ignored_case_count}` | `ALREADY_IMPORTED`, `INVALID_PROGRESS`, `INVALID_STATS` |
 
 Doğrudan tablo erişimi (supabase-js `.from()`): yalnızca `select`, RLS'e tabi. Tek yazma:
-`supabase.from('profiles').update({ display_name, avatar }).eq('id', myId)`.
+`supabase.from('profiles').update({ display_name, avatar }).eq('id', myId)` (0005'ten beri uygunsuz görünen ad
+`DISPLAY_NAME_INAPPROPRIATE` ile reddedilir, §14).
 Liderlik: `supabase.from('leaderboard').select('*').order('ranked_points', { ascending: false }).limit(10)`;
 lig adı ve amblemi (`js/leagues.js`, `PsikoVakaLeagues.tierFor/badge`) istemcide hesaplanır.
 
@@ -584,3 +585,69 @@ Mevcut hesaplar değişmez. Lig adları/eşikleri yalnızca istemcide (`js/leagu
   `tests/daily_quick.test.mjs` 50/50 (PGlite) / 52/52 (PostgreSQL 16). 0004 ikinci kez çalıştırılınca parmak izi aynı; yetkiler,
   `security definer`, `search_path` ve RPC imzaları/dönüşleri 0003 ile aynı. `apply_migrations.sh` 0001–0003'ü uygulanmış yerel
   Postgres'e 0004'ü uyguladı, ikinci çalıştırmada atladı. Canlıda bir sonraki yayında Actions uygular.
+
+## 14. İsim filtresi (ajan K2, 2026-11-20 — `0005_isim_filtresi.sql`; Emre kararı)
+
+Kullanıcı adı (`username`) ve görünen ad (`display_name`) Türkçe + İngilizce küfür, cinsel argo, ağır hakaret, nefret ifadesi ve
+ayrılmış adlara (yönetici, destek, PsikoVaka, Claude…) karşı **sunucuda** denetlenir; istemci aynı kuralları anında geri bildirim için
+uygular (`js/isim_filtresi.js`, `PsikoVakaIsimFiltresi.check(metin) → { ok, reason: null | 'uygunsuz' | 'ayrilmis' }`).
+
+### 14.1 Tek kaynak ve eşlik
+- Liste: `tools/isim_filtresi/liste.json` (kaynaklar `tools/isim_filtresi/KAYNAKLAR.md`). Üretici `tools/isim_filtresi/uret.js`
+  aynı derlenmiş veriyi istemci dosyasına ve SQL'e yazar; normalleştirme/eşleştirme kodu `tools/isim_filtresi/cekirdek.js` ile
+  SQL'deki `public._isim_on_isle` / `public.isim_kontrol_ayrinti` adım adım aynıdır. `tools/isim_filtresi/test/calistir.mjs --sql`
+  aynı girdileri iki taraftan geçirir ve farkı sıfır ister.
+- Normalleştirme: ilk 64 karakter → görünmez karakterler silinir → benzer harf tablosu (Kiril/Yunan, ı→i, ß→ss) → NFKD + birleşen
+  işaretler silinir (ş→s, ğ→g, ç→c, ö→o, ü→u, İ→i) → sözcük sınırı (`AMYalamak` → `AM Yalamak`) → küçük harf → iki varyant:
+  **leet** (0→o 1→i 3→e 4→a 5→s 7→t 8→b 9→g @→a $→s !→i |→i €→e) ve **rakamsız** (rakam/işaret ayraç). Harf dışı her şey ayraç;
+  ayraçsız bütün de denenir.
+- Eşleştirme: her terim harf tekrarına izin veren bir desendir (`siktir` ↔ `siiiktir`; kökte çift harf girdide de en az iki kez:
+  `nigger` ≠ `Niger`). Kipler: `alt` (bütünün herhangi bir yerinde: birleşik yazımları yakalar), `kelime` / `kelime_ek` (bir sözcüğün
+  tamamı = kök + izinli 0-2 / 1-2 ek), `bas` / `son`, `tam` (ayrılmış adlar). 3 harf ve kısa kökler (am, sik, göt, piç, oç, amk, aq,
+  ass, dick, cum…) serbest alt dizge olarak aranmaz. Beyaz liste: bir eşleşme tamamen beyaz listedeki bir sözcüğün içinde kalıyorsa
+  yok sayılır (Scunthorpe, assistant, therapist, amca, sikke, sıkıcı, Kasımpaşa…).
+
+### 14.2 Şema ve fonksiyonlar
+- Tablolar (RLS açık, politika yok, istemciye yetki yok): `isim_filtresi_terimleri(sira, tur, kip, terim, desen, ek)`
+  (`tur`: tr / kalip / en / ayrilmis / beyaz), `isim_filtresi_harita(tur, kaynak, hedef)` (gorunmez / benzer / leet),
+  `isim_filtresi_desenler` (kategori başına hızlı yol deseni; `_isim_filtresi_derle()` doldurur), `isim_filtresi_surum`.
+- `public.isim_kontrol_ayrinti(text) → null | 'tr' | 'kalip' | 'en' | 'ayrilmis'` — iç kullanım/kayıt; istemci çağıramaz.
+  `public.isim_uygun_mu(text) → boolean` — `authenticated` çağırabilir (hangi sözcüğün eşleştiğini söylemez).
+- `public._isim_filtresi_tara() → integer`: kullanıcı adı ya da görünen adı **uygunsuz** olan profilleri işaretler (ayrılmış ad
+  işaretlenmez: eski "admin" gibi adlar ve Emre'nin hesabı etkilenmesin), listeden çıkan sözcük yüzünden işaretli kalanların bayrağını
+  kaldırır. 0005 ve her veri migration'ı bunu çağırır ve sayıyı `NOTICE` ile Actions günlüğüne yazar.
+- `profiles.needs_rename boolean not null default false`. İstemci yazamaz (sütun yetkisi yalnızca display_name/avatar).
+
+### 14.3 Hata kodları (error.message; Türkçe açıklama error.details — eşleşen sözcüğü içermez)
+| Kod | Nerede | Anlam |
+|---|---|---|
+| `USERNAME_INAPPROPRIATE` | `set_username`; `profiles` tetikleyicisi | Kullanıcı adı uygunsuz |
+| `USERNAME_RESERVED` | `set_username` | Ayrılmış ad (yalnızca RPC; panelden verilebilir) |
+| `DISPLAY_NAME_INAPPROPRIATE` | `profiles` UPDATE tetikleyicisi | Görünen ad uygunsuz ya da (istemci rolüyle yazılırken) ayrılmış |
+
+Tetikleyici `profiles_isim_denetle` (BEFORE INSERT OR UPDATE OF username, display_name) yalnızca bu iki sütun gerçekten değişince
+denetler; RP/maç sayacı/avatar güncellemeleri etkilenmez. INSERT'te (kayıt, `auth.users` tetikleyicisi) uygunsuz görünen ad hata
+vermez, `'Klinisyen'` olur: kayıt hiçbir zaman bu yüzden bozulmaz. İşaretli kullanıcı iki adını da düzeltince bayrak kendiliğinden kalkar.
+
+### 14.4 İşaretli kullanıcı (`needs_rename = true`)
+- **Gizlenir:** `profiles` okuma kuralı artık `id = auth.uid() or not needs_rename` — arkadaş arama, arkadaş listesi / davet /
+  oda sahibi gömmeleri işaretli profili boş getirir (istemci bu satırları zaten atlıyor); `leaderboard` ve `daily_leaderboard`
+  görünümleri (kendisi dahil) dışarıda bırakır; `get_daily_leaderboard` satırlarında yok, kendi `me` satırı durur;
+  `send_friend_request` → `USER_NOT_FOUND`; açık oda listesi (`rooms_read`) sahibi işaretli lobiyi göstermez (üyeler/davetliler görür).
+- **Yer tutucu:** `get_room_state` başka oyunculara işaretli kişinin `username`/`display_name` yerine `'Oyuncu'` döner.
+- **Yeniden adlandırma:** `set_username` işaretli kullanıcıya (adı olsa da) yeni ad seçtirir ve bayrağı kaldırır; görünen ad da
+  uygunsuzsa `'Klinisyen'` olur. Not: `set_username` 0001'den beri adı olan kullanıcının da adını değiştirmesine izin veriyor
+  (sunucuda "bir kez" kuralı yok; yalnızca istemci adımı bir kez gösteriyor) — 0005 bunu değiştirmedi.
+- **İstemci (`js/account.js`):** profil `needs_rename` ile okunur (sütun yoksa — 0005 öncesi — bir kez sütunsuz okunur); işaretliyse
+  durum `signed_in_no_username` (`snapshot.renameRequired = true`): mevcut kapatılamayan "Kullanıcı adını seç" adımı açılır,
+  üstünde "Kullanıcı adın topluluk kurallarına uymadığı için değiştirmen gerekiyor." satırı durur. Görünen ad alanı gerekmez
+  (sunucu uygunsuz görünen adı yeniden adlandırmada sıfırlar).
+
+### 14.5 Test durumu
+- Derlem (`tools/isim_filtresi/test/`): engellenmeli 185 satır → 2567 türev (büyük/küçük, leet, harf tekrarı, ayraç, Türkçe ek, uzun
+  ada gömme) %100 engellendi; izinli 597 ad/sözcük 0 yanlış pozitif; SQL ile JS 3151 girdide 0 fark (PGlite ve PostgreSQL 16.15).
+- `tests/isim_filtresi.test.mjs` 21/21 (PGlite ve PostgreSQL 16.15): tarama, iki kez çalıştırma, gizleme (sıralama, günlük, arama,
+  arkadaş isteği, açık oda, oda durumu), set_username kodları ve yeniden adlandırma, tetikleyici, kayıt, yetkiler.
+  `scenario.test.mjs` 46/46 ve `daily_quick.test.mjs` 51/51 (PGlite) / 53/53 (PG 16) 0005 yüklüyken; 0005 ikinci kez çalışınca
+  parmak izi aynı. `apply_migrations.sh` 0001–0004 kayıtlı veritabanına yalnızca 0005'i uyguladı (NOTICE: 1 profil), ikinci çalıştırmada atladı.
+- Canlıda henüz çalışmadı; bir sonraki yayında Actions uygular.

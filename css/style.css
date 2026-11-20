@@ -139,21 +139,27 @@ strong { font-weight: var(--weight-semibold); }
 .top-nav-link:hover { color: var(--color-text); background: var(--color-surface-2); }
 .top-nav-link.active { color: var(--color-text); background: var(--color-surface-3); }
 
-.profile-chip {
+/* Üst çubuk profil çipi: avatar düğmesi (stüdyoyu açar) + ad bağlantısı (Profil) — ajan G2 */
+.profile-chip-group {
     display: none;
     align-items: center;
-    gap: var(--space-2);
-    min-height: 40px;
-    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+    gap: var(--space-1);
+    margin-left: auto;
+    padding: 1px var(--space-1) 1px 1px;
     border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+}
+.profile-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 var(--space-3) 0 var(--space-2);
     border-radius: var(--radius-full);
     color: var(--color-text);
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
-    margin-left: auto;
 }
 .profile-chip:hover { background: var(--color-surface-2); }
-.profile-chip-avatar { display: inline-flex; }
 .profile-chip-name { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .app-main {
@@ -212,7 +218,7 @@ strong { font-weight: var(--weight-semibold); }
 /* Oyun sırasında menüler gizlenir */
 body.is-playing .tab-bar { display: none; }
 body.is-playing .top-nav,
-body.is-playing .profile-chip { visibility: hidden; }
+body.is-playing .profile-chip-group { visibility: hidden; }
 
 /* ---------- 4. Temel bileşenler ---------- */
 .btn,
@@ -538,7 +544,6 @@ body.is-playing .profile-chip { visibility: hidden; }
     align-items: center;
     gap: var(--space-3);
 }
-.home-avatar { display: inline-flex; flex-shrink: 0; }
 .home-greeting-text { flex: 1; min-width: 0; }
 .home-title {
     font-size: var(--text-xl);
@@ -1029,7 +1034,6 @@ body.is-playing .profile-chip { visibility: hidden; }
     gap: var(--space-4);
 }
 .profile-card-main { display: flex; align-items: center; gap: var(--space-4); min-width: 0; }
-.profile-avatar { display: inline-flex; flex-shrink: 0; }
 .profile-meta { display: flex; flex-direction: column; min-width: 0; }
 .profile-name { font-size: var(--text-lg); font-weight: var(--weight-bold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .profile-rp { font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-accent); }
@@ -2176,7 +2180,7 @@ body.is-playing .toast-container { bottom: calc(132px + env(safe-area-inset-bott
 
 @media (min-width: 768px) {
     .top-nav { display: flex; }
-    .profile-chip { display: inline-flex; }
+    .profile-chip-group { display: inline-flex; }
     .tab-bar { display: none; }
     .app-main { padding-top: var(--space-6); padding-bottom: var(--space-7); }
     .screen-play { min-height: calc(100dvh - var(--header-h)); }
@@ -2576,3 +2580,80 @@ a.list-row { color: inherit; text-decoration: none; }
     body.is-playing .toast-container { bottom: var(--space-3); }
 }
 .profile-league-cta { font-size: var(--text-sm); text-align: left; }
+
+/* ---------- Avatara dokun, düzenle + Nöro hatırlatması (ajan G2, 2026-11-20) ----------
+   Ana sayfa selamı, üst çubuk çipi ve Profil kartındaki avatar birer düğme: stüdyoyu açar.
+   Kalem rozeti yalnızca görsel (düğmenin adı "Avatarı düzenle"). */
+.avatar-edit {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.avatar-edit-art { display: inline-flex; border-radius: var(--radius-full); transition: transform var(--duration-fast) var(--ease); }
+.avatar-edit-art svg { display: block; }
+.avatar-edit:hover .avatar-edit-art { transform: scale(1.04); }
+.avatar-edit:active .avatar-edit-art { transform: scale(0.97); }
+.avatar-edit:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.avatar-edit-badge {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-bg);
+    color: var(--color-accent-contrast);
+    box-shadow: 0 0 0 2px var(--color-bg);
+    pointer-events: none;
+}
+.avatar-edit-badge .icon { width: 11px; height: 11px; stroke-width: 2.4; }
+.avatar-edit-sm .avatar-edit-badge { width: 16px; height: 16px; right: -1px; bottom: 0; box-shadow: 0 0 0 2px var(--color-surface); }
+.avatar-edit-sm .avatar-edit-badge .icon { width: 9px; height: 9px; }
+.avatar-edit-sm { min-width: 40px; min-height: 40px; }
+.avatar-edit-lg .avatar-edit-badge { width: 24px; height: 24px; right: 0; bottom: 0; box-shadow: 0 0 0 2px var(--color-surface); }
+.avatar-edit-lg .avatar-edit-badge .icon { width: 13px; height: 13px; }
+.app-header .avatar-edit-badge { box-shadow: 0 0 0 2px var(--color-surface); }
+
+/* Ana sayfa: Nöro hatırlatma kartı (günün vakasının altında; ekranı itmez) */
+.noro-nudge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+}
+.noro-nudge-art { display: inline-flex; flex-shrink: 0; width: 72px; height: 72px; }
+.noro-nudge-art svg { width: 100%; height: 100%; }
+.noro-nudge-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); min-width: 0; flex: 1; padding-right: var(--space-6); }
+.noro-nudge-title { font-size: var(--text-md); font-weight: var(--weight-bold); line-height: var(--leading-tight); }
+.noro-nudge-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: var(--leading-normal); }
+.noro-nudge-close { position: absolute; top: var(--space-1); right: var(--space-1); color: var(--color-text-3); }
+.noro-nudge-close:hover { color: var(--color-text); }
+
+/* Lobiden açılınca stüdyo telefonda alt sayfa olur: lobi üstte görünür kalır */
+@media (max-width: 767px) {
+    .modal-backdrop.is-sheet .modal-window {
+        height: auto;
+        max-height: 90dvh;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        border: 1px solid var(--color-border);
+        border-bottom: 0;
+        box-shadow: var(--shadow-3);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .modal-backdrop.is-sheet .modal-header { padding-top: var(--space-2); }
+}

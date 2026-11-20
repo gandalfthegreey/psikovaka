@@ -1,7 +1,7 @@
 /**
  * PsikoVaka Online — Realtime kanal yönetimi (supabase-js v2).
  *  - online:<user_id>  (özel)  kendi çevrimiçi durumum (presence track); arkadaşlarınkini okurum
- *  - room:<room_id>    (özel)  lobi presence (konum) + broadcast: move / emote / say / rematch
+ *  - room:<room_id>    (özel)  lobi presence (konum) + broadcast: move / emote / say / rematch / profile (avatar değişti → yeniden oku)
  *  - pg-*              (genel) postgres_changes; yetkiyi RLS verir
  * Kanal koparsa/hata verirse kademeli geri çekilmeyle yeniden kurulur; yeniden bağlanınca onResync çağrılır.
  * Bu katmandan gelen hiçbir bilgi otoriter değildir (TASARIM.md §6.2): puan/hazır/kazanan yalnızca tablolardan.
@@ -167,7 +167,7 @@
         });
         const rt = managed('room:' + roomId, { private: true, presenceKey: uid, onResync: handlers.onResync }, (ch) => {
             ch.on('presence', { event: 'sync' }, () => handlers.onPresence && handlers.onPresence(ch.presenceState()));
-            ['move', 'emote', 'say', 'rematch'].forEach(ev => {
+            ['move', 'emote', 'say', 'rematch', 'profile'].forEach(ev => {
                 ch.on('broadcast', { event: ev }, (msg) => handlers.onBroadcast && handlers.onBroadcast(ev, msg && msg.payload));
             });
         });

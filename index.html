@@ -141,10 +141,15 @@
                 <a class="top-nav-link" href="#/profil" data-route="profil">Profil</a>
             </nav>
 
-            <a class="profile-chip" id="navProfileChip" href="#/profil" aria-label="Profil">
-                <span class="profile-chip-avatar" id="navAvatarMount"></span>
-                <span class="profile-chip-name" id="navNameMount">Klinisyen</span>
-            </a>
+            <div class="profile-chip-group">
+                <button class="avatar-edit avatar-edit-sm profile-chip-avatar" id="navAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                    <span class="avatar-edit-art" id="navAvatarMount"></span>
+                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                </button>
+                <a class="profile-chip" id="navProfileChip" href="#/profil" aria-label="Profil">
+                    <span class="profile-chip-name" id="navNameMount">Klinisyen</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -152,7 +157,10 @@
         <!-- EKRAN: Oyna (ana sayfa) -->
         <section class="screen screen-home" id="screenHome" data-screen="oyna" aria-labelledby="homeTitle">
             <div class="home-greeting">
-                <span class="home-avatar" id="homeAvatarMount"></span>
+                <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                    <span class="avatar-edit-art" id="homeAvatarMount"></span>
+                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                </button>
                 <div class="home-greeting-text">
                     <p class="eyebrow">Hoş geldin</p>
                     <h1 class="home-title" id="homeTitle"><span id="homeGreetingName">Klinisyen</span></h1>
@@ -219,6 +227,17 @@
                     </button>
                     <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
                 </div>
+            </article>
+
+            <!-- Nöro hatırlatması (js/avatar_studio.js): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
+            <article class="card noro-nudge" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
+                <span class="noro-nudge-art" id="noroNudgeArt" aria-hidden="true"></span>
+                <div class="noro-nudge-body">
+                    <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
+                    <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
+                    <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg> Özelleştir</button>
+                </div>
+                <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
             </article>
 
             <div class="home-grid">
@@ -365,7 +384,10 @@
 
             <article class="card profile-card">
                 <div class="profile-card-main">
-                    <span class="profile-avatar" id="headerFunnyAvatarMount"></span>
+                    <button class="avatar-edit avatar-edit-lg profile-avatar" id="profileAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                        <span class="avatar-edit-art" id="headerFunnyAvatarMount"></span>
+                        <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                    </button>
                     <div class="profile-meta">
                         <strong class="profile-name" id="headerPlayerNameMount">Klinisyen</strong>
                         <span class="profile-username" id="profileUsername" hidden></span>
@@ -1259,6 +1281,7 @@
     <script src="js/explain.js"></script>
     <script src="js/avatar_studio.js"></script>
     <script src="js/supabase_config.js"></script>
+    <script src="js/isim_filtresi.js"></script>
     <script src="js/account.js"></script>
     <script src="js/app.js"></script>
     <script src="js/online/core.js"></script>

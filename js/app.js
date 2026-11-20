@@ -389,23 +389,37 @@ class PsikoVakaGame {
         const patch = this.buildProfilePatch(p);
         if (!patch) return;
         clearTimeout(this.profilePushTimer);
-        this.profilePushTimer = setTimeout(async () => {
-            this.profilePushTimer = null;
-            const latest = this.buildProfilePatch(this.accountSnap.profile);
-            if (!latest || !this.accountReady()) return;
-            this.profilePushInFlight = true;
-            let r;
-            try { r = await this.account.saveProfile(latest); } catch (e) { r = { ok: false }; }
-            this.profilePushInFlight = false;
-            if (typeof this.setAvatarSaveStatus === 'function' && latest.avatar) this.setAvatarSaveStatus(r && r.ok ? 'saved' : 'error');
-            if (!r || !r.ok) {
-                const now = Date.now();
-                if (!this.lastPushErrorAt || now - this.lastPushErrorAt > 30000) {
-                    this.lastPushErrorAt = now;
-                    this.showToast(`Profil sunucuya kaydedilemedi. ${(r && r.error && r.error.message) || ''}`.trim());
-                }
+        this.profilePushTimer = setTimeout(() => { this.profilePushTimer = null; this.runProfilePush(); }, 1200);
+    }
+
+    /** Bekleyen profil yazımını beklemeden yapar (ör. avatar stüdyosu kapanınca; lobide herkes hemen görsün). */
+    flushProfilePush() {
+        if (!this.profilePushTimer) return;
+        clearTimeout(this.profilePushTimer);
+        this.profilePushTimer = null;
+        this.runProfilePush();
+    }
+
+    async runProfilePush() {
+        if (!this.accountSnap || !this.accountReady()) return;
+        const latest = this.buildProfilePatch(this.accountSnap.profile);
+        if (!latest) return;
+        if (this.profilePushInFlight) { this.queueProfilePush(); return; }
+        this.profilePushInFlight = true;
+        let r;
+        try { r = await this.account.saveProfile(latest); } catch (e) { r = { ok: false }; }
+        this.profilePushInFlight = false;
+        if (typeof this.setAvatarSaveStatus === 'function' && latest.avatar) this.setAvatarSaveStatus(r && r.ok ? 'saved' : 'error');
+        if (r && r.ok) {
+            // Online lobi bunu dinler: odadakilere yeni avatarı duyurur (js/online/lobby.js)
+            try { window.dispatchEvent(new CustomEvent('psikovaka:profile-saved', { detail: { avatar: latest.avatar || null, displayName: latest.displayName || null } })); } catch (e) {}
+        } else {
+            const now = Date.now();
+            if (!this.lastPushErrorAt || now - this.lastPushErrorAt > 30000) {
+                this.lastPushErrorAt = now;
+                this.showToast(`Profil sunucuya kaydedilemedi. ${(r && r.error && r.error.message) || ''}`.trim());
             }
-        }, 1200);
+        }
     }
 
     buildProfilePatch(p) {
@@ -863,6 +877,7 @@ class PsikoVakaGame {
             const profileAvatar = document.getElementById('headerFunnyAvatarMount');
             if (profileAvatar) profileAvatar.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 64);
         }
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
         const nameMount = document.getElementById('headerPlayerNameMount');
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
@@ -903,12 +918,14 @@ class PsikoVakaGame {
             const m = document.getElementById('welcomeNoro');
             if (m && !m.firstChild) m.innerHTML = this.renderNoro('wave', 96);
         }
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
     }
 
     markOnboarded() {
         try { localStorage.setItem('psikovaka_onboarded', '1'); } catch (e) {}
         const card = document.getElementById('homeWelcome');
         if (card) card.hidden = true;
+        if (typeof this.updateNoroNudge === 'function') this.updateNoroNudge();
     }
 
     /** "İlk vakayı oyna": elle seçilmiş kolay bir vaka (tipik majör depresyon), tanı hedefiyle. */
@@ -4409,7 +4426,8 @@ class PsikoVakaGame {
         const body = modal.querySelector('.modal-body');
         if (body) body.scrollTop = 0;
         const focusTarget = modal.querySelector('.modal-header .btn-close-modal') || modal.querySelector('button');
-        if (focusTarget) setTimeout(() => { try { focusTarget.focus({ preventScroll: true }); } catch (e) {} }, 30);
+        // pencere bu arada kapandıysa (ör. hemen Esc) odağı gizli düğmeye taşıma
+        if (focusTarget) setTimeout(() => { if (!modal.classList.contains('open')) return; try { focusTarget.focus({ preventScroll: true }); } catch (e) {} }, 30);
     }
 
     closeModal(modal) {

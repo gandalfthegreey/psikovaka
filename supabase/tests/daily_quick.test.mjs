@@ -237,6 +237,15 @@ await test('0004 ikinci kez çalıştırılınca hiçbir şey değişmez (parmak
   eq(await fingerprint(), a);
 });
 
+console.log('\n[0005 kurulumu (isim filtresi)]');
+await test('0005 uygulanır ve ikinci kez çalıştırılınca hiçbir şey değişmez (parmak izi); bu dosyadaki adlar işaretlenmez', async () => {
+  await db.exec(read('migrations/0005_isim_filtresi.sql'));
+  const a = await fingerprint();
+  await db.exec(read('migrations/0005_isim_filtresi.sql'));
+  eq(await fingerprint(), a);
+  eq(Number((await one(`select count(*) n from public.profiles where needs_rename`)).n), 0);
+});
+
 console.log('\n[Günlük: yetki]');
 await test('anon yalnızca get_daily_challenge çağırabilir; diğer yeni RPC\'ler ve tablolar kapalı', async () => {
   await setDay('2026-03-01');
