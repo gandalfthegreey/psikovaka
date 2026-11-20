@@ -10,35 +10,35 @@
 
 /* ---------- Değişkenler (yalnızca pilot) ---------- */
 .tasarim-dosya {
-    --dosya-paper: #20242c;
-    --dosya-edge: #353c4a;
-    --dosya-tape: #2b313c;
-    --dosya-rule: rgba(126, 166, 255, 0.14);
-    --dosya-red: #ff8a8a;              /* kâğıtta metin olarak ≥4.5:1 */
-    --dosya-red-line: rgba(255, 123, 123, 0.55);
-    --dosya-hl: rgba(242, 196, 90, 0.26);
-    --dosya-hl-strong: #f2c45a;
+    --dosya-paper: var(--paper);
+    --dosya-edge: var(--paper-edge);
+    --dosya-tape: var(--paper-tape);
+    --dosya-rule: var(--paper-rule);
+    --dosya-red: var(--ink-red);              /* kâğıtta metin olarak ≥4.5:1 */
+    --dosya-red-line: var(--ink-red-line);
+    --dosya-hl: var(--paper-hl);
+    --dosya-hl-strong: var(--paper-hl-strong);
     --dosya-ink-win: #8db0ff;
     --dosya-ink-loss: #ff8f8f;
-    --dosya-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 14px 28px -18px rgba(0, 0, 0, 0.8);
+    --dosya-shadow: var(--paper-shadow);
     --dosya-lh: 28px;                  /* satır aralığı = satır çizgisi aralığı */
     --dosya-m: 36px;                   /* kenar boşluğu (not numaraları) */
     --dosya-pad: 14px;
     --dosya-margin-col: 232px;         /* masaüstü tahmin sütunu */
-    --dosya-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    --dosya-mono: var(--font-type);
 }
 .tasarim-dosya[data-theme="light"] {
-    --dosya-paper: #fffdf8;
-    --dosya-edge: #cfd3db;
-    --dosya-tape: #eceef2;
-    --dosya-rule: rgba(35, 84, 176, 0.16);
-    --dosya-red: #b42330;
-    --dosya-red-line: rgba(201, 56, 56, 0.62);
-    --dosya-hl: rgba(255, 196, 30, 0.34);
-    --dosya-hl-strong: #a87600;
+    --dosya-paper: var(--paper);
+    --dosya-edge: var(--paper-edge);
+    --dosya-tape: var(--paper-tape);
+    --dosya-rule: var(--paper-rule);
+    --dosya-red: var(--ink-red);
+    --dosya-red-line: var(--ink-red-line);
+    --dosya-hl: var(--paper-hl);
+    --dosya-hl-strong: var(--paper-hl-strong);
     --dosya-ink-win: #2354b0;
     --dosya-ink-loss: #a51d2d;
-    --dosya-shadow: 0 1px 0 rgba(26, 30, 39, 0.06), 0 12px 26px -16px rgba(26, 30, 39, 0.28);
+    --dosya-shadow: var(--paper-shadow);
 }
 
 /* ---------- Oyun çubuğu: sade, başlık yüzüyle; vaka no + zorluk sekmeye taşındı ---------- */

@@ -169,6 +169,40 @@
     --shadow-3: 0 18px 48px rgba(26, 30, 39, 0.16);
 }
 
+/* ---------- Kâğıt / klasör / mürekkep (ajan R3, 2026-11-21) ----------
+   Ana sayfa "çalışma masası" (css/anasayfa.css) ve Kütüphane "ders kitabı" (css/kutuphane.css) bu değerleri kullanır;
+   oyun ekranı pilotu (css/dosya.css, ?tasarim=dosya) aynı değerleri --dosya-* adlarıyla okur. */
+:root,
+[data-theme="dark"] {
+    --paper: #20242c;
+    --paper-edge: #353c4a;
+    --paper-tape: #2b313c;
+    --paper-rule: rgba(126, 166, 255, 0.14);
+    --paper-hl: rgba(242, 196, 90, 0.26);
+    --paper-hl-strong: #f2c45a;
+    --paper-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 14px 28px -18px rgba(0, 0, 0, 0.8);
+    --paper-lift: 0 1px 0 rgba(0, 0, 0, 0.35), 0 10px 22px -14px rgba(0, 0, 0, 0.75);
+    --ink-red: #ff8a8a;                /* kâğıtta metin olarak ≥4.5:1 */
+    --ink-red-line: rgba(255, 123, 123, 0.55);
+    --folder: var(--color-surface);
+    --folder-edge: var(--color-border-strong);
+    --font-type: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+[data-theme="light"] {
+    --paper: #fffdf8;
+    --paper-edge: #cfd3db;
+    --paper-tape: #eceef2;
+    --paper-rule: rgba(35, 84, 176, 0.16);
+    --paper-hl: rgba(255, 196, 30, 0.34);
+    --paper-hl-strong: #a87600;
+    --paper-shadow: 0 1px 0 rgba(26, 30, 39, 0.06), 0 12px 26px -16px rgba(26, 30, 39, 0.28);
+    --paper-lift: 0 1px 0 rgba(26, 30, 39, 0.05), 0 10px 22px -14px rgba(26, 30, 39, 0.3);
+    --ink-red: #b42330;
+    --ink-red-line: rgba(201, 56, 56, 0.62);
+    --folder: #ffffff;
+    --folder-edge: var(--color-border-strong);
+}
+
 body.therapy-mode-active { --color-target: var(--target-therapy); }
 body.pharmacology-mode-active { --color-target: var(--target-pharmacology); }
 body.combo-mode-active { --color-target: var(--target-combo); }

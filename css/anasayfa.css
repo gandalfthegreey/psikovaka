@@ -1,0 +1,383 @@
+/* ==========================================================================
+   PsikoVaka — Ana sayfa "çalışma masası" (ajan R3, 2026-11-21; Emre onayı: ajan E2 örneği birebir)
+   Günün vakası masaya bırakılmış danışan dosyası (klasör sekmesi: tarih + 6 ipucu; daktilo etiketiyle danışan
+   özeti; ataşlı seri etiketi), yanında kullanıcının Nöro'su (hatırlatma = konuşma balonu), pratik = fiş kutusu,
+   online = panoya raptiyeyle tutturulmuş kart. Yapı index.html'de; renkler yalnızca token (tokens.css: --paper*,
+   --folder*, --ink-*). Bayrağa bağlı değil.
+   ========================================================================== */
+.screen.screen-home { gap: var(--space-5); }
+
+/* Selam: etiket yok, doğal cümle */
+.screen-home .home-greeting { align-items: flex-end; }
+.screen-home .home-greeting .home-title { font-size: 1.625rem; white-space: normal; }
+.screen-home .home-greeting .home-hello { font-weight: 600; color: var(--color-text-2); }
+.screen-home .home-greeting-sub { margin-top: 2px; color: var(--color-text-2); font-size: var(--text-base); }
+/* RP: lig etiketi (yazı makinesi değil, kâğıt fiş) */
+.screen-home .home-greeting .rp-chip {
+    align-self: center;
+    border-radius: 3px;
+    border-color: var(--paper-edge);
+    background: var(--paper);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    box-shadow: var(--paper-lift);
+}
+
+/* Masa düzeni */
+.screen-home .desk { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+.screen-home .desk-main { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.screen-home .desk-aside { display: grid; grid-template-columns: 1fr; gap: var(--space-5); min-width: 0; }
+
+/* Hedef seçici: kalemle altı çizilen sözcükler (kutu değil) */
+.screen-home .target-picker .segmented {
+    display: flex;
+    gap: var(--space-2);
+    margin-left: -6px;   /* sözcükler 44 px dokunma alanı için iç boşluklu; ilk sözcük hizada kalsın */
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-home .target-picker .segmented-btn,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn {
+    min-width: var(--tap);
+    min-height: var(--tap);
+    padding: 0 8px;
+    border-radius: 6px;
+    background: none;
+    box-shadow: none;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-text-2);
+}
+.screen-home .target-picker .segmented-btn.active,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
+    background: none;
+    box-shadow: none;
+    color: var(--color-text);
+    font-weight: 750;
+    text-decoration: underline;
+    text-decoration-color: var(--color-target);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 7px;
+}
+.screen-home .target-hint-row { margin-top: -2px; }
+.screen-home .target-hint { padding-left: 2px; }
+
+/* Sahne: [balon] / [boşluk | Nöro] / [klasör] */
+.screen-home .desk-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "bubble noro" "folder folder";
+    align-items: end;
+    margin-top: var(--space-1);
+    min-width: 0;
+}
+.screen-home .desk-noro { grid-area: noro; position: relative; z-index: 2; margin: 0 2px -16px 0; line-height: 0; }
+.screen-home .desk-noro .home-avatar { width: auto; height: auto; min-width: 0; min-height: 0; padding: 0; border-radius: 50%; background: none; }
+.screen-home .desk-noro .avatar-edit-art { border-radius: 0; }
+.screen-home .desk-noro .avatar-edit-art svg { width: 112px; height: 112px; }
+.screen-home .desk-noro .avatar-edit-badge { right: 4px; bottom: 18px; width: 24px; height: 24px; box-shadow: 0 0 0 2px var(--color-bg); }
+.screen-home .desk-noro .avatar-edit-badge .icon { width: 12px; height: 12px; }
+
+/* Nöro hatırlatması: Nöro'nun konuşma balonu */
+.screen-home .noro-nudge.noro-bubble {
+    grid-area: bubble;
+    justify-self: end;
+    position: relative;
+    display: block;
+    max-width: 19rem;
+    margin: 0 4px 10px 0;
+    padding: 12px 40px 12px 14px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 12px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .noro-nudge.noro-bubble[hidden] { display: none; }
+.screen-home .noro-nudge.noro-bubble::after {
+    content: '';
+    position: absolute;
+    right: 44px;
+    bottom: -8px;
+    width: 14px;
+    height: 14px;
+    background: var(--paper);
+    border-right: 1px solid var(--paper-edge);
+    border-bottom: 1px solid var(--paper-edge);
+    transform: rotate(45deg);
+}
+.screen-home .noro-bubble .noro-nudge-art { display: none; }
+.screen-home .noro-bubble .noro-nudge-body { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 0; }
+.screen-home .noro-bubble .noro-nudge-title { flex-basis: 100%; font-size: var(--text-base); }
+.screen-home .noro-bubble .noro-nudge-text { flex: 1 1 12rem; }
+.screen-home .noro-bubble .noro-nudge-btn { border-radius: 6px; background: transparent; }
+.screen-home .noro-bubble .noro-nudge-btn-long { display: none; }
+.screen-home .noro-bubble .noro-nudge-close { top: 4px; right: 4px; }
+
+/* Telefonda balon tek satır: Nöro'nun solunda, sekmenin üstünde */
+@media (max-width: 1023px) {
+    .screen-home .noro-nudge.noro-bubble { align-self: start; justify-self: end; margin: 4px 12px 0 0; padding: 0 44px 0 4px; border-radius: 23px; }
+    .screen-home .noro-nudge.noro-bubble::after { right: -8px; bottom: auto; top: 16px; transform: rotate(-45deg); }
+    .screen-home .noro-bubble .noro-nudge-title,
+    .screen-home .noro-bubble .noro-nudge-text { display: none; }
+    .screen-home .noro-bubble .noro-nudge-btn { min-height: var(--tap); border: 0; padding: 0 8px; gap: 6px; font-size: var(--text-sm); font-weight: 600; }
+    .screen-home .noro-bubble .noro-nudge-btn .icon { width: 16px; height: 16px; }
+    .screen-home .noro-bubble .noro-nudge-btn-short { display: none; }
+    .screen-home .noro-bubble .noro-nudge-btn-long { display: inline; }
+    .screen-home .noro-bubble .noro-nudge-close { top: 0; right: 0; width: var(--tap); height: var(--tap); min-width: var(--tap); min-height: var(--tap); }
+}
+/* Klasör: günün vakası */
+.screen-home .card-hero.desk-folder {
+    grid-area: folder;
+    position: relative;
+    gap: var(--space-3);
+    margin-top: -4px;
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    border: 1px solid var(--folder-edge);
+    border-radius: 0 10px 10px 10px;
+    background: var(--folder);
+    box-shadow: var(--paper-lift);
+}
+/* Klasörden taşan kâğıt: kırmızı başlık çizgisi + satır çizgisi (yalnızca süs) */
+.screen-home .card-hero.desk-folder::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 120px;
+    top: -12px;
+    height: 12px;
+    border: 1px solid var(--paper-edge);
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to bottom, var(--paper) 0 5px, var(--ink-red-line) 5px 6px, var(--paper) 6px);
+}
+/* Sekme: tarih + 6 ipucu (mevcut çipler) */
+.screen-home .desk-folder-tab {
+    position: absolute;
+    left: -1px;
+    top: -35px;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    height: 35px;
+    padding: 0 14px;
+    border: 1px solid var(--folder-edge);
+    border-bottom: 0;
+    border-radius: 9px 9px 0 0;
+    background: var(--folder);
+}
+.screen-home .desk-folder-tab::after { /* sekmenin klasörle birleştiği yer */
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; background: var(--folder);
+}
+.screen-home .desk-folder-tab .chip {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.screen-home .desk-folder-tab .chip .icon { display: none; }
+.screen-home .desk-folder-tab .chip-muted { color: var(--color-text-2); font-family: var(--font-sans); font-weight: 600; font-size: var(--text-sm); }
+.screen-home .desk-folder-tab .chip-muted::before { content: '·'; margin-right: 10px; color: var(--color-text-3); }
+
+.screen-home .desk-folder .daily-title-row { display: block; padding-right: 0; }
+.screen-home .desk-folder .card-hero-title { font-size: 2.125rem; letter-spacing: -0.02em; }
+.screen-home .desk-teaser {
+    display: inline;
+    align-self: flex-start;
+    max-width: 100%;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--paper-tape);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--paper-edge) 55%, transparent);
+    color: var(--color-text);
+    font-family: var(--font-type);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+.screen-home .desk-teaser[hidden] { display: none; }
+.screen-home .desk-folder .card-hero-text { font-size: var(--text-base); }
+.screen-home .desk-folder .daily-actions { width: 100%; align-items: center; gap: var(--space-2) var(--space-5); margin-top: var(--space-1); }
+.screen-home .desk-folder #btnStartDaily { min-width: 200px; border-radius: 8px; }
+/* Sıralama: ikincil = metin bağlantısı (bitince birincil kalır) */
+.screen-home .desk-folder #btnDailyBoard.btn-secondary {
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.screen-home .desk-folder #btnDailyBoard.btn-secondary .icon { display: none; }
+.screen-home .desk-folder .daily-result { border-radius: 4px; }
+/* Bitmiş günlük: sonuç kutusu dokunulabilir ("Vakayı gör", js/online/daily.js bindResultBox) */
+.screen-home .daily-result.is-tappable { min-height: var(--tap); cursor: pointer; transition: background-color var(--duration-fast) var(--ease); }
+.screen-home .daily-result.is-tappable:hover { background: var(--color-surface-3); }
+.screen-home .daily-result.is-tappable:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .screen-home .daily-result.is-tappable { transition: none; } }
+
+/* Seri: klasöre kıstırılmış kâğıt etiket (ataş + hafif eğik) */
+.screen-home .streak-chip.desk-tag {
+    position: absolute;
+    right: 18px;
+    top: -14px;
+    z-index: 1;
+    gap: 6px;
+    padding: 9px 12px 7px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: var(--paper);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    transform: rotate(3deg);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .streak-chip.desk-tag[hidden] { display: none; }
+.screen-home .streak-chip.desk-tag .icon { color: var(--ink-red); }
+.screen-home .streak-chip.desk-tag::before { /* ataş */
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    width: 9px;
+    height: 20px;
+    margin-left: -5px;
+    border: 2px solid var(--color-text-3);
+    border-radius: 6px;
+}
+/* Nöro sağda dururken etiket onun altında kalmasın: telefonda etiket klasörün sol altında */
+@media (max-width: 1023px) {
+    .screen-home .streak-chip.desk-tag { top: auto; right: 14px; bottom: -14px; transform: rotate(-2deg); }
+    .screen-home .card-hero.desk-folder:has(.desk-tag:not([hidden])) { margin-bottom: 10px; padding-bottom: 44px; } /* etiket düğmeye binmesin */
+}
+
+/* İlk ziyaret: masaya bırakılmış not kâğıdı */
+.screen-home .welcome-card {
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+    padding: var(--space-5) var(--space-5) var(--space-4);
+}
+.screen-home .welcome-card .welcome-noro { display: none; }
+.screen-home .welcome-card .welcome-title { padding-bottom: 8px; border-bottom: 2px solid var(--ink-red-line); font-size: 1.25rem; }
+.screen-home .welcome-steps { counter-reset: deskw; gap: 0; }
+.screen-home .welcome-steps li { counter-increment: deskw; position: relative; padding-left: 30px; line-height: 30px; border-bottom: 1px solid var(--paper-rule); }
+.screen-home .welcome-steps li .icon { display: none; }
+@media (min-width: 600px) { .screen-home .welcome-steps { column-gap: var(--space-5); } }
+.screen-home .welcome-steps li::before { content: counter(deskw); position: absolute; left: 4px; color: var(--ink-red); font-family: var(--font-display); font-weight: 700; }
+.screen-home .resume-banner { border-radius: 3px; border-left-width: 1px; background: var(--paper); border-color: var(--paper-edge); box-shadow: var(--paper-lift); }
+
+/* ---- Fiş kutusu: Sınırsız pratik (ön fiş + arkada iki fiş kenarı) ---- */
+.screen-home .card-action.desk-cardbox {
+    position: relative;
+    gap: var(--space-3);
+    margin-top: 12px;
+    padding: 12px 16px 14px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: 0 -5px 0 -1px var(--paper), 0 -5px 0 0 var(--paper-edge), 0 -10px 0 -2px var(--paper), 0 -10px 0 -1px var(--paper-edge), var(--paper-lift);
+}
+.screen-home .desk-cardbox .card-action-head { display: block; }
+.screen-home .desk-cardbox .card-icon { display: none; }
+.screen-home .desk-cardbox .card-title { padding-bottom: 6px; border-bottom: 2px solid var(--ink-red-line); font-size: 1.0625rem; }
+.screen-home .desk-cardbox .card-text { padding: 3px 0 2px; border-bottom: 1px solid var(--paper-rule); color: var(--color-text); font-family: var(--font-display); font-size: 1rem; font-weight: 600; line-height: 28px; }
+.screen-home .desk-filter-label { color: var(--color-text-2); font-family: var(--font-sans); font-weight: 400; font-size: var(--text-sm); }
+.screen-home .desk-cardbox .card-action-row { gap: var(--space-2) var(--space-4); align-items: center; }
+.screen-home .desk-cardbox .card-action-row .btn-secondary { border-radius: 6px; background: transparent; border-color: var(--paper-edge); }
+.screen-home .desk-cardbox .card-action-row .btn-ghost { padding-inline: 4px; }
+
+/* ---- Pano kartı: Online ---- */
+.screen-home .card-action.desk-pin {
+    position: relative;
+    gap: var(--space-3);
+    padding: 20px 18px 16px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+    transform: rotate(-0.8deg);
+}
+.screen-home .desk-pin::before { /* raptiye */
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 50%;
+    background: var(--color-badge-bg);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), inset -2px -2px 0 rgba(0, 0, 0, 0.18);
+}
+.screen-home .desk-pin .card-action-head { display: block; }
+.screen-home .desk-pin .card-icon { display: none; }
+.screen-home .desk-pin .card-title { font-size: 1.0625rem; }
+.screen-home .desk-pin-note {
+    margin-top: -4px;
+    padding-left: 10px;
+    border-left: 3px solid var(--ink-red-line);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: 1.45;
+}
+.screen-home .desk-pin-note[hidden] { display: none; }
+.screen-home .desk-pin .card-action-row .btn { border-radius: 6px; }
+
+@media (min-width: 600px) {
+    .screen-home .desk-aside { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+@media (min-width: 1024px) {
+    .screen-home .home-greeting .home-title { font-size: 2rem; }
+    .screen-home .desk { gap: var(--space-7); }
+    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 340px)); justify-content: start; gap: var(--space-7); padding-left: 4px; }
+    .screen-home .desk-stage { grid-template-columns: minmax(0, 1fr) 250px; grid-template-rows: 1fr auto; grid-template-areas: "folder bubble" "folder noro"; column-gap: var(--space-4); margin-top: var(--space-3); }
+    .screen-home .card-hero.desk-folder { margin-top: 36px; }
+    .screen-home .desk-noro { align-self: end; justify-self: start; margin: 0 0 -8px -28px; }
+    .screen-home .desk-noro .avatar-edit-art svg { width: 168px; height: 168px; }
+    .screen-home .desk-noro .avatar-edit-badge { right: 22px; bottom: 34px; width: 28px; height: 28px; }
+    .screen-home .noro-nudge.noro-bubble { align-self: end; justify-self: stretch; max-width: none; margin: 0 0 6px; }
+    .screen-home .noro-nudge.noro-bubble::after { right: 50%; margin-right: -7px; }
+    .screen-home .noro-bubble .noro-nudge-btn { margin-top: 4px; }
+    .screen-home .card-hero.desk-folder { padding: 40px 40px 34px; }
+    .screen-home .card-hero.desk-folder::before { right: 40px; }
+    .screen-home .desk-folder .card-hero-title { font-size: 2.75rem; }
+    .screen-home .desk-folder .card-hero-text { font-size: var(--text-md); }
+}
+
+/* Telefonda sekmede yalnız gün + ay (uzun gün adı, ör. "Cumartesi", sekmeyi Nöro'nun altına iterdi) */
+@media (max-width: 599px) {
+    .screen-home .desk-date-wd { display: none; }
+}
+/* Dar telefon (≤ 389 px): sekme ve Nöro birbirine değmesin */
+@media (max-width: 389px) {
+    .screen-home .desk-noro .avatar-edit-art svg { width: 88px; height: 88px; }
+    .screen-home .desk-noro .avatar-edit-badge { bottom: 12px; right: 0; }
+    .screen-home .desk-folder-tab { gap: 6px; padding: 0 10px; }
+    .screen-home .desk-folder-tab .chip { font-size: 0.875rem; }
+    .screen-home .desk-folder-tab .chip-muted { font-size: 0.8125rem; }
+    .screen-home .desk-folder-tab .chip-muted::before { margin-right: 6px; }
+}
+@media (max-width: 1023px) {
+    .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 14px; }
+}
+
+/* Hareket azaltma: avatar düğmesinin büyüme/küçülme geçişi yok (genel kural style.css'te; burada açıkça) */
+@media (prefers-reduced-motion: reduce) {
+    .screen-home .desk-noro .avatar-edit-art { transition: none; }
+}

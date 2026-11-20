@@ -33,13 +33,34 @@
     function acc() { return global.PsikoVakaAccount || null; }
     function member() { const a = acc(); return !!(a && a.availability === 'ready' && a.state === 'ready' && NS.api.client()); }
     function canReach() { const a = acc(); return !!(location.protocol !== 'file:' && a && a.availability === 'ready' && NS.api.client()); }
+    /** Hesap durumu henüz netleşmedi: hizmet yükleniyor ya da oturum var ama profil yükleniyor (geçici 'guest'). */
+    function accSettling() {
+        const a = acc();
+        if (!a || D.settleGaveUp) return false;
+        if (a.availability === 'pending') return true;
+        try { const s = a.snapshot ? a.snapshot() : null; if (s && s.user && a.state === 'guest') return true; } catch (e) { /* yok */ }
+        return false;
+    }
+    function waitSettled(ms) {
+        return new Promise(res => {
+            if (!accSettling()) return res();
+            const t0 = Date.now();
+            const iv = setInterval(() => {
+                if (!accSettling()) { clearInterval(iv); res(); return; }
+                if (Date.now() - t0 > (ms || 12000)) { D.settleGaveUp = true; clearInterval(iv); res(); } // hesap hizmeti yanıt vermiyor: misafir gibi devam
+            }, 100);
+        });
+    }
     function curTarget() { const gm = g(); return (gm && gm.targetGameMode) || 'diagnosis'; }
     function findCase(id) { const gm = g(); return gm ? (gm.allMasterCases || gm.cases || []).find(c => c.id === id) || null : null; }
     const fmtTime = (s) => (s == null ? '' : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`);
 
     // ------------------------------------------------------------ veri
     async function loadChallenge(target, force) {
-        if (!canReach()) { D.avail = D.avail === true ? true : (D.avail == null ? false : D.avail); return null; }
+        // Ulaşılamıyor (hesap hizmeti yükleniyor, file://, çevrimdışı): özellik durumunu DEĞİŞTİRME. Eskiden burada
+        // D.avail=false yazılıyordu ve hesap değişiminde de false korunuyordu: açılışta erken çağrılırsa üye o sayfa
+        // boyunca yerel günlüğe düşüyor, bitirdiği günü yeniden oynayabiliyordu (B3).
+        if (!canReach()) return null;
         if (D.avail === false) return null;
         const fresh = D.ch[target] && Date.now() - (D.chAt[target] || 0) < 60000;
         if (fresh && !force) return D.ch[target];
@@ -57,12 +78,44 @@
     }
     function streakFor(target) { return D.streaks ? D.streaks.find(x => x.target === target) || null : null; }
 
+    // ------------------------------------------------------------ tek yetki: bugünün günlüğü (hedef) bitti mi?
+    /** Yerel kaydın günü: sunucunun bildirdiği gün (biliniyorsa) ya da İstanbul günü. */
+    function localDay(target) { const st = D.ch[target]; const gm = g(); return (st && st.day) || (gm && gm.getDailyDay ? gm.getDailyDay() : null); }
+    function localRecord(target) { const gm = g(); return gm && gm.getDailyRecord ? gm.getDailyRecord(target, localDay(target)) : null; }
+    /**
+     * { finished, src: 'server'|'local', st (sunucu durumu|null), rec (yerel kayıt|null), serverOk }
+     * Üye + özellik açık: sunucu otoritedir; yerel kayıt yalnızca sunucuya ulaşılamazsa yedek. Misafir / özellik yok: yerel kayıt.
+     * Hesap durumu netleşmeden karar verilmez (açılıştaki geçici 'guest' durumu üyeyi misafir saymasın).
+     */
+    async function status(target, force) {
+        target = target || curTarget();
+        await waitSettled();
+        if (member() && D.avail !== false) {
+            const st = await loadChallenge(target, force);
+            if (st) {
+                const fin = st.status === 'finished';
+                return { finished: fin, src: 'server', st, rec: fin ? localRecord(target) : null, serverOk: true };
+            }
+            if (D.avail !== false) { const rec = localRecord(target); return { finished: !!rec, src: 'local', st: null, rec, serverOk: false }; }
+        }
+        if (canReach() && D.avail !== false && !D.ch[target]) await loadChallenge(target, force);
+        const rec = localRecord(target);
+        return { finished: !!rec, src: 'local', st: D.ch[target] || null, rec, serverOk: !!D.ch[target] };
+    }
+    /** Eşzamanlı sürüm (kart çizimi): elde olan bilgiyle. */
+    function statusNow(target, st) {
+        if (member() && D.avail !== false && st) return { finished: st.status === 'finished', src: 'server', st, rec: null };
+        const rec = localRecord(target);
+        return { finished: !!rec, src: 'local', st: st || null, rec };
+    }
+
     // ------------------------------------------------------------ ana sayfa kartı
     function $(id) { return document.getElementById(id); }
     let cardSeq = 0;
     async function refreshCard(force) {
         const seq = ++cardSeq;
         const target = curTarget();
+        if (accSettling()) { renderCard(target, null); await waitSettled(); if (seq !== cardSeq) return; }
         const st = await loadChallenge(target, force);
         if (member()) await loadStreaks(force);
         if (seq !== cardSeq) return;
@@ -72,60 +125,113 @@
         const btn = $('btnStartDaily'), lbl = $('btnStartDailyLabel'), board = $('btnDailyBoard');
         const box = $('dailyResultBox'), chip = $('dailyStreakChip'), text = $('dailyCardText');
         if (!btn) return;
+        // Dosyadaki danışan özeti: bu okumanın vakası (ek istek yok); sunucu yoksa yerel günün vakası (ajan R3)
+        const gmT = g();
+        if (gmT && gmT.setDailyTeaser) gmT.setDailyTeaser((st && st.case_id && findCase(st.case_id)) || (gmT.getLocalDailyCase ? gmT.getLocalDailyCase() : null));
         const on = D.avail === true;
         board.hidden = !on;
         // seri
         const sk = on && member() ? streakFor(target) : null;
         if (sk && sk.current_streak > 0) { chip.hidden = false; $('dailyStreakText').textContent = `${sk.current_streak} günlük seri`; }
         else chip.hidden = true;
-        const finished = on && member() && st && st.status === 'finished';
+        const settling = accSettling();
+        const S = settling ? { finished: false } : statusNow(target, st);
+        const finished = !!S.finished;
+        bindResultBox(box);
         box.hidden = !finished;
         btn.hidden = !!finished;
+        btn.disabled = settling; // hesap netleşmeden başlatılmaz (üye misafir sanılmasın)
         board.classList.toggle('btn-primary', !!finished);
         board.classList.toggle('btn-secondary', !finished);
         if (finished) {
-            box.className = 'daily-result ' + (st.won ? 'is-win' : 'is-loss');
-            $('dailyResultIcon').innerHTML = icon(st.won ? 'check' : 'flag');
-            $('dailyResultTitle').textContent = st.won ? `${st.guesses_used}. tahminde bildin` : 'Bugün olmadı';
-            $('dailyResultSub').textContent = st.won ? `${st.points} puan · ${fmtTime(st.time_sec)} · Yarın yeni vaka` : 'Yarın yeni vaka seni bekliyor.';
-            text.textContent = `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Sıralamada nerede olduğuna bak.`;
+            const srv = S.src === 'server' ? S.st : null, rec = S.rec;
+            const won = srv ? !!srv.won : !!(rec && rec.won);
+            box.className = 'daily-result is-tappable ' + (won ? 'is-win' : 'is-loss');
+            $('dailyResultIcon').innerHTML = icon(won ? 'check' : 'flag');
+            $('dailyResultTitle').textContent = won ? `${srv ? srv.guesses_used : rec.guessesUsed}. tahminde bildin` : 'Bugün olmadı';
+            const tail = 'Yarın yeni vaka · Vakayı gör';
+            $('dailyResultSub').textContent = won ? (srv ? `${srv.points} puan · ${fmtTime(srv.time_sec)} · ${tail}` : `${fmtTime(rec.elapsed)} · ${tail}`) : `Yarın yeni vaka seni bekliyor · Vakayı gör`;
+            text.textContent = on
+                ? `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Sıralamada nerede olduğuna bak.`
+                : `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Yarın yeni vaka var.`;
         } else {
             text.textContent = 'Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.';
             lbl.textContent = on && member() && st && st.status === 'in_progress' ? 'Devam et' : 'Başla';
         }
     }
+    /** Bitmiş günün sonuç kutusu: dokununca vaka salt okunur açılır. */
+    function bindResultBox(box) {
+        if (!box || box._b3) return;
+        box._b3 = true;
+        box.setAttribute('role', 'button');
+        box.tabIndex = 0;
+        box.setAttribute('aria-label', 'Bugünkü sonucu ve vakayı gör');
+        box.classList.add('is-tappable'); // imleç/odak/üzerine gelme: css/anasayfa.css (satır içi stil yok; ajan R3)
+        const go = () => { const gm = g(); if (gm) gm.setMode('daily'); };
+        box.addEventListener('click', go);
+        box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    }
 
     // ------------------------------------------------------------ oyun: başlatma
     /** game.loadDailyCase yerine (setMode('daily') çağırır). */
+    /** Yerel bitmiş kaydı salt okunur açar. */
+    function openLocalFinished(rec) {
+        const gm = g();
+        D.active = null;
+        return gm.openFinishedDaily(findCase(rec.caseId), rec);
+    }
+    /** Sunucuda bitmiş denemeyi salt okunur açar (daily_begin'in tahminleri + sonucu). Yeni tahmin gönderilmez. */
+    function openServerFinished(target, st) {
+        const gm = g();
+        const c = findCase(st.case_id);
+        if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); return false; }
+        D.active = { target, caseId: c.id, day: st.day };
+        installOverrides();
+        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0 };
+        const ok = gm.openFinishedDaily(c, rec, {
+            fill: () => { restore(st); },
+            title: st.won ? `${st.guesses_used}. tahminde bildin · ${st.points} puan` : null
+        });
+        if (ok && gm.saveDailyRecord) gm.saveDailyRecord(gm.snapshotDailyRecord(!!st.won)); // sunucuya ulaşılamazsa yedek
+        if (ok) gm.updateDailyRecord(target, st.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
+        return ok;
+    }
+
     async function loadDaily(orig) {
         const gm = g();
         const target = gm.targetGameMode || 'diagnosis';
         if (D.busy) return;
-        // Misafir / özellik kapalı / ulaşılamıyor: yerel (misafirde mümkünse sunucunun case_id'si)
-        if (!member() || D.avail === false || !canReach()) {
-            const st = canReach() && D.avail !== false ? await loadChallenge(target) : null;
+        D.busy = true;
+        const btn = $('btnStartDaily'); if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+        let S;
+        try { S = await status(target, true); } finally { D.busy = false; if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); } }
+        if (gm.targetGameMode !== target) return; // beklerken hedef değişti
+        // Misafir / özellik kapalı / ulaşılamıyor: yerel kayıt tek kaynak (misafirde mümkünse sunucunun case_id'si)
+        if (!(member() && D.avail !== false && S.serverOk)) {
+            if (member() && D.avail !== false && !S.serverOk && !S.finished) { gm.showToast('Sunucuya ulaşılamadı. Biraz sonra yeniden dene.'); return; }
+            if (S.finished && S.rec && openLocalFinished(S.rec)) { renderCard(target, S.st); return; }
+            const st = S.st;
             const c = st && findCase(st.case_id);
-            if (c) { gm.currentMode = 'daily'; gm.startCase(c, `Günün vakası · #${c.caseNumber || ''}`.replace(/ · #$/, '')); return; }
+            if (c) { D.active = null; gm.startDailyCase(c, { day: st.day, target, src: 'local' }); return; }
             return orig();
         }
         D.busy = true;
-        const btn = $('btnStartDaily'); if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+        if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
         const r = await NS.api.dailyBegin(target);
         if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); }
         D.busy = false;
         if (!r.ok) {
-            if (r.error.code === 'UNSUPPORTED') { D.avail = false; renderCard(target, null); return orig(); }
+            if (r.error.code === 'UNSUPPORTED') { D.avail = false; renderCard(target, null); return loadDaily(orig); }
             gm.showToast(r.error.message);
             return;
         }
         const st = r.data;
         D.avail = true; D.ch[target] = st; D.chAt[target] = Date.now();
-        if (st.status === 'finished') { renderCard(target, st); gm.showToast('Bugünün vakasını bu hedefte bitirdin. Sıralamaya bak.'); location.hash = '#/gunluk'; return; }
+        if (st.status === 'finished') { renderCard(target, st); openServerFinished(target, st); return; }
         const c = findCase(st.case_id);
         if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); console.warn('[PsikoVaka] günlük vaka yok', st.case_id); return; }
         D.active = { target, caseId: c.id, day: st.day };
-        gm.currentMode = 'daily';
-        gm.startCase(c, `Günün vakası · #${c.caseNumber || ''}`.replace(/ · #$/, ''));
+        gm.startDailyCase(c, { day: st.day, target, src: 'server', userId: NS.api.myId() });
         if (st.started_at) { const ms = NS.clock.now() - Date.parse(st.started_at); if (isFinite(ms) && ms > 0) gm.caseStartTime = Date.now() - ms; }
         installOverrides();
         restore(st);
@@ -202,7 +308,7 @@
         if (!isServerDaily() || gm.currentCase.id !== caseId) return;
         if (!r.ok) {
             const c = r.error.code;
-            if (c === 'DAILY_ALREADY_FINISHED') { gm.showToast(r.error.message); refreshCard(true); return; }
+            if (c === 'DAILY_ALREADY_FINISHED') { gm.showToast(r.error.message); const t = D.active.target; const b = await NS.api.dailyBegin(t); if (b.ok && b.data.status === 'finished') { D.ch[t] = b.data; D.chAt[t] = Date.now(); openServerFinished(t, b.data); } refreshCard(true); return; }
             if (c === 'DAILY_NOT_STARTED') { gm.showToast('Gün değişti. Yeni günün vakasını başlat.'); return; }
             gm.showToast(r.error.message);
             return;
@@ -254,6 +360,7 @@
         Object.getPrototypeOf(gm).handleGameEnd.call(gm, !!d.won);
         if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${st.guesses_used}. tahminde bildin · ${d.points} puan`;
         if (gm.dom.btnMainNextCase) gm.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
+        if (gm.updateDailyRecord) gm.updateDailyRecord(target, st.day || D.active.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
         renderCard(target, st);
         loadStreaks(true).then(() => showStreakInReport(target, !!d.won));
     }
@@ -440,13 +547,13 @@
         const origOpen = gm.openResultModal.bind(gm);
         gm.openResultModal = (won) => { const el = $('resultStreakNote'); if (el && !isServerDaily()) el.hidden = true; return origOpen(won); };
         const a = acc();
-        if (a && a.onChange) a.onChange(() => { D.ch = {}; D.chAt = {}; D.streaks = null; D.avail = D.avail === false ? false : null; D.active = null; D.board.data = null;
+        if (a && a.onChange) a.onChange(() => { D.settleGaveUp = false; D.ch = {}; D.chAt = {}; D.streaks = null; D.avail = D.avail === false ? false : null; D.active = null; D.board.data = null;
             if (gm.currentScreen === 'oyna') refreshCard(true); if (gm.currentScreen === 'gunluk') onBoardShow({}); if (gm.currentScreen === 'profil') renderProfile(); });
         if (gm.currentScreen === 'oyna') refreshCard();
     }
 
     NS.daily = {
-        refreshCard, loadBoard, renderBoard, renderProfile,
+        refreshCard, loadBoard, renderBoard, renderProfile, status,
         get available() { return D.avail; }, get active() { return D.active; }, isServerDaily,
         _reset() { D.avail = null; D.ch = {}; D.chAt = {}; D.streaks = null; D.board.data = null; D.active = null; }
     };

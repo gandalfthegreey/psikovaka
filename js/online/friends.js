@@ -67,7 +67,16 @@
     const reloadInvitesSoon = NS.util.debounce(loadInvites, 300);
 
     function updateBadge() {
-        NS.ui.setNavBadge(F.incoming.length + F.invites.length);
+        const n = F.incoming.length + F.invites.length;
+        NS.ui.setNavBadge(n);
+        homeNote(n);
+    }
+    /** Ana sayfa Online kartındaki not (ajan R3): ilk bekleyen davetin sahibi + bekleyen bildirim sayısı */
+    function homeNote(n) {
+        const gm = NS.game && NS.game();
+        if (!gm || !gm.setHomeOnlineNote) return;
+        const inv = F.invites[0];
+        gm.setHomeOnlineNote({ count: n, inviter: inv ? ((inv.inviter && inv.inviter.username) || 'Bir arkadaşın') : '', duel: !!(inv && inv.room && inv.room.mode === 'duel') });
     }
 
     function showInviteBanner(inv) {
@@ -355,6 +364,7 @@
         F.loaded = false; F.friends = []; F.incoming = []; F.outgoing = []; F.invites = [];
         F.seenIncoming.clear(); F.seenInvites.clear();
         NS.ui.setNavBadge(0);
+        homeNote(0);
         render();
     }
 

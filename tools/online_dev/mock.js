@@ -18,19 +18,23 @@
 
     // ---------------------------------------------------------- sahte hesap
     const listeners = new Set();
-    const snap = () => (M.opt && M.opt.guest ? { state: 'guest', availability: 'ready', user: null, profile: null, remember: true, passwordMinLength: 8 } : { state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
+    // B3: accPending (hizmet yükleniyor) / accLoading (oturum var, profil yükleniyor: geçici 'guest')
+    const accTransient = () => !!(M.opt && (M.opt.accPending || M.opt.accLoading));
+    const snap = () => (M.opt && M.opt.accPending ? { state: 'guest', availability: 'pending', user: null, profile: null, remember: true, passwordMinLength: 8 }
+        : M.opt && M.opt.accLoading ? { state: 'guest', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' }, profile: null, remember: true, passwordMinLength: 8 }
+        : M.opt && M.opt.guest ? { state: 'guest', availability: 'ready', user: null, profile: null, remember: true, passwordMinLength: 8 } : { state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
         profile: { id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: (M.rpProfile != null ? M.rpProfile : 760) }, remember: true, passwordMinLength: 8 });
     const fakeAcc = Object.assign({}, realAcc, {
         init: async () => { listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
         onChange: (fn) => { listeners.add(fn); return () => listeners.delete(fn); },
         snapshot: snap,
-        getClient: () => ({ mock: true }),
+        getClient: () => (M.opt && M.opt.accPending ? null : { mock: true }),
         getRemember: () => true,
         refreshProfile: async () => { M.refreshCalls = (M.refreshCalls || 0) + 1; if (M.rpServer != null) M.rpProfile = M.rpServer; listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
         getLeaderboard: async () => ({ ok: true, rows: names.slice(0, 8).map((n, i) => ({ user_id: uid(i), username: n, avatar: AV.randomConfig(n), ranked_points: 2100 - i * 230, position: i + 1 })), me: null })
     });
-    Object.defineProperty(fakeAcc, 'state', { get: () => (M.opt && M.opt.guest ? 'guest' : 'ready') });
-    Object.defineProperty(fakeAcc, 'availability', { get: () => 'ready' });
+    Object.defineProperty(fakeAcc, 'state', { get: () => (M.opt && (M.opt.guest || accTransient()) ? 'guest' : 'ready') });
+    Object.defineProperty(fakeAcc, 'availability', { get: () => (M.opt && M.opt.accPending ? 'pending' : 'ready') });
     window.PsikoVakaAccount = fakeAcc;
 
     // ---------------------------------------------------------- sahte realtime
@@ -116,9 +120,10 @@
             return ok(base.concat(Object.entries(NS.leaguesView ? NS.leaguesView.V2_DEFAULTS : {}).map(([key, value]) => ({ key, value }))));
         },
         // ---- ajan P: günlük (§13.1)
-        getDailyChallenge: (t) => M.opt.daily === 'unsupported' ? err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.') : ok(dailyState(t, true)),
-        dailyBegin: (t) => { if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-'); const d = dget(t); if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now() - (M.opt.dailyElapsed || 0)); } persist(); return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, answer: d.status === 'finished' ? dailyAnswer(t) : null })); },
+        getDailyChallenge: (t) => M.opt.dailyFail ? err('NETWORK', 'Sunucuya ulaşılamadı.') : M.opt.daily === 'unsupported' ? err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.') : ok(dailyState(t, true)),
+        dailyBegin: (t) => { M.beginCalls = (M.beginCalls || 0) + 1; if (M.opt.dailyFail) return err('NETWORK', 'Sunucuya ulaşılamadı.'); if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-'); const d = dget(t); if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now() - (M.opt.dailyElapsed || 0)); } persist(); return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, answer: d.status === 'finished' ? dailyAnswer(t) : null })); },
         dailySubmitGuess: (t, item) => {
+            M.submitCalls = (M.submitCalls || 0) + 1;
             const d = dget(t);
             if (d.status === 'not_started') return err('DAILY_NOT_STARTED', 'Önce vakayı başlat.');
             if (d.status === 'finished') return err('DAILY_ALREADY_FINISHED', 'Bugünün vakasını bu hedefte zaten bitirdin.');
@@ -132,7 +137,7 @@
             else if (correct) finishDaily(d, true);
             else if (nInStage >= 6) finishDaily(d, false);
             persist();
-            return ok({ server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, correct, same_group: false, stage, next_stage: next, stage_completed: correct, guess_no: nInStage, guesses_used: d.guesses.length, guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, finished: d.status === 'finished', won: d.status === 'finished' ? d.won : null, points: d.status === 'finished' ? d.points : null, time_sec: d.status === 'finished' ? d.time_sec : null, answer: d.status === 'finished' ? ans : null });
+            return ok({ server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, correct, same_group: false, stage, next_stage: next, stage_completed: correct, guess_no: nInStage, guesses_used: d.guesses.length, guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, finished: d.status === 'finished', won: d.status === 'finished' ? d.won : null, points: d.status === 'finished' ? d.points : null, time_sec: d.status === 'finished' ? d.time_sec : null, answer: d.status === 'finished' ? ans : null });
         },
         dailyGiveUp: (t) => { const d = dget(t); if (d.status !== 'in_progress') return err(d.status === 'finished' ? 'DAILY_ALREADY_FINISHED' : 'DAILY_NOT_STARTED', '-'); finishDaily(d, false); persist(); return ok(Object.assign(dailyState(t), { answer: dailyAnswer(t) })); },
         getDailyLeaderboard: (t, day, limit) => {
@@ -146,7 +151,7 @@
                 me = { rank: M.opt.mePos === 'top' ? 2 : n + 4, user_id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760, won: d.won, guesses_used: d.guesses.length, time_sec: d.time_sec, points: d.points };
                 if (M.opt.mePos === 'top') { if (rows.length >= 2) rows.splice(1, 1, me); else { me.rank = 1; rows.splice(0, rows.length, me); } }
             }
-            return ok({ server_time: iso(Date.now()), day: day || '2026-11-15', target: t, total_players: n + (me && M.opt.mePos !== 'top' ? 4 : 0) + (day ? 3 : 0), rows: rows.slice(0, limit || 50), me });
+            return ok({ server_time: iso(Date.now()), day: day || mday(), target: t, total_players: n + (me && M.opt.mePos !== 'top' ? 4 : 0) + (day ? 3 : 0), rows: rows.slice(0, limit || 50), me });
         },
         getMyStreaks: () => M.opt.daily === 'unsupported' ? err('UNSUPPORTED', '-') : ok(['diagnosis', 'therapy', 'pharmacology', 'combo'].map(t => { const d = M.daily && M.daily[t]; const base = M.opt.streakBase != null ? M.opt.streakBase : 3;
             const cur = d && d.status === 'finished' ? (d.won ? base + 1 : 0) : (t === 'diagnosis' ? base : 0); return { target: t, current_streak: cur, best_streak: Math.max(cur, t === 'diagnosis' ? 6 : cur), last_day: '2026-11-14', played_today: !!(d && d.status === 'finished') }; })),
@@ -238,16 +243,19 @@
         NS.rooms.open('mock-room');
     }
     // ---- sahte günlük durum
+    /** Sunucunun günü: İstanbul takvim günü (UTC+3), sahte saat (Date.now) ile. M.opt.dailyDay ile sabitlenebilir. */
+    function mday() { return M.opt.dailyDay || new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10); }
     function dget(t) {
         M.daily = M.daily || {};
-        if (!M.daily[t]) { const ids = caseIds(); M.daily[t] = { case_id: M.opt.dailyCase || ids[{ diagnosis: 9, therapy: 10, pharmacology: 11, combo: 12 }[t]], status: 'not_started', guesses: [], stage: 1, won: null, points: null, time_sec: null, started_at: null }; }
+        if (M.daily[t] && M.daily[t].day && M.daily[t].day !== mday()) delete M.daily[t]; // İstanbul gece yarısı: yeni gün
+        if (!M.daily[t]) { const ids = caseIds(); M.daily[t] = { case_id: M.opt.dailyCase || ids[{ diagnosis: 9, therapy: 10, pharmacology: 11, combo: 12 }[t]], status: 'not_started', guesses: [], stage: 1, won: null, points: null, time_sec: null, started_at: null, day: mday() }; }
         return M.daily[t];
     }
     function dailyAnswer(t) { const c = (window.game.allMasterCases || []).find(x => x.id === dget(t).case_id) || {}; return { diagnosis_id: c.diagnosisId, therapy_id: c.therapyId || 'cbt_general', pharmacology_id: c.pharmacologyId || (window.game.getFallbackPharmacologyId ? window.game.getFallbackPharmacologyId(c) : null) }; }
     function dailyState(t, pub) {
         const d = dget(t);
-        if (pub && M.opt.guest) return { server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, status: 'not_started', guesses_used: 0, won: null, points: null, time_sec: null, stage: 1 };
-        return { server_time: iso(Date.now()), day: '2026-11-15', target: t, case_id: d.case_id, status: d.status, guesses_used: d.guesses.length, won: d.won, points: d.points, time_sec: d.time_sec, stage: d.stage };
+        if (pub && (M.opt.guest || accTransient())) return { server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, status: 'not_started', guesses_used: 0, won: null, points: null, time_sec: null, stage: 1 };
+        return { server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, status: d.status, guesses_used: d.guesses.length, won: d.won, points: d.points, time_sec: d.time_sec, stage: d.stage };
     }
     function finishDaily(d, won) {
         d.status = 'finished'; d.won = won;
@@ -286,5 +294,5 @@
     function emitRoomChange(patch) { if (!M.state) return; const old = M.state.room; M.state.room = Object.assign({}, old, patch); if (M.rt && M.rt.onChange) M.rt.onChange('rooms', { eventType: 'UPDATE', new: Object.assign({}, M.state.room), old: { id: old.id } }); }
     function emitFriendship(ev) { if (M.selfHandlers && M.selfHandlers.onFriendship) M.selfHandlers.onFriendship(ev || { eventType: 'UPDATE' }); }
     function emitResync() { if (M.selfHandlers && M.selfHandlers.onResync) M.selfHandlers.onResync(); }
-    window.olMock = { emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; persist(); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
+    window.olMock = { emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; M.beginCalls = 0; M.submitCalls = 0; persist(); }, get beginCalls() { return M.beginCalls || 0; }, get submitCalls() { return M.submitCalls || 0; }, emitAcc() { listeners.forEach(f => f(snap(), { type: 'state' })); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
 })();

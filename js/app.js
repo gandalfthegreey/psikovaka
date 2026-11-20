@@ -873,7 +873,16 @@ class PsikoVakaGame {
         }
         if (hasAvatar) {
             if (this.dom.navAvatarMount) this.dom.navAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 28);
-            if (this.dom.homeAvatarMount) this.dom.homeAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 44);
+            // Ana sayfa masasındaki Nöro: büyük, çerçevesiz, hareketli (boyutu CSS verir: 88/112/168 px). Aynı avatar
+            // yeniden çizilmez (animasyon her profil güncellemesinde baştan başlamasın).
+            const hm = this.dom.homeAvatarMount;
+            if (hm) {
+                const sig = JSON.stringify(this.myAvatar);
+                if (hm.dataset.sig !== sig || !hm.firstChild) {
+                    hm.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 168, { animated: true, framed: false });
+                    hm.dataset.sig = sig;
+                }
+            }
             const profileAvatar = document.getElementById('headerFunnyAvatarMount');
             if (profileAvatar) profileAvatar.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 64);
         }
@@ -954,13 +963,21 @@ class PsikoVakaGame {
     updateHomeMeta() {
         if (this.dom.dailyDateLabel) {
             try {
-                this.dom.dailyDateLabel.textContent = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'long' });
+                // Klasör sekmesi: "21 Kasım" + gün adı (dar telefonda gün adı gizlenir ki sekme Nöro'nun altına girmesin)
+                const now = new Date();
+                const dm = now.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' });
+                const wd = now.toLocaleDateString('tr-TR', { weekday: 'long' });
+                this.dom.dailyDateLabel.innerHTML = `${this.libEsc(dm)}<span class="desk-date-wd"> ${this.libEsc(wd)}</span>`;
             } catch (e) {
                 this.dom.dailyDateLabel.textContent = this.getDailySeed();
             }
         }
+        // Danışan özeti: js/online/daily.js varsa o çizer (sunucunun vakasıyla); yoksa yerel günün vakası
+        if (!(window.PsikoVakaOnline && window.PsikoVakaOnline.daily)) this.setDailyTeaser(this.getLocalDailyCase());
         if (this.dom.homeResume) {
-            const canResume = !!(this.currentCase && !this.isGameOver && this.caseTargetMode === this.targetGameMode);
+            // Bitmiş (başka sekmede bitirilmiş ya da günü geçmiş) günlük "devam et" olarak sunulmaz
+            const staleDaily = this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay());
+            const canResume = !!(this.currentCase && !this.isGameOver && this.caseTargetMode === this.targetGameMode && !staleDaily);
             this.dom.homeResume.hidden = !canResume;
             if (canResume && this.dom.homeResumeLabel) this.dom.homeResumeLabel.textContent = this.currentDisplayTitle || 'Vaka';
         }
@@ -1377,9 +1394,22 @@ class PsikoVakaGame {
         }
         if (this.dom.btnResumeCase) {
             this.dom.btnResumeCase.addEventListener('click', () => {
-                if (this.currentCase && !this.isGameOver) this.enterPlayScreen();
+                if (!this.currentCase || this.isGameOver) return;
+                if (this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay())) { this.setMode('daily'); return; }
+                this.enterPlayScreen();
             });
         }
+        // Başka sekmede günlük bitirildi: ana sayfa kartı ve oynanan aynı günlük güncellensin
+        window.addEventListener('storage', (e) => {
+            if (e.key !== 'psikovaka_daily_done') return;
+            if (this.currentScreen === 'oyna') this.updateHomeMeta();
+            const NSd = window.PsikoVakaOnline && window.PsikoVakaOnline.daily;
+            if (NSd && typeof NSd.refreshCard === 'function') NSd.refreshCard();
+            if (this.currentMode === 'daily' && this.dailyContext && !this.isGameOver && this.dailyContext.src !== 'server' && this.isDailyContextFinished()) {
+                const rec = this.getDailyRecord(this.dailyContext.target, this.dailyContext.day);
+                if (this.currentScreen === 'play') this.openFinishedDaily(this.findCaseById(rec.caseId), rec);
+            }
+        });
         if (this.dom.btnPlayBack) this.dom.btnPlayBack.addEventListener('click', () => this.leavePlayScreen());
         if (this.dom.btnOpenArchive) this.dom.btnOpenArchive.addEventListener('click', () => this.openArchiveModal());
         document.querySelectorAll('[data-arena-tab]').forEach(btn => {
@@ -1660,7 +1690,8 @@ class PsikoVakaGame {
         }
 
         if (restartCurrentCase && this.currentCase) {
-            this.startCase(this.currentCase, this.currentDisplayTitle || 'Vaka');
+            if (this.currentMode === 'daily') this.setMode('daily'); // günlük: bu hedefin günlüğü (bittiyse salt okunur)
+            else this.startCase(this.currentCase, this.currentDisplayTitle || 'Vaka');
         }
 
         const modeMessages = {
@@ -1904,17 +1935,187 @@ class PsikoVakaGame {
         return `${year}-${month}-${day}`;
     }
 
+    /** Yerel günlük (misafir / sunucu yok): gün = İstanbul günü (sunucuyla aynı kaynak). Bittiyse salt okunur sonuç açılır. */
     loadDailyCase() {
-        const seedStr = this.getDailySeed();
+        const day = this.getDailyDay();
+        const target = this.targetGameMode;
+        const rec = this.getDailyRecord(target, day);
+        if (rec && this.openFinishedDaily(this.findCaseById(rec.caseId), rec)) return;
         let hash = 0;
-        for (let i = 0; i < seedStr.length; i++) {
-            hash = ((hash << 5) - hash) + seedStr.charCodeAt(i);
+        for (let i = 0; i < day.length; i++) {
+            hash = ((hash << 5) - hash) + day.charCodeAt(i);
             hash |= 0;
         }
         const index = Math.abs(hash) % this.cases.length;
         const dailyCase = this.cases[index];
+        this.startDailyCase(dailyCase, { day, target, src: 'local' });
+    }
 
-        this.startCase(dailyCase, `Günün vakası · #${dailyCase.caseNumber || (index + 1)}`);
+    // ---------------------------------------------------------------- Günün vakası: bitti kaydı (B3)
+    // Bir hedefte günde tek oyun. Kayıt localStorage 'psikovaka_daily_done' { "<gün>|<hedef>": kayıt }; gün = İstanbul günü.
+    // Misafirde tek kaynak bu kayıt; üyede sunucu (js/online/daily.js), kayıt yalnızca sunucuya ulaşılamazsa yedek.
+
+    /** İstanbul takvim günü 'YYYY-AA-GG' (sunucunun günü, §13.1). Sunucu saat farkı biliniyorsa onu kullanır. */
+    getDailyDay(ms) {
+        let t = ms;
+        if (t == null) {
+            const C = window.PsikoVakaOnline && window.PsikoVakaOnline.clock;
+            t = C && typeof C.now === 'function' ? C.now() : Date.now();
+        }
+        try {
+            const s = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t));
+            if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+        } catch (e) {}
+        return new Date(t + 3 * 3600e3).toISOString().slice(0, 10); // Türkiye: sabit UTC+3
+    }
+
+    findCaseById(id) {
+        if (!id) return null;
+        return (this.allMasterCases || []).find(c => c.id === id) || (this.cases || []).find(c => c.id === id) || null;
+    }
+
+    dailyRecords() {
+        try {
+            const o = JSON.parse(localStorage.getItem('psikovaka_daily_done') || '{}');
+            return o && typeof o === 'object' && !Array.isArray(o) ? o : {};
+        } catch (e) { return {}; }
+    }
+
+    /** Bugünün (ya da verilen günün) bu hedefteki bitmiş günlük kaydı; yoksa null. */
+    getDailyRecord(target, day) {
+        const r = this.dailyRecords()[`${day || this.getDailyDay()}|${target || this.targetGameMode}`];
+        return r && r.caseId ? r : null;
+    }
+
+    /** İlk sonuç kalır (overwrite yoksa). En yeni 40 kayıt tutulur. */
+    saveDailyRecord(rec, overwrite) {
+        if (!rec || !rec.day || !rec.target || !rec.caseId) return null;
+        const all = this.dailyRecords();
+        const key = `${rec.day}|${rec.target}`;
+        if (all[key] && !overwrite) return all[key];
+        all[key] = rec;
+        Object.keys(all).sort((a, b) => String((all[b] || {}).day || '').localeCompare(String((all[a] || {}).day || ''))).slice(40).forEach(k => { delete all[k]; });
+        try { localStorage.setItem('psikovaka_daily_done', JSON.stringify(all)); } catch (e) {}
+        return rec;
+    }
+
+    updateDailyRecord(target, day, patch) {
+        const r = this.getDailyRecord(target, day);
+        if (r) this.saveDailyRecord(Object.assign(r, patch || {}), true);
+    }
+
+    /** Şu an oynanan günlüğün bitiş görüntüsü (tahminler, kombo aşamaları, süre). */
+    snapshotDailyRecord(won) {
+        const c = this.dailyContext;
+        const log = this.stageGuessLog || {};
+        const earlier = Object.keys(log).filter(k => Number(k) !== this.comboStage).reduce((n, k) => n + (log[k] || []).length, 0);
+        return {
+            day: c.day, target: c.target, caseId: this.currentCase.id, src: c.src || 'local', userId: c.userId || null,
+            won: !!won, guessesUsed: earlier + this.guesses.length, comboStage: this.comboStage,
+            guesses: this.guesses.map(g => Object.assign({}, g)),
+            stageGuessLog: JSON.parse(JSON.stringify(log)), comboResults: Object.assign({}, this.comboResults || {}),
+            diagWrongLog: (this.diagWrongLog || []).slice(), elapsed: this.elapsedSeconds || 0,
+            steps: [1, 2, 3].map(i => { const el = this.dom['comboStep' + i + 'Val']; return el ? el.textContent : ''; }),
+            at: Date.now()
+        };
+    }
+
+    /** Günlük oyunu başlatır ve hangi güne/hedefe ait olduğunu işaretler (bitişte kayıt için). */
+    startDailyCase(caseObj, ctx) {
+        if (!caseObj) return;
+        this.currentMode = 'daily';
+        this.startCase(caseObj, `Günün vakası · #${caseObj.caseNumber || ''}`.replace(/ · #$/, ''));
+        this.dailyContext = Object.assign({ day: this.getDailyDay(), target: this.targetGameMode, src: 'local', userId: null }, ctx || {}, { caseId: caseObj.id });
+    }
+
+    /** Bu oyun hâlâ oynanabilir bir günlük mü? (gün değişmediyse ve bitmiş kaydı yoksa) */
+    isDailyContextFinished(ctx) {
+        const c = ctx || this.dailyContext;
+        return !!(c && this.getDailyRecord(c.target, c.day));
+    }
+
+    /**
+     * Bitmiş günlüğü SALT OKUNUR açar: bütün ipuçları, tahminler, sonuç kartı + açıklama; tahmin alanı yok, istatistik yazılmaz.
+     * opts.fill(): tahminleri dışarıdan kurmak için (sunucu günlüğü), opts.title: sonuç başlığı.
+     */
+    openFinishedDaily(caseObj, rec, opts = {}) {
+        if (!caseObj || !rec) return false;
+        if (rec.target && rec.target !== this.targetGameMode) this.setTargetGameMode(rec.target, false);
+        this.currentMode = 'daily';
+        this.startCase(caseObj, `Günün vakası · #${caseObj.caseNumber || ''}`.replace(/ · #$/, '') + ' · bitti');
+        clearInterval(this.duelTimerInterval);
+        this.dailyContext = { day: rec.day, target: rec.target || this.targetGameMode, caseId: caseObj.id, src: rec.src || 'local', userId: rec.userId || null };
+        this.dailyReadOnly = true;
+        if (typeof opts.fill === 'function') {
+            opts.fill();
+        } else {
+            this.guesses = (rec.guesses || []).map(g => Object.assign({}, g));
+            this.stageGuessLog = rec.stageGuessLog || {};
+            if (rec.comboResults) this.comboResults = Object.assign({}, rec.comboResults);
+            this.diagWrongLog = (rec.diagWrongLog || []).slice();
+            if (this.targetGameMode === 'combo') {
+                this.comboStage = rec.comboStage || 3;
+                (rec.steps || []).forEach((t, i) => { const el = this.dom['comboStep' + (i + 1) + 'Val']; if (el && t) el.textContent = t; });
+            }
+        }
+        this.elapsedSeconds = rec.elapsed || 0;
+        this.renderGameOverView(!!rec.won);
+        if (opts.title && this.dom.playResultTitle) this.dom.playResultTitle.textContent = opts.title;
+        if (this.dom.btnMainNextCase) this.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
+        this.emitPlayState();
+        this.announcePlay('Bugünün vakasını bu hedefte bitirdin. Sonucun ve açıklaması aşağıda.');
+        return true;
+    }
+
+    /**
+     * Ana sayfa dosyasındaki özet için yerel (misafir / sunucusuz) günün vakası: loadDailyCase ile aynı seçim
+     * (aynı gün anahtarı ve tohum); bu hedefte bugün bitmiş bir yerel kayıt varsa onun vakası. Oyun başlatmaz.
+     */
+    getLocalDailyCase() {
+        if (!this.cases || !this.cases.length) return null;
+        const day = typeof this.getDailyDay === 'function' ? this.getDailyDay() : this.getDailySeed();
+        if (typeof this.getDailyRecord === 'function' && typeof this.findCaseById === 'function') {
+            const rec = this.getDailyRecord(this.targetGameMode, day);
+            const done = rec && this.findCaseById(rec.caseId);
+            if (done) return done;
+        }
+        let hash = 0;
+        for (let i = 0; i < day.length; i++) {
+            hash = ((hash << 5) - hash) + day.charCodeAt(i);
+            hash |= 0;
+        }
+        return this.cases[Math.abs(hash) % this.cases.length];
+    }
+
+    /**
+     * Ana sayfa dosyasındaki daktilo etiketi: günün danışanının kısa özeti (vakanın patientSummary alanı; yalnızca
+     * demografi + meslek, tanı/kategori/ders taşımaz — 2026-11-15 kuralı). Üyede/misafirde js/online/daily.js
+     * zaten okuduğu sunucu vakasıyla çağırır (ek istek yok); daily.js yoksa yerel günün vakası.
+     */
+    setDailyTeaser(c) {
+        const el = document.getElementById('dailyTeaser');
+        if (!el) return;
+        const t = c && typeof c.patientSummary === 'string' ? c.patientSummary.trim() : '';
+        if (el.textContent !== t) el.textContent = t;
+        el.hidden = !t;
+    }
+
+    /**
+     * Ana sayfa Online kartındaki not (js/online/friends.js bekleyen istek/davet sayısını değiştirince çağırır):
+     * { count, inviter, duel } → "<ad> seni odasına çağırıyor · N bekleyen bildirim"; count 0 ve davet yoksa gizli.
+     */
+    setHomeOnlineNote(info) {
+        const el = document.getElementById('homeOnlineNote');
+        if (!el) return;
+        const count = (info && info.count) || 0;
+        const who = info && info.inviter ? String(info.inviter) : '';
+        if (!count && !who) { el.hidden = true; el.textContent = ''; return; }
+        const parts = [];
+        if (who) parts.push(`<strong>${this.libEsc(who)}</strong> ${info.duel ? 'seni düelloya çağırdı' : 'seni odasına çağırıyor'}`);
+        if (count) parts.push(`${count} bekleyen bildirim`);
+        const html = parts.join('<span aria-hidden="true"> · </span>');
+        if (el.innerHTML !== html) el.innerHTML = html;
+        el.hidden = false;
     }
 
     loadRandomPracticeCase() {
@@ -1962,6 +2163,8 @@ class PsikoVakaGame {
     // --- Core Game Flow ---
     startCase(caseData, displayModeTitle = 'Vaka') {
         if (!caseData) return;
+        this.dailyReadOnly = false;
+        this.dailyContext = null; // günlük ise startDailyCase / openFinishedDaily hemen sonra kurar
         this.currentCase = caseData;
         if (!this.currentCase.pharmacologyId) {
             this.currentCase.pharmacologyId = this.getFallbackPharmacologyId(this.currentCase);
@@ -2592,7 +2795,8 @@ class PsikoVakaGame {
         this.handleGameEnd(false);
     }
 
-    handleGameEnd(won) {
+    /** Bitmiş vaka görünümü (yan etkisiz): tahmin alanı kapalı, sonuç kartı, bütün ipuçları. */
+    renderGameOverView(won) {
         this.isGameOver = true;
         this.gameWon = won;
         this.dom.diagnosisInput.disabled = true;
@@ -2607,18 +2811,27 @@ class PsikoVakaGame {
         this.unlockedClues = this.maxClues;
         this.updateComboStepperUI();
 
-        if (won && this.currentCase) {
-            this.markCaseAsSolved(this.currentCase.id);
-        }
-
         this.renderClues();
         this.renderGuesses();
         this.updateRemainingGuessesUI();
+    }
+
+    handleGameEnd(won) {
+        if (won && this.currentCase) {
+            this.markCaseAsSolved(this.currentCase.id);
+        }
+        this.renderGameOverView(won);
 
         this.recordStats(won, this.guesses.length);
 
         if (won) {
             this.launchConfetti();
+        }
+
+        // Günün vakası: bu gün + hedef için bitti kaydı (ilk sonuç kalır; salt okunur görünümde yazılmaz)
+        if (this.currentMode === 'daily' && this.dailyContext && !this.dailyReadOnly && this.currentCase && this.dailyContext.caseId === this.currentCase.id) {
+            this.saveDailyRecord(this.snapshotDailyRecord(won));
+            this.updateHomeMeta();
         }
 
         this.emitPlayState();
@@ -3750,11 +3963,11 @@ class PsikoVakaGame {
         }
     }
 
-    /** Bir sekmenin gruplu listesini kurar (bir kez). */
-    buildLibraryList(tab) {
-        const d = this.dom;
-        const host = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac }[tab];
-        if (!host) return;
+    /**
+     * Bir sekmenin bölümleri (boş bölümler atlanır). Liste ve detay sayfası aynı sırayı kullanır: bölüm numarası
+     * 1…N ve madde numarası "bölüm.sıra" (ör. 4.1) aramada da değişmez.
+     */
+    libChapters(tab) {
         let groups = [];
         if (tab === 'tani') {
             groups = Object.keys(this.categories).map(k => ({
@@ -3769,7 +3982,25 @@ class PsikoVakaGame {
                 key: k, name: this.pharmacologyFamilies[k].name, items: this.pharmacology.filter(x => x.family === k)
             }));
         }
-        groups = groups.filter(g => g.items.length > 0);
+        return groups.filter(g => g.items.length > 0);
+    }
+
+    /** "4.1 Depresif Bozukluklar" üst bilgi satırı için: { no: '4.1', chapter: 'Depresif Bozukluklar' } */
+    libEntryNo(tab, item) {
+        const groups = this.libChapters(tab);
+        for (let gi = 0; gi < groups.length; gi++) {
+            const ri = groups[gi].items.indexOf(item);
+            if (ri >= 0) return { no: `${gi + 1}.${ri + 1}`, chapter: groups[gi].name };
+        }
+        return { no: '', chapter: '' };
+    }
+
+    /** Bir sekmenin gruplu listesini (içindekiler) kurar (bir kez). */
+    buildLibraryList(tab) {
+        const d = this.dom;
+        const host = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac }[tab];
+        if (!host) return;
+        const groups = this.libChapters(tab);
 
         const desktop = this.libIsDesktop();
         const esc = (s) => this.libEsc(s);
@@ -3778,14 +4009,18 @@ class PsikoVakaGame {
         groups.forEach((g, gi) => {
             const open = desktop || gi === 0;
             html += `<details class="lib-group" data-group="${esc(g.key)}"${open ? ' open' : ''}>`;
-            html += `<summary class="lib-group-head"><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
+            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
             html += `<ul class="lib-rows">`;
-            g.items.forEach(it => {
+            g.items.forEach((it, ri) => {
                 const codes = tab === 'tani' ? this.libCodesOf(it) : [];
-                html += `<li class="lib-row-item" data-id="${esc(it.id)}"><a class="lib-row" href="${this.libHref(tab, it.id)}">` +
+                // İçindekilerde kod sayfa numarası gibi: yalnız ilki (tamamı tanı sayfasında ve title'da; arama dizini tüm kodları içerir)
+                const codeHtml = codes.length
+                    ? `<span class="lib-row-codes"${codes.length > 1 ? ` title="${esc(codes.join(', '))}"` : ''}>${esc(codes[0])}</span>` : '';
+                html += `<li class="lib-row-item" data-id="${esc(it.id)}"><a class="lib-row${codes.length ? ' has-code' : ''}" href="${this.libHref(tab, it.id)}">` +
+                    `<span class="lib-no">${gi + 1}.${ri + 1}</span>` +
                     `<span class="lib-row-text"><span class="lib-row-title">${esc(it.nameTr)}</span>` +
                     `<span class="lib-row-sub" lang="en">${esc(it.nameEn || '')}</span></span>` +
-                    (codes.length ? `<span class="lib-row-codes">${codes.map(esc).join(', ')}</span>` : '') +
+                    codeHtml +
                     `${chevron}</a></li>`;
             });
             html += `</ul></details>`;
@@ -3853,6 +4088,11 @@ class PsikoVakaGame {
             shown += n;
         });
         idx.searching = searching;
+        // Ararken "İçindekiler" başlığı yerine dizin (sonuçlar); masaüstünde tek sütun
+        const tocTitle = document.getElementById('libContentsTitle');
+        if (tocTitle) tocTitle.hidden = searching;
+        const page = document.getElementById('libPage');
+        if (page) page.classList.toggle('is-searching', searching);
         if (d.libSearchStatus) d.libSearchStatus.textContent = searching ? (shown ? `${shown} sonuç` : '') : '';
         if (d.libEmpty) d.libEmpty.hidden = !(searching && shown === 0);
     }
@@ -3870,6 +4110,7 @@ class PsikoVakaGame {
         if (r.view === 'list') {
             const restoreY = prevView === 'detail' ? (this.libScroll[r.tab] || 0) : null;
             d.libDetail.hidden = true;
+            d.libDetail.classList.remove('is-book');
             d.libDetail.innerHTML = '';
             d.libHome.hidden = false;
             this.libView = 'list';
@@ -3909,6 +4150,7 @@ class PsikoVakaGame {
         if (!found) html = this.renderLibraryNotFound(r.kind);
 
         d.libHome.hidden = true;
+        d.libDetail.classList.toggle('is-book', found); // ders kitabı sayfası (css/kutuphane.css)
         d.libDetail.innerHTML = html;
         d.libDetail.hidden = false;
         this.libView = 'detail';
@@ -3934,7 +4176,15 @@ class PsikoVakaGame {
             ilac: ['#/kutuphane/ilaclar', 'İlaçlar']
         };
         const [href, label] = map[kind] || map.tani;
-        return `<a class="lib-back" href="${href}">${this.icon('arrow-left')}<span>${label}</span></a>`;
+        return `<a class="lib-back" href="${href}">${this.icon('arrow-left')}<span><span class="lib-back-pre">İçindekiler: </span>${label}</span></a>`;
+    }
+
+    /** Kitap sayfası üst bilgi satırı: "4.1 Depresif Bozukluklar · PsikoVaka Kütüphanesi" */
+    libRunningHead(tab, item, fallbackChapter) {
+        const esc = (s) => this.libEsc(s);
+        const e = this.libEntryNo(tab, item);
+        const chapter = e.chapter || fallbackChapter || '';
+        return `<div class="lib-run"><span class="lib-run-l">${e.no ? `<span class="lib-run-no">${esc(e.no)}</span> ` : ''}${esc(chapter)}</span><span class="lib-run-r">PsikoVaka Kütüphanesi</span></div>`;
     }
 
     renderLibraryNotFound(kind) {
@@ -3961,18 +4211,19 @@ class PsikoVakaGame {
         const extra = kind === 'tani'
             ? 'Tanı koymak için DSM-5-TR el kitabına başvurun.'
             : 'Tedavi kararları için güncel klinik kılavuzlara başvurun.';
-        return `<p class="lib-disclaimer">${this.icon('info')}<span>Bu özetler ${kind === 'tani' ? 'DSM-5-TR metni değildir; ' : ''}projenin kendi cümleleriyle yazılmış çalışma notlarıdır ve hata içerebilir. ${extra}</span></p>`;
+        return `<p class="lib-disclaimer lib-note"><span class="lib-note-h">Kenar notu</span><span>Bu özetler ${kind === 'tani' ? 'DSM-5-TR metni değildir; ' : ''}projenin kendi cümleleriyle yazılmış çalışma notlarıdır ve hata içerebilir. ${extra}</span></p>`;
     }
 
     /** a etiketli bağlantı listesi; çoksa ilk `limit` tanesi görünür, gerisi "daha fazla" içinde. */
-    libLinkList(items, limit = 12) {
+    libLinkList(items, limit = 12, cls = '') {
         const esc = (s) => this.libEsc(s);
         const li = (x) => `<li><a class="lib-link" href="${x.href}"><span class="lib-link-title">${esc(x.title)}</span>${x.sub ? `<span class="lib-link-sub">${esc(x.sub)}</span>` : ''}${this.icon('chevron-right', 'lib-link-chevron')}</a></li>`;
         const head = items.slice(0, limit).map(li).join('');
         const rest = items.slice(limit);
-        let html = `<ul class="lib-links">${head}</ul>`;
+        const c = cls ? ` ${cls}` : '';
+        let html = `<ul class="lib-links${c}">${head}</ul>`;
         if (rest.length) {
-            html += `<details class="lib-more"><summary class="lib-more-summary">${rest.length} kayıt daha</summary><ul class="lib-links">${rest.map(li).join('')}</ul></details>`;
+            html += `<details class="lib-more"><summary class="lib-more-summary">${rest.length} kayıt daha</summary><ul class="lib-links${c}">${rest.map(li).join('')}</ul></details>`;
         }
         return html;
     }
@@ -4024,7 +4275,7 @@ class PsikoVakaGame {
         let html = this.libBackLink('tani');
         html += this.libCaseNotice();
         html += `<header class="lib-detail-head">
-            <div class="lib-detail-chips"><span class="chip">${esc(cat.name)}</span></div>
+            ${this.libRunningHead('tani', item, cat.name)}
             <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
             <p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>`;
         if (codes.length || others.length) {
@@ -4052,10 +4303,24 @@ class PsikoVakaGame {
             body += `<ol class="lib-crit-list">`;
             crit.forEach(c => {
                 const items = Array.isArray(c.items) ? c.items : [];
-                body += `<li class="lib-crit">
-                    <div class="lib-crit-head"><span class="lib-crit-code">${esc(c.code)}</span><h3 class="lib-crit-title">${esc(c.title)}</h3></div>
+                // Kenar etiketi: "Kriter A" (telefonda yalnız "A"); başka etiketler (ör. "Belirleyiciler") ayrı biçimde
+                const code = String(c.code == null ? '' : c.code).trim();
+                const km = /^Kriter\s+(.+)$/i.exec(code);
+                const codeHtml = km
+                    ? `<span class="lib-crit-code"><span class="lib-crit-code-pre">Kriter </span>${esc(km[1])}</span>`
+                    : `<span class="lib-crit-code">${esc(code)}</span>`;
+                // Alt maddeler: baştaki "A1." / "1)" asılı numara olur
+                const itemHtml = (x) => {
+                    const t = String(x == null ? '' : x);
+                    const mm = /^\s*([A-Z]?\d{1,2}[a-z]?)[.)]\s+/.exec(t);
+                    return mm ? `<li class="is-hung"><span class="lib-hang">${esc(mm[1])}</span>${esc(t.slice(mm[0].length))}</li>` : `<li>${esc(t)}</li>`;
+                };
+                // Birleşik etiketler ("C & D", "A-C") telefonda kenara sığmaz: başlığın üstünde tam "Kriter C & D"
+                const wide = km && km[1].length > 2;
+                body += `<li class="lib-crit${km ? '' : ' lib-crit-other'}${wide ? ' lib-crit-wide' : ''}">
+                    <div class="lib-crit-head">${codeHtml}<h3 class="lib-crit-title">${esc(c.title)}</h3></div>
                     ${c.content ? `<p class="lib-crit-text">${esc(c.content)}</p>` : ''}
-                    ${items.length ? `<ul class="lib-crit-items">${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+                    ${items.length ? `<ul class="lib-crit-items">${items.map(itemHtml).join('')}</ul>` : ''}
                 </li>`;
             });
             body += `</ol>`;
@@ -4069,7 +4334,13 @@ class PsikoVakaGame {
         [['overview', 'Genel bakış'], ['epidemiology', 'Epidemiyoloji'], ['etiology', 'Etiyoloji'], ['prognosis', 'Seyir ve prognoz']].forEach(([k, label]) => {
             if (!cd[k]) return;
             toc.push([`lib-sec-${k}`, label]);
-            body += `<details class="lib-sec lib-collapse" id="lib-sec-${k}"${desktop ? ' open' : ''}>
+            // Masaüstünde kitaptaki gibi düz bölüm; telefonda kapalı açılır bölüm (uzun tanılar binlerce piksel olmasın)
+            body += desktop
+                ? `<section class="lib-sec lib-clin" id="lib-sec-${k}" aria-labelledby="lib-h-${k}">
+                <h2 class="lib-sec-title" id="lib-h-${k}">${label}</h2>
+                <div class="lib-prose"><p>${esc(cd[k])}</p></div>
+            </section>`
+                : `<details class="lib-sec lib-collapse" id="lib-sec-${k}">
                 <summary class="lib-collapse-head"><h2 class="lib-sec-title">${label}</h2></summary>
                 <div class="lib-prose"><p>${esc(cd[k])}</p></div>
             </details>`;
@@ -4079,7 +4350,7 @@ class PsikoVakaGame {
         const siblings = this.diagnoses.filter(x => x.category === item.category && x.id !== item.id);
         if (siblings.length) {
             toc.push(['lib-sec-diff', 'Ayırıcı tanı']);
-            body += `<section class="lib-sec" id="lib-sec-diff" aria-labelledby="lib-h-diff">
+            body += `<section class="lib-sec lib-see" id="lib-sec-diff" aria-labelledby="lib-h-diff">
                 <h2 class="lib-sec-title" id="lib-h-diff">Ayırıcı tanı</h2>
                 <p class="lib-sec-note">Aynı DSM-5-TR bölümündeki (${esc(cat.name)}) diğer tanılar. Liste otomatik oluşturulur; klinik bir ayırıcı tanı listesi değildir.</p>
                 ${this.libLinkList(siblings.map(x => ({ href: this.libHref('tani', x.id), title: x.nameTr, sub: x.nameEn })), 10)}
@@ -4090,7 +4361,7 @@ class PsikoVakaGame {
         const tx = this.libTreatmentsForDiagnosis(item.id);
         if (tx.therapies.length || tx.pharma.length) {
             toc.push(['lib-sec-tx', 'Tedavi']);
-            body += `<section class="lib-sec" id="lib-sec-tx" aria-labelledby="lib-h-tx">
+            body += `<section class="lib-sec lib-refs" id="lib-sec-tx" aria-labelledby="lib-h-tx">
                 <h2 class="lib-sec-title" id="lib-h-tx">Tedavi</h2>`;
             if (this.libHideTreatmentLinks()) {
                 body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu tanıyla eşleşen terapi ve ilaçlar görünür.</p>`;
@@ -4113,7 +4384,7 @@ class PsikoVakaGame {
         // 8. Bu alandan pratik yap (kategoriye göre; tanının kendisi değil)
         const n = this.cases.filter(c => c.category === item.category).length;
         if (n > 0) {
-            body += `<section class="lib-practice card" aria-labelledby="lib-h-practice">
+            body += `<section class="lib-practice lib-foot card" aria-labelledby="lib-h-practice">
                 <div class="lib-practice-text">
                     <h2 class="lib-sec-title" id="lib-h-practice">Bu alandan pratik yap</h2>
                     <p class="lib-sec-note">${esc(cat.name)} bölümünden rastgele bir vaka, ${n} vaka arasından. Cevap belli olmasın diye tanı değil bölüm seçilir.</p>
@@ -4145,7 +4416,7 @@ class PsikoVakaGame {
         let html = this.libBackLink(kind);
         html += this.libCaseNotice();
         html += `<header class="lib-detail-head">
-            <div class="lib-detail-chips"><span class="chip">${esc(fam.name)}</span></div>
+            ${this.libRunningHead(kind, item, fam.name)}
             <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
             ${item.nameEn ? `<p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>` : ''}
             ${others.length ? `<dl class="lib-meta"><div class="lib-meta-row"><dt>Diğer adları</dt><dd>${others.map(esc).join(' · ')}</dd></div></dl>` : ''}
@@ -4153,6 +4424,7 @@ class PsikoVakaGame {
 
         let body = '';
         const sec = (id, title, inner) => `<section class="lib-sec" id="${id}" aria-labelledby="${id}-h"><h2 class="lib-sec-title" id="${id}-h">${title}</h2>${inner}</section>`;
+        const secSee = (id, title, inner) => `<section class="lib-sec lib-see" id="${id}" aria-labelledby="${id}-h"><h2 class="lib-sec-title" id="${id}-h">${title}</h2>${inner}</section>`;
         if (item.shortDefinition) body += sec('lib-sec-def', 'Tanım', `<div class="lib-prose"><p>${esc(item.shortDefinition)}</p></div>`);
         if (kind === 'ilac' && item.mechanism) body += sec('lib-sec-mech', 'Etki mekanizması', `<div class="lib-prose"><p>${esc(item.mechanism)}</p></div>`);
         if (item.targetMechanism) body += sec('lib-sec-target', kind === 'terapi' ? 'Değişim mekanizması' : 'Hedef', `<div class="lib-prose"><p>${esc(item.targetMechanism)}</p></div>`);
@@ -4161,7 +4433,7 @@ class PsikoVakaGame {
                 `<ol class="lib-steps">${item.protocolSteps.map(s => `<li>${esc(strip(s))}</li>`).join('')}</ol>`);
         }
         if (item.pitfalls) {
-            body += `<aside class="lib-callout" aria-labelledby="lib-h-pit">
+            body += `<aside class="lib-callout lib-note-box" aria-labelledby="lib-h-pit">
                 <h2 class="lib-callout-title" id="lib-h-pit">${this.icon('alert')}${kind === 'terapi' ? 'Klinik tuzak' : 'Kontrendikasyon ve yan etki'}</h2>
                 <p>${esc(item.pitfalls)}</p>
             </aside>`;
@@ -4169,7 +4441,7 @@ class PsikoVakaGame {
 
         const diags = this.libDiagnosesForTreatment(kind, item);
         if (diags.length) {
-            body += `<section class="lib-sec" id="lib-sec-used" aria-labelledby="lib-h-used"><h2 class="lib-sec-title" id="lib-h-used">Kullanıldığı tanılar</h2>`;
+            body += `<section class="lib-sec lib-see" id="lib-sec-used" aria-labelledby="lib-h-used"><h2 class="lib-sec-title" id="lib-h-used">Kullanıldığı tanılar</h2>`;
             if (this.libHideTreatmentLinks()) {
                 body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu protokolle eşleşen tanılar görünür.</p>`;
             } else {
@@ -4181,7 +4453,7 @@ class PsikoVakaGame {
 
         const siblings = list.filter(x => x.family === item.family && x.id !== item.id);
         if (siblings.length) {
-            body += sec('lib-sec-family', kind === 'terapi' ? 'Aynı ekolden' : 'Aynı gruptan',
+            body += secSee('lib-sec-family', kind === 'terapi' ? 'Aynı ekolden' : 'Aynı gruptan',
                 this.libLinkList(siblings.map(x => ({ href: this.libHref(kind, x.id), title: x.nameTr, sub: x.nameEn || '' })), 8));
         }
 

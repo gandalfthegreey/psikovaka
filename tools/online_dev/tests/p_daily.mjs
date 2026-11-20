@@ -7,7 +7,7 @@ async function open(c, opt, hash) {
   const p = await page(c, 'd');
   await p.goto(HAR + (hash || '#/oyna'));
   await p.waitForFunction(() => window.olMock && window.PsikoVakaOnline.daily);
-  await p.evaluate((o) => { window.olMock.set(o); window.olMock.resetDaily(); window.PsikoVakaOnline.daily._reset(); }, opt || {});
+  await p.evaluate((o) => { window.olMock.set(o); window.olMock.resetDaily(); localStorage.removeItem('psikovaka_daily_done'); window.PsikoVakaOnline.daily._reset(); }, opt || {});
   await p.evaluate(() => window.PsikoVakaOnline.daily.refreshCard(true));
   await sleep(300);
   return p;
@@ -56,8 +56,11 @@ for (const vp of [{ w: 360, h: 740, dark: false }, { w: 390, h: 844, dark: true 
   // tekrar oynama engeli
   const before = await p.evaluate(() => window.olMock.daily.diagnosis.guesses.length);
   await p.evaluate(() => window.game.setMode('daily')); await sleep(500);
-  check((await p.evaluate(() => location.hash)) === '#/gunluk', 'tekrar başlatma → sıralamaya yönlendirir');
+  // B3: tekrar başlatma → bitmiş vaka salt okunur (eskiden sıralamaya yönlendiriyordu)
+  await p.waitForFunction(() => window.game.currentScreen === 'play' && window.game.dailyReadOnly, null, { timeout: 4000 }).catch(() => {});
+  check(await p.evaluate(() => window.game.currentScreen === 'play' && window.game.isGameOver && window.game.dailyReadOnly && window.game.dom.mainInputSection.hidden), 'tekrar başlatma → bitmiş vaka salt okunur ' + await p.evaluate(() => JSON.stringify([window.game.currentScreen, window.game.isGameOver, window.game.dailyReadOnly, window.game.dom.mainInputSection.hidden])));
   check((await p.evaluate(() => window.olMock.daily.diagnosis.guesses.length)) === before, 'yeni deneme yok');
+  await p.evaluate(() => { location.hash = '#/gunluk'; }); await sleep(300);
   // sıralama: 30 satır, kendi satırı dışarıda (sabit)
   await p.waitForSelector('.dl-list', { timeout: 4000 });
   check((await p.locator('.dl-row').count()) === 31, '30 satır + sabitlenmiş kendi satırın');

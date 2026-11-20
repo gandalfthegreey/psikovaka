@@ -64,6 +64,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/arena.css">
     <link rel="stylesheet" href="css/online.css">
+    <link rel="stylesheet" href="css/anasayfa.css">
+    <link rel="stylesheet" href="css/kutuphane.css">
     <link rel="stylesheet" href="css/dosya.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
@@ -173,14 +175,11 @@
     <main class="app-main" id="appMain" tabindex="-1">
         <!-- EKRAN: Oyna (ana sayfa) -->
         <section class="screen screen-home" id="screenHome" data-screen="oyna" aria-labelledby="homeTitle">
+            <!-- Ana sayfa "çalışma masası" (ajan R3; görünüm css/anasayfa.css) -->
             <div class="home-greeting">
-                <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
-                    <span class="avatar-edit-art" id="homeAvatarMount"></span>
-                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
-                </button>
                 <div class="home-greeting-text">
-                    <p class="eyebrow">Hoş geldin</p>
-                    <h1 class="home-title" id="homeTitle"><span id="homeGreetingName">Klinisyen</span></h1>
+                    <h1 class="home-title" id="homeTitle"><span class="home-hello">Merhaba, </span><span id="homeGreetingName">Klinisyen</span><span class="home-title-dot">.</span></h1>
+                    <p class="home-greeting-sub">Bugünün dosyası masanda.</p>
                 </div>
                 <a class="rp-chip rp-chip-link" id="homeRpMount" href="#/ligler" aria-label="Lig bilgisi" hidden></a>
             </div>
@@ -210,82 +209,95 @@
                 <button class="btn btn-secondary btn-sm" id="btnResumeCase" type="button">Devam et</button>
             </div>
 
-            <div class="target-picker">
-                <div class="segmented" role="radiogroup" aria-label="Neyi tahmin edeceksin?">
-                    <button class="segmented-btn target-mode-btn active" id="btnModeDiagnosis" data-target="diagnosis" type="button" role="radio" aria-checked="true">Tanı</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModeTherapy" data-target="therapy" type="button" role="radio" aria-checked="false">Terapi</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModePharmacology" data-target="pharmacology" type="button" role="radio" aria-checked="false">İlaç</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModeCombo" data-target="combo" type="button" role="radio" aria-checked="false">Kombo</button>
-                </div>
-                <div class="target-hint-row">
-                    <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
-                    <button class="text-link home-help-link" id="btnHomeHelp" type="button"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Nasıl oynanır</button>
-                </div>
-            </div>
-
-            <article class="card card-hero">
-                <div class="card-hero-top">
-                    <span class="chip"><svg class="icon"><use href="#i-calendar"/></svg><span id="dailyDateLabel">Bugün</span></span>
-                    <span class="chip chip-muted">6 ipucu · 6 hak</span>
-                </div>
-                <div class="daily-title-row">
-                    <h2 class="card-hero-title">Günün vakası</h2>
-                    <span class="streak-chip" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
-                </div>
-                <p class="card-hero-text" id="dailyCardText">Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.</p>
-                <!-- js/online/daily.js: üyelerde bugünün sonucu (tek oyun hakkı) -->
-                <div class="daily-result" id="dailyResultBox" hidden aria-live="polite">
-                    <span class="daily-result-icon" id="dailyResultIcon"></span>
-                    <span class="daily-result-text"><span class="daily-result-title" id="dailyResultTitle"></span><span class="daily-result-sub" id="dailyResultSub"></span></span>
-                </div>
-                <div class="daily-actions">
-                    <button class="btn btn-primary btn-lg" id="btnStartDaily" type="button">
-                        <svg class="icon"><use href="#i-play"/></svg> <span id="btnStartDailyLabel">Başla</span>
-                    </button>
-                    <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
-                </div>
-            </article>
-
-            <!-- Nöro hatırlatması (js/avatar_studio.js): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
-            <article class="card noro-nudge" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
-                <span class="noro-nudge-art" id="noroNudgeArt" aria-hidden="true"></span>
-                <div class="noro-nudge-body">
-                    <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
-                    <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
-                    <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg> Özelleştir</button>
-                </div>
-                <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
-            </article>
-
-            <div class="home-grid">
-                <article class="card card-action">
-                    <div class="card-action-head">
-                        <span class="card-icon"><svg class="icon"><use href="#i-infinity"/></svg></span>
-                        <div>
-                            <h3 class="card-title">Sınırsız pratik</h3>
-                            <p class="card-text" id="practiceSummary">Tüm vakalar</p>
+            <div class="desk">
+                <div class="desk-main">
+                    <div class="target-picker">
+                        <div class="segmented" role="radiogroup" aria-label="Neyi tahmin edeceksin?">
+                            <button class="segmented-btn target-mode-btn active" id="btnModeDiagnosis" data-target="diagnosis" type="button" role="radio" aria-checked="true">Tanı</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModeTherapy" data-target="therapy" type="button" role="radio" aria-checked="false">Terapi</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModePharmacology" data-target="pharmacology" type="button" role="radio" aria-checked="false">İlaç</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModeCombo" data-target="combo" type="button" role="radio" aria-checked="false">Kombo</button>
+                        </div>
+                        <div class="target-hint-row">
+                            <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
+                            <button class="text-link home-help-link" id="btnHomeHelp" type="button"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Nasıl oynanır</button>
                         </div>
                     </div>
-                    <div class="card-action-row">
-                        <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
-                        <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
-                            <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
-                        </button>
-                    </div>
-                </article>
 
-                <article class="card card-action">
-                    <div class="card-action-head">
-                        <span class="card-icon"><svg class="icon"><use href="#i-globe"/></svg></span>
-                        <div>
-                            <h3 class="card-title">Online</h3>
+                    <div class="desk-stage">
+                        <!-- Nöro hatırlatması = Nöro'nun konuşma balonu (js/avatar_studio.js updateNoroNudge): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
+                        <aside class="card noro-nudge noro-bubble" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
+                            <div class="noro-nudge-body">
+                                <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
+                                <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
+                                <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg><span class="noro-nudge-btn-short">Özelleştir</span><span class="noro-nudge-btn-long">Nöro'nu özelleştir</span></button>
+                            </div>
+                            <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+                        </aside>
+
+                        <div class="desk-noro">
+                            <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                                <span class="avatar-edit-art" id="homeAvatarMount"></span>
+                                <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                            </button>
+                        </div>
+
+                        <!-- Günün vakası: masadaki danışan dosyası -->
+                        <article class="card card-hero desk-folder" aria-labelledby="dailyHeroTitle">
+                            <div class="card-hero-top desk-folder-tab">
+                                <span class="chip"><svg class="icon"><use href="#i-calendar"/></svg><span id="dailyDateLabel">Bugün</span></span>
+                                <span class="chip chip-muted">6 ipucu · 6 hak</span>
+                            </div>
+                            <div class="daily-title-row">
+                                <h2 class="card-hero-title" id="dailyHeroTitle">Günün vakası</h2>
+                            </div>
+                            <!-- Danışan özeti (vakanın patientSummary alanı: yalnızca demografi + meslek; tanı/kategori/ders YOK). app.js setDailyTeaser -->
+                            <p class="desk-teaser" id="dailyTeaser" hidden></p>
+                            <p class="card-hero-text" id="dailyCardText">Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.</p>
+                            <!-- js/online/daily.js: üyelerde bugünün sonucu (tek oyun hakkı) -->
+                            <div class="daily-result" id="dailyResultBox" hidden aria-live="polite">
+                                <span class="daily-result-icon" id="dailyResultIcon"></span>
+                                <span class="daily-result-text"><span class="daily-result-title" id="dailyResultTitle"></span><span class="daily-result-sub" id="dailyResultSub"></span></span>
+                            </div>
+                            <div class="daily-actions">
+                                <button class="btn btn-primary btn-lg" id="btnStartDaily" type="button">
+                                    <svg class="icon"><use href="#i-play"/></svg> <span id="btnStartDailyLabel">Başla</span>
+                                </button>
+                                <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
+                            </div>
+                            <!-- Seri: klasöre ataşla tutturulmuş etiket -->
+                            <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="desk-aside">
+                    <!-- Sınırsız pratik: fiş kutusu (ön fişte geçerli filtre) -->
+                    <article class="card card-action desk-cardbox" aria-labelledby="practiceCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="practiceCardTitle">Sınırsız pratik</h3>
+                            <p class="card-text"><span class="desk-filter-label">Filtre:</span> <span id="practiceSummary">Tüm vakalar</span></p>
+                        </div>
+                        <div class="card-action-row">
+                            <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
+                            <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
+                                <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Online: panoya raptiyeli kart (bekleyen davet/bildirim: js/online/friends.js -> game.setHomeOnlineNote) -->
+                    <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
                             <p class="card-text">Düello, herkes tek ve turnuva.</p>
                         </div>
-                    </div>
-                    <div class="card-action-row">
-                        <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
-                    </div>
-                </article>
+                        <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                        <div class="card-action-row">
+                            <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -338,24 +350,30 @@
                     <p class="screen-sub">Tanı kriterleri, klinik özetler, terapi ve ilaç protokolleri.</p>
                 </header>
 
-                <nav class="segmented lib-tabs" aria-label="Kütüphane bölümleri">
-                    <a class="segmented-btn lib-tab" href="#/kutuphane" data-lib-tab="tani">Tanılar <span class="lib-tab-count" id="libDsmCount"></span></a>
-                    <a class="segmented-btn lib-tab" href="#/kutuphane/terapiler" data-lib-tab="terapi">Terapiler <span class="lib-tab-count" id="libTherapyCount"></span></a>
-                    <a class="segmented-btn lib-tab" href="#/kutuphane/ilaclar" data-lib-tab="ilac">İlaçlar <span class="lib-tab-count" id="libPharmaCount"></span></a>
-                </nav>
+                <div class="lib-book">
+                    <nav class="segmented lib-tabs" aria-label="Kütüphane bölümleri">
+                        <a class="segmented-btn lib-tab" href="#/kutuphane" data-lib-tab="tani">Tanılar <span class="lib-tab-count" id="libDsmCount"></span></a>
+                        <a class="segmented-btn lib-tab" href="#/kutuphane/terapiler" data-lib-tab="terapi">Terapiler <span class="lib-tab-count" id="libTherapyCount"></span></a>
+                        <a class="segmented-btn lib-tab" href="#/kutuphane/ilaclar" data-lib-tab="ilac">İlaçlar <span class="lib-tab-count" id="libPharmaCount"></span></a>
+                    </nav>
 
-                <div class="lib-search" role="search">
-                    <svg class="icon lib-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-                    <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
-                </div>
-                <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
+                    <!-- Ders kitabı sayfası (ajan R3; görünüm css/kutuphane.css) -->
+                    <div class="lib-page" id="libPage">
+                        <div class="lib-search" role="search">
+                            <label class="lib-search-label" for="libSearchInput">Ara</label>
+                            <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
+                        </div>
+                        <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
 
-                <div class="lib-list" id="libListTani" data-lib-list="tani"></div>
-                <div class="lib-list" id="libListTerapi" data-lib-list="terapi" hidden></div>
-                <div class="lib-list" id="libListIlac" data-lib-list="ilac" hidden></div>
-                <div class="lib-empty" id="libEmpty" hidden>
-                    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-                    <p>Sonuç yok. Başka bir yazım, İngilizce ad ya da kod dene.</p>
+                        <h2 class="lib-contents-title" id="libContentsTitle">İçindekiler</h2>
+                        <div class="lib-list lib-contents" id="libListTani" data-lib-list="tani"></div>
+                        <div class="lib-list lib-contents" id="libListTerapi" data-lib-list="terapi" hidden></div>
+                        <div class="lib-list lib-contents" id="libListIlac" data-lib-list="ilac" hidden></div>
+                        <div class="lib-empty" id="libEmpty" hidden>
+                            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+                            <p>Sonuç yok. Başka bir yazım, İngilizce ad ya da kod dene.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

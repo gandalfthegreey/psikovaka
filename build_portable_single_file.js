@@ -58,7 +58,7 @@ if (typeof module !== 'undefined' && module.exports) {
 // 2. Tek dosyalık taşınabilir HTML'i bellekte kur (doğrulama hatası varsa hiçbir dosya yazılmaz)
 const htmlRaw = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 // CSS dosyaları index.html'deki sırayla satır içine alınır (tokens -> style -> arena -> online)
-const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css', 'dosya.css'];
+const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css', 'anasayfa.css', 'kutuphane.css', 'dosya.css'];
 const cssRawByFile = Object.fromEntries(CSS_FILES.map(f => [f, fs.readFileSync(path.join(__dirname, 'css', f), 'utf8')]));
 // index.html'deki yerel script sırası. Yeni bir js/ dosyası eklenirse buraya da eklenmeli.
 // js/cases.js diskten değil, yukarıda pharmacologyId damgalanmış içerikten alınır.

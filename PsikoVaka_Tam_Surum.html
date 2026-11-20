@@ -232,6 +232,40 @@
     --shadow-3: 0 18px 48px rgba(26, 30, 39, 0.16);
 }
 
+/* ---------- Kâğıt / klasör / mürekkep (ajan R3, 2026-11-21) ----------
+   Ana sayfa "çalışma masası" (css/anasayfa.css) ve Kütüphane "ders kitabı" (css/kutuphane.css) bu değerleri kullanır;
+   oyun ekranı pilotu (css/dosya.css, ?tasarim=dosya) aynı değerleri --dosya-* adlarıyla okur. */
+:root,
+[data-theme="dark"] {
+    --paper: #20242c;
+    --paper-edge: #353c4a;
+    --paper-tape: #2b313c;
+    --paper-rule: rgba(126, 166, 255, 0.14);
+    --paper-hl: rgba(242, 196, 90, 0.26);
+    --paper-hl-strong: #f2c45a;
+    --paper-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 14px 28px -18px rgba(0, 0, 0, 0.8);
+    --paper-lift: 0 1px 0 rgba(0, 0, 0, 0.35), 0 10px 22px -14px rgba(0, 0, 0, 0.75);
+    --ink-red: #ff8a8a;                /* kâğıtta metin olarak ≥4.5:1 */
+    --ink-red-line: rgba(255, 123, 123, 0.55);
+    --folder: var(--color-surface);
+    --folder-edge: var(--color-border-strong);
+    --font-type: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+[data-theme="light"] {
+    --paper: #fffdf8;
+    --paper-edge: #cfd3db;
+    --paper-tape: #eceef2;
+    --paper-rule: rgba(35, 84, 176, 0.16);
+    --paper-hl: rgba(255, 196, 30, 0.34);
+    --paper-hl-strong: #a87600;
+    --paper-shadow: 0 1px 0 rgba(26, 30, 39, 0.06), 0 12px 26px -16px rgba(26, 30, 39, 0.28);
+    --paper-lift: 0 1px 0 rgba(26, 30, 39, 0.05), 0 10px 22px -14px rgba(26, 30, 39, 0.3);
+    --ink-red: #b42330;
+    --ink-red-line: rgba(201, 56, 56, 0.62);
+    --folder: #ffffff;
+    --folder-edge: var(--color-border-strong);
+}
+
 body.therapy-mode-active { --color-target: var(--target-therapy); }
 body.pharmacology-mode-active { --color-target: var(--target-pharmacology); }
 body.combo-mode-active { --color-target: var(--target-combo); }
@@ -4077,6 +4111,792 @@ body.ol-banners-docked .ol-banners { display: none; }
 </style>
     <style>
 /* ==========================================================================
+   PsikoVaka — Ana sayfa "çalışma masası" (ajan R3, 2026-11-21; Emre onayı: ajan E2 örneği birebir)
+   Günün vakası masaya bırakılmış danışan dosyası (klasör sekmesi: tarih + 6 ipucu; daktilo etiketiyle danışan
+   özeti; ataşlı seri etiketi), yanında kullanıcının Nöro'su (hatırlatma = konuşma balonu), pratik = fiş kutusu,
+   online = panoya raptiyeyle tutturulmuş kart. Yapı index.html'de; renkler yalnızca token (tokens.css: --paper*,
+   --folder*, --ink-*). Bayrağa bağlı değil.
+   ========================================================================== */
+.screen.screen-home { gap: var(--space-5); }
+
+/* Selam: etiket yok, doğal cümle */
+.screen-home .home-greeting { align-items: flex-end; }
+.screen-home .home-greeting .home-title { font-size: 1.625rem; white-space: normal; }
+.screen-home .home-greeting .home-hello { font-weight: 600; color: var(--color-text-2); }
+.screen-home .home-greeting-sub { margin-top: 2px; color: var(--color-text-2); font-size: var(--text-base); }
+/* RP: lig etiketi (yazı makinesi değil, kâğıt fiş) */
+.screen-home .home-greeting .rp-chip {
+    align-self: center;
+    border-radius: 3px;
+    border-color: var(--paper-edge);
+    background: var(--paper);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    box-shadow: var(--paper-lift);
+}
+
+/* Masa düzeni */
+.screen-home .desk { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+.screen-home .desk-main { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.screen-home .desk-aside { display: grid; grid-template-columns: 1fr; gap: var(--space-5); min-width: 0; }
+
+/* Hedef seçici: kalemle altı çizilen sözcükler (kutu değil) */
+.screen-home .target-picker .segmented {
+    display: flex;
+    gap: var(--space-2);
+    margin-left: -6px;   /* sözcükler 44 px dokunma alanı için iç boşluklu; ilk sözcük hizada kalsın */
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-home .target-picker .segmented-btn,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn {
+    min-width: var(--tap);
+    min-height: var(--tap);
+    padding: 0 8px;
+    border-radius: 6px;
+    background: none;
+    box-shadow: none;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-text-2);
+}
+.screen-home .target-picker .segmented-btn.active,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
+    background: none;
+    box-shadow: none;
+    color: var(--color-text);
+    font-weight: 750;
+    text-decoration: underline;
+    text-decoration-color: var(--color-target);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 7px;
+}
+.screen-home .target-hint-row { margin-top: -2px; }
+.screen-home .target-hint { padding-left: 2px; }
+
+/* Sahne: [balon] / [boşluk | Nöro] / [klasör] */
+.screen-home .desk-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "bubble noro" "folder folder";
+    align-items: end;
+    margin-top: var(--space-1);
+    min-width: 0;
+}
+.screen-home .desk-noro { grid-area: noro; position: relative; z-index: 2; margin: 0 2px -16px 0; line-height: 0; }
+.screen-home .desk-noro .home-avatar { width: auto; height: auto; min-width: 0; min-height: 0; padding: 0; border-radius: 50%; background: none; }
+.screen-home .desk-noro .avatar-edit-art { border-radius: 0; }
+.screen-home .desk-noro .avatar-edit-art svg { width: 112px; height: 112px; }
+.screen-home .desk-noro .avatar-edit-badge { right: 4px; bottom: 18px; width: 24px; height: 24px; box-shadow: 0 0 0 2px var(--color-bg); }
+.screen-home .desk-noro .avatar-edit-badge .icon { width: 12px; height: 12px; }
+
+/* Nöro hatırlatması: Nöro'nun konuşma balonu */
+.screen-home .noro-nudge.noro-bubble {
+    grid-area: bubble;
+    justify-self: end;
+    position: relative;
+    display: block;
+    max-width: 19rem;
+    margin: 0 4px 10px 0;
+    padding: 12px 40px 12px 14px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 12px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .noro-nudge.noro-bubble[hidden] { display: none; }
+.screen-home .noro-nudge.noro-bubble::after {
+    content: '';
+    position: absolute;
+    right: 44px;
+    bottom: -8px;
+    width: 14px;
+    height: 14px;
+    background: var(--paper);
+    border-right: 1px solid var(--paper-edge);
+    border-bottom: 1px solid var(--paper-edge);
+    transform: rotate(45deg);
+}
+.screen-home .noro-bubble .noro-nudge-art { display: none; }
+.screen-home .noro-bubble .noro-nudge-body { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 0; }
+.screen-home .noro-bubble .noro-nudge-title { flex-basis: 100%; font-size: var(--text-base); }
+.screen-home .noro-bubble .noro-nudge-text { flex: 1 1 12rem; }
+.screen-home .noro-bubble .noro-nudge-btn { border-radius: 6px; background: transparent; }
+.screen-home .noro-bubble .noro-nudge-btn-long { display: none; }
+.screen-home .noro-bubble .noro-nudge-close { top: 4px; right: 4px; }
+
+/* Telefonda balon tek satır: Nöro'nun solunda, sekmenin üstünde */
+@media (max-width: 1023px) {
+    .screen-home .noro-nudge.noro-bubble { align-self: start; justify-self: end; margin: 4px 12px 0 0; padding: 0 44px 0 4px; border-radius: 23px; }
+    .screen-home .noro-nudge.noro-bubble::after { right: -8px; bottom: auto; top: 16px; transform: rotate(-45deg); }
+    .screen-home .noro-bubble .noro-nudge-title,
+    .screen-home .noro-bubble .noro-nudge-text { display: none; }
+    .screen-home .noro-bubble .noro-nudge-btn { min-height: var(--tap); border: 0; padding: 0 8px; gap: 6px; font-size: var(--text-sm); font-weight: 600; }
+    .screen-home .noro-bubble .noro-nudge-btn .icon { width: 16px; height: 16px; }
+    .screen-home .noro-bubble .noro-nudge-btn-short { display: none; }
+    .screen-home .noro-bubble .noro-nudge-btn-long { display: inline; }
+    .screen-home .noro-bubble .noro-nudge-close { top: 0; right: 0; width: var(--tap); height: var(--tap); min-width: var(--tap); min-height: var(--tap); }
+}
+/* Klasör: günün vakası */
+.screen-home .card-hero.desk-folder {
+    grid-area: folder;
+    position: relative;
+    gap: var(--space-3);
+    margin-top: -4px;
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    border: 1px solid var(--folder-edge);
+    border-radius: 0 10px 10px 10px;
+    background: var(--folder);
+    box-shadow: var(--paper-lift);
+}
+/* Klasörden taşan kâğıt: kırmızı başlık çizgisi + satır çizgisi (yalnızca süs) */
+.screen-home .card-hero.desk-folder::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 120px;
+    top: -12px;
+    height: 12px;
+    border: 1px solid var(--paper-edge);
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to bottom, var(--paper) 0 5px, var(--ink-red-line) 5px 6px, var(--paper) 6px);
+}
+/* Sekme: tarih + 6 ipucu (mevcut çipler) */
+.screen-home .desk-folder-tab {
+    position: absolute;
+    left: -1px;
+    top: -35px;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    height: 35px;
+    padding: 0 14px;
+    border: 1px solid var(--folder-edge);
+    border-bottom: 0;
+    border-radius: 9px 9px 0 0;
+    background: var(--folder);
+}
+.screen-home .desk-folder-tab::after { /* sekmenin klasörle birleştiği yer */
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; background: var(--folder);
+}
+.screen-home .desk-folder-tab .chip {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.screen-home .desk-folder-tab .chip .icon { display: none; }
+.screen-home .desk-folder-tab .chip-muted { color: var(--color-text-2); font-family: var(--font-sans); font-weight: 600; font-size: var(--text-sm); }
+.screen-home .desk-folder-tab .chip-muted::before { content: '·'; margin-right: 10px; color: var(--color-text-3); }
+
+.screen-home .desk-folder .daily-title-row { display: block; padding-right: 0; }
+.screen-home .desk-folder .card-hero-title { font-size: 2.125rem; letter-spacing: -0.02em; }
+.screen-home .desk-teaser {
+    display: inline;
+    align-self: flex-start;
+    max-width: 100%;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--paper-tape);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--paper-edge) 55%, transparent);
+    color: var(--color-text);
+    font-family: var(--font-type);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+.screen-home .desk-teaser[hidden] { display: none; }
+.screen-home .desk-folder .card-hero-text { font-size: var(--text-base); }
+.screen-home .desk-folder .daily-actions { width: 100%; align-items: center; gap: var(--space-2) var(--space-5); margin-top: var(--space-1); }
+.screen-home .desk-folder #btnStartDaily { min-width: 200px; border-radius: 8px; }
+/* Sıralama: ikincil = metin bağlantısı (bitince birincil kalır) */
+.screen-home .desk-folder #btnDailyBoard.btn-secondary {
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.screen-home .desk-folder #btnDailyBoard.btn-secondary .icon { display: none; }
+.screen-home .desk-folder .daily-result { border-radius: 4px; }
+/* Bitmiş günlük: sonuç kutusu dokunulabilir ("Vakayı gör", js/online/daily.js bindResultBox) */
+.screen-home .daily-result.is-tappable { min-height: var(--tap); cursor: pointer; transition: background-color var(--duration-fast) var(--ease); }
+.screen-home .daily-result.is-tappable:hover { background: var(--color-surface-3); }
+.screen-home .daily-result.is-tappable:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .screen-home .daily-result.is-tappable { transition: none; } }
+
+/* Seri: klasöre kıstırılmış kâğıt etiket (ataş + hafif eğik) */
+.screen-home .streak-chip.desk-tag {
+    position: absolute;
+    right: 18px;
+    top: -14px;
+    z-index: 1;
+    gap: 6px;
+    padding: 9px 12px 7px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: var(--paper);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    transform: rotate(3deg);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .streak-chip.desk-tag[hidden] { display: none; }
+.screen-home .streak-chip.desk-tag .icon { color: var(--ink-red); }
+.screen-home .streak-chip.desk-tag::before { /* ataş */
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    width: 9px;
+    height: 20px;
+    margin-left: -5px;
+    border: 2px solid var(--color-text-3);
+    border-radius: 6px;
+}
+/* Nöro sağda dururken etiket onun altında kalmasın: telefonda etiket klasörün sol altında */
+@media (max-width: 1023px) {
+    .screen-home .streak-chip.desk-tag { top: auto; right: 14px; bottom: -14px; transform: rotate(-2deg); }
+    .screen-home .card-hero.desk-folder:has(.desk-tag:not([hidden])) { margin-bottom: 10px; padding-bottom: 44px; } /* etiket düğmeye binmesin */
+}
+
+/* İlk ziyaret: masaya bırakılmış not kâğıdı */
+.screen-home .welcome-card {
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+    padding: var(--space-5) var(--space-5) var(--space-4);
+}
+.screen-home .welcome-card .welcome-noro { display: none; }
+.screen-home .welcome-card .welcome-title { padding-bottom: 8px; border-bottom: 2px solid var(--ink-red-line); font-size: 1.25rem; }
+.screen-home .welcome-steps { counter-reset: deskw; gap: 0; }
+.screen-home .welcome-steps li { counter-increment: deskw; position: relative; padding-left: 30px; line-height: 30px; border-bottom: 1px solid var(--paper-rule); }
+.screen-home .welcome-steps li .icon { display: none; }
+@media (min-width: 600px) { .screen-home .welcome-steps { column-gap: var(--space-5); } }
+.screen-home .welcome-steps li::before { content: counter(deskw); position: absolute; left: 4px; color: var(--ink-red); font-family: var(--font-display); font-weight: 700; }
+.screen-home .resume-banner { border-radius: 3px; border-left-width: 1px; background: var(--paper); border-color: var(--paper-edge); box-shadow: var(--paper-lift); }
+
+/* ---- Fiş kutusu: Sınırsız pratik (ön fiş + arkada iki fiş kenarı) ---- */
+.screen-home .card-action.desk-cardbox {
+    position: relative;
+    gap: var(--space-3);
+    margin-top: 12px;
+    padding: 12px 16px 14px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: 0 -5px 0 -1px var(--paper), 0 -5px 0 0 var(--paper-edge), 0 -10px 0 -2px var(--paper), 0 -10px 0 -1px var(--paper-edge), var(--paper-lift);
+}
+.screen-home .desk-cardbox .card-action-head { display: block; }
+.screen-home .desk-cardbox .card-icon { display: none; }
+.screen-home .desk-cardbox .card-title { padding-bottom: 6px; border-bottom: 2px solid var(--ink-red-line); font-size: 1.0625rem; }
+.screen-home .desk-cardbox .card-text { padding: 3px 0 2px; border-bottom: 1px solid var(--paper-rule); color: var(--color-text); font-family: var(--font-display); font-size: 1rem; font-weight: 600; line-height: 28px; }
+.screen-home .desk-filter-label { color: var(--color-text-2); font-family: var(--font-sans); font-weight: 400; font-size: var(--text-sm); }
+.screen-home .desk-cardbox .card-action-row { gap: var(--space-2) var(--space-4); align-items: center; }
+.screen-home .desk-cardbox .card-action-row .btn-secondary { border-radius: 6px; background: transparent; border-color: var(--paper-edge); }
+.screen-home .desk-cardbox .card-action-row .btn-ghost { padding-inline: 4px; }
+
+/* ---- Pano kartı: Online ---- */
+.screen-home .card-action.desk-pin {
+    position: relative;
+    gap: var(--space-3);
+    padding: 20px 18px 16px;
+    border: 1px solid var(--paper-edge);
+    border-radius: 2px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+    transform: rotate(-0.8deg);
+}
+.screen-home .desk-pin::before { /* raptiye */
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 50%;
+    background: var(--color-badge-bg);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), inset -2px -2px 0 rgba(0, 0, 0, 0.18);
+}
+.screen-home .desk-pin .card-action-head { display: block; }
+.screen-home .desk-pin .card-icon { display: none; }
+.screen-home .desk-pin .card-title { font-size: 1.0625rem; }
+.screen-home .desk-pin-note {
+    margin-top: -4px;
+    padding-left: 10px;
+    border-left: 3px solid var(--ink-red-line);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: 1.45;
+}
+.screen-home .desk-pin-note[hidden] { display: none; }
+.screen-home .desk-pin .card-action-row .btn { border-radius: 6px; }
+
+@media (min-width: 600px) {
+    .screen-home .desk-aside { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+@media (min-width: 1024px) {
+    .screen-home .home-greeting .home-title { font-size: 2rem; }
+    .screen-home .desk { gap: var(--space-7); }
+    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 340px)); justify-content: start; gap: var(--space-7); padding-left: 4px; }
+    .screen-home .desk-stage { grid-template-columns: minmax(0, 1fr) 250px; grid-template-rows: 1fr auto; grid-template-areas: "folder bubble" "folder noro"; column-gap: var(--space-4); margin-top: var(--space-3); }
+    .screen-home .card-hero.desk-folder { margin-top: 36px; }
+    .screen-home .desk-noro { align-self: end; justify-self: start; margin: 0 0 -8px -28px; }
+    .screen-home .desk-noro .avatar-edit-art svg { width: 168px; height: 168px; }
+    .screen-home .desk-noro .avatar-edit-badge { right: 22px; bottom: 34px; width: 28px; height: 28px; }
+    .screen-home .noro-nudge.noro-bubble { align-self: end; justify-self: stretch; max-width: none; margin: 0 0 6px; }
+    .screen-home .noro-nudge.noro-bubble::after { right: 50%; margin-right: -7px; }
+    .screen-home .noro-bubble .noro-nudge-btn { margin-top: 4px; }
+    .screen-home .card-hero.desk-folder { padding: 40px 40px 34px; }
+    .screen-home .card-hero.desk-folder::before { right: 40px; }
+    .screen-home .desk-folder .card-hero-title { font-size: 2.75rem; }
+    .screen-home .desk-folder .card-hero-text { font-size: var(--text-md); }
+}
+
+/* Telefonda sekmede yalnız gün + ay (uzun gün adı, ör. "Cumartesi", sekmeyi Nöro'nun altına iterdi) */
+@media (max-width: 599px) {
+    .screen-home .desk-date-wd { display: none; }
+}
+/* Dar telefon (≤ 389 px): sekme ve Nöro birbirine değmesin */
+@media (max-width: 389px) {
+    .screen-home .desk-noro .avatar-edit-art svg { width: 88px; height: 88px; }
+    .screen-home .desk-noro .avatar-edit-badge { bottom: 12px; right: 0; }
+    .screen-home .desk-folder-tab { gap: 6px; padding: 0 10px; }
+    .screen-home .desk-folder-tab .chip { font-size: 0.875rem; }
+    .screen-home .desk-folder-tab .chip-muted { font-size: 0.8125rem; }
+    .screen-home .desk-folder-tab .chip-muted::before { margin-right: 6px; }
+}
+@media (max-width: 1023px) {
+    .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 14px; }
+}
+
+/* Hareket azaltma: avatar düğmesinin büyüme/küçülme geçişi yok (genel kural style.css'te; burada açıkça) */
+@media (prefers-reduced-motion: reduce) {
+    .screen-home .desk-noro .avatar-edit-art { transition: none; }
+}
+
+</style>
+    <style>
+/* ==========================================================================
+   PsikoVaka — Kütüphane "ders kitabı" (ajan R3, 2026-11-21; Emre onayı: ajan E2 örneği birebir)
+   Liste = içindekiler sayfası (kitap sekmeleri, "Ara" yazı satırı, bölüm no + noktalı çizgi + sayı, sabit madde
+   numaraları 4.1…, masaüstünde iki sütun). Tanı/terapi/ilaç sayfası = kitap sayfası (üst bilgi satırı, kenarda
+   "Kriter A", asılı A1… numaraları, "Bkz." göndermeleri, kaynakça gibi tedavi listesi, tek kutu "Kenar notu").
+   İşaretler js/app.js'te doğrudan üretilir (buildLibraryList, renderDiagnosisDetail, renderTreatmentDetail).
+   Bilgi yapısı aynı; yalnızca görünüm. Renkler yalnızca token. Bayrağa bağlı değil.
+   ========================================================================== */
+
+/* ---- Liste: içindekiler ---- */
+.screen-library .lib-home { gap: var(--space-4); }
+.screen-library .lib-book { display: flex; flex-direction: column; min-width: 0; }
+/* Kitap sekmeleri: kâğıda takılı, etkin olan kâğıtla birleşir */
+.screen-library .lib-tabs.segmented {
+    display: flex;
+    gap: 4px;
+    padding: 0 0 0 10px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    position: relative;
+    z-index: 1;
+}
+.screen-library .lib-tabs .lib-tab,
+[data-theme="dark"] .screen-library .lib-tabs .lib-tab {
+    flex: 0 1 auto;
+    min-height: 44px;
+    margin-bottom: -1px;
+    padding: 0 14px;
+    border: 1px solid var(--color-border-strong);
+    border-bottom: 0;
+    border-radius: 9px 9px 0 0;
+    background: var(--color-surface-2);
+    box-shadow: none;
+    color: var(--color-text-2);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+.screen-library .lib-tabs .lib-tab.active,
+[data-theme="dark"] .screen-library .lib-tabs .lib-tab.active {
+    background: var(--paper);
+    border-color: var(--paper-edge);
+    color: var(--color-text);
+    font-weight: 750;
+    box-shadow: inset 0 3px 0 var(--color-accent);
+}
+.screen-library .lib-tab-count { background: none; padding: 0; color: var(--color-text-3); font-family: var(--font-sans); font-weight: 600; }
+.screen-library .lib-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-5) var(--space-4) var(--space-5) 0;
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px 8px 6px 6px;
+    background: var(--paper);
+    box-shadow: var(--paper-shadow);
+}
+/* Arama: yazı satırı */
+.screen-library .lib-page .lib-search { display: flex; align-items: center; gap: 10px; margin-left: var(--lib-m, 44px); }
+.screen-library .lib-search-label { font-family: var(--font-display); font-weight: 700; color: var(--color-text); }
+.screen-library .lib-page .lib-search-input {
+    flex: 1;
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    border-bottom: 2px solid var(--color-input-border);
+    border-radius: 0;
+    background: transparent;
+    font-size: 17px;
+}
+.screen-library .lib-page .lib-search-input:focus { outline: none; border-bottom-color: var(--color-accent); box-shadow: 0 1px 0 0 var(--color-accent); background: var(--color-accent-soft); }
+.screen-library .lib-page .lib-search-status { margin: 0 0 0 var(--lib-m, 44px); font-style: italic; color: var(--color-text-2); }
+.screen-library .lib-contents-title {
+    margin: var(--space-3) 0 0 var(--lib-m, 44px);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink-red-line);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 750;
+}
+.screen-library .lib-contents-title[hidden] { display: none; }
+
+.screen-library .lib-list.lib-contents { gap: 0; }
+.screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
+.screen-library .lib-contents .lib-group-head {
+    position: relative;
+    display: flex;
+    align-items: last baseline;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 0 8px var(--lib-m, 44px);
+    border: 0;
+    background: none;
+}
+.screen-library .lib-contents .lib-group-head::-webkit-details-marker { display: none; }
+/* Açık/kapalı işareti: bölüm satırının sonunda küçük ok (kapalı: aşağı, açık: yukarı); durum <details>/<summary>
+   ile yardımcı teknolojiye de bildirilir */
+.screen-library .lib-contents .lib-group-head::after { align-self: center; width: 7px; height: 7px; margin: 0 2px 0 4px; border-color: var(--color-text-2); }
+.screen-library .lib-contents .lib-group-head:hover { background: none; }
+.screen-library .lib-contents .lib-group-head:hover .lib-group-title { text-decoration: underline; text-underline-offset: 3px; }
+.screen-library .lib-contents .lib-group[open] > .lib-group-head { border: 0; }
+.screen-library .lib-ch {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: var(--lib-m, 44px);
+    text-align: center;
+    color: var(--ink-red);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.screen-library .lib-contents .lib-group-title { flex: 0 1 auto; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; }
+/* noktalı çizgi: başlığın SON satırında başlar, sağa uzar, taşan kısmı kırpılır */
+.screen-library .lib-contents .lib-group-title,
+.screen-library .lib-contents .lib-row-title { display: block; flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.screen-library .lib-contents .lib-group-title::after,
+.screen-library .lib-contents .lib-row.has-code .lib-row-title::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    margin: 0 -100% 0 8px;
+    border-bottom: 2px dotted color-mix(in srgb, var(--color-text-3) 65%, transparent);
+    vertical-align: 0.28em;
+}
+.screen-library .lib-contents .lib-group-head .lib-group-count {
+    flex: 0 0 auto;
+    min-width: 1.5rem;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text-2);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.screen-library .lib-contents .lib-group[open] > .lib-group-head .lib-group-title { color: var(--color-text); }
+.screen-library .lib-contents .lib-group:not([open]) > .lib-group-head .lib-group-title { color: var(--color-text); font-weight: 600; }
+
+/* maddeler */
+.screen-library .lib-contents .lib-rows { padding: 0 0 10px; }
+.screen-library .lib-contents .lib-row-item + .lib-row-item { border: 0; }
+.screen-library .lib-contents .lib-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "t c" "s s";
+    align-items: last baseline;
+    column-gap: 8px;
+    row-gap: 0;
+    min-height: 48px;
+    padding: 7px 0 7px calc(var(--lib-m, 44px) + 14px);
+    background: none;
+}
+.screen-library .lib-contents .lib-row:hover { background: color-mix(in srgb, var(--paper-hl) 60%, transparent); }
+.screen-library .lib-contents .lib-row-text { display: contents; }
+.screen-library .lib-contents .lib-row-title { grid-area: t; font-weight: 600; color: var(--color-text); }
+.screen-library .lib-contents .lib-row-sub { grid-area: s; font-style: italic; font-size: 0.8125rem; color: var(--color-text-2); margin-top: 1px; }
+.screen-library .lib-contents .lib-row-codes { grid-area: c; max-width: 9rem; color: var(--color-text-2); font-family: var(--font-sans); font-size: 0.8125rem; font-variant-numeric: tabular-nums; text-align: right; }
+.screen-library .lib-contents .lib-row-chevron { display: none; }
+.screen-library .lib-no {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: var(--lib-m, 44px);
+    text-align: right;
+    padding-right: 2px;
+    color: var(--color-text-3);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.6;
+}
+.screen-library .lib-page .lib-empty { margin-left: var(--lib-m, 44px); border-radius: 3px; background: none; }
+
+@media (min-width: 768px) {
+    .screen-library { --lib-m: 64px; }
+    .screen-library .lib-page { padding: var(--space-6) var(--space-6) var(--space-6) 0; }
+    .screen-library .lib-contents .lib-row-sub { font-size: var(--text-sm); }
+}
+@media (min-width: 1024px) {
+    /* İki sütunlu içindekiler: telefon gibi tek uzun sütun yerine kitap açılımı */
+    .screen-library .lib-list.lib-contents:not([hidden]) { display: block; column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
+    .screen-library .lib-contents .lib-group { break-inside: avoid-column; }
+    .screen-library .lib-contents .lib-group[open] { break-inside: auto; }
+    .screen-library .lib-home .screen-head, .screen-library .lib-book { max-width: none; }
+}
+
+/* ---- Tanı / terapi / ilaç sayfası: kitap sayfası ---- */
+.screen-library .lib-detail.is-book {
+    gap: 0;
+    margin-inline: calc(-1 * var(--space-2));
+    padding: var(--space-4) 14px var(--space-6);
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: var(--paper-shadow);
+}
+.screen-library .is-book .lib-back { margin: -6px 0 var(--space-2) -8px; }
+/* Duraklatılmış vaka notu (libCaseNotice) kitap sayfasında üst bilginin üstünde */
+.screen-library .is-book .lib-case-notice { margin-bottom: var(--space-4); }
+/* Üst bilgi satırı (running header) */
+.screen-library .lib-run {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-text-2);
+    font-size: 0.8125rem;
+    font-style: italic;
+}
+.screen-library .lib-run-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.screen-library .lib-run-no { font-style: normal; font-weight: 700; color: var(--ink-red); font-family: var(--font-display); }
+.screen-library .lib-run-r { flex-shrink: 0; }
+.screen-library .is-book .lib-detail-head { gap: 4px; padding-bottom: var(--space-4); border-bottom: 2px solid var(--ink-red-line); }
+.screen-library .is-book .lib-detail-title { font-size: 2rem; line-height: 1.15; }
+.screen-library .is-book .lib-detail-en { font-style: italic; }
+.screen-library .is-book .lib-meta { gap: 2px; margin-top: var(--space-2); padding: 0; border: 0; background: none; font-size: var(--text-sm); }
+.screen-library .is-book .lib-meta .lib-meta-row { flex-direction: row; flex-wrap: wrap; gap: 0 6px; align-items: baseline; }
+.screen-library .is-book .lib-meta dt { flex: 0 0 auto !important; padding: 0 !important; text-transform: none; letter-spacing: 0; font-size: var(--text-sm); font-weight: 700; color: var(--color-text); }
+.screen-library .is-book .lib-meta dt::after { content: ':'; }
+.screen-library .is-book .lib-meta dd { flex: 1 1 0; min-width: 12rem; color: var(--color-text-2); }
+.screen-library .is-book .lib-meta .lib-meta-codes { display: inline; }
+.screen-library .is-book .lib-meta .lib-code { padding: 0; background: none; font-family: var(--font-sans); font-weight: 600; font-size: var(--text-sm); color: var(--color-text); }
+.screen-library .is-book .lib-meta .lib-code + .lib-code::before { content: ', '; font-weight: 400; }
+.screen-library .is-book .lib-meta .lib-more-inline .lib-more-summary { min-height: 32px; }
+
+/* gövde: kutusuz bölümler */
+.screen-library .is-book .lib-detail-body { gap: 0; }
+.screen-library .is-book .lib-sec {
+    padding: var(--space-5) 0 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-library .is-book .lib-sec-title { font-size: 1.3125rem; font-weight: 750; }
+.screen-library .is-book .lib-sec-note { font-style: italic; color: var(--color-text-2); }
+/* Klinik özet: telefonda açılır (kapalı başlar; uzun tanılar duvar olmasın), masaüstünde düz bölüm (app.js) */
+.screen-library .is-book .lib-collapse-head { min-height: var(--tap); padding: 0; }
+.screen-library .is-book .lib-collapse-head::after { margin-right: 6px; border-color: var(--color-text-2); }
+.screen-library .is-book .lib-collapse-head:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.screen-library .is-book .lib-collapse > .lib-prose { padding: var(--space-2) 0 0; }
+.screen-library .is-book .lib-clin > .lib-sec-title + .lib-prose { margin-top: var(--space-2); }
+.screen-library .is-book .lib-prose { font-size: 1.0625rem; }
+
+/* Kriterler: numaralı paragraflar, kenar etiketi */
+.screen-library .is-book .lib-crit-list { gap: var(--space-4); margin-top: var(--space-3); }
+.screen-library .is-book .lib-crit {
+    position: relative;
+    padding: 0 0 0 30px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-library .is-book .lib-crit-head { display: block; }
+.screen-library .is-book .lib-crit-code {
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 32px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--ink-red);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 750;
+    line-height: 1.5;
+    text-align: left;
+}
+/* Telefonda kenarda yalnız harf ("A"); "Kriter " ekran okuyucuya yine okunur */
+.screen-library .is-book .lib-crit-code-pre {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.screen-library .is-book .lib-crit-other { padding-left: 0; padding-top: var(--space-2); border-top: 1px solid var(--paper-rule); }
+.screen-library .is-book .lib-crit-other .lib-crit-code { position: static; display: block; width: auto; font-size: 0.8125rem; font-style: italic; font-family: var(--font-sans); font-weight: 600; color: var(--color-text-2); }
+.screen-library .is-book .lib-crit-title { display: inline; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; }
+.screen-library .is-book .lib-crit-text { margin-top: 4px; font-size: 1.0625rem; }
+.screen-library .is-book .lib-crit-items { gap: 6px; margin-top: var(--space-2); }
+.screen-library .is-book .lib-crit-items li { padding-left: 0; border: 0; color: var(--color-text); font-size: 1rem; }
+.screen-library .is-book .lib-crit-items li.is-hung { position: relative; padding-left: 30px; }
+.screen-library .lib-hang { position: absolute; left: 0; color: var(--color-text-2); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Telefon: birleşik kriter etiketi kenarda değil, başlığın üstünde ("Kriter C & D") */
+@media (max-width: 767px) {
+    .screen-library .is-book .lib-crit-wide { padding-left: 0; }
+    .screen-library .is-book .lib-crit-wide .lib-crit-code { position: static; display: block; width: auto; font-size: 0.9375rem; line-height: 1.4; }
+    .screen-library .is-book .lib-crit-wide .lib-crit-code-pre { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+}
+
+/* Bkz. çapraz göndermeleri: satır içi, noktalı virgülle */
+.screen-library .lib-see .lib-links { display: block; border: 0; border-radius: 0; overflow: visible; line-height: 1.9; }
+.screen-library .lib-see .lib-links::before { content: 'Bkz. '; font-style: italic; font-weight: 700; color: var(--color-text); }
+.screen-library .lib-see .lib-links li { display: inline; border: 0 !important; }
+.screen-library .lib-see .lib-links li:not(:last-child)::after { content: '; '; color: var(--color-text-2); }
+.screen-library .lib-see .lib-link { display: inline; min-height: 0; padding: 0; background: none; color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.screen-library .lib-see .lib-link:hover { background: none; text-decoration-thickness: 2px; }
+.screen-library .lib-see .lib-link-title { font-weight: 600; }
+.screen-library .lib-see .lib-link-sub, .screen-library .lib-see .lib-link-chevron { display: none; }
+.screen-library .lib-see .lib-more { display: inline; margin: 0 0 0 6px; }
+.screen-library .lib-see .lib-more-summary { display: inline; min-height: 0; padding: 0; }
+.screen-library .lib-see .lib-more-summary::after { display: none; }
+.screen-library .lib-see .lib-more[open] .lib-links::before { content: none; }
+
+/* Tedavi: kısa kaynakça */
+.screen-library .lib-refs .lib-sub-title { margin-top: var(--space-3); font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text); }
+.screen-library .lib-refs { counter-reset: libref; }
+.screen-library .lib-refs .lib-links { border: 0; border-radius: 0; gap: 2px; }
+.screen-library .lib-refs .lib-links li { counter-increment: libref; border: 0 !important; }
+.screen-library .lib-refs .lib-link { position: relative; display: block; min-height: 0; padding: 6px 0 6px 34px; background: none; }
+.screen-library .lib-refs .lib-link::before { content: '[' counter(libref) ']'; position: absolute; left: 0; top: 6px; color: var(--color-text-2); font-variant-numeric: tabular-nums; }
+.screen-library .lib-refs .lib-link:hover { background: none; }
+.screen-library .lib-refs .lib-link-title { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.screen-library .lib-refs .lib-link-sub { display: inline; margin: 0; font-size: var(--text-sm); font-style: italic; color: var(--color-text-2); }
+.screen-library .lib-refs .lib-link-sub::before { content: ' — '; font-style: normal; }
+.screen-library .lib-refs .lib-link-chevron { display: none; }
+
+/* Terapi/ilaç adımları: numaralı paragraflar (yuvarlak rozet yerine kenar numarası) */
+.screen-library .is-book .lib-steps li { padding-left: 40px; }
+.screen-library .is-book .lib-steps li::before { width: 32px; height: auto; top: 0; justify-content: flex-start; border-radius: 0; background: none; color: var(--ink-red); font-family: var(--font-display); font-size: 1.125rem; font-weight: 750; }
+
+/* Kenar notu: sayfadaki tek kutu */
+.screen-library .lib-disclaimer.lib-note,
+.screen-library .lib-callout.lib-note-box {
+    display: block;
+    max-width: 62ch;
+    margin-top: var(--space-6);
+    padding: 12px 14px;
+    border: 1px solid var(--paper-edge);
+    border-left: 3px solid var(--paper-hl-strong);
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--paper-hl) 45%, transparent);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+}
+.screen-library .lib-callout.lib-note-box { margin-top: var(--space-5); font-size: var(--text-base); }
+.screen-library .lib-note .icon { display: none; }
+.screen-library .lib-note-h { display: block; margin-bottom: 2px; font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem; }
+.screen-library .lib-note-box .lib-callout-title { font-family: var(--font-display); font-size: 1rem; }
+.screen-library .lib-note-box .lib-callout-title .icon { display: none; }
+
+/* Pratik: sayfa altı satırı */
+.screen-library .lib-practice.lib-foot {
+    margin-top: var(--space-6);
+    padding: var(--space-4) 0 0;
+    border: 0;
+    border-top: 2px solid var(--ink-red-line);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+.screen-library .lib-foot .lib-sec-title { font-size: 1.0625rem; }
+.screen-library .lib-foot .btn { border-radius: 6px; }
+
+/* İçindekiler kutusu: sağ kenarda yan not */
+@media (min-width: 768px) {
+    .screen-library .is-book .lib-crit-items li.is-hung { padding-left: 34px; }
+    .screen-library .lib-detail.is-book { margin-inline: 0; padding: var(--space-6) var(--space-7) var(--space-7); }
+    .screen-library .is-book .lib-detail-title { font-size: 2.5rem; }
+    .screen-library .is-book .lib-crit { padding-left: 96px; }
+    .screen-library .is-book .lib-crit-code { width: 84px; font-size: 0.875rem; top: 1px; line-height: 1.6; }
+    .screen-library .is-book .lib-crit-code-pre { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+    .screen-library .is-book .lib-crit-other { padding-left: 96px; }
+    .screen-library .is-book .lib-crit-other .lib-crit-code { position: absolute; display: block; width: 84px; font-size: 0.8125rem; top: var(--space-2); }
+}
+@media (min-width: 900px) {
+    .screen-library .is-book .lib-detail-layout { grid-template-columns: minmax(0, 1fr) 170px; gap: var(--space-7); }
+    .screen-library .is-book .lib-detail-layout-single { grid-template-columns: minmax(0, 1fr); }
+    .screen-library .is-book .lib-toc { grid-column: 2; grid-row: 1; padding-top: var(--space-5); }
+    .screen-library .is-book .lib-detail-body { grid-column: 1; grid-row: 1; }
+    .screen-library .is-book .lib-toc-title { text-transform: none; letter-spacing: 0; font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; color: var(--color-text); }
+    .screen-library .is-book .lib-toc-list { border-left: 1px solid var(--paper-edge); }
+    .screen-library .is-book .lib-toc-link { min-height: 32px; font-size: 0.875rem; }
+}
+/* Arama sonuçları (dizin): tek sütun, bölümler bölünmesin */
+@media (min-width: 1024px) {
+    .screen-library .lib-page.is-searching .lib-list.lib-contents:not([hidden]) { column-count: 1; max-width: 760px; }
+}
+
+/* Hareket azaltma: ok dönüşü anında */
+@media (prefers-reduced-motion: reduce) {
+    .screen-library .lib-contents .lib-group-head::after { transition: none; }
+}
+
+/* Dokunmatik: kaynakça satırları ve "N kayıt/ad daha" açıcıları en az 44 px (satır içi "Bkz." bağlantıları cümle içi metindir) */
+@media (pointer: coarse) {
+    .screen-library .lib-refs .lib-link { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0; min-height: var(--tap); padding-block: 11px; }
+    .screen-library .lib-refs .lib-link::before { top: 11px; }
+    .screen-library .lib-see .lib-more-summary,
+    .screen-library .is-book .lib-meta .lib-more-inline .lib-more-summary { display: inline-flex; align-items: center; min-height: var(--tap); }
+}
+
+</style>
+    <style>
+/* ==========================================================================
    PsikoVaka — Tasarım pilotu "Danışan dosyası" (ajan D2, 2026-11-20)
    YALNIZCA <html class="tasarim-dosya"> iken etkilidir (?tasarim=dosya). Bayrak kapalıyken hiçbir kural
    eşleşmez: site bugünküyle birebir aynı. Yapıyı js/tasarim_dosya.js kurar (.dosya-folder/.dosya-tabs/
@@ -4088,35 +4908,35 @@ body.ol-banners-docked .ol-banners { display: none; }
 
 /* ---------- Değişkenler (yalnızca pilot) ---------- */
 .tasarim-dosya {
-    --dosya-paper: #20242c;
-    --dosya-edge: #353c4a;
-    --dosya-tape: #2b313c;
-    --dosya-rule: rgba(126, 166, 255, 0.14);
-    --dosya-red: #ff8a8a;              /* kâğıtta metin olarak ≥4.5:1 */
-    --dosya-red-line: rgba(255, 123, 123, 0.55);
-    --dosya-hl: rgba(242, 196, 90, 0.26);
-    --dosya-hl-strong: #f2c45a;
+    --dosya-paper: var(--paper);
+    --dosya-edge: var(--paper-edge);
+    --dosya-tape: var(--paper-tape);
+    --dosya-rule: var(--paper-rule);
+    --dosya-red: var(--ink-red);              /* kâğıtta metin olarak ≥4.5:1 */
+    --dosya-red-line: var(--ink-red-line);
+    --dosya-hl: var(--paper-hl);
+    --dosya-hl-strong: var(--paper-hl-strong);
     --dosya-ink-win: #8db0ff;
     --dosya-ink-loss: #ff8f8f;
-    --dosya-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 14px 28px -18px rgba(0, 0, 0, 0.8);
+    --dosya-shadow: var(--paper-shadow);
     --dosya-lh: 28px;                  /* satır aralığı = satır çizgisi aralığı */
     --dosya-m: 36px;                   /* kenar boşluğu (not numaraları) */
     --dosya-pad: 14px;
     --dosya-margin-col: 232px;         /* masaüstü tahmin sütunu */
-    --dosya-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    --dosya-mono: var(--font-type);
 }
 .tasarim-dosya[data-theme="light"] {
-    --dosya-paper: #fffdf8;
-    --dosya-edge: #cfd3db;
-    --dosya-tape: #eceef2;
-    --dosya-rule: rgba(35, 84, 176, 0.16);
-    --dosya-red: #b42330;
-    --dosya-red-line: rgba(201, 56, 56, 0.62);
-    --dosya-hl: rgba(255, 196, 30, 0.34);
-    --dosya-hl-strong: #a87600;
+    --dosya-paper: var(--paper);
+    --dosya-edge: var(--paper-edge);
+    --dosya-tape: var(--paper-tape);
+    --dosya-rule: var(--paper-rule);
+    --dosya-red: var(--ink-red);
+    --dosya-red-line: var(--ink-red-line);
+    --dosya-hl: var(--paper-hl);
+    --dosya-hl-strong: var(--paper-hl-strong);
     --dosya-ink-win: #2354b0;
     --dosya-ink-loss: #a51d2d;
-    --dosya-shadow: 0 1px 0 rgba(26, 30, 39, 0.06), 0 12px 26px -16px rgba(26, 30, 39, 0.28);
+    --dosya-shadow: var(--paper-shadow);
 }
 
 /* ---------- Oyun çubuğu: sade, başlık yüzüyle; vaka no + zorluk sekmeye taşındı ---------- */
@@ -4756,14 +5576,11 @@ body.ol-banners-docked .ol-banners { display: none; }
     <main class="app-main" id="appMain" tabindex="-1">
         <!-- EKRAN: Oyna (ana sayfa) -->
         <section class="screen screen-home" id="screenHome" data-screen="oyna" aria-labelledby="homeTitle">
+            <!-- Ana sayfa "çalışma masası" (ajan R3; görünüm css/anasayfa.css) -->
             <div class="home-greeting">
-                <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
-                    <span class="avatar-edit-art" id="homeAvatarMount"></span>
-                    <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
-                </button>
                 <div class="home-greeting-text">
-                    <p class="eyebrow">Hoş geldin</p>
-                    <h1 class="home-title" id="homeTitle"><span id="homeGreetingName">Klinisyen</span></h1>
+                    <h1 class="home-title" id="homeTitle"><span class="home-hello">Merhaba, </span><span id="homeGreetingName">Klinisyen</span><span class="home-title-dot">.</span></h1>
+                    <p class="home-greeting-sub">Bugünün dosyası masanda.</p>
                 </div>
                 <a class="rp-chip rp-chip-link" id="homeRpMount" href="#/ligler" aria-label="Lig bilgisi" hidden></a>
             </div>
@@ -4793,82 +5610,95 @@ body.ol-banners-docked .ol-banners { display: none; }
                 <button class="btn btn-secondary btn-sm" id="btnResumeCase" type="button">Devam et</button>
             </div>
 
-            <div class="target-picker">
-                <div class="segmented" role="radiogroup" aria-label="Neyi tahmin edeceksin?">
-                    <button class="segmented-btn target-mode-btn active" id="btnModeDiagnosis" data-target="diagnosis" type="button" role="radio" aria-checked="true">Tanı</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModeTherapy" data-target="therapy" type="button" role="radio" aria-checked="false">Terapi</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModePharmacology" data-target="pharmacology" type="button" role="radio" aria-checked="false">İlaç</button>
-                    <button class="segmented-btn target-mode-btn" id="btnModeCombo" data-target="combo" type="button" role="radio" aria-checked="false">Kombo</button>
-                </div>
-                <div class="target-hint-row">
-                    <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
-                    <button class="text-link home-help-link" id="btnHomeHelp" type="button"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Nasıl oynanır</button>
-                </div>
-            </div>
-
-            <article class="card card-hero">
-                <div class="card-hero-top">
-                    <span class="chip"><svg class="icon"><use href="#i-calendar"/></svg><span id="dailyDateLabel">Bugün</span></span>
-                    <span class="chip chip-muted">6 ipucu · 6 hak</span>
-                </div>
-                <div class="daily-title-row">
-                    <h2 class="card-hero-title">Günün vakası</h2>
-                    <span class="streak-chip" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
-                </div>
-                <p class="card-hero-text" id="dailyCardText">Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.</p>
-                <!-- js/online/daily.js: üyelerde bugünün sonucu (tek oyun hakkı) -->
-                <div class="daily-result" id="dailyResultBox" hidden aria-live="polite">
-                    <span class="daily-result-icon" id="dailyResultIcon"></span>
-                    <span class="daily-result-text"><span class="daily-result-title" id="dailyResultTitle"></span><span class="daily-result-sub" id="dailyResultSub"></span></span>
-                </div>
-                <div class="daily-actions">
-                    <button class="btn btn-primary btn-lg" id="btnStartDaily" type="button">
-                        <svg class="icon"><use href="#i-play"/></svg> <span id="btnStartDailyLabel">Başla</span>
-                    </button>
-                    <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
-                </div>
-            </article>
-
-            <!-- Nöro hatırlatması (js/avatar_studio.js): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
-            <article class="card noro-nudge" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
-                <span class="noro-nudge-art" id="noroNudgeArt" aria-hidden="true"></span>
-                <div class="noro-nudge-body">
-                    <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
-                    <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
-                    <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg> Özelleştir</button>
-                </div>
-                <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
-            </article>
-
-            <div class="home-grid">
-                <article class="card card-action">
-                    <div class="card-action-head">
-                        <span class="card-icon"><svg class="icon"><use href="#i-infinity"/></svg></span>
-                        <div>
-                            <h3 class="card-title">Sınırsız pratik</h3>
-                            <p class="card-text" id="practiceSummary">Tüm vakalar</p>
+            <div class="desk">
+                <div class="desk-main">
+                    <div class="target-picker">
+                        <div class="segmented" role="radiogroup" aria-label="Neyi tahmin edeceksin?">
+                            <button class="segmented-btn target-mode-btn active" id="btnModeDiagnosis" data-target="diagnosis" type="button" role="radio" aria-checked="true">Tanı</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModeTherapy" data-target="therapy" type="button" role="radio" aria-checked="false">Terapi</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModePharmacology" data-target="pharmacology" type="button" role="radio" aria-checked="false">İlaç</button>
+                            <button class="segmented-btn target-mode-btn" id="btnModeCombo" data-target="combo" type="button" role="radio" aria-checked="false">Kombo</button>
+                        </div>
+                        <div class="target-hint-row">
+                            <p class="target-hint" id="targetModeHint">Vakadaki danışanın DSM-5-TR tanısını bul.</p>
+                            <button class="text-link home-help-link" id="btnHomeHelp" type="button"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Nasıl oynanır</button>
                         </div>
                     </div>
-                    <div class="card-action-row">
-                        <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
-                        <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
-                            <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
-                        </button>
-                    </div>
-                </article>
 
-                <article class="card card-action">
-                    <div class="card-action-head">
-                        <span class="card-icon"><svg class="icon"><use href="#i-globe"/></svg></span>
-                        <div>
-                            <h3 class="card-title">Online</h3>
+                    <div class="desk-stage">
+                        <!-- Nöro hatırlatması = Nöro'nun konuşma balonu (js/avatar_studio.js updateNoroNudge): avatar hâlâ varsayılansa; kapatılınca bir daha çıkmaz (psikovaka_noro_nudge_off) -->
+                        <aside class="card noro-nudge noro-bubble" id="homeNoroNudge" aria-labelledby="noroNudgeTitle" hidden>
+                            <div class="noro-nudge-body">
+                                <h2 class="noro-nudge-title" id="noroNudgeTitle">Nöro'nu özelleştir</h2>
+                                <p class="noro-nudge-text">Rengini, tüylerini ve şapkasını seç; lobide herkes onu görür.</p>
+                                <button class="btn btn-secondary btn-sm noro-nudge-btn" id="btnNoroNudgeOpen" type="button"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg><span class="noro-nudge-btn-short">Özelleştir</span><span class="noro-nudge-btn-long">Nöro'nu özelleştir</span></button>
+                            </div>
+                            <button class="icon-btn noro-nudge-close" id="btnNoroNudgeClose" type="button" aria-label="Hatırlatmayı kapat"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+                        </aside>
+
+                        <div class="desk-noro">
+                            <button class="avatar-edit home-avatar" id="homeAvatarEdit" type="button" aria-label="Avatarı düzenle" title="Avatarı düzenle">
+                                <span class="avatar-edit-art" id="homeAvatarMount"></span>
+                                <span class="avatar-edit-badge" aria-hidden="true"><svg class="icon"><use href="#i-pen"/></svg></span>
+                            </button>
+                        </div>
+
+                        <!-- Günün vakası: masadaki danışan dosyası -->
+                        <article class="card card-hero desk-folder" aria-labelledby="dailyHeroTitle">
+                            <div class="card-hero-top desk-folder-tab">
+                                <span class="chip"><svg class="icon"><use href="#i-calendar"/></svg><span id="dailyDateLabel">Bugün</span></span>
+                                <span class="chip chip-muted">6 ipucu · 6 hak</span>
+                            </div>
+                            <div class="daily-title-row">
+                                <h2 class="card-hero-title" id="dailyHeroTitle">Günün vakası</h2>
+                            </div>
+                            <!-- Danışan özeti (vakanın patientSummary alanı: yalnızca demografi + meslek; tanı/kategori/ders YOK). app.js setDailyTeaser -->
+                            <p class="desk-teaser" id="dailyTeaser" hidden></p>
+                            <p class="card-hero-text" id="dailyCardText">Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.</p>
+                            <!-- js/online/daily.js: üyelerde bugünün sonucu (tek oyun hakkı) -->
+                            <div class="daily-result" id="dailyResultBox" hidden aria-live="polite">
+                                <span class="daily-result-icon" id="dailyResultIcon"></span>
+                                <span class="daily-result-text"><span class="daily-result-title" id="dailyResultTitle"></span><span class="daily-result-sub" id="dailyResultSub"></span></span>
+                            </div>
+                            <div class="daily-actions">
+                                <button class="btn btn-primary btn-lg" id="btnStartDaily" type="button">
+                                    <svg class="icon"><use href="#i-play"/></svg> <span id="btnStartDailyLabel">Başla</span>
+                                </button>
+                                <a class="btn btn-secondary btn-lg" id="btnDailyBoard" href="#/gunluk" hidden><svg class="icon"><use href="#i-podium"/></svg> Sıralamayı gör</a>
+                            </div>
+                            <!-- Seri: klasöre ataşla tutturulmuş etiket -->
+                            <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="desk-aside">
+                    <!-- Sınırsız pratik: fiş kutusu (ön fişte geçerli filtre) -->
+                    <article class="card card-action desk-cardbox" aria-labelledby="practiceCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="practiceCardTitle">Sınırsız pratik</h3>
+                            <p class="card-text"><span class="desk-filter-label">Filtre:</span> <span id="practiceSummary">Tüm vakalar</span></p>
+                        </div>
+                        <div class="card-action-row">
+                            <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
+                            <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
+                                <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Online: panoya raptiyeli kart (bekleyen davet/bildirim: js/online/friends.js -> game.setHomeOnlineNote) -->
+                    <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
                             <p class="card-text">Düello, herkes tek ve turnuva.</p>
                         </div>
-                    </div>
-                    <div class="card-action-row">
-                        <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
-                    </div>
-                </article>
+                        <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                        <div class="card-action-row">
+                            <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -4921,24 +5751,30 @@ body.ol-banners-docked .ol-banners { display: none; }
                     <p class="screen-sub">Tanı kriterleri, klinik özetler, terapi ve ilaç protokolleri.</p>
                 </header>
 
-                <nav class="segmented lib-tabs" aria-label="Kütüphane bölümleri">
-                    <a class="segmented-btn lib-tab" href="#/kutuphane" data-lib-tab="tani">Tanılar <span class="lib-tab-count" id="libDsmCount"></span></a>
-                    <a class="segmented-btn lib-tab" href="#/kutuphane/terapiler" data-lib-tab="terapi">Terapiler <span class="lib-tab-count" id="libTherapyCount"></span></a>
-                    <a class="segmented-btn lib-tab" href="#/kutuphane/ilaclar" data-lib-tab="ilac">İlaçlar <span class="lib-tab-count" id="libPharmaCount"></span></a>
-                </nav>
+                <div class="lib-book">
+                    <nav class="segmented lib-tabs" aria-label="Kütüphane bölümleri">
+                        <a class="segmented-btn lib-tab" href="#/kutuphane" data-lib-tab="tani">Tanılar <span class="lib-tab-count" id="libDsmCount"></span></a>
+                        <a class="segmented-btn lib-tab" href="#/kutuphane/terapiler" data-lib-tab="terapi">Terapiler <span class="lib-tab-count" id="libTherapyCount"></span></a>
+                        <a class="segmented-btn lib-tab" href="#/kutuphane/ilaclar" data-lib-tab="ilac">İlaçlar <span class="lib-tab-count" id="libPharmaCount"></span></a>
+                    </nav>
 
-                <div class="lib-search" role="search">
-                    <svg class="icon lib-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-                    <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
-                </div>
-                <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
+                    <!-- Ders kitabı sayfası (ajan R3; görünüm css/kutuphane.css) -->
+                    <div class="lib-page" id="libPage">
+                        <div class="lib-search" role="search">
+                            <label class="lib-search-label" for="libSearchInput">Ara</label>
+                            <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
+                        </div>
+                        <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
 
-                <div class="lib-list" id="libListTani" data-lib-list="tani"></div>
-                <div class="lib-list" id="libListTerapi" data-lib-list="terapi" hidden></div>
-                <div class="lib-list" id="libListIlac" data-lib-list="ilac" hidden></div>
-                <div class="lib-empty" id="libEmpty" hidden>
-                    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-                    <p>Sonuç yok. Başka bir yazım, İngilizce ad ya da kod dene.</p>
+                        <h2 class="lib-contents-title" id="libContentsTitle">İçindekiler</h2>
+                        <div class="lib-list lib-contents" id="libListTani" data-lib-list="tani"></div>
+                        <div class="lib-list lib-contents" id="libListTerapi" data-lib-list="terapi" hidden></div>
+                        <div class="lib-list lib-contents" id="libListIlac" data-lib-list="ilac" hidden></div>
+                        <div class="lib-empty" id="libEmpty" hidden>
+                            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+                            <p>Sonuç yok. Başka bir yazım, İngilizce ad ya da kod dene.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -29339,7 +30175,16 @@ class PsikoVakaGame {
         }
         if (hasAvatar) {
             if (this.dom.navAvatarMount) this.dom.navAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 28);
-            if (this.dom.homeAvatarMount) this.dom.homeAvatarMount.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 44);
+            // Ana sayfa masasındaki Nöro: büyük, çerçevesiz, hareketli (boyutu CSS verir: 88/112/168 px). Aynı avatar
+            // yeniden çizilmez (animasyon her profil güncellemesinde baştan başlamasın).
+            const hm = this.dom.homeAvatarMount;
+            if (hm) {
+                const sig = JSON.stringify(this.myAvatar);
+                if (hm.dataset.sig !== sig || !hm.firstChild) {
+                    hm.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 168, { animated: true, framed: false });
+                    hm.dataset.sig = sig;
+                }
+            }
             const profileAvatar = document.getElementById('headerFunnyAvatarMount');
             if (profileAvatar) profileAvatar.innerHTML = renderFunnyAvatarSVG(this.myAvatar, 64);
         }
@@ -29420,13 +30265,21 @@ class PsikoVakaGame {
     updateHomeMeta() {
         if (this.dom.dailyDateLabel) {
             try {
-                this.dom.dailyDateLabel.textContent = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', weekday: 'long' });
+                // Klasör sekmesi: "21 Kasım" + gün adı (dar telefonda gün adı gizlenir ki sekme Nöro'nun altına girmesin)
+                const now = new Date();
+                const dm = now.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' });
+                const wd = now.toLocaleDateString('tr-TR', { weekday: 'long' });
+                this.dom.dailyDateLabel.innerHTML = `${this.libEsc(dm)}<span class="desk-date-wd"> ${this.libEsc(wd)}</span>`;
             } catch (e) {
                 this.dom.dailyDateLabel.textContent = this.getDailySeed();
             }
         }
+        // Danışan özeti: js/online/daily.js varsa o çizer (sunucunun vakasıyla); yoksa yerel günün vakası
+        if (!(window.PsikoVakaOnline && window.PsikoVakaOnline.daily)) this.setDailyTeaser(this.getLocalDailyCase());
         if (this.dom.homeResume) {
-            const canResume = !!(this.currentCase && !this.isGameOver && this.caseTargetMode === this.targetGameMode);
+            // Bitmiş (başka sekmede bitirilmiş ya da günü geçmiş) günlük "devam et" olarak sunulmaz
+            const staleDaily = this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay());
+            const canResume = !!(this.currentCase && !this.isGameOver && this.caseTargetMode === this.targetGameMode && !staleDaily);
             this.dom.homeResume.hidden = !canResume;
             if (canResume && this.dom.homeResumeLabel) this.dom.homeResumeLabel.textContent = this.currentDisplayTitle || 'Vaka';
         }
@@ -29843,9 +30696,22 @@ class PsikoVakaGame {
         }
         if (this.dom.btnResumeCase) {
             this.dom.btnResumeCase.addEventListener('click', () => {
-                if (this.currentCase && !this.isGameOver) this.enterPlayScreen();
+                if (!this.currentCase || this.isGameOver) return;
+                if (this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay())) { this.setMode('daily'); return; }
+                this.enterPlayScreen();
             });
         }
+        // Başka sekmede günlük bitirildi: ana sayfa kartı ve oynanan aynı günlük güncellensin
+        window.addEventListener('storage', (e) => {
+            if (e.key !== 'psikovaka_daily_done') return;
+            if (this.currentScreen === 'oyna') this.updateHomeMeta();
+            const NSd = window.PsikoVakaOnline && window.PsikoVakaOnline.daily;
+            if (NSd && typeof NSd.refreshCard === 'function') NSd.refreshCard();
+            if (this.currentMode === 'daily' && this.dailyContext && !this.isGameOver && this.dailyContext.src !== 'server' && this.isDailyContextFinished()) {
+                const rec = this.getDailyRecord(this.dailyContext.target, this.dailyContext.day);
+                if (this.currentScreen === 'play') this.openFinishedDaily(this.findCaseById(rec.caseId), rec);
+            }
+        });
         if (this.dom.btnPlayBack) this.dom.btnPlayBack.addEventListener('click', () => this.leavePlayScreen());
         if (this.dom.btnOpenArchive) this.dom.btnOpenArchive.addEventListener('click', () => this.openArchiveModal());
         document.querySelectorAll('[data-arena-tab]').forEach(btn => {
@@ -30126,7 +30992,8 @@ class PsikoVakaGame {
         }
 
         if (restartCurrentCase && this.currentCase) {
-            this.startCase(this.currentCase, this.currentDisplayTitle || 'Vaka');
+            if (this.currentMode === 'daily') this.setMode('daily'); // günlük: bu hedefin günlüğü (bittiyse salt okunur)
+            else this.startCase(this.currentCase, this.currentDisplayTitle || 'Vaka');
         }
 
         const modeMessages = {
@@ -30370,17 +31237,187 @@ class PsikoVakaGame {
         return `${year}-${month}-${day}`;
     }
 
+    /** Yerel günlük (misafir / sunucu yok): gün = İstanbul günü (sunucuyla aynı kaynak). Bittiyse salt okunur sonuç açılır. */
     loadDailyCase() {
-        const seedStr = this.getDailySeed();
+        const day = this.getDailyDay();
+        const target = this.targetGameMode;
+        const rec = this.getDailyRecord(target, day);
+        if (rec && this.openFinishedDaily(this.findCaseById(rec.caseId), rec)) return;
         let hash = 0;
-        for (let i = 0; i < seedStr.length; i++) {
-            hash = ((hash << 5) - hash) + seedStr.charCodeAt(i);
+        for (let i = 0; i < day.length; i++) {
+            hash = ((hash << 5) - hash) + day.charCodeAt(i);
             hash |= 0;
         }
         const index = Math.abs(hash) % this.cases.length;
         const dailyCase = this.cases[index];
+        this.startDailyCase(dailyCase, { day, target, src: 'local' });
+    }
 
-        this.startCase(dailyCase, `Günün vakası · #${dailyCase.caseNumber || (index + 1)}`);
+    // ---------------------------------------------------------------- Günün vakası: bitti kaydı (B3)
+    // Bir hedefte günde tek oyun. Kayıt localStorage 'psikovaka_daily_done' { "<gün>|<hedef>": kayıt }; gün = İstanbul günü.
+    // Misafirde tek kaynak bu kayıt; üyede sunucu (js/online/daily.js), kayıt yalnızca sunucuya ulaşılamazsa yedek.
+
+    /** İstanbul takvim günü 'YYYY-AA-GG' (sunucunun günü, §13.1). Sunucu saat farkı biliniyorsa onu kullanır. */
+    getDailyDay(ms) {
+        let t = ms;
+        if (t == null) {
+            const C = window.PsikoVakaOnline && window.PsikoVakaOnline.clock;
+            t = C && typeof C.now === 'function' ? C.now() : Date.now();
+        }
+        try {
+            const s = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t));
+            if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+        } catch (e) {}
+        return new Date(t + 3 * 3600e3).toISOString().slice(0, 10); // Türkiye: sabit UTC+3
+    }
+
+    findCaseById(id) {
+        if (!id) return null;
+        return (this.allMasterCases || []).find(c => c.id === id) || (this.cases || []).find(c => c.id === id) || null;
+    }
+
+    dailyRecords() {
+        try {
+            const o = JSON.parse(localStorage.getItem('psikovaka_daily_done') || '{}');
+            return o && typeof o === 'object' && !Array.isArray(o) ? o : {};
+        } catch (e) { return {}; }
+    }
+
+    /** Bugünün (ya da verilen günün) bu hedefteki bitmiş günlük kaydı; yoksa null. */
+    getDailyRecord(target, day) {
+        const r = this.dailyRecords()[`${day || this.getDailyDay()}|${target || this.targetGameMode}`];
+        return r && r.caseId ? r : null;
+    }
+
+    /** İlk sonuç kalır (overwrite yoksa). En yeni 40 kayıt tutulur. */
+    saveDailyRecord(rec, overwrite) {
+        if (!rec || !rec.day || !rec.target || !rec.caseId) return null;
+        const all = this.dailyRecords();
+        const key = `${rec.day}|${rec.target}`;
+        if (all[key] && !overwrite) return all[key];
+        all[key] = rec;
+        Object.keys(all).sort((a, b) => String((all[b] || {}).day || '').localeCompare(String((all[a] || {}).day || ''))).slice(40).forEach(k => { delete all[k]; });
+        try { localStorage.setItem('psikovaka_daily_done', JSON.stringify(all)); } catch (e) {}
+        return rec;
+    }
+
+    updateDailyRecord(target, day, patch) {
+        const r = this.getDailyRecord(target, day);
+        if (r) this.saveDailyRecord(Object.assign(r, patch || {}), true);
+    }
+
+    /** Şu an oynanan günlüğün bitiş görüntüsü (tahminler, kombo aşamaları, süre). */
+    snapshotDailyRecord(won) {
+        const c = this.dailyContext;
+        const log = this.stageGuessLog || {};
+        const earlier = Object.keys(log).filter(k => Number(k) !== this.comboStage).reduce((n, k) => n + (log[k] || []).length, 0);
+        return {
+            day: c.day, target: c.target, caseId: this.currentCase.id, src: c.src || 'local', userId: c.userId || null,
+            won: !!won, guessesUsed: earlier + this.guesses.length, comboStage: this.comboStage,
+            guesses: this.guesses.map(g => Object.assign({}, g)),
+            stageGuessLog: JSON.parse(JSON.stringify(log)), comboResults: Object.assign({}, this.comboResults || {}),
+            diagWrongLog: (this.diagWrongLog || []).slice(), elapsed: this.elapsedSeconds || 0,
+            steps: [1, 2, 3].map(i => { const el = this.dom['comboStep' + i + 'Val']; return el ? el.textContent : ''; }),
+            at: Date.now()
+        };
+    }
+
+    /** Günlük oyunu başlatır ve hangi güne/hedefe ait olduğunu işaretler (bitişte kayıt için). */
+    startDailyCase(caseObj, ctx) {
+        if (!caseObj) return;
+        this.currentMode = 'daily';
+        this.startCase(caseObj, `Günün vakası · #${caseObj.caseNumber || ''}`.replace(/ · #$/, ''));
+        this.dailyContext = Object.assign({ day: this.getDailyDay(), target: this.targetGameMode, src: 'local', userId: null }, ctx || {}, { caseId: caseObj.id });
+    }
+
+    /** Bu oyun hâlâ oynanabilir bir günlük mü? (gün değişmediyse ve bitmiş kaydı yoksa) */
+    isDailyContextFinished(ctx) {
+        const c = ctx || this.dailyContext;
+        return !!(c && this.getDailyRecord(c.target, c.day));
+    }
+
+    /**
+     * Bitmiş günlüğü SALT OKUNUR açar: bütün ipuçları, tahminler, sonuç kartı + açıklama; tahmin alanı yok, istatistik yazılmaz.
+     * opts.fill(): tahminleri dışarıdan kurmak için (sunucu günlüğü), opts.title: sonuç başlığı.
+     */
+    openFinishedDaily(caseObj, rec, opts = {}) {
+        if (!caseObj || !rec) return false;
+        if (rec.target && rec.target !== this.targetGameMode) this.setTargetGameMode(rec.target, false);
+        this.currentMode = 'daily';
+        this.startCase(caseObj, `Günün vakası · #${caseObj.caseNumber || ''}`.replace(/ · #$/, '') + ' · bitti');
+        clearInterval(this.duelTimerInterval);
+        this.dailyContext = { day: rec.day, target: rec.target || this.targetGameMode, caseId: caseObj.id, src: rec.src || 'local', userId: rec.userId || null };
+        this.dailyReadOnly = true;
+        if (typeof opts.fill === 'function') {
+            opts.fill();
+        } else {
+            this.guesses = (rec.guesses || []).map(g => Object.assign({}, g));
+            this.stageGuessLog = rec.stageGuessLog || {};
+            if (rec.comboResults) this.comboResults = Object.assign({}, rec.comboResults);
+            this.diagWrongLog = (rec.diagWrongLog || []).slice();
+            if (this.targetGameMode === 'combo') {
+                this.comboStage = rec.comboStage || 3;
+                (rec.steps || []).forEach((t, i) => { const el = this.dom['comboStep' + (i + 1) + 'Val']; if (el && t) el.textContent = t; });
+            }
+        }
+        this.elapsedSeconds = rec.elapsed || 0;
+        this.renderGameOverView(!!rec.won);
+        if (opts.title && this.dom.playResultTitle) this.dom.playResultTitle.textContent = opts.title;
+        if (this.dom.btnMainNextCase) this.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
+        this.emitPlayState();
+        this.announcePlay('Bugünün vakasını bu hedefte bitirdin. Sonucun ve açıklaması aşağıda.');
+        return true;
+    }
+
+    /**
+     * Ana sayfa dosyasındaki özet için yerel (misafir / sunucusuz) günün vakası: loadDailyCase ile aynı seçim
+     * (aynı gün anahtarı ve tohum); bu hedefte bugün bitmiş bir yerel kayıt varsa onun vakası. Oyun başlatmaz.
+     */
+    getLocalDailyCase() {
+        if (!this.cases || !this.cases.length) return null;
+        const day = typeof this.getDailyDay === 'function' ? this.getDailyDay() : this.getDailySeed();
+        if (typeof this.getDailyRecord === 'function' && typeof this.findCaseById === 'function') {
+            const rec = this.getDailyRecord(this.targetGameMode, day);
+            const done = rec && this.findCaseById(rec.caseId);
+            if (done) return done;
+        }
+        let hash = 0;
+        for (let i = 0; i < day.length; i++) {
+            hash = ((hash << 5) - hash) + day.charCodeAt(i);
+            hash |= 0;
+        }
+        return this.cases[Math.abs(hash) % this.cases.length];
+    }
+
+    /**
+     * Ana sayfa dosyasındaki daktilo etiketi: günün danışanının kısa özeti (vakanın patientSummary alanı; yalnızca
+     * demografi + meslek, tanı/kategori/ders taşımaz — 2026-11-15 kuralı). Üyede/misafirde js/online/daily.js
+     * zaten okuduğu sunucu vakasıyla çağırır (ek istek yok); daily.js yoksa yerel günün vakası.
+     */
+    setDailyTeaser(c) {
+        const el = document.getElementById('dailyTeaser');
+        if (!el) return;
+        const t = c && typeof c.patientSummary === 'string' ? c.patientSummary.trim() : '';
+        if (el.textContent !== t) el.textContent = t;
+        el.hidden = !t;
+    }
+
+    /**
+     * Ana sayfa Online kartındaki not (js/online/friends.js bekleyen istek/davet sayısını değiştirince çağırır):
+     * { count, inviter, duel } → "<ad> seni odasına çağırıyor · N bekleyen bildirim"; count 0 ve davet yoksa gizli.
+     */
+    setHomeOnlineNote(info) {
+        const el = document.getElementById('homeOnlineNote');
+        if (!el) return;
+        const count = (info && info.count) || 0;
+        const who = info && info.inviter ? String(info.inviter) : '';
+        if (!count && !who) { el.hidden = true; el.textContent = ''; return; }
+        const parts = [];
+        if (who) parts.push(`<strong>${this.libEsc(who)}</strong> ${info.duel ? 'seni düelloya çağırdı' : 'seni odasına çağırıyor'}`);
+        if (count) parts.push(`${count} bekleyen bildirim`);
+        const html = parts.join('<span aria-hidden="true"> · </span>');
+        if (el.innerHTML !== html) el.innerHTML = html;
+        el.hidden = false;
     }
 
     loadRandomPracticeCase() {
@@ -30428,6 +31465,8 @@ class PsikoVakaGame {
     // --- Core Game Flow ---
     startCase(caseData, displayModeTitle = 'Vaka') {
         if (!caseData) return;
+        this.dailyReadOnly = false;
+        this.dailyContext = null; // günlük ise startDailyCase / openFinishedDaily hemen sonra kurar
         this.currentCase = caseData;
         if (!this.currentCase.pharmacologyId) {
             this.currentCase.pharmacologyId = this.getFallbackPharmacologyId(this.currentCase);
@@ -31058,7 +32097,8 @@ class PsikoVakaGame {
         this.handleGameEnd(false);
     }
 
-    handleGameEnd(won) {
+    /** Bitmiş vaka görünümü (yan etkisiz): tahmin alanı kapalı, sonuç kartı, bütün ipuçları. */
+    renderGameOverView(won) {
         this.isGameOver = true;
         this.gameWon = won;
         this.dom.diagnosisInput.disabled = true;
@@ -31073,18 +32113,27 @@ class PsikoVakaGame {
         this.unlockedClues = this.maxClues;
         this.updateComboStepperUI();
 
-        if (won && this.currentCase) {
-            this.markCaseAsSolved(this.currentCase.id);
-        }
-
         this.renderClues();
         this.renderGuesses();
         this.updateRemainingGuessesUI();
+    }
+
+    handleGameEnd(won) {
+        if (won && this.currentCase) {
+            this.markCaseAsSolved(this.currentCase.id);
+        }
+        this.renderGameOverView(won);
 
         this.recordStats(won, this.guesses.length);
 
         if (won) {
             this.launchConfetti();
+        }
+
+        // Günün vakası: bu gün + hedef için bitti kaydı (ilk sonuç kalır; salt okunur görünümde yazılmaz)
+        if (this.currentMode === 'daily' && this.dailyContext && !this.dailyReadOnly && this.currentCase && this.dailyContext.caseId === this.currentCase.id) {
+            this.saveDailyRecord(this.snapshotDailyRecord(won));
+            this.updateHomeMeta();
         }
 
         this.emitPlayState();
@@ -32216,11 +33265,11 @@ class PsikoVakaGame {
         }
     }
 
-    /** Bir sekmenin gruplu listesini kurar (bir kez). */
-    buildLibraryList(tab) {
-        const d = this.dom;
-        const host = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac }[tab];
-        if (!host) return;
+    /**
+     * Bir sekmenin bölümleri (boş bölümler atlanır). Liste ve detay sayfası aynı sırayı kullanır: bölüm numarası
+     * 1…N ve madde numarası "bölüm.sıra" (ör. 4.1) aramada da değişmez.
+     */
+    libChapters(tab) {
         let groups = [];
         if (tab === 'tani') {
             groups = Object.keys(this.categories).map(k => ({
@@ -32235,7 +33284,25 @@ class PsikoVakaGame {
                 key: k, name: this.pharmacologyFamilies[k].name, items: this.pharmacology.filter(x => x.family === k)
             }));
         }
-        groups = groups.filter(g => g.items.length > 0);
+        return groups.filter(g => g.items.length > 0);
+    }
+
+    /** "4.1 Depresif Bozukluklar" üst bilgi satırı için: { no: '4.1', chapter: 'Depresif Bozukluklar' } */
+    libEntryNo(tab, item) {
+        const groups = this.libChapters(tab);
+        for (let gi = 0; gi < groups.length; gi++) {
+            const ri = groups[gi].items.indexOf(item);
+            if (ri >= 0) return { no: `${gi + 1}.${ri + 1}`, chapter: groups[gi].name };
+        }
+        return { no: '', chapter: '' };
+    }
+
+    /** Bir sekmenin gruplu listesini (içindekiler) kurar (bir kez). */
+    buildLibraryList(tab) {
+        const d = this.dom;
+        const host = { tani: d.libListTani, terapi: d.libListTerapi, ilac: d.libListIlac }[tab];
+        if (!host) return;
+        const groups = this.libChapters(tab);
 
         const desktop = this.libIsDesktop();
         const esc = (s) => this.libEsc(s);
@@ -32244,14 +33311,18 @@ class PsikoVakaGame {
         groups.forEach((g, gi) => {
             const open = desktop || gi === 0;
             html += `<details class="lib-group" data-group="${esc(g.key)}"${open ? ' open' : ''}>`;
-            html += `<summary class="lib-group-head"><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
+            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
             html += `<ul class="lib-rows">`;
-            g.items.forEach(it => {
+            g.items.forEach((it, ri) => {
                 const codes = tab === 'tani' ? this.libCodesOf(it) : [];
-                html += `<li class="lib-row-item" data-id="${esc(it.id)}"><a class="lib-row" href="${this.libHref(tab, it.id)}">` +
+                // İçindekilerde kod sayfa numarası gibi: yalnız ilki (tamamı tanı sayfasında ve title'da; arama dizini tüm kodları içerir)
+                const codeHtml = codes.length
+                    ? `<span class="lib-row-codes"${codes.length > 1 ? ` title="${esc(codes.join(', '))}"` : ''}>${esc(codes[0])}</span>` : '';
+                html += `<li class="lib-row-item" data-id="${esc(it.id)}"><a class="lib-row${codes.length ? ' has-code' : ''}" href="${this.libHref(tab, it.id)}">` +
+                    `<span class="lib-no">${gi + 1}.${ri + 1}</span>` +
                     `<span class="lib-row-text"><span class="lib-row-title">${esc(it.nameTr)}</span>` +
                     `<span class="lib-row-sub" lang="en">${esc(it.nameEn || '')}</span></span>` +
-                    (codes.length ? `<span class="lib-row-codes">${codes.map(esc).join(', ')}</span>` : '') +
+                    codeHtml +
                     `${chevron}</a></li>`;
             });
             html += `</ul></details>`;
@@ -32319,6 +33390,11 @@ class PsikoVakaGame {
             shown += n;
         });
         idx.searching = searching;
+        // Ararken "İçindekiler" başlığı yerine dizin (sonuçlar); masaüstünde tek sütun
+        const tocTitle = document.getElementById('libContentsTitle');
+        if (tocTitle) tocTitle.hidden = searching;
+        const page = document.getElementById('libPage');
+        if (page) page.classList.toggle('is-searching', searching);
         if (d.libSearchStatus) d.libSearchStatus.textContent = searching ? (shown ? `${shown} sonuç` : '') : '';
         if (d.libEmpty) d.libEmpty.hidden = !(searching && shown === 0);
     }
@@ -32336,6 +33412,7 @@ class PsikoVakaGame {
         if (r.view === 'list') {
             const restoreY = prevView === 'detail' ? (this.libScroll[r.tab] || 0) : null;
             d.libDetail.hidden = true;
+            d.libDetail.classList.remove('is-book');
             d.libDetail.innerHTML = '';
             d.libHome.hidden = false;
             this.libView = 'list';
@@ -32375,6 +33452,7 @@ class PsikoVakaGame {
         if (!found) html = this.renderLibraryNotFound(r.kind);
 
         d.libHome.hidden = true;
+        d.libDetail.classList.toggle('is-book', found); // ders kitabı sayfası (css/kutuphane.css)
         d.libDetail.innerHTML = html;
         d.libDetail.hidden = false;
         this.libView = 'detail';
@@ -32400,7 +33478,15 @@ class PsikoVakaGame {
             ilac: ['#/kutuphane/ilaclar', 'İlaçlar']
         };
         const [href, label] = map[kind] || map.tani;
-        return `<a class="lib-back" href="${href}">${this.icon('arrow-left')}<span>${label}</span></a>`;
+        return `<a class="lib-back" href="${href}">${this.icon('arrow-left')}<span><span class="lib-back-pre">İçindekiler: </span>${label}</span></a>`;
+    }
+
+    /** Kitap sayfası üst bilgi satırı: "4.1 Depresif Bozukluklar · PsikoVaka Kütüphanesi" */
+    libRunningHead(tab, item, fallbackChapter) {
+        const esc = (s) => this.libEsc(s);
+        const e = this.libEntryNo(tab, item);
+        const chapter = e.chapter || fallbackChapter || '';
+        return `<div class="lib-run"><span class="lib-run-l">${e.no ? `<span class="lib-run-no">${esc(e.no)}</span> ` : ''}${esc(chapter)}</span><span class="lib-run-r">PsikoVaka Kütüphanesi</span></div>`;
     }
 
     renderLibraryNotFound(kind) {
@@ -32427,18 +33513,19 @@ class PsikoVakaGame {
         const extra = kind === 'tani'
             ? 'Tanı koymak için DSM-5-TR el kitabına başvurun.'
             : 'Tedavi kararları için güncel klinik kılavuzlara başvurun.';
-        return `<p class="lib-disclaimer">${this.icon('info')}<span>Bu özetler ${kind === 'tani' ? 'DSM-5-TR metni değildir; ' : ''}projenin kendi cümleleriyle yazılmış çalışma notlarıdır ve hata içerebilir. ${extra}</span></p>`;
+        return `<p class="lib-disclaimer lib-note"><span class="lib-note-h">Kenar notu</span><span>Bu özetler ${kind === 'tani' ? 'DSM-5-TR metni değildir; ' : ''}projenin kendi cümleleriyle yazılmış çalışma notlarıdır ve hata içerebilir. ${extra}</span></p>`;
     }
 
     /** a etiketli bağlantı listesi; çoksa ilk `limit` tanesi görünür, gerisi "daha fazla" içinde. */
-    libLinkList(items, limit = 12) {
+    libLinkList(items, limit = 12, cls = '') {
         const esc = (s) => this.libEsc(s);
         const li = (x) => `<li><a class="lib-link" href="${x.href}"><span class="lib-link-title">${esc(x.title)}</span>${x.sub ? `<span class="lib-link-sub">${esc(x.sub)}</span>` : ''}${this.icon('chevron-right', 'lib-link-chevron')}</a></li>`;
         const head = items.slice(0, limit).map(li).join('');
         const rest = items.slice(limit);
-        let html = `<ul class="lib-links">${head}</ul>`;
+        const c = cls ? ` ${cls}` : '';
+        let html = `<ul class="lib-links${c}">${head}</ul>`;
         if (rest.length) {
-            html += `<details class="lib-more"><summary class="lib-more-summary">${rest.length} kayıt daha</summary><ul class="lib-links">${rest.map(li).join('')}</ul></details>`;
+            html += `<details class="lib-more"><summary class="lib-more-summary">${rest.length} kayıt daha</summary><ul class="lib-links${c}">${rest.map(li).join('')}</ul></details>`;
         }
         return html;
     }
@@ -32490,7 +33577,7 @@ class PsikoVakaGame {
         let html = this.libBackLink('tani');
         html += this.libCaseNotice();
         html += `<header class="lib-detail-head">
-            <div class="lib-detail-chips"><span class="chip">${esc(cat.name)}</span></div>
+            ${this.libRunningHead('tani', item, cat.name)}
             <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
             <p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>`;
         if (codes.length || others.length) {
@@ -32518,10 +33605,24 @@ class PsikoVakaGame {
             body += `<ol class="lib-crit-list">`;
             crit.forEach(c => {
                 const items = Array.isArray(c.items) ? c.items : [];
-                body += `<li class="lib-crit">
-                    <div class="lib-crit-head"><span class="lib-crit-code">${esc(c.code)}</span><h3 class="lib-crit-title">${esc(c.title)}</h3></div>
+                // Kenar etiketi: "Kriter A" (telefonda yalnız "A"); başka etiketler (ör. "Belirleyiciler") ayrı biçimde
+                const code = String(c.code == null ? '' : c.code).trim();
+                const km = /^Kriter\s+(.+)$/i.exec(code);
+                const codeHtml = km
+                    ? `<span class="lib-crit-code"><span class="lib-crit-code-pre">Kriter </span>${esc(km[1])}</span>`
+                    : `<span class="lib-crit-code">${esc(code)}</span>`;
+                // Alt maddeler: baştaki "A1." / "1)" asılı numara olur
+                const itemHtml = (x) => {
+                    const t = String(x == null ? '' : x);
+                    const mm = /^\s*([A-Z]?\d{1,2}[a-z]?)[.)]\s+/.exec(t);
+                    return mm ? `<li class="is-hung"><span class="lib-hang">${esc(mm[1])}</span>${esc(t.slice(mm[0].length))}</li>` : `<li>${esc(t)}</li>`;
+                };
+                // Birleşik etiketler ("C & D", "A-C") telefonda kenara sığmaz: başlığın üstünde tam "Kriter C & D"
+                const wide = km && km[1].length > 2;
+                body += `<li class="lib-crit${km ? '' : ' lib-crit-other'}${wide ? ' lib-crit-wide' : ''}">
+                    <div class="lib-crit-head">${codeHtml}<h3 class="lib-crit-title">${esc(c.title)}</h3></div>
                     ${c.content ? `<p class="lib-crit-text">${esc(c.content)}</p>` : ''}
-                    ${items.length ? `<ul class="lib-crit-items">${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+                    ${items.length ? `<ul class="lib-crit-items">${items.map(itemHtml).join('')}</ul>` : ''}
                 </li>`;
             });
             body += `</ol>`;
@@ -32535,7 +33636,13 @@ class PsikoVakaGame {
         [['overview', 'Genel bakış'], ['epidemiology', 'Epidemiyoloji'], ['etiology', 'Etiyoloji'], ['prognosis', 'Seyir ve prognoz']].forEach(([k, label]) => {
             if (!cd[k]) return;
             toc.push([`lib-sec-${k}`, label]);
-            body += `<details class="lib-sec lib-collapse" id="lib-sec-${k}"${desktop ? ' open' : ''}>
+            // Masaüstünde kitaptaki gibi düz bölüm; telefonda kapalı açılır bölüm (uzun tanılar binlerce piksel olmasın)
+            body += desktop
+                ? `<section class="lib-sec lib-clin" id="lib-sec-${k}" aria-labelledby="lib-h-${k}">
+                <h2 class="lib-sec-title" id="lib-h-${k}">${label}</h2>
+                <div class="lib-prose"><p>${esc(cd[k])}</p></div>
+            </section>`
+                : `<details class="lib-sec lib-collapse" id="lib-sec-${k}">
                 <summary class="lib-collapse-head"><h2 class="lib-sec-title">${label}</h2></summary>
                 <div class="lib-prose"><p>${esc(cd[k])}</p></div>
             </details>`;
@@ -32545,7 +33652,7 @@ class PsikoVakaGame {
         const siblings = this.diagnoses.filter(x => x.category === item.category && x.id !== item.id);
         if (siblings.length) {
             toc.push(['lib-sec-diff', 'Ayırıcı tanı']);
-            body += `<section class="lib-sec" id="lib-sec-diff" aria-labelledby="lib-h-diff">
+            body += `<section class="lib-sec lib-see" id="lib-sec-diff" aria-labelledby="lib-h-diff">
                 <h2 class="lib-sec-title" id="lib-h-diff">Ayırıcı tanı</h2>
                 <p class="lib-sec-note">Aynı DSM-5-TR bölümündeki (${esc(cat.name)}) diğer tanılar. Liste otomatik oluşturulur; klinik bir ayırıcı tanı listesi değildir.</p>
                 ${this.libLinkList(siblings.map(x => ({ href: this.libHref('tani', x.id), title: x.nameTr, sub: x.nameEn })), 10)}
@@ -32556,7 +33663,7 @@ class PsikoVakaGame {
         const tx = this.libTreatmentsForDiagnosis(item.id);
         if (tx.therapies.length || tx.pharma.length) {
             toc.push(['lib-sec-tx', 'Tedavi']);
-            body += `<section class="lib-sec" id="lib-sec-tx" aria-labelledby="lib-h-tx">
+            body += `<section class="lib-sec lib-refs" id="lib-sec-tx" aria-labelledby="lib-h-tx">
                 <h2 class="lib-sec-title" id="lib-h-tx">Tedavi</h2>`;
             if (this.libHideTreatmentLinks()) {
                 body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu tanıyla eşleşen terapi ve ilaçlar görünür.</p>`;
@@ -32579,7 +33686,7 @@ class PsikoVakaGame {
         // 8. Bu alandan pratik yap (kategoriye göre; tanının kendisi değil)
         const n = this.cases.filter(c => c.category === item.category).length;
         if (n > 0) {
-            body += `<section class="lib-practice card" aria-labelledby="lib-h-practice">
+            body += `<section class="lib-practice lib-foot card" aria-labelledby="lib-h-practice">
                 <div class="lib-practice-text">
                     <h2 class="lib-sec-title" id="lib-h-practice">Bu alandan pratik yap</h2>
                     <p class="lib-sec-note">${esc(cat.name)} bölümünden rastgele bir vaka, ${n} vaka arasından. Cevap belli olmasın diye tanı değil bölüm seçilir.</p>
@@ -32611,7 +33718,7 @@ class PsikoVakaGame {
         let html = this.libBackLink(kind);
         html += this.libCaseNotice();
         html += `<header class="lib-detail-head">
-            <div class="lib-detail-chips"><span class="chip">${esc(fam.name)}</span></div>
+            ${this.libRunningHead(kind, item, fam.name)}
             <h1 class="lib-detail-title" id="libDetailTitle" tabindex="-1">${esc(item.nameTr)}</h1>
             ${item.nameEn ? `<p class="lib-detail-en" lang="en">${esc(item.nameEn)}</p>` : ''}
             ${others.length ? `<dl class="lib-meta"><div class="lib-meta-row"><dt>Diğer adları</dt><dd>${others.map(esc).join(' · ')}</dd></div></dl>` : ''}
@@ -32619,6 +33726,7 @@ class PsikoVakaGame {
 
         let body = '';
         const sec = (id, title, inner) => `<section class="lib-sec" id="${id}" aria-labelledby="${id}-h"><h2 class="lib-sec-title" id="${id}-h">${title}</h2>${inner}</section>`;
+        const secSee = (id, title, inner) => `<section class="lib-sec lib-see" id="${id}" aria-labelledby="${id}-h"><h2 class="lib-sec-title" id="${id}-h">${title}</h2>${inner}</section>`;
         if (item.shortDefinition) body += sec('lib-sec-def', 'Tanım', `<div class="lib-prose"><p>${esc(item.shortDefinition)}</p></div>`);
         if (kind === 'ilac' && item.mechanism) body += sec('lib-sec-mech', 'Etki mekanizması', `<div class="lib-prose"><p>${esc(item.mechanism)}</p></div>`);
         if (item.targetMechanism) body += sec('lib-sec-target', kind === 'terapi' ? 'Değişim mekanizması' : 'Hedef', `<div class="lib-prose"><p>${esc(item.targetMechanism)}</p></div>`);
@@ -32627,7 +33735,7 @@ class PsikoVakaGame {
                 `<ol class="lib-steps">${item.protocolSteps.map(s => `<li>${esc(strip(s))}</li>`).join('')}</ol>`);
         }
         if (item.pitfalls) {
-            body += `<aside class="lib-callout" aria-labelledby="lib-h-pit">
+            body += `<aside class="lib-callout lib-note-box" aria-labelledby="lib-h-pit">
                 <h2 class="lib-callout-title" id="lib-h-pit">${this.icon('alert')}${kind === 'terapi' ? 'Klinik tuzak' : 'Kontrendikasyon ve yan etki'}</h2>
                 <p>${esc(item.pitfalls)}</p>
             </aside>`;
@@ -32635,7 +33743,7 @@ class PsikoVakaGame {
 
         const diags = this.libDiagnosesForTreatment(kind, item);
         if (diags.length) {
-            body += `<section class="lib-sec" id="lib-sec-used" aria-labelledby="lib-h-used"><h2 class="lib-sec-title" id="lib-h-used">Kullanıldığı tanılar</h2>`;
+            body += `<section class="lib-sec lib-see" id="lib-sec-used" aria-labelledby="lib-h-used"><h2 class="lib-sec-title" id="lib-h-used">Kullanıldığı tanılar</h2>`;
             if (this.libHideTreatmentLinks()) {
                 body += `<p class="lib-sec-note">Devam eden vakan bitince burada bu protokolle eşleşen tanılar görünür.</p>`;
             } else {
@@ -32647,7 +33755,7 @@ class PsikoVakaGame {
 
         const siblings = list.filter(x => x.family === item.family && x.id !== item.id);
         if (siblings.length) {
-            body += sec('lib-sec-family', kind === 'terapi' ? 'Aynı ekolden' : 'Aynı gruptan',
+            body += secSee('lib-sec-family', kind === 'terapi' ? 'Aynı ekolden' : 'Aynı gruptan',
                 this.libLinkList(siblings.map(x => ({ href: this.libHref(kind, x.id), title: x.nameTr, sub: x.nameEn || '' })), 8));
         }
 
@@ -34209,7 +35317,16 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     const reloadInvitesSoon = NS.util.debounce(loadInvites, 300);
 
     function updateBadge() {
-        NS.ui.setNavBadge(F.incoming.length + F.invites.length);
+        const n = F.incoming.length + F.invites.length;
+        NS.ui.setNavBadge(n);
+        homeNote(n);
+    }
+    /** Ana sayfa Online kartındaki not (ajan R3): ilk bekleyen davetin sahibi + bekleyen bildirim sayısı */
+    function homeNote(n) {
+        const gm = NS.game && NS.game();
+        if (!gm || !gm.setHomeOnlineNote) return;
+        const inv = F.invites[0];
+        gm.setHomeOnlineNote({ count: n, inviter: inv ? ((inv.inviter && inv.inviter.username) || 'Bir arkadaşın') : '', duel: !!(inv && inv.room && inv.room.mode === 'duel') });
     }
 
     function showInviteBanner(inv) {
@@ -34497,6 +35614,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         F.loaded = false; F.friends = []; F.incoming = []; F.outgoing = []; F.invites = [];
         F.seenIncoming.clear(); F.seenInvites.clear();
         NS.ui.setNavBadge(0);
+        homeNote(0);
         render();
     }
 
@@ -36713,13 +37831,34 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function acc() { return global.PsikoVakaAccount || null; }
     function member() { const a = acc(); return !!(a && a.availability === 'ready' && a.state === 'ready' && NS.api.client()); }
     function canReach() { const a = acc(); return !!(location.protocol !== 'file:' && a && a.availability === 'ready' && NS.api.client()); }
+    /** Hesap durumu henüz netleşmedi: hizmet yükleniyor ya da oturum var ama profil yükleniyor (geçici 'guest'). */
+    function accSettling() {
+        const a = acc();
+        if (!a || D.settleGaveUp) return false;
+        if (a.availability === 'pending') return true;
+        try { const s = a.snapshot ? a.snapshot() : null; if (s && s.user && a.state === 'guest') return true; } catch (e) { /* yok */ }
+        return false;
+    }
+    function waitSettled(ms) {
+        return new Promise(res => {
+            if (!accSettling()) return res();
+            const t0 = Date.now();
+            const iv = setInterval(() => {
+                if (!accSettling()) { clearInterval(iv); res(); return; }
+                if (Date.now() - t0 > (ms || 12000)) { D.settleGaveUp = true; clearInterval(iv); res(); } // hesap hizmeti yanıt vermiyor: misafir gibi devam
+            }, 100);
+        });
+    }
     function curTarget() { const gm = g(); return (gm && gm.targetGameMode) || 'diagnosis'; }
     function findCase(id) { const gm = g(); return gm ? (gm.allMasterCases || gm.cases || []).find(c => c.id === id) || null : null; }
     const fmtTime = (s) => (s == null ? '' : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`);
 
     // ------------------------------------------------------------ veri
     async function loadChallenge(target, force) {
-        if (!canReach()) { D.avail = D.avail === true ? true : (D.avail == null ? false : D.avail); return null; }
+        // Ulaşılamıyor (hesap hizmeti yükleniyor, file://, çevrimdışı): özellik durumunu DEĞİŞTİRME. Eskiden burada
+        // D.avail=false yazılıyordu ve hesap değişiminde de false korunuyordu: açılışta erken çağrılırsa üye o sayfa
+        // boyunca yerel günlüğe düşüyor, bitirdiği günü yeniden oynayabiliyordu (B3).
+        if (!canReach()) return null;
         if (D.avail === false) return null;
         const fresh = D.ch[target] && Date.now() - (D.chAt[target] || 0) < 60000;
         if (fresh && !force) return D.ch[target];
@@ -36737,12 +37876,44 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
     function streakFor(target) { return D.streaks ? D.streaks.find(x => x.target === target) || null : null; }
 
+    // ------------------------------------------------------------ tek yetki: bugünün günlüğü (hedef) bitti mi?
+    /** Yerel kaydın günü: sunucunun bildirdiği gün (biliniyorsa) ya da İstanbul günü. */
+    function localDay(target) { const st = D.ch[target]; const gm = g(); return (st && st.day) || (gm && gm.getDailyDay ? gm.getDailyDay() : null); }
+    function localRecord(target) { const gm = g(); return gm && gm.getDailyRecord ? gm.getDailyRecord(target, localDay(target)) : null; }
+    /**
+     * { finished, src: 'server'|'local', st (sunucu durumu|null), rec (yerel kayıt|null), serverOk }
+     * Üye + özellik açık: sunucu otoritedir; yerel kayıt yalnızca sunucuya ulaşılamazsa yedek. Misafir / özellik yok: yerel kayıt.
+     * Hesap durumu netleşmeden karar verilmez (açılıştaki geçici 'guest' durumu üyeyi misafir saymasın).
+     */
+    async function status(target, force) {
+        target = target || curTarget();
+        await waitSettled();
+        if (member() && D.avail !== false) {
+            const st = await loadChallenge(target, force);
+            if (st) {
+                const fin = st.status === 'finished';
+                return { finished: fin, src: 'server', st, rec: fin ? localRecord(target) : null, serverOk: true };
+            }
+            if (D.avail !== false) { const rec = localRecord(target); return { finished: !!rec, src: 'local', st: null, rec, serverOk: false }; }
+        }
+        if (canReach() && D.avail !== false && !D.ch[target]) await loadChallenge(target, force);
+        const rec = localRecord(target);
+        return { finished: !!rec, src: 'local', st: D.ch[target] || null, rec, serverOk: !!D.ch[target] };
+    }
+    /** Eşzamanlı sürüm (kart çizimi): elde olan bilgiyle. */
+    function statusNow(target, st) {
+        if (member() && D.avail !== false && st) return { finished: st.status === 'finished', src: 'server', st, rec: null };
+        const rec = localRecord(target);
+        return { finished: !!rec, src: 'local', st: st || null, rec };
+    }
+
     // ------------------------------------------------------------ ana sayfa kartı
     function $(id) { return document.getElementById(id); }
     let cardSeq = 0;
     async function refreshCard(force) {
         const seq = ++cardSeq;
         const target = curTarget();
+        if (accSettling()) { renderCard(target, null); await waitSettled(); if (seq !== cardSeq) return; }
         const st = await loadChallenge(target, force);
         if (member()) await loadStreaks(force);
         if (seq !== cardSeq) return;
@@ -36752,60 +37923,113 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const btn = $('btnStartDaily'), lbl = $('btnStartDailyLabel'), board = $('btnDailyBoard');
         const box = $('dailyResultBox'), chip = $('dailyStreakChip'), text = $('dailyCardText');
         if (!btn) return;
+        // Dosyadaki danışan özeti: bu okumanın vakası (ek istek yok); sunucu yoksa yerel günün vakası (ajan R3)
+        const gmT = g();
+        if (gmT && gmT.setDailyTeaser) gmT.setDailyTeaser((st && st.case_id && findCase(st.case_id)) || (gmT.getLocalDailyCase ? gmT.getLocalDailyCase() : null));
         const on = D.avail === true;
         board.hidden = !on;
         // seri
         const sk = on && member() ? streakFor(target) : null;
         if (sk && sk.current_streak > 0) { chip.hidden = false; $('dailyStreakText').textContent = `${sk.current_streak} günlük seri`; }
         else chip.hidden = true;
-        const finished = on && member() && st && st.status === 'finished';
+        const settling = accSettling();
+        const S = settling ? { finished: false } : statusNow(target, st);
+        const finished = !!S.finished;
+        bindResultBox(box);
         box.hidden = !finished;
         btn.hidden = !!finished;
+        btn.disabled = settling; // hesap netleşmeden başlatılmaz (üye misafir sanılmasın)
         board.classList.toggle('btn-primary', !!finished);
         board.classList.toggle('btn-secondary', !finished);
         if (finished) {
-            box.className = 'daily-result ' + (st.won ? 'is-win' : 'is-loss');
-            $('dailyResultIcon').innerHTML = icon(st.won ? 'check' : 'flag');
-            $('dailyResultTitle').textContent = st.won ? `${st.guesses_used}. tahminde bildin` : 'Bugün olmadı';
-            $('dailyResultSub').textContent = st.won ? `${st.points} puan · ${fmtTime(st.time_sec)} · Yarın yeni vaka` : 'Yarın yeni vaka seni bekliyor.';
-            text.textContent = `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Sıralamada nerede olduğuna bak.`;
+            const srv = S.src === 'server' ? S.st : null, rec = S.rec;
+            const won = srv ? !!srv.won : !!(rec && rec.won);
+            box.className = 'daily-result is-tappable ' + (won ? 'is-win' : 'is-loss');
+            $('dailyResultIcon').innerHTML = icon(won ? 'check' : 'flag');
+            $('dailyResultTitle').textContent = won ? `${srv ? srv.guesses_used : rec.guessesUsed}. tahminde bildin` : 'Bugün olmadı';
+            const tail = 'Yarın yeni vaka · Vakayı gör';
+            $('dailyResultSub').textContent = won ? (srv ? `${srv.points} puan · ${fmtTime(srv.time_sec)} · ${tail}` : `${fmtTime(rec.elapsed)} · ${tail}`) : `Yarın yeni vaka seni bekliyor · Vakayı gör`;
+            text.textContent = on
+                ? `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Sıralamada nerede olduğuna bak.`
+                : `Bugünün ${T.target[target].toLocaleLowerCase('tr')} vakasını bitirdin. Yarın yeni vaka var.`;
         } else {
             text.textContent = 'Bugün herkes aynı vakayı çözüyor. İlk ipucuyla başla, yanlış tahminde yeni ipucu açılır.';
             lbl.textContent = on && member() && st && st.status === 'in_progress' ? 'Devam et' : 'Başla';
         }
     }
+    /** Bitmiş günün sonuç kutusu: dokununca vaka salt okunur açılır. */
+    function bindResultBox(box) {
+        if (!box || box._b3) return;
+        box._b3 = true;
+        box.setAttribute('role', 'button');
+        box.tabIndex = 0;
+        box.setAttribute('aria-label', 'Bugünkü sonucu ve vakayı gör');
+        box.classList.add('is-tappable'); // imleç/odak/üzerine gelme: css/anasayfa.css (satır içi stil yok; ajan R3)
+        const go = () => { const gm = g(); if (gm) gm.setMode('daily'); };
+        box.addEventListener('click', go);
+        box.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    }
 
     // ------------------------------------------------------------ oyun: başlatma
     /** game.loadDailyCase yerine (setMode('daily') çağırır). */
+    /** Yerel bitmiş kaydı salt okunur açar. */
+    function openLocalFinished(rec) {
+        const gm = g();
+        D.active = null;
+        return gm.openFinishedDaily(findCase(rec.caseId), rec);
+    }
+    /** Sunucuda bitmiş denemeyi salt okunur açar (daily_begin'in tahminleri + sonucu). Yeni tahmin gönderilmez. */
+    function openServerFinished(target, st) {
+        const gm = g();
+        const c = findCase(st.case_id);
+        if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); return false; }
+        D.active = { target, caseId: c.id, day: st.day };
+        installOverrides();
+        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0 };
+        const ok = gm.openFinishedDaily(c, rec, {
+            fill: () => { restore(st); },
+            title: st.won ? `${st.guesses_used}. tahminde bildin · ${st.points} puan` : null
+        });
+        if (ok && gm.saveDailyRecord) gm.saveDailyRecord(gm.snapshotDailyRecord(!!st.won)); // sunucuya ulaşılamazsa yedek
+        if (ok) gm.updateDailyRecord(target, st.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
+        return ok;
+    }
+
     async function loadDaily(orig) {
         const gm = g();
         const target = gm.targetGameMode || 'diagnosis';
         if (D.busy) return;
-        // Misafir / özellik kapalı / ulaşılamıyor: yerel (misafirde mümkünse sunucunun case_id'si)
-        if (!member() || D.avail === false || !canReach()) {
-            const st = canReach() && D.avail !== false ? await loadChallenge(target) : null;
+        D.busy = true;
+        const btn = $('btnStartDaily'); if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+        let S;
+        try { S = await status(target, true); } finally { D.busy = false; if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); } }
+        if (gm.targetGameMode !== target) return; // beklerken hedef değişti
+        // Misafir / özellik kapalı / ulaşılamıyor: yerel kayıt tek kaynak (misafirde mümkünse sunucunun case_id'si)
+        if (!(member() && D.avail !== false && S.serverOk)) {
+            if (member() && D.avail !== false && !S.serverOk && !S.finished) { gm.showToast('Sunucuya ulaşılamadı. Biraz sonra yeniden dene.'); return; }
+            if (S.finished && S.rec && openLocalFinished(S.rec)) { renderCard(target, S.st); return; }
+            const st = S.st;
             const c = st && findCase(st.case_id);
-            if (c) { gm.currentMode = 'daily'; gm.startCase(c, `Günün vakası · #${c.caseNumber || ''}`.replace(/ · #$/, '')); return; }
+            if (c) { D.active = null; gm.startDailyCase(c, { day: st.day, target, src: 'local' }); return; }
             return orig();
         }
         D.busy = true;
-        const btn = $('btnStartDaily'); if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+        if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
         const r = await NS.api.dailyBegin(target);
         if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); }
         D.busy = false;
         if (!r.ok) {
-            if (r.error.code === 'UNSUPPORTED') { D.avail = false; renderCard(target, null); return orig(); }
+            if (r.error.code === 'UNSUPPORTED') { D.avail = false; renderCard(target, null); return loadDaily(orig); }
             gm.showToast(r.error.message);
             return;
         }
         const st = r.data;
         D.avail = true; D.ch[target] = st; D.chAt[target] = Date.now();
-        if (st.status === 'finished') { renderCard(target, st); gm.showToast('Bugünün vakasını bu hedefte bitirdin. Sıralamaya bak.'); location.hash = '#/gunluk'; return; }
+        if (st.status === 'finished') { renderCard(target, st); openServerFinished(target, st); return; }
         const c = findCase(st.case_id);
         if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); console.warn('[PsikoVaka] günlük vaka yok', st.case_id); return; }
         D.active = { target, caseId: c.id, day: st.day };
-        gm.currentMode = 'daily';
-        gm.startCase(c, `Günün vakası · #${c.caseNumber || ''}`.replace(/ · #$/, ''));
+        gm.startDailyCase(c, { day: st.day, target, src: 'server', userId: NS.api.myId() });
         if (st.started_at) { const ms = NS.clock.now() - Date.parse(st.started_at); if (isFinite(ms) && ms > 0) gm.caseStartTime = Date.now() - ms; }
         installOverrides();
         restore(st);
@@ -36882,7 +38106,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!isServerDaily() || gm.currentCase.id !== caseId) return;
         if (!r.ok) {
             const c = r.error.code;
-            if (c === 'DAILY_ALREADY_FINISHED') { gm.showToast(r.error.message); refreshCard(true); return; }
+            if (c === 'DAILY_ALREADY_FINISHED') { gm.showToast(r.error.message); const t = D.active.target; const b = await NS.api.dailyBegin(t); if (b.ok && b.data.status === 'finished') { D.ch[t] = b.data; D.chAt[t] = Date.now(); openServerFinished(t, b.data); } refreshCard(true); return; }
             if (c === 'DAILY_NOT_STARTED') { gm.showToast('Gün değişti. Yeni günün vakasını başlat.'); return; }
             gm.showToast(r.error.message);
             return;
@@ -36934,6 +38158,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         Object.getPrototypeOf(gm).handleGameEnd.call(gm, !!d.won);
         if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${st.guesses_used}. tahminde bildin · ${d.points} puan`;
         if (gm.dom.btnMainNextCase) gm.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
+        if (gm.updateDailyRecord) gm.updateDailyRecord(target, st.day || D.active.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
         renderCard(target, st);
         loadStreaks(true).then(() => showStreakInReport(target, !!d.won));
     }
@@ -37120,13 +38345,13 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const origOpen = gm.openResultModal.bind(gm);
         gm.openResultModal = (won) => { const el = $('resultStreakNote'); if (el && !isServerDaily()) el.hidden = true; return origOpen(won); };
         const a = acc();
-        if (a && a.onChange) a.onChange(() => { D.ch = {}; D.chAt = {}; D.streaks = null; D.avail = D.avail === false ? false : null; D.active = null; D.board.data = null;
+        if (a && a.onChange) a.onChange(() => { D.settleGaveUp = false; D.ch = {}; D.chAt = {}; D.streaks = null; D.avail = D.avail === false ? false : null; D.active = null; D.board.data = null;
             if (gm.currentScreen === 'oyna') refreshCard(true); if (gm.currentScreen === 'gunluk') onBoardShow({}); if (gm.currentScreen === 'profil') renderProfile(); });
         if (gm.currentScreen === 'oyna') refreshCard();
     }
 
     NS.daily = {
-        refreshCard, loadBoard, renderBoard, renderProfile,
+        refreshCard, loadBoard, renderBoard, renderProfile, status,
         get available() { return D.avail; }, get active() { return D.active; }, isServerDaily,
         _reset() { D.avail = null; D.ch = {}; D.chAt = {}; D.streaks = null; D.board.data = null; D.active = null; }
     };

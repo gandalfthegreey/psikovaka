@@ -38,10 +38,12 @@ for (const th of ['dark', 'light']) {
   const hero = await box(p, '.card-hero');
   check(nudge && !nudge.hidden, `${th} 390: varsayılan avatarda hatırlatma kartı görünür`);
   check(hero && hero.b <= 844 - 60, `${th} 390: Günün vakası kartı ekranın içinde (alt ${Math.round(hero.b)} ≤ 784, sekme çubuğu üstü)`);
-  check(nudge.y > hero.b - 1, `${th} 390: hatırlatma Günün vakası kartının altında`);
-  const t = await p.evaluate(() => ({ title: document.getElementById('noroNudgeTitle').textContent, btn: document.getElementById('btnNoroNudgeOpen').textContent.trim(), x: document.getElementById('btnNoroNudgeClose').getAttribute('aria-label'), anim: !!document.querySelector('#noroNudgeArt svg.nv-anim, #noroNudgeArt .nv-anim') }));
-  check(t.title === "Nöro'nu özelleştir" && t.btn === 'Özelleştir' && t.x === 'Hatırlatmayı kapat', `${th}: kart metinleri ${JSON.stringify(t)}`);
-  check(t.anim, `${th}: kartta animasyonlu Nöro`);
+  // R3: hatırlatma artık Nöro'nun konuşma balonu (klasörün üstünde, Nöro'nun solunda)
+  const noro = await box(p, '#homeAvatarEdit');
+  check(nudge.b <= hero.y + 1 && nudge.x + nudge.w <= noro.x + 12, `${th} 390: hatırlatma Nöro'nun balonu: klasörün üstünde, Nöro'nun yanında`);
+  const t = await p.evaluate(() => ({ title: document.getElementById('noroNudgeTitle').textContent, btn: document.getElementById('btnNoroNudgeOpen').innerText.trim(), x: document.getElementById('btnNoroNudgeClose').getAttribute('aria-label'), anim: !!document.querySelector('#homeAvatarMount svg.nv-anim, #homeAvatarMount .nv-anim') }));
+  check(t.title === "Nöro'nu özelleştir" && t.btn === "Nöro'nu özelleştir" && t.x === 'Hatırlatmayı kapat', `${th}: kart metinleri ${JSON.stringify(t)}`);
+  check(t.anim, `${th}: masada animasyonlu Nöro (balonun sahibi)`);
   const av = await box(p, '#homeAvatarEdit');
   check(av.w >= 44 && av.h >= 44, `${th}: ana sayfa avatar düğmesi ≥44 px (${av.w}×${av.h})`);
   const name = await p.evaluate(() => document.getElementById('homeAvatarEdit').getAttribute('aria-label'));
@@ -151,8 +153,8 @@ for (const th of ['dark', 'light']) {
   const c = await guestCtx({ viewport: { width: 390, height: 844 }, mobile: true, reduced: true });
   const p = await page(c, 'reduced');
   await p.goto(SITE + '#/oyna'); await ready(p); await sleep(300);
-  const anims = await p.evaluate(() => Array.from(document.querySelectorAll('#noroNudgeArt *')).map(e => getComputedStyle(e).animationName).filter(n => n && n !== 'none'));
-  check(anims.length === 0, `hareket azaltmada karttaki Nöro durağan (${anims.slice(0, 3)})`);
+  const anims = await p.evaluate(() => Array.from(document.querySelectorAll('#homeAvatarMount *')).map(e => getComputedStyle(e).animationName).filter(n => n && n !== 'none'));
+  check(anims.length === 0, `hareket azaltmada masadaki Nöro durağan (${anims.slice(0, 3)})`);
   await c.close();
 }
 

@@ -1,0 +1,397 @@
+/* ==========================================================================
+   PsikoVaka — Kütüphane "ders kitabı" (ajan R3, 2026-11-21; Emre onayı: ajan E2 örneği birebir)
+   Liste = içindekiler sayfası (kitap sekmeleri, "Ara" yazı satırı, bölüm no + noktalı çizgi + sayı, sabit madde
+   numaraları 4.1…, masaüstünde iki sütun). Tanı/terapi/ilaç sayfası = kitap sayfası (üst bilgi satırı, kenarda
+   "Kriter A", asılı A1… numaraları, "Bkz." göndermeleri, kaynakça gibi tedavi listesi, tek kutu "Kenar notu").
+   İşaretler js/app.js'te doğrudan üretilir (buildLibraryList, renderDiagnosisDetail, renderTreatmentDetail).
+   Bilgi yapısı aynı; yalnızca görünüm. Renkler yalnızca token. Bayrağa bağlı değil.
+   ========================================================================== */
+
+/* ---- Liste: içindekiler ---- */
+.screen-library .lib-home { gap: var(--space-4); }
+.screen-library .lib-book { display: flex; flex-direction: column; min-width: 0; }
+/* Kitap sekmeleri: kâğıda takılı, etkin olan kâğıtla birleşir */
+.screen-library .lib-tabs.segmented {
+    display: flex;
+    gap: 4px;
+    padding: 0 0 0 10px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    position: relative;
+    z-index: 1;
+}
+.screen-library .lib-tabs .lib-tab,
+[data-theme="dark"] .screen-library .lib-tabs .lib-tab {
+    flex: 0 1 auto;
+    min-height: 44px;
+    margin-bottom: -1px;
+    padding: 0 14px;
+    border: 1px solid var(--color-border-strong);
+    border-bottom: 0;
+    border-radius: 9px 9px 0 0;
+    background: var(--color-surface-2);
+    box-shadow: none;
+    color: var(--color-text-2);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+.screen-library .lib-tabs .lib-tab.active,
+[data-theme="dark"] .screen-library .lib-tabs .lib-tab.active {
+    background: var(--paper);
+    border-color: var(--paper-edge);
+    color: var(--color-text);
+    font-weight: 750;
+    box-shadow: inset 0 3px 0 var(--color-accent);
+}
+.screen-library .lib-tab-count { background: none; padding: 0; color: var(--color-text-3); font-family: var(--font-sans); font-weight: 600; }
+.screen-library .lib-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-5) var(--space-4) var(--space-5) 0;
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px 8px 6px 6px;
+    background: var(--paper);
+    box-shadow: var(--paper-shadow);
+}
+/* Arama: yazı satırı */
+.screen-library .lib-page .lib-search { display: flex; align-items: center; gap: 10px; margin-left: var(--lib-m, 44px); }
+.screen-library .lib-search-label { font-family: var(--font-display); font-weight: 700; color: var(--color-text); }
+.screen-library .lib-page .lib-search-input {
+    flex: 1;
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    border-bottom: 2px solid var(--color-input-border);
+    border-radius: 0;
+    background: transparent;
+    font-size: 17px;
+}
+.screen-library .lib-page .lib-search-input:focus { outline: none; border-bottom-color: var(--color-accent); box-shadow: 0 1px 0 0 var(--color-accent); background: var(--color-accent-soft); }
+.screen-library .lib-page .lib-search-status { margin: 0 0 0 var(--lib-m, 44px); font-style: italic; color: var(--color-text-2); }
+.screen-library .lib-contents-title {
+    margin: var(--space-3) 0 0 var(--lib-m, 44px);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink-red-line);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 750;
+}
+.screen-library .lib-contents-title[hidden] { display: none; }
+
+.screen-library .lib-list.lib-contents { gap: 0; }
+.screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
+.screen-library .lib-contents .lib-group-head {
+    position: relative;
+    display: flex;
+    align-items: last baseline;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 0 8px var(--lib-m, 44px);
+    border: 0;
+    background: none;
+}
+.screen-library .lib-contents .lib-group-head::-webkit-details-marker { display: none; }
+/* Açık/kapalı işareti: bölüm satırının sonunda küçük ok (kapalı: aşağı, açık: yukarı); durum <details>/<summary>
+   ile yardımcı teknolojiye de bildirilir */
+.screen-library .lib-contents .lib-group-head::after { align-self: center; width: 7px; height: 7px; margin: 0 2px 0 4px; border-color: var(--color-text-2); }
+.screen-library .lib-contents .lib-group-head:hover { background: none; }
+.screen-library .lib-contents .lib-group-head:hover .lib-group-title { text-decoration: underline; text-underline-offset: 3px; }
+.screen-library .lib-contents .lib-group[open] > .lib-group-head { border: 0; }
+.screen-library .lib-ch {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: var(--lib-m, 44px);
+    text-align: center;
+    color: var(--ink-red);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.screen-library .lib-contents .lib-group-title { flex: 0 1 auto; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; }
+/* noktalı çizgi: başlığın SON satırında başlar, sağa uzar, taşan kısmı kırpılır */
+.screen-library .lib-contents .lib-group-title,
+.screen-library .lib-contents .lib-row-title { display: block; flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.screen-library .lib-contents .lib-group-title::after,
+.screen-library .lib-contents .lib-row.has-code .lib-row-title::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    margin: 0 -100% 0 8px;
+    border-bottom: 2px dotted color-mix(in srgb, var(--color-text-3) 65%, transparent);
+    vertical-align: 0.28em;
+}
+.screen-library .lib-contents .lib-group-head .lib-group-count {
+    flex: 0 0 auto;
+    min-width: 1.5rem;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text-2);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.screen-library .lib-contents .lib-group[open] > .lib-group-head .lib-group-title { color: var(--color-text); }
+.screen-library .lib-contents .lib-group:not([open]) > .lib-group-head .lib-group-title { color: var(--color-text); font-weight: 600; }
+
+/* maddeler */
+.screen-library .lib-contents .lib-rows { padding: 0 0 10px; }
+.screen-library .lib-contents .lib-row-item + .lib-row-item { border: 0; }
+.screen-library .lib-contents .lib-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "t c" "s s";
+    align-items: last baseline;
+    column-gap: 8px;
+    row-gap: 0;
+    min-height: 48px;
+    padding: 7px 0 7px calc(var(--lib-m, 44px) + 14px);
+    background: none;
+}
+.screen-library .lib-contents .lib-row:hover { background: color-mix(in srgb, var(--paper-hl) 60%, transparent); }
+.screen-library .lib-contents .lib-row-text { display: contents; }
+.screen-library .lib-contents .lib-row-title { grid-area: t; font-weight: 600; color: var(--color-text); }
+.screen-library .lib-contents .lib-row-sub { grid-area: s; font-style: italic; font-size: 0.8125rem; color: var(--color-text-2); margin-top: 1px; }
+.screen-library .lib-contents .lib-row-codes { grid-area: c; max-width: 9rem; color: var(--color-text-2); font-family: var(--font-sans); font-size: 0.8125rem; font-variant-numeric: tabular-nums; text-align: right; }
+.screen-library .lib-contents .lib-row-chevron { display: none; }
+.screen-library .lib-no {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: var(--lib-m, 44px);
+    text-align: right;
+    padding-right: 2px;
+    color: var(--color-text-3);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.6;
+}
+.screen-library .lib-page .lib-empty { margin-left: var(--lib-m, 44px); border-radius: 3px; background: none; }
+
+@media (min-width: 768px) {
+    .screen-library { --lib-m: 64px; }
+    .screen-library .lib-page { padding: var(--space-6) var(--space-6) var(--space-6) 0; }
+    .screen-library .lib-contents .lib-row-sub { font-size: var(--text-sm); }
+}
+@media (min-width: 1024px) {
+    /* İki sütunlu içindekiler: telefon gibi tek uzun sütun yerine kitap açılımı */
+    .screen-library .lib-list.lib-contents:not([hidden]) { display: block; column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
+    .screen-library .lib-contents .lib-group { break-inside: avoid-column; }
+    .screen-library .lib-contents .lib-group[open] { break-inside: auto; }
+    .screen-library .lib-home .screen-head, .screen-library .lib-book { max-width: none; }
+}
+
+/* ---- Tanı / terapi / ilaç sayfası: kitap sayfası ---- */
+.screen-library .lib-detail.is-book {
+    gap: 0;
+    margin-inline: calc(-1 * var(--space-2));
+    padding: var(--space-4) 14px var(--space-6);
+    border: 1px solid var(--paper-edge);
+    border-radius: 3px;
+    background: var(--paper);
+    box-shadow: var(--paper-shadow);
+}
+.screen-library .is-book .lib-back { margin: -6px 0 var(--space-2) -8px; }
+/* Duraklatılmış vaka notu (libCaseNotice) kitap sayfasında üst bilginin üstünde */
+.screen-library .is-book .lib-case-notice { margin-bottom: var(--space-4); }
+/* Üst bilgi satırı (running header) */
+.screen-library .lib-run {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-text-2);
+    font-size: 0.8125rem;
+    font-style: italic;
+}
+.screen-library .lib-run-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.screen-library .lib-run-no { font-style: normal; font-weight: 700; color: var(--ink-red); font-family: var(--font-display); }
+.screen-library .lib-run-r { flex-shrink: 0; }
+.screen-library .is-book .lib-detail-head { gap: 4px; padding-bottom: var(--space-4); border-bottom: 2px solid var(--ink-red-line); }
+.screen-library .is-book .lib-detail-title { font-size: 2rem; line-height: 1.15; }
+.screen-library .is-book .lib-detail-en { font-style: italic; }
+.screen-library .is-book .lib-meta { gap: 2px; margin-top: var(--space-2); padding: 0; border: 0; background: none; font-size: var(--text-sm); }
+.screen-library .is-book .lib-meta .lib-meta-row { flex-direction: row; flex-wrap: wrap; gap: 0 6px; align-items: baseline; }
+.screen-library .is-book .lib-meta dt { flex: 0 0 auto !important; padding: 0 !important; text-transform: none; letter-spacing: 0; font-size: var(--text-sm); font-weight: 700; color: var(--color-text); }
+.screen-library .is-book .lib-meta dt::after { content: ':'; }
+.screen-library .is-book .lib-meta dd { flex: 1 1 0; min-width: 12rem; color: var(--color-text-2); }
+.screen-library .is-book .lib-meta .lib-meta-codes { display: inline; }
+.screen-library .is-book .lib-meta .lib-code { padding: 0; background: none; font-family: var(--font-sans); font-weight: 600; font-size: var(--text-sm); color: var(--color-text); }
+.screen-library .is-book .lib-meta .lib-code + .lib-code::before { content: ', '; font-weight: 400; }
+.screen-library .is-book .lib-meta .lib-more-inline .lib-more-summary { min-height: 32px; }
+
+/* gövde: kutusuz bölümler */
+.screen-library .is-book .lib-detail-body { gap: 0; }
+.screen-library .is-book .lib-sec {
+    padding: var(--space-5) 0 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-library .is-book .lib-sec-title { font-size: 1.3125rem; font-weight: 750; }
+.screen-library .is-book .lib-sec-note { font-style: italic; color: var(--color-text-2); }
+/* Klinik özet: telefonda açılır (kapalı başlar; uzun tanılar duvar olmasın), masaüstünde düz bölüm (app.js) */
+.screen-library .is-book .lib-collapse-head { min-height: var(--tap); padding: 0; }
+.screen-library .is-book .lib-collapse-head::after { margin-right: 6px; border-color: var(--color-text-2); }
+.screen-library .is-book .lib-collapse-head:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.screen-library .is-book .lib-collapse > .lib-prose { padding: var(--space-2) 0 0; }
+.screen-library .is-book .lib-clin > .lib-sec-title + .lib-prose { margin-top: var(--space-2); }
+.screen-library .is-book .lib-prose { font-size: 1.0625rem; }
+
+/* Kriterler: numaralı paragraflar, kenar etiketi */
+.screen-library .is-book .lib-crit-list { gap: var(--space-4); margin-top: var(--space-3); }
+.screen-library .is-book .lib-crit {
+    position: relative;
+    padding: 0 0 0 30px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.screen-library .is-book .lib-crit-head { display: block; }
+.screen-library .is-book .lib-crit-code {
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 32px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--ink-red);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 750;
+    line-height: 1.5;
+    text-align: left;
+}
+/* Telefonda kenarda yalnız harf ("A"); "Kriter " ekran okuyucuya yine okunur */
+.screen-library .is-book .lib-crit-code-pre {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.screen-library .is-book .lib-crit-other { padding-left: 0; padding-top: var(--space-2); border-top: 1px solid var(--paper-rule); }
+.screen-library .is-book .lib-crit-other .lib-crit-code { position: static; display: block; width: auto; font-size: 0.8125rem; font-style: italic; font-family: var(--font-sans); font-weight: 600; color: var(--color-text-2); }
+.screen-library .is-book .lib-crit-title { display: inline; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; }
+.screen-library .is-book .lib-crit-text { margin-top: 4px; font-size: 1.0625rem; }
+.screen-library .is-book .lib-crit-items { gap: 6px; margin-top: var(--space-2); }
+.screen-library .is-book .lib-crit-items li { padding-left: 0; border: 0; color: var(--color-text); font-size: 1rem; }
+.screen-library .is-book .lib-crit-items li.is-hung { position: relative; padding-left: 30px; }
+.screen-library .lib-hang { position: absolute; left: 0; color: var(--color-text-2); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Telefon: birleşik kriter etiketi kenarda değil, başlığın üstünde ("Kriter C & D") */
+@media (max-width: 767px) {
+    .screen-library .is-book .lib-crit-wide { padding-left: 0; }
+    .screen-library .is-book .lib-crit-wide .lib-crit-code { position: static; display: block; width: auto; font-size: 0.9375rem; line-height: 1.4; }
+    .screen-library .is-book .lib-crit-wide .lib-crit-code-pre { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+}
+
+/* Bkz. çapraz göndermeleri: satır içi, noktalı virgülle */
+.screen-library .lib-see .lib-links { display: block; border: 0; border-radius: 0; overflow: visible; line-height: 1.9; }
+.screen-library .lib-see .lib-links::before { content: 'Bkz. '; font-style: italic; font-weight: 700; color: var(--color-text); }
+.screen-library .lib-see .lib-links li { display: inline; border: 0 !important; }
+.screen-library .lib-see .lib-links li:not(:last-child)::after { content: '; '; color: var(--color-text-2); }
+.screen-library .lib-see .lib-link { display: inline; min-height: 0; padding: 0; background: none; color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.screen-library .lib-see .lib-link:hover { background: none; text-decoration-thickness: 2px; }
+.screen-library .lib-see .lib-link-title { font-weight: 600; }
+.screen-library .lib-see .lib-link-sub, .screen-library .lib-see .lib-link-chevron { display: none; }
+.screen-library .lib-see .lib-more { display: inline; margin: 0 0 0 6px; }
+.screen-library .lib-see .lib-more-summary { display: inline; min-height: 0; padding: 0; }
+.screen-library .lib-see .lib-more-summary::after { display: none; }
+.screen-library .lib-see .lib-more[open] .lib-links::before { content: none; }
+
+/* Tedavi: kısa kaynakça */
+.screen-library .lib-refs .lib-sub-title { margin-top: var(--space-3); font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text); }
+.screen-library .lib-refs { counter-reset: libref; }
+.screen-library .lib-refs .lib-links { border: 0; border-radius: 0; gap: 2px; }
+.screen-library .lib-refs .lib-links li { counter-increment: libref; border: 0 !important; }
+.screen-library .lib-refs .lib-link { position: relative; display: block; min-height: 0; padding: 6px 0 6px 34px; background: none; }
+.screen-library .lib-refs .lib-link::before { content: '[' counter(libref) ']'; position: absolute; left: 0; top: 6px; color: var(--color-text-2); font-variant-numeric: tabular-nums; }
+.screen-library .lib-refs .lib-link:hover { background: none; }
+.screen-library .lib-refs .lib-link-title { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.screen-library .lib-refs .lib-link-sub { display: inline; margin: 0; font-size: var(--text-sm); font-style: italic; color: var(--color-text-2); }
+.screen-library .lib-refs .lib-link-sub::before { content: ' — '; font-style: normal; }
+.screen-library .lib-refs .lib-link-chevron { display: none; }
+
+/* Terapi/ilaç adımları: numaralı paragraflar (yuvarlak rozet yerine kenar numarası) */
+.screen-library .is-book .lib-steps li { padding-left: 40px; }
+.screen-library .is-book .lib-steps li::before { width: 32px; height: auto; top: 0; justify-content: flex-start; border-radius: 0; background: none; color: var(--ink-red); font-family: var(--font-display); font-size: 1.125rem; font-weight: 750; }
+
+/* Kenar notu: sayfadaki tek kutu */
+.screen-library .lib-disclaimer.lib-note,
+.screen-library .lib-callout.lib-note-box {
+    display: block;
+    max-width: 62ch;
+    margin-top: var(--space-6);
+    padding: 12px 14px;
+    border: 1px solid var(--paper-edge);
+    border-left: 3px solid var(--paper-hl-strong);
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--paper-hl) 45%, transparent);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+}
+.screen-library .lib-callout.lib-note-box { margin-top: var(--space-5); font-size: var(--text-base); }
+.screen-library .lib-note .icon { display: none; }
+.screen-library .lib-note-h { display: block; margin-bottom: 2px; font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem; }
+.screen-library .lib-note-box .lib-callout-title { font-family: var(--font-display); font-size: 1rem; }
+.screen-library .lib-note-box .lib-callout-title .icon { display: none; }
+
+/* Pratik: sayfa altı satırı */
+.screen-library .lib-practice.lib-foot {
+    margin-top: var(--space-6);
+    padding: var(--space-4) 0 0;
+    border: 0;
+    border-top: 2px solid var(--ink-red-line);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+.screen-library .lib-foot .lib-sec-title { font-size: 1.0625rem; }
+.screen-library .lib-foot .btn { border-radius: 6px; }
+
+/* İçindekiler kutusu: sağ kenarda yan not */
+@media (min-width: 768px) {
+    .screen-library .is-book .lib-crit-items li.is-hung { padding-left: 34px; }
+    .screen-library .lib-detail.is-book { margin-inline: 0; padding: var(--space-6) var(--space-7) var(--space-7); }
+    .screen-library .is-book .lib-detail-title { font-size: 2.5rem; }
+    .screen-library .is-book .lib-crit { padding-left: 96px; }
+    .screen-library .is-book .lib-crit-code { width: 84px; font-size: 0.875rem; top: 1px; line-height: 1.6; }
+    .screen-library .is-book .lib-crit-code-pre { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+    .screen-library .is-book .lib-crit-other { padding-left: 96px; }
+    .screen-library .is-book .lib-crit-other .lib-crit-code { position: absolute; display: block; width: 84px; font-size: 0.8125rem; top: var(--space-2); }
+}
+@media (min-width: 900px) {
+    .screen-library .is-book .lib-detail-layout { grid-template-columns: minmax(0, 1fr) 170px; gap: var(--space-7); }
+    .screen-library .is-book .lib-detail-layout-single { grid-template-columns: minmax(0, 1fr); }
+    .screen-library .is-book .lib-toc { grid-column: 2; grid-row: 1; padding-top: var(--space-5); }
+    .screen-library .is-book .lib-detail-body { grid-column: 1; grid-row: 1; }
+    .screen-library .is-book .lib-toc-title { text-transform: none; letter-spacing: 0; font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; color: var(--color-text); }
+    .screen-library .is-book .lib-toc-list { border-left: 1px solid var(--paper-edge); }
+    .screen-library .is-book .lib-toc-link { min-height: 32px; font-size: 0.875rem; }
+}
+/* Arama sonuçları (dizin): tek sütun, bölümler bölünmesin */
+@media (min-width: 1024px) {
+    .screen-library .lib-page.is-searching .lib-list.lib-contents:not([hidden]) { column-count: 1; max-width: 760px; }
+}
+
+/* Hareket azaltma: ok dönüşü anında */
+@media (prefers-reduced-motion: reduce) {
+    .screen-library .lib-contents .lib-group-head::after { transition: none; }
+}
+
+/* Dokunmatik: kaynakça satırları ve "N kayıt/ad daha" açıcıları en az 44 px (satır içi "Bkz." bağlantıları cümle içi metindir) */
+@media (pointer: coarse) {
+    .screen-library .lib-refs .lib-link { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0; min-height: var(--tap); padding-block: 11px; }
+    .screen-library .lib-refs .lib-link::before { top: 11px; }
+    .screen-library .lib-see .lib-more-summary,
+    .screen-library .is-book .lib-meta .lib-more-inline .lib-more-summary { display: inline-flex; align-items: center; min-height: var(--tap); }
+}
