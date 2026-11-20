@@ -100,7 +100,10 @@ if (fs.existsSync(altTip)) {
 for (const [id, v] of Object.entries(disi)) if (v.karsilayanResmiTani && !ids.has(v.karsilayanResmiTani)) err(`Liste dışı ${id}: karşılayan tanı listede yok (${v.karsilayanResmiTani})`);
 { const { DIAGNOSIS_TO_PHARMACOLOGY_MAP: MAP } = require(J('js', 'pharmacology.js'));
   for (const k of Object.keys(MAP)) { if (!ids.has(k)) err(`Farmakoloji haritasında listede olmayan id: ${k}`); else if (!pharmaIds.has(MAP[k])) err(`Farmakoloji haritası ${k}: protokol yok (${MAP[k]})`); }
-  for (const d of D) if (!MAP[d.id]) err(`Farmakoloji haritasında yok: ${d.id}`); }
+  // Bilerek ilaç protokolü bağlanmayan tanılar (ajan W, 2026-11-20): mevcut protokollerin hiçbiri sirkadiyen ritim bozukluğuna uymuyor
+  // (klonazepam = parasomni, modafinil/oksibat = narkolepsi); yanlış liste yerine kütüphane sayfasında Tedavi bölümü hiç görünmez.
+  const MAP_MUAF = new Set(['circadian_rhythm_sleep_wake']);
+  for (const d of D) if (!MAP[d.id] && !MAP_MUAF.has(d.id)) err(`Farmakoloji haritasında yok: ${d.id}`); }
 // goldForDiagnoses (terapi + ilaç protokolleri) yalnızca listedeki tanılara işaret etmeli (ajan P; eşleme: gold_remap.js)
 for (const x of T.concat(P)) for (const g of (x.goldForDiagnoses || [])) if (!ids.has(g)) err(`goldForDiagnoses ${x.id}: listede olmayan tanı ${g} (node tools/icerik/tani_temizligi/gold_remap.js)`);
 // Oyun bitmeden görünen başlık (patientSummary) tanı/kategori etiketi taşımamalı: sondaki parantez yalnızca BKİ ya da "Çift tanılı vaka" olabilir

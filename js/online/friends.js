@@ -54,6 +54,7 @@
         if (F.reloadAgain) { F.reloadAgain = false; load(); }
     }
     const reloadSoon = NS.util.debounce(() => load(), 300);
+    const reloadVerifySoon = NS.util.debounce(() => load({ silent: true }), 2500);
 
     async function loadInvites() {
         const r = await NS.api.listPendingInvites();
@@ -359,7 +360,10 @@
 
     NS.friends = {
         state: F, openChallengeSheet, challenge, load, loadInvites, reloadSoon, reloadInvitesSoon, renderInto, render, openInvitePicker, reset, add, respond,
-        onFriendshipChange() { reloadSoon(); },
+        // Her arkadaşlık olayında hemen + 2,5 sn sonra bir kez daha tazele (olay işlem tamamlanmadan geldiyse ya da kaçtıysa liste yine düzelir)
+        onFriendshipChange() { reloadSoon(); reloadVerifySoon(); },
+        /** Online merkezine/Arkadaşlar bölümüne her dönüşte ve görünür olunca tazele (sessiz). */
+        refreshOnShow() { if (NS.api.myId()) { load({ silent: true }); loadInvites(); } },
         onInviteChange(p) { reloadInvitesSoon(); if (p && p.new && p.new.status !== 'pending') NS.ui.closeBanner('inv-' + p.new.id); }
     };
 })(typeof window !== 'undefined' ? window : globalThis);

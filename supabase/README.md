@@ -9,6 +9,11 @@ Supabase tarafını içerir. Site yine GitHub Pages'te statik kalır; tarayıcı
 > 47/47 (PostgreSQL 16, iki bağlantılı eşzamanlılık testleri dahil), `tests/00_supabase_stubs.sql` taklitleriyle.
 > 0003 gerçek Supabase projesinde henüz çalıştırılmadı; ilk yayında GitHub Actions uygular (bkz. "Veritabanı
 > güncellemeleri kendiliğinden uygulanır"). Hata çıkarsa mesajı olduğu gibi geliştiriciye iletin.
+>
+> **2026-11-20:** `migrations/0004_kural_duzeltmeleri.sql` eklendi (Emre onayı): rakip erken ayrılınca kalan oyuncu oynanan
+> turların RP'sini alır ama galibiyet primi almaz (`rp_breakdown.erken_bitis`); günlük sıralama artık önce kazananlar (az tahmin,
+> sonra kısa süre), sonra kaybedenler (çok tahmin önde); puan sırayı etkilemez. Kurallar `TASARIM.md` §13.1 ve §13.4. Yerelde
+> test edildi (PGlite + PostgreSQL 16); bir sonraki yayında GitHub Actions canlıya uygular.
 
 Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.supabase.co`**
 
@@ -17,7 +22,7 @@ Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.s
 | Dosya | Ne işe yarar |
 |---|---|
 | `migrations/0001_init.sql` | Bütün tablolar, güvenlik kuralları (RLS), sunucu fonksiyonları, Realtime ayarları. Canlı projede elle çalıştırıldı; bir daha çalıştırılmaz. |
-| `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
+| `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql`, `migrations/0004_kural_duzeltmeleri.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2; erken ayrılma RP kuralı + günlük sıralama). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
 | `tools/apply_migrations.sh` | Uygulanmamış migration dosyalarını sırayla uygulayan betik (GitHub Actions çalıştırır). Hangi dosyanın uygulandığı veritabanında `public._migrations` tablosunda tutulur. |
 | `tools/workflow/supabase-migrasyon.yml` | Yeni GitHub Actions akışının hazır kopyası (bir kez yerine konacak; bkz. aşağıda "Kurulum (bir kez)"). |
 | `seed/0002_cases_answer_key.sql` | Vakaların doğru cevapları + seçenek listesi. Otomatik üretilir; elle düzenlemeyin. |

@@ -8,3 +8,8 @@ Bu klasörde Claude da çalışıyor. Herhangi bir değişiklik yapmadan önce:
 4. İşin bitince aynı dosyadaki "Değişiklik Günlüğü"nün en üstüne şablona uygun bir kayıt ekle ve tablodaki satırını sil.
 
 Tabloda Claude'un adı geçen dosyalara, satır silinene kadar dokunma.
+
+Ek yönergeler:
+- **Yeni vaka yazma / ekleme / yayınlama:** `VAKA_URETIMI.md` dosyasını oku ve adımlarını birebir uygula
+  (`js/cases.js`'i elle düzenleme; yalnızca `tools/vaka_ekle/` araçlarını kullan).
+- **Projenin güncel durumu, bekleyen işler:** `DEVAM_PLANI.md`.

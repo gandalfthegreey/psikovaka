@@ -1,4 +1,5 @@
 // PsikoVaka — 0003 testleri: günlük vaka + seriler, hızlı eşleşme, RP v2
+// (+ 0004: erken ayrılma kuralı ve günlük sıralama; 0003'ün tekrar testinden sonra uygulanır)
 //
 // Çalıştırma (supabase/tests klasöründe):
 //   npm install
@@ -209,6 +210,33 @@ await test('0003 ikinci kez çalıştırılınca hiçbir şey değişmez (fonksi
   await admin(`update public.game_config set value = 120 where key = 'quick_wait_timeout_sec'`);
 });
 
+console.log('\n[0004 kurulumu]');
+const grantsOf = async () => (await admin(`
+  select p.proname, coalesce(array_to_string(p.proacl, ','), '') as acl, p.prosecdef, array_to_string(p.proconfig, ',') as cfg
+    from pg_proc p where p.pronamespace = 'public'::regnamespace and p.proname in ('_finish_match', 'get_daily_leaderboard')
+   order by p.proname`)).rows;
+const viewAcl = async () => (await one(`select coalesce(array_to_string(relacl, ','), '') as acl, reloptions::text as opt from pg_class where oid = 'public.daily_leaderboard'::regclass`));
+let grants3, view3;
+await test('0004 uygulanır; yetkiler, security definer ve search_path 0003 ile aynı; imzalar değişmez', async () => {
+  grants3 = await grantsOf(); view3 = await viewAcl();
+  const sig = async () => (await admin(`select p.oid::regprocedure::text as s, pg_get_function_result(p.oid) as r from pg_proc p
+                                         where p.pronamespace = 'public'::regnamespace and p.proname in ('_finish_match', 'get_daily_leaderboard') order by 1`)).rows;
+  const s3 = await sig();
+  await db.exec(read('migrations/0004_kural_duzeltmeleri.sql'));
+  eq(await sig(), s3, 'imza/dönüş');
+  eq(await grantsOf(), grants3, 'fonksiyon yetkileri');
+  eq(await viewAcl(), view3, 'görünüm yetkisi ve security_invoker');
+  ok(grants3.every((g) => g.prosecdef && g.cfg === 'search_path=""'), JSON.stringify(grants3));
+  ok(/authenticated=X/.test(grants3.find((g) => g.proname === 'get_daily_leaderboard').acl), 'authenticated çağırabilir');
+  ok(!/(^|,)(anon|authenticated)=|(^|,)=X/.test(grants3.find((g) => g.proname === '_finish_match').acl), '_finish_match istemciye kapalı');
+  ok((await one(`select prosrc from pg_proc where proname = '_finish_match'`)).prosrc.includes('erken_bitis'), '0004 gövdesi');
+});
+await test('0004 ikinci kez çalıştırılınca hiçbir şey değişmez (parmak izi)', async () => {
+  const a = await fingerprint();
+  await db.exec(read('migrations/0004_kural_duzeltmeleri.sql'));
+  eq(await fingerprint(), a);
+});
+
 console.log('\n[Günlük: yetki]');
 await test('anon yalnızca get_daily_challenge çağırabilir; diğer yeni RPC\'ler ve tablolar kapalı', async () => {
   await setDay('2026-03-01');
@@ -343,7 +371,7 @@ await test('Günlük oyun RP ve maç sayısı vermez', async () => {
   const p = await one(`select ranked_points, matches_played, matches_won from public.profiles where id = $1`, [U[1]]);
   eq([p.ranked_points, p.matches_played, p.matches_won], [0, 0, 0]);
 });
-await test('Liderlik: kazananlar > puan > tahmin > süre > bitiş; me; total_players; cevap/case_id yok; limit', async () => {
+await test('Liderlik (0004): kazananlar > tahmin ↑ > süre ↑; kaybedenler tahmin ↓; me; total_players; cevap/case_id yok; limit', async () => {
   // U4: 1. tahminde ama yavaş; U5: 1. tahminde hızlı
   for (const u of [4, 5]) await rpc(U[u], 'daily_begin', { p_target: 'diagnosis' });
   await admin(`update public.daily_attempts set started_at = now() - interval '50 seconds' where user_id = $1 and challenge_date = $2`, [U[4], D1]);
@@ -352,9 +380,9 @@ await test('Liderlik: kazananlar > puan > tahmin > süre > bitiş; me; total_pla
   await dailySolve(U[5], D1, 'diagnosis');
   const lb = await rpc(U[2], 'get_daily_leaderboard', { p_target: 'diagnosis' });
   eq(lb.total_players, 5);
-  eq(lb.rows.map((r) => [r.rank, r.user_id, r.won]), [[1, U[5], true], [2, U[4], true], [3, U[1], true], [4, U[3], false], [5, U[2], false]]);
-  // kayıplar 0 puanda eşit: az tahmin önde (pes eden 0 tahmin, 6 yanlış yapan 6)
-  eq(lb.me.user_id, U[2]); eq(lb.me.rank, 5);
+  eq(lb.rows.map((r) => [r.rank, r.user_id, r.won]), [[1, U[5], true], [2, U[4], true], [3, U[1], true], [4, U[2], false], [5, U[3], false]]);
+  // kaybedenler: çok tahmin önde (6 yanlış yapan 6 tahmin, pes eden 0)
+  eq(lb.me.user_id, U[2]); eq(lb.me.rank, 4);
   ok(!JSON.stringify(lb).includes('case_id') && !JSON.stringify(lb).includes('diagnosis_id'), 'cevap/case_id yok');
   ok(['username', 'display_name', 'avatar', 'ranked_points', 'points', 'time_sec'].every((k) => k in lb.rows[0]));
   const small = await rpc(U[9], 'get_daily_leaderboard', { p_target: 'diagnosis', p_limit: 2 });
@@ -362,7 +390,8 @@ await test('Liderlik: kazananlar > puan > tahmin > süre > bitiş; me; total_pla
 });
 await test('Liderlik görünümü (daily_leaderboard) yeni sıralamayla tutarlı', async () => {
   const v = (await q(U[1], `select user_id, position from public.daily_leaderboard where challenge_date = $1 and target_type = 'diagnosis' order by position`, [D1])).rows;
-  eq(v.slice(0, 3).map((x) => x.user_id), [U[5], U[4], U[1]]);
+  eq(v.map((x) => x.user_id), [U[5], U[4], U[1], U[2], U[3]]);
+  eq(v.map((x) => Number(x.position)), [1, 2, 3, 4, 5]);
 });
 await test('Geçmiş gün sorgulanabilir (salt okunur), oynanmamış gün boş', async () => {
   await setDay('2026-03-02');
@@ -573,6 +602,7 @@ await test('Her sonuç: g1..g6 = +10 +8 +6 +4 +2 +1; başarısız −10; düello
   eq(outcomes(res[0].rp_breakdown), ['g1', 'g2', 'g3', 'g4', 'g5', 'g6']);
   eq(res[0].rp_breakdown.rounds.map((x) => x.delta), [10, 8, 6, 4, 2, 1]);
   eq([res[0].rp_breakdown.placement, res[0].rp_delta], [10, 41]);
+  eq(res.map((x) => [x.rp_breakdown.voided, x.rp_breakdown.erken_bitis]), [[false, false], [false, false]], 'normal maç: bayrak yok');
   eq([res[1].rp_delta, res[1].rp_after], [-60, 0]);
   eq(await rp(B), 0, 'RP 0\'ın altına inmez');
 });
@@ -653,6 +683,7 @@ await test('Bracket: ara sürede çıkan yalnızca eşleşmesinin turu için cez
   eq([outcomes(res[B].rp_breakdown), res[B].rp_delta], [['fail'], -10], 'elenen: 2. tur için ceza yok');
   eq([res[D].final_rank, outcomes(res[D].rp_breakdown), res[D].rp_delta], [2, ['g2'], 8 + 10]);
   eq([res[C].final_rank, res[C].rp_delta], [1, 10 + 25]);
+  eq([res[C].rp_breakdown.erken_bitis, res[C].rp_breakdown.voided], [false, false], 'eşik sağlandı: kural tetiklenmez, prim verilir');
 });
 await test('Kombo: N = aşama tahmin sayılarının yuvarlanmış ortalaması; bir aşama başarısızsa fail', async () => {
   const [A, B] = [U[4], U[5]];
@@ -672,7 +703,7 @@ await test('FFA 2 kişiyle 2.lik primi yok; turnuva 2.si +10 (battle testinde)',
   const res = await results(f.id);
   eq(res.map((x) => x.rp_breakdown.placement), [15, 0]);
 });
-await test('Çiftçilik koruması: erken bitişte kalanın kazancı ve kaybı silinir; çıkan yalnızca negatiflerini öder', async () => {
+await test('Erken bitiş (0004): kalan oynadığı turların RP\'sini alır (burada −10), prim yok, erken_bitis; çıkan yalnızca negatiflerini öder', async () => {
   const [A, B] = [U[8], U[9]];
   await admin(`update public.profiles set ranked_points = 100 where id = any($1)`, [[A, B]]);
   const wonBefore = (await one(`select matches_won from public.profiles where id = $1`, [A])).matches_won;
@@ -683,10 +714,11 @@ await test('Çiftçilik koruması: erken bitişte kalanın kazancı ve kaybı si
   const r = await room(d.id);
   eq([r.status, r.ended_early], ['finished', true]);
   const res = Object.fromEntries((await results(d.id)).map((x) => [x.user_id, x]));
-  eq([res[A].rp_delta, res[A].rp_breakdown.voided, res[A].rp_breakdown.total], [0, true, 0]);
-  eq([res[B].rp_delta, res[B].rp_breakdown.voided], [-40, true], 'B: +10 silinir, 4 kaçırılan tur × −10');
-  eq([await rp(A), await rp(B)], [100, 60]);
-  eq((await one(`select matches_won from public.profiles where id = $1`, [A])).matches_won, wonBefore, 'geçersiz maç galibiyet sayılmaz');
+  const bA = res[A].rp_breakdown;
+  eq([res[A].final_rank, res[A].rp_delta, bA.voided, bA.erken_bitis, bA.placement, bA.total, outcomes(bA)], [1, -10, false, true, 0, -10, ['fail']]);
+  eq([res[B].rp_delta, res[B].rp_breakdown.voided, res[B].rp_breakdown.erken_bitis], [-40, true, false], 'B: +10 silinir, 4 kaçırılan tur × −10');
+  eq([await rp(A), await rp(B)], [90, 60]);
+  eq((await one(`select matches_won from public.profiles where id = $1`, [A])).matches_won, wonBefore, 'erken biten maç galibiyet sayılmaz');
 });
 await test('Bitirme tekrar çağrılsa da RP bir kez uygulanır (RP v2)', async () => {
   const A = U[8];
@@ -710,10 +742,110 @@ await test('get_my_rp_history: en yeniden eskiye, alanlar, limit', async () => {
   ok(h.length >= 2);
   const keys = ['room_id', 'finished_at', 'mode', 'format', 'target', 'placement', 'players', 'rp_delta', 'rp_breakdown', 'rp_after'];
   ok(keys.every((k) => k in h[0]), JSON.stringify(Object.keys(h[0])));
-  eq([h[0].mode, h[0].players, h[0].rp_delta, h[0].rp_after, h[0].target], ['duel', 2, 0, 100, 'diagnosis']);
+  eq([h[0].mode, h[0].players, h[0].rp_delta, h[0].rp_after, h[0].target], ['duel', 2, -10, 90, 'diagnosis']);
   ok(new Date(h[0].finished_at) >= new Date(h[1].finished_at));
   eq((await rpc(U[8], 'get_my_rp_history', { p_limit: 1 })).length, 1);
   eq(await rpc(U[16], 'get_my_rp_history', {}), []);
+});
+
+console.log('\n[0004: erken ayrılma]');
+await test('Erken ayrılma: kalan çözdüğü turların +, çözemediğinin −10\'unu alır; yarıda kalan tur 0; prim yok; çıkan eskisi gibi', async () => {
+  const A = await makeUser(30), B = await makeUser(31);
+  await admin(`update public.profiles set ranked_points = 100 where id = any($1)`, [[A, B]]);
+  const before = await one(`select matches_played, matches_won from public.profiles where id = $1`, [A]);
+  const d = await setupMatch(A, [B], { p_mode: 'duel', p_round_count: 10 });
+  await startedAgo(d.id, 10.2);
+  await solve(d.id, A); await solve(d.id, B);            // A g1 +10
+  await nextRound(d.id, A); await startedAgo(d.id, 10.2);
+  await solve(d.id, A, 1); await solve(d.id, B);         // A g2 +8
+  await nextRound(d.id, A); await startedAgo(d.id, 10.2);
+  await failRound(d.id, A); await solve(d.id, B);        // A fail −10
+  await nextRound(d.id, A); await startedAgo(d.id, 10.2);
+  await rpc(B, 'leave_room', { p_room_id: d.id });       // 4. tur sürerken çıkar -> maç biter (4/10 < yarı)
+  const r = await room(d.id);
+  eq([r.status, r.ended_early], ['finished', true]);
+  const res = Object.fromEntries((await results(d.id)).map((x) => [x.user_id, x]));
+  const bA = res[A].rp_breakdown, bB = res[B].rp_breakdown;
+  eq(outcomes(bA), ['g1', 'g2', 'fail', 'void']);
+  eq(bA.rounds.map((x) => x.delta), [10, 8, -10, 0]);
+  eq([res[A].final_rank, res[A].rp_delta, bA.placement, bA.voided, bA.erken_bitis, bA.total], [1, 8, 0, false, true, 8],
+    'kalan: tur toplamı, galibiyet primi (+10) yok');
+  // çıkan: 1-3. turlar +10'ar (silinir), 4. tur 'left' −10, 5-10. turlar 6 × −10 -> yalnızca negatifler
+  eq([outcomes(bB), bB.rounds.filter((x) => x.missed).length], [['g1', 'g1', 'g1', 'fail', 'fail', 'fail', 'fail', 'fail', 'fail', 'fail'], 6]);
+  eq([res[B].rp_delta, bB.placement, bB.voided, bB.erken_bitis, bB.total, res[B].left_early], [-70, 0, true, false, -70, true]);
+  eq([await rp(A), await rp(B)], [108, 30]);
+  const after = await one(`select matches_played, matches_won from public.profiles where id = $1`, [A]);
+  eq([after.matches_played - before.matches_played, after.matches_won - before.matches_won], [1, 0], 'oynandı sayılır, galibiyet sayılmaz');
+  const st = await rpc(A, 'get_room_state', { p_room_id: d.id });
+  eq(st.results.find((x) => x.user_id === A).rp_breakdown.erken_bitis, true, 'get_room_state de bayrağı taşır');
+  const h = await rpc(A, 'get_my_rp_history', { p_limit: 1 });
+  eq([h[0].room_id, h[0].rp_delta, h[0].rp_breakdown.erken_bitis, h[0].rp_after], [d.id, 8, true, 108]);
+  // idempotent: bitirme tekrar çağrılsa da hiçbir şey değişmez
+  const snap = JSON.stringify(await results(d.id));
+  await admin(`update public.rooms set status = 'in_round' where id = $1`, [d.id]);
+  await admin(`select public._finish_match($1, true)`, [d.id]);
+  await admin(`select public._finish_match($1, false)`, [d.id]);
+  await admin(`select public._finish_match($1, true)`, [d.id]);
+  eq([await rp(A), await rp(B)], [108, 30]);
+  eq(JSON.stringify(await results(d.id)), snap);
+  const again = await one(`select matches_played from public.profiles where id = $1`, [A]);
+  eq(again.matches_played, after.matches_played);
+});
+await test('Erken ayrılma: kalanın eksi toplamı da uygulanır ve 0 tabanı geçerli', async () => {
+  const A = await makeUser(32), B = await makeUser(33);
+  await admin(`update public.profiles set ranked_points = 5 where id = any($1)`, [[A, B]]);
+  const d = await setupMatch(A, [B], { p_mode: 'duel', p_round_count: 6 });
+  await startedAgo(d.id, 10.2);
+  await failRound(d.id, A); await solve(d.id, B);        // A −10
+  await rpc(B, 'leave_room', { p_room_id: d.id });       // ara sürede çıkar (1/6 tur)
+  const res = Object.fromEntries((await results(d.id)).map((x) => [x.user_id, x]));
+  eq([res[A].rp_delta, res[A].rp_after, res[A].rp_breakdown.erken_bitis], [-10, 0, true]);
+  eq([res[B].rp_delta, res[B].rp_after], [-50, 0]);
+});
+
+console.log('\n[0004: günlük sıralama]');
+await test('Günlük sıralama: 2 tahminde yavaş kazanan 3 tahminde hızlıdan önde; eşit tahminde süre; kaybedenler tahmin ↓; me; geçmiş gün', async () => {
+  const D = '2026-04-10';
+  await setDay(D);
+  const [W3f, W2s, W2f, L6, L2, L0, W2t] = [await makeUser(40), await makeUser(41), await makeUser(42), await makeUser(43), await makeUser(44), await makeUser(45), await makeUser(46)];
+  const play = async (u, ago, fn) => {
+    await rpc(u, 'daily_begin', { p_target: 'diagnosis' });
+    await admin(`update public.daily_attempts set started_at = now() - make_interval(secs => $3) where user_id = $1 and challenge_date = $2`, [u, D, ago]);
+    return fn();
+  };
+  const r3f = await play(W3f, 2, () => dailySolve(W3f, D, 'diagnosis', 2));    // 3 tahmin, ~2 sn  -> 70 + 19
+  const r2s = await play(W2s, 87, () => dailySolve(W2s, D, 'diagnosis', 1));   // 2 tahmin, ~87 sn -> 85 + 0
+  const r2f = await play(W2f, 30, () => dailySolve(W2f, D, 'diagnosis', 1));   // 2 tahmin, ~30 sn
+  ok(r3f.points > r2s.points, `puan: ${r3f.points} > ${r2s.points} (puan sırayı belirlememeli)`);
+  ok(r2f.time_sec < r2s.time_sec, 'süre farkı');
+  await play(L6, 1, () => dailyFail(L6, D, 'diagnosis'));                        // 6 tahmin, kayıp
+  await play(L2, 1, async () => {                                                // 2 yanlış + pes
+    const c = await dailyWrong(L2, D, 'diagnosis', 2);
+    for (const w of c.wrong) await rpc(L2, 'daily_submit_guess', { p_target: 'diagnosis', p_item_id: w });
+    return rpc(L2, 'daily_give_up', { p_target: 'diagnosis' });
+  });
+  await play(L0, 1, () => rpc(L0, 'daily_give_up', { p_target: 'diagnosis' })); // 0 tahmin, pes
+  // W2t: W2f ile aynı tahmin ve aynı süre, daha geç bitirdi -> bitiş anı belirler
+  await play(W2t, 30, () => dailySolve(W2t, D, 'diagnosis', 1));
+  await admin(`update public.daily_results set elapsed_sec = (select elapsed_sec from public.daily_results where user_id = $1 and challenge_date = $3),
+                      completed_at = (select completed_at from public.daily_results where user_id = $1 and challenge_date = $3) + interval '1 second'
+                where user_id = $2 and challenge_date = $3`, [W2f, W2t, D]);
+  const expectOrder = [W2f, W2t, W2s, W3f, L6, L2, L0];
+  const lb = await rpc(W3f, 'get_daily_leaderboard', { p_target: 'diagnosis' });
+  eq(lb.rows.map((r) => r.user_id), expectOrder);
+  eq(lb.rows.map((r) => r.rank), [1, 2, 3, 4, 5, 6, 7]);
+  eq(lb.rows.map((r) => [r.won, r.guesses_used]), [[true, 2], [true, 2], [true, 2], [true, 3], [false, 6], [false, 2], [false, 0]]);
+  ok(lb.rows.every((r) => Number.isInteger(r.points)), 'puan satırda kalır');
+  eq([lb.me.user_id, lb.me.rank], [W3f, 4]);
+  eq((await rpc(L2, 'get_daily_leaderboard', { p_target: 'diagnosis', p_limit: 2 })).me.rank, 6, 'ilk N dışında da me doğru');
+  const small = await rpc(L2, 'get_daily_leaderboard', { p_target: 'diagnosis', p_limit: 2 });
+  eq([small.rows.map((r) => r.user_id), small.total_players], [[W2f, W2t], 7]);
+  const v = (await q(W3f, `select user_id, position from public.daily_leaderboard where challenge_date = $1 and target_type = 'diagnosis' order by position`, [D])).rows;
+  eq(v.map((x) => x.user_id), expectOrder, 'görünüm aynı sırada');
+  eq(v.map((x) => Number(x.position)), [1, 2, 3, 4, 5, 6, 7]);
+  await setDay(addDays(D, 1));
+  const past = await rpc(L0, 'get_daily_leaderboard', { p_target: 'diagnosis', p_day: D });
+  eq([past.day, past.rows.map((r) => r.user_id), past.me.rank], [D, expectOrder, 7], 'geçmiş gün aynı sıra');
 });
 
 // ---------------------------------------------------------------- iki bağlantı: gerçek eşzamanlılık (yalnızca pg)

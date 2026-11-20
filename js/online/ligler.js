@@ -140,7 +140,7 @@
                 <ul class="lg-notes">
                     <li>Maçtan erken ayrılırsan kalan her tur çözülemedi sayılır. Elendikten sonraki turlar puan götürmez.</li>
                     <li>Kombo: üç aşamadaki tahmin sayılarının ortalaması kullanılır; bir aşama çözülemezse tur çözülemedi sayılır.</li>
-                    <li>Rakipler ayrıldığı için maç erken biterse, kalanlar için maç geçersiz olur (0 RP).</li>
+                    <li>Rakipler ayrıldığı için maç erken biterse (turların yarısı oynanmadan), kalanlara galibiyet primi verilmez.</li>
                     <li>RP 0'ın altına düşmez. Yeni hesaplar 0 RP ile başlar.</li>
                     <li>Günün vakası ve tek kişilik pratik RP vermez.</li>
                 </ul>`;
@@ -181,6 +181,7 @@
         const place = Number(bd.placement || 0);
         return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(x))}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
             ${place ? `<li class="lg-bd-place"><span>Sıralama primi</span><span class="lg-delta is-plus">${signed(place)}</span></li>` : ''}
+            ${bd.erken_bitis === true ? `<li class="lg-bd-note"><span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></li>` : ''}
             ${bd.voided ? `<li class="lg-bd-note"><span>Maç erken bittiği için geçersiz sayıldı.</span></li>` : ''}</ul>`;
     }
     function historyHtml() {

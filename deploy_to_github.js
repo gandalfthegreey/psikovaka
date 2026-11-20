@@ -12,7 +12,12 @@
  *   --dry-run         git'e yazan hiçbir komutu çalıştırmaz, yalnızca ne çalıştıracağını yazar
  *                     (PSIKOVAKA_DRY_RUN=1 ortam değişkeni de aynı işi görür)
  *   --skip-build      2. adımı atlar (derleyici js/cases.js ve PsikoVaka_Tam_Surum.html dosyalarını yeniden yazar)
- *   --message="..."   commit mesajını sormadan kullanır
+ *   --message="..."   commit mesajını sormadan kullanır ve betiği ETKİLEŞİMSİZ yapar (aşağıya bakın)
+ *   --non-interactive hiçbir şey sormaz (stdin bir terminal değilse de kendiliğinden açılır)
+ *
+ * Etkileşimsiz kipte (tools/vaka_ekle/yayinla.js, Gemini/AI terminali) betik HİÇBİR ZAMAN girdi beklemez:
+ * remote yoksa, GitHub'da yeni commit varsa, giriş bilgisi sorulacaksa (GIT_TERMINAL_PROMPT=0, GCM_INTERACTIVE=never)
+ * ya da ağ 5 dakikada yanıt vermezse açık bir mesajla ve çıkış kodu 1 ile durur.
  *
  * Windows'ta cmd.exe ile çalışır: hiçbir komut kabuk üzerinden çalıştırılmaz (spawnSync + argüman dizisi),
  * bu yüzden yol ve mesajlardaki boşluk, tırnak, % gibi karakterler sorun çıkarmaz.
@@ -30,6 +35,8 @@ const argv = process.argv.slice(2);
 const DRY_RUN = argv.includes('--dry-run') || process.env.PSIKOVAKA_DRY_RUN === '1';
 const SKIP_BUILD = argv.includes('--skip-build');
 const MESSAGE_ARG = (argv.find(a => a.startsWith('--message=')) || '').slice('--message='.length);
+const NON_INTERACTIVE = !!MESSAGE_ARG || argv.includes('--non-interactive') || !process.stdin.isTTY;
+const NET_TIMEOUT_MS = 5 * 60 * 1000;
 
 const BRANCH = 'main';
 // Diskte olan yollar + git'in zaten izlediği (taşınmış/silinmiş) yollar eklenir;
@@ -37,7 +44,7 @@ const BRANCH = 'main';
 const CANDIDATE_PATHS = [
     'index.html', '404.html', 'manifest.json', 'assets', 'css', 'js', 'PsikoVaka_Tam_Surum.html',
     'paketler', 'build_portable_single_file.js', 'deploy_to_github.js', 'GITHUBA_YUKLE.bat',
-    '.gitignore', '.github', 'CLAUDE.md', 'GEMINI.md', 'AI_ISBIRLIGI.md', 'tools', 'supabase',
+    '.gitignore', '.github', 'CLAUDE.md', 'GEMINI.md', 'AI_ISBIRLIGI.md', 'VAKA_URETIMI.md', 'tools', 'supabase',
     // eski konumlar: kökten paketler/ altına taşındı, silinmeleri de kayda geçsin
     'vaka_paketi_150.json', 'vaka_paketi_80.json', 'vaka_paketi_60.json', 'vaka_paketi_40.json', 'vaka_paketi_20.json'
 ];
@@ -58,11 +65,15 @@ function askQuestion(query) {
     }));
 }
 
-const READ_ENV = { ...process.env, GIT_OPTIONAL_LOCKS: '0' };
+// Etkileşimsiz kipte git kullanıcı adı/şifre sormaz (terminal ya da Git Credential Manager penceresi); sorması gerekirse hata verir.
+const NO_PROMPT_ENV = NON_INTERACTIVE
+    ? { GIT_TERMINAL_PROMPT: '0', GCM_INTERACTIVE: 'never', GIT_SSH_COMMAND: process.env.GIT_SSH_COMMAND || 'ssh -o BatchMode=yes' }
+    : {};
+const READ_ENV = { ...process.env, GIT_OPTIONAL_LOCKS: '0', ...NO_PROMPT_ENV };
 
 /** Salt okuyan git komutu; çıktıyı döndürür, ekrana basmaz. */
-function gitRead(args) {
-    const r = spawnSync('git', args, { encoding: 'utf8', env: READ_ENV, windowsHide: true });
+function gitRead(args, { timeout } = {}) {
+    const r = spawnSync('git', args, { encoding: 'utf8', env: READ_ENV, windowsHide: true, timeout, stdio: ['ignore', 'pipe', 'pipe'] });
     return { status: r.error ? -1 : r.status, stdout: (r.stdout || '').trim(), stderr: (r.stderr || '').trim(), error: r.error };
 }
 
@@ -76,7 +87,9 @@ function gitWrite(args, { captureStderr = false } = {}) {
     }
     const r = spawnSync('git', args, {
         encoding: 'utf8',
-        stdio: ['inherit', 'inherit', captureStderr ? 'pipe' : 'inherit'],
+        stdio: [NON_INTERACTIVE ? 'ignore' : 'inherit', 'inherit', captureStderr ? 'pipe' : 'inherit'],
+        env: { ...process.env, ...NO_PROMPT_ENV },
+        timeout: NET_TIMEOUT_MS,
         windowsHide: true
     });
     const stderr = r.stderr || '';
@@ -120,6 +133,10 @@ function checkGitRepo() {
 
 async function ensureRemote() {
     let remoteUrl = gitRead(['remote', 'get-url', 'origin']).stdout;
+    if (!remoteUrl && NON_INTERACTIVE) {
+        stop(['Bu depoda "origin" GitHub adresi tanımlı değil ve betik etkileşimsiz çalışıyor (soru soramaz).',
+            'Emre GITHUBA_YUKLE.bat dosyasını bir kez çift tıklayıp adresi girmeli; sonra tekrar deneyin.']);
+    }
     if (!remoteUrl) {
         console.log('Kişisel GitHub depo adresinizi girin (Örn: https://github.com/kullaniciadiniz/psikovaka.git)');
         const inputUrl = await askQuestion('🔗 GitHub Repo Adresi: ');
@@ -141,9 +158,23 @@ const BEHIND_MESSAGE = [
 ];
 
 /** GitHub'da bizde olmayan commit var mı? Salt okuma (ls-remote). Ağ yoksa uyarıp devam eder. */
+const AUTH_RE = /Authentication failed|could not read Username|could not read Password|terminal prompts disabled|interactivity has been disabled|Permission to .* denied|Permission denied \(publickey|403|401/i;
+const AUTH_MESSAGE = [
+    'GitHub girişi / yetkisi reddedildi ya da giriş bilgisi sorulması gerekti (etkileşimsiz kipte sorulamaz).',
+    'Ne yapmalı: Emre GITHUBA_YUKLE.bat dosyasına bir kez çift tıklayıp açılan GitHub giriş penceresinde depo sahibinin',
+    'hesabıyla giriş yapsın (bilgiler Windows\'ta saklanır); sonra komut tekrar çalıştırılabilir. Hiçbir şey gönderilmedi.',
+    '💡 Başka bir hesapla yüklüyorsanız: depoda Settings -> Collaborators kısmından o hesabı ekleyin ve daveti kabul edin.'
+];
+
 function checkRemoteNotAhead() {
-    const r = gitRead(['ls-remote', '--heads', 'origin', BRANCH]);
+    const r = gitRead(['ls-remote', '--heads', 'origin', BRANCH], { timeout: NET_TIMEOUT_MS });
     if (r.status !== 0) {
+        if (NON_INTERACTIVE) {
+            if (r.error && /ETIMEDOUT/.test(String(r.error.code || r.error.message))) stop('GitHub 5 dakikada yanıt vermedi (git ls-remote). İnternet bağlantısını kontrol edip tekrar deneyin. Hiçbir şey gönderilmedi.');
+            if (AUTH_RE.test(r.stderr)) stop(AUTH_MESSAGE);
+            stop(['GitHub\'daki son durum okunamadı (git ls-remote): ' + (r.stderr || (r.error && r.error.message) || 'bilinmeyen hata'),
+                'İnternet bağlantısını kontrol edip tekrar deneyin. Hiçbir şey gönderilmedi.']);
+        }
         console.log('⚠️  GitHub\'daki son durum okunamadı (internet veya giriş sorunu olabilir); devam ediliyor.');
         return;
     }
@@ -156,6 +187,20 @@ function checkRemoteNotAhead() {
     const isAncestor = known && gitRead(['merge-base', '--is-ancestor', remoteSha, 'HEAD']).status === 0;
     if (!isAncestor) stop(BEHIND_MESSAGE);
     console.log('✓ GitHub\'daki son sürüm bu bilgisayarda da var.');
+}
+
+/** Tüm vakalara yapısal denetim (tools/vaka_ekle/dogrula.js --mevcut; ~1 sn). Dosya yoksa atlanır. */
+function runCaseValidator() {
+    const rel = path.join('tools', 'vaka_ekle', 'dogrula.js');
+    if (!fs.existsSync(rel)) return;
+    const r = spawnSync(process.execPath, [rel, '--mevcut'], { cwd: ROOT, encoding: 'utf8', windowsHide: true, maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+    const out = `${r.stdout || ''}${r.stderr || ''}`;
+    if (r.error || r.status !== 0) {
+        process.stdout.write(out);
+        stop(['Vaka yapı denetimi başarısız (node tools/vaka_ekle/dogrula.js --mevcut). Hatalı vakalar yukarıda.',
+            'Düzeltip tekrar çalıştırın. GitHub\'a hiçbir şey gönderilmedi.']);
+    }
+    console.log('✓ ' + (out.trim().split('\n').pop() || 'vaka yapı denetimi geçti'));
 }
 
 function runBuild() {
@@ -213,7 +258,7 @@ async function commit(pendingCount) {
         return;
     }
     let msg = MESSAGE_ARG;
-    if (!msg && !DRY_RUN) msg = await askQuestion('📝 Commit mesajı (boş bırakırsan: "PsikoVaka guncellemesi"): ');
+    if (!msg && !DRY_RUN && !NON_INTERACTIVE) msg = await askQuestion('📝 Commit mesajı (boş bırakırsan: "PsikoVaka guncellemesi"): ');
     if (!msg) msg = 'PsikoVaka guncellemesi';
     const r = gitWrite(['commit', '-m', msg]);
     if (r.status !== 0) {
@@ -230,9 +275,12 @@ function push() {
     const r = gitWrite(['push', '-u', 'origin', BRANCH], { captureStderr: true });
     if (r.status === 0) return;
     const e = r.stderr || '';
+    if (r.error && /ETIMEDOUT/.test(String(r.error.code || r.error.message))) {
+        stop('git push 5 dakikada bitmedi ve durduruldu. İnternet bağlantısını kontrol edin. (Commit bu bilgisayarda duruyor; tekrar çalıştırınca gönderilir.)');
+    }
     if (/\[rejected\]|non-fast-forward|fetch first|Updates were rejected/i.test(e)) stop(BEHIND_MESSAGE);
-    if (/Authentication failed|could not read Username|Permission to .* denied|403|401/i.test(e)) {
-        stop([
+    if (AUTH_RE.test(e)) {
+        stop(NON_INTERACTIVE ? AUTH_MESSAGE.concat('(Commit bu bilgisayarda duruyor; giriş düzelince tekrar çalıştırınca gönderilir.)') : [
             'GitHub girişi / yetkisi reddedildi.',
             'Açılan GitHub giriş penceresinde depo sahibinin hesabıyla giriş yaptığınızdan emin olun.',
             '💡 Başka bir hesapla yüklüyorsanız: depoda Settings -> Collaborators kısmından o hesabı ekleyin ve daveti kabul edin.'
@@ -250,6 +298,7 @@ function push() {
         console.log('==============================================================');
         console.log('🚀 PsikoVaka - Tek adımda yayın (doğrula + derle + GitHub\'a gönder)');
         if (DRY_RUN) console.log('   DENEME MODU: git\'e yazan hiçbir komut çalıştırılmayacak.');
+        if (NON_INTERACTIVE) console.log('   Etkileşimsiz kip: hiçbir soru sorulmaz; giriş gerekirse açık bir hatayla durur.');
         console.log('==============================================================\n');
 
         console.log('[1/5] Git ve GitHub kontrolü...');
@@ -259,6 +308,7 @@ function push() {
         checkRemoteNotAhead();
 
         console.log('\n[2/5] Vakalar doğrulanıyor ve tek dosyalık sürüm derleniyor...');
+        runCaseValidator();
         runBuild();
 
         console.log('\n[3/5] Sunucu cevap anahtarı (Supabase SQL) vakalardan üretiliyor...');

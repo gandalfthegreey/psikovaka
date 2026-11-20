@@ -740,7 +740,9 @@
         const pod = res.slice(0, 3);
         const order = pod.length >= 3 ? [pod[1], pod[0], pod[2]] : pod.length === 2 ? [pod[1], pod[0]] : pod;
         const metric = (x) => room.format === 'hp' ? `${x.final_hp != null ? x.final_hp : 0} can` : (room.format === 'battle' || room.format === 'bracket') && x.final_rank > 1 && x.eliminated_round ? `${x.total_score} puan` : `${x.total_score} puan`;
-        const noRp = room.ended_early && res.length && res.every(x => x.rp_delta === 0);
+        // 0004 sonrası: rakipler erken ayrıldıysa kalanlar tur RP'sini alır, yalnızca galibiyet primi verilmez (rp_breakdown.erken_bitis). Eski sunucu: toplam 0 → eski metin.
+        const earlyEnd = !!(mine && mine.rp_breakdown && mine.rp_breakdown.erken_bitis === true);
+        const noRp = !earlyEnd && room.ended_early && res.length && res.every(x => x.rp_delta === 0);
         const L = global.PsikoVakaLeagues;
         let league = '';
         if (mine && mine.rp_after != null && L) {
@@ -772,6 +774,7 @@
                         <div class="ol-pod-block"><span>${x.final_rank}</span></div>
                     </div>`;
                 }).join('')}</div>` : `<div class="ol-empty">${icon('hourglass')}<span>Sonuçlar yükleniyor…</span></div>`}
+                ${earlyEnd ? `<div class="notice">${icon('info')}<span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></div>` : ''}
                 ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için RP verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
                 ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için RP almadın.'}</span></div>` : ''}
                 ${league}

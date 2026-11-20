@@ -38,6 +38,8 @@ await db.exec(read('migrations/0002_online_ek.sql'));
 await db.exec(read('migrations/0002_online_ek.sql')); // tekrar çalıştırılabilir olmalı
 await db.exec(read('migrations/0003_gunluk_ve_hizli.sql'));
 await db.exec(read('migrations/0003_gunluk_ve_hizli.sql')); // tekrar çalıştırılabilir olmalı
+await db.exec(read('migrations/0004_kural_duzeltmeleri.sql'));
+await db.exec(read('migrations/0004_kural_duzeltmeleri.sql')); // tekrar çalıştırılabilir olmalı
 
 // ---------------------------------------------------------------- mini test aracı
 let passed = 0, failed = 0;
@@ -356,6 +358,7 @@ await test('RP v2 (ffa): tur başına g2 +8 / g1 +10 / g3 +6 / başarısız −1
   // U1: 8 + 10 − 10 (zaman aşımı) + 15 = 23; U2: −10 + 6 − 10 + 5 = −9; U4: pes −10, absent −10, zaman aşımı −10 = −30
   eq(res.map((r) => [r.user_id, r.final_rank, r.rp_delta]), [[U[1], 1, 23], [U[2], 2, -9], [U[4], 3, -30]]);
   const b1 = res[0].rp_breakdown;
+  eq(b1.erken_bitis, false, 'normal maçta erken_bitis false');
   eq([b1.total, b1.voided, b1.placement, b1.rounds], [23, false, 15, [{ delta: 8, round: 1, outcome: 'g2' }, { delta: 10, round: 2, outcome: 'g1' }, { delta: -10, round: 3, outcome: 'fail' }]]);
   eq(res[2].rp_breakdown.rounds.map((x) => x.outcome), ['fail', 'fail', 'fail']);
   eq([await rp(U[1]), await rp(U[2]), await rp(U[4])], [23, 0, 0], 'RP 0\'ın altına inmez');
@@ -526,17 +529,19 @@ await test('HP: tur sınırında canı yüksek olan kazanır', async () => {
 });
 
 console.log('\n[Erken bitiş ve RP çiftçiliği koruması]');
-await test('Rakip ilk turda çıkarsa maç biter; kalan için maç geçersiz (0), çıkan kalan turların cezasını öder (RP v2)', async () => {
+await test('Rakip ilk turda çıkarsa maç biter; kalan oynanmamış/yarıda kalan tur için 0 alır, prim yok (0004), çıkan kalan turların cezasını öder', async () => {
   const b = await rp(U[5]);
   const d = await setupMatch(U[5], [U[6]], { p_mode: 'duel', p_format: 'rounds', p_round_count: 5 });
   await rpc(U[6], 'leave_room', { p_room_id: d.id });
   const r = await room(d.id);
   eq([r.status, r.ended_early], ['finished', true]);
   const res = (await admin(`select user_id, rp_delta, left_early from public.match_results where room_id = $1 order by final_rank`, [d.id])).rows;
-  // U6: tur 1 'left' −10 + oynamadığı 2-5. turlar 4 × −10 = −50; U5: geçersiz maç, 0
+  // U6: tur 1 'left' −10 + oynamadığı 2-5. turlar 4 × −10 = −50; U5: tur 1 yarıda kesildi (void 0), prim yok -> 0
   eq(res.map((x) => [x.user_id, x.rp_delta, x.left_early]), [[U[5], 0, false], [U[6], -50, true]]);
   const b6 = (await one(`select rp_breakdown from public.match_results where room_id = $1 and user_id = $2`, [d.id, U[6]])).rp_breakdown;
-  eq([b6.voided, b6.rounds.filter((x) => x.missed).length, b6.total], [true, 4, -50]);
+  eq([b6.voided, b6.erken_bitis, b6.rounds.filter((x) => x.missed).length, b6.total], [true, false, 4, -50]);
+  const b5 = (await one(`select rp_breakdown from public.match_results where room_id = $1 and user_id = $2`, [d.id, U[5]])).rp_breakdown;
+  eq([b5.voided, b5.erken_bitis, b5.placement, b5.total, b5.rounds.map((x) => x.outcome)], [false, true, 0, 0, ['void']]);
   eq(await rp(U[5]), b);
 });
 

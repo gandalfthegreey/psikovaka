@@ -128,7 +128,8 @@ geç elenenden erken elenene.
   `room_rounds` (alt tur) eklenmesi yeterli.
 
 ### 3.5 RP (maç sonunda, sunucuda, bir kez)
-> **2026-11-15: bu tablo RP v2 ile değişti — geçerli kural §13.4.** Aşağıdaki koruma notları hâlâ geçerli.
+> **2026-11-15: bu tablo RP v2 ile değişti — geçerli kural §13.4.** Aşağıdaki koruma notları hâlâ geçerli;
+> çiftçilik korumasının *kalanlara* etkisi 2026-11-20'de 0004 ile değişti (§13.4 madde 4).
 
 | durum | RP |
 |---|---|
@@ -441,7 +442,7 @@ Hata kodları her zamanki gibi `error.message` içinde sabit İngilizce dizge, T
 | `daily_begin` | `p_target text` | `daily_state` + `started_at`, `guesses: [{stage, guess_no, item_id, correct, same_group}]` (sıralı), `guesses_left` (şu anki aşamada), `answer` (yalnızca `finished` ise `{diagnosis_id, therapy_id, pharmacology_id}`, değilse `null`). İdempotent: ilk çağrı saati başlatır, sonrakiler aynı denemeyi döner (yenilemede kaldığı yerden devam). | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `NOT_ENOUGH_CASES` |
 | `daily_submit_guess` | `p_target text, p_item_id text` | `{server_time, day, target, case_id, correct, same_group, stage, next_stage, stage_completed, guess_no, guesses_used, guesses_left, finished, won, points, time_sec, answer}` — `stage` = tahminin yapıldığı aşama; `next_stage` yalnızca kombo aşaması geçilip oyun sürüyorsa; `won/points/time_sec` bitene kadar `null`; `answer` yalnızca bitince | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `DAILY_NOT_STARTED` (önce `daily_begin`), `DAILY_ALREADY_FINISHED`, `UNKNOWN_ITEM`, `DUPLICATE_GUESS` |
 | `daily_give_up` | `p_target text` | `daily_state` + `answer` (kaybedilmiş olarak biter, puan 0, seri sıfırlanır) | `INVALID_TARGET`, `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`, `DAILY_NOT_STARTED`, `DAILY_ALREADY_FINISHED` |
-| `get_daily_leaderboard` | `p_target text, p_day date default null` (null = bugün; geçmiş günler salt okunur), `p_limit int default 50` (1–200'e kırpılır) | `{server_time, day, target, total_players, rows: [row], me: row \| null}`; `row = {rank, user_id, username, display_name, avatar, ranked_points, won, guesses_used, time_sec, points}`. Yalnızca BİTMİŞ sonuçlar. Sıra: kazananlar önce → puan ↓ → tahmin ↑ → süre ↑ → bitiş anı ↑ (`rank` 1'den, eşitlik yok). `me` = çağıranın satırı (ilk N'de olmasa da), oynamadıysa `null`. Cevap ve `case_id` YOK. | `INVALID_TARGET`, `NOT_AUTHENTICATED` |
+| `get_daily_leaderboard` | `p_target text, p_day date default null` (null = bugün; geçmiş günler salt okunur), `p_limit int default 50` (1–200'e kırpılır) | `{server_time, day, target, total_players, rows: [row], me: row \| null}`; `row = {rank, user_id, username, display_name, avatar, ranked_points, won, guesses_used, time_sec, points}`. Yalnızca BİTMİŞ sonuçlar. Sıra (**0004, 2026-11-20**): önce kazananlar → tahmin ↑ → süre ↑ → bitiş anı ↑; sonra kaybedenler (6 yanlış / pes) → tahmin ↓ (çok deneyen önde) → bitiş anı ↑ (`rank` 1'den, eşitlik yok). `points` satırda kalır ama sırayı etkilemez; geçmiş günler de aynı sırayla. ~~0003: kazananlar → puan ↓ → tahmin ↑ → süre ↑ → bitiş anı ↑~~ (0004 ile değişti). `me` = çağıranın satırı (ilk N'de olmasa da), oynamadıysa `null`. Cevap ve `case_id` YOK. | `INVALID_TARGET`, `NOT_AUTHENTICATED` |
 | `get_my_streaks` | — | `[{target, current_streak, best_streak, last_day, played_today}]` — her zaman 4 satır (diagnosis, therapy, pharmacology, combo; hiç oynanmadıysa 0/0/null/false) | `NOT_AUTHENTICATED` |
 
 **Seriler** (`solo_streaks`, yalnızca sunucu yazar): her günlük bitişte (kullanıcı × hedef) güncellenir. Kazanç: önceki sonuç
@@ -502,7 +503,7 @@ alanlarını da içerir.
 - Yeni tablolar (RLS açık, politika YOK, yetki yok): `daily_attempts` (kullanıcı × gün × hedef; durum, aşama, sayaçlar, `started_at`),
   `daily_guesses` (tahmin içerikleri).
 - `daily_results`'a yalnızca bitişte yazılır (`completed_at` = bitiş anı). `daily_leaderboard` görünümü yeni sıralamayla yeniden tanımlandı
-  (sütunlar aynı).
+  (sütunlar aynı). **0004** görünümün `position` sırasını `get_daily_leaderboard` ile aynı yeni sıraya çekti (§13.1; `rank()`, eşitlik olabilir).
 - `game_config`: `quick_wait_timeout_sec` (120), `quick_round_count` (3), `daily_no_repeat_days` (60), RP v2 anahtarları (§13.4); `rp_default` 250 → 0.
 - `match_results.rp_breakdown jsonb`; `profiles.ranked_points` varsayılanı 0.
 - Değiştirilen (aynı davranış + ek) fonksiyonlar: `start_match` (gövdesi `_start_match_locked`'a taşındı), `_join_room_locked` (hızlı odada
@@ -543,16 +544,27 @@ alanlarını da içerir.
 **3) Toplam:** `rp_delta = Σ tur + prim`; `ranked_points = max(0, ranked_points + rp_delta)`. `rp_after` gerçek yeni değerdir
 (taban 0 yüzünden `rp_after − önceki ≠ rp_delta` olabilir).
 
-**4) Çiftçilik koruması ile etkileşim:** maç rakipler çıktığı için erken bittiyse ve turların yarısından azı oynandıysa
-(`rooms.ended_early` + eşik, §3.5): **odada kalanların** toplamı 0 (maç geçersiz; ne kazanç ne kayıp, satırlar `voided:true`);
-**çıkanlar** yalnızca negatif kalemlerini öder (pozitif turları ve primi silinir). Böylece maçtan kaçmak asla bedava değil ve ikinci
-hesapla katıl-çık hâlâ kazanç getirmez.
+**4) Çiftçilik koruması ile etkileşim (0004, Emre onayı 2026-11-20):** maç rakipler çıktığı için erken bittiyse ve turların yarısından
+azı oynandıysa (`rooms.ended_early` + eşik, §3.5):
+- **Odada kalanlar** oynadıkları turların normal RP v2 değerlerini alır (çözülen tur +10…+1, çözülemeyen −10; maç bittiği için yarıda
+  kesilen tur `void` = 0; hiç oynanmayan turlar için satır yoktur = 0) ama **sıralama primi almaz**. Döküm: `placement: 0`,
+  `voided: false`, **`erken_bitis: true`**. Bu maç `matches_won`'a galibiyet olarak yazılmaz (`matches_played` +1, eskisi gibi).
+- **Çıkanlar** değişmedi: yalnızca negatif kalemlerini öder (pozitif turları ve primi silinir); döküm `voided: true`, `erken_bitis: false`.
+- Eşik sağlandıysa (turların en az yarısı oynandı) ya da maç normal bittiyse kural tetiklenmez: herkes tur + prim alır, `erken_bitis: false`.
+- RP 0 tabanı ve bir kez uygulama (idempotent) aynen geçerli.
+
+~~0003: odada kalanların toplamı 0 (maç geçersiz, `voided:true`)~~ — 0004 ile değişti. Bilinen ödünleşim: ikinci hesapla katıl-çık artık
+kalan hesaba yalnızca oynanan turların puanını getirir (prim yok, çıkan hesap her seferinde kalan turlar × −10 öder).
+
+İstemci için: `erken_bitis === true` ise "Rakip erken ayrıldı: galibiyet primi verilmedi" gösterilir; `voided === true` (yalnızca çıkan)
+eskisi gibi "geçersiz sayıldı" notu. 0004'ten önce biten maçların dökümünde `erken_bitis` anahtarı yoktur: yoksa `false` say.
 
 **5) Saklama ve okuma:** `match_results.rp_delta` (toplam) + yeni `match_results.rp_breakdown jsonb`:
 ```json
 { "rounds": [ { "round": 1, "outcome": "g2", "delta": 8 }, { "round": 2, "outcome": "fail", "delta": -10, "missed": true } ],
-  "placement": 10, "voided": false, "total": 8 }
+  "placement": 10, "voided": false, "erken_bitis": false, "total": 8 }
 ```
+`erken_bitis` 0004'te eklendi (madde 4); diğer alanlar 0003 ile aynı.
 `match_results` oda üyelerine ve sahibine okunur (0001 politikası; yeni sütun da). `get_room_state.results[]` artık `rp_breakdown` içerir.
 
 | RPC | Parametreler | Dönüş | Hatalar |
@@ -568,3 +580,7 @@ Mevcut hesaplar değişmez. Lig adları/eşikleri yalnızca istemcide (`js/leagu
   iki sekmeden aynı günlük tahmin). 0003 iki kez çalıştırıldığında parmak izi aynı (fonksiyon, yetki, ayar, sütun, politika, kısıt).
 - Migration'lar artık GitHub Actions ile uygulanır (`supabase/tools/apply_migrations.sh`, kayıt tablosu `public._migrations`);
   ayrıntı `README.md`. 0003 gerçek Supabase'de henüz çalıştırılmadı.
+- **0004 (2026-11-20, ajan X):** `tests/scenario.test.mjs` 46/46 (PGlite ve PostgreSQL 16; 0001…0004, 0004 iki kez) ve
+  `tests/daily_quick.test.mjs` 50/50 (PGlite) / 52/52 (PostgreSQL 16). 0004 ikinci kez çalıştırılınca parmak izi aynı; yetkiler,
+  `security definer`, `search_path` ve RPC imzaları/dönüşleri 0003 ile aynı. `apply_migrations.sh` 0001–0003'ü uygulanmış yerel
+  Postgres'e 0004'ü uyguladı, ikinci çalıştırmada atladı. Canlıda bir sonraki yayında Actions uygular.

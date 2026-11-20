@@ -19,14 +19,14 @@
     // ---------------------------------------------------------- sahte hesap
     const listeners = new Set();
     const snap = () => (M.opt && M.opt.guest ? { state: 'guest', availability: 'ready', user: null, profile: null, remember: true, passwordMinLength: 8 } : { state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
-        profile: { id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760 }, remember: true, passwordMinLength: 8 });
+        profile: { id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: (M.rpProfile != null ? M.rpProfile : 760) }, remember: true, passwordMinLength: 8 });
     const fakeAcc = Object.assign({}, realAcc, {
         init: async () => { listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
         onChange: (fn) => { listeners.add(fn); return () => listeners.delete(fn); },
         snapshot: snap,
         getClient: () => ({ mock: true }),
         getRemember: () => true,
-        refreshProfile: async () => ({ ok: true }),
+        refreshProfile: async () => { M.refreshCalls = (M.refreshCalls || 0) + 1; if (M.rpServer != null) M.rpProfile = M.rpServer; listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
         getLeaderboard: async () => ({ ok: true, rows: names.slice(0, 8).map((n, i) => ({ user_id: uid(i), username: n, avatar: AV.randomConfig(n), ranked_points: 2100 - i * 230, position: i + 1 })), me: null })
     });
     Object.defineProperty(fakeAcc, 'state', { get: () => (M.opt && M.opt.guest ? 'guest' : 'ready') });
@@ -36,8 +36,8 @@
     // ---------------------------------------------------------- sahte realtime
     const noopHandle = { track() {}, send() { return true; }, presence() { return {}; }, isLive() { return true; }, leave() {} };
     Object.assign(NS.realtime, {
-        startSelf() {}, stopSelf() {}, setStatus() {}, watchFriends() {}, friendStatus: (id) => (/[2357]$/.test(id) ? { status: id.endsWith('3') ? 'in_match' : 'online' } : null),
-        watchPublicRooms() {}, stopPublicRooms() {}, joinRoom: () => noopHandle, stopAll() {}
+        startSelf(u, handlers) { M.selfHandlers = handlers || null; }, stopSelf() {}, setStatus() {}, watchFriends() {}, friendStatus: (id) => (/[2357]$/.test(id) ? { status: id.endsWith('3') ? 'in_match' : 'online' } : null),
+        watchPublicRooms() {}, stopPublicRooms() {}, joinRoom: (id, u, handlers) => { M.rt = handlers; return noopHandle; }, stopAll() {}
     });
 
     // ---------------------------------------------------------- sahte sunucu
@@ -70,7 +70,7 @@
             { id: 'f3', status: 'accepted', requester_id: ME, addressee_id: uid(3), updated_at: iso(now()), requester: null, addressee: { id: uid(3), username: longNames[3], avatar: AV.randomConfig(names[3]), ranked_points: 2050 } },
             { id: 'f4', status: 'accepted', requester_id: ME, addressee_id: uid(4), updated_at: iso(now()), requester: null, addressee: { id: uid(4), username: names[4], avatar: AV.randomConfig(names[4]), ranked_points: 410 } },
             { id: 'f5', status: 'pending', requester_id: uid(5), addressee_id: ME, updated_at: iso(now()), requester: { id: uid(5), username: names[5], avatar: AV.randomConfig(names[5]), ranked_points: 980 }, addressee: null },
-            { id: 'f6', status: 'pending', requester_id: ME, addressee_id: uid(6), updated_at: iso(now()), requester: null, addressee: { id: uid(6), username: names[6], avatar: AV.randomConfig(names[6]), ranked_points: 1310 } }
+            { id: 'f6', status: M.opt.f6accepted ? 'accepted' : 'pending', requester_id: ME, addressee_id: uid(6), updated_at: iso(now()), requester: null, addressee: { id: uid(6), username: names[6], avatar: AV.randomConfig(names[6]), ranked_points: 1310 } }
         ]),
         listPublicRooms: () => M.hubMode === 'error' ? err('OFFLINE', 'Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.') : ok(M.hubMode === 'empty' ? [] : [
             { id: 'p1', code: 'ABC234', mode: 'ffa', format: 'rounds', target_type: 'combo', capacity: 6, player_count: 3, round_count: 5, host: { username: names[3], avatar: AV.randomConfig(names[3]) } },
@@ -157,7 +157,7 @@
             const t = now();
             return ok([
                 { room_id: 'h1', finished_at: iso(t - 3600e3), mode: 'duel', format: 'hp', target: 'diagnosis', placement: 1, players: 2, rp_delta: 32, rp_after: 760,
-                    rp_breakdown: { rounds: [{ round: 1, outcome: 'g1', delta: 10 }, { round: 2, outcome: 'g3', delta: 6 }, { round: 3, outcome: 'fail', delta: -10 }, { round: 4, outcome: 'g2', delta: 8 }, { round: 5, outcome: 'g2', delta: 8 }], placement: 10, voided: false, total: 32 } },
+                    rp_breakdown: { rounds: [{ round: 1, outcome: 'g1', delta: 10 }, { round: 2, outcome: 'g3', delta: 6 }, { round: 3, outcome: 'fail', delta: -10 }, { round: 4, outcome: 'g2', delta: 8 }, { round: 5, outcome: 'g2', delta: 8 }], placement: M.opt.erkenBitis ? 0 : 10, voided: false, erken_bitis: !!M.opt.erkenBitis, total: 32 } },
                 { room_id: 'h2', finished_at: iso(t - 86400e3), mode: 'ffa', format: 'rounds', target: 'combo', placement: 3, players: 4, rp_delta: -14, rp_after: 728,
                     rp_breakdown: { rounds: [{ round: 1, outcome: 'fail', delta: -10 }, { round: 2, outcome: 'g5', delta: 2 }, { round: 3, outcome: 'fail', delta: -10, missed: true }, { round: 4, outcome: 'g4', delta: 4 }], placement: 0, voided: false, total: -14 } },
                 { room_id: 'h3', finished_at: iso(t - 2 * 86400e3), mode: 'tournament', format: 'battle', target: 'therapy', placement: 2, players: 4, rp_delta: 20, rp_after: 742 }
@@ -282,5 +282,9 @@
     }
     // Yeniden yükleme testleri için: sessionStorage['olMockPersist']='1' ise durum saklanır ve geri yüklenir
     function persist() { try { if (sessionStorage.getItem('olMockPersist') === '1') sessionStorage.setItem('olMockState', JSON.stringify({ state: M.state, opt: M.opt, daily: M.daily })); } catch (e) { /* yok */ } }
-    window.olMock = { scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; persist(); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
+    /** Ajan W: sahte realtime olayı (rooms güncellemesi: gerçek sunucudaki gibi iki ayrı UPDATE) */
+    function emitRoomChange(patch) { if (!M.state) return; const old = M.state.room; M.state.room = Object.assign({}, old, patch); if (M.rt && M.rt.onChange) M.rt.onChange('rooms', { eventType: 'UPDATE', new: Object.assign({}, M.state.room), old: { id: old.id } }); }
+    function emitFriendship(ev) { if (M.selfHandlers && M.selfHandlers.onFriendship) M.selfHandlers.onFriendship(ev || { eventType: 'UPDATE' }); }
+    function emitResync() { if (M.selfHandlers && M.selfHandlers.onResync) M.selfHandlers.onResync(); }
+    window.olMock = { emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; persist(); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
 })();

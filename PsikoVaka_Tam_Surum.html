@@ -14662,8 +14662,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "rem_sleep_behavior_disorder",
-            "nrem_sleep_arousal",
-            "circadian_rhythm_sleep_wake"
+            "nrem_sleep_arousal"
         ],
         "shortDefinition": "REM Uykusu Davranış Bozukluğu (RBD - rüyaları yaşama) ve tehlikeli/adli NREM parasomnilerinde (Seksomni, travmatik Uyurgezerlik) yatak odası güvenlik önlemleriyle birlikte motor disinhibisyonu baskılayan spesifik gece protokolüdür.",
         "mechanism": "Klonazepam uzun etkili GABA-A agonizması ile beyin sapı lokomotor merkezlerini ve фаzik REM motor deşarjlarını baskılar, NREM derin uykusundan patolojik kısmi uyanma (arousal) eşiğini stabilize eder; Melatonin ise MT1/MT2 reseptörleri üzerinden REM kas atonisini restore eder.",
@@ -14832,8 +14831,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "narcolepsy",
-            "hypersomnolence",
-            "circadian_rhythm_sleep_wake"
+            "hypersomnolence"
         ],
         "shortDefinition": "Narkolepsi (Tip 1 Katapleksili ve Tip 2), İdiyopatik Hipersomnolans ve Vardiyalı Çalışma Uyku Bozukluğunda karşı konulamaz gündüz uyku ataklarını ve ani kas tonusu kaybını (katapleksi) önleyen uyanıklık destekleyici protokoldür.",
         "mechanism": "Modafinil zayıf/seçici DAT blokajı üzerinden hipotalamik histaminerjik (TMN) ve oreksinerjik (hipokretin) uyanıklık yolaklarını aktive eder; Pitolisant H3 otoreseptör ters agonizmasıyla histamin ve noradrenalin salınımını artırarak hem uyanıklığı sağlar hem katapleksiyi önler; Sodyum Oksibat gece GABA-B agonizmasıyla derin yavaş dalga uykusunu konsolide eder.",
@@ -15346,7 +15344,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "obstructive_sleep_apnea": "psychotherapy_first_no_drug",
     "central_sleep_apnea": "psychotherapy_first_no_drug",
     "sleep_related_hypoventilation": "psychotherapy_first_no_drug",
-    "circadian_rhythm_sleep_wake": "clonazepam_parasomnia",
     "nrem_sleep_arousal": "clonazepam_parasomnia",
     "nightmare_disorder": "prazosin_nightmares",
     "rem_sleep_behavior_disorder": "clonazepam_parasomnia",
@@ -33119,6 +33116,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (F.reloadAgain) { F.reloadAgain = false; load(); }
     }
     const reloadSoon = NS.util.debounce(() => load(), 300);
+    const reloadVerifySoon = NS.util.debounce(() => load({ silent: true }), 2500);
 
     async function loadInvites() {
         const r = await NS.api.listPendingInvites();
@@ -33424,7 +33422,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     NS.friends = {
         state: F, openChallengeSheet, challenge, load, loadInvites, reloadSoon, reloadInvitesSoon, renderInto, render, openInvitePicker, reset, add, respond,
-        onFriendshipChange() { reloadSoon(); },
+        // Her arkadaşlık olayında hemen + 2,5 sn sonra bir kez daha tazele (olay işlem tamamlanmadan geldiyse ya da kaçtıysa liste yine düzelir)
+        onFriendshipChange() { reloadSoon(); reloadVerifySoon(); },
+        /** Online merkezine/Arkadaşlar bölümüne her dönüşte ve görünür olunca tazele (sessiz). */
+        refreshOnShow() { if (NS.api.myId()) { load({ silent: true }); loadInvites(); } },
         onInviteChange(p) { reloadInvitesSoon(); if (p && p.new && p.new.status !== 'pending') NS.ui.closeBanner('inv-' + p.new.id); }
     };
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -35048,7 +35049,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const pod = res.slice(0, 3);
         const order = pod.length >= 3 ? [pod[1], pod[0], pod[2]] : pod.length === 2 ? [pod[1], pod[0]] : pod;
         const metric = (x) => room.format === 'hp' ? `${x.final_hp != null ? x.final_hp : 0} can` : (room.format === 'battle' || room.format === 'bracket') && x.final_rank > 1 && x.eliminated_round ? `${x.total_score} puan` : `${x.total_score} puan`;
-        const noRp = room.ended_early && res.length && res.every(x => x.rp_delta === 0);
+        // 0004 sonrası: rakipler erken ayrıldıysa kalanlar tur RP'sini alır, yalnızca galibiyet primi verilmez (rp_breakdown.erken_bitis). Eski sunucu: toplam 0 → eski metin.
+        const earlyEnd = !!(mine && mine.rp_breakdown && mine.rp_breakdown.erken_bitis === true);
+        const noRp = !earlyEnd && room.ended_early && res.length && res.every(x => x.rp_delta === 0);
         const L = global.PsikoVakaLeagues;
         let league = '';
         if (mine && mine.rp_after != null && L) {
@@ -35080,6 +35083,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                         <div class="ol-pod-block"><span>${x.final_rank}</span></div>
                     </div>`;
                 }).join('')}</div>` : `<div class="ol-empty">${icon('hourglass')}<span>Sonuçlar yükleniyor…</span></div>`}
+                ${earlyEnd ? `<div class="notice">${icon('info')}<span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></div>` : ''}
                 ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için RP verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
                 ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için RP almadın.'}</span></div>` : ''}
                 ${league}
@@ -35286,7 +35290,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 <ul class="lg-notes">
                     <li>Maçtan erken ayrılırsan kalan her tur çözülemedi sayılır. Elendikten sonraki turlar puan götürmez.</li>
                     <li>Kombo: üç aşamadaki tahmin sayılarının ortalaması kullanılır; bir aşama çözülemezse tur çözülemedi sayılır.</li>
-                    <li>Rakipler ayrıldığı için maç erken biterse, kalanlar için maç geçersiz olur (0 RP).</li>
+                    <li>Rakipler ayrıldığı için maç erken biterse (turların yarısı oynanmadan), kalanlara galibiyet primi verilmez.</li>
                     <li>RP 0'ın altına düşmez. Yeni hesaplar 0 RP ile başlar.</li>
                     <li>Günün vakası ve tek kişilik pratik RP vermez.</li>
                 </ul>`;
@@ -35327,6 +35331,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const place = Number(bd.placement || 0);
         return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(x))}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
             ${place ? `<li class="lg-bd-place"><span>Sıralama primi</span><span class="lg-delta is-plus">${signed(place)}</span></li>` : ''}
+            ${bd.erken_bitis === true ? `<li class="lg-bd-note"><span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></li>` : ''}
             ${bd.voided ? `<li class="lg-bd-note"><span>Maç erken bittiği için geçersiz sayıldı.</span></li>` : ''}</ul>`;
     }
     function historyHtml() {
@@ -36042,7 +36047,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     const PENDING_KEY = 'psikovaka_online_pending_room';
     const A = {
         started: false, layer: null, view: null, viewTimer: null, uid: null,
-        pendingRematch: null, lastPhase: null, leaving: false,
+        pendingRematch: null, lastPhase: null, leaving: false, rpRefreshedFor: null,
         challenge: null, chTimer: null
     };
 
@@ -36127,6 +36132,24 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (t) A.viewTimer = t;
     }
 
+    // ------------------------------------------------------------ maç sonrası RP/lig tazeleme (ajan W, hata 1)
+    /** Hesap profilini ve lig ekranı önbelleğini tazele; profil değişince başlık hapı, ana sayfa hapı, Profil ve #/ligler kendiliğinden yeniden çizilir. */
+    function refreshRpViews() {
+        try { if (NS.leaguesView && NS.leaguesView.invalidate) NS.leaguesView.invalidate(); } catch (e) { /* yok */ }
+        const a = account();
+        if (!a || typeof a.refreshProfile !== 'function' || !ready()) return;
+        try { const p = a.refreshProfile(); if (p && typeof p.catch === 'function') p.catch(() => {}); } catch (e) { /* yok */ }
+    }
+    /** Hızlı eşleşmede tek başına aranırken kapanan oda: close_reason henüz gelmemiş olsa da "Şu an kimse yok" görünümü (hata 2). */
+    function isQuickTimeout(s) {
+        const r = s && s.room;
+        if (!r || !r.is_quick) return false;
+        if (r.close_reason === 'quick_timeout') return true;
+        if (r.close_reason) return false;
+        const started = (r.current_round || 0) > 0 || (s.players || []).some(p => p.played);
+        return !started;
+    }
+
     // ------------------------------------------------------------ yönlendirme (oda fazına göre)
     function route() {
         const s = NS.rooms.state;
@@ -36139,7 +36162,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             else if (s.room.format === 'bracket' && mine.finished && NS.match.myPairingDone(s)) view = 'pairing';
             else view = 'play';
         }
-        const sigParts = [view, s.room.current_round, s.round && s.round.closed_at ? 1 : 0];
+        const sigParts = [view, s.room.current_round, s.round && s.round.closed_at ? 1 : 0, s.room.close_reason || '', s.room.is_quick ? 1 : 0];
         if (view === 'result' || view === 'spectate' || view === 'pairing') sigParts.push(JSON.stringify([s.round_players.map(r => [r.user_id, r.finished, r.guess_count, r.points]), s.pairings.map(p => p.winner_id), s.room.next_round_at, s.players.map(p => [p.total_score, p.hp, p.eliminated_round])]));
         if (view === 'finished') sigParts.push(s.results.length, JSON.stringify(s.results.map(r => r.rp_after)));
         const sig = JSON.stringify(sigParts);
@@ -36173,8 +36196,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         else if (view === 'result') A.viewTimer = NS.match.renderResult(root);
         else if (view === 'spectate') A.viewTimer = NS.match.renderSpectate(root, 'spectate');
         else if (view === 'pairing') A.viewTimer = NS.match.renderSpectate(root, 'pairing');
-        else if (view === 'finished') { NS.match.exit(); NS.match.renderFinal(root); }
-        else if (view === 'abandoned' && s.room.is_quick && s.room.close_reason === 'quick_timeout') {
+        else if (view === 'finished') {
+            NS.match.exit(); NS.match.renderFinal(root);
+            if (A.rpRefreshedFor !== s.room.id) { A.rpRefreshedFor = s.room.id; refreshRpViews(); }
+        }
+        else if (view === 'abandoned' && isQuickTimeout(s)) {
             NS.match.exit();
             const me = NS.rooms.me() || {};
             root.innerHTML = `<div class="ol-center-view"><div class="ol-card-big">
@@ -36264,6 +36290,21 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         return r;
     }
 
+    /** Maçtan çıkınca sunucunun (_finish_match) "kalan tur" olarak cezalandıracağı tur sayısı (§13.4). */
+    function leaveRoundsLeft(s) {
+        const mr = NS.rooms.myRound();
+        const cur = s.room.current_round || 0;
+        const open = mr && !mr.finished ? 1 : 0;       // bitirmediğin bu tur
+        if (s.room.format === 'bracket') {
+            // yalnızca bulunduğun eşleşmenin turu; sonraki turun eşleşmesi varsa o da
+            const me = NS.api.myId();
+            const next = (s.pairings || []).filter(p => p.bracket_round > cur && (p.player_a === me || p.player_b === me)).length;
+            return open + next;
+        }
+        const total = s.room.format === 'hp' ? 10 : s.room.round_count;
+        return Math.max(0, total - cur + open);
+    }
+
     async function leaveRoom() {
         const s = NS.rooms.state;
         if (!s) { exitToHub(); return; }
@@ -36274,11 +36315,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const alive = me.eliminated_round == null;
             const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
             // RP v2 (§13.4): kalan her tur (bu tur dahil, bitirmediysen) −pen; hp'de tur sınırı 10, bracket'te yalnızca bu eşleşme
-            const mr = NS.rooms.myRound();
-            const total = s.room.format === 'hp' ? 10 : s.room.round_count;
-            const cur = s.room.current_round || 0;
-            const left = s.room.format === 'bracket' ? 1 : Math.max(1, total - cur + (mr && !mr.finished ? 1 : 0));
-            const leaveText = pen ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} RP. Sıralama primi de alamazsın.` : 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.';
+            const left = leaveRoundsLeft(s);
+            const leaveText = !pen ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.'
+                : left > 0 ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} RP. Sıralama primi de alamazsın.`
+                : 'Ayrılırsan sıralama primi alamazsın. Bitirilmemiş tur kalmadığı için ek RP kesilmez.';
             const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama RP alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
             if (!ok) return;
         }
@@ -36290,6 +36330,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
 
     function exitToHub() {
+        const st0 = NS.rooms.state;
+        const hadMatch = !!(st0 && st0.room && st0.room.status !== 'lobby' && (st0.players || []).some(p => p.played));
         clearChallenge();
         NS.match.exit();
         if (NS.rooms.roomId) NS.rooms.close(true);
@@ -36300,6 +36342,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (gm && gm.showRoute) gm.showRoute('online');
         if (location.hash.startsWith('#room=')) { try { history.replaceState(null, '', location.pathname + location.search + '#/online'); } catch (e) { /* yok */ } }
         if (NS.hub && NS.hub.refreshPublicRooms) NS.hub.refreshPublicRooms();
+        if (hadMatch) refreshRpViews();
     }
 
     /** Rövanş: aynı ayarlarla yeni oda, eski odanın kanalında haber ver, arkadaş olanları davet et. */
@@ -36443,6 +36486,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         });
         NS.rooms.bus.on('error', (e) => { if (e && e.code === 'OFFLINE') NS.toast(e.message); });
         global.addEventListener('hashchange', onHash);
+        // Arkadaş listesi: Online ekranına her gelişte ve sekme yeniden görünür/bağlantı geri gelince tazele (kaçan olaylara karşı)
+        const prevOnline = gm.screenHooks && gm.screenHooks.online;
+        if (gm.registerScreen) gm.registerScreen('online', (i) => { if (prevOnline) prevOnline(i); if (ready() && NS.friends) NS.friends.refreshOnShow(); });
+        document.addEventListener('visibilitychange', () => { if (!document.hidden && ready() && NS.friends) NS.friends.refreshOnShow(); });
+        global.addEventListener('online', () => { if (ready() && NS.friends) NS.friends.refreshOnShow(); });
         const acc = account();
         if (acc && acc.onChange) acc.onChange((snap) => onAccount(snap));
         onAccount(acc && acc.snapshot ? acc.snapshot() : null);

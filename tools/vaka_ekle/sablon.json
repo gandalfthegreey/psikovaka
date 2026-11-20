@@ -1,0 +1,76 @@
+[
+    {
+        "difficulty": "Zor",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "mild_neurocognitive_vascular",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "67 yaşında, erkek, emekli tapu memuru",
+        "clues": [
+            "67 yaşındaki emekli tapu memuru, eşinin ısrarıyla getirildi; son bir yıldır 'eskisi gibi hızlı düşünemediğini', gazete okurken satırı kaybettiğini ve kahvehanede okey oynarken taşları saymakta zorlandığı için oyunu bıraktığını anlatıyor.",
+            "Öyküsünde 15 yıllık hipertansiyon, tip 2 diyabet ve 30 paket-yıl sigara var. Yakınmaların, 14 ay önce sağ kolunda yarım saat süren uyuşma ve konuşmada peltekleşmeyle acile başvurduğu bir ataktan sonra başladığı ve o günden beri 'bir basamak inmiş gibi' sürdüğü öğreniliyor.",
+            "Eşi, hastanın artık bir işe başlamakta, birkaç işi sırayla planlamakta ve yarım kalan konuşmaya geri dönmekte zorlandığını; buna karşın dün akşam kimlerin ziyarete geldiğini ve haftanın maç sonuçlarını bildiğini söylüyor.",
+            "Kan sayımı, B12, folat, TSH ve böbrek-karaciğer testleri olağan. Beyin MR'ında periventriküler ve derin beyaz cevherde yaygın hiperintensiteler ile sol talamusta ve bazal ganglionlarda iki eski lakün enfarkt izleniyor; hipokampus hacmi yaşıyla uyumlu.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, gün içinde dalgalanma yok. MoCA 23/30; puan kaybı iz sürme, saat çizimi, sözel akıcılık ve seri çıkarmada. Gecikmeli hatırlamada kendiliğinden 2/5 sözcük, ipucuyla 5/5. Duygudurum ötimik, Geriatrik Depresyon Ölçeği 3/15.",
+            "Faturalarını kendisi ödüyor, ilaçlarını haftalık ilaç kutusuyla düzenliyor ve pazar alışverişini tek başına yapıyor; ancak bunları her şeyi deftere yazarak ve eskisine göre neredeyse iki kat sürede tamamladığını söylüyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "bir ataktan sonra başladığı ve o günden beri 'bir basamak inmiş gibi' sürdüğü",
+                "dsmMatch": "Kriter B: Bilişsel gerilemenin serebrovasküler bir olayla zamansal ilişkisi"
+            },
+            {
+                "clueIndex": 3,
+                "text": "iki eski lakün enfarkt",
+                "dsmMatch": "Kriter C: Nörogörüntülemede gerilemeyi açıklayan serebrovasküler hastalık kanıtı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "her şeyi deftere yazarak ve eskisine göre neredeyse iki kat sürede",
+                "dsmMatch": "Kriter A: Bağımsızlık korunuyor, telafi stratejileriyle sürdürülüyor (hafif düzey)"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Vasküler Risk Etmenlerinin Sıkı Denetimi & Bilişsel Rehabilitasyon",
+            "therapyDetails": "Tansiyon, kan şekeri ve kolesterolün hedefte tutulması, sigaranın bırakılması ve düzenli egzersiz; liste, takvim ve ilaç kutusu gibi telafi stratejilerinin öğretilmesi ve eşe psikoeğitim.",
+            "pharmacologyNote": "Psikotrop ilaç birinci basamak değildir; ikincil inme önlemi (antiagregan, statin, antihipertansif) nörolojiyle birlikte düzenlenir. Kolinesteraz inhibitörlerinin hafif vasküler tablodaki yararı sınırlıdır."
+        },
+        "miniQuiz": {
+            "question": "Küçük damar hastalığına bağlı bilişsel gerilemede, Alzheimer tipine göre hangi bilişsel profil daha tipiktir?",
+            "options": [
+                "Erken ve ağır yeni öğrenme kaybı; ipucu verilse de sözcüklerin hatırlanamaması",
+                "İşlem hızı ve yönetsel işlevlerde belirgin yavaşlama; ipucuyla düzelen geri getirme güçlüğü",
+                "Erken dönemde ayrıntılı görsel varsanılar ve parkinsonizm",
+                "Erken dönemde kişilik değişikliği ve toplumsal uygunsuz davranışlar"
+            ],
+            "correctIndex": 1,
+            "explanation": "Küçük damar hastalığı ön-subkortikal devreleri bozduğu için yavaşlama ve yönetsel işlev kaybı öne çıkar; bellekte sorun kaydetmeden çok geri getirmededir ve ipucuyla düzelir. Diğer seçenekler sırasıyla Alzheimer, Lewy cisimcikli ve frontotemporal tabloları düşündürür."
+        },
+        "differentialDiagnosis": "• Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı): Sinsi başlar; öne çıkan, ipucuyla düzelmeyen yeni öğrenme ve bellek kaybıdır.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Gündelik işlerde bağımsızlık bozulmuştur.\n• Majör Depresif Bozukluk: Belirgin çökkünlük ve çaba azlığı vardır; burada duygudurum ötimiktir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bir ya da daha çok bilişsel alanda ılımlı gerileme + Bağımsızlık korunmuş (telafiyle) + Serebrovasküler olayla zamansal ilişki ya da karmaşık dikkat/yönetsel işlevlerde ağırlık + Görüntülemede serebrovasküler hastalık kanıtı.",
+        "therapyId": "caregiver_behavioral",
+        "pharmacologyId": "psychotherapy_first_no_drug",
+        "explanation": {
+            "whyThis": [
+                "Bir yıldır süren düşünce yavaşlığı, planlama ve işe başlama güçlüğü ile MoCA'da iz sürme, saat çizimi ve akıcılıkta puan kaybı, karmaşık dikkat ve yönetsel işlevlerde ılımlı bir gerilemeyi gösterir.",
+                "Yakınmaların inme benzeri bir ataktan sonra basamak şeklinde başlaması ve MR'daki lakün enfarktlar ile yaygın beyaz cevher lezyonları, gerilemeyi açıklayan serebrovasküler hastalığa işaret eder.",
+                "Faturalar, ilaçlar ve alışveriş gibi gündelik işleri listelerle ve daha uzun sürede de olsa kendisi sürdürdüğü için bağımsızlık korunmuştur; bu, hafif düzeyi gösterir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "mild_neurocognitive_alzheimer",
+                    "reason": "Başlangıç sinsi değil, bir atakla ilişkili ve basamaklıdır; bellek sorunu ipucuyla düzelen bir geri getirme güçlüğüdür ve hipokampus hacmi korunmuştur."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "Gündelik işlerde bağımsızlık bozulmamıştır; yalnızca daha çok çaba ve telafi gerekmektedir."
+                },
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Duygudurum ötimik ve depresyon ölçeği puanı düşüktür; bilişsel yakınmalar çökkünlükle açıklanamaz."
+                }
+            ],
+            "teachingPoint": "Damarsal kökenli bilişsel bozulmada önce bellek değil işlem hızı ve yönetsel işlevler bozulur; inmeyle zamansal ilişki ya da görüntülemedeki lezyonlar etiyolojiyi, bağımsızlığın korunması ise hafif düzeyi belirler."
+        }
+    }
+]

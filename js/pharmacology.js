@@ -491,8 +491,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "rem_sleep_behavior_disorder",
-            "nrem_sleep_arousal",
-            "circadian_rhythm_sleep_wake"
+            "nrem_sleep_arousal"
         ],
         "shortDefinition": "REM Uykusu Davranış Bozukluğu (RBD - rüyaları yaşama) ve tehlikeli/adli NREM parasomnilerinde (Seksomni, travmatik Uyurgezerlik) yatak odası güvenlik önlemleriyle birlikte motor disinhibisyonu baskılayan spesifik gece protokolüdür.",
         "mechanism": "Klonazepam uzun etkili GABA-A agonizması ile beyin sapı lokomotor merkezlerini ve фаzik REM motor deşarjlarını baskılar, NREM derin uykusundan patolojik kısmi uyanma (arousal) eşiğini stabilize eder; Melatonin ise MT1/MT2 reseptörleri üzerinden REM kas atonisini restore eder.",
@@ -661,8 +660,7 @@ const PHARMACOLOGY_DATABASE = [
         ],
         "goldForDiagnoses": [
             "narcolepsy",
-            "hypersomnolence",
-            "circadian_rhythm_sleep_wake"
+            "hypersomnolence"
         ],
         "shortDefinition": "Narkolepsi (Tip 1 Katapleksili ve Tip 2), İdiyopatik Hipersomnolans ve Vardiyalı Çalışma Uyku Bozukluğunda karşı konulamaz gündüz uyku ataklarını ve ani kas tonusu kaybını (katapleksi) önleyen uyanıklık destekleyici protokoldür.",
         "mechanism": "Modafinil zayıf/seçici DAT blokajı üzerinden hipotalamik histaminerjik (TMN) ve oreksinerjik (hipokretin) uyanıklık yolaklarını aktive eder; Pitolisant H3 otoreseptör ters agonizmasıyla histamin ve noradrenalin salınımını artırarak hem uyanıklığı sağlar hem katapleksiyi önler; Sodyum Oksibat gece GABA-B agonizmasıyla derin yavaş dalga uykusunu konsolide eder.",
@@ -1175,7 +1173,6 @@ const DIAGNOSIS_TO_PHARMACOLOGY_MAP = {
     "obstructive_sleep_apnea": "psychotherapy_first_no_drug",
     "central_sleep_apnea": "psychotherapy_first_no_drug",
     "sleep_related_hypoventilation": "psychotherapy_first_no_drug",
-    "circadian_rhythm_sleep_wake": "clonazepam_parasomnia",
     "nrem_sleep_arousal": "clonazepam_parasomnia",
     "nightmare_disorder": "prazosin_nightmares",
     "rem_sleep_behavior_disorder": "clonazepam_parasomnia",
