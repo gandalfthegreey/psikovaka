@@ -6010,6 +6010,139 @@ body.sinif-open .ol-banners { display: none; }
 }
 
 </style>
+    <style>
+/* ==========================================================================
+   PsikoVaka — Ambiyans (ajan B4, 2026-11-21): yalnızca süs, bilgi taşımaz.
+   1) .amb-bg     : içeriğin arkasında yavaş kayan, çok yumuşak renk bulutları (CSS radial-gradient; canvas/filter yok,
+                    yalnızca transform animasyonu → GPU birleştirici katmanı). js/ambiyans.js <body>'nin başına ekler.
+   2) .amb-margin : masaüstünde boş sol/sağ kenar boşluklarında küçük Nöro'lar (js/ambiyans.js yerleştirir).
+   Renkler token'lardan: kobalt = --color-accent-bg, kart kırmızısı = --color-badge-bg, mor = ikisinin karışımı.
+   Kontrast: bulutlar yalnızca zemini (#0f1117) en çok ~%10 aydınlatır; zemin üstündeki her metin AA'yı geçer
+   (tools/online_dev/tests/b4_ambiyans.mjs örnekleyerek ölçer). Kartlar/yüzeyler opak kalır.
+   ========================================================================== */
+
+.amb-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;               /* her şeyin altında (zemin rengi body'den tuvale geçer, bulutlar onun üstünde) */
+    overflow: hidden;
+    pointer-events: none;
+    contain: strict;
+    --amb-cobalt: var(--color-accent-bg, #2f63c9);
+    --amb-red: var(--color-badge-bg, #c93838);
+    --amb-violet: #6a4bc4;
+    --amb-a1: 0.17;            /* kobalt tepe opaklığı */
+    --amb-a2: 0.15;            /* mor */
+    --amb-a3: 0.075;           /* kart kırmızısı (en soluk) */
+    --amb-a4: 0.11;            /* ikinci kobalt */
+}
+@supports (color: color-mix(in oklab, red, blue)) {
+    .amb-bg { --amb-violet: color-mix(in oklab, var(--amb-cobalt) 58%, var(--amb-red)); }
+    /* yumuşak (Gauss benzeri) sönüm: merkezde parlak nokta oluşmaz */
+    .amb-bg .amb-blob {
+        background: radial-gradient(closest-side,
+            var(--amb-c) 0%,
+            color-mix(in srgb, var(--amb-c) 86%, transparent) 18%,
+            color-mix(in srgb, var(--amb-c) 62%, transparent) 36%,
+            color-mix(in srgb, var(--amb-c) 36%, transparent) 54%,
+            color-mix(in srgb, var(--amb-c) 16%, transparent) 72%,
+            color-mix(in srgb, var(--amb-c) 5%, transparent) 88%,
+            transparent 100%);
+    }
+}
+
+.amb-blob {
+    position: fixed;           /* .amb-bg'nin paint kapsaması içinde: o kutuya göre yerleşir ve kırpılır (taşma denetimleri sabit öğeleri saymaz) */
+    width: 70vmax;
+    height: 70vmax;
+    border-radius: 50%;
+    will-change: transform;
+    backface-visibility: hidden;
+    /* yumuşak kenar: blur filtresi yerine kendiliğinden sönen radyal gradyan (çok daha ucuz) */
+    background: radial-gradient(closest-side, var(--amb-c) 0%, transparent 100%);
+    opacity: var(--amb-o);
+    animation: var(--amb-anim) var(--amb-dur) ease-in-out infinite alternate;
+}
+.amb-b1 { --amb-c: var(--amb-cobalt); --amb-o: var(--amb-a1); left: -22vmax; top: -26vmax; --amb-anim: amb-drift-1; --amb-dur: 46s; }
+.amb-b2 { --amb-c: var(--amb-violet); --amb-o: var(--amb-a2); right: -26vmax; top: 4vmax; width: 64vmax; height: 64vmax; --amb-anim: amb-drift-2; --amb-dur: 58s; }
+.amb-b3 { --amb-c: var(--amb-red); --amb-o: var(--amb-a3); left: 16vmax; bottom: -34vmax; width: 60vmax; height: 60vmax; --amb-anim: amb-drift-3; --amb-dur: 52s; }
+.amb-b4 { --amb-c: var(--amb-cobalt); --amb-o: var(--amb-a4); left: -30vmax; bottom: -30vmax; width: 56vmax; height: 56vmax; --amb-anim: amb-drift-4; --amb-dur: 38s; }
+
+@keyframes amb-drift-1 { from { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(9vmax, 6vmax, 0) scale(1.08); } to { transform: translate3d(16vmax, 2vmax, 0) scale(0.96); } }
+@keyframes amb-drift-2 { from { transform: translate3d(0, 0, 0) scale(1.04); } 50% { transform: translate3d(-10vmax, 8vmax, 0) scale(0.95); } to { transform: translate3d(-4vmax, 16vmax, 0) scale(1.06); } }
+@keyframes amb-drift-3 { from { transform: translate3d(0, 0, 0) scale(0.98); } 50% { transform: translate3d(12vmax, -7vmax, 0) scale(1.06); } to { transform: translate3d(22vmax, -3vmax, 0) scale(1); } }
+@keyframes amb-drift-4 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(10vmax, -12vmax, 0) scale(1.1); } }
+
+/* Açık tema: çok daha soluk pastel (krem/beyaz kâğıtlar opak kalır) */
+[data-theme="light"] .amb-bg { --amb-a1: 0.085; --amb-a2: 0.07; --amb-a3: 0.04; --amb-a4: 0.055; }
+
+/* Oyun turu sürerken (odak): daha da soluk */
+body.is-playing .amb-bg { opacity: 0.6; }
+
+/* Tam ekran opak katmanlar (sınıf projeksiyonu/telefonu, online lobi/maç) zaten örtüyor: çizme, GPU boşa çalışmasın */
+body.sinif-open .amb-bg,
+body.ol-layer-open .amb-bg { display: none; }
+
+/* Telefon/tablet: daha az ve daha küçük bulut */
+@media (max-width: 767px) {
+    .amb-b4 { display: none; }
+    .amb-blob { width: 92vmax; height: 92vmax; }
+    .amb-b1 { left: -40vmax; top: -40vmax; }
+    .amb-b2 { right: -46vmax; top: 20vmax; }
+    .amb-b3 { left: -10vmax; bottom: -52vmax; }
+}
+@media (max-width: 479px) { .amb-b3 { display: none; } }
+
+/* Sekme gizliyken (js/ambiyans.js) ve hareket azaltmada: duruk */
+html.amb-hidden .amb-blob { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+    .amb-blob { animation: none !important; }
+}
+
+/* Üst çubuk: hafif buzlu cam (destek yoksa style.css'teki opak zemin kalır). %88 zemin → altındaki her şey bastırılır. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .app-header {
+        background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+        -webkit-backdrop-filter: blur(14px) saturate(1.1);
+        backdrop-filter: blur(14px) saturate(1.1);
+    }
+}
+
+/* ---------- Kenar boşluğu Nöro'ları ---------- */
+.amb-margin {
+    position: fixed;
+    inset: 0;
+    z-index: 1;                 /* yalnızca boş kenar boşluğunda; içerik sütununa hiç girmez (JS ölçer) */
+    pointer-events: none;
+    overflow: hidden;
+    contain: layout style;
+}
+.amb-margin[hidden] { display: none !important; }
+.amb-noro {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    will-change: transform;
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0s;
+    opacity: 0.92;
+}
+.amb-noro.is-in { animation: amb-noro-in 900ms ease-out both; }
+@keyframes amb-noro-in { from { opacity: 0; } to { opacity: 0.92; } }
+.amb-noro svg.nv { display: block; }
+[data-theme="light"] .amb-noro { opacity: 0.95; }
+
+@media (prefers-reduced-motion: reduce) {
+    .amb-noro { transition: none !important; }
+    .amb-noro.is-in { animation: none; }
+}
+/* Telefon/tablet ve dar pencerelerde hiç yok (JS de yerleştirmez) */
+@media (max-width: 1199px), (hover: none) and (pointer: coarse) {
+    .amb-margin { display: none !important; }
+}
+
+</style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
 <body>
@@ -45192,6 +45325,283 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     document.addEventListener('psikovaka:playstate', sync);
     // İlk çizim: oyun nesnesi DOMContentLoaded'da kurulur
     if (window.game) sync(); else document.addEventListener('DOMContentLoaded', function () { setTimeout(sync, 0); });
+})();
+
+</script>
+<script>
+/**
+ * PsikoVaka — Ambiyans (ajan B4, 2026-11-21). Yalnızca süs: hiçbir oyun bilgisi okumaz/göstermez.
+ *
+ * 1) Renk bulutu arka planı: <body>'nin başına .amb-bg (4 yumuşak radyal gradyan, css/ambiyans.css'te yavaş kayar).
+ *    Sekme gizliyken <html>.amb-hidden → animasyon durur.
+ * 2) Kenar boşluğu Nöro'ları: geniş masaüstü ekranında (.app-main'in her iki yanında ≥ 160 px boşluk) kenar boşluğunun
+ *    altında 1–2 küçük Nöro (boşluk ≥ 270 px ise 2). Sakin etkinlikler (okuma, çay, kestirme, gerinme, düşünme), 20–40 sn'de
+ *    bir değişir; ara sıra kısa ve yavaş yürür (yalnızca transform geçişi; requestAnimationFrame döngüsü yok).
+ *    Yalnızca ana sayfa, Kütüphane, Profil ve Lig bilgisi ekranlarında; vaka turu, sınıf modu, online katman ve
+ *    açık pencere (modal) sırasında gizli. pointer-events yok. Hareket azaltmada duruk poz, yürüme yok.
+ *    Giriş yapmış kullanıcının Nöro'su (game.myAvatar) bir tanesi olur; diğerleri oturum boyunca sabit rastgele.
+ *
+ * API (testler için): window.PsikoVakaAmbiyans = { refresh(), state() }
+ */
+(function () {
+    'use strict';
+    const doc = document;
+    const root = doc.documentElement;
+    const SHOW_ON = { oyna: 1, kutuphane: 1, profil: 1, ligler: 1 };
+    const MIN_GUTTER = 160;     // bundan dar kenar boşluğunda Nöro yok
+    const TWO_GUTTER = 270;     // bundan geniş kenar boşluğunda iki Nöro
+    const EDGE = 12;            // içerik sütunuyla ve pencere kenarıyla arada bırakılan boşluk
+    const IDLE_ACTS = ['read', 'tea', 'doze', 'stretch', 'think', null];
+    const SPEED = 20;           // px/sn (yavaş gezinti)
+    const reduceMq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+
+    // ------------------------------------------------------------- 1) arka plan
+    function mountBg() {
+        if (doc.querySelector('.amb-bg')) return;
+        const bg = doc.createElement('div');
+        bg.className = 'amb-bg';
+        bg.setAttribute('aria-hidden', 'true');
+        bg.innerHTML = '<span class="amb-blob amb-b1"></span><span class="amb-blob amb-b2"></span><span class="amb-blob amb-b3"></span><span class="amb-blob amb-b4"></span>';
+        doc.body.insertBefore(bg, doc.body.firstChild);
+    }
+
+    // ------------------------------------------------------------- 2) kenar boşluğu Nöro'ları
+    const S = { layer: null, noros: [], key: '', visible: false, hidden: doc.hidden, timer: null };
+
+    function seed() {
+        let s = null;
+        try { s = sessionStorage.getItem('psikovaka_amb_seed'); } catch (e) { /* yok */ }
+        if (!s) {
+            s = Math.random().toString(36).slice(2, 10);
+            try { sessionStorage.setItem('psikovaka_amb_seed', s); } catch (e) { /* yok */ }
+        }
+        return s;
+    }
+    const SEED = seed();
+    // Oturum boyunca sabit, Nöro başına ayrı küçük rastgele dizi
+    function rng(n) {
+        let h = 2166136261;
+        const str = SEED + ':' + n;
+        for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+        let a = h >>> 0;
+        return function () {
+            a = (a + 0x6D2B79F5) | 0;
+            let t = Math.imul(a ^ (a >>> 15), 1 | a);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+    }
+
+    function ownConfig() {
+        const g = window.game;
+        if (!g || !g.myAvatar || !doc.body.classList.contains('is-signed-in')) return null;
+        return g.myAvatar;
+    }
+
+    function shouldShow() {
+        const g = window.game, b = doc.body;
+        if (!g || !window.PsikoVakaAvatar || S.hidden) return false;
+        if (!SHOW_ON[g.currentScreen]) return false;
+        if (b.classList.contains('is-playing') || b.classList.contains('sinif-open') || b.classList.contains('ol-layer-open') ||
+            b.classList.contains('modal-open') || b.classList.contains('ol-sheet-open')) return false;
+        if (window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return false;
+        return true;
+    }
+
+    /** Sol/sağ boş bant: [x0, x1] (pencere koordinatı). İçerik sütunu = .app-main (dolgusu dahil). */
+    function gutters() {
+        const main = doc.getElementById('appMain') || doc.querySelector('.app-main');
+        if (!main) return null;
+        const r = main.getBoundingClientRect();
+        const vw = root.clientWidth; // kaydırma çubuğu hariç
+        const left = { x0: EDGE, x1: Math.floor(r.left) - EDGE };
+        const right = { x0: Math.ceil(r.right) + EDGE, x1: vw - EDGE };
+        const wl = Math.floor(r.left), wr = Math.floor(vw - r.right);
+        return { left, right, wl, wr, w: Math.min(wl, wr), vw };
+    }
+
+    function clearNoros() {
+        S.noros.forEach(n => { clearTimeout(n.t); });
+        S.noros = [];
+        if (S.layer) S.layer.innerHTML = '';
+    }
+
+    function layer() {
+        if (S.layer) return S.layer;
+        const l = doc.createElement('div');
+        l.className = 'amb-margin';
+        l.setAttribute('aria-hidden', 'true');
+        l.hidden = true;
+        doc.body.appendChild(l);
+        S.layer = l;
+        return l;
+    }
+
+    function build() {
+        const g = gutters();
+        const AV = window.PsikoVakaAvatar;
+        if (!g || g.w < MIN_GUTTER) { clearNoros(); S.key = ''; return false; }
+        const per = g.w >= TWO_GUTTER ? 2 : 1;
+        const size = g.w >= 300 ? 72 : g.w >= 220 ? 64 : 56;
+        const own = ownConfig();
+        const key = [g.vw, g.wl, g.wr, per, size, own ? JSON.stringify(own) : '-'].join('|');
+        if (key === S.key && S.noros.length) return true;
+        clearNoros();
+        S.key = key;
+        const l = layer();
+        const bands = [];
+        [['left', g.left], ['right', g.right]].forEach(([side, b]) => {
+            const w = b.x1 - b.x0;
+            if (per === 1) bands.push({ side, x0: b.x0, x1: b.x1 });
+            else {
+                const half = Math.floor(w / 2);
+                bands.push({ side, x0: b.x0, x1: b.x0 + half - 4 });
+                bands.push({ side, x0: b.x0 + half + 4, x1: b.x1 });
+            }
+        });
+        const reduce = reduceMq.matches;
+        bands.forEach((band, i) => {
+            const rnd = rng(i);
+            // Kullanıcının Nöro'su: sol bandın içe yakın olanı (içerik sütununa en yakın sol bant)
+            const isOwn = own && i === (per === 1 ? 0 : 1);
+            const cfg = isOwn ? own : AV.randomConfig('amb-' + SEED + '-' + i);
+            const span = Math.max(0, band.x1 - band.x0 - size);
+            const x = band.x0 + Math.round(span * (0.2 + rnd() * 0.6));
+            const act = IDLE_ACTS[Math.floor(rnd() * IDLE_ACTS.length)];
+            const facing = 'front';
+            const el = doc.createElement('div');
+            el.className = 'amb-noro' + (reduce ? '' : ' is-in');
+            el.dataset.side = band.side;
+            el.dataset.own = isOwn ? '1' : '0';
+            el.innerHTML = AV.render(cfg, { size, framed: false, animated: !reduce, activity: act, facing });
+            const bottom = 10 + Math.round(rnd() * 6);
+            el.style.transform = `translate3d(${x}px, ${-bottom}px, 0)`;
+            l.appendChild(el);
+            const n = { el, band, size, x, bottom, rnd, act, walking: false, t: null };
+            S.noros.push(n);
+            if (!reduce) schedule(n, 8000 + rnd() * 22000);
+        });
+        return true;
+    }
+
+    function schedule(n, ms) {
+        clearTimeout(n.t);
+        n.t = setTimeout(() => step(n), ms);
+    }
+
+    /** Bir sonraki davranış: yeni etkinlik ya da kısa yürüyüş. */
+    function step(n) {
+        if (!S.visible || S.hidden || !n.el.isConnected) return;
+        const AV = window.PsikoVakaAvatar;
+        const span = Math.max(0, n.band.x1 - n.band.x0 - n.size);
+        if (span > 36 && n.rnd() < 0.45) {
+            // kısa yürüyüş: 30 px … bandın tamamı, yön seyahat yönü
+            let target = n.band.x0 + Math.round(n.rnd() * span);
+            if (Math.abs(target - n.x) < 30) target = n.x + (n.x - n.band.x0 > span / 2 ? -1 : 1) * Math.min(span, 30 + n.rnd() * 40);
+            target = Math.max(n.band.x0, Math.min(n.band.x0 + span, Math.round(target)));
+            const dist = Math.abs(target - n.x);
+            const dur = dist / SPEED;
+            const facing = target > n.x ? 'right' : 'left';
+            AV.setPose(n.el, { activity: null, facing, walking: true });
+            n.walking = true;
+            // önce dönsün (220 ms), sonra yürüsün
+            n.t = setTimeout(() => {
+                n.el.style.transitionDuration = dur.toFixed(2) + 's';
+                n.el.style.transform = `translate3d(${target}px, ${-n.bottom}px, 0)`;
+                n.x = target;
+                n.t = setTimeout(() => arrive(n), dur * 1000 + 60);
+            }, 240);
+        } else {
+            let act = IDLE_ACTS[Math.floor(n.rnd() * IDLE_ACTS.length)];
+            if (act === n.act) act = IDLE_ACTS[(IDLE_ACTS.indexOf(act) + 1) % IDLE_ACTS.length];
+            n.act = act;
+            AV.setPose(n.el, { activity: act, facing: 'front', walking: false });
+            schedule(n, 20000 + n.rnd() * 20000);
+        }
+    }
+    function arrive(n) {
+        const AV = window.PsikoVakaAvatar;
+        n.walking = false;
+        n.el.style.transitionDuration = '0s';
+        AV.setPose(n.el, { walking: false });
+        n.t = setTimeout(() => {
+            if (!n.el.isConnected) return;
+            AV.setPose(n.el, { facing: 'front' });
+            let act = IDLE_ACTS[Math.floor(n.rnd() * IDLE_ACTS.length)];
+            n.act = act;
+            AV.setPose(n.el, { activity: act });
+            schedule(n, 20000 + n.rnd() * 20000);
+        }, 200);
+    }
+
+    function pauseAll(on) {
+        if (S.layer) S.layer.classList.toggle('nv-paused', !!on);
+        if (on) S.noros.forEach(n => { clearTimeout(n.t); if (n.walking) freeze(n); });
+        else if (!reduceMq.matches) S.noros.forEach(n => schedule(n, 4000 + n.rnd() * 12000));
+    }
+    /** Yürürken durdurulursa o anki konumda bırak (geçişi kes). */
+    function freeze(n) {
+        const m = getComputedStyle(n.el).transform;
+        let x = n.x;
+        const mm = /matrix\(([^)]+)\)/.exec(m);
+        if (mm) x = parseFloat(mm[1].split(',')[4]) || x;
+        n.el.style.transitionDuration = '0s';
+        n.el.style.transform = `translate3d(${Math.round(x)}px, ${-n.bottom}px, 0)`;
+        n.x = Math.round(x);
+        n.walking = false;
+        window.PsikoVakaAvatar.setPose(n.el, { walking: false, facing: 'front' });
+    }
+
+    function refresh() {
+        const want = shouldShow() && window.innerWidth >= 1200;
+        if (!want) {
+            if (S.visible) { S.visible = false; pauseAll(true); }
+            if (S.layer) S.layer.hidden = true;
+            return;
+        }
+        const ok = build();
+        layer().hidden = !ok;
+        if (ok && !S.visible) { S.visible = true; pauseAll(false); }
+        if (!ok) S.visible = false;
+    }
+
+    let rq = 0;
+    function queue() {
+        if (rq) return;
+        rq = requestAnimationFrame(() => { rq = 0; refresh(); });
+    }
+
+    function onVisibility() {
+        S.hidden = doc.hidden;
+        root.classList.toggle('amb-hidden', S.hidden);
+        if (S.hidden) { S.visible = false; pauseAll(true); } else queue();
+    }
+
+    function init() {
+        mountBg();
+        root.classList.toggle('amb-hidden', !!doc.hidden);
+        doc.addEventListener('visibilitychange', onVisibility);
+        doc.addEventListener('psikovaka:playstate', queue);
+        window.addEventListener('hashchange', queue);
+        window.addEventListener('psikovaka:profile-saved', () => { S.key = ''; queue(); });
+        let rt = 0;
+        window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(queue, 150); });
+        if (reduceMq.addEventListener) reduceMq.addEventListener('change', () => { S.key = ''; queue(); });
+        // body sınıfları (is-playing, sinif-open, ol-layer-open, modal-open, is-signed-in) değişince
+        if (typeof MutationObserver === 'function') {
+            new MutationObserver(queue).observe(doc.body, { attributes: true, attributeFilter: ['class'] });
+        }
+        queue();
+    }
+
+    window.PsikoVakaAmbiyans = {
+        refresh: () => { S.key = ''; refresh(); },
+        state: () => ({ visible: S.visible, count: S.noros.length, noros: S.noros.map(n => ({ side: n.band.side, x: n.x, size: n.size, act: n.act, walking: n.walking, own: n.el.dataset.own === '1', rect: n.el.getBoundingClientRect().toJSON() })) }),
+        _step: (i) => { const n = S.noros[i]; if (n) step(n); }
+    };
+
+    if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);
+    else init();
 })();
 
 </script>

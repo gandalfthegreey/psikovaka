@@ -1,0 +1,130 @@
+/* ==========================================================================
+   PsikoVaka — Ambiyans (ajan B4, 2026-11-21): yalnızca süs, bilgi taşımaz.
+   1) .amb-bg     : içeriğin arkasında yavaş kayan, çok yumuşak renk bulutları (CSS radial-gradient; canvas/filter yok,
+                    yalnızca transform animasyonu → GPU birleştirici katmanı). js/ambiyans.js <body>'nin başına ekler.
+   2) .amb-margin : masaüstünde boş sol/sağ kenar boşluklarında küçük Nöro'lar (js/ambiyans.js yerleştirir).
+   Renkler token'lardan: kobalt = --color-accent-bg, kart kırmızısı = --color-badge-bg, mor = ikisinin karışımı.
+   Kontrast: bulutlar yalnızca zemini (#0f1117) en çok ~%10 aydınlatır; zemin üstündeki her metin AA'yı geçer
+   (tools/online_dev/tests/b4_ambiyans.mjs örnekleyerek ölçer). Kartlar/yüzeyler opak kalır.
+   ========================================================================== */
+
+.amb-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;               /* her şeyin altında (zemin rengi body'den tuvale geçer, bulutlar onun üstünde) */
+    overflow: hidden;
+    pointer-events: none;
+    contain: strict;
+    --amb-cobalt: var(--color-accent-bg, #2f63c9);
+    --amb-red: var(--color-badge-bg, #c93838);
+    --amb-violet: #6a4bc4;
+    --amb-a1: 0.17;            /* kobalt tepe opaklığı */
+    --amb-a2: 0.15;            /* mor */
+    --amb-a3: 0.075;           /* kart kırmızısı (en soluk) */
+    --amb-a4: 0.11;            /* ikinci kobalt */
+}
+@supports (color: color-mix(in oklab, red, blue)) {
+    .amb-bg { --amb-violet: color-mix(in oklab, var(--amb-cobalt) 58%, var(--amb-red)); }
+    /* yumuşak (Gauss benzeri) sönüm: merkezde parlak nokta oluşmaz */
+    .amb-bg .amb-blob {
+        background: radial-gradient(closest-side,
+            var(--amb-c) 0%,
+            color-mix(in srgb, var(--amb-c) 86%, transparent) 18%,
+            color-mix(in srgb, var(--amb-c) 62%, transparent) 36%,
+            color-mix(in srgb, var(--amb-c) 36%, transparent) 54%,
+            color-mix(in srgb, var(--amb-c) 16%, transparent) 72%,
+            color-mix(in srgb, var(--amb-c) 5%, transparent) 88%,
+            transparent 100%);
+    }
+}
+
+.amb-blob {
+    position: fixed;           /* .amb-bg'nin paint kapsaması içinde: o kutuya göre yerleşir ve kırpılır (taşma denetimleri sabit öğeleri saymaz) */
+    width: 70vmax;
+    height: 70vmax;
+    border-radius: 50%;
+    will-change: transform;
+    backface-visibility: hidden;
+    /* yumuşak kenar: blur filtresi yerine kendiliğinden sönen radyal gradyan (çok daha ucuz) */
+    background: radial-gradient(closest-side, var(--amb-c) 0%, transparent 100%);
+    opacity: var(--amb-o);
+    animation: var(--amb-anim) var(--amb-dur) ease-in-out infinite alternate;
+}
+.amb-b1 { --amb-c: var(--amb-cobalt); --amb-o: var(--amb-a1); left: -22vmax; top: -26vmax; --amb-anim: amb-drift-1; --amb-dur: 46s; }
+.amb-b2 { --amb-c: var(--amb-violet); --amb-o: var(--amb-a2); right: -26vmax; top: 4vmax; width: 64vmax; height: 64vmax; --amb-anim: amb-drift-2; --amb-dur: 58s; }
+.amb-b3 { --amb-c: var(--amb-red); --amb-o: var(--amb-a3); left: 16vmax; bottom: -34vmax; width: 60vmax; height: 60vmax; --amb-anim: amb-drift-3; --amb-dur: 52s; }
+.amb-b4 { --amb-c: var(--amb-cobalt); --amb-o: var(--amb-a4); left: -30vmax; bottom: -30vmax; width: 56vmax; height: 56vmax; --amb-anim: amb-drift-4; --amb-dur: 38s; }
+
+@keyframes amb-drift-1 { from { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(9vmax, 6vmax, 0) scale(1.08); } to { transform: translate3d(16vmax, 2vmax, 0) scale(0.96); } }
+@keyframes amb-drift-2 { from { transform: translate3d(0, 0, 0) scale(1.04); } 50% { transform: translate3d(-10vmax, 8vmax, 0) scale(0.95); } to { transform: translate3d(-4vmax, 16vmax, 0) scale(1.06); } }
+@keyframes amb-drift-3 { from { transform: translate3d(0, 0, 0) scale(0.98); } 50% { transform: translate3d(12vmax, -7vmax, 0) scale(1.06); } to { transform: translate3d(22vmax, -3vmax, 0) scale(1); } }
+@keyframes amb-drift-4 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(10vmax, -12vmax, 0) scale(1.1); } }
+
+/* Açık tema: çok daha soluk pastel (krem/beyaz kâğıtlar opak kalır) */
+[data-theme="light"] .amb-bg { --amb-a1: 0.085; --amb-a2: 0.07; --amb-a3: 0.04; --amb-a4: 0.055; }
+
+/* Oyun turu sürerken (odak): daha da soluk */
+body.is-playing .amb-bg { opacity: 0.6; }
+
+/* Tam ekran opak katmanlar (sınıf projeksiyonu/telefonu, online lobi/maç) zaten örtüyor: çizme, GPU boşa çalışmasın */
+body.sinif-open .amb-bg,
+body.ol-layer-open .amb-bg { display: none; }
+
+/* Telefon/tablet: daha az ve daha küçük bulut */
+@media (max-width: 767px) {
+    .amb-b4 { display: none; }
+    .amb-blob { width: 92vmax; height: 92vmax; }
+    .amb-b1 { left: -40vmax; top: -40vmax; }
+    .amb-b2 { right: -46vmax; top: 20vmax; }
+    .amb-b3 { left: -10vmax; bottom: -52vmax; }
+}
+@media (max-width: 479px) { .amb-b3 { display: none; } }
+
+/* Sekme gizliyken (js/ambiyans.js) ve hareket azaltmada: duruk */
+html.amb-hidden .amb-blob { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+    .amb-blob { animation: none !important; }
+}
+
+/* Üst çubuk: hafif buzlu cam (destek yoksa style.css'teki opak zemin kalır). %88 zemin → altındaki her şey bastırılır. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .app-header {
+        background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+        -webkit-backdrop-filter: blur(14px) saturate(1.1);
+        backdrop-filter: blur(14px) saturate(1.1);
+    }
+}
+
+/* ---------- Kenar boşluğu Nöro'ları ---------- */
+.amb-margin {
+    position: fixed;
+    inset: 0;
+    z-index: 1;                 /* yalnızca boş kenar boşluğunda; içerik sütununa hiç girmez (JS ölçer) */
+    pointer-events: none;
+    overflow: hidden;
+    contain: layout style;
+}
+.amb-margin[hidden] { display: none !important; }
+.amb-noro {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    will-change: transform;
+    transition-property: transform;
+    transition-timing-function: linear;
+    transition-duration: 0s;
+    opacity: 0.92;
+}
+.amb-noro.is-in { animation: amb-noro-in 900ms ease-out both; }
+@keyframes amb-noro-in { from { opacity: 0; } to { opacity: 0.92; } }
+.amb-noro svg.nv { display: block; }
+[data-theme="light"] .amb-noro { opacity: 0.95; }
+
+@media (prefers-reduced-motion: reduce) {
+    .amb-noro { transition: none !important; }
+    .amb-noro.is-in { animation: none; }
+}
+/* Telefon/tablet ve dar pencerelerde hiç yok (JS de yerleştirmez) */
+@media (max-width: 1199px), (hover: none) and (pointer: coarse) {
+    .amb-margin { display: none !important; }
+}
