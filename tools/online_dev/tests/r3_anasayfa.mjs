@@ -30,9 +30,11 @@ for (const vp of [{ w: 390, h: 844, mobile: true }, { w: 1440, h: 900 }]) for (c
   const tab = await p.evaluate(() => ({ wd: getComputedStyle(document.querySelector('.desk-date-wd')).display, txt: document.getElementById('dailyDateLabel').textContent }));
   check(vp.w < 600 ? tab.wd === 'none' : tab.wd !== 'none', `${tag}: klasör sekmesinde gün adı ${vp.w < 600 ? 'gizli' : 'görünür'} (${tab.txt})`);
   const nb = await box(p, '#homeNoroNudge'), av = await box(p, '#homeAvatarEdit'), fold = await box(p, '.desk-folder'), ftab = await box(p, '.desk-folder-tab');
-  check(nb.vis && av.w >= 88, `${tag}: Nöro masada büyük (${Math.round(av.w)} px) ve balon görünür`);
-  if (vp.w < 1024) check(nb.b <= fold.y + 1 && nb.r <= av.x + 12 && ftab.r <= av.x + 8, `${tag}: balon Nöro'nun solunda, klasörün üstünde; sekme Nöro'ya değmiyor`);
-  else check(nb.x >= fold.r && av.x >= fold.r - 40 && nb.b <= av.y + 20, `${tag}: balon ve Nöro klasörün sağında, balon Nöro'nun üstünde`);
+  // 2026-11-21 (Emre isteği, ajan B4): ana sayfada Nöro yok — büyük avatar ve hatırlatma balonu çizilmiyor; klasör tam genişlikte
+  const dm = await box(p, '.desk-main'), aside = await box(p, '.desk-aside');
+  check(!nb.vis && av.w === 0, `${tag}: ana sayfada Nöro ve hatırlatma balonu yok`);
+  check(Math.abs(fold.w - dm.w) <= 2 && ftab.r <= fold.r, `${tag}: günün vakası klasörü tam genişlikte (${Math.round(fold.w)}/${Math.round(dm.w)} px)`);
+  check(Math.abs(aside.r - fold.r) <= 2 && Math.abs(aside.x - fold.x) <= 2, `${tag}: alttaki kartlar klasörle aynı hizada`);
   check((await box(p, '#homeOnlineNote')).vis === false, `${tag} misafir: Online kartında not yok`);
   // özet, Başla'ya basınca açılan vakanın özetiyle aynı
   const shown = await p.evaluate(() => document.getElementById('dailyTeaser').textContent);

@@ -68,7 +68,7 @@ await p2.click('[data-ol-emote="wave"]');
 await p2.click('[data-ol-l="quick"]'); await p2.click('[data-ol-say="go"]');
 const u2id = await p2.evaluate(() => window.PsikoVakaOnline.api.myId());
 await p1.waitForFunction((id) => { const n = document.querySelector(`.ol-p[data-uid="${id}"]`); return n && Math.abs(parseFloat(n.dataset.x) - 0.25) < 0.05; }, u2id, { timeout: 8000 }).then(() => check(true, 'u1 u2nin hareketini gördü')).catch(() => check(false, 'u1 u2nin hareketini gördü'));
-await p1.waitForFunction((id) => { const n = document.querySelector(`.ol-p[data-uid="${id}"] .ol-p-bubble`); return n && !n.hidden; }, u2id, { timeout: 8000 }).then(() => check(true, 'u1 balonu gördü')).catch(() => check(false, 'u1 balonu gördü'));
+await p1.waitForFunction((id) => { const n = document.querySelector(`.ol-p-bubble[data-uid="${id}"]`); return n && !n.hidden; }, u2id, { timeout: 8000 }).then(() => check(true, 'u1 balonu gördü')).catch(() => check(false, 'u1 balonu gördü'));
 await p1.screenshot({ path: '/tmp/shots/lobby_2_390.png' });
 await p2.click('[data-ol-l="ready"]');
 await p1.waitForFunction(() => !document.querySelector('[data-ol-l="start"]').disabled, null, { timeout: 10000 });

@@ -3648,28 +3648,40 @@ body.ol-layer-open .tab-bar { display: none; }
 .ol-p-badge { display: inline-flex; flex-shrink: 0; }
 .ol-p-crown { display: inline-flex; color: var(--color-warning); flex-shrink: 0; }
 .ol-p-crown .icon { width: 15px; height: 15px; fill: currentColor; }
-.ol-p-state { margin-top: 3px; display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: var(--weight-semibold); color: var(--color-text-3); white-space: nowrap; }
+/* Durum (Hazır / Bekliyor / Oda sahibi): halı ve tahta üstünde okunsun diye opak çip (metin/zemin AA) */
+.ol-p-state {
+    margin-top: 3px; display: inline-flex; align-items: center; gap: 3px;
+    padding: 1px 7px 1px 6px; border-radius: var(--radius-full);
+    background: var(--color-surface); border: 1px solid var(--color-border-strong); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+    font-size: 11px; font-weight: var(--weight-semibold); line-height: 16px; color: var(--color-text-2); white-space: nowrap;
+}
+.ol-p-state:empty { display: none; }
 .ol-p-state .icon { width: 12px; height: 12px; }
 .ol-p.is-ready .ol-p-state { color: var(--color-success); }
 .ol-p.is-host .ol-p-state { color: var(--color-warning); }
 .ol-p.is-away .ol-p-state { color: var(--color-danger); }
+/* Konuşma/duygu balonu: Nöro düğümünün DIŞINDA, sahnedeki her şeyin (eşyalar, ön plan saksısı, diğer Nöro'lar) üstündeki
+   ayrı katmanda. Konum JS'ten (lobby.js placeBubble: transform + --tail); sahnenin kenarında kırpılmasın diye içeri itilir. */
+.ol-bubble-layer { position: absolute; inset: 0; z-index: 170; pointer-events: none; }
 .ol-p-bubble {
-    position: absolute; bottom: calc(100% - 6px); left: 50%; transform: translateX(-50%);
+    position: absolute; left: 0; top: 0;
     display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
     padding: 6px 12px; border-radius: 16px; background: var(--color-surface); color: var(--color-text);
     border: 1px solid var(--color-border-strong); box-shadow: var(--shadow-2);
     font-size: var(--text-sm); font-weight: var(--weight-semibold);
-    animation: ol-bubble 260ms cubic-bezier(0.3, 1.5, 0.5, 1);
-    z-index: 5;
+    transform: translate(-50%, -100%); transform-origin: 50% 100%;
+    will-change: translate;
 }
+.ol-p-bubble.is-pop { animation: ol-bubble 260ms cubic-bezier(0.3, 1.5, 0.5, 1); }
 .ol-p-bubble::after {
-    content: ''; position: absolute; top: 100%; left: 50%; width: 10px; height: 10px; margin-left: -5px; margin-top: -5px;
+    content: ''; position: absolute; top: 100%; left: calc(50% + var(--tail, 0px)); width: 10px; height: 10px; margin-left: -5px; margin-top: -5px;
     background: inherit; border-right: 1px solid var(--color-border-strong); border-bottom: 1px solid var(--color-border-strong); transform: rotate(45deg);
 }
 .ol-p-bubble.is-emote { padding: 6px; border-radius: 50%; color: var(--color-accent); }
 .ol-p-bubble.is-emote .icon { width: 22px; height: 22px; }
 .ol-p-bubble[hidden] { display: none; }
-@keyframes ol-bubble { from { opacity: 0; transform: translate(-50%, 8px) scale(0.6); } to { opacity: 1; transform: translateX(-50%); } }
+/* konum JS'ten `translate` özelliğiyle (en dışta uygulanır); açılış animasyonu yalnızca `transform` (alt-ortadan büyür) */
+@keyframes ol-bubble { from { opacity: 0; transform: translate(-50%, -100%) translateY(8px) scale(0.6); } to { opacity: 1; transform: translate(-50%, -100%); } }
 
 .ol-slot { pointer-events: none; gap: 6px; }
 .ol-slot-ring {
@@ -3691,8 +3703,11 @@ body.ol-layer-open .tab-bar { display: none; }
     .ol-p-plate { max-width: 92px; font-size: var(--text-xs); padding: 2px 6px; }
     .ol-stage-layer[data-count="5"] .ol-p-state, .ol-stage-layer[data-count="6"] .ol-p-state,
     .ol-stage-layer[data-count="7"] .ol-p-state, .ol-stage-layer[data-count="8"] .ol-p-state { display: none; }
+    /* 5+ kişi telefonda: daha küçük plaka (ad CSS ile kesilir; tam ad "Oyuncular" listesinde ve aria-label'da), sıkışmasın */
     .ol-stage-layer[data-count="5"] .ol-p-plate, .ol-stage-layer[data-count="6"] .ol-p-plate,
-    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 116px; } /* H16: 10 karakterlik ad sığsın */
+    .ol-stage-layer[data-count="7"] .ol-p-plate, .ol-stage-layer[data-count="8"] .ol-p-plate { max-width: 80px; padding: 1px 6px; font-size: 11px; line-height: 16px; gap: 2px; }
+    .ol-stage-layer[data-count="5"] .ol-p-crown .icon, .ol-stage-layer[data-count="6"] .ol-p-crown .icon,
+    .ol-stage-layer[data-count="7"] .ol-p-crown .icon, .ol-stage-layer[data-count="8"] .ol-p-crown .icon { width: 12px; height: 12px; }
     .ol-stage-layer[data-count="5"] .ol-p-badge, .ol-stage-layer[data-count="6"] .ol-p-badge,
     .ol-stage-layer[data-count="7"] .ol-p-badge, .ol-stage-layer[data-count="8"] .ol-p-badge { display: none; }
     .ol-stage[data-count="5"], .ol-stage[data-count="6"], .ol-stage[data-count="7"], .ol-stage[data-count="8"] { min-height: clamp(400px, 62vh, 640px); }
@@ -3700,6 +3715,10 @@ body.ol-layer-open .tab-bar { display: none; }
     .ol-code-label { display: none; }
     .ol-deco-board { top: 20%; }
 }
+
+/* Tablet genişliği (560–899 px sahne), 5+ kişi: ön sırada 6 plaka yan yana sığsın (ajan D1) */
+.ol-stage-layer.is-mid:is([data-count="5"], [data-count="6"], [data-count="7"], [data-count="8"]) .ol-p-plate { max-width: 100px; padding: 2px 7px; font-size: var(--text-xs); }
+.ol-stage-layer.is-mid:is([data-count="5"], [data-count="6"], [data-count="7"], [data-count="8"]) .ol-p-badge { display: none; }
 
 /* ---------- 7b. Terapi odası + yürüyen Nöro'lar (ajan N2; js/online/lobby_room.js) ---------- */
 .ol-stage {
@@ -3716,6 +3735,9 @@ body.ol-layer-open .tab-bar { display: none; }
     --r-curtain: #9c5c4a; --r-curtain-fold: #7a4334; --r-glow: rgba(255, 140, 50, 0.32); --r-lamp: rgba(255, 210, 130, 0.42);
     background: #7d5739;
 }
+/* Ajan D1: sahne kendi yığın bağlamını kurar; içindeki eşya/Nöro z-index'leri (10…170) sahnenin dışına sızıp alttaki
+   denetim çubuğunun "Mesaj" menüsünü (Hazırım! …) ya da başka açılır öğeleri örtmesin. */
+.ol-stage { isolation: isolate; z-index: 0; }
 .olr { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .olr-back { position: absolute; left: 0; top: 0; display: block; }
 .olr-wall { fill: var(--r-wall); }
@@ -4638,6 +4660,23 @@ body.ol-banners-docked .ol-banners { display: none; }
     .screen-home .desk-noro .avatar-edit-art { transition: none; }
 }
 
+/* ==========================================================================
+   2026-11-21 (Emre isteği, ajan B4): ana sayfada Nöro yok. Günün vakası yanındaki büyük avatar (#homeAvatarEdit)
+   ve "Nöro'nu özelleştir" balonu (#homeNoroNudge) gösterilmez; avatar stüdyosu üst çubuktaki profil çipinden,
+   Profil sayfasından ve lobiden açılır. İşaretleme JS kancaları (avatar_studio.js, app.js) bozulmasın diye yerinde
+   duruyor, yalnızca çizilmiyor. Klasör tüm genişliği alır; alttaki iki kart klasörün genişliğine hizalanır.
+   ========================================================================== */
+.screen-home .desk-noro,
+.screen-home .noro-nudge.noro-bubble { display: none !important; }
+/* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
+.screen-home .desk-stage { display: block; margin-top: var(--space-1); }
+.screen-home .card-hero.desk-folder,
+.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 38px; }
+@media (min-width: 1024px) {
+    .screen-home .desk-stage { margin-top: var(--space-3); }
+    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-left: 0; }
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -4724,7 +4763,7 @@ body.ol-banners-docked .ol-banners { display: none; }
 }
 .screen-library .lib-contents-title[hidden] { display: none; }
 
-.screen-library .lib-list.lib-contents { gap: 0; }
+.screen-library .lib-list.lib-contents { gap: 0; overflow-anchor: none; } /* akordeon başlığı JS ile yerinde tutar (app.js) */
 .screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
 .screen-library .lib-contents .lib-group-head {
     position: relative;
@@ -4828,7 +4867,12 @@ body.ol-banners-docked .ol-banners { display: none; }
     /* İki sütunlu içindekiler: telefon gibi tek uzun sütun yerine kitap açılımı */
     .screen-library .lib-list.lib-contents:not([hidden]) { display: block; column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
     .screen-library .lib-contents .lib-group { break-inside: avoid-column; }
-    .screen-library .lib-contents .lib-group[open] { break-inside: auto; }
+    /* Ajan D1: bölümler kapalı başlar (iki sütunda yalnızca başlıklar). Açılan bölüm iki sütunu birden kaplar ve maddeleri
+       kendi içinde iki sütuna dizilir; önceki/sonraki başlıklar üstünde ve altında yine iki sütunda kalır. */
+    .screen-library .lib-contents .lib-group[open] { column-span: all; break-inside: auto; margin: 4px 0 10px; }
+    .screen-library .lib-contents .lib-group[open] > .lib-rows { column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
+    .screen-library .lib-contents .lib-group[open] .lib-row-item { break-inside: avoid; }
+    .screen-library .lib-page.is-searching .lib-contents .lib-group[open] > .lib-rows { column-count: 1; }
     .screen-library .lib-home .screen-head, .screen-library .lib-book { max-width: none; }
 }
 
@@ -6015,7 +6059,7 @@ body.sinif-open .ol-banners { display: none; }
    PsikoVaka — Ambiyans (ajan B4, 2026-11-21): yalnızca süs, bilgi taşımaz.
    1) .amb-bg     : içeriğin arkasında yavaş kayan, çok yumuşak renk bulutları (CSS radial-gradient; canvas/filter yok,
                     yalnızca transform animasyonu → GPU birleştirici katmanı). js/ambiyans.js <body>'nin başına ekler.
-   2) .amb-margin : masaüstünde boş sol/sağ kenar boşluklarında küçük Nöro'lar (js/ambiyans.js yerleştirir).
+   (Kenar boşluğu Nöro'ları Emre isteğiyle 2026-11-21'de kaldırıldı; eski kod _arsiv/2026-11-21-b4-kenar-norolari/.)
    Renkler token'lardan: kobalt = --color-accent-bg, kart kırmızısı = --color-badge-bg, mor = ikisinin karışımı.
    Kontrast: bulutlar yalnızca zemini (#0f1117) en çok ~%10 aydınlatır; zemin üstündeki her metin AA'yı geçer
    (tools/online_dev/tests/b4_ambiyans.mjs örnekleyerek ölçer). Kartlar/yüzeyler opak kalır.
@@ -6106,40 +6150,6 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
         -webkit-backdrop-filter: blur(14px) saturate(1.1);
         backdrop-filter: blur(14px) saturate(1.1);
     }
-}
-
-/* ---------- Kenar boşluğu Nöro'ları ---------- */
-.amb-margin {
-    position: fixed;
-    inset: 0;
-    z-index: 1;                 /* yalnızca boş kenar boşluğunda; içerik sütununa hiç girmez (JS ölçer) */
-    pointer-events: none;
-    overflow: hidden;
-    contain: layout style;
-}
-.amb-margin[hidden] { display: none !important; }
-.amb-noro {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    will-change: transform;
-    transition-property: transform;
-    transition-timing-function: linear;
-    transition-duration: 0s;
-    opacity: 0.92;
-}
-.amb-noro.is-in { animation: amb-noro-in 900ms ease-out both; }
-@keyframes amb-noro-in { from { opacity: 0; } to { opacity: 0.92; } }
-.amb-noro svg.nv { display: block; }
-[data-theme="light"] .amb-noro { opacity: 0.95; }
-
-@media (prefers-reduced-motion: reduce) {
-    .amb-noro { transition: none !important; }
-    .amb-noro.is-in { animation: none; }
-}
-/* Telefon/tablet ve dar pencerelerde hiç yok (JS de yerleştirmez) */
-@media (max-width: 1199px), (hover: none) and (pointer: coarse) {
-    .amb-margin { display: none !important; }
 }
 
 </style>
@@ -37141,12 +37151,25 @@ class PsikoVakaGame {
             el.addEventListener('click', (e) => {
                 const a = e.target.closest && e.target.closest('a.lib-row');
                 if (a) this.libLastHref[tab] = a.getAttribute('href');
+                // açılmadan önceki başlık konumu (masaüstünde açılan bölüm iki sütunu kapladığı için başlık yer değiştirir)
+                const sm = e.target.closest && e.target.closest('summary.lib-group-head');
+                if (sm) sm._top0 = sm.getBoundingClientRect().top;
             });
+            // Akordeon (ajan D1): arama dışında bir bölüm açılınca diğerleri kapanır; açılan başlık ekranda yerinde kalır.
             el.addEventListener('toggle', (e) => {
                 const g = e.target;
                 if (!g || !g.classList || !g.classList.contains('lib-group')) return;
                 const idx = this.libIndex[tab];
-                if (idx && !idx.searching) idx.userOpen[g.dataset.group] = g.open;
+                if (!idx || idx.searching || !g.open) { const h = g.querySelector('.lib-group-head'); if (h) h._top0 = null; return; }
+                const others = idx.groups.filter(x => x.el !== g && x.el.open);
+                const head = g.querySelector('.lib-group-head');
+                const top0 = head ? (head._top0 != null ? head._top0 : head.getBoundingClientRect().top) : 0;
+                if (head) head._top0 = null;
+                others.forEach(x => { x.el.open = false; });
+                if (head) {
+                    const dy = head.getBoundingClientRect().top - top0;
+                    if (Math.abs(dy) > 1) window.scrollBy(0, dy);
+                }
             }, true);
         });
 
@@ -37219,14 +37242,15 @@ class PsikoVakaGame {
         if (!host) return;
         const groups = this.libChapters(tab);
 
-        const desktop = this.libIsDesktop();
         const esc = (s) => this.libEsc(s);
         const chevron = this.icon('chevron-right', 'lib-row-chevron');
         let html = '';
+        const unit = { tani: 'tanı', terapi: 'terapi', ilac: 'tedavi' }[tab] || 'madde';
+        // Ajan D1: açılışta bütün bölümler kapalı (yalnızca başlıklar + madde sayısı); bir başlık açılınca diğerleri kapanır.
+        // <details>/<summary>: klavyeyle (Tab, Enter/Boşluk) açılır, açık/kapalı durumu yardımcı teknolojiye bildirilir.
         groups.forEach((g, gi) => {
-            const open = desktop || gi === 0;
-            html += `<details class="lib-group" data-group="${esc(g.key)}"${open ? ' open' : ''}>`;
-            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
+            html += `<details class="lib-group" data-group="${esc(g.key)}">`;
+            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span><span class="visually-hidden"> ${unit}</span></summary>`;
             html += `<ul class="lib-rows">`;
             g.items.forEach((it, ri) => {
                 const codes = tab === 'tani' ? this.libCodesOf(it) : [];
@@ -37245,7 +37269,7 @@ class PsikoVakaGame {
         host.innerHTML = html;
 
         const byKey = Object.fromEntries(groups.map(g => [g.key, g]));
-        const idx = { groups: [], total: 0, searching: false, userOpen: {} };
+        const idx = { groups: [], total: 0, searching: false };
         host.querySelectorAll('.lib-group').forEach(gEl => {
             const g = byKey[gEl.dataset.group];
             const rows = [];
@@ -37254,7 +37278,6 @@ class PsikoVakaGame {
                 rows.push({ el: li, hay: this.libNorm([it.nameTr, it.nameEn].concat(it.aliases || []).join(' | ')) });
             });
             idx.groups.push({ el: gEl, key: g.key, rows, countEl: gEl.querySelector('.lib-group-count') });
-            idx.userOpen[g.key] = gEl.open;
             idx.total += rows.length;
         });
         this.libIndex[tab] = idx;
@@ -37300,8 +37323,9 @@ class PsikoVakaGame {
             });
             g.el.hidden = n === 0;
             g.countEl.textContent = searching ? `${n}/${g.rows.length}` : String(g.rows.length);
+            // aramada eşleşen bölümler kendiliğinden açılır; arama silinince hepsi yeniden kapanır
             if (searching) { if (n > 0 && !g.el.open) g.el.open = true; }
-            else if (idx.searching) g.el.open = !!idx.userOpen[g.key];
+            else if (idx.searching && g.el.open) g.el.open = false;
             shown += n;
         });
         idx.searching = searching;
@@ -37334,9 +37358,14 @@ class PsikoVakaGame {
             this.libViewKey = key;
             this.setLibraryTab(r.tab);
             if (restoreY !== null) {
-                window.scrollTo(0, restoreY);
                 const href = this.libLastHref[r.tab];
                 const link = href ? d.libHome.querySelector(`a.lib-row[href="${href.replace(/"/g, '\\"')}"]`) : null;
+                // açılan maddenin bölümü (başka yoldan kapanmışsa) yeniden açılır ki odak görünür satıra dönsün
+                const grp = link && link.closest('details.lib-group');
+                if (grp && !grp.open) grp.open = true;
+                window.scrollTo(0, restoreY);
+                // doğrudan bağlantıyla gelinip listeye hiç bakılmadıysa (kaydırma 0) maddeyi ekrana getir
+                if (link && restoreY === 0) { try { link.scrollIntoView({ block: 'center' }); } catch (e) {} }
                 if (link) { try { link.focus({ preventScroll: true }); } catch (e) {} }
                 else this.libFocus(d.libraryTitle);
             } else if (prevView === null) {
@@ -37365,6 +37394,8 @@ class PsikoVakaGame {
             found = false;
         }
         if (!found) html = this.renderLibraryNotFound(r.kind);
+        // listeye dönünce bu maddenin bölümü açılsın ve odak satırına gelsin (doğrudan bağlantıyla gelindiyse de)
+        else this.libLastHref[r.kind] = this.libHref(r.kind, r.id);
 
         d.libHome.hidden = true;
         d.libDetail.classList.toggle('is-book', found); // ders kitabı sayfası (css/kutuphane.css)
@@ -40608,13 +40639,19 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (nar) {
             // dar ekranda 3+ kişi birden çok sıra (ad etiketleri okunabilsin): 3-4 → 2+2, 5+ → 3-3-2
             if (n <= 2) out = row(n, 0.8, 0.3, 0.7);
-            else if (n <= 4) out = [...row(Math.ceil(n / 2), 0.73, 0.24, 0.76), ...row(Math.floor(n / 2), 0.87, 0.36, 0.64)];
-            else { const a = Math.ceil(n / 3), b = Math.ceil((n - a) / 2), c = n - a - b; out = [...row(a, 0.675, 0.2, 0.8), ...row(b, 0.785, 0.2, 0.8), ...row(c, 0.895, 0.32, 0.68)]; }
+            else if (n <= 4) out = [...row(Math.ceil(n / 2), 0.665, 0.22, 0.78), ...row(Math.floor(n / 2), 0.885, 0.36, 0.64)];   // D1: sıralar arası açıldı (durum çipi alttaki başa binmesin)
+            else {
+                // 5+ (ajan D1): iki seyrek sıra, arada bir Nöro + plaka boyu boşluk (3-3-2 sıralarda plakalar alttaki başlara
+                // biniyordu); ön sıra yarım adım kaydırılır ve sağdaki ön plan saksısından uzak durur
+                const a = Math.ceil(n / 2), b = n - a;
+                const step = 0.76 / Math.max(1, a - 1);
+                out = [...row(a, 0.665, 0.12, 0.88), ...(b < a ? Array.from({ length: b }, (_, i) => ({ x: 0.12 + step * (i + 0.5), y: 0.875 })) : row(b, 0.875, 0.13, 0.78))];
+            }
         } else if (n <= 4) out = row(n, 0.8, n <= 2 ? 0.4 : 0.28, n <= 2 ? 0.6 : 0.72);
         else {
             // 5+ kişi iki sıra: arka sıra koltuk ile kanepe arasındaki açıklıkta, ön sıra halının önünde
             const c1 = (n <= 5 || (L.W && L.W < 900)) ? 2 : 3, c2 = n - c1;
-            out = [...row(c1, 0.625, c1 === 2 ? 0.4 : 0.35, c1 === 2 ? 0.54 : 0.59), ...row(c2, 0.83, c2 > 5 ? 0.12 : 0.16, c2 > 5 ? 0.88 : 0.84)];
+            out = [...row(c1, 0.6, c1 === 2 ? 0.4 : 0.35, c1 === 2 ? 0.54 : 0.59), ...row(c2, 0.855, c2 > 5 && !(L.W && L.W < 900) ? 0.12 : 0.17, c2 > 5 ? 0.88 : 0.84)];   // D1: sıralar biraz açıldı (durum çipi öndeki başa binmesin)
         }
         const r = L.room;
         return out.map(p => r ? r.nearestFree(p.x, p.y) : p);
@@ -40661,6 +40698,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             <div class="ol-ch-note" id="olChNote" aria-live="polite" hidden></div>
             <div class="ol-stage" id="olStage" tabindex="0" role="group" aria-roledescription="lobi sahnesi" aria-label="Lobi: terapi odası. Boş bir yere dokunarak ya da ok tuşlarıyla Nöro'nu yürüt; odadaki eşya düğmeleriyle bir etkinlik başlat.">
                 <div class="ol-stage-layer" id="olStageLayer"></div>
+                <div class="ol-bubble-layer" id="olBubbleLayer" aria-hidden="true"></div>
                 <div class="ol-stage-hint" id="olStageHint"><span class="ol-lg-only">Boş bir yere dokun, Nöro'n oraya yürüsün. Eşyalara dokunursan bir şey yapar.</span><span class="ol-sm-only">Yere dokun: Nöro'n yürüsün. Eşyaya dokun: bir şey yapsın.</span></div>
             </div>
             <details class="ol-roster" id="olRoster">
@@ -40828,6 +40866,31 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             node.classList.toggle('is-walking', !!st.walking);
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
+        node._st = st;
+        if (node._bubble && !node._bubble.hidden) placeBubble(node);
+    }
+    /**
+     * Konuşma/duygu balonu: Nöro düğümünün dışında, tüm eşyaların ve Nöro'ların üstündeki ayrı katmanda (#olBubbleLayer).
+     * Konumu (CSS `translate`) Nöro'nun dünya koordinatından hesaplanır (yürürken her karede izler) ve sahnenin içinde kalacak şekilde
+     * kırpılır; kuyruk (--tail) Nöro'yu göstermeye devam eder.
+     */
+    function placeBubble(node) {
+        const b = node._bubble, st = node._st;
+        if (!b || !st) return;
+        const W = L.W || 1, H = L.H || 1;
+        const depth = (0.82 + (st.y - FLOOR_TOP) * 0.45);
+        if (!node._h) node._h = node.offsetHeight || 0;
+        if (!b._w) { b._w = b.offsetWidth || 0; b._hh = b.offsetHeight || 0; }
+        const ax = st.x * W, ay = st.y * H;
+        // eski yerleşimle aynı: balonun altı düğümün üst kenarının 6 px altında (ölçekli)
+        let bottom = ay - node._h * 0.88 * depth + 6 * depth;
+        const m = 6, half = b._w / 2;
+        let x = ax;
+        if (half * 2 + 2 * m < W) x = Math.max(half + m, Math.min(W - half - m, ax));
+        if (bottom - b._hh < m) bottom = b._hh + m;
+        const tail = Math.max(-(half - 14), Math.min(half - 14, ax - x));
+        b.style.translate = `${x.toFixed(1)}px ${bottom.toFixed(1)}px`;   // konum `translate`ta; `transform` açılış animasyonuna kalır
+        b.style.setProperty('--tail', tail.toFixed(1) + 'px');
     }
     function arrived(uid, st) {
         st.arrived = true;
@@ -40912,11 +40975,20 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 node = document.createElement('div');
                 node.className = 'ol-p';
                 node.dataset.uid = p.user_id;
-                node.innerHTML = `<div class="ol-p-bubble" hidden></div><div class="ol-p-fig"></div><span class="ol-p-ready" aria-hidden="true">${icon('check')}</span>
+                node.innerHTML = `<div class="ol-p-fig"></div><span class="ol-p-ready" aria-hidden="true">${icon('check')}</span>
                     <div class="ol-p-plate"><span class="ol-p-crown" hidden>${icon('crown')}</span><span class="ol-p-name"></span><span class="ol-p-badge"></span></div><span class="ol-p-state"></span>`;
                 node.classList.add('is-new');
                 setTimeout(() => node.classList.remove('is-new'), 600);
                 layer.appendChild(node);
+                const bl = $('#olBubbleLayer', L.root);
+                if (bl) {
+                    const bub = document.createElement('div');
+                    bub.className = 'ol-p-bubble';
+                    bub.dataset.uid = p.user_id;
+                    bub.hidden = true;
+                    bl.appendChild(bub);
+                    node._bubble = bub;
+                }
                 L.nodes.set(p.user_id, node);
                 fresh = true;
             }
@@ -40959,7 +41031,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             node.setAttribute('aria-label', `${p.username}${p.user_id === myId ? ' (sen)' : ''}: ${disc ? 'bağlantı koptu' : p.is_host ? 'oda sahibi' : p.is_ready ? 'hazır' : 'bekliyor'}`);
             node.setAttribute('role', 'img');
         });
-        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); L.nodes.delete(uid); if (L.walker) L.walker.remove(uid); } });
+        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); if (node._bubble) { clearTimeout(node._bubble._t); node._bubble.remove(); } L.nodes.delete(uid); if (L.walker) L.walker.remove(uid); } });
+        L.nodes.forEach(node => { node._h = 0; });   // plaka/durum değişmiş olabilir: balon yüksekliği bir sonraki yerleştirmede yeniden ölçülür
         // boş yerler
         $all('.ol-slot', layer).forEach(e => e.remove());
         const sl = slotList(cap);
@@ -40979,6 +41052,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             layer.appendChild(e);
         }
         layer.dataset.count = String(cap);
+        layer.classList.toggle('is-mid', w >= 560 && w < 900);   // tablet genişliği: 5+ kişide daha küçük plaka (css/online.css)
         const stg = layer.parentNode; if (stg) stg.dataset.count = String(cap);
         if (L.room) L.room.setInteractive(!s.room.is_quick);
     }
@@ -41120,10 +41194,15 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function showBubble(uid, html, cls, ms) {
         const node = L.nodes.get(uid);
         if (!node) return;
-        const b = node.querySelector('.ol-p-bubble');
+        const b = node._bubble;
+        if (!b) return;
         b.className = 'ol-p-bubble ' + (cls || '');
         b.innerHTML = html;
         b.hidden = false;
+        b._w = 0; node._h = 0;
+        b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop');
+        if (L.walker && L.walker.get(uid)) node._st = L.walker.get(uid);   // yerleşim değişince durum nesnesi yenilenir
+        placeBubble(node);
         clearTimeout(b._t);
         b._t = setTimeout(() => { b.hidden = true; }, ms || 3000);
     }
@@ -41250,6 +41329,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (L.walker) { L.walker.destroy(); L.walker = null; }
         if (L.room) { L.room.destroy(); L.room = null; }
         L.W = 0; L.H = 0; L.lastActs = {};
+        L.nodes.forEach(n => { if (n._bubble) clearTimeout(n._bubble._t); });
         L.nodes.clear();
         Object.keys(L.emotes).forEach(k => { if (k.startsWith('_t')) clearTimeout(L.emotes[k]); });
         L.emotes = {};
@@ -45332,30 +45412,17 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 /**
  * PsikoVaka — Ambiyans (ajan B4, 2026-11-21). Yalnızca süs: hiçbir oyun bilgisi okumaz/göstermez.
  *
- * 1) Renk bulutu arka planı: <body>'nin başına .amb-bg (4 yumuşak radyal gradyan, css/ambiyans.css'te yavaş kayar).
- *    Sekme gizliyken <html>.amb-hidden → animasyon durur.
- * 2) Kenar boşluğu Nöro'ları: geniş masaüstü ekranında (.app-main'in her iki yanında ≥ 160 px boşluk) kenar boşluğunun
- *    altında 1–2 küçük Nöro (boşluk ≥ 270 px ise 2). Sakin etkinlikler (okuma, çay, kestirme, gerinme, düşünme), 20–40 sn'de
- *    bir değişir; ara sıra kısa ve yavaş yürür (yalnızca transform geçişi; requestAnimationFrame döngüsü yok).
- *    Yalnızca ana sayfa, Kütüphane, Profil ve Lig bilgisi ekranlarında; vaka turu, sınıf modu, online katman ve
- *    açık pencere (modal) sırasında gizli. pointer-events yok. Hareket azaltmada duruk poz, yürüme yok.
- *    Giriş yapmış kullanıcının Nöro'su (game.myAvatar) bir tanesi olur; diğerleri oturum boyunca sabit rastgele.
+ * Renk bulutu arka planı: <body>'nin başına .amb-bg (4 yumuşak radyal gradyan; css/ambiyans.css'te yavaş kayar,
+ * hareket azaltmada duruk). Sekme gizliyken <html>.amb-hidden → animasyon durur.
  *
- * API (testler için): window.PsikoVakaAmbiyans = { refresh(), state() }
+ * Not: kenar boşluğu Nöro'ları Emre isteğiyle (2026-11-21, "kenar nöroları hiçbir yerde istemiyorum") kaldırıldı;
+ * eski kod _arsiv/2026-11-21-b4-kenar-norolari/ambiyans_kenar_norolari.js içinde.
  */
 (function () {
     'use strict';
     const doc = document;
     const root = doc.documentElement;
-    const SHOW_ON = { oyna: 1, kutuphane: 1, profil: 1, ligler: 1 };
-    const MIN_GUTTER = 160;     // bundan dar kenar boşluğunda Nöro yok
-    const TWO_GUTTER = 270;     // bundan geniş kenar boşluğunda iki Nöro
-    const EDGE = 12;            // içerik sütunuyla ve pencere kenarıyla arada bırakılan boşluk
-    const IDLE_ACTS = ['read', 'tea', 'doze', 'stretch', 'think', null];
-    const SPEED = 20;           // px/sn (yavaş gezinti)
-    const reduceMq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
 
-    // ------------------------------------------------------------- 1) arka plan
     function mountBg() {
         if (doc.querySelector('.amb-bg')) return;
         const bg = doc.createElement('div');
@@ -45365,240 +45432,13 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         doc.body.insertBefore(bg, doc.body.firstChild);
     }
 
-    // ------------------------------------------------------------- 2) kenar boşluğu Nöro'ları
-    const S = { layer: null, noros: [], key: '', visible: false, hidden: doc.hidden, timer: null };
-
-    function seed() {
-        let s = null;
-        try { s = sessionStorage.getItem('psikovaka_amb_seed'); } catch (e) { /* yok */ }
-        if (!s) {
-            s = Math.random().toString(36).slice(2, 10);
-            try { sessionStorage.setItem('psikovaka_amb_seed', s); } catch (e) { /* yok */ }
-        }
-        return s;
-    }
-    const SEED = seed();
-    // Oturum boyunca sabit, Nöro başına ayrı küçük rastgele dizi
-    function rng(n) {
-        let h = 2166136261;
-        const str = SEED + ':' + n;
-        for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
-        let a = h >>> 0;
-        return function () {
-            a = (a + 0x6D2B79F5) | 0;
-            let t = Math.imul(a ^ (a >>> 15), 1 | a);
-            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-        };
-    }
-
-    function ownConfig() {
-        const g = window.game;
-        if (!g || !g.myAvatar || !doc.body.classList.contains('is-signed-in')) return null;
-        return g.myAvatar;
-    }
-
-    function shouldShow() {
-        const g = window.game, b = doc.body;
-        if (!g || !window.PsikoVakaAvatar || S.hidden) return false;
-        if (!SHOW_ON[g.currentScreen]) return false;
-        if (b.classList.contains('is-playing') || b.classList.contains('sinif-open') || b.classList.contains('ol-layer-open') ||
-            b.classList.contains('modal-open') || b.classList.contains('ol-sheet-open')) return false;
-        if (window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return false;
-        return true;
-    }
-
-    /** Sol/sağ boş bant: [x0, x1] (pencere koordinatı). İçerik sütunu = .app-main (dolgusu dahil). */
-    function gutters() {
-        const main = doc.getElementById('appMain') || doc.querySelector('.app-main');
-        if (!main) return null;
-        const r = main.getBoundingClientRect();
-        const vw = root.clientWidth; // kaydırma çubuğu hariç
-        const left = { x0: EDGE, x1: Math.floor(r.left) - EDGE };
-        const right = { x0: Math.ceil(r.right) + EDGE, x1: vw - EDGE };
-        const wl = Math.floor(r.left), wr = Math.floor(vw - r.right);
-        return { left, right, wl, wr, w: Math.min(wl, wr), vw };
-    }
-
-    function clearNoros() {
-        S.noros.forEach(n => { clearTimeout(n.t); });
-        S.noros = [];
-        if (S.layer) S.layer.innerHTML = '';
-    }
-
-    function layer() {
-        if (S.layer) return S.layer;
-        const l = doc.createElement('div');
-        l.className = 'amb-margin';
-        l.setAttribute('aria-hidden', 'true');
-        l.hidden = true;
-        doc.body.appendChild(l);
-        S.layer = l;
-        return l;
-    }
-
-    function build() {
-        const g = gutters();
-        const AV = window.PsikoVakaAvatar;
-        if (!g || g.w < MIN_GUTTER) { clearNoros(); S.key = ''; return false; }
-        const per = g.w >= TWO_GUTTER ? 2 : 1;
-        const size = g.w >= 300 ? 72 : g.w >= 220 ? 64 : 56;
-        const own = ownConfig();
-        const key = [g.vw, g.wl, g.wr, per, size, own ? JSON.stringify(own) : '-'].join('|');
-        if (key === S.key && S.noros.length) return true;
-        clearNoros();
-        S.key = key;
-        const l = layer();
-        const bands = [];
-        [['left', g.left], ['right', g.right]].forEach(([side, b]) => {
-            const w = b.x1 - b.x0;
-            if (per === 1) bands.push({ side, x0: b.x0, x1: b.x1 });
-            else {
-                const half = Math.floor(w / 2);
-                bands.push({ side, x0: b.x0, x1: b.x0 + half - 4 });
-                bands.push({ side, x0: b.x0 + half + 4, x1: b.x1 });
-            }
-        });
-        const reduce = reduceMq.matches;
-        bands.forEach((band, i) => {
-            const rnd = rng(i);
-            // Kullanıcının Nöro'su: sol bandın içe yakın olanı (içerik sütununa en yakın sol bant)
-            const isOwn = own && i === (per === 1 ? 0 : 1);
-            const cfg = isOwn ? own : AV.randomConfig('amb-' + SEED + '-' + i);
-            const span = Math.max(0, band.x1 - band.x0 - size);
-            const x = band.x0 + Math.round(span * (0.2 + rnd() * 0.6));
-            const act = IDLE_ACTS[Math.floor(rnd() * IDLE_ACTS.length)];
-            const facing = 'front';
-            const el = doc.createElement('div');
-            el.className = 'amb-noro' + (reduce ? '' : ' is-in');
-            el.dataset.side = band.side;
-            el.dataset.own = isOwn ? '1' : '0';
-            el.innerHTML = AV.render(cfg, { size, framed: false, animated: !reduce, activity: act, facing });
-            const bottom = 10 + Math.round(rnd() * 6);
-            el.style.transform = `translate3d(${x}px, ${-bottom}px, 0)`;
-            l.appendChild(el);
-            const n = { el, band, size, x, bottom, rnd, act, walking: false, t: null };
-            S.noros.push(n);
-            if (!reduce) schedule(n, 8000 + rnd() * 22000);
-        });
-        return true;
-    }
-
-    function schedule(n, ms) {
-        clearTimeout(n.t);
-        n.t = setTimeout(() => step(n), ms);
-    }
-
-    /** Bir sonraki davranış: yeni etkinlik ya da kısa yürüyüş. */
-    function step(n) {
-        if (!S.visible || S.hidden || !n.el.isConnected) return;
-        const AV = window.PsikoVakaAvatar;
-        const span = Math.max(0, n.band.x1 - n.band.x0 - n.size);
-        if (span > 36 && n.rnd() < 0.45) {
-            // kısa yürüyüş: 30 px … bandın tamamı, yön seyahat yönü
-            let target = n.band.x0 + Math.round(n.rnd() * span);
-            if (Math.abs(target - n.x) < 30) target = n.x + (n.x - n.band.x0 > span / 2 ? -1 : 1) * Math.min(span, 30 + n.rnd() * 40);
-            target = Math.max(n.band.x0, Math.min(n.band.x0 + span, Math.round(target)));
-            const dist = Math.abs(target - n.x);
-            const dur = dist / SPEED;
-            const facing = target > n.x ? 'right' : 'left';
-            AV.setPose(n.el, { activity: null, facing, walking: true });
-            n.walking = true;
-            // önce dönsün (220 ms), sonra yürüsün
-            n.t = setTimeout(() => {
-                n.el.style.transitionDuration = dur.toFixed(2) + 's';
-                n.el.style.transform = `translate3d(${target}px, ${-n.bottom}px, 0)`;
-                n.x = target;
-                n.t = setTimeout(() => arrive(n), dur * 1000 + 60);
-            }, 240);
-        } else {
-            let act = IDLE_ACTS[Math.floor(n.rnd() * IDLE_ACTS.length)];
-            if (act === n.act) act = IDLE_ACTS[(IDLE_ACTS.indexOf(act) + 1) % IDLE_ACTS.length];
-            n.act = act;
-            AV.setPose(n.el, { activity: act, facing: 'front', walking: false });
-            schedule(n, 20000 + n.rnd() * 20000);
-        }
-    }
-    function arrive(n) {
-        const AV = window.PsikoVakaAvatar;
-        n.walking = false;
-        n.el.style.transitionDuration = '0s';
-        AV.setPose(n.el, { walking: false });
-        n.t = setTimeout(() => {
-            if (!n.el.isConnected) return;
-            AV.setPose(n.el, { facing: 'front' });
-            let act = IDLE_ACTS[Math.floor(n.rnd() * IDLE_ACTS.length)];
-            n.act = act;
-            AV.setPose(n.el, { activity: act });
-            schedule(n, 20000 + n.rnd() * 20000);
-        }, 200);
-    }
-
-    function pauseAll(on) {
-        if (S.layer) S.layer.classList.toggle('nv-paused', !!on);
-        if (on) S.noros.forEach(n => { clearTimeout(n.t); if (n.walking) freeze(n); });
-        else if (!reduceMq.matches) S.noros.forEach(n => schedule(n, 4000 + n.rnd() * 12000));
-    }
-    /** Yürürken durdurulursa o anki konumda bırak (geçişi kes). */
-    function freeze(n) {
-        const m = getComputedStyle(n.el).transform;
-        let x = n.x;
-        const mm = /matrix\(([^)]+)\)/.exec(m);
-        if (mm) x = parseFloat(mm[1].split(',')[4]) || x;
-        n.el.style.transitionDuration = '0s';
-        n.el.style.transform = `translate3d(${Math.round(x)}px, ${-n.bottom}px, 0)`;
-        n.x = Math.round(x);
-        n.walking = false;
-        window.PsikoVakaAvatar.setPose(n.el, { walking: false, facing: 'front' });
-    }
-
-    function refresh() {
-        const want = shouldShow() && window.innerWidth >= 1200;
-        if (!want) {
-            if (S.visible) { S.visible = false; pauseAll(true); }
-            if (S.layer) S.layer.hidden = true;
-            return;
-        }
-        const ok = build();
-        layer().hidden = !ok;
-        if (ok && !S.visible) { S.visible = true; pauseAll(false); }
-        if (!ok) S.visible = false;
-    }
-
-    let rq = 0;
-    function queue() {
-        if (rq) return;
-        rq = requestAnimationFrame(() => { rq = 0; refresh(); });
-    }
-
-    function onVisibility() {
-        S.hidden = doc.hidden;
-        root.classList.toggle('amb-hidden', S.hidden);
-        if (S.hidden) { S.visible = false; pauseAll(true); } else queue();
-    }
+    function onVisibility() { root.classList.toggle('amb-hidden', !!doc.hidden); }
 
     function init() {
         mountBg();
-        root.classList.toggle('amb-hidden', !!doc.hidden);
+        onVisibility();
         doc.addEventListener('visibilitychange', onVisibility);
-        doc.addEventListener('psikovaka:playstate', queue);
-        window.addEventListener('hashchange', queue);
-        window.addEventListener('psikovaka:profile-saved', () => { S.key = ''; queue(); });
-        let rt = 0;
-        window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(queue, 150); });
-        if (reduceMq.addEventListener) reduceMq.addEventListener('change', () => { S.key = ''; queue(); });
-        // body sınıfları (is-playing, sinif-open, ol-layer-open, modal-open, is-signed-in) değişince
-        if (typeof MutationObserver === 'function') {
-            new MutationObserver(queue).observe(doc.body, { attributes: true, attributeFilter: ['class'] });
-        }
-        queue();
     }
-
-    window.PsikoVakaAmbiyans = {
-        refresh: () => { S.key = ''; refresh(); },
-        state: () => ({ visible: S.visible, count: S.noros.length, noros: S.noros.map(n => ({ side: n.band.side, x: n.x, size: n.size, act: n.act, walking: n.walking, own: n.el.dataset.own === '1', rect: n.el.getBoundingClientRect().toJSON() })) }),
-        _step: (i) => { const n = S.noros[i]; if (n) step(n); }
-    };
 
     if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);
     else init();

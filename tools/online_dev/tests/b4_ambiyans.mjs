@@ -1,6 +1,6 @@
-// Ajan B4: renk bulutu arka planı + kenar boşluğu Nöro'ları (js/ambiyans.js, css/ambiyans.css).
-// Kontrast (zemindeki en kötü bulut rengine karşı, animasyonun 6 anında), Nöro yerleşimi/görünürlüğü, yürüme,
-// hareket azaltma, gizli sekme, sınıf/online katmanı, telefonda yokluk, CPU karşılaştırması.
+// Ajan B4: renk bulutu arka planı (js/ambiyans.js, css/ambiyans.css). Kenar boşluğu Nöro'ları ve ana sayfa Nöro'su
+// Emre isteğiyle kaldırıldı (2026-11-21): her ekranda yoklukları denetlenir.
+// Kontrast (zemindeki en kötü bulut rengine karşı, animasyonun 6 anında), hareket azaltma, gizli sekme, sınıf/online katmanı, CPU.
 import { browser, ctx, page, check, sleep } from './lib.mjs';
 const IDX = process.env.IDX || 'http://localhost:8899/index.html';
 const b = await browser();
@@ -11,11 +11,10 @@ async function open(vp, theme, route, extra = {}) {
   await c.addInitScript(() => { try { localStorage.setItem('psikovaka_onboarded', '1'); } catch (e) {} });
   const p = await page(c, `${vp[0]} ${theme} ${route}`);
   await p.goto(IDX + '#/' + route);
-  await p.waitForFunction(() => window.game && window.PsikoVakaAmbiyans && document.querySelector('.amb-bg'));
+  await p.waitForFunction(() => window.game && document.querySelector('.amb-bg'));
   await sleep(500);
   return { c, p };
 }
-const st = (p) => p.evaluate(() => window.PsikoVakaAmbiyans.state());
 
 // ---------- 1) kontrast
 const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
@@ -70,113 +69,40 @@ for (const [vp, theme, route] of [[[1440, 900], 'dark', 'oyna'], [[1440, 900], '
   await c.close();
 }
 
-// ---------- 2) kenar boşluğu Nöro'ları: yerleşim
-for (const [vp, exp] of [[[1440, 900], 2], [[1920, 1080], 4], [[1280, 800], 2], [[1180, 800], 0], [[1024, 768], 0], [[390, 844], 0]]) {
+// ---------- 2) bulut katmanı + Nöro'suz ekranlar (kenar boşluğu Nöro'ları ve ana sayfa Nöro'su Emre isteğiyle kaldırıldı)
+for (const vp of [[1920, 1080], [1440, 900], [1024, 768], [390, 844]]) {
   const { c, p } = await open(vp, 'dark', 'oyna');
-  const s = await st(p);
-  check(s.count === exp, `${vp[0]}px: ${exp} kenar Nöro'su (${s.count})`);
-  if (s.count) {
-    const geo = await p.evaluate(() => {
-      const m = document.getElementById('appMain').getBoundingClientRect();
-      const out = [];
-      document.querySelectorAll('.amb-noro').forEach(n => {
-        const r = n.getBoundingClientRect();
-        const overlapMain = !(r.right <= m.left || r.left >= m.right);
-        // altında tıklanabilir öğe var mı (Nöro katmanını yok sayarak)
-        const pts = [[r.left + 4, r.top + 4], [r.right - 4, r.top + 4], [r.left + r.width / 2, r.top + r.height / 2], [r.left + 4, r.bottom - 4], [r.right - 4, r.bottom - 4]];
-        const hit = pts.some(([x, y]) => document.elementsFromPoint(x, y).some(e => !e.closest('.amb-margin,.amb-bg') && e.closest('a,button,input,select,textarea,[role=button],[tabindex]:not([tabindex="-1"])')));
-        out.push({ overlapMain, hit, inView: r.left >= 0 && r.right <= document.documentElement.clientWidth && r.bottom <= innerHeight, pe: getComputedStyle(n).pointerEvents });
-      });
-      return out;
-    });
-    check(geo.every(g => !g.overlapMain), `${vp[0]}px: hiçbir Nöro içerik sütununa girmiyor`);
-    check(geo.every(g => !g.hit), `${vp[0]}px: hiçbir Nöro düğme/bağlantı örtmüyor`);
-    check(geo.every(g => g.inView), `${vp[0]}px: Nöro'lar pencere içinde`);
-    check(geo.every(g => g.pe === 'none'), `${vp[0]}px: pointer-events yok`);
-  }
   const bgOk = await p.evaluate(() => { const bg = document.querySelector('.amb-bg'); const cs = getComputedStyle(bg); return { pe: cs.pointerEvents, z: cs.zIndex, pos: cs.position, blobs: [...bg.children].filter(x => getComputedStyle(x).display !== 'none').length, anim: getComputedStyle(bg.children[0]).animationName }; });
   check(bgOk.pe === 'none' && bgOk.z === '-1' && bgOk.pos === 'fixed', `${vp[0]}px: bulut katmanı sabit, en altta, tıklamayı geçirir`);
   check(bgOk.blobs === (vp[0] < 480 ? 2 : vp[0] < 768 ? 3 : 4) && bgOk.anim.startsWith('amb-drift'), `${vp[0]}px: ${bgOk.blobs} bulut, kayma animasyonu açık`);
+  for (const r of ['oyna', 'kutuphane', 'profil', 'ligler']) {
+    await p.evaluate((r) => { location.hash = '#/' + r; }, r); await sleep(300);
+    const n = await p.evaluate(() => ({ margin: document.querySelectorAll('.amb-margin,.amb-noro').length, home: [...document.querySelectorAll('#screenHome svg.nv')].filter(s => s.getBoundingClientRect().width > 0).length }));
+    check(n.margin === 0 && n.home === 0, `${vp[0]}px #/${r}: kenar boşluğu Nöro'su yok${r === 'oyna' ? ', ana sayfada görünür Nöro yok' : ''}`);
+  }
   check(p._errors.length === 0, `${vp[0]}px: konsol hatası yok ${p._errors.join(' | ')}`);
   await c.close();
 }
 
-// ---------- 3) ekranlara göre görünürlük + yürüme + gizli sekme
+// ---------- 3) vaka turu, tam ekran katmanlar, gizli sekme
 {
   const { c, p } = await open([1440, 900], 'dark', 'oyna');
-  for (const r of ['kutuphane', 'profil', 'ligler', 'oyna']) {
-    await p.evaluate((r) => { location.hash = '#/' + r; }, r); await sleep(350);
-    const s = await st(p);
-    check(s.visible && s.count === 2 && !(await p.evaluate(() => document.querySelector('.amb-margin').hidden)), `#/${r}: kenar Nöro'ları görünür`);
-  }
-  await p.evaluate(() => { location.hash = '#/online'; }); await sleep(350);
-  check(await p.evaluate(() => document.querySelector('.amb-margin').hidden), '#/online: kenar Nöro\'ları gizli');
-  await p.evaluate(() => { location.hash = '#/oyna'; }); await sleep(350);
-  // Vaka turu (pratik)
   await p.click('#btnStartPractice');
   await sleep(600);
-  const playing = await p.evaluate(() => ({ playing: document.body.classList.contains('is-playing'), hidden: document.querySelector('.amb-margin').hidden, bgOp: getComputedStyle(document.querySelector('.amb-bg')).opacity }));
-  if (playing.playing) {
-    check(playing.hidden, 'vaka turu: kenar Nöro\'ları gizli');
-    check(+playing.bgOp <= 0.6, `vaka turu: bulutlar daha soluk (opaklık ${playing.bgOp})`);
-  } else check(false, 'vaka turu başlatılamadı (test)');
+  const playing = await p.evaluate(() => ({ playing: document.body.classList.contains('is-playing'), bgOp: getComputedStyle(document.querySelector('.amb-bg')).opacity }));
+  check(playing.playing && +playing.bgOp <= 0.6, `vaka turu: bulutlar daha soluk (opaklık ${playing.bgOp})`);
   await p.evaluate(() => { location.hash = '#/kutuphane'; }); await sleep(400);
-  await p.evaluate(() => { location.hash = '#/oyna'; }); await sleep(400);
-  check((await st(p)).visible, 'turdan çıkınca yeniden görünür');
-  // Açık pencere (modal) ve sınıf / online katmanı sınıfları
-  for (const cls of ['modal-open', 'sinif-open', 'ol-layer-open']) {
+  for (const cls of ['sinif-open', 'ol-layer-open']) {
     await p.evaluate((cls) => document.body.classList.add(cls), cls); await sleep(120);
-    const s = await p.evaluate(() => ({ h: document.querySelector('.amb-margin').hidden, bg: getComputedStyle(document.querySelector('.amb-bg')).display }));
-    check(s.h, `body.${cls}: kenar Nöro'ları gizli`);
-    if (cls !== 'modal-open') check(s.bg === 'none', `body.${cls}: bulut katmanı çizilmiyor (opak tam ekran katmanın altında)`);
+    check(await p.evaluate(() => getComputedStyle(document.querySelector('.amb-bg')).display === 'none'), `body.${cls}: bulut katmanı çizilmiyor (opak tam ekran katmanın altında)`);
     await p.evaluate((cls) => document.body.classList.remove(cls), cls); await sleep(120);
   }
-  check((await st(p)).visible, 'katmanlar kapanınca yeniden görünür');
-  // Yürüme: zorla bir adım; yürüyorsa yön + walking sınıfı + konum değişimi + bant içinde kalma
-  let walked = false;
-  for (let i = 0; i < 30 && !walked; i++) {
-    const before = (await st(p)).noros[0];
-    await p.evaluate(() => window.PsikoVakaAmbiyans._step(0));
-    await sleep(60);
-    const cls = await p.evaluate(() => document.querySelector('.amb-noro svg.nv').getAttribute('class'));
-    if (/nv-walking/.test(cls)) {
-      walked = true;
-      await sleep(400);
-      const s1 = (await st(p)).noros[0];
-      const dir = s1.x > before.x ? 'right' : 'left';
-      check(cls.includes('nv-f-' + dir), `yürüme: yürüme yönüne bakıyor (${dir})`);
-      await sleep(1500);
-      const mid = await p.evaluate(() => document.querySelector('.amb-noro').getBoundingClientRect().x);
-      check(Math.abs(mid - before.x) > 2 && Math.abs(mid - before.x) < 60, `yürüme: yavaş ilerliyor (1.5 sn'de ${Math.abs(mid - before.x).toFixed(1)} px)`);
-      const m = await p.evaluate(() => document.getElementById('appMain').getBoundingClientRect().left);
-      check(s1.x >= 0 && s1.x + s1.size <= m, 'yürüme: hedef sol kenar boşluğunda');
-      // gizli sekme: yürürken durur, animasyonlar duraklar
-      await p.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => true }); document.dispatchEvent(new Event('visibilitychange')); });
-      await sleep(100);
-      const hid = await p.evaluate(() => ({ html: document.documentElement.classList.contains('amb-hidden'), paused: document.querySelector('.amb-margin').classList.contains('nv-paused'), walking: !!document.querySelector('.amb-noro svg.nv-walking'), blob: getComputedStyle(document.querySelector('.amb-blob')).animationPlayState }));
-      check(hid.html && hid.paused && !hid.walking && hid.blob === 'paused', 'gizli sekme: bulutlar ve Nöro\'lar duraklatıldı, yürüme kesildi');
-      await p.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => false }); document.dispatchEvent(new Event('visibilitychange')); });
-      await sleep(150);
-      const vis = await p.evaluate(() => ({ html: document.documentElement.classList.contains('amb-hidden'), paused: document.querySelector('.amb-margin').classList.contains('nv-paused') }));
-      check(!vis.html && !vis.paused && (await st(p)).visible, 'sekme görünür: yeniden çalışıyor');
-    }
-  }
-  check(walked, 'yürüme denendi');
-  const k1 = await p.evaluate(() => [...document.querySelectorAll('.amb-noro svg')].map(s => s.getAttribute('data-nv')).join());
-  // Kendi Nöro'su (giriş yapmış)
-  const own = await p.evaluate(() => {
-    const AV = window.PsikoVakaAvatar; const cfg = AV.randomConfig('b4-own');
-    window.game.myAvatar = AV.normalize(cfg); document.body.classList.add('is-signed-in');
-    window.PsikoVakaAmbiyans.refresh();
-    const el = document.querySelector('.amb-noro[data-own="1"] svg.nv');
-    const ref = document.createElement('div'); ref.innerHTML = AV.render(cfg, { size: 10 });
-    return { n: document.querySelectorAll('.amb-noro[data-own="1"]').length, same: el && el.getAttribute('data-nv') === ref.firstChild.getAttribute('data-nv') };
-  });
-  check(own.n === 1 && own.same, 'giriş yapmış kullanıcı: bir kenar Nöro\'su onun Nöro\'su');
-  // Oturum boyunca sabit rastgele Nöro'lar
-  await p.reload(); await p.waitForFunction(() => window.PsikoVakaAmbiyans); await sleep(400);
-  const k2 = await p.evaluate(() => [...document.querySelectorAll('.amb-noro svg')].map(s => s.getAttribute('data-nv')).join());
-  check(k1 && k1 === k2, 'rastgele Nöro\'lar oturum boyunca aynı');
+  await p.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => true }); document.dispatchEvent(new Event('visibilitychange')); });
+  await sleep(100);
+  check(await p.evaluate(() => document.documentElement.classList.contains('amb-hidden') && getComputedStyle(document.querySelector('.amb-blob')).animationPlayState === 'paused'), 'gizli sekme: bulutlar duraklatıldı');
+  await p.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, get: () => false }); document.dispatchEvent(new Event('visibilitychange')); });
+  await sleep(100);
+  check(await p.evaluate(() => !document.documentElement.classList.contains('amb-hidden') && getComputedStyle(document.querySelector('.amb-blob')).animationPlayState === 'running'), 'sekme görünür: bulutlar yeniden kayıyor');
   check(p._errors.length === 0, 'konsol hatası yok ' + p._errors.join(' | '));
   await c.close();
 }
@@ -184,13 +110,7 @@ for (const [vp, exp] of [[[1440, 900], 2], [[1920, 1080], 4], [[1280, 800], 2], 
 // ---------- 4) hareket azaltma
 {
   const { c, p } = await open([1440, 900], 'dark', 'oyna', { reduced: true });
-  const r = await p.evaluate(() => ({ blob: getComputedStyle(document.querySelector('.amb-blob')).animationName, anim: !!document.querySelector('.amb-noro svg.nv-anim'), n: document.querySelectorAll('.amb-noro').length }));
-  check(r.blob === 'none', 'hareket azaltma: bulutlar duruk');
-  check(r.n === 2 && !r.anim, 'hareket azaltma: Nöro\'lar duruk pozda');
-  await p.evaluate(() => window.PsikoVakaAmbiyans._step(0)); await sleep(50);
-  // _step zorla çağrılsa bile kendiliğinden zamanlama yok; yürüme geçişi kapalı
-  const tr = await p.evaluate(() => getComputedStyle(document.querySelector('.amb-noro')).transitionDuration);
-  check(parseFloat(tr) < 0.01, `hareket azaltma: konum geçişi yok (${tr})`);
+  check(await p.evaluate(() => getComputedStyle(document.querySelector('.amb-blob')).animationName) === 'none', 'hareket azaltma: bulutlar duruk');
   await c.close();
 }
 
@@ -199,7 +119,7 @@ for (const [vp, exp] of [[[1440, 900], 2], [[1920, 1080], 4], [[1280, 800], 2], 
   const cpu = {};
   for (const on of [true, false]) {
     const { c, p } = await open([1920, 1080], 'dark', 'oyna');
-    if (!on) await p.addStyleTag({ content: '.amb-bg,.amb-margin{display:none!important}' });
+    if (!on) await p.addStyleTag({ content: '.amb-bg{display:none!important}' });
     const s = await c.newCDPSession(p);
     await s.send('Performance.enable');
     await sleep(500);
@@ -211,7 +131,7 @@ for (const [vp, exp] of [[[1440, 900], 2], [[1920, 1080], 4], [[1280, 800], 2], 
   }
   console.log('  CPU', JSON.stringify(cpu));
   check(cpu.on.task - cpu.off.task < 0.25, `CPU: 5 sn'de ek ana iş parçacığı süresi ${((cpu.on.task - cpu.off.task) * 1000).toFixed(0)} ms (< 250 ms)`);
-  check(cpu.on.layout - cpu.off.layout <= 15, `CPU: boşta ek yerleşim/stil hesabı seyrek (5 sn'de ${cpu.on.layout} / kapalıyken ${cpu.off.layout}; SVG Nöro animasyonları)`);
+  check(cpu.on.layout - cpu.off.layout <= 1, `CPU: boşta ek yerleşim yok (5 sn'de ${cpu.on.layout} / kapalıyken ${cpu.off.layout})`);
 }
 
 console.log('\nKONTRAST', JSON.stringify(results, null, 0));

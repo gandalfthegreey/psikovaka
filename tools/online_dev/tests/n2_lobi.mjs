@@ -117,11 +117,11 @@ await A.p.click('[data-ol-emote="wave"]'); await sleep(80); await pump(A, [B]);
 await sleep(300);
 const se = await nodeState(B, U1);
 check(se.act === '' && /nv-emote-wave/.test(se.svg), 'duygu: B\'de etkinlik bitti, el sallıyor');
-check(await B.p.evaluate((u) => !document.querySelector(`.ol-p[data-uid="${u}"] .ol-p-bubble`).hidden, U1), 'duygu balonu görünür');
+check(await B.p.evaluate((u) => !document.querySelector(`.ol-p-bubble[data-uid="${u}"]`).hidden, U1), 'duygu balonu görünür');
 check((await nodeState(A)).act === '', 'A: kendi etkinliğim de bitti');
 await sleep(2800);
 await A.p.click('[data-ol-l="quick"]'); await A.p.click('[data-ol-say="gg"]'); await sleep(80); await pump(A, [B]);
-check(await B.p.evaluate((u) => { const bb = document.querySelector(`.ol-p[data-uid="${u}"] .ol-p-bubble`); return !bb.hidden && bb.classList.contains('is-say'); }, U1), 'hazır mesaj balonu B\'de');
+check(await B.p.evaluate((u) => { const bb = document.querySelector(`.ol-p-bubble[data-uid="${u}"]`); return !bb.hidden && bb.classList.contains('is-say'); }, U1), 'hazır mesaj balonu B\'de');
 
 // ---------------------------------------------------------------- 6. eski istemci "hop" iletisi (act/spot yok)
 const U2 = '00000000-0000-4000-8000-000000000003';

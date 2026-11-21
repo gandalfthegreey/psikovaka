@@ -2,7 +2,7 @@
    PsikoVaka — Ambiyans (ajan B4, 2026-11-21): yalnızca süs, bilgi taşımaz.
    1) .amb-bg     : içeriğin arkasında yavaş kayan, çok yumuşak renk bulutları (CSS radial-gradient; canvas/filter yok,
                     yalnızca transform animasyonu → GPU birleştirici katmanı). js/ambiyans.js <body>'nin başına ekler.
-   2) .amb-margin : masaüstünde boş sol/sağ kenar boşluklarında küçük Nöro'lar (js/ambiyans.js yerleştirir).
+   (Kenar boşluğu Nöro'ları Emre isteğiyle 2026-11-21'de kaldırıldı; eski kod _arsiv/2026-11-21-b4-kenar-norolari/.)
    Renkler token'lardan: kobalt = --color-accent-bg, kart kırmızısı = --color-badge-bg, mor = ikisinin karışımı.
    Kontrast: bulutlar yalnızca zemini (#0f1117) en çok ~%10 aydınlatır; zemin üstündeki her metin AA'yı geçer
    (tools/online_dev/tests/b4_ambiyans.mjs örnekleyerek ölçer). Kartlar/yüzeyler opak kalır.
@@ -93,38 +93,4 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
         -webkit-backdrop-filter: blur(14px) saturate(1.1);
         backdrop-filter: blur(14px) saturate(1.1);
     }
-}
-
-/* ---------- Kenar boşluğu Nöro'ları ---------- */
-.amb-margin {
-    position: fixed;
-    inset: 0;
-    z-index: 1;                 /* yalnızca boş kenar boşluğunda; içerik sütununa hiç girmez (JS ölçer) */
-    pointer-events: none;
-    overflow: hidden;
-    contain: layout style;
-}
-.amb-margin[hidden] { display: none !important; }
-.amb-noro {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    will-change: transform;
-    transition-property: transform;
-    transition-timing-function: linear;
-    transition-duration: 0s;
-    opacity: 0.92;
-}
-.amb-noro.is-in { animation: amb-noro-in 900ms ease-out both; }
-@keyframes amb-noro-in { from { opacity: 0; } to { opacity: 0.92; } }
-.amb-noro svg.nv { display: block; }
-[data-theme="light"] .amb-noro { opacity: 0.95; }
-
-@media (prefers-reduced-motion: reduce) {
-    .amb-noro { transition: none !important; }
-    .amb-noro.is-in { animation: none; }
-}
-/* Telefon/tablet ve dar pencerelerde hiç yok (JS de yerleştirmez) */
-@media (max-width: 1199px), (hover: none) and (pointer: coarse) {
-    .amb-margin { display: none !important; }
 }

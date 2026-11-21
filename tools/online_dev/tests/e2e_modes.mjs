@@ -63,7 +63,7 @@ if (MODE === 'ffa') {
 // lobi etkileşimi (ilk iki oyuncu)
 if (P.length >= 2) {
   await P[1].click('[data-ol-emote="cheer"]');
-  await P[0].waitForFunction((id) => { const n = document.querySelector(`.ol-p[data-uid="${id}"] .ol-p-bubble`); return n && !n.hidden; }, ids[1], { timeout: 8000 }).then(() => check(true, 'tepki diğer istemcide göründü')).catch(() => check(false, 'tepki diğer istemcide göründü'));
+  await P[0].waitForFunction((id) => { const n = document.querySelector(`.ol-p-bubble[data-uid="${id}"]`); return n && !n.hidden; }, ids[1], { timeout: 8000 }).then(() => check(true, 'tepki diğer istemcide göründü')).catch(() => check(false, 'tepki diğer istemcide göründü'));
 }
 await sleep(500);
 await P[0].screenshot({ path: `/tmp/shots/lobby_${MODE}_${P.length}.png` });

@@ -3924,12 +3924,25 @@ class PsikoVakaGame {
             el.addEventListener('click', (e) => {
                 const a = e.target.closest && e.target.closest('a.lib-row');
                 if (a) this.libLastHref[tab] = a.getAttribute('href');
+                // açılmadan önceki başlık konumu (masaüstünde açılan bölüm iki sütunu kapladığı için başlık yer değiştirir)
+                const sm = e.target.closest && e.target.closest('summary.lib-group-head');
+                if (sm) sm._top0 = sm.getBoundingClientRect().top;
             });
+            // Akordeon (ajan D1): arama dışında bir bölüm açılınca diğerleri kapanır; açılan başlık ekranda yerinde kalır.
             el.addEventListener('toggle', (e) => {
                 const g = e.target;
                 if (!g || !g.classList || !g.classList.contains('lib-group')) return;
                 const idx = this.libIndex[tab];
-                if (idx && !idx.searching) idx.userOpen[g.dataset.group] = g.open;
+                if (!idx || idx.searching || !g.open) { const h = g.querySelector('.lib-group-head'); if (h) h._top0 = null; return; }
+                const others = idx.groups.filter(x => x.el !== g && x.el.open);
+                const head = g.querySelector('.lib-group-head');
+                const top0 = head ? (head._top0 != null ? head._top0 : head.getBoundingClientRect().top) : 0;
+                if (head) head._top0 = null;
+                others.forEach(x => { x.el.open = false; });
+                if (head) {
+                    const dy = head.getBoundingClientRect().top - top0;
+                    if (Math.abs(dy) > 1) window.scrollBy(0, dy);
+                }
             }, true);
         });
 
@@ -4002,14 +4015,15 @@ class PsikoVakaGame {
         if (!host) return;
         const groups = this.libChapters(tab);
 
-        const desktop = this.libIsDesktop();
         const esc = (s) => this.libEsc(s);
         const chevron = this.icon('chevron-right', 'lib-row-chevron');
         let html = '';
+        const unit = { tani: 'tanı', terapi: 'terapi', ilac: 'tedavi' }[tab] || 'madde';
+        // Ajan D1: açılışta bütün bölümler kapalı (yalnızca başlıklar + madde sayısı); bir başlık açılınca diğerleri kapanır.
+        // <details>/<summary>: klavyeyle (Tab, Enter/Boşluk) açılır, açık/kapalı durumu yardımcı teknolojiye bildirilir.
         groups.forEach((g, gi) => {
-            const open = desktop || gi === 0;
-            html += `<details class="lib-group" data-group="${esc(g.key)}"${open ? ' open' : ''}>`;
-            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span></summary>`;
+            html += `<details class="lib-group" data-group="${esc(g.key)}">`;
+            html += `<summary class="lib-group-head"><span class="lib-ch">${gi + 1}</span><span class="lib-group-title">${esc(g.name)}</span><span class="lib-group-count">${g.items.length}</span><span class="visually-hidden"> ${unit}</span></summary>`;
             html += `<ul class="lib-rows">`;
             g.items.forEach((it, ri) => {
                 const codes = tab === 'tani' ? this.libCodesOf(it) : [];
@@ -4028,7 +4042,7 @@ class PsikoVakaGame {
         host.innerHTML = html;
 
         const byKey = Object.fromEntries(groups.map(g => [g.key, g]));
-        const idx = { groups: [], total: 0, searching: false, userOpen: {} };
+        const idx = { groups: [], total: 0, searching: false };
         host.querySelectorAll('.lib-group').forEach(gEl => {
             const g = byKey[gEl.dataset.group];
             const rows = [];
@@ -4037,7 +4051,6 @@ class PsikoVakaGame {
                 rows.push({ el: li, hay: this.libNorm([it.nameTr, it.nameEn].concat(it.aliases || []).join(' | ')) });
             });
             idx.groups.push({ el: gEl, key: g.key, rows, countEl: gEl.querySelector('.lib-group-count') });
-            idx.userOpen[g.key] = gEl.open;
             idx.total += rows.length;
         });
         this.libIndex[tab] = idx;
@@ -4083,8 +4096,9 @@ class PsikoVakaGame {
             });
             g.el.hidden = n === 0;
             g.countEl.textContent = searching ? `${n}/${g.rows.length}` : String(g.rows.length);
+            // aramada eşleşen bölümler kendiliğinden açılır; arama silinince hepsi yeniden kapanır
             if (searching) { if (n > 0 && !g.el.open) g.el.open = true; }
-            else if (idx.searching) g.el.open = !!idx.userOpen[g.key];
+            else if (idx.searching && g.el.open) g.el.open = false;
             shown += n;
         });
         idx.searching = searching;
@@ -4117,9 +4131,14 @@ class PsikoVakaGame {
             this.libViewKey = key;
             this.setLibraryTab(r.tab);
             if (restoreY !== null) {
-                window.scrollTo(0, restoreY);
                 const href = this.libLastHref[r.tab];
                 const link = href ? d.libHome.querySelector(`a.lib-row[href="${href.replace(/"/g, '\\"')}"]`) : null;
+                // açılan maddenin bölümü (başka yoldan kapanmışsa) yeniden açılır ki odak görünür satıra dönsün
+                const grp = link && link.closest('details.lib-group');
+                if (grp && !grp.open) grp.open = true;
+                window.scrollTo(0, restoreY);
+                // doğrudan bağlantıyla gelinip listeye hiç bakılmadıysa (kaydırma 0) maddeyi ekrana getir
+                if (link && restoreY === 0) { try { link.scrollIntoView({ block: 'center' }); } catch (e) {} }
                 if (link) { try { link.focus({ preventScroll: true }); } catch (e) {} }
                 else this.libFocus(d.libraryTitle);
             } else if (prevView === null) {
@@ -4148,6 +4167,8 @@ class PsikoVakaGame {
             found = false;
         }
         if (!found) html = this.renderLibraryNotFound(r.kind);
+        // listeye dönünce bu maddenin bölümü açılsın ve odak satırına gelsin (doğrudan bağlantıyla gelindiyse de)
+        else this.libLastHref[r.kind] = this.libHref(r.kind, r.id);
 
         d.libHome.hidden = true;
         d.libDetail.classList.toggle('is-book', found); // ders kitabı sayfası (css/kutuphane.css)

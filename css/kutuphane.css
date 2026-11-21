@@ -82,7 +82,7 @@
 }
 .screen-library .lib-contents-title[hidden] { display: none; }
 
-.screen-library .lib-list.lib-contents { gap: 0; }
+.screen-library .lib-list.lib-contents { gap: 0; overflow-anchor: none; } /* akordeon başlığı JS ile yerinde tutar (app.js) */
 .screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
 .screen-library .lib-contents .lib-group-head {
     position: relative;
@@ -186,7 +186,12 @@
     /* İki sütunlu içindekiler: telefon gibi tek uzun sütun yerine kitap açılımı */
     .screen-library .lib-list.lib-contents:not([hidden]) { display: block; column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
     .screen-library .lib-contents .lib-group { break-inside: avoid-column; }
-    .screen-library .lib-contents .lib-group[open] { break-inside: auto; }
+    /* Ajan D1: bölümler kapalı başlar (iki sütunda yalnızca başlıklar). Açılan bölüm iki sütunu birden kaplar ve maddeleri
+       kendi içinde iki sütuna dizilir; önceki/sonraki başlıklar üstünde ve altında yine iki sütunda kalır. */
+    .screen-library .lib-contents .lib-group[open] { column-span: all; break-inside: auto; margin: 4px 0 10px; }
+    .screen-library .lib-contents .lib-group[open] > .lib-rows { column-count: 2; column-gap: 56px; column-rule: 1px solid var(--paper-rule); }
+    .screen-library .lib-contents .lib-group[open] .lib-row-item { break-inside: avoid; }
+    .screen-library .lib-page.is-searching .lib-contents .lib-group[open] > .lib-rows { column-count: 1; }
     .screen-library .lib-home .screen-head, .screen-library .lib-book { max-width: none; }
 }
 

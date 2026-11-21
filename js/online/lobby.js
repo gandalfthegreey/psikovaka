@@ -53,13 +53,19 @@
         if (nar) {
             // dar ekranda 3+ kişi birden çok sıra (ad etiketleri okunabilsin): 3-4 → 2+2, 5+ → 3-3-2
             if (n <= 2) out = row(n, 0.8, 0.3, 0.7);
-            else if (n <= 4) out = [...row(Math.ceil(n / 2), 0.73, 0.24, 0.76), ...row(Math.floor(n / 2), 0.87, 0.36, 0.64)];
-            else { const a = Math.ceil(n / 3), b = Math.ceil((n - a) / 2), c = n - a - b; out = [...row(a, 0.675, 0.2, 0.8), ...row(b, 0.785, 0.2, 0.8), ...row(c, 0.895, 0.32, 0.68)]; }
+            else if (n <= 4) out = [...row(Math.ceil(n / 2), 0.665, 0.22, 0.78), ...row(Math.floor(n / 2), 0.885, 0.36, 0.64)];   // D1: sıralar arası açıldı (durum çipi alttaki başa binmesin)
+            else {
+                // 5+ (ajan D1): iki seyrek sıra, arada bir Nöro + plaka boyu boşluk (3-3-2 sıralarda plakalar alttaki başlara
+                // biniyordu); ön sıra yarım adım kaydırılır ve sağdaki ön plan saksısından uzak durur
+                const a = Math.ceil(n / 2), b = n - a;
+                const step = 0.76 / Math.max(1, a - 1);
+                out = [...row(a, 0.665, 0.12, 0.88), ...(b < a ? Array.from({ length: b }, (_, i) => ({ x: 0.12 + step * (i + 0.5), y: 0.875 })) : row(b, 0.875, 0.13, 0.78))];
+            }
         } else if (n <= 4) out = row(n, 0.8, n <= 2 ? 0.4 : 0.28, n <= 2 ? 0.6 : 0.72);
         else {
             // 5+ kişi iki sıra: arka sıra koltuk ile kanepe arasındaki açıklıkta, ön sıra halının önünde
             const c1 = (n <= 5 || (L.W && L.W < 900)) ? 2 : 3, c2 = n - c1;
-            out = [...row(c1, 0.625, c1 === 2 ? 0.4 : 0.35, c1 === 2 ? 0.54 : 0.59), ...row(c2, 0.83, c2 > 5 ? 0.12 : 0.16, c2 > 5 ? 0.88 : 0.84)];
+            out = [...row(c1, 0.6, c1 === 2 ? 0.4 : 0.35, c1 === 2 ? 0.54 : 0.59), ...row(c2, 0.855, c2 > 5 && !(L.W && L.W < 900) ? 0.12 : 0.17, c2 > 5 ? 0.88 : 0.84)];   // D1: sıralar biraz açıldı (durum çipi öndeki başa binmesin)
         }
         const r = L.room;
         return out.map(p => r ? r.nearestFree(p.x, p.y) : p);
@@ -106,6 +112,7 @@
             <div class="ol-ch-note" id="olChNote" aria-live="polite" hidden></div>
             <div class="ol-stage" id="olStage" tabindex="0" role="group" aria-roledescription="lobi sahnesi" aria-label="Lobi: terapi odası. Boş bir yere dokunarak ya da ok tuşlarıyla Nöro'nu yürüt; odadaki eşya düğmeleriyle bir etkinlik başlat.">
                 <div class="ol-stage-layer" id="olStageLayer"></div>
+                <div class="ol-bubble-layer" id="olBubbleLayer" aria-hidden="true"></div>
                 <div class="ol-stage-hint" id="olStageHint"><span class="ol-lg-only">Boş bir yere dokun, Nöro'n oraya yürüsün. Eşyalara dokunursan bir şey yapar.</span><span class="ol-sm-only">Yere dokun: Nöro'n yürüsün. Eşyaya dokun: bir şey yapsın.</span></div>
             </div>
             <details class="ol-roster" id="olRoster">
@@ -273,6 +280,31 @@
             node.classList.toggle('is-walking', !!st.walking);
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
+        node._st = st;
+        if (node._bubble && !node._bubble.hidden) placeBubble(node);
+    }
+    /**
+     * Konuşma/duygu balonu: Nöro düğümünün dışında, tüm eşyaların ve Nöro'ların üstündeki ayrı katmanda (#olBubbleLayer).
+     * Konumu (CSS `translate`) Nöro'nun dünya koordinatından hesaplanır (yürürken her karede izler) ve sahnenin içinde kalacak şekilde
+     * kırpılır; kuyruk (--tail) Nöro'yu göstermeye devam eder.
+     */
+    function placeBubble(node) {
+        const b = node._bubble, st = node._st;
+        if (!b || !st) return;
+        const W = L.W || 1, H = L.H || 1;
+        const depth = (0.82 + (st.y - FLOOR_TOP) * 0.45);
+        if (!node._h) node._h = node.offsetHeight || 0;
+        if (!b._w) { b._w = b.offsetWidth || 0; b._hh = b.offsetHeight || 0; }
+        const ax = st.x * W, ay = st.y * H;
+        // eski yerleşimle aynı: balonun altı düğümün üst kenarının 6 px altında (ölçekli)
+        let bottom = ay - node._h * 0.88 * depth + 6 * depth;
+        const m = 6, half = b._w / 2;
+        let x = ax;
+        if (half * 2 + 2 * m < W) x = Math.max(half + m, Math.min(W - half - m, ax));
+        if (bottom - b._hh < m) bottom = b._hh + m;
+        const tail = Math.max(-(half - 14), Math.min(half - 14, ax - x));
+        b.style.translate = `${x.toFixed(1)}px ${bottom.toFixed(1)}px`;   // konum `translate`ta; `transform` açılış animasyonuna kalır
+        b.style.setProperty('--tail', tail.toFixed(1) + 'px');
     }
     function arrived(uid, st) {
         st.arrived = true;
@@ -357,11 +389,20 @@
                 node = document.createElement('div');
                 node.className = 'ol-p';
                 node.dataset.uid = p.user_id;
-                node.innerHTML = `<div class="ol-p-bubble" hidden></div><div class="ol-p-fig"></div><span class="ol-p-ready" aria-hidden="true">${icon('check')}</span>
+                node.innerHTML = `<div class="ol-p-fig"></div><span class="ol-p-ready" aria-hidden="true">${icon('check')}</span>
                     <div class="ol-p-plate"><span class="ol-p-crown" hidden>${icon('crown')}</span><span class="ol-p-name"></span><span class="ol-p-badge"></span></div><span class="ol-p-state"></span>`;
                 node.classList.add('is-new');
                 setTimeout(() => node.classList.remove('is-new'), 600);
                 layer.appendChild(node);
+                const bl = $('#olBubbleLayer', L.root);
+                if (bl) {
+                    const bub = document.createElement('div');
+                    bub.className = 'ol-p-bubble';
+                    bub.dataset.uid = p.user_id;
+                    bub.hidden = true;
+                    bl.appendChild(bub);
+                    node._bubble = bub;
+                }
                 L.nodes.set(p.user_id, node);
                 fresh = true;
             }
@@ -404,7 +445,8 @@
             node.setAttribute('aria-label', `${p.username}${p.user_id === myId ? ' (sen)' : ''}: ${disc ? 'bağlantı koptu' : p.is_host ? 'oda sahibi' : p.is_ready ? 'hazır' : 'bekliyor'}`);
             node.setAttribute('role', 'img');
         });
-        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); L.nodes.delete(uid); if (L.walker) L.walker.remove(uid); } });
+        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); if (node._bubble) { clearTimeout(node._bubble._t); node._bubble.remove(); } L.nodes.delete(uid); if (L.walker) L.walker.remove(uid); } });
+        L.nodes.forEach(node => { node._h = 0; });   // plaka/durum değişmiş olabilir: balon yüksekliği bir sonraki yerleştirmede yeniden ölçülür
         // boş yerler
         $all('.ol-slot', layer).forEach(e => e.remove());
         const sl = slotList(cap);
@@ -424,6 +466,7 @@
             layer.appendChild(e);
         }
         layer.dataset.count = String(cap);
+        layer.classList.toggle('is-mid', w >= 560 && w < 900);   // tablet genişliği: 5+ kişide daha küçük plaka (css/online.css)
         const stg = layer.parentNode; if (stg) stg.dataset.count = String(cap);
         if (L.room) L.room.setInteractive(!s.room.is_quick);
     }
@@ -565,10 +608,15 @@
     function showBubble(uid, html, cls, ms) {
         const node = L.nodes.get(uid);
         if (!node) return;
-        const b = node.querySelector('.ol-p-bubble');
+        const b = node._bubble;
+        if (!b) return;
         b.className = 'ol-p-bubble ' + (cls || '');
         b.innerHTML = html;
         b.hidden = false;
+        b._w = 0; node._h = 0;
+        b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop');
+        if (L.walker && L.walker.get(uid)) node._st = L.walker.get(uid);   // yerleşim değişince durum nesnesi yenilenir
+        placeBubble(node);
         clearTimeout(b._t);
         b._t = setTimeout(() => { b.hidden = true; }, ms || 3000);
     }
@@ -695,6 +743,7 @@
         if (L.walker) { L.walker.destroy(); L.walker = null; }
         if (L.room) { L.room.destroy(); L.room = null; }
         L.W = 0; L.H = 0; L.lastActs = {};
+        L.nodes.forEach(n => { if (n._bubble) clearTimeout(n._bubble._t); });
         L.nodes.clear();
         Object.keys(L.emotes).forEach(k => { if (k.startsWith('_t')) clearTimeout(L.emotes[k]); });
         L.emotes = {};

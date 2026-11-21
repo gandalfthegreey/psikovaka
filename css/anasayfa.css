@@ -381,3 +381,20 @@
 @media (prefers-reduced-motion: reduce) {
     .screen-home .desk-noro .avatar-edit-art { transition: none; }
 }
+
+/* ==========================================================================
+   2026-11-21 (Emre isteği, ajan B4): ana sayfada Nöro yok. Günün vakası yanındaki büyük avatar (#homeAvatarEdit)
+   ve "Nöro'nu özelleştir" balonu (#homeNoroNudge) gösterilmez; avatar stüdyosu üst çubuktaki profil çipinden,
+   Profil sayfasından ve lobiden açılır. İşaretleme JS kancaları (avatar_studio.js, app.js) bozulmasın diye yerinde
+   duruyor, yalnızca çizilmiyor. Klasör tüm genişliği alır; alttaki iki kart klasörün genişliğine hizalanır.
+   ========================================================================== */
+.screen-home .desk-noro,
+.screen-home .noro-nudge.noro-bubble { display: none !important; }
+/* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
+.screen-home .desk-stage { display: block; margin-top: var(--space-1); }
+.screen-home .card-hero.desk-folder,
+.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 38px; }
+@media (min-width: 1024px) {
+    .screen-home .desk-stage { margin-top: var(--space-3); }
+    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-left: 0; }
+}
