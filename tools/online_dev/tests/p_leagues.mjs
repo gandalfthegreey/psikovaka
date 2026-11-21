@@ -30,12 +30,12 @@ for (const vp of [{ w: 390, h: 844, dark: true }, { w: 360, h: 740, dark: false 
   await q.click('#homeRpMount');
   await q.waitForSelector('.lg-head:not(.lg-head-guest)', { timeout: 5000 });
   const head = await q.locator('.lg-head').innerText();
-  check(/Gümüş 2/.test(head) && /760 RP/.test(head), 'kendi ligin (760 RP → Gümüş 2): ' + head.replace(/\n/g, ' '));
-  check(/Gümüş 3 için 140 RP kaldı/.test(head), 'ilerleme metni');
+  check(/Gümüş 2/.test(head) && /760 Elo/.test(head), 'kendi ligin (760 Elo → Gümüş 2): ' + head.replace(/\n/g, ' '));
+  check(/Gümüş 3 için 140 Elo kaldı/.test(head), 'ilerleme metni');
   check((await q.locator('.lg-tier.is-current').count()) === 1, 'güncel kademe vurgulu');
   check((await q.locator('.lg-tier.is-locked').count()) === 12, 'üstteki 12 kademe kilitli görünümde');
   const v2 = await q.locator('#lgRulesT + table').innerText().catch(() => '');
-  check(/\+10 RP/.test(v2) && /−10 RP/.test(v2), 'v2 kuralları (sunucu config v2): ' + v2.slice(0, 40).replace(/\n/g, ' '));
+  check(/\+10 Elo/.test(v2) && /−10 Elo/.test(v2), 'v2 kuralları (sunucu config v2): ' + v2.slice(0, 40).replace(/\n/g, ' '));
   check((await q.locator('.lg-hist-row').count()) === 3, 'son maçlar 3 satır');
   await q.locator('.lg-hist-row summary').first().click();
   check(await q.locator('.lg-bd').first().isVisible(), 'tur dökümü açılır');

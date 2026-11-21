@@ -20,7 +20,7 @@ console.log('== 1) maç sonrası RP / lig');
   const p = await open();
   await p.evaluate(() => window.olMock.setRp(495, 513));
   await sleep(300);
-  check((await txt(p, '#homeRpMount')) === '495 RP', 'başlangıç: ana sayfa hapı 495 RP (' + await txt(p, '#homeRpMount') + ')');
+  check((await txt(p, '#homeRpMount')) === '495 Elo', 'başlangıç: ana sayfa hapı 495 Elo (' + await txt(p, '#homeRpMount') + ')');
   await p.evaluate(() => {
     window.olMock.scenario('final', { n: 4 });
     const st = window.olMock.state; const me = st.results[0]; me.rp_delta = 18; me.rp_after = 513;
@@ -30,7 +30,7 @@ console.log('== 1) maç sonrası RP / lig');
   await sleep(900);
   check(/Yeni lig: Gümüş 1/.test(await p.locator('.ol-league-change').innerText()) && /Bronz 3\s*→\s*Gümüş 1/.test(await p.locator('.ol-lc-sub').innerText()), 'podyum: lig değişimi maç sonucundan (Bronz 3 → Gümüş 1)');
   check((await p.evaluate(() => window.olMock.refreshCalls)) >= 1, 'final görününce profil tazelendi');
-  check((await txt(p, '#homeRpMount')) === '513 RP', 'ana sayfa hapı 513 RP (' + await txt(p, '#homeRpMount') + ')');
+  check((await txt(p, '#homeRpMount')) === '513 Elo', 'ana sayfa hapı 513 Elo (' + await txt(p, '#homeRpMount') + ')');
   check(/Gümüş 1/.test(await p.locator('.ol-league-change').innerText()), 'tazelemeden sonra da podyum değişmedi');
   // başlık hapı (avatar + ad; RP yok): ad/aria bozulmadı
   check(/@sen_buradasin/.test(await p.evaluate(() => document.getElementById('navProfileChip').getAttribute('aria-label'))), 'başlık hapı sağlam');
@@ -38,13 +38,13 @@ console.log('== 1) maç sonrası RP / lig');
   await p.evaluate(() => window.olMock.setRp(null, 530));
   await p.locator('[data-ol-v="exit"]').first().click();
   await sleep(600);
-  check((await txt(p, '#homeRpMount')) === '530 RP', 'hub\'a dönünce yeniden tazelendi: 530 RP (' + await txt(p, '#homeRpMount') + ')');
+  check((await txt(p, '#homeRpMount')) === '530 Elo', 'hub\'a dönünce yeniden tazelendi: 530 Elo (' + await txt(p, '#homeRpMount') + ')');
   await p.evaluate(() => { location.hash = '#/profil'; });
   await sleep(500);
-  check((await txt(p, '#headerPlayerRpMount')) === '530 RP' && (await txt(p, '#profileTierLabel')) === 'Gümüş 1', 'Profil: 530 RP · Gümüş 1 (' + await txt(p, '#headerPlayerRpMount') + ' ' + await txt(p, '#profileTierLabel') + ')');
+  check((await txt(p, '#headerPlayerRpMount')) === '530 Elo' && (await txt(p, '#profileTierLabel')) === 'Gümüş 1', 'Profil: 530 Elo · Gümüş 1 (' + await txt(p, '#headerPlayerRpMount') + ' ' + await txt(p, '#profileTierLabel') + ')');
   await p.evaluate(() => { location.hash = '#/ligler'; });
   await sleep(800);
-  check(/530 RP/.test(await txt(p, '.lg-head-rp') || '') && /Gümüş 1/.test(await txt(p, '.lg-head-title') || ''), '#/ligler: 530 RP · Gümüş 1 (' + await txt(p, '.lg-head-rp') + ' ' + await txt(p, '.lg-head-title') + ')');
+  check(/530 Elo/.test(await txt(p, '.lg-head-rp') || '') && /Gümüş 1/.test(await txt(p, '.lg-head-title') || ''), '#/ligler: 530 Elo · Gümüş 1 (' + await txt(p, '.lg-head-rp') + ' ' + await txt(p, '.lg-head-title') + ')');
   check(p._errors.length === 0, 'konsol temiz ' + p._errors.join('|'));
   await p.close();
 }
@@ -110,32 +110,32 @@ console.log('== 3) ayrılma uyarısı');
     return t;
   }
   let t = await warn(() => window.olMock.scenario('playing', { n: 2 }), 'düello tur 2/5, bitirmedim');
-  check(/kalan 4 tur çözülemedi sayılır: −40 RP/.test(t), 'tur ortası (rounds): kalan 4 tur −40 RP');
+  check(/kalan 4 tur çözülemedi sayılır: −40 Elo/.test(t), 'tur ortası (rounds): kalan 4 tur −40 Elo');
   t = await warn(() => {
     window.olMock.scenario('playing', { n: 2 });
     const st = window.olMock.state; st.room.current_round = 5; st.round.round_no = 5;
     st.round_players.forEach(r => { r.round_no = 5; if (r.user_id === '00000000-0000-4000-8000-000000000001') { r.finished = true; r.won = true; r.guess_count = 2; } });
   }, 'son tur çözüldü');
-  check(!/−\d+ RP/.test(t) && !/tur çözülemedi/.test(t) && /Bitirilmemiş tur kalmadığı/.test(t), 'son turdan sonra: RP uyarısı yok, düz metin');
+  check(!/−\d+ Elo/.test(t) && !/tur çözülemedi/.test(t) && /Bitirilmemiş tur kalmadığı/.test(t), 'son turdan sonra: RP uyarısı yok, düz metin');
   t = await warn(() => window.olMock.scenario('playing', { n: 2 }) || (window.olMock.state.round.round_no = 5, window.olMock.state.room.current_round = 5), 'son tur, bitirmedim');
-  check(/kalan 1 tur çözülemedi sayılır: −10 RP/.test(t), 'son tur ama bitirmedim: kalan 1 tur −10 RP');
+  check(/kalan 1 tur çözülemedi sayılır: −10 Elo/.test(t), 'son tur ama bitirmedim: kalan 1 tur −10 Elo');
   t = await warn(() => window.olMock.scenario('hp-playing', { n: 2 }), 'hp tur 5');
-  check(/kalan 6 tur çözülemedi sayılır: −60 RP/.test(t), 'hp (tavan 10 tur): kalan 6 tur −60 RP');
+  check(/kalan 6 tur çözülemedi sayılır: −60 Elo/.test(t), 'hp (tavan 10 tur): kalan 6 tur −60 Elo');
   t = await warn(() => {
     window.olMock.scenario('hp-playing', { n: 2 });
     const st = window.olMock.state; st.room.current_round = 10; st.round.round_no = 10;
     st.round_players.forEach(r => { r.round_no = 10; if (r.user_id === '00000000-0000-4000-8000-000000000001') { r.finished = true; r.won = true; } });
   }, 'hp son tur çözüldü');
-  check(!/−\d+ RP/.test(t) && /Bitirilmemiş tur kalmadığı/.test(t), 'hp 10. tur çözüldü: uyarı yok');
+  check(!/−\d+ Elo/.test(t) && /Bitirilmemiş tur kalmadığı/.test(t), 'hp 10. tur çözüldü: uyarı yok');
   t = await warn(() => window.olMock.scenario('bracket', { cap: 4, round: 1 }), 'bracket yarı final');
-  check(/kalan 1 tur çözülemedi sayılır: −10 RP/.test(t), 'bracket: yalnızca bu eşleşmenin turu −10 RP');
+  check(/kalan 1 tur çözülemedi sayılır: −10 Elo/.test(t), 'bracket: yalnızca bu eşleşmenin turu −10 Elo');
   t = await warn(() => {
     window.olMock.scenario('bracket', { cap: 4, round: 1 });
     const st = window.olMock.state; st.round_players.forEach(r => { if (r.user_id === '00000000-0000-4000-8000-000000000001') { r.finished = true; r.won = true; r.guess_count = 2; } });
   }, 'bracket bitirdim, rakip bekleniyor');
-  check(!/−\d+ RP/.test(t), 'bracket: turu bitirmiş (rakip bekleniyor) → RP uyarısı yok');
+  check(!/−\d+ Elo/.test(t), 'bracket: turu bitirmiş (rakip bekleniyor) → RP uyarısı yok');
   t = await warn(() => window.olMock.scenario('battle-result', { n: 4 }), 'battle tur 2/3 sonuç');
-  check(/kalan 1 tur çözülemedi sayılır: −10 RP/.test(t), 'battle (tur sonucu, 3 turluk): kalan 1 tur −10 RP');
+  check(/kalan 1 tur çözülemedi sayılır: −10 Elo/.test(t), 'battle (tur sonucu, 3 turluk): kalan 1 tur −10 Elo');
   check(p._errors.length === 0, 'konsol temiz ' + p._errors.join('|'));
   await p.close();
 }
@@ -195,17 +195,17 @@ console.log('== 5) 0004: erken ayrılma (erken_bitis) metinleri');
   });
   await p.waitForSelector('.ol-final-view'); await sleep(700);
   let t = await p.locator('.ol-view-body').innerText();
-  check(/Rakip erken ayrıldı: galibiyet primi verilmedi/.test(t) && !/RP verilmedi/.test(t), 'erken_bitis: "Rakip erken ayrıldı: galibiyet primi verilmedi" (RP verilmedi yok)');
-  check(/\+8 RP/.test(t), 'kalanın tur RP\'si görünüyor (+8)');
+  check(/Rakip erken ayrıldı: galibiyet primi verilmedi/.test(t) && !/Elo verilmedi/.test(t), 'erken_bitis: "Rakip erken ayrıldı: galibiyet primi verilmedi" (RP verilmedi yok)');
+  check(/\+8 Elo/.test(t), 'kalanın tur RP\'si görünüyor (+8)');
   // eski sunucu: dökümsüz, hepsi 0 → eski metin
   await p.evaluate(() => { const st = window.olMock.state; st.results.forEach(r => { r.rp_delta = 0; r.rp_after = 761; delete r.rp_breakdown; }); window.PsikoVakaOnline.rooms.refresh(); });
   await sleep(700);
   t = await p.locator('.ol-view-body').innerText();
-  check(/Maç erken bittiği için RP verilmedi/.test(t) && !/galibiyet primi verilmedi/.test(t), 'eski sunucu: eski metin korunur');
+  check(/Maç erken bittiği için Elo verilmedi/.test(t) && !/galibiyet primi verilmedi/.test(t), 'eski sunucu: eski metin korunur');
   await p.locator('[data-ol-v="exit"]').first().click(); await sleep(500);
   await p.evaluate(() => { location.hash = '#/ligler'; }); await sleep(1200);
   const rules = await p.locator('#leaguesMount').innerText();
-  check(/kalanlara galibiyet primi verilmez/.test(rules) && !/0 RP\)/.test(rules), 'Lig bilgisi kuralları: yeni erken bitiş cümlesi, eski "0 RP" yok');
+  check(/kalanlara galibiyet primi verilmez/.test(rules) && !/0 Elo\)/.test(rules), 'Lig bilgisi kuralları: yeni erken bitiş cümlesi, eski "0 Elo" yok');
   check(/Rakip erken ayrıldı: galibiyet primi verilmedi/.test(await p.locator('#leaguesMount').evaluate(e => e.textContent)), 'Son maçlar dökümünde erken_bitis notu');
   check(p._errors.length === 0, 'konsol temiz ' + p._errors.join('|'));
   await p.close();

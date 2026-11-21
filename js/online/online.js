@@ -184,7 +184,7 @@
         else if (view === 'abandoned') {
             NS.match.exit();
             root.innerHTML = `<div class="ol-center-view"><div class="ol-card-big"><span class="ol-big-icon">${icon('door')}</span><h2 class="ol-h2">Oda kapandı</h2>
-                <p class="ol-muted">Bu odada uzun süre kimseden ses gelmediği için oda kapatıldı. RP verilmedi.</p>
+                <p class="ol-muted">Bu odada uzun süre kimseden ses gelmediği için oda kapatıldı. Elo verilmedi.</p>
                 <div class="ol-row-btns"><button class="btn btn-primary" type="button" data-ol-v="exit">Online'a dön</button></div></div></div>`;
         }
         if (view !== A.lastPhase) {
@@ -283,10 +283,10 @@
             const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
             // RP v2 (§13.4): kalan her tur (bu tur dahil, bitirmediysen) −pen; hp'de tur sınırı 10, bracket'te yalnızca bu eşleşme
             const left = leaveRoundsLeft(s);
-            const leaveText = !pen ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.'
-                : left > 0 ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} RP. Sıralama primi de alamazsın.`
-                : 'Ayrılırsan sıralama primi alamazsın. Bitirilmemiş tur kalmadığı için ek RP kesilmez.';
-            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama RP alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
+            const leaveText = !pen ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan Elo alamazsın.'
+                : left > 0 ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} Elo. Sıralama primi de alamazsın.`
+                : 'Ayrılırsan sıralama primi alamazsın. Bitirilmemiş tur kalmadığı için ek Elo kesilmez.';
+            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama Elo alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
             if (!ok) return;
         }
         if (st === 'finished' || st === 'abandoned') { exitToHub(); return; }
@@ -324,7 +324,7 @@
         const oldHandle = NS.rooms;
         const others = s.players.filter(p => p.played && p.user_id !== NS.api.myId()).map(p => p.user_id);
         btn.disabled = true; btn.classList.add('is-loading');
-        const r = await NS.api.createRoom({ mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.format === 'rounds' ? room.round_count : null, visibility: room.visibility, timeLimit: room.round_time_limit_sec, seeding: room.bracket_seeding });
+        const r = await NS.api.createRoom({ mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.format === 'rounds' ? room.round_count : null, visibility: room.visibility, timeLimit: room.round_time_limit_sec, seeding: room.bracket_seeding, tekHak: !!room.tek_hak, kategoriGizli: !!room.kategori_gizli });
         btn.disabled = false; btn.classList.remove('is-loading');
         if (!r.ok) { NS.toast(r.error.message); return; }
         const me = NS.rooms.me() || {};

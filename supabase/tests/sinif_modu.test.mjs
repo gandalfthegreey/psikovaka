@@ -17,6 +17,9 @@ import { randomUUID } from 'node:crypto';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const read = (p) => readFileSync(path.join(root, p), 'utf8');
+// ILE_0007=1: 0006'nın ardından 0007 de uygulanır (0007 sonrası geriye uyum ve anonim numaralandırma denemesi)
+const MIG7_YOL = ['migrations/0007_zorluk.sql', 'tools/0007_zorluk.sql.taslak'].find((p) => existsSync(path.join(root, p)));
+const readMig = (p) => read(p) + (process.env.ILE_0007 && p === MIG6 && MIG7_YOL ? '\n' + read(MIG7_YOL) : '');
 const MIG6 = process.env.SINIF_MIG
   || (existsSync(path.join(root, 'migrations/0006_sinif_modu.sql')) ? 'migrations/0006_sinif_modu.sql' : 'tools/0006_sinif_modu.sql.taslak');
 
@@ -149,12 +152,12 @@ console.log('\n[0006 kurulumu]');
 let fp0;
 await test('0006 uygulanır; ikinci kez çalıştırılınca hiçbir şey değişmez (fonksiyon/yetki/ayar/sütun/politika/kısıt/tetikleyici/yayın)', async () => {
   fp0 = await fingerprint();
-  await db.exec(read(MIG6));
+  await db.exec(readMig(MIG6));
   const a = await fingerprint();
   ok(JSON.stringify(a) !== JSON.stringify(fp0), '0006 bir şey değiştirmeli');
   await admin(`update public.game_config set value = 4 where key = 'sinif_geri_sayim_sn'`);   // ayarlanmış değer korunmalı
   const a2 = await fingerprint();
-  await db.exec(read(MIG6));
+  await db.exec(readMig(MIG6));
   eq(await fingerprint(), a2);
   eq(await num(`select value from public.game_config where key = 'sinif_geri_sayim_sn'`), 4);
   await admin(`update public.game_config set value = 3 where key = 'sinif_geri_sayim_sn'`);
@@ -300,7 +303,8 @@ await test('sinif_olustur: kullanıcı adı şart; ayar doğrulama (her alan); s
   ok(/0/.test(e.detail));
   const r = await rpc(H, 'sinif_olustur', { p_ayarlar: { ipucu_araligi_sn: 10 } });
   ok(r.ok && /^[A-Z0-9]{6}$/.test(r.kod) && r.server_now, JSON.stringify(r));
-  eq(r.ayarlar, { vaka_sayisi: 5, hedef: 'diagnosis', kurslar: null, kategoriler: null, ipucu_araligi_sn: 10, tahmin_hakki: 3, kapasite: 100, gec_katilim: true });
+  eq(r.ayarlar, { vaka_sayisi: 5, hedef: 'diagnosis', kurslar: null, kategoriler: null, ipucu_araligi_sn: 10, tahmin_hakki: 3, kapasite: 100, gec_katilim: true,
+    ...(process.env.ILE_0007 ? { tek_hak: false, kategori_gizli: false } : {}) });   // 0007: iki ek anahtar
   S = r;
   const d = await durum(H, S.oturum_id);
   eq([d.rol, d.oturum.durum, d.oturum.tur_no, d.tur, d.ben, d.katilimcilar, d.oturum.sunucu.username], ['sunucu', 'lobi', 0, null, null, [], 'hoca1']);

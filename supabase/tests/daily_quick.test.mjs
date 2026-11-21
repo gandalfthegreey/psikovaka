@@ -17,7 +17,10 @@ const root = path.resolve(here, '..');
 const readRaw = (p) => readFileSync(path.join(root, p), 'utf8');
 // ILE_0006=1: 0005 her yüklendiğinde ardından 0006 da uygulanır (0006 sonrası geriye uyum denemesi)
 const MIG6_YOL = ['migrations/0006_sinif_modu.sql', 'tools/0006_sinif_modu.sql.taslak'].find((p) => existsSync(path.join(root, p)));
-const read = (p) => readRaw(p) + (process.env.ILE_0006 && p === 'migrations/0005_isim_filtresi.sql' && MIG6_YOL ? '\n' + readRaw(MIG6_YOL) : '');
+// ILE_0007=1: 0005'in ardından 0006 + 0007 de uygulanır (0007 sonrası geriye uyum denemesi)
+const MIG7_YOL = ['migrations/0007_zorluk.sql', 'tools/0007_zorluk.sql.taslak'].find((p) => existsSync(path.join(root, p)));
+const read = (p) => readRaw(p) + ((process.env.ILE_0006 || process.env.ILE_0007) && p === 'migrations/0005_isim_filtresi.sql' && MIG6_YOL ? '\n' + readRaw(MIG6_YOL) : '')
+  + (process.env.ILE_0007 && p === 'migrations/0005_isim_filtresi.sql' && MIG7_YOL ? '\n' + readRaw(MIG7_YOL) : '');
 
 async function connect() {
   if (process.env.DATABASE_URL) {

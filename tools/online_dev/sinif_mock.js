@@ -174,6 +174,13 @@
                 if (!intIn('kapasite', 2, 100)) return err('INVALID_SETTINGS', 'kapasite');
                 if (p.hedef != null && p.hedef !== 'diagnosis') return err('INVALID_SETTINGS', 'hedef');
                 if (p.gec_katilim != null) ay.gec_katilim = !!p.gec_katilim;
+                // 0007 (ajan Z1): zorluk; o.zorluk === false → eski sunucu gibi anahtarlar yok sayılır
+                if (o.zorluk !== false) {
+                    if (p.tek_hak != null && typeof p.tek_hak !== 'boolean') return err('INVALID_SETTINGS', 'tek_hak');
+                    if (p.kategori_gizli != null && typeof p.kategori_gizli !== 'boolean') return err('INVALID_SETTINGS', 'kategori_gizli');
+                    ay.tek_hak = !!p.tek_hak; ay.kategori_gizli = !!p.kategori_gizli;
+                    if (ay.tek_hak) ay.tahmin_hakki = 1;
+                }
                 ay.kurslar = arr(p.kurslar); ay.kategoriler = arr(p.kategoriler);
                 const uygun = cases.filter(c => (!ay.kurslar || ay.kurslar.includes(c.course)) && (!ay.kategoriler || ay.kategoriler.includes(c.category)));
                 if (uygun.length < ay.vaka_sayisi) return err('NOT_ENOUGH_CASES', uygun.length);
@@ -274,7 +281,7 @@
                 const ip = ipucuNo(s, t);
                 const dogru = item === c.diagnosisId;
                 const d1 = diag.get(item), d2 = diag.get(c.diagnosisId);
-                const ayni = !dogru && !!(d1 && d2 && d1.category === d2.category);
+                const ayni = !dogru && !s.ayarlar.kategori_gizli && !!(d1 && d2 && d1.category === d2.category);
                 const yeni = !r;
                 if (!r) { r = { tur_no: s.tur_no, katilimci_id: k.id, tahmin_sayisi: 0, bitti: false, cozdu: false, ipucu_no: null, puan: 0, sure_ms: null }; s.sonuclar.push(r); }
                 r.tahmin_sayisi++;

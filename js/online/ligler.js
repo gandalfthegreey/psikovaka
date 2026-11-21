@@ -33,7 +33,7 @@
 
     // ------------------------------------------------------------ veri
     async function loadConfig() {
-        if (S.cfgLoading || (S.cfg && Date.now() - S.cfgAt < 5 * 60000) || !signedIn()) return;
+        if (S.cfgLoading || (S.cfg && Date.now() - S.cfgAt < 5 * 60000) || !signedIn()) return S.cfg;
         S.cfgLoading = true;
         const r = await NS.api.getConfig();
         S.cfgLoading = false;
@@ -84,8 +84,8 @@
             const a = acc();
             const canSign = a && a.availability === 'ready';
             return `<article class="card lg-head lg-head-guest">
-                <div class="lg-head-text"><h2 class="lg-head-title">Ligler ve sıralama puanı</h2>
-                <p class="lg-muted">Online maçlarda RP kazanır ya da kaybedersin; RP'n ligini belirler. ${canSign ? 'Kendi ligini ve son maçlarını görmek için giriş yap.' : 'Online özellikler bu sürümde ya da şu an kullanılamıyor.'}</p></div>
+                <div class="lg-head-text"><h2 class="lg-head-title">Ligler ve Elo</h2>
+                <p class="lg-muted">Online maçlarda Elo kazanır ya da kaybedersin; Elo'n ligini belirler. ${canSign ? 'Kendi ligini ve son maçlarını görmek için giriş yap.' : 'Online özellikler bu sürümde ya da şu an kullanılamıyor.'}</p></div>
                 ${canSign ? `<div class="lg-head-actions"><button class="btn btn-primary" type="button" data-lg="signin">Giriş yap</button><button class="btn btn-secondary" type="button" data-lg="signup">Hesap oluştur</button></div>` : ''}
             </article>`;
         }
@@ -96,9 +96,9 @@
             <div class="lg-head-main">
                 <span class="lg-eyebrow">Ligin</span>
                 <h2 class="lg-head-title">${esc(t.name)}</h2>
-                <span class="lg-head-rp">${rp} RP${S.pos ? ` <span class="lg-head-pos">· Sıralamada ${S.pos}.</span>` : ''}</span>
+                <span class="lg-head-rp">${rp} Elo${S.pos ? ` <span class="lg-head-pos">· Sıralamada ${S.pos}.</span>` : ''}</span>
                 <div class="lg-bar" role="progressbar" aria-label="Sonraki kademeye ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${t.pct}"><i data-pct="${t.pct}"></i></div>
-                <span class="lg-head-next">${t.next ? `${esc(t.next.name)} için ${t.toNext} RP kaldı` : 'En üst ligdesin'}</span>
+                <span class="lg-head-next">${t.next ? `${esc(t.next.name)} için ${t.toNext} Elo kaldı` : 'En üst ligdesin'}</span>
             </div>
         </article>`;
     }
@@ -111,7 +111,7 @@
         return `<section class="lg-sec" aria-labelledby="lgLadderT">
             <h2 class="lg-sec-title" id="lgLadderT">Lig merdiveni</h2>
             <ol class="lg-ladder">${L.TIERS.map((t, i) => {
-                const range = t.max === Infinity ? `${t.min}+ RP` : `${t.min}–${t.max} RP`;
+                const range = t.max === Infinity ? `${t.min}+ Elo` : `${t.min}–${t.max} Elo`;
                 const state = curIdx < 0 ? '' : i === curIdx ? ' is-current' : i > curIdx ? ' is-locked' : ' is-passed';
                 return `<li class="lg-tier${state}"${i === curIdx ? ' aria-current="true" data-lg-current' : ''}>
                     <span class="lg-tier-badge">${L.badge(t.min, 32)}</span>
@@ -125,7 +125,7 @@
 
     function rulesHtml() {
         const R = rules(), v = R.v;
-        const row = (label, val) => `<tr><th scope="row">${esc(label)}</th><td class="${val > 0 ? 'is-plus' : val < 0 ? 'is-minus' : ''}">${signed(val)} RP</td></tr>`;
+        const row = (label, val) => `<tr><th scope="row">${esc(label)}</th><td class="${val > 0 ? 'is-plus' : val < 0 ? 'is-minus' : ''}">${signed(val)} Elo</td></tr>`;
         let body = '';
         if (R.kind === 'v2') {
             body = `<table class="lg-table"><caption class="lg-cap">Her tur</caption><tbody>
@@ -141,9 +141,10 @@
                     <li>Maçtan erken ayrılırsan kalan her tur çözülemedi sayılır. Elendikten sonraki turlar puan götürmez.</li>
                     <li>Kombo: üç aşamadaki tahmin sayılarının ortalaması kullanılır; bir aşama çözülemezse tur çözülemedi sayılır.</li>
                     <li>Rakipler ayrıldığı için maç erken biterse (turların yarısı oynanmadan), kalanlara galibiyet primi verilmez.</li>
-                    <li>RP 0'ın altına düşmez. Yeni hesaplar 0 RP ile başlar.</li>
-                    <li>Günün vakası ve tek kişilik pratik RP vermez.</li>
-                </ul>`;
+                    <li>Elo 0'ın altına düşmez. Yeni hesaplar 0 Elo ile başlar.</li>
+                    <li>Günün vakası ve tek kişilik pratik Elo vermez.</li>
+                </ul>
+                ${zorlukRulesHtml()}`;
         } else {
             body = `<table class="lg-table"><tbody>
                 ${isFinite(v.rp_win_duel) ? row('Düello galibiyeti', v.rp_win_duel) : ''}
@@ -152,13 +153,26 @@
                 ${isFinite(v.rp_second) ? row('İkincilik (2\'den fazla oyuncu)', v.rp_second) : ''}
                 ${isFinite(v.rp_completion) ? row('Maçı tamamlama', v.rp_completion) : ''}
                 </tbody></table>
-                <ul class="lg-notes"><li>Maç erken biterse ya da erken ayrılırsan RP verilmez.</li><li>Günün vakası ve tek kişilik pratik RP vermez.</li></ul>`;
+                <ul class="lg-notes"><li>Maç erken biterse ya da erken ayrılırsan Elo verilmez.</li><li>Günün vakası ve tek kişilik pratik Elo vermez.</li></ul>`;
         }
         return `<section class="lg-sec" aria-labelledby="lgRulesT">
             <h2 class="lg-sec-title" id="lgRulesT">Puan nasıl kazanılır, nasıl kaybedilir?</h2>
             ${body}
             ${R.source === 'default' ? `<p class="lg-muted lg-small">${icon('info')}<span>Belgelenmiş varsayılan değerler. Giriş yaptığında güncel değerler sunucudan okunur.</span></p>` : ''}
         </section>`;
+    }
+
+    /** Zorluk bonusu (0007): sunucuda ayar anahtarları varsa (ya da varsayılan) özel oda kuralı. */
+    function zorlukRulesHtml() {
+        const Z = global.PsikoVakaZorluk;
+        if (!Z) return '';
+        const c = S.cfg || {};
+        const m1 = Z.multiplier({ tekHak: true }, c), m2 = Z.multiplier({ tekHak: true, kategoriGizli: true }, c);
+        return `<table class="lg-table"><caption class="lg-cap">Zorluk bonusu (yalnızca özel odalar)</caption><tbody>
+            <tr><th scope="row">Bir ayar açık (tek tahmin hakkı ya da kategori gizli)</th><td class="is-plus">${esc(Z.fmtMult(m1))}</td></tr>
+            <tr><th scope="row">İki ayar açık</th><td class="is-plus">${esc(Z.fmtMult(m2))}</td></tr></tbody></table>
+            <ul class="lg-notes"><li>Çarpan yalnızca turda kazandığın Elo'ya uygulanır (en yakın tam sayıya yuvarlanır). Çözemediğin tur yine −10; sıralama primi ve ayrılma cezası değişmez.</li>
+            <li>Tek tahmin hakkında "kaçıncı tahmin" yerine kaçıncı ipucunda bildiğin sayılır. Hızlı eşleşme her zaman normal kurallarla oynanır.</li></ul>`;
     }
 
     function fmtDate(iso) {
@@ -170,7 +184,7 @@
     function outcomeText(x) {
         const o = String(x.outcome || '');
         const m = /^g([1-6])$/.exec(o);
-        if (m) return `${m[1]}. tahminde çözdü`;
+        if (m) return x._tek ? `${m[1]}. ipucunda çözdü` : `${m[1]}. tahminde çözdü`;
         if (o === 'fail') return x.missed ? 'Oynanmadı (ayrıldın)' : 'Çözemedi';
         if (o === 'void') return 'Yarıda kaldı';
         return o || '—';
@@ -179,8 +193,12 @@
     function breakdownHtml(bd) {
         if (!bd || typeof bd !== 'object' || !Array.isArray(bd.rounds)) return '';
         const place = Number(bd.placement || 0);
-        return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(x))}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
+        const mult = Number(bd.zorluk_carpani) || 1;
+        const tek = !!(bd.zorluk && bd.zorluk.tek_hak);
+        const Z = global.PsikoVakaZorluk;
+        return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(Object.assign({ _tek: tek }, x)))}${x.base != null && Number(x.base) !== d ? ` <span class="lg-bd-base">(${signed(Number(x.base))} ${esc(Z ? Z.fmtMult(mult) : '×' + mult)})</span>` : ''}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
             ${place ? `<li class="lg-bd-place"><span>Sıralama primi</span><span class="lg-delta is-plus">${signed(place)}</span></li>` : ''}
+            ${mult > 1 && Z ? `<li class="lg-bd-note"><span>Zorluk bonusu ${esc(Z.fmtMult(mult))}: ${esc(Z.label(bd.zorluk))}</span></li>` : ''}
             ${bd.erken_bitis === true ? `<li class="lg-bd-note"><span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></li>` : ''}
             ${bd.voided ? `<li class="lg-bd-note"><span>Maç erken bittiği için geçersiz sayıldı.</span></li>` : ''}</ul>`;
     }
@@ -191,7 +209,7 @@
         let inner;
         if (h == null) inner = `<div class="ol-skel"></div><div class="ol-skel"></div>`;
         else if (h.error) inner = `<div class="ol-empty">${icon('alert')}<span>${esc(h.error.message)}</span><button class="btn btn-sm btn-secondary" type="button" data-lg="retry-hist">Tekrar dene</button></div>`;
-        else if (!h.length) inner = `<div class="ol-empty">${icon('trophy')}<span>Henüz RP'li maçın yok. Online'da bir maç bitir, burada görünsün.</span></div>`;
+        else if (!h.length) inner = `<div class="ol-empty">${icon('trophy')}<span>Henüz Elo'lu maçın yok. Online'da bir maç bitir, burada görünsün.</span></div>`;
         else inner = `<ul class="lg-hist">${h.map(x => {
             const d = Number(x.rp_delta) || 0;
             const room = { mode: x.mode, format: x.format };
@@ -202,7 +220,7 @@
             const bd = breakdownHtml(x.rp_breakdown);
             const head = `<span class="lg-hist-main"><span class="lg-hist-title">${esc(NS.roomTitle(room))}</span>
                 <span class="lg-hist-sub">${esc(fmtDate(x.finished_at || x.created_at))}${tgt ? ` · ${esc(T.target[tgt] || tgt)}` : ''}${place ? ` · ${esc(place)}` : ''}</span></span>
-                <span class="lg-delta lg-delta-big ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)} RP</span>`;
+                <span class="lg-delta lg-delta-big ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)} Elo</span>`;
             return bd ? `<li class="lg-hist-row"><details><summary class="lg-hist-sum">${head}</summary>${bd}</details></li>` : `<li class="lg-hist-row"><div class="lg-hist-sum">${head}</div></li>`;
         }).join('')}</ul>`;
         return `<section class="lg-sec" aria-labelledby="lgHistT"><h2 class="lg-sec-title" id="lgHistT">Son maçlar</h2>${inner}</section>`;
@@ -261,6 +279,8 @@
 
     /** Maçtan ayrılma/pes etme uyarıları için: sunucuda RP v2 açık mı, tur cezası kaç? (yalnızca sunucudan okunduysa) */
     function failPenalty() { const R = rules(); return R.kind === 'v2' && R.source === 'server' ? Math.abs(Number(R.v[V2.fail]) || 0) : null; }
-    NS.leaguesView = { render, onShow, rules, failPenalty, loadConfig, invalidate() { S.hist = null; S.histAt = 0; S.pos = null; S.cfg = null; S.cfgAt = 0; S.histUid = null; }, V2_DEFAULTS };
+    /** Sunucu zorluk ayarlarını (0007) biliyor mu? game_config'te çarpan anahtarı varsa evet. */
+    function zorlukSupported() { return !!(S.cfg && isFinite(S.cfg.rp_zorluk_carpan_1)); }
+    NS.leaguesView = { render, onShow, rules, failPenalty, loadConfig, zorlukSupported, cfg: () => S.cfg, invalidate() { S.hist = null; S.histAt = 0; S.pos = null; S.cfg = null; S.cfgAt = 0; S.histUid = null; }, V2_DEFAULTS };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(init, 0)); else setTimeout(init, 0);
 })(typeof window !== 'undefined' ? window : globalThis);

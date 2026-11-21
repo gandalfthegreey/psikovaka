@@ -73,7 +73,7 @@
     function progressText(value) {
         const t = tierFor(value);
         if (!t.next) return 'En üst ligdesin';
-        return `${dative(t.next.name)} ${t.toNext} RP kaldı`;
+        return `${dative(t.next.name)} ${t.toNext} Elo kaldı`;
     }
 
     // Amblem: 0 0 24 24; lige göre şekil, kademe kadar nokta

@@ -35,6 +35,12 @@ class PsikoVakaGame {
 
         this.unlockedClues = 1;
         this.maxClues = 6;
+        // Zorluk (ajan Z1): bu vakanın ayarları; pratik seçimi localStorage'da (js/zorluk.js)
+        this.zorluk = { tekHak: false, kategoriGizli: false };
+        this.practiceZorluk = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.load() : { tekHak: false, kategoriGizli: false };
+        this.clueRevealHandler = null;   // online/günlük: sunucuya giden "Sonraki ipucu"
+        this.dailyZorlukHandler = null;  // günlük (üye): ayar değişince sunucuya
+        this.cluesUsed = null;           // vaka bitince açık ipucu sayısı (tek hak sonucu)
         this.guesses = [];
         this.isGameOver = false;
         this.gameWon = false;
@@ -860,7 +866,7 @@ class PsikoVakaGame {
         if (this.dom.homeGreetingName) this.dom.homeGreetingName.textContent = name;
         // RP yalnızca online maçlardan gelir: misafirde RP hapı ve "0 RP" gösterilmez (H5)
         if (this.dom.homeRpMount) {
-            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} RP` : '';
+            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} Elo` : '';
             this.dom.homeRpMount.hidden = !(acct && hasRp);
         }
         const leagueLink = document.getElementById('profileLeagueLink');
@@ -891,7 +897,7 @@ class PsikoVakaGame {
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
         if (rpMount && acct && hasRp) {
-            rpMount.textContent = `${rp} RP`;
+            rpMount.textContent = `${rp} Elo`;
             rpMount.style.color = '';
         }
         if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = (acct && tier) ? tier.name : '';
@@ -910,7 +916,7 @@ class PsikoVakaGame {
         if (a.profileRpNote) {
             const differs = !!(acct && localRp !== null && localRp !== acct.ranked_points);
             a.profileRpNote.hidden = !differs;
-            if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda tutulur; bu cihazdaki ${localRp} RP aktarılmaz.`;
+            if (differs) a.profileRpNote.textContent = `Elo (sıralama puanı) sunucuda tutulur; bu cihazdaki ${localRp} Elo aktarılmaz.`;
         }
     }
 
@@ -1011,6 +1017,8 @@ class PsikoVakaGame {
             if (cat) parts.push(cat.name);
         }
         if (this.onlyUnsolvedMode) parts.push('sadece çözülmemişler');
+        const Z = window.PsikoVakaZorluk;
+        if (Z && Z.any(this.practiceZorluk)) parts.push('Zor: ' + Z.names(this.practiceZorluk).join(' + ').toLocaleLowerCase('tr'));
         this.dom.practiceSummary.textContent = parts.join(' · ');
     }
 
@@ -1262,6 +1270,11 @@ class PsikoVakaGame {
             remainingGuessesText: document.getElementById('remainingGuessesText'),
             guessDots: document.getElementById('guessDots'),
             btnGiveUp: document.getElementById('btnGiveUp'),
+            btnNextClue: document.getElementById('btnNextClue'),
+            playZorBadge: document.getElementById('playZorBadge'),
+            playZorlukPanel: document.getElementById('playZorlukPanel'),
+            playResultZor: document.getElementById('playResultZor'),
+            practiceZorlukMount: document.getElementById('practiceZorlukMount'),
             mainInputSection: document.getElementById('mainInputSection'),
             finishedActions: document.getElementById('finishedActions'),
             btnMainNextCase: document.getElementById('btnMainNextCase'),
@@ -1488,6 +1501,10 @@ class PsikoVakaGame {
         if (this.dom.btnGiveUp) {
             this.dom.btnGiveUp.addEventListener('click', () => this.giveUp());
         }
+        if (this.dom.btnNextClue) {
+            this.dom.btnNextClue.addEventListener('click', () => this.revealNextClue());
+        }
+        this.initZorlukUI();
 
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
@@ -2015,6 +2032,7 @@ class PsikoVakaGame {
             guesses: this.guesses.map(g => Object.assign({}, g)),
             stageGuessLog: JSON.parse(JSON.stringify(log)), comboResults: Object.assign({}, this.comboResults || {}),
             diagWrongLog: (this.diagWrongLog || []).slice(), elapsed: this.elapsedSeconds || 0,
+            zorluk: Object.assign({}, this.zorluk || {}), cluesUsed: this.cluesUsed || this.unlockedClues,
             steps: [1, 2, 3].map(i => { const el = this.dom['comboStep' + i + 'Val']; return el ? el.textContent : ''; }),
             at: Date.now()
         };
@@ -2059,6 +2077,9 @@ class PsikoVakaGame {
             }
         }
         this.elapsedSeconds = rec.elapsed || 0;
+        if (rec.zorluk) this.zorluk = Object.assign({ tekHak: false, kategoriGizli: false }, rec.zorluk);
+        if (rec.cluesUsed) this.cluesUsed = rec.cluesUsed;
+        this.zorlukLocked = true;
         this.renderGameOverView(!!rec.won);
         if (opts.title && this.dom.playResultTitle) this.dom.playResultTitle.textContent = opts.title;
         if (this.dom.btnMainNextCase) this.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
@@ -2166,6 +2187,13 @@ class PsikoVakaGame {
         this.dailyReadOnly = false;
         this.dailyContext = null; // günlük ise startDailyCase / openFinishedDaily hemen sonra kurar
         this.currentCase = caseData;
+        // Zorluk: pratik ve paylaşılan vakada pratik seçimi; günlük/online/meydan okumada kapalı (günlük ve online sonra kurar)
+        this.zorluk = (this.currentMode === 'practice' || this.currentMode === 'custom')
+            ? Object.assign({}, this.practiceZorluk) : { tekHak: false, kategoriGizli: false };
+        this.zorlukLocked = false;
+        this.clueRevealHandler = null;
+        this.dailyZorlukHandler = null;
+        this.cluesUsed = null;
         if (!this.currentCase.pharmacologyId) {
             this.currentCase.pharmacologyId = this.getFallbackPharmacologyId(this.currentCase);
         }
@@ -2231,6 +2259,7 @@ class PsikoVakaGame {
         this.renderClues();
         this.renderGuesses();
         this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
         this.enterPlayScreen();
         this.markOnboarded();
         this.emitPlayState();
@@ -2275,6 +2304,110 @@ class PsikoVakaGame {
                 }
             }
         }, 500);
+    }
+
+    // ---------------------------------------------------------------- Zorluk (ajan Z1)
+    /** Aşama başına tahmin hakkı: tek hakta 1, değilse 6. */
+    maxGuesses() { return this.zorluk && this.zorluk.tekHak ? 1 : this.maxClues; }
+
+    /** Vakanın zorluk ayarlarını değiştirir (online/günlük çağırır). opts.locked: değiştirilemez (rozet gösterilir). */
+    setCaseZorluk(z, opts = {}) {
+        const Z = window.PsikoVakaZorluk;
+        this.zorluk = Z ? Z.norm(z) : { tekHak: !!(z && z.tekHak), kategoriGizli: !!(z && z.kategoriGizli) };
+        if (opts.locked != null) this.zorlukLocked = !!opts.locked;
+        this.renderClues();
+        this.renderGuesses();
+        this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
+    }
+
+    /** Günlükte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    canEditZorluk() {
+        if (this.currentMode !== 'daily' || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        const log = this.stageGuessLog || {};
+        const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
+        return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
+    }
+
+    /** Oyun başlığındaki "Zor" rozeti, "Sonraki ipucu" düğmesi ve günlük ayar paneli. */
+    renderZorlukUI() {
+        const Z = window.PsikoVakaZorluk;
+        if (!Z) return;
+        if (this.dom.playZorBadge) this.dom.playZorBadge.innerHTML = Z.badge(this.zorluk);
+        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('is-kategori-gizli', !!(this.zorluk && this.zorluk.kategoriGizli));
+        const panel = this.dom.playZorlukPanel;
+        if (panel) {
+            const show = this.canEditZorluk();
+            if (show) {
+                const sig = JSON.stringify(this.zorluk);
+                if (panel.dataset.sig !== sig || !panel.firstChild) {
+                    panel.dataset.sig = sig;
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk', note: 'İlk tahminden önce seç; sonra değiştirilemez. Günün vakasında Elo yok; sıralamada adının yanında "Zor" görünür.' });
+                }
+            }
+            panel.hidden = !show;
+        }
+        this.updateNextClueButton();
+    }
+
+    updateNextClueButton() {
+        const b = this.dom.btnNextClue;
+        if (!b) return;
+        const show = !!(this.zorluk && this.zorluk.tekHak) && !this.isGameOver && !this.dailyReadOnly && this.currentCase;
+        b.hidden = !show;
+        b.disabled = !show || this.unlockedClues >= this.maxClues || !!this._revealBusy;
+        const lbl = b.querySelector('span');
+        const all = this.unlockedClues >= this.maxClues;
+        if (lbl) lbl.textContent = all ? 'İpuçları açık' : 'Sonraki ipucu';
+        b.setAttribute('aria-label', all ? 'Bütün ipuçları açık' : `Sonraki ipucunu aç (${Math.min(this.unlockedClues + 1, this.maxClues)}/${this.maxClues}), tahmin hakkın gitmez`);
+    }
+
+    /** Tek hak: tahmin etmeden sonraki ipucunu açar. Online/günlük üye: sunucuya sorar (clueRevealHandler). */
+    async revealNextClue() {
+        if (!(this.zorluk && this.zorluk.tekHak) || this.isGameOver || this.dailyReadOnly || this._revealBusy) return;
+        if (this.unlockedClues >= this.maxClues) return;
+        let n = this.unlockedClues + 1;
+        if (typeof this.clueRevealHandler === 'function') {
+            this._revealBusy = true; this.updateNextClueButton();
+            let r = null;
+            try { r = await this.clueRevealHandler(); } catch (e) { r = null; }
+            this._revealBusy = false;
+            if (!r || !r.ok) { this.updateNextClueButton(); return; }
+            n = Math.min(this.maxClues, Math.max(this.unlockedClues, r.clues || n));
+        }
+        if (this.isGameOver) return;
+        this.unlockedClues = n;
+        this.zorlukLocked = true;
+        this.renderClues();
+        this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
+        this.announcePlay(`İpucu ${this.unlockedClues}/${this.maxClues} açıldı.`);
+    }
+
+    /** Pratik ayarları penceresindeki ve günlük paneldeki anahtarlar. */
+    initZorlukUI() {
+        const Z = window.PsikoVakaZorluk;
+        if (!Z) return;
+        const mount = this.dom.practiceZorlukMount;
+        if (mount) {
+            mount.innerHTML = Z.switches(this.practiceZorluk, { id: 'practiceZor', note: 'Sonraki pratik vakasından itibaren geçerli; seçimin hatırlanır.' });
+            Z.bind(mount, (z) => {
+                this.practiceZorluk = z;
+                Z.save(z);
+                this.updatePracticeSummary();
+            });
+        }
+        if (this.dom.playZorlukPanel) {
+            Z.bind(this.dom.playZorlukPanel, async (z) => {
+                if (!this.canEditZorluk()) { this.renderZorlukUI(); return; }
+                if (typeof this.dailyZorlukHandler === 'function') {
+                    const r = await this.dailyZorlukHandler(z);
+                    if (r && r.zorluk) z = r.zorluk;
+                    if (r && r.locked) this.zorlukLocked = true;
+                }
+                this.setCaseZorluk(z);
+            });
+        }
     }
 
     renderClues() {
@@ -2325,7 +2458,7 @@ class PsikoVakaGame {
                         <span class="clue-num">${this.icon('lock')}</span>
                         <span class="clue-tag">${clueLabels[i]}</span>
                     </div>
-                    <span class="clue-locked-note">${i}. yanlışta açılır</span>
+                    <span class="clue-locked-note">${this.zorluk && this.zorluk.tekHak ? (i === this.unlockedClues ? 'Sonraki ipucu ile açılır' : 'Kilitli') : `${i}. yanlışta açılır`}</span>
                 `;
             }
 
@@ -2381,14 +2514,14 @@ class PsikoVakaGame {
         this.guesses.forEach((guess, index) => {
             const card = document.createElement('div');
             let cardClass = 'guess-card wrong';
-            let statusText = 'Farklı grup';
+            let statusText = this.zorluk && this.zorluk.kategoriGizli ? 'Yanlış' : 'Farklı grup';
             let iconName = 'x';
 
             if (guess.isCorrect) {
                 cardClass = 'guess-card correct';
                 statusText = 'Doğru';
                 iconName = 'check';
-            } else if (guess.categoryMatch) {
+            } else if (guess.categoryMatch && !(this.zorluk && this.zorluk.kategoriGizli)) {
                 cardClass = 'guess-card category-match';
                 statusText = `Grup doğru: ${guess.categoryName}`;
                 iconName = 'target';
@@ -2424,13 +2557,15 @@ class PsikoVakaGame {
         if (strip.hidden) { strip.innerHTML = ''; return; }
         const short = (t) => { const x = String(t || ''); return x.length > 22 ? x.slice(0, 21).trimEnd() + '…' : x; };
         const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const hide = !!(this.zorluk && this.zorluk.kategoriGizli);
         strip.innerHTML = list.map((g, i) => {
-            const kind = g.isCorrect ? 'is-correct' : (g.categoryMatch ? 'is-close' : 'is-wrong');
-            const ico = g.isCorrect ? 'check' : (g.categoryMatch ? 'target' : 'x');
-            const state = g.isCorrect ? 'doğru' : (g.categoryMatch ? `grup doğru: ${g.categoryName}` : 'farklı grup');
+            const near = g.categoryMatch && !hide;
+            const kind = g.isCorrect ? 'is-correct' : (near ? 'is-close' : 'is-wrong');
+            const ico = g.isCorrect ? 'check' : (near ? 'target' : 'x');
+            const state = g.isCorrect ? 'doğru' : (near ? `grup doğru: ${g.categoryName}` : (hide ? 'yanlış' : 'farklı grup'));
             return `<li class="guess-chip ${kind}" title="${esc(g.nameTr)}">
                 <span class="guess-chip-ico">${this.icon(ico)}</span>
-                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${g.categoryMatch && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
+                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${near && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
                 <span class="visually-hidden">${i + 1}. tahmin, ${esc(state)}</span>
             </li>`;
         }).join('');
@@ -2439,11 +2574,12 @@ class PsikoVakaGame {
     }
 
     updateRemainingGuessesUI() {
-        const remaining = Math.max(0, this.maxClues - this.guesses.length);
-        this.dom.remainingGuessesText.textContent = `Kalan hak ${remaining}/${this.maxClues}`;
+        const maxG = this.maxGuesses();
+        const remaining = Math.max(0, maxG - this.guesses.length);
+        this.dom.remainingGuessesText.textContent = this.zorluk && this.zorluk.tekHak ? (remaining ? 'Tek hak' : 'Hak kalmadı') : `Kalan hak ${remaining}/${maxG}`;
 
         this.dom.guessDots.innerHTML = '';
-        for (let i = 0; i < this.maxClues; i++) {
+        for (let i = 0; i < maxG; i++) {
             const dot = document.createElement('div');
             dot.className = 'guess-dot';
             if (i < this.guesses.length) {
@@ -2453,6 +2589,7 @@ class PsikoVakaGame {
             }
             this.dom.guessDots.appendChild(dot);
         }
+        this.renderZorlukUI();
     }
 
     // --- Autocomplete & Search ---
@@ -2694,6 +2831,8 @@ class PsikoVakaGame {
             this.showToast("Bunu zaten denedin.");
             return;
         }
+        // Kategori gizli: aynı grup bilgisi hiç üretilmez (yalnızca "yanlış")
+        if (this.zorluk && this.zorluk.kategoriGizli) { categoryMatch = false; categoryName = ''; }
 
         const guessData = {
             itemId: chosenObj.id,
@@ -2758,11 +2897,11 @@ class PsikoVakaGame {
 
             this.handleGameEnd(true);
         } else {
-            if (this.unlockedClues < this.maxClues) {
+            if (this.unlockedClues < this.maxClues && !(this.zorluk && this.zorluk.tekHak)) {
                 this.unlockedClues++;
             }
 
-            if (this.guesses.length >= this.maxClues) {
+            if (this.guesses.length >= this.maxGuesses()) {
                 this.handleGameEnd(false);
             } else {
                 this.renderClues();
@@ -2806,10 +2945,12 @@ class PsikoVakaGame {
         if (this.dom.mainInputSection) this.dom.mainInputSection.hidden = true;
         this.closeAutocomplete();
         this.closeCategoryTree();
+        if (this.cluesUsed == null) this.cluesUsed = this.unlockedClues;
         this.renderInlineResult(won);
 
         this.unlockedClues = this.maxClues;
         this.updateComboStepperUI();
+        this.renderZorlukUI();
 
         this.renderClues();
         this.renderGuesses();
@@ -2882,10 +3023,11 @@ class PsikoVakaGame {
         if (this.dom.playResultIcon) this.dom.playResultIcon.innerHTML = this.icon(won ? 'check' : 'flag');
         if (this.dom.playResultTitle) {
             this.dom.playResultTitle.textContent = won
-                ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`
+                ? (this.zorluk && this.zorluk.tekHak ? `Tek hakla bildin · ${this.cluesUsed || 1}. ipucunda · ${this.formatDuration(this.elapsedSeconds)}` : `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`)
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
+        if (this.dom.playResultZor) this.dom.playResultZor.innerHTML = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.badge(this.zorluk) : '';
         if (this.dom.playResultTakeaway) {
             const xp = window.PsikoVakaExplain ? window.PsikoVakaExplain.get(this.currentCase) : null;
             this.dom.playResultTakeaway.hidden = !(xp && xp.teachingPoint && this.isGameOver);
@@ -2921,6 +3063,8 @@ class PsikoVakaGame {
 
         banner.className = won ? 'result-banner success' : 'result-banner failure';
         icon.innerHTML = this.icon(won ? 'check' : 'flag');
+        const zorEl = document.getElementById('resultZor');
+        if (zorEl) zorEl.innerHTML = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.badge(this.zorluk) : '';
         if (this.targetGameMode === 'therapy') {
             heading.textContent = won ? `${this.guesses.length}. tahminde doğru terapi` : 'Terapi vakası tamamlandı';
             diagNameEl.textContent = targetTherapy ? targetTherapy.nameTr : 'Kanıta dayalı psikoterapi';
@@ -3717,6 +3861,16 @@ class PsikoVakaGame {
         const extra = [this.formatDuration(this.elapsedSeconds)];
         if (won && this.currentMode === 'daily' && this.shareStreak > 0) extra.push(`🔥 ${this.shareStreak} gün`);
         const lines = [title];
+        const Z = window.PsikoVakaZorluk;
+        const zLine = Z ? Z.shareLine(this.zorluk) : '';
+        if (this.zorluk && this.zorluk.tekHak) {
+            const label = { diagnosis: 'Tanı', therapy: 'Terapi', pharmacology: 'İlaç', combo: 'Kombo' }[this.targetGameMode] || 'Tanı';
+            lines.push([`${label} ${won ? `${this.cluesUsed || 1}. ipucunda` : 'X'} · tek hak`].concat(extra).join(' · '));
+            lines.push(won ? '🟩' : '🟥');
+            if (zLine) lines.push(zLine);
+            lines.push(SITE);
+            return lines.join('\n');
+        }
         if (this.targetGameMode === 'combo') {
             lines.push(['Kombo'].concat(extra).join(' · '));
             const log = Object.assign({}, this.stageGuessLog || {});
@@ -3732,6 +3886,7 @@ class PsikoVakaGame {
             lines.push([`${label} ${won ? this.guesses.length : 'X'}/${max}`].concat(extra).join(' · '));
             lines.push(sq(this.guesses));
         }
+        if (zLine) lines.push(zLine);
         lines.push(SITE);
         return lines.join('\n');
     }

@@ -370,7 +370,7 @@
                 ${NS.avatar(x.avatar, { size: 36, framed: true })}
                 <span class="ol-lb-name">${esc(x.username || x.display_name)}${x.user_id === meId ? ' <span class="ol-me-tag">sen</span>' : ''}</span>
                 <span class="ol-lb-tier">${NS.leagueBadge(x.ranked_points, 20)}<span class="ol-lb-tier-name">${esc(NS.leagueName(x.ranked_points))}</span></span>
-                <span class="ol-lb-rp">${x.ranked_points} RP</span>
+                <span class="ol-lb-rp">${x.ranked_points} Elo</span>
             </li>`).join('')}</ol>`;
     }
 
@@ -429,6 +429,7 @@
     function defaultsFor(mode, prev) {
         const p = prev || {};
         const d = { mode, target: p.target || 'diagnosis', visibility: p.visibility || 'private', rounds: p.rounds || 5, seeding: p.seeding || 'random' };
+        d.tekHak = !!p.tekHak; d.kategoriGizli = !!p.kategoriGizli;
         if (mode === 'duel') { d.format = (p.mode === 'duel' && p.format) || 'rounds'; d.capacity = 2; }
         if (mode === 'ffa') { d.format = 'rounds'; d.capacity = (p.mode === 'ffa' && p.capacity) || 4; }
         if (mode === 'tournament') { d.format = (p.mode === 'tournament' && p.format) || 'battle'; d.capacity = (p.mode === 'tournament' && p.capacity) || 4; }
@@ -484,7 +485,12 @@
         }
         if (s.format === 'bracket' && !o.locked) {
             html += `<fieldset class="ol-field"><legend class="ol-legend">Eşleştirme</legend>
-                ${chips('seeding', [{ v: 'random', l: 'Rastgele' }, { v: 'ranked', l: 'RP’ye göre' }], s.seeding, 'Eşleştirme')}</fieldset>`;
+                ${chips('seeding', [{ v: 'random', l: 'Rastgele' }, { v: 'ranked', l: 'Elo’ya göre' }], s.seeding, 'Eşleştirme')}</fieldset>`;
+        }
+        // Zorluk (0007): yalnızca sunucu destekliyorsa (game_config'te çarpan anahtarı); yoksa bölüm hiç çizilmez
+        const Zm = global.PsikoVakaZorluk;
+        if (Zm && o.zorluk !== false && NS.leaguesView && NS.leaguesView.zorlukSupported()) {
+            html += `<fieldset class="ol-field ol-zorluk-field" data-ol-zorluk>${Zm.switches({ tekHak: s.tekHak, kategoriGizli: s.kategoriGizli }, { id: 'roomZor', mult: true, cfg: NS.leaguesView.cfg(), title: 'Zorluk' })}</fieldset>`;
         }
         html += `<label class="ol-switch-row"><span class="ol-switch-text"><span class="ol-opt-title">Herkese açık</span><span class="ol-opt-sub">Açık odalar listesinde görünür; kapalıysa yalnızca kod ve davetle girilir.</span></span>
             <input type="checkbox" class="ol-switch-input" name="visibility" ${s.visibility === 'public' ? 'checked' : ''}><span class="switch" aria-hidden="true"><span class="switch-knob"></span></span></label>`;
@@ -501,6 +507,8 @@
         if (val('seeding')) out.seeding = val('seeding');
         const vis = root.querySelector('input[name="visibility"]');
         if (vis) out.visibility = vis.checked ? 'public' : 'private';
+        const zr = root.querySelector('[data-ol-zorluk]');
+        if (zr && global.PsikoVakaZorluk) { const z = global.PsikoVakaZorluk.read(zr); out.tekHak = z.tekHak; out.kategoriGizli = z.kategoriGizli; }
         return out;
     }
 
@@ -513,6 +521,7 @@
             async onAction(id, shx) {
                 if (id !== 'create') return;
                 s = readForm(shx.body, s);
+                if (!shx.body.querySelector('[data-ol-zorluk]')) { s.tekHak = false; s.kategoriGizli = false; }   // 0007 yok: normal kurallar
                 shx.setBusy('create', true);
                 const r = await NS.app.createRoom(s);
                 shx.setBusy('create', false);
@@ -524,6 +533,15 @@
                 }
             }
         });
+        bindZorluk(sh.body, () => { s = readForm(sh.body, s); });
+        // Ayarlar henüz okunmadıysa (yeni sayfa): okununca zorluk bölümü eklensin
+        if (NS.leaguesView && !NS.leaguesView.zorlukSupported() && NS.leaguesView.loadConfig) {
+            Promise.resolve(NS.leaguesView.loadConfig()).then(() => {
+                if (sh.closed || !NS.leaguesView.zorlukSupported() || sh.body.querySelector('[data-ol-zorluk]')) return;
+                s = readForm(sh.body, s);
+                const form = sh.body.querySelector('[data-ol-create]'); if (form) form.innerHTML = settingsForm(s);
+            });
+        }
         sh.body.addEventListener('change', (e) => {
             const prev = s;
             s = readForm(sh.body, s);
@@ -543,10 +561,15 @@
         });
         return sh;
     }
+    /** Zorluk anahtarları (js/zorluk.js) tıklanınca çağrılır; kök bir kez bağlanır. */
+    function bindZorluk(root, onChange) {
+        const Zm = global.PsikoVakaZorluk;
+        if (Zm) Zm.bind(root, () => { if (onChange) onChange(); }, { cfg: () => (NS.leaguesView ? NS.leaguesView.cfg() : null) });
+    }
     function syncChecked(root) {
         $all('.ol-opt, .ol-chip', root).forEach(l => { const i = l.querySelector('input'); l.classList.toggle('is-checked', !!(i && i.checked)); });
     }
 
-    NS.ui = { sheet, confirm, closeAllSheets, banner, closeBanner, setNavBadge, playerChip, settingsForm, readForm, syncChecked, roundsFor, defaultsFor };
+    NS.ui = { sheet, confirm, closeAllSheets, banner, closeBanner, setNavBadge, playerChip, settingsForm, readForm, syncChecked, roundsFor, defaultsFor, bindZorluk };
     NS.hub = { mount: mountHub, render: renderHub, refreshPublicRooms, renderPublicRooms, loadLeaderboard, openCreateSheet, state: hubState, stop: stopHubLive };
 })(typeof window !== 'undefined' ? window : globalThis);

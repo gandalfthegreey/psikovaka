@@ -528,6 +528,7 @@
                     <div class="play-meta">
                         <span id="patientId">CASE-001</span>
                         <span class="badge badge-difficulty-orta" id="difficultyBadge">Orta</span>
+                        <span class="zor-slot" id="playZorBadge"></span>
                     </div>
                 </div>
                 <button class="play-invite-pill" id="playInvitePill" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span data-pill-text>1 davet</span></button>
@@ -603,6 +604,9 @@
                 <p class="patient-summary" id="patientSummaryText">Yükleniyor…</p>
             </section>
 
+            <!-- Zorluk (günün vakası: ilk tahminden önce seçilir; ajan Z1) -->
+            <section class="zorluk-play" id="playZorlukPanel" aria-label="Zorluk" hidden></section>
+
             <div class="clues-container" id="cluesContainer" aria-live="polite"></div>
 
             <div class="guesses-feed" id="guessesFeed"></div>
@@ -614,6 +618,7 @@
                     <div class="result-inline-text">
                         <span class="result-inline-title" id="playResultTitle">Vaka tamamlandı</span>
                         <span class="result-inline-answer" id="playResultAnswer"></span>
+                        <span class="zor-slot" id="playResultZor"></span>
                     </div>
                 </div>
                 <p class="xp-takeaway" id="playResultTakeaway" hidden><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="xp-takeaway-label">Akılda kalsın:</span> <span data-xp-text></span></span></p>
@@ -681,6 +686,7 @@
                         <div class="guess-dots" id="guessDots" aria-hidden="true"></div>
                         <span id="remainingGuessesText">Kalan hak 6/6</span>
                     </div>
+                    <button class="btn btn-secondary btn-sm btn-next-clue" id="btnNextClue" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span>Sonraki ipucu</span></button>
                     <button class="btn-link" id="btnGiveUp" type="button">Pes et</button>
                 </div>
             </section>
@@ -724,6 +730,8 @@
                     </button>
                 </div>
 
+                <div id="practiceZorlukMount"></div>
+
                 <div class="settings-group">
                     <span class="settings-label">Ders</span>
                     <div class="chip-group" id="courseNav"></div>
@@ -753,6 +761,7 @@
                 <div class="result-banner" id="resultBanner">
                     <div class="result-icon" id="resultIcon"></div>
                     <div class="result-heading" id="resultHeading">Tebrikler</div>
+                    <div class="zor-slot" id="resultZor"></div>
                     <div class="result-diagnosis-box">
                         <div class="result-label">Doğru cevap</div>
                         <div class="result-diagnosis-name" id="resultDiagnosisName">Tanı adı</div>
@@ -1121,10 +1130,17 @@
                     <li><span class="legend-swatch is-wrong"></span> Farklı grup</li>
                 </ul>
 
+                <h3 class="section-title">Zorluk</h3>
+                <ul class="plain-list">
+                    <li><strong>Tek tahmin hakkı</strong>: Tek tahminin var, yanlışsa vaka biter. İpuçlarını tahmin etmeden "Sonraki ipucu" ile açarsın; puan kaçıncı ipucunda bildiğine göre.</li>
+                    <li><strong>Kategori gizli</strong>: Oyun sırasında tanı grubu ve "grup doğru" geri bildirimi gösterilmez; yanlış tahmin yalnızca "yanlış" der.</li>
+                    <li>İkisi birlikte açılabilir. Pratikte ayarlardan, günün vakasında ilk tahminden önce, özel online odada oda sahibi seçer. Özel odada kazandığın Elo bir ayarla ×1,25, ikisiyle ×1,5 olur. Hızlı eşleşme normal kurallarla oynanır.</li>
+                </ul>
+
                 <h3 class="section-title">Diğer</h3>
                 <ul class="plain-list">
                     <li><strong>Sınırsız pratik</strong>: Ayarlar'dan paket, ders, kategori ve "sadece çözülmemişler" seçilir.</li>
-                    <li><strong>Online</strong>: Oda kodu ya da düello linkiyle arkadaşınla aynı vakaları çöz.</li>
+                    <li><strong>Online</strong>: Oda kodu ya da düello linkiyle arkadaşınla aynı vakaları çöz. Online maçlarda Elo kazanır ya da kaybedersin; Elo ligini belirler.</li>
                     <li><strong>Vaka stüdyosu</strong>: Kendi vakanı yaz, link olarak paylaş.</li>
                 </ul>
             </div>
@@ -1292,9 +1308,9 @@
             <div class="modal-body prose">
                 <!-- YER TUTUCU METİN: Emre'nin gözden geçirmesi gerekiyor. Bu kısa not KVKK aydınlatma metni DEĞİLDİR;
                      gerçek aydınlatma metni (veri sorumlusu, amaç, hukuki sebep, aktarım, haklar) site sahibinin sorumluluğundadır. -->
-                <p>Hesap açarsan şunlar saklanır: <strong>e-posta adresin</strong>, <strong>kullanıcı adın</strong>, <strong>görünen adın ve avatarın</strong>, <strong>oyun istatistiklerin</strong> (çözülen vakalar, oynanan/kazanılan, seriler, sıralama puanı).</p>
+                <p>Hesap açarsan şunlar saklanır: <strong>e-posta adresin</strong>, <strong>kullanıcı adın</strong>, <strong>görünen adın ve avatarın</strong>, <strong>oyun istatistiklerin</strong> (çözülen vakalar, oynanan/kazanılan, seriler, Elo sıralama puanı).</p>
                 <p>Bu bilgiler Supabase (barındırma ve veritabanı hizmeti) üzerinde tutulur. Şifren bizim tarafımızdan görülemez; Supabase onu şifrelenmiş (hash) olarak saklar.</p>
-                <p>Kullanıcı adın, görünen adın, avatarın ve sıralama puanın giriş yapmış diğer oyunculara görünür. E-posta adresin görünmez.</p>
+                <p>Kullanıcı adın, görünen adın, avatarın ve Elo sıralama puanın giriş yapmış diğer oyunculara görünür. E-posta adresin görünmez.</p>
                 <p>Hesabını ve verilerini silmek istersen site sahibine yazman yeterli; istek üzerine silinir.</p>
                 <p>Hesap açmadan da oynayabilirsin: misafir ilerlemen yalnızca bu cihazda, tarayıcında kalır.</p>
             </div>
@@ -1320,6 +1336,7 @@
     <script src="js/supabase_config.js"></script>
     <script src="js/isim_filtresi.js"></script>
     <script src="js/account.js"></script>
+    <script src="js/zorluk.js"></script>
     <script src="js/app.js"></script>
     <script src="js/online/core.js"></script>
     <script src="js/online/api.js"></script>

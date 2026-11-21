@@ -3042,6 +3042,67 @@ h1, h2, h3, h4,
 }
 .home-title, .screen-title, .card-hero-title, .result-heading, .lib-detail-title, .brand-name { font-weight: 750; }
 
+/* =====================================================================
+   Zorluk ayarları (ajan Z1): "Zor" rozeti, anahtarlar, "Sonraki ipucu"
+   ===================================================================== */
+.zor-slot:empty { display: none; }
+.zor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--color-danger) 45%, transparent);
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
+    font-size: var(--text-xs, 12px);
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.zor-badge .icon { width: 13px; height: 13px; }
+.zor-badge-i { display: inline-flex; padding-left: 2px; border-left: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent); }
+.zor-badge.is-sm { padding: 1px 6px; font-size: 11px; }
+.zorluk-group { display: flex; flex-direction: column; gap: var(--space-2); }
+.zorluk-switch { gap: var(--space-3); }
+.zorluk-switch .list-row-sub { white-space: normal; line-height: 1.35; }
+.zorluk-switch .switch-row-text { flex: 1 1 auto; }
+.zorluk-switch-ico { display: inline-flex; color: var(--color-text-2); flex-shrink: 0; }
+.zorluk-switch[aria-checked="true"] .zorluk-switch-ico { color: var(--color-danger); }
+.zorluk-switch:disabled { opacity: 0.6; cursor: not-allowed; }
+.zorluk-mult, .zorluk-note { display: flex; gap: var(--space-2); align-items: flex-start; margin: 0; font-size: var(--text-sm, 14px); color: var(--color-text-2); }
+.zorluk-mult .icon { flex-shrink: 0; margin-top: 2px; color: var(--color-warning); }
+.zorluk-play {
+    margin: var(--space-3) 0;
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+}
+.zorluk-play .settings-group { margin: 0; }
+.game-controls .btn-next-clue { margin-left: auto; margin-right: var(--space-3); min-height: 44px; white-space: nowrap; flex-shrink: 0; }
+.game-controls .btn-link { white-space: nowrap; }
+.remaining-guesses { white-space: nowrap; }
+.result-inline-text .zor-badge, .result-banner .zor-badge { margin-top: var(--space-1); align-self: flex-start; }
+.result-banner .zor-slot { display: flex; justify-content: center; }
+/* Zorluk: online (lobi çipleri, HUD, döküm) */
+.ol-chip-static.ol-chip-zor { color: var(--color-danger); border-color: color-mix(in srgb, var(--color-danger) 40%, transparent); }
+.ol-chip-static.ol-chip-zor.is-mult { color: var(--color-warning); border-color: color-mix(in srgb, var(--color-warning) 40%, transparent); }
+[data-theme="light"] .ol-chip-static.ol-chip-zor.is-mult { color: var(--color-warning-text-strong, var(--color-warning)); }
+.ol-hud-top .zor-badge { flex-shrink: 0; }
+.ol-rpbd-zor { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--color-text-2); }
+.ol-rpbd-base, .lg-bd-base { color: var(--color-text-3); font-size: var(--text-xs); }
+.ol-count-zor { margin-top: var(--space-2); }
+.ol-wait-text .zor-badge { margin-top: 2px; align-self: flex-start; }
+.ol-zorluk-field { border: 0; padding: 0; margin: 0; }
+.dl-zor { margin-left: var(--space-1); }
+.ol-field.is-locked .ol-chip:has(input:disabled):not(.is-checked) { opacity: 0.45; cursor: not-allowed; }
+.ol-field.is-locked .ol-chip.is-checked { cursor: default; }
+/* "Danışan dosyası" pilotunda (?tasarim=dosya) başlık satırı gizli: yalnızca "Zor" rozeti kalsın */
+html.tasarim-dosya .screen-play .play-bar-title .play-meta:has(#playZorBadge .zor-badge) { display: flex; }
+html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge) { display: none; }
+
 </style>
     <style>
 /* ==========================================================================
@@ -6612,6 +6673,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                     <div class="play-meta">
                         <span id="patientId">CASE-001</span>
                         <span class="badge badge-difficulty-orta" id="difficultyBadge">Orta</span>
+                        <span class="zor-slot" id="playZorBadge"></span>
                     </div>
                 </div>
                 <button class="play-invite-pill" id="playInvitePill" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span data-pill-text>1 davet</span></button>
@@ -6687,6 +6749,9 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 <p class="patient-summary" id="patientSummaryText">Yükleniyor…</p>
             </section>
 
+            <!-- Zorluk (günün vakası: ilk tahminden önce seçilir; ajan Z1) -->
+            <section class="zorluk-play" id="playZorlukPanel" aria-label="Zorluk" hidden></section>
+
             <div class="clues-container" id="cluesContainer" aria-live="polite"></div>
 
             <div class="guesses-feed" id="guessesFeed"></div>
@@ -6698,6 +6763,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                     <div class="result-inline-text">
                         <span class="result-inline-title" id="playResultTitle">Vaka tamamlandı</span>
                         <span class="result-inline-answer" id="playResultAnswer"></span>
+                        <span class="zor-slot" id="playResultZor"></span>
                     </div>
                 </div>
                 <p class="xp-takeaway" id="playResultTakeaway" hidden><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="xp-takeaway-label">Akılda kalsın:</span> <span data-xp-text></span></span></p>
@@ -6765,6 +6831,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                         <div class="guess-dots" id="guessDots" aria-hidden="true"></div>
                         <span id="remainingGuessesText">Kalan hak 6/6</span>
                     </div>
+                    <button class="btn btn-secondary btn-sm btn-next-clue" id="btnNextClue" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span>Sonraki ipucu</span></button>
                     <button class="btn-link" id="btnGiveUp" type="button">Pes et</button>
                 </div>
             </section>
@@ -6808,6 +6875,8 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                     </button>
                 </div>
 
+                <div id="practiceZorlukMount"></div>
+
                 <div class="settings-group">
                     <span class="settings-label">Ders</span>
                     <div class="chip-group" id="courseNav"></div>
@@ -6837,6 +6906,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 <div class="result-banner" id="resultBanner">
                     <div class="result-icon" id="resultIcon"></div>
                     <div class="result-heading" id="resultHeading">Tebrikler</div>
+                    <div class="zor-slot" id="resultZor"></div>
                     <div class="result-diagnosis-box">
                         <div class="result-label">Doğru cevap</div>
                         <div class="result-diagnosis-name" id="resultDiagnosisName">Tanı adı</div>
@@ -7205,10 +7275,17 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                     <li><span class="legend-swatch is-wrong"></span> Farklı grup</li>
                 </ul>
 
+                <h3 class="section-title">Zorluk</h3>
+                <ul class="plain-list">
+                    <li><strong>Tek tahmin hakkı</strong>: Tek tahminin var, yanlışsa vaka biter. İpuçlarını tahmin etmeden "Sonraki ipucu" ile açarsın; puan kaçıncı ipucunda bildiğine göre.</li>
+                    <li><strong>Kategori gizli</strong>: Oyun sırasında tanı grubu ve "grup doğru" geri bildirimi gösterilmez; yanlış tahmin yalnızca "yanlış" der.</li>
+                    <li>İkisi birlikte açılabilir. Pratikte ayarlardan, günün vakasında ilk tahminden önce, özel online odada oda sahibi seçer. Özel odada kazandığın Elo bir ayarla ×1,25, ikisiyle ×1,5 olur. Hızlı eşleşme normal kurallarla oynanır.</li>
+                </ul>
+
                 <h3 class="section-title">Diğer</h3>
                 <ul class="plain-list">
                     <li><strong>Sınırsız pratik</strong>: Ayarlar'dan paket, ders, kategori ve "sadece çözülmemişler" seçilir.</li>
-                    <li><strong>Online</strong>: Oda kodu ya da düello linkiyle arkadaşınla aynı vakaları çöz.</li>
+                    <li><strong>Online</strong>: Oda kodu ya da düello linkiyle arkadaşınla aynı vakaları çöz. Online maçlarda Elo kazanır ya da kaybedersin; Elo ligini belirler.</li>
                     <li><strong>Vaka stüdyosu</strong>: Kendi vakanı yaz, link olarak paylaş.</li>
                 </ul>
             </div>
@@ -7376,9 +7453,9 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
             <div class="modal-body prose">
                 <!-- YER TUTUCU METİN: Emre'nin gözden geçirmesi gerekiyor. Bu kısa not KVKK aydınlatma metni DEĞİLDİR;
                      gerçek aydınlatma metni (veri sorumlusu, amaç, hukuki sebep, aktarım, haklar) site sahibinin sorumluluğundadır. -->
-                <p>Hesap açarsan şunlar saklanır: <strong>e-posta adresin</strong>, <strong>kullanıcı adın</strong>, <strong>görünen adın ve avatarın</strong>, <strong>oyun istatistiklerin</strong> (çözülen vakalar, oynanan/kazanılan, seriler, sıralama puanı).</p>
+                <p>Hesap açarsan şunlar saklanır: <strong>e-posta adresin</strong>, <strong>kullanıcı adın</strong>, <strong>görünen adın ve avatarın</strong>, <strong>oyun istatistiklerin</strong> (çözülen vakalar, oynanan/kazanılan, seriler, Elo sıralama puanı).</p>
                 <p>Bu bilgiler Supabase (barındırma ve veritabanı hizmeti) üzerinde tutulur. Şifren bizim tarafımızdan görülemez; Supabase onu şifrelenmiş (hash) olarak saklar.</p>
-                <p>Kullanıcı adın, görünen adın, avatarın ve sıralama puanın giriş yapmış diğer oyunculara görünür. E-posta adresin görünmez.</p>
+                <p>Kullanıcı adın, görünen adın, avatarın ve Elo sıralama puanın giriş yapmış diğer oyunculara görünür. E-posta adresin görünmez.</p>
                 <p>Hesabını ve verilerini silmek istersen site sahibine yazman yeterli; istek üzerine silinir.</p>
                 <p>Hesap açmadan da oynayabilirsin: misafir ilerlemen yalnızca bu cihazda, tarayıcında kalır.</p>
             </div>
@@ -31650,7 +31727,7 @@ if (typeof module !== 'undefined' && module.exports) {
     function progressText(value) {
         const t = tierFor(value);
         if (!t.next) return 'En üst ligdesin';
-        return `${dative(t.next.name)} ${t.toNext} RP kaldı`;
+        return `${dative(t.next.name)} ${t.toNext} Elo kaldı`;
     }
 
     // Amblem: 0 0 24 24; lige göre şekil, kademe kadar nokta
@@ -33226,6 +33303,117 @@ if (typeof module !== 'undefined' && module.exports) {
 </script>
 <script>
 /**
+ * PsikoVaka — zorluk ayarları (ajan Z1, 2026-11-21; Emre kararı).
+ * İki bağımsız ayar: "Tek tahmin hakkı" (tekHak) ve "Kategori gizli" (kategoriGizli).
+ * Pratik, günün vakası, özel online odalar ve sınıf modu bu modülün metinlerini, rozetini ve
+ * anahtarlarını (switch) ortak kullanır. Sunucu adları: tek_hak / kategori_gizli (0007).
+ * Bağımlılık yok; satır içi stil yok (görünüm css/style.css "Zorluk" bölümü).
+ */
+(function (global) {
+    'use strict';
+    const KEY = 'psikovaka_zorluk';
+    const ITEMS = [
+        { key: 'tekHak', db: 'tek_hak', icon: 'target', title: 'Tek tahmin hakkı', short: 'Tek hak',
+            desc: 'Vaka başına tek tahminin var; yanlışsa vaka biter. İpuçlarını tahmin etmeden "Sonraki ipucu" ile açabilirsin.' },
+        { key: 'kategoriGizli', db: 'kategori_gizli', icon: 'eye-off', title: 'Kategori gizli', short: 'Kategori gizli',
+            desc: 'Oyun sırasında tanı grubu ve "aynı grup" geri bildirimi gösterilmez; yanlış tahmin yalnızca "yanlış" der.' }
+    ];
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const svg = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+
+    /** Her biçimden (istemci {tekHak}, sunucu {tek_hak}) {tekHak, kategoriGizli}. */
+    function norm(z) {
+        z = z || {};
+        return { tekHak: !!(z.tekHak != null ? z.tekHak : z.tek_hak), kategoriGizli: !!(z.kategoriGizli != null ? z.kategoriGizli : z.kategori_gizli) };
+    }
+    const count = (z) => { const n = norm(z); return (n.tekHak ? 1 : 0) + (n.kategoriGizli ? 1 : 0); };
+    const any = (z) => count(z) > 0;
+    const toDb = (z) => { const n = norm(z); return { tek_hak: n.tekHak, kategori_gizli: n.kategoriGizli }; };
+
+    function load() { try { return norm(JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return norm({}); } }
+    function save(z) { try { localStorage.setItem(KEY, JSON.stringify(norm(z))); } catch (e) { /* yok */ } }
+
+    /** Elo çarpanı (online özel oda): cfg = game_config nesnesi {anahtar: değer}; yoksa 1,25 / 1,5. */
+    function multiplier(z, cfg) {
+        const n = count(z);
+        if (!n) return 1;
+        const c = cfg || {};
+        const v = n === 1 ? c.rp_zorluk_carpan_1 : c.rp_zorluk_carpan_2;
+        return Number(v) > 0 ? Number(v) : (n === 1 ? 1.25 : 1.5);
+    }
+    /** 1.5 → "×1,5" */
+    function fmtMult(m) { return '×' + String(Math.round(Number(m) * 100) / 100).replace('.', ','); }
+    function names(z) { const n = norm(z); return ITEMS.filter(i => n[i.key]).map(i => i.title); }
+    function label(z) { return names(z).join(' + '); }
+
+    /** Küçük "Zor" rozeti + açık ayarların simgeleri. Ayar yoksa ''. */
+    function badge(z, opts) {
+        const n = norm(z);
+        if (!any(n)) return '';
+        const o = opts || {};
+        const txt = 'Zor: ' + names(n).join(', ');
+        return `<span class="zor-badge${o.cls ? ' ' + o.cls : ''}" role="img" aria-label="${esc(txt)}" title="${esc(txt)}">${svg('zap')}<span class="zor-badge-t">Zor</span>${ITEMS.filter(i => n[i.key]).map(i => `<span class="zor-badge-i">${svg(i.icon)}</span>`).join('')}</span>`;
+    }
+    /** Paylaşım satırı (emoji yok): "Zor: tek hak + kategori gizli" */
+    function shareLine(z) { const n = norm(z); return any(n) ? 'Zor: ' + ITEMS.filter(i => n[i.key]).map(i => i.short.toLocaleLowerCase('tr')).join(' + ') : ''; }
+
+    /**
+     * "Zorluk" bölümü: iki anahtar (button role=switch, mevcut .switch-row bileşeni).
+     * opts: { id: önek, disabled, note (düz metin), title, mult: true → bonus satırı, cfg, desc: { tekHak?, kategoriGizli? } açıklamayı değiştirir }
+     */
+    function switches(z, opts) {
+        const n = norm(z), o = opts || {};
+        const id = o.id || 'zor';
+        const mult = o.mult ? multiplier(n, o.cfg) : 1;
+        return `<div class="settings-group zorluk-group" data-zorluk-root="${esc(id)}">
+            <span class="settings-label" id="${esc(id)}Label">${esc(o.title || 'Zorluk')}</span>
+            ${ITEMS.map(i => `<button class="switch-row zorluk-switch" type="button" role="switch" id="${esc(id)}-${i.key}" data-zorluk="${i.key}" aria-checked="${n[i.key]}"${o.disabled ? ' disabled' : ''}>
+                <span class="zorluk-switch-ico">${svg(i.icon)}</span>
+                <span class="switch-row-text"><span class="list-row-title">${esc(i.title)}</span><span class="list-row-sub">${esc((o.desc && o.desc[i.key]) || i.desc)}</span></span>
+                <span class="switch" aria-hidden="true"><span class="switch-knob"></span></span>
+            </button>`).join('')}
+            ${o.mult ? `<p class="zorluk-mult" data-zorluk-mult>${multHtml(mult)}</p>` : ''}
+            ${o.note ? `<p class="zorluk-note">${esc(o.note)}</p>` : ''}
+        </div>`;
+    }
+    function multHtml(m) {
+        return m > 1 ? `${svg('zap')}<span>Zorluk bonusu ${esc(fmtMult(m))}: turda kazandığın Elo ${esc(fmtMult(m))} olur (çözemezsen −10 aynı kalır).</span>`
+            : `${svg('info')}<span>Bir ayar açıkken kazandığın Elo ×1,25, ikisi açıkken ×1,5 olur.</span>`;
+    }
+    /** Kökteki anahtarları okur. */
+    function read(root) {
+        const z = { tekHak: false, kategoriGizli: false };
+        if (!root) return z;
+        root.querySelectorAll('[data-zorluk]').forEach(b => { z[b.dataset.zorluk] = b.getAttribute('aria-checked') === 'true'; });
+        return z;
+    }
+    /** Tıklama bağlar; onChange(yeniZ, anahtar). Bir kez bağlanır (kök başına). */
+    function bind(root, onChange, opts) {
+        if (!root || root._zorBound) return;
+        root._zorBound = true;
+        const o = opts || {};
+        root.addEventListener('click', (e) => {
+            const b = e.target.closest('[data-zorluk]');
+            if (!b || b.disabled || !root.contains(b)) return;
+            b.setAttribute('aria-checked', String(b.getAttribute('aria-checked') !== 'true'));
+            const z = read(root);
+            const m = root.querySelector('[data-zorluk-mult]');
+            if (m) m.innerHTML = multHtml(multiplier(z, typeof o.cfg === 'function' ? o.cfg() : o.cfg));
+            if (onChange) onChange(z, b.dataset.zorluk);
+        });
+    }
+    function set(root, z) {
+        if (!root) return;
+        const n = norm(z);
+        root.querySelectorAll('[data-zorluk]').forEach(b => b.setAttribute('aria-checked', String(!!n[b.dataset.zorluk])));
+    }
+
+    global.PsikoVakaZorluk = { KEY, ITEMS, norm, count, any, toDb, load, save, multiplier, fmtMult, names, label, badge, shareLine, switches, multHtml, read, bind, set };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+/**
  * PsikoVaka 2.0 - Klinik Vaka, Terapi, Psikofarmakoloji ve Tam Konsültasyon (Kombo) motoru.
  * Canlı çok oyunculu katman: js/online/ (Supabase); bu dosya yalnızca #duel= meydan okuma bağlantısını taşır
  */
@@ -33262,6 +33450,12 @@ class PsikoVakaGame {
 
         this.unlockedClues = 1;
         this.maxClues = 6;
+        // Zorluk (ajan Z1): bu vakanın ayarları; pratik seçimi localStorage'da (js/zorluk.js)
+        this.zorluk = { tekHak: false, kategoriGizli: false };
+        this.practiceZorluk = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.load() : { tekHak: false, kategoriGizli: false };
+        this.clueRevealHandler = null;   // online/günlük: sunucuya giden "Sonraki ipucu"
+        this.dailyZorlukHandler = null;  // günlük (üye): ayar değişince sunucuya
+        this.cluesUsed = null;           // vaka bitince açık ipucu sayısı (tek hak sonucu)
         this.guesses = [];
         this.isGameOver = false;
         this.gameWon = false;
@@ -34087,7 +34281,7 @@ class PsikoVakaGame {
         if (this.dom.homeGreetingName) this.dom.homeGreetingName.textContent = name;
         // RP yalnızca online maçlardan gelir: misafirde RP hapı ve "0 RP" gösterilmez (H5)
         if (this.dom.homeRpMount) {
-            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} RP` : '';
+            this.dom.homeRpMount.textContent = (acct && hasRp) ? `${rp} Elo` : '';
             this.dom.homeRpMount.hidden = !(acct && hasRp);
         }
         const leagueLink = document.getElementById('profileLeagueLink');
@@ -34118,7 +34312,7 @@ class PsikoVakaGame {
         if (nameMount) nameMount.textContent = name;
         const rpMount = document.getElementById('headerPlayerRpMount');
         if (rpMount && acct && hasRp) {
-            rpMount.textContent = `${rp} RP`;
+            rpMount.textContent = `${rp} Elo`;
             rpMount.style.color = '';
         }
         if (this.dom.profileTierLabel) this.dom.profileTierLabel.textContent = (acct && tier) ? tier.name : '';
@@ -34137,7 +34331,7 @@ class PsikoVakaGame {
         if (a.profileRpNote) {
             const differs = !!(acct && localRp !== null && localRp !== acct.ranked_points);
             a.profileRpNote.hidden = !differs;
-            if (differs) a.profileRpNote.textContent = `Sıralama puanı sunucuda tutulur; bu cihazdaki ${localRp} RP aktarılmaz.`;
+            if (differs) a.profileRpNote.textContent = `Elo (sıralama puanı) sunucuda tutulur; bu cihazdaki ${localRp} Elo aktarılmaz.`;
         }
     }
 
@@ -34238,6 +34432,8 @@ class PsikoVakaGame {
             if (cat) parts.push(cat.name);
         }
         if (this.onlyUnsolvedMode) parts.push('sadece çözülmemişler');
+        const Z = window.PsikoVakaZorluk;
+        if (Z && Z.any(this.practiceZorluk)) parts.push('Zor: ' + Z.names(this.practiceZorluk).join(' + ').toLocaleLowerCase('tr'));
         this.dom.practiceSummary.textContent = parts.join(' · ');
     }
 
@@ -34489,6 +34685,11 @@ class PsikoVakaGame {
             remainingGuessesText: document.getElementById('remainingGuessesText'),
             guessDots: document.getElementById('guessDots'),
             btnGiveUp: document.getElementById('btnGiveUp'),
+            btnNextClue: document.getElementById('btnNextClue'),
+            playZorBadge: document.getElementById('playZorBadge'),
+            playZorlukPanel: document.getElementById('playZorlukPanel'),
+            playResultZor: document.getElementById('playResultZor'),
+            practiceZorlukMount: document.getElementById('practiceZorlukMount'),
             mainInputSection: document.getElementById('mainInputSection'),
             finishedActions: document.getElementById('finishedActions'),
             btnMainNextCase: document.getElementById('btnMainNextCase'),
@@ -34715,6 +34916,10 @@ class PsikoVakaGame {
         if (this.dom.btnGiveUp) {
             this.dom.btnGiveUp.addEventListener('click', () => this.giveUp());
         }
+        if (this.dom.btnNextClue) {
+            this.dom.btnNextClue.addEventListener('click', () => this.revealNextClue());
+        }
+        this.initZorlukUI();
 
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
@@ -35242,6 +35447,7 @@ class PsikoVakaGame {
             guesses: this.guesses.map(g => Object.assign({}, g)),
             stageGuessLog: JSON.parse(JSON.stringify(log)), comboResults: Object.assign({}, this.comboResults || {}),
             diagWrongLog: (this.diagWrongLog || []).slice(), elapsed: this.elapsedSeconds || 0,
+            zorluk: Object.assign({}, this.zorluk || {}), cluesUsed: this.cluesUsed || this.unlockedClues,
             steps: [1, 2, 3].map(i => { const el = this.dom['comboStep' + i + 'Val']; return el ? el.textContent : ''; }),
             at: Date.now()
         };
@@ -35286,6 +35492,9 @@ class PsikoVakaGame {
             }
         }
         this.elapsedSeconds = rec.elapsed || 0;
+        if (rec.zorluk) this.zorluk = Object.assign({ tekHak: false, kategoriGizli: false }, rec.zorluk);
+        if (rec.cluesUsed) this.cluesUsed = rec.cluesUsed;
+        this.zorlukLocked = true;
         this.renderGameOverView(!!rec.won);
         if (opts.title && this.dom.playResultTitle) this.dom.playResultTitle.textContent = opts.title;
         if (this.dom.btnMainNextCase) this.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
@@ -35393,6 +35602,13 @@ class PsikoVakaGame {
         this.dailyReadOnly = false;
         this.dailyContext = null; // günlük ise startDailyCase / openFinishedDaily hemen sonra kurar
         this.currentCase = caseData;
+        // Zorluk: pratik ve paylaşılan vakada pratik seçimi; günlük/online/meydan okumada kapalı (günlük ve online sonra kurar)
+        this.zorluk = (this.currentMode === 'practice' || this.currentMode === 'custom')
+            ? Object.assign({}, this.practiceZorluk) : { tekHak: false, kategoriGizli: false };
+        this.zorlukLocked = false;
+        this.clueRevealHandler = null;
+        this.dailyZorlukHandler = null;
+        this.cluesUsed = null;
         if (!this.currentCase.pharmacologyId) {
             this.currentCase.pharmacologyId = this.getFallbackPharmacologyId(this.currentCase);
         }
@@ -35458,6 +35674,7 @@ class PsikoVakaGame {
         this.renderClues();
         this.renderGuesses();
         this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
         this.enterPlayScreen();
         this.markOnboarded();
         this.emitPlayState();
@@ -35502,6 +35719,110 @@ class PsikoVakaGame {
                 }
             }
         }, 500);
+    }
+
+    // ---------------------------------------------------------------- Zorluk (ajan Z1)
+    /** Aşama başına tahmin hakkı: tek hakta 1, değilse 6. */
+    maxGuesses() { return this.zorluk && this.zorluk.tekHak ? 1 : this.maxClues; }
+
+    /** Vakanın zorluk ayarlarını değiştirir (online/günlük çağırır). opts.locked: değiştirilemez (rozet gösterilir). */
+    setCaseZorluk(z, opts = {}) {
+        const Z = window.PsikoVakaZorluk;
+        this.zorluk = Z ? Z.norm(z) : { tekHak: !!(z && z.tekHak), kategoriGizli: !!(z && z.kategoriGizli) };
+        if (opts.locked != null) this.zorlukLocked = !!opts.locked;
+        this.renderClues();
+        this.renderGuesses();
+        this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
+    }
+
+    /** Günlükte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    canEditZorluk() {
+        if (this.currentMode !== 'daily' || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        const log = this.stageGuessLog || {};
+        const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
+        return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
+    }
+
+    /** Oyun başlığındaki "Zor" rozeti, "Sonraki ipucu" düğmesi ve günlük ayar paneli. */
+    renderZorlukUI() {
+        const Z = window.PsikoVakaZorluk;
+        if (!Z) return;
+        if (this.dom.playZorBadge) this.dom.playZorBadge.innerHTML = Z.badge(this.zorluk);
+        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('is-kategori-gizli', !!(this.zorluk && this.zorluk.kategoriGizli));
+        const panel = this.dom.playZorlukPanel;
+        if (panel) {
+            const show = this.canEditZorluk();
+            if (show) {
+                const sig = JSON.stringify(this.zorluk);
+                if (panel.dataset.sig !== sig || !panel.firstChild) {
+                    panel.dataset.sig = sig;
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk', note: 'İlk tahminden önce seç; sonra değiştirilemez. Günün vakasında Elo yok; sıralamada adının yanında "Zor" görünür.' });
+                }
+            }
+            panel.hidden = !show;
+        }
+        this.updateNextClueButton();
+    }
+
+    updateNextClueButton() {
+        const b = this.dom.btnNextClue;
+        if (!b) return;
+        const show = !!(this.zorluk && this.zorluk.tekHak) && !this.isGameOver && !this.dailyReadOnly && this.currentCase;
+        b.hidden = !show;
+        b.disabled = !show || this.unlockedClues >= this.maxClues || !!this._revealBusy;
+        const lbl = b.querySelector('span');
+        const all = this.unlockedClues >= this.maxClues;
+        if (lbl) lbl.textContent = all ? 'İpuçları açık' : 'Sonraki ipucu';
+        b.setAttribute('aria-label', all ? 'Bütün ipuçları açık' : `Sonraki ipucunu aç (${Math.min(this.unlockedClues + 1, this.maxClues)}/${this.maxClues}), tahmin hakkın gitmez`);
+    }
+
+    /** Tek hak: tahmin etmeden sonraki ipucunu açar. Online/günlük üye: sunucuya sorar (clueRevealHandler). */
+    async revealNextClue() {
+        if (!(this.zorluk && this.zorluk.tekHak) || this.isGameOver || this.dailyReadOnly || this._revealBusy) return;
+        if (this.unlockedClues >= this.maxClues) return;
+        let n = this.unlockedClues + 1;
+        if (typeof this.clueRevealHandler === 'function') {
+            this._revealBusy = true; this.updateNextClueButton();
+            let r = null;
+            try { r = await this.clueRevealHandler(); } catch (e) { r = null; }
+            this._revealBusy = false;
+            if (!r || !r.ok) { this.updateNextClueButton(); return; }
+            n = Math.min(this.maxClues, Math.max(this.unlockedClues, r.clues || n));
+        }
+        if (this.isGameOver) return;
+        this.unlockedClues = n;
+        this.zorlukLocked = true;
+        this.renderClues();
+        this.updateRemainingGuessesUI();
+        this.renderZorlukUI();
+        this.announcePlay(`İpucu ${this.unlockedClues}/${this.maxClues} açıldı.`);
+    }
+
+    /** Pratik ayarları penceresindeki ve günlük paneldeki anahtarlar. */
+    initZorlukUI() {
+        const Z = window.PsikoVakaZorluk;
+        if (!Z) return;
+        const mount = this.dom.practiceZorlukMount;
+        if (mount) {
+            mount.innerHTML = Z.switches(this.practiceZorluk, { id: 'practiceZor', note: 'Sonraki pratik vakasından itibaren geçerli; seçimin hatırlanır.' });
+            Z.bind(mount, (z) => {
+                this.practiceZorluk = z;
+                Z.save(z);
+                this.updatePracticeSummary();
+            });
+        }
+        if (this.dom.playZorlukPanel) {
+            Z.bind(this.dom.playZorlukPanel, async (z) => {
+                if (!this.canEditZorluk()) { this.renderZorlukUI(); return; }
+                if (typeof this.dailyZorlukHandler === 'function') {
+                    const r = await this.dailyZorlukHandler(z);
+                    if (r && r.zorluk) z = r.zorluk;
+                    if (r && r.locked) this.zorlukLocked = true;
+                }
+                this.setCaseZorluk(z);
+            });
+        }
     }
 
     renderClues() {
@@ -35552,7 +35873,7 @@ class PsikoVakaGame {
                         <span class="clue-num">${this.icon('lock')}</span>
                         <span class="clue-tag">${clueLabels[i]}</span>
                     </div>
-                    <span class="clue-locked-note">${i}. yanlışta açılır</span>
+                    <span class="clue-locked-note">${this.zorluk && this.zorluk.tekHak ? (i === this.unlockedClues ? 'Sonraki ipucu ile açılır' : 'Kilitli') : `${i}. yanlışta açılır`}</span>
                 `;
             }
 
@@ -35608,14 +35929,14 @@ class PsikoVakaGame {
         this.guesses.forEach((guess, index) => {
             const card = document.createElement('div');
             let cardClass = 'guess-card wrong';
-            let statusText = 'Farklı grup';
+            let statusText = this.zorluk && this.zorluk.kategoriGizli ? 'Yanlış' : 'Farklı grup';
             let iconName = 'x';
 
             if (guess.isCorrect) {
                 cardClass = 'guess-card correct';
                 statusText = 'Doğru';
                 iconName = 'check';
-            } else if (guess.categoryMatch) {
+            } else if (guess.categoryMatch && !(this.zorluk && this.zorluk.kategoriGizli)) {
                 cardClass = 'guess-card category-match';
                 statusText = `Grup doğru: ${guess.categoryName}`;
                 iconName = 'target';
@@ -35651,13 +35972,15 @@ class PsikoVakaGame {
         if (strip.hidden) { strip.innerHTML = ''; return; }
         const short = (t) => { const x = String(t || ''); return x.length > 22 ? x.slice(0, 21).trimEnd() + '…' : x; };
         const esc = (t) => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const hide = !!(this.zorluk && this.zorluk.kategoriGizli);
         strip.innerHTML = list.map((g, i) => {
-            const kind = g.isCorrect ? 'is-correct' : (g.categoryMatch ? 'is-close' : 'is-wrong');
-            const ico = g.isCorrect ? 'check' : (g.categoryMatch ? 'target' : 'x');
-            const state = g.isCorrect ? 'doğru' : (g.categoryMatch ? `grup doğru: ${g.categoryName}` : 'farklı grup');
+            const near = g.categoryMatch && !hide;
+            const kind = g.isCorrect ? 'is-correct' : (near ? 'is-close' : 'is-wrong');
+            const ico = g.isCorrect ? 'check' : (near ? 'target' : 'x');
+            const state = g.isCorrect ? 'doğru' : (near ? `grup doğru: ${g.categoryName}` : (hide ? 'yanlış' : 'farklı grup'));
             return `<li class="guess-chip ${kind}" title="${esc(g.nameTr)}">
                 <span class="guess-chip-ico">${this.icon(ico)}</span>
-                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${g.categoryMatch && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
+                <span class="guess-chip-text"><span class="guess-chip-name">${esc(short(g.nameTr))}</span>${near && !g.isCorrect ? `<span class="guess-chip-sub">${esc(short(g.categoryName))}</span>` : ''}</span>
                 <span class="visually-hidden">${i + 1}. tahmin, ${esc(state)}</span>
             </li>`;
         }).join('');
@@ -35666,11 +35989,12 @@ class PsikoVakaGame {
     }
 
     updateRemainingGuessesUI() {
-        const remaining = Math.max(0, this.maxClues - this.guesses.length);
-        this.dom.remainingGuessesText.textContent = `Kalan hak ${remaining}/${this.maxClues}`;
+        const maxG = this.maxGuesses();
+        const remaining = Math.max(0, maxG - this.guesses.length);
+        this.dom.remainingGuessesText.textContent = this.zorluk && this.zorluk.tekHak ? (remaining ? 'Tek hak' : 'Hak kalmadı') : `Kalan hak ${remaining}/${maxG}`;
 
         this.dom.guessDots.innerHTML = '';
-        for (let i = 0; i < this.maxClues; i++) {
+        for (let i = 0; i < maxG; i++) {
             const dot = document.createElement('div');
             dot.className = 'guess-dot';
             if (i < this.guesses.length) {
@@ -35680,6 +36004,7 @@ class PsikoVakaGame {
             }
             this.dom.guessDots.appendChild(dot);
         }
+        this.renderZorlukUI();
     }
 
     // --- Autocomplete & Search ---
@@ -35921,6 +36246,8 @@ class PsikoVakaGame {
             this.showToast("Bunu zaten denedin.");
             return;
         }
+        // Kategori gizli: aynı grup bilgisi hiç üretilmez (yalnızca "yanlış")
+        if (this.zorluk && this.zorluk.kategoriGizli) { categoryMatch = false; categoryName = ''; }
 
         const guessData = {
             itemId: chosenObj.id,
@@ -35985,11 +36312,11 @@ class PsikoVakaGame {
 
             this.handleGameEnd(true);
         } else {
-            if (this.unlockedClues < this.maxClues) {
+            if (this.unlockedClues < this.maxClues && !(this.zorluk && this.zorluk.tekHak)) {
                 this.unlockedClues++;
             }
 
-            if (this.guesses.length >= this.maxClues) {
+            if (this.guesses.length >= this.maxGuesses()) {
                 this.handleGameEnd(false);
             } else {
                 this.renderClues();
@@ -36033,10 +36360,12 @@ class PsikoVakaGame {
         if (this.dom.mainInputSection) this.dom.mainInputSection.hidden = true;
         this.closeAutocomplete();
         this.closeCategoryTree();
+        if (this.cluesUsed == null) this.cluesUsed = this.unlockedClues;
         this.renderInlineResult(won);
 
         this.unlockedClues = this.maxClues;
         this.updateComboStepperUI();
+        this.renderZorlukUI();
 
         this.renderClues();
         this.renderGuesses();
@@ -36109,10 +36438,11 @@ class PsikoVakaGame {
         if (this.dom.playResultIcon) this.dom.playResultIcon.innerHTML = this.icon(won ? 'check' : 'flag');
         if (this.dom.playResultTitle) {
             this.dom.playResultTitle.textContent = won
-                ? `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`
+                ? (this.zorluk && this.zorluk.tekHak ? `Tek hakla bildin · ${this.cluesUsed || 1}. ipucunda · ${this.formatDuration(this.elapsedSeconds)}` : `${this.guesses.length}. tahminde bildin · ${this.formatDuration(this.elapsedSeconds)}`)
                 : 'Bu sefer olmadı';
         }
         if (this.dom.playResultAnswer) this.dom.playResultAnswer.textContent = answer ? `Doğru cevap: ${answer}` : '';
+        if (this.dom.playResultZor) this.dom.playResultZor.innerHTML = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.badge(this.zorluk) : '';
         if (this.dom.playResultTakeaway) {
             const xp = window.PsikoVakaExplain ? window.PsikoVakaExplain.get(this.currentCase) : null;
             this.dom.playResultTakeaway.hidden = !(xp && xp.teachingPoint && this.isGameOver);
@@ -36148,6 +36478,8 @@ class PsikoVakaGame {
 
         banner.className = won ? 'result-banner success' : 'result-banner failure';
         icon.innerHTML = this.icon(won ? 'check' : 'flag');
+        const zorEl = document.getElementById('resultZor');
+        if (zorEl) zorEl.innerHTML = window.PsikoVakaZorluk ? window.PsikoVakaZorluk.badge(this.zorluk) : '';
         if (this.targetGameMode === 'therapy') {
             heading.textContent = won ? `${this.guesses.length}. tahminde doğru terapi` : 'Terapi vakası tamamlandı';
             diagNameEl.textContent = targetTherapy ? targetTherapy.nameTr : 'Kanıta dayalı psikoterapi';
@@ -36944,6 +37276,16 @@ class PsikoVakaGame {
         const extra = [this.formatDuration(this.elapsedSeconds)];
         if (won && this.currentMode === 'daily' && this.shareStreak > 0) extra.push(`🔥 ${this.shareStreak} gün`);
         const lines = [title];
+        const Z = window.PsikoVakaZorluk;
+        const zLine = Z ? Z.shareLine(this.zorluk) : '';
+        if (this.zorluk && this.zorluk.tekHak) {
+            const label = { diagnosis: 'Tanı', therapy: 'Terapi', pharmacology: 'İlaç', combo: 'Kombo' }[this.targetGameMode] || 'Tanı';
+            lines.push([`${label} ${won ? `${this.cluesUsed || 1}. ipucunda` : 'X'} · tek hak`].concat(extra).join(' · '));
+            lines.push(won ? '🟩' : '🟥');
+            if (zLine) lines.push(zLine);
+            lines.push(SITE);
+            return lines.join('\n');
+        }
         if (this.targetGameMode === 'combo') {
             lines.push(['Kombo'].concat(extra).join(' · '));
             const log = Object.assign({}, this.stageGuessLog || {});
@@ -36959,6 +37301,7 @@ class PsikoVakaGame {
             lines.push([`${label} ${won ? this.guesses.length : 'X'}/${max}`].concat(extra).join(' · '));
             lines.push(sq(this.guesses));
         }
+        if (zLine) lines.push(zLine);
         lines.push(SITE);
         return lines.join('\n');
     }
@@ -38366,19 +38709,22 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             : Promise.resolve({ ok: true, data: [] }),
 
         // ---- oda
-        createRoom: (o) => rpc('create_room', {
+        /** Zorluk parametreleri (0007) yalnızca bir ayar açıksa gönderilir: eski sunucu (0007 yok) kapalı ayarla çalışmaya devam eder. */
+        createRoom: (o) => rpc('create_room', Object.assign({
             p_mode: o.mode, p_format: o.format || null, p_target_type: o.target || 'diagnosis',
             p_capacity: o.capacity == null ? null : o.capacity,
             p_round_count: o.rounds == null ? null : o.rounds,
             p_visibility: o.visibility || 'private',
             p_round_time_limit_sec: o.timeLimit == null ? null : o.timeLimit,
             p_bracket_seeding: o.seeding || 'random'
-        }),
+        }, o.tekHak || o.kategoriGizli ? { p_tek_hak: !!o.tekHak, p_kategori_gizli: !!o.kategoriGizli } : {})),
         joinRoom: (code) => rpc('join_room', { p_code: String(code || '').trim().toUpperCase() }),
         leaveRoom: (id) => rpc('leave_room', { p_room_id: id }),
         setReady: (id, ready) => rpc('set_ready', { p_room_id: id, p_ready: !!ready }),
         startMatch: (id) => rpc('start_match', { p_room_id: id }),
         submitGuess: (id, round, item) => rpc('submit_guess', { p_room_id: id, p_round_no: round, p_item_id: item }),
+        /** 0007: tek hakta sonraki ipucu. */
+        revealClue: (id, round) => feature('reveal_clue', { p_room_id: id, p_round_no: round }),
         forfeitRound: (id, round) => rpc('forfeit_round', { p_room_id: id, p_round_no: round }),
         heartbeat: (id) => rpc('heartbeat', { p_room_id: id }),
         advanceIfDue: (id) => rpc('advance_if_due', { p_room_id: id }),
@@ -38389,15 +38735,17 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         /** 0002 migration'ı: yoksa UNSUPPORTED döner ve bir daha denenmez. */
         async updateRoomSettings(id, patch) {
             if (unsupported.has('update_room_settings')) return fail({ code: 'PGRST202' });
-            const r = await rpc('update_room_settings', {
+            const hasZor = patch.tekHak != null || patch.kategoriGizli != null;
+            const r = await rpc('update_room_settings', Object.assign({
                 p_room_id: id,
                 p_target_type: patch.target || null,
                 p_round_count: patch.rounds == null ? null : patch.rounds,
                 p_visibility: patch.visibility || null,
                 p_capacity: patch.capacity == null ? null : patch.capacity,
                 p_round_time_limit_sec: patch.timeLimit == null ? null : patch.timeLimit
-            });
-            if (!r.ok && r.error.code === 'UNSUPPORTED') unsupported.add('update_room_settings');
+            }, hasZor ? { p_tek_hak: patch.tekHak == null ? null : !!patch.tekHak, p_kategori_gizli: patch.kategoriGizli == null ? null : !!patch.kategoriGizli } : {}));
+            // zorluk alanıyla gelen PGRST202 "0007 yok" demektir; ayar sayfasının tamamını kapatma
+            if (!r.ok && r.error.code === 'UNSUPPORTED' && !hasZor) unsupported.add('update_room_settings');
             return r;
         },
         /** Sunucuda update_room_settings var mı? (bir kez sorar; sonucu saklar) */
@@ -38413,6 +38761,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         // ---- migration 0003 (§13): yoksa UNSUPPORTED döner ve bir daha sorulmaz (sayfa yenilenene kadar)
         getDailyChallenge: (target) => feature('get_daily_challenge', { p_target: target || 'diagnosis' }),
         dailyBegin: (target) => feature('daily_begin', { p_target: target || 'diagnosis' }),
+        /** 0007: ilk tahminden önce zorluk seçimi (daily_begin'in ek parametreleri). feature() değil: PGRST202 günlüğü kapatmasın. */
+        dailySetZorluk: (target, z) => rpc('daily_begin', { p_target: target || 'diagnosis', p_tek_hak: !!(z && z.tekHak), p_kategori_gizli: !!(z && z.kategoriGizli) }),
+        dailyRevealClue: (target) => feature('daily_reveal_clue', { p_target: target || 'diagnosis' }),
         dailySubmitGuess: (target, item) => feature('daily_submit_guess', { p_target: target, p_item_id: item }),
         dailyGiveUp: (target) => feature('daily_give_up', { p_target: target }),
         getDailyLeaderboard: (target, day, limit) => feature('get_daily_leaderboard', { p_target: target, p_day: day || null, p_limit: limit || 50 }),
@@ -39036,7 +39387,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 ${NS.avatar(x.avatar, { size: 36, framed: true })}
                 <span class="ol-lb-name">${esc(x.username || x.display_name)}${x.user_id === meId ? ' <span class="ol-me-tag">sen</span>' : ''}</span>
                 <span class="ol-lb-tier">${NS.leagueBadge(x.ranked_points, 20)}<span class="ol-lb-tier-name">${esc(NS.leagueName(x.ranked_points))}</span></span>
-                <span class="ol-lb-rp">${x.ranked_points} RP</span>
+                <span class="ol-lb-rp">${x.ranked_points} Elo</span>
             </li>`).join('')}</ol>`;
     }
 
@@ -39095,6 +39446,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function defaultsFor(mode, prev) {
         const p = prev || {};
         const d = { mode, target: p.target || 'diagnosis', visibility: p.visibility || 'private', rounds: p.rounds || 5, seeding: p.seeding || 'random' };
+        d.tekHak = !!p.tekHak; d.kategoriGizli = !!p.kategoriGizli;
         if (mode === 'duel') { d.format = (p.mode === 'duel' && p.format) || 'rounds'; d.capacity = 2; }
         if (mode === 'ffa') { d.format = 'rounds'; d.capacity = (p.mode === 'ffa' && p.capacity) || 4; }
         if (mode === 'tournament') { d.format = (p.mode === 'tournament' && p.format) || 'battle'; d.capacity = (p.mode === 'tournament' && p.capacity) || 4; }
@@ -39150,7 +39502,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         }
         if (s.format === 'bracket' && !o.locked) {
             html += `<fieldset class="ol-field"><legend class="ol-legend">Eşleştirme</legend>
-                ${chips('seeding', [{ v: 'random', l: 'Rastgele' }, { v: 'ranked', l: 'RP’ye göre' }], s.seeding, 'Eşleştirme')}</fieldset>`;
+                ${chips('seeding', [{ v: 'random', l: 'Rastgele' }, { v: 'ranked', l: 'Elo’ya göre' }], s.seeding, 'Eşleştirme')}</fieldset>`;
+        }
+        // Zorluk (0007): yalnızca sunucu destekliyorsa (game_config'te çarpan anahtarı); yoksa bölüm hiç çizilmez
+        const Zm = global.PsikoVakaZorluk;
+        if (Zm && o.zorluk !== false && NS.leaguesView && NS.leaguesView.zorlukSupported()) {
+            html += `<fieldset class="ol-field ol-zorluk-field" data-ol-zorluk>${Zm.switches({ tekHak: s.tekHak, kategoriGizli: s.kategoriGizli }, { id: 'roomZor', mult: true, cfg: NS.leaguesView.cfg(), title: 'Zorluk' })}</fieldset>`;
         }
         html += `<label class="ol-switch-row"><span class="ol-switch-text"><span class="ol-opt-title">Herkese açık</span><span class="ol-opt-sub">Açık odalar listesinde görünür; kapalıysa yalnızca kod ve davetle girilir.</span></span>
             <input type="checkbox" class="ol-switch-input" name="visibility" ${s.visibility === 'public' ? 'checked' : ''}><span class="switch" aria-hidden="true"><span class="switch-knob"></span></span></label>`;
@@ -39167,6 +39524,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (val('seeding')) out.seeding = val('seeding');
         const vis = root.querySelector('input[name="visibility"]');
         if (vis) out.visibility = vis.checked ? 'public' : 'private';
+        const zr = root.querySelector('[data-ol-zorluk]');
+        if (zr && global.PsikoVakaZorluk) { const z = global.PsikoVakaZorluk.read(zr); out.tekHak = z.tekHak; out.kategoriGizli = z.kategoriGizli; }
         return out;
     }
 
@@ -39179,6 +39538,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             async onAction(id, shx) {
                 if (id !== 'create') return;
                 s = readForm(shx.body, s);
+                if (!shx.body.querySelector('[data-ol-zorluk]')) { s.tekHak = false; s.kategoriGizli = false; }   // 0007 yok: normal kurallar
                 shx.setBusy('create', true);
                 const r = await NS.app.createRoom(s);
                 shx.setBusy('create', false);
@@ -39190,6 +39550,15 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 }
             }
         });
+        bindZorluk(sh.body, () => { s = readForm(sh.body, s); });
+        // Ayarlar henüz okunmadıysa (yeni sayfa): okununca zorluk bölümü eklensin
+        if (NS.leaguesView && !NS.leaguesView.zorlukSupported() && NS.leaguesView.loadConfig) {
+            Promise.resolve(NS.leaguesView.loadConfig()).then(() => {
+                if (sh.closed || !NS.leaguesView.zorlukSupported() || sh.body.querySelector('[data-ol-zorluk]')) return;
+                s = readForm(sh.body, s);
+                const form = sh.body.querySelector('[data-ol-create]'); if (form) form.innerHTML = settingsForm(s);
+            });
+        }
         sh.body.addEventListener('change', (e) => {
             const prev = s;
             s = readForm(sh.body, s);
@@ -39209,11 +39578,16 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         });
         return sh;
     }
+    /** Zorluk anahtarları (js/zorluk.js) tıklanınca çağrılır; kök bir kez bağlanır. */
+    function bindZorluk(root, onChange) {
+        const Zm = global.PsikoVakaZorluk;
+        if (Zm) Zm.bind(root, () => { if (onChange) onChange(); }, { cfg: () => (NS.leaguesView ? NS.leaguesView.cfg() : null) });
+    }
     function syncChecked(root) {
         $all('.ol-opt, .ol-chip', root).forEach(l => { const i = l.querySelector('input'); l.classList.toggle('is-checked', !!(i && i.checked)); });
     }
 
-    NS.ui = { sheet, confirm, closeAllSheets, banner, closeBanner, setNavBadge, playerChip, settingsForm, readForm, syncChecked, roundsFor, defaultsFor };
+    NS.ui = { sheet, confirm, closeAllSheets, banner, closeBanner, setNavBadge, playerChip, settingsForm, readForm, syncChecked, roundsFor, defaultsFor, bindZorluk };
     NS.hub = { mount: mountHub, render: renderHub, refreshPublicRooms, renderPublicRooms, loadLeaderboard, openCreateSheet, state: hubState, stop: stopHubLive };
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -40762,7 +41136,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         $('#olLobbyChips', L.root).innerHTML = `
             <span class="ol-chip-static ol-t-${esc(room.target_type)}">${icon(T.targetIcon[room.target_type])}${esc(T.target[room.target_type])}</span>
             <span class="ol-chip-static">${icon('clock')}${esc(roundsTxt)} · ${Math.round(room.round_time_limit_sec / 60 * 10) / 10} dk</span>
-            ${quick ? '' : `<span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`}`;
+            ${quick ? '' : `<span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`}
+            ${quick ? '' : zorlukChips(room)}`;
         const setBtn = $('#olLobbySettingsBtn', L.root);
         if (setBtn) setBtn.hidden = quick || !NS.rooms.isHost();
         updatePlayers();
@@ -40770,6 +41145,16 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         updateCta();
         updateChallenge();
         announceDiff();
+    }
+
+    /** Zorluk çipleri (0007): Tek hak / Kategori gizli + Elo çarpanı. Ayar kapalıysa boş. */
+    function zorlukChips(room) {
+        const Zm = global.PsikoVakaZorluk;
+        if (!Zm || !(room.tek_hak || room.kategori_gizli)) return '';
+        const z = Zm.norm(room);
+        const m = Zm.multiplier(z, NS.leaguesView ? NS.leaguesView.cfg() : null);
+        return Zm.ITEMS.filter(i => z[i.key]).map(i => `<span class="ol-chip-static ol-chip-zor" data-ol-zor="${i.key}">${icon(i.icon)}${esc(i.short)}</span>`).join('')
+            + `<span class="ol-chip-static ol-chip-zor is-mult" title="Zorluk bonusu: kazandığın Elo ${esc(Zm.fmtMult(m))}">${icon('zap')}Elo ${esc(Zm.fmtMult(m))}</span>`;
     }
 
     /** Telefonda sahnenin altındaki açılır oyuncu listesi (H16): tam ad, lig rozeti, hazır durumu. */
@@ -41297,7 +41682,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const s = NS.rooms.state;
         if (!s || !NS.rooms.isHost()) return;
         const room = s.room;
-        let cur = { mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.round_count, visibility: room.visibility, seeding: room.bracket_seeding };
+        let cur = { mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.round_count, visibility: room.visibility, seeding: room.bracket_seeding,
+            tekHak: !!room.tek_hak, kategoriGizli: !!room.kategori_gizli };
         const minCap = NS.rooms.active().length;
         const unsupported = !NS.api.isSupported('update_room_settings');
         const sh = NS.ui.sheet({
@@ -41310,6 +41696,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             async onAction(id, shx) {
                 if (id !== 'save') { shx.close(); return; }
                 cur = NS.ui.readForm(shx.body, cur);
+                // 0007 yoksa zorluk alanı gönderilmez (eski sunucuda imza yok)
+                if (!(NS.leaguesView && NS.leaguesView.zorlukSupported()) || !shx.body.querySelector('[data-ol-zorluk]')) { delete cur.tekHak; delete cur.kategoriGizli; }
                 shx.setBusy('save', true);
                 const r = await NS.api.updateRoomSettings(room.id, cur);
                 shx.setBusy('save', false);
@@ -41319,7 +41707,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 else el.textContent = r.error.message;
             }
         });
-        if (unsupported) sh.body.querySelectorAll('input').forEach(i => { i.disabled = true; });
+        if (unsupported) sh.body.querySelectorAll('input, [data-zorluk]').forEach(i => { i.disabled = true; });
+        NS.ui.bindZorluk(sh.body);
         sh.body.addEventListener('change', () => { NS.ui.syncChecked(sh.body); });
     }
 
@@ -41368,6 +41757,29 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     const g = () => NS.game();
     const S = () => NS.rooms.state;
     const myId = () => NS.api.myId();
+    // ---- zorluk (0007, ajan Z1): odanın ayarları sunucudan (rooms.tek_hak / kategori_gizli)
+    const Zm = () => global.PsikoVakaZorluk;
+    function zor() { const s = S(); return { tekHak: !!(s && s.room && s.room.tek_hak), kategoriGizli: !!(s && s.room && s.room.kategori_gizli) }; }
+    const cluesOf = (rp) => Math.min(6, 1 + ((rp && rp.ek_ipucu) || 0));
+    const zorBadge = (cls) => (Zm() ? Zm().badge(zor(), { cls }) : '');
+    function applyRoomZorluk() {
+        const s = S(), gm = g();
+        if (!s || !gm || !gm.setCaseZorluk) return;
+        const z = zor();
+        gm.setCaseZorluk(z, { locked: true });
+        gm.clueRevealHandler = z.tekHak ? async () => {
+            const st = S(); if (!st || !st.round) return { ok: false };
+            const key = st.room.id + ':' + st.round.round_no;
+            const r = await NS.api.revealClue(st.room.id, st.round.round_no);
+            if (M.roundKey !== key) return { ok: false };
+            if (!r.ok) { gm.showToast(r.error.code === 'UNSUPPORTED' ? 'Sunucu bu özelliği henüz desteklemiyor.' : r.error.message); return { ok: false }; }
+            const mine = NS.rooms.myRound(); if (mine) mine.ek_ipucu = Math.max(0, (r.data.clues_opened || 1) - 1);
+            updateHud();
+            return { ok: true, clues: r.data.clues_opened };
+        } : null;
+        const mine = NS.rooms.myRound();
+        if (z.tekHak && mine && cluesOf(mine) > gm.unlockedClues) { gm.unlockedClues = cluesOf(mine); gm.renderClues(); gm.updateRemainingGuessesUI(); }
+    }
 
     // ------------------------------------------------------------ veri yardımcıları
     function findCase(id) {
@@ -41491,6 +41903,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             gm.currentMode = 'online';
             gm.startCase(caseObj, `Tur ${s.round.round_no}/${s.room.round_count}`);
             restoreGuesses(caseObj, mine);
+            applyRoomZorluk();
             ensureHud();
         } else if (M.missingKey === key) {
             return;
@@ -41598,7 +42011,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         delete gm.dom.diagnosisInput.dataset.selectedId;
         gm.closeAutocomplete();
         gm.playTone(d.is_correct ? 'win' : (d.same_group ? 'warm' : 'cold'));
-        if (!d.is_correct && gm.unlockedClues < gm.maxClues) gm.unlockedClues++;
+        if (!d.is_correct && gm.unlockedClues < gm.maxClues && !zor().tekHak) gm.unlockedClues++;
 
         // HUD için kendi satırımı hemen güncelle (sunucu yanıtı)
         const mine = NS.rooms.myRound();
@@ -41632,7 +42045,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const gm = g(), s = S();
         if (!s || !s.round || gm.isGameOver || M.busy) return;
         const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
-        const ok = await NS.ui.confirm('Pes et', pen ? `Bu turdan 0 puan alırsın ve tur çözülemedi sayılır (−${pen} RP). Maç devam eder.` : 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
+        const ok = await NS.ui.confirm('Pes et', pen ? `Bu turdan 0 puan alırsın ve tur çözülemedi sayılır (−${pen} Elo). Maç devam eder.` : 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
         if (!ok) return;
         const key = s.room.id + ':' + s.round.round_no;
         setSubmitting(true);
@@ -41659,9 +42072,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (gm.dom.mainInputSection) gm.dom.mainInputSection.hidden = true;
         if (gm.dom.finishedActions) gm.dom.finishedActions.hidden = true;
         gm.closeAutocomplete(); gm.closeCategoryTree();
+        if (gm.cluesUsed == null) gm.cluesUsed = gm.unlockedClues;
         gm.unlockedClues = gm.maxClues;
         gm.updateComboStepperUI();
         gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
+        if (typeof gm.renderZorlukUI === 'function') gm.renderZorlukUI();
         if (won && typeof gm.launchConfetti === 'function' && !NS.util.reducedMotion()) gm.launchConfetti();
         const ans = answer || roundAnswer();
         renderWaitPanel(won, points, ans, elapsed, reason);
@@ -41690,11 +42105,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const mine = NS.rooms.myRound();
         const n = mine ? mine.guess_count : gm.guesses.length;
         const title = won ? `+${points} puan` : (T.finish[reason] || 'Bu tur olmadı');
-        const sub = won ? `${n}. tahminde${elapsed != null ? ` · ${elapsed} sn` : ''}` : 'Bu turdan puan yok';
+        const sub = won ? `${zor().tekHak ? `Tek hakla, ${mine ? cluesOf(mine) : (gm.cluesUsed || 1)}. ipucunda` : `${n}. tahminde`}${elapsed != null ? ` · ${elapsed} sn` : ''}` : 'Bu turdan puan yok';
         p.innerHTML = `
             <div class="ol-wait-head ${won ? 'is-win' : 'is-loss'}">
                 <span class="ol-wait-icon">${icon(won ? 'check' : 'flag')}</span>
-                <span class="ol-wait-text"><span class="ol-wait-title">${esc(title)}</span><span class="ol-wait-sub">${esc(sub)}</span></span>
+                <span class="ol-wait-text"><span class="ol-wait-title">${esc(title)}</span><span class="ol-wait-sub">${esc(sub)}</span>${zorBadge('is-sm')}</span>
             </div>
             ${ans ? `<div class="ol-wait-answer"><span class="ol-eyebrow">Doğru cevap</span><span>${esc(answerText(ans, s.room.target_type))}</span></div>` : ''}
             <div class="ol-wait-others" id="olWaitOthers"></div>
@@ -41709,9 +42124,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     function statusBits(rp) {
         if (!rp) return { cls: 'is-wait', text: 'Bekliyor', icon: 'hourglass' };
-        if (rp.finished && rp.won) return { cls: 'is-won', text: `Çözdü · ${rp.guess_count}. tahmin`, icon: 'check' };
+        const tek = zor().tekHak;
+        if (rp.finished && rp.won) return { cls: 'is-won', text: tek ? `Çözdü · ${cluesOf(rp)}. ipucu` : `Çözdü · ${rp.guess_count}. tahmin`, icon: 'check' };
         if (rp.finished) return { cls: 'is-lost', text: T.finish[rp.finish_reason] || 'Bitti', icon: rp.finish_reason === 'absent' ? 'wifi-off' : 'x' };
-        return { cls: 'is-play', text: `${rp.guess_count} tahmin`, icon: 'pen' };
+        return { cls: 'is-play', text: tek ? `${cluesOf(rp)}. ipucu açık` : `${rp.guess_count} tahmin`, icon: 'pen' };
     }
     function updateWaitOthers() {
         const box = document.getElementById('olWaitOthers');
@@ -41807,7 +42223,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const me = NS.rooms.me();
         const opps = opponentsFor(s);
         const mult = s.round.hp_multiplier ? Number(s.round.hp_multiplier) : null;
-        const sig = JSON.stringify([s.round.round_no, opps.map(o => [o.user_id, o.guess_count, o.finished, o.won]), me && me.total_score, NS.rooms.active().map(p => p.hp)]);
+        const sig = JSON.stringify([s.round.round_no, opps.map(o => [o.user_id, o.guess_count, o.ek_ipucu, o.finished, o.won]), me && me.total_score, NS.rooms.active().map(p => p.hp), s.room.tek_hak, s.room.kategori_gizli]);
         if (hud.dataset.sig !== sig) {
             hud.dataset.sig = sig;
             hud.innerHTML = `
@@ -41815,12 +42231,14 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     <span class="ol-hud-round">${icon(T.targetIcon[s.room.target_type])}Tur ${s.round.round_no}/${s.room.round_count}</span>
                     <span class="ol-hud-timer" id="olHudTimer" role="timer" aria-label="Kalan süre">--:--</span>
                     <span class="ol-hud-score">${s.room.format === 'hp' ? (mult && mult !== 1 ? `Çarpan ×${mult}` : 'Can düellosu') : `${me ? me.total_score : 0} puan`}</span>
+                    ${zorBadge('is-sm ol-hud-zor')}
                 </div>
                 ${s.room.format === 'hp' ? hpBars(s) : ''}
                 ${opps.length && s.room.format !== 'hp' ? `<ul class="ol-hud-opps" aria-label="Rakipler">${opps.map(r => {
                     const p = NS.rooms.player(r.user_id) || {};
                     const st = statusBits(r);
-                    const dots = Array.from({ length: 6 }, (_, i) => `<i class="${i < (r.stage_guess_count != null ? r.stage_guess_count : r.guess_count) ? 'on' : ''}"></i>`).join('');
+                    const used = zor().tekHak ? cluesOf(r) : (r.stage_guess_count != null ? r.stage_guess_count : r.guess_count);
+                    const dots = Array.from({ length: 6 }, (_, i) => `<i class="${i < used ? 'on' : ''}"></i>`).join('');
                     return `<li class="ol-opp ${st.cls}" aria-label="${esc(p.username)}: ${esc(st.text)}">${NS.avatar(p.avatar, { size: 28, framed: true })}<span class="ol-opp-body"><span class="ol-opp-name">${esc(p.username || '')}</span><span class="ol-opp-dots" aria-hidden="true">${r.finished ? icon(st.icon) : dots}</span></span></li>`;
                 }).join('')}</ul>` : ''}
                 ${s.room.format === 'hp' && opps[0] ? `<div class="ol-hud-oppline">${(() => { const st = statusBits(opps[0]); const p = NS.rooms.player(opps[0].user_id) || {}; return `<span class="ol-mini-st ${st.cls}">${icon(st.icon)}${esc(p.username)}: ${esc(st.text)}</span>`; })()}</div>` : ''}
@@ -41883,6 +42301,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 <span class="ol-eyebrow">${esc(roundLabel)}</span>
                 <span class="ol-count-num" id="olCountNum" aria-live="assertive">3</span>
                 <span class="ol-count-sub">${icon(T.targetIcon[room.target_type])}${esc(T.target[room.target_type])} · ${esc(NS.roomTitle(room))}</span>
+                ${zorBadge('ol-count-zor')}
                 ${vs}${extra}
             </div></div>`;
         }
@@ -41918,7 +42337,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const me = myId();
         return `<ol class="ol-res-list">${rps.map((r, i) => {
             const p = P[r.user_id] || {};
-            const res = r.won ? `${r.guess_count}. tahminde` : (T.finish[r.finish_reason] || '—');
+            const res = r.won ? (zor().tekHak ? `${cluesOf(r)}. ipucunda` : `${r.guess_count}. tahminde`) : (T.finish[r.finish_reason] || '—');
             return `<li class="ol-res-row${r.user_id === me ? ' is-me' : ''}${elim.has(r.user_id) ? ' is-out' : ''}${r.won ? ' is-won' : ''}">
                 <span class="ol-res-pos">${i + 1}</span>
                 ${NS.avatar(p.avatar, { size: 36, framed: true })}
@@ -42030,7 +42449,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const s = S();
         return `<header class="ol-topbar">
             <button class="icon-btn" type="button" data-ol-v="leave" aria-label="Maçtan ayrıl">${icon('arrow-left')}</button>
-            <div class="ol-topbar-main"><h1 class="ol-topbar-title">${esc(title)}</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(s.room))}</span><span class="ol-chip-static ol-t-${esc(s.room.target_type)}">${icon(T.targetIcon[s.room.target_type])}${esc(T.target[s.room.target_type])}</span></div></div>
+            <div class="ol-topbar-main"><h1 class="ol-topbar-title">${esc(title)}</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(s.room))}</span><span class="ol-chip-static ol-t-${esc(s.room.target_type)}">${icon(T.targetIcon[s.room.target_type])}${esc(T.target[s.room.target_type])}</span>${zorBadge()}</div></div>
             ${timer ? `<span class="ol-hud-timer" id="olSpecTimer" role="timer">--:--</span>` : ''}
         </header>`;
     }
@@ -42095,7 +42514,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         let league = '';
         if (mine && mine.rp_after != null && L) {
             const t = L.tierFor(mine.rp_after);
-            league = `<a class="ol-league-line" href="#/ligler" data-ol-v="leagues" aria-label="Lig bilgisi">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} RP</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
+            league = `<a class="ol-league-line" href="#/ligler" data-ol-v="leagues" aria-label="Lig bilgisi">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} Elo</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
                 <span class="ol-league-bar"><i data-pct="${t.pct}"></i></span></a>`;
             // Lig değişimi (kademe sınırı aşıldıysa): önceki RP ≈ rp_after − rp_delta (0 tabanı yüzünden yaklaşık; sınırlar 0'dan uzak)
             const prev = Math.max(0, mine.rp_after - (Number(mine.rp_delta) || 0));
@@ -42110,7 +42529,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const bdHtml = mine ? rpBreakdownHtml(mine) : '';
         root.innerHTML = `<div class="ol-view ol-final-view">
             <header class="ol-topbar"><button class="icon-btn" type="button" data-ol-v="exit" aria-label="Çık">${icon('x')}</button>
-                <div class="ol-topbar-main"><h1 class="ol-topbar-title">Maç bitti</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(room))}</span></div></div></header>
+                <div class="ol-topbar-main"><h1 class="ol-topbar-title">Maç bitti</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(room))}</span>${zorBadge()}</div></div></header>
             <div class="ol-view-body">
                 ${res.length ? `<div class="ol-podium" data-n="${pod.length}">${order.map(x => {
                     const p = P[x.user_id] || {};
@@ -42123,8 +42542,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     </div>`;
                 }).join('')}</div>` : `<div class="ol-empty">${icon('hourglass')}<span>Sonuçlar yükleniyor…</span></div>`}
                 ${earlyEnd ? `<div class="notice">${icon('info')}<span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></div>` : ''}
-                ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için RP verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
-                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için RP almadın.'}</span></div>` : ''}
+                ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için Elo verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
+                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için Elo almadın.'}</span></div>` : ''}
                 ${league}
                 ${bdHtml}
                 <ol class="ol-res-list">${res.map(x => {
@@ -42133,7 +42552,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                         <span class="ol-res-pos">${x.final_rank}</span>${NS.avatar(p.avatar, { size: 36, framed: true })}
                         <span class="ol-res-main"><span class="ol-res-name">${esc(p.username || '')}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}${x.left_early ? ' <span class="ol-out-tag">Ayrıldı</span>' : ''}</span>
                         <span class="ol-res-sub">${esc(metric(x))}${x.eliminated_round ? ` · ${room.format === 'bracket' ? bracketRoundLoc(x.eliminated_round, room.round_count) : x.eliminated_round + '. turda'} elendi` : ''}</span></span>
-                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : x.rp_delta < 0 ? ' is-minus' : ''}">${x.rp_delta > 0 ? '+' : x.rp_delta < 0 ? '−' : ''}${Math.abs(x.rp_delta)} RP</span>
+                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : x.rp_delta < 0 ? ' is-minus' : ''}">${x.rp_delta > 0 ? '+' : x.rp_delta < 0 ? '−' : ''}${Math.abs(x.rp_delta)} Elo</span>
                     </li>`;
                 }).join('')}</ol>
                 <div class="ol-rematch" id="olRematch"></div>
@@ -42146,7 +42565,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         root.querySelectorAll('.ol-league-bar i').forEach(i => i.style.setProperty('--pct', (i.dataset.pct || 0) + '%'));
         if (NS.app.pendingRematch) showRematchOffer(NS.app.pendingRematch);
         if (mine && mine.final_rank === 1 && !M.confetti && g() && g().launchConfetti && !NS.util.reducedMotion()) { M.confetti = room.id; g().launchConfetti(); }
-        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta ? (mine.rp_delta > 0 ? 'artı ' : 'eksi ') + Math.abs(mine.rp_delta) + ' RP' : ''}` : 'Maç bitti.');
+        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta ? (mine.rp_delta > 0 ? 'artı ' : 'eksi ') + Math.abs(mine.rp_delta) + ' Elo' : ''}` : 'Maç bitti.');
         return null;
     }
     /** RP v2 dökümü (match_results.rp_breakdown, §13.4). Alan yoksa (eski sunucu) hiçbir şey çizilmez. */
@@ -42158,13 +42577,19 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const cls = (n) => (n > 0 ? 'is-plus' : n < 0 ? 'is-minus' : '');
         const total = Number(x.rp_delta) || 0;
         const place = Number(bd.placement) || 0;
+        const mult = Number(bd.zorluk_carpani) || 1;
+        const tek = !!(bd.zorluk && bd.zorluk.tek_hak);
+        const Z = Zm();
+        const outTxt = (r) => { const m = /^g([1-6])$/.exec(r.outcome || ''); return m && tek ? `Tek hakla, ${m[1]}. ipucunda çözdün` : (RP_OUT[r.outcome] || r.outcome || ''); };
+        const baseTxt = (r) => (r.base != null && Number(r.base) !== Number(r.delta) ? ` <span class="ol-rpbd-base">(${sg(Number(r.base))} ${esc(Z ? Z.fmtMult(mult) : '×' + mult)})</span>` : '');
         return `<details class="ol-rpbd">
-            <summary class="ol-rpbd-sum"><span>Bu maçın RP dökümü</span><span class="ol-rpbd-total ${cls(total)}">${sg(total)} RP</span></summary>
-            <ul class="ol-rpbd-list">${bd.rounds.map(r => { const d = Number(r.delta) || 0; return `<li><span class="ol-rpbd-r">Tur ${esc(r.round)}</span><span class="ol-rpbd-o">${esc(r.missed ? 'Oynanmadı (ayrıldın)' : (RP_OUT[r.outcome] || r.outcome || ''))}</span><span class="ol-rpbd-d ${cls(d)}">${sg(d)}</span></li>`; }).join('')}
+            <summary class="ol-rpbd-sum"><span>Bu maçın Elo dökümü</span><span class="ol-rpbd-total ${cls(total)}">${sg(total)} Elo</span></summary>
+            <ul class="ol-rpbd-list">${bd.rounds.map(r => { const d = Number(r.delta) || 0; return `<li><span class="ol-rpbd-r">Tur ${esc(r.round)}</span><span class="ol-rpbd-o">${esc(r.missed ? 'Oynanmadı (ayrıldın)' : outTxt(r))}${r.missed ? '' : baseTxt(r)}</span><span class="ol-rpbd-d ${cls(d)}">${sg(d)}</span></li>`; }).join('')}
                 ${place ? `<li class="ol-rpbd-place"><span class="ol-rpbd-r">Sıralama primi</span><span class="ol-rpbd-o"></span><span class="ol-rpbd-d is-plus">${sg(place)}</span></li>` : ''}
             </ul>
+            ${mult > 1 && Z ? `<p class="ol-rpbd-zor">${Z.badge(bd.zorluk, { cls: 'is-sm' })}<span>Zorluk bonusu ${esc(Z.fmtMult(mult))}: turlarda kazandığın Elo ${esc(Z.fmtMult(mult))} sayıldı (−10 ve sıralama primi aynı).</span></p>` : ''}
             ${bd.voided ? `<p class="ol-muted ol-small">Maç erken bittiği için bu maç geçersiz sayıldı.</p>` : ''}
-            ${x.rp_after === 0 && total < 0 ? `<p class="ol-muted ol-small">RP 0'ın altına inmez.</p>` : ''}
+            ${x.rp_after === 0 && total < 0 ? `<p class="ol-muted ol-small">Elo 0'ın altına inmez.</p>` : ''}
         </details>`;
     }
 
@@ -42222,7 +42647,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     // ------------------------------------------------------------ veri
     async function loadConfig() {
-        if (S.cfgLoading || (S.cfg && Date.now() - S.cfgAt < 5 * 60000) || !signedIn()) return;
+        if (S.cfgLoading || (S.cfg && Date.now() - S.cfgAt < 5 * 60000) || !signedIn()) return S.cfg;
         S.cfgLoading = true;
         const r = await NS.api.getConfig();
         S.cfgLoading = false;
@@ -42273,8 +42698,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const a = acc();
             const canSign = a && a.availability === 'ready';
             return `<article class="card lg-head lg-head-guest">
-                <div class="lg-head-text"><h2 class="lg-head-title">Ligler ve sıralama puanı</h2>
-                <p class="lg-muted">Online maçlarda RP kazanır ya da kaybedersin; RP'n ligini belirler. ${canSign ? 'Kendi ligini ve son maçlarını görmek için giriş yap.' : 'Online özellikler bu sürümde ya da şu an kullanılamıyor.'}</p></div>
+                <div class="lg-head-text"><h2 class="lg-head-title">Ligler ve Elo</h2>
+                <p class="lg-muted">Online maçlarda Elo kazanır ya da kaybedersin; Elo'n ligini belirler. ${canSign ? 'Kendi ligini ve son maçlarını görmek için giriş yap.' : 'Online özellikler bu sürümde ya da şu an kullanılamıyor.'}</p></div>
                 ${canSign ? `<div class="lg-head-actions"><button class="btn btn-primary" type="button" data-lg="signin">Giriş yap</button><button class="btn btn-secondary" type="button" data-lg="signup">Hesap oluştur</button></div>` : ''}
             </article>`;
         }
@@ -42285,9 +42710,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             <div class="lg-head-main">
                 <span class="lg-eyebrow">Ligin</span>
                 <h2 class="lg-head-title">${esc(t.name)}</h2>
-                <span class="lg-head-rp">${rp} RP${S.pos ? ` <span class="lg-head-pos">· Sıralamada ${S.pos}.</span>` : ''}</span>
+                <span class="lg-head-rp">${rp} Elo${S.pos ? ` <span class="lg-head-pos">· Sıralamada ${S.pos}.</span>` : ''}</span>
                 <div class="lg-bar" role="progressbar" aria-label="Sonraki kademeye ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${t.pct}"><i data-pct="${t.pct}"></i></div>
-                <span class="lg-head-next">${t.next ? `${esc(t.next.name)} için ${t.toNext} RP kaldı` : 'En üst ligdesin'}</span>
+                <span class="lg-head-next">${t.next ? `${esc(t.next.name)} için ${t.toNext} Elo kaldı` : 'En üst ligdesin'}</span>
             </div>
         </article>`;
     }
@@ -42300,7 +42725,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         return `<section class="lg-sec" aria-labelledby="lgLadderT">
             <h2 class="lg-sec-title" id="lgLadderT">Lig merdiveni</h2>
             <ol class="lg-ladder">${L.TIERS.map((t, i) => {
-                const range = t.max === Infinity ? `${t.min}+ RP` : `${t.min}–${t.max} RP`;
+                const range = t.max === Infinity ? `${t.min}+ Elo` : `${t.min}–${t.max} Elo`;
                 const state = curIdx < 0 ? '' : i === curIdx ? ' is-current' : i > curIdx ? ' is-locked' : ' is-passed';
                 return `<li class="lg-tier${state}"${i === curIdx ? ' aria-current="true" data-lg-current' : ''}>
                     <span class="lg-tier-badge">${L.badge(t.min, 32)}</span>
@@ -42314,7 +42739,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     function rulesHtml() {
         const R = rules(), v = R.v;
-        const row = (label, val) => `<tr><th scope="row">${esc(label)}</th><td class="${val > 0 ? 'is-plus' : val < 0 ? 'is-minus' : ''}">${signed(val)} RP</td></tr>`;
+        const row = (label, val) => `<tr><th scope="row">${esc(label)}</th><td class="${val > 0 ? 'is-plus' : val < 0 ? 'is-minus' : ''}">${signed(val)} Elo</td></tr>`;
         let body = '';
         if (R.kind === 'v2') {
             body = `<table class="lg-table"><caption class="lg-cap">Her tur</caption><tbody>
@@ -42330,9 +42755,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     <li>Maçtan erken ayrılırsan kalan her tur çözülemedi sayılır. Elendikten sonraki turlar puan götürmez.</li>
                     <li>Kombo: üç aşamadaki tahmin sayılarının ortalaması kullanılır; bir aşama çözülemezse tur çözülemedi sayılır.</li>
                     <li>Rakipler ayrıldığı için maç erken biterse (turların yarısı oynanmadan), kalanlara galibiyet primi verilmez.</li>
-                    <li>RP 0'ın altına düşmez. Yeni hesaplar 0 RP ile başlar.</li>
-                    <li>Günün vakası ve tek kişilik pratik RP vermez.</li>
-                </ul>`;
+                    <li>Elo 0'ın altına düşmez. Yeni hesaplar 0 Elo ile başlar.</li>
+                    <li>Günün vakası ve tek kişilik pratik Elo vermez.</li>
+                </ul>
+                ${zorlukRulesHtml()}`;
         } else {
             body = `<table class="lg-table"><tbody>
                 ${isFinite(v.rp_win_duel) ? row('Düello galibiyeti', v.rp_win_duel) : ''}
@@ -42341,13 +42767,26 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 ${isFinite(v.rp_second) ? row('İkincilik (2\'den fazla oyuncu)', v.rp_second) : ''}
                 ${isFinite(v.rp_completion) ? row('Maçı tamamlama', v.rp_completion) : ''}
                 </tbody></table>
-                <ul class="lg-notes"><li>Maç erken biterse ya da erken ayrılırsan RP verilmez.</li><li>Günün vakası ve tek kişilik pratik RP vermez.</li></ul>`;
+                <ul class="lg-notes"><li>Maç erken biterse ya da erken ayrılırsan Elo verilmez.</li><li>Günün vakası ve tek kişilik pratik Elo vermez.</li></ul>`;
         }
         return `<section class="lg-sec" aria-labelledby="lgRulesT">
             <h2 class="lg-sec-title" id="lgRulesT">Puan nasıl kazanılır, nasıl kaybedilir?</h2>
             ${body}
             ${R.source === 'default' ? `<p class="lg-muted lg-small">${icon('info')}<span>Belgelenmiş varsayılan değerler. Giriş yaptığında güncel değerler sunucudan okunur.</span></p>` : ''}
         </section>`;
+    }
+
+    /** Zorluk bonusu (0007): sunucuda ayar anahtarları varsa (ya da varsayılan) özel oda kuralı. */
+    function zorlukRulesHtml() {
+        const Z = global.PsikoVakaZorluk;
+        if (!Z) return '';
+        const c = S.cfg || {};
+        const m1 = Z.multiplier({ tekHak: true }, c), m2 = Z.multiplier({ tekHak: true, kategoriGizli: true }, c);
+        return `<table class="lg-table"><caption class="lg-cap">Zorluk bonusu (yalnızca özel odalar)</caption><tbody>
+            <tr><th scope="row">Bir ayar açık (tek tahmin hakkı ya da kategori gizli)</th><td class="is-plus">${esc(Z.fmtMult(m1))}</td></tr>
+            <tr><th scope="row">İki ayar açık</th><td class="is-plus">${esc(Z.fmtMult(m2))}</td></tr></tbody></table>
+            <ul class="lg-notes"><li>Çarpan yalnızca turda kazandığın Elo'ya uygulanır (en yakın tam sayıya yuvarlanır). Çözemediğin tur yine −10; sıralama primi ve ayrılma cezası değişmez.</li>
+            <li>Tek tahmin hakkında "kaçıncı tahmin" yerine kaçıncı ipucunda bildiğin sayılır. Hızlı eşleşme her zaman normal kurallarla oynanır.</li></ul>`;
     }
 
     function fmtDate(iso) {
@@ -42359,7 +42798,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function outcomeText(x) {
         const o = String(x.outcome || '');
         const m = /^g([1-6])$/.exec(o);
-        if (m) return `${m[1]}. tahminde çözdü`;
+        if (m) return x._tek ? `${m[1]}. ipucunda çözdü` : `${m[1]}. tahminde çözdü`;
         if (o === 'fail') return x.missed ? 'Oynanmadı (ayrıldın)' : 'Çözemedi';
         if (o === 'void') return 'Yarıda kaldı';
         return o || '—';
@@ -42368,8 +42807,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function breakdownHtml(bd) {
         if (!bd || typeof bd !== 'object' || !Array.isArray(bd.rounds)) return '';
         const place = Number(bd.placement || 0);
-        return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(x))}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
+        const mult = Number(bd.zorluk_carpani) || 1;
+        const tek = !!(bd.zorluk && bd.zorluk.tek_hak);
+        const Z = global.PsikoVakaZorluk;
+        return `<ul class="lg-bd">${bd.rounds.map(x => { const d = Number(x.delta) || 0; return `<li><span>Tur ${esc(x.round)}</span><span class="lg-bd-o">${esc(outcomeText(Object.assign({ _tek: tek }, x)))}${x.base != null && Number(x.base) !== d ? ` <span class="lg-bd-base">(${signed(Number(x.base))} ${esc(Z ? Z.fmtMult(mult) : '×' + mult)})</span>` : ''}</span><span class="lg-delta ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)}</span></li>`; }).join('')}
             ${place ? `<li class="lg-bd-place"><span>Sıralama primi</span><span class="lg-delta is-plus">${signed(place)}</span></li>` : ''}
+            ${mult > 1 && Z ? `<li class="lg-bd-note"><span>Zorluk bonusu ${esc(Z.fmtMult(mult))}: ${esc(Z.label(bd.zorluk))}</span></li>` : ''}
             ${bd.erken_bitis === true ? `<li class="lg-bd-note"><span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></li>` : ''}
             ${bd.voided ? `<li class="lg-bd-note"><span>Maç erken bittiği için geçersiz sayıldı.</span></li>` : ''}</ul>`;
     }
@@ -42380,7 +42823,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         let inner;
         if (h == null) inner = `<div class="ol-skel"></div><div class="ol-skel"></div>`;
         else if (h.error) inner = `<div class="ol-empty">${icon('alert')}<span>${esc(h.error.message)}</span><button class="btn btn-sm btn-secondary" type="button" data-lg="retry-hist">Tekrar dene</button></div>`;
-        else if (!h.length) inner = `<div class="ol-empty">${icon('trophy')}<span>Henüz RP'li maçın yok. Online'da bir maç bitir, burada görünsün.</span></div>`;
+        else if (!h.length) inner = `<div class="ol-empty">${icon('trophy')}<span>Henüz Elo'lu maçın yok. Online'da bir maç bitir, burada görünsün.</span></div>`;
         else inner = `<ul class="lg-hist">${h.map(x => {
             const d = Number(x.rp_delta) || 0;
             const room = { mode: x.mode, format: x.format };
@@ -42391,7 +42834,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const bd = breakdownHtml(x.rp_breakdown);
             const head = `<span class="lg-hist-main"><span class="lg-hist-title">${esc(NS.roomTitle(room))}</span>
                 <span class="lg-hist-sub">${esc(fmtDate(x.finished_at || x.created_at))}${tgt ? ` · ${esc(T.target[tgt] || tgt)}` : ''}${place ? ` · ${esc(place)}` : ''}</span></span>
-                <span class="lg-delta lg-delta-big ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)} RP</span>`;
+                <span class="lg-delta lg-delta-big ${d > 0 ? 'is-plus' : d < 0 ? 'is-minus' : ''}">${signed(d)} Elo</span>`;
             return bd ? `<li class="lg-hist-row"><details><summary class="lg-hist-sum">${head}</summary>${bd}</details></li>` : `<li class="lg-hist-row"><div class="lg-hist-sum">${head}</div></li>`;
         }).join('')}</ul>`;
         return `<section class="lg-sec" aria-labelledby="lgHistT"><h2 class="lg-sec-title" id="lgHistT">Son maçlar</h2>${inner}</section>`;
@@ -42450,7 +42893,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     /** Maçtan ayrılma/pes etme uyarıları için: sunucuda RP v2 açık mı, tur cezası kaç? (yalnızca sunucudan okunduysa) */
     function failPenalty() { const R = rules(); return R.kind === 'v2' && R.source === 'server' ? Math.abs(Number(R.v[V2.fail]) || 0) : null; }
-    NS.leaguesView = { render, onShow, rules, failPenalty, loadConfig, invalidate() { S.hist = null; S.histAt = 0; S.pos = null; S.cfg = null; S.cfgAt = 0; S.histUid = null; }, V2_DEFAULTS };
+    /** Sunucu zorluk ayarlarını (0007) biliyor mu? game_config'te çarpan anahtarı varsa evet. */
+    function zorlukSupported() { return !!(S.cfg && isFinite(S.cfg.rp_zorluk_carpan_1)); }
+    NS.leaguesView = { render, onShow, rules, failPenalty, loadConfig, zorlukSupported, cfg: () => S.cfg, invalidate() { S.hist = null; S.histAt = 0; S.pos = null; S.cfg = null; S.cfgAt = 0; S.histUid = null; }, V2_DEFAULTS };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(init, 0)); else setTimeout(init, 0);
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -42669,6 +43114,32 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function curTarget() { const gm = g(); return (gm && gm.targetGameMode) || 'diagnosis'; }
     function findCase(id) { const gm = g(); return gm ? (gm.allMasterCases || gm.cases || []).find(c => c.id === id) || null : null; }
     const fmtTime = (s) => (s == null ? '' : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`);
+    // ---- zorluk (0007, ajan Z1): sunucu durumunda tek_hak alanı yoksa sunucu zorluğu bilmiyor → ayar sunulmaz
+    const Zm = () => global.PsikoVakaZorluk;
+    const zorOf = (st) => ({ tekHak: !!(st && st.tek_hak), kategoriGizli: !!(st && st.kategori_gizli) });
+    const zorSupported = (st) => !!(st && Object.prototype.hasOwnProperty.call(st, 'tek_hak'));
+    /** Sonuç başlığı: tek hakta "Tek hakla bildin · N. ipucunda", değilse "N. tahminde bildin". */
+    function wonTitle(st, nGuess, nClue) { return st && st.tek_hak ? `Tek hakla bildin · ${nClue || st.clues_opened || 1}. ipucunda` : `${nGuess}. tahminde bildin`; }
+    /** Sunucu günlüğünde zorluk ayarı ve "Sonraki ipucu" bağlantısı. */
+    function applyServerZorluk(target, st) {
+        const gm = g();
+        if (!gm || !gm.setCaseZorluk) return;
+        if (!zorSupported(st)) { gm.zorlukLocked = true; gm.dailyZorlukHandler = null; gm.clueRevealHandler = null; gm.renderZorlukUI(); return; }
+        gm.dailyZorlukHandler = async (z) => {
+            const r = await NS.api.dailySetZorluk(target, z);
+            if (!r.ok) { gm.showToast(r.error.message); return { zorluk: zorOf(D.ch[target]), locked: true }; }
+            D.ch[target] = Object.assign({}, D.ch[target] || {}, r.data); D.chAt[target] = Date.now();
+            return { zorluk: zorOf(r.data), locked: !!r.data.zorluk_kilitli };
+        };
+        gm.clueRevealHandler = async () => {
+            const r = await NS.api.dailyRevealClue(target);
+            if (!r.ok) { gm.showToast(r.error.message); return { ok: false }; }
+            D.ch[target] = Object.assign({}, D.ch[target] || {}, r.data);
+            return { ok: true, clues: r.data.clues_opened };
+        };
+        gm.setCaseZorluk(zorOf(st), { locked: !!st.zorluk_kilitli });
+        if (st.tek_hak && st.clues_opened > gm.unlockedClues) { gm.unlockedClues = Math.min(gm.maxClues, st.clues_opened); gm.renderClues(); gm.updateRemainingGuessesUI(); }
+    }
 
     // ------------------------------------------------------------ veri
     async function loadChallenge(target, force) {
@@ -42763,7 +43234,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const won = srv ? !!srv.won : !!(rec && rec.won);
             box.className = 'daily-result is-tappable ' + (won ? 'is-win' : 'is-loss');
             $('dailyResultIcon').innerHTML = icon(won ? 'check' : 'flag');
-            $('dailyResultTitle').textContent = won ? `${srv ? srv.guesses_used : rec.guessesUsed}. tahminde bildin` : 'Bugün olmadı';
+            const zst = srv || (rec && rec.zorluk ? { tek_hak: rec.zorluk.tekHak, kategori_gizli: rec.zorluk.kategoriGizli, clues_opened: rec.cluesUsed } : null);
+            $('dailyResultTitle').innerHTML = esc(won ? wonTitle(zst, srv ? srv.guesses_used : rec.guessesUsed, zst && zst.clues_opened) : 'Bugün olmadı') + (Zm() && zst ? ' ' + Zm().badge(zorOf(zst), { cls: 'is-sm' }) : '');
             const tail = 'Yarın yeni vaka · Vakayı gör';
             $('dailyResultSub').textContent = won ? (srv ? `${srv.points} puan · ${fmtTime(srv.time_sec)} · ${tail}` : `${fmtTime(rec.elapsed)} · ${tail}`) : `Yarın yeni vaka seni bekliyor · Vakayı gör`;
             text.textContent = on
@@ -42802,10 +43274,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); return false; }
         D.active = { target, caseId: c.id, day: st.day };
         installOverrides();
-        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0 };
+        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0,
+            zorluk: zorOf(st), cluesUsed: st.tek_hak ? st.clues_opened : null };
         const ok = gm.openFinishedDaily(c, rec, {
             fill: () => { restore(st); },
-            title: st.won ? `${st.guesses_used}. tahminde bildin · ${st.points} puan` : null
+            title: st.won ? `${wonTitle(st, st.guesses_used)} · ${st.points} puan` : null
         });
         if (ok && gm.saveDailyRecord) gm.saveDailyRecord(gm.snapshotDailyRecord(!!st.won)); // sunucuya ulaşılamazsa yedek
         if (ok) gm.updateDailyRecord(target, st.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
@@ -42850,6 +43323,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (st.started_at) { const ms = NS.clock.now() - Date.parse(st.started_at); if (isFinite(ms) && ms > 0) gm.caseStartTime = Date.now() - ms; }
         installOverrides();
         restore(st);
+        applyServerZorluk(target, st);
     }
 
     function isServerDaily() {
@@ -42934,7 +43408,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (kind === 'diagnosis' && !d.correct) (gm.diagWrongLog = gm.diagWrongLog || []).push(ch.obj.id);
         gm.dom.diagnosisInput.value = ''; delete gm.dom.diagnosisInput.dataset.selectedId; gm.closeAutocomplete();
         gm.playTone(d.correct ? 'win' : (d.same_group ? 'warm' : 'cold'));
-        if (!d.correct && gm.unlockedClues < gm.maxClues) gm.unlockedClues++;
+        if (!d.correct && gm.unlockedClues < gm.maxClues && !(gm.zorluk && gm.zorluk.tekHak)) gm.unlockedClues++;
+        if (zorSupported(d)) D.ch[D.active.target] = Object.assign({}, D.ch[D.active.target] || {}, { tek_hak: d.tek_hak, kategori_gizli: d.kategori_gizli, clues_opened: d.clues_opened });
         if (d.correct && d.next_stage && !d.finished) {
             const el = gm.dom['comboStep' + d.stage + 'Val']; if (el) el.textContent = ch.obj.nameTr;
             const nx = gm.dom['comboStep' + d.next_stage + 'Val']; if (nx) nx.textContent = d.next_stage === 2 ? 'Şimdi terapiyi seç' : 'Şimdi ilacı seç';
@@ -42969,11 +43444,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const target = D.active.target;
         if (d.time_sec != null) gm.elapsedSeconds = d.time_sec;
         clearInterval(gm.duelTimerInterval);
-        const st = Object.assign({}, D.ch[target] || {}, { status: 'finished', won: !!d.won, points: d.points != null ? d.points : 0, time_sec: d.time_sec, guesses_used: d.guesses_used != null ? d.guesses_used : (D.ch[target] || {}).guesses_used });
+        const st = Object.assign({}, D.ch[target] || {}, { status: 'finished', won: !!d.won, points: d.points != null ? d.points : 0, time_sec: d.time_sec, guesses_used: d.guesses_used != null ? d.guesses_used : (D.ch[target] || {}).guesses_used },
+            zorSupported(d) ? { tek_hak: d.tek_hak, kategori_gizli: d.kategori_gizli, clues_opened: d.clues_opened } : {});
         D.ch[target] = st; D.chAt[target] = Date.now();
         D.board.data = null;
         Object.getPrototypeOf(gm).handleGameEnd.call(gm, !!d.won);
-        if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${st.guesses_used}. tahminde bildin · ${d.points} puan`;
+        if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${wonTitle(st, st.guesses_used)} · ${d.points} puan`;
         if (gm.dom.btnMainNextCase) gm.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
         if (gm.updateDailyRecord) gm.updateDailyRecord(target, st.day || D.active.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
         renderCard(target, st);
@@ -43048,11 +43524,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         return `<span class="dl-pips" aria-hidden="true">${Array.from({ length: 6 }, (_, i) => `<i class="${i < n ? (row.won && i === n - 1 ? 'is-hit' : 'is-miss') : ''}"></i>`).join('')}</span>`;
     }
     function rowHtml(x, me, target) {
-        const label = x.won ? `${x.guesses_used}. tahminde` : 'Çözemedi';
-        return `<li class="dl-row${x.user_id === me ? ' is-me' : ''}${x.won ? '' : ' is-lost'}" aria-label="${x.rank}. ${esc(x.username)}, ${label}, ${x.points} puan">
+        const label = x.won ? (x.tek_hak ? `tek hakla ${x.guesses_used}. ipucunda` : `${x.guesses_used}. tahminde`) : 'Çözemedi';
+        const zb = Zm() ? Zm().badge(zorOf(x), { cls: 'is-sm dl-zor' }) : '';
+        return `<li class="dl-row${x.user_id === me ? ' is-me' : ''}${x.won ? '' : ' is-lost'}" aria-label="${x.rank}. ${esc(x.username)}, ${label}${zb ? ', zor' : ''}, ${x.points} puan">
             <span class="dl-rank">${x.rank}</span>
             ${NS.avatar(x.avatar, { size: 36, framed: true })}
-            <span class="dl-main"><span class="dl-name">${esc(x.username || x.display_name)}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}<span class="dl-badge" title="${esc(NS.leagueName(x.ranked_points))}">${NS.leagueBadge(x.ranked_points, 16)}</span></span>
+            <span class="dl-main"><span class="dl-name">${esc(x.username || x.display_name)}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}<span class="dl-badge" title="${esc(NS.leagueName(x.ranked_points))}">${NS.leagueBadge(x.ranked_points, 16)}</span>${zb}</span>
                 <span class="dl-sub">${pips(x, target)}<span class="dl-sub-t">${x.won ? fmtTime(x.time_sec) : 'Çözemedi'}</span></span></span>
             <span class="dl-pts">${x.points}</span>
         </li>`;
@@ -43816,9 +44293,13 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     // ------------------------------------------------------------ oturum kurma sayfası
     function loadSettings() {
-        const d = { vaka_sayisi: 5, kurs: '', kategori: '', ipucu_araligi_sn: 15, tahmin_hakki: 3, gec_katilim: true };
+        const d = { vaka_sayisi: 5, kurs: '', kategori: '', ipucu_araligi_sn: 15, tahmin_hakki: 3, gec_katilim: true, tek_hak: false, kategori_gizli: false };
         try { return Object.assign(d, JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}')); } catch (e) { return d; }
     }
+    // ---- zorluk (0007, ajan Z1): sunucu destekliyorsa (game_config çarpan anahtarı) kurulumda iki anahtar
+    const Zm = () => global.PsikoVakaZorluk;
+    const zorOk = () => !!(Zm() && NS.leaguesView && NS.leaguesView.zorlukSupported());
+    const zorOfA = (a) => ({ tekHak: !!(a && a.tek_hak), kategoriGizli: !!(a && a.kategori_gizli) });
     function matching(s) { return cases().filter(c => (!s.kurs || c.course === s.kurs) && (!s.kategori || c.category === s.kategori)); }
     function setupForm(s) {
         const courses = typeof COURSE_CATEGORIES !== 'undefined' ? Object.values(COURSE_CATEGORIES).filter(c => c.id !== 'ALL') : [];
@@ -43846,9 +44327,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             <fieldset class="ol-field"><legend class="ol-legend" id="snIntL">İpucu aralığı: <output name="araOut" for="snInt">${s.ipucu_araligi_sn} sn</output></legend>
                 <input class="sinif-range" type="range" id="snInt" name="ipucu_araligi_sn" min="8" max="60" step="1" value="${s.ipucu_araligi_sn}" aria-labelledby="snIntL">
                 <p class="ol-field-note">İpuçları projeksiyonda bu aralıkla kendiliğinden açılır (8–60 sn).</p></fieldset>
-            <fieldset class="ol-field"><legend class="ol-legend">Tahmin hakkı</legend>
-                ${chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], s.tahmin_hakki, 'Tahmin hakkı')}
-                <p class="ol-field-note">Bir öğrencinin bir vakada yapabileceği en fazla tahmin.</p></fieldset>
+            <fieldset class="ol-field${zorOk() && s.tek_hak ? ' is-locked' : ''}" data-sn-hak><legend class="ol-legend">Tahmin hakkı</legend>
+                ${zorOk() && s.tek_hak ? chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], 1, 'Tahmin hakkı').replace(/<input /g, '<input disabled ') : chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], s.tahmin_hakki, 'Tahmin hakkı')}
+                <p class="ol-field-note">${zorOk() && s.tek_hak ? 'Tek tahmin hakkı açık: her öğrencinin vaka başına 1 tahmini var.' : 'Bir öğrencinin bir vakada yapabileceği en fazla tahmin.'}</p></fieldset>
+            ${zorOk() ? `<div data-sn-zorluk>${Zm().switches({ tekHak: s.tek_hak, kategoriGizli: s.kategori_gizli }, { id: 'snZor', title: 'Zorluk', desc: { tekHak: 'Her öğrencinin vaka başına tek tahmini var; yanlışsa o tur onun için biter. İpuçları yine kendiliğinden açılır.', kategoriGizli: 'Tur boyunca tanı grubu gösterilmez; telefonlarda yanlış tahmin yalnızca "yanlış" der (aynı grup bilgisi yok).' }, note: 'Tek hak açıkken tahmin hakkı 1 olur. Kategori gizliyken telefonlarda "aynı grup" bilgisi ve projeksiyonda tur boyunca tanı grubu gösterilmez. Puanlama değişmez.' })}</div>` : ''}
             <label class="ol-switch-row"><span class="ol-switch-text"><span class="ol-opt-title">Geç katılım</span><span class="ol-opt-sub">Başladıktan sonra gelenler bir sonraki turdan katılır.</span></span>
                 <input type="checkbox" class="ol-switch-input" name="gec_katilim" ${s.gec_katilim ? 'checked' : ''}><span class="switch" aria-hidden="true"><span class="switch-knob"></span></span></label>`;
     }
@@ -43861,6 +44343,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const k = rootEl.querySelector('select[name="kurs"]'); if (k) out.kurs = k.value;
         const g = rootEl.querySelector('select[name="kategori"]'); if (g) out.kategori = g.value;
         const l = rootEl.querySelector('input[name="gec_katilim"]'); if (l) out.gec_katilim = l.checked;
+        const zr = rootEl.querySelector('[data-sn-zorluk]');
+        if (zr && Zm()) { const z = Zm().read(zr); out.tek_hak = z.tekHak; out.kategori_gizli = z.kategoriGizli; }
+        else { out.tek_hak = false; out.kategori_gizli = false; }
         return out;
     }
     function openSetup() {
@@ -43876,8 +44361,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 const errEl = shx.body.querySelector('[data-sn-err]');
                 if (matching(s).length < s.vaka_sayisi) { errEl.textContent = API.MSG.NOT_ENOUGH_CASES; return; }
                 shx.setBusy('start', true);
-                const r = await API.olustur({ vaka_sayisi: s.vaka_sayisi, hedef: 'diagnosis', kurslar: s.kurs ? [s.kurs] : null, kategoriler: s.kategori ? [s.kategori] : null,
-                    ipucu_araligi_sn: s.ipucu_araligi_sn, tahmin_hakki: s.tahmin_hakki, gec_katilim: s.gec_katilim });
+                const zz = zorOk() ? { tek_hak: !!s.tek_hak, kategori_gizli: !!s.kategori_gizli } : {};
+                const r = await API.olustur(Object.assign({ vaka_sayisi: s.vaka_sayisi, hedef: 'diagnosis', kurslar: s.kurs ? [s.kurs] : null, kategoriler: s.kategori ? [s.kategori] : null,
+                    ipucu_araligi_sn: s.ipucu_araligi_sn, tahmin_hakki: zz.tek_hak ? 1 : s.tahmin_hakki, gec_katilim: s.gec_katilim }, zz));
                 shx.setBusy('start', false);
                 if (!r.ok) { errEl.textContent = r.error.message; return; }
                 try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch (e) { /* yok */ }
@@ -43894,6 +44380,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const again = focusName && form.querySelector(`[name="${focusName}"]`);
             if (again) try { again.focus({ preventScroll: true }); } catch (e) { /* yok */ }
         };
+        if (Zm()) Zm().bind(sh.body, () => { s = readSetup(sh.body, s); rerender(null); });
+        if (NS.leaguesView && !zorOk() && NS.leaguesView.loadConfig) Promise.resolve(NS.leaguesView.loadConfig()).then(() => { if (!sh.closed && zorOk() && !sh.body.querySelector('[data-sn-zorluk]')) { s = readSetup(sh.body, s); rerender(null); } });
         sh.body.addEventListener('change', (e) => {
             s = readSetup(sh.body, s);
             sh.body.querySelector('[data-sn-err]').textContent = '';
@@ -44247,7 +44735,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const tur = d.oturum.tur_no;
         const left = du === 'lobi' ? `<span class="sp-title">Sınıf oyunu</span>`
             : ['bitti', 'iptal'].includes(du) ? `<span class="sp-title">${du === 'iptal' ? 'Oturum iptal edildi' : 'Oyun bitti'}</span>`
-            : `<span class="sp-title">Tur ${tur}<span class="sp-dim"> / ${d.oturum.vaka_sayisi}</span></span>`;
+            : `<span class="sp-title">Tur ${tur}<span class="sp-dim"> / ${d.oturum.vaka_sayisi}</span></span>${Zm() ? Zm().badge(zorOfA(d.oturum.ayarlar)) : ''}`;
         const codeChip = ['lobi', 'bitti', 'iptal'].includes(du) || !d.oturum.ayarlar.gec_katilim ? '' : `<span class="sp-codechip" title="Geç katılım">${esc(shortUrl())} · <b>${esc(d.oturum.kod)}</b></span>`;
         setHTML(head, `<div class="sp-head-l"><button class="icon-btn" type="button" data-sn="home" aria-label="Projeksiyondan çık (oturum sürer)">${ic('arrow-left')}</button>
             <span class="sp-brand">${ic('school')}</span>${left}${codeChip}</div><div class="sp-head-r">${hostControls(d)}</div>`);
@@ -44307,7 +44795,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 </div>
                 <div class="sp-join-foot">
                     ${qr ? `<figure class="sp-qr">${qr}<figcaption>ya da telefonunun kamerasıyla QR kodu okut</figcaption></figure>` : ''}
-                    <ul class="sp-settings" aria-label="Oturum ayarları"><li>${a.vaka_sayisi} vaka</li><li>İpucu ${a.ipucu_araligi_sn} sn'de bir</li><li>${a.tahmin_hakki} tahmin hakkı</li></ul>
+                    <ul class="sp-settings" aria-label="Oturum ayarları"><li>${a.vaka_sayisi} vaka</li><li>İpucu ${a.ipucu_araligi_sn} sn'de bir</li><li>${a.tek_hak ? 'Tek tahmin hakkı' : `${a.tahmin_hakki} tahmin hakkı`}</li>${a.kategori_gizli ? '<li>Kategori gizli</li>' : ''}</ul>
                 </div>
             </section>
             <section class="sp-people" aria-labelledby="spPeopleT">
@@ -44476,7 +44964,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const pts = me.puan != null ? me.puan : 0;
         setHTML(head, `<button class="icon-btn" type="button" data-sn="leave" aria-label="Oturumdan ayrıl">${ic('arrow-left')}</button>
             <span class="st-me"><span class="st-me-fig" aria-hidden="true">${noro(myCfg(), 36, { animated: false })}</span><span class="st-me-name">${esc(me.takma_ad || '')}</span></span>
-            <span class="st-pts" aria-label="Toplam puan ${pts}">${pts} puan</span>`);
+            ${Zm() ? Zm().badge(zorOfA(d.oturum.ayarlar), { cls: 'is-sm st-zor' }) : ''}<span class="st-pts" aria-label="Toplam puan ${pts}">${pts} puan</span>`);
         const main = r.querySelector('[data-sn-main]');
         const dock = r.querySelector('[data-sn-dock]');
         const k = clueIndex();
@@ -44550,8 +45038,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!g.length) return '';
         return `<section class="st-guesses${done ? ' is-done' : ''}" aria-label="Tahminlerin"><h2 class="st-h2">Tahminlerin</h2><ul>${g.map(x => {
             const dd = diag(x.item_id);
-            const st = x.dogru ? 'is-ok' : x.ayni_grup ? 'is-near' : 'is-bad';
-            const lab = x.dogru ? 'Doğru' : x.ayni_grup ? 'Aynı grup' : 'Yanlış';
+            const near = x.ayni_grup && !(C.d && C.d.oturum && C.d.oturum.ayarlar && C.d.oturum.ayarlar.kategori_gizli);
+            const st = x.dogru ? 'is-ok' : near ? 'is-near' : 'is-bad';
+            const lab = x.dogru ? 'Doğru' : near ? 'Aynı grup' : 'Yanlış';
             return `<li class="st-guess ${st}">${ic(x.dogru ? 'check' : 'x')}<span class="st-guess-n">${esc(dd ? dd.nameTr : x.item_id)}</span><span class="st-guess-tag">${lab}</span></li>`;
         }).join('')}</ul></section>`;
     }
@@ -44634,7 +45123,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         acClose();
         const name = esc(dd ? dd.nameTr : itemId);
         if (g.correct) { C.feedback = { cls: 'is-ok', icon: 'check', html: `Doğru! +${g.points} puan` }; announce(`Doğru! ${g.points} puan.`); }
-        else if (g.same_group) { C.feedback = { cls: 'is-near', icon: 'info', html: `${name} değil, ama aynı tanı grubunda. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış ama aynı grup. ${g.guesses_left} hak kaldı.`); }
+        else if (g.same_group && !(d.oturum.ayarlar && d.oturum.ayarlar.kategori_gizli)) { C.feedback = { cls: 'is-near', icon: 'info', html: `${name} değil, ama aynı tanı grubunda. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış ama aynı grup. ${g.guesses_left} hak kaldı.`); }
         else { C.feedback = { cls: 'is-bad', icon: 'x', html: `${name} değil. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış. ${g.guesses_left} hak kaldı.`); }
         render();
         if (!g.done && input) { try { input.focus({ preventScroll: true }); } catch (e) { /* yok */ } }
@@ -44980,7 +45469,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         else if (view === 'abandoned') {
             NS.match.exit();
             root.innerHTML = `<div class="ol-center-view"><div class="ol-card-big"><span class="ol-big-icon">${icon('door')}</span><h2 class="ol-h2">Oda kapandı</h2>
-                <p class="ol-muted">Bu odada uzun süre kimseden ses gelmediği için oda kapatıldı. RP verilmedi.</p>
+                <p class="ol-muted">Bu odada uzun süre kimseden ses gelmediği için oda kapatıldı. Elo verilmedi.</p>
                 <div class="ol-row-btns"><button class="btn btn-primary" type="button" data-ol-v="exit">Online'a dön</button></div></div></div>`;
         }
         if (view !== A.lastPhase) {
@@ -45079,10 +45568,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
             // RP v2 (§13.4): kalan her tur (bu tur dahil, bitirmediysen) −pen; hp'de tur sınırı 10, bracket'te yalnızca bu eşleşme
             const left = leaveRoundsLeft(s);
-            const leaveText = !pen ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan RP alamazsın.'
-                : left > 0 ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} RP. Sıralama primi de alamazsın.`
-                : 'Ayrılırsan sıralama primi alamazsın. Bitirilmemiş tur kalmadığı için ek RP kesilmez.';
-            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama RP alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
+            const leaveText = !pen ? 'Ayrılırsan maçı hükmen kaybedersin ve bu maçtan Elo alamazsın.'
+                : left > 0 ? `Ayrılırsan kalan ${left} tur çözülemedi sayılır: −${left * pen} Elo. Sıralama primi de alamazsın.`
+                : 'Ayrılırsan sıralama primi alamazsın. Bitirilmemiş tur kalmadığı için ek Elo kesilmez.';
+            const ok = await NS.ui.confirm('Maçtan ayrıl', alive ? leaveText : 'İzlemeyi bırakıp çıkmak istiyor musun? Sıralaman değişmez ama Elo alamazsın.', 'Ayrıl', { danger: true, cancelLabel: 'Maça dön' });
             if (!ok) return;
         }
         if (st === 'finished' || st === 'abandoned') { exitToHub(); return; }
@@ -45120,7 +45609,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const oldHandle = NS.rooms;
         const others = s.players.filter(p => p.played && p.user_id !== NS.api.myId()).map(p => p.user_id);
         btn.disabled = true; btn.classList.add('is-loading');
-        const r = await NS.api.createRoom({ mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.format === 'rounds' ? room.round_count : null, visibility: room.visibility, timeLimit: room.round_time_limit_sec, seeding: room.bracket_seeding });
+        const r = await NS.api.createRoom({ mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.format === 'rounds' ? room.round_count : null, visibility: room.visibility, timeLimit: room.round_time_limit_sec, seeding: room.bracket_seeding, tekHak: !!room.tek_hak, kategoriGizli: !!room.kategori_gizli });
         btn.disabled = false; btn.classList.remove('is-loading');
         if (!r.ok) { NS.toast(r.error.message); return; }
         const me = NS.rooms.me() || {};

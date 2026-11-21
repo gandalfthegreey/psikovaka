@@ -102,7 +102,14 @@
         getMyCurrentRoom: () => ok(M.state && ['lobby', 'in_round', 'round_result'].includes(M.state.room.status) && sessionStorage.getItem('olMockPersist') === '1' ? { id: M.state.room.id, code: M.state.room.code, status: M.state.room.status } : null),
         searchUsers: () => ok([]),
         sendFriendRequest: () => err('USER_NOT_FOUND', 'Bu kullanıcı adıyla biri bulunamadı.'),
-        createRoom: (o) => { M.state = { server_time: iso(Date.now()), room: room({ mode: o.mode, format: o.format, target_type: o.target, capacity: o.capacity, round_count: NS.ui.roundsFor(o) }), players: [player(0)], round: null, round_players: [], my_guesses: [], pairings: [], results: [] }; return ok(M.state.room); },
+        createRoom: (o) => {
+            M.lastCreate = Object.assign({}, o);
+            // 0007 yokken (zorluk: 'unsupported') sunucu p_tek_hak'ı tanımaz: PGRST202 (UNSUPPORTED)
+            if (M.opt.zorluk === 'unsupported' && (o.tekHak || o.kategoriGizli)) return err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.');
+            const zr = M.opt.zorluk === 'unsupported' ? {} : { tek_hak: !!o.tekHak, kategori_gizli: !!o.kategoriGizli };
+            M.state = { server_time: iso(Date.now()), room: room(Object.assign({ mode: o.mode, format: o.format, target_type: o.target, capacity: o.capacity, round_count: NS.ui.roundsFor(o) }, zr)), players: [player(0)], round: null, round_players: [], my_guesses: [], pairings: [], results: [] };
+            return ok(M.state.room);
+        },
         joinRoom: () => err('ALREADY_STARTED', 'Maç başladı; sonradan katılınamaz.'),
         getRoomState: () => M.state ? ok(JSON.parse(JSON.stringify(Object.assign({}, M.state, { server_time: iso(Date.now()) })))) : err('NOT_MEMBER', 'Bu odada değilsin.'),
         heartbeat: () => quickTimeoutCheck() || ok(brief()), advanceIfDue: () => quickTimeoutCheck() || ok(brief()),
@@ -120,11 +127,24 @@
         setReady: (id, r) => { const me = M.state.players[0]; me.is_ready = r; return ok({ ok: true, is_ready: r }); },
         startMatch: () => err('NOT_ALL_READY', 'Herkes hazır olmadan maç başlamaz.'),
         leaveRoom: () => { M.left = (M.left || 0) + 1; M.state = null; persist(); return ok({ ok: true }); },
-        submitGuess: () => err('ROUND_CLOSED', 'Bu tur kapandı.'),
+        submitGuess: (id, round, item) => (M.opt.play ? playGuess(round, item) : err('ROUND_CLOSED', 'Bu tur kapandı.')),
+        revealClue: (id, round) => (M.opt.play ? playReveal(round) : err('ROUND_CLOSED', 'Bu tur kapandı.')),
         forfeitRound: () => err('ROUND_CLOSED', 'Bu tur kapandı.'),
         inviteFriend: (roomId, fid) => { M.invites = (M.invites || 0) + 1; M.lastInvite = { roomId, fid }; return M.opt.inviteError ? err(M.opt.inviteError, 'Bu arkadaş zaten odada.') : ok({ id: 'inv-sent-' + M.invites, status: 'pending' }); },
         getInvite: (id) => ok([{ id, status: M.opt.inviteStatus || 'pending', expires_at: iso(now() + (M.opt.inviteStatus === 'expired-time' ? -1000 : 600000)) }].map(x => (x.status === 'expired-time' ? Object.assign(x, { status: 'pending' }) : x))),
-        updateRoomSettings: () => err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.'),
+        updateRoomSettings: (id, patch) => {
+            if (!M.opt.roomSettings) return err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.');
+            M.lastSettings = Object.assign({}, patch);
+            if (M.opt.zorluk === 'unsupported' && (patch.tekHak != null || patch.kategoriGizli != null)) return err('UNSUPPORTED', '-');
+            const r = M.state.room, before = JSON.stringify(r);
+            if (patch.target) r.target_type = patch.target;
+            if (patch.rounds != null && r.format === 'rounds') r.round_count = patch.rounds;
+            if (patch.visibility) r.visibility = patch.visibility;
+            if (patch.capacity != null) r.capacity = patch.capacity;
+            if (patch.tekHak != null) r.tek_hak = !!patch.tekHak;
+            if (patch.kategoriGizli != null) r.kategori_gizli = !!patch.kategoriGizli;
+            return ok(Object.assign({}, r, { changed: before !== JSON.stringify(r) }));
+        },
         respondRoomInvite: () => err('INVITE_EXPIRED', 'Davetin süresi dolmuş.'),
         // ---- ajan P: lig ekranı
         getConfig: () => {
@@ -132,38 +152,67 @@
             if (o === 'none') return err('OFFLINE', 'Bağlantı kurulamadı.');
             const base = [{ key: 'max_guesses_per_stage', value: 6 }].concat(M.opt.quick === 'unsupported' ? [] : [{ key: 'quick_round_count', value: 3 }, { key: 'quick_wait_timeout_sec', value: 120 }]);
             if (o === 'old') return ok(base.concat([['rp_win_tournament', 75], ['rp_win_ffa', 50], ['rp_win_duel', 35], ['rp_second', 20], ['rp_completion', 5]].map(([key, value]) => ({ key, value }))));
-            return ok(base.concat(Object.entries(NS.leaguesView ? NS.leaguesView.V2_DEFAULTS : {}).map(([key, value]) => ({ key, value }))));
+            const zk = M.opt.zorluk === 'unsupported' ? [] : [{ key: 'rp_zorluk_carpan_1', value: 1.25 }, { key: 'rp_zorluk_carpan_2', value: 1.5 }];
+            return ok(base.concat(Object.entries(NS.leaguesView ? NS.leaguesView.V2_DEFAULTS : {}).map(([key, value]) => ({ key, value }))).concat(zk));
         },
         // ---- ajan P: günlük (§13.1)
         getDailyChallenge: (t) => M.opt.dailyFail ? err('NETWORK', 'Sunucuya ulaşılamadı.') : M.opt.daily === 'unsupported' ? err('UNSUPPORTED', 'Bu özellik sunucuda henüz açık değil.') : ok(dailyState(t, true)),
-        dailyBegin: (t) => { M.beginCalls = (M.beginCalls || 0) + 1; if (M.opt.dailyFail) return err('NETWORK', 'Sunucuya ulaşılamadı.'); if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-'); const d = dget(t); if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now() - (M.opt.dailyElapsed || 0)); } persist(); return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, answer: d.status === 'finished' ? dailyAnswer(t) : null })); },
+        dailyBegin: (t) => { M.beginCalls = (M.beginCalls || 0) + 1; if (M.opt.dailyFail) return err('NETWORK', 'Sunucuya ulaşılamadı.'); if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-'); const d = dget(t); if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now() - (M.opt.dailyElapsed || 0)); } persist(); return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: dMax(d) - d.guesses.filter(x => x.stage === d.stage).length, answer: d.status === 'finished' ? dailyAnswer(t) : null })); },
+        // 0007 (ajan Z1): ilk tahmine / ilk ek ipucuna kadar ayar değişir, sonra kilitli (sessizce yok sayılır)
+        dailySetZorluk: (t, z) => {
+            M.setZorCalls = (M.setZorCalls || 0) + 1;
+            if (M.opt.zorluk === 'unsupported') return err('UNSUPPORTED', '-');
+            const d = dget(t);
+            if (d.status === 'not_started') { d.status = 'in_progress'; d.started_at = iso(now()); }
+            if (d.status !== 'finished' && !d.guesses.length && !(d.ek_ipucu > 0)) { d.tek_hak = !!(z && z.tekHak); d.kategori_gizli = !!(z && z.kategoriGizli); }
+            persist();
+            return ok(Object.assign(dailyState(t), { started_at: d.started_at, guesses: d.guesses.slice(), guesses_left: dMax(d) - d.guesses.filter(x => x.stage === d.stage).length, answer: null }));
+        },
+        dailyRevealClue: (t) => {
+            M.revealCalls = (M.revealCalls || 0) + 1;
+            if (M.opt.zorluk === 'unsupported') return err('UNSUPPORTED', '-');
+            const d = dget(t);
+            if (d.status === 'not_started') return err('DAILY_NOT_STARTED', 'Önce vakayı başlat.');
+            if (d.status === 'finished') return err('DAILY_ALREADY_FINISHED', 'Bugünün vakasını bu hedefte zaten bitirdin.');
+            if (!d.tek_hak) return err('SINGLE_GUESS_OFF', 'İpuçları yanlış tahminle açılır.');
+            if ((d.ek_ipucu || 0) >= 5) return err('NO_MORE_CLUES', 'Bütün ipuçları açık.');
+            d.ek_ipucu = (d.ek_ipucu || 0) + 1; persist();
+            return ok(dailyState(t));
+        },
         dailySubmitGuess: (t, item) => {
             M.submitCalls = (M.submitCalls || 0) + 1;
             const d = dget(t);
             if (d.status === 'not_started') return err('DAILY_NOT_STARTED', 'Önce vakayı başlat.');
             if (d.status === 'finished') return err('DAILY_ALREADY_FINISHED', 'Bugünün vakasını bu hedefte zaten bitirdin.');
             if (d.guesses.some(x => x.stage === d.stage && x.item_id === item)) return err('DUPLICATE_GUESS', 'Bunu zaten tahmin ettin.');
+            if (d.guesses.filter(x => x.stage === d.stage).length >= dMax(d)) return err('GUESS_LIMIT', 'Tahmin hakkın bitti.');
             const ans = dailyAnswer(t), kind = t === 'combo' ? ['diagnosis', 'therapy', 'pharmacology'][d.stage - 1] : t;
             const correct = ans[kind + '_id'] === item, stage = d.stage;
             const nInStage = d.guesses.filter(x => x.stage === stage).length + 1;
-            d.guesses.push({ stage, guess_no: nInStage, item_id: item, correct, same_group: false });
+            const same = !correct && !d.kategori_gizli && sameGroup(kind, item, ans[kind + '_id']);
+            d.guesses.push({ stage, guess_no: nInStage, item_id: item, correct, same_group: same });
             let next = null;
             if (correct && t === 'combo' && stage < 3) { d.stage++; next = d.stage; }
             else if (correct) finishDaily(d, true);
-            else if (nInStage >= 6) finishDaily(d, false);
+            else if (nInStage >= dMax(d)) finishDaily(d, false);
             persist();
-            return ok({ server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, correct, same_group: false, stage, next_stage: next, stage_completed: correct, guess_no: nInStage, guesses_used: d.guesses.length, guesses_left: 6 - d.guesses.filter(x => x.stage === d.stage).length, finished: d.status === 'finished', won: d.status === 'finished' ? d.won : null, points: d.status === 'finished' ? d.points : null, time_sec: d.status === 'finished' ? d.time_sec : null, answer: d.status === 'finished' ? ans : null });
+            const zx = M.opt.zorluk === 'unsupported' ? {} : { tek_hak: !!d.tek_hak, kategori_gizli: !!d.kategori_gizli, clues_opened: 1 + (d.ek_ipucu || 0) };
+            const resp = Object.assign({ server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, correct, same_group: same, stage, next_stage: next, stage_completed: correct, guess_no: nInStage, guesses_used: d.guesses.length, guesses_left: d.status === 'finished' ? 0 : dMax(d) - d.guesses.filter(x => x.stage === d.stage).length, finished: d.status === 'finished', won: d.status === 'finished' ? d.won : null, points: d.status === 'finished' ? d.points : null, time_sec: d.status === 'finished' ? d.time_sec : null, answer: d.status === 'finished' ? ans : null }, zx);
+            (M.payloads = M.payloads || []).push(['daily_submit_guess', resp]);
+            return ok(resp);
         },
         dailyGiveUp: (t) => { const d = dget(t); if (d.status !== 'in_progress') return err(d.status === 'finished' ? 'DAILY_ALREADY_FINISHED' : 'DAILY_NOT_STARTED', '-'); finishDaily(d, false); persist(); return ok(Object.assign(dailyState(t), { answer: dailyAnswer(t) })); },
         getDailyLeaderboard: (t, day, limit) => {
             if (M.opt.daily === 'unsupported') return err('UNSUPPORTED', '-');
             const n = M.opt.boardRows != null ? M.opt.boardRows : 30;
             const rows = Array.from({ length: n }, (_, i) => { const nm = i < 8 ? (i === 0 ? 'ayse_klinik' : longNames[i]) : 'oyuncu_' + (i + 1); const won = i < n - 3 || n < 4; const gu = won ? Math.min(6, 1 + Math.floor(i / 5)) : 6;
-                return { rank: i + 1, user_id: i === 0 ? uid(1) : 'u-' + i, username: nm, display_name: nm, avatar: AV.randomConfig(nm), ranked_points: [4200, 3300, 2600, 2000, 1500, 1200, 950, 760, 520, 310][i % 10] - i, won, guesses_used: gu, time_sec: 25 + i * 7, points: won ? 100 - (gu - 1) * 15 + Math.max(0, 20 - i) : 0 }; });
+                const zr = M.opt.zorluk === 'unsupported' ? {} : { tek_hak: i % 4 === 1, kategori_gizli: i % 4 === 1 || i % 7 === 3 };
+                return Object.assign({ rank: i + 1, user_id: i === 0 ? uid(1) : 'u-' + i, username: nm, display_name: nm, avatar: AV.randomConfig(nm), ranked_points: [4200, 3300, 2600, 2000, 1500, 1200, 950, 760, 520, 310][i % 10] - i, won, guesses_used: gu, time_sec: 25 + i * 7, points: won ? 100 - (gu - 1) * 15 + Math.max(0, 20 - i) : 0 }, zr); });
             const d = dget(t);
             let me = null;
             if (d.status === 'finished' && !day) {
-                me = { rank: M.opt.mePos === 'top' ? 2 : n + 4, user_id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760, won: d.won, guesses_used: d.guesses.length, time_sec: d.time_sec, points: d.points };
+                me = Object.assign({ rank: M.opt.mePos === 'top' ? 2 : n + 4, user_id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: 760, won: d.won, guesses_used: d.tek_hak ? 1 + (d.ek_ipucu || 0) : d.guesses.length, time_sec: d.time_sec, points: d.points },
+                    M.opt.zorluk === 'unsupported' ? {} : { tek_hak: !!d.tek_hak, kategori_gizli: !!d.kategori_gizli });
                 if (M.opt.mePos === 'top') { if (rows.length >= 2) rows.splice(1, 1, me); else { me.rank = 1; rows.splice(0, rows.length, me); } }
             }
             return ok({ server_time: iso(Date.now()), day: day || mday(), target: t, total_players: n + (me && M.opt.mePos !== 'top' ? 4 : 0) + (day ? 3 : 0), rows: rows.slice(0, limit || 50), me });
@@ -270,13 +319,86 @@
     function dailyState(t, pub) {
         const d = dget(t);
         if (pub && (M.opt.guest || accTransient())) return { server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, status: 'not_started', guesses_used: 0, won: null, points: null, time_sec: null, stage: 1 };
-        return { server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, status: d.status, guesses_used: d.guesses.length, won: d.won, points: d.points, time_sec: d.time_sec, stage: d.stage };
+        const zx = M.opt.zorluk === 'unsupported' ? {} : { tek_hak: !!d.tek_hak, kategori_gizli: !!d.kategori_gizli, clues_opened: 1 + (d.ek_ipucu || 0),
+            zorluk_kilitli: d.status === 'finished' || d.guesses.length > 0 || (d.ek_ipucu || 0) > 0 };
+        return Object.assign({ server_time: iso(Date.now()), day: mday(), target: t, case_id: d.case_id, status: d.status, guesses_used: d.guesses.length, won: d.won, points: d.points, time_sec: d.time_sec, stage: d.stage }, zx);
+    }
+    const dMax = (d) => (d && d.tek_hak ? 1 : 6);
+    /** Sahte answer_catalog grubu: tanıda kategori, terapi/ilaçta aile (istemci verisinden). */
+    function sameGroup(kind, a, b) {
+        const gm = window.game; const list = kind === 'therapy' ? gm.therapies : kind === 'pharmacology' ? gm.pharmacology : gm.diagnoses;
+        const x = list.find(i => i.id === a), y = list.find(i => i.id === b); const key = kind === 'diagnosis' ? 'category' : 'family';
+        return !!(x && y && x[key] && x[key] === y[key]);
     }
     function finishDaily(d, won) {
         d.status = 'finished'; d.won = won;
         d.time_sec = Math.max(1, Math.floor((now() - Date.parse(d.started_at)) / 1000));
-        const n = d.guesses.filter(x => x.stage === d.stage).length;
+        const n = d.tek_hak ? Math.min(6, 1 + (d.ek_ipucu || 0)) : d.guesses.filter(x => x.stage === d.stage).length;
         d.points = won ? [0, 100, 85, 70, 55, 40, 25][n] + Math.max(0, Math.min(20, Math.round((60 - Math.min(60, d.time_sec || 30)) / 3))) : 0;
+    }
+
+    // ---------------------------------------------------------- oynanabilir maç (ajan Z1; M.opt.play): submit_guess / reveal_clue sunucu gibi
+    const BASE = [0, 100, 85, 70, 55, 40, 25];
+    const speed = (e) => Math.max(0, Math.min(20, Math.round((60 - Math.min(60, e || 30)) / 3)));
+    function myRp() { const s = M.state; return s && (s.round_players || []).find(r => r.user_id === ME); }
+    function playGuess(round, item) {
+        const s = M.state;
+        if (!s || !s.round || s.room.status !== 'in_round' || round !== s.round.round_no) return err('ROUND_CLOSED', 'Bu tur kapandı.');
+        const rp = myRp();
+        if (!rp) return err('NOT_IN_ROUND', 'Bu turda oynamıyorsun.');
+        if (rp.finished) return err('ALREADY_FINISHED', 'Bu turu bitirdin.');
+        const max = s.room.tek_hak ? 1 : 6;
+        if (rp.stage_guess_count >= max) return err('GUESS_LIMIT', 'Tahmin hakkın bitti.');
+        const c = (window.game.allMasterCases || []).find(x => x.id === s.round.case_id);
+        const kinds = ['diagnosis', 'therapy', 'pharmacology'];
+        const kind = s.room.target_type === 'combo' ? kinds[rp.stage - 1] : s.room.target_type;
+        const ans = { diagnosis: c.diagnosisId, therapy: c.therapyId || 'cbt_general', pharmacology: c.pharmacologyId }[kind];
+        if (s.my_guesses.some(g => g.stage === rp.stage && g.item_id === item)) return err('DUPLICATE_GUESS', 'Bu seçeneği zaten denedin.');
+        const correct = item === ans;
+        const same = !correct && !s.room.kategori_gizli && sameGroup(kind, item, ans);
+        const stage = rp.stage;
+        rp.stage_guess_count++; rp.guess_count++;
+        s.my_guesses.push({ stage, guess_no: rp.stage_guess_count, item_id: item, is_correct: correct, same_group: same });
+        const clues = Math.min(6, 1 + (rp.ek_ipucu || 0));
+        const el = Math.max(1, Math.floor((now() - Date.parse(s.round.starts_at)) / 1000));
+        let next = null, fin = false, won = false, pts = 0;
+        if (correct && s.room.target_type === 'combo' && stage < 3) { rp.stage++; rp.stage_guess_count = 0; next = rp.stage; }
+        else if (correct) { fin = true; won = true; pts = BASE[s.room.tek_hak ? clues : rp.stage_guess_count] + speed(el); }
+        else if (rp.stage_guess_count >= max) fin = true;
+        if (fin) { Object.assign(rp, { finished: true, won, points: pts, elapsed_sec: el, finish_reason: won ? 'solved' : 'failed' }); const me = s.players.find(p => p.user_id === ME); if (me) me.total_score += pts; }
+        const resp = { round_no: round, stage, next_stage: next, guess_no: s.my_guesses.filter(g => g.stage === stage).length, guesses_left: fin ? 0 : max - rp.stage_guess_count, is_correct: correct, same_group: same, stage_completed: correct, finished: fin, won, points: pts, elapsed_sec: el, clues_opened: clues,
+            answer: fin ? { diagnosis_id: c.diagnosisId, therapy_id: c.therapyId || 'cbt_general', pharmacology_id: c.pharmacologyId } : null, room: brief() };
+        (M.payloads = M.payloads || []).push(['submit_guess', resp]);
+        return ok(JSON.parse(JSON.stringify(resp)));
+    }
+    function playReveal(round) {
+        const s = M.state;
+        M.revealCalls = (M.revealCalls || 0) + 1;
+        if (!s || !s.round || round !== s.round.round_no) return err('ROUND_CLOSED', 'Bu tur kapandı.');
+        if (!s.room.tek_hak) return err('SINGLE_GUESS_OFF', 'Bu odada ipuçları yanlış tahminle açılır.');
+        const rp = myRp();
+        if (!rp || rp.finished) return err('ALREADY_FINISHED', 'Bu turu bitirdin.');
+        if ((rp.ek_ipucu || 0) >= 5) return err('NO_MORE_CLUES', 'Bütün ipuçları açık.');
+        rp.ek_ipucu = (rp.ek_ipucu || 0) + 1;
+        const resp = { server_time: iso(Date.now()), round_no: round, clues_opened: 1 + rp.ek_ipucu, room: brief() };
+        (M.payloads = M.payloads || []).push(['reveal_clue', resp]);
+        return ok(resp);
+    }
+    /** Sunucudaki _finish_match (0007) ile aynı Elo hesabı: rounds [{outcome:'g1'..'g6'|'fail'|'void'}], ayarlar → döküm */
+    function eloBreakdown(rounds, opt) {
+        const o = opt || {}, cfg = { g: [0, 10, 8, 6, 4, 2, 1], fail: -10 };
+        const n = (o.tekHak ? 1 : 0) + (o.kategoriGizli ? 1 : 0);
+        const mult = o.quick ? 1 : n === 0 ? 1 : n === 1 ? 1.25 : 1.5;
+        let sum = 0;
+        const out = rounds.map((r, i) => {
+            const m = /^g([1-6])$/.exec(r.outcome || '');
+            const base = r.outcome === 'void' ? 0 : r.outcome === 'fail' ? cfg.fail : cfg.g[Number(m[1])];
+            const d = base > 0 && mult !== 1 ? Math.round(base * mult) : base;     // PG round(): .5 yukarı (pozitifte JS ile aynı)
+            sum += d;
+            return Object.assign({ round: r.round || i + 1, outcome: r.outcome, delta: d }, d !== base ? { base } : {});
+        });
+        const place = o.placement || 0;
+        return { rounds: out, placement: place, voided: false, erken_bitis: false, zorluk_carpani: mult, zorluk: { tek_hak: !!o.tekHak, kategori_gizli: !!o.kategoriGizli }, total: sum + place };
     }
 
     /** Sahte: bir oyuncu odaya katılır (hızlı eşleşme / çağrı testleri). Hızlı oda dolunca sunucu gibi maçı başlatır. */
@@ -294,7 +416,8 @@
         s.room.status = 'in_round'; s.room.current_round = 1; s.room.player_count = s.players.length;
         s.players.forEach(p => { p.played = true; });
         s.round = { room_id: 'mock-room', round_no: 1, case_id: ids[5], starts_at: iso(T0 + 3000), deadline_at: iso(T0 + 183000), closed_at: null, close_reason: null, hp_multiplier: null, eliminated_user_ids: [] };
-        s.round_players = s.players.map((p, i) => rp(i, 1, {}));
+        s.round_players = s.players.map((p, i) => rp(i, 1, { ek_ipucu: 0 }));
+        s.my_guesses = [];
     }
     function quickTimeoutCheck() {
         const s = M.state;
@@ -370,5 +493,6 @@
         };
     }
 
-    window.olMock = { get sinifEngine() { return snEngine(); }, get sinifCalls() { return M.sinifCalls || {}; }, get anonCalls() { return M.anonCalls || 0; }, get sinifSubs() { return M.sinifSubs || 0; }, emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; M.beginCalls = 0; M.submitCalls = 0; persist(); }, get beginCalls() { return M.beginCalls || 0; }, get submitCalls() { return M.submitCalls || 0; }, emitAcc() { listeners.forEach(f => f(snap(), { type: 'state' })); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
+    window.olMock = { get sinifEngine() { return snEngine(); }, get sinifCalls() { return M.sinifCalls || {}; }, get anonCalls() { return M.anonCalls || 0; }, get sinifSubs() { return M.sinifSubs || 0; }, emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; M.beginCalls = 0; M.submitCalls = 0; persist(); }, get beginCalls() { return M.beginCalls || 0; }, get submitCalls() { return M.submitCalls || 0; }, emitAcc() { listeners.forEach(f => f(snap(), { type: 'state' })); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; },
+        eloBreakdown, get payloads() { return M.payloads || []; }, clearPayloads() { M.payloads = []; }, get revealCalls() { return M.revealCalls || 0; }, get setZorCalls() { return M.setZorCalls || 0; }, get lastCreate() { return M.lastCreate; }, get lastSettings() { return M.lastSettings; } };
 })();

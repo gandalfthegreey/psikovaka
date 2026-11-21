@@ -119,19 +119,22 @@
             : Promise.resolve({ ok: true, data: [] }),
 
         // ---- oda
-        createRoom: (o) => rpc('create_room', {
+        /** Zorluk parametreleri (0007) yalnızca bir ayar açıksa gönderilir: eski sunucu (0007 yok) kapalı ayarla çalışmaya devam eder. */
+        createRoom: (o) => rpc('create_room', Object.assign({
             p_mode: o.mode, p_format: o.format || null, p_target_type: o.target || 'diagnosis',
             p_capacity: o.capacity == null ? null : o.capacity,
             p_round_count: o.rounds == null ? null : o.rounds,
             p_visibility: o.visibility || 'private',
             p_round_time_limit_sec: o.timeLimit == null ? null : o.timeLimit,
             p_bracket_seeding: o.seeding || 'random'
-        }),
+        }, o.tekHak || o.kategoriGizli ? { p_tek_hak: !!o.tekHak, p_kategori_gizli: !!o.kategoriGizli } : {})),
         joinRoom: (code) => rpc('join_room', { p_code: String(code || '').trim().toUpperCase() }),
         leaveRoom: (id) => rpc('leave_room', { p_room_id: id }),
         setReady: (id, ready) => rpc('set_ready', { p_room_id: id, p_ready: !!ready }),
         startMatch: (id) => rpc('start_match', { p_room_id: id }),
         submitGuess: (id, round, item) => rpc('submit_guess', { p_room_id: id, p_round_no: round, p_item_id: item }),
+        /** 0007: tek hakta sonraki ipucu. */
+        revealClue: (id, round) => feature('reveal_clue', { p_room_id: id, p_round_no: round }),
         forfeitRound: (id, round) => rpc('forfeit_round', { p_room_id: id, p_round_no: round }),
         heartbeat: (id) => rpc('heartbeat', { p_room_id: id }),
         advanceIfDue: (id) => rpc('advance_if_due', { p_room_id: id }),
@@ -142,15 +145,17 @@
         /** 0002 migration'ı: yoksa UNSUPPORTED döner ve bir daha denenmez. */
         async updateRoomSettings(id, patch) {
             if (unsupported.has('update_room_settings')) return fail({ code: 'PGRST202' });
-            const r = await rpc('update_room_settings', {
+            const hasZor = patch.tekHak != null || patch.kategoriGizli != null;
+            const r = await rpc('update_room_settings', Object.assign({
                 p_room_id: id,
                 p_target_type: patch.target || null,
                 p_round_count: patch.rounds == null ? null : patch.rounds,
                 p_visibility: patch.visibility || null,
                 p_capacity: patch.capacity == null ? null : patch.capacity,
                 p_round_time_limit_sec: patch.timeLimit == null ? null : patch.timeLimit
-            });
-            if (!r.ok && r.error.code === 'UNSUPPORTED') unsupported.add('update_room_settings');
+            }, hasZor ? { p_tek_hak: patch.tekHak == null ? null : !!patch.tekHak, p_kategori_gizli: patch.kategoriGizli == null ? null : !!patch.kategoriGizli } : {}));
+            // zorluk alanıyla gelen PGRST202 "0007 yok" demektir; ayar sayfasının tamamını kapatma
+            if (!r.ok && r.error.code === 'UNSUPPORTED' && !hasZor) unsupported.add('update_room_settings');
             return r;
         },
         /** Sunucuda update_room_settings var mı? (bir kez sorar; sonucu saklar) */
@@ -166,6 +171,9 @@
         // ---- migration 0003 (§13): yoksa UNSUPPORTED döner ve bir daha sorulmaz (sayfa yenilenene kadar)
         getDailyChallenge: (target) => feature('get_daily_challenge', { p_target: target || 'diagnosis' }),
         dailyBegin: (target) => feature('daily_begin', { p_target: target || 'diagnosis' }),
+        /** 0007: ilk tahminden önce zorluk seçimi (daily_begin'in ek parametreleri). feature() değil: PGRST202 günlüğü kapatmasın. */
+        dailySetZorluk: (target, z) => rpc('daily_begin', { p_target: target || 'diagnosis', p_tek_hak: !!(z && z.tekHak), p_kategori_gizli: !!(z && z.kategoriGizli) }),
+        dailyRevealClue: (target) => feature('daily_reveal_clue', { p_target: target || 'diagnosis' }),
         dailySubmitGuess: (target, item) => feature('daily_submit_guess', { p_target: target, p_item_id: item }),
         dailyGiveUp: (target) => feature('daily_give_up', { p_target: target }),
         getDailyLeaderboard: (target, day, limit) => feature('get_daily_leaderboard', { p_target: target, p_day: day || null, p_limit: limit || 50 }),

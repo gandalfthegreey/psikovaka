@@ -20,6 +20,29 @@
     const g = () => NS.game();
     const S = () => NS.rooms.state;
     const myId = () => NS.api.myId();
+    // ---- zorluk (0007, ajan Z1): odanın ayarları sunucudan (rooms.tek_hak / kategori_gizli)
+    const Zm = () => global.PsikoVakaZorluk;
+    function zor() { const s = S(); return { tekHak: !!(s && s.room && s.room.tek_hak), kategoriGizli: !!(s && s.room && s.room.kategori_gizli) }; }
+    const cluesOf = (rp) => Math.min(6, 1 + ((rp && rp.ek_ipucu) || 0));
+    const zorBadge = (cls) => (Zm() ? Zm().badge(zor(), { cls }) : '');
+    function applyRoomZorluk() {
+        const s = S(), gm = g();
+        if (!s || !gm || !gm.setCaseZorluk) return;
+        const z = zor();
+        gm.setCaseZorluk(z, { locked: true });
+        gm.clueRevealHandler = z.tekHak ? async () => {
+            const st = S(); if (!st || !st.round) return { ok: false };
+            const key = st.room.id + ':' + st.round.round_no;
+            const r = await NS.api.revealClue(st.room.id, st.round.round_no);
+            if (M.roundKey !== key) return { ok: false };
+            if (!r.ok) { gm.showToast(r.error.code === 'UNSUPPORTED' ? 'Sunucu bu özelliği henüz desteklemiyor.' : r.error.message); return { ok: false }; }
+            const mine = NS.rooms.myRound(); if (mine) mine.ek_ipucu = Math.max(0, (r.data.clues_opened || 1) - 1);
+            updateHud();
+            return { ok: true, clues: r.data.clues_opened };
+        } : null;
+        const mine = NS.rooms.myRound();
+        if (z.tekHak && mine && cluesOf(mine) > gm.unlockedClues) { gm.unlockedClues = cluesOf(mine); gm.renderClues(); gm.updateRemainingGuessesUI(); }
+    }
 
     // ------------------------------------------------------------ veri yardımcıları
     function findCase(id) {
@@ -143,6 +166,7 @@
             gm.currentMode = 'online';
             gm.startCase(caseObj, `Tur ${s.round.round_no}/${s.room.round_count}`);
             restoreGuesses(caseObj, mine);
+            applyRoomZorluk();
             ensureHud();
         } else if (M.missingKey === key) {
             return;
@@ -250,7 +274,7 @@
         delete gm.dom.diagnosisInput.dataset.selectedId;
         gm.closeAutocomplete();
         gm.playTone(d.is_correct ? 'win' : (d.same_group ? 'warm' : 'cold'));
-        if (!d.is_correct && gm.unlockedClues < gm.maxClues) gm.unlockedClues++;
+        if (!d.is_correct && gm.unlockedClues < gm.maxClues && !zor().tekHak) gm.unlockedClues++;
 
         // HUD için kendi satırımı hemen güncelle (sunucu yanıtı)
         const mine = NS.rooms.myRound();
@@ -284,7 +308,7 @@
         const gm = g(), s = S();
         if (!s || !s.round || gm.isGameOver || M.busy) return;
         const pen = NS.leaguesView && NS.leaguesView.failPenalty ? NS.leaguesView.failPenalty() : null;
-        const ok = await NS.ui.confirm('Pes et', pen ? `Bu turdan 0 puan alırsın ve tur çözülemedi sayılır (−${pen} RP). Maç devam eder.` : 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
+        const ok = await NS.ui.confirm('Pes et', pen ? `Bu turdan 0 puan alırsın ve tur çözülemedi sayılır (−${pen} Elo). Maç devam eder.` : 'Bu turdan 0 puan alırsın. Maç devam eder.', 'Pes et', { danger: true });
         if (!ok) return;
         const key = s.room.id + ':' + s.round.round_no;
         setSubmitting(true);
@@ -311,9 +335,11 @@
         if (gm.dom.mainInputSection) gm.dom.mainInputSection.hidden = true;
         if (gm.dom.finishedActions) gm.dom.finishedActions.hidden = true;
         gm.closeAutocomplete(); gm.closeCategoryTree();
+        if (gm.cluesUsed == null) gm.cluesUsed = gm.unlockedClues;
         gm.unlockedClues = gm.maxClues;
         gm.updateComboStepperUI();
         gm.renderClues(); gm.renderGuesses(); gm.updateRemainingGuessesUI();
+        if (typeof gm.renderZorlukUI === 'function') gm.renderZorlukUI();
         if (won && typeof gm.launchConfetti === 'function' && !NS.util.reducedMotion()) gm.launchConfetti();
         const ans = answer || roundAnswer();
         renderWaitPanel(won, points, ans, elapsed, reason);
@@ -342,11 +368,11 @@
         const mine = NS.rooms.myRound();
         const n = mine ? mine.guess_count : gm.guesses.length;
         const title = won ? `+${points} puan` : (T.finish[reason] || 'Bu tur olmadı');
-        const sub = won ? `${n}. tahminde${elapsed != null ? ` · ${elapsed} sn` : ''}` : 'Bu turdan puan yok';
+        const sub = won ? `${zor().tekHak ? `Tek hakla, ${mine ? cluesOf(mine) : (gm.cluesUsed || 1)}. ipucunda` : `${n}. tahminde`}${elapsed != null ? ` · ${elapsed} sn` : ''}` : 'Bu turdan puan yok';
         p.innerHTML = `
             <div class="ol-wait-head ${won ? 'is-win' : 'is-loss'}">
                 <span class="ol-wait-icon">${icon(won ? 'check' : 'flag')}</span>
-                <span class="ol-wait-text"><span class="ol-wait-title">${esc(title)}</span><span class="ol-wait-sub">${esc(sub)}</span></span>
+                <span class="ol-wait-text"><span class="ol-wait-title">${esc(title)}</span><span class="ol-wait-sub">${esc(sub)}</span>${zorBadge('is-sm')}</span>
             </div>
             ${ans ? `<div class="ol-wait-answer"><span class="ol-eyebrow">Doğru cevap</span><span>${esc(answerText(ans, s.room.target_type))}</span></div>` : ''}
             <div class="ol-wait-others" id="olWaitOthers"></div>
@@ -361,9 +387,10 @@
 
     function statusBits(rp) {
         if (!rp) return { cls: 'is-wait', text: 'Bekliyor', icon: 'hourglass' };
-        if (rp.finished && rp.won) return { cls: 'is-won', text: `Çözdü · ${rp.guess_count}. tahmin`, icon: 'check' };
+        const tek = zor().tekHak;
+        if (rp.finished && rp.won) return { cls: 'is-won', text: tek ? `Çözdü · ${cluesOf(rp)}. ipucu` : `Çözdü · ${rp.guess_count}. tahmin`, icon: 'check' };
         if (rp.finished) return { cls: 'is-lost', text: T.finish[rp.finish_reason] || 'Bitti', icon: rp.finish_reason === 'absent' ? 'wifi-off' : 'x' };
-        return { cls: 'is-play', text: `${rp.guess_count} tahmin`, icon: 'pen' };
+        return { cls: 'is-play', text: tek ? `${cluesOf(rp)}. ipucu açık` : `${rp.guess_count} tahmin`, icon: 'pen' };
     }
     function updateWaitOthers() {
         const box = document.getElementById('olWaitOthers');
@@ -459,7 +486,7 @@
         const me = NS.rooms.me();
         const opps = opponentsFor(s);
         const mult = s.round.hp_multiplier ? Number(s.round.hp_multiplier) : null;
-        const sig = JSON.stringify([s.round.round_no, opps.map(o => [o.user_id, o.guess_count, o.finished, o.won]), me && me.total_score, NS.rooms.active().map(p => p.hp)]);
+        const sig = JSON.stringify([s.round.round_no, opps.map(o => [o.user_id, o.guess_count, o.ek_ipucu, o.finished, o.won]), me && me.total_score, NS.rooms.active().map(p => p.hp), s.room.tek_hak, s.room.kategori_gizli]);
         if (hud.dataset.sig !== sig) {
             hud.dataset.sig = sig;
             hud.innerHTML = `
@@ -467,12 +494,14 @@
                     <span class="ol-hud-round">${icon(T.targetIcon[s.room.target_type])}Tur ${s.round.round_no}/${s.room.round_count}</span>
                     <span class="ol-hud-timer" id="olHudTimer" role="timer" aria-label="Kalan süre">--:--</span>
                     <span class="ol-hud-score">${s.room.format === 'hp' ? (mult && mult !== 1 ? `Çarpan ×${mult}` : 'Can düellosu') : `${me ? me.total_score : 0} puan`}</span>
+                    ${zorBadge('is-sm ol-hud-zor')}
                 </div>
                 ${s.room.format === 'hp' ? hpBars(s) : ''}
                 ${opps.length && s.room.format !== 'hp' ? `<ul class="ol-hud-opps" aria-label="Rakipler">${opps.map(r => {
                     const p = NS.rooms.player(r.user_id) || {};
                     const st = statusBits(r);
-                    const dots = Array.from({ length: 6 }, (_, i) => `<i class="${i < (r.stage_guess_count != null ? r.stage_guess_count : r.guess_count) ? 'on' : ''}"></i>`).join('');
+                    const used = zor().tekHak ? cluesOf(r) : (r.stage_guess_count != null ? r.stage_guess_count : r.guess_count);
+                    const dots = Array.from({ length: 6 }, (_, i) => `<i class="${i < used ? 'on' : ''}"></i>`).join('');
                     return `<li class="ol-opp ${st.cls}" aria-label="${esc(p.username)}: ${esc(st.text)}">${NS.avatar(p.avatar, { size: 28, framed: true })}<span class="ol-opp-body"><span class="ol-opp-name">${esc(p.username || '')}</span><span class="ol-opp-dots" aria-hidden="true">${r.finished ? icon(st.icon) : dots}</span></span></li>`;
                 }).join('')}</ul>` : ''}
                 ${s.room.format === 'hp' && opps[0] ? `<div class="ol-hud-oppline">${(() => { const st = statusBits(opps[0]); const p = NS.rooms.player(opps[0].user_id) || {}; return `<span class="ol-mini-st ${st.cls}">${icon(st.icon)}${esc(p.username)}: ${esc(st.text)}</span>`; })()}</div>` : ''}
@@ -535,6 +564,7 @@
                 <span class="ol-eyebrow">${esc(roundLabel)}</span>
                 <span class="ol-count-num" id="olCountNum" aria-live="assertive">3</span>
                 <span class="ol-count-sub">${icon(T.targetIcon[room.target_type])}${esc(T.target[room.target_type])} · ${esc(NS.roomTitle(room))}</span>
+                ${zorBadge('ol-count-zor')}
                 ${vs}${extra}
             </div></div>`;
         }
@@ -570,7 +600,7 @@
         const me = myId();
         return `<ol class="ol-res-list">${rps.map((r, i) => {
             const p = P[r.user_id] || {};
-            const res = r.won ? `${r.guess_count}. tahminde` : (T.finish[r.finish_reason] || '—');
+            const res = r.won ? (zor().tekHak ? `${cluesOf(r)}. ipucunda` : `${r.guess_count}. tahminde`) : (T.finish[r.finish_reason] || '—');
             return `<li class="ol-res-row${r.user_id === me ? ' is-me' : ''}${elim.has(r.user_id) ? ' is-out' : ''}${r.won ? ' is-won' : ''}">
                 <span class="ol-res-pos">${i + 1}</span>
                 ${NS.avatar(p.avatar, { size: 36, framed: true })}
@@ -682,7 +712,7 @@
         const s = S();
         return `<header class="ol-topbar">
             <button class="icon-btn" type="button" data-ol-v="leave" aria-label="Maçtan ayrıl">${icon('arrow-left')}</button>
-            <div class="ol-topbar-main"><h1 class="ol-topbar-title">${esc(title)}</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(s.room))}</span><span class="ol-chip-static ol-t-${esc(s.room.target_type)}">${icon(T.targetIcon[s.room.target_type])}${esc(T.target[s.room.target_type])}</span></div></div>
+            <div class="ol-topbar-main"><h1 class="ol-topbar-title">${esc(title)}</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(s.room))}</span><span class="ol-chip-static ol-t-${esc(s.room.target_type)}">${icon(T.targetIcon[s.room.target_type])}${esc(T.target[s.room.target_type])}</span>${zorBadge()}</div></div>
             ${timer ? `<span class="ol-hud-timer" id="olSpecTimer" role="timer">--:--</span>` : ''}
         </header>`;
     }
@@ -747,7 +777,7 @@
         let league = '';
         if (mine && mine.rp_after != null && L) {
             const t = L.tierFor(mine.rp_after);
-            league = `<a class="ol-league-line" href="#/ligler" data-ol-v="leagues" aria-label="Lig bilgisi">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} RP</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
+            league = `<a class="ol-league-line" href="#/ligler" data-ol-v="leagues" aria-label="Lig bilgisi">${L.badge(mine.rp_after, 40)}<span class="ol-league-text"><span class="ol-league-name">${esc(t.name)} · ${mine.rp_after} Elo</span><span class="ol-league-sub">${esc(L.progressText(mine.rp_after))}</span></span>
                 <span class="ol-league-bar"><i data-pct="${t.pct}"></i></span></a>`;
             // Lig değişimi (kademe sınırı aşıldıysa): önceki RP ≈ rp_after − rp_delta (0 tabanı yüzünden yaklaşık; sınırlar 0'dan uzak)
             const prev = Math.max(0, mine.rp_after - (Number(mine.rp_delta) || 0));
@@ -762,7 +792,7 @@
         const bdHtml = mine ? rpBreakdownHtml(mine) : '';
         root.innerHTML = `<div class="ol-view ol-final-view">
             <header class="ol-topbar"><button class="icon-btn" type="button" data-ol-v="exit" aria-label="Çık">${icon('x')}</button>
-                <div class="ol-topbar-main"><h1 class="ol-topbar-title">Maç bitti</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(room))}</span></div></div></header>
+                <div class="ol-topbar-main"><h1 class="ol-topbar-title">Maç bitti</h1><div class="ol-topbar-chips"><span class="ol-chip-static">${esc(NS.roomTitle(room))}</span>${zorBadge()}</div></div></header>
             <div class="ol-view-body">
                 ${res.length ? `<div class="ol-podium" data-n="${pod.length}">${order.map(x => {
                     const p = P[x.user_id] || {};
@@ -775,8 +805,8 @@
                     </div>`;
                 }).join('')}</div>` : `<div class="ol-empty">${icon('hourglass')}<span>Sonuçlar yükleniyor…</span></div>`}
                 ${earlyEnd ? `<div class="notice">${icon('info')}<span>Rakip erken ayrıldı: galibiyet primi verilmedi.</span></div>` : ''}
-                ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için RP verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
-                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için RP almadın.'}</span></div>` : ''}
+                ${noRp ? `<div class="notice">${icon('info')}<span>Maç erken bittiği için Elo verilmedi (turların yarısı oynanmadı).</span></div>` : ''}
+                ${mine && mine.left_early ? `<div class="notice">${icon('info')}<span>${Number(mine.rp_delta) < 0 ? 'Maçtan erken ayrıldın: kalan turlar çözülemedi sayıldı.' : 'Maçtan erken ayrıldığın için Elo almadın.'}</span></div>` : ''}
                 ${league}
                 ${bdHtml}
                 <ol class="ol-res-list">${res.map(x => {
@@ -785,7 +815,7 @@
                         <span class="ol-res-pos">${x.final_rank}</span>${NS.avatar(p.avatar, { size: 36, framed: true })}
                         <span class="ol-res-main"><span class="ol-res-name">${esc(p.username || '')}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}${x.left_early ? ' <span class="ol-out-tag">Ayrıldı</span>' : ''}</span>
                         <span class="ol-res-sub">${esc(metric(x))}${x.eliminated_round ? ` · ${room.format === 'bracket' ? bracketRoundLoc(x.eliminated_round, room.round_count) : x.eliminated_round + '. turda'} elendi` : ''}</span></span>
-                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : x.rp_delta < 0 ? ' is-minus' : ''}">${x.rp_delta > 0 ? '+' : x.rp_delta < 0 ? '−' : ''}${Math.abs(x.rp_delta)} RP</span>
+                        <span class="ol-res-rp${x.rp_delta > 0 ? ' is-plus' : x.rp_delta < 0 ? ' is-minus' : ''}">${x.rp_delta > 0 ? '+' : x.rp_delta < 0 ? '−' : ''}${Math.abs(x.rp_delta)} Elo</span>
                     </li>`;
                 }).join('')}</ol>
                 <div class="ol-rematch" id="olRematch"></div>
@@ -798,7 +828,7 @@
         root.querySelectorAll('.ol-league-bar i').forEach(i => i.style.setProperty('--pct', (i.dataset.pct || 0) + '%'));
         if (NS.app.pendingRematch) showRematchOffer(NS.app.pendingRematch);
         if (mine && mine.final_rank === 1 && !M.confetti && g() && g().launchConfetti && !NS.util.reducedMotion()) { M.confetti = room.id; g().launchConfetti(); }
-        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta ? (mine.rp_delta > 0 ? 'artı ' : 'eksi ') + Math.abs(mine.rp_delta) + ' RP' : ''}` : 'Maç bitti.');
+        NS.announce(mine ? `Maç bitti. ${mine.final_rank}. oldun. ${mine.rp_delta ? (mine.rp_delta > 0 ? 'artı ' : 'eksi ') + Math.abs(mine.rp_delta) + ' Elo' : ''}` : 'Maç bitti.');
         return null;
     }
     /** RP v2 dökümü (match_results.rp_breakdown, §13.4). Alan yoksa (eski sunucu) hiçbir şey çizilmez. */
@@ -810,13 +840,19 @@
         const cls = (n) => (n > 0 ? 'is-plus' : n < 0 ? 'is-minus' : '');
         const total = Number(x.rp_delta) || 0;
         const place = Number(bd.placement) || 0;
+        const mult = Number(bd.zorluk_carpani) || 1;
+        const tek = !!(bd.zorluk && bd.zorluk.tek_hak);
+        const Z = Zm();
+        const outTxt = (r) => { const m = /^g([1-6])$/.exec(r.outcome || ''); return m && tek ? `Tek hakla, ${m[1]}. ipucunda çözdün` : (RP_OUT[r.outcome] || r.outcome || ''); };
+        const baseTxt = (r) => (r.base != null && Number(r.base) !== Number(r.delta) ? ` <span class="ol-rpbd-base">(${sg(Number(r.base))} ${esc(Z ? Z.fmtMult(mult) : '×' + mult)})</span>` : '');
         return `<details class="ol-rpbd">
-            <summary class="ol-rpbd-sum"><span>Bu maçın RP dökümü</span><span class="ol-rpbd-total ${cls(total)}">${sg(total)} RP</span></summary>
-            <ul class="ol-rpbd-list">${bd.rounds.map(r => { const d = Number(r.delta) || 0; return `<li><span class="ol-rpbd-r">Tur ${esc(r.round)}</span><span class="ol-rpbd-o">${esc(r.missed ? 'Oynanmadı (ayrıldın)' : (RP_OUT[r.outcome] || r.outcome || ''))}</span><span class="ol-rpbd-d ${cls(d)}">${sg(d)}</span></li>`; }).join('')}
+            <summary class="ol-rpbd-sum"><span>Bu maçın Elo dökümü</span><span class="ol-rpbd-total ${cls(total)}">${sg(total)} Elo</span></summary>
+            <ul class="ol-rpbd-list">${bd.rounds.map(r => { const d = Number(r.delta) || 0; return `<li><span class="ol-rpbd-r">Tur ${esc(r.round)}</span><span class="ol-rpbd-o">${esc(r.missed ? 'Oynanmadı (ayrıldın)' : outTxt(r))}${r.missed ? '' : baseTxt(r)}</span><span class="ol-rpbd-d ${cls(d)}">${sg(d)}</span></li>`; }).join('')}
                 ${place ? `<li class="ol-rpbd-place"><span class="ol-rpbd-r">Sıralama primi</span><span class="ol-rpbd-o"></span><span class="ol-rpbd-d is-plus">${sg(place)}</span></li>` : ''}
             </ul>
+            ${mult > 1 && Z ? `<p class="ol-rpbd-zor">${Z.badge(bd.zorluk, { cls: 'is-sm' })}<span>Zorluk bonusu ${esc(Z.fmtMult(mult))}: turlarda kazandığın Elo ${esc(Z.fmtMult(mult))} sayıldı (−10 ve sıralama primi aynı).</span></p>` : ''}
             ${bd.voided ? `<p class="ol-muted ol-small">Maç erken bittiği için bu maç geçersiz sayıldı.</p>` : ''}
-            ${x.rp_after === 0 && total < 0 ? `<p class="ol-muted ol-small">RP 0'ın altına inmez.</p>` : ''}
+            ${x.rp_after === 0 && total < 0 ? `<p class="ol-muted ol-small">Elo 0'ın altına inmez.</p>` : ''}
         </details>`;
     }
 

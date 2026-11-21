@@ -24,6 +24,12 @@ Supabase tarafını içerir. Site yine GitHub Pages'te statik kalır; tarayıcı
 > kullanıcıları sınıf dışındaki her şeyden (arkadaş, oda, günlük, sıralama, profil) kilitler. Sözleşme `TASARIM.md` §15.
 > **Anonim girişi 0006 canlıya uygulanmadan AÇMAYIN** — sıra aşağıda "Sınıf modu: anonim girişi açmak".
 
+> **2026-11-22:** `migrations/0007_zorluk.sql` eklendi (Emre kararı): iki **zorluk ayarı** — "Tek tahmin hakkı" ve "Kategori gizli" —
+> günün vakası, özel online odalar ve sınıf modunda sunucuda uygulanır; özel odada kazanılan Elo bir ayarla ×1,25, ikisiyle ×1,5
+> (`rp_zorluk_carpan_1`, `rp_zorluk_carpan_2`). Arayüzde "RP" artık **"Elo"** yazar; veritabanındaki adlar aynı (`ranked_points`,
+> `rp_delta`, `rp_*`). Eski istemciler 0007'yle çalışmaya devam eder (yeni parametreler isteğe bağlı). Sözleşme `TASARIM.md` §16.
+> Bir sonraki yayında Actions uygular; elle bir şey yapmanız gerekmez.
+
 Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.supabase.co`**
 
 ## Klasördeki dosyalar
@@ -34,6 +40,7 @@ Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.s
 | `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql`, `migrations/0004_kural_duzeltmeleri.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2; erken ayrılma RP kuralı + günlük sıralama). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
 | `migrations/0005_isim_filtresi.sql` | İsim filtresi (fonksiyonlar + ilk liste + mevcut profillerin taranması). Sonraki liste değişiklikleri `NNNN_isim_filtresi_veri.sql` (yalnızca veri). |
 | `migrations/0006_sinif_modu.sql` | Sınıf (projeksiyon) modu tabloları/fonksiyonları + anonim kullanıcı kilitleri. Tekrar çalıştırılabilir. GitHub kendisi uygular. |
+| `migrations/0007_zorluk.sql` | Zorluk ayarları (tek tahmin hakkı, kategori gizli; günlük, özel oda, sınıf) + özel odada Elo zorluk bonusu. Tekrar çalıştırılabilir. GitHub kendisi uygular. |
 | `tools/apply_migrations.sh` | Uygulanmamış migration dosyalarını sırayla uygulayan betik (GitHub Actions çalıştırır). Hangi dosyanın uygulandığı veritabanında `public._migrations` tablosunda tutulur. |
 | `tools/workflow/supabase-migrasyon.yml` | Yeni GitHub Actions akışının hazır kopyası (bir kez yerine konacak; bkz. aşağıda "Kurulum (bir kez)"). |
 | `seed/0002_cases_answer_key.sql` | Vakaların doğru cevapları + seçenek listesi. Otomatik üretilir; elle düzenlemeyin. |
@@ -280,10 +287,11 @@ temizlik istenirse Dashboard → **Integrations → Cron** (pg_cron) ile 15 daki
 
 ## 9. Ayarları değiştirmek
 
-Tur süresi, HP düellosu canı/çarpanı, RP kuralları (RP v2: `rp_round_g1`…`rp_round_g6`, `rp_round_fail`,
+Tur süresi, HP düellosu canı/çarpanı, Elo kuralları (arayüzde "Elo", veritabanında `rp`; RP v2: `rp_round_g1`…`rp_round_g6`, `rp_round_fail`,
 `rp_place_*`; eski `rp_win_*`/`rp_second`/`rp_completion` artık kullanılmıyor), hızlı eşleşme bekleme süresi
 (`quick_wait_timeout_sec`), günlük vaka tekrar aralığı (`daily_no_repeat_days`), bağlantı kopma toleransları
-`public.game_config` tablosundadır. Günlük vaka RP vermez. Örnek: `update public.game_config set value = 800 where key = 'hp_start';`
+`public.game_config` tablosundadır. Özel odadaki zorluk bonusu: `rp_zorluk_carpan_1` (bir ayar, 1.25) ve `rp_zorluk_carpan_2`
+(iki ayar, 1.5). Günlük vaka Elo (rp) vermez. Örnek: `update public.game_config set value = 800 where key = 'hp_start';`
 Değişiklik yeni başlayan maçlara uygulanır.
 
 ## İsim filtresine sözcük eklemek / çıkarmak
@@ -337,6 +345,7 @@ cd supabase/tests
 npm install
 npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs + isim_filtresi.test.mjs + sinif_modu.test.mjs
 npm run test:0006   # (bash/WSL) önceki üç paket, 0005'in hemen ardından 0006 da yüklenerek (ILE_0006=1)
+npm run test:0007   # (bash/WSL) önceki dört paket, 0006 + 0007 de yüklenerek (ILE_0007=1); zorluk.test.mjs `npm test` içinde
 ```
 İsim filtresi derlemi ve sunucu/istemci eşliği (depo kökünde): `node tools/isim_filtresi/test/calistir.mjs --sql`;
 tarayıcı testi: `node tools/isim_filtresi/test/istemci.mjs` (yerel sunucu `python3 -m http.server 8899`).

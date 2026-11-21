@@ -222,9 +222,13 @@
 
     // ------------------------------------------------------------ oturum kurma sayfası
     function loadSettings() {
-        const d = { vaka_sayisi: 5, kurs: '', kategori: '', ipucu_araligi_sn: 15, tahmin_hakki: 3, gec_katilim: true };
+        const d = { vaka_sayisi: 5, kurs: '', kategori: '', ipucu_araligi_sn: 15, tahmin_hakki: 3, gec_katilim: true, tek_hak: false, kategori_gizli: false };
         try { return Object.assign(d, JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}')); } catch (e) { return d; }
     }
+    // ---- zorluk (0007, ajan Z1): sunucu destekliyorsa (game_config çarpan anahtarı) kurulumda iki anahtar
+    const Zm = () => global.PsikoVakaZorluk;
+    const zorOk = () => !!(Zm() && NS.leaguesView && NS.leaguesView.zorlukSupported());
+    const zorOfA = (a) => ({ tekHak: !!(a && a.tek_hak), kategoriGizli: !!(a && a.kategori_gizli) });
     function matching(s) { return cases().filter(c => (!s.kurs || c.course === s.kurs) && (!s.kategori || c.category === s.kategori)); }
     function setupForm(s) {
         const courses = typeof COURSE_CATEGORIES !== 'undefined' ? Object.values(COURSE_CATEGORIES).filter(c => c.id !== 'ALL') : [];
@@ -252,9 +256,10 @@
             <fieldset class="ol-field"><legend class="ol-legend" id="snIntL">İpucu aralığı: <output name="araOut" for="snInt">${s.ipucu_araligi_sn} sn</output></legend>
                 <input class="sinif-range" type="range" id="snInt" name="ipucu_araligi_sn" min="8" max="60" step="1" value="${s.ipucu_araligi_sn}" aria-labelledby="snIntL">
                 <p class="ol-field-note">İpuçları projeksiyonda bu aralıkla kendiliğinden açılır (8–60 sn).</p></fieldset>
-            <fieldset class="ol-field"><legend class="ol-legend">Tahmin hakkı</legend>
-                ${chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], s.tahmin_hakki, 'Tahmin hakkı')}
-                <p class="ol-field-note">Bir öğrencinin bir vakada yapabileceği en fazla tahmin.</p></fieldset>
+            <fieldset class="ol-field${zorOk() && s.tek_hak ? ' is-locked' : ''}" data-sn-hak><legend class="ol-legend">Tahmin hakkı</legend>
+                ${zorOk() && s.tek_hak ? chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], 1, 'Tahmin hakkı').replace(/<input /g, '<input disabled ') : chips('tahmin_hakki', [1, 2, 3, 4, 5, 6], s.tahmin_hakki, 'Tahmin hakkı')}
+                <p class="ol-field-note">${zorOk() && s.tek_hak ? 'Tek tahmin hakkı açık: her öğrencinin vaka başına 1 tahmini var.' : 'Bir öğrencinin bir vakada yapabileceği en fazla tahmin.'}</p></fieldset>
+            ${zorOk() ? `<div data-sn-zorluk>${Zm().switches({ tekHak: s.tek_hak, kategoriGizli: s.kategori_gizli }, { id: 'snZor', title: 'Zorluk', desc: { tekHak: 'Her öğrencinin vaka başına tek tahmini var; yanlışsa o tur onun için biter. İpuçları yine kendiliğinden açılır.', kategoriGizli: 'Tur boyunca tanı grubu gösterilmez; telefonlarda yanlış tahmin yalnızca "yanlış" der (aynı grup bilgisi yok).' }, note: 'Tek hak açıkken tahmin hakkı 1 olur. Kategori gizliyken telefonlarda "aynı grup" bilgisi ve projeksiyonda tur boyunca tanı grubu gösterilmez. Puanlama değişmez.' })}</div>` : ''}
             <label class="ol-switch-row"><span class="ol-switch-text"><span class="ol-opt-title">Geç katılım</span><span class="ol-opt-sub">Başladıktan sonra gelenler bir sonraki turdan katılır.</span></span>
                 <input type="checkbox" class="ol-switch-input" name="gec_katilim" ${s.gec_katilim ? 'checked' : ''}><span class="switch" aria-hidden="true"><span class="switch-knob"></span></span></label>`;
     }
@@ -267,6 +272,9 @@
         const k = rootEl.querySelector('select[name="kurs"]'); if (k) out.kurs = k.value;
         const g = rootEl.querySelector('select[name="kategori"]'); if (g) out.kategori = g.value;
         const l = rootEl.querySelector('input[name="gec_katilim"]'); if (l) out.gec_katilim = l.checked;
+        const zr = rootEl.querySelector('[data-sn-zorluk]');
+        if (zr && Zm()) { const z = Zm().read(zr); out.tek_hak = z.tekHak; out.kategori_gizli = z.kategoriGizli; }
+        else { out.tek_hak = false; out.kategori_gizli = false; }
         return out;
     }
     function openSetup() {
@@ -282,8 +290,9 @@
                 const errEl = shx.body.querySelector('[data-sn-err]');
                 if (matching(s).length < s.vaka_sayisi) { errEl.textContent = API.MSG.NOT_ENOUGH_CASES; return; }
                 shx.setBusy('start', true);
-                const r = await API.olustur({ vaka_sayisi: s.vaka_sayisi, hedef: 'diagnosis', kurslar: s.kurs ? [s.kurs] : null, kategoriler: s.kategori ? [s.kategori] : null,
-                    ipucu_araligi_sn: s.ipucu_araligi_sn, tahmin_hakki: s.tahmin_hakki, gec_katilim: s.gec_katilim });
+                const zz = zorOk() ? { tek_hak: !!s.tek_hak, kategori_gizli: !!s.kategori_gizli } : {};
+                const r = await API.olustur(Object.assign({ vaka_sayisi: s.vaka_sayisi, hedef: 'diagnosis', kurslar: s.kurs ? [s.kurs] : null, kategoriler: s.kategori ? [s.kategori] : null,
+                    ipucu_araligi_sn: s.ipucu_araligi_sn, tahmin_hakki: zz.tek_hak ? 1 : s.tahmin_hakki, gec_katilim: s.gec_katilim }, zz));
                 shx.setBusy('start', false);
                 if (!r.ok) { errEl.textContent = r.error.message; return; }
                 try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch (e) { /* yok */ }
@@ -300,6 +309,8 @@
             const again = focusName && form.querySelector(`[name="${focusName}"]`);
             if (again) try { again.focus({ preventScroll: true }); } catch (e) { /* yok */ }
         };
+        if (Zm()) Zm().bind(sh.body, () => { s = readSetup(sh.body, s); rerender(null); });
+        if (NS.leaguesView && !zorOk() && NS.leaguesView.loadConfig) Promise.resolve(NS.leaguesView.loadConfig()).then(() => { if (!sh.closed && zorOk() && !sh.body.querySelector('[data-sn-zorluk]')) { s = readSetup(sh.body, s); rerender(null); } });
         sh.body.addEventListener('change', (e) => {
             s = readSetup(sh.body, s);
             sh.body.querySelector('[data-sn-err]').textContent = '';
@@ -653,7 +664,7 @@
         const tur = d.oturum.tur_no;
         const left = du === 'lobi' ? `<span class="sp-title">Sınıf oyunu</span>`
             : ['bitti', 'iptal'].includes(du) ? `<span class="sp-title">${du === 'iptal' ? 'Oturum iptal edildi' : 'Oyun bitti'}</span>`
-            : `<span class="sp-title">Tur ${tur}<span class="sp-dim"> / ${d.oturum.vaka_sayisi}</span></span>`;
+            : `<span class="sp-title">Tur ${tur}<span class="sp-dim"> / ${d.oturum.vaka_sayisi}</span></span>${Zm() ? Zm().badge(zorOfA(d.oturum.ayarlar)) : ''}`;
         const codeChip = ['lobi', 'bitti', 'iptal'].includes(du) || !d.oturum.ayarlar.gec_katilim ? '' : `<span class="sp-codechip" title="Geç katılım">${esc(shortUrl())} · <b>${esc(d.oturum.kod)}</b></span>`;
         setHTML(head, `<div class="sp-head-l"><button class="icon-btn" type="button" data-sn="home" aria-label="Projeksiyondan çık (oturum sürer)">${ic('arrow-left')}</button>
             <span class="sp-brand">${ic('school')}</span>${left}${codeChip}</div><div class="sp-head-r">${hostControls(d)}</div>`);
@@ -713,7 +724,7 @@
                 </div>
                 <div class="sp-join-foot">
                     ${qr ? `<figure class="sp-qr">${qr}<figcaption>ya da telefonunun kamerasıyla QR kodu okut</figcaption></figure>` : ''}
-                    <ul class="sp-settings" aria-label="Oturum ayarları"><li>${a.vaka_sayisi} vaka</li><li>İpucu ${a.ipucu_araligi_sn} sn'de bir</li><li>${a.tahmin_hakki} tahmin hakkı</li></ul>
+                    <ul class="sp-settings" aria-label="Oturum ayarları"><li>${a.vaka_sayisi} vaka</li><li>İpucu ${a.ipucu_araligi_sn} sn'de bir</li><li>${a.tek_hak ? 'Tek tahmin hakkı' : `${a.tahmin_hakki} tahmin hakkı`}</li>${a.kategori_gizli ? '<li>Kategori gizli</li>' : ''}</ul>
                 </div>
             </section>
             <section class="sp-people" aria-labelledby="spPeopleT">
@@ -882,7 +893,7 @@
         const pts = me.puan != null ? me.puan : 0;
         setHTML(head, `<button class="icon-btn" type="button" data-sn="leave" aria-label="Oturumdan ayrıl">${ic('arrow-left')}</button>
             <span class="st-me"><span class="st-me-fig" aria-hidden="true">${noro(myCfg(), 36, { animated: false })}</span><span class="st-me-name">${esc(me.takma_ad || '')}</span></span>
-            <span class="st-pts" aria-label="Toplam puan ${pts}">${pts} puan</span>`);
+            ${Zm() ? Zm().badge(zorOfA(d.oturum.ayarlar), { cls: 'is-sm st-zor' }) : ''}<span class="st-pts" aria-label="Toplam puan ${pts}">${pts} puan</span>`);
         const main = r.querySelector('[data-sn-main]');
         const dock = r.querySelector('[data-sn-dock]');
         const k = clueIndex();
@@ -956,8 +967,9 @@
         if (!g.length) return '';
         return `<section class="st-guesses${done ? ' is-done' : ''}" aria-label="Tahminlerin"><h2 class="st-h2">Tahminlerin</h2><ul>${g.map(x => {
             const dd = diag(x.item_id);
-            const st = x.dogru ? 'is-ok' : x.ayni_grup ? 'is-near' : 'is-bad';
-            const lab = x.dogru ? 'Doğru' : x.ayni_grup ? 'Aynı grup' : 'Yanlış';
+            const near = x.ayni_grup && !(C.d && C.d.oturum && C.d.oturum.ayarlar && C.d.oturum.ayarlar.kategori_gizli);
+            const st = x.dogru ? 'is-ok' : near ? 'is-near' : 'is-bad';
+            const lab = x.dogru ? 'Doğru' : near ? 'Aynı grup' : 'Yanlış';
             return `<li class="st-guess ${st}">${ic(x.dogru ? 'check' : 'x')}<span class="st-guess-n">${esc(dd ? dd.nameTr : x.item_id)}</span><span class="st-guess-tag">${lab}</span></li>`;
         }).join('')}</ul></section>`;
     }
@@ -1040,7 +1052,7 @@
         acClose();
         const name = esc(dd ? dd.nameTr : itemId);
         if (g.correct) { C.feedback = { cls: 'is-ok', icon: 'check', html: `Doğru! +${g.points} puan` }; announce(`Doğru! ${g.points} puan.`); }
-        else if (g.same_group) { C.feedback = { cls: 'is-near', icon: 'info', html: `${name} değil, ama aynı tanı grubunda. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış ama aynı grup. ${g.guesses_left} hak kaldı.`); }
+        else if (g.same_group && !(d.oturum.ayarlar && d.oturum.ayarlar.kategori_gizli)) { C.feedback = { cls: 'is-near', icon: 'info', html: `${name} değil, ama aynı tanı grubunda. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış ama aynı grup. ${g.guesses_left} hak kaldı.`); }
         else { C.feedback = { cls: 'is-bad', icon: 'x', html: `${name} değil. ${g.guesses_left ? `${g.guesses_left} hakkın kaldı.` : 'Hakların bitti.'}` }; announce(`Yanlış. ${g.guesses_left} hak kaldı.`); }
         render();
         if (!g.done && input) { try { input.focus({ preventScroll: true }); } catch (e) { /* yok */ } }

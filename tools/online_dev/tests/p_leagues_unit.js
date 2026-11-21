@@ -10,10 +10,10 @@ exp.forEach(([n, min], i) => {
 });
 t(L.tierFor(-5).name === 'Bronz 1' && L.tierFor(null).name === 'Bronz 1', 'negatif/boş → Bronz 1');
 t(L.tierFor(99999).name === 'Kahin' && L.tierFor(99999).next === null, 'Kahin en üst');
-t(L.progressText(0) === "Bronz 2'ye 150 RP kaldı", L.progressText(0));
-t(L.progressText(1600) === "Altın 3'e 50 RP kaldı", L.progressText(1600));
-t(L.progressText(3700) === "Uzman'a 300 RP kaldı", L.progressText(3700));
-t(L.progressText(4500) === "Kahin'e 500 RP kaldı", L.progressText(4500));
+t(L.progressText(0) === "Bronz 2'ye 150 Elo kaldı", L.progressText(0));
+t(L.progressText(1600) === "Altın 3'e 50 Elo kaldı", L.progressText(1600));
+t(L.progressText(3700) === "Uzman'a 300 Elo kaldı", L.progressText(3700));
+t(L.progressText(4500) === "Kahin'e 500 Elo kaldı", L.progressText(4500));
 t(L.progressText(5000) === 'En üst ligdesin', 'en üst');
 t(L.tierFor(1275).pct === 50, 'pct 1275 = 50 (' + L.tierFor(1275).pct + ')');
 console.log(`lig sınır testleri: ${ok} ok / ${fail} fail`); process.exit(fail ? 1 : 0);

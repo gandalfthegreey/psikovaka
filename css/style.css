@@ -2744,3 +2744,64 @@ h1, h2, h3, h4,
     letter-spacing: 0;
 }
 .home-title, .screen-title, .card-hero-title, .result-heading, .lib-detail-title, .brand-name { font-weight: 750; }
+
+/* =====================================================================
+   Zorluk ayarları (ajan Z1): "Zor" rozeti, anahtarlar, "Sonraki ipucu"
+   ===================================================================== */
+.zor-slot:empty { display: none; }
+.zor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--color-danger) 45%, transparent);
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
+    font-size: var(--text-xs, 12px);
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.zor-badge .icon { width: 13px; height: 13px; }
+.zor-badge-i { display: inline-flex; padding-left: 2px; border-left: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent); }
+.zor-badge.is-sm { padding: 1px 6px; font-size: 11px; }
+.zorluk-group { display: flex; flex-direction: column; gap: var(--space-2); }
+.zorluk-switch { gap: var(--space-3); }
+.zorluk-switch .list-row-sub { white-space: normal; line-height: 1.35; }
+.zorluk-switch .switch-row-text { flex: 1 1 auto; }
+.zorluk-switch-ico { display: inline-flex; color: var(--color-text-2); flex-shrink: 0; }
+.zorluk-switch[aria-checked="true"] .zorluk-switch-ico { color: var(--color-danger); }
+.zorluk-switch:disabled { opacity: 0.6; cursor: not-allowed; }
+.zorluk-mult, .zorluk-note { display: flex; gap: var(--space-2); align-items: flex-start; margin: 0; font-size: var(--text-sm, 14px); color: var(--color-text-2); }
+.zorluk-mult .icon { flex-shrink: 0; margin-top: 2px; color: var(--color-warning); }
+.zorluk-play {
+    margin: var(--space-3) 0;
+    padding: var(--space-3) var(--space-4);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+}
+.zorluk-play .settings-group { margin: 0; }
+.game-controls .btn-next-clue { margin-left: auto; margin-right: var(--space-3); min-height: 44px; white-space: nowrap; flex-shrink: 0; }
+.game-controls .btn-link { white-space: nowrap; }
+.remaining-guesses { white-space: nowrap; }
+.result-inline-text .zor-badge, .result-banner .zor-badge { margin-top: var(--space-1); align-self: flex-start; }
+.result-banner .zor-slot { display: flex; justify-content: center; }
+/* Zorluk: online (lobi çipleri, HUD, döküm) */
+.ol-chip-static.ol-chip-zor { color: var(--color-danger); border-color: color-mix(in srgb, var(--color-danger) 40%, transparent); }
+.ol-chip-static.ol-chip-zor.is-mult { color: var(--color-warning); border-color: color-mix(in srgb, var(--color-warning) 40%, transparent); }
+[data-theme="light"] .ol-chip-static.ol-chip-zor.is-mult { color: var(--color-warning-text-strong, var(--color-warning)); }
+.ol-hud-top .zor-badge { flex-shrink: 0; }
+.ol-rpbd-zor { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--color-text-2); }
+.ol-rpbd-base, .lg-bd-base { color: var(--color-text-3); font-size: var(--text-xs); }
+.ol-count-zor { margin-top: var(--space-2); }
+.ol-wait-text .zor-badge { margin-top: 2px; align-self: flex-start; }
+.ol-zorluk-field { border: 0; padding: 0; margin: 0; }
+.dl-zor { margin-left: var(--space-1); }
+.ol-field.is-locked .ol-chip:has(input:disabled):not(.is-checked) { opacity: 0.45; cursor: not-allowed; }
+.ol-field.is-locked .ol-chip.is-checked { cursor: default; }
+/* "Danışan dosyası" pilotunda (?tasarim=dosya) başlık satırı gizli: yalnızca "Zor" rozeti kalsın */
+html.tasarim-dosya .screen-play .play-bar-title .play-meta:has(#playZorBadge .zor-badge) { display: flex; }
+html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge) { display: none; }

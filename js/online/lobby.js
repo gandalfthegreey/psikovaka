@@ -176,7 +176,8 @@
         $('#olLobbyChips', L.root).innerHTML = `
             <span class="ol-chip-static ol-t-${esc(room.target_type)}">${icon(T.targetIcon[room.target_type])}${esc(T.target[room.target_type])}</span>
             <span class="ol-chip-static">${icon('clock')}${esc(roundsTxt)} · ${Math.round(room.round_time_limit_sec / 60 * 10) / 10} dk</span>
-            ${quick ? '' : `<span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`}`;
+            ${quick ? '' : `<span class="ol-chip-static">${icon(room.visibility === 'public' ? 'globe' : 'lock')}${esc(T.visibility[room.visibility])}</span>`}
+            ${quick ? '' : zorlukChips(room)}`;
         const setBtn = $('#olLobbySettingsBtn', L.root);
         if (setBtn) setBtn.hidden = quick || !NS.rooms.isHost();
         updatePlayers();
@@ -184,6 +185,16 @@
         updateCta();
         updateChallenge();
         announceDiff();
+    }
+
+    /** Zorluk çipleri (0007): Tek hak / Kategori gizli + Elo çarpanı. Ayar kapalıysa boş. */
+    function zorlukChips(room) {
+        const Zm = global.PsikoVakaZorluk;
+        if (!Zm || !(room.tek_hak || room.kategori_gizli)) return '';
+        const z = Zm.norm(room);
+        const m = Zm.multiplier(z, NS.leaguesView ? NS.leaguesView.cfg() : null);
+        return Zm.ITEMS.filter(i => z[i.key]).map(i => `<span class="ol-chip-static ol-chip-zor" data-ol-zor="${i.key}">${icon(i.icon)}${esc(i.short)}</span>`).join('')
+            + `<span class="ol-chip-static ol-chip-zor is-mult" title="Zorluk bonusu: kazandığın Elo ${esc(Zm.fmtMult(m))}">${icon('zap')}Elo ${esc(Zm.fmtMult(m))}</span>`;
     }
 
     /** Telefonda sahnenin altındaki açılır oyuncu listesi (H16): tam ad, lig rozeti, hazır durumu. */
@@ -711,7 +722,8 @@
         const s = NS.rooms.state;
         if (!s || !NS.rooms.isHost()) return;
         const room = s.room;
-        let cur = { mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.round_count, visibility: room.visibility, seeding: room.bracket_seeding };
+        let cur = { mode: room.mode, format: room.format, target: room.target_type, capacity: room.capacity, rounds: room.round_count, visibility: room.visibility, seeding: room.bracket_seeding,
+            tekHak: !!room.tek_hak, kategoriGizli: !!room.kategori_gizli };
         const minCap = NS.rooms.active().length;
         const unsupported = !NS.api.isSupported('update_room_settings');
         const sh = NS.ui.sheet({
@@ -724,6 +736,8 @@
             async onAction(id, shx) {
                 if (id !== 'save') { shx.close(); return; }
                 cur = NS.ui.readForm(shx.body, cur);
+                // 0007 yoksa zorluk alanı gönderilmez (eski sunucuda imza yok)
+                if (!(NS.leaguesView && NS.leaguesView.zorlukSupported()) || !shx.body.querySelector('[data-ol-zorluk]')) { delete cur.tekHak; delete cur.kategoriGizli; }
                 shx.setBusy('save', true);
                 const r = await NS.api.updateRoomSettings(room.id, cur);
                 shx.setBusy('save', false);
@@ -733,7 +747,8 @@
                 else el.textContent = r.error.message;
             }
         });
-        if (unsupported) sh.body.querySelectorAll('input').forEach(i => { i.disabled = true; });
+        if (unsupported) sh.body.querySelectorAll('input, [data-zorluk]').forEach(i => { i.disabled = true; });
+        NS.ui.bindZorluk(sh.body);
         sh.body.addEventListener('change', () => { NS.ui.syncChecked(sh.body); });
     }
 

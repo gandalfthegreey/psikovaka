@@ -36,7 +36,7 @@ for (const vp of [{ w: 360, h: 740, dark: true }, { w: 390, h: 844, dark: false 
   await p.evaluate(() => { const st = window.olMock.state; st.results.forEach(r => { delete r.rp_breakdown; }); st.results[0].rp_delta = 20; st.results[0].rp_after = 780; window.PsikoVakaOnline.rooms.refresh(); });
   await sleep(500);
   check((await p.locator('.ol-rpbd').count()) === 0 && (await p.locator('.ol-league-change').count()) === 0, 'eski sunucu: döküm ve lig değişimi yok, sunucunun RP\'si gösterilir');
-  check(/\+20 RP/.test(await p.locator('.ol-res-list').innerText()), 'sunucunun bildirdiği +20 RP');
+  check(/\+20 Elo/.test(await p.locator('.ol-res-list').innerText()), 'sunucunun bildirdiği +20 Elo');
   // ayrılma uyarısı: v2 config
   await p.evaluate(() => { window.olMock.scenario('playing', { n: 2 }); });
   await sleep(800);
@@ -44,7 +44,7 @@ for (const vp of [{ w: 360, h: 740, dark: true }, { w: 390, h: 844, dark: false 
   await sleep(300);
   await p.evaluate(() => { window.PsikoVakaOnline.app.leaveRoom(); });
   await sleep(400);
-  check(/kalan 4 tur çözülemedi sayılır: −40 RP/.test(await p.locator('.ol-sheet').last().innerText()), 'ayrılma uyarısı: kalan turlar −10 RP');
+  check(/kalan 4 tur çözülemedi sayılır: −40 Elo/.test(await p.locator('.ol-sheet').last().innerText()), 'ayrılma uyarısı: kalan turlar −10 Elo');
   await p.locator('.ol-sheet [data-ol-action="no"]').last().click(); await sleep(200);
   // tur sonucu: açıklama (tanı hedefi) ve sızıntı yok
   const xp = await p.evaluate(() => { const st = window.olMock.state; const c = window.game.allMasterCases.find(x => x.id === st.round.case_id); const others = window.game.diagnoses.filter(d => d.id !== c.diagnosisId).slice(0, 2); c.explanation = { whyThis: ['A', 'B'], whyNot: others.map(o => ({ diagnosisId: o.id, reason: 'neden ' + o.id })), teachingPoint: 'Ders' }; return { wrong: others[1].id }; });

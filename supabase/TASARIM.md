@@ -514,6 +514,10 @@ alanlarını da içerir.
 
 ### 13.4 RP v2 (Emre kararı, 2026-11-15) — kaybetmek de puan götürür
 
+> **Ad (2026-11-22, Emre kararı):** arayüzde bu puanın adı artık **"Elo"** (lig sayfası, profil, sıralamalar, maç sonu, paylaşım,
+> yardım). Veritabanında adlar değişmedi: `profiles.ranked_points`, `match_results.rp_delta/rp_after/rp_breakdown`, `rp_*` ayar
+> anahtarları, `get_my_rp_history`. Bu belgede "RP" = Elo (veritabanında rp). Özel odadaki zorluk bonusu §16.4.
+
 §3.5'teki yalnızca sıralamaya göre ödül (75/50/35/20/5) **kaldırıldı**. Yeni kural `_finish_match` içinde, maç sonunda bir kez
 (idempotent, §3.5'teki çifte ödeme koruması aynen) uygulanır. Bütün sayılar `game_config`'te. Hızlı ve normal odalar aynı; günlük oyun RP vermez.
 
@@ -913,3 +917,61 @@ RLS'li bütün sınıf dışı tablolara (`game_config` hariç) kısıtlayıcı 
   tablolarına izin verecek şekilde güncellendi.)
 - `tools/apply_migrations.sh`: 0001–0005 kayıtlı yerel Postgres'e yalnızca 0006'yı uyguladı, üçüncü çalıştırmada atladı.
 - Canlıda henüz çalışmadı; bir sonraki yayında Actions uygular. **Anonim giriş bundan sonra açılmalı.**
+
+## 16. Zorluk ayarları ve Elo zorluk bonusu (ajan Z1, 2026-11-22 — `0007_zorluk.sql`; Emre kararı)
+
+> **Durum:** SÖZLEŞME + UYGULANDI (0007; test `tests/zorluk.test.mjs` 18/18 PGlite ve PostgreSQL 16). Arayüzde puanın adı **Elo**
+> (veritabanında `rp`, §13.4 notu). 0007 yokken yeni parametreler/RPC'ler `PGRST202` döner; istemci zorluk denetimlerini göstermez.
+
+İki bağımsız, birlikte açılabilen ayar:
+- **Tek tahmin hakkı** (`tek_hak`): aşama başına 1 tahmin (kombo: her aşamada 1). Yanlış tahmin turu/vakayı başarısız bitirir.
+  İpuçları tahmin etmeden açılır (`reveal_clue` / `daily_reveal_clue`; turda en çok 5 ek ipucu = 6 ipucu). Puan ve Elo'da
+  "kaçıncı tahmin" yerine **kaçıncı ipucunda** (`1 + ek_ipucu`) sayılır: 3. ipucunda doğru = 3. tahmindeki taban puan (70) + hız
+  bonusu, Elo sonucu `g3`. (Aksi halde bütün ipuçlarını açıp tek tahminle en yüksek puanı almak mümkün olurdu.)
+- **Kategori gizli** (`kategori_gizli`): sunucu "aynı grup" bilgisini hiçbir yere yazmaz/döndürmez (`same_group`/`ayni_grup`
+  her yerde `false`: tahmin yanıtı, `round_guesses`/`daily_guesses`/`sinif_tahminleri` satırları, `get_room_state.my_guesses`,
+  `daily_begin.guesses`, `sinif_durum.ben.tahminlerim`). Kategori/ders adı zaten hiçbir yanıtta yok (§9: vaka metni istemcide; istemci
+  oyun sırasında göstermez). Cevap ekranında normal gösterilir.
+
+### 16.1 Özel odalar (rooms.tek_hak, rooms.kategori_gizli — boolean, varsayılan false)
+| RPC | Değişiklik |
+|---|---|
+| `create_room(…, p_tek_hak boolean default false, p_kategori_gizli boolean default false)` | Eski 8 parametreli imza düşürüldü, varsayılanlı yenisi kuruldu (eski istemci çağrıları aynen çalışır). |
+| `update_room_settings(…, p_tek_hak boolean default null, p_kategori_gizli boolean default null)` | Yalnızca host, yalnızca lobide; `null` = değiştirme. Değişince diğerlerinin "hazır"ı sıfırlanır (eskisi gibi). |
+| `submit_guess` (imza aynı) | Tek hakta `GUESS_LIMIT` 1'de; kategori gizlide `same_group:false`. Yanıta `clues_opened` eklendi. |
+| **`reveal_clue(p_room_id uuid, p_round_no integer)`** (yeni) | Tek hakta sonraki ipucu: `{server_time, round_no, clues_opened, room}`. Hatalar: `ROOM_NOT_FOUND`, `NOT_MEMBER`, `NOT_STARTED`, `ROUND_CLOSED`, `ROUND_NOT_STARTED`, `NOT_IN_ROUND`, `ALREADY_FINISHED`, **`SINGLE_GUESS_OFF`** (oda tek hak değil), **`NO_MORE_CLUES`**. |
+- `round_players.ek_ipucu smallint` (0–5; Realtime'da görünür — rakipler kaçıncı ipucunda olduğunu görür, içerik yok).
+- **Hızlı eşleşme her zaman normal kurallar** (`rooms_quick_normal` kısıtı; `update_room_settings` → `QUICK_ROOM`).
+- `rooms` satırı (to_jsonb) iki alanı taşır: `get_room_state.room`, Realtime `rooms` UPDATE, `create_room` dönüşü.
+
+### 16.2 Günün vakası (daily_attempts / daily_results .tek_hak, .kategori_gizli; daily_attempts.ek_ipucu)
+- **`daily_begin(p_target text, p_tek_hak boolean default null, p_kategori_gizli boolean default null)`**: ilk çağrı denemeyi
+  verilen ayarlarla açar. Ayar **ilk tahmine ya da ilk ek ipucuna kadar** değiştirilebilir (yeniden `daily_begin`), sonra kilitli:
+  verilen değerler sessizce yok sayılır (hata yok), dönüşte gerçek ayarlar. Günlük Elo vermez (değişmedi).
+- `daily_state` (ve `get_daily_challenge`) ek alanlar: `tek_hak`, `kategori_gizli`, `clues_opened`, `zorluk_kilitli`.
+- **`daily_reveal_clue(p_target text)`** (yeni) → `daily_state`. Hatalar: `DAILY_NOT_STARTED`, `DAILY_ALREADY_FINISHED`, `SINGLE_GUESS_OFF`, `NO_MORE_CLUES`.
+- `daily_submit_guess`: tek hakta 1 tahmin (`GUESS_LIMIT`), maske; yanıta `tek_hak`, `kategori_gizli`, `clues_opened`.
+- **Sıralama kuralı aynı** (§13.1). Tek hakta `daily_results.guess_count` = açılan ipucu sayısı (sıralamadaki "tahmin" karşılığı);
+  `get_daily_leaderboard` satırlarına `tek_hak`, `kategori_gizli` eklendi (istemci "Zor" rozeti gösterir).
+
+### 16.3 Sınıf modu (sinif_oturumlari.tek_hak, .kategori_gizli)
+- `sinif_olustur(p_ayarlar)` yeni anahtarlar `tek_hak`, `kategori_gizli` (boolean; başka tür `INVALID_SETTINGS`). `tek_hak:true`
+  → `tahmin_hakki = 1` (verilen değer yok sayılır; kısıt `sinif_tek_hak_bir`). `ayarlar` JSON'u iki anahtarı taşır. 0006 sunucusu bu
+  anahtarları zaten yok sayardı (geriye uyumlu).
+- `sinif_tahmin`: kategori gizlide `same_group:false`, `ayni_grup` false yazılır. Sınıf puanlaması değişmedi.
+
+### 16.4 Elo zorluk bonusu (yalnızca özel odalar; `_finish_match`)
+- Çarpan = 1 (ayar yok / hızlı oda), `rp_zorluk_carpan_1` (1.25, bir ayar), `rp_zorluk_carpan_2` (1.5, iki ayar).
+- Yalnızca **pozitif tur kalemleri** çarpılır, en yakın tam sayıya yuvarlanır (`round`, .5 yukarı): g1 10→13 / 15, g2 8→10 / 12,
+  g3 6→8 / 9, g4 4→5 / 6, g5 2→3 / 3, g6 1→1 / 2. **Çözememe −10 aynı**, sıralama primi ve ayrılma kuralları (§13.4) aynı.
+- `rp_breakdown`: yeni `zorluk_carpani` (sayı, her maçta), `zorluk: {tek_hak, kategori_gizli}`; çarpılan tur kaleminde `base`
+  (çarpılmamış değer). Örn. `{ "round": 1, "outcome": "g1", "delta": 15, "base": 10 }`. Eski maçlarda alanlar yok: 1 say.
+
+### 16.5 İstemci (`js/zorluk.js` + motor)
+- Ortak modül `window.PsikoVakaZorluk`: anahtarlar ("Zorluk" bölümü), "Zor" rozeti (simgeler: hedef = tek hak, göz kapalı =
+  kategori gizli), çarpan metni (`×1,25`), paylaşım satırı ("Zor: tek hak + kategori gizli"). Pratik seçimi `localStorage.psikovaka_zorluk`.
+- Özellik algılama: `game_config`'te `rp_zorluk_carpan_1` varsa oda/sınıf ayarları gösterilir; günlükte `daily_state.tek_hak`
+  alanı varsa. Yoksa denetim yok, yeni parametre gönderilmez (eski sunucu bozulmaz).
+- İpucu açma davranışı: tek hakta yanlış tahmin ipucu açmaz (vaka biter); "Sonraki ipucu" düğmesi (tahmin alanının yanında) bir
+  sonraki ipucunu açar. Sınıf modunda ipuçları zaten zamanla açılır (düğme yok). Ayrıntı `AI_ISBIRLIGI.md` ajan Z1 kaydı.
+

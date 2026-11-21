@@ -46,7 +46,7 @@ for (const vp of [{ w: 360, h: 740, dark: false }, { w: 390, h: 844, dark: true 
   check(await p.locator('#playResultStreak').isVisible() && /4 günlük seri/.test(await p.locator('#playResultStreak').innerText()), 'sonuç kartında güncel seri (4)');
   await p.click('#btnMainShowReport'); await sleep(400);
   check(await p.locator('#resultStreakNote').isVisible() && /4 günlük seri/.test(await p.locator('#resultStreakNote').innerText()), 'raporda güncel seri (4)');
-  check(!/RP/.test(await p.locator('#resultModal .result-banner').innerText()), 'raporda RP yok');
+  check(!/\bRP\b|Elo/.test(await p.locator('#resultModal .result-banner').innerText()), 'raporda RP/Elo yok');
   if (vp.w === 390) await p.screenshot({ path: `${SHOTS}/gunluk_rapor_${tag}.png` });
   await p.evaluate(() => { window.game.closeModal(window.game.dom.resultModal); location.hash = '#/oyna'; window.game.showRoute('oyna'); });
   await sleep(500);

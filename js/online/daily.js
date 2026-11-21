@@ -54,6 +54,32 @@
     function curTarget() { const gm = g(); return (gm && gm.targetGameMode) || 'diagnosis'; }
     function findCase(id) { const gm = g(); return gm ? (gm.allMasterCases || gm.cases || []).find(c => c.id === id) || null : null; }
     const fmtTime = (s) => (s == null ? '' : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`);
+    // ---- zorluk (0007, ajan Z1): sunucu durumunda tek_hak alanı yoksa sunucu zorluğu bilmiyor → ayar sunulmaz
+    const Zm = () => global.PsikoVakaZorluk;
+    const zorOf = (st) => ({ tekHak: !!(st && st.tek_hak), kategoriGizli: !!(st && st.kategori_gizli) });
+    const zorSupported = (st) => !!(st && Object.prototype.hasOwnProperty.call(st, 'tek_hak'));
+    /** Sonuç başlığı: tek hakta "Tek hakla bildin · N. ipucunda", değilse "N. tahminde bildin". */
+    function wonTitle(st, nGuess, nClue) { return st && st.tek_hak ? `Tek hakla bildin · ${nClue || st.clues_opened || 1}. ipucunda` : `${nGuess}. tahminde bildin`; }
+    /** Sunucu günlüğünde zorluk ayarı ve "Sonraki ipucu" bağlantısı. */
+    function applyServerZorluk(target, st) {
+        const gm = g();
+        if (!gm || !gm.setCaseZorluk) return;
+        if (!zorSupported(st)) { gm.zorlukLocked = true; gm.dailyZorlukHandler = null; gm.clueRevealHandler = null; gm.renderZorlukUI(); return; }
+        gm.dailyZorlukHandler = async (z) => {
+            const r = await NS.api.dailySetZorluk(target, z);
+            if (!r.ok) { gm.showToast(r.error.message); return { zorluk: zorOf(D.ch[target]), locked: true }; }
+            D.ch[target] = Object.assign({}, D.ch[target] || {}, r.data); D.chAt[target] = Date.now();
+            return { zorluk: zorOf(r.data), locked: !!r.data.zorluk_kilitli };
+        };
+        gm.clueRevealHandler = async () => {
+            const r = await NS.api.dailyRevealClue(target);
+            if (!r.ok) { gm.showToast(r.error.message); return { ok: false }; }
+            D.ch[target] = Object.assign({}, D.ch[target] || {}, r.data);
+            return { ok: true, clues: r.data.clues_opened };
+        };
+        gm.setCaseZorluk(zorOf(st), { locked: !!st.zorluk_kilitli });
+        if (st.tek_hak && st.clues_opened > gm.unlockedClues) { gm.unlockedClues = Math.min(gm.maxClues, st.clues_opened); gm.renderClues(); gm.updateRemainingGuessesUI(); }
+    }
 
     // ------------------------------------------------------------ veri
     async function loadChallenge(target, force) {
@@ -148,7 +174,8 @@
             const won = srv ? !!srv.won : !!(rec && rec.won);
             box.className = 'daily-result is-tappable ' + (won ? 'is-win' : 'is-loss');
             $('dailyResultIcon').innerHTML = icon(won ? 'check' : 'flag');
-            $('dailyResultTitle').textContent = won ? `${srv ? srv.guesses_used : rec.guessesUsed}. tahminde bildin` : 'Bugün olmadı';
+            const zst = srv || (rec && rec.zorluk ? { tek_hak: rec.zorluk.tekHak, kategori_gizli: rec.zorluk.kategoriGizli, clues_opened: rec.cluesUsed } : null);
+            $('dailyResultTitle').innerHTML = esc(won ? wonTitle(zst, srv ? srv.guesses_used : rec.guessesUsed, zst && zst.clues_opened) : 'Bugün olmadı') + (Zm() && zst ? ' ' + Zm().badge(zorOf(zst), { cls: 'is-sm' }) : '');
             const tail = 'Yarın yeni vaka · Vakayı gör';
             $('dailyResultSub').textContent = won ? (srv ? `${srv.points} puan · ${fmtTime(srv.time_sec)} · ${tail}` : `${fmtTime(rec.elapsed)} · ${tail}`) : `Yarın yeni vaka seni bekliyor · Vakayı gör`;
             text.textContent = on
@@ -187,10 +214,11 @@
         if (!c) { gm.showToast('Günün vakası bu sürümde yok. Sayfayı yenile.'); return false; }
         D.active = { target, caseId: c.id, day: st.day };
         installOverrides();
-        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0 };
+        const rec = { day: st.day, target, caseId: c.id, src: 'server', userId: NS.api.myId(), won: !!st.won, elapsed: st.time_sec || 0,
+            zorluk: zorOf(st), cluesUsed: st.tek_hak ? st.clues_opened : null };
         const ok = gm.openFinishedDaily(c, rec, {
             fill: () => { restore(st); },
-            title: st.won ? `${st.guesses_used}. tahminde bildin · ${st.points} puan` : null
+            title: st.won ? `${wonTitle(st, st.guesses_used)} · ${st.points} puan` : null
         });
         if (ok && gm.saveDailyRecord) gm.saveDailyRecord(gm.snapshotDailyRecord(!!st.won)); // sunucuya ulaşılamazsa yedek
         if (ok) gm.updateDailyRecord(target, st.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
@@ -235,6 +263,7 @@
         if (st.started_at) { const ms = NS.clock.now() - Date.parse(st.started_at); if (isFinite(ms) && ms > 0) gm.caseStartTime = Date.now() - ms; }
         installOverrides();
         restore(st);
+        applyServerZorluk(target, st);
     }
 
     function isServerDaily() {
@@ -319,7 +348,8 @@
         if (kind === 'diagnosis' && !d.correct) (gm.diagWrongLog = gm.diagWrongLog || []).push(ch.obj.id);
         gm.dom.diagnosisInput.value = ''; delete gm.dom.diagnosisInput.dataset.selectedId; gm.closeAutocomplete();
         gm.playTone(d.correct ? 'win' : (d.same_group ? 'warm' : 'cold'));
-        if (!d.correct && gm.unlockedClues < gm.maxClues) gm.unlockedClues++;
+        if (!d.correct && gm.unlockedClues < gm.maxClues && !(gm.zorluk && gm.zorluk.tekHak)) gm.unlockedClues++;
+        if (zorSupported(d)) D.ch[D.active.target] = Object.assign({}, D.ch[D.active.target] || {}, { tek_hak: d.tek_hak, kategori_gizli: d.kategori_gizli, clues_opened: d.clues_opened });
         if (d.correct && d.next_stage && !d.finished) {
             const el = gm.dom['comboStep' + d.stage + 'Val']; if (el) el.textContent = ch.obj.nameTr;
             const nx = gm.dom['comboStep' + d.next_stage + 'Val']; if (nx) nx.textContent = d.next_stage === 2 ? 'Şimdi terapiyi seç' : 'Şimdi ilacı seç';
@@ -354,11 +384,12 @@
         const target = D.active.target;
         if (d.time_sec != null) gm.elapsedSeconds = d.time_sec;
         clearInterval(gm.duelTimerInterval);
-        const st = Object.assign({}, D.ch[target] || {}, { status: 'finished', won: !!d.won, points: d.points != null ? d.points : 0, time_sec: d.time_sec, guesses_used: d.guesses_used != null ? d.guesses_used : (D.ch[target] || {}).guesses_used });
+        const st = Object.assign({}, D.ch[target] || {}, { status: 'finished', won: !!d.won, points: d.points != null ? d.points : 0, time_sec: d.time_sec, guesses_used: d.guesses_used != null ? d.guesses_used : (D.ch[target] || {}).guesses_used },
+            zorSupported(d) ? { tek_hak: d.tek_hak, kategori_gizli: d.kategori_gizli, clues_opened: d.clues_opened } : {});
         D.ch[target] = st; D.chAt[target] = Date.now();
         D.board.data = null;
         Object.getPrototypeOf(gm).handleGameEnd.call(gm, !!d.won);
-        if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${st.guesses_used}. tahminde bildin · ${d.points} puan`;
+        if (gm.dom.playResultTitle && d.won) gm.dom.playResultTitle.textContent = `${wonTitle(st, st.guesses_used)} · ${d.points} puan`;
         if (gm.dom.btnMainNextCase) gm.dom.btnMainNextCase.textContent = 'Pratiğe devam et';
         if (gm.updateDailyRecord) gm.updateDailyRecord(target, st.day || D.active.day, { points: st.points, time_sec: st.time_sec, guessesUsed: st.guesses_used, src: 'server' });
         renderCard(target, st);
@@ -433,11 +464,12 @@
         return `<span class="dl-pips" aria-hidden="true">${Array.from({ length: 6 }, (_, i) => `<i class="${i < n ? (row.won && i === n - 1 ? 'is-hit' : 'is-miss') : ''}"></i>`).join('')}</span>`;
     }
     function rowHtml(x, me, target) {
-        const label = x.won ? `${x.guesses_used}. tahminde` : 'Çözemedi';
-        return `<li class="dl-row${x.user_id === me ? ' is-me' : ''}${x.won ? '' : ' is-lost'}" aria-label="${x.rank}. ${esc(x.username)}, ${label}, ${x.points} puan">
+        const label = x.won ? (x.tek_hak ? `tek hakla ${x.guesses_used}. ipucunda` : `${x.guesses_used}. tahminde`) : 'Çözemedi';
+        const zb = Zm() ? Zm().badge(zorOf(x), { cls: 'is-sm dl-zor' }) : '';
+        return `<li class="dl-row${x.user_id === me ? ' is-me' : ''}${x.won ? '' : ' is-lost'}" aria-label="${x.rank}. ${esc(x.username)}, ${label}${zb ? ', zor' : ''}, ${x.points} puan">
             <span class="dl-rank">${x.rank}</span>
             ${NS.avatar(x.avatar, { size: 36, framed: true })}
-            <span class="dl-main"><span class="dl-name">${esc(x.username || x.display_name)}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}<span class="dl-badge" title="${esc(NS.leagueName(x.ranked_points))}">${NS.leagueBadge(x.ranked_points, 16)}</span></span>
+            <span class="dl-main"><span class="dl-name">${esc(x.username || x.display_name)}${x.user_id === me ? ' <span class="ol-me-tag">sen</span>' : ''}<span class="dl-badge" title="${esc(NS.leagueName(x.ranked_points))}">${NS.leagueBadge(x.ranked_points, 16)}</span>${zb}</span>
                 <span class="dl-sub">${pips(x, target)}<span class="dl-sub-t">${x.won ? fmtTime(x.time_sec) : 'Çözemedi'}</span></span></span>
             <span class="dl-pts">${x.points}</span>
         </li>`;
