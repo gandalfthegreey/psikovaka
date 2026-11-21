@@ -87,17 +87,18 @@
     --color-badge-bg: #c93838;  /* kart kırmızısı; beyaz yazıyla ≥4.5:1 */
 }
 
-/* ---------- Koyu tema (varsayılan) ---------- */
+/* ---------- Koyu tema (varsayılan) ----------
+   2026-11-21 (Emre onayı, ajan C2): zemin/yüzey/kenar daha koyu (#0f1117 derinliği); yüzey adımları ve metin kontrastı korunur. */
 :root,
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --color-bg: #15181e;
-    --color-surface: #1d2129;
-    --color-surface-2: #232833;
-    --color-surface-3: #2c3240;
-    --color-border: #2a303c;
-    --color-border-strong: #3c4454;
+    --color-bg: #0f1117;
+    --color-surface: #181b23;
+    --color-surface-2: #1f232c;
+    --color-surface-3: #292e39;
+    --color-border: #272c37;
+    --color-border-strong: #3a414e;
     --color-input-border: #717b8f;
 
     --color-text: #eef0f4;
@@ -117,7 +118,7 @@
     --color-danger: #ff8f8f;
     --color-danger-soft: rgba(255, 143, 143, 0.13);
 
-    --color-overlay: rgba(6, 8, 12, 0.66);
+    --color-overlay: rgba(4, 5, 8, 0.7);
     --color-focus: #a9c4ff;
 
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35);
@@ -174,9 +175,9 @@
    oyun ekranı pilotu (css/dosya.css, ?tasarim=dosya) aynı değerleri --dosya-* adlarıyla okur. */
 :root,
 [data-theme="dark"] {
-    --paper: #20242c;
-    --paper-edge: #353c4a;
-    --paper-tape: #2b313c;
+    --paper: #1b1e26;
+    --paper-edge: #343a47;
+    --paper-tape: #252a34;
     --paper-rule: rgba(126, 166, 255, 0.14);
     --paper-hl: rgba(242, 196, 90, 0.26);
     --paper-hl-strong: #f2c45a;

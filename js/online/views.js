@@ -225,6 +225,11 @@
             } else if (st === 'username') {
                 m.innerHTML = box('Bir kullanıcı adı seç', 'Arkadaşların seni kullanıcı adınla bulur.', `<button class="btn btn-primary" type="button" data-ol-hub="username">Kullanıcı adı seç</button>`);
             }
+            // Sınıf modu (ajan C2): misafir de takma adla katılabilir; kart yalnızca §15 sunucuda varsa görünür
+            if ((st === 'guest' || st === 'username') && NS.sinif) {
+                m.insertAdjacentHTML('beforeend', '<div class="ol-sinif-slot" id="olSinifSlot" hidden></div>');
+                NS.sinif.renderHubCard($('#olSinifSlot', m));
+            }
             hub.rendered = false;
             return;
         }
@@ -250,6 +255,7 @@
                             </span>
                         </form>
                     </div>
+                    <div class="ol-sinif-slot" id="olSinifSlot" hidden></div>
 
                     <section class="ol-section" aria-labelledby="olPubTitle">
                         <div class="ol-section-head">
@@ -279,6 +285,7 @@
             hub.lbLoaded = false;
         }
         if (NS.quick) { NS.quick.bindCard(m); NS.quick.renderCard(); }
+        if (NS.sinif) NS.sinif.renderHubCard($('#olSinifSlot', m));
         if (NS.friends) NS.friends.renderInto($('#olFriendsMount', m));
         renderPublicRooms();
         startHubLive();

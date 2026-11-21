@@ -3,7 +3,14 @@
   "private": true,
   "type": "module",
   "description": "Supabase şemasının senaryo testleri. Varsayılan: PGlite (WASM Postgres, kurulum gerektirmez). DATABASE_URL verilirse gerçek Postgres (pg).",
-  "scripts": { "test": "node scenario.test.mjs && node daily_quick.test.mjs && node isim_filtresi.test.mjs" },
-  "dependencies": { "@electric-sql/pglite": "^0.5.16" },
-  "optionalDependencies": { "pg": "^8.13.0" }
+  "scripts": {
+    "test": "node scenario.test.mjs && node daily_quick.test.mjs && node isim_filtresi.test.mjs && node sinif_modu.test.mjs",
+    "test:0006": "ILE_0006=1 node scenario.test.mjs && ILE_0006=1 node daily_quick.test.mjs && ILE_0006=1 node isim_filtresi.test.mjs"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.16"
+  },
+  "optionalDependencies": {
+    "pg": "^8.13.0"
+  }
 }

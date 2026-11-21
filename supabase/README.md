@@ -19,6 +19,11 @@ Supabase tarafını içerir. Site yine GitHub Pages'te statik kalır; tarayıcı
 > küfür, hakaret ve nefret ifadesi sunucuda engellenir; mevcut uygunsuz adlı hesaplar işaretlenir (`needs_rename`), sıralama/arkadaş
 > arama/açık oda listesinden gizlenir ve sonraki girişte yeni ad seçer. Sözleşme `TASARIM.md` §14. Bir sonraki yayında Actions uygular.
 
+> **2026-11-21:** `migrations/0006_sinif_modu.sql` eklendi (Emre kararı): Kahoot benzeri **sınıf (projeksiyon) modu** — öğretmen
+> oturum açar, öğrenciler telefondan yalnızca takma adla (Supabase **anonim girişi**) katılır; RP yok. Aynı dosya, anonim
+> kullanıcıları sınıf dışındaki her şeyden (arkadaş, oda, günlük, sıralama, profil) kilitler. Sözleşme `TASARIM.md` §15.
+> **Anonim girişi 0006 canlıya uygulanmadan AÇMAYIN** — sıra aşağıda "Sınıf modu: anonim girişi açmak".
+
 Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.supabase.co`**
 
 ## Klasördeki dosyalar
@@ -28,6 +33,7 @@ Proje: `wanjxcuqyghiyvculgau` → Project URL: **`https://wanjxcuqyghiyvculgau.s
 | `migrations/0001_init.sql` | Bütün tablolar, güvenlik kuralları (RLS), sunucu fonksiyonları, Realtime ayarları. Canlı projede elle çalıştırıldı; bir daha çalıştırılmaz. |
 | `migrations/0002_online_ek.sql`, `migrations/0003_gunluk_ve_hizli.sql`, `migrations/0004_kural_duzeltmeleri.sql` | Sonraki veritabanı güncellemeleri (lobide ayar; günlük vaka + seri, hızlı eşleşme, RP v2; erken ayrılma RP kuralı + günlük sıralama). Tekrar çalıştırılabilir. GitHub kendisi uygular. |
 | `migrations/0005_isim_filtresi.sql` | İsim filtresi (fonksiyonlar + ilk liste + mevcut profillerin taranması). Sonraki liste değişiklikleri `NNNN_isim_filtresi_veri.sql` (yalnızca veri). |
+| `migrations/0006_sinif_modu.sql` | Sınıf (projeksiyon) modu tabloları/fonksiyonları + anonim kullanıcı kilitleri. Tekrar çalıştırılabilir. GitHub kendisi uygular. |
 | `tools/apply_migrations.sh` | Uygulanmamış migration dosyalarını sırayla uygulayan betik (GitHub Actions çalıştırır). Hangi dosyanın uygulandığı veritabanında `public._migrations` tablosunda tutulur. |
 | `tools/workflow/supabase-migrasyon.yml` | Yeni GitHub Actions akışının hazır kopyası (bir kez yerine konacak; bkz. aşağıda "Kurulum (bir kez)"). |
 | `seed/0002_cases_answer_key.sql` | Vakaların doğru cevapları + seçenek listesi. Otomatik üretilir; elle düzenlemeyin. |
@@ -290,12 +296,47 @@ kayıtlı profilleri yeniden tarar: yeni listeye takılanlar `needs_rename` olur
 (izin verilen 597 ad hâlâ geçiyor mu; yanlış engel çıkarsa sözcüğü `beyaz_liste`'ye ekle) ve yayınla: Actions migration'ı
 canlıya uygular. Sözcükler hiçbir ekranda ya da hata mesajında gösterilmez.
 
+## Sınıf modu: anonim girişi açmak (bir kez) ve eski anonim hesapları temizlemek
+
+**Sıra önemli.**
+1. 0006'yı içeren sürümü yayınlayın (`GITHUBA_YUKLE.bat`). GitHub → **Actions** → son "Supabase" çalışmasında
+   `0006_sinif_modu.sql: uygulandı` satırını görün. (İsterseniz SQL Editor'de doğrulayın:
+   `select name from public._migrations order by name;` listesinde `0006_sinif_modu.sql` olmalı.)
+2. Ancak bundan **sonra**: Dashboard → **Authentication** → **Sign In / Providers** → **Allow anonymous sign-ins** → açın, kaydedin.
+   (0006 olmadan açılırsa anonim kullanıcılar arkadaşlık/oda/günlük fonksiyonlarına erişebilirdi.)
+3. Önerilir: **Authentication → Attack Protection** bölümünden CAPTCHA (Turnstile/hCaptcha) açmak ve **Authentication → Rate Limits**
+   sayfasında anonim giriş sınırını kontrol etmek (Supabase, anonim girişi kötüye kullanıma karşı CAPTCHA ile korumayı öneriyor).
+   CAPTCHA açılırsa istemciye site anahtarı eklenmesi gerekir; geliştiriciye söyleyin.
+
+Öğrenciler hesap açmaz; her telefon/tarayıcı bir anonim kullanıcı oluşturur ve bunlar `auth.users`'ta birikir (profil satırı açılmaz,
+sıralamada görünmezler). Ayda bir SQL Editor'de şu çalıştırılabilir (30 günden eski, açık bir sınıfta olmayan anonim kullanıcıları ve
+onların eski sınıf kayıtlarını siler; normal hesaplara dokunmaz):
+
+```sql
+delete from auth.users u
+ where u.is_anonymous
+   and u.created_at < now() - interval '30 days'
+   and not exists (select 1 from public.sinif_katilimcilar k
+                     join public.sinif_oturumlari o on o.id = k.oturum_id
+                    where k.user_id = u.id and o.durum in ('lobi', 'tur', 'cevap', 'skor'));
+-- (isteğe bağlı) 30 günden eski biten sınıf oturumları:
+delete from public.sinif_oturumlari
+ where durum in ('bitti', 'iptal') and coalesce(bitis, olusturma) < now() - interval '30 days';
+```
+İsterseniz aynı iki komut Dashboard → **Integrations → Cron** ile ayda bir otomatik çalıştırılabilir. Açık kalan sınıflar kendiliğinden
+kapanır (2 saat hareketsiz ya da 24 saatlik oturum); cron gerekmez.
+
+**Realtime (ücretsiz plan):** 2026-11-21'de bakılan sınırlar: 200 eşzamanlı bağlantı, saniyede 100 mesaj. 100 öğrencilik sınıf ve
+projeksiyon ≈ 101 bağlantıdır; istemci kalabalık sınıfta öğrencilerde Realtime yerine 3 sn'lik yoklama kullanır (`TASARIM.md` §15.6).
+Sınırlar değişebilir: https://supabase.com/docs/guides/realtime/limits
+
 ## 10. Testler (geliştiriciler için)
 
 ```
 cd supabase/tests
 npm install
-npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs + isim_filtresi.test.mjs
+npm test            # PGlite (tarayıcı dışı WASM Postgres) ile: scenario.test.mjs + daily_quick.test.mjs + isim_filtresi.test.mjs + sinif_modu.test.mjs
+npm run test:0006   # (bash/WSL) önceki üç paket, 0005'in hemen ardından 0006 da yüklenerek (ILE_0006=1)
 ```
 İsim filtresi derlemi ve sunucu/istemci eşliği (depo kökünde): `node tools/isim_filtresi/test/calistir.mjs --sql`;
 tarayıcı testi: `node tools/isim_filtresi/test/istemci.mjs` (yerel sunucu `python3 -m http.server 8899`).

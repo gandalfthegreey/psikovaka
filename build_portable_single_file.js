@@ -58,11 +58,11 @@ if (typeof module !== 'undefined' && module.exports) {
 // 2. Tek dosyalık taşınabilir HTML'i bellekte kur (doğrulama hatası varsa hiçbir dosya yazılmaz)
 const htmlRaw = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 // CSS dosyaları index.html'deki sırayla satır içine alınır (tokens -> style -> arena -> online)
-const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css', 'anasayfa.css', 'kutuphane.css', 'dosya.css'];
+const CSS_FILES = ['tokens.css', 'style.css', 'arena.css', 'online.css', 'anasayfa.css', 'kutuphane.css', 'dosya.css', 'sinif.css'];
 const cssRawByFile = Object.fromEntries(CSS_FILES.map(f => [f, fs.readFileSync(path.join(__dirname, 'css', f), 'utf8')]));
 // index.html'deki yerel script sırası. Yeni bir js/ dosyası eklenirse buraya da eklenmeli.
 // js/cases.js diskten değil, yukarıda pharmacologyId damgalanmış içerikten alınır.
-const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'explain.js', 'avatar_studio.js', 'supabase_config.js', 'isim_filtresi.js', 'account.js', 'app.js', 'online/core.js', 'online/api.js', 'online/realtime.js', 'online/views.js', 'online/friends.js', 'online/rooms.js', 'online/lobby.js', 'online/match.js', 'online/ligler.js', 'online/quick.js', 'online/daily.js', 'online/online.js', 'tasarim_dosya.js'];
+const JS_FILES = ['diagnoses.js', 'dsm_manual.js', 'therapies.js', 'pharmacology.js', 'cases.js', 'avatar.js', 'leagues.js', 'explain.js', 'avatar_studio.js', 'supabase_config.js', 'isim_filtresi.js', 'account.js', 'app.js', 'online/core.js', 'online/api.js', 'online/realtime.js', 'online/views.js', 'online/friends.js', 'online/rooms.js', 'online/lobby_room.js', 'online/lobby.js', 'online/match.js', 'online/ligler.js', 'online/quick.js', 'online/daily.js', 'vendor/qr.js', 'online/sinif_api.js', 'online/sinif.js', 'online/online.js', 'tasarim_dosya.js'];
 const jsRawByFile = Object.fromEntries(JS_FILES.map(f => [f, f === 'cases.js' ? updatedCasesContent : fs.readFileSync(path.join(__dirname, 'js', f), 'utf8')]));
 
 let bundled = htmlRaw;

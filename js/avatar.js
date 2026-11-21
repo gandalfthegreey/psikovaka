@@ -16,7 +16,16 @@
  *   isLegacy(cfg)              eski biçim mi?
  *   equals(a, b)               normalize edilmiş iki yapılandırma aynı mı?
  *   randomConfig(seed?)        tohum verilirse belirlenimci (botlar, yer tutucular)
- *   render(cfg, opts)          SVG dizesi. opts: { size=56, framed=true, animated=false, title, emote, className }
+ *   render(cfg, opts)          SVG dizesi. opts: { size=56, framed=true, animated=false, title, emote, className,
+ *                                activity: 'read'|'tea'|'doze'|'stretch'|'think'|'wave'|null, facing: 'front'|'left'|'right',
+ *                                walking: true|false }
+ *                              activity: kısa döngülü poz + nesne (kitap, fincan, "z"…); emote verilirse emote kazanır.
+ *                              facing: 'right' 3/4 yan poz (yüz/şapka bakılan yana kayar, tüyler geriye yatar), 'left' onun aynası.
+ *                              walking: sırayla adım atan ayaklar + hafif sekme (css/style.css; hareket azaltmada durur).
+ *   setPose(el, {facing, walking, activity})  çizilmiş Nöro'yu yerinde değiştirir (aynı <svg>): facing/walking yalnızca
+ *                              sınıf, activity yalnızca o svg'nin içini yeniden üretir. getPose(el) mevcut pozu döner.
+ *   ACTIVITIES, ACTIVITY_LABELS, FACINGS
+ *   Kapsayıcıya .nv-paused sınıfı eklenirse içindeki tüm Nöro animasyonları durur (ör. sekme gizliyken).
  *                              framed: dairesel rozet arka planı (profil, sıralama). framed=false: şeffaf zemin +
  *                              yumuşak yer gölgesi (lobi). animated: CSS sınıf kancaları (nefes, göz kırpma, tüy ucu
  *                              parıltısı; css/style.css "Nöro avatar"; prefers-reduced-motion'a uyar).
@@ -384,14 +393,14 @@
             const c = (x, y, r) => `<circle cx="${f1(x)}" cy="${f1(y)}" r="${r}" fill="${pal.base}" stroke="${pal.outline}" stroke-width="3"/>`;
             out.push(c(52, T + 3, 6.5), c(68, T + 3, 6.5), c(60, T - 1, 7.5));
         }
-        return out.join('');
+        return `<g class="nv-tufts">${out.join('')}</g>`;
     }
 
     function drawFeet(g, pal) {
         const b = g.b;
         const fx = Math.max(9, b.wBot * 0.5);
-        const e = (x) => `<ellipse cx="${f1(x)}" cy="${b.bottom - 1}" rx="7.5" ry="4.6" fill="${pal.shade}" stroke="${pal.outline}" stroke-width="3"/>`;
-        return e(60 - fx) + e(60 + fx);
+        const e = (x, side) => `<g class="nv-foot nv-foot-${side}"><ellipse cx="${f1(x)}" cy="${b.bottom - 1}" rx="7.5" ry="4.6" fill="${pal.shade}" stroke="${pal.outline}" stroke-width="3"/></g>`;
+        return `<g class="nv-feet">${e(60 - fx, 'l')}${e(60 + fx, 'r')}</g>`;
     }
 
     function drawBody(g, pal) {
@@ -458,6 +467,10 @@
         }
         if (id === 'closed') {
             return `<path d="M${f1(x - 6)} ${y}Q${f1(x)} ${y + 5} ${f1(x + 6)} ${y}" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`;
+        }
+        if (id === 'down') { // kitaba bakan: yarı kapalı kapak, aşağı bakan göz bebeği
+            return `<path d="M${f1(x - 6)} ${y - 0.5}Q${f1(x)} ${y - 2.4} ${f1(x + 6)} ${y - 0.5}Q${f1(x + 6)} ${y + 7} ${f1(x)} ${y + 7}Q${f1(x - 6)} ${y + 7} ${f1(x - 6)} ${y - 0.5}Z" fill="${INK}"/>` +
+                glint(x - 2.2, y + 3.4, 1.5);
         }
         if (id === 'dot') {
             return `<circle cx="${f1(x)}" cy="${y}" r="3.8" fill="${INK}"/>` + glint(x - 1.2, y - 1.3, 1.1);
@@ -706,45 +719,143 @@
         laugh: { eyes: 'closed', mouth: 'laugh' }
     };
 
+    // ------------------------------------------------------------------ etkinlikler (kısa döngülü pozlar + nesne)
+    const ACTIVITIES = ['read', 'tea', 'doze', 'stretch', 'think', 'wave'];
+    const ACTIVITY_LABELS = { read: 'Kitap okuyor', tea: 'Çay içiyor', doze: 'Kestiriyor', stretch: 'Geriniyor', think: 'Düşünüyor', wave: 'El sallıyor' };
+    const ACT_FACE = {
+        read: { eyes: 'down', mouth: 'smile' },
+        tea: { eyes: 'happy', mouth: 'smile' },
+        doze: { eyes: 'closed', mouth: 'o' },
+        stretch: { eyes: 'closed', mouth: 'o' },
+        think: { eyes: 'up', mouth: 'smirk' },
+        wave: { eyes: 'happy', mouth: 'open' }
+    };
+    function limb(d, pal, cls) {
+        return `<g${cls ? ` class="${cls}"` : ''}><path d="${d}" fill="none" stroke="${pal.outline}" stroke-width="10" stroke-linecap="round"/>` +
+            `<path d="${d}" fill="none" stroke="${pal.base}" stroke-width="6" stroke-linecap="round"/></g>`;
+    }
+    // "z" harfi: kalın beyaz, koyu konturlu (her zeminde okunur)
+    function zee(x, y, s, cls) {
+        const d = `M${f1(x)} ${f1(y)}h${f1(s)}l${f1(-s)} ${f1(s * 1.1)}h${f1(s)}`;
+        return `<g class="${cls}"><path d="${d}" fill="none" stroke="#2a2238" stroke-width="${f1(s * 0.62)}" stroke-linecap="round" stroke-linejoin="round"/>` +
+            `<path d="${d}" fill="none" stroke="#fff" stroke-width="${f1(s * 0.3)}" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+    }
+    /** Etkinlik çizimi: { item: gövde içinde (nefesle hareket eder), extras: gövde dışında, droop } */
+    function drawActivity(act, g, pal) {
+        const OUT = '#2a2238';
+        const T = g.b.top, ay = g.armY, my = g.mouthY;
+        if (act === 'read') {
+            const by = Math.max(my + 6.5, ay - 16);
+            const h = Math.min(15, ay + 5 - by);
+            const pw = 15.5;
+            const cover = `M60 ${by + 1}L${f1(60 - pw - 1.6)} ${f1(by - 1)}L${f1(60 - pw - 1.6)} ${f1(by + h + 1.6)}L60 ${f1(by + h + 3.4)}L${f1(60 + pw + 1.6)} ${f1(by + h + 1.6)}L${f1(60 + pw + 1.6)} ${f1(by - 1)}Z`;
+            const pageL = `M60 ${by + 0.5}L${f1(60 - pw)} ${f1(by - 1.5)}L${f1(60 - pw)} ${f1(by + h)}L60 ${f1(by + h + 2)}Z`;
+            const pageR = `M60 ${by + 0.5}L${f1(60 + pw)} ${f1(by - 1.5)}L${f1(60 + pw)} ${f1(by + h)}L60 ${f1(by + h + 2)}Z`;
+            const lines = [3.2, 6.4, 9.6].filter(dy => dy < h - 1).map(dy =>
+                `M${f1(60 - pw + 2.5)} ${f1(by + dy - 0.6)}L${f1(60 - 3)} ${f1(by + dy + 0.4)}M${f1(60 + 3)} ${f1(by + dy + 0.4)}L${f1(60 + pw - 2.5)} ${f1(by + dy - 0.6)}`).join('');
+            const item = `<g class="nv-prop nv-book"><path d="${cover}" fill="#2f7f86" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
+                `<path d="${pageL}" fill="#fbf4e4" stroke="${OUT}" stroke-width="1.6" stroke-linejoin="round"/>` +
+                `<path d="${pageR}" fill="#fffaf0" stroke="${OUT}" stroke-width="1.6" stroke-linejoin="round"/>` +
+                `<path d="${lines}" stroke="#a9a08c" stroke-width="1.3" stroke-linecap="round"/>` +
+                `<path class="nv-page" d="${pageR}" fill="#fffdf7" stroke="${OUT}" stroke-width="1.4" stroke-linejoin="round"/>` +
+                `<path d="M60 ${by + 0.5}V${f1(by + h + 2)}" stroke="${OUT}" stroke-width="1.6"/></g>`;
+            const arms = arm(g, pal, -1, 60 - pw - 0.5, by + h * 0.6) + arm(g, pal, 1, 60 + pw + 0.5, by + h * 0.6);
+            return { item: item + arms, extras: '' };
+        }
+        if (act === 'tea') {
+            const cy = my + 6;                         // fincanın ağzı
+            const cx = 60 + Math.min(17, g.hw(cy) * 0.6);
+            const cup = `<path d="M${f1(cx - 8.5)} ${cy}L${f1(cx + 8.5)} ${cy}Q${f1(cx + 8)} ${cy + 11} ${f1(cx)} ${cy + 11}Q${f1(cx - 8)} ${cy + 11} ${f1(cx - 8.5)} ${cy}Z" fill="#fdfaf3" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                `<path d="M${f1(cx - 7.6)} ${cy + 4}L${f1(cx + 7.6)} ${cy + 4}" stroke="#e0705a" stroke-width="2.2"/>` +
+                `<ellipse cx="${f1(cx)}" cy="${cy + 0.8}" rx="7" ry="1.6" fill="#b9683a"/>` +
+                `<path d="M${f1(cx + 8)} ${cy + 2.4}q5 .4 4.4 4q-.6 3 -5.4 2.4" fill="none" stroke="${OUT}" stroke-width="2.4" stroke-linecap="round"/>` +
+                `<ellipse cx="${f1(cx)}" cy="${cy + 12}" rx="11.5" ry="2.6" fill="#fdfaf3" stroke="${OUT}" stroke-width="2"/>`;
+            const steam = `<g class="nv-steam"><path class="nv-steam-1" d="M${f1(cx - 3)} ${cy - 3}q-2.6 -3.2 0 -6.4q2.6 -3.2 0 -6.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>` +
+                `<path class="nv-steam-2" d="M${f1(cx + 3)} ${cy - 2}q-2.2 -2.8 0 -5.6q2.2 -2.8 0 -5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".75"/></g>`;
+            const hands = arm(g, pal, -1, cx - 10, cy + 12) + arm(g, pal, 1, cx + 9, cy + 9);
+            return { item: `<g class="nv-prop nv-sip">${hands}${steam}${cup}</g>`, extras: '' };
+        }
+        if (act === 'doze') {
+            const x = 60 + Math.min(14, g.hw(T + 8) * 0.6) + 4, y = T - 2;
+            return {
+                item: '', droop: true,
+                extras: `<g class="nv-zzz">${zee(x - 2, y + 2, 7.5, 'nv-z nv-z-1')}${zee(x + 8, y - 9, 9.5, 'nv-z nv-z-2')}${zee(x + 19, y - 22, 11.5, 'nv-z nv-z-3')}</g>`
+            };
+        }
+        if (act === 'stretch') {
+            const one = (side) => {
+                const sy = g.eyeY + 6, sx = 60 + side * (g.hw(sy) - 3);
+                return limb(`M${f1(sx)} ${sy}Q${f1(sx + side * 7)} ${sy - 8} ${f1(sx + side * 6)} ${sy - 20}`, pal);
+            };
+            return { item: `<g class="nv-stretch-arms">${one(-1)}${one(1)}</g>`, extras: '' };
+        }
+        if (act === 'think') {
+            const sy = ay - 6, sx = 60 + g.hw(sy) - 3;
+            return { item: limb(`M${f1(sx)} ${sy}Q${f1(sx - 2)} ${f1(my + 12)} ${63} ${f1(my + 7)}`, pal, 'nv-chin'), extras: drawEmoteExtras('think', g) };
+        }
+        if (act === 'wave') {
+            const sy = g.eyeY + 10, sx = 60 + g.hw(sy) - 3;
+            return { item: limb(`M${f1(sx)} ${sy}Q${f1(sx + 10)} ${sy - 3} ${f1(sx + 10)} ${sy - 17}`, pal, 'nv-wave-arm'), extras: '' };
+        }
+        return { item: '', extras: '' };
+    }
+
     // ------------------------------------------------------------------ render
     function esc(s) {
         return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
-    function render(config, opts) {
-        const o = opts || {};
-        const cfg = normalize(config);
-        const size = Math.max(12, Math.round(Number(o.size) || 56));
-        const framed = o.framed !== false;
-        const animated = !!o.animated;
-        const emote = EMOTES.includes(o.emote) ? o.emote : null;
+    const FACINGS = ['front', 'left', 'right'];
+    const cfgKey = (cfg) => KEYS.map(k => cfg[k]).join('.');
+    function cfgFromKey(str) {
+        const parts = String(str || '').split('.');
+        if (parts.length !== KEYS.length) return null;
+        const o = { v: 2 };
+        KEYS.forEach((k, i) => { o[k] = parts[i]; });
+        return normalize(o);
+    }
+
+    /** SVG'nin iç işaretlemesi (kök <svg> hariç) */
+    function inner(cfg, framed, emote, activity) {
         const g = GEOM[cfg.body] || GEOM.round;
         const pal = palette(cfg.color);
-        const face = emote ? EMOTE_FACE[emote] : null;
+        const face = emote ? EMOTE_FACE[emote] : (activity ? ACT_FACE[activity] : null);
         const eyes = face ? face.eyes : cfg.eyes;
         const mouth = face ? face.mouth : cfg.mouth;
+        const act = (!emote && activity) ? drawActivity(activity, g, pal) : null;
 
-        const held = (!emote && ACC_HELD[cfg.accessory]) ? drawHeld(cfg.accessory, g, pal) : { item: '', arms: '' };
-        const accFront = (cfg.accessory === 'glasses' && emote) ? '' : drawAccessoryFront(cfg.accessory, g, pal);
+        const held = (!emote && !act && ACC_HELD[cfg.accessory]) ? drawHeld(cfg.accessory, g, pal) : { item: '', arms: '' };
+        const glasses = cfg.accessory === 'glasses';
+        const faceAcc = (glasses && !emote) ? drawAccessoryFront('glasses', g, pal) : '';
+        const bodyAcc = glasses ? '' : drawAccessoryFront(cfg.accessory, g, pal);
+        const cheeks = cfg.pattern === 'cheeks';
 
         const figure =
+            `<g class="nv-sway">` +
             drawAccessoryBehind(cfg.accessory, g) +
-            drawTufts(cfg.tufts, g, pal, emote === 'sad') +
+            drawTufts(cfg.tufts, g, pal, emote === 'sad' || !!(act && act.droop)) +
             drawFeet(g, pal) +
             `<g class="nv-torso">` +
             drawBody(g, pal) +
-            drawPattern(cfg.pattern, g, pal) +
-            `<g class="nv-eyes">${drawEyes(eyes, g, pal)}</g>` +
+            (cheeks ? '' : drawPattern(cfg.pattern, g, pal)) +
+            `<g class="nv-face">` +
+            (cheeks ? drawPattern('cheeks', g, pal) : '') +
+            `<g class="nv-look"><g class="nv-eyes">${drawEyes(eyes, g, pal)}</g></g>` +
             drawMouth(mouth, g) +
-            accFront +
-            drawHeadwear(cfg.headwear, g, pal) +
+            faceAcc +
+            `</g>` +
+            (bodyAcc ? `<g class="nv-chest">${bodyAcc}</g>` : '') +
+            `<g class="nv-hat">${drawHeadwear(cfg.headwear, g, pal)}</g>` +
             held.item + held.arms +
             (emote ? drawEmoteArms(emote, g, pal) : '') +
+            (act ? act.item : '') +
             `</g>` +
-            (emote ? drawEmoteExtras(emote, g) : '');
+            (emote ? drawEmoteExtras(emote, g) : '') +
+            (act ? act.extras : '') +
+            `</g>`;
 
         const bg = byId.background[cfg.background] || byId.background[DEFAULT.background];
         let frame = '';
-        let wrapOpen, wrapClose = '</g>';
+        let wrapOpen;
         if (framed) {
             if (bg.hex) frame = `<circle cx="60" cy="60" r="58" fill="${bg.hex}" stroke="${bg.ring}" stroke-width="2"/>`;
             wrapOpen = `<g transform="translate(60 63) scale(.9) translate(-60 -63)">`;
@@ -752,15 +863,78 @@
             frame = `<ellipse class="nv-ground" cx="60" cy="104" rx="27" ry="4.5" fill="#000" opacity=".16"/>`;
             wrapOpen = `<g transform="translate(0 2)">`;
         }
+        // nv-flip: yön (sola bakış = yatay ayna). Görünmez dikdörtgen kutuyu 0-120 aralığında simetrik tutar,
+        // böylece CSS dönüşümü (transform-box: fill-box) tam ortadan aynalar.
+        return frame + wrapOpen + `<g class="nv-figure"><g class="nv-flip"><rect x="0" y="0" width="120" height="1" fill="none"/>${figure}</g></g></g>`;
+    }
 
+    function rootClasses(cfg, o) {
+        const framed = o.framed !== false;
+        const emote = EMOTES.includes(o.emote) ? o.emote : null;
+        const activity = (!emote && ACTIVITIES.includes(o.activity)) ? o.activity : null;
+        const facing = FACINGS.includes(o.facing) ? o.facing : 'front';
         const h = hashString(KEYS.map(k => cfg[k]).join('|'));
         const cls = ['nv', framed ? 'nv-framed' : 'nv-free'];
-        if (animated) cls.push('nv-anim', 'nv-dly-' + (h % 4));
+        if (o.animated) cls.push('nv-anim', 'nv-dly-' + (h % 4));
         if (emote) cls.push('nv-emote', 'nv-emote-' + emote);
+        if (activity) cls.push('nv-act', 'nv-act-' + activity);
+        if (facing !== 'front') cls.push('nv-f-side', 'nv-f-' + facing);
+        if (o.walking) cls.push('nv-walking');
         if (o.className) cls.push(String(o.className).replace(/[^\w\- ]/g, ''));
+        return { cls, framed, emote, activity, facing };
+    }
+
+    function render(config, opts) {
+        const o = opts || {};
+        const cfg = normalize(config);
+        const size = Math.max(12, Math.round(Number(o.size) || 56));
+        const r = rootClasses(cfg, o);
         const a11y = o.title ? `role="img" aria-label="${esc(o.title)}"` : 'aria-hidden="true" focusable="false"';
-        return `<svg class="${cls.join(' ')}" viewBox="0 0 120 120" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" ${a11y}>` +
-            frame + wrapOpen + `<g class="nv-figure">${figure}</g>` + wrapClose + `</svg>`;
+        // data-nv: kısa yapılandırma anahtarı; setPose etkinliği aynı öğe içinde yeniden çizebilsin diye
+        return `<svg class="${r.cls.join(' ')}" viewBox="0 0 120 120" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" data-nv="${cfgKey(cfg)}" ${a11y}>` +
+            inner(cfg, r.framed, r.emote, r.activity) + `</svg>`;
+    }
+
+    /**
+     * Çizilmiş bir Nöro'nun pozunu yerinde değiştirir (aynı <svg> öğesi kalır).
+     * el: svg.nv ya da onu içeren öğe. pose: { facing?, walking?, activity? } (verilmeyen değişmez).
+     * facing/walking yalnızca sınıf değiştirir (DOM değişmez, CSS ile yumuşak döner);
+     * activity değişince yalnızca o svg'nin iç işaretlemesi yeniden üretilir. Dönen değer: svg ya da null.
+     */
+    function setPose(el, pose) {
+        const svg = el && (el.matches && el.matches('svg.nv') ? el : el.querySelector && el.querySelector('svg.nv'));
+        if (!svg || !pose) return null;
+        const cl = svg.classList;
+        if (pose.facing !== undefined) {
+            const f = FACINGS.includes(pose.facing) ? pose.facing : 'front';
+            cl.toggle('nv-f-side', f !== 'front');
+            cl.toggle('nv-f-left', f === 'left');
+            cl.toggle('nv-f-right', f === 'right');
+        }
+        if (pose.walking !== undefined) cl.toggle('nv-walking', !!pose.walking);
+        if (pose.activity !== undefined) {
+            const act = ACTIVITIES.includes(pose.activity) ? pose.activity : null;
+            const cur = ACTIVITIES.find(a => cl.contains('nv-act-' + a)) || null;
+            const emote = EMOTES.find(e => cl.contains('nv-emote-' + e)) || null;
+            if (act !== cur) {
+                ACTIVITIES.forEach(a => cl.remove('nv-act-' + a));
+                cl.toggle('nv-act', !!act && !emote);
+                if (act && !emote) cl.add('nv-act-' + act);
+                const cfg = cfgFromKey(svg.getAttribute('data-nv')) || normalize(null);
+                svg.innerHTML = inner(cfg, cl.contains('nv-framed'), emote, emote ? null : act);
+            }
+        }
+        return svg;
+    }
+    function getPose(el) {
+        const svg = el && (el.matches && el.matches('svg.nv') ? el : el.querySelector && el.querySelector('svg.nv'));
+        if (!svg) return null;
+        const cl = svg.classList;
+        return {
+            facing: cl.contains('nv-f-left') ? 'left' : cl.contains('nv-f-right') ? 'right' : 'front',
+            walking: cl.contains('nv-walking'),
+            activity: ACTIVITIES.find(a => cl.contains('nv-act-' + a)) || null
+        };
     }
 
     function partName(slot, id) {
@@ -772,7 +946,7 @@
         return `${partName('color', c.color)} ${partName('body', c.body).toLocaleLowerCase('tr')} Nöro`;
     }
 
-    const api = { PARTS, SLOTS, DEFAULT, EMOTES, EMOTE_LABELS, normalize, isLegacy, equals, randomConfig, render, partName, describe };
+    const api = { PARTS, SLOTS, DEFAULT, EMOTES, EMOTE_LABELS, ACTIVITIES, ACTIVITY_LABELS, FACINGS, normalize, isLegacy, equals, randomConfig, render, setPose, getPose, partName, describe };
     global.PsikoVakaAvatar = api;
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

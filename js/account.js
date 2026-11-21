@@ -14,6 +14,10 @@
  *   'ready'                  oturum var, kullanıcı adı var (profil null olabilir: okunamadıysa profileError dolu)
  * Hizmet durumu (availability): 'pending' | 'ready' | 'unavailable' | 'disabled' | 'unsupported'
  *
+ * Anonim oturum (yalnızca Sınıf modu, TASARIM §15; ajan C2): signInAnonymously() YALNIZCA js/online/sinif*.js'ten çağrılır.
+ * Anonim kullanıcı uygulamanın geri kalanı için MİSAFİRDİR: state 'guest', snapshot.user null, profil okunmaz,
+ * kullanıcı adı adımı açılmaz, aktarım yapılmaz; snapshot.anonymous = true. Giriş/kayıt seçenekleri normal görünür.
+ *
  * Kullanım:
  *   PsikoVakaAccount.onChange((snapshot, event) => { ... });
  *   PsikoVakaAccount.init();
@@ -61,7 +65,8 @@
         syncedUserId: null,
         importedThisSession: false,
         loadSeq: 0,
-        renameColumn: true
+        renameColumn: true,
+        anon: null          // anonim oturumun kullanıcısı (yalnızca sınıf modu); st.user her zaman null kalır
     };
     let initPromise = null;
 
@@ -324,6 +329,7 @@
             profile: st.profile ? JSON.parse(JSON.stringify(st.profile)) : null,
             profileError: st.profileError,
             recovery: st.recovery,
+            anonymous: !!(st.anon && !st.user),
             renameRequired: !!(st.user && st.profile && st.profile.username && st.profile.needs_rename),
             remember: getRemember(),
             passwordMinLength: passwordMinLength()
@@ -518,7 +524,8 @@
     }
 
     function clearSession() {
-        const hadUser = !!st.user;
+        const hadUser = !!st.user || !!st.anon;
+        st.anon = null;
         st.user = null;
         st.profile = null;
         st.profileError = null;
@@ -533,6 +540,15 @@
     async function applySession(session) {
         const user = session && session.user ? session.user : null;
         if (!user) { clearSession(); return; }
+        if (user.is_anonymous) {
+            // Sınıf modu takma adı: uygulama için misafir (profil yok, kullanıcı adı adımı yok)
+            const changed = !st.anon || st.anon.id !== user.id || !!st.user;
+            st.anon = { id: user.id };
+            st.user = null; st.profile = null; st.profileError = null; st.syncedUserId = null; st.loadSeq++; st._loading = false;
+            if (changed) setState();
+            return;
+        }
+        st.anon = null;
         const sameUser = st.user && st.user.id === user.id;
         st.user = user;
         if (sameUser && (st.profile || st._loading)) {
@@ -722,6 +738,25 @@
         } catch (e) { return fail(e); }
     }
 
+    /**
+     * YALNIZCA sınıf modu (js/online/sinif*.js) çağırır: oturum yoksa Supabase anonim girişi.
+     * Hesaplı ya da zaten anonim oturumda hiçbir şey yapmaz. Sunucuda anonim giriş kapalıysa { code: 'ANON_KAPALI' }.
+     */
+    async function signInAnonymously() {
+        const bad = requireClient(); if (bad) return bad;
+        if (st.user || st.anon) return { ok: true, reused: true };
+        try {
+            if (typeof st.client.auth.signInAnonymously !== 'function') return { ok: false, error: { code: 'ANON_KAPALI', message: 'Takma adla katılım şu an kapalı.' } };
+            const { data, error } = await st.client.auth.signInAnonymously();
+            if (error) {
+                if (/anonymous/i.test(error.message || '') || error.code === 'anonymous_provider_disabled') return { ok: false, error: { code: 'ANON_KAPALI', message: 'Takma adla katılım şu an kapalı.' } };
+                return fail(error);
+            }
+            await applySession(data && data.session);
+            return { ok: true };
+        } catch (e) { return fail(e); }
+    }
+
     async function signOut() {
         try {
             if (st.client) await st.client.auth.signOut({ scope: 'local' });
@@ -879,6 +914,7 @@
         signUp,
         resendConfirmation,
         signIn,
+        signInAnonymously,
         getRemember,
         sendPasswordReset,
         updatePassword,

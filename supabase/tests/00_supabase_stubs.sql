@@ -19,6 +19,8 @@ create table if not exists auth.users (
   raw_user_meta_data jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now()
 );
+-- Supabase anonim girişi (0006 testleri): auth.users.is_anonymous + JWT claim 'is_anonymous'
+alter table auth.users add column if not exists is_anonymous boolean not null default false;
 
 -- Supabase'deki ile aynı mantık: JWT claim'lerindeki "sub"
 create or replace function auth.uid() returns uuid

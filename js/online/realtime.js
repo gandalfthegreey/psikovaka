@@ -180,11 +180,29 @@
         };
     }
 
+    // --------------------------------------------------------- sınıf modu (§15.6; ajan C2)
+    /**
+     * Sunucu (projeksiyon): oturum satırı + katılımcılar + tur sonuçları. Katılımcı (telefon): yalnızca oturum satırı.
+     * opts: { host: bool }. handlers: { onChange(table, payload), onStatus(s), onResync() }. Dönüş: { leave(), isLive() } | null
+     */
+    function joinSinif(oturumId, opts, handlers) {
+        const host = !!(opts && opts.host);
+        const tables = host ? ['sinif_oturumlari', 'sinif_katilimcilar', 'sinif_tur_sonuclari'] : ['sinif_oturumlari'];
+        const rec = managed('pg-sinif-' + oturumId, { onResync: handlers.onResync, onStatus: handlers.onStatus }, (ch) => {
+            tables.forEach(t => {
+                const filter = t === 'sinif_oturumlari' ? 'id=eq.' + oturumId : 'oturum_id=eq.' + oturumId;
+                ch.on('postgres_changes', { event: t === 'sinif_oturumlari' ? 'UPDATE' : '*', schema: 'public', table: t, filter }, (p) => handlers.onChange && handlers.onChange(t, p));
+            });
+        });
+        if (!rec) return null;
+        return { leave: () => rec.leave(), isLive: () => rec.isLive() };
+    }
+
     function stopAll() {
         stopSelf();
         stopPublicRooms();
         Array.from(live.values()).forEach(r => r.leave());
     }
 
-    NS.realtime = { startSelf, stopSelf, setStatus, watchFriends, friendStatus, watchPublicRooms, stopPublicRooms, joinRoom, stopAll, _live: live };
+    NS.realtime = { startSelf, stopSelf, setStatus, watchFriends, friendStatus, watchPublicRooms, stopPublicRooms, joinRoom, joinSinif, stopAll, _live: live };
 })(typeof window !== 'undefined' ? window : globalThis);

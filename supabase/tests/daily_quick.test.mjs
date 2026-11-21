@@ -7,14 +7,17 @@
 //   DATABASE_URL=postgres://... node daily_quick.test.mjs   # boş, atılabilir gerçek Postgres
 //                                                          # (+ iki bağlantılı eşzamanlılık testleri)
 // Gerçek Supabase projesine ASLA bağlamayın.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
-const read = (p) => readFileSync(path.join(root, p), 'utf8');
+const readRaw = (p) => readFileSync(path.join(root, p), 'utf8');
+// ILE_0006=1: 0005 her yüklendiğinde ardından 0006 da uygulanır (0006 sonrası geriye uyum denemesi)
+const MIG6_YOL = ['migrations/0006_sinif_modu.sql', 'tools/0006_sinif_modu.sql.taslak'].find((p) => existsSync(path.join(root, p)));
+const read = (p) => readRaw(p) + (process.env.ILE_0006 && p === 'migrations/0005_isim_filtresi.sql' && MIG6_YOL ? '\n' + readRaw(MIG6_YOL) : '');
 
 async function connect() {
   if (process.env.DATABASE_URL) {

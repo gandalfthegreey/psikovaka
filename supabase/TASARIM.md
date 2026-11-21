@@ -651,3 +651,265 @@ vermez, `'Klinisyen'` olur: kayıt hiçbir zaman bu yüzden bozulmaz. İşaretli
   `scenario.test.mjs` 46/46 ve `daily_quick.test.mjs` 51/51 (PGlite) / 53/53 (PG 16) 0005 yüklüyken; 0005 ikinci kez çalışınca
   parmak izi aynı. `apply_migrations.sh` 0001–0004 kayıtlı veritabanına yalnızca 0005'i uyguladı (NOTICE: 1 profil), ikinci çalıştırmada atladı.
 - Canlıda henüz çalışmadı; bir sonraki yayında Actions uygular.
+
+## 15. Sınıf (projeksiyon) modu (ajan S2, 2026-11-21 — `0006_sinif_modu.sql`; Emre kararı)
+
+> **Durum:** SÖZLEŞME + UYGULANDI (0006, testler §15.10; sapmalar §15.9). İstemci (ajan C2) bu bölüme göre yazar. Adlar, parametreler, JSON biçimleri ve hata kodları
+> sözleşmedir; uygulamada değişen bir şey olursa burada **"Sapma"** notuyla işaretlenir.
+> 0006 canlıya uygulanmadan önce bu RPC'ler PostgREST'te `PGRST202` döner (`UNSUPPORTED`).
+> **Anonim giriş (Allow anonymous sign-ins) 0006 canlıya uygulanmadan AÇILMAMALI** (§15.8).
+
+Kahoot benzeri sınıf oyunu: **sunucu** (öğretmen; giriş yapmış, kullanıcı adı olan, anonim OLMAYAN hesap) oturum açar,
+projeksiyonda lobi + katılım kodu görünür; **katılımcılar** (öğrenciler) telefondan yalnızca **takma adla** katılır
+(Supabase anonim girişi; normal hesaplar da katılabilir). Her tur bir vaka: ipuçları projeksiyonda sabit aralıkla
+kendiliğinden açılır, öğrenciler telefonda tanı arar (otomatik tamamlama, `js/diagnoses.js`) ve serbestçe tahmin eder;
+erken doğru tahmin daha çok puan getirir. Tur sonunda cevap, çözenler ve sıralama; en sonda podyum.
+**RP YOK:** hiçbir sınıf işlemi `profiles.ranked_points`, `matches_*`, `match_results`, liderlik, günlük ya da seri tablolarına dokunmaz.
+
+### 15.1 Durum makinesi
+
+```mermaid
+stateDiagram-v2
+  [*] --> lobi: sinif_olustur
+  lobi --> lobi: sinif_katil / sinif_ayril / sinif_at
+  lobi --> tur: sinif_basla (sunucu; ≥1 katılımcı)
+  tur --> cevap: 6. ipucunun aralığı doldu (kendiliğinden) / tüm aktif katılımcılar bitti / sinif_turu_bitir (sunucu)
+  cevap --> skor: sinif_sonraki (sunucu)
+  skor --> tur: sinif_sonraki (sunucu; tur kaldıysa)
+  skor --> bitti: sinif_sonraki (sunucu; son turdan sonra)
+  lobi --> iptal: sinif_bitir (sunucu, hiç başlamadan)
+  tur --> bitti: sinif_bitir (sunucu)
+  cevap --> bitti: sinif_bitir
+  skor --> bitti: sinif_bitir
+  lobi --> bitti: zaman aşımı (§15.7)
+  tur --> bitti: zaman aşımı
+  cevap --> bitti: zaman aşımı
+  skor --> bitti: zaman aşımı
+```
+
+- `durum`: `lobi | tur | cevap | skor | bitti | iptal`. `tur_no`: lobide 0, sonra 1…`vaka_sayisi`.
+- `surum` (tam sayı): oturum satırındaki her durum/tur değişikliğinde +1. İstemci son gördüğü `surum`'dan farklı bir değer
+  görünce `sinif_durum` çağırır.
+- **Geri sayım:** tur açılırken `tur_baslangic = now() + 3 sn` (`game_config.sinif_geri_sayim_sn`). Bu sürede `ipucu_no = 0`
+  ("Hazır ol"), tahmin `TUR_BASLAMADI` alır. (Brifte yoktu; projeksiyon için eklendi.)
+- **İpucu zaman çizelgesi (sunucu saatine göre):** `gecen = now − tur_baslangic` (sn, kesirli);
+  `ipucu_no = gecen < 0 ? 0 : min(6, 1 + floor(gecen / ipucu_araligi_sn))`.
+  `tur_son = tur_baslangic + 6 × ipucu_araligi_sn` (6. ipucu `5×aralık`'ta açılır, bir aralık daha görünür).
+  İstemci saat farkını her yanıttaki `server_now`'dan hesaplar (`fark = server_now − (istek_anı + gidiş_dönüş/2)`) ve ipuçlarını
+  kendi saatiyle açar; ağ isteği gerekmez. Vaka metni/ipuçları istemcideki `js/cases.js`'ten (`case_id` ile) gösterilir (§9 aynen geçerli).
+- **`tur → cevap` kendiliğinden:** (a) `now ≥ tur_son`; (b) en az bir aktif katılımcı varken hepsi bitti (çözdü ya da hakkı bitti);
+  (c) sunucu `sinif_turu_bitir` çağırdı. Sunucu tarafında zamanlayıcı yok: (a) ilk gelen `sinif_durum` / `sinif_ozet` /
+  `sinif_tahmin` / `sinif_turu_bitir` çağrısında uygulanır (idempotent, satır kilidiyle). Projeksiyon istemcisi `tur_son` anında
+  (+0,2–0,6 sn) `sinif_durum` çağırmalı; öğrencilerin yoklaması da tetikler. (b) son tahminin işleminde uygulanır.
+- `cevap → skor → tur …` geçişlerini yalnızca sunucu yapar (`sinif_sonraki`); otomatik ilerleme yok (öğretmen tartışma için bekleyebilir).
+- **Aktif katılımcı:** ayrılmamış (`ayrildi = false`), atılmamış, `katildigi_tur ≤ tur_no`.
+
+### 15.2 Ayarlar (`sinif_olustur(p_ayarlar jsonb)`; bilinmeyen anahtarlar yok sayılır, `null` = varsayılan)
+
+| anahtar | tür | izinli | varsayılan | not |
+|---|---|---|---|---|
+| `vaka_sayisi` | int | 3–15 | 5 | tur sayısı |
+| `hedef` | text | `diagnosis` | `diagnosis` | alan ayrıldı; şimdilik başka değer → `INVALID_SETTINGS` (details `hedef`) |
+| `kurslar` | text veya text[] | `cases_answer_key.course` değerleri (ör. `FORENSIC`) | null (hepsi) | süzgeç |
+| `kategoriler` | text veya text[] | `cases_answer_key.category` değerleri (ör. `PERSONALITY_B`) | null (hepsi) | süzgeç; ikisi birlikte verilirse VE |
+| `ipucu_araligi_sn` | int | 8–60 | 15 | |
+| `tahmin_hakki` | int | 1–6 | 3 | katılımcı × tur |
+| `kapasite` | int | 2–100 | 100 | |
+| `gec_katilim` | bool | | `true` | `false` ise başlamış oturuma katılım `SINIF_BASLADI` |
+
+Süzgece uyan aktif vaka sayısı `vaka_sayisi`'ndan azsa `NOT_ENOUGH_CASES` (details: bulunan sayı). Ayarlar oluşturulduktan sonra değişmez.
+
+### 15.3 Puan
+
+- Doğru tahmin `ipucu_no = k` iken: `taban(k) = {1:1000, 2:850, 3:700, 4:550, 5:400, 6:250}`
+  + **hız bonusu** = `round(100 × (1 − t / aralık))` (0–100'e kırpılır), `t = gecen − (k−1) × aralık` (o ipucu penceresinde geçen süre, ms hassasiyetinde).
+  Örn. aralık 15: 1. ipucu açılır açılmaz → 1100; 4. ipucunun 7,5. saniyesi → 600.
+- Yanlış tahmin puan götürmez, hak yer. `UNKNOWN_ITEM` ve `DUPLICATE_GUESS` hak yemez (normal oyundaki gibi).
+- Çözen ya da hakkı biten katılımcı o tur için **bitti**; tahmin göndermez (`ZATEN_COZDUN` / `HAK_BITTI`).
+- Turda hiç tahmin etmeyen ya da çözemeyen 0 alır.
+- **Toplam puan** (`katilimcilar[].puan`) yalnızca **kapanmış** turları içerir: tur kapanınca eklenir. Böylece tur sürerken kimin
+  çözdüğü puandan anlaşılmaz. Katılımcı kendi tur puanını `sinif_tahmin` yanıtında ve `ben.tur.puan`'da hemen görür.
+- **Sıralama:** `puan` azalan → `sira = rank()` (eşit puan = aynı sıra). Aynı sıradakiler listede `dogru_sayisi` azalan,
+  `toplam_sure_ms` (çözülen turlarda tur başından doğru tahmine kadar geçen süre toplamı) artan, `takma_ad` ile dizilir.
+  Atılanlar sıralamada yok; ayrılanlar puanıyla kalır (`ayrildi: true`).
+- Podyum (`bitti`): ilk 3 sıra (eşitlikte 3'ten fazla kişi olabilir).
+
+### 15.4 RPC'ler
+
+Çağrı/hata kuralları §7 ile aynı: `error.message` sabit kod, `error.details` Türkçe açıklama. Başarılı yanıtlar `ok: true` ve
+`server_now` (ISO) içerir. Ortak hatalar: `NOT_AUTHENTICATED` (oturum açılmamış), `SINIF_YOK` (oturum yok ya da çağıran
+üye/sunucu değil — varlık sızdırılmaz), `ATILDIN`, `SINIF_BITTI` (bitti/iptal oturumda değişiklik).
+Bütün sınıf RPC'leri `authenticated` rolüne açıktır (anonim kullanıcılar dahil); `anon` (girişsiz) rolü çağıramaz:
+öğrenci istemcisi önce `supabase.auth.signInAnonymously()` yapmalıdır (oturum tarayıcıda kalıcıdır; yeniden katılım aynı kullanıcıyla olur).
+
+| RPC | Kim | Parametreler | Dönüş | Hatalar |
+|---|---|---|---|---|
+| `sinif_olustur` | sunucu (anonim değil + kullanıcı adı) | `p_ayarlar jsonb default '{}'` | `{ok, server_now, oturum_id, kod, ayarlar}` | `ANON_IZINSIZ`, `USERNAME_REQUIRED`, `INVALID_SETTINGS` (details: alan), `NOT_ENOUGH_CASES`, `COK_FAZLA_OTURUM` (açık oturum ≤ 3), `CODE_GENERATION_FAILED` |
+| `sinif_oturumlarim` | sunucu | — | `{ok, server_now, oturumlar: [{oturum_id, kod, durum, tur_no, vaka_sayisi, katilimci_sayisi, olusturma}]}` bitmemiş oturumlar, yeniden yükleme sonrası projeksiyonu kurtarmak için | `ANON_IZINSIZ` |
+| `sinif_katil` | herkes (anonim dahil) | `p_kod text` (büyük/küçük harf ve boşluk fark etmez), `p_takma_ad text default null` | `{ok, server_now, oturum_id, katilimci_id, takma_ad, yeniden, katildigi_tur, durum, tur_no}` | `SINIF_YOK`, `SINIF_DOLU`, `SINIF_BASLADI`, `TAKMA_AD_GECERSIZ`, `TAKMA_AD_UYGUNSUZ`, `TAKMA_AD_ALINMIS`, `ATILDIN`, `SUNUCU_KATILAMAZ`, `COK_FAZLA_ISTEK` |
+| `sinif_ayril` | katılımcı | `p_oturum uuid` | `{ok, server_now}` (idempotent) | `SINIF_YOK` |
+| `sinif_at` | sunucu | `p_oturum uuid, p_katilimci uuid` | `{ok, server_now}` (idempotent) | `SINIF_YOK`, `SADECE_SUNUCU`, `KATILIMCI_YOK` |
+| `sinif_basla` | sunucu | `p_oturum uuid` | `sinif_durum` | `SADECE_SUNUCU`, `SINIF_BASLADI` (lobide değil), `KIMSE_YOK` (aktif katılımcı yok), `NOT_ENOUGH_CASES`, `SINIF_BITTI` |
+| `sinif_tahmin` | katılımcı | `p_oturum uuid, p_item_id text, p_tur_no int default null` (verilirse ve güncel tur değilse `TUR_KAPALI`) | `{ok, server_now, tur_no, item_id, correct, same_group, guess_no, guesses_left, done, points, clue_index}` — `points` bu turdaki puanın (çözdüysen, değilse 0); cevap DÖNMEZ | `SINIF_YOK`, `ATILDIN`, `TUR_KAPALI` (tur yok/kapandı/süre doldu), `TUR_BASLAMADI` (geri sayım), `TUR_DISI` (geç katıldın: sonraki turdan oynarsın), `ZATEN_COZDUN`, `HAK_BITTI`, `UNKNOWN_ITEM`, `DUPLICATE_GUESS` |
+| `sinif_turu_bitir` | sunucu | `p_oturum uuid` | `sinif_durum` (+ `degisti bool`); `tur` değilse değişiklik yapmaz (`degisti:false`) | `SADECE_SUNUCU`, `SINIF_BITTI` |
+| `sinif_sonraki` | sunucu | `p_oturum uuid, p_beklenen text default null` (verilirse ve güncel `durum` farklıysa hiçbir şey yapmaz: çift tık koruması) | `sinif_durum` (+ `degisti`) — `cevap→skor`, `skor→tur (n+1)` ya da son turdan sonra `skor→bitti` | `SADECE_SUNUCU`, `ASAMA_UYGUN_DEGIL` (`lobi`/`tur`; `tur` için `sinif_turu_bitir`), `SINIF_BITTI` |
+| `sinif_bitir` | sunucu | `p_oturum uuid` | `sinif_durum` — lobide → `iptal`, değilse → `bitti` (açık tur önce kapanır ve puanlanır); idempotent | `SADECE_SUNUCU` |
+| `sinif_durum` | sunucu + katılımcı | `p_oturum uuid` | aşağıda | `SINIF_YOK`, `ATILDIN` |
+| `sinif_ozet` | sunucu + katılımcı | `p_oturum uuid` | `{ok, server_now, durum, surum, tur_no, vaka_sayisi, katilimci_sayisi, tur_baslangic, tur_son, ipucu_araligi_sn}` (hafif; yoklama için) | `SINIF_YOK`, `ATILDIN` |
+
+`isim_uygun_mu(text)` anonim kullanıcıya da açıktır (takma ad ön denetimi için; sonuç yalnızca boolean).
+
+**Takma ad:** baştaki/sondaki boşluk kırpılır, art arda boşluk teke iner; 2–16 karakter; harf (Türkçe ve Latin-1 aksanlı dahil),
+rakam, boşluk, `_ - .` (aksi `TAKMA_AD_GECERSIZ`); `isim_uygun_mu` geçmeli (`TAKMA_AD_UYGUNSUZ`); oturum içinde büyük/küçük harf
+duyarsız benzersiz (`TAKMA_AD_ALINMIS`; ayrılan/atılan kişinin adı da tutulur). Normal hesap `p_takma_ad` vermezse kullanıcı adı
+kullanılır (kullanıcı adı yoksa `TAKMA_AD_GECERSIZ`). **Yeniden katılım:** aynı auth kullanıcısı aynı oturuma tekrar `sinif_katil`
+çağırırsa aynı katılımcı döner (`yeniden: true`, puanı korunur, `ayrildi` temizlenir, verilen yeni takma ad yok sayılır).
+Atılan kullanıcı o oturuma dönemez (`ATILDIN`).
+
+**Geç katılım:** `gec_katilim = true` (varsayılan) ise `lobi` dışındaki açık durumlarda da katılınır; `katildigi_tur`:
+lobide 1, `tur` sırasında `tur_no + 1`, `cevap/skor` sırasında `tur_no + 1`. O tura kadar `sinif_tahmin` → `TUR_DISI`.
+Son turdan sonra katılan yalnızca izler.
+
+**Kapasite:** aktif (ayrılmamış, atılmamış) katılımcı sayısı `kapasite`'ye ulaştıysa `SINIF_DOLU` (yeniden katılım da sayılır).
+**Hız sınırı:** bir kullanıcı son 1 saatte en çok 10 farklı oturuma katılabilir (`COK_FAZLA_ISTEK`; `game_config.sinif_saatlik_katilim`).
+Değerlendirilen tahminler `tahmin_hakki` ile sınırlı (tur başına ≤ 6; cevap RPC ile taranamaz). Hak yemeyen hatalı çağrılar
+(`UNKNOWN_ITEM`, `DUPLICATE_GUESS`) sayılmaz ve sınırlanmaz (hata fırlatan çağrı sayaç yazamaz; ucuz ve zararsızdır).
+
+**`sinif_durum` dönüşü:**
+```json
+{ "ok": true, "server_now": "ISO",
+  "rol": "sunucu | katilimci",
+  "oturum": { "id": "uuid", "kod": "ABC234", "durum": "tur", "surum": 7, "tur_no": 2, "vaka_sayisi": 5,
+              "ayarlar": { "vaka_sayisi": 5, "hedef": "diagnosis", "kurslar": null, "kategoriler": null,
+                           "ipucu_araligi_sn": 15, "tahmin_hakki": 3, "kapasite": 100, "gec_katilim": true },
+              "sunucu": { "username": "hoca", "display_name": "…", "avatar": {} },
+              "katilimci_sayisi": 30, "olusturma": "ISO", "bitis": null, "bitis_nedeni": null },
+  "tur": { "tur_no": 2, "case_id": "case-012", "baslangic": "ISO", "son": "ISO", "ipucu_no": 3,
+           "kapandi": null, "kapanma_nedeni": null,          // 'sure' | 'herkes_bitti' | 'sunucu' | 'oturum_bitti'
+           "aktif_sayisi": 30, "biten_sayisi": 12,
+           "cozen_sayisi": null,                               // tur kapanınca sayı
+           "cevap": null },                                    // yalnızca cevap/skor/bitti: {diagnosis_id, therapy_id, pharmacology_id}
+  "ben": { "katilimci_id": "uuid", "takma_ad": "Ada", "puan": 2100, "sira": 3, "katildigi_tur": 1, "aktif": true,
+           "tur": { "tahmin_sayisi": 1, "kalan": 2, "bitti": false, "cozdu": false, "puan": 0 },
+           "tahminlerim": [ { "tahmin_no": 1, "item_id": "mdd", "dogru": false, "ayni_grup": true, "ipucu_no": 2 } ] },
+  "katilimcilar": [ { "katilimci_id": "uuid", "takma_ad": "Ada", "puan": 2100, "sira": 1, "dogru_sayisi": 2,
+                      "ayrildi": false, "katildigi_tur": 1,
+                      "bitti": true,                      // bu turda bitti mi (tur sırasında da görünür)
+                      "tur_puan": null, "cozdu": null, "ipucu_no": null } ],   // tur kapanınca dolar
+  "tur_sonuclari": [ { "tur_no": 1, "case_id": "case-003", "cevap": {}, "cozen_sayisi": 18, "katilan_sayisi": 30 } ],
+  "podyum": null }                                      // bitti: [{sira, katilimci_id, takma_ad, puan}]
+```
+- `tur`: lobide `null`; `cevap/skor/bitti`'de son oynanan tur.
+- `ben`: sunucu için `null`. `tahminlerim` yalnızca güncel turun tahminleri (sıralı). Başkalarının tahminleri hiçbir zaman dönmez.
+- `katilimcilar`: atılanlar hariç, sıralı (§15.3). `tur_puan/cozdu/ipucu_no` yalnızca güncel tur kapandıysa dolu.
+- `tur_sonuclari`: yalnızca kapanmış turlar (özet). En çok 15 satır.
+- Boyut: 100 katılımcıda ≈ 15–20 KB. Projeksiyon sık çağırabilir; öğrenciler yalnızca `surum` değişince çağırmalı.
+
+### 15.5 Tablolar (RLS açık; istemci yalnızca SELECT; yazma yalnızca RPC)
+
+| Tablo | Kim okur | İçerik |
+|---|---|---|
+| `sinif_oturumlari` | sunucu + oturumun (atılmamış) katılımcıları | `id, kod, host_id, durum, surum, tur_no, vaka_sayisi, hedef, kurslar, kategoriler, ipucu_araligi_sn, tahmin_hakki, kapasite, gec_katilim, tur_baslangic, tur_son, tur_kapandi, olusturma, durum_degisti, bitis, bitis_nedeni`. **Yalnızca durum/tur değişikliklerinde güncellenir** (katılım ve tahminlerde değil). |
+| `sinif_katilimcilar` | aynı | `id, oturum_id, user_id, takma_ad, puan, dogru_sayisi, toplam_sure_ms, katildigi_tur, katilma, ayrildi, atildi`. Puan yalnızca tur kapanınca değişir. |
+| `sinif_tur_sonuclari` | sunucu: hepsi; katılımcı: kendi satırı + kapanmış turların satırları | `oturum_id, tur_no, katilimci_id, tahmin_sayisi, bitti, cozdu, ipucu_no, puan, sure_ms` (tahmin içeriği yok). İlk tahminde oluşur. |
+| `sinif_turlari` | aynı (oturum üyeleri) | `oturum_id, tur_no, case_id, baslangic, son, kapandi, kapanma_nedeni` — yalnızca başlamış turlar |
+| `sinif_vaka_sirasi`, `sinif_tahminleri` | kimse (iç) | gelecek turların vakaları; tahmin içerikleri (yalnızca `sinif_durum.ben.tahminlerim` ile sahibine) |
+
+Cevap hiçbir tabloda istemciye açık değildir; yalnızca `sinif_durum` `cevap/skor/bitti`'de döner.
+
+### 15.6 Realtime
+
+Yayına eklenenler: `sinif_oturumlari`, `sinif_katilimcilar`, `sinif_tur_sonuclari`. RLS'e göre süzülür.
+
+| İstemci | Dinlenecek | Filtre | Amaç |
+|---|---|---|---|
+| Projeksiyon (sunucu) | `sinif_oturumlari` UPDATE | `id=eq.<oturum>` | durum değişti → `sinif_durum` |
+| | `sinif_katilimcilar` INSERT, UPDATE | `oturum_id=eq.<oturum>` | lobide katılan listesi, ayrılma, tur sonu puanları |
+| | `sinif_tur_sonuclari` INSERT, UPDATE | `oturum_id=eq.<oturum>` | tur sırasında "12/30 cevapladı" |
+| Telefon (katılımcı) | `sinif_oturumlari` UPDATE (**isteğe bağlı**) | `id=eq.<oturum>` | durum değişti → `sinif_durum` |
+
+- **Öğrenciler `sinif_katilimcilar` / `sinif_tur_sonuclari`'na ABONE OLMAMALI** (100 kişide her olay 100 kişiye gider).
+- **Yoklama zorunlu yedek:** öğrenci istemcisi `sinif_ozet`'i 3 sn (± 0,5 sn rastgele) arayla çağırır; `surum` değişince `sinif_durum`.
+  Tur sırasında ipuçları yerel saatle açılır, ağ gerekmez. Atılma da bu yoklamada (`ATILDIN`) öğrenilir.
+  Projeksiyon da Realtime koparsa 3 sn'de bir `sinif_ozet` yoklamalı.
+- **Ücretsiz plan sınırları (supabase.com/docs/guides/realtime/limits, 2026-11-21'de bakıldı):** eşzamanlı bağlantı 200,
+  saniyede mesaj 100, saniyede kanal katılımı 100, bağlantı başına kanal 100. Her olayın her aboneye teslimi bir mesaj sayılır:
+  100 öğrenci oturum satırına abone olursa her durum değişikliği tek seferde ~100 mesajdır (sınırda). Bu yüzden **öğrencilerde
+  Realtime aboneliği yalnızca aktif katılımcı ≤ 40 ise açılmalı**, daha kalabalık sınıfta yalnızca yoklama kullanılmalı.
+  100 öğrenci + projeksiyon = ~101 bağlantı; aynı anda başka maçlar/sınıflar da sayılır (200 sınırı). Sınırlar değişebilir; plan sayfasına bakın.
+- Yeni özel (Broadcast/Presence) kanal yok. `can_use_realtime_topic` anonim kullanıcıya her kanalda `false` döner.
+
+### 15.7 Zaman aşımı ve temizlik
+- Açık bir oturum (`lobi/tur/cevap/skor`) son durum değişikliğinden (`durum_degisti`) **2 saat** sonra ya da oluşturulmasından
+  24 saat sonra `bitti` olur (`bitis_nedeni = 'zaman_asimi'`; açık tur önce kapanıp puanlanır). Kontrol `sinif_olustur`,
+  `sinif_katil`, `sinif_oturumlarim` içinde ve o oturuma yapılan her çağrıda (`_sinif_zaman_asimi`) çalışır; pg_cron gerekmez.
+- Kod yalnızca açık oturumlar arasında benzersizdir; biten oturumun kodu yeniden kullanılabilir.
+- Biten oturumların verisi silinmez (sahip README'deki SQL ile eski oturumları ve eski anonim kullanıcıları temizler).
+
+### 15.8 Anonim kullanıcı güvenliği
+- `public.anon_mu()` = `auth.jwt() ->> 'is_anonymous' = 'true'`. Anonim kullanıcı `authenticated` rolündedir.
+- **Bütün sınıf dışı RPC'ler** anonim kullanıcıya `ANON_IZINSIZ` döner (`_uid()` üzerinden; ayrıntı §15.9).
+- **Bütün sınıf dışı tablolar/görünümler** anonim kullanıcıya boş gelir (kısıtlayıcı — `as restrictive` — RLS politikası
+  `anon_engel`); `game_config` hariç (zararsız ayar okuma).
+- Anonim kullanıcıya **profil satırı açılmaz** (`_handle_new_user`): liderlik, günlük sıralama, arkadaş arama, oda listeleri onları
+  hiç görmez. Anonim hesap kalıcı hesaba bağlanırsa (`is_anonymous` false olur) profil o anda açılır.
+- İzin listesi (anonim çağırabilir): sınıf RPC'leri (`sinif_katil, sinif_ayril, sinif_tahmin, sinif_durum, sinif_ozet`; sunucu
+  RPC'leri de çağrılabilir ama `SADECE_SUNUCU`/`SINIF_YOK` döner), `isim_uygun_mu`, `get_daily_challenge` (zaten girişsiz
+  misafire açık), `anon_mu`; RLS yardımcıları (`is_room_member`, `has_room_invite`, `is_friend`, `can_use_realtime_topic`,
+  `sinif_uyesi_mi`, `sinif_sunucusu_mu`) anonime yalnızca kendi durumunu söyler / `false` döner.
+
+### 15.9 Uygulama notları ve sapmalar (ajan S2, 2026-11-21 — uygulama bitti)
+
+Brife göre sapmalar / netleştirmeler (C2 bunlara göre yazmalı):
+1. **Hata kodları:** projede zaten olan kavramlar için mevcut İngilizce kodlar kullanıldı: `NOT_AUTHENTICATED`, `USERNAME_REQUIRED`,
+   `INVALID_SETTINGS` (details = alan adı), `NOT_ENOUGH_CASES`, `CODE_GENERATION_FAILED`, `UNKNOWN_ITEM`, `DUPLICATE_GUESS`.
+   Brifteki Türkçe kodlar aynen var (`SINIF_YOK`, `SINIF_DOLU`, `SINIF_BASLADI`, `TAKMA_AD_UYGUNSUZ`, `TAKMA_AD_ALINMIS`, `ATILDIN`,
+   `SADECE_SUNUCU`, `TUR_KAPALI`, `HAK_BITTI`, `ANON_IZINSIZ`); eklenenler: `TAKMA_AD_GECERSIZ`, `SUNUCU_KATILAMAZ`, `COK_FAZLA_ISTEK`,
+   `COK_FAZLA_OTURUM`, `KATILIMCI_YOK`, `KIMSE_YOK`, `TUR_BASLAMADI`, `TUR_DISI`, `ZATEN_COZDUN`, `ASAMA_UYGUN_DEGIL`, `SINIF_BITTI`.
+   Üye olmayana ayrı `UYE_DEGIL` yok: `SINIF_YOK` (oturumun varlığı sızdırılmaz). Ayrılmış katılımcı `sinif_tahmin`'de `SINIF_YOK` alır
+   (yeniden `sinif_katil` ile döner).
+2. **Sunucu RPC'lerinde** (`sinif_at/basla/turu_bitir/sonraki/bitir`) yetki kontrolü oturuma göre yapılır: katılımcı (anonim de olsa)
+   `SADECE_SUNUCU`, ilgisiz kullanıcı `SINIF_YOK` alır (`ANON_IZINSIZ` değil). `sinif_olustur` ve `sinif_oturumlarim` anonime `ANON_IZINSIZ`.
+3. **3 sn geri sayım** (`ipucu_no = 0`, `TUR_BASLAMADI`) eklendi; `tur_son = tur_baslangic + 6 × aralık`.
+4. **Toplam puan tur kapanınca** eklenir (tur sırasında kimin çözdüğü sıralamadan anlaşılmasın). Kendi tur puanı hemen görünür.
+5. **"Herkes bitti"** kuralı en az bir aktif katılımcı ister; herkes ayrıldıysa tur süreyle kapanır.
+6. Ek parametreler: `sinif_tahmin(…, p_tur_no)` (yanlış tura giden tahmini reddeder), `sinif_sonraki(…, p_beklenen)` (çift tık).
+   Ek RPC: `sinif_oturumlarim()` (projeksiyon yeniden yüklenince açık oturumu bulmak için). "Hafif katılımcı sayısı" = `sinif_ozet`.
+7. **Atılan katılımcının satırı** `sinif_katilimcilar`'da `atildi = true` ile kalır (projeksiyon UPDATE olayıyla görür); `sinif_durum`
+   listesinde yoktur. Atılan kişi yeni bir anonim hesapla (başka cihaz/temiz tarayıcı) yeni takma adla girebilir — bu engellenemez;
+   öğretmen yeniden atar. Ayrılan/atılan kişinin takma adı oturumda tutulur.
+8. **Anonimlik** iki yerden okunur: JWT `is_anonymous` claim'i ve (yedek) `auth.users.is_anonymous`.
+9. **Anonime profil satırı açılmaz** (brif "açılabilir ama her yerde dışla" diyordu; açmamak daha sıkı). Anonim → kalıcı dönüşte
+   `on_auth_user_upgraded` tetikleyicisi profili açar (yetki yoksa migration NOTICE yazar ve tetikleyiciyi atlar; sınıf modu etkilenmez).
+10. Ayarlar oluşturulduktan sonra değiştirilemez (ayar değiştirme RPC'si yok).
+
+**Kimin neyi tetiklediği (özet):** projeksiyon `tur_son` anında `sinif_durum` çağırır (süre dolunca turu kapatan çağrı) ve `cevap`/`skor`
+ekranlarında öğretmenin düğmesiyle `sinif_sonraki`. Öğrenci telefonu: `signInAnonymously` → `sinif_katil(kod, ad)` → 3 sn'de bir
+`sinif_ozet` (+ isteğe bağlı Realtime) → `surum` değişince `sinif_durum` → ipuçlarını yerel saatle aç → `sinif_tahmin`.
+Sayfa yenilenince aynı anonim oturumla `sinif_katil(kod)` aynı katılımcıyı döner.
+
+**Anonim sertleştirme denetimi (0006):** `authenticated`'a açık 47 fonksiyonun 27'si anonimi `ANON_IZINSIZ` ile reddediyor
+(0001–0005'in 25 istemci RPC'si `_uid()` üzerinden + `sinif_olustur`, `sinif_oturumlarim`); 20'si izin listesinde: 10 sınıf RPC'si
+(`sinif_katil/ayril/tahmin/durum/ozet/at/basla/turu_bitir/sonraki/bitir`), `isim_uygun_mu`, `get_daily_challenge`, `anon_mu` ve anonime
+`false` dönen 7 RLS yardımcısı (`is_room_member`, `has_room_invite`, `is_friend`, `can_use_realtime_topic`, `sinif_sunucusu_mu`,
+`sinif_uyesi_mi`, `sinif_tur_sonucu_okunur`). Reddedilen 25 eski RPC: advance_if_due, create_room, daily_begin, daily_give_up,
+daily_submit_guess, forfeit_round, get_daily_leaderboard, get_my_rp_history, get_my_streaks, get_room_state, heartbeat,
+import_local_progress, invite_friend, join_room, leave_room, quick_match, remove_friend, respond_friend_request, respond_room_invite,
+send_friend_request, set_ready, set_username, start_match, submit_guess, update_room_settings.
+RLS'li bütün sınıf dışı tablolara (`game_config` hariç) kısıtlayıcı `anon_engel` politikası eklendi; 20 tablo/görünüm anonime boş döner.
+`can_use_realtime_topic` anonime her kanalda `false`.
+
+### 15.10 Test durumu
+- `tests/sinif_modu.test.mjs`: **32/32 (PGlite)**, **34/34 (PostgreSQL 16.15**; +2 iki bağlantılı eşzamanlılık: son iki katılımcı aynı
+  anda bitirince tur bir kez kapanır; aynı takma adla eşzamanlı katılımda biri `TAKMA_AD_ALINMIS`). Kapsam: 0006 iki kez çalışınca parmak
+  izi aynı; anonim profil yok/dönüşte açılır; fonksiyon ve tablo **numaralandırma** testleri; ayar doğrulama (16 geçersiz girdi), süzgeç,
+  açık oturum sınırı; 30 anonim + 1 normal katılımcı; takma ad kuralları, tekrar, kapasite, atma, yeniden katılım, saatlik katılım sınırı;
+  RLS (üye olmayan okuyamaz, gizli tablolar kapalı, istemci yazamaz); farklı ve süzgece uyan vakalar; enjekte edilen zamanla ipucu
+  ilerlemesi; 1. ipucunda 1100, 4. ipucu ortasında 600, 4. ipucu sonunda 550; yanlış/aynı grup/hak sınırı/`ZATEN_COZDUN`; cevap `cevap`
+  öncesi hiçbir yanıtta yok; herkes bitince / süre dolunca / öğretmen bitirince kapanış; sıralama ve eşitlik; `cevap → skor → tur → … → bitti`,
+  podyum; geç katılım ve `gec_katilim:false`; zaman aşımı (2 sa hareketsiz, 24 sa); RP/maç/seri/günlük tablolarına yan etki yok; yetkiler.
+- Önceki paketler 0006 yüklüyken de geçiyor (`ILE_0006=1`: 0005'in hemen ardından 0006 uygulanır): `scenario` 46/46, `daily_quick`
+  51/51 (PGlite) / 53/53 (PG 16), `isim_filtresi` 21/21 — 0006'sız da aynı sayılar. (`scenario`'daki yayın listesi testi `sinif_*`
+  tablolarına izin verecek şekilde güncellendi.)
+- `tools/apply_migrations.sh`: 0001–0005 kayıtlı yerel Postgres'e yalnızca 0006'yı uyguladı, üçüncü çalıştırmada atladı.
+- Canlıda henüz çalışmadı; bir sonraki yayında Actions uygular. **Anonim giriş bundan sonra açılmalı.**

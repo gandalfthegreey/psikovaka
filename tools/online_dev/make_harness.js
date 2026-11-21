@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const root = path.resolve(__dirname, '..', '..');
 let html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const ONLINE_JS = ['core', 'api', 'realtime', 'views', 'friends', 'rooms', 'lobby', 'match', 'online'];
+const ONLINE_JS = ['core', 'api', 'realtime', 'views', 'friends', 'rooms', 'lobby_room', 'lobby', 'match', 'online'];
 
 html = html.replace(/(src|href)="(js|css)\//g, '$1="../../$2/').replace('href="manifest.json"', 'href="../../manifest.json"');
 if (!html.includes('../../css/online.css')) {
@@ -29,7 +29,7 @@ const onlineScreen = `<section class="screen" id="screenOnline" data-screen="onl
         </section>`;
 html = html.slice(0, start) + onlineScreen + html.slice(end);
 const tags = ONLINE_JS.map(n => `    <script src="../../js/online/${n}.js"></script>`).join('\n');
-const mock = `    <script>if (/[?&]mock=1/.test(location.search)) document.write('<script src="mock.js"><\\/script>');</script>`;
+const mock = `    <script>if (/[?&]mock=1/.test(location.search)) document.write('<script src="sinif_mock.js"><\\/script><script src="mock.js"><\\/script>');</script>`;
 if (html.includes('../../js/online/online.js')) {
   // index.html modülleri zaten içeriyor (aşama 9 sonrası): yalnızca sahte sunucu kancası
   html = html.replace('    <script src="../../js/online/online.js"></script>', '    <script src="../../js/online/online.js"></script>\n' + mock);

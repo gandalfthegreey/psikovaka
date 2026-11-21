@@ -1,0 +1,727 @@
+[
+  {
+    "difficulty": "Orta",
+    "course": "CHILD",
+    "diagnosisId": "global_developmental_delay",
+    "category": "NEURODEV",
+    "patientSummary": "3 yaşında, erkek çocuğu, okul öncesi",
+    "clues": [
+      "3 yaşındaki erkek çocuğu, çocuk sağlığı izleminde yürümeye 22 aylıkken başlaması, halen yalnızca birkaç tek sözcük kullanması ve kendi başına kaşık tutamaması üzerine çocuk psikiyatrisine yönlendirildi.",
+      "Doğum öyküsünde 31 haftalık prematüre doğum ve yenidoğan yoğun bakımda solunum desteği aldığı öğreniliyor; annesi, oğlunun hem ince-kaba motor hem konuşma hem de öz bakım basamaklarında yaşıtlarının belirgin gerisinde kaldığını anlatıyor.",
+      "Çocuk, annesine gülümsüyor, kucağa alınmak için kollarını uzatıyor ve sevdiği renkli topları göstererek ortak dikkat kuruyor; ancak basit iki parçalı yapbozları birleştiremiyor ve tek adımlı yönergelerin çoğunu anlamakta zorlanıyor.",
+      "Odyoloji ve göz muayeneleri olağan; metabolik tarama ile kromozom mikroarray analizi planlanıyor. Ailesi 'kesin düzeyini ve zekâ puanını' öğrenmek istiyor.",
+      "Ruhsal Durum Muayenesinde: Sıcak göz teması mevcut, yineleyici takıntılı davranış yok. Yaşı ve kısıtlı tepki repertuvarı nedeniyle standart zekâ testine güvenilir biçimde katılamıyor; gelişimsel tarama ölçeğinde dil, motor, bilişsel ve uyumsal alanların tümünde belirgin geri kalma izleniyor.",
+      "Beş yaşından küçük bu çocukta zihinsel işlevselliğin birden fazla alanında beklenen gelişim basamaklarına ulaşılamadığı, ancak klinik şiddetin şu aşamada güvenilir biçimde ölçülemediği ve ileride yeniden değerlendirme gerektiği belirleniyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "hem ince-kaba motor hem konuşma hem de öz bakım basamaklarında yaşıtlarının belirgin gerisinde kaldığını",
+        "dsmMatch": "Tanım: Birden fazla gelişimsel alanda beklenen basamaklara ulaşamama"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Yaşı ve kısıtlı tepki repertuvarı nedeniyle standart zekâ testine güvenilir biçimde katılamıyor",
+        "dsmMatch": "Kullanım Koşulu: 5 yaş altında klinik şiddetin güvenilir biçimde değerlendirilememesi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Erken Müdahale Özel Eğitim, Dil-Konuşma & Fizyoterapi Programı",
+      "therapyDetails": "Çok disiplinli erken çocukluk rehabilitasyonu, ebeveynin evde gelişim destekleyici oyun ve öz bakım becerileri konusunda eğitilmesi ve genetik/nörolojik izlem.",
+      "pharmacologyNote": "Birincil ilaç tedavisi yoktur; erken yoğun eğitsel ve gelişimsel destek en güçlü prognoz belirleyicisidir."
+    },
+    "miniQuiz": {
+      "question": "Bu tanının DSM-5-TR'deki yaş sınırı ve klinik niteliği aşağıdakilerden hangisinde doğru verilmiştir?",
+      "options": [
+        "5 yaşından küçük çocuklarda standart değerlendirme yapılamadığında konulan ve yeniden değerlendirme gerektiren geçici bir tanıdır",
+        "Yalnızca 18 yaşından büyük erişkinlere konur",
+        "Yaşam boyu değişmeyen kalıcı bir kişilik tanısıdır",
+        "Sadece tek bir konuşma sesinin yanlış söylenmesinde kullanılır"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bu kategori 5 yaş altı çocuklarda birden fazla gelişimsel alanda gecikme olup zekâ ve uyumsal şiddet henüz güvenilir biçimde belirlenemediğinde geçici olarak kullanılır ve zamanla yeniden değerlendirilir."
+    },
+    "differentialDiagnosis": "• Zihinsel Yetiyitimi (Orta Düzey): Standart zekâ ve uyumsal işlev değerlendirmesiyle şiddet düzeyi güvenilir biçimde belirlenebildiğinde (genellikle 5 yaş sonrası) konur.\n• Otizm Spektrum Bozukluğu: Karşılıklı toplumsal etkileşim ve ortak dikkat belirgin bozulmuştur; burada çocuk gülümseyerek ortak dikkat kurmaktadır.\n• Dil Bozukluğu: Gecikme yalnızca dil alanıyla sınırlıdır; burada motor, bilişsel ve öz bakım alanları da etkilenmiştir.",
+    "dsmCriteriaSummary": "DSM-5-TR: 5 yaş altı + Birden fazla gelişim alanında beklenen basamaklara ulaşamama + Klinik şiddetin güvenilir biçimde değerlendirilememesi + Yeniden değerlendirme gerekliliği.",
+    "therapyId": "special_education",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "3 yaşındaki (<5 yaş) çocukta motor, dil, bilişsel ve öz bakım olmak üzere birden fazla gelişim alanında belirgin geri kalma vardır.",
+        "Yaşı ve sınırlı tepki repertuvarı nedeniyle standart zekâ ve uyumsal şiddet değerlendirmesi güvenilir biçimde yapılamamaktadır.",
+        "Göz teması ve ortak dikkat korunduğu için otizm, birden fazla alan etkilendiği için izole dil bozukluğu dışlanmıştır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "intellectual_disability_moderate",
+          "reason": "Çocuk 3 yaşındadır ve standart testlerle şiddet düzeyi henüz güvenilir biçimde belirlenememektedir."
+        },
+        {
+          "diagnosisId": "asd",
+          "reason": "Anneye sıcak gülümseme, kucağa uzanma ve oyuncakla ortak dikkat kurma korunmuştur; yineleyici davranış yoktur."
+        },
+        {
+          "diagnosisId": "language_disorder",
+          "reason": "Gecikme yalnızca dilde değil, yürümeye geç başlama, kaşık tutamama ve bilişsel oyun alanlarında da yaygındır."
+        }
+      ],
+      "teachingPoint": "Beş yaşından küçük ve çoklu alanda gelişimsel gecikmesi olan çocukta şiddet güvenilir biçimde ölçülemiyorsa geçici olarak küresel gelişimsel gecikme tanısı konur."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "CHILD",
+    "diagnosisId": "intellectual_disability_mild",
+    "category": "NEURODEV",
+    "patientSummary": "13 yaşında, erkek çocuğu, ortaokul 7. sınıf kaynaştırma öğrencisi",
+    "clues": [
+      "13 yaşındaki ortaokul öğrencisi, okuduğunu anlamada, matematik problemlerini çözmede, zaman ve para hesabı yapmada süregen güçlük yaşaması ve okulda arkadaşları tarafından sık sık kandırılması nedeniyle ailesi tarafından getirildi.",
+      "Gelişim öyküsünde okul öncesi dönemde belirgin bir motor ya da öz bakım geriliği fark edilmediği; ancak ilkokul 1. sınıftan itibaren tüm derslerde yaşıtlarının gerisinde kaldığı, soyut kavramları ve planlama gerektiren ödevleri tek başına yapamadığı öğreniliyor.",
+      "Annesi, oğlunun giyinme, banyo yapma ve kendi yemeğini hazırlama gibi kişisel öz bakım işlerini yaşına uygun biçimde tamamen bağımsız yürüttüğünü; ancak marketten para üstü hesaplarken ya da tek başına otobüs aktarması yaparken desteğe ihtiyaç duyduğunu anlatıyor.",
+      "Toplumsal ilişkilerde yaşıtlarına göre daha çocuksu ve saf davrandığı, alay edildiğini ya da harçlığının kandırılarak elinden alındığını geç fark ettiği bildiriliyor. İşitme, görme ve nörolojik muayene doğal.",
+      "Ruhsal Durum Muayenesinde: İşbirliğine açık, güler yüzlü ve günlük konuşması akıcı. Bireysel uygulanan standart zekâ testinde (WISC-IV) tüm alt testlerde yaygın düşüklük (toplam puan 62) ve standart uyumsal davranış ölçeğinde kavramsal-toplumsal alanlarda ılımlı yetersizlik saptanıyor.",
+      "Gelişim döneminde başlayan, hem zihinsel işlevlerde hem de kavramsal, toplumsal ve karmaşık günlük işlerde destek gerektiren uyumsal yetersizliğin öz bakımı koruyan en ılımlı düzeyi netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "kişisel öz bakım işlerini yaşına uygun biçimde tamamen bağımsız yürüttüğünü; ancak marketten para üstü hesaplarken ya da tek başına otobüs aktarması yaparken desteğe ihtiyaç duyduğunu",
+        "dsmMatch": "Şiddet Düzeyi (Pratik Alan): Öz bakımda bağımsız, karmaşık günlük işlerde destek gereksinimi"
+      },
+      {
+        "clueIndex": 3,
+        "text": "yaşıtlarına göre daha çocuksu ve saf davrandığı, alay edildiğini ya da harçlığının kandırılarak elinden alındığını geç fark ettiği",
+        "dsmMatch": "Kriter B (Toplumsal Alan): Sosyal yargıda olgunlaşmamışlık ve istismara açıklık"
+      },
+      {
+        "clueIndex": 4,
+        "text": "standart zekâ testinde (WISC-IV) tüm alt testlerde yaygın düşüklük (toplam puan 62)",
+        "dsmMatch": "Kriter A: Standart zekâ testiyle doğrulanan zihinsel işlev yetersizliği"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bireyselleştirilmiş Eğitim Programı (BEP / Özel Eğitim) & Sosyal Beceri Eğitimi",
+      "therapyDetails": "Okulda kaynaştırma ve destek eğitim odası, para-zaman-ulaşım gibi yaşam becerilerinin somut öğretimi, akran istismarından korunma ve ileride mesleki yönlendirme.",
+      "pharmacologyNote": "Birincil ilaç tedavisi yoktur; eşlik eden DEHB, kaygı veya depresyon gelişirse ayrıca değerlendirilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'de zihinsel işlev yetersizliğinin şiddet düzeyini (hafif, orta, ağır, ileri ağır) belirlemede temel alınan ölçüt hangisidir?",
+      "options": [
+        "Yalnızca tek bir IQ puanı aralığı",
+        "Kavramsal, toplumsal ve pratik alanlardaki uyumsal işlevsellik ve gereksinim duyulan destek düzeyi",
+        "Çocuğun boy ve kilo persentili",
+        "Ailenin gelir düzeyi"
+      ],
+      "correctIndex": 1,
+      "explanation": "DSM-5-TR ile birlikte şiddet düzeyi yalnızca IQ puanına göre değil, bireyin kavramsal, toplumsal ve pratik uyumsal işlevselliği ile günlük yaşamda gereksinim duyduğu destek düzeyine göre belirlenir."
+    },
+    "differentialDiagnosis": "• Özgül Öğrenme Bozukluğu: Genel zihinsel işlevsellik (IQ) ve uyumsal beceriler normaldir; güçlük yalnızca okuma, yazma veya matematikle sınırlıdır.\n• Zihinsel Yetiyitimi (Orta Düzey): Öz bakım uzun öğretim gerektirir, kavramsal beceriler temel ilkokul düzeyinde kalır ve yaşam boyu daha yoğun destek gerekir.\n• Toplumsal (Pragmatik) İletişim Bozukluğu: Zekâ testi yaşıyla uyumlu ya da ortalama üstüdür; genel bilişsel gerilik yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Zihinsel işlev yetersizliği (Kriter A) + Kavramsal/toplumsal/pratik uyumsal yetersizlik (Kriter B) + Gelişimsel başlangıç (Kriter C) + Öz bakımda bağımsız, karmaşık işlerde destek (hafif düzey).",
+    "therapyId": "special_education",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "Akıl yürütme, soyut düşünme ve akademik öğrenmede yaygın yetersizlik bireysel WISC-IV (62) ile doğrulanmıştır (Kriter A).",
+        "Kavramsal görevlerde ve para-ulaşım gibi karmaşık pratik işlerde destek gereksinimi ile sosyal yargıda çocuksu saflık Kriter B'yi karşılar.",
+        "Öz bakımda tam bağımsızlık hafif düzeyi, okul çağında belirginleşen seyir ise gelişimsel başlangıcı (Kriter C) gösterir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "specific_learning_disorder",
+          "reason": "Sorun yalnızca özgül bir akademik alanla sınırlı değildir; genel zekâ (IQ 62) ve uyumsal işlevler de belirgin biçimde geridir."
+        },
+        {
+          "diagnosisId": "intellectual_disability_moderate",
+          "reason": "Kişisel öz bakımda tam bağımsızdır, konuşması akıcıdır ve yalnızca karmaşık günlük işlerde desteğe ihtiyaç duyar."
+        },
+        {
+          "diagnosisId": "social_communication_disorder",
+          "reason": "Toplumsal saflığa genel bilişsel ve akademik yetersizlik eşlik etmektedir."
+        }
+      ],
+      "teachingPoint": "Öz bakımı bağımsız ama akademik, sosyal yargı ve para-ulaşım gibi karmaşık işlerde desteğe gereksinim duyan, standart testle doğrulanmış tabloda hafif düzey zihinsel yetiyitimi tanınır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "CHILD",
+    "diagnosisId": "intellectual_disability_moderate",
+    "category": "NEURODEV",
+    "patientSummary": "16 yaşında, kız ergen, özel eğitim meslek okulu öğrencisi",
+    "clues": [
+      "16 yaşındaki özel eğitim meslek okulu öğrencisi, aile içi bakım planlaması ve mesleki destek raporu yenilenmesi amacıyla annesiyle birlikte çocuk ve ergen psikiyatrisine başvurdu.",
+      "Öyküsünde okul öncesi dönemde dil ve motor gelişiminin yaşıtlarından belirgin biçimde yavaş ilerlediği, kromozom analizinde Trizomi 21 saptandığı ve erken çocukluktan bu yana düzenli özel eğitim aldığı öğreniliyor.",
+      "Annesi, kızının okuma-yazma ve sayı becerilerinin temel ilkokul 1.-2. sınıf düzeyinde kaldığını (kendi adını, basit uyarı levhalarını okuyabiliyor ancak para hesabı ve zaman planlaması yapamıyor), konuşmasının ise yaşıtlarına göre çok daha basit cümlelerle sınırlı olduğunu anlatıyor.",
+      "Uzun yıllar süren sabırlı öğretim ve hatırlatmalarla yemek yeme, giyinme ve tuvalet temizliği gibi temel öz bakım becerilerini büyük ölçüde kazanmış; ancak bağımsız alışveriş, sağlık kararları ve işe gidip gelme için kalıcı yetişkin gözetimine gereksinim duyuyor.",
+      "Ruhsal Durum Muayenesinde: Sıcakkanlı, aile üyeleri ve okul arkadaşlarıyla yakın bağlar kurabiliyor ancak karmaşık sosyal ipuçlarını yorumlayamıyor. Standart zekâ testinde belirgin yaygın düşüklük (IQ 43) ve uyumsal değerlendirmede tüm alanlarda sürekli destek gereksinimi saptanıyor.",
+      "Kavramsal becerilerin temel ilkokul düzeyinde kaldığı, öz bakımın uzun süreli öğretimle kazanıldığı ancak bağımsız yaşam ve korumalı iş için kalıcı desteğin gerektiği bu uyumsal düzey netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "okuma-yazma ve sayı becerilerinin temel ilkokul 1.-2. sınıf düzeyinde kaldığını",
+        "dsmMatch": "Kavramsal Alan (Orta Düzey): Akademik becerilerin temel ilkokul düzeyinde kalması"
+      },
+      {
+        "clueIndex": 3,
+        "text": "Uzun yıllar süren sabırlı öğretim ve hatırlatmalarla yemek yeme, giyinme ve tuvalet temizliği gibi temel öz bakım becerilerini büyük ölçüde kazanmış; ancak bağımsız alışveriş, sağlık kararları ve işe gidip gelme için kalıcı yetişkin gözetimine gereksinim duyuyor",
+        "dsmMatch": "Pratik Alan (Orta Düzey): Öz bakım uzun öğretimle kazanılır, yaşam/iş için kalıcı destek gerekir"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Standart zekâ testinde belirgin yaygın düşüklük (IQ 43)",
+        "dsmMatch": "Kriter A: Bireysel testle doğrulanan belirgin zihinsel işlev yetersizliği"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Yapılandırılmış Özel Eğitim, Korumalı İstihdam & Aile Destek Programı",
+      "therapyDetails": "Günlük yaşam rutinlerinin görsel çizelgelerle desteklenmesi, temel iletişim ve güvenlik becerilerinin sürdürülmesi, korumalı/destekli iş ortamına geçiş ve yasal-sosyal hak danışmanlığı.",
+      "pharmacologyNote": "Temel yaklaşım yaşam boyu eğitsel ve sosyal destektir; eşlik eden davranışsal ya da tıbbi (tiroid vb.) durumlar ayrıca izlenir."
+    },
+    "miniQuiz": {
+      "question": "Bu uyumsal düzeyi Hafif Düzey ve Ağır Düzey Zihinsel Yetiyitiminden ayıran en tipik profil hangisidir?",
+      "options": [
+        "Akademik beceriler temel ilkokul düzeyinde kalır, basit konuşmayla iletişim kurulur ve öz bakım uzun süreli öğretimle kazanılabilir; ancak yaşam ve iş için kalıcı destek gerekir",
+        "Üniversite düzeyinde soyut analiz yapabilir ve tamamen bağımsız yaşar",
+        "Hiçbir sözcük konuşamaz ve yemek yeme-tuvalette tam bağımlıdır",
+        "Yalnızca 5 yaş altındaki çocuklara konulur"
+      ],
+      "correctIndex": 0,
+      "explanation": "Orta düzeyde temel ilkokul düzeyi kavramsal beceriler, basit sözel iletişim ve uzun öğretimle kazanılan öz bakım mümkündür; hafif düzeyden daha fazla kalıcı destek gerektirirken ağır düzeydeki tam öz bakım bağımlılığı yoktur."
+    },
+    "differentialDiagnosis": "• Zihinsel Yetiyitimi (Hafif Düzey): Öz bakım kendiliğinden gelişir, akademik beceriler daha ileri düzeye ulaşır ve erişkinlikte yarı bağımsız yaşam mümkündür.\n• Zihinsel Yetiyitimi (Ağır Düzey): Sözlü dil tek tek sözcüklerle çok sınırlıdır ve tüm temel öz bakım etkinliklerinde (yemek, giyinme, tuvalet) sürekli gözetim ve yardım gerekir.\n• Küresel Gelişimsel Gecikme: Yalnızca 5 yaşından küçük, standart değerlendirme yapılamayan çocuklarda kullanılır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Zihinsel işlev yetersizliği (IQ 43) + Temel ilkokul kavramsal düzey + Basit sözel iletişim + Uzun öğretimle kazanılan öz bakım ve kalıcı yaşam/iş desteği (orta düzey).",
+    "therapyId": "special_education",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "Gelişim döneminde başlayan (Trizomi 21) ve standart zekâ testiyle (IQ 43) doğrulanan zihinsel işlev yetersizliği Kriter A ve C'yi karşılar.",
+        "Okuma-yazmanın temel ilkokul düzeyinde kalması, basit konuşma dili, uzun öğretimle kazanılmış temel öz bakım ve yaşam/iş için kalıcı destek gereksinimi orta düzeyi (Kriter B) tanımlar.",
+        "16 yaşında olduğu ve standart değerlendirme tamamlandığı için geçici gecikme tanısı dışlanmıştır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "intellectual_disability_mild",
+          "reason": "Öz bakım uzun süreli öğretimle kazanılmış, dil belirgin basit kalmış ve bağımsız yaşam/iş için kalıcı gözetim gerekmektedir."
+        },
+        {
+          "diagnosisId": "intellectual_disability_severe",
+          "reason": "Basit cümlelerle konuşabilmekte, temel okuma yapabilmekte ve yemek-giyinme-tuvalet öz bakımını büyük ölçüde kendisi gerçekleştirebilmektedir."
+        },
+        {
+          "diagnosisId": "global_developmental_delay",
+          "reason": "Hasta 16 yaşındadır ve standart testlerle şiddet düzeyi güvenilir biçimde belirlenmiştir."
+        }
+      ],
+      "teachingPoint": "Orta düzey zihinsel yetiyitiminde kavramsal beceriler temel ilkokul düzeyinde kalır; öz bakım uzun öğretimle kazanılabilir ancak bağımsız yaşam için kalıcı destek gerekir."
+    }
+  },
+  {
+    "difficulty": "İleri Düzey",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "major_neurocognitive_multiple",
+    "category": "NEUROCOGNITIVE",
+    "patientSummary": "79 yaşında, kadın, emekli terzi",
+    "clues": [
+      "79 yaşındaki emekli terzi, son 3 yıldır ilerleyen ağır unutkanlık, son 8 ayda hızlanan düşünce yavaşlığı, kendi başına ilaçlarını ve yemeklerini hazırlayamama ve evin içinde odaları karıştırma yakınmalarıyla oğlu tarafından getirildi.",
+      "Oğlu, annesinin ilk 2 yıl boyunca hiçbir inme ya da ani atak olmadan sinsi biçimde yakın olayları unuttuğunu ve kelime bulmakta zorlandığını; ancak 8 ay önce geçirdiği sağ taraf güçsüzlüğü atağından sonra tablonun aniden bir basamak daha ağırlaşıp yürüyüşünün bozulduğunu anlatıyor.",
+      "Tıbbi öyküde 18 yıllık hipertansiyon, diyabet ve koroner arter hastalığı var. Kan sayımı, B12, folat ve TSH olağan; alkol ya da madde kullanımı bulunmuyor.",
+      "Beyin MR'ında hem iki taraflı belirgin hipokampal ve medial temporal lob atrofisi hem de yaygın periventriküler beyaz cevher iskemik değişiklikleri ile sol bazal ganglion ve sağ frontal bölgede iki eski lakün enfarkt bir arada izleniyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, dalgalanma yok. MoCA 13/30; hem ipucuyla düzelmeyen ağır yeni öğrenme ve yakın bellek kaybı (0/5) hem de iz sürme, saat çizimi ve sözel akıcılıkta belirgin yönetsel bozulma birlikte saptanıyor.",
+      "Klinik seyir, nöropsikolojik profil ve nörogörüntülemenin tek bir patolojiyle açıklanamayacak biçimde hem sinsi amnestik nörodejenerasyonu hem de serebrovasküler hasarı birlikte kanıtladığı ve günlük yaşam bağımsızlığının bozulduğu netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "ilk 2 yıl boyunca hiçbir inme ya da ani atak olmadan sinsi biçimde yakın olayları unuttuğunu ve kelime bulmakta zorlandığını; ancak 8 ay önce geçirdiği sağ taraf güçsüzlüğü atağından sonra tablonun aniden bir basamak daha ağırlaşıp",
+        "dsmMatch": "Kriter B: Sinsi başlangıçlı dejeneratif seyir üzerine eklenen basamaklı damarsal kötüleşme"
+      },
+      {
+        "clueIndex": 3,
+        "text": "hem iki taraflı belirgin hipokampal ve medial temporal lob atrofisi hem de yaygın periventriküler beyaz cevher iskemik değişiklikleri ile sol bazal ganglion ve sağ frontal bölgede iki eski lakün enfarkt bir arada",
+        "dsmMatch": "Kriter B: Görüntülemede iki ayrı etiyolojik sürecin birlikte kanıtı"
+      },
+      {
+        "clueIndex": 4,
+        "text": "hem ipucuyla düzelmeyen ağır yeni öğrenme ve yakın bellek kaybı (0/5) hem de iz sürme, saat çizimi ve sözel akıcılıkta belirgin yönetsel bozulma",
+        "dsmMatch": "Kriter A: İki profilin birleştiği ağır bilişsel yıkım ve bağımsızlık kaybı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bütüncül Risk Kontrolü, Çevre Güvenliği & Bakım Veren Desteği",
+      "therapyDetails": "Tansiyon ve diyabetin sıkı kontrolüyle yeni inmelerin önlenmesi, ev içi yönlendirme ve güvenlik düzenlemeleri, rutin oluşturma ve bakım veren desteği.",
+      "pharmacologyNote": "Asetilkolinesteraz inhibitörleri (donepezil/rivastigmin) ve memantin bilişsel destek amacıyla kullanılırken, ikincil inme önlemi (antiagregan, statin) eş zamanlı sürdürülür."
+    },
+    "miniQuiz": {
+      "question": "İleri yaşta en sık bir arada görülerek bu tabloyu oluşturan iki etiyolojik süreç hangisidir?",
+      "options": [
+        "Alzheimer hastalığı patolojisi ile serebrovasküler (damarsal) hastalık",
+        "Yalnızca tek seferlik uyku yoksunluğu",
+        "Mevsimsel alerji ile migren",
+        "Kafein kesilmesi ile demir eksikliği"
+      ],
+      "correctIndex": 0,
+      "explanation": "Otopsi ve görüntüleme çalışmalarında ileri yaşlı bireylerde en sık birlikte bulunan iki patoloji Alzheimer nörodejenerasyonu (hipokampal atrofi) ile serebrovasküler hastalıktır (lakünler ve beyaz cevher lezyonları)."
+    },
+    "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Tek başına inme sonrası basamaklı kötüleşmeyi ve MR'daki çoklu lakün enfarktları açıklamaz.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Tek başına inmeden 2 yıl önce başlayan sinsi, ipucuyla düzelmeyen hipokampal bellek yıkımını açıklamaz.\n• Deliryum (Akut Bilinç Bulanıklığı): Bilinç açık ve gün içi dalgalanma yoktur; süreç 3 yıllık ilerleyici gidişlidir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Majör bilişsel gerileme ve bağımsızlık kaybı + Madde dışı birden çok etiyolojik sürecin (Alzheimer + serebrovasküler) öykü/muayene/MR kanıtı + Deliryum/ruhsal bozukluk dışlaması.",
+    "therapyId": "caregiver_behavioral",
+    "pharmacologyId": "cholinesterase_donepezil",
+    "explanation": {
+      "whyThis": [
+        "MoCA 13/30 ve ilaç, yemek, ev içi yönelimde bağımsızlık kaybı majör düzeyi (Kriter A) karşılar.",
+        "İki yıllık sinsi, ipucuyla düzelmeyen bellek kaybı ve bilateral hipokampal atrofi Alzheimer patolojisini; üzerine eklenen inme sonrası basamaklı kötüleşme, lakün enfarktlar ve beyaz cevher hastalığı ise serebrovasküler süreci kanıtlar (Kriter B).",
+        "Tek bir etiyoloji tüm klinik ve MR bulgularını açıklayamadığından çoklu etiyoloji tanısı konur; deliryum ve B12/TSH bozukluğu yoktur."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "major_neurocognitive_alzheimer",
+          "reason": "İnme sonrası ani basamaklı kötüleşme, yürüme bozukluğu ve MR'daki lakün enfarktlar tek başına Alzheimer ile açıklanamaz."
+        },
+        {
+          "diagnosisId": "major_neurocognitive_vascular",
+          "reason": "İnmeden 2 yıl önce sinsi başlayan, ipucuyla düzelmeyen bellek kaybı ve belirgin hipokampal atrofi eşlik eden Alzheimer sürecini gösterir."
+        },
+        {
+          "diagnosisId": "delirium",
+          "reason": "Bilinç açık, dalgalanma yok ve süreç 3 yıldır ilerlemektedir."
+        }
+      ],
+      "teachingPoint": "Sinsi başlangıçlı hipokampal bellek yıkımı ile inme sonrası basamaklı kötüleşme ve çoklu enfarktlar bir aradaysa tek bir neden yerine çoklu etiyoloji tanısı konur."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "mild_neurocognitive_vascular",
+    "category": "NEUROCOGNITIVE",
+    "patientSummary": "64 yaşında, kadın, emekli belediye memuru",
+    "clues": [
+      "64 yaşındaki emekli belediye memuru, son 9 aydır yemek tariflerindeki adımları sırayla takip etmekte yavaşladığını, aynı anda iki işi birden yapamadığını ve apartman toplantılarında konuşmaları takip ederken çabuk yorulduğunu belirterek başvurdu.",
+      "Öyküsünde 12 yıllık hipertansiyon, hiperlipidemi ve 11 ay önce geçirdiği sol elinde geçici uyuşma ile konuşmada hafif takılmaya yol açan küçük bir iskemik atak var; yakınmaların o olaydan kısa süre sonra başlayıp belirgin bir ilerleme göstermeden sürdüğü öğreniliyor.",
+      "Hasta, bankacılık işlemlerini, kendi ilaç düzenini, ev temizliğini ve pazar alışverişini hâlâ tek başına ve hatasız sürdürdüğünü; ancak artık her iş için önceden yazılı liste çıkardığını ve eskisine göre daha fazla zaman ayırdığını anlatıyor.",
+      "Hemogram, B12, folat ve TSH olağan. Beyin MR'ında derin beyaz cevherde belirgin mikroanjiyopatik odaklar ve sağ kaudat çekirdek komşuluğunda eski bir lakün enfarkt izleniyor; hipokampus hacimleri tamamen doğal.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, duygudurum ötimik (Geriatrik Depresyon Ölçeği 3/15). MoCA 24/30; puan kaybı yalnızca iz sürme, dikkat ve sözel akıcılıkta; gecikmeli hatırlamada kendiliğinden 3/5, ipucuyla 5/5 sözcük hatırlıyor.",
+      "Küçük damar olayıyla zamansal ilişkili, işlem hızı ve yönetsel işlevlerde ılımlı gerileme gösteren bu tabloda günlük yaşam bağımsızlığının telafi stratejileriyle tam olarak korunduğu kesinleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "11 ay önce geçirdiği sol elinde geçici uyuşma ile konuşmada hafif takılmaya yol açan küçük bir iskemik atak var; yakınmaların o olaydan kısa süre sonra başlayıp",
+        "dsmMatch": "Kriter B1: Bilişsel eksikliklerin serebrovasküler olayla zamansal ilişkisi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "bankacılık işlemlerini, kendi ilaç düzenini, ev temizliğini ve pazar alışverişini hâlâ tek başına ve hatasız sürdürdüğünü; ancak artık her iş için önceden yazılı liste çıkardığını",
+        "dsmMatch": "Kriter A: Günlük yaşamda bağımsızlığın telafi stratejileriyle korunması (hafif düzey)"
+      },
+      {
+        "clueIndex": 3,
+        "text": "derin beyaz cevherde belirgin mikroanjiyopatik odaklar ve sağ kaudat çekirdek komşuluğunda eski bir lakün enfarkt",
+        "dsmMatch": "Kriter C: Nörogörüntülemede serebrovasküler hastalık kanıtı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Vasküler Risk Etmenlerinin Sıkı Kontrolü & Bilişsel Telafi Eğitimi",
+      "therapyDetails": "Tansiyon ve kolesterolün hedef değerlerde tutulması, düzenli yürüyüş, yazılı planlama/liste stratejilerinin desteklenmesi ve nöroloji ile düzenli izlem.",
+      "pharmacologyNote": "İkincil inme önlemi (antiagregan, statin, antihipertansif) temeldir; hafif damarsal evrede kolinesteraz inhibitörleri rutin birinci basamak değildir."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloyu Majör Vasküler Nörobilişsel Bozukluktan ayıran tek ve en temel klinik sınır nedir?",
+      "options": [
+        "Bilişsel gerilemenin ılımlı olması ve banka, ilaç, alışveriş gibi günlük yaşam etkinliklerinde bağımsızlığın telafi stratejileriyle korunması",
+        "Hastada hipertansiyon öyküsünün olmaması",
+        "MR'da hiçbir damarsal lezyonun görülmemesi",
+        "Yalnızca 40 yaş altında görülmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hafif ve majör vasküler nörobilişsel bozukluk aynı damarsal patolojiyi paylaşır; aradaki temel ayrım, eksikliklerin günlük yaşam bağımsızlığını bozup bozmamasıdır."
+    },
+    "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Banka, ilaç ve ev işlerinde bağımsızlık kaybolmuştur; burada hasta tüm işlerini listelerle tek başına sürdürmektedir.\n• Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI): Sinsi başlar, hipokampal atrofi ve ipucuyla düzelmeyen yakın bellek kaybı baskındır; burada ipucuyla 5/5 hatırlamaktadır.\n• Majör Depresif Bozukluk: Çökkün duygudurum ve anhedoni eşlik eder; burada duygudurum ötimik ve depresyon ölçeği 3/15'tir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Dikkat/yönetsel işlevlerde ılımlı gerileme + Bağımsızlık korunmuş (telafiyle) + Serebrovasküler olayla zamansal ilişki + MR'da lakün/beyaz cevher kanıtı.",
+    "therapyId": "caregiver_behavioral",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "MoCA 24/30 ile iz sürme, dikkat ve sözel akıcılıkta ılımlı gerileme bulunmasına karşın banka, ilaç ve alışverişin yazılı listelerle bağımsız yürütülmesi hafif düzeyi (Kriter A) karşılar.",
+        "Yakınmaların 11 ay önceki iskemik ataktan hemen sonra başlaması (Kriter B) ve MR'daki kaudat lakünü ile mikroanjiyopatik beyaz cevher odakları (Kriter C) damarsal etiyolojiyi kanıtlar.",
+        "İpucuyla 5/5 hatırlama ve doğal hipokampus hacmi Alzheimer tipini, ötimik duygudurum depresyonu dışlar."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "major_neurocognitive_vascular",
+          "reason": "Günlük yaşam etkinliklerinde bağımsızlık bozulmamış, yalnızca daha fazla çaba ve yazılı liste gerekmiştir."
+        },
+        {
+          "diagnosisId": "mild_neurocognitive_alzheimer",
+          "reason": "Başlangıç iskemik atakla ilişkilidir, hipokampus doğaldır ve bellek ipucuyla 5/5 düzelmektedir."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Duygudurum ötimik ve Geriatrik Depresyon Ölçeği 3/15'tir."
+        }
+      ],
+      "teachingPoint": "İskemik olay sonrası işlem hızı ve yönetsel işlevlerde yavaşlama gelişip MR'da lakün/beyaz cevher lezyonları saptandığında, bağımsızlık korunuyorsa hafif vasküler nörobilişsel bozukluk tanınır."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "SUBSTANCE",
+    "diagnosisId": "alcohol_withdrawal",
+    "category": "SUBSTANCE",
+    "patientSummary": "48 yaşında, erkek, lokanta aşçısı",
+    "clues": [
+      "48 yaşındaki lokanta aşçısı, 24 saat önce 'artık sağlığım için bırakacağım' diyerek içkiyi aniden kesmesinin ardından başlayan ellerde belirgin titreme, yoğun terleme, mide bulantısı ve şiddetli huzursuzluk yakınmalarıyla polikliniğe başvurdu.",
+      "Hasta, son 10 yıldır hemen her akşam en az 5-6 kadeh rakı ya da 8-10 şişe bira içtiğini, dün sabahtan beri hiç içki almadığını, gece hiç uyuyamadığını ve sabah çay bardağını tutarken ellerinin titremesinden çayı döktüğünü anlatıyor.",
+      "Fizik muayenede nabız 112/dk, kan basıncı 148/92 mmHg, alın ve avuç içlerinde belirgin terleme, eller öne uzatıldığında hızlı ve belirgin titreme saptanıyor; ateş yok (36.8 °C).",
+      "Kan alkol düzeyi 0 mg/dL, kan şekeri ve elektrolitler olağan; sedatif ya da opioid kullanımı yok. Hasta nöbet geçirmemiş ve geçmişte de benzer kesilme denemelerinde titreme yaşadığı için yeniden içmeye başlamış.",
+      "Ruhsal Durum Muayenesinde: Bilinç tamamen açık, yer, zaman ve kişi yönelimi tam (konfüzyon ya da dalgalanma yok). Belirgin anksiyete ve psikomotor ajitasyon mevcut; sanrı ya da canlı varsanı saptanmıyor.",
+      "Uzun süreli ve yoğun içki kullanımının ani kesilmesinden sonraki ilk 24 saat içinde gelişen, bilincin ve yönelimin korunduğu bu otonom aşırılık, tremor, bulantı, uykusuzluk ve ajitasyon tablosu denetimli detoksifikasyona alınıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "son 10 yıldır hemen her akşam en az 5-6 kadeh rakı ya da 8-10 şişe bira içtiğini, dün sabahtan beri hiç içki almadığını",
+        "dsmMatch": "Kriter A: Yoğun ve uzun süreli alkol kullanımının bırakılması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "nabız 112/dk, kan basıncı 148/92 mmHg, alın ve avuç içlerinde belirgin terleme, eller öne uzatıldığında hızlı ve belirgin titreme",
+        "dsmMatch": "Kriter B1 & B2: Otonom aşırı etkinlik (nabız >100, terleme) ve el titremesinde artma"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Bilinç tamamen açık, yer, zaman ve kişi yönelimi tam (konfüzyon ya da dalgalanma yok)",
+        "dsmMatch": "Ayırıcı Bulgu: Deliryum gelişmemiş komplike olmayan kesilme tablosu"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Tıbbi Denetimli Detoksifikasyon & Sonrasında Motivasyonel Görüşme",
+      "therapyDetails": "CIWA-Ar ölçeğiyle yakın izlem, hidrasyon ve elektrolit desteği, glukoz öncesi tiamin verilmesi ve akut kesilme bitince nüks önleyici bağımlılık tedavisine geçiş.",
+      "pharmacologyNote": "Nöbet ve deliryuma ilerlemeyi önlemek için benzodiazepinler (lorazepam/diazepam) ve parenteral/oral tiamin birinci basamaktır."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloyu Alkol Yoksunluğu Deliryumundan (Delirium Tremens) ayıran en temel klinik bulgu hangisidir?",
+      "options": [
+        "Bilincin tamamen açık, dikkatin ve yer-zaman yöneliminin tam olarak korunmuş olması",
+        "Ellerde hiç titreme olmaması",
+        "Nabzın her zaman 50/dk altında olması",
+        "Kan alkol düzeyinin çok yüksek çıkması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Komplike olmayan alkol yoksunluğunda titreme, terleme, taşikardi ve anksiyete vardır ancak bilinç açık ve yönelim tamdır; dalgalı bilinç bulanıklığı ve yönelim kaybı gelişirse tanı yoksunluk deliryumuna döner."
+    },
+    "differentialDiagnosis": "• Alkol Yoksunluğu Deliryumu (Delirium Tremens): Genellikle 48-72 saat sonra gelişir; dalgalı bilinç bulanıklığı, yönelim kaybı, ateş ve canlı varsanılar vardır. Burada bilinç açık ve yönelim tamdır.\n• Sedatif/Benzodiazepin Yoksunluğu: Klinik görünüm çok benzerdir; ancak burada benzodiazepin kullanımı yoktur, etken alkol kesilmesidir.\n• Alkol Zehirlenmesi (İntoksikasyonu): Yüksek kan alkol düzeyi, dizartri ve dengesiz yürüme vardır; burada kan alkol düzeyi sıfırdır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Uzun süreli yoğun alkol kesilmesi + ≥2/8 belirti (otonom aşırılık, el titremesi, uykusuzluk, bulantı, ajitasyon, anksiyete) + Bilinç ve yönelim açık.",
+    "therapyId": "medical_stabilization",
+    "pharmacologyId": "lorazepam_catatonia",
+    "explanation": {
+      "whyThis": [
+        "10 yıllık ağır günlük içki kullanımının 24 saat önce ani kesilmesi Kriter A'yı karşılar.",
+        "Taşikardi (112/dk), terleme, belirgin el titremesi, uykusuzluk, bulantı, ajitasyon ve anksiyete ile Kriter B'nin 6/8 belirtisi (eşik ≥2) mevcuttur.",
+        "Bilincin açık ve yönelimin tam olması yoksunluk deliryumundan, sedatif öyküsünün yokluğu benzodiazepin kesilmesinden ayırır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "alcohol_withdrawal_delirium",
+          "reason": "Bilinç tamamen açık, yer-zaman yönelimi tamdır; ateş, dalgalı konfüzyon ya da canlı varsanı yoktur."
+        },
+        {
+          "diagnosisId": "sedative_withdrawal",
+          "reason": "Benzodiazepin veya sedatif ilaç kullanımı yoktur; etken 10 yıllık ağır alkolün ani kesilmesidir."
+        },
+        {
+          "diagnosisId": "alcohol_intoxication",
+          "reason": "Kan alkol düzeyi sıfırdır; belirtiler içki alımıyla değil bırakılmasıyla başlamıştır."
+        }
+      ],
+      "teachingPoint": "Ağır içki kesilmesinden 6-24 saat sonra açık bilinçle titreme, terleme, taşikardi ve anksiyete geliştiğinde nöbet ve deliryumu önlemek için erken benzodiazepin ve tiamin başlanır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "opioid_intoxication",
+    "category": "SUBSTANCE",
+    "patientSummary": "27 yaşında, erkek, işsiz",
+    "clues": [
+      "27 yaşındaki erkek hasta, bir apartman merdiveninde yarı baygın ve güçlükle nefes alır hâlde bulunması üzerine 112 acil ekibi tarafından acil servise getirildi.",
+      "Hastanın yanında enjektör ve kaşık bulunduğu, sol kol iç yüzünde taze iğne izleri olduğu görülüyor; uyandırılmaya çalışıldığında başlangıçta birkaç saniye gözünü aralayıp peltek bir sesle anlaşılmaz birkaç sözcük mırıldanarak yeniden derin uyuklamaya dalıyor.",
+      "Fizik muayenede solunum sayısı dakikada 6'ya kadar düşmüş (belirgin solunum baskılanması), oksijen satürasyonu %84, dudaklar hafif morarmış ve her iki göz bebeği ışığa tepkisiz toplu iğne başı kadar küçülmüş (miyozis, 1.5 mm) saptanıyor.",
+      "Kan şekeri 102 mg/dL, kan alkol düzeyi 0; travma bulgusu yok. Nabız 58/dk, kan basıncı 95/60 mmHg ve bağırsak sesleri belirgin azalmış.",
+      "Ruhsal Durum Muayenesinde: Uyarana yanıtı ileri derecede azalmış (stupora yakın uyuklama), dikkat ve bellek değerlendirilemeyecek düzeyde bozuk, peltek konuşma ve belirgin psikomotor yavaşlama tabloya egemen.",
+      "Hava yolu desteğiyle birlikte damar içi 0.4 mg nalokson uygulanmasının ardından 2 dakika içinde solunum hızı 16/dk'ya yükseliyor, göz bebekleri normale dönüyor ve hasta tamamen uyanarak az önce damar içi madde aldığını doğruluyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "solunum sayısı dakikada 6'ya kadar düşmüş (belirgin solunum baskılanması), oksijen satürasyonu %84, dudaklar hafif morarmış ve her iki göz bebeği ışığa tepkisiz toplu iğne başı kadar küçülmüş (miyozis, 1.5 mm)",
+        "dsmMatch": "Kriter C & Acil Üçlü: Miyozis, solunum depresyonu ve derin uyuklama/stupor"
+      },
+      {
+        "clueIndex": 1,
+        "text": "peltek bir sesle anlaşılmaz birkaç sözcük mırıldanarak yeniden derin uyuklamaya dalıyor",
+        "dsmMatch": "Kriter C1 & C2: Uyuklama/koma ve peltek konuşma"
+      },
+      {
+        "clueIndex": 5,
+        "text": "damar içi 0.4 mg nalokson uygulanmasının ardından 2 dakika içinde solunum hızı 16/dk'ya yükseliyor",
+        "dsmMatch": "Kriter A & Doğrulama: Opioid antagonistine ani ve dramatik yanıt"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Acil Hava Yolu Desteği, Antidot İzlemi & Uzun Dönem Bağımlılık Tedavisine Yönlendirme",
+      "therapyDetails": "Solunum depresyonunun yeniden ortaya çıkmasına (renarkotizasyon) karşı acilde en az 4-6 saat gözlem, doz aşımı eğitimi ve ayıldıktan sonra AMATEM sürdürüm tedavisine yönlendirme.",
+      "pharmacologyNote": "Acil hayati antidot parenteral/intranazal naloksondur; akut dönem sonrası bağımlılık tedavisinde buprenorfin/nalokson sürdürüm protokolü planlanır."
+    },
+    "miniQuiz": {
+      "question": "Bu acil tablonun klasik yaşamı tehdit eden 'doz aşımı üçlüsü' aşağıdakilerden hangisidir?",
+      "options": [
+        "Toplu iğne başı göz bebekleri (miyozis), solunum depresyonu ve bilinç bulanıklığı/koma",
+        "Geniş göz bebekleri (midriyazis), yüksek ateş ve ishal",
+        "Kaba el titremesi, hipertansiyon ve görsel varsanılar",
+        "Yalnızca sık idrara çıkma ve kas seğirmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Opioid doz aşımının klasik üçlüsü miyozis, solunum depresyonu (solunum sayısı <12/dk) ve bilinç kaybı/uyuklamadır; acil tedavisi hava yolu desteği ve naloksondur."
+    },
+    "differentialDiagnosis": "• Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis): Göz bebekleri genişler (midriyazis), uykusuzluk, ishal ve piloereksiyon görülür; burada miyozis ve solunum depresyonu vardır.\n• Alkol Zehirlenmesi (İntoksikasyonu): Kan etanol düzeyi sıfırdır ve naloksona 2 dakikada tam uyanma yanıtı yalnızca opioidlere özgüdür.\n• Deliryum (Akut Bilinç Bulanıklığı): Hipoglisemi, travma ve enfeksiyon dışlanmış olup tablo doğrudan akut opioid toksisitesidir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yakın opioid alımı + Psikomotor yavaşlama/yargılama bozukluğu + Miyozis + ≥1 bulgu (uyuklama/koma, peltek konuşma, dikkat/bellek bozulması) + Nalokson yanıtı.",
+    "therapyId": "medical_stabilization",
+    "pharmacologyId": "buprenorphine_naloxone",
+    "explanation": {
+      "whyThis": [
+        "Taze iğne izi ve enjektörle uyumlu yakın opioid alımı sonrası (Kriter A) derin psikomotor yavaşlama ve yargılama kaybı (Kriter B) gelişmiştir.",
+        "1.5 mm toplu iğne başı göz bebekleri (miyozis), dakikada 6 solunum, peltek konuşma ve stupora yakın uyuklama Kriter C'yi tam olarak karşılar.",
+        "Damar içi nalokson sonrası 2 dakikada solunumun ve bilincin tamamen açılması tanıyı kesinleştirir; kan şekeri ve alkol normaldir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "opioid_withdrawal",
+          "reason": "Yoksunlukta midriyazis, ishal, kas ağrısı ve ajitasyon görülür; burada miyozis, uyuklama ve solunum depresyonu vardır."
+        },
+        {
+          "diagnosisId": "alcohol_intoxication",
+          "reason": "Kan alkol düzeyi sıfırdır ve toplu iğne başı miyozis ile nalokson yanıtı opioidlere özgüdür."
+        },
+        {
+          "diagnosisId": "delirium",
+          "reason": "Tablo hipoglisemi veya başka tıbbi nedene değil, doğrudan akut opioid doz aşımına bağlıdır."
+        }
+      ],
+      "teachingPoint": "Miyozis, solunum depresyonu ve derin uyuklama üçlüsünde acil nalokson hayat kurtarır; naloksonun etki süresi kısa olduğundan hasta renarkotizasyon açısından gözlenmelidir."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "inhalant_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "15 yaşında, erkek ergen, oto tamir çırağı",
+    "clues": [
+      "15 yaşındaki oto tamir çırağı, son 1 yıldır atölyedeki boya inceltici ve yapıştırıcıları naylon poşete dökerek gizlice soluduğu, okuldan tamamen koptuğu ve iş yerinde sürekli baş dönmesiyle kazalara ramak kala yakalandığı için sosyal hizmetler eşliğinde getirildi.",
+      "Ergen, ilk kez 13 yaşında arkadaşlarıyla meraktan denediğini; son 1 yılda neredeyse her gün poşetten kimyasal buhar soluduğunu, aynı sersemlik etkisini yakalamak için artık çok daha uzun süre ve daha fazla miktar kullandığını (tolerans) anlatıyor.",
+      "Annesi, oğlunun giysilerinden sürekli keskin kimyasal solvent kokusu geldiğini, ağız ve burun çevresinde kızarıklık-döküntü ('tutkalcı döküntüsü') oluştuğunu, bırakmak istemesine karşın her gün yoğun aşerme duyup yeniden poşete sarıldığını bildiriyor.",
+      "Kullanım nedeniyle sanayi atölyesinde hareketli motor parçalarının yanında dikkatsizce çalışıp elini yaraladığı, ailesiyle ağır kavgalar yaşadığı ve baş ağrısı ile ellerinde uyuşma (erken periferik nöropati) geliştiğini bilmesine karşın solumayı sürdürdüğü öğreniliyor.",
+      "Ruhsal Durum Muayenesinde: Zayıf ve solgun görünümlü, ağız kenarında kuruluk ve tahriş mevcut, dikkat ve yakın bellekte hafif yavaşlama izleniyor. İdrar standart uyuşturucu taraması negatif (uçucu hidrokarbonlar rutin panelde çıkmaz); bırakmaya çalıştığında belirgin fiziksel bir kesilme sendromu tarif etmiyor.",
+      "Son 12 ayda denetim kaybı, aşerme, iş-okul yükümlülüklerinin çökmesi, tehlikeli koşullarda kullanım, bedensel zararlara karşın sürdürme ve toleransla 10 ölçütten 7'sinin karşılandığı (yoksunluk ölçütü bulunmayan özgül grup) netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 0,
+        "text": "atölyedeki boya inceltici ve yapıştırıcıları naylon poşete dökerek gizlice soluduğu",
+        "dsmMatch": "Madde Grubu: Hidrokarbon bazlı çözücü/yapıştırıcıların sarhoşluk amacıyla solunması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "ağız ve burun çevresinde kızarıklık-döküntü ('tutkalcı döküntüsü') oluştuğunu, bırakmak istemesine karşın her gün yoğun aşerme duyup",
+        "dsmMatch": "Kriter A2 & A4: Başarısız bırakma çabaları, aşerme ve tipik fiziksel bulgu"
+      },
+      {
+        "clueIndex": 3,
+        "text": "baş ağrısı ile ellerinde uyuşma (erken periferik nöropati) geliştiğini bilmesine karşın solumayı sürdürdüğü",
+        "dsmMatch": "Kriter A8 & A9: Riskli ortamda ve bilinen bedensel zarara karşın kullanım (≥2/10)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Kapsamlı Psikososyal Müdahale, Motivasyonel Görüşme & Sosyal Hizmet Desteği",
+      "therapyDetails": "Aile ve sosyal hizmetler işbirliğiyle güvenli ortam sağlama, motivasyonel görüşme, akran ve çalışma ortamı risklerini azaltma, nörolojik-kardiyak zararların izlemi.",
+      "pharmacologyNote": "Özgül onaylı bir ilacı yoktur; temel yaklaşım kapsamlı psikososyal rehabilitasyon ve tıbbi organ hasarı (kalp, karaciğer, sinir sistemi) takibidir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'de bu madde kullanım bozukluğunu diğer pek çok madde kullanım bozukluğundan ayıran yapısal ölçüt farkı ve en acil tıbbi tehlikesi nedir?",
+      "options": [
+        "Belirgin bir yoksunluk sendromu tanımlanmadığı için 11 yerine 10 ölçüt vardır; ilk kullanımda bile kardiyak aritmiye bağlı 'ani koklama ölümü' gelişebilir",
+        "Yalnızca 50 yaş üstünde tanı konur ve hiç fiziksel zararı yoktur",
+        "Ağır opioid benzeri ishal ve gözyaşı akıntısıyla giden yoksunluk ölçütü zorunludur",
+        "Rutin idrar uyuşturucu testinde her zaman 30 gün boyunca pozitif çıkar"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hidrokarbon bazlı uçucu maddelerde klinik olarak belirgin bir yoksunluk sendromu tanımlanmadığından DSM-5-TR'de 10 ölçüt yer alır; miyokardı katekolaminlere duyarlılaştırarak 'ani koklama ölümü'ne yol açabilir."
+    },
+    "differentialDiagnosis": "• Esrar (Kannabis) Kullanım Bozukluğu: İdrar taraması negatiftir; hasta solvent/yapıştırıcı solumakta olup ağız çevresi döküntüsü ve solvent kokusu mevcuttur.\n• Davranım Bozukluğu: Sıklıkla eşlik edebilir; ancak burada 12 ayda 7/10 ölçütü karşılayan ağır kimyasal soluma bağımlılığı birincil klinik tablodur.\n• Alkol Kullanım Bozukluğu (Alkolizm): Alkol tüketimi yoktur; etken hidrokarbon bazlı boya inceltici ve yapıştırıcılardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 ayda ≥2/10 sorunlu hidrokarbon soluma ölçütü (yoksunluk ölçütü yok; tolerans, aşerme, iş-okul kaybı, riskli kullanım, zarara karşın sürdürme).",
+    "therapyId": "motivational_interviewing",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "15 yaşındaki ergenin 1 yıldır her gün boya inceltici ve yapıştırıcı soluması; tolerans, aşerme, başarısız bırakma, okuldan kopma, tehlikeli iş ortamında yaralanma, aile çatışması ve nöropatiye karşın sürdürme ile 7/10 ölçütü (ağır düzey) karşılar.",
+        "Ağız-burun çevresi döküntüsü, solvent kokusu, rutin idrar testinin negatifliği ve yoksunluk sendromunun bulunmaması bu madde grubuna özgüdür.",
+        "Erken ergenlik başlangıcı ve sosyoekonomik/iş riskleri epidemiyolojiyle tam uyumludur."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "cannabis_use_disorder",
+          "reason": "Kullanılan madde esrar değil boya inceltici ve yapıştırıcıdır; rutin idrar taraması negatiftir."
+        },
+        {
+          "diagnosisId": "conduct_disorder",
+          "reason": "Klinik tabloya ağır kimyasal soluma bağımlılığı, ağız çevresi tahrişi ve erken nöropati egemendir."
+        },
+        {
+          "diagnosisId": "alcohol_use_disorder",
+          "reason": "Alkol kullanımı bulunmamaktadır; etken uçucu hidrokarbonlardır."
+        }
+      ],
+      "teachingPoint": "Uçucu madde kullanım bozukluğunda DSM-5-TR'de yoksunluk ölçütü yoktur (10 ölçüt); rutin idrar testleri negatiftir ve kardiyak aritmiye bağlı ani ölüm riski taşır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "tobacco_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "50 yaşında, erkek, şehir içi otobüs şoförü",
+    "clues": [
+      "50 yaşındaki otobüs şoförü, son 2 yıldır giderek artan öksürük ve nefes darlığına karşın günde iki paket sigara içmeyi bir türlü bırakamadığı için göğüs hastalıklarının yönlendirmesiyle bırakma polikliniğine başvurdu.",
+      "Hasta, 17 yaşından beri tütün ürünleri kullandığını, sabah uyanır uyanmaz ilk 5 dakika içinde, kahvaltıdan bile önce ilk sigarasını yaktığını ve son 10 yılda aynı rahatlamayı almak için tüketimini yarım paketten iki pakete çıkardığını anlatıyor.",
+      "Geçen yıl erken evre KOAH tanısı konduğunu ve hekiminin kesinlikle bırakması gerektiğini söylemesine karşın içmeyi sürdürdüğünü; son 12 ayda dört kez bırakmayı denediğini ancak her seferinde ilk 24 saatte yoğun sinirlilik, odaklanamama, huzursuzluk ve dayanılmaz aşerme nedeniyle yeniden başladığını aktarıyor.",
+      "Uzun seferlerde mola saatine kadar dayanamadığı için gizlice araç içinde içerek iki kez disiplin cezası aldığı, ailesinin kapalı alanlarda içmesini yasaklaması yüzünden akşamları uzun süre balkonda tek başına vakit geçirdiği öğreniliyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, duygudurum hafif kaygılı ancak majör depresyon ya da psikoz yok; parmaklarında sarı lekeler ve belirgin tütün kokusu mevcut. Alkol ya da başka madde kullanımı bulunmuyor.",
+      "Son 12 ayda amaçlanandan fazla tüketim, dört başarısız bırakma girişimi, güçlü aşerme, KOAH gibi bilinen ciddi bedensel hastalığa karşın sürdürme, tolerans ve kesilme belirtileriyle 11 ölçütten 7'si karşılanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "sabah uyanır uyanmaz ilk 5 dakika içinde, kahvaltıdan bile önce ilk sigarasını yaktığını ve son 10 yılda aynı rahatlamayı almak için tüketimini yarım paketten iki pakete çıkardığını",
+        "dsmMatch": "Kriter A10 & Fiziksel Bağımlılık: Tolerans ve uyanır uyanmaz yüksek kullanım"
+      },
+      {
+        "clueIndex": 2,
+        "text": "erken evre KOAH tanısı konduğunu ve hekiminin kesinlikle bırakması gerektiğini söylemesine karşın içmeyi sürdürdüğünü; son 12 ayda dört kez bırakmayı denediğini ancak her seferinde ilk 24 saatte yoğun sinirlilik, odaklanamama, huzursuzluk ve dayanılmaz aşerme",
+        "dsmMatch": "Kriter A2, A4, A9 & A11: Başarısız bırakma, aşerme, KOAH'a karşın sürdürme ve yoksunluk"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Davranışsal Bırakma Programı & Farmakoterapi Kombinasyonu",
+      "therapyDetails": "Bırakma günü belirleme, sabah kahvesi ve mola gibi koşullanmış ipuçlarının yönetimi, aşerme baş etme planı ve düzenli poliklinik izlemi.",
+      "pharmacologyNote": "Davranışsal desteğe eklenen bupropion, vareniklin veya nikotin yerine koyma tedavisi (bant/sakız) uzun dönem bırakma başarısını belirgin biçimde artırır."
+    },
+    "miniQuiz": {
+      "question": "Bu kullanım bozukluğunda uzun dönem bırakma başarısını en belirgin biçimde artıran kanıta dayalı yaklaşım hangisidir?",
+      "options": [
+        "Davranışsal destek (motivasyonel görüşme/BDT) ile farmakoterapinin (nikotin replasmanı, vareniklin veya bupropion) birlikte uygulanması",
+        "Hiçbir destek olmadan ani yasaklama",
+        "Yalnızca antibiyotik kullanımı",
+        "Antipsikotik monoterapisi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Kendi başına bırakma girişimlerinde nüks oranı yüksektir; davranışsal danışmanlık ile bupropion, vareniklin veya nikotin replasman tedavisinin birlikte kullanımı bırakma oranlarını anlamlı biçimde yükseltir."
+    },
+    "differentialDiagnosis": "• Tütün (Nikotin) Yoksunluğu: Yalnızca bırakma/azaltma sonrası ilk günlerde ortaya çıkan geçici kesilme sendromudur; burada hasta halen günde 2 paket aktif kullanımını sürdürmektedir.\n• Esrar (Kannabis) Kullanım Bozukluğu: Başka madde kullanımı yoktur; etken yalnızca sigara/nikotindir.\n• Yaygın Anksiyete Bozukluğu (YAB): Sinirlilik ve huzursuzluk yalnızca bırakma girişimlerindeki kesilme dönemlerinde ortaya çıkmaktadır.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 ayda ≥2/11 sorunlu kullanım ölçütü (başarısız bırakma, aşerme, KOAH'a karşın sürdürme, tolerans, yoksunluk, disiplin sorunları) + Klinik sıkıntı/işlev kaybı.",
+    "therapyId": "motivational_interviewing",
+    "pharmacologyId": "bupropion_ndri",
+    "explanation": {
+      "whyThis": [
+        "Günde 2 paket tüketim, uyanınca ilk 5 dakikada içme, dört başarısız bırakma girişimi, güçlü aşerme, tolerans, kesilme belirtileri ve KOAH'a karşın sürdürme ile 7/11 ölçüt (ağır düzey) karşılanmıştır.",
+        "Hasta halen aktif içici olduğundan tablo yalnızca geçici yoksunluk değil, süreğen kullanım bozukluğudur.",
+        "Başka madde ya da birincil depresyon/anksiyete bozukluğu dışlanmıştır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "tobacco_withdrawal",
+          "reason": "Hasta şu an bırakma döneminde değil, günde iki paket aktif kullanımını sürdürmektedir."
+        },
+        {
+          "diagnosisId": "cannabis_use_disorder",
+          "reason": "Alkol veya yasa dışı madde kullanımı yoktur; etken yalnızca tütündür."
+        },
+        {
+          "diagnosisId": "gad",
+          "reason": "Huzursuzluk ve sinirlilik genel yaşam alanlarında değil, yalnızca içmeyi bırakma denemelerinde gelişmektedir."
+        }
+      ],
+      "teachingPoint": "Tütün kullanım bozukluğunda rol kaybından çok bırakamama, uyanır uyanmaz içme, aşerme, tolerans, yoksunluk ve KOAH gibi sağlık zararlarına karşın sürdürme ölçütleri öne çıkar."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "sedative_hypnotic_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "46 yaşında, kadın, özel sektör insan kaynakları müdürü",
+    "clues": [
+      "46 yaşındaki insan kaynakları müdürü, 3 yıl önce kısa süreli uyku ve gerginlik için başlanan sakinleştirici hapları artık kontrol edemediğini, her gün yüksek dozda aldığını ve ilaçsız tek bir gün geçiremediğini belirterek başvurdu.",
+      "Hasta, başlangıçta gece 0.5 mg alprazolam yeterli olurken son 1.5 yılda aynı rahatlamayı elde etmek için kendi kendine dozu günde 5 mg'a çıkardığını; tek bir hekimden yazdıramadığı için her ay üç farklı özel klinikten ve tanıdıklardan ilaç temin etmek için saatler harcadığını anlatıyor.",
+      "Son 1 yılda iki kez dozunu azaltmaya çalışmış ancak ellerde titreme, çarpıntı ve yoğun kaygı başlayınca hemen eski doza geri dönmüş; gün içi uyuklama ve unutkanlık yüzünden iş toplantılarını kaçırdığı ve iki kez ilaç etkisi altında araç kullanırken maddi hasarlı kaza yaptığı öğreniliyor.",
+      "Eşi, hastanın gün boyu dalgın olması ve ilacı saklaması nedeniyle evliliklerinde ciddi güven sorunu yaşadıklarını bildiriyor. Hasta aktif kesilme krizinde değil (sabah dozunu almış); alkol ya da opioid kullanımı yok.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, hafif peltek konuşma yok ancak hafif psikomotor yavaşlık ve yoğun suçluluk hissi mevcut; sanrı, varsanı ya da nöbet yok.",
+      "Tıbbi gözetim dışına taşan doz artırımı, birden çok hekimden ilaç toplama, başarısız azaltma girişimleri, aşerme, iş aksaması, ilaçlı araç kullanımı ve tolerans-yoksunlukla 12 ayda 9/11 ölçüt karşılanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "kendi kendine dozu günde 5 mg'a çıkardığını; tek bir hekimden yazdıramadığı için her ay üç farklı özel klinikten ve tanıdıklardan ilaç temin etmek için saatler harcadığını",
+        "dsmMatch": "Kriter A1, A3 & A10: Tıbbi gözetim dışı doz artırma, temin için aşırı zaman ve tolerans"
+      },
+      {
+        "clueIndex": 2,
+        "text": "iş toplantılarını kaçırdığı ve iki kez ilaç etkisi altında araç kullanırken maddi hasarlı kaza yaptığı",
+        "dsmMatch": "Kriter A5 & A8: İş yükümlülüklerinin aksaması ve tehlikeli durumda yineleyici kullanım"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Hekim Denetiminde Kademeli Doz Azaltma, BDT-İ & Motivasyonel Görüşme",
+      "therapyDetails": "Tek hekim/tek eczane izlemiyle haftalar-aylara yayılan güvenli azaltma takvimi, altta yatan uyku/kaygı için ilaç dışı BDT ve nüks önleme planı.",
+      "pharmacologyNote": "Ani kesilme nöbet ve deliryuma yol açabileceğinden uzun yarı ömürlü benzodiazepine geçilerek yavaşça azaltılır; altta yatan kaygı için bağımlılık yapmayan ajanlar (buspiron/SSRI) planlanır."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'ye göre bir hasta sakinleştirici ilacı yalnızca uygun tıbbi gözetim altında reçeteli dozunda kullanıyorsa, hangi iki ölçüt tek başına bu tanıyı koymak için yeterli sayılmaz?",
+      "options": [
+        "Tolerans ve yoksunluk",
+        "Birden çok hekimden ilaç toplama ve araç kazası",
+        "İş yükümlülüklerini aksatma ve aile çatışması",
+        "Başarısız bırakma çabaları ve aşerme"
+      ],
+      "correctIndex": 0,
+      "explanation": "Uygun tıbbi gözetim altında reçeteli kullanımda beklenen fizyolojik tolerans ve yoksunluk tek başına kullanım bozukluğu sayılmaz; tanı için doz aşımı, doktor gezme, denetim kaybı veya işlev bozulması gerekir."
+    },
+    "differentialDiagnosis": "• Sedatif/Benzodiazepin Yoksunluğu: İlacın kesilmesi/azaltılmasıyla ortaya çıkan akut kesilme sendromudur; hasta şu an günlük 5 mg dozunu almaya devam etmektedir.\n• Alkol Kullanım Bozukluğu (Alkolizm): Alkol tüketimi bulunmamaktadır; etken alprazolamdır.\n• Yaygın Anksiyete Bozukluğu (YAB): Tek başına tıbbi gözetim dışı 10 kat doz artırımı, doktor gezme ve ilaçlı trafik kazalarını açıklamaz.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 ayda ≥2/11 sorunlu sedatif/hipnotik/anksiyolitik kullanım ölçütü (tıbbi gözetim dışı doz artırımı, doktor gezme, iş kaybı, riskli araç kullanımı, tolerans/yoksunluk).",
+    "therapyId": "motivational_interviewing",
+    "pharmacologyId": "hydroxyzine_buspirone",
+    "explanation": {
+      "whyThis": [
+        "Reçeteli dozu kendi kendine 10 kat artırma (5 mg/gün), üç farklı klinikten ilaç toplama, iki başarısız azaltma girişimi, iş toplantılarını kaçırma, ilaçlı iki trafik kazası, evlilik çatışması, tolerans ve yoksunlukla 9/11 ölçüt (ağır düzey) karşılanmıştır.",
+        "Kullanım uygun tıbbi gözetimin tamamen dışına çıktığından tolerans ve yoksunluk dışındaki 7 davranışsal ölçüt de tanıyı kesinleştirir.",
+        "Hasta aktif kesilme krizinde değildir; alkol ya da opioid kullanımı yoktur."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "sedative_withdrawal",
+          "reason": "Hasta şu an aktif kesilme tablosunda değildir; sabah dozunu almış olup klinik sorun 3 yıllık ağır kullanım örüntüsüdür."
+        },
+        {
+          "diagnosisId": "alcohol_use_disorder",
+          "reason": "Alkol kullanımı yoktur; etken benzodiazepin grubu alprazolamdır."
+        },
+        {
+          "diagnosisId": "gad",
+          "reason": "Tıbbi gözetim dışı doz artırımı, çoklu hekimden ilaç temini ve ilaç etkisiyle kazalar kullanım bozukluğuna özgüdür."
+        }
+      ],
+      "teachingPoint": "Reçeteli benzodiazepin kullanımında tıbbi gözetim dışı doz artırımı, çoklu hekimden ilaç toplama, riskli araç kullanımı ve işlev kaybı geliştiğinde sedatif kullanım bozukluğu tanınır."
+    }
+  }
+]

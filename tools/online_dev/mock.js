@@ -3,6 +3,10 @@
  * Hesap ve sunucu sahte; realtime kapalı. Konsoldan: olMock.scenario('lobby', { n: 8, long: true })
  * Senaryolar: hub, hub-empty, hub-error, lobby, countdown, playing, hp-playing, result, hp-result,
  *             battle-result, spectate, bracket, final, abandoned, missing
+ * Sınıf modu (§15, ajan C2): NS.sinifApi.transport sahte sunucuya (sinif_mock.js) bağlanır. Sayfada window.__sinifRpc varsa
+ * (Playwright exposeBinding) bütün bağlamlar Node'daki TEK sahte sunucuyu paylaşır; yoksa sayfa içi sunucu kullanılır.
+ * Ayarlar: olMock.set({ sinif: 'unsupported' }) özellik yok; { anonDisabled: true } anonim giriş kapalı;
+ * { guest: true } misafir; { sinifUid, sinifUsername } hesaplı katılımcı kimliği. Anonim kimlik localStorage 'olMockAnon'.
  */
 (function () {
     'use strict';
@@ -20,7 +24,8 @@
     const listeners = new Set();
     // B3: accPending (hizmet yükleniyor) / accLoading (oturum var, profil yükleniyor: geçici 'guest')
     const accTransient = () => !!(M.opt && (M.opt.accPending || M.opt.accLoading));
-    const snap = () => (M.opt && M.opt.accPending ? { state: 'guest', availability: 'pending', user: null, profile: null, remember: true, passwordMinLength: 8 }
+    const snap = () => (M.opt && M.opt.guest && !M.opt.accPending && !M.opt.accLoading && M.anonId ? { state: 'guest', availability: 'ready', user: null, profile: null, anonymous: true, remember: true, passwordMinLength: 8 }
+        : M.opt && M.opt.accPending ? { state: 'guest', availability: 'pending', user: null, profile: null, remember: true, passwordMinLength: 8 }
         : M.opt && M.opt.accLoading ? { state: 'guest', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' }, profile: null, remember: true, passwordMinLength: 8 }
         : M.opt && M.opt.guest ? { state: 'guest', availability: 'ready', user: null, profile: null, remember: true, passwordMinLength: 8 } : { state: 'ready', availability: 'ready', user: { id: ME, email: 'sen@ornek.test' },
         profile: { id: ME, username: names[0], display_name: 'Sen', avatar: AV.randomConfig('me'), ranked_points: (M.rpProfile != null ? M.rpProfile : 760) }, remember: true, passwordMinLength: 8 });
@@ -31,6 +36,16 @@
         getClient: () => (M.opt && M.opt.accPending ? null : { mock: true }),
         getRemember: () => true,
         refreshProfile: async () => { M.refreshCalls = (M.refreshCalls || 0) + 1; if (M.rpServer != null) M.rpProfile = M.rpServer; listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
+        signInAnonymously: async () => {
+            M.anonCalls = (M.anonCalls || 0) + 1;
+            if (M.opt.anonDisabled) return { ok: false, error: { code: 'ANON_KAPALI', message: 'Takma adla katılım şu an kapalı.' } };
+            if (!M.opt.guest || M.anonId) return { ok: true, reused: true };
+            M.anonId = '00000000-0000-4000-a000-' + String(Math.floor(Math.random() * 1e12)).padStart(12, '0');
+            try { localStorage.setItem('olMockAnon', M.anonId); } catch (e) { /* yok */ }
+            listeners.forEach(f => f(snap(), { type: 'state' }));
+            return { ok: true };
+        },
+        signOut: async () => { M.anonId = null; try { localStorage.removeItem('olMockAnon'); } catch (e) { /* yok */ } listeners.forEach(f => f(snap(), { type: 'state' })); return { ok: true }; },
         getLeaderboard: async () => ({ ok: true, rows: names.slice(0, 8).map((n, i) => ({ user_id: uid(i), username: n, avatar: AV.randomConfig(n), ranked_points: 2100 - i * 230, position: i + 1 })), me: null })
     });
     Object.defineProperty(fakeAcc, 'state', { get: () => (M.opt && (M.opt.guest || accTransient()) ? 'guest' : 'ready') });
@@ -45,7 +60,7 @@
     });
 
     // ---------------------------------------------------------- sahte sunucu
-    const M = { state: null, hubMode: 'full' };
+    const M = { state: null, hubMode: 'full', anonId: (() => { try { return localStorage.getItem('olMockAnon'); } catch (e) { return null; } })() };
     const ok = (data) => Promise.resolve({ ok: true, data });
     const err = (code, message) => Promise.resolve({ ok: false, error: { code, message } });
     function player(i, opts) {
@@ -294,5 +309,66 @@
     function emitRoomChange(patch) { if (!M.state) return; const old = M.state.room; M.state.room = Object.assign({}, old, patch); if (M.rt && M.rt.onChange) M.rt.onChange('rooms', { eventType: 'UPDATE', new: Object.assign({}, M.state.room), old: { id: old.id } }); }
     function emitFriendship(ev) { if (M.selfHandlers && M.selfHandlers.onFriendship) M.selfHandlers.onFriendship(ev || { eventType: 'UPDATE' }); }
     function emitResync() { if (M.selfHandlers && M.selfHandlers.onResync) M.selfHandlers.onResync(); }
-    window.olMock = { emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; M.beginCalls = 0; M.submitCalls = 0; persist(); }, get beginCalls() { return M.beginCalls || 0; }, get submitCalls() { return M.submitCalls || 0; }, emitAcc() { listeners.forEach(f => f(snap(), { type: 'state' })); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
+    // ---------------------------------------------------------- Sınıf modu (§15; ajan C2)
+    const SN = { engine: null, handlers: new Map() };
+    function snIdent() {
+        const s = snap();
+        if (s.state === 'ready' && s.user) return { uid: M.opt.sinifUid || ME, username: M.opt.sinifUsername || names[0], display_name: 'Sen', avatar: s.profile && s.profile.avatar, anonymous: false };
+        if (s.anonymous && M.anonId) return { uid: M.anonId, anonymous: true };
+        return null;
+    }
+    function snEngine() {
+        if (!SN.engine && window.PsikoVakaSinifMock) {
+            SN.engine = window.PsikoVakaSinifMock.create({ cases: (window.game && window.game.allMasterCases) || [], diagnoses: (window.game && window.game.diagnoses) || [],
+                isimUygun: (n) => !window.PsikoVakaIsimFiltresi || window.PsikoVakaIsimFiltresi.check(n).ok, now: () => Date.now() + (M.opt.sinifSkew || 0), kod: 'K7Q2MX' });
+            SN.engine.on((ev) => {
+                const id = ev.new.oturum_id || ev.new.id;
+                const h = SN.handlers.get(id);
+                const me = snIdent();
+                if (h && me && SN.engine.canSee(me.uid, ev) && (h.host || ev.table === 'sinif_oturumlari')) setTimeout(() => h.onChange && h.onChange(ev.table, { eventType: ev.eventType, new: ev.new }), 0);
+            });
+        }
+        return SN.engine;
+    }
+    const snRemote = () => typeof window.__sinifRpc === 'function';
+    function snUser(id) { if (id && snEngine()) snEngine().users[id.uid] = { username: id.username || null, display_name: id.display_name || null, avatar: id.avatar || {}, anonymous: !!id.anonymous }; }
+    window.__sinifPush = (ev) => { const h = SN.handlers.get(ev.new.oturum_id || ev.new.id); if (h && h.onChange) h.onChange(ev.table, { eventType: ev.eventType, new: ev.new }); };
+    if (NS.sinifApi) {
+        NS.sinifApi.transport = {
+            async rpc(fn, args) {
+                M.sinifCalls = M.sinifCalls || {};
+                M.sinifCalls[fn] = (M.sinifCalls[fn] || 0) + 1;
+                if (M.opt.sinif === 'unsupported') return { data: null, error: { code: 'PGRST202', message: 'Could not find the function public.' + fn } };
+                const id = snIdent();
+                let r;
+                if (snRemote()) r = await window.__sinifRpc(id, fn, args || {});
+                else { if (!id) return { data: null, error: { message: 'NOT_AUTHENTICATED' } }; snUser(id); r = snEngine().call(id.uid, fn, args || {}); }
+                if (r && r.error && r.error.network) throw new TypeError('Failed to fetch');
+                return { data: (r && r.data) || null, error: (r && r.error) || null };
+            },
+            async select(table, q) {
+                const id = snIdent();
+                if (!id) return { data: [], error: null };
+                if (table === 'profiles') {
+                    if (snRemote()) return window.__sinifSelect(id, table, q);
+                    const U = snEngine().users;
+                    return { data: (q.ids || []).filter(x => U[x] && !U[x].anonymous).map(x => ({ id: x, avatar: U[x].avatar })), error: null };
+                }
+                if (snRemote()) return window.__sinifSelect(id, table, q);
+                snUser(id);
+                return { data: snEngine().select(id.uid, table, q).data, error: null };
+            },
+            subscribe(oturumId, opts, handlers) {
+                const id = snIdent();
+                SN.handlers.set(oturumId, Object.assign({ host: !!(opts && opts.host) }, handlers));
+                M.sinifSubs = (M.sinifSubs || 0) + 1;
+                if (snRemote() && window.__sinifSub && id) window.__sinifSub(id.uid, oturumId, !!(opts && opts.host));
+                setTimeout(() => handlers.onStatus && handlers.onStatus(M.opt.sinifRtDown ? 'down' : 'live'), 0);
+                return { leave() { if (SN.handlers.get(oturumId) && SN.handlers.get(oturumId).onChange === handlers.onChange) SN.handlers.delete(oturumId); if (snRemote() && window.__sinifUnsub && id) window.__sinifUnsub(id.uid, oturumId); }, isLive: () => !M.opt.sinifRtDown };
+            },
+            signInAnonymously: () => fakeAcc.signInAnonymously()
+        };
+    }
+
+    window.olMock = { get sinifEngine() { return snEngine(); }, get sinifCalls() { return M.sinifCalls || {}; }, get anonCalls() { return M.anonCalls || 0; }, get sinifSubs() { return M.sinifSubs || 0; }, emitRoomChange, emitFriendship, emitResync, get hasSelfHandlers() { return !!M.selfHandlers; }, get refreshCalls() { return M.refreshCalls || 0; }, setRp(profileRp, serverRp) { if (profileRp != null) M.rpProfile = profileRp; if (serverRp != null) M.rpServer = serverRp; if (profileRp != null) listeners.forEach(f => f(snap(), { type: 'state' })); }, scenario, get state() { return M.state; }, set(o) { Object.assign(M.opt, o || {}); }, resetDaily() { M.daily = {}; M.beginCalls = 0; M.submitCalls = 0; persist(); }, get beginCalls() { return M.beginCalls || 0; }, get submitCalls() { return M.submitCalls || 0; }, emitAcc() { listeners.forEach(f => f(snap(), { type: 'state' })); }, get daily() { return M.daily; }, addPlayer, startRoom, get lastInvite() { return M.lastInvite; }, get left() { return M.left || 0; }, get opt() { return M.opt; } };
 })();

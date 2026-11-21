@@ -64,8 +64,11 @@
             onBroadcast: (ev, p) => {
                 if (!p || !p.user_id || p.user_id === uid) return;
                 if (ev === 'move' && isFinite(p.x) && isFinite(p.y)) {
-                    R.presence[p.user_id] = Object.assign({}, R.presence[p.user_id], { x: clampPos(p.x), y: clampPos(p.y), at: Date.now() });
+                    // act/spot (N2, isteğe bağlı): eski istemcilerin "move"u bunları taşımaz → etkinlik yok
+                    R.presence[p.user_id] = Object.assign({}, R.presence[p.user_id], { x: clampPos(p.x), y: clampPos(p.y), at: Date.now(), act: cleanAct(p.act), spot: cleanSpot(p.spot), via: 'move' });
                 }
+                // duygu gönderen oyuncunun etkinliği biter
+                if (ev === 'emote' && R.presence[p.user_id]) R.presence[p.user_id] = Object.assign({}, R.presence[p.user_id], { act: null, spot: null });
                 // Bir oyuncu avatarını değiştirdi: yeni hâli sunucudan oku (yayındaki veriye güvenilmez)
                 if (ev === 'profile') refreshSoon();
                 R.bus.emit('broadcast', ev, p);
@@ -224,6 +227,9 @@
 
     // ------------------------------------------------------------ presence (görsel)
     function clampPos(v) { return Math.max(0.04, Math.min(0.96, Number(v))); }
+    const ACTS = ['read', 'tea', 'doze', 'stretch', 'think', 'wave'];
+    function cleanAct(a) { return ACTS.includes(a) ? a : null; }
+    function cleanSpot(s) { return (typeof s === 'string' && /^[a-z]{1,12}(\.[0-9])?$/.test(s)) ? s : null; }
     function onPresence(state) {
         const seen = {};
         Object.keys(state || {}).forEach(k => {
@@ -234,7 +240,7 @@
                 const cur = R.presence[meta.user_id] || {};
                 // broadcast ile daha yeni konum geldiyse presence'in eski değerini alma
                 if (isFinite(meta.x) && isFinite(meta.y) && !(cur.at && cur.at > Date.parse(meta.at || 0))) {
-                    R.presence[meta.user_id] = { x: clampPos(meta.x), y: clampPos(meta.y), at: Date.parse(meta.at || 0) || Date.now() };
+                    R.presence[meta.user_id] = { x: clampPos(meta.x), y: clampPos(meta.y), at: Date.parse(meta.at || 0) || Date.now(), act: cleanAct(meta.act), spot: cleanSpot(meta.spot), via: 'sync' };
                 }
             });
         });
@@ -251,27 +257,40 @@
         return Date.now() - last > 6000;
     }
 
-    const sendMove = NS.util.throttle((x, y) => {
+    // move/presence yükü: {user_id, x, y} + isteğe bağlı act (etkinlik) ve spot (oda nesnesi/oturma yeri).
+    // Eski istemciler fazladan alanları yok sayar (yalnızca x,y'ye "zıplar").
+    const extraOf = (e) => { const o = {}; if (e && e.act) o.act = e.act; if (e && e.spot) o.spot = e.spot; return o; };
+    const sendMove = NS.util.throttle((x, y, e) => {
         if (!R.handle) return;
         const uid = NS.api.myId();
-        R.handle.send('move', { user_id: uid, x, y });
-        trackPresence(x, y);
+        R.handle.send('move', Object.assign({ user_id: uid, x, y }, extraOf(e)));
+        trackPresence(x, y, e);
     }, 350);
-    const trackPresence = NS.util.throttle((x, y) => {
+    const trackPresence = NS.util.throttle((x, y, e) => {
         if (!R.handle) return;
-        R.handle.track({ user_id: NS.api.myId(), x, y, at: new Date().toISOString() });
+        R.handle.track(Object.assign({ user_id: NS.api.myId(), x, y, at: new Date().toISOString() }, extraOf(e)));
     }, 1200);
-    function move(x, y) {
+    /** Konum (hedef) + isteğe bağlı { act, spot }. */
+    function move(x, y, extra) {
         const uid = NS.api.myId();
         x = clampPos(x); y = clampPos(y);
-        R.presence[uid] = { x, y, at: Date.now() };
-        sendMove(x, y);
+        const e = { act: cleanAct(extra && extra.act), spot: cleanSpot(extra && extra.spot) };
+        R.presence[uid] = { x, y, at: Date.now(), act: e.act, spot: e.spot };
+        sendMove(x, y, e);
+    }
+    /** Kendi etkinliğimi bitir (duygu gönderince): yeni yayın yok, yalnızca presence güncellenir. */
+    function clearActivity() {
+        const uid = NS.api.myId();
+        const cur = R.presence[uid];
+        if (!cur || (!cur.act && !cur.spot)) return;
+        R.presence[uid] = Object.assign({}, cur, { act: null, spot: null, at: Date.now() });
+        trackPresence(cur.x, cur.y, null);
     }
     function trackInitial(x, y) {
         if (!R.handle) return;
         const uid = NS.api.myId();
         const cur = R.presence[uid];
-        R.handle.track({ user_id: uid, x: cur ? cur.x : x, y: cur ? cur.y : y, at: new Date().toISOString() });
+        R.handle.track(Object.assign({ user_id: uid, x: cur ? cur.x : x, y: cur ? cur.y : y, at: new Date().toISOString() }, extraOf(cur)));
     }
     /** Yayın; kanal henüz bağlı değilse (ör. ilk abonelik yeniden deneniyor) kısa aralıklarla 3 kez daha dener. */
     function send(ev, payload, tries) {
@@ -331,6 +350,6 @@
         bus: R.bus,
         open(id) { R.openedAt = Date.now(); open(id); },
         close, leave, refresh, refreshSoon, apply, phase, me, active, isHost, player, myRound, startGate,
-        setReady, start, move, trackInitial, send, isDisconnected, beat
+        setReady, start, move, clearActivity, trackInitial, send, isDisconnected, beat
     };
 })(typeof window !== 'undefined' ? window : globalThis);

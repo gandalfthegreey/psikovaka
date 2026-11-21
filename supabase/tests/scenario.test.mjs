@@ -7,14 +7,17 @@
 //
 // DİKKAT: DATABASE_URL verilirse o veritabanına stub şema ve migration kurulur.
 // Gerçek Supabase projesine ASLA bağlamayın; yalnızca boş, atılabilir bir test veritabanı.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
-const read = (p) => readFileSync(path.join(root, p), 'utf8');
+const readRaw = (p) => readFileSync(path.join(root, p), 'utf8');
+// ILE_0006=1: 0005 her yüklendiğinde ardından 0006 da uygulanır (0006 sonrası geriye uyum denemesi)
+const MIG6_YOL = ['migrations/0006_sinif_modu.sql', 'tools/0006_sinif_modu.sql.taslak'].find((p) => existsSync(path.join(root, p)));
+const read = (p) => readRaw(p) + (process.env.ILE_0006 && p === 'migrations/0005_isim_filtresi.sql' && MIG6_YOL ? '\n' + readRaw(MIG6_YOL) : '');
 
 // ---------------------------------------------------------------- bağlantı
 async function connect() {
@@ -580,7 +583,9 @@ await test('Tutarsız istatistik -> INVALID_STATS', async () => {
 console.log('\n[Realtime]');
 await test('Yayında doğru tablolar var; tahminler ve cevap anahtarı yok', async () => {
   const t = (await admin(`select tablename from pg_publication_tables where pubname = 'supabase_realtime' `)).rows.map((r) => r.tablename).sort();
-  eq(t, ['friendships', 'match_pairings', 'match_results', 'room_invites', 'room_players', 'room_rounds', 'rooms', 'round_players']);
+  // 0006 (sınıf modu) üç tablo ekler: sinif_oturumlari, sinif_katilimcilar, sinif_tur_sonuclari (tahminler/vaka sırası yok)
+  eq(t.filter((x) => !x.startsWith('sinif_')), ['friendships', 'match_pairings', 'match_results', 'room_invites', 'room_players', 'room_rounds', 'rooms', 'round_players']);
+  ok(t.filter((x) => x.startsWith('sinif_')).every((x) => ['sinif_oturumlari', 'sinif_katilimcilar', 'sinif_tur_sonuclari'].includes(x)), t.join(','));
 });
 await test('Özel kanal yetkisi: room:<id> yalnızca üyeler; online:<id> sahibi yazar, arkadaşlar okur', async () => {
   const d = await rpc(U[1], 'create_room', { p_mode: 'duel' });

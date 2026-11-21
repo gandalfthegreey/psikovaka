@@ -4750,7 +4750,7 @@ function applyThemeChrome(theme) {
     if (iconEl) iconEl.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-${theme === 'light' ? 'sun' : 'moon'}"/></svg>`;
     if (labelEl) labelEl.textContent = theme === 'light' ? 'Açık' : 'Koyu';
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef0f3' : '#15181e');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef0f3' : '#0f1117');
 }
 
 window.addEventListener('DOMContentLoaded', () => {

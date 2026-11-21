@@ -1,7 +1,10 @@
 /**
  * PsikoVaka Online — lobi sahnesi.
- * Oyuncuların Nöro'ları çizilmiş bir odada durur; boş yere dokununca kendi Nöro'n oraya zıplar
- * (konum room:<id> kanalında yayınlanır, geç gelenler presence'ten alır; yalnızca görsel).
+ * Oyuncuların Nöro'ları özgün bir terapi odasında (js/online/lobby_room.js) durur; boş yere dokununca kendi Nöro'n
+ * engellerin etrafından dolaşarak oraya YÜRÜR (yalnızca hedef yayınlanır, her istemci yürüyüşü kendisi canlandırır;
+ * geç gelenler presence'ten anında yerleşir). Eşyalara dokununca oraya yürüyüp bir etkinlik başlatır
+ * (kitaplık/kanepe → okuma, sehpa → çay, koltuk → kestirme, şömine → gerinme, pencere → düşünme); hareket ya da duygu bitirir.
+ * Eski istemcilerin "move" (zıplama) iletileri aynen işlenir: Nöro o noktaya yürür.
  * Duygu ve hazır mesaj düğmeleri herkese gider. Serbest yazı yok.
  * Başlatma kuralları sunucudakinin aynısı (rooms.startGate); yarışta sunucu hatası zarifçe gösterilir.
  */
@@ -15,8 +18,10 @@
         root: null, nodes: new Map(), emotes: {}, bubbles: {}, timers: [],
         emoteLimit: NS.util.rateLimiter(4, 6000),
         sayLimit: NS.util.rateLimiter(3, 6000),
-        offs: [], lastPlayers: null, lastHost: null, busy: false
+        offs: [], lastPlayers: null, lastHost: null, busy: false,
+        room: null, walker: null, W: 0, H: 0, lastActs: {}
     };
+    const A = () => global.PsikoVakaAvatar;
 
     // ------------------------------------------------------------ yerleşim
     const FLOOR_TOP = 0.46, FLOOR_BOTTOM = 0.9;
@@ -41,30 +46,31 @@
         return out;
     }
 
-    function narrow() { const l = L.root && L.root.querySelector('#olStageLayer'); return !!(l && l.clientWidth && l.clientWidth < 480); }
+    /** Odaya göre varsayılan yerler: eşyaların önündeki açık alanda (yürünebilir en yakın noktaya oturtulur). */
+    function roomSlots(n, nar) {
+        const row = (cnt, y, x0, x1) => Array.from({ length: cnt }, (_, i) => ({ x: cnt === 1 ? (x0 + x1) / 2 : x0 + (x1 - x0) * i / (cnt - 1), y }));
+        let out;
+        if (nar) {
+            // dar ekranda 3+ kişi birden çok sıra (ad etiketleri okunabilsin): 3-4 → 2+2, 5+ → 3-3-2
+            if (n <= 2) out = row(n, 0.8, 0.3, 0.7);
+            else if (n <= 4) out = [...row(Math.ceil(n / 2), 0.73, 0.24, 0.76), ...row(Math.floor(n / 2), 0.87, 0.36, 0.64)];
+            else { const a = Math.ceil(n / 3), b = Math.ceil((n - a) / 2), c = n - a - b; out = [...row(a, 0.675, 0.2, 0.8), ...row(b, 0.785, 0.2, 0.8), ...row(c, 0.895, 0.32, 0.68)]; }
+        } else if (n <= 4) out = row(n, 0.8, n <= 2 ? 0.4 : 0.28, n <= 2 ? 0.6 : 0.72);
+        else {
+            // 5+ kişi iki sıra: arka sıra koltuk ile kanepe arasındaki açıklıkta, ön sıra halının önünde
+            const c1 = (n <= 5 || (L.W && L.W < 900)) ? 2 : 3, c2 = n - c1;
+            out = [...row(c1, 0.625, c1 === 2 ? 0.4 : 0.35, c1 === 2 ? 0.54 : 0.59), ...row(c2, 0.83, c2 > 5 ? 0.12 : 0.16, c2 > 5 ? 0.88 : 0.84)];
+        }
+        const r = L.room;
+        return out.map(p => r ? r.nearestFree(p.x, p.y) : p);
+    }
+    function narrow() { const l = L.root && L.root.querySelector('#olStageLayer'); return !!(l && l.clientWidth && l.clientWidth < 560); }
+    function slotList(cap) { return L.room ? roomSlots(cap, narrow()) : slots(cap, narrow()); }
     function posFor(p, idx, cap) {
         const pr = NS.rooms.presence[p.user_id];
         if (pr && isFinite(pr.x) && isFinite(pr.y)) return { x: pr.x, y: Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, pr.y)) };
-        const s = slots(cap, narrow())[idx] || { x: 0.5, y: 0.72 };
+        const s = slotList(cap)[idx] || { x: 0.5, y: 0.8 };
         return s;
-    }
-
-    // ------------------------------------------------------------ sahne süsleri (özgün, sade)
-    function stageArt() {
-        return `
-        <div class="ol-stage-wall" aria-hidden="true">
-            <svg class="ol-deco ol-deco-bunting" viewBox="0 0 400 40" preserveAspectRatio="none"><path class="ol-deco-line" d="M0 6 Q100 22 200 8 T400 6"/>
-                ${[20, 60, 100, 140, 180, 220, 260, 300, 340, 380].map((x, i) => `<path class="ol-flag ol-flag-${i % 4}" d="M${x - 9} ${10 + Math.sin(i) * 3} L${x + 9} ${10 + Math.sin(i + 0.5) * 3} L${x} ${30 + Math.sin(i) * 2} Z"/>`).join('')}</svg>
-            <svg class="ol-deco ol-deco-board" viewBox="0 0 120 70"><rect class="ol-deco-frame" x="2" y="2" width="116" height="66" rx="8"/>
-                <path class="ol-deco-pulse" d="M10 40 H38 L46 22 L58 54 L66 34 L72 40 H110"/></svg>
-            <svg class="ol-deco ol-deco-window" viewBox="0 0 80 90"><rect class="ol-deco-frame" x="3" y="3" width="74" height="84" rx="38"/><path class="ol-deco-line" d="M40 6 V86 M6 46 H74"/><circle class="ol-deco-sun" cx="56" cy="28" r="8"/></svg>
-            <svg class="ol-deco ol-deco-shelf" viewBox="0 0 90 80"><rect class="ol-deco-wood" x="2" y="30" width="86" height="5" rx="2"/><rect class="ol-deco-wood" x="2" y="72" width="86" height="5" rx="2"/>
-                <rect class="ol-book ol-book-0" x="8" y="8" width="9" height="22" rx="2"/><rect class="ol-book ol-book-1" x="19" y="12" width="8" height="18" rx="2"/><rect class="ol-book ol-book-2" x="29" y="6" width="10" height="24" rx="2"/>
-                <rect class="ol-book ol-book-3" x="44" y="50" width="9" height="22" rx="2"/><rect class="ol-book ol-book-0" x="55" y="54" width="8" height="18" rx="2"/><circle class="ol-deco-sun" cx="74" cy="62" r="8"/></svg>
-        </div>
-        <div class="ol-stage-floor" aria-hidden="true"><div class="ol-rug"></div></div>
-        <svg class="ol-deco ol-deco-plant" viewBox="0 0 60 90" aria-hidden="true"><path class="ol-leaf" d="M30 58 C10 50 8 30 14 18 C26 26 32 40 30 58Z"/><path class="ol-leaf" d="M30 58 C48 48 54 30 48 14 C36 22 28 40 30 58Z"/><path class="ol-leaf ol-leaf-2" d="M30 60 C24 40 28 22 32 8 C38 24 36 42 30 60Z"/><path class="ol-pot" d="M16 58 H44 L40 86 H20Z"/></svg>
-        <svg class="ol-deco ol-deco-lamp" viewBox="0 0 50 120" aria-hidden="true"><path class="ol-lamp-shade" d="M10 30 L18 6 H32 L40 30Z"/><path class="ol-deco-line" d="M25 30 V112 M12 114 H38"/><ellipse class="ol-lamp-glow" cx="25" cy="34" rx="22" ry="8"/></svg>`;
     }
 
     // ------------------------------------------------------------ çizim
@@ -98,10 +104,9 @@
                 <button class="btn btn-ghost btn-sm" type="button" data-ol-l="settings" id="olLobbySettingsBtn">${icon('settings')}<span>Ayarlar</span></button>
             </div>
             <div class="ol-ch-note" id="olChNote" aria-live="polite" hidden></div>
-            <div class="ol-stage" id="olStage" tabindex="0" role="group" aria-roledescription="lobi sahnesi" aria-label="Lobi. Boş bir yere dokunarak ya da ok tuşlarıyla Nöro'nu taşı.">
-                ${stageArt()}
+            <div class="ol-stage" id="olStage" tabindex="0" role="group" aria-roledescription="lobi sahnesi" aria-label="Lobi: terapi odası. Boş bir yere dokunarak ya da ok tuşlarıyla Nöro'nu yürüt; odadaki eşya düğmeleriyle bir etkinlik başlat.">
                 <div class="ol-stage-layer" id="olStageLayer"></div>
-                <div class="ol-stage-hint" id="olStageHint">Boş bir yere dokun, Nöro'n oraya zıplasın.</div>
+                <div class="ol-stage-hint" id="olStageHint"><span class="ol-lg-only">Boş bir yere dokun, Nöro'n oraya yürüsün. Eşyalara dokunursan bir şey yapar.</span><span class="ol-sm-only">Yere dokun: Nöro'n yürüsün. Eşyaya dokun: bir şey yapsın.</span></div>
             </div>
             <details class="ol-roster" id="olRoster">
                 <summary class="ol-roster-sum"><span id="olRosterTitle">Oyuncular</span>${icon('chevron-down')}</summary>
@@ -133,6 +138,7 @@
         const stage = $('#olStage', root2);
         stage.addEventListener('pointerdown', onStagePointer);
         stage.addEventListener('keydown', onStageKey);
+        setupRoom(stage);
         document.addEventListener('click', closeQuickOutside, true);
         L.offs.push(() => document.removeEventListener('click', closeQuickOutside, true));
         L.offs.push(NS.rooms.bus.on('presence', () => update()));
@@ -216,12 +222,118 @@
         box.hidden = false;
     }
 
-    function figureHtml(p, ready, emote, size) {
+    function figureHtml(p, ready, emote, size, activity) {
         let cfg = p.avatar || {};
-        if (ready && !emote && global.PsikoVakaAvatar) {
-            cfg = Object.assign({}, global.PsikoVakaAvatar.normalize(cfg), { eyes: 'happy', mouth: 'open' });
+        if (ready && !emote && !activity && A()) {
+            cfg = Object.assign({}, A().normalize(cfg), { eyes: 'happy', mouth: 'open' });
         }
-        return NS.avatar(cfg, { size, framed: false, animated: true, emote: emote || undefined, title: p.username || '' });
+        return NS.avatar(cfg, { size, framed: false, animated: true, emote: emote || undefined, activity: activity || undefined, title: p.username || '' });
+    }
+
+    // ------------------------------------------------------------ oda + yürüme
+    function setupRoom(stage) {
+        const layer = $('#olStageLayer', stage);
+        if (!NS.lobbyRoom) return;
+        L.walker = NS.lobbyRoom.createWalker({
+            reduced: () => NS.util.reducedMotion(),
+            onFrame: (uid, st, teleport) => positionNode(uid, st, teleport),
+            onArrive: (uid, st) => arrived(uid, st)
+        });
+        L.room = NS.lobbyRoom.create(stage, {
+            itemLayer: layer,
+            interactive: !(NS.rooms.state && NS.rooms.state.room.is_quick),
+            onLayout: () => {
+                if (!L.room) return;          // ilk yerleşim create() içinde; aşağıda ayrıca çizilir
+                L.W = layer.clientWidth || stage.clientWidth; L.H = layer.clientHeight || stage.clientHeight;
+                // yerleşim değişti (ör. döndürme): herkes yeni yerleşimdeki karşılığına anında geçer
+                L.nodes.forEach(n => { n._sig = ''; });
+                if (L.walker) L.walker.states.clear();
+                updatePlayers();
+            }
+        });
+        L.W = layer.clientWidth || stage.clientWidth; L.H = layer.clientHeight || stage.clientHeight;
+        const vis = () => stage.classList.toggle('nv-paused', document.hidden);
+        document.addEventListener('visibilitychange', vis);
+        L.offs.push(() => document.removeEventListener('visibilitychange', vis));
+    }
+
+    function positionNode(uid, st, teleport) {
+        const node = L.nodes.get(uid);
+        if (!node) return;
+        const W = L.W || 1, H = L.H || 1;
+        const depth = (0.82 + (st.y - FLOOR_TOP) * 0.45);
+        node.style.transform = `translate3d(${(st.x * W).toFixed(1)}px, ${(st.y * H).toFixed(1)}px, 0) translate(-50%, -88%) scale(${depth.toFixed(3)})`;
+        const z = String(st.seated && st.opts && st.opts.zBase ? 11 + Math.round(st.opts.zBase * 100) : 10 + Math.round(st.y * 100));
+        if (node.style.zIndex !== z) node.style.zIndex = z;
+        const fig = node.querySelector('.ol-p-fig');
+        const pose = node._pose || {};
+        if (pose.walking !== st.walking || pose.facing !== st.facing) {
+            node._pose = { walking: st.walking, facing: st.facing };
+            if (A()) A().setPose(fig, { walking: st.walking, facing: st.facing });
+            node.classList.toggle('is-walking', !!st.walking);
+        }
+        if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
+    }
+    function arrived(uid, st) {
+        st.arrived = true;
+        st.seated = !!(st.opts && st.opts.seat);
+        clearTimeout(st._turnT);
+        // kısa bir an sonra rahat ön (ya da nesneye uygun) poza döner
+        st._turnT = setTimeout(() => { st.facing = (st.opts && st.opts.facing) || 'front'; positionNode(uid, st); refreshFigure(uid); }, NS.util.reducedMotion() ? 0 : 160);
+        positionNode(uid, st);
+    }
+    /** Seçilen oturma yerleri: aynı yeri iki kişi isterse kimliği küçük olan oturur (her istemcide aynı sonuç). */
+    function seatHolders(act) {
+        const m = {};
+        act.slice().sort((a, b) => (a.user_id < b.user_id ? -1 : 1)).forEach(p => {
+            const pr = NS.rooms.presence[p.user_id];
+            if (pr && pr.spot && pr.spot.includes('.') && !m[pr.spot]) m[pr.spot] = p.user_id;
+        });
+        return m;
+    }
+    /** Oyuncunun olması gereken yer: { x, y (çizim), lx, ly (yayındaki), act, spot, seat, approach, facing } */
+    function desired(p, idx, cap, holders) {
+        const pr = NS.rooms.presence[p.user_id];
+        const base = posFor(p, idx, cap);
+        const out = { lx: base.x, ly: base.y, act: null, spot: null, seat: false, approach: null, facing: 'front', via: pr ? (pr.via || 'sync') : 'slot' };
+        const r = L.room;
+        if (pr && pr.spot && r) {
+            const sp = r.spotPos(pr.spot);
+            if (sp) {
+                out.act = pr.act || sp.object.act;
+                out.facing = sp.object.facing || 'front';
+                out.spot = pr.spot;
+                if (sp.seat && holders[pr.spot] === p.user_id) { out.x = sp.x; out.y = sp.y; out.seat = true; out.approach = sp.approach; out.zBase = sp.zBase; return out; }
+                const ap = sp.object.approach; out.x = ap.x; out.y = ap.y; return out;
+            }
+        }
+        if (pr && pr.act && !pr.spot) out.act = pr.act;   // nesnesiz etkinlik (ileride)
+        const q = r ? r.nearestFree(base.x, base.y) : base;
+        out.x = q.x; out.y = q.y;
+        return out;
+    }
+    function refreshFigure(uid) {
+        const node = L.nodes.get(uid), s = NS.rooms.state;
+        if (!node || !s) return;
+        const p = NS.rooms.player(uid);
+        if (!p) return;
+        const st = L.walker && L.walker.get(uid);
+        const ready = p.is_host || p.is_ready;
+        const emote = L.emotes[uid] || '';
+        const activity = (st && st.arrived && !st.walking && !emote && st.opts) ? (st.opts.act || '') : '';
+        const size = node._size || 80;
+        const key = JSON.stringify([p.avatar, !!ready, emote, size, activity]);
+        const fig = node.querySelector('.ol-p-fig');
+        if (fig.dataset.key !== key) {
+            fig.innerHTML = figureHtml(p, ready, emote, size, activity);
+            fig.dataset.key = key;
+            node._pose = null;
+            if (st) positionNode(uid, st);
+            node.classList.toggle('is-active', !!activity);
+            node.dataset.act = activity;
+            if (activity && uid !== NS.api.myId() && L.lastActs[uid] !== activity && A()) NS.announce(`${p.username}: ${A().ACTIVITY_LABELS[activity] || ''}`);
+            L.lastActs[uid] = activity;
+        }
     }
 
     function updatePlayers() {
@@ -232,11 +344,15 @@
         const cap = s.room.capacity;
         const myId = NS.api.myId();
         const w = layer.clientWidth || 360;
-        const size = w < 480 ? (cap > 4 ? 54 : 78) : Math.round(Math.max(cap > 4 ? 64 : 84, Math.min(cap > 4 ? 108 : 148, w * (cap > 4 ? 0.08 : 0.115))));
+        if (!L.W) { L.W = w; L.H = layer.clientHeight || 400; }
+        // Nöro boyu: lobi ~80-120 px (masaüstü), telefonda 52-66 px; eşyalarla orantılı kalsın diye üst sınırlı
+        const size = w < 560 ? (cap > 4 ? 52 : 66) : Math.round(Math.max(cap > 4 ? 64 : 80, Math.min(cap > 4 ? 88 : 120, w * (cap > 4 ? 0.07 : 0.1))));
+        const holders = seatHolders(act);
         const seen = new Set();
         act.forEach((p, idx) => {
             seen.add(p.user_id);
             let node = L.nodes.get(p.user_id);
+            let fresh = false;
             if (!node) {
                 node = document.createElement('div');
                 node.className = 'ol-p';
@@ -247,26 +363,29 @@
                 setTimeout(() => node.classList.remove('is-new'), 600);
                 layer.appendChild(node);
                 L.nodes.set(p.user_id, node);
+                fresh = true;
             }
-            const pos = posFor(p, idx, cap);
-            const prevX = parseFloat(node.dataset.x), prevY = parseFloat(node.dataset.y);
-            if (prevX !== pos.x || prevY !== pos.y) {
-                if (isFinite(prevX) && !NS.util.reducedMotion()) {
-                    node.classList.remove('is-hopping'); void node.offsetWidth; node.classList.add('is-hopping');
-                    node.classList.toggle('is-facing-left', pos.x < prevX);
-                    clearTimeout(node._hopT); node._hopT = setTimeout(() => node.classList.remove('is-hopping'), 520);
+            node._size = size;
+            const want = desired(p, idx, cap, holders);
+            const sig = [want.x.toFixed(4), want.y.toFixed(4), want.spot || '', want.act || ''].join('|');
+            if (node._sig !== sig) {
+                node._sig = sig;
+                node.dataset.x = want.lx; node.dataset.y = want.ly;
+                node.dataset.spot = want.spot || '';
+                const prevVia = node._via; node._via = want.via;
+                const opts = { act: want.act, facing: want.facing, seat: want.seat, zBase: want.zBase };
+                const st = L.walker && L.walker.get(p.user_id);
+                if (!L.walker) positionNode(p.user_id, { x: want.x, y: want.y, walking: false, facing: 'front' });   // oda modülü yoksa: düz yerleştirme
+                // ilk kez presence'ten gelen konum (geç katılma / ilk eşitleme): yürümeden yerleşir
+                else if (fresh || !st || (prevVia === 'slot' && want.via === 'sync' && p.user_id !== myId)) { const st2 = L.walker.place(p.user_id, { x: want.x, y: want.y }, opts); st2.arrived = true; st2.seated = want.seat; st2.facing = want.facing; positionNode(p.user_id, st2); }
+                else {
+                    const path = L.room.route({ x: st.x, y: st.y }, { x: want.x, y: want.y }, want.seat ? want.approach : null);
+                    st.arrived = false; st.seated = false;
+                    clearTimeout(st._turnT);
+                    L.walker.go(p.user_id, path, opts);
                 }
-                node.dataset.x = pos.x; node.dataset.y = pos.y;
-                node.style.setProperty('--x', (pos.x * 100).toFixed(2) + '%');
-                node.style.setProperty('--y', (pos.y * 100).toFixed(2) + '%');
-                node.style.setProperty('--depth', (0.82 + (pos.y - FLOOR_TOP) * 0.45).toFixed(3));
-                node.style.zIndex = String(10 + Math.round(pos.y * 100));
             }
-            const ready = p.is_host || p.is_ready;
-            const emote = L.emotes[p.user_id] || '';
-            const key = JSON.stringify([p.avatar, !!ready, emote, size]);
-            const fig = node.querySelector('.ol-p-fig');
-            if (fig.dataset.key !== key) { fig.innerHTML = figureHtml(p, ready, emote, size); fig.dataset.key = key; }
+            refreshFigure(p.user_id);
             const disc = NS.rooms.isDisconnected(p.user_id);
             node.classList.toggle('is-me', p.user_id === myId);
             node.classList.toggle('is-ready', !!p.is_ready && !p.is_host && !s.room.is_quick);
@@ -280,20 +399,22 @@
             if (b.dataset.rp !== String(p.ranked_points)) { b.innerHTML = NS.leagueBadge(p.ranked_points, 16); b.dataset.rp = String(p.ranked_points); b.title = NS.leagueName(p.ranked_points); }
             const stEl = node.querySelector('.ol-p-state');
             const quick = !!s.room.is_quick;
-            stEl.innerHTML = disc ? `${icon('wifi-off')}Bağlantı koptu` : quick ? (p.user_id === myId ? 'Sen' : `${icon('check')}Geldi`) : p.is_host ? 'Oda sahibi' : p.is_ready ? `${icon('check')}Hazır` : 'Bekliyor';
+            const stHtml = disc ? `${icon('wifi-off')}Bağlantı koptu` : quick ? (p.user_id === myId ? 'Sen' : `${icon('check')}Geldi`) : p.is_host ? 'Oda sahibi' : p.is_ready ? `${icon('check')}Hazır` : 'Bekliyor';
+            if (stEl._h !== stHtml) { stEl.innerHTML = stHtml; stEl._h = stHtml; }
             node.setAttribute('aria-label', `${p.username}${p.user_id === myId ? ' (sen)' : ''}: ${disc ? 'bağlantı koptu' : p.is_host ? 'oda sahibi' : p.is_ready ? 'hazır' : 'bekliyor'}`);
             node.setAttribute('role', 'img');
         });
-        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); L.nodes.delete(uid); } });
+        L.nodes.forEach((node, uid) => { if (!seen.has(uid)) { node.remove(); L.nodes.delete(uid); if (L.walker) L.walker.remove(uid); } });
         // boş yerler
         $all('.ol-slot', layer).forEach(e => e.remove());
-        const sl = slots(cap, w < 480);
+        const sl = slotList(cap);
         for (let i = act.length; i < cap; i++) {
             const e = document.createElement('div');
             e.className = 'ol-slot';
             e.style.setProperty('--x', (sl[i].x * 100).toFixed(2) + '%');
             e.style.setProperty('--y', (sl[i].y * 100).toFixed(2) + '%');
             e.style.setProperty('--depth', (0.82 + (sl[i].y - FLOOR_TOP) * 0.45).toFixed(3));
+            e.style.zIndex = String(10 + Math.round(sl[i].y * 100));
             const ch = NS.app.challenge;
             const chWait = ch && i === act.length && ['pending', 'accepted', 'sending'].includes(ch.status);
             e.classList.toggle('is-invited', !!chWait);
@@ -304,6 +425,7 @@
         }
         layer.dataset.count = String(cap);
         const stg = layer.parentNode; if (stg) stg.dataset.count = String(cap);
+        if (L.room) L.room.setInteractive(!s.room.is_quick);
     }
     function $all(sel, root) { return Array.from(root.querySelectorAll(sel)); }
 
@@ -383,30 +505,56 @@
     function onStagePointer(e) {
         if (e.button && e.button !== 0) return;
         const stage = e.currentTarget;
-        if (e.target.closest('.ol-p:not(.is-me)')) return;
+        if (e.target.closest('.ol-p:not(.is-me)') || e.target.closest('.olr-obj')) return;
         const r = stage.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width;
         let y = (e.clientY - r.top) / r.height;
         if (y < FLOOR_TOP - 0.08) return;           // duvara tıklama yok sayılır
         y = Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, y));
-        NS.rooms.move(x, y);
-        const hint = $('#olStageHint', L.root); if (hint) hint.classList.add('is-gone');
+        const q = L.room ? L.room.nearestFree(x, y) : { x, y };
+        NS.rooms.move(q.x, q.y);
+        hideHint();
         updatePlayers();
     }
+    function hideHint() { const hint = L.root && $('#olStageHint', L.root); if (hint) hint.classList.add('is-gone'); }
     function onStageKey(e) {
+        if (e.target.closest && e.target.closest('.olr-obj')) return;
         const d = { ArrowLeft: [-0.06, 0], ArrowRight: [0.06, 0], ArrowUp: [0, -0.06], ArrowDown: [0, 0.06] }[e.key];
         if (!d) return;
         e.preventDefault();
         const myId = NS.api.myId();
         const node = L.nodes.get(myId);
         const x = node ? parseFloat(node.dataset.x) : 0.5, y = node ? parseFloat(node.dataset.y) : 0.7;
-        NS.rooms.move(Math.max(0.04, Math.min(0.96, x + d[0])), Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, y + d[1])));
+        let nx = Math.max(0.04, Math.min(0.96, x + d[0])), ny = Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, y + d[1]));
+        if (L.room) { const q = L.room.nearestFree(nx, ny); nx = q.x; ny = q.y; }
+        NS.rooms.move(nx, ny);
         updatePlayers();
+    }
+    /** Oda nesnesine git + etkinlik: oturma yeri boşsa oraya, doluysa önüne. Yayın: move {x,y = yaklaşma noktası, act, spot}. */
+    function goToObject(id) {
+        const s = NS.rooms.state;
+        if (!L.room || !s || s.room.is_quick) return;
+        const ob = L.room.object(id);
+        if (!ob) return;
+        const myId = NS.api.myId();
+        let spot = ob.id;
+        if (ob.seats) {
+            const holders = seatHolders(NS.rooms.active().filter(p => p.user_id !== myId));
+            const mine = NS.rooms.presence[myId];
+            const k = ob.seats.findIndex((_, i) => !holders[ob.id + '.' + i] || (mine && mine.spot === ob.id + '.' + i));
+            if (k >= 0) spot = ob.id + '.' + k;
+        }
+        delete L.emotes[myId];
+        NS.rooms.move(ob.approach.x, ob.approach.y, { act: ob.act, spot });
+        hideHint();
+        updatePlayers();
+        if (A()) NS.announce(`Nöro'n: ${A().ACTIVITY_LABELS[ob.act] || ob.label}`);
     }
 
     function showEmote(uid, emote) {
         if (!T.emotes[emote]) return;
         L.emotes[uid] = emote;
+        if (uid === NS.api.myId()) NS.rooms.clearActivity();     // duygu etkinliği bitirir (diğerlerinde rooms.js temizler)
         clearTimeout(L.emotes['_t' + uid]);
         L.emotes['_t' + uid] = setTimeout(() => { delete L.emotes[uid]; updatePlayers(); }, 2600);
         showBubble(uid, `${icon(T.emoteIcon[emote])}`, 'is-emote', 2600);
@@ -462,6 +610,8 @@
             showEmote(NS.api.myId(), emote);
             return;
         }
+        const obj = e.target.closest('[data-olr-obj]');
+        if (obj) { goToObject(obj.dataset.olrObj); return; }
         const say = e.target.closest('[data-ol-say]');
         if (say) {
             toggleQuick(false);
@@ -542,6 +692,9 @@
     function cleanupNodes() {
         L.offs.forEach(f => { try { f(); } catch (e) { /* yok */ } });
         L.offs = [];
+        if (L.walker) { L.walker.destroy(); L.walker = null; }
+        if (L.room) { L.room.destroy(); L.room = null; }
+        L.W = 0; L.H = 0; L.lastActs = {};
         L.nodes.clear();
         Object.keys(L.emotes).forEach(k => { if (k.startsWith('_t')) clearTimeout(L.emotes[k]); });
         L.emotes = {};
@@ -553,5 +706,5 @@
         L.root = null;
     }
 
-    NS.lobby = { render, update, destroy, slots, showEmote, showSay };
+    NS.lobby = { render, update, destroy, slots, showEmote, showSay, goToObject, get room() { return L.room; }, get walker() { return L.walker; } };
 })(typeof window !== 'undefined' ? window : globalThis);
