@@ -1608,10 +1608,12 @@ class PsikoVakaGame {
         const hash = window.location.hash;
         // Siteye ilk girişte (hash yokken) otomatik olarak Günün Vakası başlar;
         // #/oyna veya başka bir rota varsa ilgili ekran açılır.
+        // daily.js yüklenip sunucu oturumunu netleştirmeden yerel günlük başlamasın diye _autoStartDaily kancası kullanılır.
         if (!hash || hash === '#') {
             this.currentRoute = 'oyna';
             this.showScreen('oyna');
-            setTimeout(() => this.setMode('daily'), 0);
+            this._autoStartDaily = true;
+            setTimeout(() => { if (this._autoStartDaily) { this._autoStartDaily = false; this.setMode('daily'); } }, 350);
             return;
         }
         if (hash.startsWith('#/')) {
@@ -1647,8 +1649,26 @@ class PsikoVakaGame {
             }
         }
 
+        if (hash.startsWith('#daily=')) {
+            const mode = hash.replace('#daily=', '').trim().toLowerCase();
+            if (['diagnosis', 'therapy', 'pharmacology', 'combo'].includes(mode)) {
+                this.setTargetGameMode(mode, false);
+            }
+            this.currentRoute = 'oyna';
+            this.showScreen('oyna');
+            this._autoStartDaily = true;
+            setTimeout(() => { if (this._autoStartDaily) { this._autoStartDaily = false; this.setMode('daily'); } }, 350);
+            return;
+        }
+
         if (hash.startsWith('#id=')) {
-            const targetId = hash.replace('#id=', '').trim().toLowerCase();
+            const raw = hash.replace('#id=', '').trim();
+            const parts = raw.split('&mode=');
+            const targetId = parts[0].trim().toLowerCase();
+            const mode = parts[1] ? parts[1].trim().toLowerCase() : '';
+            if (['diagnosis', 'therapy', 'pharmacology', 'combo'].includes(mode)) {
+                this.setTargetGameMode(mode, false);
+            }
             const found = this.allMasterCases.find(c => c.id.toLowerCase() === targetId || String(c.caseNumber) === targetId);
             if (found) {
                 this.currentMode = 'practice';
@@ -2357,12 +2377,14 @@ class PsikoVakaGame {
         }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
-            const show = this.canEditZorluk();
+            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice');
+            const editable = this.canEditZorluk();
+            const show = isDailyOrPractice && !this.dailyReadOnly;
             if (show) {
-                const sig = JSON.stringify(this.zorluk);
+                const sig = JSON.stringify(this.zorluk) + ':' + String(editable);
                 if (panel.dataset.sig !== sig || !panel.firstChild) {
                     panel.dataset.sig = sig;
-                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', hideTitle: true });
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', hideTitle: true, disabled: !editable });
                 }
             }
             panel.hidden = !show;
@@ -3862,7 +3884,14 @@ class PsikoVakaGame {
      * 🟥 farklı grup, 🟨 grup doğru, 🟩 doğru, ⬜ kullanılmayan hak. Kombo: aşama başına bir satır.
      */
     generateShareString(won) {
-        const SITE = 'https://gandalfthegreey.github.io/psikovaka/';
+        const BASE = 'https://gandalfthegreey.github.io/psikovaka/';
+        const mode = this.targetGameMode || 'diagnosis';
+        let SITE = BASE;
+        if (this.currentMode === 'daily') {
+            SITE = mode !== 'diagnosis' ? `${BASE}#daily=${mode}` : BASE;
+        } else if (this.currentMode === 'practice' && this.currentCase && this.currentCase.caseNumber) {
+            SITE = `${BASE}#id=${this.currentCase.caseNumber}&mode=${mode}`;
+        }
         const max = this.maxClues || 6;
         const sq = (list) => {
             const row = (list || []).slice(0, max).map(g => g.isCorrect ? '🟩' : (g.categoryMatch ? '🟨' : '🟥'));

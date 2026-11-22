@@ -131,6 +131,22 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 16:36 — Gemini — Açılışta günlük vaka / `daily.js` yarış koşulu düzeltmesi
+- **Dosyalar:** `js/app.js`, `js/online/daily.js`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:** Açılışta (`!hash` veya `#daily=<mod>`) `setMode('daily')` artık `daily.js`'in `init()` işlevi `loadDailyCase`'i sunucu katmanıyla sarmalamadan çalışmıyor (`_autoStartDaily` kancası). Böylece giriş yapmış üyeler açılışta yanlışlıkla yerel günlük vaka başlatmıyor; tüm tahminler doğrudan Supabase'e yazılıyor ve geri gelindiğinde bitmiş günlük asla sıfırdan yeniden açılmıyor.
+- **Neden:** Emre'nin bildirimi (günlük vakayı çözdükten sonra geri gelince bazen sıfırdan tekrar çözülebilmesi).
+- **Doğrulama:** `node --check js/app.js js/online/daily.js` temiz, `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
+### 2026-11-22 16:32 — Gemini — Mobilde Zorluk seçici düzeltmesi + paylaşım linkinde hedef modu (`#daily=mode`, `#id=N&mode=M`) koruma
+- **Dosyalar:** `js/app.js`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `css/style.css` + `js/app.js` (`renderZorlukUI`): `.play-bar .zorluk-play` mutlak konumdan normal flex ortalamasına (`margin: 0 auto`) alındı, `.play-bar-title` gizlendi; ayrıca günlük ve pratikte ilk tahminden sonra kilitlense bile `Normal | Zor` düğmesi kaybolmayıp salt okunur (`disabled`) olarak görünmeye devam eder (mobilde görünmeme sorunu giderildi).
+  2. `js/app.js` (`generateShareString`, `checkURLForCustomOrDuelCase`): Günün vakası paylaşım linkine artık aktif hedef mod eklenir (`#daily=therapy`, `#daily=pharmacology`, `#daily=combo`); pratik vaka paylaşımına `#id=<no>&mode=<mod>` eklenir ve linke tıklayan kişi doğrudan o modda açar.
+- **Neden:** Emre'nin telefon testi geri bildirimi.
+- **Doğrulama:** `node --check js/app.js` temiz, `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 16:18 — Gemini — Play-bar ortada Normal/Zor (günlük+pratik), ipucu altı sonraki ipucu düğmesi, göz ergonomisi (2, 4, 5)
 - **Dosyalar:** `index.html`, `js/app.js`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**

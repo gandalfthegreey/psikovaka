@@ -2940,30 +2940,26 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
 }
 
 .screen-play .play-bar-title {
-    flex: 1;
-    align-items: center;
+    display: none !important;
 }
 
 .screen-play .play-bar .zorluk-play {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
+    flex-shrink: 0;
     z-index: 2;
 }
 
 .screen-play .play-bar .zorluk-play[hidden] {
-    display: none;
-}
-
-.screen-play .play-bar:has(.zorluk-play:not([hidden])) .play-bar-title {
-    display: none;
+    display: none !important;
 }
 
 .screen-play .play-bar .zorluk-segmented {
-    min-width: 170px;
-    max-width: 210px;
+    min-width: 148px;
+    max-width: 190px;
 }
 
 .screen-play .play-bar .zorluk-seg-btn {

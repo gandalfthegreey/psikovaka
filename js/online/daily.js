@@ -582,6 +582,10 @@
         if (a && a.onChange) a.onChange(() => { D.settleGaveUp = false; D.ch = {}; D.chAt = {}; D.streaks = null; D.avail = D.avail === false ? false : null; D.active = null; D.board.data = null;
             if (gm.currentScreen === 'oyna') refreshCard(true); if (gm.currentScreen === 'gunluk') onBoardShow({}); if (gm.currentScreen === 'profil') renderProfile(); });
         if (gm.currentScreen === 'oyna') refreshCard();
+        if (gm._autoStartDaily) {
+            gm._autoStartDaily = false;
+            gm.setMode('daily');
+        }
     }
 
     NS.daily = {
