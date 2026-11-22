@@ -391,10 +391,52 @@
 .screen-home .desk-noro,
 .screen-home .noro-nudge.noro-bubble { display: none !important; }
 /* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
-.screen-home .desk-stage { display: block; margin-top: var(--space-1); }
+.screen-home .desk-stage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-1);
+}
 .screen-home .card-hero.desk-folder,
-.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 38px; }
-@media (min-width: 1024px) {
-    .screen-home .desk-stage { margin-top: var(--space-3); }
-    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-left: 0; }
+.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
+    grid-area: auto;
+    margin-top: 38px;
+}
+
+/* Ana sayfa Tırmanış kartı: çalışma masası estetiğine uyumlu temiz yerleşim */
+.screen-home .card-action.desk-climb {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--color-warning) 50%, var(--paper-edge));
+    border-radius: 6px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .desk-climb .card-action-head { display: block; }
+.screen-home .desk-climb .card-title { font-size: 1.0625rem; margin-bottom: 4px; }
+.screen-home .desk-climb .card-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: 1.45; }
+.screen-home .desk-climb .card-action-row { display: flex; align-items: center; margin-top: auto; padding-top: var(--space-1); }
+.screen-home .desk-climb .card-action-row .btn { border-radius: 6px; padding: 8px 16px; min-height: 40px; font-size: var(--text-sm); }
+
+@media (min-width: 900px) {
+    .screen-home .desk-stage {
+        grid-template-columns: minmax(0, 1.38fr) minmax(260px, 1fr);
+        grid-template-areas: none;
+        align-items: stretch;
+        gap: var(--space-6);
+        margin-top: var(--space-3);
+    }
+    .screen-home .desk-stage .desk-pin {
+        margin-top: 38px;
+        align-self: stretch;
+        justify-content: space-between;
+    }
+    .screen-home .desk-aside {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-left: 0;
+        gap: var(--space-6);
+        align-items: stretch;
+    }
 }

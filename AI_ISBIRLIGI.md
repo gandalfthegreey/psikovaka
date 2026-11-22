@@ -131,6 +131,26 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 20:14 — Gemini — Tırmanış Başlama Düzeltmesi (`CLINICAL_CASES`), Buton/Balon Temizliği & Ana Sayfa 2×2 Masa Yerleşimi
+- **Dosyalar:** `js/tirmanis.js`, `css/tirmanis.css`, `index.html`, `css/anasayfa.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **Tırmanış başlama hatası düzeltildi (`js/tirmanis.js`):** `pickNextCase` içinde yanlış global ad (`CASES_DATABASE`) yerine `gm.allMasterCases` / `CLINICAL_CASES` kullanıldı; artık "Tırmanışa Başla" tıklandığında 278 vakalık havuzdan anında Zor Mod vaka açılıyor.
+  2. **Boşta konuşma balonu kaldırıldı (`js/tirmanis.js`):** "Hazırsan ilk zor vakayı alalım!" balonu kaldırıldı; balon yalnızca aktif seri veya biten seri özeti olduğunda görünüyor.
+  3. **Buton boyutu ve boşlukları düzeltildi (`css/tirmanis.css`, `css/anasayfa.css`):** Hem ana sayfadaki hem Tırmanış odasındaki "Tırmanışa Başla" düğmeleri orantılı ve kenarlardan temiz boşluklu hale getirildi.
+  4. **Ana sayfa dengelendi (`index.html`, `css/anasayfa.css`):** Masaüstünde (`≥900px`) Günün Vakası daraltılarak Online kartı hemen sağına çekildi (`1.38fr / 1fr`); alt satırda Tırmanış ve Sınırsız Pratik 2 eşit sütun olarak hizalandı.
+- **Neden:** Emre'nin bildirimi ve yerleşim isteği.
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
+### 2026-11-22 20:09 — Gemini — Tırmanış Online Liderlik Tablosu (`0009_tirmanis_siralama.sql`)
+- **Dosyalar:** Yeni `supabase/migrations/0009_tirmanis_siralama.sql`, `js/tirmanis.js`, `css/tirmanis.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `supabase/migrations/0009_tirmanis_siralama.sql`: `public.climb_scores` tablosu (RLS korumalı), `submit_climb_score(p_streak, p_avg_clues)` RPC (yalnızca giriş yapmış üyelere, en iyi seri ve aynı seride daha düşük ortalama ipucu öncelikli) ve `get_climb_leaderboard(p_limit)` RPC (`needs_rename` filtreli, Top 30 + kendi sıran) eklendi.
+  2. `js/tirmanis.js` & `css/tirmanis.css`: Tırmanış odasının altına **🏆 En İyi Tırmanışçılar** online liderlik tablosu (Nöro avatarı, kullanıcı adı, lig rozeti, en iyi seri, ort. ipucu, yenile düğmesi) eklendi. Giriş yapmış üyelerin yeni rekoru ve biten tırmanışları otomatik sunucuya kaydedilir; misafirler listeyi görebilir; migration henüz uygulanmadıysa hata vermeden nazik bilgi gösterir.
+- **Neden:** Emre'nin isteği (Tırmanış modu için hızlı online liderlik tablosu).
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** `supabase/migrations/0009_tirmanis_siralama.sql` dosyasının Supabase SQL Editor'de bir kez çalıştırılması gerekir.
+
 ### 2026-11-22 20:04 — Gemini — Lobi Nöro Tıklama Hizası Düzeltmesi + Kliniğim Arşivlendi + Yeni "Tırmanış" Modu
 - **Dosyalar:** `js/online/lobby.js`, yeni `js/tirmanis.js`, yeni `css/tirmanis.css`, `index.html`, `js/app.js`, `build_portable_single_file.js`, `PsikoVaka_Tam_Surum.html`; eski `js/klinik.js` ve `css/klinik.css` → `_arsiv/2026-11-22-klinigim-v1/` klasörüne taşındı.
 - **Ne değişti:**

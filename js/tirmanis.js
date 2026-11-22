@@ -16,6 +16,119 @@
 
     let state = null;
     let lastFinishedRun = null;
+    let lbCache = { loading: false, rows: null, me: null, error: null, unsupported: false };
+
+    function getAccount() {
+        return global.PsikoVakaAccount || null;
+    }
+
+    function getSbClient() {
+        const acc = getAccount();
+        return acc && typeof acc.getClient === 'function' ? acc.getClient() : null;
+    }
+
+    async function submitScoreRemote(streak, avgClues) {
+        const acc = getAccount();
+        const client = getSbClient();
+        if (!acc || !client || acc.state !== 'ready' || !(streak > 0)) return;
+        try {
+            const { error } = await client.rpc('submit_climb_score', {
+                p_streak: Math.round(streak),
+                p_avg_clues: Number.isFinite(Number(avgClues)) ? Number(Number(avgClues).toFixed(2)) : 0
+            });
+            if (!error) {
+                fetchLeaderboard(true);
+            }
+        } catch (e) {}
+    }
+
+    async function fetchLeaderboard(force) {
+        const client = getSbClient();
+        if (!client) {
+            lbCache = { loading: false, rows: null, me: null, error: 'offline', unsupported: false };
+            renderLeaderboardMount();
+            return;
+        }
+        if (lbCache.loading && !force) return;
+        lbCache.loading = true;
+        lbCache.error = null;
+        renderLeaderboardMount();
+        try {
+            const { data, error } = await client.rpc('get_climb_leaderboard', { p_limit: 30 });
+            if (error) {
+                const msg = String(error.message || error.code || '');
+                const unsup = error.code === 'PGRST202' || /get_climb_leaderboard/i.test(msg) || /does not exist/i.test(msg);
+                lbCache = { loading: false, rows: null, me: null, error: msg, unsupported: unsup };
+            } else {
+                const d = data || {};
+                lbCache = { loading: false, rows: Array.isArray(d.rows) ? d.rows : [], me: d.me || null, error: null, unsupported: false };
+            }
+        } catch (e) {
+            lbCache = { loading: false, rows: null, me: null, error: 'network', unsupported: false };
+        }
+        renderLeaderboardMount();
+    }
+
+    function renderLeaderboardMount() {
+        const mount = document.getElementById('climbLeaderboardMount');
+        if (!mount) return;
+        const acc = getAccount();
+        const snap = acc && typeof acc.snapshot === 'function' ? acc.snapshot() : null;
+        const myId = snap && snap.user ? snap.user.id : null;
+        const isGuest = !acc || acc.state !== 'ready';
+
+        if (lbCache.loading && !lbCache.rows) {
+            mount.innerHTML = `<div class="tr-lb-state">Sıralama yükleniyor…</div>`;
+            return;
+        }
+        if (lbCache.unsupported) {
+            mount.innerHTML = `<div class="tr-lb-state">Online Tırmanış sıralaması sunucu güncellemesi (0009) uygulandığında burada görünecek.</div>`;
+            return;
+        }
+        if (lbCache.error === 'offline') {
+            mount.innerHTML = `<div class="tr-lb-state">Çevrimdışı modda online sıralama görüntülenemiyor.</div>`;
+            return;
+        }
+        if (lbCache.error || !lbCache.rows) {
+            mount.innerHTML = `<div class="tr-lb-state">Sıralama şu an yüklenemedi.</div>`;
+            return;
+        }
+        if (!lbCache.rows.length) {
+            mount.innerHTML = `<div class="tr-lb-state">Henüz kayıtlı Tırmanış rekoru yok — ilk rekoru sen kır!</div>` +
+                (isGuest ? `<p class="tr-lb-guest-note">Skorunun sıralamaya yazılması için <a href="#/profil">giriş yap</a>.</p>` : '');
+            return;
+        }
+
+        const badgeFn = (rp) => {
+            if (global.PsikoVakaOnline && typeof global.PsikoVakaOnline.leagueBadge === 'function') {
+                return global.PsikoVakaOnline.leagueBadge(rp, 16);
+            }
+            return '';
+        };
+        const rowHtml = (r) => {
+            const medal = r.pos === 1 ? '🥇' : r.pos === 2 ? '🥈' : r.pos === 3 ? '🥉' : `#${r.pos}`;
+            const isMe = myId && r.user_id === myId;
+            const avgTxt = Number(r.avg_clues) > 0 ? `ort. ${Number(r.avg_clues).toFixed(1)} ipucu` : '';
+            return `<li class="tr-lb-row${isMe ? ' is-me' : ''}">
+                <span class="tr-lb-pos">${medal}</span>
+                <span class="tr-lb-av">${renderAvatar(r.avatar || {}, 34, { animated: false })}</span>
+                <span class="tr-lb-who">
+                    <span class="tr-lb-name">${esc(r.username)}${isMe ? ' <em>(sen)</em>' : ''}</span>
+                    <span class="tr-lb-sub">${badgeFn(r.ranked_points)}<span>${avgTxt}</span></span>
+                </span>
+                <span class="tr-lb-score"><strong>${r.best_streak}</strong><span>seri</span></span>
+            </li>`;
+        };
+
+        const inTop = lbCache.me && lbCache.rows.some(r => r.user_id === lbCache.me.user_id);
+        mount.innerHTML = `
+            ${isGuest ? `<p class="tr-lb-guest-note">Skorunun sıralamaya yazılması için <a href="#/profil">giriş yap</a>.</p>` : ''}
+            <ol class="tr-lb-list">
+                ${lbCache.rows.map(rowHtml).join('')}
+            </ol>
+            ${lbCache.me && !inTop ? `<div class="tr-lb-me-sep">Senin sıran</div><ol class="tr-lb-list">${rowHtml(lbCache.me)}</ol>` : ''}
+        `;
+    }
 
     function defaultState() {
         return {
@@ -76,7 +189,10 @@
     }
 
     function pickNextCase(gm, run) {
-        const all = (global.CASES_DATABASE || []).filter(c => !c.archived);
+        const raw = (gm && Array.isArray(gm.allMasterCases) && gm.allMasterCases.length)
+            ? gm.allMasterCases
+            : (typeof CLINICAL_CASES !== 'undefined' ? CLINICAL_CASES : []);
+        const all = raw.filter(c => c && !c.archived);
         const mode = (run && run.targetMode) || (gm && gm.targetMode) || 'diagnosis';
         let pool = all;
         if (mode === 'therapy') pool = all.filter(c => c.targetTherapyId);
@@ -182,6 +298,9 @@
             save();
             renderPlayHud(gm);
             updateHomeCard();
+            if (newRecord) {
+                submitScoreRemote(run.streak, run.totalClues / run.streak);
+            }
 
             if (gm && typeof gm.setResultStreak === 'function') {
                 gm.setResultStreak(`🏔️ Tırmanış Serisi: ${run.streak} · Bütçe: ${run.budget} (${fmtDelta(d)})${newRecord ? ' · 🏆 Yeni Rekor!' : ''}`, false);
@@ -191,7 +310,8 @@
             }
         } else {
             const finalStreak = run.streak;
-            const avg = finalStreak > 0 ? (run.totalClues / finalStreak).toFixed(1) : '—';
+            const avgNum = finalStreak > 0 ? (run.totalClues / finalStreak) : 0;
+            const avg = finalStreak > 0 ? avgNum.toFixed(1) : '—';
             const isRecord = finalStreak > 0 && finalStreak >= s.bestStreak;
             s.totalRuns += 1;
             s.activeRun = null;
@@ -199,6 +319,7 @@
             save();
             renderPlayHud(gm);
             updateHomeCard();
+            if (finalStreak > 0) submitScoreRemote(finalStreak, avgNum);
 
             if (gm && typeof gm.setResultStreak === 'function') {
                 gm.setResultStreak(`🏔️ Tırmanış bitti · Seri: ${finalStreak} (Rekor: ${s.bestStreak})`, true);
@@ -240,15 +361,12 @@
         if (lastFinishedRun) {
             return lastFinishedRun.isRecord && lastFinishedRun.streak > 0
                 ? `🏆 ${lastFinishedRun.streak} vakalık yeni rekor!`
-                : `🔥 ${lastFinishedRun.streak} seri yaptın, tekrar deneyelim!`;
+                : `🔥 ${lastFinishedRun.streak} seri tamamlandı!`;
         }
         if (s.activeRun) {
-            return `🔥 Seri ${s.activeRun.streak} · ${s.activeRun.budget} ipucu kaldı!`;
+            return `🔥 Seri ${s.activeRun.streak} · ${s.activeRun.budget} ipucu kaldı`;
         }
-        if (s.bestStreak >= 5) {
-            return `🏔️ Rekorun ${s.bestStreak}! Üstüne çıkabilir misin?`;
-        }
-        return '☕ Hazırsan ilk zor vakayı alalım!';
+        return '';
     }
 
     function render() {
@@ -294,7 +412,7 @@
                     <span class="tr-mote" style="left:78%;top:40%;animation-delay:1.5s"></span>
                 </div>
                 <div class="tr-noro-seat">
-                    <div class="tr-noro-bubble">${esc(therapistBubbleText(s))}</div>
+                    ${therapistBubbleText(s) ? `<div class="tr-noro-bubble">${esc(therapistBubbleText(s))}</div>` : ''}
                     ${renderAvatar(myCfg, 92, { facing: 'left', activity: run ? 'think' : null })}
                     <span class="tr-noro-tag">Sen</span>
                 </div>
@@ -302,15 +420,15 @@
 
             <div class="tr-actions">
                 ${run ? `
-                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbContinue">
-                        ▶️ Tırmanışa Devam Et (Vaka #${run.streak + 1})
+                    <button type="button" class="btn btn-primary tr-start-btn" id="btnClimbContinue">
+                        ▶️ Devam Et (Vaka #${run.streak + 1})
                     </button>
-                    <button type="button" class="btn btn-secondary btn-lg" id="btnClimbRestart">
+                    <button type="button" class="btn btn-secondary" id="btnClimbRestart">
                         🔄 Sıfırdan Başla
                     </button>
                 ` : `
-                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbStart">
-                        🏔️ Tırmanışa Başla (10 İpucu)
+                    <button type="button" class="btn btn-primary tr-start-btn" id="btnClimbStart">
+                        🏔️ Tırmanışa Başla
                     </button>
                 `}
             </div>
@@ -329,6 +447,14 @@
                     <div class="tr-delta-cell is-neg"><span>6. İpucu</span><strong>−3</strong></div>
                 </div>
             </section>
+
+            <section class="tr-lb-card" aria-labelledby="trLbTitle">
+                <div class="tr-lb-head">
+                    <h2 class="tr-lb-title" id="trLbTitle">🏆 En İyi Tırmanışçılar</h2>
+                    <button type="button" class="btn btn-ghost btn-sm" id="btnClimbRefreshLb">↻ Yenile</button>
+                </div>
+                <div id="climbLeaderboardMount"></div>
+            </section>
         `;
 
         const btnStart = document.getElementById('btnClimbStart');
@@ -342,6 +468,12 @@
 
         const btnDismiss = document.getElementById('btnClimbDismissSummary');
         if (btnDismiss) btnDismiss.addEventListener('click', () => { lastFinishedRun = null; render(); });
+
+        const btnRefLb = document.getElementById('btnClimbRefreshLb');
+        if (btnRefLb) btnRefLb.addEventListener('click', () => fetchLeaderboard(true));
+
+        renderLeaderboardMount();
+        fetchLeaderboard(false);
     }
 
     global.PsikoVakaTirmanis = {

@@ -5207,12 +5207,54 @@ body.ol-banners-docked .ol-banners { display: none; }
 .screen-home .desk-noro,
 .screen-home .noro-nudge.noro-bubble { display: none !important; }
 /* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
-.screen-home .desk-stage { display: block; margin-top: var(--space-1); }
+.screen-home .desk-stage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-1);
+}
 .screen-home .card-hero.desk-folder,
-.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder { margin-top: 38px; }
-@media (min-width: 1024px) {
-    .screen-home .desk-stage { margin-top: var(--space-3); }
-    .screen-home .desk-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-left: 0; }
+.screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
+    grid-area: auto;
+    margin-top: 38px;
+}
+
+/* Ana sayfa Tırmanış kartı: çalışma masası estetiğine uyumlu temiz yerleşim */
+.screen-home .card-action.desk-climb {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--color-warning) 50%, var(--paper-edge));
+    border-radius: 6px;
+    background: var(--paper);
+    box-shadow: var(--paper-lift);
+}
+.screen-home .desk-climb .card-action-head { display: block; }
+.screen-home .desk-climb .card-title { font-size: 1.0625rem; margin-bottom: 4px; }
+.screen-home .desk-climb .card-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: 1.45; }
+.screen-home .desk-climb .card-action-row { display: flex; align-items: center; margin-top: auto; padding-top: var(--space-1); }
+.screen-home .desk-climb .card-action-row .btn { border-radius: 6px; padding: 8px 16px; min-height: 40px; font-size: var(--text-sm); }
+
+@media (min-width: 900px) {
+    .screen-home .desk-stage {
+        grid-template-columns: minmax(0, 1.38fr) minmax(260px, 1fr);
+        grid-template-areas: none;
+        align-items: stretch;
+        gap: var(--space-6);
+        margin-top: var(--space-3);
+    }
+    .screen-home .desk-stage .desk-pin {
+        margin-top: 38px;
+        align-self: stretch;
+        justify-content: space-between;
+    }
+    .screen-home .desk-aside {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-left: 0;
+        gap: var(--space-6);
+        align-items: stretch;
+    }
 }
 
 </style>
@@ -6902,12 +6944,15 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 .tr-actions {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: var(--space-2);
+    gap: var(--space-3);
+    padding: var(--space-1) 0;
 }
 
 .tr-start-btn {
-    min-width: 240px;
+    min-width: 180px;
+    padding: 10px 22px;
 }
 
 /* İpucu bütçesi kural şeridi */
@@ -7015,6 +7060,145 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 /* Ana sayfa Tırmanış kartı vurgusu */
 .desk-climb {
     border-color: color-mix(in srgb, var(--color-warning) 55%, var(--color-border));
+}
+
+/* Online Tırmanış Liderlik Tablosu */
+.tr-lb-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.tr-lb-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.tr-lb-title {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+}
+
+.tr-lb-state {
+    font-size: var(--text-sm);
+    color: var(--color-text-2);
+    padding: var(--space-2) 0;
+}
+
+.tr-lb-guest-note {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-2);
+}
+
+.tr-lb-guest-note a {
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+}
+
+.tr-lb-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.tr-lb-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+}
+
+.tr-lb-row.is-me {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+}
+
+.tr-lb-pos {
+    min-width: 28px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-sm);
+    color: var(--color-text-2);
+}
+
+.tr-lb-av {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.tr-lb-who {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tr-lb-name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tr-lb-name em {
+    font-style: normal;
+    font-weight: var(--weight-regular);
+    color: var(--color-accent);
+}
+
+.tr-lb-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-xs);
+    color: var(--color-text-2);
+}
+
+.tr-lb-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.1;
+}
+
+.tr-lb-score strong {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-warning);
+}
+
+.tr-lb-score span {
+    font-size: 11px;
+    color: var(--color-text-3);
+}
+
+.tr-lb-me-sep {
+    margin: var(--space-2) 0 var(--space-1);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 @media (max-width: 600px) {
@@ -7235,6 +7419,18 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                             <!-- Seri: klasöre ataşla tutturulmuş etiket -->
                             <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
                         </article>
+
+                        <!-- Online: günün vakasının sağında panoya raptiyeli kart -->
+                        <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
+                            <div class="card-action-head">
+                                <h3 class="card-title" id="onlineCardTitle">Online</h3>
+                                <p class="card-text">Düello, herkes tek ve turnuva.</p>
+                            </div>
+                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                            <div class="card-action-row">
+                                <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
 
@@ -7261,18 +7457,6 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                             <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
                                 <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
                             </button>
-                        </div>
-                    </article>
-
-                    <!-- Online: panoya raptiyeli kart (bekleyen davet/bildirim: js/online/friends.js -> game.setHomeOnlineNote) -->
-                    <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
-                        <div class="card-action-head">
-                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
-                            <p class="card-text">Düello, herkes tek ve turnuva.</p>
-                        </div>
-                        <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
-                        <div class="card-action-row">
-                            <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
                         </div>
                     </article>
                 </div>
@@ -54836,6 +55020,119 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     let state = null;
     let lastFinishedRun = null;
+    let lbCache = { loading: false, rows: null, me: null, error: null, unsupported: false };
+
+    function getAccount() {
+        return global.PsikoVakaAccount || null;
+    }
+
+    function getSbClient() {
+        const acc = getAccount();
+        return acc && typeof acc.getClient === 'function' ? acc.getClient() : null;
+    }
+
+    async function submitScoreRemote(streak, avgClues) {
+        const acc = getAccount();
+        const client = getSbClient();
+        if (!acc || !client || acc.state !== 'ready' || !(streak > 0)) return;
+        try {
+            const { error } = await client.rpc('submit_climb_score', {
+                p_streak: Math.round(streak),
+                p_avg_clues: Number.isFinite(Number(avgClues)) ? Number(Number(avgClues).toFixed(2)) : 0
+            });
+            if (!error) {
+                fetchLeaderboard(true);
+            }
+        } catch (e) {}
+    }
+
+    async function fetchLeaderboard(force) {
+        const client = getSbClient();
+        if (!client) {
+            lbCache = { loading: false, rows: null, me: null, error: 'offline', unsupported: false };
+            renderLeaderboardMount();
+            return;
+        }
+        if (lbCache.loading && !force) return;
+        lbCache.loading = true;
+        lbCache.error = null;
+        renderLeaderboardMount();
+        try {
+            const { data, error } = await client.rpc('get_climb_leaderboard', { p_limit: 30 });
+            if (error) {
+                const msg = String(error.message || error.code || '');
+                const unsup = error.code === 'PGRST202' || /get_climb_leaderboard/i.test(msg) || /does not exist/i.test(msg);
+                lbCache = { loading: false, rows: null, me: null, error: msg, unsupported: unsup };
+            } else {
+                const d = data || {};
+                lbCache = { loading: false, rows: Array.isArray(d.rows) ? d.rows : [], me: d.me || null, error: null, unsupported: false };
+            }
+        } catch (e) {
+            lbCache = { loading: false, rows: null, me: null, error: 'network', unsupported: false };
+        }
+        renderLeaderboardMount();
+    }
+
+    function renderLeaderboardMount() {
+        const mount = document.getElementById('climbLeaderboardMount');
+        if (!mount) return;
+        const acc = getAccount();
+        const snap = acc && typeof acc.snapshot === 'function' ? acc.snapshot() : null;
+        const myId = snap && snap.user ? snap.user.id : null;
+        const isGuest = !acc || acc.state !== 'ready';
+
+        if (lbCache.loading && !lbCache.rows) {
+            mount.innerHTML = `<div class="tr-lb-state">Sıralama yükleniyor…</div>`;
+            return;
+        }
+        if (lbCache.unsupported) {
+            mount.innerHTML = `<div class="tr-lb-state">Online Tırmanış sıralaması sunucu güncellemesi (0009) uygulandığında burada görünecek.</div>`;
+            return;
+        }
+        if (lbCache.error === 'offline') {
+            mount.innerHTML = `<div class="tr-lb-state">Çevrimdışı modda online sıralama görüntülenemiyor.</div>`;
+            return;
+        }
+        if (lbCache.error || !lbCache.rows) {
+            mount.innerHTML = `<div class="tr-lb-state">Sıralama şu an yüklenemedi.</div>`;
+            return;
+        }
+        if (!lbCache.rows.length) {
+            mount.innerHTML = `<div class="tr-lb-state">Henüz kayıtlı Tırmanış rekoru yok — ilk rekoru sen kır!</div>` +
+                (isGuest ? `<p class="tr-lb-guest-note">Skorunun sıralamaya yazılması için <a href="#/profil">giriş yap</a>.</p>` : '');
+            return;
+        }
+
+        const badgeFn = (rp) => {
+            if (global.PsikoVakaOnline && typeof global.PsikoVakaOnline.leagueBadge === 'function') {
+                return global.PsikoVakaOnline.leagueBadge(rp, 16);
+            }
+            return '';
+        };
+        const rowHtml = (r) => {
+            const medal = r.pos === 1 ? '🥇' : r.pos === 2 ? '🥈' : r.pos === 3 ? '🥉' : `#${r.pos}`;
+            const isMe = myId && r.user_id === myId;
+            const avgTxt = Number(r.avg_clues) > 0 ? `ort. ${Number(r.avg_clues).toFixed(1)} ipucu` : '';
+            return `<li class="tr-lb-row${isMe ? ' is-me' : ''}">
+                <span class="tr-lb-pos">${medal}</span>
+                <span class="tr-lb-av">${renderAvatar(r.avatar || {}, 34, { animated: false })}</span>
+                <span class="tr-lb-who">
+                    <span class="tr-lb-name">${esc(r.username)}${isMe ? ' <em>(sen)</em>' : ''}</span>
+                    <span class="tr-lb-sub">${badgeFn(r.ranked_points)}<span>${avgTxt}</span></span>
+                </span>
+                <span class="tr-lb-score"><strong>${r.best_streak}</strong><span>seri</span></span>
+            </li>`;
+        };
+
+        const inTop = lbCache.me && lbCache.rows.some(r => r.user_id === lbCache.me.user_id);
+        mount.innerHTML = `
+            ${isGuest ? `<p class="tr-lb-guest-note">Skorunun sıralamaya yazılması için <a href="#/profil">giriş yap</a>.</p>` : ''}
+            <ol class="tr-lb-list">
+                ${lbCache.rows.map(rowHtml).join('')}
+            </ol>
+            ${lbCache.me && !inTop ? `<div class="tr-lb-me-sep">Senin sıran</div><ol class="tr-lb-list">${rowHtml(lbCache.me)}</ol>` : ''}
+        `;
+    }
 
     function defaultState() {
         return {
@@ -54896,7 +55193,10 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
 
     function pickNextCase(gm, run) {
-        const all = (global.CASES_DATABASE || []).filter(c => !c.archived);
+        const raw = (gm && Array.isArray(gm.allMasterCases) && gm.allMasterCases.length)
+            ? gm.allMasterCases
+            : (typeof CLINICAL_CASES !== 'undefined' ? CLINICAL_CASES : []);
+        const all = raw.filter(c => c && !c.archived);
         const mode = (run && run.targetMode) || (gm && gm.targetMode) || 'diagnosis';
         let pool = all;
         if (mode === 'therapy') pool = all.filter(c => c.targetTherapyId);
@@ -55002,6 +55302,9 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             save();
             renderPlayHud(gm);
             updateHomeCard();
+            if (newRecord) {
+                submitScoreRemote(run.streak, run.totalClues / run.streak);
+            }
 
             if (gm && typeof gm.setResultStreak === 'function') {
                 gm.setResultStreak(`🏔️ Tırmanış Serisi: ${run.streak} · Bütçe: ${run.budget} (${fmtDelta(d)})${newRecord ? ' · 🏆 Yeni Rekor!' : ''}`, false);
@@ -55011,7 +55314,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             }
         } else {
             const finalStreak = run.streak;
-            const avg = finalStreak > 0 ? (run.totalClues / finalStreak).toFixed(1) : '—';
+            const avgNum = finalStreak > 0 ? (run.totalClues / finalStreak) : 0;
+            const avg = finalStreak > 0 ? avgNum.toFixed(1) : '—';
             const isRecord = finalStreak > 0 && finalStreak >= s.bestStreak;
             s.totalRuns += 1;
             s.activeRun = null;
@@ -55019,6 +55323,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             save();
             renderPlayHud(gm);
             updateHomeCard();
+            if (finalStreak > 0) submitScoreRemote(finalStreak, avgNum);
 
             if (gm && typeof gm.setResultStreak === 'function') {
                 gm.setResultStreak(`🏔️ Tırmanış bitti · Seri: ${finalStreak} (Rekor: ${s.bestStreak})`, true);
@@ -55060,15 +55365,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (lastFinishedRun) {
             return lastFinishedRun.isRecord && lastFinishedRun.streak > 0
                 ? `🏆 ${lastFinishedRun.streak} vakalık yeni rekor!`
-                : `🔥 ${lastFinishedRun.streak} seri yaptın, tekrar deneyelim!`;
+                : `🔥 ${lastFinishedRun.streak} seri tamamlandı!`;
         }
         if (s.activeRun) {
-            return `🔥 Seri ${s.activeRun.streak} · ${s.activeRun.budget} ipucu kaldı!`;
+            return `🔥 Seri ${s.activeRun.streak} · ${s.activeRun.budget} ipucu kaldı`;
         }
-        if (s.bestStreak >= 5) {
-            return `🏔️ Rekorun ${s.bestStreak}! Üstüne çıkabilir misin?`;
-        }
-        return '☕ Hazırsan ilk zor vakayı alalım!';
+        return '';
     }
 
     function render() {
@@ -55114,7 +55416,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     <span class="tr-mote" style="left:78%;top:40%;animation-delay:1.5s"></span>
                 </div>
                 <div class="tr-noro-seat">
-                    <div class="tr-noro-bubble">${esc(therapistBubbleText(s))}</div>
+                    ${therapistBubbleText(s) ? `<div class="tr-noro-bubble">${esc(therapistBubbleText(s))}</div>` : ''}
                     ${renderAvatar(myCfg, 92, { facing: 'left', activity: run ? 'think' : null })}
                     <span class="tr-noro-tag">Sen</span>
                 </div>
@@ -55122,15 +55424,15 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
             <div class="tr-actions">
                 ${run ? `
-                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbContinue">
-                        ▶️ Tırmanışa Devam Et (Vaka #${run.streak + 1})
+                    <button type="button" class="btn btn-primary tr-start-btn" id="btnClimbContinue">
+                        ▶️ Devam Et (Vaka #${run.streak + 1})
                     </button>
-                    <button type="button" class="btn btn-secondary btn-lg" id="btnClimbRestart">
+                    <button type="button" class="btn btn-secondary" id="btnClimbRestart">
                         🔄 Sıfırdan Başla
                     </button>
                 ` : `
-                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbStart">
-                        🏔️ Tırmanışa Başla (10 İpucu)
+                    <button type="button" class="btn btn-primary tr-start-btn" id="btnClimbStart">
+                        🏔️ Tırmanışa Başla
                     </button>
                 `}
             </div>
@@ -55149,6 +55451,14 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                     <div class="tr-delta-cell is-neg"><span>6. İpucu</span><strong>−3</strong></div>
                 </div>
             </section>
+
+            <section class="tr-lb-card" aria-labelledby="trLbTitle">
+                <div class="tr-lb-head">
+                    <h2 class="tr-lb-title" id="trLbTitle">🏆 En İyi Tırmanışçılar</h2>
+                    <button type="button" class="btn btn-ghost btn-sm" id="btnClimbRefreshLb">↻ Yenile</button>
+                </div>
+                <div id="climbLeaderboardMount"></div>
+            </section>
         `;
 
         const btnStart = document.getElementById('btnClimbStart');
@@ -55162,6 +55472,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
         const btnDismiss = document.getElementById('btnClimbDismissSummary');
         if (btnDismiss) btnDismiss.addEventListener('click', () => { lastFinishedRun = null; render(); });
+
+        const btnRefLb = document.getElementById('btnClimbRefreshLb');
+        if (btnRefLb) btnRefLb.addEventListener('click', () => fetchLeaderboard(true));
+
+        renderLeaderboardMount();
+        fetchLeaderboard(false);
     }
 
     global.PsikoVakaTirmanis = {

@@ -272,6 +272,18 @@
                             <!-- Seri: klasöre ataşla tutturulmuş etiket -->
                             <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
                         </article>
+
+                        <!-- Online: günün vakasının sağında panoya raptiyeli kart -->
+                        <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
+                            <div class="card-action-head">
+                                <h3 class="card-title" id="onlineCardTitle">Online</h3>
+                                <p class="card-text">Düello, herkes tek ve turnuva.</p>
+                            </div>
+                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                            <div class="card-action-row">
+                                <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
+                            </div>
+                        </article>
                     </div>
                 </div>
 
@@ -298,18 +310,6 @@
                             <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
                                 <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
                             </button>
-                        </div>
-                    </article>
-
-                    <!-- Online: panoya raptiyeli kart (bekleyen davet/bildirim: js/online/friends.js -> game.setHomeOnlineNote) -->
-                    <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
-                        <div class="card-action-head">
-                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
-                            <p class="card-text">Düello, herkes tek ve turnuva.</p>
-                        </div>
-                        <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
-                        <div class="card-action-row">
-                            <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
                         </div>
                     </article>
                 </div>
