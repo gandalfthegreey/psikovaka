@@ -69,6 +69,7 @@
     <link rel="stylesheet" href="css/dosya.css">
     <link rel="stylesheet" href="css/sinif.css">
     <link rel="stylesheet" href="css/ambiyans.css">
+    <link rel="stylesheet" href="css/klinik.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
 <body>
@@ -157,6 +158,7 @@
 
             <nav class="top-nav" aria-label="Ana menü">
                 <a class="top-nav-link" href="#/oyna" data-route="oyna">Oyna</a>
+                <a class="top-nav-link" href="#/klinigim" data-route="klinigim">Kliniğim</a>
                 <a class="top-nav-link" href="#/online" data-route="online">Online</a>
                 <a class="top-nav-link" href="#/kutuphane" data-route="kutuphane">Kütüphane</a>
                 <a class="top-nav-link" href="#/profil" data-route="profil">Profil</a>
@@ -690,11 +692,16 @@
                 </div>
             </section>
         </section>
+        <!-- EKRAN: Kliniğim (tek oyunculu klinik ve dekorasyon modu) -->
+        <section class="screen screen-clinic" id="screenClinic" data-screen="klinigim" aria-label="Kliniğim" hidden>
+            <div id="clinicMount"></div>
+        </section>
     </main>
 
     <!-- Telefon alt sekme çubuğu -->
     <nav class="tab-bar" aria-label="Ana menü">
         <a class="tab-bar-link" href="#/oyna" data-route="oyna"><svg class="icon"><use href="#i-target"/></svg><span>Oyna</span></a>
+        <a class="tab-bar-link" href="#/klinigim" data-route="klinigim"><svg class="icon"><use href="#i-home"/></svg><span>Kliniğim</span></a>
         <a class="tab-bar-link" href="#/online" data-route="online"><svg class="icon"><use href="#i-globe"/></svg><span>Online</span></a>
         <a class="tab-bar-link" href="#/kutuphane" data-route="kutuphane"><svg class="icon"><use href="#i-book"/></svg><span>Kütüphane</span></a>
         <a class="tab-bar-link" href="#/profil" data-route="profil"><svg class="icon"><use href="#i-user"/></svg><span>Profil</span></a>
@@ -1356,5 +1363,6 @@
     <script src="js/tasarim_dosya.js"></script>
     <script src="js/ambiyans.js"></script>
     <script src="js/muzik.js"></script>
+    <script src="js/klinik.js"></script>
 </body>
 </html>

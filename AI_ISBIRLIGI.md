@@ -131,6 +131,27 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 19:22 — Gemini — Nöro Kağıt-Dönüşü Düzeltme, Şapka/Aksesuar Oturtma, Dinamik Lobi Işığı & Canlı Etkileşimler
+- **Dosyalar:** `css/style.css`, `js/avatar.js`, `js/online/lobby_room.js`, `js/online/lobby.js`, `css/online.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **Kağıt-dönüşü (paper-flip) düzeltmesi (`css/style.css`, `js/online/lobby.js`):** `.nv-flip` üzerindeki `transition: transform 220ms ease` kaldırılarak (`transition: none`) `scaleX(-1)` sırasında avatarın 0 kalınlığa basılması engellendi. Yerine yön değişiminde 160ms'lik hacimli 3B squash-hop (`@keyframes nvTurnHop`, `.ol-p.is-turning`) eklendi ve 3/4 yan bakış kaydırmaları sıkılaştırıldı.
+  2. **Şapka ve aksesuar oturtma (`js/avatar.js`):** `drawHeadwear` dar tepeli gövdeler (`drop` dahil 5 şekil) için `seat` oturma ofseti ve gerçek `hw(y)` genişliğine oranlı boyutlandırma ile güncellendi; `drawAccessoryFront` içinde gözlük sapları gövde kenarına kırpıldı ve atkı gövde konturuna oturtuldu.
+  3. **Dinamik lobi ışıklandırması (`js/online/lobby_room.js`, `css/online.css`):** Çok frekanslı nefes alan şömine ortam ışığı (`.olr-fire-ambient`, `mix-blend-mode: screen`) + şömineye gidince parlayan alev güçlenmesi (`.is-fire-stoked`), lambader açılıp kapandıkça kaybolan gerçek sıcak ışık konisi (`.olr-lamp-cone`) ve havada süzülen 7 altın toz zerresi (`.olr-motes`) eklendi.
+  4. **Canlı Nöro & etkileşimler (`js/online/lobby.js`):** Eşyalara varışta anlamlı geri bildirimler (şömine alevlenmesi + balon, çay sehpası + parıltı, kitaplıkta `💡` kıvılcımı, koltuk/pencere tepkileri), başka Nöro'ya tıklayınca iki Nöro'nun karşılıklı dönüp zıplaması + selam balonu ve 35 sn hareketsizlikte otomatik hafif kestirme (`doze`) eklendi.
+- **Neden:** Emre'nin bildirimi (kağıt gibi dönen Nöro'lar, tam oturmayan kıyafet/şapkalar, statik lobi ışığı ve yüzeysel etkileşimler).
+- **Doğrulama:** `node --check js/avatar.js js/online/lobby_room.js js/online/lobby.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
+### 2026-11-22 19:15 — Gemini — Kliniğim v1 (Tek Oyunculu Danışan Kabulü & Görsel Klinik Mağazası)
+- **Dosyalar:** Yeni `js/klinik.js`, yeni `css/klinik.css`, `index.html`, `js/app.js`, `build_portable_single_file.js`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. Üst menüye ve mobil alt sekmeye **`Kliniğim`** (`#/klinigim`, `#screenClinic`) ekranı eklendi.
+  2. **Danışan kabul döngüsü (`js/klinik.js`):** "Sıradaki Danışanı Al" düğmesine basıldığında kapıdan rastgele görünümlü bir danışan Nöro yürüyerek odaya girer, kısa bir başvuru balonu gösterir ve 278 vakalık havuzdan (öncelik çözülmemişlerde) seans başlar (`currentMode = 'clinic'`). Seans sonunda ipucu sayısına göre seans ücreti (200–50 ₺; Zor ×1,5; Kombo ×2; eşya bonusu +%), memnuniyet yıldızı ve danışan yorumu verilir.
+  3. **Görsel Klinik Geliştirme Mağazası:** 10 adet eşya (Salon Bitkisi, Uzmanlık Diploması, Terapi Koltuğu, Klinik Halısı, Gerçek Zamanlı Duvar Saati, Tıklanabilir Rorschach Tablosu, Espresso Makinesi, Deri Psikanaliz Divanı, DSM-5-TR Kütüphanesi, Sıcak Şömine). Alınan her eşya anında odada görünür ve kalıcı gelir yüzdesi (+%5–%25) kazandırır; 6+ eşyada oda sıcak akşam atmosferine geçer. İlerleme `localStorage.psikovaka_clinic_v1` içinde saklanır (online Elo'yu etkilemez).
+- **Neden:** Emre'nin isteği (Kliniğim v1 — ilk 2 başlık + localStorage kalıcılığı).
+- **Doğrulama:** `node --check js/klinik.js js/app.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** İleride istenirse Supabase profiline senkronize edilebilir; şu an tamamen yerel (`localStorage`).
+
 ### 2026-11-22 18:34 — Gemini — Yol B Boyalı Terapi Odası İllüstrasyonu, 3D Hacimli Nöro & Lobi Animasyon/Etkileşimleri
 - **Dosyalar:** Yeni `assets/lobby_bg_night.jpg`, `js/avatar.js`, `js/online/lobby_room.js`, `js/online/lobby.js`, `css/style.css`, `css/online.css`, `PsikoVaka_Tam_Surum.html` (yedek gündüz taslağı `_arsiv/lobby-bg-taslak/lobby_bg_day.jpg`).
 - **Ne değişti:**

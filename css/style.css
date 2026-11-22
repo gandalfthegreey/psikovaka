@@ -2270,18 +2270,31 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 @keyframes nv-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: translateX(0.8px) rotate(1.4deg); } 64% { transform: translateX(-0.8px) rotate(-1.2deg); } }
 @keyframes nv-tuft { 0%, 70%, 100% { transform: rotate(var(--nv-tl, 0deg)); } 74% { transform: rotate(calc(var(--nv-tl, 0deg) + 5deg)); } 78% { transform: rotate(calc(var(--nv-tl, 0deg) - 4deg)); } 83% { transform: rotate(calc(var(--nv-tl, 0deg) + 2deg)); } 88% { transform: rotate(var(--nv-tl, 0deg)); } }
 
-/* Yön: front | right | left (left = right'ın aynası). Yüz ve şapka bakılan yana kayar, tüyler geriye yatar → 3/4 poz */
-.nv-flip { transform-origin: 50% 50%; transition: transform 220ms ease; }
+/* Yön: front | right | left (left = right'ın aynası).
+   KRİTİK: .nv-flip'te transition YOK (scaleX 1→-1 arası kağıt gibi incelip dönmesin!).
+   Yalnızca yüz, şapka ve aksesuar yumuşak kayar. */
+.nv-flip { transform-origin: 50% 50%; transition: none; }
 .nv-f-left .nv-flip { transform: scaleX(-1); }
-.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 220ms ease; }
+.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
 .nv-face { transform-origin: 50% 50%; }
-.nv-f-side { --nv-tl: -13deg; --nv-fx: 4px; }
-.nv-f-side .nv-face { transform: translateX(10px) scaleX(0.8); }
-.nv-f-side .nv-hat { transform: translateX(4px); }
-.nv-f-side .nv-chest { transform: translateX(6px) scaleX(0.85); }
+.nv-hat { transform-origin: 50% 100%; }
+.nv-f-side { --nv-tl: -11deg; --nv-fx: 3px; }
+.nv-f-side .nv-face { transform: translateX(6.5px) scaleX(0.9); }
+.nv-f-side .nv-hat { transform: translateX(3px) rotate(3deg); }
+.nv-f-side .nv-chest { transform: translateX(4.5px) scaleX(0.92); }
 .nv-f-side .nv-tufts { transform: rotate(var(--nv-tl)); }
-.nv-f-side .nv-foot-l { transform: translateX(6px); }
+.nv-f-side .nv-foot-l { transform: translateX(5px); }
 .nv-f-side .nv-foot-r { transform: translateX(2px); }
+
+@keyframes nvTurnHop {
+    0% { transform: translateY(0) scale(1, 1); }
+    45% { transform: translateY(-4px) scale(0.94, 1.07); }
+    100% { transform: translateY(0) scale(1, 1); }
+}
+.ol-p.is-turning .ol-p-fig {
+    animation: nvTurnHop 160ms ease-out;
+    transform-origin: center bottom;
+}
 
 /* Yürüme: sırayla adım atan ayaklar, hafif gövde sekmesi, öne eğilme (animated olmasa da çalışır) */
 .nv.nv-walking .nv-foot-l { animation: nv-step 0.52s linear infinite; }

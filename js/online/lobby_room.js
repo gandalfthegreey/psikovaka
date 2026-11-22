@@ -448,8 +448,26 @@
         const photoDiv = usePhoto ? `<div class="olr-photo-bg olr-t-${tod}" aria-hidden="true"></div>` : '';
         const fx = L.fire.cx, fw = L.fire.w, fb = L.fire.bottom;
         const wx = L.win.cx, ww = L.win.w, fy = L.floorY;
+        const lampIt = L.items.find(it => it.id === 'lamp');
+        const lxPct = lampIt ? (lampIt.x * 100).toFixed(1) : (L.narrow ? '4' : '95');
+        const lyPct = lampIt ? ((lampIt.top / H) * 100).toFixed(1) : '30';
+        const fxPct = ((fx / W) * 100).toFixed(1);
+        const fyPct = ((fb / H) * 100).toFixed(1);
+        const motes = [
+            { x: 14, y: 28, d: 0, dur: 9.2, s: 1 },
+            { x: 22, y: 42, d: 1.8, dur: 11.4, s: 0.8 },
+            { x: 31, y: 34, d: 3.4, dur: 8.6, s: 1.15 },
+            { x: 46, y: 48, d: 0.9, dur: 10.5, s: 0.85 },
+            { x: 58, y: 38, d: 4.1, dur: 12.1, s: 0.9 },
+            { x: 74, y: 44, d: 2.3, dur: 9.8, s: 1.1 },
+            { x: 86, y: 32, d: 5.0, dur: 10.8, s: 0.75 }
+        ].map(m => `<span class="olr-mote" style="left:${m.x}%;top:${m.y}%;--s:${m.s};animation-delay:${m.d}s;animation-duration:${m.dur}s"></span>`).join('');
         const beam = `M${f1(wx - ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 1.25)} ${f1(fy + (H - fy) * 0.55)}L${f1(wx + ww * 0.05)} ${f1(fy + (H - fy) * 0.55)}Z`;
-        return `${photoDiv}<svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
+        return `${photoDiv}
+            <div class="olr-fire-ambient" style="--fx:${fxPct}%;--fy:${fyPct}%" aria-hidden="true"></div>
+            <div class="olr-lamp-cone" style="--lx:${lxPct}%;--ly:${lyPct}%" aria-hidden="true"></div>
+            <div class="olr-motes" aria-hidden="true">${motes}</div>
+            <svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
             ${usePhoto ? `<g class="olr-photo-fx">
                 <path class="olr-beam" d="${beam}"/>
                 <g class="olr-fire-glow">${[1, 0.72, 0.46].map(k => `<ellipse cx="${f1(fx)}" cy="${f1(fb + 8 * u)}" rx="${f1(fw * 0.72 * k)}" ry="${f1(28 * u * k)}"/>`).join('')}</g>
@@ -667,6 +685,14 @@
             if (room.layout) room.layout._blotIdx = blotIdx;
             return b.msg;
         };
+        let stokeT = 0;
+        room.stokeFire = () => {
+            clearTimeout(stokeT);
+            stage.classList.remove('is-fire-stoked');
+            void stage.offsetWidth;
+            stage.classList.add('is-fire-stoked');
+            stokeT = setTimeout(() => stage.classList.remove('is-fire-stoked'), 3600);
+        };
         room.toggleLamp = () => {
             const dim = stage.classList.toggle('is-lamp-dim');
             return dim;
@@ -677,7 +703,7 @@
             ro.observe(stage);
         }
         relayout(true);
-        room.destroy = () => { if (ro) ro.disconnect(); clearTimeout(tmr); host.remove(); objLayer.remove(); stage.querySelectorAll('.olr-item').forEach(e => e.remove()); };
+        room.destroy = () => { if (ro) ro.disconnect(); clearTimeout(tmr); clearTimeout(stokeT); stage.classList.remove('is-fire-stoked', 'is-lamp-dim'); host.remove(); objLayer.remove(); stage.querySelectorAll('.olr-item').forEach(e => e.remove()); };
         return room;
     }
 

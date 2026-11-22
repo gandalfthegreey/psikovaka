@@ -96,6 +96,7 @@ class PsikoVakaGame {
     initRouter() {
         this.routeScreens = {
             oyna: this.dom.screenHome,
+            klinigim: document.getElementById('screenClinic'),
             online: this.dom.screenOnline,
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
@@ -1509,6 +1510,10 @@ class PsikoVakaGame {
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.addEventListener('click', () => {
+                if (this.currentMode === 'clinic') {
+                    this.showRoute('klinigim');
+                    return;
+                }
                 this.setMode('practice');
             });
         }
@@ -2349,9 +2354,9 @@ class PsikoVakaGame {
         this.renderZorlukUI();
     }
 
-    /** Günlük ve pratikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    /** Günlük, pratik ve klinikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
     canEditZorluk() {
-        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice' && this.currentMode !== 'clinic') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
         const log = this.stageGuessLog || {};
         const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
@@ -2377,7 +2382,7 @@ class PsikoVakaGame {
         }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
-            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice');
+            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice' || this.currentMode === 'clinic');
             const editable = this.canEditZorluk();
             const show = isDailyOrPractice && !this.dailyReadOnly;
             if (show) {
@@ -3017,6 +3022,11 @@ class PsikoVakaGame {
         if (this.currentMode === 'daily' && this.dailyContext && !this.dailyReadOnly && this.currentCase && this.dailyContext.caseId === this.currentCase.id) {
             this.saveDailyRecord(this.snapshotDailyRecord(won));
             this.updateHomeMeta();
+        }
+
+        // Kliniğim modu: seans ücreti ve danışan yorumu
+        if (this.currentMode === 'clinic' && window.PsikoVakaKlinik && typeof window.PsikoVakaKlinik.onCaseFinished === 'function') {
+            window.PsikoVakaKlinik.onCaseFinished(won, this);
         }
 
         this.emitPlayState();

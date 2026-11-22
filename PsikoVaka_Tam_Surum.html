@@ -2567,18 +2567,31 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 @keyframes nv-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: translateX(0.8px) rotate(1.4deg); } 64% { transform: translateX(-0.8px) rotate(-1.2deg); } }
 @keyframes nv-tuft { 0%, 70%, 100% { transform: rotate(var(--nv-tl, 0deg)); } 74% { transform: rotate(calc(var(--nv-tl, 0deg) + 5deg)); } 78% { transform: rotate(calc(var(--nv-tl, 0deg) - 4deg)); } 83% { transform: rotate(calc(var(--nv-tl, 0deg) + 2deg)); } 88% { transform: rotate(var(--nv-tl, 0deg)); } }
 
-/* Yön: front | right | left (left = right'ın aynası). Yüz ve şapka bakılan yana kayar, tüyler geriye yatar → 3/4 poz */
-.nv-flip { transform-origin: 50% 50%; transition: transform 220ms ease; }
+/* Yön: front | right | left (left = right'ın aynası).
+   KRİTİK: .nv-flip'te transition YOK (scaleX 1→-1 arası kağıt gibi incelip dönmesin!).
+   Yalnızca yüz, şapka ve aksesuar yumuşak kayar. */
+.nv-flip { transform-origin: 50% 50%; transition: none; }
 .nv-f-left .nv-flip { transform: scaleX(-1); }
-.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 220ms ease; }
+.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
 .nv-face { transform-origin: 50% 50%; }
-.nv-f-side { --nv-tl: -13deg; --nv-fx: 4px; }
-.nv-f-side .nv-face { transform: translateX(10px) scaleX(0.8); }
-.nv-f-side .nv-hat { transform: translateX(4px); }
-.nv-f-side .nv-chest { transform: translateX(6px) scaleX(0.85); }
+.nv-hat { transform-origin: 50% 100%; }
+.nv-f-side { --nv-tl: -11deg; --nv-fx: 3px; }
+.nv-f-side .nv-face { transform: translateX(6.5px) scaleX(0.9); }
+.nv-f-side .nv-hat { transform: translateX(3px) rotate(3deg); }
+.nv-f-side .nv-chest { transform: translateX(4.5px) scaleX(0.92); }
 .nv-f-side .nv-tufts { transform: rotate(var(--nv-tl)); }
-.nv-f-side .nv-foot-l { transform: translateX(6px); }
+.nv-f-side .nv-foot-l { transform: translateX(5px); }
 .nv-f-side .nv-foot-r { transform: translateX(2px); }
+
+@keyframes nvTurnHop {
+    0% { transform: translateY(0) scale(1, 1); }
+    45% { transform: translateY(-4px) scale(0.94, 1.07); }
+    100% { transform: translateY(0) scale(1, 1); }
+}
+.ol-p.is-turning .ol-p-fig {
+    animation: nvTurnHop 160ms ease-out;
+    transform-origin: center bottom;
+}
 
 /* Yürüme: sırayla adım atan ayaklar, hafif gövde sekmesi, öne eğilme (animated olmasa da çalışır) */
 .nv.nv-walking .nv-foot-l { animation: nv-step 0.52s linear infinite; }
@@ -4679,6 +4692,104 @@ body.ol-banners-docked .ol-banners { display: none; }
     cursor: pointer;
 }
 
+/* ==========================================================================
+   Dinamik Lobi Işıklandırması: Şömine Nefesi, Lambader Işık Konisi & Toz Zerreleri
+   ========================================================================== */
+.olr-fire-ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 42% 38% at var(--fx, 50%) var(--fy, 48%),
+        rgba(255, 164, 72, 0.36) 0%,
+        rgba(255, 118, 42, 0.16) 44%,
+        transparent 78%
+    );
+    animation: olrFireBreathe 3.8s ease-in-out infinite;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+@keyframes olrFireBreathe {
+    0%   { opacity: 0.68; transform: scale(0.98); }
+    28%  { opacity: 0.94; transform: scale(1.03); }
+    52%  { opacity: 0.74; transform: scale(0.99); }
+    79%  { opacity: 1;    transform: scale(1.05); }
+    100% { opacity: 0.68; transform: scale(0.98); }
+}
+
+.ol-stage.is-fire-stoked .olr-fire-ambient {
+    animation-duration: 1.5s;
+    background: radial-gradient(
+        ellipse 52% 46% at var(--fx, 50%) var(--fy, 48%),
+        rgba(255, 186, 92, 0.56) 0%,
+        rgba(255, 126, 46, 0.28) 48%,
+        transparent 80%
+    );
+}
+
+.ol-stage.is-fire-stoked .olr-ember {
+    animation-duration: 1.5s !important;
+}
+
+.olr-lamp-cone {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 34% 48% at var(--lx, 95%) calc(var(--ly, 30%) + 12%),
+        rgba(255, 224, 150, 0.34) 0%,
+        rgba(255, 198, 108, 0.14) 46%,
+        transparent 78%
+    );
+    opacity: 0.9;
+    transition: opacity 0.55s ease;
+}
+
+.ol-stage.is-lamp-dim .olr-lamp-cone {
+    opacity: 0;
+}
+
+.ol-stage.is-lamp-dim .olr-lamp-glow,
+.ol-stage.is-lamp-dim .olr-lamp-shine {
+    opacity: 0.08;
+    transition: opacity 0.5s ease;
+}
+
+.olr-motes {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.olr-mote {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 240, 196, 0.95) 0%, rgba(255, 210, 130, 0) 75%);
+    opacity: 0;
+    animation: olrMoteDrift 10s ease-in-out infinite;
+}
+
+@keyframes olrMoteDrift {
+    0%   { opacity: 0; transform: translate(0, 0) scale(var(--s, 1)); }
+    20%  { opacity: 0.65; }
+    55%  { opacity: 0.45; transform: translate(14px, -22px) scale(calc(var(--s, 1) * 1.15)); }
+    85%  { opacity: 0.55; }
+    100% { opacity: 0; transform: translate(-8px, -44px) scale(calc(var(--s, 1) * 0.7)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .olr-fire-ambient, .olr-mote, .olr-ember { animation: none !important; }
+    .olr-motes { display: none; }
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -6558,6 +6669,347 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 }
 
 </style>
+    <style>
+/* ==========================================================================
+   PsikoVaka — Kliniğim v1 (Tek Oyunculu Klinik & Dekorasyon Modu)
+   Yalnızca tasarım token'larını kullanır (css/tokens.css).
+   ========================================================================== */
+.screen-clinic {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.kl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.kl-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+}
+
+.kl-sub {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-2);
+}
+
+.kl-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.kl-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+
+.kl-stat-pill.is-money {
+    border-color: var(--color-warning);
+    background: var(--color-warning-soft);
+    color: var(--color-warning);
+}
+
+.kl-stat-pill.is-bonus {
+    border-color: var(--color-success);
+    background: var(--color-success-soft);
+    color: var(--color-success);
+}
+
+.kl-payout-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.kl-payout-banner.is-win {
+    border-color: var(--color-success);
+    background: var(--color-success-soft);
+}
+
+.kl-payout-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: var(--text-sm);
+}
+
+.kl-payout-main strong {
+    color: var(--color-text);
+    font-size: var(--text-base);
+}
+
+.kl-payout-main span {
+    color: var(--color-text-2);
+}
+
+/* Canlı Klinik Odası Sahnesi */
+.kl-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 8;
+    min-height: 220px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-2);
+}
+
+.kl-room-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.kl-rorschach-hit {
+    position: absolute;
+    left: 70%;
+    top: 9%;
+    width: 9%;
+    height: 20%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.kl-noro {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.kl-therapist {
+    left: 22%;
+    bottom: 24%;
+    transform: translateX(-50%);
+}
+
+.kl-patient {
+    left: 66%;
+    bottom: 24%;
+    transform: translateX(-50%);
+}
+
+@keyframes klPatientWalkIn {
+    0% { left: 92%; opacity: 0.2; }
+    100% { left: 66%; opacity: 1; }
+}
+
+.kl-patient.is-entering {
+    animation: klPatientWalkIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.kl-patient-bubble {
+    margin-bottom: 4px;
+    padding: 6px 10px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+    box-shadow: var(--shadow-1);
+}
+
+.kl-tag {
+    margin-top: -4px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    background: rgba(15, 17, 23, 0.78);
+    color: #fff;
+    font-size: 11px;
+    font-weight: var(--weight-semibold);
+}
+
+@keyframes klFlameFlicker {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.12); }
+}
+
+.kl-flame {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation: klFlameFlicker 1.1s ease-in-out infinite;
+}
+
+.kl-actions-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.kl-accept-btn {
+    min-width: 240px;
+}
+
+.kl-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.kl-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.kl-section-title {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+}
+
+.kl-section-meta {
+    font-size: var(--text-xs);
+    color: var(--color-text-3);
+}
+
+.kl-shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: var(--space-3);
+}
+
+.kl-shop-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.15s ease;
+}
+
+.kl-shop-card.is-owned {
+    border-color: var(--color-success);
+    background: color-mix(in srgb, var(--color-surface) 92%, var(--color-success));
+}
+
+.kl-shop-card.is-locked {
+    opacity: 0.65;
+}
+
+.kl-shop-top {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+}
+
+.kl-shop-ico {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.kl-shop-name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+}
+
+.kl-shop-desc {
+    margin-top: 2px;
+    font-size: var(--text-xs);
+    color: var(--color-text-2);
+    line-height: 1.4;
+}
+
+.kl-shop-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.kl-shop-bonus {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-success);
+}
+
+.kl-shop-owned {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-success);
+}
+
+.kl-shop-req {
+    font-size: 11px;
+    color: var(--color-text-3);
+}
+
+.kl-reviews-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.kl-review-item,
+.kl-review-empty {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+    color: var(--color-text-2);
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.kl-review-stars {
+    color: var(--color-warning);
+    font-size: var(--text-xs);
+    flex-shrink: 0;
+}
+
+@media (max-width: 599px) {
+    .kl-stage {
+        aspect-ratio: 16 / 10;
+    }
+    .kl-noro svg {
+        width: 62px;
+        height: 62px;
+    }
+}
+
+</style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f63c9%22/><path d=%22M5 17h5l2.5-6 5 12 2.5-6H27%22 fill=%22none%22 stroke=%22white%22 stroke-width=%222.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
 </head>
 <body>
@@ -6646,6 +7098,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 
             <nav class="top-nav" aria-label="Ana menü">
                 <a class="top-nav-link" href="#/oyna" data-route="oyna">Oyna</a>
+                <a class="top-nav-link" href="#/klinigim" data-route="klinigim">Kliniğim</a>
                 <a class="top-nav-link" href="#/online" data-route="online">Online</a>
                 <a class="top-nav-link" href="#/kutuphane" data-route="kutuphane">Kütüphane</a>
                 <a class="top-nav-link" href="#/profil" data-route="profil">Profil</a>
@@ -7179,11 +7632,16 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </div>
             </section>
         </section>
+        <!-- EKRAN: Kliniğim (tek oyunculu klinik ve dekorasyon modu) -->
+        <section class="screen screen-clinic" id="screenClinic" data-screen="klinigim" aria-label="Kliniğim" hidden>
+            <div id="clinicMount"></div>
+        </section>
     </main>
 
     <!-- Telefon alt sekme çubuğu -->
     <nav class="tab-bar" aria-label="Ana menü">
         <a class="tab-bar-link" href="#/oyna" data-route="oyna"><svg class="icon"><use href="#i-target"/></svg><span>Oyna</span></a>
+        <a class="tab-bar-link" href="#/klinigim" data-route="klinigim"><svg class="icon"><use href="#i-home"/></svg><span>Kliniğim</span></a>
         <a class="tab-bar-link" href="#/online" data-route="online"><svg class="icon"><use href="#i-globe"/></svg><span>Online</span></a>
         <a class="tab-bar-link" href="#/kutuphane" data-route="kutuphane"><svg class="icon"><use href="#i-book"/></svg><span>Kütüphane</span></a>
         <a class="tab-bar-link" href="#/profil" data-route="profil"><svg class="icon"><use href="#i-user"/></svg><span>Profil</span></a>
@@ -39010,75 +39468,82 @@ if (typeof module !== 'undefined' && module.exports) {
         }
     }
 
-    // Başlık: tepe noktası T, alın çizgisi gövde genişliğine göre
+    // Başlık: tepe noktası T, alın çizgisi gövde genişliğine göre (dar/damla gövdede tam oturur)
     function drawHeadwear(id, g, pal) {
         const T = g.b.top;
         const hw = g.hw;
         const OUT = '#2a2238';
+        const isNarrowTop = g.b.wTop < 12; // damla gövde tepesi dar: şapkaları biraz daha derin oturt
+        const seat = isNarrowTop ? 4 : 0;
         switch (id) {
             case 'gradcap': {
-                const w = Math.min(20, hw(T + 8) + 1.5);
-                const by = T - 1;
-                return `<path d="M${f1(60 - w)} ${T + 8}Q60 ${T - 4} ${f1(60 + w)} ${T + 8}Z" fill="#323a5c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M33 ${by}L60 ${by - 8}L87 ${by}L60 ${by + 8}Z" fill="#3d4670" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M60 ${by}L80 ${by + 2}L80 ${by + 11}" fill="none" stroke="#f2c14e" stroke-width="2" stroke-linecap="round"/>` +
-                    `<rect x="77.6" y="${by + 10}" width="4.8" height="6" rx="1.6" fill="#f2c14e" stroke="${OUT}" stroke-width="1.2"/>` +
+                const y = T + 8 + seat;
+                const w = Math.max(12, Math.min(20, hw(y) + 1));
+                const by = T + seat;
+                return `<path d="M${f1(60 - w)} ${y}Q60 ${by - 2} ${f1(60 + w)} ${y}Z" fill="#323a5c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - w - 7)} ${by}L60 ${by - 7.5}L${f1(60 + w + 7)} ${by}L60 ${by + 7.5}Z" fill="#3d4670" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M60 ${by}L${f1(60 + w + 1)} ${by + 2}L${f1(60 + w + 1)} ${by + 11}" fill="none" stroke="#f2c14e" stroke-width="2" stroke-linecap="round"/>` +
+                    `<rect x="${f1(60 + w - 1.4)}" y="${by + 10}" width="4.8" height="6" rx="1.6" fill="#f2c14e" stroke="${OUT}" stroke-width="1.2"/>` +
                     `<circle cx="60" cy="${by}" r="2" fill="#f2c14e"/>`;
             }
             case 'beanie': {
-                const y = T + 13, w = hw(y) + 2.2;
-                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 7} ${f1(60 + w)} ${T - 7} ${f1(60 + w)} ${y}Z" fill="#e2574c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<rect x="${f1(60 - w - 1)}" y="${y - 5}" width="${f1(2 * w + 2)}" height="7.5" rx="3.6" fill="#c54238" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M${f1(60 - w * 0.5)} ${y - 4}v5M60 ${y - 4}v5M${f1(60 + w * 0.5)} ${y - 4}v5" stroke="#a7362e" stroke-width="1.6" stroke-linecap="round"/>` +
-                    `<circle cx="60" cy="${T - 4}" r="5" fill="#fff3ea" stroke="${OUT}" stroke-width="2.2"/>`;
+                const y = Math.min(g.eyeY - 9, T + 13 + seat);
+                const w = Math.max(13, hw(y) + 1.8);
+                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 5 + seat} ${f1(60 + w)} ${T - 5 + seat} ${f1(60 + w)} ${y}Z" fill="#e2574c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<rect x="${f1(60 - w - 1)}" y="${y - 4.5}" width="${f1(2 * w + 2)}" height="7" rx="3.5" fill="#c54238" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - w * 0.5)} ${y - 3.5}v4.5M60 ${y - 3.5}v4.5M${f1(60 + w * 0.5)} ${y - 3.5}v4.5" stroke="#a7362e" stroke-width="1.6" stroke-linecap="round"/>` +
+                    `<circle cx="60" cy="${T - 3 + seat}" r="4.8" fill="#fff3ea" stroke="${OUT}" stroke-width="2.2"/>`;
             }
             case 'headphones': {
-                const y = g.eyeY - 4, w = hw(y) + 1;
-                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 9} ${f1(60 + w)} ${T - 9} ${f1(60 + w)} ${y}" fill="none" stroke="${OUT}" stroke-width="6.5" stroke-linecap="round"/>` +
-                    `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 9} ${f1(60 + w)} ${T - 9} ${f1(60 + w)} ${y}" fill="none" stroke="#5b6480" stroke-width="3" stroke-linecap="round"/>` +
-                    `<rect x="${f1(60 - w - 6)}" y="${y - 7}" width="11" height="17" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<rect x="${f1(60 + w - 5)}" y="${y - 7}" width="11" height="17" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>`;
+                const y = g.eyeY - 3, w = hw(y) + 0.8;
+                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 8} ${f1(60 + w)} ${T - 8} ${f1(60 + w)} ${y}" fill="none" stroke="${OUT}" stroke-width="6.5" stroke-linecap="round"/>` +
+                    `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 8} ${f1(60 + w)} ${T - 8} ${f1(60 + w)} ${y}" fill="none" stroke="#5b6480" stroke-width="3" stroke-linecap="round"/>` +
+                    `<rect x="${f1(60 - w - 5.5)}" y="${y - 7}" width="10.5" height="16.5" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<rect x="${f1(60 + w - 5)}" y="${y - 7}" width="10.5" height="16.5" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>`;
             }
             case 'crown': {
-                const y = T + 4;
-                return `<path d="M46 ${y}L44 ${y - 15}L52 ${y - 8}L60 ${y - 19}L68 ${y - 8}L76 ${y - 15}L74 ${y}Z" fill="#f6c945" stroke="#8a6110" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<rect x="45" y="${y - 3}" width="30" height="5.5" rx="2" fill="#e8b02c" stroke="#8a6110" stroke-width="2"/>` +
-                    `<circle cx="60" cy="${y - 8}" r="2.4" fill="#ef5a7a"/><circle cx="44" cy="${y - 15}" r="1.8" fill="#fff6d0"/><circle cx="76" cy="${y - 15}" r="1.8" fill="#fff6d0"/>`;
+                const y = T + 5 + seat;
+                const cw = Math.max(10, Math.min(14, hw(y) * 0.85));
+                return `<path d="M${f1(60 - cw)} ${y}L${f1(60 - cw - 2)} ${y - 14}L${f1(60 - cw * 0.45)} ${y - 7.5}L60 ${y - 18}L${f1(60 + cw * 0.45)} ${y - 7.5}L${f1(60 + cw + 2)} ${y - 14}L${f1(60 + cw)} ${y}Z" fill="#f6c945" stroke="#8a6110" stroke-width="2.3" stroke-linejoin="round"/>` +
+                    `<rect x="${f1(60 - cw - 1)}" y="${y - 3}" width="${f1(cw * 2 + 2)}" height="5.2" rx="2" fill="#e8b02c" stroke="#8a6110" stroke-width="2"/>` +
+                    `<circle cx="60" cy="${y - 7.5}" r="2.2" fill="#ef5a7a"/><circle cx="${f1(60 - cw - 2)}" cy="${y - 14}" r="1.7" fill="#fff6d0"/><circle cx="${f1(60 + cw + 2)}" cy="${y - 14}" r="1.7" fill="#fff6d0"/>`;
             }
             case 'bandana': {
-                const y = T + 11, w = hw(y + 2) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 7} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 9}Q60 ${y - 1} ${f1(60 - w)} ${y + 9}Z" fill="#3d7de0" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
-                    `<circle cx="52" cy="${y + 1}" r="1.2" fill="#fff"/><circle cx="60" cy="${y - 1}" r="1.2" fill="#fff"/><circle cx="68" cy="${y + 1}" r="1.2" fill="#fff"/>` +
-                    `<path d="M${f1(60 + w - 1)} ${y + 5}l9 -5l-1 8zM${f1(60 + w - 1)} ${y + 6}l8 6l-9 1z" fill="#3d7de0" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>`;
+                const y = Math.min(g.eyeY - 12, T + 11 + seat), w = Math.max(12, hw(y + 2) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 6} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 9}Q60 ${y} ${f1(60 - w)} ${y + 9}Z" fill="#3d7de0" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
+                    `<circle cx="52" cy="${y + 1.5}" r="1.2" fill="#fff"/><circle cx="60" cy="${y - 0.5}" r="1.2" fill="#fff"/><circle cx="68" cy="${y + 1.5}" r="1.2" fill="#fff"/>` +
+                    `<path d="M${f1(60 + w - 1)} ${y + 5}l8 -4.5l-1 7.5zM${f1(60 + w - 1)} ${y + 6}l7.5 5.5l-8.5 1z" fill="#3d7de0" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>`;
             }
             case 'goggles': {
-                const y = T + 10, w = hw(y) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 1}Q60 ${y - 4} ${f1(60 + w)} ${y + 1}" fill="none" stroke="#3d4458" stroke-width="3.4"/>` +
-                    `<circle cx="52" cy="${y}" r="6.6" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.6"/><circle cx="68" cy="${y}" r="6.6" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.6"/>` +
-                    `<path d="M58.6 ${y}h2.8" stroke="#3d4458" stroke-width="2.6"/>` +
+                const y = Math.min(g.eyeY - 11, T + 10 + seat), w = Math.max(14, hw(y) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 1}Q60 ${y - 4} ${f1(60 + w)} ${y + 1}" fill="none" stroke="#3d4458" stroke-width="3.2"/>` +
+                    `<circle cx="52" cy="${y}" r="6.4" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.5"/><circle cx="68" cy="${y}" r="6.4" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.5"/>` +
+                    `<path d="M58.4 ${y}h3.2" stroke="#3d4458" stroke-width="2.5"/>` +
                     `<path d="M49 ${y - 2.2}q2 -2 4.6 -1.6M65 ${y - 2.2}q2 -2 4.6 -1.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>`;
             }
             case 'flower': {
-                const y = T + 6, x = 60 + Math.max(8, hw(y) * 0.62);
+                const y = T + 7 + seat, x = 60 + Math.max(7, hw(y) * 0.62);
                 const p = (a) => { const r = a * Math.PI / 180; return `<circle cx="${f1(x + Math.cos(r) * 4.6)}" cy="${f1(y + Math.sin(r) * 4.6)}" r="3.9" fill="#ff9ec4" stroke="${OUT}" stroke-width="1.6"/>`; };
                 return [0, 72, 144, 216, 288].map(a => p(a - 90)).join('') + `<circle cx="${f1(x)}" cy="${y}" r="2.9" fill="#ffd54d" stroke="${OUT}" stroke-width="1.4"/>`;
             }
             case 'party': {
-                const y = T + 5;
-                return `<path d="M50 ${y}L66 ${y - 27}L71 ${y}Z" fill="#7b6cf6" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M53.5 ${y - 6}L69.3 ${y - 6}M57.6 ${y - 14}L68 ${y - 14}M61.5 ${y - 21}L66.8 ${y - 21}" stroke="#ffd34d" stroke-width="2.6"/>` +
-                    `<path d="M50 ${y}L66 ${y - 27}L71 ${y}Z" fill="none" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<circle cx="66" cy="${y - 28}" r="3.8" fill="#ff7a9c" stroke="${OUT}" stroke-width="2"/>`;
+                const y = T + 6 + seat;
+                const pw = Math.max(8, Math.min(11, hw(y) * 0.75));
+                return `<path d="M${f1(60 - pw)} ${y}L${f1(60 + 5)} ${y - 26}L${f1(60 + pw)} ${y}Z" fill="#7b6cf6" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - pw * 0.72)} ${y - 6}L${f1(60 + pw * 0.85)} ${y - 6}M${f1(60 - pw * 0.35)} ${y - 14}L${f1(60 + pw * 0.65)} ${y - 14}" stroke="#ffd34d" stroke-width="2.5"/>` +
+                    `<path d="M${f1(60 - pw)} ${y}L${f1(60 + 5)} ${y - 26}L${f1(60 + pw)} ${y}Z" fill="none" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<circle cx="${f1(60 + 5)}" cy="${y - 27}" r="3.8" fill="#ff7a9c" stroke="${OUT}" stroke-width="2"/>`;
             }
             case 'headband': {
-                const y = T + 9, w = hw(y + 2) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 6} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 8}Q60 ${y - 1} ${f1(60 - w)} ${y + 8}Z" fill="#fafafa" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
-                    `<path d="M${f1(60 - w + 1)} ${y + 5.4}Q60 ${y - 3.4} ${f1(60 + w - 1)} ${y + 5.4}" fill="none" stroke="#2fb38a" stroke-width="2.2"/>`;
+                const y = Math.min(g.eyeY - 12, T + 9 + seat), w = Math.max(12, hw(y + 2) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 5} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 8}Q60 ${y} ${f1(60 - w)} ${y + 8}Z" fill="#fafafa" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - w + 1)} ${y + 5.4}Q60 ${y - 2.4} ${f1(60 + w - 1)} ${y + 5.4}" fill="none" stroke="#2fb38a" stroke-width="2.2"/>`;
             }
             case 'sage': {
-                const y = T + 6;
-                return `<ellipse cx="60" cy="${y}" rx="${f1(Math.min(30, hw(y) + 11))}" ry="5" fill="#4a3f9c" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M47 ${y - 1}C49 ${y - 14} 58 ${y - 22} 70 ${y - 28}C74 ${y - 30} 77 ${y - 27} 74 ${y - 25}C68 ${y - 20} 72 ${y - 10} 73 ${y - 1}Z" fill="#5a4fbf" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                const y = T + 7 + seat;
+                const sw = Math.max(10, Math.min(13, hw(y) * 0.82));
+                return `<ellipse cx="60" cy="${y}" rx="${f1(Math.min(28, hw(y) + 10))}" ry="4.8" fill="#4a3f9c" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - sw)} ${y - 1}C${f1(60 - sw + 2)} ${y - 14} 58 ${y - 22} 70 ${y - 27}C74 ${y - 29} 77 ${y - 26} 74 ${y - 24}C68 ${y - 19} ${f1(60 + sw - 1)} ${y - 10} ${f1(60 + sw)} ${y - 1}Z" fill="#5a4fbf" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
                     `<path d="M62 ${y - 13}l1.4 3l3.2 .4l-2.4 2.2l.6 3.2l-2.8 -1.6l-2.8 1.6l.6 -3.2l-2.4 -2.2l3.2 -.4z" fill="#ffd54d"/>` +
                     `<circle cx="54" cy="${y - 6}" r="1.2" fill="#ffd54d"/>`;
             }
@@ -39101,9 +39566,10 @@ if (typeof module !== 'undefined' && module.exports) {
         switch (id) {
             case 'glasses': {
                 const ey = g.eyeY, dx = g.eyeDx, w = g.hw(ey);
-                return `<circle cx="${f1(60 - dx)}" cy="${ey}" r="9.6" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<circle cx="${f1(60 + dx)}" cy="${ey}" r="9.6" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M${f1(60 - dx + 9.6)} ${ey - 1}Q60 ${ey - 4} ${f1(60 + dx - 9.6)} ${ey - 1}M${f1(60 - dx - 9.6)} ${ey - 1}L${f1(60 - w + 1)} ${ey - 3}M${f1(60 + dx + 9.6)} ${ey - 1}L${f1(60 + w - 1)} ${ey - 3}" fill="none" stroke="${OUT}" stroke-width="2.2" stroke-linecap="round"/>`;
+                const edge = Math.min(w - 1.2, dx + 13.5);
+                return `<circle cx="${f1(60 - dx)}" cy="${ey}" r="9.4" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<circle cx="${f1(60 + dx)}" cy="${ey}" r="9.4" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - dx + 9.4)} ${ey - 1}Q60 ${ey - 4} ${f1(60 + dx - 9.4)} ${ey - 1}M${f1(60 - dx - 9.4)} ${ey - 1}L${f1(60 - edge)} ${ey - 2.6}M${f1(60 + dx + 9.4)} ${ey - 1}L${f1(60 + edge)} ${ey - 2.6}" fill="none" stroke="${OUT}" stroke-width="2.2" stroke-linecap="round"/>`;
             }
             case 'bowtie': {
                 const by = Math.min(g.b.bottom - 12, y + 12);
@@ -39111,7 +39577,7 @@ if (typeof module !== 'undefined' && module.exports) {
                     `<rect x="57" y="${by - 3}" width="6" height="6" rx="2" fill="#c9314a" stroke="${OUT}" stroke-width="2"/>`;
             }
             case 'scarf': {
-                const sy = Math.min(g.b.bottom - 14, y + 10), w = g.hw(sy) - 0.8;
+                const sy = Math.min(g.b.bottom - 14, y + 10), w = g.hw(sy) + 0.5;
                 return `<path d="M${f1(60 - w)} ${sy - 3}Q60 ${sy + 3} ${f1(60 + w)} ${sy - 3}L${f1(60 + w - 0.5)} ${sy + 4}Q60 ${sy + 10} ${f1(60 - w + 0.5)} ${sy + 4}Z" fill="#ff8a5c" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
                     `<path d="M${f1(60 + w * 0.35)} ${sy + 3}l2 15l7 -1l-1.5 -15z" fill="#ff8a5c" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
                     `<path d="M${f1(60 + w * 0.35 + 2.4)} ${sy + 16}l6.2 -.8" stroke="#e06a3d" stroke-width="1.6"/>`;
@@ -41325,6 +41791,7 @@ class PsikoVakaGame {
     initRouter() {
         this.routeScreens = {
             oyna: this.dom.screenHome,
+            klinigim: document.getElementById('screenClinic'),
             online: this.dom.screenOnline,
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
@@ -42738,6 +43205,10 @@ class PsikoVakaGame {
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.addEventListener('click', () => {
+                if (this.currentMode === 'clinic') {
+                    this.showRoute('klinigim');
+                    return;
+                }
                 this.setMode('practice');
             });
         }
@@ -43578,9 +44049,9 @@ class PsikoVakaGame {
         this.renderZorlukUI();
     }
 
-    /** Günlük ve pratikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    /** Günlük, pratik ve klinikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
     canEditZorluk() {
-        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice' && this.currentMode !== 'clinic') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
         const log = this.stageGuessLog || {};
         const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
@@ -43606,7 +44077,7 @@ class PsikoVakaGame {
         }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
-            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice');
+            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice' || this.currentMode === 'clinic');
             const editable = this.canEditZorluk();
             const show = isDailyOrPractice && !this.dailyReadOnly;
             if (show) {
@@ -44246,6 +44717,11 @@ class PsikoVakaGame {
         if (this.currentMode === 'daily' && this.dailyContext && !this.dailyReadOnly && this.currentCase && this.dailyContext.caseId === this.currentCase.id) {
             this.saveDailyRecord(this.snapshotDailyRecord(won));
             this.updateHomeMeta();
+        }
+
+        // Kliniğim modu: seans ücreti ve danışan yorumu
+        if (this.currentMode === 'clinic' && window.PsikoVakaKlinik && typeof window.PsikoVakaKlinik.onCaseFinished === 'function') {
+            window.PsikoVakaKlinik.onCaseFinished(won, this);
         }
 
         this.emitPlayState();
@@ -48651,8 +49127,26 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const photoDiv = usePhoto ? `<div class="olr-photo-bg olr-t-${tod}" aria-hidden="true"></div>` : '';
         const fx = L.fire.cx, fw = L.fire.w, fb = L.fire.bottom;
         const wx = L.win.cx, ww = L.win.w, fy = L.floorY;
+        const lampIt = L.items.find(it => it.id === 'lamp');
+        const lxPct = lampIt ? (lampIt.x * 100).toFixed(1) : (L.narrow ? '4' : '95');
+        const lyPct = lampIt ? ((lampIt.top / H) * 100).toFixed(1) : '30';
+        const fxPct = ((fx / W) * 100).toFixed(1);
+        const fyPct = ((fb / H) * 100).toFixed(1);
+        const motes = [
+            { x: 14, y: 28, d: 0, dur: 9.2, s: 1 },
+            { x: 22, y: 42, d: 1.8, dur: 11.4, s: 0.8 },
+            { x: 31, y: 34, d: 3.4, dur: 8.6, s: 1.15 },
+            { x: 46, y: 48, d: 0.9, dur: 10.5, s: 0.85 },
+            { x: 58, y: 38, d: 4.1, dur: 12.1, s: 0.9 },
+            { x: 74, y: 44, d: 2.3, dur: 9.8, s: 1.1 },
+            { x: 86, y: 32, d: 5.0, dur: 10.8, s: 0.75 }
+        ].map(m => `<span class="olr-mote" style="left:${m.x}%;top:${m.y}%;--s:${m.s};animation-delay:${m.d}s;animation-duration:${m.dur}s"></span>`).join('');
         const beam = `M${f1(wx - ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 1.25)} ${f1(fy + (H - fy) * 0.55)}L${f1(wx + ww * 0.05)} ${f1(fy + (H - fy) * 0.55)}Z`;
-        return `${photoDiv}<svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
+        return `${photoDiv}
+            <div class="olr-fire-ambient" style="--fx:${fxPct}%;--fy:${fyPct}%" aria-hidden="true"></div>
+            <div class="olr-lamp-cone" style="--lx:${lxPct}%;--ly:${lyPct}%" aria-hidden="true"></div>
+            <div class="olr-motes" aria-hidden="true">${motes}</div>
+            <svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
             ${usePhoto ? `<g class="olr-photo-fx">
                 <path class="olr-beam" d="${beam}"/>
                 <g class="olr-fire-glow">${[1, 0.72, 0.46].map(k => `<ellipse cx="${f1(fx)}" cy="${f1(fb + 8 * u)}" rx="${f1(fw * 0.72 * k)}" ry="${f1(28 * u * k)}"/>`).join('')}</g>
@@ -48870,6 +49364,14 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             if (room.layout) room.layout._blotIdx = blotIdx;
             return b.msg;
         };
+        let stokeT = 0;
+        room.stokeFire = () => {
+            clearTimeout(stokeT);
+            stage.classList.remove('is-fire-stoked');
+            void stage.offsetWidth;
+            stage.classList.add('is-fire-stoked');
+            stokeT = setTimeout(() => stage.classList.remove('is-fire-stoked'), 3600);
+        };
         room.toggleLamp = () => {
             const dim = stage.classList.toggle('is-lamp-dim');
             return dim;
@@ -48880,7 +49382,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             ro.observe(stage);
         }
         relayout(true);
-        room.destroy = () => { if (ro) ro.disconnect(); clearTimeout(tmr); host.remove(); objLayer.remove(); stage.querySelectorAll('.olr-item').forEach(e => e.remove()); };
+        room.destroy = () => { if (ro) ro.disconnect(); clearTimeout(tmr); clearTimeout(stokeT); stage.classList.remove('is-fire-stoked', 'is-lamp-dim'); host.remove(); objLayer.remove(); stage.querySelectorAll('.olr-item').forEach(e => e.remove()); };
         return room;
     }
 
@@ -48910,9 +49412,28 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         emoteLimit: NS.util.rateLimiter(4, 6000),
         sayLimit: NS.util.rateLimiter(3, 6000),
         offs: [], lastPlayers: null, lastHost: null, busy: false,
-        room: null, walker: null, W: 0, H: 0, lastActs: {}
+        room: null, walker: null, W: 0, H: 0, lastActs: {},
+        idleTimer: 0, idleDoze: false
     };
     const A = () => global.PsikoVakaAvatar;
+
+    function touchIdle() {
+        const wasDozing = L.idleDoze;
+        L.idleDoze = false;
+        clearTimeout(L.idleTimer);
+        if (wasDozing) {
+            const myId = NS.api.myId();
+            if (myId) refreshFigure(myId);
+        }
+        L.idleTimer = setTimeout(() => {
+            if (!L.root || !L.walker || document.hidden) return;
+            const myId = NS.api.myId();
+            const st = myId && L.walker.get(myId);
+            if (!st || st.walking || L.emotes[myId] || (st.opts && st.opts.act)) return;
+            L.idleDoze = true;
+            refreshFigure(myId);
+        }, 35000);
+    }
 
     // ------------------------------------------------------------ yerleşim
     const FLOOR_TOP = 0.46, FLOOR_BOTTOM = 0.9;
@@ -49164,6 +49685,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const vis = () => stage.classList.toggle('nv-paused', document.hidden);
         document.addEventListener('visibilitychange', vis);
         L.offs.push(() => document.removeEventListener('visibilitychange', vis));
+        touchIdle();
     }
 
     function positionNode(uid, st, teleport) {
@@ -49177,9 +49699,17 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const fig = node.querySelector('.ol-p-fig');
         const pose = node._pose || {};
         if (pose.walking !== st.walking || pose.facing !== st.facing) {
+            const flipped = (pose.facing === 'left' && st.facing === 'right') || (pose.facing === 'right' && st.facing === 'left');
             node._pose = { walking: st.walking, facing: st.facing };
             if (A()) A().setPose(fig, { walking: st.walking, facing: st.facing });
             node.classList.toggle('is-walking', !!st.walking);
+            if (flipped && !teleport && !NS.util.reducedMotion()) {
+                node.classList.remove('is-turning');
+                void node.offsetWidth;
+                node.classList.add('is-turning');
+                clearTimeout(node._turnHopT);
+                node._turnHopT = setTimeout(() => node.classList.remove('is-turning'), 180);
+            }
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
         if (st.walking && !NS.util.reducedMotion()) {
@@ -49203,12 +49733,12 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         layer.appendChild(d);
         setTimeout(() => d.remove(), 520);
     }
-    function spawnSparkBurst(nx, ny) {
+    function spawnSparkBurst(nx, ny, glyph) {
         const layer = L.root && $('#olBubbleLayer', L.root);
         if (!layer) return;
         const sp = document.createElement('span');
         sp.className = 'ol-spark-burst';
-        sp.textContent = '✨';
+        sp.textContent = glyph || '✨';
         sp.style.left = (nx * 100).toFixed(2) + '%';
         sp.style.top = (ny * 100).toFixed(2) + '%';
         layer.appendChild(sp);
@@ -49244,6 +49774,25 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         // kısa bir an sonra rahat ön (ya da nesneye uygun) poza döner
         st._turnT = setTimeout(() => { st.facing = (st.opts && st.opts.facing) || 'front'; positionNode(uid, st); refreshFigure(uid); }, NS.util.reducedMotion() ? 0 : 160);
         positionNode(uid, st);
+        // Anlamlı nesne varış tepkileri (ışık/kıvılcım/balon)
+        const spotBase = st.opts && st.opts.spot ? String(st.opts.spot).split('.')[0] : '';
+        if (spotBase === 'fire' && L.room && L.room.stokeFire) L.room.stokeFire();
+        if (uid === NS.api.myId() && spotBase) {
+            if (spotBase === 'fire') {
+                showBubble(uid, esc('🔥 Şömine çok iyi geldi!'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.08, '🔥');
+            } else if (spotBase === 'table') {
+                showBubble(uid, esc('☕ Taze demlenmiş çay gibisi yok!'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.08, '✨');
+            } else if (spotBase === 'shelf') {
+                showBubble(uid, esc('📖 Kriterlere bir göz atayım...'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.09, '💡');
+            } else if (spotBase === 'window') {
+                showBubble(uid, esc('🪟 Dışarıda hava ne güzel...'), 'is-say', 2600);
+            } else if (spotBase === 'couch' || spotBase === 'chair') {
+                showBubble(uid, esc('🛋️ Oh, burası çok rahatmış!'), 'is-say', 2400);
+            }
+        }
     }
     /** Seçilen oturma yerleri: aynı yeri iki kişi isterse kimliği küçük olan oturur (her istemcide aynı sonuç). */
     function seatHolders(act) {
@@ -49283,7 +49832,8 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const st = L.walker && L.walker.get(uid);
         const ready = p.is_host || p.is_ready;
         const emote = L.emotes[uid] || '';
-        const activity = (st && st.arrived && !st.walking && !emote && st.opts) ? (st.opts.act || '') : '';
+        const baseAct = (st && st.arrived && !st.walking && !emote && st.opts) ? (st.opts.act || '') : '';
+        const activity = baseAct || (uid === NS.api.myId() && L.idleDoze && !emote && (!st || !st.walking) ? 'doze' : '');
         const size = node._size || 80;
         const key = JSON.stringify([p.avatar, !!ready, emote, size, activity]);
         const fig = node.querySelector('.ol-p-fig');
@@ -49345,7 +49895,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 node.dataset.x = want.lx; node.dataset.y = want.ly;
                 node.dataset.spot = want.spot || '';
                 const prevVia = node._via; node._via = want.via;
-                const opts = { act: want.act, facing: want.facing, seat: want.seat, zBase: want.zBase };
+                const opts = { act: want.act, spot: want.spot, facing: want.facing, seat: want.seat, zBase: want.zBase };
                 const st = L.walker && L.walker.get(p.user_id);
                 if (!L.walker) positionNode(p.user_id, { x: want.x, y: want.y, walking: false, facing: 'front' });   // oda modülü yoksa: düz yerleştirme
                 // ilk kez presence'ten gelen konum (geç katılma / ilk eşitleme): yürümeden yerleşir
@@ -49495,6 +50045,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (y < FLOOR_TOP - 0.08) return;           // duvara tıklama yok sayılır
         y = Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, y));
         const q = L.room ? L.room.nearestFree(x, y) : { x, y };
+        touchIdle();
         NS.rooms.move(q.x, q.y);
         hideHint();
         updatePlayers();
@@ -49505,6 +50056,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const d = { ArrowLeft: [-0.06, 0], ArrowRight: [0.06, 0], ArrowUp: [0, -0.06], ArrowDown: [0, 0.06] }[e.key];
         if (!d) return;
         e.preventDefault();
+        touchIdle();
         const myId = NS.api.myId();
         const node = L.nodes.get(myId);
         const x = node ? parseFloat(node.dataset.x) : 0.5, y = node ? parseFloat(node.dataset.y) : 0.7;
@@ -49519,6 +50071,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!L.room || !s || s.room.is_quick) return;
         const ob = L.room.object(id);
         if (!ob) return;
+        touchIdle();
         const myId = NS.api.myId();
         let spot = ob.id;
         if (ob.seats) {
@@ -49593,6 +50146,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         const em = e.target.closest('[data-ol-emote]');
         if (em) {
             if (!L.emoteLimit()) { NS.toast('Biraz yavaş: tepkiler kısa bir süre bekletiliyor.'); return; }
+            touchIdle();
             const emote = em.dataset.olEmote;
             NS.rooms.send('emote', { emote });
             showEmote(NS.api.myId(), emote);
@@ -49615,18 +50169,27 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             goToObject(oid);
             return;
         }
-        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp selam ver / beşlik çak!
+        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp karşılıklı selam ver / beşlik çak!
         const peerNode = e.target.closest('.ol-p[data-uid]');
         if (peerNode && peerNode.dataset.uid && peerNode.dataset.uid !== NS.api.myId() && L.room && L.walker) {
             const targetUid = peerNode.dataset.uid;
             const targetSt = L.walker.get(targetUid);
             if (targetSt) {
+                touchIdle();
                 const destX = Math.max(0.06, Math.min(0.94, targetSt.x + (targetSt.x > 0.5 ? -0.07 : 0.07)));
                 const destY = Math.max(0.48, Math.min(0.88, targetSt.y + 0.02));
                 const freePt = L.room.nearestFree(destX, destY);
                 NS.rooms.move(freePt.x, freePt.y, { act: 'wave', spot: null });
                 showEmote(NS.api.myId(), 'wave');
-                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06);
+                showBubble(NS.api.myId(), esc('👋 Selam! Hazır mısın?'), 'is-say', 2600);
+                // Tıklanan arkadaşın Nöro'su da yerel olarak sana dönüp hafifçe zıplar
+                targetSt.facing = targetSt.x > freePt.x ? 'left' : 'right';
+                positionNode(targetUid, targetSt);
+                peerNode.classList.remove('is-ready-pop');
+                void peerNode.offsetWidth;
+                peerNode.classList.add('is-ready-pop');
+                setTimeout(() => peerNode.classList.remove('is-ready-pop'), 700);
+                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06, '✨');
                 updatePlayers();
                 return;
             }
@@ -49713,6 +50276,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
 
     function cleanupNodes() {
+        clearTimeout(L.idleTimer); L.idleTimer = 0; L.idleDoze = false;
         L.offs.forEach(f => { try { f(); } catch (e) { /* yok */ } });
         L.offs = [];
         if (L.walker) { L.walker.destroy(); L.walker = null; }
@@ -54157,6 +54721,520 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
 
     global.PsikoVakaMuzik = { start: startMusic, stop: stopMusic, toggle: toggleMusic };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+/**
+ * PsikoVaka — Kliniğim v1 (Tek Oyunculu Klinik & Dekorasyon Modu)
+ * Danışan Nöro kabulü, seans ücreti + itibar, odada canlı görünen eşya mağazası.
+ * İlerleme localStorage.psikovaka_clinic_v1 içinde saklanır (online Elo'yu etkilemez).
+ */
+(function (global) {
+    'use strict';
+
+    const STORAGE_KEY = 'psikovaka_clinic_v1';
+
+    const SHOP_ITEMS = [
+        { id: 'decor_plant', cat: 'Atmosfer', name: 'Salon Bitkisi', desc: 'Odaya canlılık ve ferahlık katar.', price: 150, bonusPct: 5, icon: '🪴' },
+        { id: 'wall_diploma', cat: 'Prestij', name: 'Uzmanlık Diploması', desc: 'Duvara asılı çerçeveli klinik yetki belgesi.', price: 200, bonusPct: 5, icon: '📜' },
+        { id: 'seat_chair', cat: 'Oturma', name: 'Rahat Terapi Koltuğu', desc: 'Tabure yerine yumuşak, geniş bir koltuk.', price: 250, bonusPct: 10, icon: '🪑' },
+        { id: 'decor_rug', cat: 'Atmosfer', name: 'Desenli Klinik Halısı', desc: 'Zemini ısıtan dokuma terapi halısı.', price: 300, bonusPct: 10, icon: '🧶' },
+        { id: 'wall_clock', cat: 'Prestij', name: 'Sessiz Duvar Saati', desc: 'Gerçek zamanlı çalışan klasik ahşap saat.', price: 350, bonusPct: 8, icon: '🕰️' },
+        { id: 'wall_rorschach', cat: 'Prestij', name: 'Rorschach Tablosu', desc: 'Tıklandıkça değişen mürekkep lekesi tablosu.', price: 450, bonusPct: 12, icon: '🦋' },
+        { id: 'equip_espresso', cat: 'İkram', name: 'Espresso Makinesi', desc: 'Sıcak kahve ikramı seans memnuniyetini artırır.', price: 500, bonusPct: 15, icon: '☕' },
+        { id: 'seat_couch', cat: 'Oturma', name: 'Deri Psikanaliz Divanı', desc: 'Klasik, gösterişli üç kişilik terapi divanı.', price: 650, bonusPct: 20, icon: '🛋️', requires: 'seat_chair' },
+        { id: 'equip_bookshelf', cat: 'İkram', name: 'DSM-5-TR Kütüphanesi', desc: 'Tavana kadar uzanan zengin klinik kitaplık.', price: 700, bonusPct: 20, icon: '📚' },
+        { id: 'decor_fireplace', cat: 'Atmosfer', name: 'Sıcak Şömine', desc: 'Kıvılcımlı şömine ile en üst düzey klinik atmosferi.', price: 800, bonusPct: 25, icon: '🔥' }
+    ];
+
+    const CLINIC_RANKS = [
+        { minItems: 0, title: 'Stajyer Görüşme Odası' },
+        { minItems: 2, title: 'Genç Klinisyen Ofisi' },
+        { minItems: 5, title: 'Özel Danışmanlık Kliniği' },
+        { minItems: 8, title: 'Uzman Psikiyatri Merkezi' },
+        { minItems: 10, title: 'Efsanevi Başhekim Enstitüsü' }
+    ];
+
+    const GREETINGS = [
+        'Merhaba hocam, biraz konuşabilir miyiz?',
+        'Bir süredir kendimi hiç iyi hissetmiyorum...',
+        'Yakınlarım mutlaka size görünmemi istedi.',
+        'Son haftalarda uyku ve düzenim tamamen bozuldu.',
+        'Kimseye anlatamadığım bazı şeyler yaşıyorum...'
+    ];
+
+    const WIN_REVIEWS = [
+        'İlk bakışta beni anladı, harika bir klinisyen!',
+        'Çok dikkatli dinledi ve nokta atışı tanı koydu.',
+        'Oda atmosferi çok rahatlatıcı, kesinlikle tavsiye ederim.',
+        'Kafamdaki bütün soru işaretleri çözüldü, teşekkürler!',
+        'Sanki kitabın içinden çıkıp gelmiş gibi doğru teşhis!'
+    ];
+
+    const RORSCHACH_SHAPES = [
+        { d: 'M0 -11 C-4 -14 -12 -10 -14 -3 C-16 4 -9 10 -4 8 L0 5 L4 8 C9 10 16 4 14 -3 C12 -10 4 -14 0 -11 Z', msg: '🦋 Kelebek mi, iki ayı mı?' },
+        { d: 'M0 -13 C-3 -9 -9 -11 -13 -6 C-15 -1 -10 2 -6 4 C-9 8 -6 13 -2 10 L0 6 L2 10 C6 13 9 8 6 4 C10 2 15 -1 13 -6 C9 -11 3 -9 0 -13 Z', msg: '🦇 Yarasa kanadı gibi!' },
+        { d: 'M0 -10 C-6 -14 -15 -6 -11 2 C-8 8 -13 11 -5 12 L0 8 L5 12 C13 11 8 8 11 2 C15 -6 6 -14 0 -10 Z', msg: '☕ İki terapist kahve içiyor!' }
+    ];
+
+    let state = null;
+    let activePatientAvatar = null;
+    let walkingIn = false;
+    let lastPayout = null;
+    let blotIndex = 0;
+
+    function defaultState() {
+        return { money: 0, reputation: 0, treated: 0, wonCount: 0, owned: [], reviews: [] };
+    }
+
+    function load() {
+        if (state) return state;
+        try {
+            const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+            if (raw && typeof raw === 'object') {
+                state = Object.assign(defaultState(), raw);
+                if (!Array.isArray(state.owned)) state.owned = [];
+                if (!Array.isArray(state.reviews)) state.reviews = [];
+                return state;
+            }
+        } catch (e) {}
+        state = defaultState();
+        return state;
+    }
+
+    function save() {
+        if (!state) return;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function has(itemId) {
+        return load().owned.includes(itemId);
+    }
+
+    function totalBonusPct() {
+        const s = load();
+        return SHOP_ITEMS.reduce((sum, it) => sum + (s.owned.includes(it.id) ? it.bonusPct : 0), 0);
+    }
+
+    function clinicRankTitle() {
+        const n = load().owned.length;
+        let title = CLINIC_RANKS[0].title;
+        for (const r of CLINIC_RANKS) {
+            if (n >= r.minItems) title = r.title;
+        }
+        return title;
+    }
+
+    function avgRating() {
+        const s = load();
+        if (!s.treated) return '—';
+        const score = Math.min(5, Math.max(3.0, 3.2 + (s.wonCount / Math.max(1, s.treated)) * 1.8));
+        return score.toFixed(1);
+    }
+
+    function esc(str) {
+        return String(str == null ? '' : str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function renderAvatar(cfg, size, opts) {
+        const AV = global.PsikoVakaAvatar;
+        if (!AV) return '';
+        return AV.render(cfg, Object.assign({ size: size || 78, framed: false, animated: true }, opts || {}));
+    }
+
+    function drawClockSVG() {
+        const now = new Date();
+        const sec = now.getHours() % 12 * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        const st = (period, offs) => `style="transform-origin:520px 62px;animation-duration:${period}s;animation-delay:-${offs}s"`;
+        return `<g class="kl-item kl-clock">
+            <circle cx="520" cy="64" r="21" fill="#000" opacity=".2"/>
+            <circle cx="520" cy="62" r="21" fill="#7a4d33" stroke="#2a1f1c" stroke-width="1.5"/>
+            <circle cx="520" cy="62" r="17" fill="#fbf4e4"/>
+            <path class="olr-hand" ${st(43200, sec % 43200)} d="M520 64V52" stroke="#2a1f1c" stroke-width="2.2" stroke-linecap="round"/>
+            <path class="olr-hand" ${st(3600, sec % 3600)} d="M520 64V48" stroke="#2a1f1c" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="520" cy="62" r="2" fill="#c0533f"/>
+        </g>`;
+    }
+
+    function renderStageSVG() {
+        const s = load();
+        const rich = s.owned.length >= 6;
+        const wallTop = rich ? '#3d2c26' : '#2a2f3d';
+        const wain = rich ? '#5c3c2a' : '#353b4b';
+        const floor = rich ? '#5a3a26' : '#3e3a38';
+        const blot = RORSCHACH_SHAPES[blotIndex % RORSCHACH_SHAPES.length];
+
+        let svg = `<svg class="kl-room-svg" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <!-- Duvar & Zemin -->
+            <rect x="0" y="0" width="640" height="132" fill="${wallTop}"/>
+            <rect x="0" y="96" width="640" height="36" fill="${wain}"/>
+            <rect x="0" y="94" width="640" height="4" fill="#201a18" opacity=".4"/>
+            <rect x="0" y="132" width="640" height="168" fill="${floor}"/>
+            <path d="M0 165H640M0 205H640M0 250H640" stroke="#000" stroke-opacity=".14" stroke-width="1.2"/>
+            <!-- Pencere (sol) -->
+            <g class="kl-window">
+                <rect x="26" y="22" width="84" height="72" rx="3" fill="${rich ? '#21345c' : '#27364f'}" stroke="#7a5238" stroke-width="4"/>
+                <path d="M68 22V94M26 58H110" stroke="#7a5238" stroke-width="3"/>
+                <circle cx="88" cy="40" r="7" fill="#fde68a" opacity=".85"/>
+                <path d="M26 132L110 132L175 245L50 245Z" fill="#fde68a" opacity="${rich ? '.07' : '.04'}"/>
+            </g>
+            <!-- Kapı (sağ kenar) -->
+            <g class="kl-door">
+                <rect x="572" y="34" width="52" height="98" rx="2" fill="#6b442b" stroke="#241a17" stroke-width="2"/>
+                <rect x="580" y="44" width="36" height="34" rx="2" fill="#593722"/>
+                <rect x="580" y="86" width="36" height="34" rx="2" fill="#593722"/>
+                <circle cx="582" cy="84" r="3" fill="#e3b04b"/>
+            </g>`;
+
+        // Halı
+        if (has('decor_rug')) {
+            svg += `<g class="kl-item">
+                <polygon points="165,172 475,172 515,274 125,274" fill="#8b3a3a" stroke="#241a17" stroke-width="1.5"/>
+                <polygon points="186,184 454,184 486,262 154,262" fill="#2c4f6b"/>
+                <polygon points="225,200 415,200 436,246 204,246" fill="#d9a441" opacity=".82"/>
+            </g>`;
+        }
+
+        // Kütüphane
+        if (has('equip_bookshelf')) {
+            svg += `<g class="kl-item">
+                <rect x="128" y="20" width="96" height="114" rx="3" fill="#6e432a" stroke="#241a17" stroke-width="2"/>
+                <rect x="136" y="28" width="80" height="98" fill="#3b2316"/>
+                <rect x="140" y="34" width="11" height="22" fill="#c0533f"/><rect x="153" y="38" width="10" height="18" fill="#2f6f8f"/>
+                <rect x="165" y="32" width="12" height="24" fill="#d9a441"/><rect x="180" y="36" width="10" height="20" fill="#6a8f5a"/>
+                <rect x="193" y="34" width="14" height="22" fill="#7b5ea7"/>
+                <rect x="136" y="56" width="80" height="4" fill="#8a5a3c"/>
+                <rect x="142" y="64" width="14" height="20" fill="#4d8c84"/><rect x="159" y="62" width="11" height="22" fill="#d97a5a"/>
+                <rect x="173" y="66" width="15" height="18" fill="#e0b48f"/><rect x="191" y="62" width="12" height="22" fill="#c0533f"/>
+                <rect x="136" y="84" width="80" height="4" fill="#8a5a3c"/>
+                <rect x="144" y="92" width="12" height="24" fill="#38506e"/><rect x="160" y="96" width="16" height="20" fill="#a3442f"/>
+                <rect x="180" y="94" width="12" height="22" fill="#6a8f5a"/><rect x="196" y="92" width="12" height="24" fill="#d9a441"/>
+            </g>`;
+        }
+
+        // Şömine
+        if (has('decor_fireplace')) {
+            svg += `<g class="kl-item">
+                <ellipse cx="315" cy="144" rx="95" ry="24" fill="#ff9436" opacity=".18"/>
+                <rect x="255" y="42" width="120" height="94" rx="3" fill="#9c543e" stroke="#241a17" stroke-width="2"/>
+                <rect x="247" y="38" width="136" height="11" rx="2" fill="#7a4d33" stroke="#241a17" stroke-width="1.6"/>
+                <path d="M285 134V94A30 24 0 0 1 345 94V134Z" fill="#231613" stroke="#241a17" stroke-width="2"/>
+                <path class="kl-flame" d="M300 130C296 112 308 106 315 92C322 106 334 112 330 130Z" fill="#ff8a2b"/>
+                <path class="kl-flame" d="M307 130C305 118 312 114 315 104C319 114 325 118 323 130Z" fill="#ffe066"/>
+            </g>`;
+        }
+
+        // Diploma
+        if (has('wall_diploma')) {
+            svg += `<g class="kl-item">
+                <rect x="392" y="34" width="52" height="38" rx="2" fill="#b88c46" stroke="#241a17" stroke-width="1.4"/>
+                <rect x="397" y="39" width="42" height="28" fill="#fbf4e4"/>
+                <path d="M403 48H433M406 54H428M405 60H420" stroke="#8a7e6e" stroke-width="1.6"/>
+                <circle cx="430" cy="60" r="3.5" fill="#c0533f"/>
+            </g>`;
+        }
+
+        // Rorschach Tablosu
+        if (has('wall_rorschach')) {
+            svg += `<g class="kl-item kl-rorschach-box" id="klRorschachWall">
+                <rect x="454" y="30" width="44" height="54" rx="2" fill="#5e3e29" stroke="#241a17" stroke-width="1.5"/>
+                <rect x="459" y="35" width="34" height="44" fill="#f5eedc"/>
+                <g transform="translate(476 57) scale(0.9)"><path d="${blot.d}" fill="#231c35"/></g>
+            </g>`;
+        }
+
+        // Duvar Saati
+        if (has('wall_clock')) {
+            svg += drawClockSVG();
+        }
+
+        // Espresso Makinesi & Sehpa
+        if (has('equip_espresso')) {
+            svg += `<g class="kl-item">
+                <rect x="195" y="136" width="56" height="34" rx="3" fill="#7a4d33" stroke="#241a17" stroke-width="1.6"/>
+                <rect x="205" y="108" width="34" height="28" rx="4" fill="#cbd5e1" stroke="#241a17" stroke-width="1.6"/>
+                <rect x="210" y="113" width="24" height="10" rx="2" fill="#1e293b"/>
+                <circle cx="215" cy="118" r="2" fill="#34d399"/><circle cx="222" cy="118" r="2" fill="#fbbf24"/>
+                <rect x="218" y="128" width="9" height="7" rx="1" fill="#fff" stroke="#241a17" stroke-width="1"/>
+                <path class="kl-steam" d="M221 104q-2 -4 0 -8M226 105q2 -4 0 -8" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/>
+            </g>`;
+        }
+
+        // Danışan Oturma Alanı (sağ orta: Tabure -> Koltuk -> Deri Divan)
+        if (has('seat_couch')) {
+            svg += `<g class="kl-item">
+                <ellipse cx="425" cy="222" rx="95" ry="12" fill="#000" opacity=".22"/>
+                <path d="M342 156Q342 142 358 142H492Q508 142 508 156V208H342Z" fill="#9f4e3a" stroke="#241a17" stroke-width="2.2"/>
+                <rect x="352" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
+                <rect x="402" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
+                <rect x="452" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
+                <rect x="346" y="188" width="158" height="22" rx="7" fill="#c9725a" stroke="#241a17" stroke-width="2"/>
+                <rect x="330" y="168" width="20" height="46" rx="8" fill="#8c4230" stroke="#241a17" stroke-width="2"/>
+                <rect x="500" y="168" width="20" height="46" rx="8" fill="#8c4230" stroke="#241a17" stroke-width="2"/>
+            </g>`;
+        } else if (has('seat_chair')) {
+            svg += `<g class="kl-item">
+                <ellipse cx="425" cy="218" rx="48" ry="10" fill="#000" opacity=".2"/>
+                <path d="M388 148Q388 136 402 136H448Q462 136 462 148V202H388Z" fill="#2f6f73" stroke="#241a17" stroke-width="2"/>
+                <rect x="382" y="178" width="86" height="24" rx="7" fill="#3c8a8e" stroke="#241a17" stroke-width="2"/>
+                <rect x="376" y="164" width="14" height="44" rx="6" fill="#255a5e" stroke="#241a17" stroke-width="2"/>
+                <rect x="460" y="164" width="14" height="44" rx="6" fill="#255a5e" stroke="#241a17" stroke-width="2"/>
+            </g>`;
+        } else {
+            // Başlangıç stajyer taburesi
+            svg += `<g class="kl-item">
+                <ellipse cx="425" cy="218" rx="28" ry="7" fill="#000" opacity=".2"/>
+                <path d="M408 186L402 216M442 186L448 216" stroke="#5a3c28" stroke-width="4" stroke-linecap="round"/>
+                <ellipse cx="425" cy="184" rx="26" ry="9" fill="#8a6042" stroke="#241a17" stroke-width="2"/>
+            </g>`;
+        }
+
+        // Terapist koltuğu (sol taraf, oyuncunun Nöro'su burada)
+        svg += `<g class="kl-item">
+            <ellipse cx="140" cy="222" rx="44" ry="9" fill="#000" opacity=".2"/>
+            <path d="M106 154Q106 142 120 142H160Q174 142 174 154V206H106Z" fill="#3f4b6e" stroke="#241a17" stroke-width="2"/>
+            <rect x="100" y="184" width="80" height="22" rx="7" fill="#4f5f8c" stroke="#241a17" stroke-width="2"/>
+        </g>`;
+
+        // Salon Bitkisi (ön sol köşe)
+        if (has('decor_plant')) {
+            svg += `<g class="kl-item">
+                <ellipse cx="52" cy="276" rx="22" ry="6" fill="#000" opacity=".22"/>
+                <path d="M36 238H68L63 274H41Z" fill="#c26b45" stroke="#241a17" stroke-width="1.8"/>
+                <path d="M52 240C36 226 24 210 34 196C46 206 50 220 52 240Z" fill="#4f8f54" stroke="#241a17" stroke-width="1.5"/>
+                <path d="M52 240C68 224 80 208 70 194C58 204 54 220 52 240Z" fill="#5da662" stroke="#241a17" stroke-width="1.5"/>
+                <path d="M52 240C48 214 44 192 54 182C62 194 58 216 52 240Z" fill="#3f7a44" stroke="#241a17" stroke-width="1.5"/>
+            </g>`;
+        }
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    function render() {
+        const root = document.getElementById('clinicMount');
+        if (!root) return;
+        const s = load();
+        const gm = global.game;
+        const myCfg = (gm && gm.myAvatar) || (global.PsikoVakaAvatar && global.PsikoVakaAvatar.DEFAULT) || {};
+        const bonus = totalBonusPct();
+        const nextBtnDisabled = walkingIn ? ' disabled' : '';
+
+        const payoutHtml = lastPayout ? `
+            <div class="kl-payout-banner ${lastPayout.won ? 'is-win' : 'is-loss'}">
+                <div class="kl-payout-main">
+                    <strong>${lastPayout.won ? `+${lastPayout.earned} ₺ Seans Ücreti Kazanıldı!` : 'Seans tamamlandı (0 ₺)'}</strong>
+                    <span>${esc(lastPayout.note)}</span>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnClinicClosePayout">Tamam</button>
+            </div>` : '';
+
+        const shopHtml = SHOP_ITEMS.map(it => {
+            const owned = has(it.id);
+            const lockedBy = it.requires && !has(it.requires);
+            const reqName = lockedBy ? (SHOP_ITEMS.find(x => x.id === it.requires) || {}).name : '';
+            const canBuy = !owned && !lockedBy && s.money >= it.price;
+            return `<article class="kl-shop-card${owned ? ' is-owned' : ''}${lockedBy ? ' is-locked' : ''}">
+                <div class="kl-shop-top">
+                    <span class="kl-shop-ico" aria-hidden="true">${it.icon}</span>
+                    <div class="kl-shop-info">
+                        <div class="kl-shop-name">${esc(it.name)}</div>
+                        <div class="kl-shop-desc">${esc(it.desc)}</div>
+                    </div>
+                </div>
+                <div class="kl-shop-foot">
+                    <span class="kl-shop-bonus">+%${it.bonusPct} ücret</span>
+                    ${owned
+                        ? `<span class="kl-shop-owned">✓ Odada</span>`
+                        : lockedBy
+                            ? `<span class="kl-shop-req">Önce: ${esc(reqName)}</span>`
+                            : `<button type="button" class="btn btn-sm ${canBuy ? 'btn-primary' : 'btn-secondary'}" data-kl-buy="${it.id}" ${canBuy ? '' : 'disabled'}>${it.price} ₺</button>`
+                    }
+                </div>
+            </article>`;
+        }).join('');
+
+        const reviewsHtml = s.reviews.length
+            ? s.reviews.slice(0, 4).map(r => `<li class="kl-review-item"><span class="kl-review-stars">${r.won ? '★★★★★' : '★★★☆☆'}</span><span class="kl-review-text">"${esc(r.text)}"</span></li>`).join('')
+            : `<li class="kl-review-empty">Henüz danışan kabul etmedin. İlk seansını başlattığında yorumlar burada görünecek.</li>`;
+
+        root.innerHTML = `
+            <div class="kl-header">
+                <div>
+                    <h1 class="kl-title">${esc(clinicRankTitle())}</h1>
+                    <p class="kl-sub">Danışan kabul et, doğru teşhislerle bütçe kazan ve kliniğini geliştir.</p>
+                </div>
+                <div class="kl-stats">
+                    <div class="kl-stat-pill is-money"><span>💰</span><strong>${s.money} ₺</strong></div>
+                    <div class="kl-stat-pill"><span>⭐</span><strong>${avgRating()}</strong></div>
+                    <div class="kl-stat-pill"><span>🧑‍⚕️</span><strong>${s.treated} seans</strong></div>
+                    ${bonus > 0 ? `<div class="kl-stat-pill is-bonus"><span>📈</span><strong>+%${bonus}</strong></div>` : ''}
+                </div>
+            </div>
+
+            ${payoutHtml}
+
+            <div class="kl-stage" id="clinicStage">
+                ${renderStageSVG()}
+                ${has('wall_rorschach') ? `<button type="button" class="kl-rorschach-hit" id="btnClinicRorschach" aria-label="Rorschach tablosunu değiştir" title="Mürekkep lekesine bak"></button>` : ''}
+                <div class="kl-noro kl-therapist">
+                    ${renderAvatar(myCfg, 84, { facing: 'right', activity: walkingIn ? 'wave' : null })}
+                    <span class="kl-tag">Sen</span>
+                </div>
+                <div class="kl-noro kl-patient${walkingIn ? ' is-entering' : ''}" id="clinicPatientSlot" ${activePatientAvatar ? '' : 'hidden'}>
+                    <div class="kl-patient-bubble" id="clinicPatientBubble" hidden></div>
+                    <div id="clinicPatientFig">${activePatientAvatar ? renderAvatar(activePatientAvatar, 80, { facing: 'left', walking: walkingIn }) : ''}</div>
+                    <span class="kl-tag">Danışan</span>
+                </div>
+            </div>
+
+            <div class="kl-actions-bar">
+                <button type="button" class="btn btn-primary btn-lg kl-accept-btn" id="btnClinicNextPatient"${nextBtnDisabled}>
+                    🔔 Sıradaki Danışanı Al
+                </button>
+            </div>
+
+            <section class="kl-section" aria-labelledby="klShopHeading">
+                <div class="kl-section-head">
+                    <h2 class="kl-section-title" id="klShopHeading">Klinik Geliştirme Mağazası</h2>
+                    <span class="kl-section-meta">${s.owned.length}/${SHOP_ITEMS.length} eşya</span>
+                </div>
+                <div class="kl-shop-grid">${shopHtml}</div>
+            </section>
+
+            <section class="kl-section" aria-labelledby="klReviewHeading">
+                <h2 class="kl-section-title" id="klReviewHeading">Son Danışan Yorumları</h2>
+                <ul class="kl-reviews-list">${reviewsHtml}</ul>
+            </section>
+        `;
+
+        bindEvents(root);
+    }
+
+    function bindEvents(root) {
+        const btnNext = root.querySelector('#btnClinicNextPatient');
+        if (btnNext) btnNext.addEventListener('click', acceptNextPatient);
+
+        const btnClosePayout = root.querySelector('#btnClinicClosePayout');
+        if (btnClosePayout) {
+            btnClosePayout.addEventListener('click', () => { lastPayout = null; render(); });
+        }
+
+        const btnRor = root.querySelector('#btnClinicRorschach');
+        if (btnRor) {
+            btnRor.addEventListener('click', () => {
+                blotIndex = (blotIndex + 1) % RORSCHACH_SHAPES.length;
+                render();
+                if (global.game) global.game.showToast(RORSCHACH_SHAPES[blotIndex].msg);
+            });
+        }
+
+        root.querySelectorAll('[data-kl-buy]').forEach(btn => {
+            btn.addEventListener('click', () => buyItem(btn.dataset.klBuy));
+        });
+    }
+
+    function buyItem(itemId) {
+        const it = SHOP_ITEMS.find(x => x.id === itemId);
+        const s = load();
+        if (!it || s.owned.includes(it.id)) return;
+        if (it.requires && !s.owned.includes(it.requires)) return;
+        if (s.money < it.price) {
+            if (global.game) global.game.showToast('Yeterli klinik bütçen yok.');
+            return;
+        }
+        s.money -= it.price;
+        s.owned.push(it.id);
+        save();
+        if (global.game) {
+            global.game.playTone('win');
+            global.game.showToast(`${it.icon} ${it.name} kliniğine eklendi! (+%${it.bonusPct} seans ücreti)`);
+        }
+        render();
+    }
+
+    function pickClinicCase() {
+        const gm = global.game;
+        if (!gm) return null;
+        const pool = (gm.allMasterCases && gm.allMasterCases.length) ? gm.allMasterCases : (gm.cases || []);
+        const unsolved = pool.filter(c => !gm.solvedCaseIds || !gm.solvedCaseIds.has(c.id));
+        const list = unsolved.length ? unsolved : pool;
+        return list[Math.floor(Math.random() * list.length)] || null;
+    }
+
+    function acceptNextPatient() {
+        const gm = global.game;
+        if (!gm || walkingIn) return;
+        const nextCase = pickClinicCase();
+        if (!nextCase) return;
+
+        lastPayout = null;
+        walkingIn = true;
+        const AV = global.PsikoVakaAvatar;
+        activePatientAvatar = AV ? AV.randomConfig(nextCase.id + '-' + Date.now()) : null;
+        render();
+
+        const bubble = document.getElementById('clinicPatientBubble');
+        if (bubble) {
+            bubble.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+            bubble.hidden = false;
+        }
+
+        setTimeout(() => {
+            walkingIn = false;
+            gm.currentRoute = 'klinigim';
+            gm.currentMode = 'clinic';
+            gm.startCase(nextCase, 'Kliniğim · Danışan Seansı');
+            if (gm.dom && gm.dom.btnMainNextCase) {
+                gm.dom.btnMainNextCase.textContent = '🏥 Kliniğe dön';
+            }
+        }, 950);
+    }
+
+    function onCaseFinished(won, gm) {
+        const s = load();
+        s.treated += 1;
+        let earned = 0;
+        let note = 'Danışan teşekkür edip ayrıldı; yeni bir seans deneyebilirsin.';
+
+        if (won) {
+            s.wonCount += 1;
+            const cluesUsed = Math.max(1, Math.min(6, (gm.zorluk && gm.zorluk.tekHak) ? (gm.cluesUsed || gm.unlockedClues || 1) : (gm.guesses ? gm.guesses.length : 1)));
+            const baseTable = { 1: 200, 2: 160, 3: 130, 4: 100, 5: 75, 6: 50 };
+            let raw = baseTable[cluesUsed] || 50;
+            const isHard = !!(gm.zorluk && (gm.zorluk.tekHak || gm.zorluk.kategoriGizli));
+            if (isHard) raw = Math.round(raw * 1.5);
+            if (gm.targetGameMode === 'combo') raw = Math.round(raw * 2);
+            const bonusPct = totalBonusPct();
+            earned = Math.round(raw * (1 + bonusPct / 100));
+            s.money += earned;
+            s.reputation += cluesUsed <= 2 ? 2 : 1;
+            note = `${cluesUsed}. ipucunda doğru teşhis${isHard ? ' · Zor ×1,5' : ''}${bonusPct > 0 ? ` · Klinik +%${bonusPct}` : ''}`;
+            s.reviews.unshift({ won: true, text: WIN_REVIEWS[Math.floor(Math.random() * WIN_REVIEWS.length)], at: Date.now() });
+        } else {
+            s.reviews.unshift({ won: false, text: 'Biraz daha zamana ihtiyacım var sanırım, yine geleceğim.', at: Date.now() });
+        }
+
+        s.reviews = s.reviews.slice(0, 10);
+        save();
+        activePatientAvatar = null;
+        lastPayout = { won: !!won, earned, note };
+
+        if (gm && gm.dom && gm.dom.btnMainNextCase) {
+            gm.dom.btnMainNextCase.textContent = won ? `🏥 Kliniğe dön (+${earned} ₺)` : '🏥 Kliniğe dön';
+        }
+    }
+
+    function init() {
+        const gm = global.game;
+        if (!gm || !gm.registerScreen) { setTimeout(init, 60); return; }
+        gm.registerScreen('klinigim', () => render());
+    }
+
+    global.PsikoVakaKlinik = { load, render, acceptNextPatient, onCaseFinished, SHOP_ITEMS };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(init, 0));
+    else setTimeout(init, 0);
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>

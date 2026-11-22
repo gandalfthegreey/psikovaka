@@ -524,75 +524,82 @@
         }
     }
 
-    // Başlık: tepe noktası T, alın çizgisi gövde genişliğine göre
+    // Başlık: tepe noktası T, alın çizgisi gövde genişliğine göre (dar/damla gövdede tam oturur)
     function drawHeadwear(id, g, pal) {
         const T = g.b.top;
         const hw = g.hw;
         const OUT = '#2a2238';
+        const isNarrowTop = g.b.wTop < 12; // damla gövde tepesi dar: şapkaları biraz daha derin oturt
+        const seat = isNarrowTop ? 4 : 0;
         switch (id) {
             case 'gradcap': {
-                const w = Math.min(20, hw(T + 8) + 1.5);
-                const by = T - 1;
-                return `<path d="M${f1(60 - w)} ${T + 8}Q60 ${T - 4} ${f1(60 + w)} ${T + 8}Z" fill="#323a5c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M33 ${by}L60 ${by - 8}L87 ${by}L60 ${by + 8}Z" fill="#3d4670" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M60 ${by}L80 ${by + 2}L80 ${by + 11}" fill="none" stroke="#f2c14e" stroke-width="2" stroke-linecap="round"/>` +
-                    `<rect x="77.6" y="${by + 10}" width="4.8" height="6" rx="1.6" fill="#f2c14e" stroke="${OUT}" stroke-width="1.2"/>` +
+                const y = T + 8 + seat;
+                const w = Math.max(12, Math.min(20, hw(y) + 1));
+                const by = T + seat;
+                return `<path d="M${f1(60 - w)} ${y}Q60 ${by - 2} ${f1(60 + w)} ${y}Z" fill="#323a5c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - w - 7)} ${by}L60 ${by - 7.5}L${f1(60 + w + 7)} ${by}L60 ${by + 7.5}Z" fill="#3d4670" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M60 ${by}L${f1(60 + w + 1)} ${by + 2}L${f1(60 + w + 1)} ${by + 11}" fill="none" stroke="#f2c14e" stroke-width="2" stroke-linecap="round"/>` +
+                    `<rect x="${f1(60 + w - 1.4)}" y="${by + 10}" width="4.8" height="6" rx="1.6" fill="#f2c14e" stroke="${OUT}" stroke-width="1.2"/>` +
                     `<circle cx="60" cy="${by}" r="2" fill="#f2c14e"/>`;
             }
             case 'beanie': {
-                const y = T + 13, w = hw(y) + 2.2;
-                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 7} ${f1(60 + w)} ${T - 7} ${f1(60 + w)} ${y}Z" fill="#e2574c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<rect x="${f1(60 - w - 1)}" y="${y - 5}" width="${f1(2 * w + 2)}" height="7.5" rx="3.6" fill="#c54238" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M${f1(60 - w * 0.5)} ${y - 4}v5M60 ${y - 4}v5M${f1(60 + w * 0.5)} ${y - 4}v5" stroke="#a7362e" stroke-width="1.6" stroke-linecap="round"/>` +
-                    `<circle cx="60" cy="${T - 4}" r="5" fill="#fff3ea" stroke="${OUT}" stroke-width="2.2"/>`;
+                const y = Math.min(g.eyeY - 9, T + 13 + seat);
+                const w = Math.max(13, hw(y) + 1.8);
+                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 5 + seat} ${f1(60 + w)} ${T - 5 + seat} ${f1(60 + w)} ${y}Z" fill="#e2574c" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<rect x="${f1(60 - w - 1)}" y="${y - 4.5}" width="${f1(2 * w + 2)}" height="7" rx="3.5" fill="#c54238" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - w * 0.5)} ${y - 3.5}v4.5M60 ${y - 3.5}v4.5M${f1(60 + w * 0.5)} ${y - 3.5}v4.5" stroke="#a7362e" stroke-width="1.6" stroke-linecap="round"/>` +
+                    `<circle cx="60" cy="${T - 3 + seat}" r="4.8" fill="#fff3ea" stroke="${OUT}" stroke-width="2.2"/>`;
             }
             case 'headphones': {
-                const y = g.eyeY - 4, w = hw(y) + 1;
-                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 9} ${f1(60 + w)} ${T - 9} ${f1(60 + w)} ${y}" fill="none" stroke="${OUT}" stroke-width="6.5" stroke-linecap="round"/>` +
-                    `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 9} ${f1(60 + w)} ${T - 9} ${f1(60 + w)} ${y}" fill="none" stroke="#5b6480" stroke-width="3" stroke-linecap="round"/>` +
-                    `<rect x="${f1(60 - w - 6)}" y="${y - 7}" width="11" height="17" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<rect x="${f1(60 + w - 5)}" y="${y - 7}" width="11" height="17" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>`;
+                const y = g.eyeY - 3, w = hw(y) + 0.8;
+                return `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 8} ${f1(60 + w)} ${T - 8} ${f1(60 + w)} ${y}" fill="none" stroke="${OUT}" stroke-width="6.5" stroke-linecap="round"/>` +
+                    `<path d="M${f1(60 - w)} ${y}C${f1(60 - w)} ${T - 8} ${f1(60 + w)} ${T - 8} ${f1(60 + w)} ${y}" fill="none" stroke="#5b6480" stroke-width="3" stroke-linecap="round"/>` +
+                    `<rect x="${f1(60 - w - 5.5)}" y="${y - 7}" width="10.5" height="16.5" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<rect x="${f1(60 + w - 5)}" y="${y - 7}" width="10.5" height="16.5" rx="5" fill="#ff7a6b" stroke="${OUT}" stroke-width="2.4"/>`;
             }
             case 'crown': {
-                const y = T + 4;
-                return `<path d="M46 ${y}L44 ${y - 15}L52 ${y - 8}L60 ${y - 19}L68 ${y - 8}L76 ${y - 15}L74 ${y}Z" fill="#f6c945" stroke="#8a6110" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<rect x="45" y="${y - 3}" width="30" height="5.5" rx="2" fill="#e8b02c" stroke="#8a6110" stroke-width="2"/>` +
-                    `<circle cx="60" cy="${y - 8}" r="2.4" fill="#ef5a7a"/><circle cx="44" cy="${y - 15}" r="1.8" fill="#fff6d0"/><circle cx="76" cy="${y - 15}" r="1.8" fill="#fff6d0"/>`;
+                const y = T + 5 + seat;
+                const cw = Math.max(10, Math.min(14, hw(y) * 0.85));
+                return `<path d="M${f1(60 - cw)} ${y}L${f1(60 - cw - 2)} ${y - 14}L${f1(60 - cw * 0.45)} ${y - 7.5}L60 ${y - 18}L${f1(60 + cw * 0.45)} ${y - 7.5}L${f1(60 + cw + 2)} ${y - 14}L${f1(60 + cw)} ${y}Z" fill="#f6c945" stroke="#8a6110" stroke-width="2.3" stroke-linejoin="round"/>` +
+                    `<rect x="${f1(60 - cw - 1)}" y="${y - 3}" width="${f1(cw * 2 + 2)}" height="5.2" rx="2" fill="#e8b02c" stroke="#8a6110" stroke-width="2"/>` +
+                    `<circle cx="60" cy="${y - 7.5}" r="2.2" fill="#ef5a7a"/><circle cx="${f1(60 - cw - 2)}" cy="${y - 14}" r="1.7" fill="#fff6d0"/><circle cx="${f1(60 + cw + 2)}" cy="${y - 14}" r="1.7" fill="#fff6d0"/>`;
             }
             case 'bandana': {
-                const y = T + 11, w = hw(y + 2) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 7} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 9}Q60 ${y - 1} ${f1(60 - w)} ${y + 9}Z" fill="#3d7de0" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
-                    `<circle cx="52" cy="${y + 1}" r="1.2" fill="#fff"/><circle cx="60" cy="${y - 1}" r="1.2" fill="#fff"/><circle cx="68" cy="${y + 1}" r="1.2" fill="#fff"/>` +
-                    `<path d="M${f1(60 + w - 1)} ${y + 5}l9 -5l-1 8zM${f1(60 + w - 1)} ${y + 6}l8 6l-9 1z" fill="#3d7de0" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>`;
+                const y = Math.min(g.eyeY - 12, T + 11 + seat), w = Math.max(12, hw(y + 2) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 6} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 9}Q60 ${y} ${f1(60 - w)} ${y + 9}Z" fill="#3d7de0" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
+                    `<circle cx="52" cy="${y + 1.5}" r="1.2" fill="#fff"/><circle cx="60" cy="${y - 0.5}" r="1.2" fill="#fff"/><circle cx="68" cy="${y + 1.5}" r="1.2" fill="#fff"/>` +
+                    `<path d="M${f1(60 + w - 1)} ${y + 5}l8 -4.5l-1 7.5zM${f1(60 + w - 1)} ${y + 6}l7.5 5.5l-8.5 1z" fill="#3d7de0" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>`;
             }
             case 'goggles': {
-                const y = T + 10, w = hw(y) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 1}Q60 ${y - 4} ${f1(60 + w)} ${y + 1}" fill="none" stroke="#3d4458" stroke-width="3.4"/>` +
-                    `<circle cx="52" cy="${y}" r="6.6" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.6"/><circle cx="68" cy="${y}" r="6.6" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.6"/>` +
-                    `<path d="M58.6 ${y}h2.8" stroke="#3d4458" stroke-width="2.6"/>` +
+                const y = Math.min(g.eyeY - 11, T + 10 + seat), w = Math.max(14, hw(y) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 1}Q60 ${y - 4} ${f1(60 + w)} ${y + 1}" fill="none" stroke="#3d4458" stroke-width="3.2"/>` +
+                    `<circle cx="52" cy="${y}" r="6.4" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.5"/><circle cx="68" cy="${y}" r="6.4" fill="#bfe8f7" stroke="#3d4458" stroke-width="2.5"/>` +
+                    `<path d="M58.4 ${y}h3.2" stroke="#3d4458" stroke-width="2.5"/>` +
                     `<path d="M49 ${y - 2.2}q2 -2 4.6 -1.6M65 ${y - 2.2}q2 -2 4.6 -1.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>`;
             }
             case 'flower': {
-                const y = T + 6, x = 60 + Math.max(8, hw(y) * 0.62);
+                const y = T + 7 + seat, x = 60 + Math.max(7, hw(y) * 0.62);
                 const p = (a) => { const r = a * Math.PI / 180; return `<circle cx="${f1(x + Math.cos(r) * 4.6)}" cy="${f1(y + Math.sin(r) * 4.6)}" r="3.9" fill="#ff9ec4" stroke="${OUT}" stroke-width="1.6"/>`; };
                 return [0, 72, 144, 216, 288].map(a => p(a - 90)).join('') + `<circle cx="${f1(x)}" cy="${y}" r="2.9" fill="#ffd54d" stroke="${OUT}" stroke-width="1.4"/>`;
             }
             case 'party': {
-                const y = T + 5;
-                return `<path d="M50 ${y}L66 ${y - 27}L71 ${y}Z" fill="#7b6cf6" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<path d="M53.5 ${y - 6}L69.3 ${y - 6}M57.6 ${y - 14}L68 ${y - 14}M61.5 ${y - 21}L66.8 ${y - 21}" stroke="#ffd34d" stroke-width="2.6"/>` +
-                    `<path d="M50 ${y}L66 ${y - 27}L71 ${y}Z" fill="none" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
-                    `<circle cx="66" cy="${y - 28}" r="3.8" fill="#ff7a9c" stroke="${OUT}" stroke-width="2"/>`;
+                const y = T + 6 + seat;
+                const pw = Math.max(8, Math.min(11, hw(y) * 0.75));
+                return `<path d="M${f1(60 - pw)} ${y}L${f1(60 + 5)} ${y - 26}L${f1(60 + pw)} ${y}Z" fill="#7b6cf6" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - pw * 0.72)} ${y - 6}L${f1(60 + pw * 0.85)} ${y - 6}M${f1(60 - pw * 0.35)} ${y - 14}L${f1(60 + pw * 0.65)} ${y - 14}" stroke="#ffd34d" stroke-width="2.5"/>` +
+                    `<path d="M${f1(60 - pw)} ${y}L${f1(60 + 5)} ${y - 26}L${f1(60 + pw)} ${y}Z" fill="none" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                    `<circle cx="${f1(60 + 5)}" cy="${y - 27}" r="3.8" fill="#ff7a9c" stroke="${OUT}" stroke-width="2"/>`;
             }
             case 'headband': {
-                const y = T + 9, w = hw(y + 2) - 0.5;
-                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 6} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 8}Q60 ${y - 1} ${f1(60 - w)} ${y + 8}Z" fill="#fafafa" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
-                    `<path d="M${f1(60 - w + 1)} ${y + 5.4}Q60 ${y - 3.4} ${f1(60 + w - 1)} ${y + 5.4}" fill="none" stroke="#2fb38a" stroke-width="2.2"/>`;
+                const y = Math.min(g.eyeY - 12, T + 9 + seat), w = Math.max(12, hw(y + 2) + 0.2);
+                return `<path d="M${f1(60 - w)} ${y + 3}Q60 ${y - 5} ${f1(60 + w)} ${y + 3}L${f1(60 + w)} ${y + 8}Q60 ${y} ${f1(60 - w)} ${y + 8}Z" fill="#fafafa" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
+                    `<path d="M${f1(60 - w + 1)} ${y + 5.4}Q60 ${y - 2.4} ${f1(60 + w - 1)} ${y + 5.4}" fill="none" stroke="#2fb38a" stroke-width="2.2"/>`;
             }
             case 'sage': {
-                const y = T + 6;
-                return `<ellipse cx="60" cy="${y}" rx="${f1(Math.min(30, hw(y) + 11))}" ry="5" fill="#4a3f9c" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M47 ${y - 1}C49 ${y - 14} 58 ${y - 22} 70 ${y - 28}C74 ${y - 30} 77 ${y - 27} 74 ${y - 25}C68 ${y - 20} 72 ${y - 10} 73 ${y - 1}Z" fill="#5a4fbf" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
+                const y = T + 7 + seat;
+                const sw = Math.max(10, Math.min(13, hw(y) * 0.82));
+                return `<ellipse cx="60" cy="${y}" rx="${f1(Math.min(28, hw(y) + 10))}" ry="4.8" fill="#4a3f9c" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - sw)} ${y - 1}C${f1(60 - sw + 2)} ${y - 14} 58 ${y - 22} 70 ${y - 27}C74 ${y - 29} 77 ${y - 26} 74 ${y - 24}C68 ${y - 19} ${f1(60 + sw - 1)} ${y - 10} ${f1(60 + sw)} ${y - 1}Z" fill="#5a4fbf" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>` +
                     `<path d="M62 ${y - 13}l1.4 3l3.2 .4l-2.4 2.2l.6 3.2l-2.8 -1.6l-2.8 1.6l.6 -3.2l-2.4 -2.2l3.2 -.4z" fill="#ffd54d"/>` +
                     `<circle cx="54" cy="${y - 6}" r="1.2" fill="#ffd54d"/>`;
             }
@@ -615,9 +622,10 @@
         switch (id) {
             case 'glasses': {
                 const ey = g.eyeY, dx = g.eyeDx, w = g.hw(ey);
-                return `<circle cx="${f1(60 - dx)}" cy="${ey}" r="9.6" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<circle cx="${f1(60 + dx)}" cy="${ey}" r="9.6" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
-                    `<path d="M${f1(60 - dx + 9.6)} ${ey - 1}Q60 ${ey - 4} ${f1(60 + dx - 9.6)} ${ey - 1}M${f1(60 - dx - 9.6)} ${ey - 1}L${f1(60 - w + 1)} ${ey - 3}M${f1(60 + dx + 9.6)} ${ey - 1}L${f1(60 + w - 1)} ${ey - 3}" fill="none" stroke="${OUT}" stroke-width="2.2" stroke-linecap="round"/>`;
+                const edge = Math.min(w - 1.2, dx + 13.5);
+                return `<circle cx="${f1(60 - dx)}" cy="${ey}" r="9.4" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<circle cx="${f1(60 + dx)}" cy="${ey}" r="9.4" fill="#fff" fill-opacity=".16" stroke="${OUT}" stroke-width="2.4"/>` +
+                    `<path d="M${f1(60 - dx + 9.4)} ${ey - 1}Q60 ${ey - 4} ${f1(60 + dx - 9.4)} ${ey - 1}M${f1(60 - dx - 9.4)} ${ey - 1}L${f1(60 - edge)} ${ey - 2.6}M${f1(60 + dx + 9.4)} ${ey - 1}L${f1(60 + edge)} ${ey - 2.6}" fill="none" stroke="${OUT}" stroke-width="2.2" stroke-linecap="round"/>`;
             }
             case 'bowtie': {
                 const by = Math.min(g.b.bottom - 12, y + 12);
@@ -625,7 +633,7 @@
                     `<rect x="57" y="${by - 3}" width="6" height="6" rx="2" fill="#c9314a" stroke="${OUT}" stroke-width="2"/>`;
             }
             case 'scarf': {
-                const sy = Math.min(g.b.bottom - 14, y + 10), w = g.hw(sy) - 0.8;
+                const sy = Math.min(g.b.bottom - 14, y + 10), w = g.hw(sy) + 0.5;
                 return `<path d="M${f1(60 - w)} ${sy - 3}Q60 ${sy + 3} ${f1(60 + w)} ${sy - 3}L${f1(60 + w - 0.5)} ${sy + 4}Q60 ${sy + 10} ${f1(60 - w + 0.5)} ${sy + 4}Z" fill="#ff8a5c" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
                     `<path d="M${f1(60 + w * 0.35)} ${sy + 3}l2 15l7 -1l-1.5 -15z" fill="#ff8a5c" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>` +
                     `<path d="M${f1(60 + w * 0.35 + 2.4)} ${sy + 16}l6.2 -.8" stroke="#e06a3d" stroke-width="1.6"/>`;

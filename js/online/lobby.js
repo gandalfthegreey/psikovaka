@@ -19,9 +19,28 @@
         emoteLimit: NS.util.rateLimiter(4, 6000),
         sayLimit: NS.util.rateLimiter(3, 6000),
         offs: [], lastPlayers: null, lastHost: null, busy: false,
-        room: null, walker: null, W: 0, H: 0, lastActs: {}
+        room: null, walker: null, W: 0, H: 0, lastActs: {},
+        idleTimer: 0, idleDoze: false
     };
     const A = () => global.PsikoVakaAvatar;
+
+    function touchIdle() {
+        const wasDozing = L.idleDoze;
+        L.idleDoze = false;
+        clearTimeout(L.idleTimer);
+        if (wasDozing) {
+            const myId = NS.api.myId();
+            if (myId) refreshFigure(myId);
+        }
+        L.idleTimer = setTimeout(() => {
+            if (!L.root || !L.walker || document.hidden) return;
+            const myId = NS.api.myId();
+            const st = myId && L.walker.get(myId);
+            if (!st || st.walking || L.emotes[myId] || (st.opts && st.opts.act)) return;
+            L.idleDoze = true;
+            refreshFigure(myId);
+        }, 35000);
+    }
 
     // ------------------------------------------------------------ yerleşim
     const FLOOR_TOP = 0.46, FLOOR_BOTTOM = 0.9;
@@ -273,6 +292,7 @@
         const vis = () => stage.classList.toggle('nv-paused', document.hidden);
         document.addEventListener('visibilitychange', vis);
         L.offs.push(() => document.removeEventListener('visibilitychange', vis));
+        touchIdle();
     }
 
     function positionNode(uid, st, teleport) {
@@ -286,9 +306,17 @@
         const fig = node.querySelector('.ol-p-fig');
         const pose = node._pose || {};
         if (pose.walking !== st.walking || pose.facing !== st.facing) {
+            const flipped = (pose.facing === 'left' && st.facing === 'right') || (pose.facing === 'right' && st.facing === 'left');
             node._pose = { walking: st.walking, facing: st.facing };
             if (A()) A().setPose(fig, { walking: st.walking, facing: st.facing });
             node.classList.toggle('is-walking', !!st.walking);
+            if (flipped && !teleport && !NS.util.reducedMotion()) {
+                node.classList.remove('is-turning');
+                void node.offsetWidth;
+                node.classList.add('is-turning');
+                clearTimeout(node._turnHopT);
+                node._turnHopT = setTimeout(() => node.classList.remove('is-turning'), 180);
+            }
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
         if (st.walking && !NS.util.reducedMotion()) {
@@ -312,12 +340,12 @@
         layer.appendChild(d);
         setTimeout(() => d.remove(), 520);
     }
-    function spawnSparkBurst(nx, ny) {
+    function spawnSparkBurst(nx, ny, glyph) {
         const layer = L.root && $('#olBubbleLayer', L.root);
         if (!layer) return;
         const sp = document.createElement('span');
         sp.className = 'ol-spark-burst';
-        sp.textContent = '✨';
+        sp.textContent = glyph || '✨';
         sp.style.left = (nx * 100).toFixed(2) + '%';
         sp.style.top = (ny * 100).toFixed(2) + '%';
         layer.appendChild(sp);
@@ -353,6 +381,25 @@
         // kısa bir an sonra rahat ön (ya da nesneye uygun) poza döner
         st._turnT = setTimeout(() => { st.facing = (st.opts && st.opts.facing) || 'front'; positionNode(uid, st); refreshFigure(uid); }, NS.util.reducedMotion() ? 0 : 160);
         positionNode(uid, st);
+        // Anlamlı nesne varış tepkileri (ışık/kıvılcım/balon)
+        const spotBase = st.opts && st.opts.spot ? String(st.opts.spot).split('.')[0] : '';
+        if (spotBase === 'fire' && L.room && L.room.stokeFire) L.room.stokeFire();
+        if (uid === NS.api.myId() && spotBase) {
+            if (spotBase === 'fire') {
+                showBubble(uid, esc('🔥 Şömine çok iyi geldi!'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.08, '🔥');
+            } else if (spotBase === 'table') {
+                showBubble(uid, esc('☕ Taze demlenmiş çay gibisi yok!'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.08, '✨');
+            } else if (spotBase === 'shelf') {
+                showBubble(uid, esc('📖 Kriterlere bir göz atayım...'), 'is-say', 2800);
+                spawnSparkBurst(st.x, st.y - 0.09, '💡');
+            } else if (spotBase === 'window') {
+                showBubble(uid, esc('🪟 Dışarıda hava ne güzel...'), 'is-say', 2600);
+            } else if (spotBase === 'couch' || spotBase === 'chair') {
+                showBubble(uid, esc('🛋️ Oh, burası çok rahatmış!'), 'is-say', 2400);
+            }
+        }
     }
     /** Seçilen oturma yerleri: aynı yeri iki kişi isterse kimliği küçük olan oturur (her istemcide aynı sonuç). */
     function seatHolders(act) {
@@ -392,7 +439,8 @@
         const st = L.walker && L.walker.get(uid);
         const ready = p.is_host || p.is_ready;
         const emote = L.emotes[uid] || '';
-        const activity = (st && st.arrived && !st.walking && !emote && st.opts) ? (st.opts.act || '') : '';
+        const baseAct = (st && st.arrived && !st.walking && !emote && st.opts) ? (st.opts.act || '') : '';
+        const activity = baseAct || (uid === NS.api.myId() && L.idleDoze && !emote && (!st || !st.walking) ? 'doze' : '');
         const size = node._size || 80;
         const key = JSON.stringify([p.avatar, !!ready, emote, size, activity]);
         const fig = node.querySelector('.ol-p-fig');
@@ -454,7 +502,7 @@
                 node.dataset.x = want.lx; node.dataset.y = want.ly;
                 node.dataset.spot = want.spot || '';
                 const prevVia = node._via; node._via = want.via;
-                const opts = { act: want.act, facing: want.facing, seat: want.seat, zBase: want.zBase };
+                const opts = { act: want.act, spot: want.spot, facing: want.facing, seat: want.seat, zBase: want.zBase };
                 const st = L.walker && L.walker.get(p.user_id);
                 if (!L.walker) positionNode(p.user_id, { x: want.x, y: want.y, walking: false, facing: 'front' });   // oda modülü yoksa: düz yerleştirme
                 // ilk kez presence'ten gelen konum (geç katılma / ilk eşitleme): yürümeden yerleşir
@@ -604,6 +652,7 @@
         if (y < FLOOR_TOP - 0.08) return;           // duvara tıklama yok sayılır
         y = Math.max(FLOOR_TOP, Math.min(FLOOR_BOTTOM, y));
         const q = L.room ? L.room.nearestFree(x, y) : { x, y };
+        touchIdle();
         NS.rooms.move(q.x, q.y);
         hideHint();
         updatePlayers();
@@ -614,6 +663,7 @@
         const d = { ArrowLeft: [-0.06, 0], ArrowRight: [0.06, 0], ArrowUp: [0, -0.06], ArrowDown: [0, 0.06] }[e.key];
         if (!d) return;
         e.preventDefault();
+        touchIdle();
         const myId = NS.api.myId();
         const node = L.nodes.get(myId);
         const x = node ? parseFloat(node.dataset.x) : 0.5, y = node ? parseFloat(node.dataset.y) : 0.7;
@@ -628,6 +678,7 @@
         if (!L.room || !s || s.room.is_quick) return;
         const ob = L.room.object(id);
         if (!ob) return;
+        touchIdle();
         const myId = NS.api.myId();
         let spot = ob.id;
         if (ob.seats) {
@@ -702,6 +753,7 @@
         const em = e.target.closest('[data-ol-emote]');
         if (em) {
             if (!L.emoteLimit()) { NS.toast('Biraz yavaş: tepkiler kısa bir süre bekletiliyor.'); return; }
+            touchIdle();
             const emote = em.dataset.olEmote;
             NS.rooms.send('emote', { emote });
             showEmote(NS.api.myId(), emote);
@@ -724,18 +776,27 @@
             goToObject(oid);
             return;
         }
-        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp selam ver / beşlik çak!
+        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp karşılıklı selam ver / beşlik çak!
         const peerNode = e.target.closest('.ol-p[data-uid]');
         if (peerNode && peerNode.dataset.uid && peerNode.dataset.uid !== NS.api.myId() && L.room && L.walker) {
             const targetUid = peerNode.dataset.uid;
             const targetSt = L.walker.get(targetUid);
             if (targetSt) {
+                touchIdle();
                 const destX = Math.max(0.06, Math.min(0.94, targetSt.x + (targetSt.x > 0.5 ? -0.07 : 0.07)));
                 const destY = Math.max(0.48, Math.min(0.88, targetSt.y + 0.02));
                 const freePt = L.room.nearestFree(destX, destY);
                 NS.rooms.move(freePt.x, freePt.y, { act: 'wave', spot: null });
                 showEmote(NS.api.myId(), 'wave');
-                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06);
+                showBubble(NS.api.myId(), esc('👋 Selam! Hazır mısın?'), 'is-say', 2600);
+                // Tıklanan arkadaşın Nöro'su da yerel olarak sana dönüp hafifçe zıplar
+                targetSt.facing = targetSt.x > freePt.x ? 'left' : 'right';
+                positionNode(targetUid, targetSt);
+                peerNode.classList.remove('is-ready-pop');
+                void peerNode.offsetWidth;
+                peerNode.classList.add('is-ready-pop');
+                setTimeout(() => peerNode.classList.remove('is-ready-pop'), 700);
+                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06, '✨');
                 updatePlayers();
                 return;
             }
@@ -822,6 +883,7 @@
     }
 
     function cleanupNodes() {
+        clearTimeout(L.idleTimer); L.idleTimer = 0; L.idleDoze = false;
         L.offs.forEach(f => { try { f(); } catch (e) { /* yok */ } });
         L.offs = [];
         if (L.walker) { L.walker.destroy(); L.walker = null; }

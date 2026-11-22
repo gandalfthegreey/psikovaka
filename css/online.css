@@ -1141,3 +1141,101 @@ body.ol-banners-docked .ol-banners { display: none; }
 .ol-p[data-uid]:not(.is-me) {
     cursor: pointer;
 }
+
+/* ==========================================================================
+   Dinamik Lobi Işıklandırması: Şömine Nefesi, Lambader Işık Konisi & Toz Zerreleri
+   ========================================================================== */
+.olr-fire-ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 42% 38% at var(--fx, 50%) var(--fy, 48%),
+        rgba(255, 164, 72, 0.36) 0%,
+        rgba(255, 118, 42, 0.16) 44%,
+        transparent 78%
+    );
+    animation: olrFireBreathe 3.8s ease-in-out infinite;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+@keyframes olrFireBreathe {
+    0%   { opacity: 0.68; transform: scale(0.98); }
+    28%  { opacity: 0.94; transform: scale(1.03); }
+    52%  { opacity: 0.74; transform: scale(0.99); }
+    79%  { opacity: 1;    transform: scale(1.05); }
+    100% { opacity: 0.68; transform: scale(0.98); }
+}
+
+.ol-stage.is-fire-stoked .olr-fire-ambient {
+    animation-duration: 1.5s;
+    background: radial-gradient(
+        ellipse 52% 46% at var(--fx, 50%) var(--fy, 48%),
+        rgba(255, 186, 92, 0.56) 0%,
+        rgba(255, 126, 46, 0.28) 48%,
+        transparent 80%
+    );
+}
+
+.ol-stage.is-fire-stoked .olr-ember {
+    animation-duration: 1.5s !important;
+}
+
+.olr-lamp-cone {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 34% 48% at var(--lx, 95%) calc(var(--ly, 30%) + 12%),
+        rgba(255, 224, 150, 0.34) 0%,
+        rgba(255, 198, 108, 0.14) 46%,
+        transparent 78%
+    );
+    opacity: 0.9;
+    transition: opacity 0.55s ease;
+}
+
+.ol-stage.is-lamp-dim .olr-lamp-cone {
+    opacity: 0;
+}
+
+.ol-stage.is-lamp-dim .olr-lamp-glow,
+.ol-stage.is-lamp-dim .olr-lamp-shine {
+    opacity: 0.08;
+    transition: opacity 0.5s ease;
+}
+
+.olr-motes {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.olr-mote {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 240, 196, 0.95) 0%, rgba(255, 210, 130, 0) 75%);
+    opacity: 0;
+    animation: olrMoteDrift 10s ease-in-out infinite;
+}
+
+@keyframes olrMoteDrift {
+    0%   { opacity: 0; transform: translate(0, 0) scale(var(--s, 1)); }
+    20%  { opacity: 0.65; }
+    55%  { opacity: 0.45; transform: translate(14px, -22px) scale(calc(var(--s, 1) * 1.15)); }
+    85%  { opacity: 0.55; }
+    100% { opacity: 0; transform: translate(-8px, -44px) scale(calc(var(--s, 1) * 0.7)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .olr-fire-ambient, .olr-mote, .olr-ember { animation: none !important; }
+    .olr-motes { display: none; }
+}
