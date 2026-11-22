@@ -131,6 +131,17 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 20:34 — Gemini — Ana Sayfa Görsel Cilası (A1/A2/A3) + Kompakt Online Hub (B2)
+- **Dosyalar:** `index.html`, `css/anasayfa.css`, `css/online.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **A1:** Günün Vakası klasöründeki gereksiz açıklama cümlesi (`#dailyCardText`) gizlendi; yalnızca danışan özeti ve Başla düğmesi kaldı.
+  2. **A2:** Sağdaki 3 yatay şeride kendi renginde ikon rozetleri (`🏔️` altın, `♾️` kobalt mavi, `⚔️` mor) ve hover'da `-2px` kalkma + kenar parıltısı eklendi.
+  3. **A3:** `Tanı | Terapi | İlaç | Kombo` seçimine göre aktif buton, Günün Vakası üst şeridi ve Başla düğmesi dinamik olarak `--color-target` rengine geçiyor.
+  4. **B2:** Online giriş ekranı (`#/online`) sıkılaştırıldı; Hızlı Eşleşme, Oda Kur, Koda Katıl ve Açık Odalar kartlarına sıcak derinlik, belirgin ikon rozetleri ve hover geçişleri eklendi.
+- **Neden:** Emre'nin onayı (A1, A2, A3, B2 + otomatik push).
+- **Doğrulama:** `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 20:22 — Gemini — Ana Sayfa Selamlama Kaldırıldı + Net Segmented Mod Seçici
 - **Dosyalar:** `css/anasayfa.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**

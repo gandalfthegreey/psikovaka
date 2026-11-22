@@ -3668,52 +3668,73 @@ body.ol-sheet-open { overflow: hidden; }
 .ol-banner-actions .btn { min-height: var(--tap); }
 @keyframes ol-drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
 
-/* ---------- 3. Online merkezi ---------- */
-.ol-hub { display: flex; flex-direction: column; gap: var(--space-6); }
+/* ---------- 3. Online merkezi (B2: kompakt, sıcak, ikon rozetli hub) ---------- */
+#screenOnline .screen-head { margin-bottom: var(--space-2); }
+#screenOnline .screen-sub { display: none; }
+.ol-hub { display: flex; flex-direction: column; gap: var(--space-4); }
 .ol-hub-cta { display: grid; grid-template-columns: 1fr; gap: var(--space-3); }
 @media (min-width: 720px) { .ol-hub-cta { grid-template-columns: 1fr 1fr; } }
 .ol-cta-card {
-    display: flex; align-items: center; gap: var(--space-4); min-height: 104px; width: 100%;
-    padding: var(--space-4) var(--space-5); text-align: left;
-    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+    display: flex; align-items: center; gap: var(--space-3); min-height: 84px; width: 100%;
+    padding: var(--space-3) var(--space-4); text-align: left;
+    background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg);
     box-shadow: var(--shadow-1); color: var(--color-text);
-    transition: border-color var(--duration-fast), transform var(--duration-fast), background var(--duration-fast);
+    transition: border-color 180ms var(--ease), transform 180ms var(--ease), box-shadow 180ms var(--ease);
 }
-button.ol-cta-card:hover { border-color: var(--color-accent); transform: translateY(-1px); }
-/* "Oda kur" kartı yüzey renginde; vurgu yalnızca mor ikon kutusunda (S9: her bölümde tek dolu düğme) */
-.ol-cta-primary { border-color: var(--color-border-strong); }
+button.ol-cta-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+/* "Oda kur" kartı sıcak vurgulu ikon rozetiyle öne çıkar */
+.ol-cta-primary {
+    border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border-strong));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 9%, var(--color-surface)), var(--color-surface) 70%);
+}
 .ol-cta-icon {
     display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
-    width: 52px; height: 52px; border-radius: var(--radius-lg);
-    background: var(--color-accent-soft); color: var(--color-accent);
+    width: 46px; height: 46px; border-radius: 12px;
+    background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    color: var(--color-accent);
 }
-.ol-cta-primary .ol-cta-icon { background: var(--color-accent-bg); color: var(--color-accent-contrast); }
-.ol-cta-icon .icon { width: 26px; height: 26px; }
+.ol-cta-primary .ol-cta-icon {
+    background: var(--color-accent-bg);
+    border-color: transparent;
+    color: var(--color-accent-contrast);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+.ol-cta-icon .icon { width: 22px; height: 22px; }
 .ol-cta-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-.ol-cta-title { font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
-.ol-cta-sub { font-size: var(--text-sm); opacity: 0.85; }
-.ol-cta-chev { width: 22px; height: 22px; opacity: 0.8; }
+.ol-cta-title { font-size: var(--text-md); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
+.ol-cta-sub { font-size: var(--text-xs); color: var(--color-text-2); }
+.ol-cta-chev { width: 20px; height: 20px; opacity: 0.7; }
 .ol-join-row { display: flex; gap: var(--space-2); margin-top: var(--space-2); }
 .ol-code-input {
-    flex: 1; min-width: 0; height: var(--tap);
-    font-family: var(--font-mono); font-size: var(--text-lg); font-weight: var(--weight-bold);
-    letter-spacing: 0.28em; text-transform: uppercase;
+    flex: 1; min-width: 0; height: 40px;
+    font-family: var(--font-mono); font-size: var(--text-base); font-weight: var(--weight-bold);
+    letter-spacing: 0.24em; text-transform: uppercase;
 }
-.ol-code-input::placeholder { letter-spacing: 0.28em; opacity: 0.45; }
-.ol-join-row .btn { min-height: var(--tap); }
+.ol-code-input::placeholder { letter-spacing: 0.24em; opacity: 0.45; }
+.ol-join-row .btn { min-height: 40px; }
 .ol-form-error { min-height: 1.2em; font-size: var(--text-sm); color: var(--color-danger); }
 .ol-form-error:empty { min-height: 0; }
 
-.ol-section { display: flex; flex-direction: column; gap: var(--space-3); }
+.ol-section { display: flex; flex-direction: column; gap: var(--space-2); }
 .ol-section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
-.ol-section-title { font-size: var(--text-lg); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
+.ol-section-title { font-size: var(--text-md); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
 
 .ol-pub-list { display: flex; flex-direction: column; gap: var(--space-2); }
 .ol-pub-row {
     display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: var(--space-3);
-    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+    padding: 10px 12px 10px 14px;
     background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
     animation: ol-fade-in 240ms var(--ease);
+    transition: border-color 160ms var(--ease), transform 160ms var(--ease);
+}
+.ol-pub-row:hover {
+    border-color: color-mix(in srgb, var(--ol-tc, var(--color-accent)) 55%, var(--color-border));
+    transform: translateY(-1px);
 }
 .ol-pub-row .btn { min-height: var(--tap); }
 .ol-pub-icon {
@@ -4522,8 +4543,14 @@ body.ol-has-banner .ol-layer-inner { padding-top: var(--ol-banner-space, 0px); }
 body.ol-sheet-open .ol-banners { visibility: hidden; }
 @media (max-width: 480px) { .ol-slot.is-invited .ol-slot-text { display: block; max-width: 30vw; overflow: hidden; text-overflow: ellipsis; } }
 
-/* Hızlı eşleşme (ajan P) */
-.ol-quick { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5); border-radius: var(--radius-xl); border: 1px solid var(--color-accent); background: linear-gradient(135deg, var(--color-accent-soft), var(--color-surface) 70%); }
+/* Hızlı eşleşme (ajan P + B2 kompakt cila) */
+.ol-quick {
+    display: flex; flex-direction: column; gap: var(--space-3);
+    padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 55%, var(--color-border-strong));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 14%, var(--color-surface)), var(--color-surface) 68%);
+    box-shadow: var(--shadow-1);
+}
 .ol-quick[hidden] { display: none; }
 .ol-quick-head { display: flex; align-items: center; gap: var(--space-4); }
 .ol-quick-title { margin: 0; }
@@ -5266,12 +5293,12 @@ body.ol-banners-docked .ol-banners { display: none; }
 }
 .screen-home .target-picker .segmented-btn.active,
 [data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
-    background: var(--color-accent-bg);
+    background: var(--color-target-strong, var(--color-accent-bg));
     color: #fff;
     border-color: transparent;
     font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-target, var(--color-accent)) 35%, transparent);
 }
 .screen-home .target-hint-row {
     margin-top: 0;
@@ -5290,15 +5317,27 @@ body.ol-banners-docked .ol-banners { display: none; }
 .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
     grid-area: auto;
     margin-top: 32px;
-    padding: 26px 26px 22px;
-    gap: var(--space-2);
+    padding: 26px 26px 24px;
+    gap: var(--space-3);
+    border-top: 3px solid var(--color-target, var(--color-accent));
+    transition: border-color 220ms ease;
 }
 .screen-home .desk-folder .card-hero-title {
     font-size: 1.85rem;
 }
-.screen-home .desk-folder .card-hero-text {
-    font-size: var(--text-sm);
-    line-height: 1.45;
+/* A1: Günün vakası gereksiz açıklama cümlesi gizli */
+.screen-home .desk-folder #dailyCardText {
+    display: none;
+}
+/* A3: Başla düğmesi seçili hedef modunun rengine (Tanı/Terapi/İlaç/Kombo) uyar */
+.screen-home .desk-folder #btnStartDaily {
+    background: var(--color-target-strong, var(--color-accent-bg));
+    border-color: transparent;
+    transition: background-color 220ms ease, transform 140ms ease, box-shadow 220ms ease;
+}
+.screen-home .desk-folder #btnStartDaily:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-target, var(--color-accent)) 36%, transparent);
 }
 .screen-home .desk-folder .daily-actions {
     margin-top: var(--space-1);
@@ -5310,26 +5349,57 @@ body.ol-banners-docked .ol-banners { display: none; }
     padding-left: 0;
 }
 
-/* Sağ sütundaki 3 ince yatay şerit kartı */
+/* A2: Sağ sütundaki 3 ince yatay şerit kartı — renkli ikon rozeti & hover derinliği */
 .screen-home .card-action.desk-strip {
+    --strip-accent: var(--color-accent);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
     margin-top: 0;
-    padding: 14px 16px;
-    border-radius: 8px;
+    padding: 13px 16px;
+    border-radius: 10px;
     border: 1px solid var(--paper-edge);
     background: var(--paper);
     box-shadow: var(--paper-lift);
     transform: none;
+    transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
 .screen-home .card-action.desk-strip::before {
     display: none;
 }
 .screen-home .card-action.desk-strip.desk-climb {
-    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--paper-edge));
+    --strip-accent: #e0a800;
+}
+.screen-home .card-action.desk-strip.desk-cardbox {
+    --strip-accent: #3b6fd6;
+}
+.screen-home .card-action.desk-strip.desk-pin {
+    --strip-accent: #7c5ce6;
+}
+.screen-home .card-action.desk-strip:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--strip-accent) 62%, var(--paper-edge));
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+.screen-home .desk-strip-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--strip-accent) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--strip-accent) 34%, transparent);
+    color: var(--strip-accent);
+    font-size: 18px;
+    line-height: 1;
+}
+.screen-home .desk-strip-badge .icon {
+    width: 19px;
+    height: 19px;
 }
 .screen-home .desk-strip .card-action-head {
     display: flex;
@@ -7555,12 +7625,13 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                     </div>
                 </div>
 
-                <!-- Sağ sütun (Seçenek B): 3 ince, tek satırlık aksiyon kartı -->
+                <!-- Sağ sütun (Seçenek B): 3 ince, renkli ikon rozetli aksiyon kartı -->
                 <div class="desk-aside">
                     <!-- 1. Tırmanış -->
                     <article class="card card-action desk-strip desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
+                        <span class="desk-strip-badge" aria-hidden="true">🏔️</span>
                         <div class="card-action-head">
-                            <h3 class="card-title" id="climbCardTitle">🏔️ Tırmanış</h3>
+                            <h3 class="card-title" id="climbCardTitle">Tırmanış</h3>
                             <p class="card-text" id="homeClimbMeta">Zor mod seri · 10 ipucu bütçesi</p>
                         </div>
                         <div class="card-action-row">
@@ -7570,6 +7641,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 
                     <!-- 2. Sınırsız pratik -->
                     <article class="card card-action desk-strip desk-cardbox" aria-labelledby="practiceCardTitle">
+                        <span class="desk-strip-badge" aria-hidden="true"><svg class="icon"><use href="#i-infinity"/></svg></span>
                         <div class="card-action-head">
                             <h3 class="card-title" id="practiceCardTitle">Sınırsız pratik</h3>
                             <p class="card-text"><span class="desk-filter-label">Filtre:</span> <span id="practiceSummary">Tüm vakalar</span></p>
@@ -7584,6 +7656,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 
                     <!-- 3. Online -->
                     <article class="card card-action desk-strip desk-pin" aria-labelledby="onlineCardTitle">
+                        <span class="desk-strip-badge" aria-hidden="true"><svg class="icon"><use href="#i-swords"/></svg></span>
                         <div class="card-action-head">
                             <h3 class="card-title" id="onlineCardTitle">Online</h3>
                             <p class="card-text">Düello · Herkes tek · Turnuva</p>

@@ -450,12 +450,12 @@
 }
 .screen-home .target-picker .segmented-btn.active,
 [data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
-    background: var(--color-accent-bg);
+    background: var(--color-target-strong, var(--color-accent-bg));
     color: #fff;
     border-color: transparent;
     font-weight: 700;
     text-decoration: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-target, var(--color-accent)) 35%, transparent);
 }
 .screen-home .target-hint-row {
     margin-top: 0;
@@ -474,15 +474,27 @@
 .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
     grid-area: auto;
     margin-top: 32px;
-    padding: 26px 26px 22px;
-    gap: var(--space-2);
+    padding: 26px 26px 24px;
+    gap: var(--space-3);
+    border-top: 3px solid var(--color-target, var(--color-accent));
+    transition: border-color 220ms ease;
 }
 .screen-home .desk-folder .card-hero-title {
     font-size: 1.85rem;
 }
-.screen-home .desk-folder .card-hero-text {
-    font-size: var(--text-sm);
-    line-height: 1.45;
+/* A1: Günün vakası gereksiz açıklama cümlesi gizli */
+.screen-home .desk-folder #dailyCardText {
+    display: none;
+}
+/* A3: Başla düğmesi seçili hedef modunun rengine (Tanı/Terapi/İlaç/Kombo) uyar */
+.screen-home .desk-folder #btnStartDaily {
+    background: var(--color-target-strong, var(--color-accent-bg));
+    border-color: transparent;
+    transition: background-color 220ms ease, transform 140ms ease, box-shadow 220ms ease;
+}
+.screen-home .desk-folder #btnStartDaily:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-target, var(--color-accent)) 36%, transparent);
 }
 .screen-home .desk-folder .daily-actions {
     margin-top: var(--space-1);
@@ -494,26 +506,57 @@
     padding-left: 0;
 }
 
-/* Sağ sütundaki 3 ince yatay şerit kartı */
+/* A2: Sağ sütundaki 3 ince yatay şerit kartı — renkli ikon rozeti & hover derinliği */
 .screen-home .card-action.desk-strip {
+    --strip-accent: var(--color-accent);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
     margin-top: 0;
-    padding: 14px 16px;
-    border-radius: 8px;
+    padding: 13px 16px;
+    border-radius: 10px;
     border: 1px solid var(--paper-edge);
     background: var(--paper);
     box-shadow: var(--paper-lift);
     transform: none;
+    transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
 .screen-home .card-action.desk-strip::before {
     display: none;
 }
 .screen-home .card-action.desk-strip.desk-climb {
-    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--paper-edge));
+    --strip-accent: #e0a800;
+}
+.screen-home .card-action.desk-strip.desk-cardbox {
+    --strip-accent: #3b6fd6;
+}
+.screen-home .card-action.desk-strip.desk-pin {
+    --strip-accent: #7c5ce6;
+}
+.screen-home .card-action.desk-strip:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--strip-accent) 62%, var(--paper-edge));
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+.screen-home .desk-strip-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--strip-accent) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--strip-accent) 34%, transparent);
+    color: var(--strip-accent);
+    font-size: 18px;
+    line-height: 1;
+}
+.screen-home .desk-strip-badge .icon {
+    width: 19px;
+    height: 19px;
 }
 .screen-home .desk-strip .card-action-head {
     display: flex;
