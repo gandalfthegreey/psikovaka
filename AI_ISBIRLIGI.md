@@ -131,6 +131,16 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 15:52 — Gemini — Boş ve etkinliksiz açık odaların otomatik kapanması (`0008_oda_otomatik_kapanma.sql`)
+- **Dosyalar:** Yeni `supabase/migrations/0008_oda_otomatik_kapanma.sql`, `js/online/api.js`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `game_config`: `empty_lobby_close_minutes = 2` eklendi, `stale_room_minutes` 10 → 3 dakikaya indirildi.
+  2. `_close_stale_rooms()`: `player_count <= 0` olan odaları anında kapatır; lobide 2 dakikadır, maçta 3 dakikadır kalp atışı gelmeyen odaları otomatik `abandoned` yapar.
+  3. Yeni `cleanup_stale_rooms()` RPC (`security definer`, `set search_path = ''`, `_uid()` korumalı) eklendi; `js/online/api.js` `listPublicRooms()` içinde `feature('cleanup_stale_rooms')` ile çağrılarak kimse yeni oda kurmasa bile açık odalar listelenirken boş/terk edilmiş odaların otomatik kapanması sağlandı (ayrıca `player_count > 0` filtresi eklendi).
+- **Neden:** Emre'nin isteği — açık odalar bir süre boş/etkinliksiz kaldığında otomatik kapansın.
+- **Doğrulama:** `node --check js/online/api.js` temiz, `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0. `game_config` şeması (`key, value, note`) ve `_close_stale_rooms()` / `_abandon_room()` / `_uid()` imzaları `0001_init.sql` ile doğrulandı.
+- **Açık kalan / dikkat:** PGlite bu ortamda kurulu olmadığı için SQL canlıya ilk push'ta GitHub Actions (`supabase-migrasyon.yml`) tarafından uygulanıp doğrulanacak.
+
 ### 2026-11-22 15:45 — Gemini — Yeni vakalar: 100 vaka (case-191 – case-290)
 - **Dosyalar:** js/cases.js, PsikoVaka_Tam_Surum.html, supabase/seed/0002_cases_answer_key.sql, tools/vaka_ekle/taslaklar/2026-11-22_20_p1.json, tools/vaka_ekle/taslaklar/2026-11-22_20_p2.json, tools/vaka_ekle/taslaklar/2026-11-22_20_p3.json, tools/vaka_ekle/taslaklar/2026-11-22_20_p4.json, tools/vaka_ekle/taslaklar/2026-11-22_20_p5.json
 - **Ne değişti:** Yeni dsmdle.com zorluk standardında (1. ipucu en az 4–5 tanıya uyacak şekilde genel, kademeli daralan, 6. ipucu belirleyici) 100 farklı tanıdan 100 yeni klinik vaka eklendi (178 → 278 aktif vaka): case-191..210 (Nörogelişimsel, Madde, Psikotik, Bipolar), case-211..230 (Madde, Nörobilişsel, Duygudurum, Anksiyete), case-231..250 (OKB İlişkili, Travma, Dissosiyatif, Somatik, Yeme), case-251..270 (Yeme, Dışa Atım, Uyku-Uyanıklık, Cinsel İşlev, Dürtü), case-271..290 (Dürtü, Madde, Nörobilişsel, Kişilik A/B/C).

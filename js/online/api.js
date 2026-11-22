@@ -181,10 +181,13 @@
         quickMatch: (mode, target) => feature('quick_match', { p_mode: mode, p_target: target || 'diagnosis' }),
         getMyRpHistory: (limit) => feature('get_my_rp_history', { p_limit: limit || 20 }),
 
-        listPublicRooms: () => select(c => c.from('rooms')
-            .select('id,code,mode,format,target_type,capacity,player_count,round_count,created_at,host_id,host:profiles!rooms_host_id_fkey(username,avatar,ranked_points)')
-            .eq('visibility', 'public').eq('status', 'lobby')
-            .order('created_at', { ascending: false }).limit(20)),
+        listPublicRooms: async () => {
+            await feature('cleanup_stale_rooms', {});
+            return select(c => c.from('rooms')
+                .select('id,code,mode,format,target_type,capacity,player_count,round_count,created_at,host_id,host:profiles!rooms_host_id_fkey(username,avatar,ranked_points)')
+                .eq('visibility', 'public').eq('status', 'lobby').gt('player_count', 0)
+                .order('created_at', { ascending: false }).limit(20));
+        },
         listPendingInvites: () => {
             const me = myId();
             if (!me) return Promise.resolve({ ok: true, data: [] });
