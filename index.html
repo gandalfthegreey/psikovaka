@@ -381,6 +381,8 @@
                         <div class="lib-search" role="search">
                             <label class="lib-search-label" for="libSearchInput">Ara</label>
                             <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
+                            <button type="button" id="btnLibSearchClear" class="lib-search-clear" aria-label="Aramayı temizle" hidden>×</button>
+                            <kbd class="lib-search-kbd" aria-hidden="true">/</kbd>
                         </div>
                         <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
 
@@ -463,7 +465,8 @@
             <div class="stat-strip">
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatPlayed">0</span><span class="stat-strip-label">Oynanan</span></div>
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatWin">%0</span><span class="stat-strip-label">Başarı</span></div>
-                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Kazanma serisi</span></div>
+                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Seri</span></div>
+                <div class="stat-strip-item is-climb"><span class="stat-strip-value" id="profileStatClimb">0</span><span class="stat-strip-label">🏔️ Tırmanış</span></div>
             </div>
 
             <div class="card profile-streaks" id="profileStreaks" hidden aria-labelledby="profileStreaksTitle">

@@ -131,6 +131,17 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 20:44 — Gemini — Profesyonel UI/UX Cila Paketi (A1–A4 + B1–B4)
+- **Dosyalar:** `css/style.css`, `css/anasayfa.css`, `css/kutuphane.css`, `index.html`, `js/app.js`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **A1–A3 (Koyu Tema Derinlik & Dokunsal Hissiyat — `css/style.css`):** Seçili hedef modunun rengine (`--color-target`) göre değişen yumuşak üst ortam ışığı (`body::before`), %3 opaklıklı ince nokta ızgarası, tüm kartlarda 1px üst ışık kenarlığı (`inset 0 1px 0`) ve buton/kartlarda yaylı basma animasyonu (`:active scale(0.972)`) eklendi.
+  2. **A4 (Günün Vakası Durum Şeridi — `css/anasayfa.css`, `js/app.js`):** Bugünün vakası bitirildiğinde sonuç kutusuna Wordle tarzı 6'lı renkli kare şeridi (`.daily-pips`) ve klasörün tamamlandı vurgusu (`.is-done`) eklendi.
+  3. **B1–B2 (Vaka Ekranı "Game Feel" + Mikro Sesler — `css/style.css`, `js/app.js`):** Yeni açılan ipucunda yumuşak `clueSlideIn` + sol vurgu şeridi, `1..6` noktaları arasında bağlantılı stepper çizgisi, yanlış tahminde 240ms `.is-shake` titremesi, doğru tahminde yeşil parıltı ve `playTone` içinde `±%4` perde varyasyonlu yeni `click` & `clue` Web Audio mikro sesleri eklendi.
+  4. **B3–B4 (Profil & Kütüphane — `index.html`, `css/style.css`, `css/kutuphane.css`, `js/app.js`):** Profil kartı sıcak gradyanlı kimlik kartına yükseltilip 4'lü kompakt istatistik ızgarasına **🏔️ Tırmanış** rekoru eklendi. Kütüphanede kategorilere 6 renkli sol şerit, arama kutusuna `×` temizle düğmesi ve `/` klavye kısayolu eklendi.
+- **Neden:** Emre'nin onayı ("Hepsini uygula").
+- **Doğrulama:** `node --check js/app.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 20:34 — Gemini — Ana Sayfa Görsel Cilası (A1/A2/A3) + Kompakt Online Hub (B2)
 - **Dosyalar:** `index.html`, `css/anasayfa.css`, `css/online.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**

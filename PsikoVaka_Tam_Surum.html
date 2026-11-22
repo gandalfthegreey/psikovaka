@@ -3382,6 +3382,171 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
     }
 }
 
+/* ==========================================================================
+   Profesyonel UI/UX Cila Paketi (Linear / Refactoring UI / NYT Games / Game Feel)
+   A1 Ambient Spotlight · A2 1px Rim & Dot-Grid · A3 Spring Press · B1 Game Feel · B3 Profil
+   ========================================================================== */
+
+/* A2: Çok silik nokta ızgarası (steril boşluğu kırar) */
+body {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+}
+[data-theme="light"] body {
+    background-image: radial-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+}
+
+/* A1: Seçili hedef rengine (--color-target) göre yumuşak üst ortam ışığı */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 460px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+        ellipse 68% 58% at 50% -8%,
+        color-mix(in srgb, var(--color-target, var(--color-accent)) 11%, transparent) 0%,
+        transparent 74%
+    );
+    transition: background 320ms ease;
+}
+[data-theme="light"] body::before {
+    background: radial-gradient(
+        ellipse 68% 58% at 50% -8%,
+        color-mix(in srgb, var(--color-target, var(--color-accent)) 7%, transparent) 0%,
+        transparent 74%
+    );
+}
+.app-header, .app-main, .tab-bar {
+    position: relative;
+    z-index: 1;
+}
+
+/* A2: Koyu temada 1px üst ışık kenarlığı (Linear "Stepped Luminance" derinliği) */
+[data-theme="dark"] .card,
+[data-theme="dark"] .patient-card,
+[data-theme="dark"] .clue-box,
+[data-theme="dark"] .ol-cta-card,
+[data-theme="dark"] .ol-quick,
+[data-theme="dark"] .tr-rules-card,
+[data-theme="dark"] .tr-lb-card,
+[data-theme="dark"] .stat-strip-item {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075), var(--shadow-1);
+}
+
+/* A3: Dokunsal yaylı tıklama hissi (3-State Button + Spring Press) */
+.btn:not(:disabled),
+.segmented-btn,
+.ol-cta-card,
+.list-row {
+    transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms ease, border-color 160ms ease, box-shadow 180ms ease;
+}
+.btn:not(:disabled):active,
+.segmented-btn:active,
+.desk-strip:active,
+.ol-cta-card:active {
+    transform: scale(0.972);
+}
+
+/* B1: Vaka Ekranı "Game Feel" — ipucu açılış animasyonu, stepper & yanlış tahminde titreme */
+@keyframes clueSlideIn {
+    0%   { opacity: 0; transform: translateY(10px) scale(0.99); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.clue-box.is-latest {
+    border-left: 3px solid var(--color-target, var(--color-accent));
+    animation: clueSlideIn 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.clue-progress-tracker {
+    position: relative;
+    isolation: isolate;
+}
+.clue-progress-tracker::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 50%;
+    height: 2px;
+    transform: translateY(-50%);
+    background: var(--color-border-strong);
+    z-index: -1;
+    border-radius: 2px;
+}
+.clue-step-node {
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease, box-shadow 220ms ease;
+}
+.clue-step-node.unlocked {
+    box-shadow: 0 0 0 2px var(--color-bg);
+}
+.clue-step-node.correct {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-success) 55%, transparent);
+}
+
+@keyframes inputShake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    45%      { transform: translateX(6px); }
+    70%      { transform: translateX(-4px); }
+    88%      { transform: translateX(3px); }
+}
+.is-shake {
+    animation: inputShake 240ms ease-in-out;
+}
+
+@keyframes winGlowPulse {
+    0%   { transform: scale(0.97); box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-success) 45%, transparent); }
+    55%  { transform: scale(1.01); box-shadow: 0 0 0 10px transparent; }
+    100% { transform: scale(1); box-shadow: none; }
+}
+.result-inline.is-win {
+    animation: winGlowPulse 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* B3: Profil "Klinisyen Kimlik Kartı" + Kompakt 2×2 / 4'lü İstatistik Izgarası */
+.screen-profile .profile-card {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)), var(--color-surface) 65%);
+    border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border-strong));
+}
+.screen-profile .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+@media (min-width: 600px) {
+    .screen-profile .stat-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+.screen-profile .stat-strip-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+.screen-profile .stat-strip-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+}
+.screen-profile .stat-strip-item.is-climb .stat-strip-value {
+    color: var(--color-warning);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .clue-box.is-latest, .is-shake, .result-inline.is-win { animation: none !important; }
+    .btn:active, .segmented-btn:active, .desk-strip:active, .ol-cta-card:active { transform: none !important; }
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -5460,6 +5625,37 @@ body.ol-banners-docked .ol-banners { display: none; }
     }
 }
 
+/* A4: Günün Vakası — Wordle/NYT Games tarzı 6'lı renkli kare durum şeridi */
+.daily-pips {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+}
+.daily-pip {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: var(--color-surface-3);
+    border: 1px solid var(--color-border-strong);
+}
+.daily-pip.is-miss {
+    background: color-mix(in srgb, var(--color-danger) 55%, var(--color-surface-3));
+    border-color: transparent;
+}
+.daily-pip.is-warm {
+    background: var(--color-warning);
+    border-color: transparent;
+}
+.daily-pip.is-hit {
+    background: var(--color-success);
+    border-color: transparent;
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-success) 45%, transparent);
+}
+.screen-home .card-hero.desk-folder.is-done {
+    border-top-color: var(--color-success);
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -5547,7 +5743,51 @@ body.ol-banners-docked .ol-banners { display: none; }
 .screen-library .lib-contents-title[hidden] { display: none; }
 
 .screen-library .lib-list.lib-contents { gap: 0; overflow-anchor: none; } /* akordeon başlığı JS ile yerinde tutar (app.js) */
-.screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
+.screen-library .lib-contents .lib-group {
+    --cat-stripe: var(--color-accent);
+    border: 0;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+    border-left: 3px solid var(--cat-stripe);
+    padding-left: 8px;
+    margin-bottom: 4px;
+}
+.screen-library .lib-contents .lib-group:nth-child(6n + 1) { --cat-stripe: #3b6fd6; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 2) { --cat-stripe: #2f9e62; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 3) { --cat-stripe: #e0a800; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 4) { --cat-stripe: #e5484d; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 5) { --cat-stripe: #8b5cf6; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 6) { --cat-stripe: #14b8a6; }
+
+.lib-search-clear {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-2);
+    color: var(--color-text-2);
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.lib-search-clear[hidden] { display: none; }
+.lib-search-clear:hover { color: var(--color-text); border-color: var(--color-accent); }
+.lib-search-kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text-3);
+    background: var(--color-surface-2);
+    flex-shrink: 0;
+}
+@media (max-width: 767px) { .lib-search-kbd { display: none; } }
 .screen-library .lib-contents .lib-group-head {
     position: relative;
     display: flex;
@@ -7731,6 +7971,8 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                         <div class="lib-search" role="search">
                             <label class="lib-search-label" for="libSearchInput">Ara</label>
                             <input type="search" id="libSearchInput" class="form-input lib-search-input" placeholder="Tanı ara: ad, İngilizce ad, kod" aria-label="Kütüphanede ara" autocomplete="off" spellcheck="false" enterkeyhint="search">
+                            <button type="button" id="btnLibSearchClear" class="lib-search-clear" aria-label="Aramayı temizle" hidden>×</button>
+                            <kbd class="lib-search-kbd" aria-hidden="true">/</kbd>
                         </div>
                         <p class="lib-search-status" id="libSearchStatus" role="status" aria-live="polite"></p>
 
@@ -7813,7 +8055,8 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
             <div class="stat-strip">
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatPlayed">0</span><span class="stat-strip-label">Oynanan</span></div>
                 <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatWin">%0</span><span class="stat-strip-label">Başarı</span></div>
-                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Kazanma serisi</span></div>
+                <div class="stat-strip-item"><span class="stat-strip-value" id="profileStatStreak">0</span><span class="stat-strip-label">Seri</span></div>
+                <div class="stat-strip-item is-climb"><span class="stat-strip-value" id="profileStatClimb">0</span><span class="stat-strip-label">🏔️ Tırmanış</span></div>
             </div>
 
             <div class="card profile-streaks" id="profileStreaks" hidden aria-labelledby="profileStreaksTitle">
@@ -43092,6 +43335,12 @@ class PsikoVakaGame {
         if (this.dom.profileStatPlayed) this.dom.profileStatPlayed.textContent = s.played;
         if (this.dom.profileStatWin) this.dom.profileStatWin.textContent = `%${winRate}`;
         if (this.dom.profileStatStreak) this.dom.profileStatStreak.textContent = s.currentStreak;
+        const climbEl = document.getElementById('profileStatClimb');
+        if (climbEl) {
+            const best = (window.PsikoVakaTirmanis && typeof window.PsikoVakaTirmanis.load === 'function')
+                ? (window.PsikoVakaTirmanis.load().bestStreak || 0) : 0;
+            climbEl.textContent = best;
+        }
         if (this.dom.profileArchiveCount) this.dom.profileArchiveCount.textContent = `${this.solvedCaseIds.size} vaka`;
         if (this.dom.profilePackLabel && this.dom.quickPackLabel) this.dom.profilePackLabel.textContent = this.dom.quickPackLabel.textContent;
     }
@@ -43110,6 +43359,24 @@ class PsikoVakaGame {
         }
         // Danışan özeti: js/online/daily.js varsa o çizer (sunucunun vakasıyla); yoksa yerel günün vakası
         if (!(window.PsikoVakaOnline && window.PsikoVakaOnline.daily)) this.setDailyTeaser(this.getLocalDailyCase());
+        // A4: Wordle tarzı 6'lı günlük durum kareleri (yerel günlük kaydı varsa)
+        try {
+            const rec = typeof this.getDailyRecord === 'function' ? this.getDailyRecord(this.getDailyDay(), this.targetGameMode) : null;
+            const folder = document.querySelector('.screen-home .desk-folder');
+            if (folder) folder.classList.toggle('is-done', !!(rec && rec.won));
+            const box = document.getElementById('dailyResultBox');
+            const sub = document.getElementById('dailyResultSub');
+            if (rec && box && sub && !sub.querySelector('.daily-pips')) {
+                const gs = Array.isArray(rec.guesses) ? rec.guesses : [];
+                const pips = Array.from({ length: 6 }, (_, i) => {
+                    const g = gs[i];
+                    if (!g) return '<span class="daily-pip"></span>';
+                    const cls = g.isCorrect ? 'is-hit' : (g.categoryMatch ? 'is-warm' : 'is-miss');
+                    return `<span class="daily-pip ${cls}"></span>`;
+                }).join('');
+                if (gs.length) sub.insertAdjacentHTML('beforeend', `<div class="daily-pips" aria-hidden="true">${pips}</div>`);
+            }
+        } catch (e) {}
         if (this.dom.homeResume) {
             // Bitmiş (başka sekmede bitirilmiş ya da günü geçmiş) günlük "devam et" olarak sunulmaz
             const staleDaily = this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay());
@@ -43840,6 +44107,9 @@ class PsikoVakaGame {
     }
 
     setTargetGameMode(targetMode, restartCurrentCase = true) {
+        if (restartCurrentCase && this.targetGameMode && this.targetGameMode !== targetMode) {
+            this.playTone('click');
+        }
         this.targetGameMode = targetMode;
         this.comboStage = 1;
 
@@ -44553,6 +44823,7 @@ class PsikoVakaGame {
         if (this.isGameOver) return;
         this.unlockedClues = n;
         this.zorlukLocked = true;
+        this.playTone('clue');
         this.renderClues();
         this.updateRemainingGuessesUI();
         this.renderZorlukUI();
@@ -45051,6 +45322,15 @@ class PsikoVakaGame {
         this.closeAutocomplete();
 
         this.playTone(isCorrect ? 'win' : (categoryMatch ? 'warm' : 'cold'));
+        if (!isCorrect && this.dom.diagnosisInput) {
+            const wrap = this.dom.diagnosisInput.closest('.guess-input-group, .input-wrapper') || this.dom.diagnosisInput.parentElement;
+            if (wrap) {
+                wrap.classList.remove('is-shake');
+                void wrap.offsetWidth;
+                wrap.classList.add('is-shake');
+                setTimeout(() => wrap.classList.remove('is-shake'), 260);
+            }
+        }
 
 
         if (isCorrect) {
@@ -46266,7 +46546,10 @@ class PsikoVakaGame {
 
         if (d.libSearchInput) {
             let t = 0;
+            const clearBtn = document.getElementById('btnLibSearchClear');
+            const syncClear = () => { if (clearBtn) clearBtn.hidden = !d.libSearchInput.value; };
             d.libSearchInput.addEventListener('input', () => {
+                syncClear();
                 clearTimeout(t);
                 t = setTimeout(() => this.applyLibrarySearch(), 120);
             });
@@ -46274,7 +46557,22 @@ class PsikoVakaGame {
                 if (e.key === 'Escape' && d.libSearchInput.value) {
                     e.stopPropagation();
                     d.libSearchInput.value = '';
+                    syncClear();
                     this.applyLibrarySearch();
+                }
+            });
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    d.libSearchInput.value = '';
+                    syncClear();
+                    this.applyLibrarySearch();
+                    d.libSearchInput.focus();
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && this.currentScreen === 'kutuphane' && document.activeElement !== d.libSearchInput && !['INPUT', 'TEXTAREA', 'SELECT'].includes((document.activeElement && document.activeElement.tagName) || '')) {
+                    e.preventDefault();
+                    d.libSearchInput.focus();
                 }
             });
         }
@@ -46985,33 +47283,52 @@ class PsikoVakaGame {
             osc.connect(gain);
             gain.connect(ctx.destination);
             const t = ctx.currentTime;
+            // Pitch randomization (±4%): kulak yorgunluğunu önler, organik his verir
+            const jitter = 0.96 + Math.random() * 0.08;
 
             if (type === 'win') {
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(523.25, t);
-                osc.frequency.setValueAtTime(659.25, t + 0.1);
-                osc.frequency.setValueAtTime(783.99, t + 0.2);
-                osc.frequency.setValueAtTime(1046.50, t + 0.3);
-                gain.gain.setValueAtTime(0.15, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                osc.frequency.setValueAtTime(659.25, t + 0.09);
+                osc.frequency.setValueAtTime(783.99, t + 0.18);
+                osc.frequency.setValueAtTime(1046.50, t + 0.27);
+                gain.gain.setValueAtTime(0.14, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.56);
                 osc.start(t);
-                osc.stop(t + 0.6);
+                osc.stop(t + 0.56);
             } else if (type === 'warm') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, t);
-                osc.frequency.setValueAtTime(554.37, t + 0.1);
-                gain.gain.setValueAtTime(0.1, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.frequency.setValueAtTime(440 * jitter, t);
+                osc.frequency.setValueAtTime(554.37 * jitter, t + 0.09);
+                gain.gain.setValueAtTime(0.09, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
                 osc.start(t);
-                osc.stop(t + 0.25);
-            } else {
-                // yanlış: yumuşak tek nota (bölüm 3: 250 Hz yerine 330 Hz sinüs)
+                osc.stop(t + 0.24);
+            } else if (type === 'clue') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(520 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(740 * jitter, t + 0.065);
+                gain.gain.setValueAtTime(0.055, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.085);
+                osc.start(t);
+                osc.stop(t + 0.085);
+            } else if (type === 'click') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(330, t);
-                gain.gain.setValueAtTime(0.08, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.frequency.setValueAtTime(680 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(460 * jitter, t + 0.032);
+                gain.gain.setValueAtTime(0.04, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.038);
                 osc.start(t);
-                osc.stop(t + 0.2);
+                osc.stop(t + 0.038);
+            } else {
+                // yanlış: yumuşak kısa tok tık
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(290 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(210 * jitter, t + 0.14);
+                gain.gain.setValueAtTime(0.075, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+                osc.start(t);
+                osc.stop(t + 0.18);
             }
         } catch (e) {}
     }

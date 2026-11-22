@@ -616,3 +616,34 @@
         padding-top: 78px;
     }
 }
+
+/* A4: Günün Vakası — Wordle/NYT Games tarzı 6'lı renkli kare durum şeridi */
+.daily-pips {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+}
+.daily-pip {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: var(--color-surface-3);
+    border: 1px solid var(--color-border-strong);
+}
+.daily-pip.is-miss {
+    background: color-mix(in srgb, var(--color-danger) 55%, var(--color-surface-3));
+    border-color: transparent;
+}
+.daily-pip.is-warm {
+    background: var(--color-warning);
+    border-color: transparent;
+}
+.daily-pip.is-hit {
+    background: var(--color-success);
+    border-color: transparent;
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-success) 45%, transparent);
+}
+.screen-home .card-hero.desk-folder.is-done {
+    border-top-color: var(--color-success);
+}

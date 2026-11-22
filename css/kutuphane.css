@@ -83,7 +83,51 @@
 .screen-library .lib-contents-title[hidden] { display: none; }
 
 .screen-library .lib-list.lib-contents { gap: 0; overflow-anchor: none; } /* akordeon başlığı JS ile yerinde tutar (app.js) */
-.screen-library .lib-contents .lib-group { border: 0; border-radius: 0; background: none; overflow: visible; }
+.screen-library .lib-contents .lib-group {
+    --cat-stripe: var(--color-accent);
+    border: 0;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+    border-left: 3px solid var(--cat-stripe);
+    padding-left: 8px;
+    margin-bottom: 4px;
+}
+.screen-library .lib-contents .lib-group:nth-child(6n + 1) { --cat-stripe: #3b6fd6; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 2) { --cat-stripe: #2f9e62; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 3) { --cat-stripe: #e0a800; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 4) { --cat-stripe: #e5484d; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 5) { --cat-stripe: #8b5cf6; }
+.screen-library .lib-contents .lib-group:nth-child(6n + 6) { --cat-stripe: #14b8a6; }
+
+.lib-search-clear {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-2);
+    color: var(--color-text-2);
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.lib-search-clear[hidden] { display: none; }
+.lib-search-clear:hover { color: var(--color-text); border-color: var(--color-accent); }
+.lib-search-kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text-3);
+    background: var(--color-surface-2);
+    flex-shrink: 0;
+}
+@media (max-width: 767px) { .lib-search-kbd { display: none; } }
 .screen-library .lib-contents .lib-group-head {
     position: relative;
     display: flex;

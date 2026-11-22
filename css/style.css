@@ -3084,3 +3084,168 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
         animation: none !important;
     }
 }
+
+/* ==========================================================================
+   Profesyonel UI/UX Cila Paketi (Linear / Refactoring UI / NYT Games / Game Feel)
+   A1 Ambient Spotlight · A2 1px Rim & Dot-Grid · A3 Spring Press · B1 Game Feel · B3 Profil
+   ========================================================================== */
+
+/* A2: Çok silik nokta ızgarası (steril boşluğu kırar) */
+body {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+}
+[data-theme="light"] body {
+    background-image: radial-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+}
+
+/* A1: Seçili hedef rengine (--color-target) göre yumuşak üst ortam ışığı */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 460px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+        ellipse 68% 58% at 50% -8%,
+        color-mix(in srgb, var(--color-target, var(--color-accent)) 11%, transparent) 0%,
+        transparent 74%
+    );
+    transition: background 320ms ease;
+}
+[data-theme="light"] body::before {
+    background: radial-gradient(
+        ellipse 68% 58% at 50% -8%,
+        color-mix(in srgb, var(--color-target, var(--color-accent)) 7%, transparent) 0%,
+        transparent 74%
+    );
+}
+.app-header, .app-main, .tab-bar {
+    position: relative;
+    z-index: 1;
+}
+
+/* A2: Koyu temada 1px üst ışık kenarlığı (Linear "Stepped Luminance" derinliği) */
+[data-theme="dark"] .card,
+[data-theme="dark"] .patient-card,
+[data-theme="dark"] .clue-box,
+[data-theme="dark"] .ol-cta-card,
+[data-theme="dark"] .ol-quick,
+[data-theme="dark"] .tr-rules-card,
+[data-theme="dark"] .tr-lb-card,
+[data-theme="dark"] .stat-strip-item {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075), var(--shadow-1);
+}
+
+/* A3: Dokunsal yaylı tıklama hissi (3-State Button + Spring Press) */
+.btn:not(:disabled),
+.segmented-btn,
+.ol-cta-card,
+.list-row {
+    transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms ease, border-color 160ms ease, box-shadow 180ms ease;
+}
+.btn:not(:disabled):active,
+.segmented-btn:active,
+.desk-strip:active,
+.ol-cta-card:active {
+    transform: scale(0.972);
+}
+
+/* B1: Vaka Ekranı "Game Feel" — ipucu açılış animasyonu, stepper & yanlış tahminde titreme */
+@keyframes clueSlideIn {
+    0%   { opacity: 0; transform: translateY(10px) scale(0.99); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.clue-box.is-latest {
+    border-left: 3px solid var(--color-target, var(--color-accent));
+    animation: clueSlideIn 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.clue-progress-tracker {
+    position: relative;
+    isolation: isolate;
+}
+.clue-progress-tracker::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 50%;
+    height: 2px;
+    transform: translateY(-50%);
+    background: var(--color-border-strong);
+    z-index: -1;
+    border-radius: 2px;
+}
+.clue-step-node {
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), background-color 220ms ease, box-shadow 220ms ease;
+}
+.clue-step-node.unlocked {
+    box-shadow: 0 0 0 2px var(--color-bg);
+}
+.clue-step-node.correct {
+    transform: scale(1.15);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-success) 55%, transparent);
+}
+
+@keyframes inputShake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    45%      { transform: translateX(6px); }
+    70%      { transform: translateX(-4px); }
+    88%      { transform: translateX(3px); }
+}
+.is-shake {
+    animation: inputShake 240ms ease-in-out;
+}
+
+@keyframes winGlowPulse {
+    0%   { transform: scale(0.97); box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-success) 45%, transparent); }
+    55%  { transform: scale(1.01); box-shadow: 0 0 0 10px transparent; }
+    100% { transform: scale(1); box-shadow: none; }
+}
+.result-inline.is-win {
+    animation: winGlowPulse 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* B3: Profil "Klinisyen Kimlik Kartı" + Kompakt 2×2 / 4'lü İstatistik Izgarası */
+.screen-profile .profile-card {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)), var(--color-surface) 65%);
+    border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-border-strong));
+}
+.screen-profile .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+@media (min-width: 600px) {
+    .screen-profile .stat-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+.screen-profile .stat-strip-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+.screen-profile .stat-strip-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+}
+.screen-profile .stat-strip-item.is-climb .stat-strip-value {
+    color: var(--color-warning);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .clue-box.is-latest, .is-shake, .result-inline.is-win { animation: none !important; }
+    .btn:active, .segmented-btn:active, .desk-strip:active, .ol-cta-card:active { transform: none !important; }
+}

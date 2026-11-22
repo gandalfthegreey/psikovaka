@@ -971,6 +971,12 @@ class PsikoVakaGame {
         if (this.dom.profileStatPlayed) this.dom.profileStatPlayed.textContent = s.played;
         if (this.dom.profileStatWin) this.dom.profileStatWin.textContent = `%${winRate}`;
         if (this.dom.profileStatStreak) this.dom.profileStatStreak.textContent = s.currentStreak;
+        const climbEl = document.getElementById('profileStatClimb');
+        if (climbEl) {
+            const best = (window.PsikoVakaTirmanis && typeof window.PsikoVakaTirmanis.load === 'function')
+                ? (window.PsikoVakaTirmanis.load().bestStreak || 0) : 0;
+            climbEl.textContent = best;
+        }
         if (this.dom.profileArchiveCount) this.dom.profileArchiveCount.textContent = `${this.solvedCaseIds.size} vaka`;
         if (this.dom.profilePackLabel && this.dom.quickPackLabel) this.dom.profilePackLabel.textContent = this.dom.quickPackLabel.textContent;
     }
@@ -989,6 +995,24 @@ class PsikoVakaGame {
         }
         // Danışan özeti: js/online/daily.js varsa o çizer (sunucunun vakasıyla); yoksa yerel günün vakası
         if (!(window.PsikoVakaOnline && window.PsikoVakaOnline.daily)) this.setDailyTeaser(this.getLocalDailyCase());
+        // A4: Wordle tarzı 6'lı günlük durum kareleri (yerel günlük kaydı varsa)
+        try {
+            const rec = typeof this.getDailyRecord === 'function' ? this.getDailyRecord(this.getDailyDay(), this.targetGameMode) : null;
+            const folder = document.querySelector('.screen-home .desk-folder');
+            if (folder) folder.classList.toggle('is-done', !!(rec && rec.won));
+            const box = document.getElementById('dailyResultBox');
+            const sub = document.getElementById('dailyResultSub');
+            if (rec && box && sub && !sub.querySelector('.daily-pips')) {
+                const gs = Array.isArray(rec.guesses) ? rec.guesses : [];
+                const pips = Array.from({ length: 6 }, (_, i) => {
+                    const g = gs[i];
+                    if (!g) return '<span class="daily-pip"></span>';
+                    const cls = g.isCorrect ? 'is-hit' : (g.categoryMatch ? 'is-warm' : 'is-miss');
+                    return `<span class="daily-pip ${cls}"></span>`;
+                }).join('');
+                if (gs.length) sub.insertAdjacentHTML('beforeend', `<div class="daily-pips" aria-hidden="true">${pips}</div>`);
+            }
+        } catch (e) {}
         if (this.dom.homeResume) {
             // Bitmiş (başka sekmede bitirilmiş ya da günü geçmiş) günlük "devam et" olarak sunulmaz
             const staleDaily = this.currentMode === 'daily' && this.dailyContext && (this.isDailyContextFinished() || this.dailyContext.day !== this.getDailyDay());
@@ -1719,6 +1743,9 @@ class PsikoVakaGame {
     }
 
     setTargetGameMode(targetMode, restartCurrentCase = true) {
+        if (restartCurrentCase && this.targetGameMode && this.targetGameMode !== targetMode) {
+            this.playTone('click');
+        }
         this.targetGameMode = targetMode;
         this.comboStage = 1;
 
@@ -2432,6 +2459,7 @@ class PsikoVakaGame {
         if (this.isGameOver) return;
         this.unlockedClues = n;
         this.zorlukLocked = true;
+        this.playTone('clue');
         this.renderClues();
         this.updateRemainingGuessesUI();
         this.renderZorlukUI();
@@ -2930,6 +2958,15 @@ class PsikoVakaGame {
         this.closeAutocomplete();
 
         this.playTone(isCorrect ? 'win' : (categoryMatch ? 'warm' : 'cold'));
+        if (!isCorrect && this.dom.diagnosisInput) {
+            const wrap = this.dom.diagnosisInput.closest('.guess-input-group, .input-wrapper') || this.dom.diagnosisInput.parentElement;
+            if (wrap) {
+                wrap.classList.remove('is-shake');
+                void wrap.offsetWidth;
+                wrap.classList.add('is-shake');
+                setTimeout(() => wrap.classList.remove('is-shake'), 260);
+            }
+        }
 
 
         if (isCorrect) {
@@ -4145,7 +4182,10 @@ class PsikoVakaGame {
 
         if (d.libSearchInput) {
             let t = 0;
+            const clearBtn = document.getElementById('btnLibSearchClear');
+            const syncClear = () => { if (clearBtn) clearBtn.hidden = !d.libSearchInput.value; };
             d.libSearchInput.addEventListener('input', () => {
+                syncClear();
                 clearTimeout(t);
                 t = setTimeout(() => this.applyLibrarySearch(), 120);
             });
@@ -4153,7 +4193,22 @@ class PsikoVakaGame {
                 if (e.key === 'Escape' && d.libSearchInput.value) {
                     e.stopPropagation();
                     d.libSearchInput.value = '';
+                    syncClear();
                     this.applyLibrarySearch();
+                }
+            });
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    d.libSearchInput.value = '';
+                    syncClear();
+                    this.applyLibrarySearch();
+                    d.libSearchInput.focus();
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && this.currentScreen === 'kutuphane' && document.activeElement !== d.libSearchInput && !['INPUT', 'TEXTAREA', 'SELECT'].includes((document.activeElement && document.activeElement.tagName) || '')) {
+                    e.preventDefault();
+                    d.libSearchInput.focus();
                 }
             });
         }
@@ -4864,33 +4919,52 @@ class PsikoVakaGame {
             osc.connect(gain);
             gain.connect(ctx.destination);
             const t = ctx.currentTime;
+            // Pitch randomization (±4%): kulak yorgunluğunu önler, organik his verir
+            const jitter = 0.96 + Math.random() * 0.08;
 
             if (type === 'win') {
                 osc.type = 'triangle';
                 osc.frequency.setValueAtTime(523.25, t);
-                osc.frequency.setValueAtTime(659.25, t + 0.1);
-                osc.frequency.setValueAtTime(783.99, t + 0.2);
-                osc.frequency.setValueAtTime(1046.50, t + 0.3);
-                gain.gain.setValueAtTime(0.15, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+                osc.frequency.setValueAtTime(659.25, t + 0.09);
+                osc.frequency.setValueAtTime(783.99, t + 0.18);
+                osc.frequency.setValueAtTime(1046.50, t + 0.27);
+                gain.gain.setValueAtTime(0.14, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.56);
                 osc.start(t);
-                osc.stop(t + 0.6);
+                osc.stop(t + 0.56);
             } else if (type === 'warm') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, t);
-                osc.frequency.setValueAtTime(554.37, t + 0.1);
-                gain.gain.setValueAtTime(0.1, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.frequency.setValueAtTime(440 * jitter, t);
+                osc.frequency.setValueAtTime(554.37 * jitter, t + 0.09);
+                gain.gain.setValueAtTime(0.09, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
                 osc.start(t);
-                osc.stop(t + 0.25);
-            } else {
-                // yanlış: yumuşak tek nota (bölüm 3: 250 Hz yerine 330 Hz sinüs)
+                osc.stop(t + 0.24);
+            } else if (type === 'clue') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(520 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(740 * jitter, t + 0.065);
+                gain.gain.setValueAtTime(0.055, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.085);
+                osc.start(t);
+                osc.stop(t + 0.085);
+            } else if (type === 'click') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(330, t);
-                gain.gain.setValueAtTime(0.08, t);
-                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+                osc.frequency.setValueAtTime(680 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(460 * jitter, t + 0.032);
+                gain.gain.setValueAtTime(0.04, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.038);
                 osc.start(t);
-                osc.stop(t + 0.2);
+                osc.stop(t + 0.038);
+            } else {
+                // yanlış: yumuşak kısa tok tık
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(290 * jitter, t);
+                osc.frequency.exponentialRampToValueAtTime(210 * jitter, t + 0.14);
+                gain.gain.setValueAtTime(0.075, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+                osc.start(t);
+                osc.stop(t + 0.18);
             }
         } catch (e) {}
     }
