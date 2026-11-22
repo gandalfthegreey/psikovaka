@@ -2329,9 +2329,9 @@ class PsikoVakaGame {
         this.renderZorlukUI();
     }
 
-    /** Günlükte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    /** Günlük ve pratikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
     canEditZorluk() {
-        if (this.currentMode !== 'daily' || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
         const log = this.stageGuessLog || {};
         const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
@@ -2415,7 +2415,12 @@ class PsikoVakaGame {
         if (this.dom.playZorlukPanel) {
             Z.bind(this.dom.playZorlukPanel, async (z) => {
                 if (!this.canEditZorluk()) { this.renderZorlukUI(); return; }
-                if (typeof this.dailyZorlukHandler === 'function') {
+                if (this.currentMode === 'practice') {
+                    this.practiceZorluk = z;
+                    Z.save(z);
+                    if (this.dom.practiceZorlukMount) Z.set(this.dom.practiceZorlukMount, z);
+                    this.updatePracticeSummary();
+                } else if (typeof this.dailyZorlukHandler === 'function') {
                     const r = await this.dailyZorlukHandler(z);
                     if (r && r.zorluk) z = r.zorluk;
                     if (r && r.locked) this.zorlukLocked = true;
@@ -2468,6 +2473,18 @@ class PsikoVakaGame {
             `;
 
             this.dom.cluesContainer.appendChild(clueBox);
+        }
+
+        // Zor modda bir sonraki ipucunu açmak için son ipucunun hemen altında düğme
+        if (this.zorluk && this.zorluk.tekHak && !this.isGameOver && !this.dailyReadOnly && this.currentCase && visibleCount < this.maxClues) {
+            const nextBtn = document.createElement('button');
+            nextBtn.type = 'button';
+            nextBtn.id = 'btnInlineNextClue';
+            nextBtn.className = 'btn btn-secondary btn-inline-next-clue';
+            nextBtn.disabled = !!this._revealBusy;
+            nextBtn.innerHTML = `${this.icon('plus')}<span>Sonraki ipucunu aç (${visibleCount + 1}/${this.maxClues})</span>`;
+            nextBtn.addEventListener('click', () => this.revealNextClue());
+            this.dom.cluesContainer.appendChild(nextBtn);
         }
 
         this.dom.clueProgressTracker.innerHTML = '';

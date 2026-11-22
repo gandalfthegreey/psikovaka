@@ -131,6 +131,17 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 16:18 — Gemini — Play-bar ortada Normal/Zor (günlük+pratik), ipucu altı sonraki ipucu düğmesi, göz ergonomisi (2, 4, 5)
+- **Dosyalar:** `index.html`, `js/app.js`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `#playZorlukPanel` (`Normal | Zor`) üst `.play-bar` içine, geri ve meydan okuma düğmelerinin tam ortasına taşındı.
+  2. `canEditZorluk()` ve `initZorlukUI()` pratik modunu da kapsayacak şekilde genişletildi; pratikte değiştirilen Normal/Zor seçimi hem o vakaya hem `localStorage.psikovaka_zorluk` kaydına anında uygulanır.
+  3. Zor modda açılan son ipucunun hemen altına `#btnInlineNextClue` ("+ Sonraki ipucunu aç") düğmesi eklendi.
+  4. Göz ergonomisi: eski ipuçları hafifçe sakinleştirildi (`opacity: 0.72`, son ipucu `1`) ve dolgu daraltıldı (Öneri 2); vaka okuma genişliği `640px` ve satır aralığı `1.7` yapıldı (Öneri 4); alttaki `.game-controls` sayacı kaldırılıp yalnızca üstteki `.play-progress` bırakıldı (Öneri 5).
+- **Neden:** Emre'nin isteği.
+- **Doğrulama:** `node --check js/app.js` temiz, `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 16:06 — Gemini — Açılışta Günün Vakası + Sade Vaka Ekranı + Kompakt Tahmin Barı
 - **Dosyalar:** `index.html`, `js/app.js`, `js/zorluk.js`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
