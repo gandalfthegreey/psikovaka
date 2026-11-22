@@ -2567,29 +2567,37 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 @keyframes nv-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: translateX(0.8px) rotate(1.4deg); } 64% { transform: translateX(-0.8px) rotate(-1.2deg); } }
 @keyframes nv-tuft { 0%, 70%, 100% { transform: rotate(var(--nv-tl, 0deg)); } 74% { transform: rotate(calc(var(--nv-tl, 0deg) + 5deg)); } 78% { transform: rotate(calc(var(--nv-tl, 0deg) - 4deg)); } 83% { transform: rotate(calc(var(--nv-tl, 0deg) + 2deg)); } 88% { transform: rotate(var(--nv-tl, 0deg)); } }
 
-/* Yön: front | right | left (left = right'ın aynası).
-   KRİTİK: .nv-flip'te transition YOK (scaleX 1→-1 arası kağıt gibi incelip dönmesin!).
-   Yalnızca yüz, şapka ve aksesuar yumuşak kayar. */
-.nv-flip { transform-origin: 50% 50%; transition: none; }
-.nv-f-left .nv-flip { transform: scaleX(-1); }
-.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
+/* Yön: front | right | left — GERÇEK 2.5D PARALLAX DÖNÜŞÜ (sıfır scaleX(-1) aynalama!).
+   Sağdan sola dönerken gövde asla kağıt gibi 180° aynalanmaz; yüz, şapka, aksesuar ve
+   arka dendrit tüyleri 3B küre üzerinde yumuşakça karşı yöne kayarak döner. */
+.nv-flip { transform-origin: 50% 50%; transform: none; }
+.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1); }
 .nv-face { transform-origin: 50% 50%; }
 .nv-hat { transform-origin: 50% 100%; }
-.nv-f-side { --nv-tl: -11deg; --nv-fx: 3px; }
-.nv-f-side .nv-face { transform: translateX(6.5px) scaleX(0.9); }
-.nv-f-side .nv-hat { transform: translateX(3px) rotate(3deg); }
-.nv-f-side .nv-chest { transform: translateX(4.5px) scaleX(0.92); }
-.nv-f-side .nv-tufts { transform: rotate(var(--nv-tl)); }
-.nv-f-side .nv-foot-l { transform: translateX(5px); }
-.nv-f-side .nv-foot-r { transform: translateX(2px); }
+
+.nv-f-right { --nv-tl: -11deg; --nv-fx: 3px; --nv-lean: 3deg; }
+.nv-f-right .nv-face { transform: translateX(7.5px) scaleX(0.92); }
+.nv-f-right .nv-hat { transform: translateX(3.5px) rotate(3deg); }
+.nv-f-right .nv-chest { transform: translateX(5px) scaleX(0.93); }
+.nv-f-right .nv-tufts { transform: translateX(-2.5px) rotate(var(--nv-tl)); }
+.nv-f-right .nv-foot-l { transform: translateX(4.5px); }
+.nv-f-right .nv-foot-r { transform: translateX(2px); }
+
+.nv-f-left { --nv-tl: 11deg; --nv-fx: -3px; --nv-lean: -3deg; }
+.nv-f-left .nv-face { transform: translateX(-7.5px) scaleX(0.92); }
+.nv-f-left .nv-hat { transform: translateX(-3.5px) rotate(-3deg); }
+.nv-f-left .nv-chest { transform: translateX(-5px) scaleX(0.93); }
+.nv-f-left .nv-tufts { transform: translateX(2.5px) rotate(var(--nv-tl)); }
+.nv-f-left .nv-foot-l { transform: translateX(-2px); }
+.nv-f-left .nv-foot-r { transform: translateX(-4.5px); }
 
 @keyframes nvTurnHop {
     0% { transform: translateY(0) scale(1, 1); }
-    45% { transform: translateY(-4px) scale(0.94, 1.07); }
+    45% { transform: translateY(-3px) scale(0.96, 1.05); }
     100% { transform: translateY(0) scale(1, 1); }
 }
 .ol-p.is-turning .ol-p-fig {
-    animation: nvTurnHop 160ms ease-out;
+    animation: nvTurnHop 180ms ease-out;
     transform-origin: center bottom;
 }
 
@@ -2598,7 +2606,7 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 .nv.nv-walking .nv-foot-r { animation: nv-step 0.52s linear infinite -0.26s; }
 .nv.nv-walking .nv-torso { animation: nv-bob 0.26s ease-in-out infinite; }
 .nv.nv-walking .nv-tufts { animation: nv-tuft-bob 0.26s ease-in-out infinite; }
-.nv.nv-walking .nv-sway { animation: none; transform: rotate(3deg); }
+.nv.nv-walking .nv-sway { animation: none; transform: rotate(var(--nv-lean, 0deg)); }
 .nv.nv-walking:not(.nv-f-side) .nv-sway { transform: none; }
 .nv.nv-walking .nv-look { animation: none; }
 @keyframes nv-step { 0% { transform: translate(var(--nv-fx, 0px), 0); } 22% { transform: translate(calc(var(--nv-fx, 0px) + 2.6px), -3.4px); } 46%, 100% { transform: translate(var(--nv-fx, 0px), 0); } }
@@ -4613,9 +4621,9 @@ body.ol-banners-docked .ol-banners { display: none; }
 .olr-photo-bg {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/lobby_bg_night.jpg');
+    background-image: url('../assets/lobby_bg_cp.jpg');
     background-size: cover;
-    background-position: center 42%;
+    background-position: center 48%;
     pointer-events: none;
     transition: filter 0.6s ease;
 }
@@ -6767,35 +6775,101 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     color: var(--color-text-2);
 }
 
-/* Canlı Klinik Odası Sahnesi */
+/* Canlı Klinik Odası Sahnesi — Club Penguin Tarzı 2.5D İllüstrasyon */
 .kl-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 8;
-    min-height: 220px;
+    aspect-ratio: 16 / 9;
+    min-height: 230px;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 1px solid var(--color-border-strong);
+    border: 2px solid var(--color-border-strong);
     background: var(--color-surface);
     box-shadow: var(--shadow-2);
 }
 
+.kl-bg-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('../assets/clinic_bg_base.jpg');
+    background-size: cover;
+    background-position: center center;
+    pointer-events: none;
+    transition: background-image 0.5s ease, filter 0.5s ease;
+}
+
+.kl-bg-photo.is-deluxe {
+    background-image: url('../assets/clinic_bg_deluxe.jpg');
+}
+
+.kl-fire-ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 42% 38% at 64% 46%,
+        rgba(255, 168, 76, 0.34) 0%,
+        rgba(255, 118, 42, 0.14) 48%,
+        transparent 78%
+    );
+    animation: klFireBreathe 3.8s ease-in-out infinite;
+}
+
+@keyframes klFireBreathe {
+    0%, 100% { opacity: 0.65; transform: scale(0.98); }
+    45%      { opacity: 1;    transform: scale(1.04); }
+}
+
+.kl-motes {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.kl-mote {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 244, 200, 0.95) 0%, rgba(255, 210, 130, 0) 75%);
+    opacity: 0;
+    animation: klMoteFloat 9.5s ease-in-out infinite;
+}
+
+@keyframes klMoteFloat {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    25%  { opacity: 0.6; }
+    75%  { opacity: 0.45; transform: translate(12px, -28px); }
+    100% { opacity: 0; transform: translate(-6px, -44px); }
+}
+
 .kl-room-svg {
+    position: relative;
+    z-index: 3;
     width: 100%;
     height: 100%;
     display: block;
 }
 
+.kl-room-svg.is-overlay .kl-item {
+    filter: drop-shadow(0 3px 5px rgba(36, 26, 23, 0.25));
+}
+
 .kl-rorschach-hit {
     position: absolute;
-    left: 70%;
-    top: 9%;
+    left: 67%;
+    top: 8%;
     width: 9%;
-    height: 20%;
+    height: 22%;
     background: transparent;
     border: 0;
     cursor: pointer;
-    z-index: 4;
+    z-index: 6;
 }
 
 .kl-noro {
@@ -6805,23 +6879,24 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     align-items: center;
     pointer-events: none;
     z-index: 5;
+    filter: drop-shadow(0 6px 8px rgba(32, 20, 14, 0.32));
 }
 
 .kl-therapist {
-    left: 22%;
-    bottom: 24%;
+    left: 71%;
+    bottom: 20%;
     transform: translateX(-50%);
 }
 
 .kl-patient {
-    left: 66%;
-    bottom: 24%;
+    left: 38%;
+    bottom: 20%;
     transform: translateX(-50%);
 }
 
 @keyframes klPatientWalkIn {
-    0% { left: 92%; opacity: 0.2; }
-    100% { left: 66%; opacity: 1; }
+    0% { left: 12%; opacity: 0.25; }
+    100% { left: 38%; opacity: 1; }
 }
 
 .kl-patient.is-entering {
@@ -54859,152 +54934,119 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
     function renderStageSVG() {
         const s = load();
-        const rich = s.owned.length >= 6;
-        const wallTop = rich ? '#3d2c26' : '#2a2f3d';
-        const wain = rich ? '#5c3c2a' : '#353b4b';
-        const floor = rich ? '#5a3a26' : '#3e3a38';
+        const deluxe = s.owned.length >= 5;
+        const usePhoto = typeof location === 'undefined' || location.protocol !== 'file:';
         const blot = RORSCHACH_SHAPES[blotIndex % RORSCHACH_SHAPES.length];
 
-        let svg = `<svg class="kl-room-svg" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <!-- Duvar & Zemin -->
-            <rect x="0" y="0" width="640" height="132" fill="${wallTop}"/>
-            <rect x="0" y="96" width="640" height="36" fill="${wain}"/>
-            <rect x="0" y="94" width="640" height="4" fill="#201a18" opacity=".4"/>
-            <rect x="0" y="132" width="640" height="168" fill="${floor}"/>
-            <path d="M0 165H640M0 205H640M0 250H640" stroke="#000" stroke-opacity=".14" stroke-width="1.2"/>
-            <!-- Pencere (sol) -->
-            <g class="kl-window">
-                <rect x="26" y="22" width="84" height="72" rx="3" fill="${rich ? '#21345c' : '#27364f'}" stroke="#7a5238" stroke-width="4"/>
-                <path d="M68 22V94M26 58H110" stroke="#7a5238" stroke-width="3"/>
-                <circle cx="88" cy="40" r="7" fill="#fde68a" opacity=".85"/>
-                <path d="M26 132L110 132L175 245L50 245Z" fill="#fde68a" opacity="${rich ? '.07' : '.04'}"/>
-            </g>
-            <!-- Kapı (sağ kenar) -->
-            <g class="kl-door">
-                <rect x="572" y="34" width="52" height="98" rx="2" fill="#6b442b" stroke="#241a17" stroke-width="2"/>
-                <rect x="580" y="44" width="36" height="34" rx="2" fill="#593722"/>
-                <rect x="580" y="86" width="36" height="34" rx="2" fill="#593722"/>
-                <circle cx="582" cy="84" r="3" fill="#e3b04b"/>
-            </g>`;
+        let svg = `<svg class="kl-room-svg${usePhoto ? ' is-overlay' : ''}" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">`;
 
-        // Halı
-        if (has('decor_rug')) {
-            svg += `<g class="kl-item">
-                <polygon points="165,172 475,172 515,274 125,274" fill="#8b3a3a" stroke="#241a17" stroke-width="1.5"/>
-                <polygon points="186,184 454,184 486,262 154,262" fill="#2c4f6b"/>
-                <polygon points="225,200 415,200 436,246 204,246" fill="#d9a441" opacity=".82"/>
-            </g>`;
+        // Yalnızca file:// çevrimdışı tek dosyalık sürümde yedek vektör oda çiz
+        if (!usePhoto) {
+            const wallTop = deluxe ? '#3d2c26' : '#f3e7ce';
+            const wain = deluxe ? '#5c3c2a' : '#a8c2a6';
+            const floor = deluxe ? '#7a4a2a' : '#d69f62';
+            svg += `
+                <rect x="0" y="0" width="640" height="132" fill="${wallTop}"/>
+                <rect x="0" y="96" width="640" height="36" fill="${wain}"/>
+                <rect x="0" y="132" width="640" height="168" fill="${floor}"/>`;
         }
 
-        // Kütüphane
-        if (has('equip_bookshelf')) {
-            svg += `<g class="kl-item">
-                <rect x="128" y="20" width="96" height="114" rx="3" fill="#6e432a" stroke="#241a17" stroke-width="2"/>
-                <rect x="136" y="28" width="80" height="98" fill="#3b2316"/>
-                <rect x="140" y="34" width="11" height="22" fill="#c0533f"/><rect x="153" y="38" width="10" height="18" fill="#2f6f8f"/>
-                <rect x="165" y="32" width="12" height="24" fill="#d9a441"/><rect x="180" y="36" width="10" height="20" fill="#6a8f5a"/>
-                <rect x="193" y="34" width="14" height="22" fill="#7b5ea7"/>
-                <rect x="136" y="56" width="80" height="4" fill="#8a5a3c"/>
-                <rect x="142" y="64" width="14" height="20" fill="#4d8c84"/><rect x="159" y="62" width="11" height="22" fill="#d97a5a"/>
-                <rect x="173" y="66" width="15" height="18" fill="#e0b48f"/><rect x="191" y="62" width="12" height="22" fill="#c0533f"/>
-                <rect x="136" y="84" width="80" height="4" fill="#8a5a3c"/>
-                <rect x="144" y="92" width="12" height="24" fill="#38506e"/><rect x="160" y="96" width="16" height="20" fill="#a3442f"/>
-                <rect x="180" y="94" width="12" height="22" fill="#6a8f5a"/><rect x="196" y="92" width="12" height="24" fill="#d9a441"/>
-            </g>`;
+        // Starter modda alınan dekor eşyaları Club Penguin başlangıç odasının boş alanlarına yerleşir;
+        // Deluxe modda (5+ eşya) arka plan illüstrasyonu zaten şömine, kitaplık, halı, bitki ve espresso barı içerir.
+        if (!deluxe) {
+            if (has('decor_rug')) {
+                svg += `<g class="kl-item">
+                    <polygon points="155,186 435,186 468,266 122,266" fill="#9c4138" stroke="#3a2318" stroke-width="2.4" stroke-linejoin="round"/>
+                    <polygon points="175,196 415,196 442,256 148,256" fill="#2f6b73" stroke="#3a2318" stroke-width="1.6"/>
+                    <polygon points="215,208 375,208 394,244 196,244" fill="#e6b655" opacity=".88"/>
+                </g>`;
+            }
+            if (has('equip_bookshelf')) {
+                svg += `<g class="kl-item">
+                    <rect x="150" y="24" width="84" height="110" rx="8" fill="#7c4b2c" stroke="#3a2318" stroke-width="2.4"/>
+                    <rect x="158" y="34" width="68" height="92" rx="4" fill="#472818"/>
+                    <rect x="163" y="40" width="10" height="22" rx="1.5" fill="#d45b47" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="175" y="43" width="9" height="19" rx="1.5" fill="#3a819e" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="186" y="38" width="11" height="24" rx="1.5" fill="#e3b04b" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="199" y="42" width="10" height="20" rx="1.5" fill="#5e9956" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="158" y="63" width="68" height="4" fill="#8f5a38"/>
+                    <rect x="164" y="70" width="12" height="20" rx="1.5" fill="#4f9188" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="178" y="68" width="11" height="22" rx="1.5" fill="#e07d5c" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="192" y="71" width="14" height="19" rx="1.5" fill="#8c6bb5" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="158" y="92" width="68" height="4" fill="#8f5a38"/>
+                    <rect x="165" y="99" width="13" height="23" rx="1.5" fill="#c95340" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="181" y="102" width="14" height="20" rx="1.5" fill="#d9a441" stroke="#3a2318" stroke-width="1.2"/>
+                    <rect x="198" y="98" width="12" height="24" rx="1.5" fill="#3f6e8c" stroke="#3a2318" stroke-width="1.2"/>
+                </g>`;
+            }
+            if (has('decor_fireplace')) {
+                svg += `<g class="kl-item">
+                    <rect x="262" y="54" width="112" height="84" rx="6" fill="#9c8b7e" stroke="#3a2318" stroke-width="2.4"/>
+                    <rect x="254" y="48" width="128" height="12" rx="4" fill="#7c4b2c" stroke="#3a2318" stroke-width="2.2"/>
+                    <path d="M290 136V96A28 22 0 0 1 346 96V136Z" fill="#2a1914" stroke="#3a2318" stroke-width="2.2"/>
+                    <path class="kl-flame" d="M304 132C300 114 311 108 318 94C325 108 336 114 332 132Z" fill="#ff8a2b"/>
+                    <path class="kl-flame" d="M311 132C309 120 315 116 318 106C321 116 327 120 325 132Z" fill="#ffe066"/>
+                </g>`;
+            }
+            if (has('wall_diploma')) {
+                svg += `<g class="kl-item">
+                    <rect x="492" y="34" width="52" height="38" rx="3" fill="#c29042" stroke="#3a2318" stroke-width="2"/>
+                    <rect x="497" y="39" width="42" height="28" fill="#fdf6e3"/>
+                    <path d="M503 48H533M506 54H528M505 60H520" stroke="#8a7e6e" stroke-width="1.8" stroke-linecap="round"/>
+                    <circle cx="530" cy="60" r="3.8" fill="#d45340"/>
+                </g>`;
+            }
+            if (has('equip_espresso')) {
+                svg += `<g class="kl-item">
+                    <rect x="526" y="138" width="52" height="30" rx="4" fill="#825032" stroke="#3a2318" stroke-width="2.2"/>
+                    <rect x="534" y="110" width="34" height="28" rx="5" fill="#d9e2ec" stroke="#3a2318" stroke-width="2.2"/>
+                    <rect x="539" y="115" width="24" height="10" rx="2" fill="#243447"/>
+                    <circle cx="544" cy="120" r="2.2" fill="#34d399"/><circle cx="551" cy="120" r="2.2" fill="#fbbf24"/>
+                    <rect x="547" y="130" width="9" height="7" rx="1.5" fill="#fff" stroke="#3a2318" stroke-width="1.4"/>
+                </g>`;
+            }
+            if (has('decor_plant')) {
+                svg += `<g class="kl-item">
+                    <ellipse cx="144" cy="156" rx="18" ry="5" fill="#3a2318" opacity=".2"/>
+                    <path d="M130 124H158L153 154H135Z" fill="#c97149" stroke="#3a2318" stroke-width="2.2" stroke-linejoin="round"/>
+                    <path d="M144 125C128 112 118 96 128 84C140 94 143 108 144 125Z" fill="#529e58" stroke="#2a4d2c" stroke-width="2"/>
+                    <path d="M144 125C160 110 170 94 160 82C148 92 145 108 144 125Z" fill="#63b368" stroke="#2a4d2c" stroke-width="2"/>
+                    <path d="M144 125C140 100 138 78 146 70C154 82 150 104 144 125Z" fill="#468c4c" stroke="#2a4d2c" stroke-width="2"/>
+                </g>`;
+            }
         }
 
-        // Şömine
-        if (has('decor_fireplace')) {
-            svg += `<g class="kl-item">
-                <ellipse cx="315" cy="144" rx="95" ry="24" fill="#ff9436" opacity=".18"/>
-                <rect x="255" y="42" width="120" height="94" rx="3" fill="#9c543e" stroke="#241a17" stroke-width="2"/>
-                <rect x="247" y="38" width="136" height="11" rx="2" fill="#7a4d33" stroke="#241a17" stroke-width="1.6"/>
-                <path d="M285 134V94A30 24 0 0 1 345 94V134Z" fill="#231613" stroke="#241a17" stroke-width="2"/>
-                <path class="kl-flame" d="M300 130C296 112 308 106 315 92C322 106 334 112 330 130Z" fill="#ff8a2b"/>
-                <path class="kl-flame" d="M307 130C305 118 312 114 315 104C319 114 325 118 323 130Z" fill="#ffe066"/>
-            </g>`;
-        }
-
-        // Diploma
-        if (has('wall_diploma')) {
-            svg += `<g class="kl-item">
-                <rect x="392" y="34" width="52" height="38" rx="2" fill="#b88c46" stroke="#241a17" stroke-width="1.4"/>
-                <rect x="397" y="39" width="42" height="28" fill="#fbf4e4"/>
-                <path d="M403 48H433M406 54H428M405 60H420" stroke="#8a7e6e" stroke-width="1.6"/>
-                <circle cx="430" cy="60" r="3.5" fill="#c0533f"/>
-            </g>`;
-        }
-
-        // Rorschach Tablosu
+        // Her iki modda da canlı / etkileşimli duvar öğeleri
         if (has('wall_rorschach')) {
             svg += `<g class="kl-item kl-rorschach-box" id="klRorschachWall">
-                <rect x="454" y="30" width="44" height="54" rx="2" fill="#5e3e29" stroke="#241a17" stroke-width="1.5"/>
-                <rect x="459" y="35" width="34" height="44" fill="#f5eedc"/>
-                <g transform="translate(476 57) scale(0.9)"><path d="${blot.d}" fill="#231c35"/></g>
+                <rect x="434" y="28" width="46" height="56" rx="4" fill="#6e4429" stroke="#3a2318" stroke-width="2.2"/>
+                <rect x="439" y="33" width="36" height="46" rx="2" fill="#faf3e0"/>
+                <g transform="translate(457 56) scale(0.92)"><path d="${blot.d}" fill="#231c35"/></g>
             </g>`;
         }
-
-        // Duvar Saati
         if (has('wall_clock')) {
             svg += drawClockSVG();
         }
 
-        // Espresso Makinesi & Sehpa
-        if (has('equip_espresso')) {
-            svg += `<g class="kl-item">
-                <rect x="195" y="136" width="56" height="34" rx="3" fill="#7a4d33" stroke="#241a17" stroke-width="1.6"/>
-                <rect x="205" y="108" width="34" height="28" rx="4" fill="#cbd5e1" stroke="#241a17" stroke-width="1.6"/>
-                <rect x="210" y="113" width="24" height="10" rx="2" fill="#1e293b"/>
-                <circle cx="215" cy="118" r="2" fill="#34d399"/><circle cx="222" cy="118" r="2" fill="#fbbf24"/>
-                <rect x="218" y="128" width="9" height="7" rx="1" fill="#fff" stroke="#241a17" stroke-width="1"/>
-                <path class="kl-steam" d="M221 104q-2 -4 0 -8M226 105q2 -4 0 -8" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/>
-            </g>`;
-        }
-
-        // Danışan Oturma Alanı (sağ orta: Tabure -> Koltuk -> Deri Divan)
+        // Danışan Oturma Alanı (sol-orta halı üstünde: koltuk veya deri psikanaliz divanı)
         if (has('seat_couch')) {
             svg += `<g class="kl-item">
-                <ellipse cx="425" cy="222" rx="95" ry="12" fill="#000" opacity=".22"/>
-                <path d="M342 156Q342 142 358 142H492Q508 142 508 156V208H342Z" fill="#9f4e3a" stroke="#241a17" stroke-width="2.2"/>
-                <rect x="352" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
-                <rect x="402" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
-                <rect x="452" y="150" width="46" height="44" rx="10" fill="#b86049" stroke="#241a17" stroke-width="1.5"/>
-                <rect x="346" y="188" width="158" height="22" rx="7" fill="#c9725a" stroke="#241a17" stroke-width="2"/>
-                <rect x="330" y="168" width="20" height="46" rx="8" fill="#8c4230" stroke="#241a17" stroke-width="2"/>
-                <rect x="500" y="168" width="20" height="46" rx="8" fill="#8c4230" stroke="#241a17" stroke-width="2"/>
+                <ellipse cx="242" cy="236" rx="84" ry="12" fill="#3a2318" opacity=".24"/>
+                <path d="M170 176Q170 160 188 160H296Q314 160 314 176V222H170Z" fill="#a8503c" stroke="#3a2318" stroke-width="2.6" stroke-linejoin="round"/>
+                <rect x="180" y="168" width="42" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
+                <rect x="224" y="168" width="42" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
+                <rect x="268" y="168" width="38" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
+                <rect x="174" y="202" width="136" height="22" rx="8" fill="#d47860" stroke="#3a2318" stroke-width="2.4"/>
+                <rect x="158" y="182" width="20" height="46" rx="9" fill="#914230" stroke="#3a2318" stroke-width="2.4"/>
+                <rect x="306" y="182" width="20" height="46" rx="9" fill="#914230" stroke="#3a2318" stroke-width="2.4"/>
             </g>`;
         } else if (has('seat_chair')) {
             svg += `<g class="kl-item">
-                <ellipse cx="425" cy="218" rx="48" ry="10" fill="#000" opacity=".2"/>
-                <path d="M388 148Q388 136 402 136H448Q462 136 462 148V202H388Z" fill="#2f6f73" stroke="#241a17" stroke-width="2"/>
-                <rect x="382" y="178" width="86" height="24" rx="7" fill="#3c8a8e" stroke="#241a17" stroke-width="2"/>
-                <rect x="376" y="164" width="14" height="44" rx="6" fill="#255a5e" stroke="#241a17" stroke-width="2"/>
-                <rect x="460" y="164" width="14" height="44" rx="6" fill="#255a5e" stroke="#241a17" stroke-width="2"/>
-            </g>`;
-        } else {
-            // Başlangıç stajyer taburesi
-            svg += `<g class="kl-item">
-                <ellipse cx="425" cy="218" rx="28" ry="7" fill="#000" opacity=".2"/>
-                <path d="M408 186L402 216M442 186L448 216" stroke="#5a3c28" stroke-width="4" stroke-linecap="round"/>
-                <ellipse cx="425" cy="184" rx="26" ry="9" fill="#8a6042" stroke="#241a17" stroke-width="2"/>
-            </g>`;
-        }
-
-        // Terapist koltuğu (sol taraf, oyuncunun Nöro'su burada)
-        svg += `<g class="kl-item">
-            <ellipse cx="140" cy="222" rx="44" ry="9" fill="#000" opacity=".2"/>
-            <path d="M106 154Q106 142 120 142H160Q174 142 174 154V206H106Z" fill="#3f4b6e" stroke="#241a17" stroke-width="2"/>
-            <rect x="100" y="184" width="80" height="22" rx="7" fill="#4f5f8c" stroke="#241a17" stroke-width="2"/>
-        </g>`;
-
-        // Salon Bitkisi (ön sol köşe)
-        if (has('decor_plant')) {
-            svg += `<g class="kl-item">
-                <ellipse cx="52" cy="276" rx="22" ry="6" fill="#000" opacity=".22"/>
-                <path d="M36 238H68L63 274H41Z" fill="#c26b45" stroke="#241a17" stroke-width="1.8"/>
-                <path d="M52 240C36 226 24 210 34 196C46 206 50 220 52 240Z" fill="#4f8f54" stroke="#241a17" stroke-width="1.5"/>
-                <path d="M52 240C68 224 80 208 70 194C58 204 54 220 52 240Z" fill="#5da662" stroke="#241a17" stroke-width="1.5"/>
-                <path d="M52 240C48 214 44 192 54 182C62 194 58 216 52 240Z" fill="#3f7a44" stroke="#241a17" stroke-width="1.5"/>
+                <ellipse cx="242" cy="234" rx="46" ry="10" fill="#3a2318" opacity=".22"/>
+                <path d="M206 168Q206 154 222 154H262Q278 154 278 168V218H206Z" fill="#2f6f73" stroke="#3a2318" stroke-width="2.5" stroke-linejoin="round"/>
+                <rect x="200" y="196" width="84" height="22" rx="8" fill="#3f8f94" stroke="#3a2318" stroke-width="2.4"/>
+                <rect x="194" y="180" width="16" height="44" rx="7" fill="#255a5e" stroke="#3a2318" stroke-width="2.4"/>
+                <rect x="274" y="180" width="16" height="44" rx="7" fill="#255a5e" stroke="#3a2318" stroke-width="2.4"/>
             </g>`;
         }
 
@@ -55075,16 +55117,24 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 
             ${payoutHtml}
 
-            <div class="kl-stage" id="clinicStage">
+            <div class="kl-stage${s.owned.length >= 5 ? ' is-deluxe' : ''}" id="clinicStage">
+                <div class="kl-bg-photo${s.owned.length >= 5 ? ' is-deluxe' : ''}" aria-hidden="true"></div>
+                ${(s.owned.length >= 5 || has('decor_fireplace')) ? `<div class="kl-fire-ambient" aria-hidden="true"></div>` : ''}
+                <div class="kl-motes" aria-hidden="true">
+                    <span class="kl-mote" style="left:28%;top:28%;animation-delay:0s"></span>
+                    <span class="kl-mote" style="left:44%;top:36%;animation-delay:2.1s"></span>
+                    <span class="kl-mote" style="left:60%;top:30%;animation-delay:4.2s"></span>
+                    <span class="kl-mote" style="left:76%;top:42%;animation-delay:1.4s"></span>
+                </div>
                 ${renderStageSVG()}
                 ${has('wall_rorschach') ? `<button type="button" class="kl-rorschach-hit" id="btnClinicRorschach" aria-label="Rorschach tablosunu değiştir" title="Mürekkep lekesine bak"></button>` : ''}
                 <div class="kl-noro kl-therapist">
-                    ${renderAvatar(myCfg, 84, { facing: 'right', activity: walkingIn ? 'wave' : null })}
+                    ${renderAvatar(myCfg, 88, { facing: 'left', activity: walkingIn ? 'wave' : null })}
                     <span class="kl-tag">Sen</span>
                 </div>
                 <div class="kl-noro kl-patient${walkingIn ? ' is-entering' : ''}" id="clinicPatientSlot" ${activePatientAvatar ? '' : 'hidden'}>
                     <div class="kl-patient-bubble" id="clinicPatientBubble" hidden></div>
-                    <div id="clinicPatientFig">${activePatientAvatar ? renderAvatar(activePatientAvatar, 80, { facing: 'left', walking: walkingIn }) : ''}</div>
+                    <div id="clinicPatientFig">${activePatientAvatar ? renderAvatar(activePatientAvatar, 84, { facing: 'right', walking: walkingIn }) : ''}</div>
                     <span class="kl-tag">Danışan</span>
                 </div>
             </div>

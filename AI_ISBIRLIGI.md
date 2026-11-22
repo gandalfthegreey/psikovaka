@@ -131,6 +131,16 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 19:35 — Gemini — Gerçek 2.5D Parallax Nöro Dönüşü (Sıfır Aynalama) + Club Penguin Tarzı Lobi & Kliniğim İllüstrasyonları
+- **Dosyalar:** `css/style.css`, yeni `assets/lobby_bg_cp.jpg`, yeni `assets/clinic_bg_base.jpg`, yeni `assets/clinic_bg_deluxe.jpg`, `css/online.css`, `js/klinik.js`, `css/klinik.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **Sıfır 180° aynalama — gerçek 2.5D parallax dönüşü (`css/style.css`):** `.nv-f-left .nv-flip { transform: scaleX(-1); }` tamamen kaldırıldı. Artık sağa/sola dönerken karakter asla kağıt gibi 180° aynalanmıyor; yüz (`±7.5px`), şapka (`±3.5px`, `±3deg`), aksesuarlar (`±5px`) ve arka dendrit tüyleri (`∓2.5px` ters parallax) 3B gövde üzerinde 240 ms boyunca yumuşakça kayarak dönüyor.
+  2. **Club Penguin tarzı Bekleme Odası (`assets/lobby_bg_cp.jpg` + `css/online.css`):** Online lobi arka planı, temiz koyu kahve konturlu ve sıcak cel-shaded Club Penguin Flash-dönemi terapi bekleme odası illüstrasyonuna geçirildi.
+  3. **Club Penguin tarzı Kliniğim (`assets/clinic_bg_base.jpg`, `assets/clinic_bg_deluxe.jpg`, `js/klinik.js`, `css/klinik.css`):** Kliniğim odası başlangıçta ferah ve güneşli Club Penguin başlangıç kliniği olarak açılıyor; 5+ eşya alındığında şömineli, ceviz lambrili, halılı ve espresso barlı **Deluxe Uzman Kliniğine** dönüşüyor. Terapist Nöro sağdaki çalışma masasının yanında duruyor, danışan Nöro soldaki ahşap klinik kapısından içeri yürüyüp halının üstüne geliyor.
+- **Neden:** Emre'nin isteği (180° aynalama rotasyonunun tamamen kalkması + hem Bekleme Odası hem Kliniğim için Club Penguin tarzı 2.5D çizimler).
+- **Doğrulama:** `node --check js/klinik.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Eski `assets/lobby_bg_night.jpg` dosya silme yasağı nedeniyle korundu.
+
 ### 2026-11-22 19:22 — Gemini — Nöro Kağıt-Dönüşü Düzeltme, Şapka/Aksesuar Oturtma, Dinamik Lobi Işığı & Canlı Etkileşimler
 - **Dosyalar:** `css/style.css`, `js/avatar.js`, `js/online/lobby_room.js`, `js/online/lobby.js`, `css/online.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**

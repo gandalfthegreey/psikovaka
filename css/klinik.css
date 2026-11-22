@@ -95,35 +95,101 @@
     color: var(--color-text-2);
 }
 
-/* Canlı Klinik Odası Sahnesi */
+/* Canlı Klinik Odası Sahnesi — Club Penguin Tarzı 2.5D İllüstrasyon */
 .kl-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 8;
-    min-height: 220px;
+    aspect-ratio: 16 / 9;
+    min-height: 230px;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 1px solid var(--color-border-strong);
+    border: 2px solid var(--color-border-strong);
     background: var(--color-surface);
     box-shadow: var(--shadow-2);
 }
 
+.kl-bg-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('../assets/clinic_bg_base.jpg');
+    background-size: cover;
+    background-position: center center;
+    pointer-events: none;
+    transition: background-image 0.5s ease, filter 0.5s ease;
+}
+
+.kl-bg-photo.is-deluxe {
+    background-image: url('../assets/clinic_bg_deluxe.jpg');
+}
+
+.kl-fire-ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+        ellipse 42% 38% at 64% 46%,
+        rgba(255, 168, 76, 0.34) 0%,
+        rgba(255, 118, 42, 0.14) 48%,
+        transparent 78%
+    );
+    animation: klFireBreathe 3.8s ease-in-out infinite;
+}
+
+@keyframes klFireBreathe {
+    0%, 100% { opacity: 0.65; transform: scale(0.98); }
+    45%      { opacity: 1;    transform: scale(1.04); }
+}
+
+.kl-motes {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.kl-mote {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 244, 200, 0.95) 0%, rgba(255, 210, 130, 0) 75%);
+    opacity: 0;
+    animation: klMoteFloat 9.5s ease-in-out infinite;
+}
+
+@keyframes klMoteFloat {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    25%  { opacity: 0.6; }
+    75%  { opacity: 0.45; transform: translate(12px, -28px); }
+    100% { opacity: 0; transform: translate(-6px, -44px); }
+}
+
 .kl-room-svg {
+    position: relative;
+    z-index: 3;
     width: 100%;
     height: 100%;
     display: block;
 }
 
+.kl-room-svg.is-overlay .kl-item {
+    filter: drop-shadow(0 3px 5px rgba(36, 26, 23, 0.25));
+}
+
 .kl-rorschach-hit {
     position: absolute;
-    left: 70%;
-    top: 9%;
+    left: 67%;
+    top: 8%;
     width: 9%;
-    height: 20%;
+    height: 22%;
     background: transparent;
     border: 0;
     cursor: pointer;
-    z-index: 4;
+    z-index: 6;
 }
 
 .kl-noro {
@@ -133,23 +199,24 @@
     align-items: center;
     pointer-events: none;
     z-index: 5;
+    filter: drop-shadow(0 6px 8px rgba(32, 20, 14, 0.32));
 }
 
 .kl-therapist {
-    left: 22%;
-    bottom: 24%;
+    left: 71%;
+    bottom: 20%;
     transform: translateX(-50%);
 }
 
 .kl-patient {
-    left: 66%;
-    bottom: 24%;
+    left: 38%;
+    bottom: 20%;
     transform: translateX(-50%);
 }
 
 @keyframes klPatientWalkIn {
-    0% { left: 92%; opacity: 0.2; }
-    100% { left: 66%; opacity: 1; }
+    0% { left: 12%; opacity: 0.25; }
+    100% { left: 38%; opacity: 1; }
 }
 
 .kl-patient.is-entering {

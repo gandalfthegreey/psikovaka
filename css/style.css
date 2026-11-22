@@ -2270,29 +2270,37 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 @keyframes nv-sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: translateX(0.8px) rotate(1.4deg); } 64% { transform: translateX(-0.8px) rotate(-1.2deg); } }
 @keyframes nv-tuft { 0%, 70%, 100% { transform: rotate(var(--nv-tl, 0deg)); } 74% { transform: rotate(calc(var(--nv-tl, 0deg) + 5deg)); } 78% { transform: rotate(calc(var(--nv-tl, 0deg) - 4deg)); } 83% { transform: rotate(calc(var(--nv-tl, 0deg) + 2deg)); } 88% { transform: rotate(var(--nv-tl, 0deg)); } }
 
-/* Yön: front | right | left (left = right'ın aynası).
-   KRİTİK: .nv-flip'te transition YOK (scaleX 1→-1 arası kağıt gibi incelip dönmesin!).
-   Yalnızca yüz, şapka ve aksesuar yumuşak kayar. */
-.nv-flip { transform-origin: 50% 50%; transition: none; }
-.nv-f-left .nv-flip { transform: scaleX(-1); }
-.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1); }
+/* Yön: front | right | left — GERÇEK 2.5D PARALLAX DÖNÜŞÜ (sıfır scaleX(-1) aynalama!).
+   Sağdan sola dönerken gövde asla kağıt gibi 180° aynalanmaz; yüz, şapka, aksesuar ve
+   arka dendrit tüyleri 3B küre üzerinde yumuşakça karşı yöne kayarak döner. */
+.nv-flip { transform-origin: 50% 50%; transform: none; }
+.nv-face, .nv-hat, .nv-chest, .nv-tufts, .nv-foot { transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1); }
 .nv-face { transform-origin: 50% 50%; }
 .nv-hat { transform-origin: 50% 100%; }
-.nv-f-side { --nv-tl: -11deg; --nv-fx: 3px; }
-.nv-f-side .nv-face { transform: translateX(6.5px) scaleX(0.9); }
-.nv-f-side .nv-hat { transform: translateX(3px) rotate(3deg); }
-.nv-f-side .nv-chest { transform: translateX(4.5px) scaleX(0.92); }
-.nv-f-side .nv-tufts { transform: rotate(var(--nv-tl)); }
-.nv-f-side .nv-foot-l { transform: translateX(5px); }
-.nv-f-side .nv-foot-r { transform: translateX(2px); }
+
+.nv-f-right { --nv-tl: -11deg; --nv-fx: 3px; --nv-lean: 3deg; }
+.nv-f-right .nv-face { transform: translateX(7.5px) scaleX(0.92); }
+.nv-f-right .nv-hat { transform: translateX(3.5px) rotate(3deg); }
+.nv-f-right .nv-chest { transform: translateX(5px) scaleX(0.93); }
+.nv-f-right .nv-tufts { transform: translateX(-2.5px) rotate(var(--nv-tl)); }
+.nv-f-right .nv-foot-l { transform: translateX(4.5px); }
+.nv-f-right .nv-foot-r { transform: translateX(2px); }
+
+.nv-f-left { --nv-tl: 11deg; --nv-fx: -3px; --nv-lean: -3deg; }
+.nv-f-left .nv-face { transform: translateX(-7.5px) scaleX(0.92); }
+.nv-f-left .nv-hat { transform: translateX(-3.5px) rotate(-3deg); }
+.nv-f-left .nv-chest { transform: translateX(-5px) scaleX(0.93); }
+.nv-f-left .nv-tufts { transform: translateX(2.5px) rotate(var(--nv-tl)); }
+.nv-f-left .nv-foot-l { transform: translateX(-2px); }
+.nv-f-left .nv-foot-r { transform: translateX(-4.5px); }
 
 @keyframes nvTurnHop {
     0% { transform: translateY(0) scale(1, 1); }
-    45% { transform: translateY(-4px) scale(0.94, 1.07); }
+    45% { transform: translateY(-3px) scale(0.96, 1.05); }
     100% { transform: translateY(0) scale(1, 1); }
 }
 .ol-p.is-turning .ol-p-fig {
-    animation: nvTurnHop 160ms ease-out;
+    animation: nvTurnHop 180ms ease-out;
     transform-origin: center bottom;
 }
 
@@ -2301,7 +2309,7 @@ svg.nv { display: block; flex-shrink: 0; overflow: visible; }
 .nv.nv-walking .nv-foot-r { animation: nv-step 0.52s linear infinite -0.26s; }
 .nv.nv-walking .nv-torso { animation: nv-bob 0.26s ease-in-out infinite; }
 .nv.nv-walking .nv-tufts { animation: nv-tuft-bob 0.26s ease-in-out infinite; }
-.nv.nv-walking .nv-sway { animation: none; transform: rotate(3deg); }
+.nv.nv-walking .nv-sway { animation: none; transform: rotate(var(--nv-lean, 0deg)); }
 .nv.nv-walking:not(.nv-f-side) .nv-sway { transform: none; }
 .nv.nv-walking .nv-look { animation: none; }
 @keyframes nv-step { 0% { transform: translate(var(--nv-fx, 0px), 0); } 22% { transform: translate(calc(var(--nv-fx, 0px) + 2.6px), -3.4px); } 46%, 100% { transform: translate(var(--nv-fx, 0px), 0); } }
