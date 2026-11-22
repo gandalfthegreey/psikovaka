@@ -60,9 +60,12 @@ için 3-6. adımları tekrarla. Alan/zorluk söylenmediyse: karışık alanlar, 
 - **Ölçütleri gerçekten karşıla:** süre (ör. majör depresif epizod ≥2 hafta, yaygın anksiyete ≥6 ay, TSSB >1 ay, şizofreni ≥6 ay,
   şizofreniform 1-6 ay, kısa psikotik <1 ay), belirti sayısı (ör. "5/9"), dışlama ölçütleri (madde, tıbbi durum, başka bozukluk)
   ve işlev kaybı ipuçlarında açıkça bulunsun. Ölçüt "tıbbi durum/madde ile açıklanamaz" diyorsa ilgili tetkiki/öyküyü yaz.
-- **İpucu sırası:** 1 = başvuru yakınması (geniş, birkaç tanıya uyabilir); 2-5 = giderek özgülleşen öykü, süre, seyir, aile/sosyal
-  bilgiler, ana benzerleri dışlayan bulgular, tetkikler; 5 genelde `Ruhsal Durum Muayenesinde: ...`; 6 = belirleyici ayrıntı.
-  Tanı 1. ipucunda belli olmamalı, 6. ipucuna kadar da tamamen saklanmamalı.
+- **İpucu sırası (dsmdle.com zorluk standardı — ilk ipucundan tanı asla ele verilmemeli):**
+  - **1. İpucu (Geniş ve çok anlamlı başvuru):** En az **4–5 farklı tanıya** uyabilecek, özgül olmayan bir başvuru yakınması yaz (ör. genel yorgunluk, iş/okul performansında düşüş, uyku düzensizliği, yakınların getirmesi, belirsiz huzursuzluk veya bedensel gerginlik). Tanının patognomonik belirtisini, tipik ritüelini/fobisini veya ayırt edici süre eşiğini **ASLA 1. ipucunda verme**.
+  - **2. İpucu (Hâlâ en az 2–3 ayırıcı tanıya açık):** Başlangıç bağlamı, işlevsellik etkisi veya genel seyir; ancak benzer tanılar (ör. depresyon vs. yas vs. bipolar depresyon; OKB vs. YAB vs. paranoid) hâlâ olası kalmalı.
+  - **3–4. İpuçları (Daraltma ve tıbbi/madde dışlama):** Kategori netleşmeye başlar; tetkikler, madde/ilaç öyküsü ve ana ayırıcı tanıları eleyen bulgular gelir.
+  - **5. İpucu (`Ruhsal Durum Muayenesinde: ...`):** Klinik gözlem, duygulanım, düşünce süreci/içeriği ve içgörü bulguları.
+  - **6. İpucu (Belirleyici ayrıntı):** Tanıyı kesinleştiren ayırt edici kriter (yine tanının adını söylemeden).
 - **Yasak:** başlıkta ve 1-5. ipuçlarında tanının Türkçe/İngilizce adı, takma adları (`durum.js --tani` listeler), DSM kategori adı,
   alan adı; başlıkta parantezli etiket (yalnızca `(BKİ: ...)` gibi nötr ölçü serbest). 6. ipucunda da tanının adını söyleme;
   belirleyici bulguyu ver. Metinlerde `<` işaretinden hemen sonra harf yazma.

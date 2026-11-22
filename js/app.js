@@ -1779,6 +1779,7 @@ class PsikoVakaGame {
 
     openCategoryTree() {
         if (!this.dom.categoryTreePanel) return;
+        if (this.zorluk && (this.zorluk.kategoriGizli || this.zorluk.tekHak)) return;
         this.dom.categoryTreePanel.classList.add('open');
         this.closeAutocomplete();
         if (this.dom.btnCategoryBrowser) {
@@ -2329,12 +2330,24 @@ class PsikoVakaGame {
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
     }
 
-    /** Oyun başlığındaki "Zor" rozeti, "Sonraki ipucu" düğmesi ve günlük ayar paneli. */
+    /** Oyun başlığındaki "Zor" rozeti, "Sonraki ipucu" düğmesi, kategori kilidi ve günlük ayar paneli. */
     renderZorlukUI() {
         const Z = window.PsikoVakaZorluk;
         if (!Z) return;
+        const isHard = Z.any(this.zorluk);
         if (this.dom.playZorBadge) this.dom.playZorBadge.innerHTML = Z.badge(this.zorluk);
-        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('is-kategori-gizli', !!(this.zorluk && this.zorluk.kategoriGizli));
+        if (this.dom.screenPlay) this.dom.screenPlay.classList.toggle('is-kategori-gizli', isHard);
+        if (this.dom.categoryBrowserWrapper) this.dom.categoryBrowserWrapper.hidden = isHard;
+        if (this.dom.btnCategoryBrowser) this.dom.btnCategoryBrowser.disabled = isHard;
+        if (isHard) this.closeCategoryTree();
+        if (this.dom.diagnosisInput) {
+            const t = this.getEffectiveTargetType();
+            if (isHard) {
+                this.dom.diagnosisInput.placeholder = t === 'therapy' ? 'Terapi yaz' : (t === 'pharmacology' ? 'İlaç yaz' : 'Tanı yaz');
+            } else {
+                this.dom.diagnosisInput.placeholder = t === 'therapy' ? 'Terapi yaz ya da listeden seç' : (t === 'pharmacology' ? 'İlaç yaz ya da listeden seç' : 'Tanı yaz ya da listeden seç');
+            }
+        }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
             const show = this.canEditZorluk();
@@ -2342,7 +2355,7 @@ class PsikoVakaGame {
                 const sig = JSON.stringify(this.zorluk);
                 if (panel.dataset.sig !== sig || !panel.firstChild) {
                     panel.dataset.sig = sig;
-                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk', note: 'İlk tahminden önce seç; sonra değiştirilemez. Günün vakasında Elo yok; sıralamada adının yanında "Zor" görünür.' });
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk' });
                 }
             }
             panel.hidden = !show;
@@ -2390,7 +2403,7 @@ class PsikoVakaGame {
         if (!Z) return;
         const mount = this.dom.practiceZorlukMount;
         if (mount) {
-            mount.innerHTML = Z.switches(this.practiceZorluk, { id: 'practiceZor', note: 'Sonraki pratik vakasından itibaren geçerli; seçimin hatırlanır.' });
+            mount.innerHTML = Z.switches(this.practiceZorluk, { id: 'practiceZor' });
             Z.bind(mount, (z) => {
                 this.practiceZorluk = z;
                 Z.save(z);
@@ -2422,45 +2435,35 @@ class PsikoVakaGame {
             "Kilit tanı kriteri"
         ];
 
-        for (let i = 0; i < this.maxClues; i++) {
-            const isUnlocked = (i < this.unlockedClues);
-            const isLatest = isUnlocked && !this.isGameOver && i === this.unlockedClues - 1;
+        const visibleCount = Math.min(this.unlockedClues, this.maxClues);
+        for (let i = 0; i < visibleCount; i++) {
+            const isLatest = !this.isGameOver && i === visibleCount - 1;
             const clueBox = document.createElement('article');
-            clueBox.className = `clue-box ${isUnlocked ? 'active' : 'locked'}${isLatest ? ' is-latest' : ''}`;
+            clueBox.className = `clue-box active${isLatest ? ' is-latest' : ''}`;
 
-            if (isUnlocked) {
-                const rawClue = (this.currentCase && this.currentCase.clues && this.currentCase.clues[i]) ? this.currentCase.clues[i] : '';
-                let clueContent = typeof rawClue === 'object' && rawClue !== null ? (rawClue.text || '') : String(rawClue);
+            const rawClue = (this.currentCase && this.currentCase.clues && this.currentCase.clues[i]) ? this.currentCase.clues[i] : '';
+            let clueContent = typeof rawClue === 'object' && rawClue !== null ? (rawClue.text || '') : String(rawClue);
 
-                if (this.isGameOver && this.currentCase && Array.isArray(this.currentCase.symptomHighlights)) {
-                    this.currentCase.symptomHighlights.forEach((hl) => {
-                        if (hl && hl.clueIndex === i && typeof hl.text === 'string' && clueContent.includes(hl.text)) {
-                            const escapedDsm = (hl.dsmMatch || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                            const escapedText = hl.text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                            const tagLabel = hl.dsmMatch ? hl.dsmMatch.split(':')[0] : 'DSM-5';
-                            const replacement = `<button type="button" class="symptom-tag-highlight" onclick="window.game.showDsmDetail('${escapedDsm}', '${escapedText}')" title="DSM-5 kriterini gör">${hl.text} <span class="symptom-pill">${tagLabel}</span></button>`;
-                            clueContent = clueContent.replace(hl.text, replacement);
-                        }
-                    });
-                }
-
-                clueBox.innerHTML = `
-                    <div class="clue-header">
-                        <span class="clue-num">${i + 1}</span>
-                        <span class="clue-tag">${clueLabels[i]}</span>
-                        ${isLatest && i > 0 ? '<span class="clue-new">Yeni</span>' : ''}
-                    </div>
-                    <div class="clue-text">${clueContent}</div>
-                `;
-            } else {
-                clueBox.innerHTML = `
-                    <div class="clue-header">
-                        <span class="clue-num">${this.icon('lock')}</span>
-                        <span class="clue-tag">${clueLabels[i]}</span>
-                    </div>
-                    <span class="clue-locked-note">${this.zorluk && this.zorluk.tekHak ? (i === this.unlockedClues ? 'Sonraki ipucu ile açılır' : 'Kilitli') : `${i}. yanlışta açılır`}</span>
-                `;
+            if (this.isGameOver && this.currentCase && Array.isArray(this.currentCase.symptomHighlights)) {
+                this.currentCase.symptomHighlights.forEach((hl) => {
+                    if (hl && hl.clueIndex === i && typeof hl.text === 'string' && clueContent.includes(hl.text)) {
+                        const escapedDsm = (hl.dsmMatch || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        const escapedText = hl.text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        const tagLabel = hl.dsmMatch ? hl.dsmMatch.split(':')[0] : 'DSM-5';
+                        const replacement = `<button type="button" class="symptom-tag-highlight" onclick="window.game.showDsmDetail('${escapedDsm}', '${escapedText}')" title="DSM-5 kriterini gör">${hl.text} <span class="symptom-pill">${tagLabel}</span></button>`;
+                        clueContent = clueContent.replace(hl.text, replacement);
+                    }
+                });
             }
+
+            clueBox.innerHTML = `
+                <div class="clue-header">
+                    <span class="clue-num">${i + 1}</span>
+                    <span class="clue-tag">${clueLabels[i]}</span>
+                    ${isLatest && i > 0 ? '<span class="clue-new">Yeni</span>' : ''}
+                </div>
+                <div class="clue-text">${clueContent}</div>
+            `;
 
             this.dom.cluesContainer.appendChild(clueBox);
         }

@@ -2805,3 +2805,70 @@ h1, h2, h3, h4,
 /* "Danışan dosyası" pilotunda (?tasarim=dosya) başlık satırı gizli: yalnızca "Zor" rozeti kalsın */
 html.tasarim-dosya .screen-play .play-bar-title .play-meta:has(#playZorBadge .zor-badge) { display: flex; }
 html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge) { display: none; }
+
+
+/* ==========================================================================
+   Sade Zor Mod Seçici, Kategori Kilidi & Arka Plan Müziği Düğmesi (Gemini)
+   ========================================================================== */
+.zorluk-segmented {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 260px;
+}
+
+.zorluk-seg-btn[data-zorluk-mode="zor"].active {
+    background: var(--color-danger);
+    color: #fff;
+}
+
+.screen-play.is-kategori-gizli .category-browser-wrapper {
+    display: none !important;
+}
+
+.clue-box.active.is-latest {
+    animation: clueRevealSlide 0.28s ease-out;
+}
+
+@keyframes clueRevealSlide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-music-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    flex-shrink: 0;
+}
+
+.btn-music-toggle:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+}
+
+.btn-music-toggle.is-playing {
+    border-color: var(--color-accent);
+    background: var(--color-accent-bg);
+}
+
+@media (max-width: 767px) {
+    .profile-chip-group {
+        display: flex !important;
+        align-items: center;
+        gap: var(--space-2);
+    }
+    .profile-chip-group .profile-chip-avatar,
+    .profile-chip-group .profile-chip {
+        display: none;
+    }
+}
