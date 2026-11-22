@@ -6693,10 +6693,9 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 </style>
     <style>
 /* ==========================================================================
-   PsikoVaka — Kliniğim v1 (Tek Oyunculu Klinik & Dekorasyon Modu)
-   Yalnızca tasarım token'larını kullanır (css/tokens.css).
+   PsikoVaka — Tırmanış Modu (Zor Mod Kesintisiz Seri + Paylaşımlı İpucu Bütçesi)
    ========================================================================== */
-.screen-clinic {
+.screen-climb {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
@@ -6705,7 +6704,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     margin: 0 auto;
 }
 
-.kl-header {
+.tr-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -6713,7 +6712,7 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     gap: var(--space-3);
 }
 
-.kl-title {
+.tr-title {
     margin: 0;
     font-family: var(--font-display);
     font-size: var(--text-xl);
@@ -6721,19 +6720,19 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     color: var(--color-text);
 }
 
-.kl-sub {
+.tr-sub {
     margin: var(--space-1) 0 0;
     font-size: var(--text-sm);
     color: var(--color-text-2);
 }
 
-.kl-stats {
+.tr-stats {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
 }
 
-.kl-stat-pill {
+.tr-stat-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -6745,52 +6744,58 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     color: var(--color-text);
 }
 
-.kl-stat-pill.is-money {
+.tr-stat-pill.is-best {
     border-color: var(--color-warning);
     background: var(--color-warning-soft);
     color: var(--color-warning);
 }
 
-.kl-stat-pill.is-bonus {
+.tr-stat-pill.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+}
+
+.tr-stat-pill.is-budget {
     border-color: var(--color-success);
     background: var(--color-success-soft);
     color: var(--color-success);
 }
 
-.kl-payout-banner {
+.tr-summary-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-strong);
     background: var(--color-surface);
 }
 
-.kl-payout-banner.is-win {
-    border-color: var(--color-success);
-    background: var(--color-success-soft);
+.tr-summary-banner.is-record {
+    border-color: var(--color-warning);
+    background: var(--color-warning-soft);
 }
 
-.kl-payout-main {
+.tr-summary-main {
     display: flex;
     flex-direction: column;
     gap: 2px;
     font-size: var(--text-sm);
 }
 
-.kl-payout-main strong {
+.tr-summary-main strong {
     color: var(--color-text);
     font-size: var(--text-base);
 }
 
-.kl-payout-main span {
+.tr-summary-main span {
     color: var(--color-text-2);
 }
 
-/* Canlı Klinik Odası Sahnesi — Club Penguin Tarzı 2.5D İllüstrasyon */
-.kl-stage {
+/* Uzman Klinik Sahnesi (Club Penguin 2.5D) */
+.tr-stage {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -6798,26 +6803,21 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     border-radius: var(--radius-xl);
     overflow: hidden;
     border: 2px solid var(--color-border-strong);
-    background: var(--color-surface);
+    background: #3d2c26;
     box-shadow: var(--shadow-2);
 }
 
-.kl-bg-photo {
+.tr-bg-photo {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('../assets/clinic_bg_base.jpg');
+    background-image: url('../assets/clinic_bg_deluxe.jpg');
     background-size: cover;
     background-position: center center;
     pointer-events: none;
-    transition: background-image 0.5s ease, filter 0.5s ease;
 }
 
-.kl-bg-photo.is-deluxe {
-    background-image: url('../assets/clinic_bg_deluxe.jpg');
-}
-
-.kl-fire-ambient {
+.tr-fire-ambient {
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -6825,19 +6825,19 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     mix-blend-mode: screen;
     background: radial-gradient(
         ellipse 42% 38% at 64% 46%,
-        rgba(255, 168, 76, 0.34) 0%,
+        rgba(255, 168, 76, 0.36) 0%,
         rgba(255, 118, 42, 0.14) 48%,
         transparent 78%
     );
-    animation: klFireBreathe 3.8s ease-in-out infinite;
+    animation: trFireBreathe 3.8s ease-in-out infinite;
 }
 
-@keyframes klFireBreathe {
+@keyframes trFireBreathe {
     0%, 100% { opacity: 0.65; transform: scale(0.98); }
     45%      { opacity: 1;    transform: scale(1.04); }
 }
 
-.kl-motes {
+.tr-motes {
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -6845,81 +6845,40 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     overflow: hidden;
 }
 
-.kl-mote {
+.tr-mote {
     position: absolute;
     width: 4px;
     height: 4px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 244, 200, 0.95) 0%, rgba(255, 210, 130, 0) 75%);
     opacity: 0;
-    animation: klMoteFloat 9.5s ease-in-out infinite;
+    animation: trMoteFloat 9.5s ease-in-out infinite;
 }
 
-@keyframes klMoteFloat {
+@keyframes trMoteFloat {
     0%   { opacity: 0; transform: translate(0, 0); }
-    25%  { opacity: 0.6; }
+    25%  { opacity: 0.65; }
     75%  { opacity: 0.45; transform: translate(12px, -28px); }
     100% { opacity: 0; transform: translate(-6px, -44px); }
 }
 
-.kl-room-svg {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.kl-room-svg.is-overlay .kl-item {
-    filter: drop-shadow(0 3px 5px rgba(36, 26, 23, 0.25));
-}
-
-.kl-rorschach-hit {
+/* Terapist koltuğunda oturan Nöro */
+.tr-noro-seat {
     position: absolute;
-    left: 67%;
-    top: 8%;
-    width: 9%;
-    height: 22%;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    z-index: 6;
-}
-
-.kl-noro {
-    position: absolute;
+    left: 72%;
+    bottom: 20%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    pointer-events: none;
     z-index: 5;
-    filter: drop-shadow(0 6px 8px rgba(32, 20, 14, 0.32));
+    pointer-events: none;
+    filter: drop-shadow(0 6px 10px rgba(24, 14, 8, 0.42));
 }
 
-.kl-therapist {
-    left: 71%;
-    bottom: 20%;
-    transform: translateX(-50%);
-}
-
-.kl-patient {
-    left: 38%;
-    bottom: 20%;
-    transform: translateX(-50%);
-}
-
-@keyframes klPatientWalkIn {
-    0% { left: 12%; opacity: 0.25; }
-    100% { left: 38%; opacity: 1; }
-}
-
-.kl-patient.is-entering {
-    animation: klPatientWalkIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.kl-patient-bubble {
-    margin-bottom: 4px;
-    padding: 6px 10px;
+.tr-noro-bubble {
+    margin-bottom: 6px;
+    padding: 6px 12px;
     border-radius: var(--radius-md);
     background: var(--color-surface);
     border: 1px solid var(--color-border-strong);
@@ -6930,172 +6889,147 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
     box-shadow: var(--shadow-1);
 }
 
-.kl-tag {
+.tr-noro-tag {
     margin-top: -4px;
-    padding: 2px 8px;
+    padding: 2px 9px;
     border-radius: var(--radius-full);
-    background: rgba(15, 17, 23, 0.78);
+    background: rgba(15, 17, 23, 0.8);
     color: #fff;
     font-size: 11px;
     font-weight: var(--weight-semibold);
 }
 
-@keyframes klFlameFlicker {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(1.12); }
-}
-
-.kl-flame {
-    transform-box: fill-box;
-    transform-origin: center bottom;
-    animation: klFlameFlicker 1.1s ease-in-out infinite;
-}
-
-.kl-actions-bar {
+.tr-actions {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
 }
 
-.kl-accept-btn {
+.tr-start-btn {
     min-width: 240px;
 }
 
-.kl-section {
+/* İpucu bütçesi kural şeridi */
+.tr-rules-card {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-}
-
-.kl-section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.kl-section-title {
-    margin: 0;
-    font-size: var(--text-base);
-    font-weight: var(--weight-bold);
-    color: var(--color-text);
-}
-
-.kl-section-meta {
-    font-size: var(--text-xs);
-    color: var(--color-text-3);
-}
-
-.kl-shop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: var(--space-3);
-}
-
-.kl-shop-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding: var(--space-3);
+    padding: var(--space-4);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    transition: border-color 0.15s ease;
 }
 
-.kl-shop-card.is-owned {
-    border-color: var(--color-success);
-    background: color-mix(in srgb, var(--color-surface) 92%, var(--color-success));
-}
-
-.kl-shop-card.is-locked {
-    opacity: 0.65;
-}
-
-.kl-shop-top {
+.tr-rules-head {
     display: flex;
-    gap: var(--space-3);
-    align-items: flex-start;
-}
-
-.kl-shop-ico {
-    font-size: 24px;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-.kl-shop-name {
+    flex-direction: column;
+    gap: 2px;
     font-size: var(--text-sm);
-    font-weight: var(--weight-bold);
+}
+
+.tr-rules-head strong {
     color: var(--color-text);
 }
 
-.kl-shop-desc {
-    margin-top: 2px;
-    font-size: var(--text-xs);
+.tr-rules-head span {
     color: var(--color-text-2);
-    line-height: 1.4;
+    font-size: var(--text-xs);
 }
 
-.kl-shop-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.tr-delta-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     gap: var(--space-2);
 }
 
-.kl-shop-bonus {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    color: var(--color-success);
-}
-
-.kl-shop-owned {
-    font-size: var(--text-xs);
-    font-weight: var(--weight-bold);
-    color: var(--color-success);
-}
-
-.kl-shop-req {
-    font-size: 11px;
-    color: var(--color-text-3);
-}
-
-.kl-reviews-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.tr-delta-cell {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-}
-
-.kl-review-item,
-.kl-review-empty {
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    font-size: var(--text-sm);
-    color: var(--color-text-2);
-    display: flex;
-    gap: var(--space-2);
     align-items: center;
-}
-
-.kl-review-stars {
-    color: var(--color-warning);
+    gap: 2px;
+    padding: var(--space-2) var(--space-1);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
     font-size: var(--text-xs);
-    flex-shrink: 0;
 }
 
-@media (max-width: 599px) {
-    .kl-stage {
-        aspect-ratio: 16 / 10;
+.tr-delta-cell span {
+    color: var(--color-text-2);
+}
+
+.tr-delta-cell strong {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+}
+
+.tr-delta-cell.is-pos strong { color: var(--color-success); }
+.tr-delta-cell.is-zero strong { color: var(--color-text-2); }
+.tr-delta-cell.is-neg strong { color: var(--color-danger); }
+
+/* Oyun ekranı üstü canlı Tırmanış HUD şeridi */
+.tr-hud-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+}
+
+.tr-hud-bar[hidden] {
+    display: none;
+}
+
+.tr-hud-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    font-size: var(--text-xs);
+    color: var(--color-text-2);
+}
+
+.tr-hud-pill strong {
+    color: var(--color-text);
+    font-family: var(--font-mono);
+}
+
+.tr-hud-budget.is-low {
+    border-color: var(--color-danger);
+    background: var(--color-danger-soft);
+}
+
+.tr-hud-delta.is-pos strong { color: var(--color-success); }
+.tr-hud-delta.is-neg strong { color: var(--color-danger); }
+
+/* Ana sayfa Tırmanış kartı vurgusu */
+.desk-climb {
+    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--color-border));
+}
+
+@media (max-width: 600px) {
+    .tr-delta-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-    .kl-noro svg {
-        width: 62px;
-        height: 62px;
+    .tr-noro-seat {
+        bottom: 12%;
+        transform: translateX(-50%) scale(0.84);
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tr-fire-ambient, .tr-mote { animation: none !important; }
+    .tr-motes { display: none; }
 }
 
 </style>
@@ -7187,7 +7121,6 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
 
             <nav class="top-nav" aria-label="Ana menü">
                 <a class="top-nav-link" href="#/oyna" data-route="oyna">Oyna</a>
-                <a class="top-nav-link" href="#/klinigim" data-route="klinigim">Kliniğim</a>
                 <a class="top-nav-link" href="#/online" data-route="online">Online</a>
                 <a class="top-nav-link" href="#/kutuphane" data-route="kutuphane">Kütüphane</a>
                 <a class="top-nav-link" href="#/profil" data-route="profil">Profil</a>
@@ -7306,6 +7239,17 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </div>
 
                 <div class="desk-aside">
+                    <!-- Tırmanış: zor mod kesintisiz seri + 10 ipucu bütçesi -->
+                    <article class="card card-action desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="climbCardTitle">🏔️ Tırmanış</h3>
+                            <p class="card-text" id="homeClimbMeta">Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?</p>
+                        </div>
+                        <div class="card-action-row">
+                            <a class="btn btn-primary" id="btnHomeClimb" href="#/tirmanis">Tırmanışa başla</a>
+                        </div>
+                    </article>
+
                     <!-- Sınırsız pratik: fiş kutusu (ön fişte geçerli filtre) -->
                     <article class="card card-action desk-cardbox" aria-labelledby="practiceCardTitle">
                         <div class="card-action-head">
@@ -7626,6 +7570,9 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </li>
             </ol>
 
+            <!-- Tırmanış canlı HUD şeridi (js/tirmanis.js) -->
+            <div id="climbHudBar" class="tr-hud-bar" hidden></div>
+
             <!-- Hasta dosyası -->
             <section class="patient-card" aria-label="Hasta dosyası">
                 <div class="patient-card-head">
@@ -7721,16 +7668,15 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </div>
             </section>
         </section>
-        <!-- EKRAN: Kliniğim (tek oyunculu klinik ve dekorasyon modu) -->
-        <section class="screen screen-clinic" id="screenClinic" data-screen="klinigim" aria-label="Kliniğim" hidden>
-            <div id="clinicMount"></div>
+        <!-- EKRAN: Tırmanış (zor mod seri + 10 ipucu bütçesi) -->
+        <section class="screen screen-climb" id="screenClimb" data-screen="tirmanis" aria-label="Tırmanış" hidden>
+            <div id="climbMount"></div>
         </section>
     </main>
 
     <!-- Telefon alt sekme çubuğu -->
     <nav class="tab-bar" aria-label="Ana menü">
         <a class="tab-bar-link" href="#/oyna" data-route="oyna"><svg class="icon"><use href="#i-target"/></svg><span>Oyna</span></a>
-        <a class="tab-bar-link" href="#/klinigim" data-route="klinigim"><svg class="icon"><use href="#i-home"/></svg><span>Kliniğim</span></a>
         <a class="tab-bar-link" href="#/online" data-route="online"><svg class="icon"><use href="#i-globe"/></svg><span>Online</span></a>
         <a class="tab-bar-link" href="#/kutuphane" data-route="kutuphane"><svg class="icon"><use href="#i-book"/></svg><span>Kütüphane</span></a>
         <a class="tab-bar-link" href="#/profil" data-route="profil"><svg class="icon"><use href="#i-user"/></svg><span>Profil</span></a>
@@ -41880,7 +41826,7 @@ class PsikoVakaGame {
     initRouter() {
         this.routeScreens = {
             oyna: this.dom.screenHome,
-            klinigim: document.getElementById('screenClinic'),
+            tirmanis: document.getElementById('screenClimb'),
             online: this.dom.screenOnline,
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
@@ -41889,7 +41835,7 @@ class PsikoVakaGame {
             notfound: document.getElementById('screenNotFound')
         };
         // Alt ekranlar: menüde hangi ana sekme etkin görünsün
-        this.routeNavParent = { ligler: 'profil', gunluk: 'oyna' };
+        this.routeNavParent = { ligler: 'profil', gunluk: 'oyna', tirmanis: 'oyna' };
         this.screenHooks = this.screenHooks || {};
 
         window.addEventListener('hashchange', () => {
@@ -41976,7 +41922,15 @@ class PsikoVakaGame {
         const changed = this.currentScreen !== name;
         this.currentScreen = name;
 
-        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard(); }
+        if (name === 'oyna') {
+            this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard();
+            if (window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.updateHomeCard();
+        }
+        if (name === 'tirmanis' && window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.render();
+        if (name !== 'play' && window.PsikoVakaTirmanis) {
+            const bar = document.getElementById('climbHudBar');
+            if (bar) bar.hidden = true;
+        }
         if (name === 'profil') this.updateProfileScreen();
         if (name === 'notfound') {
             const m = document.getElementById('notFoundNoro');
@@ -43294,8 +43248,8 @@ class PsikoVakaGame {
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.addEventListener('click', () => {
-                if (this.currentMode === 'clinic') {
-                    this.showRoute('klinigim');
+                if (this.currentMode === 'climb' && window.PsikoVakaTirmanis) {
+                    window.PsikoVakaTirmanis.handlePostCaseAction();
                     return;
                 }
                 this.setMode('practice');
@@ -44138,9 +44092,9 @@ class PsikoVakaGame {
         this.renderZorlukUI();
     }
 
-    /** Günlük, pratik ve klinikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    /** Günlük ve pratikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
     canEditZorluk() {
-        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice' && this.currentMode !== 'clinic') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
         const log = this.stageGuessLog || {};
         const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
@@ -44166,7 +44120,7 @@ class PsikoVakaGame {
         }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
-            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice' || this.currentMode === 'clinic');
+            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice');
             const editable = this.canEditZorluk();
             const show = isDailyOrPractice && !this.dailyReadOnly;
             if (show) {
@@ -44192,6 +44146,10 @@ class PsikoVakaGame {
     async revealNextClue() {
         if (!(this.zorluk && this.zorluk.tekHak) || this.isGameOver || this.dailyReadOnly || this._revealBusy) return;
         if (this.unlockedClues >= this.maxClues) return;
+        if (this.currentMode === 'climb' && window.PsikoVakaTirmanis && !window.PsikoVakaTirmanis.canRevealClue(this.unlockedClues + 1)) {
+            this.announcePlay('İpucu bütçesi yetersiz.');
+            return;
+        }
         let n = this.unlockedClues + 1;
         if (typeof this.clueRevealHandler === 'function') {
             this._revealBusy = true; this.updateNextClueButton();
@@ -44292,11 +44250,24 @@ class PsikoVakaGame {
             nextBtn.type = 'button';
             nextBtn.id = 'btnInlineNextClue';
             nextBtn.className = 'btn btn-secondary btn-inline-next-clue';
-            nextBtn.disabled = !!this._revealBusy;
-            nextBtn.innerHTML = `${this.icon('plus')}<span>Sonraki ipucunu aç (${visibleCount + 1}/${this.maxClues})</span>`;
+            const nextNum = visibleCount + 1;
+            const isClimb = this.currentMode === 'climb' && window.PsikoVakaTirmanis;
+            if (isClimb) {
+                const T = window.PsikoVakaTirmanis;
+                const ok = T.canRevealClue(nextNum);
+                const d = T.deltaFor(nextNum);
+                nextBtn.disabled = !!this._revealBusy || !ok;
+                nextBtn.innerHTML = ok
+                    ? `${this.icon('plus')}<span>Sonraki ipucunu aç (${nextNum}/${this.maxClues} · ${T.fmtDelta(d)} bütçe)</span>`
+                    : `${this.icon('lock')}<span>İpucu bütçesi yetersiz (gerekli: ${T.requiredBudgetFor(nextNum)})</span>`;
+            } else {
+                nextBtn.disabled = !!this._revealBusy;
+                nextBtn.innerHTML = `${this.icon('plus')}<span>Sonraki ipucunu aç (${nextNum}/${this.maxClues})</span>`;
+            }
             nextBtn.addEventListener('click', () => this.revealNextClue());
             this.dom.cluesContainer.appendChild(nextBtn);
         }
+        if (window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.renderPlayHud(this);
 
         this.dom.clueProgressTracker.innerHTML = '';
         for (let i = 0; i < this.maxClues; i++) {
@@ -44808,9 +44779,9 @@ class PsikoVakaGame {
             this.updateHomeMeta();
         }
 
-        // Kliniğim modu: seans ücreti ve danışan yorumu
-        if (this.currentMode === 'clinic' && window.PsikoVakaKlinik && typeof window.PsikoVakaKlinik.onCaseFinished === 'function') {
-            window.PsikoVakaKlinik.onCaseFinished(won, this);
+        // Tırmanış modu: seri ve ipucu bütçesi güncelleme
+        if (this.currentMode === 'climb' && window.PsikoVakaTirmanis && typeof window.PsikoVakaTirmanis.onCaseFinished === 'function') {
+            window.PsikoVakaTirmanis.onCaseFinished(won, this);
         }
 
         this.emitPlayState();
@@ -49815,7 +49786,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!node) return;
         const W = L.W || 1, H = L.H || 1;
         const depth = (0.82 + (st.y - FLOOR_TOP) * 0.45);
-        node.style.transform = `translate3d(${(st.x * W).toFixed(1)}px, ${(st.y * H).toFixed(1)}px, 0) translate(-50%, -88%) scale(${depth.toFixed(3)})`;
+        node.style.transform = `translate3d(${(st.x * W).toFixed(1)}px, ${(st.y * H).toFixed(1)}px, 0) translate(-50%, -67%) scale(${depth.toFixed(3)})`;
         const z = String(st.seated && st.opts && st.opts.zBase ? 11 + Math.round(st.opts.zBase * 100) : 10 + Math.round(st.y * 100));
         if (node.style.zIndex !== z) node.style.zIndex = z;
         const fig = node.querySelector('.ol-p-fig');
@@ -49880,7 +49851,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!b._w) { b._w = b.offsetWidth || 0; b._hh = b.offsetHeight || 0; }
         const ax = st.x * W, ay = st.y * H;
         // eski yerleşimle aynı: balonun altı düğümün üst kenarının 6 px altında (ölçekli)
-        let bottom = ay - node._h * 0.88 * depth + 6 * depth;
+        let bottom = ay - node._h * 0.67 * depth + 6 * depth;
         const m = 6, half = b._w / 2;
         let x = ax;
         if (half * 2 + 2 * m < W) x = Math.max(half + m, Math.min(W - half - m, ax));
@@ -54848,76 +54819,40 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
 </script>
 <script>
 /**
- * PsikoVaka — Kliniğim v1 (Tek Oyunculu Klinik & Dekorasyon Modu)
- * Danışan Nöro kabulü, seans ücreti + itibar, odada canlı görünen eşya mağazası.
- * İlerleme localStorage.psikovaka_clinic_v1 içinde saklanır (online Elo'yu etkilemez).
+ * PsikoVaka — Tırmanış Modu (Zor Mod Kesintisiz Seri + Paylaşımlı İpucu Bütçesi).
+ * - Başlangıçta 10 ipucu bütçesiyle başlanır.
+ * - Her vaka Zor Modda (Tek Tahmin Hakkı + Kategori Gizli) oynanır.
+ * - Doğru tahminde kaçıncı ipucunda bilindiğine göre bütçe değişimi:
+ *   1. ipucu: +2 | 2.: +1 | 3.: ±0 | 4.: -1 | 5.: -2 | 6.: -3
+ * - Yanlış tahminde tırmanış biter.
+ * - İlerleme localStorage.psikovaka_tirmanis_v1 içinde saklanır (online Elo'yu etkilemez).
  */
 (function (global) {
     'use strict';
 
-    const STORAGE_KEY = 'psikovaka_clinic_v1';
-
-    const SHOP_ITEMS = [
-        { id: 'decor_plant', cat: 'Atmosfer', name: 'Salon Bitkisi', desc: 'Odaya canlılık ve ferahlık katar.', price: 150, bonusPct: 5, icon: '🪴' },
-        { id: 'wall_diploma', cat: 'Prestij', name: 'Uzmanlık Diploması', desc: 'Duvara asılı çerçeveli klinik yetki belgesi.', price: 200, bonusPct: 5, icon: '📜' },
-        { id: 'seat_chair', cat: 'Oturma', name: 'Rahat Terapi Koltuğu', desc: 'Tabure yerine yumuşak, geniş bir koltuk.', price: 250, bonusPct: 10, icon: '🪑' },
-        { id: 'decor_rug', cat: 'Atmosfer', name: 'Desenli Klinik Halısı', desc: 'Zemini ısıtan dokuma terapi halısı.', price: 300, bonusPct: 10, icon: '🧶' },
-        { id: 'wall_clock', cat: 'Prestij', name: 'Sessiz Duvar Saati', desc: 'Gerçek zamanlı çalışan klasik ahşap saat.', price: 350, bonusPct: 8, icon: '🕰️' },
-        { id: 'wall_rorschach', cat: 'Prestij', name: 'Rorschach Tablosu', desc: 'Tıklandıkça değişen mürekkep lekesi tablosu.', price: 450, bonusPct: 12, icon: '🦋' },
-        { id: 'equip_espresso', cat: 'İkram', name: 'Espresso Makinesi', desc: 'Sıcak kahve ikramı seans memnuniyetini artırır.', price: 500, bonusPct: 15, icon: '☕' },
-        { id: 'seat_couch', cat: 'Oturma', name: 'Deri Psikanaliz Divanı', desc: 'Klasik, gösterişli üç kişilik terapi divanı.', price: 650, bonusPct: 20, icon: '🛋️', requires: 'seat_chair' },
-        { id: 'equip_bookshelf', cat: 'İkram', name: 'DSM-5-TR Kütüphanesi', desc: 'Tavana kadar uzanan zengin klinik kitaplık.', price: 700, bonusPct: 20, icon: '📚' },
-        { id: 'decor_fireplace', cat: 'Atmosfer', name: 'Sıcak Şömine', desc: 'Kıvılcımlı şömine ile en üst düzey klinik atmosferi.', price: 800, bonusPct: 25, icon: '🔥' }
-    ];
-
-    const CLINIC_RANKS = [
-        { minItems: 0, title: 'Stajyer Görüşme Odası' },
-        { minItems: 2, title: 'Genç Klinisyen Ofisi' },
-        { minItems: 5, title: 'Özel Danışmanlık Kliniği' },
-        { minItems: 8, title: 'Uzman Psikiyatri Merkezi' },
-        { minItems: 10, title: 'Efsanevi Başhekim Enstitüsü' }
-    ];
-
-    const GREETINGS = [
-        'Merhaba hocam, biraz konuşabilir miyiz?',
-        'Bir süredir kendimi hiç iyi hissetmiyorum...',
-        'Yakınlarım mutlaka size görünmemi istedi.',
-        'Son haftalarda uyku ve düzenim tamamen bozuldu.',
-        'Kimseye anlatamadığım bazı şeyler yaşıyorum...'
-    ];
-
-    const WIN_REVIEWS = [
-        'İlk bakışta beni anladı, harika bir klinisyen!',
-        'Çok dikkatli dinledi ve nokta atışı tanı koydu.',
-        'Oda atmosferi çok rahatlatıcı, kesinlikle tavsiye ederim.',
-        'Kafamdaki bütün soru işaretleri çözüldü, teşekkürler!',
-        'Sanki kitabın içinden çıkıp gelmiş gibi doğru teşhis!'
-    ];
-
-    const RORSCHACH_SHAPES = [
-        { d: 'M0 -11 C-4 -14 -12 -10 -14 -3 C-16 4 -9 10 -4 8 L0 5 L4 8 C9 10 16 4 14 -3 C12 -10 4 -14 0 -11 Z', msg: '🦋 Kelebek mi, iki ayı mı?' },
-        { d: 'M0 -13 C-3 -9 -9 -11 -13 -6 C-15 -1 -10 2 -6 4 C-9 8 -6 13 -2 10 L0 6 L2 10 C6 13 9 8 6 4 C10 2 15 -1 13 -6 C9 -11 3 -9 0 -13 Z', msg: '🦇 Yarasa kanadı gibi!' },
-        { d: 'M0 -10 C-6 -14 -15 -6 -11 2 C-8 8 -13 11 -5 12 L0 8 L5 12 C13 11 8 8 11 2 C15 -6 6 -14 0 -10 Z', msg: '☕ İki terapist kahve içiyor!' }
-    ];
+    const STORAGE_KEY = 'psikovaka_tirmanis_v1';
+    const START_BUDGET = 10;
+    const DELTA_BY_CLUE = { 1: 2, 2: 1, 3: 0, 4: -1, 5: -2, 6: -3 };
 
     let state = null;
-    let activePatientAvatar = null;
-    let walkingIn = false;
-    let lastPayout = null;
-    let blotIndex = 0;
+    let lastFinishedRun = null;
 
     function defaultState() {
-        return { money: 0, reputation: 0, treated: 0, wonCount: 0, owned: [], reviews: [] };
+        return {
+            bestStreak: 0,
+            totalRuns: 0,
+            activeRun: null // { streak, budget, totalClues, usedIds: [], targetMode }
+        };
     }
 
     function load() {
         if (state) return state;
         try {
-            const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-            if (raw && typeof raw === 'object') {
-                state = Object.assign(defaultState(), raw);
-                if (!Array.isArray(state.owned)) state.owned = [];
-                if (!Array.isArray(state.reviews)) state.reviews = [];
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                const p = JSON.parse(raw);
+                state = Object.assign(defaultState(), p || {});
+                if (state.activeRun && typeof state.activeRun !== 'object') state.activeRun = null;
                 return state;
             }
         } catch (e) {}
@@ -54926,33 +54861,28 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     }
 
     function save() {
-        if (!state) return;
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(load())); } catch (e) {}
     }
 
-    function has(itemId) {
-        return load().owned.includes(itemId);
+    function deltaFor(clueNum) {
+        const n = Math.max(1, Math.min(6, Number(clueNum) || 1));
+        return DELTA_BY_CLUE[n];
     }
 
-    function totalBonusPct() {
-        const s = load();
-        return SHOP_ITEMS.reduce((sum, it) => sum + (s.owned.includes(it.id) ? it.bonusPct : 0), 0);
+    function fmtDelta(d) {
+        if (d > 0) return `+${d}`;
+        if (d < 0) return `${d}`;
+        return '±0';
     }
 
-    function clinicRankTitle() {
-        const n = load().owned.length;
-        let title = CLINIC_RANKS[0].title;
-        for (const r of CLINIC_RANKS) {
-            if (n >= r.minItems) title = r.title;
-        }
-        return title;
+    function requiredBudgetFor(nextClueNum) {
+        return Math.max(0, (Number(nextClueNum) || 1) - 3);
     }
 
-    function avgRating() {
-        const s = load();
-        if (!s.treated) return '—';
-        const score = Math.min(5, Math.max(3.0, 3.2 + (s.wonCount / Math.max(1, s.treated)) * 1.8));
-        return score.toFixed(1);
+    function canRevealClue(nextClueNum) {
+        const run = load().activeRun;
+        if (!run) return true;
+        return run.budget >= requiredBudgetFor(nextClueNum);
     }
 
     function esc(str) {
@@ -54962,376 +54892,300 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
     function renderAvatar(cfg, size, opts) {
         const AV = global.PsikoVakaAvatar;
         if (!AV) return '';
-        return AV.render(cfg, Object.assign({ size: size || 78, framed: false, animated: true }, opts || {}));
+        return AV.render(cfg, Object.assign({ size: size || 88, framed: false, animated: true }, opts || {}));
     }
 
-    function drawClockSVG() {
-        const now = new Date();
-        const sec = now.getHours() % 12 * 3600 + now.getMinutes() * 60 + now.getSeconds();
-        const st = (period, offs) => `style="transform-origin:520px 62px;animation-duration:${period}s;animation-delay:-${offs}s"`;
-        return `<g class="kl-item kl-clock">
-            <circle cx="520" cy="64" r="21" fill="#000" opacity=".2"/>
-            <circle cx="520" cy="62" r="21" fill="#7a4d33" stroke="#2a1f1c" stroke-width="1.5"/>
-            <circle cx="520" cy="62" r="17" fill="#fbf4e4"/>
-            <path class="olr-hand" ${st(43200, sec % 43200)} d="M520 64V52" stroke="#2a1f1c" stroke-width="2.2" stroke-linecap="round"/>
-            <path class="olr-hand" ${st(3600, sec % 3600)} d="M520 64V48" stroke="#2a1f1c" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="520" cy="62" r="2" fill="#c0533f"/>
-        </g>`;
+    function pickNextCase(gm, run) {
+        const all = (global.CASES_DATABASE || []).filter(c => !c.archived);
+        const mode = (run && run.targetMode) || (gm && gm.targetMode) || 'diagnosis';
+        let pool = all;
+        if (mode === 'therapy') pool = all.filter(c => c.targetTherapyId);
+        else if (mode === 'pharmacology') pool = all.filter(c => c.targetPharmacologyId);
+        else if (mode === 'combo') pool = all.filter(c => c.targetTherapyId || c.targetPharmacologyId);
+        if (!pool.length) pool = all;
+
+        const used = new Set((run && run.usedIds) || []);
+        let fresh = pool.filter(c => !used.has(c.id));
+        if (!fresh.length) {
+            if (run) run.usedIds = [];
+            fresh = pool;
+        }
+        return fresh[Math.floor(Math.random() * fresh.length)];
     }
 
-    function renderStageSVG() {
-        const s = load();
-        const deluxe = s.owned.length >= 5;
-        const usePhoto = typeof location === 'undefined' || location.protocol !== 'file:';
-        const blot = RORSCHACH_SHAPES[blotIndex % RORSCHACH_SHAPES.length];
-
-        let svg = `<svg class="kl-room-svg${usePhoto ? ' is-overlay' : ''}" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">`;
-
-        // Yalnızca file:// çevrimdışı tek dosyalık sürümde yedek vektör oda çiz
-        if (!usePhoto) {
-            const wallTop = deluxe ? '#3d2c26' : '#f3e7ce';
-            const wain = deluxe ? '#5c3c2a' : '#a8c2a6';
-            const floor = deluxe ? '#7a4a2a' : '#d69f62';
-            svg += `
-                <rect x="0" y="0" width="640" height="132" fill="${wallTop}"/>
-                <rect x="0" y="96" width="640" height="36" fill="${wain}"/>
-                <rect x="0" y="132" width="640" height="168" fill="${floor}"/>`;
-        }
-
-        // Starter modda alınan dekor eşyaları Club Penguin başlangıç odasının boş alanlarına yerleşir;
-        // Deluxe modda (5+ eşya) arka plan illüstrasyonu zaten şömine, kitaplık, halı, bitki ve espresso barı içerir.
-        if (!deluxe) {
-            if (has('decor_rug')) {
-                svg += `<g class="kl-item">
-                    <polygon points="155,186 435,186 468,266 122,266" fill="#9c4138" stroke="#3a2318" stroke-width="2.4" stroke-linejoin="round"/>
-                    <polygon points="175,196 415,196 442,256 148,256" fill="#2f6b73" stroke="#3a2318" stroke-width="1.6"/>
-                    <polygon points="215,208 375,208 394,244 196,244" fill="#e6b655" opacity=".88"/>
-                </g>`;
-            }
-            if (has('equip_bookshelf')) {
-                svg += `<g class="kl-item">
-                    <rect x="150" y="24" width="84" height="110" rx="8" fill="#7c4b2c" stroke="#3a2318" stroke-width="2.4"/>
-                    <rect x="158" y="34" width="68" height="92" rx="4" fill="#472818"/>
-                    <rect x="163" y="40" width="10" height="22" rx="1.5" fill="#d45b47" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="175" y="43" width="9" height="19" rx="1.5" fill="#3a819e" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="186" y="38" width="11" height="24" rx="1.5" fill="#e3b04b" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="199" y="42" width="10" height="20" rx="1.5" fill="#5e9956" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="158" y="63" width="68" height="4" fill="#8f5a38"/>
-                    <rect x="164" y="70" width="12" height="20" rx="1.5" fill="#4f9188" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="178" y="68" width="11" height="22" rx="1.5" fill="#e07d5c" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="192" y="71" width="14" height="19" rx="1.5" fill="#8c6bb5" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="158" y="92" width="68" height="4" fill="#8f5a38"/>
-                    <rect x="165" y="99" width="13" height="23" rx="1.5" fill="#c95340" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="181" y="102" width="14" height="20" rx="1.5" fill="#d9a441" stroke="#3a2318" stroke-width="1.2"/>
-                    <rect x="198" y="98" width="12" height="24" rx="1.5" fill="#3f6e8c" stroke="#3a2318" stroke-width="1.2"/>
-                </g>`;
-            }
-            if (has('decor_fireplace')) {
-                svg += `<g class="kl-item">
-                    <rect x="262" y="54" width="112" height="84" rx="6" fill="#9c8b7e" stroke="#3a2318" stroke-width="2.4"/>
-                    <rect x="254" y="48" width="128" height="12" rx="4" fill="#7c4b2c" stroke="#3a2318" stroke-width="2.2"/>
-                    <path d="M290 136V96A28 22 0 0 1 346 96V136Z" fill="#2a1914" stroke="#3a2318" stroke-width="2.2"/>
-                    <path class="kl-flame" d="M304 132C300 114 311 108 318 94C325 108 336 114 332 132Z" fill="#ff8a2b"/>
-                    <path class="kl-flame" d="M311 132C309 120 315 116 318 106C321 116 327 120 325 132Z" fill="#ffe066"/>
-                </g>`;
-            }
-            if (has('wall_diploma')) {
-                svg += `<g class="kl-item">
-                    <rect x="492" y="34" width="52" height="38" rx="3" fill="#c29042" stroke="#3a2318" stroke-width="2"/>
-                    <rect x="497" y="39" width="42" height="28" fill="#fdf6e3"/>
-                    <path d="M503 48H533M506 54H528M505 60H520" stroke="#8a7e6e" stroke-width="1.8" stroke-linecap="round"/>
-                    <circle cx="530" cy="60" r="3.8" fill="#d45340"/>
-                </g>`;
-            }
-            if (has('equip_espresso')) {
-                svg += `<g class="kl-item">
-                    <rect x="526" y="138" width="52" height="30" rx="4" fill="#825032" stroke="#3a2318" stroke-width="2.2"/>
-                    <rect x="534" y="110" width="34" height="28" rx="5" fill="#d9e2ec" stroke="#3a2318" stroke-width="2.2"/>
-                    <rect x="539" y="115" width="24" height="10" rx="2" fill="#243447"/>
-                    <circle cx="544" cy="120" r="2.2" fill="#34d399"/><circle cx="551" cy="120" r="2.2" fill="#fbbf24"/>
-                    <rect x="547" y="130" width="9" height="7" rx="1.5" fill="#fff" stroke="#3a2318" stroke-width="1.4"/>
-                </g>`;
-            }
-            if (has('decor_plant')) {
-                svg += `<g class="kl-item">
-                    <ellipse cx="144" cy="156" rx="18" ry="5" fill="#3a2318" opacity=".2"/>
-                    <path d="M130 124H158L153 154H135Z" fill="#c97149" stroke="#3a2318" stroke-width="2.2" stroke-linejoin="round"/>
-                    <path d="M144 125C128 112 118 96 128 84C140 94 143 108 144 125Z" fill="#529e58" stroke="#2a4d2c" stroke-width="2"/>
-                    <path d="M144 125C160 110 170 94 160 82C148 92 145 108 144 125Z" fill="#63b368" stroke="#2a4d2c" stroke-width="2"/>
-                    <path d="M144 125C140 100 138 78 146 70C154 82 150 104 144 125Z" fill="#468c4c" stroke="#2a4d2c" stroke-width="2"/>
-                </g>`;
-            }
-        }
-
-        // Her iki modda da canlı / etkileşimli duvar öğeleri
-        if (has('wall_rorschach')) {
-            svg += `<g class="kl-item kl-rorschach-box" id="klRorschachWall">
-                <rect x="434" y="28" width="46" height="56" rx="4" fill="#6e4429" stroke="#3a2318" stroke-width="2.2"/>
-                <rect x="439" y="33" width="36" height="46" rx="2" fill="#faf3e0"/>
-                <g transform="translate(457 56) scale(0.92)"><path d="${blot.d}" fill="#231c35"/></g>
-            </g>`;
-        }
-        if (has('wall_clock')) {
-            svg += drawClockSVG();
-        }
-
-        // Danışan Oturma Alanı (sol-orta halı üstünde: koltuk veya deri psikanaliz divanı)
-        if (has('seat_couch')) {
-            svg += `<g class="kl-item">
-                <ellipse cx="242" cy="236" rx="84" ry="12" fill="#3a2318" opacity=".24"/>
-                <path d="M170 176Q170 160 188 160H296Q314 160 314 176V222H170Z" fill="#a8503c" stroke="#3a2318" stroke-width="2.6" stroke-linejoin="round"/>
-                <rect x="180" y="168" width="42" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
-                <rect x="224" y="168" width="42" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
-                <rect x="268" y="168" width="38" height="40" rx="10" fill="#c2654e" stroke="#3a2318" stroke-width="2"/>
-                <rect x="174" y="202" width="136" height="22" rx="8" fill="#d47860" stroke="#3a2318" stroke-width="2.4"/>
-                <rect x="158" y="182" width="20" height="46" rx="9" fill="#914230" stroke="#3a2318" stroke-width="2.4"/>
-                <rect x="306" y="182" width="20" height="46" rx="9" fill="#914230" stroke="#3a2318" stroke-width="2.4"/>
-            </g>`;
-        } else if (has('seat_chair')) {
-            svg += `<g class="kl-item">
-                <ellipse cx="242" cy="234" rx="46" ry="10" fill="#3a2318" opacity=".22"/>
-                <path d="M206 168Q206 154 222 154H262Q278 154 278 168V218H206Z" fill="#2f6f73" stroke="#3a2318" stroke-width="2.5" stroke-linejoin="round"/>
-                <rect x="200" y="196" width="84" height="22" rx="8" fill="#3f8f94" stroke="#3a2318" stroke-width="2.4"/>
-                <rect x="194" y="180" width="16" height="44" rx="7" fill="#255a5e" stroke="#3a2318" stroke-width="2.4"/>
-                <rect x="274" y="180" width="16" height="44" rx="7" fill="#255a5e" stroke="#3a2318" stroke-width="2.4"/>
-            </g>`;
-        }
-
-        svg += `</svg>`;
-        return svg;
-    }
-
-    function render() {
-        const root = document.getElementById('clinicMount');
-        if (!root) return;
+    function startNewRun() {
         const s = load();
         const gm = global.game;
-        const myCfg = (gm && gm.myAvatar) || (global.PsikoVakaAvatar && global.PsikoVakaAvatar.DEFAULT) || {};
-        const bonus = totalBonusPct();
-        const nextBtnDisabled = walkingIn ? ' disabled' : '';
-
-        const payoutHtml = lastPayout ? `
-            <div class="kl-payout-banner ${lastPayout.won ? 'is-win' : 'is-loss'}">
-                <div class="kl-payout-main">
-                    <strong>${lastPayout.won ? `+${lastPayout.earned} ₺ Seans Ücreti Kazanıldı!` : 'Seans tamamlandı (0 ₺)'}</strong>
-                    <span>${esc(lastPayout.note)}</span>
-                </div>
-                <button type="button" class="btn btn-ghost btn-sm" id="btnClinicClosePayout">Tamam</button>
-            </div>` : '';
-
-        const shopHtml = SHOP_ITEMS.map(it => {
-            const owned = has(it.id);
-            const lockedBy = it.requires && !has(it.requires);
-            const reqName = lockedBy ? (SHOP_ITEMS.find(x => x.id === it.requires) || {}).name : '';
-            const canBuy = !owned && !lockedBy && s.money >= it.price;
-            return `<article class="kl-shop-card${owned ? ' is-owned' : ''}${lockedBy ? ' is-locked' : ''}">
-                <div class="kl-shop-top">
-                    <span class="kl-shop-ico" aria-hidden="true">${it.icon}</span>
-                    <div class="kl-shop-info">
-                        <div class="kl-shop-name">${esc(it.name)}</div>
-                        <div class="kl-shop-desc">${esc(it.desc)}</div>
-                    </div>
-                </div>
-                <div class="kl-shop-foot">
-                    <span class="kl-shop-bonus">+%${it.bonusPct} ücret</span>
-                    ${owned
-                        ? `<span class="kl-shop-owned">✓ Odada</span>`
-                        : lockedBy
-                            ? `<span class="kl-shop-req">Önce: ${esc(reqName)}</span>`
-                            : `<button type="button" class="btn btn-sm ${canBuy ? 'btn-primary' : 'btn-secondary'}" data-kl-buy="${it.id}" ${canBuy ? '' : 'disabled'}>${it.price} ₺</button>`
-                    }
-                </div>
-            </article>`;
-        }).join('');
-
-        const reviewsHtml = s.reviews.length
-            ? s.reviews.slice(0, 4).map(r => `<li class="kl-review-item"><span class="kl-review-stars">${r.won ? '★★★★★' : '★★★☆☆'}</span><span class="kl-review-text">"${esc(r.text)}"</span></li>`).join('')
-            : `<li class="kl-review-empty">Henüz danışan kabul etmedin. İlk seansını başlattığında yorumlar burada görünecek.</li>`;
-
-        root.innerHTML = `
-            <div class="kl-header">
-                <div>
-                    <h1 class="kl-title">${esc(clinicRankTitle())}</h1>
-                    <p class="kl-sub">Danışan kabul et, doğru teşhislerle bütçe kazan ve kliniğini geliştir.</p>
-                </div>
-                <div class="kl-stats">
-                    <div class="kl-stat-pill is-money"><span>💰</span><strong>${s.money} ₺</strong></div>
-                    <div class="kl-stat-pill"><span>⭐</span><strong>${avgRating()}</strong></div>
-                    <div class="kl-stat-pill"><span>🧑‍⚕️</span><strong>${s.treated} seans</strong></div>
-                    ${bonus > 0 ? `<div class="kl-stat-pill is-bonus"><span>📈</span><strong>+%${bonus}</strong></div>` : ''}
-                </div>
-            </div>
-
-            ${payoutHtml}
-
-            <div class="kl-stage${s.owned.length >= 5 ? ' is-deluxe' : ''}" id="clinicStage">
-                <div class="kl-bg-photo${s.owned.length >= 5 ? ' is-deluxe' : ''}" aria-hidden="true"></div>
-                ${(s.owned.length >= 5 || has('decor_fireplace')) ? `<div class="kl-fire-ambient" aria-hidden="true"></div>` : ''}
-                <div class="kl-motes" aria-hidden="true">
-                    <span class="kl-mote" style="left:28%;top:28%;animation-delay:0s"></span>
-                    <span class="kl-mote" style="left:44%;top:36%;animation-delay:2.1s"></span>
-                    <span class="kl-mote" style="left:60%;top:30%;animation-delay:4.2s"></span>
-                    <span class="kl-mote" style="left:76%;top:42%;animation-delay:1.4s"></span>
-                </div>
-                ${renderStageSVG()}
-                ${has('wall_rorschach') ? `<button type="button" class="kl-rorschach-hit" id="btnClinicRorschach" aria-label="Rorschach tablosunu değiştir" title="Mürekkep lekesine bak"></button>` : ''}
-                <div class="kl-noro kl-therapist">
-                    ${renderAvatar(myCfg, 88, { facing: 'left', activity: walkingIn ? 'wave' : null })}
-                    <span class="kl-tag">Sen</span>
-                </div>
-                <div class="kl-noro kl-patient${walkingIn ? ' is-entering' : ''}" id="clinicPatientSlot" ${activePatientAvatar ? '' : 'hidden'}>
-                    <div class="kl-patient-bubble" id="clinicPatientBubble" hidden></div>
-                    <div id="clinicPatientFig">${activePatientAvatar ? renderAvatar(activePatientAvatar, 84, { facing: 'right', walking: walkingIn }) : ''}</div>
-                    <span class="kl-tag">Danışan</span>
-                </div>
-            </div>
-
-            <div class="kl-actions-bar">
-                <button type="button" class="btn btn-primary btn-lg kl-accept-btn" id="btnClinicNextPatient"${nextBtnDisabled}>
-                    🔔 Sıradaki Danışanı Al
-                </button>
-            </div>
-
-            <section class="kl-section" aria-labelledby="klShopHeading">
-                <div class="kl-section-head">
-                    <h2 class="kl-section-title" id="klShopHeading">Klinik Geliştirme Mağazası</h2>
-                    <span class="kl-section-meta">${s.owned.length}/${SHOP_ITEMS.length} eşya</span>
-                </div>
-                <div class="kl-shop-grid">${shopHtml}</div>
-            </section>
-
-            <section class="kl-section" aria-labelledby="klReviewHeading">
-                <h2 class="kl-section-title" id="klReviewHeading">Son Danışan Yorumları</h2>
-                <ul class="kl-reviews-list">${reviewsHtml}</ul>
-            </section>
-        `;
-
-        bindEvents(root);
+        lastFinishedRun = null;
+        s.activeRun = {
+            streak: 0,
+            budget: START_BUDGET,
+            totalClues: 0,
+            usedIds: [],
+            targetMode: (gm && gm.targetMode) || 'diagnosis'
+        };
+        save();
+        updateHomeCard();
+        launchNextCase();
     }
 
-    function bindEvents(root) {
-        const btnNext = root.querySelector('#btnClinicNextPatient');
-        if (btnNext) btnNext.addEventListener('click', acceptNextPatient);
-
-        const btnClosePayout = root.querySelector('#btnClinicClosePayout');
-        if (btnClosePayout) {
-            btnClosePayout.addEventListener('click', () => { lastPayout = null; render(); });
-        }
-
-        const btnRor = root.querySelector('#btnClinicRorschach');
-        if (btnRor) {
-            btnRor.addEventListener('click', () => {
-                blotIndex = (blotIndex + 1) % RORSCHACH_SHAPES.length;
-                render();
-                if (global.game) global.game.showToast(RORSCHACH_SHAPES[blotIndex].msg);
-            });
-        }
-
-        root.querySelectorAll('[data-kl-buy]').forEach(btn => {
-            btn.addEventListener('click', () => buyItem(btn.dataset.klBuy));
-        });
-    }
-
-    function buyItem(itemId) {
-        const it = SHOP_ITEMS.find(x => x.id === itemId);
+    function continueRun() {
         const s = load();
-        if (!it || s.owned.includes(it.id)) return;
-        if (it.requires && !s.owned.includes(it.requires)) return;
-        if (s.money < it.price) {
-            if (global.game) global.game.showToast('Yeterli klinik bütçen yok.');
+        if (!s.activeRun) {
+            startNewRun();
             return;
         }
-        s.money -= it.price;
-        s.owned.push(it.id);
+        launchNextCase();
+    }
+
+    function launchNextCase() {
+        const s = load();
+        const gm = global.game;
+        if (!gm || !s.activeRun) return;
+        const c = pickNextCase(gm, s.activeRun);
+        if (!c) return;
+        s.activeRun.usedIds.push(c.id);
         save();
-        if (global.game) {
-            global.game.playTone('win');
-            global.game.showToast(`${it.icon} ${it.name} kliniğine eklendi! (+%${it.bonusPct} seans ücreti)`);
+
+        gm.currentMode = 'climb';
+        gm.dailyReadOnly = false;
+        gm.dailyContext = null;
+        gm.clueRevealHandler = null;
+        gm.dailyZorlukHandler = null;
+        if (s.activeRun.targetMode && gm.targetMode !== s.activeRun.targetMode) {
+            gm.setTargetMode(s.activeRun.targetMode, { silent: true });
         }
-        render();
+        gm.setCaseZorluk({ tekHak: true, kategoriGizli: true }, { locked: true });
+        gm.loadCase(c);
+        gm.showScreen('play');
+        if (gm.dom && gm.dom.playModePill) {
+            gm.dom.playModePill.textContent = `Tırmanış #${s.activeRun.streak + 1}`;
+        }
+        renderPlayHud(gm);
     }
 
-    function pickClinicCase() {
-        const gm = global.game;
-        if (!gm) return null;
-        const pool = (gm.allMasterCases && gm.allMasterCases.length) ? gm.allMasterCases : (gm.cases || []);
-        const unsolved = pool.filter(c => !gm.solvedCaseIds || !gm.solvedCaseIds.has(c.id));
-        const list = unsolved.length ? unsolved : pool;
-        return list[Math.floor(Math.random() * list.length)] || null;
-    }
-
-    function acceptNextPatient() {
-        const gm = global.game;
-        if (!gm || walkingIn) return;
-        const nextCase = pickClinicCase();
-        if (!nextCase) return;
-
-        lastPayout = null;
-        walkingIn = true;
-        const AV = global.PsikoVakaAvatar;
-        activePatientAvatar = AV ? AV.randomConfig(nextCase.id + '-' + Date.now()) : null;
-        render();
-
-        const bubble = document.getElementById('clinicPatientBubble');
-        if (bubble) {
-            bubble.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
-            bubble.hidden = false;
+    function renderPlayHud(gm) {
+        const bar = document.getElementById('climbHudBar');
+        if (!bar) return;
+        const s = load();
+        const run = s.activeRun;
+        if (!gm || gm.currentMode !== 'climb' || !run) {
+            bar.hidden = true;
+            bar.innerHTML = '';
+            return;
         }
-
-        setTimeout(() => {
-            walkingIn = false;
-            gm.currentRoute = 'klinigim';
-            gm.currentMode = 'clinic';
-            gm.startCase(nextCase, 'Kliniğim · Danışan Seansı');
-            if (gm.dom && gm.dom.btnMainNextCase) {
-                gm.dom.btnMainNextCase.textContent = '🏥 Kliniğe dön';
-            }
-        }, 950);
+        const curClue = Math.max(1, Math.min(6, gm.unlockedClues || 1));
+        const d = deltaFor(curClue);
+        const deltaCls = d > 0 ? 'is-pos' : d < 0 ? 'is-neg' : 'is-zero';
+        bar.hidden = false;
+        bar.innerHTML = `
+            <span class="tr-hud-pill tr-hud-streak">🔥 Seri: <strong>${run.streak}</strong></span>
+            <span class="tr-hud-pill tr-hud-budget${run.budget <= 2 ? ' is-low' : ''}">💡 İpucu Bütçesi: <strong>${run.budget}</strong></span>
+            <span class="tr-hud-pill tr-hud-delta ${deltaCls}">Bu ipucunda bilirsen: <strong>${fmtDelta(d)}</strong></span>
+            <span class="tr-hud-pill tr-hud-best">🏆 Rekor: <strong>${s.bestStreak}</strong></span>
+        `;
     }
 
     function onCaseFinished(won, gm) {
         const s = load();
-        s.treated += 1;
-        let earned = 0;
-        let note = 'Danışan teşekkür edip ayrıldı; yeni bir seans deneyebilirsin.';
+        const run = s.activeRun;
+        if (!run) return;
 
         if (won) {
-            s.wonCount += 1;
-            const cluesUsed = Math.max(1, Math.min(6, (gm.zorluk && gm.zorluk.tekHak) ? (gm.cluesUsed || gm.unlockedClues || 1) : (gm.guesses ? gm.guesses.length : 1)));
-            const baseTable = { 1: 200, 2: 160, 3: 130, 4: 100, 5: 75, 6: 50 };
-            let raw = baseTable[cluesUsed] || 50;
-            const isHard = !!(gm.zorluk && (gm.zorluk.tekHak || gm.zorluk.kategoriGizli));
-            if (isHard) raw = Math.round(raw * 1.5);
-            if (gm.targetGameMode === 'combo') raw = Math.round(raw * 2);
-            const bonusPct = totalBonusPct();
-            earned = Math.round(raw * (1 + bonusPct / 100));
-            s.money += earned;
-            s.reputation += cluesUsed <= 2 ? 2 : 1;
-            note = `${cluesUsed}. ipucunda doğru teşhis${isHard ? ' · Zor ×1,5' : ''}${bonusPct > 0 ? ` · Klinik +%${bonusPct}` : ''}`;
-            s.reviews.unshift({ won: true, text: WIN_REVIEWS[Math.floor(Math.random() * WIN_REVIEWS.length)], at: Date.now() });
+            const usedClue = Math.max(1, Math.min(6, gm.unlockedClues || 1));
+            const d = deltaFor(usedClue);
+            run.streak += 1;
+            run.totalClues += usedClue;
+            run.budget = Math.max(0, run.budget + d);
+            const newRecord = run.streak > s.bestStreak;
+            if (newRecord) s.bestStreak = run.streak;
+            save();
+            renderPlayHud(gm);
+            updateHomeCard();
+
+            if (gm && typeof gm.setResultStreak === 'function') {
+                gm.setResultStreak(`🏔️ Tırmanış Serisi: ${run.streak} · Bütçe: ${run.budget} (${fmtDelta(d)})${newRecord ? ' · 🏆 Yeni Rekor!' : ''}`, false);
+            }
+            if (gm && gm.dom && gm.dom.btnMainNextCase) {
+                gm.dom.btnMainNextCase.innerHTML = `➡️ Sıradaki Vaka (Seri #${run.streak + 1})`;
+            }
         } else {
-            s.reviews.unshift({ won: false, text: 'Biraz daha zamana ihtiyacım var sanırım, yine geleceğim.', at: Date.now() });
-        }
+            const finalStreak = run.streak;
+            const avg = finalStreak > 0 ? (run.totalClues / finalStreak).toFixed(1) : '—';
+            const isRecord = finalStreak > 0 && finalStreak >= s.bestStreak;
+            s.totalRuns += 1;
+            s.activeRun = null;
+            lastFinishedRun = { streak: finalStreak, avgClues: avg, isRecord };
+            save();
+            renderPlayHud(gm);
+            updateHomeCard();
 
-        s.reviews = s.reviews.slice(0, 10);
-        save();
-        activePatientAvatar = null;
-        lastPayout = { won: !!won, earned, note };
-
-        if (gm && gm.dom && gm.dom.btnMainNextCase) {
-            gm.dom.btnMainNextCase.textContent = won ? `🏥 Kliniğe dön (+${earned} ₺)` : '🏥 Kliniğe dön';
+            if (gm && typeof gm.setResultStreak === 'function') {
+                gm.setResultStreak(`🏔️ Tırmanış bitti · Seri: ${finalStreak} (Rekor: ${s.bestStreak})`, true);
+            }
+            if (gm && gm.dom && gm.dom.btnMainNextCase) {
+                gm.dom.btnMainNextCase.innerHTML = `🏔️ Tırmanış Odasına Dön`;
+            }
         }
     }
 
-    function init() {
+    function handlePostCaseAction() {
+        const s = load();
+        if (s.activeRun) {
+            continueRun();
+        } else {
+            location.hash = '#/tirmanis';
+            render();
+        }
+    }
+
+    function updateHomeCard() {
+        const sub = document.getElementById('homeClimbMeta');
+        const btn = document.getElementById('btnHomeClimb');
+        if (!sub) return;
+        const s = load();
+        if (s.activeRun && s.activeRun.streak > 0) {
+            sub.textContent = `Devam eden seri: ${s.activeRun.streak} · Bütçe: ${s.activeRun.budget} · Rekor: ${s.bestStreak}`;
+            if (btn) btn.textContent = `Seriye devam et (#${s.activeRun.streak + 1})`;
+        } else if (s.bestStreak > 0) {
+            sub.textContent = `🏆 En iyi serin: ${s.bestStreak} vaka · Zor mod + 10 ipucu bütçesi`;
+            if (btn) btn.textContent = 'Tırmanışa başla';
+        } else {
+            sub.textContent = 'Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?';
+            if (btn) btn.textContent = 'Tırmanışa başla';
+        }
+    }
+
+    function therapistBubbleText(s) {
+        if (lastFinishedRun) {
+            return lastFinishedRun.isRecord && lastFinishedRun.streak > 0
+                ? `🏆 ${lastFinishedRun.streak} vakalık yeni rekor!`
+                : `🔥 ${lastFinishedRun.streak} seri yaptın, tekrar deneyelim!`;
+        }
+        if (s.activeRun) {
+            return `🔥 Seri ${s.activeRun.streak} · ${s.activeRun.budget} ipucu kaldı!`;
+        }
+        if (s.bestStreak >= 5) {
+            return `🏔️ Rekorun ${s.bestStreak}! Üstüne çıkabilir misin?`;
+        }
+        return '☕ Hazırsan ilk zor vakayı alalım!';
+    }
+
+    function render() {
+        const root = document.getElementById('climbMount');
+        if (!root) return;
+        const s = load();
         const gm = global.game;
-        if (!gm || !gm.registerScreen) { setTimeout(init, 60); return; }
-        gm.registerScreen('klinigim', () => render());
+        const myCfg = (gm && gm.myAvatar) || (global.PsikoVakaAvatar && global.PsikoVakaAvatar.DEFAULT) || {};
+        const run = s.activeRun;
+
+        const summaryBanner = lastFinishedRun ? `
+            <div class="tr-summary-banner${lastFinishedRun.isRecord && lastFinishedRun.streak > 0 ? ' is-record' : ''}">
+                <div class="tr-summary-main">
+                    <strong>${lastFinishedRun.isRecord && lastFinishedRun.streak > 0 ? `🏆 Yeni Tırmanış Rekoru: ${lastFinishedRun.streak} Vaka!` : `🏔️ Tırmanış Tamamlandı — ${lastFinishedRun.streak} Vaka Seri`}</strong>
+                    <span>Ortalama ipucu: ${lastFinishedRun.avgClues} · Genel rekor: ${s.bestStreak}</span>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnClimbDismissSummary">Tamam</button>
+            </div>` : '';
+
+        root.innerHTML = `
+            <div class="tr-header">
+                <div>
+                    <h1 class="tr-title">🏔️ Tırmanış</h1>
+                    <p class="tr-sub">Zor modda (Tek Tahmin Hakkı + Kategori Gizli) art arda kaç vaka bilebilirsin?</p>
+                </div>
+                <div class="tr-stats">
+                    <div class="tr-stat-pill is-best"><span>🏆</span><strong>Rekor: ${s.bestStreak}</strong></div>
+                    ${run ? `<div class="tr-stat-pill is-active"><span>🔥</span><strong>Seri: ${run.streak}</strong></div>` : ''}
+                    ${run ? `<div class="tr-stat-pill is-budget"><span>💡</span><strong>Bütçe: ${run.budget}</strong></div>` : ''}
+                    <div class="tr-stat-pill"><span>🎮</span><strong>${s.totalRuns} deneme</strong></div>
+                </div>
+            </div>
+
+            ${summaryBanner}
+
+            <div class="tr-stage">
+                <div class="tr-bg-photo" aria-hidden="true"></div>
+                <div class="tr-fire-ambient" aria-hidden="true"></div>
+                <div class="tr-motes" aria-hidden="true">
+                    <span class="tr-mote" style="left:28%;top:28%;animation-delay:0s"></span>
+                    <span class="tr-mote" style="left:45%;top:36%;animation-delay:2.1s"></span>
+                    <span class="tr-mote" style="left:62%;top:30%;animation-delay:4.2s"></span>
+                    <span class="tr-mote" style="left:78%;top:40%;animation-delay:1.5s"></span>
+                </div>
+                <div class="tr-noro-seat">
+                    <div class="tr-noro-bubble">${esc(therapistBubbleText(s))}</div>
+                    ${renderAvatar(myCfg, 92, { facing: 'left', activity: run ? 'think' : null })}
+                    <span class="tr-noro-tag">Sen</span>
+                </div>
+            </div>
+
+            <div class="tr-actions">
+                ${run ? `
+                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbContinue">
+                        ▶️ Tırmanışa Devam Et (Vaka #${run.streak + 1})
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" id="btnClimbRestart">
+                        🔄 Sıfırdan Başla
+                    </button>
+                ` : `
+                    <button type="button" class="btn btn-primary btn-lg tr-start-btn" id="btnClimbStart">
+                        🏔️ Tırmanışa Başla (10 İpucu)
+                    </button>
+                `}
+            </div>
+
+            <section class="tr-rules-card" aria-label="Tırmanış ipucu bütçesi kuralları">
+                <div class="tr-rules-head">
+                    <strong>💡 Paylaşımlı İpucu Bütçesi (Başlangıç: 10)</strong>
+                    <span>Erken bilerek bütçe biriktir; 4–6. ipuçları bütçenden düşer. 1 yanlışta tırmanış biter.</span>
+                </div>
+                <div class="tr-delta-grid">
+                    <div class="tr-delta-cell is-pos"><span>1. İpucu</span><strong>+2</strong></div>
+                    <div class="tr-delta-cell is-pos"><span>2. İpucu</span><strong>+1</strong></div>
+                    <div class="tr-delta-cell is-zero"><span>3. İpucu</span><strong>±0</strong></div>
+                    <div class="tr-delta-cell is-neg"><span>4. İpucu</span><strong>−1</strong></div>
+                    <div class="tr-delta-cell is-neg"><span>5. İpucu</span><strong>−2</strong></div>
+                    <div class="tr-delta-cell is-neg"><span>6. İpucu</span><strong>−3</strong></div>
+                </div>
+            </section>
+        `;
+
+        const btnStart = document.getElementById('btnClimbStart');
+        if (btnStart) btnStart.addEventListener('click', startNewRun);
+
+        const btnCont = document.getElementById('btnClimbContinue');
+        if (btnCont) btnCont.addEventListener('click', continueRun);
+
+        const btnRestart = document.getElementById('btnClimbRestart');
+        if (btnRestart) btnRestart.addEventListener('click', startNewRun);
+
+        const btnDismiss = document.getElementById('btnClimbDismissSummary');
+        if (btnDismiss) btnDismiss.addEventListener('click', () => { lastFinishedRun = null; render(); });
     }
 
-    global.PsikoVakaKlinik = { load, render, acceptNextPatient, onCaseFinished, SHOP_ITEMS };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(init, 0));
-    else setTimeout(init, 0);
+    global.PsikoVakaTirmanis = {
+        START_BUDGET,
+        load,
+        render,
+        startNewRun,
+        continueRun,
+        launchNextCase,
+        renderPlayHud,
+        onCaseFinished,
+        handlePostCaseAction,
+        updateHomeCard,
+        canRevealClue,
+        requiredBudgetFor,
+        deltaFor,
+        fmtDelta
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateHomeCard);
+    } else {
+        updateHomeCard();
+    }
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>

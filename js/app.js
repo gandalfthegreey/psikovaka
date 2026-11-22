@@ -96,7 +96,7 @@ class PsikoVakaGame {
     initRouter() {
         this.routeScreens = {
             oyna: this.dom.screenHome,
-            klinigim: document.getElementById('screenClinic'),
+            tirmanis: document.getElementById('screenClimb'),
             online: this.dom.screenOnline,
             kutuphane: this.dom.screenLibrary,
             profil: this.dom.screenProfile,
@@ -105,7 +105,7 @@ class PsikoVakaGame {
             notfound: document.getElementById('screenNotFound')
         };
         // Alt ekranlar: menüde hangi ana sekme etkin görünsün
-        this.routeNavParent = { ligler: 'profil', gunluk: 'oyna' };
+        this.routeNavParent = { ligler: 'profil', gunluk: 'oyna', tirmanis: 'oyna' };
         this.screenHooks = this.screenHooks || {};
 
         window.addEventListener('hashchange', () => {
@@ -192,7 +192,15 @@ class PsikoVakaGame {
         const changed = this.currentScreen !== name;
         this.currentScreen = name;
 
-        if (name === 'oyna') { this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard(); }
+        if (name === 'oyna') {
+            this.updateHomeMeta(); this.updatePracticeSummary(); this.updateWelcomeCard();
+            if (window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.updateHomeCard();
+        }
+        if (name === 'tirmanis' && window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.render();
+        if (name !== 'play' && window.PsikoVakaTirmanis) {
+            const bar = document.getElementById('climbHudBar');
+            if (bar) bar.hidden = true;
+        }
         if (name === 'profil') this.updateProfileScreen();
         if (name === 'notfound') {
             const m = document.getElementById('notFoundNoro');
@@ -1510,8 +1518,8 @@ class PsikoVakaGame {
         // Finished Actions on Main Screen
         if (this.dom.btnMainNextCase) {
             this.dom.btnMainNextCase.addEventListener('click', () => {
-                if (this.currentMode === 'clinic') {
-                    this.showRoute('klinigim');
+                if (this.currentMode === 'climb' && window.PsikoVakaTirmanis) {
+                    window.PsikoVakaTirmanis.handlePostCaseAction();
                     return;
                 }
                 this.setMode('practice');
@@ -2354,9 +2362,9 @@ class PsikoVakaGame {
         this.renderZorlukUI();
     }
 
-    /** Günlük, pratik ve klinikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
+    /** Günlük ve pratikte ayar seçimi yalnızca ilk tahminden (ya da ilk ek ipucundan) önce. */
     canEditZorluk() {
-        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice' && this.currentMode !== 'clinic') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
+        if ((this.currentMode !== 'daily' && this.currentMode !== 'practice') || this.dailyReadOnly || this.isGameOver || this.zorlukLocked) return false;
         const log = this.stageGuessLog || {};
         const earlier = Object.keys(log).reduce((n, k) => n + (log[k] || []).length, 0);
         return (this.guesses || []).length === 0 && earlier === 0 && this.unlockedClues <= 1 && this.comboStage === 1;
@@ -2382,7 +2390,7 @@ class PsikoVakaGame {
         }
         const panel = this.dom.playZorlukPanel;
         if (panel) {
-            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice' || this.currentMode === 'clinic');
+            const isDailyOrPractice = (this.currentMode === 'daily' || this.currentMode === 'practice');
             const editable = this.canEditZorluk();
             const show = isDailyOrPractice && !this.dailyReadOnly;
             if (show) {
@@ -2408,6 +2416,10 @@ class PsikoVakaGame {
     async revealNextClue() {
         if (!(this.zorluk && this.zorluk.tekHak) || this.isGameOver || this.dailyReadOnly || this._revealBusy) return;
         if (this.unlockedClues >= this.maxClues) return;
+        if (this.currentMode === 'climb' && window.PsikoVakaTirmanis && !window.PsikoVakaTirmanis.canRevealClue(this.unlockedClues + 1)) {
+            this.announcePlay('İpucu bütçesi yetersiz.');
+            return;
+        }
         let n = this.unlockedClues + 1;
         if (typeof this.clueRevealHandler === 'function') {
             this._revealBusy = true; this.updateNextClueButton();
@@ -2508,11 +2520,24 @@ class PsikoVakaGame {
             nextBtn.type = 'button';
             nextBtn.id = 'btnInlineNextClue';
             nextBtn.className = 'btn btn-secondary btn-inline-next-clue';
-            nextBtn.disabled = !!this._revealBusy;
-            nextBtn.innerHTML = `${this.icon('plus')}<span>Sonraki ipucunu aç (${visibleCount + 1}/${this.maxClues})</span>`;
+            const nextNum = visibleCount + 1;
+            const isClimb = this.currentMode === 'climb' && window.PsikoVakaTirmanis;
+            if (isClimb) {
+                const T = window.PsikoVakaTirmanis;
+                const ok = T.canRevealClue(nextNum);
+                const d = T.deltaFor(nextNum);
+                nextBtn.disabled = !!this._revealBusy || !ok;
+                nextBtn.innerHTML = ok
+                    ? `${this.icon('plus')}<span>Sonraki ipucunu aç (${nextNum}/${this.maxClues} · ${T.fmtDelta(d)} bütçe)</span>`
+                    : `${this.icon('lock')}<span>İpucu bütçesi yetersiz (gerekli: ${T.requiredBudgetFor(nextNum)})</span>`;
+            } else {
+                nextBtn.disabled = !!this._revealBusy;
+                nextBtn.innerHTML = `${this.icon('plus')}<span>Sonraki ipucunu aç (${nextNum}/${this.maxClues})</span>`;
+            }
             nextBtn.addEventListener('click', () => this.revealNextClue());
             this.dom.cluesContainer.appendChild(nextBtn);
         }
+        if (window.PsikoVakaTirmanis) window.PsikoVakaTirmanis.renderPlayHud(this);
 
         this.dom.clueProgressTracker.innerHTML = '';
         for (let i = 0; i < this.maxClues; i++) {
@@ -3024,9 +3049,9 @@ class PsikoVakaGame {
             this.updateHomeMeta();
         }
 
-        // Kliniğim modu: seans ücreti ve danışan yorumu
-        if (this.currentMode === 'clinic' && window.PsikoVakaKlinik && typeof window.PsikoVakaKlinik.onCaseFinished === 'function') {
-            window.PsikoVakaKlinik.onCaseFinished(won, this);
+        // Tırmanış modu: seri ve ipucu bütçesi güncelleme
+        if (this.currentMode === 'climb' && window.PsikoVakaTirmanis && typeof window.PsikoVakaTirmanis.onCaseFinished === 'function') {
+            window.PsikoVakaTirmanis.onCaseFinished(won, this);
         }
 
         this.emitPlayState();

@@ -300,7 +300,7 @@
         if (!node) return;
         const W = L.W || 1, H = L.H || 1;
         const depth = (0.82 + (st.y - FLOOR_TOP) * 0.45);
-        node.style.transform = `translate3d(${(st.x * W).toFixed(1)}px, ${(st.y * H).toFixed(1)}px, 0) translate(-50%, -88%) scale(${depth.toFixed(3)})`;
+        node.style.transform = `translate3d(${(st.x * W).toFixed(1)}px, ${(st.y * H).toFixed(1)}px, 0) translate(-50%, -67%) scale(${depth.toFixed(3)})`;
         const z = String(st.seated && st.opts && st.opts.zBase ? 11 + Math.round(st.opts.zBase * 100) : 10 + Math.round(st.y * 100));
         if (node.style.zIndex !== z) node.style.zIndex = z;
         const fig = node.querySelector('.ol-p-fig');
@@ -365,7 +365,7 @@
         if (!b._w) { b._w = b.offsetWidth || 0; b._hh = b.offsetHeight || 0; }
         const ax = st.x * W, ay = st.y * H;
         // eski yerleşimle aynı: balonun altı düğümün üst kenarının 6 px altında (ölçekli)
-        let bottom = ay - node._h * 0.88 * depth + 6 * depth;
+        let bottom = ay - node._h * 0.67 * depth + 6 * depth;
         const m = 6, half = b._w / 2;
         let x = ax;
         if (half * 2 + 2 * m < W) x = Math.max(half + m, Math.min(W - half - m, ax));

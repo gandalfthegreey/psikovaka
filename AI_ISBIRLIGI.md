@@ -131,6 +131,19 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 20:04 — Gemini — Lobi Nöro Tıklama Hizası Düzeltmesi + Kliniğim Arşivlendi + Yeni "Tırmanış" Modu
+- **Dosyalar:** `js/online/lobby.js`, yeni `js/tirmanis.js`, yeni `css/tirmanis.css`, `index.html`, `js/app.js`, `build_portable_single_file.js`, `PsikoVaka_Tam_Surum.html`; eski `js/klinik.js` ve `css/klinik.css` → `_arsiv/2026-11-22-klinigim-v1/` klasörüne taşındı.
+- **Ne değişti:**
+  1. **Lobi tıklama hizası düzeltildi (`js/online/lobby.js`):** `positionNode` dikey çapa `translate(-50%, -88%)` → `translate(-50%, -67%)` (ve `placeBubble` `0.88` → `0.67`) olarak düzeltildi; artık tıklanan noktaya alttaki isim etiketi değil doğrudan Nöro'nun ayakları gidiyor.
+  2. **Kliniğim kaldırıldı & arşivlendi:** Üst menü ve mobil alt sekmedeki Kliniğim sekmesi kaldırıldı; `js/klinik.js` ve `css/klinik.css` silinmeden `_arsiv/2026-11-22-klinigim-v1/` içine taşındı.
+  3. **Yeni "Tırmanış" Modu (`js/tirmanis.js`, `css/tirmanis.css`, `index.html`, `js/app.js`):**
+     - Ana sayfada (`.desk-aside`) **🏔️ Tırmanış** modu kartı eklendi (`#/tirmanis`).
+     - Uzman Klinik illüstrasyonu (`assets/clinic_bg_deluxe.jpg`) + şömine ışığı + toz zerreleri üzerinde Nöro'muz sağdaki terapist koltuğunda/masasında oturuyor.
+     - Zor mod (`Tek Tahmin Hakkı + Kategori Gizli`) kilitli; **10 İpucu Bütçesi** ile başlanır. Doğru tahminde kaçıncı ipucunda bilindiğine göre bütçe değişimi: **1.: +2 | 2.: +1 | 3.: ±0 | 4.: −1 | 5.: −2 | 6.: −3**. Bütçe yetersizse 4–6. ipuçları kilitlenir; 1 yanlışta tırmanış biter. Canlı HUD şeridi (`#climbHudBar`) ve `localStorage.psikovaka_tirmanis_v1` kalıcılığı eklendi.
+- **Neden:** Emre'nin isteği (tıklama hizası düzeltmesi + eşyalı/paralı Kliniğim yerine Uzman Klinik arka planlı, 10 ipucu bütçeli Zor Mod "Tırmanış" serisi).
+- **Doğrulama:** `node --check js/tirmanis.js js/app.js js/online/lobby.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 19:48 — Gemini — Bekleme Odası Önceki Boyalı Arka Plana Döndü + Gölgeli 3B İnteraktif Eşyalar
 - **Dosyalar:** `css/online.css`, `js/online/lobby_room.js`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
