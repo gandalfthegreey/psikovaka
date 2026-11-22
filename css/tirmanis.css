@@ -1,11 +1,11 @@
 /* ==========================================================================
-   PsikoVaka — Tırmanış Modu (Zor Mod Kesintisiz Seri + Paylaşımlı İpucu Bütçesi)
+   PsikoVaka — Tırmanış Modu (Oda-İçi Canlı Seans + 10 İpucu Bütçesi + Sıralama)
    ========================================================================== */
 .screen-climb {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    max-width: 820px;
+    max-width: 840px;
     width: 100%;
     margin: 0 auto;
 }
@@ -68,36 +68,10 @@
     color: var(--color-success);
 }
 
-.tr-summary-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border-strong);
-    background: var(--color-surface);
-}
-
-.tr-summary-banner.is-record {
-    border-color: var(--color-warning);
-    background: var(--color-warning-soft);
-}
-
-.tr-summary-main {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    font-size: var(--text-sm);
-}
-
-.tr-summary-main strong {
-    color: var(--color-text);
-    font-size: var(--text-base);
-}
-
-.tr-summary-main span {
-    color: var(--color-text-2);
+.tr-stat-pill.is-budget.is-low {
+    border-color: var(--color-danger);
+    background: var(--color-danger-soft);
+    color: var(--color-danger);
 }
 
 /* Uzman Klinik Sahnesi (Club Penguin 2.5D) */
@@ -105,7 +79,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    min-height: 230px;
+    min-height: 290px;
     border-radius: var(--radius-xl);
     overflow: hidden;
     border: 2px solid var(--color-border-strong);
@@ -168,11 +142,11 @@
     100% { opacity: 0; transform: translate(-6px, -44px); }
 }
 
-/* Terapist koltuğunda oturan Nöro */
+/* Terapist Nöro (sağdaki masa) */
 .tr-noro-seat {
     position: absolute;
-    left: 72%;
-    bottom: 20%;
+    left: 74%;
+    bottom: 14%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
@@ -182,27 +156,341 @@
     filter: drop-shadow(0 6px 10px rgba(24, 14, 8, 0.42));
 }
 
-.tr-noro-bubble {
+/* Danışan Nöro (sol kapıdan girer, halıda oturur, kapıdan çıkar) */
+.tr-patient {
+    position: absolute;
+    left: 34%;
+    bottom: 14%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 6;
+    filter: drop-shadow(0 6px 10px rgba(24, 14, 8, 0.42));
+    transition: transform 160ms var(--ease);
+}
+
+.tr-patient.is-clickable {
+    cursor: pointer;
+}
+
+.tr-patient.is-clickable:hover {
+    transform: translateX(-50%) scale(1.06);
+    filter: drop-shadow(0 0 12px rgba(255, 224, 140, 0.55));
+}
+
+@keyframes trPatEnter {
+    0%   { left: 10%; opacity: 0.15; }
+    100% { left: 34%; opacity: 1; }
+}
+
+@keyframes trPatLeave {
+    0%   { left: 34%; opacity: 1; }
+    100% { left: 10%; opacity: 0; }
+}
+
+@keyframes trPatTalk {
+    0%, 100% { transform: translateX(-50%) scale(1, 1); }
+    45%      { transform: translateX(-50%) translateY(-6px) scale(0.96, 1.06); }
+}
+
+.tr-patient.is-entering {
+    animation: trPatEnter 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.tr-patient.is-leaving {
+    animation: trPatLeave 760ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.tr-patient.is-talking {
+    animation: trPatTalk 240ms ease-out;
+}
+
+.tr-react-bubble {
     margin-bottom: 6px;
     padding: 6px 12px;
-    border-radius: var(--radius-md);
+    border-radius: 14px;
     background: var(--color-surface);
     border: 1px solid var(--color-border-strong);
     color: var(--color-text);
     font-size: var(--text-xs);
     font-weight: var(--weight-semibold);
     white-space: nowrap;
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-2);
 }
 
 .tr-noro-tag {
     margin-top: -4px;
     padding: 2px 9px;
     border-radius: var(--radius-full);
-    background: rgba(15, 17, 23, 0.8);
+    background: rgba(15, 17, 23, 0.82);
     color: #fff;
     font-size: 11px;
     font-weight: var(--weight-semibold);
+}
+
+/* Danışanın üstündeki okunaklı ipucu konuşma balonu */
+.tr-clue-bubble {
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: min(500px, calc(100% - 32px));
+    max-height: calc(100% - 146px);
+    overflow-y: auto;
+    z-index: 10;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid var(--color-border-strong);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.38);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: clueSlideIn 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tr-clue-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tr-clue-who {
+    font-size: 11px;
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-2);
+}
+
+.tr-clue-tabs {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.tr-clue-tab {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-2);
+    color: var(--color-text-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tr-clue-tab.is-active {
+    background: var(--color-accent-bg);
+    border-color: transparent;
+    color: #fff;
+}
+
+.tr-clue-label {
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
+}
+
+.tr-clue-text {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.48;
+    color: var(--color-text);
+}
+
+.tr-clue-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 2px;
+}
+
+.tr-next-clue-btn {
+    min-height: 32px;
+    padding: 4px 12px;
+    font-size: var(--text-xs);
+}
+
+.tr-clue-locked {
+    font-size: var(--text-xs);
+    color: var(--color-text-3);
+}
+
+/* Sahne altı tahmin kutusu & otomatik tamamlama */
+.tr-guess-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+}
+
+.tr-guess-hint-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tr-guess-tip {
+    font-size: var(--text-xs);
+    color: var(--color-text-3);
+}
+
+.tr-guess-bar {
+    display: flex;
+    gap: var(--space-2);
+    align-items: stretch;
+}
+
+.tr-ac-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.tr-guess-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    font-size: var(--text-base);
+}
+
+.tr-ac-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 6px);
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    box-shadow: var(--shadow-3);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 40;
+}
+
+.tr-ac-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: var(--text-sm);
+}
+
+.tr-ac-item strong { color: var(--color-text); }
+.tr-ac-item span { font-size: 11px; color: var(--color-text-3); }
+.tr-ac-item:hover, .tr-ac-item.is-active { background: var(--color-accent-soft); }
+
+.tr-guess-err {
+    min-height: 0;
+    font-size: var(--text-xs);
+    color: var(--color-danger);
+}
+
+/* Tanı Bilgilendirme & Sonuç Kartı */
+.tr-result-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border-strong);
+    animation: clueSlideIn 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tr-result-card.is-win {
+    border-color: var(--color-success);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-success) 10%, var(--color-surface)), var(--color-surface) 70%);
+}
+
+.tr-result-card.is-loss {
+    border-color: var(--color-danger);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--color-danger) 10%, var(--color-surface)), var(--color-surface) 70%);
+}
+
+.tr-result-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tr-result-badge {
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    color: var(--color-text);
+}
+
+.tr-result-meta {
+    font-size: var(--text-xs);
+    color: var(--color-text-2);
+}
+
+.tr-rec-tag {
+    color: var(--color-warning);
+}
+
+.tr-result-diag {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tr-result-diag > strong {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    color: var(--color-text);
+}
+
+.tr-result-en {
+    font-size: var(--text-xs);
+    color: var(--color-text-3);
+}
+
+.tr-result-yours {
+    margin-top: 4px;
+    font-size: var(--text-xs);
+    color: var(--color-danger);
+}
+
+.tr-result-why {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-text-2);
+}
+
+.tr-result-tip {
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface-2);
+    border-left: 3px solid var(--color-accent);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.tr-result-actions {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .tr-actions {
@@ -237,14 +525,8 @@
     font-size: var(--text-sm);
 }
 
-.tr-rules-head strong {
-    color: var(--color-text);
-}
-
-.tr-rules-head span {
-    color: var(--color-text-2);
-    font-size: var(--text-xs);
-}
+.tr-rules-head strong { color: var(--color-text); }
+.tr-rules-head span { color: var(--color-text-2); font-size: var(--text-xs); }
 
 .tr-delta-grid {
     display: grid;
@@ -264,37 +546,11 @@
     font-size: var(--text-xs);
 }
 
-.tr-delta-cell span {
-    color: var(--color-text-2);
-}
-
-.tr-delta-cell strong {
-    font-family: var(--font-mono);
-    font-size: var(--text-base);
-    font-weight: var(--weight-bold);
-}
-
+.tr-delta-cell span { color: var(--color-text-2); }
+.tr-delta-cell strong { font-family: var(--font-mono); font-size: var(--text-base); font-weight: var(--weight-bold); }
 .tr-delta-cell.is-pos strong { color: var(--color-success); }
 .tr-delta-cell.is-zero strong { color: var(--color-text-2); }
 .tr-delta-cell.is-neg strong { color: var(--color-danger); }
-
-/* Oyun ekranı üstü canlı Tırmanış HUD şeridi */
-.tr-hud-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-2) var(--space-3);
-    margin-bottom: var(--space-3);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-strong);
-}
-
-.tr-hud-bar[hidden] {
-    display: none;
-}
 
 .tr-hud-pill {
     display: inline-flex;
@@ -308,23 +564,8 @@
     color: var(--color-text-2);
 }
 
-.tr-hud-pill strong {
-    color: var(--color-text);
-    font-family: var(--font-mono);
-}
-
-.tr-hud-budget.is-low {
-    border-color: var(--color-danger);
-    background: var(--color-danger-soft);
-}
-
 .tr-hud-delta.is-pos strong { color: var(--color-success); }
 .tr-hud-delta.is-neg strong { color: var(--color-danger); }
-
-/* Ana sayfa Tırmanış kartı vurgusu */
-.desk-climb {
-    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--color-border));
-}
 
 /* Online Tırmanış Liderlik Tablosu */
 .tr-lb-card {
@@ -337,145 +578,34 @@
     border: 1px solid var(--color-border);
 }
 
-.tr-lb-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-}
+.tr-lb-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.tr-lb-title { margin: 0; font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--color-text); }
+.tr-lb-state { font-size: var(--text-sm); color: var(--color-text-2); padding: var(--space-2) 0; }
+.tr-lb-guest-note { margin: 0 0 var(--space-2); font-size: var(--text-xs); color: var(--color-text-2); }
+.tr-lb-guest-note a { color: var(--color-accent); font-weight: var(--weight-semibold); }
+.tr-lb-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.tr-lb-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-2); border: 1px solid var(--color-border); }
+.tr-lb-row.is-me { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.tr-lb-pos { min-width: 28px; text-align: center; font-family: var(--font-mono); font-weight: var(--weight-bold); font-size: var(--text-sm); color: var(--color-text-2); }
+.tr-lb-av { display: inline-flex; flex-shrink: 0; }
+.tr-lb-who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.tr-lb-name { font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tr-lb-name em { font-style: normal; font-weight: var(--weight-regular); color: var(--color-accent); }
+.tr-lb-sub { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-xs); color: var(--color-text-2); }
+.tr-lb-score { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+.tr-lb-score strong { font-family: var(--font-mono); font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--color-warning); }
+.tr-lb-score span { font-size: 11px; color: var(--color-text-3); }
+.tr-lb-me-sep { margin: var(--space-2) 0 var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--color-text-3); text-transform: uppercase; letter-spacing: 0.05em; }
 
-.tr-lb-title {
-    margin: 0;
-    font-size: var(--text-md);
-    font-weight: var(--weight-bold);
-    color: var(--color-text);
-}
-
-.tr-lb-state {
-    font-size: var(--text-sm);
-    color: var(--color-text-2);
-    padding: var(--space-2) 0;
-}
-
-.tr-lb-guest-note {
-    margin: 0 0 var(--space-2);
-    font-size: var(--text-xs);
-    color: var(--color-text-2);
-}
-
-.tr-lb-guest-note a {
-    color: var(--color-accent);
-    font-weight: var(--weight-semibold);
-}
-
-.tr-lb-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-}
-
-.tr-lb-row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-md);
-    background: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-}
-
-.tr-lb-row.is-me {
-    border-color: var(--color-accent);
-    background: var(--color-accent-soft);
-}
-
-.tr-lb-pos {
-    min-width: 28px;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-weight: var(--weight-bold);
-    font-size: var(--text-sm);
-    color: var(--color-text-2);
-}
-
-.tr-lb-av {
-    display: inline-flex;
-    flex-shrink: 0;
-}
-
-.tr-lb-who {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.tr-lb-name {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    color: var(--color-text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.tr-lb-name em {
-    font-style: normal;
-    font-weight: var(--weight-regular);
-    color: var(--color-accent);
-}
-
-.tr-lb-sub {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: var(--text-xs);
-    color: var(--color-text-2);
-}
-
-.tr-lb-score {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.1;
-}
-
-.tr-lb-score strong {
-    font-family: var(--font-mono);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-bold);
-    color: var(--color-warning);
-}
-
-.tr-lb-score span {
-    font-size: 11px;
-    color: var(--color-text-3);
-}
-
-.tr-lb-me-sep {
-    margin: var(--space-2) 0 var(--space-1);
-    font-size: var(--text-xs);
-    font-weight: var(--weight-semibold);
-    color: var(--color-text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-@media (max-width: 600px) {
-    .tr-delta-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .tr-noro-seat {
-        bottom: 12%;
-        transform: translateX(-50%) scale(0.84);
-    }
+@media (max-width: 640px) {
+    .tr-stage { aspect-ratio: auto; min-height: 360px; }
+    .tr-delta-grid { grid-template-columns: repeat(3, 1fr); }
+    .tr-noro-seat, .tr-patient { bottom: 8%; transform: translateX(-50%) scale(0.8); }
+    .tr-clue-bubble { left: 10px; top: 10px; width: calc(100% - 20px); max-height: 210px; }
+    .tr-guess-bar { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .tr-fire-ambient, .tr-mote { animation: none !important; }
+    .tr-fire-ambient, .tr-mote, .tr-patient { animation: none !important; }
     .tr-motes { display: none; }
 }

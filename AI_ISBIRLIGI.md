@@ -131,6 +131,17 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 21:00 — Gemini — Tırmanış Oda-İçi Canlı Seans Deneyimi
+- **Dosyalar:** `js/tirmanis.js`, `css/tirmanis.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. Tırmanış artık ayrı vaka ekranına (`#screenPlay`) atmıyor; tüm seans doğrudan Uzman Klinik sahnesinde oynanıyor.
+  2. **Kapıdan giren Danışan Nöro:** Başlatınca (veya "Sıradaki Danışan"a basınca) rastgele bir Danışan Nöro soldaki kapıdan yürüyerek halıya geliyor.
+  3. **Baloncukta ipuçları & tıklayarak açma:** İpuçları danışanın üstündeki okunaklı konuşma balonunda açılıyor (eski ipuçlarına `1·2·3` sekmelerinden dönülebiliyor). Danışan Nöro'ya tıklayarak veya `💬 Sonraki İpucu` düğmesiyle 10'luk bütçe kuralına göre (`+2/+1/±0/−1/−2/−3`) yeni ipucu isteniyor.
+  4. **Sahne altı tahmin & tanı bilgilendirmesi:** Otomatik tamamlamalı DSM-5-TR tanı arama kutusu (Tek hak, Kategori gizli) eklendi. Doğru bilince danışan sevinip kapıdan çıkıyor, altta tanı açıklaması + klinik not + `➡️ Sıradaki Danışan` düğmesi açılıyor; yanlışta seri bitiyor, doğru tanı + özet gösteriliyor ve skor online liderlik tablosuna kaydediliyor.
+- **Neden:** Emre'nin isteği (oda-içi canlı danışan seansı + Sıradaki Danışan düğmesi + tanı bilgilendirmesi).
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 20:44 — Gemini — Profesyonel UI/UX Cila Paketi (A1–A4 + B1–B4)
 - **Dosyalar:** `css/style.css`, `css/anasayfa.css`, `css/kutuphane.css`, `index.html`, `js/app.js`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
