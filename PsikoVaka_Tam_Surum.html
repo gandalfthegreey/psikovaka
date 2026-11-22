@@ -5206,54 +5206,187 @@ body.ol-banners-docked .ol-banners { display: none; }
    ========================================================================== */
 .screen-home .desk-noro,
 .screen-home .noro-nudge.noro-bubble { display: none !important; }
-/* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
-.screen-home .desk-stage {
+
+/* ==========================================================================
+   Seçenek B — Ultra-Minimalist Tek Ekran (Sıfır Kaydırma) Ana Sayfa
+   Sol: Odaklı Günün Vakası klasörü | Sağ: 3 ince yatay aksiyon şeridi
+   ========================================================================== */
+.screen.screen-home {
+    gap: var(--space-3);
+}
+.screen-home .home-greeting {
+    justify-content: flex-end;
+    min-height: 0;
+}
+.screen-home .home-greeting-text,
+.screen-home .home-greeting-sub,
+.screen-home .target-hint {
+    display: none;
+}
+.screen-home .home-greeting:has(.rp-chip[hidden]) {
+    display: none;
+}
+.screen-home .target-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+/* Tanı · Terapi · İlaç · Kombo: net tıklanabilir segmented hap butonları */
+.screen-home .target-picker .segmented {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: 0;
+    padding: 3px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+}
+.screen-home .target-picker .segmented-btn,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn {
+    min-width: 0;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-2);
+    text-decoration: none;
+    transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+.screen-home .target-picker .segmented-btn:hover,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn:hover {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+}
+.screen-home .target-picker .segmented-btn.active,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
+    background: var(--color-accent-bg);
+    color: #fff;
+    border-color: transparent;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+}
+.screen-home .target-hint-row {
+    margin-top: 0;
+}
+.screen-home .desk {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-5);
-    margin-top: var(--space-1);
+    gap: var(--space-4);
+    align-items: start;
+}
+.screen-home .desk-stage {
+    display: block;
+    margin-top: 0;
 }
 .screen-home .card-hero.desk-folder,
 .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
     grid-area: auto;
-    margin-top: 38px;
+    margin-top: 32px;
+    padding: 26px 26px 22px;
+    gap: var(--space-2);
 }
-
-/* Ana sayfa Tırmanış kartı: çalışma masası estetiğine uyumlu temiz yerleşim */
-.screen-home .card-action.desk-climb {
+.screen-home .desk-folder .card-hero-title {
+    font-size: 1.85rem;
+}
+.screen-home .desk-folder .card-hero-text {
+    font-size: var(--text-sm);
+    line-height: 1.45;
+}
+.screen-home .desk-folder .daily-actions {
+    margin-top: var(--space-1);
+}
+.screen-home .desk-aside {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    padding: 18px 20px;
-    border: 1px solid color-mix(in srgb, var(--color-warning) 50%, var(--paper-edge));
-    border-radius: 6px;
+    padding-left: 0;
+}
+
+/* Sağ sütundaki 3 ince yatay şerit kartı */
+.screen-home .card-action.desk-strip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: 0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--paper-edge);
     background: var(--paper);
     box-shadow: var(--paper-lift);
+    transform: none;
 }
-.screen-home .desk-climb .card-action-head { display: block; }
-.screen-home .desk-climb .card-title { font-size: 1.0625rem; margin-bottom: 4px; }
-.screen-home .desk-climb .card-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: 1.45; }
-.screen-home .desk-climb .card-action-row { display: flex; align-items: center; margin-top: auto; padding-top: var(--space-1); }
-.screen-home .desk-climb .card-action-row .btn { border-radius: 6px; padding: 8px 16px; min-height: 40px; font-size: var(--text-sm); }
+.screen-home .card-action.desk-strip::before {
+    display: none;
+}
+.screen-home .card-action.desk-strip.desk-climb {
+    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--paper-edge));
+}
+.screen-home .desk-strip .card-action-head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+.screen-home .desk-strip .card-title {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    line-height: 1.25;
+}
+.screen-home .desk-strip .card-text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text-2);
+}
+.screen-home .desk-strip .desk-pin-note {
+    margin: 4px 0 0;
+    font-size: var(--text-xs);
+}
+.screen-home .desk-strip .card-action-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    margin: 0;
+}
+.screen-home .desk-strip .card-action-row .btn {
+    border-radius: 6px;
+    min-height: 36px;
+    padding: 6px 14px;
+    font-size: var(--text-sm);
+    white-space: nowrap;
+}
+.screen-home .desk-strip .card-action-row .btn-ghost {
+    padding: 6px 8px;
+}
 
-@media (min-width: 900px) {
-    .screen-home .desk-stage {
-        grid-template-columns: minmax(0, 1.38fr) minmax(260px, 1fr);
-        grid-template-areas: none;
-        align-items: stretch;
-        gap: var(--space-6);
-        margin-top: var(--space-3);
-    }
-    .screen-home .desk-stage .desk-pin {
-        margin-top: 38px;
-        align-self: stretch;
-        justify-content: space-between;
+@media (min-width: 860px) {
+    .screen-home .desk {
+        grid-template-columns: minmax(0, 1.22fr) minmax(300px, 1fr);
+        gap: var(--space-5);
+        align-items: end;
     }
     .screen-home .desk-aside {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        padding-left: 0;
-        gap: var(--space-6);
-        align-items: stretch;
+        align-self: stretch;
+        justify-content: space-between;
+        padding-top: 78px;
     }
 }
 
@@ -7419,44 +7552,45 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                             <!-- Seri: klasöre ataşla tutturulmuş etiket -->
                             <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
                         </article>
-
-                        <!-- Online: günün vakasının sağında panoya raptiyeli kart -->
-                        <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
-                            <div class="card-action-head">
-                                <h3 class="card-title" id="onlineCardTitle">Online</h3>
-                                <p class="card-text">Düello, herkes tek ve turnuva.</p>
-                            </div>
-                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
-                            <div class="card-action-row">
-                                <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
-                            </div>
-                        </article>
                     </div>
                 </div>
 
+                <!-- Sağ sütun (Seçenek B): 3 ince, tek satırlık aksiyon kartı -->
                 <div class="desk-aside">
-                    <!-- Tırmanış: zor mod kesintisiz seri + 10 ipucu bütçesi -->
-                    <article class="card card-action desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
+                    <!-- 1. Tırmanış -->
+                    <article class="card card-action desk-strip desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
                         <div class="card-action-head">
                             <h3 class="card-title" id="climbCardTitle">🏔️ Tırmanış</h3>
-                            <p class="card-text" id="homeClimbMeta">Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?</p>
+                            <p class="card-text" id="homeClimbMeta">Zor mod seri · 10 ipucu bütçesi</p>
                         </div>
                         <div class="card-action-row">
-                            <a class="btn btn-primary" id="btnHomeClimb" href="#/tirmanis">Tırmanışa başla</a>
+                            <a class="btn btn-primary btn-sm" id="btnHomeClimb" href="#/tirmanis">Başla</a>
                         </div>
                     </article>
 
-                    <!-- Sınırsız pratik: fiş kutusu (ön fişte geçerli filtre) -->
-                    <article class="card card-action desk-cardbox" aria-labelledby="practiceCardTitle">
+                    <!-- 2. Sınırsız pratik -->
+                    <article class="card card-action desk-strip desk-cardbox" aria-labelledby="practiceCardTitle">
                         <div class="card-action-head">
                             <h3 class="card-title" id="practiceCardTitle">Sınırsız pratik</h3>
                             <p class="card-text"><span class="desk-filter-label">Filtre:</span> <span id="practiceSummary">Tüm vakalar</span></p>
                         </div>
                         <div class="card-action-row">
-                            <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
-                            <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
-                                <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
+                            <button class="btn btn-ghost btn-sm" id="btnOpenPracticeSettings" type="button" aria-label="Pratik ayarları" title="Pratik ayarları">
+                                <svg class="icon"><use href="#i-sliders"/></svg>
                             </button>
+                            <button class="btn btn-secondary btn-sm" id="btnStartPractice" type="button">Oyna</button>
+                        </div>
+                    </article>
+
+                    <!-- 3. Online -->
+                    <article class="card card-action desk-strip desk-pin" aria-labelledby="onlineCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
+                            <p class="card-text">Düello · Herkes tek · Turnuva</p>
+                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                        </div>
+                        <div class="card-action-row">
+                            <a class="btn btn-secondary btn-sm" id="btnHomeOnline" href="#/online">Arena</a>
                         </div>
                     </article>
                 </div>
@@ -55197,7 +55331,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             ? gm.allMasterCases
             : (typeof CLINICAL_CASES !== 'undefined' ? CLINICAL_CASES : []);
         const all = raw.filter(c => c && !c.archived);
-        const mode = (run && run.targetMode) || (gm && gm.targetMode) || 'diagnosis';
+        const mode = (run && run.targetMode) || (gm && gm.targetGameMode) || 'diagnosis';
         let pool = all;
         if (mode === 'therapy') pool = all.filter(c => c.targetTherapyId);
         else if (mode === 'pharmacology') pool = all.filter(c => c.targetPharmacologyId);
@@ -55222,7 +55356,7 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             budget: START_BUDGET,
             totalClues: 0,
             usedIds: [],
-            targetMode: (gm && gm.targetMode) || 'diagnosis'
+            targetMode: (gm && gm.targetGameMode) || 'diagnosis'
         };
         save();
         updateHomeCard();
@@ -55248,15 +55382,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         save();
 
         gm.currentMode = 'climb';
-        gm.dailyReadOnly = false;
-        gm.dailyContext = null;
-        gm.clueRevealHandler = null;
-        gm.dailyZorlukHandler = null;
-        if (s.activeRun.targetMode && gm.targetMode !== s.activeRun.targetMode) {
-            gm.setTargetMode(s.activeRun.targetMode, { silent: true });
+        if (s.activeRun.targetMode && gm.targetGameMode !== s.activeRun.targetMode && typeof gm.setTargetGameMode === 'function') {
+            gm.setTargetGameMode(s.activeRun.targetMode, false);
         }
+        gm.startCase(c, `Tırmanış #${s.activeRun.streak + 1}`);
         gm.setCaseZorluk({ tekHak: true, kategoriGizli: true }, { locked: true });
-        gm.loadCase(c);
         gm.showScreen('play');
         if (gm.dom && gm.dom.playModePill) {
             gm.dom.playModePill.textContent = `Tırmanış #${s.activeRun.streak + 1}`;
@@ -55350,14 +55480,14 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
         if (!sub) return;
         const s = load();
         if (s.activeRun && s.activeRun.streak > 0) {
-            sub.textContent = `Devam eden seri: ${s.activeRun.streak} · Bütçe: ${s.activeRun.budget} · Rekor: ${s.bestStreak}`;
-            if (btn) btn.textContent = `Seriye devam et (#${s.activeRun.streak + 1})`;
+            sub.textContent = `Seri: ${s.activeRun.streak} · Bütçe: ${s.activeRun.budget} · Rekor: ${s.bestStreak}`;
+            if (btn) btn.textContent = `Devam (#${s.activeRun.streak + 1})`;
         } else if (s.bestStreak > 0) {
-            sub.textContent = `🏆 En iyi serin: ${s.bestStreak} vaka · Zor mod + 10 ipucu bütçesi`;
-            if (btn) btn.textContent = 'Tırmanışa başla';
+            sub.textContent = `🏆 Rekor: ${s.bestStreak} seri · Zor mod`;
+            if (btn) btn.textContent = 'Başla';
         } else {
-            sub.textContent = 'Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?';
-            if (btn) btn.textContent = 'Tırmanışa başla';
+            sub.textContent = 'Zor mod seri · 10 ipucu bütçesi';
+            if (btn) btn.textContent = 'Başla';
         }
     }
 

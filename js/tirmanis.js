@@ -193,7 +193,7 @@
             ? gm.allMasterCases
             : (typeof CLINICAL_CASES !== 'undefined' ? CLINICAL_CASES : []);
         const all = raw.filter(c => c && !c.archived);
-        const mode = (run && run.targetMode) || (gm && gm.targetMode) || 'diagnosis';
+        const mode = (run && run.targetMode) || (gm && gm.targetGameMode) || 'diagnosis';
         let pool = all;
         if (mode === 'therapy') pool = all.filter(c => c.targetTherapyId);
         else if (mode === 'pharmacology') pool = all.filter(c => c.targetPharmacologyId);
@@ -218,7 +218,7 @@
             budget: START_BUDGET,
             totalClues: 0,
             usedIds: [],
-            targetMode: (gm && gm.targetMode) || 'diagnosis'
+            targetMode: (gm && gm.targetGameMode) || 'diagnosis'
         };
         save();
         updateHomeCard();
@@ -244,15 +244,11 @@
         save();
 
         gm.currentMode = 'climb';
-        gm.dailyReadOnly = false;
-        gm.dailyContext = null;
-        gm.clueRevealHandler = null;
-        gm.dailyZorlukHandler = null;
-        if (s.activeRun.targetMode && gm.targetMode !== s.activeRun.targetMode) {
-            gm.setTargetMode(s.activeRun.targetMode, { silent: true });
+        if (s.activeRun.targetMode && gm.targetGameMode !== s.activeRun.targetMode && typeof gm.setTargetGameMode === 'function') {
+            gm.setTargetGameMode(s.activeRun.targetMode, false);
         }
+        gm.startCase(c, `Tırmanış #${s.activeRun.streak + 1}`);
         gm.setCaseZorluk({ tekHak: true, kategoriGizli: true }, { locked: true });
-        gm.loadCase(c);
         gm.showScreen('play');
         if (gm.dom && gm.dom.playModePill) {
             gm.dom.playModePill.textContent = `Tırmanış #${s.activeRun.streak + 1}`;
@@ -346,14 +342,14 @@
         if (!sub) return;
         const s = load();
         if (s.activeRun && s.activeRun.streak > 0) {
-            sub.textContent = `Devam eden seri: ${s.activeRun.streak} · Bütçe: ${s.activeRun.budget} · Rekor: ${s.bestStreak}`;
-            if (btn) btn.textContent = `Seriye devam et (#${s.activeRun.streak + 1})`;
+            sub.textContent = `Seri: ${s.activeRun.streak} · Bütçe: ${s.activeRun.budget} · Rekor: ${s.bestStreak}`;
+            if (btn) btn.textContent = `Devam (#${s.activeRun.streak + 1})`;
         } else if (s.bestStreak > 0) {
-            sub.textContent = `🏆 En iyi serin: ${s.bestStreak} vaka · Zor mod + 10 ipucu bütçesi`;
-            if (btn) btn.textContent = 'Tırmanışa başla';
+            sub.textContent = `🏆 Rekor: ${s.bestStreak} seri · Zor mod`;
+            if (btn) btn.textContent = 'Başla';
         } else {
-            sub.textContent = 'Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?';
-            if (btn) btn.textContent = 'Tırmanışa başla';
+            sub.textContent = 'Zor mod seri · 10 ipucu bütçesi';
+            if (btn) btn.textContent = 'Başla';
         }
     }
 

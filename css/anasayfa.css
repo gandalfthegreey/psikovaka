@@ -390,53 +390,186 @@
    ========================================================================== */
 .screen-home .desk-noro,
 .screen-home .noro-nudge.noro-bubble { display: none !important; }
-/* klasör sekmesi klasörün üstüne taşar (≈32 px): hedef ipucu satırıyla çakışmasın diye o kadar boşluk */
-.screen-home .desk-stage {
+
+/* ==========================================================================
+   Seçenek B — Ultra-Minimalist Tek Ekran (Sıfır Kaydırma) Ana Sayfa
+   Sol: Odaklı Günün Vakası klasörü | Sağ: 3 ince yatay aksiyon şeridi
+   ========================================================================== */
+.screen.screen-home {
+    gap: var(--space-3);
+}
+.screen-home .home-greeting {
+    justify-content: flex-end;
+    min-height: 0;
+}
+.screen-home .home-greeting-text,
+.screen-home .home-greeting-sub,
+.screen-home .target-hint {
+    display: none;
+}
+.screen-home .home-greeting:has(.rp-chip[hidden]) {
+    display: none;
+}
+.screen-home .target-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+/* Tanı · Terapi · İlaç · Kombo: net tıklanabilir segmented hap butonları */
+.screen-home .target-picker .segmented {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: 0;
+    padding: 3px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+}
+.screen-home .target-picker .segmented-btn,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn {
+    min-width: 0;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-2);
+    text-decoration: none;
+    transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+.screen-home .target-picker .segmented-btn:hover,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn:hover {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+}
+.screen-home .target-picker .segmented-btn.active,
+[data-theme="dark"] .screen-home .target-picker .segmented-btn.active {
+    background: var(--color-accent-bg);
+    color: #fff;
+    border-color: transparent;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+}
+.screen-home .target-hint-row {
+    margin-top: 0;
+}
+.screen-home .desk {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-5);
-    margin-top: var(--space-1);
+    gap: var(--space-4);
+    align-items: start;
+}
+.screen-home .desk-stage {
+    display: block;
+    margin-top: 0;
 }
 .screen-home .card-hero.desk-folder,
 .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
     grid-area: auto;
-    margin-top: 38px;
+    margin-top: 32px;
+    padding: 26px 26px 22px;
+    gap: var(--space-2);
 }
-
-/* Ana sayfa Tırmanış kartı: çalışma masası estetiğine uyumlu temiz yerleşim */
-.screen-home .card-action.desk-climb {
+.screen-home .desk-folder .card-hero-title {
+    font-size: 1.85rem;
+}
+.screen-home .desk-folder .card-hero-text {
+    font-size: var(--text-sm);
+    line-height: 1.45;
+}
+.screen-home .desk-folder .daily-actions {
+    margin-top: var(--space-1);
+}
+.screen-home .desk-aside {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    padding: 18px 20px;
-    border: 1px solid color-mix(in srgb, var(--color-warning) 50%, var(--paper-edge));
-    border-radius: 6px;
+    padding-left: 0;
+}
+
+/* Sağ sütundaki 3 ince yatay şerit kartı */
+.screen-home .card-action.desk-strip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: 0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--paper-edge);
     background: var(--paper);
     box-shadow: var(--paper-lift);
+    transform: none;
 }
-.screen-home .desk-climb .card-action-head { display: block; }
-.screen-home .desk-climb .card-title { font-size: 1.0625rem; margin-bottom: 4px; }
-.screen-home .desk-climb .card-text { color: var(--color-text-2); font-size: var(--text-sm); line-height: 1.45; }
-.screen-home .desk-climb .card-action-row { display: flex; align-items: center; margin-top: auto; padding-top: var(--space-1); }
-.screen-home .desk-climb .card-action-row .btn { border-radius: 6px; padding: 8px 16px; min-height: 40px; font-size: var(--text-sm); }
+.screen-home .card-action.desk-strip::before {
+    display: none;
+}
+.screen-home .card-action.desk-strip.desk-climb {
+    border-color: color-mix(in srgb, var(--color-warning) 55%, var(--paper-edge));
+}
+.screen-home .desk-strip .card-action-head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+.screen-home .desk-strip .card-title {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    line-height: 1.25;
+}
+.screen-home .desk-strip .card-text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-text-2);
+}
+.screen-home .desk-strip .desk-pin-note {
+    margin: 4px 0 0;
+    font-size: var(--text-xs);
+}
+.screen-home .desk-strip .card-action-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    margin: 0;
+}
+.screen-home .desk-strip .card-action-row .btn {
+    border-radius: 6px;
+    min-height: 36px;
+    padding: 6px 14px;
+    font-size: var(--text-sm);
+    white-space: nowrap;
+}
+.screen-home .desk-strip .card-action-row .btn-ghost {
+    padding: 6px 8px;
+}
 
-@media (min-width: 900px) {
-    .screen-home .desk-stage {
-        grid-template-columns: minmax(0, 1.38fr) minmax(260px, 1fr);
-        grid-template-areas: none;
-        align-items: stretch;
-        gap: var(--space-6);
-        margin-top: var(--space-3);
-    }
-    .screen-home .desk-stage .desk-pin {
-        margin-top: 38px;
-        align-self: stretch;
-        justify-content: space-between;
+@media (min-width: 860px) {
+    .screen-home .desk {
+        grid-template-columns: minmax(0, 1.22fr) minmax(300px, 1fr);
+        gap: var(--space-5);
+        align-items: end;
     }
     .screen-home .desk-aside {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        padding-left: 0;
-        gap: var(--space-6);
-        align-items: stretch;
+        align-self: stretch;
+        justify-content: space-between;
+        padding-top: 78px;
     }
 }

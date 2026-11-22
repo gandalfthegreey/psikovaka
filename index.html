@@ -272,44 +272,45 @@
                             <!-- Seri: klasöre ataşla tutturulmuş etiket -->
                             <span class="streak-chip desk-tag" id="dailyStreakChip" hidden><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg><span id="dailyStreakText"></span></span>
                         </article>
-
-                        <!-- Online: günün vakasının sağında panoya raptiyeli kart -->
-                        <article class="card card-action desk-pin" aria-labelledby="onlineCardTitle">
-                            <div class="card-action-head">
-                                <h3 class="card-title" id="onlineCardTitle">Online</h3>
-                                <p class="card-text">Düello, herkes tek ve turnuva.</p>
-                            </div>
-                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
-                            <div class="card-action-row">
-                                <a class="btn btn-secondary" id="btnHomeOnline" href="#/online">Arenaya git</a>
-                            </div>
-                        </article>
                     </div>
                 </div>
 
+                <!-- Sağ sütun (Seçenek B): 3 ince, tek satırlık aksiyon kartı -->
                 <div class="desk-aside">
-                    <!-- Tırmanış: zor mod kesintisiz seri + 10 ipucu bütçesi -->
-                    <article class="card card-action desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
+                    <!-- 1. Tırmanış -->
+                    <article class="card card-action desk-strip desk-climb" id="homeClimbCard" aria-labelledby="climbCardTitle">
                         <div class="card-action-head">
                             <h3 class="card-title" id="climbCardTitle">🏔️ Tırmanış</h3>
-                            <p class="card-text" id="homeClimbMeta">Zor modda 10 ipucu bütçesiyle art arda kaç vaka bilebilirsin?</p>
+                            <p class="card-text" id="homeClimbMeta">Zor mod seri · 10 ipucu bütçesi</p>
                         </div>
                         <div class="card-action-row">
-                            <a class="btn btn-primary" id="btnHomeClimb" href="#/tirmanis">Tırmanışa başla</a>
+                            <a class="btn btn-primary btn-sm" id="btnHomeClimb" href="#/tirmanis">Başla</a>
                         </div>
                     </article>
 
-                    <!-- Sınırsız pratik: fiş kutusu (ön fişte geçerli filtre) -->
-                    <article class="card card-action desk-cardbox" aria-labelledby="practiceCardTitle">
+                    <!-- 2. Sınırsız pratik -->
+                    <article class="card card-action desk-strip desk-cardbox" aria-labelledby="practiceCardTitle">
                         <div class="card-action-head">
                             <h3 class="card-title" id="practiceCardTitle">Sınırsız pratik</h3>
                             <p class="card-text"><span class="desk-filter-label">Filtre:</span> <span id="practiceSummary">Tüm vakalar</span></p>
                         </div>
                         <div class="card-action-row">
-                            <button class="btn btn-secondary" id="btnStartPractice" type="button">Pratik yap</button>
-                            <button class="btn btn-ghost" id="btnOpenPracticeSettings" type="button">
-                                <svg class="icon"><use href="#i-sliders"/></svg> Ayarlar
+                            <button class="btn btn-ghost btn-sm" id="btnOpenPracticeSettings" type="button" aria-label="Pratik ayarları" title="Pratik ayarları">
+                                <svg class="icon"><use href="#i-sliders"/></svg>
                             </button>
+                            <button class="btn btn-secondary btn-sm" id="btnStartPractice" type="button">Oyna</button>
+                        </div>
+                    </article>
+
+                    <!-- 3. Online -->
+                    <article class="card card-action desk-strip desk-pin" aria-labelledby="onlineCardTitle">
+                        <div class="card-action-head">
+                            <h3 class="card-title" id="onlineCardTitle">Online</h3>
+                            <p class="card-text">Düello · Herkes tek · Turnuva</p>
+                            <p class="desk-pin-note" id="homeOnlineNote" hidden></p>
+                        </div>
+                        <div class="card-action-row">
+                            <a class="btn btn-secondary btn-sm" id="btnHomeOnline" href="#/online">Arena</a>
                         </div>
                     </article>
                 </div>

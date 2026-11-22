@@ -131,6 +131,24 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 20:22 — Gemini — Ana Sayfa Selamlama Kaldırıldı + Net Segmented Mod Seçici
+- **Dosyalar:** `css/anasayfa.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `"Merhaba … / Bugünün dosyası masanda."` selamlama bloğu ve `"Vakadaki danışanın DSM-5-TR tanısını bul."` alt yazısı kaldırıldı.
+  2. `Tanı | Terapi | İlaç | Kombo` seçicisi düz altı çizili metin yerine belirgin çerçeveli, aktif durumu dolgulu tıklanabilir segmented hap butonlarına dönüştürüldü.
+- **Neden:** Emre'nin isteği (daha sade, net seçenekli ve sıfır kaydırmalı ana sayfa).
+- **Doğrulama:** `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
+### 2026-11-22 20:21 — Gemini — Tırmanış `startCase` Kesin Düzeltmesi + Ana Sayfa Seçenek B Ultra-Minimalist Düzen
+- **Dosyalar:** `js/tirmanis.js`, `index.html`, `css/anasayfa.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **Tırmanış başlama hatası kesin çözüldü (`js/tirmanis.js`):** `PsikoVakaGame` içinde bulunmayan `gm.loadCase` / `gm.setTargetMode` / `gm.targetMode` çağrıları gerçek metotlarla (`gm.startCase`, `gm.setTargetGameMode`, `gm.targetGameMode`) değiştirildi ve `setCaseZorluk({ tekHak: true, kategoriGizli: true }, { locked: true })` çağrısı `startCase` sonrasına alındı (çünkü `startCase` zorluğu sıfırlıyordu).
+  2. **Ana sayfa Seçenek B ultra-minimalist düzen (`index.html`, `css/anasayfa.css`):** Dolgu cümleleri gizlendi, başlık ve Günün Vakası klasörü sıkılaştırıldı. Masaüstünde (`≥860px`) solda odaklı **Günün Vakası**, sağda üst üste 3 ince yatay aksiyon şeridi (**🏔️ Tırmanış · Sınırsız Pratik · Online**) yer alıyor; sıfır kaydırmayla tek ekrana sığıyor.
+- **Neden:** Emre'nin bildirimi ve Seçenek B onayı.
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 20:14 — Gemini — Tırmanış Başlama Düzeltmesi (`CLINICAL_CASES`), Buton/Balon Temizliği & Ana Sayfa 2×2 Masa Yerleşimi
 - **Dosyalar:** `js/tirmanis.js`, `css/tirmanis.css`, `index.html`, `css/anasayfa.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
