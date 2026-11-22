@@ -2872,3 +2872,53 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
         display: none;
     }
 }
+
+
+/* ==========================================================================
+   Sade Vaka Ekranı: Başlık/Danışan Gizli, Üstte Zorluk + İpuçları, Kompakt Dock
+   ========================================================================== */
+.screen-play .play-bar-title #modeBadge,
+.screen-play .play-bar-title #patientId,
+.screen-play .play-bar-title #difficultyBadge,
+.screen-play .patient-card {
+    display: none !important;
+}
+
+.screen-play .play-bar {
+    padding-top: var(--space-1);
+    padding-bottom: var(--space-1);
+}
+
+.screen-play .zorluk-play {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.screen-play .zorluk-play .zorluk-segmented {
+    max-width: 220px;
+}
+
+.screen-play .clues-container {
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: flex-start;
+}
+
+.screen-play #btnNextClue,
+.screen-play #btnGiveUp {
+    display: none !important;
+}
+
+.screen-play .input-dock {
+    padding-top: var(--space-2);
+    padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
+}
+
+.screen-play .game-controls {
+    margin-top: var(--space-1);
+    padding-top: 0;
+    min-height: 22px;
+}

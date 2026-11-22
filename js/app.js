@@ -1606,8 +1606,15 @@ class PsikoVakaGame {
     // --- URL Routing for Custom Cases, Direct Case IDs & Live/Link Duels ---
     checkURLForCustomOrDuelCase() {
         const hash = window.location.hash;
-        // Yeni arayüz: açılışta vaka otomatik başlamaz, ana sayfa (veya #/rota) gösterilir.
-        if (!hash || hash.startsWith('#/')) {
+        // Siteye ilk girişte (hash yokken) otomatik olarak Günün Vakası başlar;
+        // #/oyna veya başka bir rota varsa ilgili ekran açılır.
+        if (!hash || hash === '#') {
+            this.currentRoute = 'oyna';
+            this.showScreen('oyna');
+            setTimeout(() => this.setMode('daily'), 0);
+            return;
+        }
+        if (hash.startsWith('#/')) {
             this.showRoute(this.parseRouteHash() || 'oyna');
             return;
         }
@@ -2355,7 +2362,7 @@ class PsikoVakaGame {
                 const sig = JSON.stringify(this.zorluk);
                 if (panel.dataset.sig !== sig || !panel.firstChild) {
                     panel.dataset.sig = sig;
-                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk' });
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', hideTitle: true });
                 }
             }
             panel.hidden = !show;
@@ -2366,13 +2373,8 @@ class PsikoVakaGame {
     updateNextClueButton() {
         const b = this.dom.btnNextClue;
         if (!b) return;
-        const show = !!(this.zorluk && this.zorluk.tekHak) && !this.isGameOver && !this.dailyReadOnly && this.currentCase;
-        b.hidden = !show;
-        b.disabled = !show || this.unlockedClues >= this.maxClues || !!this._revealBusy;
-        const lbl = b.querySelector('span');
-        const all = this.unlockedClues >= this.maxClues;
-        if (lbl) lbl.textContent = all ? 'İpuçları açık' : 'Sonraki ipucu';
-        b.setAttribute('aria-label', all ? 'Bütün ipuçları açık' : `Sonraki ipucunu aç (${Math.min(this.unlockedClues + 1, this.maxClues)}/${this.maxClues}), tahmin hakkın gitmez`);
+        b.hidden = true;
+        b.disabled = true;
     }
 
     /** Tek hak: tahmin etmeden sonraki ipucunu açar. Online/günlük üye: sunucuya sorar (clueRevealHandler). */

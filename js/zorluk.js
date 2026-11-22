@@ -70,9 +70,10 @@
         const o = opts || {};
         const id = o.id || 'zor';
         const dis = o.disabled ? ' disabled' : '';
+        const showTitle = o.hideTitle ? false : (o.title !== '');
         return `<div class="settings-group zorluk-group" data-zorluk-root="${esc(id)}">
-            <span class="settings-label" id="${esc(id)}Label">${esc(o.title || 'Zorluk')}</span>
-            <div class="segmented zorluk-segmented" role="radiogroup" aria-labelledby="${esc(id)}Label">
+            ${showTitle ? `<span class="settings-label" id="${esc(id)}Label">${esc(o.title || 'Zorluk')}</span>` : ''}
+            <div class="segmented zorluk-segmented" role="radiogroup" aria-label="${esc(o.title || 'Zorluk')}">
                 <button class="segmented-btn zorluk-seg-btn${!isHard ? ' active' : ''}" type="button" role="radio" id="${esc(id)}-normal" data-zorluk-mode="normal" aria-checked="${!isHard}"${dis}>Normal</button>
                 <button class="segmented-btn zorluk-seg-btn${isHard ? ' active' : ''}" type="button" role="radio" id="${esc(id)}-zor" data-zorluk-mode="zor" aria-checked="${isHard}"${dis}>Zor</button>
             </div>

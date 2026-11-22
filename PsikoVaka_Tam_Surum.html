@@ -3170,6 +3170,56 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
     }
 }
 
+
+/* ==========================================================================
+   Sade Vaka Ekranı: Başlık/Danışan Gizli, Üstte Zorluk + İpuçları, Kompakt Dock
+   ========================================================================== */
+.screen-play .play-bar-title #modeBadge,
+.screen-play .play-bar-title #patientId,
+.screen-play .play-bar-title #difficultyBadge,
+.screen-play .patient-card {
+    display: none !important;
+}
+
+.screen-play .play-bar {
+    padding-top: var(--space-1);
+    padding-bottom: var(--space-1);
+}
+
+.screen-play .zorluk-play {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.screen-play .zorluk-play .zorluk-segmented {
+    max-width: 220px;
+}
+
+.screen-play .clues-container {
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: flex-start;
+}
+
+.screen-play #btnNextClue,
+.screen-play #btnGiveUp {
+    display: none !important;
+}
+
+.screen-play .input-dock {
+    padding-top: var(--space-2);
+    padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
+}
+
+.screen-play .game-controls {
+    margin-top: var(--space-1);
+    padding-top: 0;
+    min-height: 22px;
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -6750,6 +6800,9 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </button>
             </div>
 
+            <!-- Zorluk (en üstte, başlıksız) -->
+            <section class="zorluk-play" id="playZorlukPanel" aria-label="Zorluk" hidden></section>
+
             <div class="play-progress">
                 <div class="clue-progress-tracker" id="clueProgressTracker" aria-hidden="true"></div>
                 <span class="play-progress-label" id="clueProgressLabel">İpucu 1/6</span>
@@ -6816,9 +6869,6 @@ html.amb-hidden .amb-blob { animation-play-state: paused; }
                 </div>
                 <p class="patient-summary" id="patientSummaryText">Yükleniyor…</p>
             </section>
-
-            <!-- Zorluk (günün vakası: ilk tahminden önce seçilir; ajan Z1) -->
-            <section class="zorluk-play" id="playZorlukPanel" aria-label="Zorluk" hidden></section>
 
             <div class="clues-container" id="cluesContainer" aria-live="polite"></div>
 
@@ -40886,9 +40936,10 @@ if (typeof module !== 'undefined' && module.exports) {
         const o = opts || {};
         const id = o.id || 'zor';
         const dis = o.disabled ? ' disabled' : '';
+        const showTitle = o.hideTitle ? false : (o.title !== '');
         return `<div class="settings-group zorluk-group" data-zorluk-root="${esc(id)}">
-            <span class="settings-label" id="${esc(id)}Label">${esc(o.title || 'Zorluk')}</span>
-            <div class="segmented zorluk-segmented" role="radiogroup" aria-labelledby="${esc(id)}Label">
+            ${showTitle ? `<span class="settings-label" id="${esc(id)}Label">${esc(o.title || 'Zorluk')}</span>` : ''}
+            <div class="segmented zorluk-segmented" role="radiogroup" aria-label="${esc(o.title || 'Zorluk')}">
                 <button class="segmented-btn zorluk-seg-btn${!isHard ? ' active' : ''}" type="button" role="radio" id="${esc(id)}-normal" data-zorluk-mode="normal" aria-checked="${!isHard}"${dis}>Normal</button>
                 <button class="segmented-btn zorluk-seg-btn${isHard ? ' active' : ''}" type="button" role="radio" id="${esc(id)}-zor" data-zorluk-mode="zor" aria-checked="${isHard}"${dis}>Zor</button>
             </div>
@@ -42548,8 +42599,15 @@ class PsikoVakaGame {
     // --- URL Routing for Custom Cases, Direct Case IDs & Live/Link Duels ---
     checkURLForCustomOrDuelCase() {
         const hash = window.location.hash;
-        // Yeni arayüz: açılışta vaka otomatik başlamaz, ana sayfa (veya #/rota) gösterilir.
-        if (!hash || hash.startsWith('#/')) {
+        // Siteye ilk girişte (hash yokken) otomatik olarak Günün Vakası başlar;
+        // #/oyna veya başka bir rota varsa ilgili ekran açılır.
+        if (!hash || hash === '#') {
+            this.currentRoute = 'oyna';
+            this.showScreen('oyna');
+            setTimeout(() => this.setMode('daily'), 0);
+            return;
+        }
+        if (hash.startsWith('#/')) {
             this.showRoute(this.parseRouteHash() || 'oyna');
             return;
         }
@@ -43297,7 +43355,7 @@ class PsikoVakaGame {
                 const sig = JSON.stringify(this.zorluk);
                 if (panel.dataset.sig !== sig || !panel.firstChild) {
                     panel.dataset.sig = sig;
-                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', title: 'Zorluk' });
+                    panel.innerHTML = Z.switches(this.zorluk, { id: 'dailyZor', hideTitle: true });
                 }
             }
             panel.hidden = !show;
@@ -43308,13 +43366,8 @@ class PsikoVakaGame {
     updateNextClueButton() {
         const b = this.dom.btnNextClue;
         if (!b) return;
-        const show = !!(this.zorluk && this.zorluk.tekHak) && !this.isGameOver && !this.dailyReadOnly && this.currentCase;
-        b.hidden = !show;
-        b.disabled = !show || this.unlockedClues >= this.maxClues || !!this._revealBusy;
-        const lbl = b.querySelector('span');
-        const all = this.unlockedClues >= this.maxClues;
-        if (lbl) lbl.textContent = all ? 'İpuçları açık' : 'Sonraki ipucu';
-        b.setAttribute('aria-label', all ? 'Bütün ipuçları açık' : `Sonraki ipucunu aç (${Math.min(this.unlockedClues + 1, this.maxClues)}/${this.maxClues}), tahmin hakkın gitmez`);
+        b.hidden = true;
+        b.disabled = true;
     }
 
     /** Tek hak: tahmin etmeden sonraki ipucunu açar. Online/günlük üye: sunucuya sorar (clueRevealHandler). */

@@ -131,6 +131,17 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 16:06 — Gemini — Açılışta Günün Vakası + Sade Vaka Ekranı + Kompakt Tahmin Barı
+- **Dosyalar:** `index.html`, `js/app.js`, `js/zorluk.js`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. `js/app.js` (`checkURLForCustomOrDuelCase`): Siteye hash olmadan ilk girişte otomatik olarak Günün Vakası (`setMode('daily')`) başlatılır; geri tuşu veya `#/oyna` ile ana sayfaya normal dönülür.
+  2. `index.html` + `css/style.css`: Vaka ekranında vaka numarası/başlık satırı (`#modeBadge`, `#patientId`, `#difficultyBadge`) ve "Danışan" kartı (`.patient-card`) gizlendi.
+  3. `index.html` + `js/zorluk.js` + `css/style.css`: `Normal | Zor` seçici başlıksız (`hideTitle: true`) ve çerçevesiz olarak ekranın en üstüne alındı; açılan 1. ipucu hemen bunun altında üstten başlar ve yeni ipuçları aşağı doğru eklenir.
+  4. `js/app.js` + `css/style.css`: Tahmin barındaki "Sonraki ipucu" (`#btnNextClue`) ve "Pes et" (`#btnGiveUp`) düğmeleri kaldırıldı, alt tahmin çubuğunun (`.input-dock` + `.game-controls`) yüksekliği azaltıldı.
+- **Neden:** Emre'nin isteği — daha temiz, dikkat dağıtmayan ve doğrudan Günün Vakası ile açılan deneyim.
+- **Doğrulama:** `node --check js/zorluk.js js/app.js` temiz, `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 15:52 — Gemini — Boş ve etkinliksiz açık odaların otomatik kapanması (`0008_oda_otomatik_kapanma.sql`)
 - **Dosyalar:** Yeni `supabase/migrations/0008_oda_otomatik_kapanma.sql`, `js/online/api.js`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
