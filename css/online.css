@@ -1063,11 +1063,25 @@ body.ol-banners-docked .ol-banners { display: none; }
 .olr-photo-bg {
     position: absolute;
     inset: 0;
-    background-image: url('../assets/lobby_bg_cp.jpg');
+    background-image: url('../assets/lobby_bg_night.jpg');
     background-size: cover;
-    background-position: center 48%;
+    background-position: center 42%;
     pointer-events: none;
     transition: filter 0.6s ease;
+}
+
+.olr-item {
+    filter: drop-shadow(0 8px 10px rgba(14, 8, 5, 0.42));
+    transition: filter 0.25s ease;
+}
+
+.olr-obj {
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 14px;
+}
+
+.olr-obj:hover {
+    background: radial-gradient(circle, rgba(255, 224, 150, 0.16) 0%, transparent 72%);
 }
 
 .olr-photo-bg.olr-t-morning,

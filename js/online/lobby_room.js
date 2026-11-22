@@ -482,70 +482,103 @@
         </svg>`;
     }
 
-    // ---- yerdeki eşyalar (tasarım koordinatlarında)
+    // ---- yerdeki eşyalar (zengin gölgeli boyalı-vektör tasarım)
     const ART = {
         chair: () => `
-            <ellipse cx="82" cy="144" rx="70" ry="6" fill="#000" opacity=".18"/>
-            <path d="M30 128l-3 16M126 128l2 15M62 132l-1 12" stroke="#4a2f22" stroke-width="5" stroke-linecap="round"/>
-            <path d="M22 26Q22 8 44 8L98 12Q114 14 114 32L112 100L24 104Z" fill="#2f6f73" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M34 22Q60 18 100 24" fill="none" stroke="#4a9093" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="48" cy="44" r="2.2" fill="#24585b"/><circle cx="76" cy="46" r="2.2" fill="#24585b"/><circle cx="100" cy="48" r="2.2" fill="#24585b"/><circle cx="60" cy="70" r="2.2" fill="#24585b"/><circle cx="90" cy="72" r="2.2" fill="#24585b"/>
-            <path d="M8 74Q8 60 22 60Q36 60 36 74L36 128L10 128Z" fill="#2a6366" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M26 98L134 96Q148 98 148 110L148 118L28 122Z" fill="#3b8487" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M24 120L150 116L150 132Q150 136 146 136L28 138Q24 138 24 134Z" fill="#285d60" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M122 70Q122 56 138 56Q154 56 154 70L154 132L124 134Z" fill="#348084" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M126 66Q138 58 150 66" fill="none" stroke="#5aa3a6" stroke-width="3" stroke-linecap="round"/>
-            <path d="M6 66Q14 54 30 58L40 100Q30 104 22 102L18 128L6 124Z" fill="#e3b04b" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M10 80L36 76M12 96L38 92M10 112L22 110" stroke="#c98d2a" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M8 124l-2 6M13 125l-1 6M18 126l0 6" stroke="#c98d2a" stroke-width="1.8" stroke-linecap="round"/>`,
+            <defs>
+                <linearGradient id="olr-ch-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3f8f93"/><stop offset="55%" stop-color="#2a676b"/><stop offset="100%" stop-color="#1d4a4d"/></linearGradient>
+                <linearGradient id="olr-ch-seat" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ba0a3"/><stop offset="100%" stop-color="#286063"/></linearGradient>
+                <linearGradient id="olr-ch-arm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#429194"/><stop offset="100%" stop-color="#1e4d50"/></linearGradient>
+                <linearGradient id="olr-ch-throw" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f3c663"/><stop offset="100%" stop-color="#c98926"/></linearGradient>
+            </defs>
+            <ellipse cx="82" cy="144" rx="72" ry="7" fill="#120906" opacity=".36"/>
+            <path d="M30 128l-4 16M126 128l3 15M62 132l-1 12" stroke="#3b2316" stroke-width="5.5" stroke-linecap="round"/>
+            <path d="M22 26Q22 8 44 8L98 12Q114 14 114 32L112 100L24 104Z" fill="url(#olr-ch-back)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M32 16Q68 12 104 20" fill="none" stroke="#8ad2d4" stroke-opacity=".45" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="48" cy="44" r="3" fill="#163b3d" opacity=".65"/><circle cx="76" cy="46" r="3" fill="#163b3d" opacity=".65"/><circle cx="100" cy="48" r="3" fill="#163b3d" opacity=".65"/>
+            <circle cx="60" cy="70" r="3" fill="#163b3d" opacity=".65"/><circle cx="90" cy="72" r="3" fill="#163b3d" opacity=".65"/>
+            <path d="M8 74Q8 60 22 60Q36 60 36 74L36 128L10 128Z" fill="url(#olr-ch-arm)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M26 98L134 96Q148 98 148 110L148 118L28 122Z" fill="url(#olr-ch-seat)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M34 102Q86 98 140 103" fill="none" stroke="#9be0e0" stroke-opacity=".38" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M24 120L150 116L150 132Q150 136 146 136L28 138Q24 138 24 134Z" fill="#1e4d50" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M122 70Q122 56 138 56Q154 56 154 70L154 132L124 134Z" fill="url(#olr-ch-arm)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M126 64Q138 56 150 64" fill="none" stroke="#9be0e0" stroke-opacity=".45" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M6 66Q14 54 30 58L40 100Q30 104 22 102L18 128L6 124Z" fill="url(#olr-ch-throw)" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M10 80L36 76M12 96L38 92M10 112L22 110" stroke="#9e6718" stroke-opacity=".75" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M8 124l-2 7M13 125l-1 7M18 126l0 7" stroke="#c98d2a" stroke-width="1.8" stroke-linecap="round"/>`,
         couch: () => `
-            <ellipse cx="160" cy="144" rx="150" ry="7" fill="#000" opacity=".18"/>
-            <path d="M30 132v12M290 132v12M110 136v8M210 136v8" stroke="#4a2f22" stroke-width="6" stroke-linecap="round"/>
-            <path d="M24 30Q24 14 42 14L278 14Q296 14 296 30L296 96L24 96Z" fill="#b5654f" stroke="${OUT}" stroke-width="2.6" stroke-linejoin="round"/>
-            <rect x="40" y="24" width="76" height="64" rx="14" fill="#c27560" stroke="${OUT}" stroke-width="2"/>
-            <rect x="122" y="24" width="76" height="64" rx="14" fill="#c27560" stroke="${OUT}" stroke-width="2"/>
-            <rect x="204" y="24" width="76" height="64" rx="14" fill="#c27560" stroke="${OUT}" stroke-width="2"/>
-            <path d="M48 32q30 -6 60 0M130 32q30 -6 60 0M212 32q30 -6 60 0" fill="none" stroke="#d68f78" stroke-width="3" stroke-linecap="round"/>
-            <g transform="rotate(-10 76 62)"><path d="M56 44Q76 38 96 44Q100 62 96 80Q76 86 56 80Q52 62 56 44Z" fill="#e3b04b" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M58 56Q76 51 94 56M58 68Q76 63 94 68" fill="none" stroke="#c98d2a" stroke-width="2.6" stroke-linecap="round"/></g>
-            <g transform="rotate(12 248 62)"><path d="M230 46Q248 40 266 46Q270 62 266 78Q248 84 230 78Q226 62 230 46Z" fill="#f2e6cf" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
-                <circle cx="240" cy="54" r="2.2" fill="#2f6f73"/><circle cx="254" cy="58" r="2.2" fill="#2f6f73"/><circle cx="244" cy="68" r="2.2" fill="#2f6f73"/><circle cx="257" cy="72" r="2.2" fill="#2f6f73"/></g>
-            <rect x="34" y="88" width="254" height="22" rx="8" fill="#c97d66" stroke="${OUT}" stroke-width="2.4"/>
-            <path d="M118 90v18M204 90v18" stroke="#9f5341" stroke-width="2"/>
-            <path d="M28 106H292V128Q292 134 286 134H34Q28 134 28 128Z" fill="#9f5341" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M4 64Q4 48 22 48Q40 48 40 64L40 134L8 134Q4 134 4 130Z" fill="#a85b46" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M280 64Q280 48 298 48Q316 48 316 64L316 130Q316 134 312 134L280 134Z" fill="#a85b46" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <path d="M10 58q12 -8 24 0M286 58q12 -8 24 0" fill="none" stroke="#c97d66" stroke-width="3" stroke-linecap="round"/>`,
+            <defs>
+                <linearGradient id="olr-co-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c97159"/><stop offset="60%" stop-color="#9f4e3a"/><stop offset="100%" stop-color="#763526"/></linearGradient>
+                <linearGradient id="olr-co-cush" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d9856d"/><stop offset="100%" stop-color="#a5533e"/></linearGradient>
+                <linearGradient id="olr-co-arm" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c26b54"/><stop offset="100%" stop-color="#7e3a2a"/></linearGradient>
+                <linearGradient id="olr-co-p1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f7cb6b"/><stop offset="100%" stop-color="#c98926"/></linearGradient>
+                <linearGradient id="olr-co-p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fcf4e3"/><stop offset="100%" stop-color="#d9c6a3"/></linearGradient>
+            </defs>
+            <ellipse cx="160" cy="144" rx="152" ry="8" fill="#120906" opacity=".36"/>
+            <path d="M30 132v12M290 132v12M110 136v8M210 136v8" stroke="#3b2316" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M24 30Q24 14 42 14L278 14Q296 14 296 30L296 96L24 96Z" fill="url(#olr-co-back)" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M38 19H282" fill="none" stroke="#ffcca8" stroke-opacity=".38" stroke-width="2.8" stroke-linecap="round"/>
+            <rect x="40" y="24" width="76" height="64" rx="14" fill="url(#olr-co-cush)" stroke="${OUT}" stroke-width="2"/>
+            <rect x="122" y="24" width="76" height="64" rx="14" fill="url(#olr-co-cush)" stroke="${OUT}" stroke-width="2"/>
+            <rect x="204" y="24" width="76" height="64" rx="14" fill="url(#olr-co-cush)" stroke="${OUT}" stroke-width="2"/>
+            <path d="M48 31q30 -5 60 0M130 31q30 -5 60 0M212 31q30 -5 60 0" fill="none" stroke="#ffd4b8" stroke-opacity=".45" stroke-width="2.6" stroke-linecap="round"/>
+            <g transform="rotate(-10 76 62)"><path d="M56 44Q76 38 96 44Q100 62 96 80Q76 86 56 80Q52 62 56 44Z" fill="url(#olr-co-p1)" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M58 56Q76 51 94 56M58 68Q76 63 94 68" fill="none" stroke="#a66c19" stroke-opacity=".75" stroke-width="2.4" stroke-linecap="round"/></g>
+            <g transform="rotate(12 248 62)"><path d="M230 46Q248 40 266 46Q270 62 266 78Q248 84 230 78Q226 62 230 46Z" fill="url(#olr-co-p2)" stroke="${OUT}" stroke-width="2" stroke-linejoin="round"/>
+                <circle cx="240" cy="54" r="2.3" fill="#2f6f73"/><circle cx="254" cy="58" r="2.3" fill="#2f6f73"/><circle cx="244" cy="68" r="2.3" fill="#2f6f73"/><circle cx="257" cy="72" r="2.3" fill="#2f6f73"/></g>
+            <rect x="34" y="88" width="254" height="22" rx="8" fill="url(#olr-co-cush)" stroke="${OUT}" stroke-width="2.2"/>
+            <path d="M42 93H280" fill="none" stroke="#ffd8bf" stroke-opacity=".35" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M118 90v18M204 90v18" stroke="#763526" stroke-width="2"/>
+            <path d="M28 106H292V128Q292 134 286 134H34Q28 134 28 128Z" fill="#7d3b2b" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M4 64Q4 48 22 48Q40 48 40 64L40 134L8 134Q4 134 4 130Z" fill="url(#olr-co-arm)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M280 64Q280 48 298 48Q316 48 316 64L316 130Q316 134 312 134L280 134Z" fill="url(#olr-co-arm)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M10 56q12 -7 24 0M286 56q12 -7 24 0" fill="none" stroke="#ffd4b8" stroke-opacity=".45" stroke-width="2.6" stroke-linecap="round"/>`,
         table: () => `
-            <ellipse cx="45" cy="114" rx="30" ry="5" fill="#000" opacity=".18"/>
-            <path d="M45 62V108M26 112Q45 100 64 112" fill="none" stroke="#6b4630" stroke-width="6" stroke-linecap="round"/>
-            <ellipse cx="45" cy="62" rx="40" ry="10" fill="#8a5a3c" stroke="${OUT}" stroke-width="2.2"/>
-            <ellipse cx="45" cy="59" rx="40" ry="10" fill="#a8734e" stroke="${OUT}" stroke-width="2.2"/>
+            <defs>
+                <linearGradient id="olr-tb-top" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c48b60"/><stop offset="100%" stop-color="#7c4d2e"/></linearGradient>
+                <radialGradient id="olr-tb-pot" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#6ca0e6"/><stop offset="55%" stop-color="#396ab0"/><stop offset="100%" stop-color="#214378"/></radialGradient>
+            </defs>
+            <ellipse cx="45" cy="114" rx="32" ry="6" fill="#120906" opacity=".34"/>
+            <path d="M45 62V108M26 112Q45 100 64 112" fill="none" stroke="#4f3220" stroke-width="6.5" stroke-linecap="round"/>
+            <ellipse cx="45" cy="62" rx="40" ry="10" fill="#6b4228" stroke="${OUT}" stroke-width="2.2"/>
+            <ellipse cx="45" cy="59" rx="40" ry="10" fill="url(#olr-tb-top)" stroke="${OUT}" stroke-width="2.2"/>
+            <ellipse cx="43" cy="57" rx="28" ry="5" fill="#ffd9b3" opacity=".2"/>
             <g class="olr-steam"><path d="M38 22q-3 -5 0 -10q3 -5 0 -10" /><path d="M46 24q-3 -5 0 -10q3 -5 0 -10"/></g>
-            <path d="M20 46q-9 -2 -10 -10" fill="none" stroke="${OUT}" stroke-width="5" stroke-linecap="round"/><path d="M20 46q-9 -2 -10 -10" fill="none" stroke="#3d6fb6" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M56 38q10 0 9 9q-1 6 -9 6" fill="none" stroke="${OUT}" stroke-width="5"/><path d="M56 38q10 0 9 9q-1 6 -9 6" fill="none" stroke="#3d6fb6" stroke-width="2.4"/>
-            <path d="M22 44Q22 28 40 28Q58 28 58 44Q58 58 40 58Q22 58 22 44Z" fill="#3d6fb6" stroke="${OUT}" stroke-width="2.2"/>
-            <circle cx="32" cy="42" r="2" fill="#fff"/><circle cx="44" cy="48" r="2" fill="#fff"/><circle cx="50" cy="38" r="2" fill="#fff"/>
-            <path d="M30 30Q40 22 50 30Z" fill="#2f5c9c" stroke="${OUT}" stroke-width="2"/><circle cx="40" cy="23" r="3" fill="#2f5c9c" stroke="${OUT}" stroke-width="1.8"/>
-            <path d="M64 50h14l-2 8h-10z" fill="#fdfaf3" stroke="${OUT}" stroke-width="1.8" stroke-linejoin="round"/><ellipse cx="71" cy="59" rx="10" ry="2.4" fill="#fdfaf3" stroke="${OUT}" stroke-width="1.6"/>`,
+            <path d="M20 46q-9 -2 -10 -10" fill="none" stroke="${OUT}" stroke-width="5" stroke-linecap="round"/><path d="M20 46q-9 -2 -10 -10" fill="none" stroke="#4276bd" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M56 38q10 0 9 9q-1 6 -9 6" fill="none" stroke="${OUT}" stroke-width="5"/><path d="M56 38q10 0 9 9q-1 6 -9 6" fill="none" stroke="#4276bd" stroke-width="2.4"/>
+            <path d="M22 44Q22 28 40 28Q58 28 58 44Q58 58 40 58Q22 58 22 44Z" fill="url(#olr-tb-pot)" stroke="${OUT}" stroke-width="2.2"/>
+            <ellipse cx="32" cy="36" rx="4.5" ry="2.6" transform="rotate(-24 32 36)" fill="#fff" opacity=".45"/>
+            <circle cx="32" cy="43" r="1.8" fill="#fff" opacity=".9"/><circle cx="44" cy="48" r="1.8" fill="#fff" opacity=".9"/><circle cx="50" cy="39" r="1.8" fill="#fff" opacity=".9"/>
+            <path d="M30 30Q40 22 50 30Z" fill="#2a528f" stroke="${OUT}" stroke-width="2"/><circle cx="40" cy="23" r="3" fill="#4f82c9" stroke="${OUT}" stroke-width="1.8"/>
+            <path d="M64 50h14l-2 8h-10z" fill="#fdfaf3" stroke="${OUT}" stroke-width="1.8" stroke-linejoin="round"/><ellipse cx="71" cy="59" rx="10" ry="2.4" fill="#ebe2d0" stroke="${OUT}" stroke-width="1.6"/>`,
         lamp: () => `
-            <ellipse class="olr-lamp-glow" cx="35" cy="40" rx="42" ry="34"/>
-            <ellipse cx="35" cy="236" rx="20" ry="4" fill="#000" opacity=".2"/>
-            <path d="M35 60V226" stroke="#3a2a24" stroke-width="4"/>
-            <ellipse cx="35" cy="228" rx="16" ry="5" fill="#5a4636" stroke="${OUT}" stroke-width="2"/>
-            <path d="M14 58L22 18H48L56 58Z" fill="#f4e3c1" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
-            <path class="olr-lamp-shine" d="M18 56L24 22H34L32 56Z" fill="#fff6dd" opacity=".7"/>
-            <ellipse cx="35" cy="58" rx="21" ry="4" fill="#ffe7a3"/>`,
+            <defs>
+                <linearGradient id="olr-lm-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff4d6"/><stop offset="55%" stop-color="#f2d69b"/><stop offset="100%" stop-color="#c99e57"/></linearGradient>
+                <linearGradient id="olr-lm-brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8a6839"/><stop offset="50%" stop-color="#e3bd78"/><stop offset="100%" stop-color="#694d26"/></linearGradient>
+            </defs>
+            <ellipse class="olr-lamp-glow" cx="35" cy="40" rx="44" ry="36"/>
+            <ellipse cx="35" cy="236" rx="22" ry="5" fill="#120906" opacity=".36"/>
+            <rect x="33" y="58" width="4.4" height="168" fill="url(#olr-lm-brass)" stroke="${OUT}" stroke-width="1"/>
+            <ellipse cx="35" cy="228" rx="17" ry="5.5" fill="url(#olr-lm-brass)" stroke="${OUT}" stroke-width="2"/>
+            <path d="M14 58L22 18H48L56 58Z" fill="url(#olr-lm-shade)" stroke="${OUT}" stroke-width="2.2" stroke-linejoin="round"/>
+            <path class="olr-lamp-shine" d="M18 56L24 22H36L34 56Z" fill="#fffaf0" opacity=".68"/>
+            <ellipse cx="35" cy="58" rx="21" ry="4.5" fill="#ffdf8a"/>`,
         plant: () => `
-            <path d="M60 120C40 100 10 104 4 80C24 72 48 86 60 120Z" fill="#4f8a4f" stroke="#2e5a33" stroke-width="2"/>
-            <path d="M60 118C78 92 108 96 116 70C94 64 70 82 60 118Z" fill="#5f9e58" stroke="#2e5a33" stroke-width="2"/>
-            <path d="M58 116C42 80 52 40 70 14C82 44 76 84 58 116Z" fill="#6fae64" stroke="#2e5a33" stroke-width="2"/>
-            <path d="M58 116C46 92 20 64 26 34C48 50 60 82 58 116Z" fill="#5a9853" stroke="#2e5a33" stroke-width="2"/>
-            <path d="M62 116C80 84 104 66 100 40C80 54 64 84 62 116Z" fill="#78b86b" stroke="#2e5a33" stroke-width="2"/>
-            <path d="M70 18C66 50 62 80 58 114M28 38C40 60 52 86 58 114M98 44C84 66 70 92 62 114" fill="none" stroke="#2e5a33" stroke-width="1.4" opacity=".7"/>
-            <path d="M30 116H90L82 176H38Z" fill="#c8754d" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
-            <rect x="26" y="110" width="68" height="12" rx="3" fill="#b5653f" stroke="${OUT}" stroke-width="2.4"/>
-            <path d="M40 140h40M42 154h36" stroke="#a75a37" stroke-width="2"/>`
+            <defs>
+                <linearGradient id="olr-pl-pot" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d9875c"/><stop offset="65%" stop-color="#b5623b"/><stop offset="100%" stop-color="#874223"/></linearGradient>
+                <linearGradient id="olr-pl-leaf1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7ec472"/><stop offset="100%" stop-color="#3c733d"/></linearGradient>
+                <linearGradient id="olr-pl-leaf2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#69ad5f"/><stop offset="100%" stop-color="#2e5c31"/></linearGradient>
+            </defs>
+            <path d="M60 120C40 100 10 104 4 80C24 72 48 86 60 120Z" fill="url(#olr-pl-leaf2)" stroke="#234527" stroke-width="2"/>
+            <path d="M60 118C78 92 108 96 116 70C94 64 70 82 60 118Z" fill="url(#olr-pl-leaf1)" stroke="#234527" stroke-width="2"/>
+            <path d="M58 116C42 80 52 40 70 14C82 44 76 84 58 116Z" fill="url(#olr-pl-leaf1)" stroke="#234527" stroke-width="2"/>
+            <path d="M58 116C46 92 20 64 26 34C48 50 60 82 58 116Z" fill="url(#olr-pl-leaf2)" stroke="#234527" stroke-width="2"/>
+            <path d="M62 116C80 84 104 66 100 40C80 54 64 84 62 116Z" fill="url(#olr-pl-leaf1)" stroke="#234527" stroke-width="2"/>
+            <path d="M70 18C66 50 62 80 58 114M28 38C40 60 52 86 58 114M98 44C84 66 70 92 62 114" fill="none" stroke="#c8f0be" stroke-opacity=".42" stroke-width="1.6"/>
+            <path d="M30 116H90L82 176H38Z" fill="url(#olr-pl-pot)" stroke="${OUT}" stroke-width="2.4" stroke-linejoin="round"/>
+            <rect x="26" y="110" width="68" height="12" rx="3.5" fill="url(#olr-pl-pot)" stroke="${OUT}" stroke-width="2.4"/>
+            <path d="M34 114h32" stroke="#ffd2b3" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
+            <path d="M40 140h40M42 154h36" stroke="#7c3d22" stroke-opacity=".65" stroke-width="2"/>`
     };
     function renderItem(it) {
         return `<svg class="olr-item olr-item-${it.id}" viewBox="0 0 ${it.vw} ${it.vh}" width="${f1(it.w)}" height="${f1(it.h)}" aria-hidden="true" focusable="false"

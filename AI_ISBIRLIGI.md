@@ -131,6 +131,15 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 19:48 — Gemini — Bekleme Odası Önceki Boyalı Arka Plana Döndü + Gölgeli 3B İnteraktif Eşyalar
+- **Dosyalar:** `css/online.css`, `js/online/lobby_room.js`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. Online bekleme odası arka planı Emre'nin tercihiyle önceki sıcak boyalı illüstrasyona (`assets/lobby_bg_night.jpg`) geri alındı (Kliniğim'deki Club Penguin arka planları korundu).
+  2. Bekleme odasındaki 5 interaktif ön plan eşyasının (`chair`, `couch`, `table`, `lamp`, `plant`) tümü düz dolgudan çok katmanlı gradyanlı, kadife/deri/pirinç/seramik ışık yansımalı ve yumuşak zemin gölgeli boyalı-vektör tasarıma yükseltildi (`css/online.css` `.olr-item` zemin gölgesi + `.olr-obj:hover` sıcak parıltı).
+- **Neden:** Emre'nin isteği (önceki bekleme odasının daha iyi bulunması ve oradaki interaktif eşyaların iyileştirilmesi).
+- **Doğrulama:** `node --check js/online/lobby_room.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** `assets/lobby_bg_cp.jpg` dosya silme yasağı nedeniyle korundu.
+
 ### 2026-11-22 19:35 — Gemini — Gerçek 2.5D Parallax Nöro Dönüşü (Sıfır Aynalama) + Club Penguin Tarzı Lobi & Kliniğim İllüstrasyonları
 - **Dosyalar:** `css/style.css`, yeni `assets/lobby_bg_cp.jpg`, yeni `assets/clinic_bg_base.jpg`, yeni `assets/clinic_bg_deluxe.jpg`, `css/online.css`, `js/klinik.js`, `css/klinik.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**
