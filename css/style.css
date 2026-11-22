@@ -3000,3 +3000,66 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
 .screen-play .game-controls {
     display: none !important;
 }
+
+
+/* ==========================================================================
+   Nöro 3D Hacim, Squash & Stretch, Sinaps Parıltısı & Lig Halesi (Gemini)
+   ========================================================================== */
+@keyframes nvSquashWalk {
+    0%, 100% { transform: translateY(0) scaleX(1.03) scaleY(0.97); }
+    50% { transform: translateY(-4px) scaleX(0.96) scaleY(1.05); }
+}
+
+@keyframes nvTipPulse {
+    0%, 100% { opacity: 0.22; transform: scale(0.92); }
+    50% { opacity: 0.65; transform: scale(1.18); }
+}
+
+@keyframes nvReadyPop {
+    0% { transform: translateY(0) scale(1, 1); }
+    22% { transform: translateY(2px) scale(1.14, 0.86); }
+    52% { transform: translateY(-16px) scale(0.92, 1.12); }
+    78% { transform: translateY(1px) scale(1.07, 0.94); }
+    100% { transform: translateY(0) scale(1, 1); }
+}
+
+.nv-animated .nv-tip-glow,
+.nv-animated .nv-tip-glow-in {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: nvTipPulse 2.8s ease-in-out infinite;
+}
+
+.ol-p.is-walking .ol-p-fig {
+    animation: nvSquashWalk 0.36s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+.ol-p.is-ready .nv-tip-glow {
+    fill: #62d08e;
+    opacity: 0.55;
+    animation-duration: 1.4s;
+}
+
+.ol-p.is-ready-pop .ol-p-fig {
+    animation: nvReadyPop 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center bottom;
+}
+
+.ol-p.is-high-league .ol-p-fig {
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.42));
+}
+
+.ol-p.is-high-league .nv-tip-glow {
+    fill: #fbbf24;
+    opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ol-p.is-walking .ol-p-fig,
+    .ol-p.is-ready-pop .ol-p-fig,
+    .nv-animated .nv-tip-glow,
+    .nv-animated .nv-tip-glow-in {
+        animation: none !important;
+    }
+}

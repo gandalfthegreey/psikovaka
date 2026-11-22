@@ -95,7 +95,11 @@
             { id: 'fire', label: 'Şöminede ısın', act: 'stretch', approach: { x: P.fire.x, y: P.fire.base + 0.055 }, facing: 'front',
                 hit: hitOf(fire.cx - fire.w / 2, fire.bottom - fire.h, fire.w, fire.h) },
             { id: 'window', label: 'Pencereden dışarı bak', act: 'think', approach: { x: P.window.x, y: FT + 0.03 }, facing: 'front',
-                hit: hitOf(win.cx - win.w / 2 - px(10), win.top - px(8), win.w + px(20), win.h + px(30)) }
+                hit: hitOf(win.cx - win.w / 2 - px(10), win.top - px(8), win.w + px(20), win.h + px(30)) },
+            { id: 'rorschach', label: 'Rorschach mürekkep testine bak', act: 'think', approach: { x: narrow ? 0.72 : 0.78, y: FT + 0.04 }, facing: 'front',
+                hit: hitOf((narrow ? 0.68 : 0.76) * W - px(34), (narrow ? 0.09 : 0.09) * H, px(68), px(52)) },
+            { id: 'lamp', label: 'Lambader ışığını değiştir', act: null, approach: { x: lamp.x, y: lamp.base + 0.04 }, facing: 'front',
+                hit: hitOf(lamp.left, lamp.top, lamp.w, lamp.h) }
         ];
         L.objects.find(o => o.id === 'couch').base = couch.base;
         L.objects.find(o => o.id === 'chair').base = chair.base;
@@ -401,16 +405,62 @@
                 <path d="${rp(inset(0.4))}" class="olr-rug-c"/><path d="${fringe(r[3], r[2])}" class="olr-rug-fringe"/></g>`;
     }
 
+    const RORSCHACH_BLOTS = [
+        { d: 'M0 -11 C-4 -14 -12 -10 -14 -3 C-16 4 -9 10 -4 8 C-2 7 -1 4 0 6 C1 4 2 7 4 8 C9 10 16 4 14 -3 C12 -10 4 -14 0 -11 Z', msg: '🦋 Kelebek mi, iki dans eden ayı mı?' },
+        { d: 'M0 -13 C-3 -9 -9 -11 -13 -6 C-15 -1 -10 2 -6 4 C-9 8 -6 13 -2 10 L0 6 L2 10 C6 13 9 8 6 4 C10 2 15 -1 13 -6 C9 -11 3 -9 0 -13 Z', msg: '🦇 Yarasa kanadı... ya da çay fincanı?' },
+        { d: 'M0 -10 C-6 -14 -15 -6 -11 2 C-8 8 -13 11 -5 12 C-2 12 -1 7 0 9 C1 7 2 12 5 12 C13 11 8 8 11 2 C15 -6 6 -14 0 -10 Z', msg: '☕ İki terapist kahve içiyor gibi!' },
+        { d: 'M0 -12 C-2 -6 -12 -12 -14 -2 C-15 6 -6 11 -3 5 L0 11 L3 5 C6 11 15 6 14 -2 C12 -12 2 -6 0 -12 Z', msg: '🧠 Bilinçdışın bugün çok yaratıcı!' },
+        { d: 'M0 -9 C-5 -13 -11 -8 -8 -1 C-14 2 -11 11 -3 10 L0 5 L3 10 C11 11 14 2 8 -1 C11 -8 5 -13 0 -9 Z', msg: '📘 Sanki DSM-5 kapağına benziyor...' }
+    ];
+
+    function drawRorschach(x, y, u, blotIdx) {
+        const w = 64 * u, h = 48 * u;
+        const b = RORSCHACH_BLOTS[(blotIdx || 0) % RORSCHACH_BLOTS.length];
+        const sc = Math.max(0.55, u * 1.15);
+        return `<g class="olr-rorschach" data-blot-idx="${blotIdx || 0}">
+            <rect x="${f1(x - w / 2 + 2)}" y="${f1(y + 3)}" width="${f1(w)}" height="${f1(h)}" rx="2" fill="#000" opacity=".28"/>
+            <rect x="${f1(x - w / 2)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="2" fill="#5e3e29" stroke="${OUT}" stroke-width="1.3"/>
+            <rect x="${f1(x - w / 2 + 4 * u)}" y="${f1(y + 4 * u)}" width="${f1(w - 8 * u)}" height="${f1(h - 8 * u)}" fill="#f5eedc"/>
+            <g class="olr-rorschach-ink" transform="translate(${f1(x)} ${f1(y + h / 2)}) scale(${f1(sc)})">
+                <path d="${b.d}" fill="#231c35" opacity=".9"/>
+            </g>
+        </g>`;
+    }
+
+    function drawEmbers(F, u) {
+        const { cx, w, bottom } = F;
+        const pts = [
+            { dx: -0.10, dy: 20, delay: '0s', dur: '2.6s' },
+            { dx: 0.06, dy: 24, delay: '0.9s', dur: '3.1s' },
+            { dx: -0.02, dy: 16, delay: '1.7s', dur: '2.4s' },
+            { dx: 0.12, dy: 22, delay: '2.2s', dur: '2.9s' }
+        ];
+        return `<g class="olr-embers">${pts.map(p =>
+            `<circle class="olr-ember" cx="${f1(cx + p.dx * w)}" cy="${f1(bottom - p.dy * u)}" r="${f1(Math.max(1.5, 2.2 * u))}" style="animation-delay:${p.delay};animation-duration:${p.dur}"/>`
+        ).join('')}</g>`;
+    }
+
     function renderBack(L) {
         const { W, H, u } = L;
         const tod = timeOfDay(new Date().getHours());
-        return `<svg class="olr-back olr-t-${tod}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
-            ${drawFloorAndWall(L)}
+        const usePhoto = typeof location === 'undefined' || location.protocol !== 'file:';
+        const rx = (L.narrow ? 0.68 : 0.76) * W, ry = 0.09 * H;
+        const photoDiv = usePhoto ? `<div class="olr-photo-bg olr-t-${tod}" aria-hidden="true"></div>` : '';
+        const fx = L.fire.cx, fw = L.fire.w, fb = L.fire.bottom;
+        const wx = L.win.cx, ww = L.win.w, fy = L.floorY;
+        const beam = `M${f1(wx - ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 1.25)} ${f1(fy + (H - fy) * 0.55)}L${f1(wx + ww * 0.05)} ${f1(fy + (H - fy) * 0.55)}Z`;
+        return `${photoDiv}<svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
+            ${usePhoto ? `<g class="olr-photo-fx">
+                <path class="olr-beam" d="${beam}"/>
+                <g class="olr-fire-glow">${[1, 0.72, 0.46].map(k => `<ellipse cx="${f1(fx)}" cy="${f1(fb + 8 * u)}" rx="${f1(fw * 0.72 * k)}" ry="${f1(28 * u * k)}"/>`).join('')}</g>
+                ${drawEmbers(L.fire, u)}
+            </g>` : `${drawFloorAndWall(L)}
             ${drawWindow(L.win.cx, L.win.top, L.win.w, L.win.h, u)}
             ${drawShelf(L.shelf, u, L.narrow)}
             ${drawFireplace(L.fire, u, L)}
+            ${L.P.diplomas.map((d, i) => drawDiploma(d.x * W, d.y * H, u, i)).join('')}`}
             ${drawClock(L.P.clock.x * W, L.P.clock.y * H, L.P.clock.r * u)}
-            ${L.P.diplomas.map((d, i) => drawDiploma(d.x * W, d.y * H, u, i)).join('')}
+            ${drawRorschach(rx, ry, u, L._blotIdx || 0)}
         </svg>`;
     }
 
@@ -607,6 +657,19 @@
             if (!ob) return null;
             if (k != null && ob.seats && ob.seats[+k]) return { x: ob.seats[+k].x, y: ob.seats[+k].y, seat: true, object: ob, approach: ob.approach, zBase: ob.base };
             return { x: ob.approach.x, y: ob.approach.y, seat: false, object: ob };
+        };
+        let blotIdx = 0;
+        room.cycleRorschach = () => {
+            blotIdx = (blotIdx + 1) % RORSCHACH_BLOTS.length;
+            const b = RORSCHACH_BLOTS[blotIdx];
+            const pathEl = host.querySelector('.olr-rorschach-ink path');
+            if (pathEl) pathEl.setAttribute('d', b.d);
+            if (room.layout) room.layout._blotIdx = blotIdx;
+            return b.msg;
+        };
+        room.toggleLamp = () => {
+            const dim = stage.classList.toggle('is-lamp-dim');
+            return dim;
         };
         let ro = null, tmr = 0;
         if (global.ResizeObserver) {

@@ -1055,3 +1055,89 @@ body.ol-banners-docked .ol-banners { display: none; }
 .ol-roster-state.is-ok { color: var(--color-success); }
 .ol-roster-state .icon { width: 14px; height: 14px; }
 @media (min-width: 768px) { .ol-roster { display: none; } }
+
+
+/* ==========================================================================
+   Yol B: Boyalı Terapi Odası İllüstrasyonu, Kıvılcımlar, Toz & Etkileşim
+   ========================================================================== */
+.olr-photo-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/lobby_bg_night.jpg');
+    background-size: cover;
+    background-position: center 42%;
+    pointer-events: none;
+    transition: filter 0.6s ease;
+}
+
+.olr-photo-bg.olr-t-morning,
+.olr-photo-bg.olr-t-day {
+    filter: brightness(1.18) saturate(1.06) contrast(0.98);
+}
+
+.olr-photo-bg.olr-t-evening,
+.olr-photo-bg.olr-t-night {
+    filter: brightness(0.96) saturate(1.08);
+}
+
+.ol-stage.is-lamp-dim .olr-photo-bg {
+    filter: brightness(0.68) saturate(1.15) contrast(1.06);
+}
+
+.olr-back.olr-has-photo {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+@keyframes olrEmberRise {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.8); }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.5; transform: translate(5px, -28px) scale(1.1); }
+    100% { opacity: 0; transform: translate(-3px, -42px) scale(0.4); }
+}
+
+.olr-ember {
+    fill: #ffbe55;
+    filter: drop-shadow(0 0 3px #ff7b29);
+    animation: olrEmberRise 2.8s ease-out infinite;
+}
+
+.olr-rorschach {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.ol-walk-dust {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 245, 224, 0.45);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: olWalkDustFade 0.5s ease-out forwards;
+}
+
+@keyframes olWalkDustFade {
+    0% { opacity: 0.65; transform: translate(-50%, -50%) scale(0.6); }
+    100% { opacity: 0; transform: translate(-50%, -120%) scale(1.8); }
+}
+
+.ol-spark-burst {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: olSparkFloat 0.85s ease-out forwards;
+    z-index: 180;
+}
+
+@keyframes olSparkFloat {
+    0% { opacity: 0; transform: translate(-50%, -20%) scale(0.4); }
+    30% { opacity: 1; transform: translate(-50%, -80%) scale(1.25); }
+    100% { opacity: 0; transform: translate(-50%, -160%) scale(0.9); }
+}
+
+.ol-p[data-uid]:not(.is-me) {
+    cursor: pointer;
+}

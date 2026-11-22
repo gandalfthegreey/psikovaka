@@ -131,6 +131,16 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-22 18:34 — Gemini — Yol B Boyalı Terapi Odası İllüstrasyonu, 3D Hacimli Nöro & Lobi Animasyon/Etkileşimleri
+- **Dosyalar:** Yeni `assets/lobby_bg_night.jpg`, `js/avatar.js`, `js/online/lobby_room.js`, `js/online/lobby.js`, `css/style.css`, `css/online.css`, `PsikoVaka_Tam_Surum.html` (yedek gündüz taslağı `_arsiv/lobby-bg-taslak/lobby_bg_day.jpg`).
+- **Ne değişti:**
+  1. **Yol B Boyalı Lobi Arka Planı (`assets/lobby_bg_night.jpg` + `lobby_room.js` + `online.css`):** Terapi odası arka planı sıcak, boyalı indie oyun illüstrasyonuna yükseltildi (`file://` tek dosyalık sürümde eski vektör oda otomatik yedek olarak kalır). Günün saatine göre gündüz/akşam tonlaması, şömine üstünde yükselen sıcak kıvılcımlar (`.olr-ember`), gerçek zamanlı çalışan duvar saati ve etkileşimli ön plan eşyaları (kanepe, koltuk, buharlı çay sehpası, lambader, saksı) katmanlandı.
+  2. **Nöro 3D Hacim & Animasyon (`avatar.js` + `style.css`):** Gövdeye çok katmanlı ışık/gölge ve parlaklık hilali, gözlere iris derinliği ve çift ışık yansıması, dendrit uçlarına yumuşak parıltı halesi (glow) eklendi. Yürürken esnek squash & stretch + adım tozları (`.ol-walk-dust`), "Hazır"a basınca sevinç sıçrayışı (`.is-ready-pop`) + yeşil sinaps parıltısı, yüksek lig oyunculara (`≥2900` Elo) altın parıltı halesi (`.is-high-league`) eklendi.
+  3. **Yeni Lobi Etkileşimleri (`lobby_room.js` + `lobby.js`):** Duvara tıklanabilir **Rorschach mürekkep lekesi tablosu** (5 farklı şekil + esprili psikoloji yorumları), tıklanabilir **lambader** (oda ışığını kısma/açma) ve başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp el sallama + parıltı kıvılcımı (`.ol-spark-burst`) eklendi.
+- **Neden:** Emre'nin isteği (Yol B grafik yükseltmesi + Nöro & lobi animasyon/etkileşim paketi).
+- **Doğrulama:** `node --check js/avatar.js js/online/lobby_room.js js/online/lobby.js` temiz; `node build_portable_single_file.js` 278 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
 ### 2026-11-22 16:36 — Gemini — Açılışta günlük vaka / `daily.js` yarış koşulu düzeltmesi
 - **Dosyalar:** `js/app.js`, `js/online/daily.js`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:** Açılışta (`!hash` veya `#daily=<mod>`) `setMode('daily')` artık `daily.js`'in `init()` işlevi `loadDailyCase`'i sunucu katmanıyla sarmalamadan çalışmıyor (`_autoStartDaily` kancası). Böylece giriş yapmış üyeler açılışta yanlışlıkla yerel günlük vaka başlatmıyor; tüm tahminler doğrudan Supabase'e yazılıyor ve geri gelindiğinde bitmiş günlük asla sıfırdan yeniden açılmıyor.

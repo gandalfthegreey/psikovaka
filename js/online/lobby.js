@@ -291,8 +291,37 @@
             node.classList.toggle('is-walking', !!st.walking);
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
+        if (st.walking && !NS.util.reducedMotion()) {
+            const nowMs = performance.now();
+            if (!node._dustAt || nowMs - node._dustAt > 240) {
+                node._dustAt = nowMs;
+                spawnWalkDust(st.x, st.y);
+            }
+        }
         node._st = st;
         if (node._bubble && !node._bubble.hidden) placeBubble(node);
+    }
+    function spawnWalkDust(nx, ny) {
+        const layer = L.root && $('#olStageLayer', L.root);
+        if (!layer) return;
+        const d = document.createElement('span');
+        d.className = 'ol-walk-dust';
+        d.style.left = (nx * 100).toFixed(2) + '%';
+        d.style.top = (ny * 100).toFixed(2) + '%';
+        d.style.zIndex = String(8 + Math.round(ny * 100));
+        layer.appendChild(d);
+        setTimeout(() => d.remove(), 520);
+    }
+    function spawnSparkBurst(nx, ny) {
+        const layer = L.root && $('#olBubbleLayer', L.root);
+        if (!layer) return;
+        const sp = document.createElement('span');
+        sp.className = 'ol-spark-burst';
+        sp.textContent = '✨';
+        sp.style.left = (nx * 100).toFixed(2) + '%';
+        sp.style.top = (ny * 100).toFixed(2) + '%';
+        layer.appendChild(sp);
+        setTimeout(() => sp.remove(), 850);
     }
     /**
      * Konuşma/duygu balonu: Nöro düğümünün dışında, tüm eşyaların ve Nöro'ların üstündeki ayrı katmanda (#olBubbleLayer).
@@ -439,10 +468,19 @@
             }
             refreshFigure(p.user_id);
             const disc = NS.rooms.isDisconnected(p.user_id);
+            const wasReady = node.classList.contains('is-ready');
+            const nowReady = !!p.is_ready && !p.is_host && !s.room.is_quick;
             node.classList.toggle('is-me', p.user_id === myId);
-            node.classList.toggle('is-ready', !!p.is_ready && !p.is_host && !s.room.is_quick);
+            node.classList.toggle('is-ready', nowReady);
             node.classList.toggle('is-host', !!p.is_host);
             node.classList.toggle('is-away', disc);
+            node.classList.toggle('is-high-league', Number(p.ranked_points || 0) >= 2900);
+            if (nowReady && !wasReady && !fresh) {
+                node.classList.remove('is-ready-pop');
+                void node.offsetWidth;
+                node.classList.add('is-ready-pop');
+                setTimeout(() => node.classList.remove('is-ready-pop'), 700);
+            }
             node.querySelector('.ol-p-crown').hidden = !p.is_host || !!s.room.is_quick;
             const fullName = p.username || p.display_name || 'Oyuncu';
             // Sahnede ad 10 karakterde kesilir (H16); tam ad aşağıdaki "Oyuncular" listesinde ve aria-label'da
@@ -670,7 +708,38 @@
             return;
         }
         const obj = e.target.closest('[data-olr-obj]');
-        if (obj) { goToObject(obj.dataset.olrObj); return; }
+        if (obj) {
+            const oid = obj.dataset.olrObj;
+            if (oid === 'lamp' && L.room && L.room.toggleLamp) {
+                const dim = L.room.toggleLamp();
+                NS.toast(dim ? '🕯️ Oda ışığı kısıldı (sıcak akşam modu).' : '💡 Oda ışığı açıldı.');
+                return;
+            }
+            if (oid === 'rorschach' && L.room && L.room.cycleRorschach) {
+                const msg = L.room.cycleRorschach();
+                goToObject('rorschach');
+                showBubble(NS.api.myId(), esc(msg), 'is-say', 3400);
+                return;
+            }
+            goToObject(oid);
+            return;
+        }
+        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp selam ver / beşlik çak!
+        const peerNode = e.target.closest('.ol-p[data-uid]');
+        if (peerNode && peerNode.dataset.uid && peerNode.dataset.uid !== NS.api.myId() && L.room && L.walker) {
+            const targetUid = peerNode.dataset.uid;
+            const targetSt = L.walker.get(targetUid);
+            if (targetSt) {
+                const destX = Math.max(0.06, Math.min(0.94, targetSt.x + (targetSt.x > 0.5 ? -0.07 : 0.07)));
+                const destY = Math.max(0.48, Math.min(0.88, targetSt.y + 0.02));
+                const freePt = L.room.nearestFree(destX, destY);
+                NS.rooms.move(freePt.x, freePt.y, { act: 'wave', spot: null });
+                showEmote(NS.api.myId(), 'wave');
+                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06);
+                updatePlayers();
+                return;
+            }
+        }
         const say = e.target.closest('[data-ol-say]');
         if (say) {
             toggleQuick(false);

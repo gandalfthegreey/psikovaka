@@ -359,8 +359,11 @@
             `<path d="${d}" fill="none" stroke="${pal.base}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`;
     }
     function tuftTip(x, y, pal, r = 4.2) {
-        return `<circle cx="${f1(x)}" cy="${f1(y)}" r="${r}" fill="${pal.outline}"/>` +
-            `<circle class="nv-tip" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r - 1.6)}" fill="#fff4b8"/>`;
+        return `<circle class="nv-tip-glow" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r + 4.4)}" fill="#ffe896" opacity=".28"/>` +
+            `<circle class="nv-tip-glow-in" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r + 1.8)}" fill="#fff6c8" opacity=".42"/>` +
+            `<circle cx="${f1(x)}" cy="${f1(y)}" r="${r}" fill="${pal.outline}"/>` +
+            `<circle class="nv-tip" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r - 1.5)}" fill="#fff4b8"/>` +
+            `<circle cx="${f1(x - 0.9)}" cy="${f1(y - 0.9)}" r="${f1(Math.max(0.8, r * 0.28))}" fill="#ffffff"/>`;
     }
     function drawTufts(id, g, pal, droop) {
         const T = g.b.top;
@@ -404,12 +407,16 @@
     }
 
     function drawBody(g, pal) {
-        const T = g.b.top;
-        const hx = 60 - g.hw(g.eyeY - 10) * 0.5;
-        const hy = T + (g.eyeY - T) * 0.42;
+        const T = g.b.top, B = g.b.bottom;
+        const hx = 60 - g.hw(g.eyeY - 10) * 0.48;
+        const hy = T + (g.eyeY - T) * 0.40;
+        const rxBounce = Math.max(10, g.hw(B - 10) * 0.62);
         return `<path d="${g.path}" fill="${pal.shade}" stroke="${pal.outline}" stroke-width="3.2" stroke-linejoin="round"/>` +
-            `<path d="${g.path}" fill="${pal.base}" transform="translate(60 ${T}) scale(.93 .915) translate(-60 ${-T})"/>` +
-            `<ellipse cx="${f1(hx)}" cy="${f1(hy)}" rx="7" ry="4" fill="#fff" opacity=".38" transform="rotate(-28 ${f1(hx)} ${f1(hy)})"/>`;
+            `<path d="${g.path}" fill="${pal.base}" transform="translate(58.5 ${T}) scale(.925 .905) translate(-60 ${-T})"/>` +
+            `<path d="${g.path}" fill="${pal.light}" opacity=".26" transform="translate(56.5 ${T + 2}) scale(.76 .52) translate(-60 ${-T})"/>` +
+            `<ellipse cx="60" cy="${f1(B - 7)}" rx="${f1(rxBounce)}" ry="4.5" fill="${pal.light}" opacity=".20"/>` +
+            `<ellipse cx="${f1(hx)}" cy="${f1(hy)}" rx="8" ry="4.4" fill="#fff" opacity=".48" transform="rotate(-26 ${f1(hx)} ${f1(hy)})"/>` +
+            `<circle cx="${f1(hx + 8.5)}" cy="${f1(hy - 4.2)}" r="2.2" fill="#fff" opacity=".55"/>`;
     }
 
     function drawPattern(id, g, pal) {
@@ -444,13 +451,17 @@
     }
 
     function eyeShape(id, x, y, side, pal) {
-        const glint = (gx, gy, r) => `<circle cx="${f1(gx)}" cy="${f1(gy)}" r="${r}" fill="#fff"/>`;
+        const glint = (gx, gy, r, op = 1) => `<circle cx="${f1(gx)}" cy="${f1(gy)}" r="${r}" fill="#fff"${op < 1 ? ` opacity="${op}"` : ''}/>`;
         if (id === 'round') {
-            return `<ellipse cx="${f1(x)}" cy="${y}" rx="6" ry="7.4" fill="${INK}"/>` + glint(x - 2, y - 2.8, 2.3) + glint(x + 2.1, y + 2.6, 1);
+            return `<ellipse cx="${f1(x)}" cy="${y}" rx="6.2" ry="7.6" fill="${INK}"/>` +
+                `<ellipse cx="${f1(x)}" cy="${f1(y + 2.2)}" rx="4.2" ry="3.2" fill="#4f4675" opacity=".45"/>` +
+                glint(x - 2.1, y - 2.8, 2.5) + glint(x + 2.1, y + 2.6, 1.15, 0.85);
         }
         if (id === 'big') {
-            return `<ellipse cx="${f1(x)}" cy="${y}" rx="8.2" ry="9" fill="#fff" stroke="${pal.outline}" stroke-width="2"/>` +
-                `<circle cx="${f1(x + side * 0.8)}" cy="${y + 1}" r="5.2" fill="${INK}"/>` + glint(x + side * 0.8 - 1.8, y - 1.2, 1.8);
+            return `<ellipse cx="${f1(x)}" cy="${y}" rx="8.4" ry="9.2" fill="#fff" stroke="${pal.outline}" stroke-width="2"/>` +
+                `<circle cx="${f1(x + side * 0.8)}" cy="${y + 1}" r="5.4" fill="${INK}"/>` +
+                `<ellipse cx="${f1(x + side * 0.8)}" cy="${f1(y + 2.6)}" rx="3.2" ry="2.2" fill="#52487d" opacity=".5"/>` +
+                glint(x + side * 0.8 - 1.9, y - 1.4, 2.1) + glint(x + side * 0.8 + 1.8, y + 2.4, 1.0, 0.85);
         }
         if (id === 'sparkle') {
             const sx = x - 2, sy = y - 2.6;

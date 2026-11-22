@@ -3298,6 +3298,69 @@ html.tasarim-dosya .screen-play .play-bar-title .play-meta > :not(#playZorBadge)
     display: none !important;
 }
 
+
+/* ==========================================================================
+   Nöro 3D Hacim, Squash & Stretch, Sinaps Parıltısı & Lig Halesi (Gemini)
+   ========================================================================== */
+@keyframes nvSquashWalk {
+    0%, 100% { transform: translateY(0) scaleX(1.03) scaleY(0.97); }
+    50% { transform: translateY(-4px) scaleX(0.96) scaleY(1.05); }
+}
+
+@keyframes nvTipPulse {
+    0%, 100% { opacity: 0.22; transform: scale(0.92); }
+    50% { opacity: 0.65; transform: scale(1.18); }
+}
+
+@keyframes nvReadyPop {
+    0% { transform: translateY(0) scale(1, 1); }
+    22% { transform: translateY(2px) scale(1.14, 0.86); }
+    52% { transform: translateY(-16px) scale(0.92, 1.12); }
+    78% { transform: translateY(1px) scale(1.07, 0.94); }
+    100% { transform: translateY(0) scale(1, 1); }
+}
+
+.nv-animated .nv-tip-glow,
+.nv-animated .nv-tip-glow-in {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: nvTipPulse 2.8s ease-in-out infinite;
+}
+
+.ol-p.is-walking .ol-p-fig {
+    animation: nvSquashWalk 0.36s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+.ol-p.is-ready .nv-tip-glow {
+    fill: #62d08e;
+    opacity: 0.55;
+    animation-duration: 1.4s;
+}
+
+.ol-p.is-ready-pop .ol-p-fig {
+    animation: nvReadyPop 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center bottom;
+}
+
+.ol-p.is-high-league .ol-p-fig {
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.42));
+}
+
+.ol-p.is-high-league .nv-tip-glow {
+    fill: #fbbf24;
+    opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ol-p.is-walking .ol-p-fig,
+    .ol-p.is-ready-pop .ol-p-fig,
+    .nv-animated .nv-tip-glow,
+    .nv-animated .nv-tip-glow-in {
+        animation: none !important;
+    }
+}
+
 </style>
     <style>
 /* ==========================================================================
@@ -4529,6 +4592,92 @@ body.ol-banners-docked .ol-banners { display: none; }
 .ol-roster-state.is-ok { color: var(--color-success); }
 .ol-roster-state .icon { width: 14px; height: 14px; }
 @media (min-width: 768px) { .ol-roster { display: none; } }
+
+
+/* ==========================================================================
+   Yol B: Boyalı Terapi Odası İllüstrasyonu, Kıvılcımlar, Toz & Etkileşim
+   ========================================================================== */
+.olr-photo-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/lobby_bg_night.jpg');
+    background-size: cover;
+    background-position: center 42%;
+    pointer-events: none;
+    transition: filter 0.6s ease;
+}
+
+.olr-photo-bg.olr-t-morning,
+.olr-photo-bg.olr-t-day {
+    filter: brightness(1.18) saturate(1.06) contrast(0.98);
+}
+
+.olr-photo-bg.olr-t-evening,
+.olr-photo-bg.olr-t-night {
+    filter: brightness(0.96) saturate(1.08);
+}
+
+.ol-stage.is-lamp-dim .olr-photo-bg {
+    filter: brightness(0.68) saturate(1.15) contrast(1.06);
+}
+
+.olr-back.olr-has-photo {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+@keyframes olrEmberRise {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.8); }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.5; transform: translate(5px, -28px) scale(1.1); }
+    100% { opacity: 0; transform: translate(-3px, -42px) scale(0.4); }
+}
+
+.olr-ember {
+    fill: #ffbe55;
+    filter: drop-shadow(0 0 3px #ff7b29);
+    animation: olrEmberRise 2.8s ease-out infinite;
+}
+
+.olr-rorschach {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.ol-walk-dust {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 245, 224, 0.45);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: olWalkDustFade 0.5s ease-out forwards;
+}
+
+@keyframes olWalkDustFade {
+    0% { opacity: 0.65; transform: translate(-50%, -50%) scale(0.6); }
+    100% { opacity: 0; transform: translate(-50%, -120%) scale(1.8); }
+}
+
+.ol-spark-burst {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: olSparkFloat 0.85s ease-out forwards;
+    z-index: 180;
+}
+
+@keyframes olSparkFloat {
+    0% { opacity: 0; transform: translate(-50%, -20%) scale(0.4); }
+    30% { opacity: 1; transform: translate(-50%, -80%) scale(1.25); }
+    100% { opacity: 0; transform: translate(-50%, -160%) scale(0.9); }
+}
+
+.ol-p[data-uid]:not(.is-me) {
+    cursor: pointer;
+}
 
 </style>
     <style>
@@ -38696,8 +38845,11 @@ if (typeof module !== 'undefined' && module.exports) {
             `<path d="${d}" fill="none" stroke="${pal.base}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`;
     }
     function tuftTip(x, y, pal, r = 4.2) {
-        return `<circle cx="${f1(x)}" cy="${f1(y)}" r="${r}" fill="${pal.outline}"/>` +
-            `<circle class="nv-tip" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r - 1.6)}" fill="#fff4b8"/>`;
+        return `<circle class="nv-tip-glow" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r + 4.4)}" fill="#ffe896" opacity=".28"/>` +
+            `<circle class="nv-tip-glow-in" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r + 1.8)}" fill="#fff6c8" opacity=".42"/>` +
+            `<circle cx="${f1(x)}" cy="${f1(y)}" r="${r}" fill="${pal.outline}"/>` +
+            `<circle class="nv-tip" cx="${f1(x)}" cy="${f1(y)}" r="${f1(r - 1.5)}" fill="#fff4b8"/>` +
+            `<circle cx="${f1(x - 0.9)}" cy="${f1(y - 0.9)}" r="${f1(Math.max(0.8, r * 0.28))}" fill="#ffffff"/>`;
     }
     function drawTufts(id, g, pal, droop) {
         const T = g.b.top;
@@ -38741,12 +38893,16 @@ if (typeof module !== 'undefined' && module.exports) {
     }
 
     function drawBody(g, pal) {
-        const T = g.b.top;
-        const hx = 60 - g.hw(g.eyeY - 10) * 0.5;
-        const hy = T + (g.eyeY - T) * 0.42;
+        const T = g.b.top, B = g.b.bottom;
+        const hx = 60 - g.hw(g.eyeY - 10) * 0.48;
+        const hy = T + (g.eyeY - T) * 0.40;
+        const rxBounce = Math.max(10, g.hw(B - 10) * 0.62);
         return `<path d="${g.path}" fill="${pal.shade}" stroke="${pal.outline}" stroke-width="3.2" stroke-linejoin="round"/>` +
-            `<path d="${g.path}" fill="${pal.base}" transform="translate(60 ${T}) scale(.93 .915) translate(-60 ${-T})"/>` +
-            `<ellipse cx="${f1(hx)}" cy="${f1(hy)}" rx="7" ry="4" fill="#fff" opacity=".38" transform="rotate(-28 ${f1(hx)} ${f1(hy)})"/>`;
+            `<path d="${g.path}" fill="${pal.base}" transform="translate(58.5 ${T}) scale(.925 .905) translate(-60 ${-T})"/>` +
+            `<path d="${g.path}" fill="${pal.light}" opacity=".26" transform="translate(56.5 ${T + 2}) scale(.76 .52) translate(-60 ${-T})"/>` +
+            `<ellipse cx="60" cy="${f1(B - 7)}" rx="${f1(rxBounce)}" ry="4.5" fill="${pal.light}" opacity=".20"/>` +
+            `<ellipse cx="${f1(hx)}" cy="${f1(hy)}" rx="8" ry="4.4" fill="#fff" opacity=".48" transform="rotate(-26 ${f1(hx)} ${f1(hy)})"/>` +
+            `<circle cx="${f1(hx + 8.5)}" cy="${f1(hy - 4.2)}" r="2.2" fill="#fff" opacity=".55"/>`;
     }
 
     function drawPattern(id, g, pal) {
@@ -38781,13 +38937,17 @@ if (typeof module !== 'undefined' && module.exports) {
     }
 
     function eyeShape(id, x, y, side, pal) {
-        const glint = (gx, gy, r) => `<circle cx="${f1(gx)}" cy="${f1(gy)}" r="${r}" fill="#fff"/>`;
+        const glint = (gx, gy, r, op = 1) => `<circle cx="${f1(gx)}" cy="${f1(gy)}" r="${r}" fill="#fff"${op < 1 ? ` opacity="${op}"` : ''}/>`;
         if (id === 'round') {
-            return `<ellipse cx="${f1(x)}" cy="${y}" rx="6" ry="7.4" fill="${INK}"/>` + glint(x - 2, y - 2.8, 2.3) + glint(x + 2.1, y + 2.6, 1);
+            return `<ellipse cx="${f1(x)}" cy="${y}" rx="6.2" ry="7.6" fill="${INK}"/>` +
+                `<ellipse cx="${f1(x)}" cy="${f1(y + 2.2)}" rx="4.2" ry="3.2" fill="#4f4675" opacity=".45"/>` +
+                glint(x - 2.1, y - 2.8, 2.5) + glint(x + 2.1, y + 2.6, 1.15, 0.85);
         }
         if (id === 'big') {
-            return `<ellipse cx="${f1(x)}" cy="${y}" rx="8.2" ry="9" fill="#fff" stroke="${pal.outline}" stroke-width="2"/>` +
-                `<circle cx="${f1(x + side * 0.8)}" cy="${y + 1}" r="5.2" fill="${INK}"/>` + glint(x + side * 0.8 - 1.8, y - 1.2, 1.8);
+            return `<ellipse cx="${f1(x)}" cy="${y}" rx="8.4" ry="9.2" fill="#fff" stroke="${pal.outline}" stroke-width="2"/>` +
+                `<circle cx="${f1(x + side * 0.8)}" cy="${y + 1}" r="5.4" fill="${INK}"/>` +
+                `<ellipse cx="${f1(x + side * 0.8)}" cy="${f1(y + 2.6)}" rx="3.2" ry="2.2" fill="#52487d" opacity=".5"/>` +
+                glint(x + side * 0.8 - 1.9, y - 1.4, 2.1) + glint(x + side * 0.8 + 1.8, y + 2.4, 1.0, 0.85);
         }
         if (id === 'sparkle') {
             const sx = x - 2, sy = y - 2.6;
@@ -48138,7 +48298,11 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             { id: 'fire', label: 'Şöminede ısın', act: 'stretch', approach: { x: P.fire.x, y: P.fire.base + 0.055 }, facing: 'front',
                 hit: hitOf(fire.cx - fire.w / 2, fire.bottom - fire.h, fire.w, fire.h) },
             { id: 'window', label: 'Pencereden dışarı bak', act: 'think', approach: { x: P.window.x, y: FT + 0.03 }, facing: 'front',
-                hit: hitOf(win.cx - win.w / 2 - px(10), win.top - px(8), win.w + px(20), win.h + px(30)) }
+                hit: hitOf(win.cx - win.w / 2 - px(10), win.top - px(8), win.w + px(20), win.h + px(30)) },
+            { id: 'rorschach', label: 'Rorschach mürekkep testine bak', act: 'think', approach: { x: narrow ? 0.72 : 0.78, y: FT + 0.04 }, facing: 'front',
+                hit: hitOf((narrow ? 0.68 : 0.76) * W - px(34), (narrow ? 0.09 : 0.09) * H, px(68), px(52)) },
+            { id: 'lamp', label: 'Lambader ışığını değiştir', act: null, approach: { x: lamp.x, y: lamp.base + 0.04 }, facing: 'front',
+                hit: hitOf(lamp.left, lamp.top, lamp.w, lamp.h) }
         ];
         L.objects.find(o => o.id === 'couch').base = couch.base;
         L.objects.find(o => o.id === 'chair').base = chair.base;
@@ -48444,16 +48608,62 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
                 <path d="${rp(inset(0.4))}" class="olr-rug-c"/><path d="${fringe(r[3], r[2])}" class="olr-rug-fringe"/></g>`;
     }
 
+    const RORSCHACH_BLOTS = [
+        { d: 'M0 -11 C-4 -14 -12 -10 -14 -3 C-16 4 -9 10 -4 8 C-2 7 -1 4 0 6 C1 4 2 7 4 8 C9 10 16 4 14 -3 C12 -10 4 -14 0 -11 Z', msg: '🦋 Kelebek mi, iki dans eden ayı mı?' },
+        { d: 'M0 -13 C-3 -9 -9 -11 -13 -6 C-15 -1 -10 2 -6 4 C-9 8 -6 13 -2 10 L0 6 L2 10 C6 13 9 8 6 4 C10 2 15 -1 13 -6 C9 -11 3 -9 0 -13 Z', msg: '🦇 Yarasa kanadı... ya da çay fincanı?' },
+        { d: 'M0 -10 C-6 -14 -15 -6 -11 2 C-8 8 -13 11 -5 12 C-2 12 -1 7 0 9 C1 7 2 12 5 12 C13 11 8 8 11 2 C15 -6 6 -14 0 -10 Z', msg: '☕ İki terapist kahve içiyor gibi!' },
+        { d: 'M0 -12 C-2 -6 -12 -12 -14 -2 C-15 6 -6 11 -3 5 L0 11 L3 5 C6 11 15 6 14 -2 C12 -12 2 -6 0 -12 Z', msg: '🧠 Bilinçdışın bugün çok yaratıcı!' },
+        { d: 'M0 -9 C-5 -13 -11 -8 -8 -1 C-14 2 -11 11 -3 10 L0 5 L3 10 C11 11 14 2 8 -1 C11 -8 5 -13 0 -9 Z', msg: '📘 Sanki DSM-5 kapağına benziyor...' }
+    ];
+
+    function drawRorschach(x, y, u, blotIdx) {
+        const w = 64 * u, h = 48 * u;
+        const b = RORSCHACH_BLOTS[(blotIdx || 0) % RORSCHACH_BLOTS.length];
+        const sc = Math.max(0.55, u * 1.15);
+        return `<g class="olr-rorschach" data-blot-idx="${blotIdx || 0}">
+            <rect x="${f1(x - w / 2 + 2)}" y="${f1(y + 3)}" width="${f1(w)}" height="${f1(h)}" rx="2" fill="#000" opacity=".28"/>
+            <rect x="${f1(x - w / 2)}" y="${f1(y)}" width="${f1(w)}" height="${f1(h)}" rx="2" fill="#5e3e29" stroke="${OUT}" stroke-width="1.3"/>
+            <rect x="${f1(x - w / 2 + 4 * u)}" y="${f1(y + 4 * u)}" width="${f1(w - 8 * u)}" height="${f1(h - 8 * u)}" fill="#f5eedc"/>
+            <g class="olr-rorschach-ink" transform="translate(${f1(x)} ${f1(y + h / 2)}) scale(${f1(sc)})">
+                <path d="${b.d}" fill="#231c35" opacity=".9"/>
+            </g>
+        </g>`;
+    }
+
+    function drawEmbers(F, u) {
+        const { cx, w, bottom } = F;
+        const pts = [
+            { dx: -0.10, dy: 20, delay: '0s', dur: '2.6s' },
+            { dx: 0.06, dy: 24, delay: '0.9s', dur: '3.1s' },
+            { dx: -0.02, dy: 16, delay: '1.7s', dur: '2.4s' },
+            { dx: 0.12, dy: 22, delay: '2.2s', dur: '2.9s' }
+        ];
+        return `<g class="olr-embers">${pts.map(p =>
+            `<circle class="olr-ember" cx="${f1(cx + p.dx * w)}" cy="${f1(bottom - p.dy * u)}" r="${f1(Math.max(1.5, 2.2 * u))}" style="animation-delay:${p.delay};animation-duration:${p.dur}"/>`
+        ).join('')}</g>`;
+    }
+
     function renderBack(L) {
         const { W, H, u } = L;
         const tod = timeOfDay(new Date().getHours());
-        return `<svg class="olr-back olr-t-${tod}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
-            ${drawFloorAndWall(L)}
+        const usePhoto = typeof location === 'undefined' || location.protocol !== 'file:';
+        const rx = (L.narrow ? 0.68 : 0.76) * W, ry = 0.09 * H;
+        const photoDiv = usePhoto ? `<div class="olr-photo-bg olr-t-${tod}" aria-hidden="true"></div>` : '';
+        const fx = L.fire.cx, fw = L.fire.w, fb = L.fire.bottom;
+        const wx = L.win.cx, ww = L.win.w, fy = L.floorY;
+        const beam = `M${f1(wx - ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 0.42)} ${f1(fy + 4)}L${f1(wx + ww * 1.25)} ${f1(fy + (H - fy) * 0.55)}L${f1(wx + ww * 0.05)} ${f1(fy + (H - fy) * 0.55)}Z`;
+        return `${photoDiv}<svg class="olr-back olr-t-${tod}${usePhoto ? ' olr-has-photo' : ''}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false">
+            ${usePhoto ? `<g class="olr-photo-fx">
+                <path class="olr-beam" d="${beam}"/>
+                <g class="olr-fire-glow">${[1, 0.72, 0.46].map(k => `<ellipse cx="${f1(fx)}" cy="${f1(fb + 8 * u)}" rx="${f1(fw * 0.72 * k)}" ry="${f1(28 * u * k)}"/>`).join('')}</g>
+                ${drawEmbers(L.fire, u)}
+            </g>` : `${drawFloorAndWall(L)}
             ${drawWindow(L.win.cx, L.win.top, L.win.w, L.win.h, u)}
             ${drawShelf(L.shelf, u, L.narrow)}
             ${drawFireplace(L.fire, u, L)}
+            ${L.P.diplomas.map((d, i) => drawDiploma(d.x * W, d.y * H, u, i)).join('')}`}
             ${drawClock(L.P.clock.x * W, L.P.clock.y * H, L.P.clock.r * u)}
-            ${L.P.diplomas.map((d, i) => drawDiploma(d.x * W, d.y * H, u, i)).join('')}
+            ${drawRorschach(rx, ry, u, L._blotIdx || 0)}
         </svg>`;
     }
 
@@ -48650,6 +48860,19 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             if (!ob) return null;
             if (k != null && ob.seats && ob.seats[+k]) return { x: ob.seats[+k].x, y: ob.seats[+k].y, seat: true, object: ob, approach: ob.approach, zBase: ob.base };
             return { x: ob.approach.x, y: ob.approach.y, seat: false, object: ob };
+        };
+        let blotIdx = 0;
+        room.cycleRorschach = () => {
+            blotIdx = (blotIdx + 1) % RORSCHACH_BLOTS.length;
+            const b = RORSCHACH_BLOTS[blotIdx];
+            const pathEl = host.querySelector('.olr-rorschach-ink path');
+            if (pathEl) pathEl.setAttribute('d', b.d);
+            if (room.layout) room.layout._blotIdx = blotIdx;
+            return b.msg;
+        };
+        room.toggleLamp = () => {
+            const dim = stage.classList.toggle('is-lamp-dim');
+            return dim;
         };
         let ro = null, tmr = 0;
         if (global.ResizeObserver) {
@@ -48959,8 +49182,37 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             node.classList.toggle('is-walking', !!st.walking);
         }
         if (teleport) { node.classList.remove('is-teleport'); void node.offsetWidth; node.classList.add('is-teleport'); }
+        if (st.walking && !NS.util.reducedMotion()) {
+            const nowMs = performance.now();
+            if (!node._dustAt || nowMs - node._dustAt > 240) {
+                node._dustAt = nowMs;
+                spawnWalkDust(st.x, st.y);
+            }
+        }
         node._st = st;
         if (node._bubble && !node._bubble.hidden) placeBubble(node);
+    }
+    function spawnWalkDust(nx, ny) {
+        const layer = L.root && $('#olStageLayer', L.root);
+        if (!layer) return;
+        const d = document.createElement('span');
+        d.className = 'ol-walk-dust';
+        d.style.left = (nx * 100).toFixed(2) + '%';
+        d.style.top = (ny * 100).toFixed(2) + '%';
+        d.style.zIndex = String(8 + Math.round(ny * 100));
+        layer.appendChild(d);
+        setTimeout(() => d.remove(), 520);
+    }
+    function spawnSparkBurst(nx, ny) {
+        const layer = L.root && $('#olBubbleLayer', L.root);
+        if (!layer) return;
+        const sp = document.createElement('span');
+        sp.className = 'ol-spark-burst';
+        sp.textContent = '✨';
+        sp.style.left = (nx * 100).toFixed(2) + '%';
+        sp.style.top = (ny * 100).toFixed(2) + '%';
+        layer.appendChild(sp);
+        setTimeout(() => sp.remove(), 850);
     }
     /**
      * Konuşma/duygu balonu: Nöro düğümünün dışında, tüm eşyaların ve Nöro'ların üstündeki ayrı katmanda (#olBubbleLayer).
@@ -49107,10 +49359,19 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             }
             refreshFigure(p.user_id);
             const disc = NS.rooms.isDisconnected(p.user_id);
+            const wasReady = node.classList.contains('is-ready');
+            const nowReady = !!p.is_ready && !p.is_host && !s.room.is_quick;
             node.classList.toggle('is-me', p.user_id === myId);
-            node.classList.toggle('is-ready', !!p.is_ready && !p.is_host && !s.room.is_quick);
+            node.classList.toggle('is-ready', nowReady);
             node.classList.toggle('is-host', !!p.is_host);
             node.classList.toggle('is-away', disc);
+            node.classList.toggle('is-high-league', Number(p.ranked_points || 0) >= 2900);
+            if (nowReady && !wasReady && !fresh) {
+                node.classList.remove('is-ready-pop');
+                void node.offsetWidth;
+                node.classList.add('is-ready-pop');
+                setTimeout(() => node.classList.remove('is-ready-pop'), 700);
+            }
             node.querySelector('.ol-p-crown').hidden = !p.is_host || !!s.room.is_quick;
             const fullName = p.username || p.display_name || 'Oyuncu';
             // Sahnede ad 10 karakterde kesilir (H16); tam ad aşağıdaki "Oyuncular" listesinde ve aria-label'da
@@ -49338,7 +49599,38 @@ ${sym('medal', `<circle ${s} cx="12" cy="15" r="5"/><path ${s} d="M8.5 10.5L6 3h
             return;
         }
         const obj = e.target.closest('[data-olr-obj]');
-        if (obj) { goToObject(obj.dataset.olrObj); return; }
+        if (obj) {
+            const oid = obj.dataset.olrObj;
+            if (oid === 'lamp' && L.room && L.room.toggleLamp) {
+                const dim = L.room.toggleLamp();
+                NS.toast(dim ? '🕯️ Oda ışığı kısıldı (sıcak akşam modu).' : '💡 Oda ışığı açıldı.');
+                return;
+            }
+            if (oid === 'rorschach' && L.room && L.room.cycleRorschach) {
+                const msg = L.room.cycleRorschach();
+                goToObject('rorschach');
+                showBubble(NS.api.myId(), esc(msg), 'is-say', 3400);
+                return;
+            }
+            goToObject(oid);
+            return;
+        }
+        // Başka bir oyuncunun Nöro'suna tıklayınca yanına yürüyüp selam ver / beşlik çak!
+        const peerNode = e.target.closest('.ol-p[data-uid]');
+        if (peerNode && peerNode.dataset.uid && peerNode.dataset.uid !== NS.api.myId() && L.room && L.walker) {
+            const targetUid = peerNode.dataset.uid;
+            const targetSt = L.walker.get(targetUid);
+            if (targetSt) {
+                const destX = Math.max(0.06, Math.min(0.94, targetSt.x + (targetSt.x > 0.5 ? -0.07 : 0.07)));
+                const destY = Math.max(0.48, Math.min(0.88, targetSt.y + 0.02));
+                const freePt = L.room.nearestFree(destX, destY);
+                NS.rooms.move(freePt.x, freePt.y, { act: 'wave', spot: null });
+                showEmote(NS.api.myId(), 'wave');
+                spawnSparkBurst((targetSt.x + freePt.x) / 2, Math.min(targetSt.y, freePt.y) - 0.06);
+                updatePlayers();
+                return;
+            }
+        }
         const say = e.target.closest('[data-ol-say]');
         if (say) {
             toggleQuick(false);
