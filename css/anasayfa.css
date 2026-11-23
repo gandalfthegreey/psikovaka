@@ -647,3 +647,36 @@
 .screen-home .card-hero.desk-folder.is-done {
     border-top-color: var(--color-success);
 }
+
+/* Mobil optimizasyon (≤599px): 4'lü simetrik mod çubuğu, kompakt kartlar, sıfır taşma */
+@media (max-width: 599px) {
+    .screen.screen-home { gap: var(--space-3); }
+    .screen-home .target-picker { flex-direction: column; align-items: stretch; gap: 6px; }
+    .screen-home .target-picker .segmented {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        width: 100%;
+    }
+    .screen-home .target-picker .segmented-btn,
+    [data-theme="dark"] .screen-home .target-picker .segmented-btn {
+        padding: 0 4px;
+        font-size: 13px;
+        min-height: 38px;
+        text-align: center;
+    }
+    .screen-home .target-hint-row { justify-content: flex-end; }
+    .screen-home .card-hero.desk-folder,
+    .screen-home .desk-stage:has(.noro-bubble:not([hidden])) .card-hero.desk-folder {
+        margin-top: 26px;
+        padding: 20px 16px 18px;
+    }
+    .screen-home .desk-folder .card-hero-title { font-size: 1.45rem; }
+    .screen-home .desk-folder .daily-actions .btn { flex: 1 1 auto; justify-content: center; }
+    .screen-home .card-action.desk-strip {
+        padding: 11px 12px;
+        gap: 10px;
+    }
+    .screen-home .desk-strip-badge { width: 34px; height: 34px; font-size: 16px; border-radius: 8px; }
+    .screen-home .desk-strip .card-title { font-size: 0.95rem; }
+    .screen-home .desk-strip .card-action-row .btn { padding: 6px 12px; font-size: 13px; }
+}

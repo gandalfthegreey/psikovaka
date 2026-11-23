@@ -1,0 +1,4152 @@
+[
+  {
+    "batch": 1,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b01.json",
+    "items": [
+      {
+        "slot": 1,
+        "diagnosisId": "intellectual_disability_profound",
+        "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 2,
+        "diagnosisId": "intellectual_disability_mild",
+        "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 3,
+        "diagnosisId": "intellectual_disability_moderate",
+        "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 4,
+        "diagnosisId": "intellectual_disability_severe",
+        "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 5,
+        "diagnosisId": "global_developmental_delay",
+        "nameTr": "Küresel Gelişimsel Gecikme",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 6,
+        "diagnosisId": "language_disorder",
+        "nameTr": "Dil Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 7,
+        "diagnosisId": "speech_sound_disorder",
+        "nameTr": "Konuşma Sesi Bozukluğu (Fonolojik Bozukluk)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 8,
+        "diagnosisId": "social_communication_disorder",
+        "nameTr": "Toplumsal (Pragmatik) İletişim Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 9,
+        "diagnosisId": "developmental_coordination_disorder",
+        "nameTr": "Gelişimsel Eşgüdüm (Koordinasyon) Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 10,
+        "diagnosisId": "stereotypic_movement_disorder",
+        "nameTr": "Stereotipik Hareket Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 11,
+        "diagnosisId": "chronic_motor_vocal_tic",
+        "nameTr": "Süregen (Kronik) Motor ya da Vokal Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 12,
+        "diagnosisId": "provisional_tic_disorder",
+        "nameTr": "Geçici Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 13,
+        "diagnosisId": "substance_induced_psychotic",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 14,
+        "diagnosisId": "psychotic_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 15,
+        "diagnosisId": "catatonia_associated",
+        "nameTr": "Başka Bir Ruhsal Bozuklukla İlişkili Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 16,
+        "diagnosisId": "catatonia_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 17,
+        "diagnosisId": "substance_induced_bipolar",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 18,
+        "diagnosisId": "bipolar_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 19,
+        "diagnosisId": "substance_induced_depressive",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 20,
+        "diagnosisId": "substance_induced_anxiety",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 2,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b02.json",
+    "items": [
+      {
+        "slot": 21,
+        "diagnosisId": "sleep_related_hypoventilation",
+        "nameTr": "Uykuda Hipoventilasyon (Ondine Laneti Dahil)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 22,
+        "diagnosisId": "male_hypoactive_desire",
+        "nameTr": "Erkekte Düşük Cinsel İstek Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 23,
+        "diagnosisId": "female_sexual_interest_arousal",
+        "nameTr": "Kadında Cinsel İlgi/Uyarılma Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 24,
+        "diagnosisId": "substance_induced_sexual_dysfunction",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 25,
+        "diagnosisId": "alcohol_intoxication",
+        "nameTr": "Alkol Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 26,
+        "diagnosisId": "alcohol_withdrawal",
+        "nameTr": "Alkol Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 27,
+        "diagnosisId": "cannabis_use_disorder",
+        "nameTr": "Esrar (Kannabis) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 28,
+        "diagnosisId": "cannabis_intoxication",
+        "nameTr": "Esrar Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 29,
+        "diagnosisId": "cannabis_withdrawal",
+        "nameTr": "Esrar Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 30,
+        "diagnosisId": "sedative_hypnotic_use_disorder",
+        "nameTr": "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 31,
+        "diagnosisId": "opioid_use_disorder",
+        "nameTr": "Opioid Kullanım Bozukluğu (Eroin / Morfin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 32,
+        "diagnosisId": "opioid_intoxication",
+        "nameTr": "Opioid Zehirlenmesi (Miyozis, Solunum Depresyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 33,
+        "diagnosisId": "cocaine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 34,
+        "diagnosisId": "cocaine_intoxication",
+        "nameTr": "Uyarıcı Zehirlenmesi (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 35,
+        "diagnosisId": "cocaine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 36,
+        "diagnosisId": "amphetamine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 37,
+        "diagnosisId": "amphetamine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Amfetamin Türü Madde)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 38,
+        "diagnosisId": "phencyclidine_use_disorder",
+        "nameTr": "Fensiklidin (PCP) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 39,
+        "diagnosisId": "hallucinogen_use_disorder",
+        "nameTr": "Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 40,
+        "diagnosisId": "hallucinogen_persisting_perception",
+        "nameTr": "Hallusinojen Kalıcı Algı Bozukluğu (HPPD / Flashback)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 3,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b03.json",
+    "items": [
+      {
+        "slot": 41,
+        "diagnosisId": "inhalant_use_disorder",
+        "nameTr": "Uçucu Madde Kullanım Bozukluğu (Tiner / Bali / Çakmak Gazı)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 42,
+        "diagnosisId": "tobacco_use_disorder",
+        "nameTr": "Tütün (Nikotin) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 43,
+        "diagnosisId": "tobacco_withdrawal",
+        "nameTr": "Tütün (Nikotin) Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 44,
+        "diagnosisId": "caffeine_intoxication",
+        "nameTr": "Kafein Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 45,
+        "diagnosisId": "caffeine_withdrawal",
+        "nameTr": "Kafein Yoksunluğu (Baş Ağrısı, Yorgunluk)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 46,
+        "diagnosisId": "mild_neurocognitive_vascular",
+        "nameTr": "Hafif Vasküler Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 47,
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 48,
+        "diagnosisId": "major_neurocognitive_tbi",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 49,
+        "diagnosisId": "major_neurocognitive_hiv",
+        "nameTr": "Majör Nörobilişsel Bozukluk (HIV Enfeksiyonuna Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 50,
+        "diagnosisId": "major_neurocognitive_prion",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Prion Hastalığı / Creutzfeldt-Jakob)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 51,
+        "diagnosisId": "major_neurocognitive_huntington",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Huntington Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 52,
+        "diagnosisId": "major_neurocognitive_another_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Majör Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 53,
+        "diagnosisId": "major_neurocognitive_multiple",
+        "nameTr": "Birden Fazla Etiyolojiye Bağlı Majör Nörobilişsel Bozukluk (Miks Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 54,
+        "diagnosisId": "avoidant_pd",
+        "nameTr": "Çekingen (Kaçıngan / Avoidant) Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 55,
+        "diagnosisId": "dependent_pd",
+        "nameTr": "Bağımlı Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 56,
+        "diagnosisId": "personality_change_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 57,
+        "diagnosisId": "voyeuristic",
+        "nameTr": "Gözetlemecilik Bozukluğu (Voyörizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 58,
+        "diagnosisId": "exhibitionistic",
+        "nameTr": "Göstermecilik Bozukluğu (Ekzibisyonizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 59,
+        "diagnosisId": "frotteuristic",
+        "nameTr": "Sürtünmecilik Bozukluğu (Frotteurizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 60,
+        "diagnosisId": "sexual_masochism",
+        "nameTr": "Cinsel Mazoşizm Bozukluğu (Asfiksi Tipi Dahil)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 4,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b04.json",
+    "items": [
+      {
+        "slot": 61,
+        "diagnosisId": "sexual_sadism",
+        "nameTr": "Cinsel Sadizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 62,
+        "diagnosisId": "fetishistic_disorder",
+        "nameTr": "Fetişizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 63,
+        "diagnosisId": "transvestic_disorder",
+        "nameTr": "Karşıgiyim (Travestik) Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 64,
+        "diagnosisId": "childhood_fluency_disorder",
+        "nameTr": "Çocuklukta Başlayan Akıcılık Bozukluğu (Kekemelik)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 65,
+        "diagnosisId": "asd",
+        "nameTr": "Otizm Spektrum Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 66,
+        "diagnosisId": "adhd",
+        "nameTr": "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 67,
+        "diagnosisId": "specific_learning_disorder",
+        "nameTr": "Özgül Öğrenme Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 68,
+        "diagnosisId": "tourette",
+        "nameTr": "Tourette Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 69,
+        "diagnosisId": "brief_psychotic",
+        "nameTr": "Kısa Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 70,
+        "diagnosisId": "schizophreniform",
+        "nameTr": "Şizofreniform Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 71,
+        "diagnosisId": "schizophrenia",
+        "nameTr": "Şizofreni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 72,
+        "diagnosisId": "schizoaffective",
+        "nameTr": "Şizoaffektif Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 73,
+        "diagnosisId": "bipolar_2",
+        "nameTr": "Bipolar II Bozukluğu (Hipomani ve Majör Depresyon)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 74,
+        "diagnosisId": "cyclothymia",
+        "nameTr": "Siklotimik Bozukluk (Siklotimi)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 75,
+        "diagnosisId": "dysthymia",
+        "nameTr": "Kalıcı Depresif Bozukluk (Distimi)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 76,
+        "diagnosisId": "dmdd",
+        "nameTr": "Yıkıcı Duygudurumu Düzenleyememe Bozukluğu (DMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 77,
+        "diagnosisId": "pmdd",
+        "nameTr": "Premenstrüel Disforik Bozukluk (PMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 78,
+        "diagnosisId": "depressive_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 79,
+        "diagnosisId": "gad",
+        "nameTr": "Yaygın Anksiyete Bozukluğu (YAB)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 80,
+        "diagnosisId": "panic_disorder",
+        "nameTr": "Panik Bozukluk",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 5,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b05.json",
+    "items": [
+      {
+        "slot": 81,
+        "diagnosisId": "agoraphobia",
+        "nameTr": "Agorafobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 82,
+        "diagnosisId": "separation_anxiety",
+        "nameTr": "Ayrılma Kaygısı Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 83,
+        "diagnosisId": "selective_mutism",
+        "nameTr": "Seçici Konuşmazlık (Selektif Mutizm)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 84,
+        "diagnosisId": "anxiety_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 85,
+        "diagnosisId": "hoarding_disorder",
+        "nameTr": "Biriktiricilik Bozukluğu (İstifçilik / Hoarding)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 86,
+        "diagnosisId": "trichotillomania",
+        "nameTr": "Trikotillomani (Saç / Kıl Yolma Bozukluğu)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 87,
+        "diagnosisId": "excoriation",
+        "nameTr": "Deri Yolma Bozukluğu (Ekskoriyasyon)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 88,
+        "diagnosisId": "ocd_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Obsesif-Kompulsif ve İlişkili Bozukluk",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 89,
+        "diagnosisId": "ptsd",
+        "nameTr": "Travma Sonrası Stres Bozukluğu (TSSB / PTSD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 90,
+        "diagnosisId": "ptsd_preschool",
+        "nameTr": "6 Yaş ve Altı Çocuklarda Travma Sonrası Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 91,
+        "diagnosisId": "acute_stress_disorder",
+        "nameTr": "Akut Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 92,
+        "diagnosisId": "adjustment_disorder",
+        "nameTr": "Uyum Bozuklukları",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 93,
+        "diagnosisId": "reactive_attachment_disorder",
+        "nameTr": "Tepkisel Bağlanma Bozukluğu (RAD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 94,
+        "diagnosisId": "disinhibited_social_engagement",
+        "nameTr": "Sınırsız Toplumsal Katılım Bozukluğu (DSED)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 95,
+        "diagnosisId": "prolonged_grief_disorder",
+        "nameTr": "Uzatılmış Yas Bozukluğu (Prolonged Grief Disorder)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 96,
+        "diagnosisId": "did",
+        "nameTr": "Dissosiyatif Kimlik Bozukluğu (Çoklu Kişilik)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 97,
+        "diagnosisId": "dissociative_amnesia",
+        "nameTr": "Dissosiyatif Amnezi (Bellek Yitimi)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 98,
+        "diagnosisId": "depersonalization_derealization",
+        "nameTr": "Depersonalizasyon / Derealizasyon Bozukluğu",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 99,
+        "diagnosisId": "somatic_symptom_disorder",
+        "nameTr": "Bedensel Belirti Bozukluğu (Somatik Semptom Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 100,
+        "diagnosisId": "illness_anxiety_disorder",
+        "nameTr": "Hastalık Kaygısı Bozukluğu (Hipokondriyazis)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 6,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b06.json",
+    "items": [
+      {
+        "slot": 101,
+        "diagnosisId": "factitious_disorder",
+        "nameTr": "Yapay Bozukluk (Kendine Yüklenen / Münchausen Sendromu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 102,
+        "diagnosisId": "factitious_another",
+        "nameTr": "Yapay Bozukluk (Başkasına Yüklenen / Münchausen by Proxy)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 103,
+        "diagnosisId": "psychological_factors_affecting_medical",
+        "nameTr": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenler",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 104,
+        "diagnosisId": "anorexia_nervosa",
+        "nameTr": "Anoreksiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 105,
+        "diagnosisId": "bulimia_nervosa",
+        "nameTr": "Bulimiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 106,
+        "diagnosisId": "binge_eating",
+        "nameTr": "Tıkınırcasına Yeme Bozukluğu (BED)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 107,
+        "diagnosisId": "arfid",
+        "nameTr": "Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 108,
+        "diagnosisId": "pica",
+        "nameTr": "Pika (Yenilmeyen Maddeleri Yeme: Toprak, Kireç, Kömür)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 109,
+        "diagnosisId": "rumination_disorder",
+        "nameTr": "Geri Çıkarma (Geviş Getirme / Ruminasyon) Bozukluğu",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 110,
+        "diagnosisId": "enuresis",
+        "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 111,
+        "diagnosisId": "encopresis",
+        "nameTr": "Enkoprezis (İstemsiz Kaka Kaçırma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 112,
+        "diagnosisId": "insomnia_disorder",
+        "nameTr": "Uykusuzluk Bozukluğu (Kronik İnsomni)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 113,
+        "diagnosisId": "hypersomnolence",
+        "nameTr": "Aşırı Uykululuk Bozukluğu (Hipersomnolans)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 114,
+        "diagnosisId": "narcolepsy",
+        "nameTr": "Narkolepsi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 115,
+        "diagnosisId": "obstructive_sleep_apnea",
+        "nameTr": "Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 116,
+        "diagnosisId": "central_sleep_apnea",
+        "nameTr": "Santral Uyku Apnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 117,
+        "diagnosisId": "circadian_rhythm_sleep_wake",
+        "nameTr": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 118,
+        "diagnosisId": "nightmare_disorder",
+        "nameTr": "Kabus Bozukluğu (Nightmare Disorder)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 119,
+        "diagnosisId": "rem_sleep_behavior_disorder",
+        "nameTr": "REM Uykusu Davranış Bozukluğu (RBD)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 120,
+        "diagnosisId": "restless_legs_syndrome",
+        "nameTr": "Huzursuz Bacaklar Sendromu (Willis-Ekbom)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 7,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b07.json",
+    "items": [
+      {
+        "slot": 121,
+        "diagnosisId": "erectile_disorder",
+        "nameTr": "Sertleşme Bozukluğu (Erektil Bozukluk)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 122,
+        "diagnosisId": "premature_ejaculation",
+        "nameTr": "Erken Boşalma (Prematür Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 123,
+        "diagnosisId": "delayed_ejaculation",
+        "nameTr": "Geç Boşalma (Gecikmiş Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 124,
+        "diagnosisId": "female_orgasmic_disorder",
+        "nameTr": "Kadında Orgazm Bozukluğu (Anorgazmi)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 125,
+        "diagnosisId": "genito_pelvic_pain",
+        "nameTr": "Genito-Pelvik Ağrı/Penetrasyon Bozukluğu (Vajinismus / Disparoni)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 126,
+        "diagnosisId": "odd",
+        "nameTr": "Karşıt Olma Karşı Gelme Bozukluğu (KOKGB / ODD)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 127,
+        "diagnosisId": "intermittent_explosive",
+        "nameTr": "Aralıklı Patlayıcı Bozukluk (IED)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 128,
+        "diagnosisId": "conduct_disorder",
+        "nameTr": "Davranım Bozukluğu",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 129,
+        "diagnosisId": "pyromania",
+        "nameTr": "Piromani (Yangın Çıkarma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 130,
+        "diagnosisId": "kleptomania",
+        "nameTr": "Kleptomani (Çalma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 131,
+        "diagnosisId": "alcohol_use_disorder",
+        "nameTr": "Alkol Kullanım Bozukluğu (Alkolizm)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 132,
+        "diagnosisId": "alcohol_withdrawal_delirium",
+        "nameTr": "Alkol Yoksunluğu Deliryumu (Delirium Tremens)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 133,
+        "diagnosisId": "sedative_withdrawal",
+        "nameTr": "Sedatif/Benzodiazepin Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 134,
+        "diagnosisId": "opioid_withdrawal",
+        "nameTr": "Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 135,
+        "diagnosisId": "gambling_disorder",
+        "nameTr": "Kumar Oynama Bozukluğu (Patolojik Kumar)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 136,
+        "diagnosisId": "delirium",
+        "nameTr": "Deliryum (Akut Bilinç Bulanıklığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 137,
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 138,
+        "diagnosisId": "mild_neurocognitive_alzheimer",
+        "nameTr": "Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 139,
+        "diagnosisId": "major_neurocognitive_vascular",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 140,
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Frontotemporal / Pick Hastalığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 8,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b08.json",
+    "items": [
+      {
+        "slot": 141,
+        "diagnosisId": "major_neurocognitive_lewy_body",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 142,
+        "diagnosisId": "wernicke_korsakoff_syndrome",
+        "nameTr": "Alkolün Yol Açtığı Majör Nörobilişsel Bozukluk (Amnestik-Konfabulatuvar Tip / Korsakoff)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 143,
+        "diagnosisId": "paranoid_pd",
+        "nameTr": "Paranoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 144,
+        "diagnosisId": "schizoid_pd",
+        "nameTr": "Şizoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 145,
+        "diagnosisId": "schizotypal_pd",
+        "nameTr": "Şizotipal Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 146,
+        "diagnosisId": "antisocial_pd",
+        "nameTr": "Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati)",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 147,
+        "diagnosisId": "borderline_pd",
+        "nameTr": "Sınırda (Borderline) Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 148,
+        "diagnosisId": "histrionic_pd",
+        "nameTr": "Histriyonik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 149,
+        "diagnosisId": "narcissistic_pd",
+        "nameTr": "Narsisistik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 150,
+        "diagnosisId": "ocpd",
+        "nameTr": "Obsesif-Kompulsif Kişilik Bozukluğu (OKKB / OCPD)",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 151,
+        "diagnosisId": "bipolar_1",
+        "nameTr": "Bipolar I Bozukluğu",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 152,
+        "diagnosisId": "social_anxiety",
+        "nameTr": "Toplumsal Kaygı Bozukluğu (Sosyal Anksiyete / Sosyal Fobi)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 153,
+        "diagnosisId": "bdd",
+        "nameTr": "Beden Algısı Bozukluğu (Vücut Dismorfik Bozukluğu / BDD)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 154,
+        "diagnosisId": "conversion_disorder",
+        "nameTr": "Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 155,
+        "diagnosisId": "nrem_sleep_arousal",
+        "nameTr": "NREM Uykusundan Uyanma Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 156,
+        "diagnosisId": "specific_phobia",
+        "nameTr": "Özgül Fobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 157,
+        "diagnosisId": "ocd",
+        "nameTr": "Obsesif-Kompulsif Bozukluk (OKB)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 158,
+        "diagnosisId": "mdd",
+        "nameTr": "Majör Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 159,
+        "diagnosisId": "delusional_disorder",
+        "nameTr": "Sanrılı Bozukluk (Hezeyanlı Bozukluk)",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 160,
+        "diagnosisId": "intellectual_disability_profound",
+        "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 9,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b09.json",
+    "items": [
+      {
+        "slot": 161,
+        "diagnosisId": "intellectual_disability_mild",
+        "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 162,
+        "diagnosisId": "intellectual_disability_moderate",
+        "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 163,
+        "diagnosisId": "intellectual_disability_severe",
+        "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 164,
+        "diagnosisId": "global_developmental_delay",
+        "nameTr": "Küresel Gelişimsel Gecikme",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 165,
+        "diagnosisId": "language_disorder",
+        "nameTr": "Dil Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 166,
+        "diagnosisId": "speech_sound_disorder",
+        "nameTr": "Konuşma Sesi Bozukluğu (Fonolojik Bozukluk)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 167,
+        "diagnosisId": "social_communication_disorder",
+        "nameTr": "Toplumsal (Pragmatik) İletişim Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 168,
+        "diagnosisId": "developmental_coordination_disorder",
+        "nameTr": "Gelişimsel Eşgüdüm (Koordinasyon) Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 169,
+        "diagnosisId": "stereotypic_movement_disorder",
+        "nameTr": "Stereotipik Hareket Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 170,
+        "diagnosisId": "chronic_motor_vocal_tic",
+        "nameTr": "Süregen (Kronik) Motor ya da Vokal Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 171,
+        "diagnosisId": "provisional_tic_disorder",
+        "nameTr": "Geçici Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 172,
+        "diagnosisId": "substance_induced_psychotic",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 173,
+        "diagnosisId": "psychotic_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 174,
+        "diagnosisId": "catatonia_associated",
+        "nameTr": "Başka Bir Ruhsal Bozuklukla İlişkili Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 175,
+        "diagnosisId": "catatonia_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 176,
+        "diagnosisId": "substance_induced_bipolar",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 177,
+        "diagnosisId": "bipolar_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 178,
+        "diagnosisId": "substance_induced_depressive",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 179,
+        "diagnosisId": "substance_induced_anxiety",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 180,
+        "diagnosisId": "sleep_related_hypoventilation",
+        "nameTr": "Uykuda Hipoventilasyon (Ondine Laneti Dahil)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 10,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b10.json",
+    "items": [
+      {
+        "slot": 181,
+        "diagnosisId": "male_hypoactive_desire",
+        "nameTr": "Erkekte Düşük Cinsel İstek Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 182,
+        "diagnosisId": "female_sexual_interest_arousal",
+        "nameTr": "Kadında Cinsel İlgi/Uyarılma Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 183,
+        "diagnosisId": "substance_induced_sexual_dysfunction",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 184,
+        "diagnosisId": "alcohol_intoxication",
+        "nameTr": "Alkol Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 185,
+        "diagnosisId": "alcohol_withdrawal",
+        "nameTr": "Alkol Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 186,
+        "diagnosisId": "cannabis_use_disorder",
+        "nameTr": "Esrar (Kannabis) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 187,
+        "diagnosisId": "cannabis_intoxication",
+        "nameTr": "Esrar Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 188,
+        "diagnosisId": "cannabis_withdrawal",
+        "nameTr": "Esrar Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 189,
+        "diagnosisId": "sedative_hypnotic_use_disorder",
+        "nameTr": "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 190,
+        "diagnosisId": "opioid_use_disorder",
+        "nameTr": "Opioid Kullanım Bozukluğu (Eroin / Morfin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 191,
+        "diagnosisId": "opioid_intoxication",
+        "nameTr": "Opioid Zehirlenmesi (Miyozis, Solunum Depresyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 192,
+        "diagnosisId": "cocaine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 193,
+        "diagnosisId": "cocaine_intoxication",
+        "nameTr": "Uyarıcı Zehirlenmesi (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 194,
+        "diagnosisId": "cocaine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 195,
+        "diagnosisId": "amphetamine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 196,
+        "diagnosisId": "amphetamine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Amfetamin Türü Madde)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 197,
+        "diagnosisId": "phencyclidine_use_disorder",
+        "nameTr": "Fensiklidin (PCP) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 198,
+        "diagnosisId": "hallucinogen_use_disorder",
+        "nameTr": "Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 199,
+        "diagnosisId": "hallucinogen_persisting_perception",
+        "nameTr": "Hallusinojen Kalıcı Algı Bozukluğu (HPPD / Flashback)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 200,
+        "diagnosisId": "inhalant_use_disorder",
+        "nameTr": "Uçucu Madde Kullanım Bozukluğu (Tiner / Bali / Çakmak Gazı)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 11,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b11.json",
+    "items": [
+      {
+        "slot": 201,
+        "diagnosisId": "tobacco_use_disorder",
+        "nameTr": "Tütün (Nikotin) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 202,
+        "diagnosisId": "tobacco_withdrawal",
+        "nameTr": "Tütün (Nikotin) Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 203,
+        "diagnosisId": "caffeine_intoxication",
+        "nameTr": "Kafein Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 204,
+        "diagnosisId": "caffeine_withdrawal",
+        "nameTr": "Kafein Yoksunluğu (Baş Ağrısı, Yorgunluk)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 205,
+        "diagnosisId": "mild_neurocognitive_vascular",
+        "nameTr": "Hafif Vasküler Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 206,
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 207,
+        "diagnosisId": "major_neurocognitive_tbi",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 208,
+        "diagnosisId": "major_neurocognitive_hiv",
+        "nameTr": "Majör Nörobilişsel Bozukluk (HIV Enfeksiyonuna Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 209,
+        "diagnosisId": "major_neurocognitive_prion",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Prion Hastalığı / Creutzfeldt-Jakob)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 210,
+        "diagnosisId": "major_neurocognitive_huntington",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Huntington Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 211,
+        "diagnosisId": "major_neurocognitive_another_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Majör Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 212,
+        "diagnosisId": "major_neurocognitive_multiple",
+        "nameTr": "Birden Fazla Etiyolojiye Bağlı Majör Nörobilişsel Bozukluk (Miks Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 213,
+        "diagnosisId": "avoidant_pd",
+        "nameTr": "Çekingen (Kaçıngan / Avoidant) Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 214,
+        "diagnosisId": "dependent_pd",
+        "nameTr": "Bağımlı Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 215,
+        "diagnosisId": "personality_change_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 216,
+        "diagnosisId": "voyeuristic",
+        "nameTr": "Gözetlemecilik Bozukluğu (Voyörizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 217,
+        "diagnosisId": "exhibitionistic",
+        "nameTr": "Göstermecilik Bozukluğu (Ekzibisyonizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 218,
+        "diagnosisId": "frotteuristic",
+        "nameTr": "Sürtünmecilik Bozukluğu (Frotteurizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 219,
+        "diagnosisId": "sexual_masochism",
+        "nameTr": "Cinsel Mazoşizm Bozukluğu (Asfiksi Tipi Dahil)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 220,
+        "diagnosisId": "sexual_sadism",
+        "nameTr": "Cinsel Sadizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 12,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b12.json",
+    "items": [
+      {
+        "slot": 221,
+        "diagnosisId": "fetishistic_disorder",
+        "nameTr": "Fetişizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 222,
+        "diagnosisId": "transvestic_disorder",
+        "nameTr": "Karşıgiyim (Travestik) Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 223,
+        "diagnosisId": "childhood_fluency_disorder",
+        "nameTr": "Çocuklukta Başlayan Akıcılık Bozukluğu (Kekemelik)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 224,
+        "diagnosisId": "asd",
+        "nameTr": "Otizm Spektrum Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 225,
+        "diagnosisId": "adhd",
+        "nameTr": "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 226,
+        "diagnosisId": "specific_learning_disorder",
+        "nameTr": "Özgül Öğrenme Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 227,
+        "diagnosisId": "tourette",
+        "nameTr": "Tourette Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 228,
+        "diagnosisId": "brief_psychotic",
+        "nameTr": "Kısa Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 229,
+        "diagnosisId": "schizophreniform",
+        "nameTr": "Şizofreniform Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 230,
+        "diagnosisId": "schizophrenia",
+        "nameTr": "Şizofreni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 231,
+        "diagnosisId": "schizoaffective",
+        "nameTr": "Şizoaffektif Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 232,
+        "diagnosisId": "bipolar_2",
+        "nameTr": "Bipolar II Bozukluğu (Hipomani ve Majör Depresyon)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 233,
+        "diagnosisId": "cyclothymia",
+        "nameTr": "Siklotimik Bozukluk (Siklotimi)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 234,
+        "diagnosisId": "dysthymia",
+        "nameTr": "Kalıcı Depresif Bozukluk (Distimi)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 235,
+        "diagnosisId": "dmdd",
+        "nameTr": "Yıkıcı Duygudurumu Düzenleyememe Bozukluğu (DMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 236,
+        "diagnosisId": "pmdd",
+        "nameTr": "Premenstrüel Disforik Bozukluk (PMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 237,
+        "diagnosisId": "depressive_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 238,
+        "diagnosisId": "gad",
+        "nameTr": "Yaygın Anksiyete Bozukluğu (YAB)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 239,
+        "diagnosisId": "panic_disorder",
+        "nameTr": "Panik Bozukluk",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 240,
+        "diagnosisId": "agoraphobia",
+        "nameTr": "Agorafobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 13,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b13.json",
+    "items": [
+      {
+        "slot": 241,
+        "diagnosisId": "separation_anxiety",
+        "nameTr": "Ayrılma Kaygısı Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 242,
+        "diagnosisId": "selective_mutism",
+        "nameTr": "Seçici Konuşmazlık (Selektif Mutizm)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 243,
+        "diagnosisId": "anxiety_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 244,
+        "diagnosisId": "hoarding_disorder",
+        "nameTr": "Biriktiricilik Bozukluğu (İstifçilik / Hoarding)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 245,
+        "diagnosisId": "trichotillomania",
+        "nameTr": "Trikotillomani (Saç / Kıl Yolma Bozukluğu)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 246,
+        "diagnosisId": "excoriation",
+        "nameTr": "Deri Yolma Bozukluğu (Ekskoriyasyon)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 247,
+        "diagnosisId": "ocd_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Obsesif-Kompulsif ve İlişkili Bozukluk",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 248,
+        "diagnosisId": "ptsd",
+        "nameTr": "Travma Sonrası Stres Bozukluğu (TSSB / PTSD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 249,
+        "diagnosisId": "ptsd_preschool",
+        "nameTr": "6 Yaş ve Altı Çocuklarda Travma Sonrası Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 250,
+        "diagnosisId": "acute_stress_disorder",
+        "nameTr": "Akut Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 251,
+        "diagnosisId": "adjustment_disorder",
+        "nameTr": "Uyum Bozuklukları",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 252,
+        "diagnosisId": "reactive_attachment_disorder",
+        "nameTr": "Tepkisel Bağlanma Bozukluğu (RAD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 253,
+        "diagnosisId": "disinhibited_social_engagement",
+        "nameTr": "Sınırsız Toplumsal Katılım Bozukluğu (DSED)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 254,
+        "diagnosisId": "prolonged_grief_disorder",
+        "nameTr": "Uzatılmış Yas Bozukluğu (Prolonged Grief Disorder)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 255,
+        "diagnosisId": "did",
+        "nameTr": "Dissosiyatif Kimlik Bozukluğu (Çoklu Kişilik)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 256,
+        "diagnosisId": "dissociative_amnesia",
+        "nameTr": "Dissosiyatif Amnezi (Bellek Yitimi)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 257,
+        "diagnosisId": "depersonalization_derealization",
+        "nameTr": "Depersonalizasyon / Derealizasyon Bozukluğu",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 258,
+        "diagnosisId": "somatic_symptom_disorder",
+        "nameTr": "Bedensel Belirti Bozukluğu (Somatik Semptom Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 259,
+        "diagnosisId": "illness_anxiety_disorder",
+        "nameTr": "Hastalık Kaygısı Bozukluğu (Hipokondriyazis)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 260,
+        "diagnosisId": "factitious_disorder",
+        "nameTr": "Yapay Bozukluk (Kendine Yüklenen / Münchausen Sendromu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 14,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b14.json",
+    "items": [
+      {
+        "slot": 261,
+        "diagnosisId": "factitious_another",
+        "nameTr": "Yapay Bozukluk (Başkasına Yüklenen / Münchausen by Proxy)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 262,
+        "diagnosisId": "psychological_factors_affecting_medical",
+        "nameTr": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenler",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 263,
+        "diagnosisId": "anorexia_nervosa",
+        "nameTr": "Anoreksiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 264,
+        "diagnosisId": "bulimia_nervosa",
+        "nameTr": "Bulimiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 265,
+        "diagnosisId": "binge_eating",
+        "nameTr": "Tıkınırcasına Yeme Bozukluğu (BED)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 266,
+        "diagnosisId": "arfid",
+        "nameTr": "Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 267,
+        "diagnosisId": "pica",
+        "nameTr": "Pika (Yenilmeyen Maddeleri Yeme: Toprak, Kireç, Kömür)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 268,
+        "diagnosisId": "rumination_disorder",
+        "nameTr": "Geri Çıkarma (Geviş Getirme / Ruminasyon) Bozukluğu",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 269,
+        "diagnosisId": "enuresis",
+        "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 270,
+        "diagnosisId": "encopresis",
+        "nameTr": "Enkoprezis (İstemsiz Kaka Kaçırma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 271,
+        "diagnosisId": "insomnia_disorder",
+        "nameTr": "Uykusuzluk Bozukluğu (Kronik İnsomni)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 272,
+        "diagnosisId": "hypersomnolence",
+        "nameTr": "Aşırı Uykululuk Bozukluğu (Hipersomnolans)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 273,
+        "diagnosisId": "narcolepsy",
+        "nameTr": "Narkolepsi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 274,
+        "diagnosisId": "obstructive_sleep_apnea",
+        "nameTr": "Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 275,
+        "diagnosisId": "central_sleep_apnea",
+        "nameTr": "Santral Uyku Apnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 276,
+        "diagnosisId": "circadian_rhythm_sleep_wake",
+        "nameTr": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 277,
+        "diagnosisId": "nightmare_disorder",
+        "nameTr": "Kabus Bozukluğu (Nightmare Disorder)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 278,
+        "diagnosisId": "rem_sleep_behavior_disorder",
+        "nameTr": "REM Uykusu Davranış Bozukluğu (RBD)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 279,
+        "diagnosisId": "restless_legs_syndrome",
+        "nameTr": "Huzursuz Bacaklar Sendromu (Willis-Ekbom)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 280,
+        "diagnosisId": "erectile_disorder",
+        "nameTr": "Sertleşme Bozukluğu (Erektil Bozukluk)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 15,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b15.json",
+    "items": [
+      {
+        "slot": 281,
+        "diagnosisId": "premature_ejaculation",
+        "nameTr": "Erken Boşalma (Prematür Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 282,
+        "diagnosisId": "delayed_ejaculation",
+        "nameTr": "Geç Boşalma (Gecikmiş Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 283,
+        "diagnosisId": "female_orgasmic_disorder",
+        "nameTr": "Kadında Orgazm Bozukluğu (Anorgazmi)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 284,
+        "diagnosisId": "genito_pelvic_pain",
+        "nameTr": "Genito-Pelvik Ağrı/Penetrasyon Bozukluğu (Vajinismus / Disparoni)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 285,
+        "diagnosisId": "odd",
+        "nameTr": "Karşıt Olma Karşı Gelme Bozukluğu (KOKGB / ODD)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 286,
+        "diagnosisId": "intermittent_explosive",
+        "nameTr": "Aralıklı Patlayıcı Bozukluk (IED)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 287,
+        "diagnosisId": "conduct_disorder",
+        "nameTr": "Davranım Bozukluğu",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 288,
+        "diagnosisId": "pyromania",
+        "nameTr": "Piromani (Yangın Çıkarma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 289,
+        "diagnosisId": "kleptomania",
+        "nameTr": "Kleptomani (Çalma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 290,
+        "diagnosisId": "alcohol_use_disorder",
+        "nameTr": "Alkol Kullanım Bozukluğu (Alkolizm)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 291,
+        "diagnosisId": "alcohol_withdrawal_delirium",
+        "nameTr": "Alkol Yoksunluğu Deliryumu (Delirium Tremens)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 292,
+        "diagnosisId": "sedative_withdrawal",
+        "nameTr": "Sedatif/Benzodiazepin Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 293,
+        "diagnosisId": "opioid_withdrawal",
+        "nameTr": "Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 294,
+        "diagnosisId": "gambling_disorder",
+        "nameTr": "Kumar Oynama Bozukluğu (Patolojik Kumar)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 295,
+        "diagnosisId": "delirium",
+        "nameTr": "Deliryum (Akut Bilinç Bulanıklığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 296,
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 297,
+        "diagnosisId": "mild_neurocognitive_alzheimer",
+        "nameTr": "Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 298,
+        "diagnosisId": "major_neurocognitive_vascular",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 299,
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Frontotemporal / Pick Hastalığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 300,
+        "diagnosisId": "major_neurocognitive_lewy_body",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 16,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b16.json",
+    "items": [
+      {
+        "slot": 301,
+        "diagnosisId": "wernicke_korsakoff_syndrome",
+        "nameTr": "Alkolün Yol Açtığı Majör Nörobilişsel Bozukluk (Amnestik-Konfabulatuvar Tip / Korsakoff)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 302,
+        "diagnosisId": "paranoid_pd",
+        "nameTr": "Paranoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 303,
+        "diagnosisId": "schizoid_pd",
+        "nameTr": "Şizoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 304,
+        "diagnosisId": "schizotypal_pd",
+        "nameTr": "Şizotipal Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 305,
+        "diagnosisId": "antisocial_pd",
+        "nameTr": "Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati)",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 306,
+        "diagnosisId": "borderline_pd",
+        "nameTr": "Sınırda (Borderline) Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 307,
+        "diagnosisId": "histrionic_pd",
+        "nameTr": "Histriyonik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 308,
+        "diagnosisId": "narcissistic_pd",
+        "nameTr": "Narsisistik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 309,
+        "diagnosisId": "ocpd",
+        "nameTr": "Obsesif-Kompulsif Kişilik Bozukluğu (OKKB / OCPD)",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 310,
+        "diagnosisId": "bipolar_1",
+        "nameTr": "Bipolar I Bozukluğu",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 311,
+        "diagnosisId": "social_anxiety",
+        "nameTr": "Toplumsal Kaygı Bozukluğu (Sosyal Anksiyete / Sosyal Fobi)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 312,
+        "diagnosisId": "bdd",
+        "nameTr": "Beden Algısı Bozukluğu (Vücut Dismorfik Bozukluğu / BDD)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 313,
+        "diagnosisId": "conversion_disorder",
+        "nameTr": "Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 314,
+        "diagnosisId": "nrem_sleep_arousal",
+        "nameTr": "NREM Uykusundan Uyanma Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 315,
+        "diagnosisId": "specific_phobia",
+        "nameTr": "Özgül Fobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 316,
+        "diagnosisId": "ocd",
+        "nameTr": "Obsesif-Kompulsif Bozukluk (OKB)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 317,
+        "diagnosisId": "mdd",
+        "nameTr": "Majör Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 318,
+        "diagnosisId": "delusional_disorder",
+        "nameTr": "Sanrılı Bozukluk (Hezeyanlı Bozukluk)",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 319,
+        "diagnosisId": "intellectual_disability_profound",
+        "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 320,
+        "diagnosisId": "intellectual_disability_mild",
+        "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 17,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b17.json",
+    "items": [
+      {
+        "slot": 321,
+        "diagnosisId": "intellectual_disability_moderate",
+        "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 322,
+        "diagnosisId": "intellectual_disability_severe",
+        "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 323,
+        "diagnosisId": "global_developmental_delay",
+        "nameTr": "Küresel Gelişimsel Gecikme",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 324,
+        "diagnosisId": "language_disorder",
+        "nameTr": "Dil Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 325,
+        "diagnosisId": "speech_sound_disorder",
+        "nameTr": "Konuşma Sesi Bozukluğu (Fonolojik Bozukluk)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 326,
+        "diagnosisId": "social_communication_disorder",
+        "nameTr": "Toplumsal (Pragmatik) İletişim Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 327,
+        "diagnosisId": "developmental_coordination_disorder",
+        "nameTr": "Gelişimsel Eşgüdüm (Koordinasyon) Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 328,
+        "diagnosisId": "stereotypic_movement_disorder",
+        "nameTr": "Stereotipik Hareket Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 329,
+        "diagnosisId": "chronic_motor_vocal_tic",
+        "nameTr": "Süregen (Kronik) Motor ya da Vokal Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 330,
+        "diagnosisId": "provisional_tic_disorder",
+        "nameTr": "Geçici Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 331,
+        "diagnosisId": "substance_induced_psychotic",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 332,
+        "diagnosisId": "psychotic_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 333,
+        "diagnosisId": "catatonia_associated",
+        "nameTr": "Başka Bir Ruhsal Bozuklukla İlişkili Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 334,
+        "diagnosisId": "catatonia_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 335,
+        "diagnosisId": "substance_induced_bipolar",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 336,
+        "diagnosisId": "bipolar_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 337,
+        "diagnosisId": "substance_induced_depressive",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 338,
+        "diagnosisId": "substance_induced_anxiety",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 339,
+        "diagnosisId": "sleep_related_hypoventilation",
+        "nameTr": "Uykuda Hipoventilasyon (Ondine Laneti Dahil)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 340,
+        "diagnosisId": "male_hypoactive_desire",
+        "nameTr": "Erkekte Düşük Cinsel İstek Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 18,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b18.json",
+    "items": [
+      {
+        "slot": 341,
+        "diagnosisId": "female_sexual_interest_arousal",
+        "nameTr": "Kadında Cinsel İlgi/Uyarılma Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 342,
+        "diagnosisId": "substance_induced_sexual_dysfunction",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 343,
+        "diagnosisId": "alcohol_intoxication",
+        "nameTr": "Alkol Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 344,
+        "diagnosisId": "alcohol_withdrawal",
+        "nameTr": "Alkol Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 345,
+        "diagnosisId": "cannabis_use_disorder",
+        "nameTr": "Esrar (Kannabis) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 346,
+        "diagnosisId": "cannabis_intoxication",
+        "nameTr": "Esrar Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 347,
+        "diagnosisId": "cannabis_withdrawal",
+        "nameTr": "Esrar Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 348,
+        "diagnosisId": "sedative_hypnotic_use_disorder",
+        "nameTr": "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 349,
+        "diagnosisId": "opioid_use_disorder",
+        "nameTr": "Opioid Kullanım Bozukluğu (Eroin / Morfin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 350,
+        "diagnosisId": "opioid_intoxication",
+        "nameTr": "Opioid Zehirlenmesi (Miyozis, Solunum Depresyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 351,
+        "diagnosisId": "cocaine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 352,
+        "diagnosisId": "cocaine_intoxication",
+        "nameTr": "Uyarıcı Zehirlenmesi (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 353,
+        "diagnosisId": "cocaine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Kokain)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 354,
+        "diagnosisId": "amphetamine_use_disorder",
+        "nameTr": "Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 355,
+        "diagnosisId": "amphetamine_withdrawal",
+        "nameTr": "Uyarıcı Yoksunluğu (Amfetamin Türü Madde)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 356,
+        "diagnosisId": "phencyclidine_use_disorder",
+        "nameTr": "Fensiklidin (PCP) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 357,
+        "diagnosisId": "hallucinogen_use_disorder",
+        "nameTr": "Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 358,
+        "diagnosisId": "hallucinogen_persisting_perception",
+        "nameTr": "Hallusinojen Kalıcı Algı Bozukluğu (HPPD / Flashback)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 359,
+        "diagnosisId": "inhalant_use_disorder",
+        "nameTr": "Uçucu Madde Kullanım Bozukluğu (Tiner / Bali / Çakmak Gazı)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 360,
+        "diagnosisId": "tobacco_use_disorder",
+        "nameTr": "Tütün (Nikotin) Kullanım Bozukluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 19,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b19.json",
+    "items": [
+      {
+        "slot": 361,
+        "diagnosisId": "tobacco_withdrawal",
+        "nameTr": "Tütün (Nikotin) Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 362,
+        "diagnosisId": "caffeine_intoxication",
+        "nameTr": "Kafein Zehirlenmesi (İntoksikasyonu)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 363,
+        "diagnosisId": "caffeine_withdrawal",
+        "nameTr": "Kafein Yoksunluğu (Baş Ağrısı, Yorgunluk)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 364,
+        "diagnosisId": "mild_neurocognitive_vascular",
+        "nameTr": "Hafif Vasküler Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 365,
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 366,
+        "diagnosisId": "major_neurocognitive_tbi",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Travmatik Beyin Hasarına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 367,
+        "diagnosisId": "major_neurocognitive_hiv",
+        "nameTr": "Majör Nörobilişsel Bozukluk (HIV Enfeksiyonuna Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 368,
+        "diagnosisId": "major_neurocognitive_prion",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Prion Hastalığı / Creutzfeldt-Jakob)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 369,
+        "diagnosisId": "major_neurocognitive_huntington",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Huntington Hastalığına Bağlı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 370,
+        "diagnosisId": "major_neurocognitive_another_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Majör Nörobilişsel Bozukluk",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 371,
+        "diagnosisId": "major_neurocognitive_multiple",
+        "nameTr": "Birden Fazla Etiyolojiye Bağlı Majör Nörobilişsel Bozukluk (Miks Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 372,
+        "diagnosisId": "avoidant_pd",
+        "nameTr": "Çekingen (Kaçıngan / Avoidant) Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 373,
+        "diagnosisId": "dependent_pd",
+        "nameTr": "Bağımlı Kişilik Bozukluğu",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 374,
+        "diagnosisId": "personality_change_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 375,
+        "diagnosisId": "voyeuristic",
+        "nameTr": "Gözetlemecilik Bozukluğu (Voyörizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 376,
+        "diagnosisId": "exhibitionistic",
+        "nameTr": "Göstermecilik Bozukluğu (Ekzibisyonizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 377,
+        "diagnosisId": "frotteuristic",
+        "nameTr": "Sürtünmecilik Bozukluğu (Frotteurizm)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 378,
+        "diagnosisId": "sexual_masochism",
+        "nameTr": "Cinsel Mazoşizm Bozukluğu (Asfiksi Tipi Dahil)",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 379,
+        "diagnosisId": "sexual_sadism",
+        "nameTr": "Cinsel Sadizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 380,
+        "diagnosisId": "fetishistic_disorder",
+        "nameTr": "Fetişizm Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 20,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b20.json",
+    "items": [
+      {
+        "slot": 381,
+        "diagnosisId": "transvestic_disorder",
+        "nameTr": "Karşıgiyim (Travestik) Bozukluğu",
+        "category": "PARAPHILIC",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 382,
+        "diagnosisId": "childhood_fluency_disorder",
+        "nameTr": "Çocuklukta Başlayan Akıcılık Bozukluğu (Kekemelik)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 383,
+        "diagnosisId": "asd",
+        "nameTr": "Otizm Spektrum Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 384,
+        "diagnosisId": "adhd",
+        "nameTr": "Dikkat Eksikliği ve Hiperaktivite Bozukluğu (DEHB)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 385,
+        "diagnosisId": "specific_learning_disorder",
+        "nameTr": "Özgül Öğrenme Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 386,
+        "diagnosisId": "tourette",
+        "nameTr": "Tourette Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 387,
+        "diagnosisId": "brief_psychotic",
+        "nameTr": "Kısa Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 388,
+        "diagnosisId": "schizophreniform",
+        "nameTr": "Şizofreniform Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 389,
+        "diagnosisId": "schizophrenia",
+        "nameTr": "Şizofreni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 390,
+        "diagnosisId": "schizoaffective",
+        "nameTr": "Şizoaffektif Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 391,
+        "diagnosisId": "bipolar_2",
+        "nameTr": "Bipolar II Bozukluğu (Hipomani ve Majör Depresyon)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 392,
+        "diagnosisId": "cyclothymia",
+        "nameTr": "Siklotimik Bozukluk (Siklotimi)",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 393,
+        "diagnosisId": "dysthymia",
+        "nameTr": "Kalıcı Depresif Bozukluk (Distimi)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 394,
+        "diagnosisId": "dmdd",
+        "nameTr": "Yıkıcı Duygudurumu Düzenleyememe Bozukluğu (DMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 395,
+        "diagnosisId": "pmdd",
+        "nameTr": "Premenstrüel Disforik Bozukluk (PMDD)",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 396,
+        "diagnosisId": "depressive_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 397,
+        "diagnosisId": "gad",
+        "nameTr": "Yaygın Anksiyete Bozukluğu (YAB)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 398,
+        "diagnosisId": "panic_disorder",
+        "nameTr": "Panik Bozukluk",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 399,
+        "diagnosisId": "agoraphobia",
+        "nameTr": "Agorafobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 400,
+        "diagnosisId": "separation_anxiety",
+        "nameTr": "Ayrılma Kaygısı Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 21,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b21.json",
+    "items": [
+      {
+        "slot": 401,
+        "diagnosisId": "selective_mutism",
+        "nameTr": "Seçici Konuşmazlık (Selektif Mutizm)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 402,
+        "diagnosisId": "anxiety_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 403,
+        "diagnosisId": "hoarding_disorder",
+        "nameTr": "Biriktiricilik Bozukluğu (İstifçilik / Hoarding)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 404,
+        "diagnosisId": "trichotillomania",
+        "nameTr": "Trikotillomani (Saç / Kıl Yolma Bozukluğu)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 405,
+        "diagnosisId": "excoriation",
+        "nameTr": "Deri Yolma Bozukluğu (Ekskoriyasyon)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 406,
+        "diagnosisId": "ocd_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Obsesif-Kompulsif ve İlişkili Bozukluk",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 407,
+        "diagnosisId": "ptsd",
+        "nameTr": "Travma Sonrası Stres Bozukluğu (TSSB / PTSD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 408,
+        "diagnosisId": "ptsd_preschool",
+        "nameTr": "6 Yaş ve Altı Çocuklarda Travma Sonrası Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 409,
+        "diagnosisId": "acute_stress_disorder",
+        "nameTr": "Akut Stres Bozukluğu",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 410,
+        "diagnosisId": "adjustment_disorder",
+        "nameTr": "Uyum Bozuklukları",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 411,
+        "diagnosisId": "reactive_attachment_disorder",
+        "nameTr": "Tepkisel Bağlanma Bozukluğu (RAD)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 412,
+        "diagnosisId": "disinhibited_social_engagement",
+        "nameTr": "Sınırsız Toplumsal Katılım Bozukluğu (DSED)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 413,
+        "diagnosisId": "prolonged_grief_disorder",
+        "nameTr": "Uzatılmış Yas Bozukluğu (Prolonged Grief Disorder)",
+        "category": "TRAUMA",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 414,
+        "diagnosisId": "did",
+        "nameTr": "Dissosiyatif Kimlik Bozukluğu (Çoklu Kişilik)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 415,
+        "diagnosisId": "dissociative_amnesia",
+        "nameTr": "Dissosiyatif Amnezi (Bellek Yitimi)",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 416,
+        "diagnosisId": "depersonalization_derealization",
+        "nameTr": "Depersonalizasyon / Derealizasyon Bozukluğu",
+        "category": "DISSOCIATIVE",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 417,
+        "diagnosisId": "somatic_symptom_disorder",
+        "nameTr": "Bedensel Belirti Bozukluğu (Somatik Semptom Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 418,
+        "diagnosisId": "illness_anxiety_disorder",
+        "nameTr": "Hastalık Kaygısı Bozukluğu (Hipokondriyazis)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 419,
+        "diagnosisId": "factitious_disorder",
+        "nameTr": "Yapay Bozukluk (Kendine Yüklenen / Münchausen Sendromu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 420,
+        "diagnosisId": "factitious_another",
+        "nameTr": "Yapay Bozukluk (Başkasına Yüklenen / Münchausen by Proxy)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 22,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b22.json",
+    "items": [
+      {
+        "slot": 421,
+        "diagnosisId": "psychological_factors_affecting_medical",
+        "nameTr": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenler",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 422,
+        "diagnosisId": "anorexia_nervosa",
+        "nameTr": "Anoreksiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 423,
+        "diagnosisId": "bulimia_nervosa",
+        "nameTr": "Bulimiya Nervoza",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 424,
+        "diagnosisId": "binge_eating",
+        "nameTr": "Tıkınırcasına Yeme Bozukluğu (BED)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 425,
+        "diagnosisId": "arfid",
+        "nameTr": "Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 426,
+        "diagnosisId": "pica",
+        "nameTr": "Pika (Yenilmeyen Maddeleri Yeme: Toprak, Kireç, Kömür)",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 427,
+        "diagnosisId": "rumination_disorder",
+        "nameTr": "Geri Çıkarma (Geviş Getirme / Ruminasyon) Bozukluğu",
+        "category": "EATING",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 428,
+        "diagnosisId": "enuresis",
+        "nameTr": "Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 429,
+        "diagnosisId": "encopresis",
+        "nameTr": "Enkoprezis (İstemsiz Kaka Kaçırma)",
+        "category": "ELIMINATION",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 430,
+        "diagnosisId": "insomnia_disorder",
+        "nameTr": "Uykusuzluk Bozukluğu (Kronik İnsomni)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 431,
+        "diagnosisId": "hypersomnolence",
+        "nameTr": "Aşırı Uykululuk Bozukluğu (Hipersomnolans)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 432,
+        "diagnosisId": "narcolepsy",
+        "nameTr": "Narkolepsi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 433,
+        "diagnosisId": "obstructive_sleep_apnea",
+        "nameTr": "Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 434,
+        "diagnosisId": "central_sleep_apnea",
+        "nameTr": "Santral Uyku Apnesi",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 435,
+        "diagnosisId": "circadian_rhythm_sleep_wake",
+        "nameTr": "Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 436,
+        "diagnosisId": "nightmare_disorder",
+        "nameTr": "Kabus Bozukluğu (Nightmare Disorder)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 437,
+        "diagnosisId": "rem_sleep_behavior_disorder",
+        "nameTr": "REM Uykusu Davranış Bozukluğu (RBD)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 438,
+        "diagnosisId": "restless_legs_syndrome",
+        "nameTr": "Huzursuz Bacaklar Sendromu (Willis-Ekbom)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 439,
+        "diagnosisId": "erectile_disorder",
+        "nameTr": "Sertleşme Bozukluğu (Erektil Bozukluk)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 440,
+        "diagnosisId": "premature_ejaculation",
+        "nameTr": "Erken Boşalma (Prematür Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 23,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b23.json",
+    "items": [
+      {
+        "slot": 441,
+        "diagnosisId": "delayed_ejaculation",
+        "nameTr": "Geç Boşalma (Gecikmiş Ejakülasyon)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 442,
+        "diagnosisId": "female_orgasmic_disorder",
+        "nameTr": "Kadında Orgazm Bozukluğu (Anorgazmi)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 443,
+        "diagnosisId": "genito_pelvic_pain",
+        "nameTr": "Genito-Pelvik Ağrı/Penetrasyon Bozukluğu (Vajinismus / Disparoni)",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 444,
+        "diagnosisId": "odd",
+        "nameTr": "Karşıt Olma Karşı Gelme Bozukluğu (KOKGB / ODD)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 445,
+        "diagnosisId": "intermittent_explosive",
+        "nameTr": "Aralıklı Patlayıcı Bozukluk (IED)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 446,
+        "diagnosisId": "conduct_disorder",
+        "nameTr": "Davranım Bozukluğu",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 447,
+        "diagnosisId": "pyromania",
+        "nameTr": "Piromani (Yangın Çıkarma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 448,
+        "diagnosisId": "kleptomania",
+        "nameTr": "Kleptomani (Çalma Hastalığı)",
+        "category": "IMPULSE",
+        "course": "IMPULSE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 449,
+        "diagnosisId": "alcohol_use_disorder",
+        "nameTr": "Alkol Kullanım Bozukluğu (Alkolizm)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 450,
+        "diagnosisId": "alcohol_withdrawal_delirium",
+        "nameTr": "Alkol Yoksunluğu Deliryumu (Delirium Tremens)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 451,
+        "diagnosisId": "sedative_withdrawal",
+        "nameTr": "Sedatif/Benzodiazepin Yoksunluğu",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 452,
+        "diagnosisId": "opioid_withdrawal",
+        "nameTr": "Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 453,
+        "diagnosisId": "gambling_disorder",
+        "nameTr": "Kumar Oynama Bozukluğu (Patolojik Kumar)",
+        "category": "SUBSTANCE",
+        "course": "SUBSTANCE",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 454,
+        "diagnosisId": "delirium",
+        "nameTr": "Deliryum (Akut Bilinç Bulanıklığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 455,
+        "diagnosisId": "major_neurocognitive_alzheimer",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 456,
+        "diagnosisId": "mild_neurocognitive_alzheimer",
+        "nameTr": "Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 457,
+        "diagnosisId": "major_neurocognitive_vascular",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 458,
+        "diagnosisId": "major_neurocognitive_frontotemporal",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Frontotemporal / Pick Hastalığı)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 459,
+        "diagnosisId": "major_neurocognitive_lewy_body",
+        "nameTr": "Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 460,
+        "diagnosisId": "wernicke_korsakoff_syndrome",
+        "nameTr": "Alkolün Yol Açtığı Majör Nörobilişsel Bozukluk (Amnestik-Konfabulatuvar Tip / Korsakoff)",
+        "category": "NEUROCOGNITIVE",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 24,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b24.json",
+    "items": [
+      {
+        "slot": 461,
+        "diagnosisId": "paranoid_pd",
+        "nameTr": "Paranoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 462,
+        "diagnosisId": "schizoid_pd",
+        "nameTr": "Şizoid Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 463,
+        "diagnosisId": "schizotypal_pd",
+        "nameTr": "Şizotipal Kişilik Bozukluğu",
+        "category": "PERSONALITY_A",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 464,
+        "diagnosisId": "antisocial_pd",
+        "nameTr": "Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati)",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 465,
+        "diagnosisId": "borderline_pd",
+        "nameTr": "Sınırda (Borderline) Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 466,
+        "diagnosisId": "histrionic_pd",
+        "nameTr": "Histriyonik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 467,
+        "diagnosisId": "narcissistic_pd",
+        "nameTr": "Narsisistik Kişilik Bozukluğu",
+        "category": "PERSONALITY_B",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 468,
+        "diagnosisId": "ocpd",
+        "nameTr": "Obsesif-Kompulsif Kişilik Bozukluğu (OKKB / OCPD)",
+        "category": "PERSONALITY_C",
+        "course": "FORENSIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 469,
+        "diagnosisId": "bipolar_1",
+        "nameTr": "Bipolar I Bozukluğu",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 470,
+        "diagnosisId": "social_anxiety",
+        "nameTr": "Toplumsal Kaygı Bozukluğu (Sosyal Anksiyete / Sosyal Fobi)",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 471,
+        "diagnosisId": "bdd",
+        "nameTr": "Beden Algısı Bozukluğu (Vücut Dismorfik Bozukluğu / BDD)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 472,
+        "diagnosisId": "conversion_disorder",
+        "nameTr": "Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu)",
+        "category": "SOMATIC",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 473,
+        "diagnosisId": "nrem_sleep_arousal",
+        "nameTr": "NREM Uykusundan Uyanma Bozukluğu",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 474,
+        "diagnosisId": "specific_phobia",
+        "nameTr": "Özgül Fobi",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 475,
+        "diagnosisId": "ocd",
+        "nameTr": "Obsesif-Kompulsif Bozukluk (OKB)",
+        "category": "OCD_RELATED",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 476,
+        "diagnosisId": "mdd",
+        "nameTr": "Majör Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 477,
+        "diagnosisId": "delusional_disorder",
+        "nameTr": "Sanrılı Bozukluk (Hezeyanlı Bozukluk)",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 478,
+        "diagnosisId": "intellectual_disability_profound",
+        "nameTr": "Zihinsel Yetiyitimi (İleri Derecede Ağır)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 479,
+        "diagnosisId": "intellectual_disability_mild",
+        "nameTr": "Zihinsel Yetiyitimi (Hafif Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 480,
+        "diagnosisId": "intellectual_disability_moderate",
+        "nameTr": "Zihinsel Yetiyitimi (Orta Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  },
+  {
+    "batch": 25,
+    "file": "tools/vaka_ekle/taslaklar/2026-11-22_b25.json",
+    "items": [
+      {
+        "slot": 481,
+        "diagnosisId": "intellectual_disability_severe",
+        "nameTr": "Zihinsel Yetiyitimi (Ağır Düzey)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 482,
+        "diagnosisId": "global_developmental_delay",
+        "nameTr": "Küresel Gelişimsel Gecikme",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 483,
+        "diagnosisId": "language_disorder",
+        "nameTr": "Dil Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 484,
+        "diagnosisId": "speech_sound_disorder",
+        "nameTr": "Konuşma Sesi Bozukluğu (Fonolojik Bozukluk)",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Kolay"
+      },
+      {
+        "slot": 485,
+        "diagnosisId": "social_communication_disorder",
+        "nameTr": "Toplumsal (Pragmatik) İletişim Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 486,
+        "diagnosisId": "developmental_coordination_disorder",
+        "nameTr": "Gelişimsel Eşgüdüm (Koordinasyon) Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 487,
+        "diagnosisId": "stereotypic_movement_disorder",
+        "nameTr": "Stereotipik Hareket Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 488,
+        "diagnosisId": "chronic_motor_vocal_tic",
+        "nameTr": "Süregen (Kronik) Motor ya da Vokal Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 489,
+        "diagnosisId": "provisional_tic_disorder",
+        "nameTr": "Geçici Tik Bozukluğu",
+        "category": "NEURODEV",
+        "course": "CHILD",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 490,
+        "diagnosisId": "substance_induced_psychotic",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 491,
+        "diagnosisId": "psychotic_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Psikotik Bozukluk",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 492,
+        "diagnosisId": "catatonia_associated",
+        "nameTr": "Başka Bir Ruhsal Bozuklukla İlişkili Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 493,
+        "diagnosisId": "catatonia_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Katatoni",
+        "category": "PSYCHOTIC",
+        "course": "ADULT",
+        "difficulty": "Orta"
+      },
+      {
+        "slot": 494,
+        "diagnosisId": "substance_induced_bipolar",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 495,
+        "diagnosisId": "bipolar_due_to_medical",
+        "nameTr": "Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk",
+        "category": "BIPOLAR",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 496,
+        "diagnosisId": "substance_induced_depressive",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Depresif Bozukluk",
+        "category": "MOOD",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 497,
+        "diagnosisId": "substance_induced_anxiety",
+        "nameTr": "Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu",
+        "category": "ANXIETY",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 498,
+        "diagnosisId": "sleep_related_hypoventilation",
+        "nameTr": "Uykuda Hipoventilasyon (Ondine Laneti Dahil)",
+        "category": "SLEEP",
+        "course": "NEURO_SOMATIC",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 499,
+        "diagnosisId": "male_hypoactive_desire",
+        "nameTr": "Erkekte Düşük Cinsel İstek Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "Zor"
+      },
+      {
+        "slot": 500,
+        "diagnosisId": "female_sexual_interest_arousal",
+        "nameTr": "Kadında Cinsel İlgi/Uyarılma Bozukluğu",
+        "category": "SEXUAL",
+        "course": "ADULT",
+        "difficulty": "İleri Düzey"
+      }
+    ]
+  }
+]

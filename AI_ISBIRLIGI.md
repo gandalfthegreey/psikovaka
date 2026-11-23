@@ -131,6 +131,25 @@ kim neyi değiştirdi, şu an kim hangi dosyada çalışıyor, sırada ne var.
 
 ## Değişiklik Günlüğü (en yeni en üstte)
 
+### 2026-11-23 21:46 — Gemini — Mobil Optimizasyon (Tırmanış, Ana Sayfa, Online Hub, Kütüphane)
+- **Dosyalar:** `js/tirmanis.js`, `css/tirmanis.css`, `css/anasayfa.css`, `css/kutuphane.css`, `css/style.css`, `PsikoVaka_Tam_Surum.html`.
+- **Ne değişti:**
+  1. **Tırmanış (≤640px):** Sahne `.tr-stage-shell` ile sarıldı; masaüstünde konuşma balonu odanın içinde danışanın üstünde yüzerken, telefonda oda temiz bir 16:10 çerçevede kalıyor ve konuşma balonu hemen altına yukarı bakan kuyrukla yerleşiyor (sıfır çakışma). İpucu sekmeleri 28×28px, tahmin girişi 16px (iOS zoom engeli), düğmeler tam genişlikte dokunma dostu yapıldı.
+  2. **Ana Sayfa (≤599px):** `Tanı | Terapi | İlaç | Kombo` çubuğu 4 eşit sütunlu simetrik ızgaraya alındı; Günün Vakası klasörü ve sağ şerit kartları telefon genişliğine sıkılaştırıldı.
+  3. **Kütüphane & Online Hub & Alt Sekme Çubuğu (≤767px):** Kütüphane sol boşluk ve sekmeleri dar ekrana uyarlandı, arama/oda kodu girişleri 16px yapıldı, alt sekme çubuğunun son düğmeleri örtmemesi için `.app-main` alt boşluğu artırıldı.
+- **Neden:** Emre'nin bildirimi (Tırmanış ve bazı ekranların telefonda optimize olmaması).
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `node build_portable_single_file.js` 778 vaka doğrulandı, Hata: 0.
+- **Açık kalan / dikkat:** Yok.
+
+### 2026-11-23 21:42 — Gemini — Yeni vakalar: 500 vaka (case-291 – case-790) + Tırmanış Tanı Detay Düğmesi
+- **Dosyalar:** `js/cases.js`, `js/tirmanis.js`, `css/tirmanis.css`, `PsikoVaka_Tam_Surum.html`, `tools/vaka_ekle/taslaklar/2026-11-23_500.json` (ve 25 parti dosyası `2026-11-22_b01.json`–`b25.json`).
+- **Ne değişti:**
+  1. **500 yeni klinik vaka (`case-291` – `case-790`):** 159 kullanılabilir DSM-5-TR tanısına dengeli dağıtılmış 500 yeni vaka (`dsmdle.com` kademeli 6 ipucu standardı, sıfır tanı sızıntısı, `symptomHighlights`, `miniQuiz`, `explanation`) `tools/vaka_ekle/ekle.js` ile eklendi. Toplam aktif vaka sayısı **278 → 778** oldu.
+  2. **Tırmanış sonuç kartına `📖 Tanıyı İncele` düğmesi (`js/tirmanis.js`, `css/tirmanis.css`):** Doğru veya yanlış tahmin sonrasında doğrudan `#/kutuphane/tani/<diagnosisId>` detay sayfasına giden düğme eklendi.
+- **Neden:** Emre'nin isteği (Tırmanış'ta tanı detayına gitme düğmesi + 500 yeni vaka üretimi).
+- **Doğrulama:** `node --check js/tirmanis.js` temiz; `tools/vaka_ekle/dogrula.js` 500 vaka / 0 hata; `tools/vaka_ekle/ekle.js` + tam proje doğrulama ve derleme 0 hata (778 aktif vaka).
+- **Açık kalan / dikkat:** İçerik yapay zekâ tarafından yazıldı; Emre/uzman klinik doğruluk açısından birkaç örneği gözden geçirmeli. Yayın (GitHub push + cevap anahtarı) Emre'nin onayını bekliyor.
+
 ### 2026-11-22 21:00 — Gemini — Tırmanış Oda-İçi Canlı Seans Deneyimi
 - **Dosyalar:** `js/tirmanis.js`, `css/tirmanis.css`, `PsikoVaka_Tam_Surum.html`.
 - **Ne değişti:**

@@ -1,0 +1,1462 @@
+[
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "male_hypoactive_desire",
+    "category": "SEXUAL",
+    "patientSummary": "38 yaşında, erkek, yazılım geliştirici",
+    "clues": [
+      "38 yaşındaki yazılım geliştirici, son aylarda eşiyle arasına mesafe girdiğini, kendini ilişkide 'yetersiz ve suçlu' hissettiğini ve evliliğinin zarar görmesinden endişelendiğini belirterek polikliniğe başvuruyor.",
+      "Yakınmalarının yaklaşık dokuz ay önce başladığını, iş temposu normalleşmesine ve eşiyle sıcak bir iletişimleri olmasına karşın fiziksel yakınlık başlatma arzusunun giderek söndüğünü anlatıyor.",
+      "Sabah ereksiyonlarının korunduğunu, nadiren gerçekleşen birlikteliklerde sertleşme ya da boşalma güçlüğü yaşamadığını; ancak zihninde neredeyse hiç erotik düşünce ya da fantezi oluşmadığını belirtiyor.",
+      "Son altı ayda depresif çökkünlük, anhedoni ya da yaygın kaygı öyküsü yok; düzenli kullandığı bir ilaç, alkol ya da madde bulunmuyor. Total ve serbest testosteron, prolaktin, TSH ve açlık glukozu normal sınırlarda.",
+      "Ruhsal Durum Muayenesinde: Giyimi özenli, göz teması doğal, duygudurumu ötimik ve duygulanımı uygun. Düşünce süreci düzenli, algı bozukluğu yok; yaşadığı durumun kendisinde belirgin sıkıntı yarattığını içgörüyle ifade ediyor.",
+      "Yaklaşık dokuz aydır hem eşiyle hem de tek başına herhangi bir yakınlık ya da fantezi kurma arzusunun neredeyse tamamen yok olması, yaş ve kültürel bağlamla açıklanamamakta ve belirgin kişisel sıkıntıya yol açmaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "zihninde neredeyse hiç erotik düşünce ya da fantezi oluşmadığını",
+        "dsmMatch": "Kriter A: Erotik düşünce/fantezi ve etkinlik arzusunda süregen yetersizlik"
+      },
+      {
+        "clueIndex": 3,
+        "text": "Total ve serbest testosteron, prolaktin, TSH ve açlık glukozu normal sınırlarda.",
+        "dsmMatch": "Kriter D: Tıbbi durum ve ilaç/madde etkisinin dışlanması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Yaklaşık dokuz aydır",
+        "dsmMatch": "Kriter B: En az yaklaşık 6 ay sürme ölçütü"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Duyusal Odaklanma (Sensate Focus) ve Bilişsel-Davranışçı Cinsel Terapi",
+      "therapyDetails": "Performans baskısını azaltan aşamalı duyusal odaklanma egzersizleri, fantezi ve uyarılma farkındalığı çalışmaları, çift iletişiminin güçlendirilmesi ve işlevsel olmayan inançların yeniden yapılandırılması uygulanır.",
+      "pharmacologyNote": "Hipogonadizm saptanmadıkça testosteron replasmanı önerilmez; eşlik eden depresyon veya ilaç yan etkisi yoksa psikoterapi birinci basamaktır, seçilmiş olgularda bupropion değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloda eşler arasındaki istek farkı ile gerçek tanı arasındaki ayrımı belirleyen temel klinik ölçüt hangisidir?",
+      "options": [
+        "Kişinin kendi yaşı ve bağlamı içinde süregen arzu/fantezi yetersizliği ile belirgin kişisel sıkıntı yaşaması",
+        "Partnerin haftada en az üç kez yakınlık talep etmesine karşın hastanın reddetmesi",
+        "Sabah ereksiyonlarının tamamen kaybolmuş olması",
+        "Yakınmaların en az iki yıldır aralıksız sürmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "DSM-5-TR'ye göre yalnızca çiftler arasındaki arzu uyumsuzluğu tanı için yeterli değildir; klinisyen yaş ve sosyokültürel bağlamı değerlendirerek süregen arzu/fantezi yetersizliği ve kişide belirgin sıkıntı varlığını (en az ~6 ay) doğrulamalıdır."
+    },
+    "differentialDiagnosis": "• Sertleşme Bozukluğu (Erektil Bozukluk): Birliktelik sırasında sertleşme sağlama veya sürdürme güçlüğü esastır; burada sertleşme normaldir.\n• Majör Depresif Bozukluk: Yaygın çökkünlük ve genel ilgi kaybı görülür; hastanın duygudurumu ötimik ve diğer alanlardaki ilgisi tamdır.\n• Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu: SSRI, antiandrojen veya madde kullanımıyla zamansal ilişki bulunur; burada ilaç ve madde kullanımı yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Erkekte erotik düşünce/fantezi ve etkinlik arzusunda süregen yetersizlik + En az yaklaşık 6 ay süre + Belirgin sıkıntı + Başka ruhsal bozukluk, ağır ilişki sorunu, ilaç/madde veya tıbbi durumla açıklanamama.",
+    "therapyId": "sensate_focus",
+    "explanation": {
+      "whyThis": [
+        "Dokuz aydır süren erotik düşünce, fantezi ve yakınlık başlatma arzusundaki belirgin yetersizlik Kriter A ve Kriter B'yi karşılar.",
+        "Ereksiyon ve boşalma işlevlerinin korunmuş olması, hormon panelinin normal gelmesi ve depresyon/ilaç kullanımının bulunmaması ikincil nedenleri dışlar.",
+        "Hastanın bu durum nedeniyle belirgin sıkıntı ve suçluluk yaşaması Kriter C'yi doğrular."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "erectile_disorder",
+          "reason": "Sabah ereksiyonları ve birliktelik sırasındaki sertleşme tamamen korunmuştur."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Duygudurum ötimiktir ve yaygın anhedoni ya da depresif belirtiler yoktur."
+        },
+        {
+          "diagnosisId": "substance_induced_sexual_dysfunction",
+          "reason": "Düzenli ilaç, alkol ya da madde kullanımı öyküsü bulunmamaktadır."
+        }
+      ],
+      "teachingPoint": "Erkekte düşük arzu tanısı konmadan önce hipogonadizm, hiperprolaktinemi, depresyon ve ilaç yan etkileri dışlanmalı; salt çiftler arası istek farkıyla yetinilmemelidir."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "female_sexual_interest_arousal",
+    "category": "SEXUAL",
+    "patientSummary": "31 yaşında, kadın, mimar",
+    "clues": [
+      "31 yaşındaki mimar, son dönemde eşiyle yakınlaşmaktan kaçındığını, bunun evliliğinde gerginlik yarattığını ve 'eskisi gibi hissedemediği için' çok üzüldüğünü söyleyerek başvuruyor.",
+      "Yakınmalarının yaklaşık sekiz ay önce başladığını, eşiyle sevgi dolu ve destekleyici bir ilişkileri olmasına karşın yakınlaşma tekliflerine neredeyse her seferinde kapalı kaldığını ifade ediyor.",
+      "Ayrıntılı öyküde erotik düşünce ve fantezilerinin belirgin biçimde azaldığını, birliktelik sırasında hem zihinsel heyecan hem de bedensel haz ile genital duyumlarda belirgin körelme yaşadığını, ancak ağrı ya da kasılma olmadığını aktarıyor.",
+      "Adet döngüsü düzenli; tiroid, prolaktin ve hemogram değerleri normal. Depresyon veya anksiyete öyküsü yok; doğum kontrol hapı dahil herhangi bir ilaç ya da madde kullanmıyor.",
+      "Ruhsal Durum Muayenesinde: İletişime açık, duygudurumu ötimik, duygulanımı canlı ve düşünce içeriği olağan. Kendini aseksüel olarak tanımlamıyor; önceki yıllardaki canlı arzusunun kaybolmasından belirgin sıkıntı duyuyor.",
+      "Sekiz aydır hem kendiliğinden hem de uyarana yanıt olarak gelişen arzu, fantezi, başlatma, heyecan ve bedensel duyumların tümünde (altı alandan beşinde) belirgin azalma sürüyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "erotik düşünce ve fantezilerinin belirgin biçimde azaldığını, birliktelik sırasında hem zihinsel heyecan hem de bedensel haz ile genital duyumlarda belirgin körelme",
+        "dsmMatch": "Kriter A: Altı belirtiden en az üçünde belirgin azalma/yokluk"
+      },
+      {
+        "clueIndex": 3,
+        "text": "tiroid, prolaktin ve hemogram değerleri normal. Depresyon veya anksiyete öyküsü yok",
+        "dsmMatch": "Kriter D: Tıbbi durum ve başka ruhsal bozukluğun dışlanması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Sekiz aydır hem kendiliğinden hem de uyarana yanıt olarak gelişen arzu",
+        "dsmMatch": "Kriter B: En az yaklaşık 6 ay sürme ve yanıtsal isteğin de azalması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Duyusal Odaklanma (Sensate Focus), Bilinçli Farkındalık Temelli Cinsel Terapi ve BDT",
+      "therapyDetails": "Bedensel duyumlara yargısız odaklanmayı artıran bilinçli farkındalık uygulamaları, aşamalı duyusal odaklanma ödevleri, eş iletişimi ve bilişsel yeniden yapılandırma temel yaklaşımlardır.",
+      "pharmacologyNote": "Psikoterapi birinci basamaktır; eşlik eden tıbbi ya da hormonal neden yoksa ilaç öncelikli değildir. Seçilmiş premenopozal olgularda flibanserin veya bremelanotid tartışılabilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'de kadında arzu ve uyarılma güçlüğü tanısı için Kriter A kapsamında en az kaç belirti alanı ve ne kadar süre gereklidir?",
+      "options": [
+        "4 belirtiden en az 2'si ve en az 3 ay süre",
+        "6 belirtiden en az 3'ü ve en az yaklaşık 6 ay süre",
+        "6 belirtiden tamamı ve en az 12 ay süre",
+        "3 belirtiden en az 1'i ve en az 1 ay süre"
+      ],
+      "correctIndex": 1,
+      "explanation": "DSM-5-TR'de kadında istek ve uyarılma tek bir tanıda birleştirilmiştir; altı belirtiden en az üçünün yaklaşık 6 ay boyunca sürmesi ve belirgin sıkıntıya yol açması gerekir."
+    },
+    "differentialDiagnosis": "• Genito-Pelvik Ağrı/Penetrasyon Bozukluğu (Vajinismus / Disparoni): Ağrı, kasılma veya penetrasyon korkusu ön plandadır; hastada ağrı ya da kasılma yoktur.\n• Kadında Orgazm Bozukluğu (Anorgazmi): İstek ve uyarılma normalken yalnızca orgazm gecikir veya oluşmaz; burada arzu ve uyarılma aşaması bozulmuştur.\n• Majör Depresif Bozukluk: Çökkün duygudurum ve genel anhedoni eşlik eder; hastanın duygudurumu ötimiktir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Kadında arzu/uyarılmaya ilişkin 6 belirtiden en az 3'ünde belirgin azalma + En az ~6 ay süre + Belirgin sıkıntı + Başka ruhsal bozukluk, ağır ilişki sıkıntısı, ilaç/madde veya tıbbi durumla açıklanamama.",
+    "therapyId": "sensate_focus",
+    "explanation": {
+      "whyThis": [
+        "Fantezi azalması, başlatmama/kapalı olma, heyecan-haz kaybı ve genital duyum körelmesi altı Kriter A alanından en az üçünü fazlasıyla karşılar.",
+        "Yakınmaların sekiz aydır sürmesi, belirgin sıkıntı oluşturması ve kişinin kendini aseksüel olarak tanımlamaması tanıyı destekler.",
+        "Ağrı olmaması, hormonal tetkiklerin normal olması ve depresyon/ilaç etkisinin dışlanması diğer nedenleri eler."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "genito_pelvic_pain",
+          "reason": "Penetrasyon sırasında ağrı, pelvik taban kasılması veya korku bildirilmemektedir."
+        },
+        {
+          "diagnosisId": "female_orgasmic_disorder",
+          "reason": "Sorun yalnızca orgazm fazıyla sınırlı olmayıp baştan itibaren ilgi, fantezi ve uyarılma fazını kapsamaktadır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Duygudurum ötimiktir ve depresif belirtiler mevcut değildir."
+        }
+      ],
+      "teachingPoint": "Kadınlarda arzu ve uyarılma birbiriyle iç içe değerlendirilir; yanıtsal isteğin de azalması, en az 6 ay süre ve aseksüel kimlikten ayrım tanıda belirleyicidir."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "substance_induced_sexual_dysfunction",
+    "category": "SEXUAL",
+    "patientSummary": "35 yaşında, kadın, eczacı",
+    "clues": [
+      "35 yaşındaki eczacı, son iki aydır eşiyle yakınlaşmada belirgin bir tatminsizlik ve bedensel duyumlarda 'uyuşmuşluk' hissettiğini, bu durumun kendisini çok kaygılandırdığını söyleyerek kontrole geliyor.",
+      "Evliliğinin mutlu olduğunu, daha önce benzer hiçbir yakınma yaşamadığını; ancak son dönemde hem yakınlaşma arzusunun düştüğünü hem de orgazma ulaşmanın neredeyse imkânsız hâle geldiğini anlatıyor.",
+      "Öyküsünde üç ay önce yaygın kaygı yakınmaları nedeniyle başlanan ve dört hafta sonra dozu 40 mg/güne çıkarılan paroksetin tedavisi bulunuyor; kaygı belirtileri belirgin biçimde düzelmiş.",
+      "Jinekolojik muayenesi, tiroid fonksiyonları, prolaktin düzeyi ve kan sayımı normal. Depresif duygudurumu yok; alkol veya yasa dışı madde kullanmıyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirlikli, duygudurumu ötimik ve kaygısı belirgin azalmış. Düşünce süreci düzenli, algı bozukluğu yok; yaşadığı yakınmanın tedavi değişikliğinden hemen sonra başladığını fark ediyor.",
+      "Yakınmaların paroksetin dozunun 40 mg/güne yükseltilmesinden iki hafta sonra ortaya çıktığı, doz kısa süreli azaltıldığında hafiflediği ve yükseltilince yeniden şiddetlendiği doğrulanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "hem yakınlaşma arzusunun düştüğünü hem de orgazma ulaşmanın neredeyse imkânsız hâle geldiğini",
+        "dsmMatch": "Kriter A: Klinik açıdan belirgin cinsel işlev bozukluğu tablosu"
+      },
+      {
+        "clueIndex": 2,
+        "text": "üç ay önce yaygın kaygı yakınmaları nedeniyle başlanan ve dört hafta sonra dozu 40 mg/güne çıkarılan paroksetin",
+        "dsmMatch": "Kriter B: Sorumlu ilaca maruziyet ve farmakolojik etki mekanizması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "paroksetin dozunun 40 mg/güne yükseltilmesinden iki hafta sonra ortaya çıktığı, doz kısa süreli azaltıldığında hafiflediği",
+        "dsmMatch": "Kriter B1: İlaç başlangıcı/doz artışıyla açık zamansal ilişki"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Psikoeğitim, İlaç Rejiminin Düzenlenmesi ve Destekleyici Cinsel Terapi",
+      "therapyDetails": "Hastaya sorunun geçici ve ilaca bağlı olduğu açıklanır; kaygıyı artırmadan çift iletişimi desteklenir ve gerekirse duyusal odaklanma teknikleriyle performans kaygısı azaltılır.",
+      "pharmacologyNote": "Hekim kontrolünde SSRI dozunun azaltılması, daha düşük cinsel yan etki profiline sahip bir ajana (ör. bupropion, vortioksetin) geçiş veya ekleme stratejisi değerlendirilir."
+    },
+    "miniQuiz": {
+      "question": "Aşağıdaki antidepresanlardan hangisinin serotonerjik kaynaklı cinsel yan etki riski en düşüktür ve ekleme/geçiş seçeneği olarak sık kullanılır?",
+      "options": [
+        "Paroksetin",
+        "Klomipramin",
+        "Bupropion",
+        "Venlafaksin"
+      ],
+      "correctIndex": 2,
+      "explanation": "Bupropion dopamin-noradrenalin geri alım inhibitörüdür ve serotonerjik 5-HT2A uyarımı yapmadığı için cinsel yan etki riski en düşük antidepresanlardandır; paroksetin ise SSRI'lar içinde riski en yüksek olanlardandır."
+    },
+    "differentialDiagnosis": "• Kadında Orgazm Bozukluğu (Anorgazmi): İlaçla zamansal ilişki olmadan en az 6 ay sürer; burada yakınma paroksetin doz artışıyla başlamıştır.\n• Kadında Cinsel İlgi/Uyarılma Bozukluğu: Birincil bir bozukluktur ve ilaç/madde etkisi dışlandığında konur.\n• Yaygın Anksiyete Bozukluğu (YAB): Hastanın kaygı belirtileri tedaviyle belirgin düzelmiş olmasına karşın cinsel yakınmalar ortaya çıkmıştır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Klinik açıdan belirgin cinsel işlev sorunu + İlaç/madde kullanımı, doz artışı veya kesilmesiyle doğrudan zamansal ilişki + Maddenin bu tabloyu oluşturabilmesi + Başka bir bozuklukla daha iyi açıklanamama.",
+    "therapyId": "sensate_focus",
+    "explanation": {
+      "whyThis": [
+        "Daha önce hiçbir yakınması olmayan hastada arzu azalması ve anorgazmi, paroksetin dozunun 40 mg/güne çıkarılmasından hemen sonra başlamıştır.",
+        "Doz azaltıldığında belirtilerin hafiflemesi ve artışta yeniden şiddetlenmesi nedensel zamansal ilişkiyi kanıtlar.",
+        "Kaygı belirtilerinin düzelmiş olması ve tıbbi tetkiklerin normal gelmesi diğer açıklamaları dışlar."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "female_orgasmic_disorder",
+          "reason": "Birincil bir bozukluk değildir; belirtiler doğrudan serotonerjik ilaç doz artışıyla başlamış ve henüz 2 aydır sürmektedir."
+        },
+        {
+          "diagnosisId": "female_sexual_interest_arousal",
+          "reason": "İlaç etkisinin dışlanması ölçütü karşılanmadığı için birincil tanı konamaz."
+        },
+        {
+          "diagnosisId": "gad",
+          "reason": "Yaygın kaygı belirtileri tedaviyle belirgin gerilemişken yakınmalar ortaya çıkmıştır."
+        }
+      ],
+      "teachingPoint": "Paroksetin gibi yüksek serotonerjik SSRI'lara başlama veya doz artışı sonrası gelişen arzu kaybı ve anorgazmi, birincil bozukluktan zamansal ilişkiyle ayrılır."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "SUBSTANCE",
+    "diagnosisId": "alcohol_intoxication",
+    "category": "SUBSTANCE",
+    "patientSummary": "29 yaşında, erkek, satış temsilcisi",
+    "clues": [
+      "29 yaşındaki satış temsilcisi, gece yarısı bir restoran çıkışında tartıştığı görevliler ve arkadaşları tarafından acil servise getiriliyor; yüksek sesle konuşuyor ve zaman zaman dengesini kaybediyor.",
+      "Arkadaşları, iş yemeğinde akşam 20.00'den itibaren art arda çok sayıda kadeh rakı tükettiğini, son iki saatte gereksiz yere kavgacı tutumlar sergilediğini ve merdivenlerden inerken tökezlediğini aktarıyor.",
+      "Fizik muayenede nefesinden yoğun etanol kokusu geliyor; konuşması peltek, tandem yürüyüşü bozuk, bakışta yatay nistagmus mevcut. Kan şekeri 98 mg/dL, oksijen satürasyonu %98, kafa travması bulgusu yok.",
+      "Kan etanol düzeyi 240 mg/dL ölçülüyor; idrar toksikoloji panelinde benzodiazepin, opioid, uyarıcı ve esrar metabolitleri negatif. Yakınlarına göre yalnızca sosyal ortamlarda nadir içiyor, kronik kullanım öyküsü yok.",
+      "Ruhsal Durum Muayenesinde: Uyanık ancak dikkati kolay dağılıyor, duygulanımı labil (kahkahadan öfkeye hızla geçiyor), yargılaması bozulmuş. Konuşma hızı artmış ve peltek; varsanı ya da sanrı saptanmıyor.",
+      "Yakın zamandaki yoğun etanol alımının hemen ardından gelişen davranışsal uyumsuzluk, peltek konuşma, koordinasyon bozukluğu, dengesiz yürüyüş ve nistagmus tablosu birkaç saatlik gözlemde kan düzeyi düştükçe geriliyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "art arda çok sayıda kadeh rakı tükettiğini, son iki saatte gereksiz yere kavgacı tutumlar sergilediğini",
+        "dsmMatch": "Kriter A-B: Yakın zamanda alım ve uygunsuz davranışsal değişiklik"
+      },
+      {
+        "clueIndex": 2,
+        "text": "konuşması peltek, tandem yürüyüşü bozuk, bakışta yatay nistagmus mevcut",
+        "dsmMatch": "Kriter C: Peltek konuşma, inkoordinasyon, dengesiz yürüyüş, nistagmus"
+      },
+      {
+        "clueIndex": 3,
+        "text": "Kan etanol düzeyi 240 mg/dL ölçülüyor",
+        "dsmMatch": "Kriter A/D: Laboratuvar doğrulaması ve başka madde/hipogliseminin dışlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Acil Tıbbi Stabilizasyon, Hava Yolu Güvenliği ve Gözlem",
+      "therapyDetails": "Solunum ve bilinç düzeyi yakından izlenir, aspirasyon ve düşme önlemleri alınır, sıvı-elektrolit dengesi sağlanır; ayılma sonrası kısa motivasyonel bilgilendirme yapılır.",
+      "pharmacologyNote": "Gerekli olgularda Wernicke ensefalopatisini önlemek için glukoz öncesi parenteral tiamin uygulanır; sedatiflerden solunum depresyonu riski nedeniyle kaçınılır."
+    },
+    "miniQuiz": {
+      "question": "Acil serviste akut etanol alımıyla gelen ve bilinç değişikliği gösteren bir hastada, dekstroz verilmeden önce ilk uygulanması gereken destekleyici ajan hangisidir?",
+      "options": [
+        "Flumazenil",
+        "Nalokson",
+        "Haloperidol",
+        "Parenteral tiamin (B1 vitamini)"
+      ],
+      "correctIndex": 3,
+      "explanation": "Etanol kullanıcılarında tiamin depoları tükenmiş olabileceğinden, glukoz uygulaması öncesi parenteral tiamin verilmesi akut Wernicke ensefalopatisini tetikleme riskini önler."
+    },
+    "differentialDiagnosis": "• Alkol Kullanım Bozukluğu (Alkolizm): 12 aylık sorunlu kullanım örüntüsü gerektirir; burada yalnızca akut bir olay vardır.\n• Deliryum (Akut Bilinç Bulanıklığı): Genel tıbbi nedene bağlı dalgalanan bilinç ve dikkat bozukluğu görülür; burada hipoglisemi ve travma dışlanmıştır.\n• Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin): İdrar toksikolojisinde benzodiazepin negatiftir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yakın zamanda etanol alımı + Uygunsuz davranışsal/psikolojik değişiklikler + Peltek konuşma, inkoordinasyon, dengesiz yürüyüş, nistagmus, dikkat/bellek bozulması veya stupor/komadan en az biri + Başka tıbbi durumla açıklanamama.",
+    "therapyId": "medical_stabilization",
+    "explanation": {
+      "whyThis": [
+        "Yakın saatlerde yüksek miktarda etanol alımının ardından kavgacılık, duygulanım labilitesi ve yargılama bozukluğu gelişmiştir.",
+        "Peltek konuşma, yürüyüş dengesizliği ve yatay nistagmus Kriter C fiziksel bulgularını açıkça karşılar.",
+        "Hipoglisemi, kafa travması ve diğer maddelerin dışlanması ile 240 mg/dL kan etanol düzeyi tanıyı kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "alcohol_use_disorder",
+          "reason": "12 aylık süreğen sorunlu kullanım örüntüsü olmayıp tekil bir akut alım tablosudur."
+        },
+        {
+          "diagnosisId": "delirium",
+          "reason": "Tablo doğrudan yüksek kan etanol düzeyine bağlıdır ve metabolik/travmatik nedenler dışlanmıştır."
+        },
+        {
+          "diagnosisId": "sedative_hypnotic_use_disorder",
+          "reason": "İdrar taramasında benzodiazepin negatiftir ve sedatif kullanım öyküsü yoktur."
+        }
+      ],
+      "teachingPoint": "Akut etanol alımında kafa travması, hipoglisemi ve eşlik eden diğer sedatifler mutlaka dışlanmalı; riskli olgularda glukoz öncesi parenteral tiamin unutulmamalıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "alcohol_withdrawal",
+    "category": "SUBSTANCE",
+    "patientSummary": "52 yaşında, erkek, lokanta işletmecisi",
+    "clues": [
+      "52 yaşındaki lokanta işletmecisi, sabahtan beri yoğun terleme, mide bulantısı, iç sıkıntısı ve ellerinde bardak tutmasını zorlaştıran titreme yakınmasıyla acil servise başvuruyor.",
+      "Yakınları, hastanın 15 yıldır her akşam en az yarım şişe sert içki tükettiğini; iki gün önce mide ağrısı nedeniyle aile hekiminin uyarısı üzerine içkiyi tamamen kestiğini aktarıyor.",
+      "Vital bulgularında nabız 116/dk, kan basıncı 158/96 mmHg, ateş 37.3 °C. Ellerde belirgin kaba tremor ve yaygın terleme var; son 24 saatte neredeyse hiç uyuyamadığını ve bir kez kustuğunu söylüyor.",
+      "Kan şekeri, tiroid fonksiyonları ve elektrolitler normal sınırlarda; kafa travması ya da enfeksiyon bulgusu yok. Nöbet geçirmemiş, idrar toksikolojisi diğer maddeler açısından negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç tamamen açık, yer, zaman ve kişi yönelimi tam. Huzursuz ve kaygılı görünümde; ara sıra duvarda gölgeler kıpırdıyormuş gibi algıladığını ancak bunların gerçek olmadığını bildiğini ifade ediyor.",
+      "Uzun süreli ve yoğun içki tüketiminin 36 saat önce kesilmesinin ardından gelişen otonomik aşırı etkinlik, kaba el tremoru, uykusuzluk, bulantı ve içgörüsü korunan geçici algısal bozulmalar bilinç bulanıklığı olmaksızın seyrediyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "15 yıldır her akşam en az yarım şişe sert içki tükettiğini; iki gün önce mide ağrısı nedeniyle aile hekiminin uyarısı üzerine içkiyi tamamen kestiğini",
+        "dsmMatch": "Kriter A: Ağır ve uzun süreli kullanımın kesilmesi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "nabız 116/dk, kan basıncı 158/96 mmHg",
+        "dsmMatch": "Kriter B1: Otonomik aşırı etkinlik (terleme, nabız >100/dk)"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Bilinç tamamen açık, yer, zaman ve kişi yönelimi tam.",
+        "dsmMatch": "Deliryum dışlaması: Bilinç ve yönelim korunmuş"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Acil Tıbbi Stabilizasyon, CIWA-Ar İzlemi ve Bırakma Sonrası Rehabilitasyon",
+      "therapyDetails": "CIWA-Ar ölçeğiyle yakın vital ve nörolojik takip, sıvı-elektrolit desteği ve stabilizasyon sonrası motivasyonel görüşme ile nüks önleme programına yönlendirme yapılır.",
+      "pharmacologyNote": "Benzodiazepinler (lorazepam, diazepam veya klordiazepoksit) birinci basamaktır; Wernicke ensefalopatisini önlemek için parenteral tiamin mutlaka eklenir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada tabloyu Alkol Yoksunluğu Deliryumu'ndan (Delirium Tremens) ayıran en kritik muayene bulgusu hangisidir?",
+      "options": [
+        "Bilincin tamamen açık, dikkatin ve yer-zaman-kişi yöneliminin korunmuş olması",
+        "Nabzın 116/dk olması ve ellerde kaba tremor görülmesi",
+        "Geçici görsel yanılsamaların bildirilmesi",
+        "Belirtilerin kesimden 36 saat sonra başlaması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Geçici ve içgörüsü korunan algısal bozulmalar komplike olmamış kesilme tablosunda görülebilir; buna karşın Delirium Tremens'te bilinç bulanıklığı, dikkatte dalgalanma ve belirgin yönelim bozukluğu temel ayırt edicidir."
+    },
+    "differentialDiagnosis": "• Alkol Yoksunluğu Deliryumu (Delirium Tremens): Bilinç bulanıklığı, dikkatte dalgalanma ve dezoryantasyon görülür; burada bilinç açık ve yönelim tamdır.\n• Sedatif/Benzodiazepin Yoksunluğu: Benzer otonomik bulgular yapar ancak sedatif kullanım öyküsü ve taraması negatiftir.\n• Panik Bozukluk: Çarpıntı ve terleme yapar ancak uzun süreli ağır içki tüketimini kesme öyküsü ve kaba tremor eşlik etmez.",
+    "dsmCriteriaSummary": "DSM-5-TR: Ağır ve uzun süreli içki kullanımının kesilmesi/azaltılması + Saatler-günler içinde otonomik hiperaktivite, el tremoru, uykusuzluk, bulantı/kusma, geçici varsanı/yanılsama, ajitasyon, anksiyete veya nöbetten en az ikisi + Bilinç/yönelim korunmuş.",
+    "therapyId": "medical_stabilization",
+    "explanation": {
+      "whyThis": [
+        "15 yıllık ağır günlük tüketimin 36 saat önce kesilmesi Kriter A'yı karşılar.",
+        "Taşikardi, terleme, kaba el tremoru, uykusuzluk, bulantı-kusma ve geçici görsel yanılsamalar Kriter B belirtilerini fazlasıyla doldurur.",
+        "Bilincin açık ve yönelimin tam olması tabloyu deliryumdan ayırır; metabolik ve diğer madde nedenleri dışlanmıştır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "alcohol_withdrawal_delirium",
+          "reason": "Bilinç bulanıklığı, dalgalanan dikkat veya yönelim bozukluğu bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "sedative_withdrawal",
+          "reason": "Benzodiazepin ya da hipnotik kullanım öyküsü yoktur ve toksikoloji negatiftir."
+        },
+        {
+          "diagnosisId": "panic_disorder",
+          "reason": "Belirtiler doğrudan ağır içki tüketiminin kesilmesiyle başlamıştır ve kaba tremor eşlik etmektedir."
+        }
+      ],
+      "teachingPoint": "Komplike olmayan kesilme tablosunda içgörülü geçici algısal bozulmalar görülebilir; ancak bilinç ve yönelim bozulduğunda tablo acil Delirium Tremens olarak yönetilmelidir."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cannabis_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "27 yaşında, kadın, dijital pazarlama uzmanı",
+    "clues": [
+      "27 yaşındaki dijital pazarlama uzmanı, son bir yıldır iş performansının belirgin düştüğünü, önemli toplantıları kaçırdığını ve ailesiyle sürekli çatışma yaşadığını belirterek başvuruyor.",
+      "Önceleri yalnızca hafta sonları arkadaş ortamında kullandığı bitkisel sarma maddeyi, son 14 aydır iş çıkışı ve giderek gün ortasında da kullanmaya başladığını; planladığından çok daha fazla tükettiğini anlatıyor.",
+      "Aynı rahatlama etkisini almak için kullandığı miktarın iki katına çıktığını, üç kez bırakmayı deneyip her seferinde birkaç gün içinde yoğun aşerme ve sinirlilikle yeniden başladığını söylüyor.",
+      "Sürekli yorgunluk ve odaklanma güçlüğü nedeniyle spor salonunu ve arkadaş buluşmalarını bıraktığını aktarıyor. Tiroid, hemogram ve B12 normal; alkol ya da başka bir madde kullanmıyor. İdrar toksikolojisinde yalnızca THC metaboliti pozitif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirlikli, duygudurumu hafif kaygılı. Düşünce süreci düzenli, varsanı veya sanrı yok; kullanımın hayatını kontrol altına aldığını kabul etmekle birlikte bırakma konusunda kararsız.",
+      "Son 12 ayda artan miktar gereksinimi, başarısız bırakma çabaları, yoğun aşerme, mesleki yükümlülüklerin aksaması ve bırakıldığında sinirlilik-uykusuzluk yaşaması düzenli bitkisel madde kullanımıyla doğrudan ilişkili."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "Aynı rahatlama etkisini almak için kullandığı miktarın iki katına çıktığını, üç kez bırakmayı deneyip her seferinde birkaç gün içinde yoğun aşerme",
+        "dsmMatch": "Kriter A: Tolerans, başarısız bırakma çabaları ve aşerme"
+      },
+      {
+        "clueIndex": 3,
+        "text": "İdrar toksikolojisinde yalnızca THC metaboliti pozitif.",
+        "dsmMatch": "Madde doğrulaması ve diğer maddelerin dışlanması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Son 12 ayda artan miktar gereksinimi, başarısız bırakma çabaları, yoğun aşerme, mesleki yükümlülüklerin aksaması",
+        "dsmMatch": "Kriter A: 12 aylık dönemde en az 2/11 sorunlu kullanım ölçütü"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme (MET), Bilişsel-Davranışçı Terapi ve Koşullu Yönetim",
+      "therapyDetails": "Bırakmaya yönelik ikircikliliği çözmek için motivasyonel görüşme, tetikleyicilerle başa çıkma ve nüks önleme için BDT, gerekirse aile desteği planlanır.",
+      "pharmacologyNote": "Onaylı spesifik bir farmakoterapi yoktur; bırakma dönemindeki şiddetli anksiyete veya uyku bozukluğu için kısa süreli destekleyici ilaçlar (ör. hidroksizin, buspiron) değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'ye göre bu bozukluğun tanısı için 12 aylık dönemde 11 ölçütten en az kaçının bulunması gerekir?",
+      "options": [
+        "En az 1 ölçüt",
+        "En az 2 ölçüt",
+        "En az 4 ölçüt",
+        "En az 6 ölçüt"
+      ],
+      "correctIndex": 1,
+      "explanation": "DSM-5-TR'de tüm madde kullanım bozukluklarında 12 aylık sürede en az 2 ölçüt tanı için yeterlidir (2-3 hafif, 4-5 orta, 6 ve üzeri ağır şiddet)."
+    },
+    "differentialDiagnosis": "• Esrar Zehirlenmesi (İntoksikasyonu): Yalnızca akut alım sonrası geçici davranışsal ve fiziksel bulguları kapsar; burada 14 aylık süreğen kullanım örüntüsü vardır.\n• Esrar Yoksunluğu: Yalnızca bırakma sonrası akut belirti dönemini tanımlar; hasta hâlen aktif ve sorunlu kullanım içindedir.\n• Majör Depresif Bozukluk: İşlev kaybı birincil çökkünlükten değil, yoğun madde tüketimi ve aşermeden kaynaklanmaktadır.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde amaçlanandan fazla kullanım, bırakma güçlüğü, aşerme, iş/sosyal yükümlülük aksaması, tolerans ve yoksunluk dahil 11 ölçütten en az 2'si ile klinik olarak belirgin işlev kaybı.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "14 aydır artan miktarda kullanım (tolerans), üç başarısız bırakma girişimi, yoğun aşerme ve etkinliklerin bırakılması çok sayıda Kriter A ölçütünü karşılar.",
+        "Toplantı kaçırma ve aile içi çatışmalar mesleki ve toplumsal işlevselliğin belirgin bozulduğunu gösterir.",
+        "İdrar toksikolojisinde yalnızca THC metabolitinin saptanması ve diğer psikiyatrik nedenlerin dışlanması tanıyı netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "cannabis_intoxication",
+          "reason": "Tablo tekil akut bir alım değil, 12 ayı aşan süreğen sorunlu kullanım örüntüsüdür."
+        },
+        {
+          "diagnosisId": "cannabis_withdrawal",
+          "reason": "Hasta şu an aktif kullanımını sürdürmekte olup başvuru nedeni uzun süreli kontrol kaybıdır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Duygudurum çökkünlüğü baskın değildir; performans kaybı doğrudan madde kullanımıyla ilişkilidir."
+        }
+      ],
+      "teachingPoint": "Düzenli THC kullanımında tolerans, başarısız bırakma çabaları, aşerme ve işlev kaybı 12 ayda 2 veya daha fazla ölçütü doldurduğunda kullanım bozukluğu tanısı konur."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cannabis_intoxication",
+    "category": "SUBSTANCE",
+    "patientSummary": "23 yaşında, kadın, yüksek lisans öğrencisi",
+    "clues": [
+      "23 yaşındaki yüksek lisans öğrencisi, akşam saatlerinde arkadaşları tarafından 'kalbim duracak gibi çarpıyor, herkes bana bakıyor' diyerek acil servise getiriliyor.",
+      "Yakınları, hastanın yaklaşık bir saat önce bir ev partisinde ilk kez yüksek etkili bitkisel sarma içtiğini, 20 dakika içinde aşırı gülme nöbetinin ardından yoğun tedirginlik ve zamanın durmuş gibi aktığını söylemeye başladığını anlatıyor.",
+      "Fizik muayenede her iki gözde belirgin konjonktival kızarıklık, şiddetli ağız kuruluğu ve dakikada 114 nabız saptanıyor; göz bebekleri normal boyutta, ateş 36.7 °C, kan basıncı 122/78 mmHg.",
+      "Acil gözlem sırasında yoğun açlık hissettiğini belirterek su ve kraker istiyor. Kan şekeri, EKG ve tiroid testleri olağan; idrar toksikolojisinde yalnızca THC metaboliti pozitif, uyarıcı ve alkol negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, yönelimi tam ancak hafif şaşkın ve kaygılı. Zaman algısında yavaşlama tarifliyor; gerçeklik değerlendirmesi kabaca korunmuş, kalıcı sanrı ya da işitsel varsanı yok.",
+      "Yakın zamandaki bitkisel madde alımının ardından gelişen kaygı, zaman algısı yavaşlaması, konjonktival hiperemi, ağız kuruluğu, taşikardi ve iştah artışı üç saatlik sakin ortam gözleminde kendiliğinden geriliyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "her iki gözde belirgin konjonktival kızarıklık, şiddetli ağız kuruluğu ve dakikada 114 nabız",
+        "dsmMatch": "Kriter C: Konjonktival enjeksiyon, ağız kuruluğu ve taşikardi"
+      },
+      {
+        "clueIndex": 3,
+        "text": "yoğun açlık hissettiğini",
+        "dsmMatch": "Kriter C2: İştah artışı"
+      },
+      {
+        "clueIndex": 4,
+        "text": "Zaman algısında yavaşlama tarifliyor",
+        "dsmMatch": "Kriter B: Zamanın yavaşladığı duyumu ve kaygı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Destekleyici Psikoterapi, Sakin Ortamda Güven Verme (Talk-Down) ve Gözlem",
+      "therapyDetails": "Uyaranın az olduğu sessiz bir ortamda hastaya belirtilerin geçici olduğu açıklanır, vital bulgular izlenir ve taburculuk öncesi risk bilgilendirmesi yapılır.",
+      "pharmacologyNote": "Çoğu olgu ilaçsız düzelir; şiddetli akut panik veya ajitasyonda kısa süreli anksiyolitik (ör. hidroksizin veya düşük doz benzodiazepin) düşünülebilir."
+    },
+    "miniQuiz": {
+      "question": "Aşağıdaki fiziksel bulgu dörtlüsü hangi akut madde etkilenmesi için DSM-5-TR'de klasik Kriter C göstergeleridir?",
+      "options": [
+        "Miyozis, bradikardi, solunum yavaşlaması, kaşıntı",
+        "Dikey nistagmus, analjezi, hipertansiyon, hiperakuzi",
+        "Konjonktival kızarıklık, iştah artışı, ağız kuruluğu, taşikardi",
+        "Kaba el tremoru, terleme, kusma, jeneralize nöbet"
+      ],
+      "correctIndex": 2,
+      "explanation": "Konjonktival enjeksiyon, iştah artışı, ağız kuruluğu ve taşikardi (alım sonrası 2 saat içinde en az ikisi) DSM-5-TR'de akut kannabis etkilenmesinin dört klasik fiziksel ölçütüdür."
+    },
+    "differentialDiagnosis": "• Panik Bozukluk: Çarpıntı ve kaygı yapar ancak konjonktival kızarıklık, iştah artışı ve yakın zamanlı THC alımı bulunmaz.\n• Uyarıcı Zehirlenmesi (Kokain): Belirgin midriyazis, hipertansiyon ve iştah baskılanması görülür; burada pupiller normal ve iştah artmıştır.\n• Esrar (Kannabis) Kullanım Bozukluğu: 12 aylık süreğen sorunlu kullanım örüntüsü gerektirir; hasta ilk kez denemiştir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yakın zamanda alım + Öfori, kaygı, zaman yavaşlaması veya yargılama bozukluğu + 2 saat içinde konjonktival kızarıklık, iştah artışı, ağız kuruluğu veya taşikardiden en az ikisi + Başka durumla açıklanamama.",
+    "therapyId": "supportive_psychotherapy",
+    "explanation": {
+      "whyThis": [
+        "Bir saat önceki alımın ardından gelişen öfori-kaygı geçişi ve zamanın yavaşladığı duyumu Kriter A ve B'yi karşılar.",
+        "Konjonktival kızarıklık, ağız kuruluğu, taşikardi ve iştah artışı Kriter C'nin dört fiziksel bulgusunu birden gösterir.",
+        "İdrar toksikolojisinde yalnızca THC saptanması ve belirtilerin birkaç saat içinde düzelmesi akut tabloyu doğrular."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "panic_disorder",
+          "reason": "Belirtiler doğrudan madde alımından 20 dakika sonra başlamış olup konjonktival hiperemi ve iştah artışı eşlik etmektedir."
+        },
+        {
+          "diagnosisId": "cocaine_intoxication",
+          "reason": "Pupiller normaldir, hipertansiyon yoktur, iştah artmıştır ve uyarıcı taraması negatiftir."
+        },
+        {
+          "diagnosisId": "cannabis_use_disorder",
+          "reason": "İlk kez kullanım söz konusudur; 12 aylık yineleyici kullanım örüntüsü yoktur."
+        }
+      ],
+      "teachingPoint": "Alım sonrası iki saat içinde ortaya çıkan konjonktival kızarıklık, ağız kuruluğu, taşikardi, iştah artışı ve zaman algısı yavaşlaması akut kannabis etkilenmesinin ayırt edici kümesidir."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cannabis_withdrawal",
+    "category": "SUBSTANCE",
+    "patientSummary": "28 yaşında, erkek, otel resepsiyonisti",
+    "clues": [
+      "28 yaşındaki otel resepsiyonisti, son beş gündür tahammülsüzlük, uykuya dalamama, mide bulantısı ve belirgin iştah kaybı yakınmalarıyla psikiyatri polikliniğine başvuruyor.",
+      "Yakınmalarından önce üç yıl boyunca neredeyse her gün yüksek yoğunluklu bitkisel sarma madde tükettiğini; yeni işe geçişte sağlık raporu ve yaşam düzeni için altı gün önce tamamen bıraktığını anlatıyor.",
+      "Bıraktıktan iki gün sonra başlayan sinirlilik, huzursuzluk, gece terlemeleri, karın ağrısı ve son üç gecedir çok canlı, rahatsız edici rüyalar görme nedeniyle işinde odaklanamadığını ifade ediyor.",
+      "Vital bulguları stabil (nabız 82/dk, tansiyon 118/74 mmHg, ateş 36.8 °C); ellerde kaba tremor, otonomik fırtına ya da göz bebeği değişikliği yok. Alkol, nikotin dışı uyarıcı veya opioid kullanımı bulunmuyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam, görünümü gergin ve çabuk öfkelenmeye yatkın. Duygudurumu hafif çökkün ve huzursuz; düşünce içeriğinde varsanı, sanrı ya da özkıyım düşüncesi yok.",
+      "Yıllardır süren günlük yoğun bitkisel madde kullanımının altı gün önce kesilmesini takiben bir hafta içinde gelişen sinirlilik, uykusuzluk, rahatsız edici rüyalar, iştahsızlık, huzursuzluk ve karın ağrısı/terleme tablosu belirgin sıkıntıya yol açıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "üç yıl boyunca neredeyse her gün yüksek yoğunluklu bitkisel sarma madde tükettiğini; yeni işe geçişte sağlık raporu ve yaşam düzeni için altı gün önce tamamen bıraktığını",
+        "dsmMatch": "Kriter A: Ağır ve uzun süreli kullanımın kesilmesi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "sinirlilik, huzursuzluk, gece terlemeleri, karın ağrısı ve son üç gecedir çok canlı, rahatsız edici rüyalar",
+        "dsmMatch": "Kriter B: Kesimden 1 hafta içinde en az 3 belirti (fiziksel belirti dahil)"
+      },
+      {
+        "clueIndex": 3,
+        "text": "nabız 82/dk, tansiyon 118/74 mmHg, ateş 36.8 °C",
+        "dsmMatch": "Kriter D: Ağır otonomik kesilme (alkol/opioid) ve tıbbi nedenlerin dışlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Psikoeğitim ve BDT Tabanlı Başa Çıkma Becerileri",
+      "therapyDetails": "Belirtilerin 1-2 hafta içinde pik yapıp gerileyeceği konusunda psikoeğitim verilir, uyku hijyeni ve öfke/huzursuzluk yönetimi çalışılır, nüks önleme planı oluşturulur.",
+      "pharmacologyNote": "Özgün onaylı ilaç yoktur; şiddetli uyku güçlüğü veya kaygıda kısa süreli destekleyici ajanlar (ör. hidroksizin, buspiron) semptomatik olarak kullanılabilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'ye göre bu kesilme sendromunda belirtiler genellikle bırakmadan ne kadar süre içinde başlar ve en az kaç belirti gereklidir?",
+      "options": [
+        "İlk 2 saat içinde başlar, en az 5 belirti gerekir",
+        "Yaklaşık 1 hafta içinde başlar, 7 kümeden en az 3 belirti gerekir",
+        "Kesimden 1 ay sonra başlar, en az 2 belirti gerekir",
+        "Yalnızca fiziksel ateş ve nöbet varlığında tanı konur"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ağır ve uzun süreli kullanımın kesilmesinden yaklaşık 1 hafta içinde sinirlilik, kaygı, uyku/rüya bozukluğu, iştah kaybı, huzursuzluk, çökkünlük ve fiziksel belirtilerden (karın ağrısı, terleme, titreme, baş ağrısı vb.) en az üçünün ortaya çıkması gerekir."
+    },
+    "differentialDiagnosis": "• Yaygın Anksiyete Bozukluğu (YAB): En az 6 ay süren yaygın evham vardır; burada belirtiler bırakmadan 48 saat sonra akut başlamıştır.\n• Alkol Yoksunluğu: Belirgin taşikardi, hipertansiyon ve kaba el tremoru öne çıkar; burada vitaller normal ve alkol kullanımı yoktur.\n• Tütün (Nikotin) Yoksunluğu: Genellikle iştah artışı ve bradikardi görülür; burada belirgin iştah kaybı, gece terlemesi ve rahatsız edici rüyalar vardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Ağır ve uzun süreli kullanımın kesilmesi + ~1 hafta içinde sinirlilik, kaygı, uyku güçlüğü/rahatsız edici rüyalar, iştah/kilo kaybı, huzursuzluk, çökkünlük ve fiziksel belirtilerden en az 3'ü + Belirgin sıkıntı.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "Üç yıllık günlük yoğun kullanımın altı gün önce kesilmesi Kriter A'yı karşılar.",
+        "Sinirlilik, uykusuzluk/canlı rahatsız edici rüyalar, iştah kaybı, huzursuzluk ve karın ağrısı-terleme Kriter B'nin 7 kümesinden beşini doldurur.",
+        "Vital bulguların stabil olması ve alkol/opioid kullanımının bulunmaması diğer kesilme tablolarını dışlar."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "gad",
+          "reason": "Belirtiler 6 aylık süreğen kaygı değil, madde kesiminin hemen ardından gelişen akut bir tablodur."
+        },
+        {
+          "diagnosisId": "alcohol_withdrawal",
+          "reason": "Otonomik fırtına, taşikardi ve kaba tremor yoktur; alkol kullanım öyküsü bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "tobacco_withdrawal",
+          "reason": "İştah artışı yerine belirgin iştah kaybı, karın ağrısı ve gece terlemeleri ön plandadır."
+        }
+      ],
+      "teachingPoint": "Yoğun THC kullanımının kesilmesinden sonraki ilk haftada sinirlilik, canlı rüyalar, iştahsızlık, huzursuzluk ve hafif somatik yakınmaların görülmesi, nüks riski yüksek gerçek bir kesilme sendromudur."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "sedative_hypnotic_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "46 yaşında, erkek, mali müşavir",
+    "clues": [
+      "46 yaşındaki mali müşavir, son bir yıldır iş yerinde gündüzleri dalgınlık, unutkanlık ve zaman zaman konuşmada peltekleşme yaşadığı, ayrıca ev içi tartışmaların arttığı gerekçesiyle eşiyle birlikte başvuruyor.",
+      "İki yıl önce yoğun vergi döneminde yaşadığı uykusuzluk ve gerginlik için reçete edilen alprazolam tabletlerini, hekimin önerdiği birkaç haftalık süreyi aşarak kendi başına sürdürdüğünü anlatıyor.",
+      "Başlangıçta 0.5 mg ile rahatladığını, son 14 ayda aynı etkiyi yakalamak için günlük dozu 6 mg'a çıkardığını; reçete bittiğinde farklı özel kliniklerden yazdırmaya çalıştığını ve ilacı yanında taşımadan evden çıkamadığını söylüyor.",
+      "İki kez kendi başına kesmeyi denediğinde 24 saat içinde yoğun çarpıntı, ellerde titreme ve dayanılmaz huzursuzluk yaşayıp tekrar yüksek doza döndüğünü belirtiyor. Alkol ve başka madde kullanmıyor; tiroid ve B12 normal.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, konuşması hafif yavaşlamış, duygudurumu kaygılı ve mahcup. Kısa süreli bellek performansında hafif aksama var; algı bozukluğu ya da sanrı saptanmıyor.",
+      "Yalnızca tıbbi gözetim altındaki fizyolojik alışkanlığın ötesinde, son bir yılda doktor gezme, artan doz gereksinimi, başarısız bırakma çabaları, yoğun aşerme ve mesleki işlevsellikte belirgin bozulma saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "son 14 ayda aynı etkiyi yakalamak için günlük dozu 6 mg'a çıkardığını; reçete bittiğinde farklı özel kliniklerden yazdırmaya çalıştığını",
+        "dsmMatch": "Kriter A: Tolerans, amaçlanandan fazla kullanım ve temin için yoğun zaman harcama"
+      },
+      {
+        "clueIndex": 3,
+        "text": "İki kez kendi başına kesmeyi denediğinde 24 saat içinde yoğun çarpıntı, ellerde titreme ve dayanılmaz huzursuzluk",
+        "dsmMatch": "Kriter A: Başarısız bırakma çabaları ve kesilme belirtileri"
+      },
+      {
+        "clueIndex": 5,
+        "text": "doktor gezme, artan doz gereksinimi, başarısız bırakma çabaları, yoğun aşerme ve mesleki işlevsellikte belirgin bozulma",
+        "dsmMatch": "Kriter A: Reçeteli kullanımın dışına çıkan sorunlu kullanım örüntüsü"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel-Davranışçı Terapi (BDT) ve Kademeli Doz Azaltma Programı",
+      "therapyDetails": "Altta yatan uykusuzluk ve kaygı için ilaç dışı BDT becerileri (uyaran kontrolü, gevşeme, bilişsel yeniden yapılandırma) öğretilir; nüks önleme ve aile desteği planlanır.",
+      "pharmacologyNote": "Ani kesim nöbet ve deliryum riski nedeniyle yasaktır; uzun yarı ömürlü bir benzodiazepine (ör. diazepam) geçilerek haftalar-aylar içinde kademeli azaltma ve gerekirse buspiron/hidroksizin desteği uygulanır."
+    },
+    "miniQuiz": {
+      "question": "Uzun süredir yüksek doz alprazolam kullanan bu hastada tedavide kesinlikle kaçınılması gereken yaklaşım hangisidir?",
+      "options": [
+        "Uzun yarı ömürlü eşdeğer bir ajana geçerek haftalık kademeli azaltma yapmak",
+        "İlacı tek seferde aniden tamamen kesmek",
+        "Altta yatan uyku ve kaygı sorunları için BDT eklemek",
+        "İlaç dışı destekleyici farmakolojik seçenekleri değerlendirmek"
+      ],
+      "correctIndex": 1,
+      "explanation": "Yüksek doz kısa etkili benzodiazepinlerin aniden kesilmesi hayatı tehdit eden jeneralize tonik-klonik nöbetlere ve deliryuma yol açabilir; mutlaka kademeli azaltma protokolü uygulanmalıdır."
+    },
+    "differentialDiagnosis": "• Yaygın Anksiyete Bozukluğu (YAB): Başlangıçta kaygı tetikleyici olsa da güncel tabloyu kontrolsüz doz artışı, doktor gezme ve ilaca bağlı bilişsel yavaşlama belirlemektedir.\n• Uykusuzluk Bozukluğu (Kronik İnsomni): Yalnızca uyku yakınması yoktur; belirgin tolerans, aşerme ve ilaç arama davranışları vardır.\n• Sedatif/Benzodiazepin Yoksunluğu: Yalnızca ilacın kesilmesi sırasındaki akut dönemi kapsar; hasta hâlen yüksek doz kullanımını sürdürmektedir.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde kontrolsüz doz artışı, başarısız bırakma çabaları, temin için çok zaman harcama, aşerme, iş/ev sorumluluklarında aksama, tolerans ve kesilme dahil 11 ölçütten en az 2'si.",
+    "therapyId": "cbt_general",
+    "explanation": {
+      "whyThis": [
+        "Reçeteli dozun 12 katına çıkılması, doktor gezme ve ilacı yanında taşımadan çıkamama kontrol kaybını ve aşermeyi gösterir.",
+        "Başarısız bırakma denemelerinde kesilme belirtilerinin çıkması ve iş yerinde dalgınlık/peltekleşme nedeniyle işlev kaybı 12 aylık sorunlu örüntüyü doğrular.",
+        "Bu bulgular yalnızca uygun tıbbi gözetimli fizyolojik alışkanlıkla açıklanamaz."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "gad",
+          "reason": "Güncel işlev kaybı ve bilişsel aksamalar birincil kaygıdan çok yüksek doz ilaç kullanımından kaynaklanmaktadır."
+        },
+        {
+          "diagnosisId": "insomnia_disorder",
+          "reason": "Tablo tek başına uyku güçlüğünü aşarak tolerans, doktor gezme ve kontrol kaybı örüntüsüne dönüşmüştür."
+        },
+        {
+          "diagnosisId": "sedative_withdrawal",
+          "reason": "Hasta ilacı hâlen aktif olarak günde 6 mg düzeyinde kullanmaktadır."
+        }
+      ],
+      "teachingPoint": "Kısa etkili benzodiazepinlerde kontrolsüz doz artışı ve doktor gezme kullanım bozukluğunu gösterir; tedavide ani kesim nöbet riski nedeniyle kesinlikle kaçınılmalıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "opioid_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "31 yaşında, erkek, nakliye şoförü",
+    "clues": [
+      "31 yaşındaki nakliye şoförü, son bir yıldır işine sık sık geç kaldığı, maaşının tamamını harcadığı ve ailesiyle bağlarının koptuğu gerekçesiyle ağabeyinin desteğiyle polikliniğe başvuruyor.",
+      "İki yıl önce geçirdiği motosiklet kazası sonrası ortopedi ameliyatı için başlanan güçlü ağrı kesicileri, ağrıları geçtikten sonra da rahatlamak için almaya devam ettiğini; son bir yılda sokaktan temin ettiği kahverengi toz maddeyi burundan çekmeye ve zaman zaman damar içi kullanmaya başladığını anlatıyor.",
+      "Aynı etkiyi görebilmek için harcadığı miktarın üç katına çıktığını, maddeyi bulamadığı günlerde 12 saat içinde yaygın kas-eklem ağrısı, burun akıntısı, esneme ve ishal geliştiği için mecburen yeniden temin ettiğini söylüyor.",
+      "Üç kez evde kendi başına bırakmaya çalışıp başaramamış; ön kollarında eski enjeksiyon izleri mevcut. Hepatit B-C ve HIV taramaları isteniyor; idrar toksikolojisinde morfin/6-MAM metaboliti pozitif, alkol ve uyarıcı negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, yorgun ve pişman görünümlü, duygudurumu hafif çökkün. Düşünce süreci düzenli, varsanı ya da sanrı yok; tedaviye başlama isteği yüksek.",
+      "Son 12 ayda belirgin tolerans, kesilme belirtileri, yoğun aşerme, başarısız bırakma çabaları, tehlikeli biçimde araç kullanırken alım ve mesleki-ailevi yıkım bir arada izleniyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "harcadığı miktarın üç katına çıktığını, maddeyi bulamadığı günlerde 12 saat içinde yaygın kas-eklem ağrısı, burun akıntısı, esneme ve ishal",
+        "dsmMatch": "Kriter A: Tolerans ve tipik kesilme belirtileri"
+      },
+      {
+        "clueIndex": 3,
+        "text": "ön kollarında eski enjeksiyon izleri mevcut",
+        "dsmMatch": "Fizik muayene bulgusu: İntravenöz kullanım kanıtı"
+      },
+      {
+        "clueIndex": 5,
+        "text": "belirgin tolerans, kesilme belirtileri, yoğun aşerme, başarısız bırakma çabaları, tehlikeli biçimde araç kullanırken alım",
+        "dsmMatch": "Kriter A: Ağır düzeyde 12 aylık sorunlu kullanım örüntüsü"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Bilişsel-Davranışçı Nüks Önleme ve İdame Tedavisi",
+      "therapyDetails": "İlaç destekli idame tedavisine uyumu artıran motivasyonel görüşme, yüksek riskli durumları yönetme, aile katılımı ve kan yoluyla bulaşan enfeksiyonlara yönelik zarar azaltma eğitimi verilir.",
+      "pharmacologyNote": "Buprenorfin/nalokson veya metadon ile uzun süreli agonist idame tedavisi mortaliteyi en çok azaltan altın standart yaklaşımdır; nüks önlemede seçilmiş olgularda uzun etkili naltrekson kullanılabilir."
+    },
+    "miniQuiz": {
+      "question": "Bu bozuklukta aşırı doz kaynaklı mortaliteyi ve nüks oranlarını en güçlü biçimde azaltan uzun süreli birinci basamak farmakolojik yaklaşım hangisidir?",
+      "options": [
+        "Yalnızca tek seferlik detoksifikasyon ve ilaçsız taburculuk",
+        "Yüksek doz benzodiazepin idamesi",
+        "Tipik antipsikotik monoterapisi",
+        "Buprenorfin/nalokson veya metadon ile agonist idame tedavisi"
+      ],
+      "correctIndex": 3,
+      "explanation": "Tek başına detoksifikasyon sonrası tolerans düştüğü için aşırı doz ölüm riski artar; buprenorfin/nalokson veya metadon ile idame tedavisi mortaliteyi ve yasa dışı kullanımı anlamlı biçimde azaltır."
+    },
+    "differentialDiagnosis": "• Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis): Yalnızca akut kesilme krizini tanımlar; burada 12 aylık süreğen kullanım bozukluğu bütünüyle mevcuttur.\n• Opioid Zehirlenmesi (Miyozis, Solunum Depresyonu): Akut bilinç baskılanması ve solunum yavaşlaması görülür; hasta şu an uyanık ve stabildir.\n• Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin): İdrar taramasında morfin/6-MAM pozitif olup benzodiazepin kullanımı yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde kontrol kaybı, başarısız bırakma çabaları, temin için yoğun zaman, aşerme, iş/aile aksaması, tehlikeli durumlarda kullanım, tolerans ve kesilme dahil 11 ölçütten en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "Ameliyat sonrası analjeziklerden sokak maddesine geçişle birlikte son bir yılda tolerans, tipik kesilme belirtileri, başarısız bırakma girişimleri ve yoğun aşerme gelişmiştir.",
+        "Araç kullanırken tüketim, mali kayıp, işe devamsızlık ve aile bağlarının kopması ağır işlev bozulmasını gösterir.",
+        "Enjeksiyon izleri ve idrarda morfin/6-MAM pozitifliği madde grubunu kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "opioid_withdrawal",
+          "reason": "Hasta akut kesilme kriziyle değil, bir yılı aşan süreğen kullanım ve kontrol kaybı örüntüsüyle değerlendirilmektedir."
+        },
+        {
+          "diagnosisId": "opioid_intoxication",
+          "reason": "Bilinç açıktır, solunum baskılanması veya akut aşırı doz bulgusu yoktur."
+        },
+        {
+          "diagnosisId": "sedative_hypnotic_use_disorder",
+          "reason": "Kullanılan ve idrarda saptanan madde grubu sedatif değil morfin türevleridir."
+        }
+      ],
+      "teachingPoint": "Reçeteli analjeziklerden yasa dışı kullanıma geçiş sık bir yoldur; yalnızca arındırma yerine buprenorfin/nalokson veya metadon idamesi yaşam kurtarıcıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "opioid_intoxication",
+    "category": "SUBSTANCE",
+    "patientSummary": "24 yaşında, erkek, otogar hamalı",
+    "clues": [
+      "24 yaşındaki otogar hamalı, gece saatlerinde bir iş hanının merdiven boşluğunda yarı baygın ve güçlükle nefes alır hâlde bulunarak 112 ambulansıyla acil servise getiriliyor.",
+      "Yanında bulunan bir arkadaşı, hastanın son haftalarda bir süre uzak kaldıktan sonra yaklaşık yarım saat önce damar içi yoldan beyaz-kahverengi bir karışım uyguladığını ve dakikalar içinde başının öne düştüğünü aktarıyor.",
+      "Fizik muayenede solunum sayısı dakikada 6 ve yüzeysel, oksijen satürasyonu %82, dudaklarda morarma mevcut. Nabız 54/dk, tansiyon 94/58 mmHg, vücut ısısı 36.1 °C.",
+      "Nörolojik bakıda ağrılı uyarana çok kısıtlı yanıt veriyor; her iki göz bebeği ışık altında toplu iğne başı kadar küçülmüş (1 mm). Kan şekeri 104 mg/dL, kafa travması izi yok; antekübital bölgede taze iğne girişi izleniyor.",
+      "Ruhsal Durum Muayenesinde: Stupor düzeyinde bilinç baskılanması mevcut, sözel uyaranlara yanıt vermiyor; konuşma ve duygulanım değerlendirilemiyor, belirgin psikomotor yavaşlama görülüyor.",
+      "Hava yolu desteklenip intravenöz nalokson uygulanmasının ardından iki dakika içinde solunum sayısı dakikada 16'ya yükseliyor, göz bebekleri normale dönüyor ve hasta bilincini geri kazanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "solunum sayısı dakikada 6 ve yüzeysel, oksijen satürasyonu %82",
+        "dsmMatch": "Acil yaşamı tehdit eden solunum baskılanması bulgusu"
+      },
+      {
+        "clueIndex": 3,
+        "text": "her iki göz bebeği ışık altında toplu iğne başı kadar küçülmüş (1 mm)",
+        "dsmMatch": "Kriter C: Pupiller daralma (pinpoint pupil)"
+      },
+      {
+        "clueIndex": 5,
+        "text": "intravenöz nalokson uygulanmasının ardından iki dakika içinde solunum sayısı dakikada 16'ya yükseliyor",
+        "dsmMatch": "Spesifik reseptör antagonistine hızlı klinik yanıt"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Acil Hava Yolu Yönetimi, Tıbbi Stabilizasyon ve Stabilizasyon Sonrası Bağımlılık Yönlendirmesi",
+      "therapyDetails": "Öncelik solunumun desteklenmesi ve oksijenasyondur; naloksonun yarı ömrü birçok maddeden kısa olduğundan hasta yeniden sedasyon riskine karşı gözlemde tutulur, ardından uzun süreli tedaviye yönlendirilir.",
+      "pharmacologyNote": "Acil antidot parenteral veya intranazal naloksondur; akut dönem sonrası nüks ve tekrar aşırı doz riskini azaltmak için buprenorfin/nalokson idame tedavisi planlanır."
+    },
+    "miniQuiz": {
+      "question": "Aşırı dozda intravenöz nalokson uygulandıktan sonra bilinci açılan bu hastanın acil serviste bir süre daha gözlenmesinin temel nedeni nedir?",
+      "options": [
+        "Naloksonun etki süresinin kısa olması nedeniyle yeniden solunum baskılanması gelişebilmesi",
+        "Naloksonun 48 saat süren ağır hipertansiyon yapması",
+        "Hastada mutlaka kafa içi kanama dışlanmasının gerekmesi",
+        "Antidotun etkisinin ancak 6 saat sonra başlaması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Naloksonun yarı ömrü yaklaşık 30-90 dakikadır; uzun etkili agonistlerin etkisi sürerken naloksonun etkisi geçince yeniden solunum baskılanması (renarkotizasyon) gelişebilir."
+    },
+    "differentialDiagnosis": "• Alkol Zehirlenmesi (İntoksikasyonu): Toplu iğne başı göz bebeği ve naloksona dramatik yanıt görülmez.\n• Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin): Tek başına benzodiazepinler belirgin pinpoint pupil yapmaz ve naloksona yanıt vermez.\n• Deliryum (Akut Bilinç Bulanıklığı): Genel tıbbi nedenli dalgalanan bilinç tablosudur; burada taze enjeksiyon ve nalokson yanıtı akut madde etkisini kanıtlar.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yakın zamanda alım + Öforiyi izleyen apati/psikomotor yavaşlama + Pupiller daralma (pinpoint) ile birlikte uyuklama/koma, peltek konuşma veya dikkat/bellek bozulmasından en az biri + Solunum baskılanması.",
+    "therapyId": "medical_stabilization",
+    "explanation": {
+      "whyThis": [
+        "Yarım saat önceki damar içi kullanımın ardından stupor, dakikada 6 yüzeysel solunum ve hipoksi gelişmiştir.",
+        "Her iki göz bebeğinin 1 mm'ye daralması (pinpoint) ve taze enjeksiyon izi klasik triadla uyumludur.",
+        "İntravenöz naloksona dakikalar içinde solunum ve bilinç düzelmesiyle verilen yanıt tanıyı kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "alcohol_intoxication",
+          "reason": "Toplu iğne başı göz bebeği yapmaz ve naloksonla hızla düzelmez."
+        },
+        {
+          "diagnosisId": "sedative_hypnotic_use_disorder",
+          "reason": "Sedatifler belirgin pinpoint pupil oluşturmaz ve naloksona dramatik yanıt vermez."
+        },
+        {
+          "diagnosisId": "delirium",
+          "reason": "Metabolik veya enfeksiyöz bir süreç değil, antidotla anında geri dönen akut reseptör aracılı baskılanmadır."
+        }
+      ],
+      "teachingPoint": "Stupor, dakikada 12'nin altında yüzeysel solunum ve toplu iğne başı göz bebekleri acil nalokson endikasyonudur; kısa ara dönem sonrası tolerans kaybı aşırı doz riskini katlar."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cocaine_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "36 yaşında, erkek, reklam ajansı yöneticisi",
+    "clues": [
+      "36 yaşındaki reklam ajansı yöneticisi, son bir yılda yüklü kredi kartı borçlarına girdiği, iş ortaklarıyla güven sorunları yaşadığı ve evde sık öfke patlamaları geçirdiği için eşinin ısrarıyla başvuruyor.",
+      "Yaklaşık 18 ay önce müşteri yemeklerinde ve gece eğlencelerinde burundan çekerek tanıştığı beyaz toz maddeyi, son bir yıldır hafta içi iş teslimlerinde de artan sıklıkta kullanmaya başladığını anlatıyor.",
+      "İstediği canlılık ve özgüven etkisini yakalamak için gece boyunca harcadığı gramajın belirgin arttığını, bırakma sözü verdiği hâlde her stresli günde yoğun aşermeyle satıcıyı aradığını ifade ediyor.",
+      "KBB muayenesinde nazal mukozada belirgin tahriş ve sık burun kanaması öyküsü var; buna rağmen kullanımı sürdürmüş. İdrar toksikolojisinde benzoilekgonin pozitif, amfetamin ve opioid negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, konuşması hafif hızlı, duygudurumu kaygılı ve savunmacı. Düşünce içeriğinde grandiyöz sanrı ya da varsanı yok; maddi ve ailevi kayıpların ciddiyetini kısmen kabul ediyor.",
+      "Son 12 ayda artan doz gereksinimi, başarısız bırakma çabaları, yoğun aşerme, burun hasarına rağmen sürdürme ve mesleki-ailevi işlevsellikte ağır bozulma düzenli benzoilekgonin pozitif madde kullanımıyla ilişkili."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "gece boyunca harcadığı gramajın belirgin arttığını, bırakma sözü verdiği hâlde her stresli günde yoğun aşermeyle",
+        "dsmMatch": "Kriter A: Tolerans, başarısız bırakma çabaları ve aşerme"
+      },
+      {
+        "clueIndex": 3,
+        "text": "nazal mukozada belirgin tahriş ve sık burun kanaması öyküsü var; buna rağmen kullanımı sürdürmüş. İdrar toksikolojisinde benzoilekgonin pozitif",
+        "dsmMatch": "Kriter A9: Bedensel hasara rağmen sürdürme ve özgül metabolit kanıtı"
+      },
+      {
+        "clueIndex": 5,
+        "text": "mesleki-ailevi işlevsellikte ağır bozulma",
+        "dsmMatch": "Kriter A5-6: Yükümlülüklerde aksama ve kişilerarası sorunlar"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Bilişsel-Davranışçı Terapi ve Koşullu Yönetim (Contingency Management)",
+      "therapyDetails": "Tetikleyici ortam ve sosyal çevrelerin yeniden düzenlenmesi, aşermeyle başa çıkma becerileri, mali/ailevi sorumluluk planlaması ve temiz idrar testlerini pekiştiren koşullu yönetim en güçlü kanıta sahiptir.",
+      "pharmacologyNote": "FDA onaylı özgül bir farmakoterapi yoktur; eşlik eden depresif belirtiler veya aşerme desteğinde seçilmiş olgularda bupropion ya da topiramat değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastanın idrar toksikoloji testinde saptanan ve söz konusu maddeye özgü olan ana metabolit hangisidir?",
+      "options": [
+        "Benzoilekgonin",
+        "6-monoasetilmorfin (6-MAM)",
+        "Etil glukuronid",
+        "11-nor-9-karboksi-THC"
+      ],
+      "correctIndex": 0,
+      "explanation": "Benzoilekgonin, kokainin karaciğerde oluşan ana inaktif metabolitidir ve idrar toksikolojisinde kullanımdan sonraki 2-4 gün boyunca (yoğun kullanımda daha uzun) saptanır."
+    },
+    "differentialDiagnosis": "• Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin): İdrar taramasında amfetamin negatiftir ve nazal mukoza hasarıyla birlikte benzoilekgonin pozitiftir.\n• Bipolar I Bozukluğu: Madde etkisinden bağımsız manik dönemler görülür; hastanın artan enerji ve harcama dönemleri doğrudan madde alımıyla sınırlıdır.\n• Uyarıcı Zehirlenmesi (Kokain): Yalnızca akut sempatomimetik krizi kapsar; burada 18 aylık süreğen kullanım bozukluğu vardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde amaçlanandan fazla kullanım, başarısız bırakma çabaları, yoğun aşerme, iş/aile sorunları, fiziksel hasara rağmen sürdürme ve tolerans dahil 11 ölçütten en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "18 aydır süren kullanımın son bir yılda artan miktar, yoğun aşerme ve başarısız bırakma çabalarıyla kontrolden çıkması çok sayıda Kriter A ölçütünü doldurur.",
+        "Nazal mukoza hasarı ve sık kanamalara, ayrıca ağır borçlanma ve ev içi çatışmalara rağmen sürdürme klinik şiddeti gösterir.",
+        "İdrarda benzoilekgonin pozitifliği ve amfetaminin negatif olması kullanılan uyarıcı sınıfını kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "amphetamine_use_disorder",
+          "reason": "İdrar toksikolojisinde amfetamin negatif, benzoilekgonin pozitiftir."
+        },
+        {
+          "diagnosisId": "bipolar_1",
+          "reason": "Özkaynaklı bir manik dönem olmayıp davranış değişiklikleri madde kullanım döngüsüne bağlıdır."
+        },
+        {
+          "diagnosisId": "cocaine_intoxication",
+          "reason": "Başvuru akut bir acil kriz değil, 12 ayı aşan kronik sorunlu kullanım örüntüsüdür."
+        }
+      ],
+      "teachingPoint": "Koşullu yönetim ve BDT bu grupta en güçlü psikososyal yaklaşımlardır; kronik burun kanaması, nazal septum erozyonu ve idrarda benzoilekgonin tipik ipuçlarıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cocaine_intoxication",
+    "category": "SUBSTANCE",
+    "patientSummary": "27 yaşında, erkek, otomobil galericisi",
+    "clues": [
+      "27 yaşındaki otomobil galericisi, sabaha karşı göğsünde sıkışma, şiddetli çarpıntı ve yoğun huzursuzluk yakınmasıyla arkadaşları tarafından acil servise getiriliyor.",
+      "Arkadaşları, hastanın bir saat önce özel bir davette art arda birkaç kez burundan beyaz toz çektiğini, ardından aşırı hızlı konuşmaya, etraftakilere karşı kuşkucu davranmaya ve yerinde duramamaya başladığını söylüyor.",
+      "Fizik muayenede nabız 136/dk, kan basıncı 176/104 mmHg, ateş 37.9 °C, cilt terli. Her iki göz bebeği belirgin genişlemiş (7 mm) ve burun deliklerinin çevresinde beyaz toz kalıntısı izleniyor.",
+      "EKG'de sinüs taşikardisi var, seri troponinler normal; kan şekeri ve tiroid testleri olağan. İdrar toksikolojisinde benzoilekgonin pozitif, amfetamin, alkol ve opioid negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık ancak aşırı tetikte ve ajite; konuşması basınçlı, duygulanımı gergin ve öfkeli. Acil personelinin kendisine zarar verebileceğine dair geçici kuşkuculuk ifade ediyor.",
+      "Yakın zamandaki burundan toz alımını izleyen saat içinde gelişen belirgin hipertansiyon, taşikardi, terleme, genişlemiş göz bebekleri, ajitasyon ve göğüs ağrısı benzodiazepin ve destek tedavisiyle saatler içinde yatışıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "nabız 136/dk, kan basıncı 176/104 mmHg, ateş 37.9 °C, cilt terli. Her iki göz bebeği belirgin genişlemiş (7 mm)",
+        "dsmMatch": "Kriter C: Taşikardi, yüksek kan basıncı, terleme ve pupiller dilatasyon"
+      },
+      {
+        "clueIndex": 3,
+        "text": "İdrar toksikolojisinde benzoilekgonin pozitif, amfetamin, alkol ve opioid negatif.",
+        "dsmMatch": "Özgül madde doğrulaması ve diğer maddelerin dışlanması"
+      },
+      {
+        "clueIndex": 4,
+        "text": "aşırı tetikte ve ajite; konuşması basınçlı",
+        "dsmMatch": "Kriter B: Aşırı tetikte olma, ajitasyon ve kişilerarası duyarlılık"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Acil Kardiyovasküler İzlem, Tıbbi Stabilizasyon ve Sakinleştirici Yaklaşım",
+      "therapyDetails": "Monitörizasyon, EKG ve troponin takibi, hipertermi ve ajitasyon kontrolü yapılır; akut kriz geçtikten sonra kısa motivasyonel müdahale ile bağımlılık tedavisine yönlendirilir.",
+      "pharmacologyNote": "Ajitasyon, taşikardi ve hipertansiyonun yönetiminde parenteral benzodiazepinler (lorazepam/diazepam) birinci basamaktır; saf beta blokerlerden karşılanmamış alfa-adrenerjik vazokonstriksiyon riski nedeniyle kaçınılır."
+    },
+    "miniQuiz": {
+      "question": "Bu akut sempatomimetik krizde göğüs ağrısı ve hipertansiyonu yönetirken birinci basamak ilaç ve kaçınılması gereken ilaç sınıfı aşağıdakilerden hangisidir?",
+      "options": [
+        "Birinci basamak: Propranolol / Kaçınılan: Benzodiazepin",
+        "Birinci basamak: Parenteral benzodiazepin / Kaçınılan: Saf beta blokerler",
+        "Birinci basamak: Haloperidol / Kaçınılan: Oksijen",
+        "Birinci basamak: Nalokson / Kaçınılan: Nitrogliserin"
+      ],
+      "correctIndex": 1,
+      "explanation": "Benzodiazepinler merkezi sempatik çıkışı azaltarak hem ajitasyonu hem taşikardi/hipertansiyonu güvenli biçimde düşürür; saf beta blokerler ise karşılanmamış alfa-adrenerjik koroner vazospazmı ağırlaştırabilir."
+    },
+    "differentialDiagnosis": "• Bipolar I Bozukluğu: Basınçlı konuşma ve ajitasyon yapabilir ancak ani 176/104 mmHg hipertansiyon, 7 mm midriyazis ve benzoilekgonin pozitifliği akut madde krizini gösterir.\n• Panik Bozukluk: Çarpıntı ve göğüs sıkışması vardır ancak belirgin hipertermi, midriyazis ve yakın zamanlı madde alımı yoktur.\n• Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin): Benzer sempatomimetik tablo yapar ancak idrar toksikolojisinde amfetamin negatif, benzoilekgonin pozitiftir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yakın zamanda alım + Öfori, aşırı tetikte olma, öfke, yargılama bozukluğu + Taşikardi, pupiller dilatasyon, yüksek kan basıncı, terleme, ajitasyon, göğüs ağrısı/aritmi veya konfüzyondan en az ikisi.",
+    "therapyId": "medical_stabilization",
+    "explanation": {
+      "whyThis": [
+        "Bir saat önceki burundan alımın ardından aşırı tetikte olma, ajitasyon, kuşkuculuk ve basınçlı konuşma gelişmiştir.",
+        "Taşikardi (136/dk), hipertansiyon (176/104 mmHg), terleme, 7 mm pupiller dilatasyon ve göğüs sıkışması Kriter C sempatomimetik bulgularını açıkça karşılar.",
+        "İdrarda benzoilekgonin pozitifliği ve benzodiazepinle hızlı düzelme akut tabloyu doğrular."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "bipolar_1",
+          "reason": "Belirtiler madde alımından hemen sonra başlamış olup belirgin otonomik kriz ve benzoilekgonin pozitifliği eşlik etmektedir."
+        },
+        {
+          "diagnosisId": "panic_disorder",
+          "reason": "Şiddetli hipertansiyon, 7 mm midriyazis, terleme ve burun çevresinde toz kalıntısı panik atakla açıklanamaz."
+        },
+        {
+          "diagnosisId": "amphetamine_use_disorder",
+          "reason": "İdrar taramasında amfetamin negatif, benzoilekgonin pozitiftir."
+        }
+      ],
+      "teachingPoint": "Akut sempatomimetik krizde kardiyak iskemi mutlaka dışlanmalı, birinci basamakta parenteral benzodiazepin seçilmeli ve saf beta blokerlerden kaçınılmalıdır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "cocaine_withdrawal",
+    "category": "SUBSTANCE",
+    "patientSummary": "34 yaşında, erkek, gece kulübü DJ'i",
+    "clues": [
+      "34 yaşındaki gece kulübü DJ'i, iki gündür yataktan çıkamadığını, kendini 'tamamen tükenmiş ve değersiz' hissettiğini, sürekli uyuduğunu ve dayanılmaz bir boşluk yaşadığını belirterek polikliniğe getiriliyor.",
+      "Eşi, hastanın son altı aydır hafta sonları burundan çektiği beyaz toz maddeyi bu hafta dört gün boyunca neredeyse hiç uyumadan aralıksız tükettiğini; 30 saat önce elindeki madde bitince bir anda çöktüğünü aktarıyor.",
+      "Son bir buçuk gündür günde 15 saate yakın uyuduğunu, uyandığında çok canlı ve rahatsız edici kâbuslar gördüğünü, normalde iştahsızken buzdolabını boşaltacak kadar aşırı yemek yediğini söylüyor.",
+      "Vital bulguları normal (nabız 68/dk, tansiyon 112/70 mmHg, ateş 36.6 °C); kaba tremor, terleme, göz bebeği daralması ya da kas ağrısı yok. Tiroid ve hemogram normal; idrar toksikolojisinde yalnızca benzoilekgonin pozitif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık ancak belirgin psikomotor yavaşlama mevcut, konuşması kısık ve yavaş. Duygudurumu yoğun disforik, duygulanımı künt; geçici pasif ölüm düşünceleri sorgulanıyor ancak aktif planı yok, varsanı ya da sanrı saptanmıyor.",
+      "Ağır ve aralıksız kullanımın 30 saat önce kesilmesini takiben gelişen disforik duygudurum, aşırı yorgunluk, hipersomni, canlı rahatsız edici rüyalar, belirgin iştah artışı ve psikomotor yavaşlama öyküsünde daha önce majör depresyon atağı bulunmuyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "dört gün boyunca neredeyse hiç uyumadan aralıksız tükettiğini; 30 saat önce elindeki madde bitince bir anda çöktüğünü",
+        "dsmMatch": "Kriter A: Ağır ve uzun süreli kullanımın kesilmesi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "günde 15 saate yakın uyuduğunu, uyandığında çok canlı ve rahatsız edici kâbuslar gördüğünü, normalde iştahsızken buzdolabını boşaltacak kadar aşırı yemek yediğini",
+        "dsmMatch": "Kriter B: Hipersomni, canlı rahatsız edici rüyalar ve iştah artışı"
+      },
+      {
+        "clueIndex": 4,
+        "text": "belirgin psikomotor yavaşlama mevcut",
+        "dsmMatch": "Kriter B: Disforik duygudurum ile birlikte psikomotor yavaşlama"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Destekleyici Psikoterapi, Özkıyım Güvenlik Değerlendirmesi ve Nüks Önleme",
+      "therapyDetails": "Çöküş dönemindeki yoğun disfori ve geçici özkıyım düşünceleri yakından izlenir; uyku ve beslenme düzeni desteklenir, ardından motivasyonel görüşme ve BDT ile uzun dönem nüks önleme planlanır.",
+      "pharmacologyNote": "Akut dönemde özgül bir ikame tedavisi yoktur; çoğunlukla destekleyici izlemle günler içinde geriler, kalıcı depresif belirtiler veya aşerme için değerlendirme sonrası bupropion düşünülebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada akut kesilme döneminde klinisyenin mutlaka dikkatle taraması gereken en kritik güvenlik riski hangisidir?",
+      "options": [
+        "Hayatı tehdit eden jeneralize kesilme nöbetleri",
+        "Şiddetli disfori ve anhedoniye eşlik edebilen akut özkıyım düşünceleri",
+        "Solunum merkezinin ani baskılanması",
+        "Geri dönüşsüz Wernicke ensefalopatisi"
+      ],
+      "correctIndex": 1,
+      "explanation": "Bu kesilme tablosu alkol/benzodiazepin gibi fiziksel açıdan ölümcül nöbetlere yol açmaz; ancak derin disfori, tükenmişlik ve anhedoni nedeniyle akut özkıyım riski mutlaka yakından değerlendirilmelidir."
+    },
+    "differentialDiagnosis": "• Majör Depresif Bozukluk: En az 2 hafta süren özerk depresif dönem gerekir; burada belirtiler 4 günlük yoğun kullanımın kesilmesinden saatler sonra başlamıştır.\n• Uyarıcı Yoksunluğu (Amfetamin Türü Madde): Benzer çöküş tablosu oluşturur ancak idrar taramasında yalnızca benzoilekgonin pozitiftir.\n• Alkol Yoksunluğu: Otonomik aşırı etkinlik, tremor ve uykusuzluk öne çıkar; burada vitaller sakin ve belirgin hipersomni vardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Uzun süreli kullanımın kesilmesi + Saatler-günler içinde disforik duygudurum ile birlikte yorgunluk, canlı rahatsız edici rüyalar, uykusuzluk/hipersomni, iştah artışı veya psikomotor yavaşlama/ajitasyondan en az ikisi.",
+    "therapyId": "supportive_psychotherapy",
+    "explanation": {
+      "whyThis": [
+        "Dört günlük yoğun kullanımın 30 saat önce kesilmesiyle ani bir duygudurum çöküşü (disfori) başlamıştır.",
+        "Hipersomni, canlı rahatsız edici rüyalar, belirgin iştah artışı, yorgunluk ve psikomotor yavaşlama Kriter B'nin tüm fizyolojik bileşenlerini karşılar.",
+        "İdrarda yalnızca benzoilekgonin saptanması ve öncesinde depresyon öyküsü olmaması birincil duygudurum bozukluğu ile diğer maddeleri dışlar."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "mdd",
+          "reason": "Belirtiler 2 haftalık özerk bir dönem olmayıp doğrudan ağır madde tüketiminin kesilmesinden saatler sonra gelişmiştir."
+        },
+        {
+          "diagnosisId": "amphetamine_withdrawal",
+          "reason": "Toksikolojide amfetamin negatiftir; yalnızca benzoilekgonin saptanmıştır."
+        },
+        {
+          "diagnosisId": "alcohol_withdrawal",
+          "reason": "Taşikardi, terleme ve tremor yoktur; tam tersine sakin vitaller ve hipersomni vardır."
+        }
+      ],
+      "teachingPoint": "Hipersomni, hiperfaji, canlı kâbuslar ve derin disfori bu kesilme sendromunun tipik yüzüdür; fiziksel vitaller sakin görünse de akut özkıyım riski mutlaka sorgulanmalıdır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "amphetamine_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "33 yaşında, erkek, uzun yol tır şoförü",
+    "clues": [
+      "33 yaşındaki uzun yol tır şoförü, son bir yıldır aşırı kilo kaybı, dişlerinde hızla ilerleyen çürükler, evde sinirlilik nöbetleri ve işten çıkarılma tehlikesi nedeniyle eşinin ısrarıyla polikliniğe başvuruyor.",
+      "Yaklaşık 15 ay önce gece seferlerinde uyanık kalmak için arkadaşının verdiği ve cam pipoyla dumanını çektiği sentetik bir maddeyi kullanmaya başladığını; son aylarda sefer dışındaki günlerde de aralıksız tükettiğini anlatıyor.",
+      "İki-üç gün üst üste uyumadan yola çıktığını, aynı uyanıklık etkisini alabilmek için dozunu giderek artırdığını ve üç kez bırakmayı deneyip yoğun aşermeyle yeniden başladığını söylüyor.",
+      "Fizik muayenede son yılda 14 kg kayıp, ön dişlerde yaygın koyu çürükler ve kollarda kaşıntıya bağlı tırnak izleri görülüyor. Tiroid normal; idrar toksikolojisinde benzoilekgonin ve opioid negatif, sentetik sempatomimetik feniletilamin grubu pozitif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, konuşması hafif hızlı ve gergin; duygulanımı huzursuz. Zaman zaman yolda takip edildiği hissine kapıldığını ancak kullanım kesilince bunun geçtiğini belirtiyor; şu an kalıcı sanrı ya da varsanı yok.",
+      "Son 12 ayda artan doz gereksinimi, başarısız bırakma çabaları, yoğun aşerme, tehlikeli biçimde uykusuz araç kullanma ve ciddi bedensel-mesleki zararlara karşın cam pipoyla sentetik madde tüketimini sürdürme tablosu belirgin."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "aynı uyanıklık etkisini alabilmek için dozunu giderek artırdığını ve üç kez bırakmayı deneyip yoğun aşermeyle yeniden başladığını",
+        "dsmMatch": "Kriter A: Tolerans, başarısız bırakma çabaları ve aşerme"
+      },
+      {
+        "clueIndex": 3,
+        "text": "son yılda 14 kg kayıp, ön dişlerde yaygın koyu çürükler ve kollarda kaşıntıya bağlı tırnak izleri",
+        "dsmMatch": "Kriter A9: Belirgin fiziksel zararlara rağmen sürdürme"
+      },
+      {
+        "clueIndex": 5,
+        "text": "tehlikeli biçimde uykusuz araç kullanma ve ciddi bedensel-mesleki zararlara karşın",
+        "dsmMatch": "Kriter A8-9: Fiziksel tehlike içeren durumlarda yineleyici kullanım"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Bilişsel-Davranışçı Terapi (Matrix Modeli) ve Koşullu Yönetim",
+      "therapyDetails": "Yapılandırılmış Matrix Modeli çerçevesinde tetikleyici yönetimi, aile eğitimi, düzenli idrar izlemi ve temiz dönemleri ödüllendiren koşullu yönetim uygulanır; diş ve beslenme rehabilitasyonu desteklenir.",
+      "pharmacologyNote": "Kesinleşmiş standart monoterapi yoktur; seçilmiş olgularda naltrekson + bupropion kombinasyonu veya mirtazapin üzerine kanıtlar bulunmakta olup eşlik eden psikotik belirtiler varsa kısa süreli antipsikotik değerlendirilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada görülen yaygın hızlı diş çürümesi, belirgin kilo kaybı ve ciltte kaşıntıya bağlı ekskoriyasyonlar hangi uzun süreli kullanım bozukluğu için en karakteristiktir?",
+      "options": [
+        "Esrar (Kannabis) Kullanım Bozukluğu",
+        "Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu",
+        "Uyarıcı Kullanım Bozukluğu (Amfetamin Türü Madde / Metamfetamin)",
+        "Opioid Kullanım Bozukluğu"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ağız kuruluğu, diş sıkma (bruksizm) ve şekerli içecek tüketimiyle hızlanan yaygın diş çürükleri ('meth mouth'), ağır iştah baskılanmasına bağlı kilo kaybı ve formikasyon kaynaklı cilt yaraları amfetamin/metamfetamin kullanım bozukluğu için tipiktir."
+    },
+    "differentialDiagnosis": "• Uyarıcı Kullanım Bozukluğu (Kokain): Benzoilekgonin negatiftir; etki süresi çok daha uzun olan cam pipo ile içilen feniletilamin grubu kullanılmaktadır.\n• Maddenin/İlacın Yol Açtığı Psikotik Bozukluk: Kalıcı veya baskın psikotik sendrom yoktur; geçici kuşkuculuk kullanım dışındayken kaybolmuştur.\n• Bipolar I Bozukluğu: Uykusuzluk ve taşkınlık dönemleri kendiliğinden değil, doğrudan sentetik madde alımına bağlıdır.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde kontrol kaybı, başarısız bırakma, aşerme, iş/aile aksaması, tehlikeli durumlarda kullanım, bedensel/ruhsal zarara rağmen sürdürme ve tolerans dahil 11 ölçütten en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "15 aydır cam pipoyla tüketilen sentetik maddeye karşı tolerans, yoğun aşerme ve üç başarısız bırakma girişimi gelişmiştir.",
+        "Uykusuz uzun yol sürüşü, 14 kg kayıp, yaygın diş çürükleri, cilt yaraları ve iş kaybı riskine rağmen sürdürme ağır kullanım bozukluğunu gösterir.",
+        "Benzoilekgoninin negatif ve feniletilamin grubunun pozitif olması madde sınıfını netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "cocaine_use_disorder",
+          "reason": "İdrarda benzoilekgonin negatiftir; etki süresi uzun sentetik feniletilamin grubu saptanmıştır."
+        },
+        {
+          "diagnosisId": "substance_induced_psychotic",
+          "reason": "Güncel muayenede sanrı veya varsanı yoktur; geçici kuşkuculuk akut kullanım dönemleriyle sınırlı kalmıştır."
+        },
+        {
+          "diagnosisId": "bipolar_1",
+          "reason": "Çok günlük uykusuzluk dönemleri madde kullanımıyla doğrudan ilişkilidir."
+        }
+      ],
+      "teachingPoint": "Cam pipoyla tüketim, çok günlük uykusuzluk nöbetleri, hızlı diş çürümesi, ağır kilo kaybı ve ciltte kaşıntı izleri amfetamin/metamfetamin kullanım bozukluğunun belirgin klinik işaretleridir."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "amphetamine_withdrawal",
+    "category": "SUBSTANCE",
+    "patientSummary": "25 yaşında, kadın, tekstil atölyesi işçisi",
+    "clues": [
+      "25 yaşındaki tekstil atölyesi işçisi, üç gündür kolunu kaldıracak hâli olmadığını, sürekli ağlama isteği duyduğunu ve işine gidemediğini söyleyerek annesiyle birlikte polikliniğe getiriliyor.",
+      "Annesi, hastanın yaklaşık bir yıldır gece mesailerine dayanabilmek için cam pipoyla dumanını çektiği sentetik bir madde kullandığını; dört gün önce ailesinin durumu öğrenmesi üzerine maddeyi tamamen bıraktığını anlatıyor.",
+      "Bıraktıktan yaklaşık 24 saat sonra başlayan derin bir iç sıkıntısı, günde 15-16 saat uyuma, uyanınca kâbus niteliğinde çok canlı rüyalar görme ve son iki gündür olağandışı aşırı yemek yeme yakınmaları var.",
+      "Vital bulguları normal (nabız 70/dk, tansiyon 108/68 mmHg, ateş 36.5 °C); tremor, terleme, ishal ya da göz bebeği daralması yok. Kan sayımı ve tiroid normal; iki gün önceki acil idrar taramasında benzoilekgonin negatif, amfetamin türevi metabolit pozitif saptanmış.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, konuşması yavaş ve durgun, belirgin psikomotor yavaşlama izleniyor. Duygudurumu yoğun disforik ve çökkün; varsanı, sanrı ya da aktif özkıyım planı yok ancak yoğun madde aşermesi tarifliyor.",
+      "Bir yıllık düzenli sentetik madde kullanımının dört gün önce kesilmesinin ardından gelişen disforik duygudurum, şiddetli bitkinlik, hipersomni, canlı rahatsız edici rüyalar, iştah artışı ve psikomotor yavaşlama tablosu ilk kez ortaya çıkmış."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "bir yıldır gece mesailerine dayanabilmek için cam pipoyla dumanını çektiği sentetik bir madde kullandığını; dört gün önce ailesinin durumu öğrenmesi üzerine maddeyi tamamen bıraktığını",
+        "dsmMatch": "Kriter A: Uzun süreli kullanımın kesilmesi"
+      },
+      {
+        "clueIndex": 2,
+        "text": "günde 15-16 saat uyuma, uyanınca kâbus niteliğinde çok canlı rüyalar görme ve son iki gündür olağandışı aşırı yemek yeme",
+        "dsmMatch": "Kriter B: Hipersomni, canlı rahatsız edici rüyalar ve iştah artışı"
+      },
+      {
+        "clueIndex": 4,
+        "text": "belirgin psikomotor yavaşlama izleniyor. Duygudurumu yoğun disforik",
+        "dsmMatch": "Kriter B: Disforik duygudurum ve psikomotor yavaşlama"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Destekleyici Psikoterapi ve Yapılandırılmış Nüks Önleme",
+      "therapyDetails": "İlk haftadaki ağır disfori, aşırı uyuma ve aşerme döneminde hasta ve aileye psikoeğitim verilir; özkıyım riski izlenir ve yoğun aşermeye bağlı erken nüksü önlemek için BDT/Matrix Modeli başlatılır.",
+      "pharmacologyNote": "Özgül bir detoksifikasyon ilacı yoktur; temel yaklaşım destekleyici bakım ve güvenlik takibidir, dirençli depresif belirtiler veya aşerme için değerlendirme sonrası bupropion düşünülebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu kesilme tablosunda belirtilerin tipik zaman akışı ve nüks riski açısından en doğru ifade hangisidir?",
+      "options": [
+        "Belirtiler 6 saat içinde tamamen biter ve aşerme görülmez",
+        "İlk 24-72 saatte derin bitkinlik ve hipersomni öne çıkar; disfori ve yoğun aşerme haftalarca sürebilir",
+        "En sık ölüm nedeni 48. saatte gelişen deliryum ve nöbetlerdir",
+        "Belirtiler yalnızca opioid antagonisti verilince başlar"
+      ],
+      "correctIndex": 1,
+      "explanation": "Amfetamin/metamfetamin kesilmesinde ilk günlerde yoğun bitkinlik, hipersomni ve hiperfaji görülür; bunu haftalarca sürebilen anhedoni, disfori ve güçlü aşerme fazı izleyebilir."
+    },
+    "differentialDiagnosis": "• Uyarıcı Yoksunluğu (Kokain): Klinik tablo çok benzerdir ancak toksikolojide benzoilekgonin negatif, amfetamin türevi metabolit pozitif saptanmıştır.\n• Majör Depresif Bozukluk: En az 2 hafta süren bağımsız bir dönem gerekir; burada belirtiler 4 gün önceki kesimle akut başlamıştır.\n• Opioid Yoksunluğu (Kriz / Kas Ağrıları, Midriyazis): Kas ağrısı, ishal, terleme, uykusuzluk ve midriyazis görülür; burada hipersomni ve sakin vitaller vardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Uzun süreli kullanımın kesilmesi + Saatler-günler içinde disforik duygudurum + Yorgunluk, canlı rahatsız edici rüyalar, uykusuzluk/hipersomni, iştah artışı veya psikomotor yavaşlama/ajitasyondan en az ikisi.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "Bir yıllık düzenli kullanımın dört gün önce kesilmesinden 24 saat sonra yoğun disfori ve tükenmişlik başlamıştır.",
+        "Hipersomni, canlı rahatsız edici rüyalar, belirgin iştah artışı ve psikomotor yavaşlama Kriter B'yi eksiksiz karşılar.",
+        "Benzoilekgoninin negatif ve amfetamin türevi metabolitin pozitif olması etken madde grubunu kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "cocaine_withdrawal",
+          "reason": "Öyküde cam pipo ile sentetik madde kullanımı vardır ve idrar taramasında benzoilekgonin negatiftir."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Belirtiler 2 haftalık özerk bir depresyon değil, kesilmeden 24 saat sonra başlayan akut bir sendromdur."
+        },
+        {
+          "diagnosisId": "opioid_withdrawal",
+          "reason": "Otonomik hiperaktivite, kas ağrısı, ishal ve uykusuzluk yoktur; tam tersine hipersomni ve sakin vitaller vardır."
+        }
+      ],
+      "teachingPoint": "Amfetamin grubu kesilmesinde akut çöküş fazını (hipersomni, hiperfaji, disfori) haftalar sürebilen anhedoni ve aşerme dönemi izler; bu nedenle erken dönemde yoğun psikososyal destek şarttır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "phencyclidine_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "29 yaşında, erkek, dövme sanatçısı",
+    "clues": [
+      "29 yaşındaki dövme sanatçısı, son bir yıldır tekrarlayan acil servis başvuruları, öfke patlamaları ve müşteri randevularını aksatması nedeniyle ortağının zorlamasıyla psikiyatri polikliniğine başvuruyor.",
+      "Yaklaşık 14 aydır tütün veya bitkisel sigaralara sıvı hâlde emdirilen dissosiyatif bir maddeyi haftada birkaç kez içtiğini; planladığından çok daha sık ve yüksek miktarda kullandığını anlatıyor.",
+      "Etkisi altındayken defalarca ciddi kesikler ve düşmeler yaşamasına rağmen o an hiç ağrı hissetmediğini, acil kayıtlarında her seferinde belirgin hipertansiyon, dikey ve yatay nistagmus ile ani saldırganlık not edildiğini aktarıyor.",
+      "Son altı ayda iki kez bırakmayı denemiş ancak yoğun aşerme nedeniyle yeniden başlamış; aynı kopma hissini almak için dozu artırmış. İdrar toksikolojisinde arilsikloheksilamin grubu NMDA antagonisti pozitif, opioid ve kokain negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliği sınırlı ve hafif kuşkucu; duygudurumu irritabl. Düşünce süreci genel olarak düzenli, güncel muayenede varsanı ya da sistematik sanrı yok; yaşadığı tehlikeleri küçümseme eğiliminde.",
+      "Son 12 ayda tolerans, başarısız bırakma çabaları, yoğun aşerme, acil yaralanmalara ve iş ortaklığının bozulmasına karşın sürdürme örüntüsü izleniyor; bu grupta belirgin bir fiziksel kesilme sendromu tariflenmiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "ciddi kesikler ve düşmeler yaşamasına rağmen o an hiç ağrı hissetmediğini, acil kayıtlarında her seferinde belirgin hipertansiyon, dikey ve yatay nistagmus",
+        "dsmMatch": "Özgül madde imzası: Analjezi, hipertansiyon ve dikey/yatay nistagmus"
+      },
+      {
+        "clueIndex": 3,
+        "text": "iki kez bırakmayı denemiş ancak yoğun aşerme nedeniyle yeniden başlamış; aynı kopma hissini almak için dozu artırmış",
+        "dsmMatch": "Kriter A: Başarısız bırakma çabaları, aşerme ve tolerans"
+      },
+      {
+        "clueIndex": 5,
+        "text": "bu grupta belirgin bir fiziksel kesilme sendromu tariflenmiyor.",
+        "dsmMatch": "DSM-5-TR notu: 10 ölçütlü değerlendirme (yoksunluk ölçütü tanımlanmamıştır)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Bilişsel-Davranışçı Nüks Önleme ve Zarar Azaltma",
+      "therapyDetails": "Risk algısını artırmaya yönelik motivasyonel görüşme, dürtü ve öfke kontrolü, tetikleyici ortamlardan uzaklaşma ve sosyal destek güçlendirmesi uygulanır; akut kriz dönemlerinde düşük uyaranlı güvenli ortam sağlanır.",
+      "pharmacologyNote": "Uzun süreli kullanım bozukluğu için onaylı özgül ilaç yoktur; akut şiddetli ajitasyon veya psikotik ataklarda benzodiazepinler ve gerekirse haloperidol dikkatle kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Bu maddenin akut etkilenme dönemlerini diğer uyaran ve halüsinojenlerden ayıran en karakteristik fiziksel bulgu kombinasyonu hangisidir?",
+      "options": [
+        "Pinpoint pupil, bradikardi ve solunum yavaşlaması",
+        "Konjonktival kızarıklık, iştah artışı ve ağız kuruluğu",
+        "Dikey/yatay nistagmus, ağrıya duyarsızlık (analjezi) ve hipertansiyon",
+        "Kaba el tremoru, yoğun terleme ve ateş"
+      ],
+      "correctIndex": 2,
+      "explanation": "NMDA reseptör antagonisti olan fensiklidin (PCP) ve benzeri arilsikloheksilaminlerde dikey/yatay nistagmus, belirgin ağrıya duyarsızlık, hipertansiyon, ataksi ve öngörülemez ajitasyon klasik ayırt edici bulgulardır."
+    },
+    "differentialDiagnosis": "• Hallusinojen Kullanım Bozukluğu (LSD / Mantar / MDMA): Dikey nistagmus, analjezi ve tekrarlayan şiddetli saldırganlık tipik değildir; arilsikloheksilamin taraması negatiftir.\n• Maddenin/İlacın Yol Açtığı Psikotik Bozukluk: Akut kullanım dışındayken süren sanrı veya varsanılar yoktur.\n• Uyarıcı Kullanım Bozukluğu (Kokain): Dikey nistagmus ve ağrıya duyarsızlık beklenmez; kokain taraması negatiftir.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde kontrol kaybı, başarısız bırakma, aşerme, iş/kişilerarası sorunlar, tehlikeli kullanım, zarara rağmen sürdürme ve tolerans dahil 10 ölçütten (yoksunluk hariç) en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "14 aydır sigaraya emdirilen arilsikloheksilamin/NMDA antagonisti maddeye karşı tolerans, yoğun aşerme ve başarısız bırakma çabaları gelişmiştir.",
+        "Tekrarlayan acil başvurularına, yaralanmalara ve iş ortaklığının zedelenmesine rağmen sürdürme 10 Kriter A ölçütünden çoğunu doldurur.",
+        "Öyküdeki dikey/yatay nistagmus, analjezi ve hipertansiyon ile idrar taraması bu spesifik madde sınıfını diğer halüsinojenlerden ayırır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "hallucinogen_use_disorder",
+          "reason": "Dikey nistagmus, ağrıya duyarsızlık ve arilsikloheksilamin pozitifliği diğer halüsinojenlerden ayrılır."
+        },
+        {
+          "diagnosisId": "substance_induced_psychotic",
+          "reason": "Güncel muayenede madde etkisi dışında süren sanrı ya da varsanı bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "cocaine_use_disorder",
+          "reason": "İdrar taramasında kokain negatiftir ve klinik profil dissosiyatif NMDA antagonistiyle uyumludur."
+        }
+      ],
+      "teachingPoint": "DSM-5-TR'de bu madde grubu ayrı bir kullanım bozukluğu olarak sınıflandırılır, yoksunluk ölçütü içermez; dikey nistagmus ve ağrıya duyarsızlık en güçlü klinik ipuçlarıdır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "hallucinogen_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "22 yaşında, kadın, sinema-televizyon öğrencisi",
+    "clues": [
+      "22 yaşındaki sinema-televizyon öğrencisi, son bir yıldır derslere devamsızlık nedeniyle okuldan uzaklaştırılma sınırına geldiğini ve ailesiyle ciddi çatışmalar yaşadığını belirterek polikliniğe başvuruyor.",
+      "Yaklaşık 16 ay önce müzik festivallerinde tanıştığı emdirilmiş küçük kâğıt parçaları ve kurutulmuş mantarları, son bir yılda neredeyse her hafta sonu ve zaman zaman hafta içi de kullanmaya başladığını anlatıyor.",
+      "Bu maddeleri bulmak, etkisini yaşamak ve ertesi gün toparlanmak için haftasının büyük bölümünü harcadığını; birkaç gün üst üste kullandığında aynı görsel yoğunluğu yakalamak için miktarı belirgin artırmak zorunda kaldığını söylüyor.",
+      "İki kez etkisindeyken şehir içinde motosiklet kullanıp kaza atlattığını, ailesine defalarca bırakma sözü verip yoğun istekle yeniden aldığını aktarıyor. Kullanmadığı haftalarda fiziksel bir kesilme sendromu yaşamıyor; alkol, esrar ve uyarıcı taramaları negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam, duygudurumu hafif kaygılı. Düşünce süreci düzenli; madde etkisi dışında kalıcı görsel bozulma, sanrı ya da işitsel varsanı bildirmiyor.",
+      "Son 12 ayda hızlı tolerans gelişimi, başarısız bırakma çabaları, yoğun aşerme, okul sorumluluklarının aksaması ve tehlikeli biçimde trafikte kullanım örüntüsü fiziksel kesilme belirtisi olmaksızın sürüyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 2,
+        "text": "haftasının büyük bölümünü harcadığını; birkaç gün üst üste kullandığında aynı görsel yoğunluğu yakalamak için miktarı belirgin artırmak zorunda kaldığını",
+        "dsmMatch": "Kriter A: Maddeye çok zaman harcama ve hızlı tolerans"
+      },
+      {
+        "clueIndex": 3,
+        "text": "İki kez etkisindeyken şehir içinde motosiklet kullanıp kaza atlattığını, ailesine defalarca bırakma sözü verip yoğun istekle yeniden aldığını",
+        "dsmMatch": "Kriter A: Tehlikeli durumlarda kullanım, başarısız bırakma ve aşerme"
+      },
+      {
+        "clueIndex": 4,
+        "text": "madde etkisi dışında kalıcı görsel bozulma, sanrı ya da işitsel varsanı bildirmiyor.",
+        "dsmMatch": "Kalıcı algı bozukluğu ve psikotik bozukluğun dışlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme ve Bilişsel-Davranışçı Nüks Önleme Terapisi",
+      "therapyDetails": "Kullanımın akademik ve güvenlik sonuçlarına dair farkındalık artırılır, festival/akran tetikleyicileriyle başa çıkma becerileri geliştirilir ve sağlıklı sosyal rutinler oluşturulur.",
+      "pharmacologyNote": "Kullanım bozukluğu için onaylı özgül ilaç yoktur; akut panik ya da ajitasyon ataklarında kısa süreli benzodiazepinler (ör. lorazepam) destekleyici olarak kullanılabilir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR'de bu madde grubunun kullanım bozukluğu ölçütleri açısından aşağıdaki ifadelerden hangisi doğrudur?",
+      "options": [
+        "Fiziksel yoksunluk sendromu ölçütü tanı listesinde yer almaz (10 ölçüt üzerinden en az 2'si aranır)",
+        "Hayatı tehdit eden ağır otonomik kesilme nöbetleri tanı için zorunludur",
+        "Tolerans bu maddelerde kesinlikle gelişmez",
+        "Tanı için en az 5 yıllık günlük kullanım gerekir"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bu grupta hızlı tolerans gelişebilir ancak klinik olarak belirgin bir fiziksel yoksunluk sendromu tanımlanmamıştır; bu nedenle DSM-5-TR'de 10 ölçüt üzerinden (en az 2'si) değerlendirilir."
+    },
+    "differentialDiagnosis": "• Hallusinojen Kalıcı Algı Bozukluğu (HPPD / Flashback): Madde bırakıldıktan sonra süren kalıcı görsel algı bozulmaları esastır; hastada ayıkken görsel belirti yoktur.\n• Fensiklidin (PCP) Kullanım Bozukluğu: Ayrı bir sınıf olup dikey nistagmus, analjezi ve öngörülemez saldırganlık öne çıkar.\n• Esrar (Kannabis) Kullanım Bozukluğu: İdrar taramasında THC negatiftir ve kullanılan maddeler serotonerjik algı değiştiricilerdir.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde kontrol kaybı, başarısız bırakma, çok zaman harcama, aşerme, okul/iş aksaması, tehlikeli kullanım ve tolerans dahil 10 ölçütten (yoksunluk hariç) en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "16 aydır düzenli emdirilmiş kâğıt ve mantar kullanımında hızlı tolerans, yoğun zaman harcama, aşerme ve başarısız bırakma girişimleri mevcuttur.",
+        "Okuldan uzaklaştırılma riski, aile çatışmaları ve etkisindeyken motosiklet kullanma klinik olarak belirgin işlev bozulmasını gösterir.",
+        "Ayıkken kalıcı görsel bozulma olmaması ve diğer maddelerin dışlanması tanıyı netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "hallucinogen_persisting_perception",
+          "reason": "Madde etkisi dışındayken süren kalıcı görsel iz, karlanma veya geometrik algı bozulması yoktur."
+        },
+        {
+          "diagnosisId": "phencyclidine_use_disorder",
+          "reason": "Kullanılan maddeler arilsikloheksilamin değildir; nistagmus veya analjezi öyküsü yoktur."
+        },
+        {
+          "diagnosisId": "cannabis_use_disorder",
+          "reason": "İdrar toksikolojisinde esrar metabolitleri negatiftir."
+        }
+      ],
+      "teachingPoint": "Serotonerjik algı değiştiricilerde hızlı tolerans gelişir ancak belirgin fiziksel kesilme sendromu görülmez; tanı 10 ölçüt üzerinden değerlendirilir."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "SUBSTANCE",
+    "diagnosisId": "hallucinogen_persisting_perception",
+    "category": "SUBSTANCE",
+    "patientSummary": "25 yaşında, kadın, mimari görselleştirme uzmanı",
+    "clues": [
+      "25 yaşındaki mimari görselleştirme uzmanı, son altı aydır özellikle loş ışıkta ve bilgisayar ekranına bakarken görme alanında rahatsız edici ışık izleri ve titreşimler gördüğünü, bu yüzden işini yaparken çok zorlandığını belirterek başvuruyor.",
+      "Sekiz ay önce yurt dışı gezisinde emdirilmiş bir kâğıt parçasıyla yaşadığı yoğun görsel deneyimden sonra bir daha hiçbir madde kullanmadığını; ancak o geceden yaklaşık iki ay sonra benzer görsel etkilerin kendiliğinden geri gelip kalıcı hâle geldiğini anlatıyor.",
+      "Hareket eden elinin ve geçen arabaların arkasında saydam izler kaldığını, sokak lambalarının çevresinde parlak haleler gördüğünü, düz beyaz duvarlarda ise sürekli titreşen ince noktacıklar ve geometrik kıpırtılar belirdiğini tarifliyor.",
+      "Göz hastalıkları muayenesi, görme alanı, kontrastlı beyin MR'ı ve uyku-uyanıklık EEG'si tamamen normal; migren aurası öyküsü yok. Son altı ayda tekrarlayan idrar toksikoloji testleri tüm maddeler için negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, duygudurumu kaygılı ve yorgun. Düşünce süreci düzenli, sanrı veya işitsel varsanı yok; gördüğü görsel fenomenlerin gerçek olmadığını tamamen biliyor (içgörü ve gerçeklik değerlendirmesi tam).",
+      "Madde kullanımının tamamen sonlanmasından aylar sonra bile süren nesne ardı izler, ışık haleleri ve geometrik/noktasal görsel algı bozulmaları, gerçeklik değerlendirmesi tamamen korunmuş olmasına karşın yoğun mesleki ve kişisel sıkıntıya yol açıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "emdirilmiş bir kâğıt parçasıyla yaşadığı yoğun görsel deneyimden sonra bir daha hiçbir madde kullanmadığını; ancak o geceden yaklaşık iki ay sonra benzer görsel etkilerin kendiliğinden geri gelip kalıcı hâle geldiğini",
+        "dsmMatch": "Kriter A: Kullanımın kesilmesinden sonra algısal belirtilerin yeniden yaşanması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "Hareket eden elinin ve geçen arabaların arkasında saydam izler kaldığını, sokak lambalarının çevresinde parlak haleler gördüğünü, düz beyaz duvarlarda ise sürekli titreşen ince noktacıklar",
+        "dsmMatch": "Kriter A: Hareket izleri (trailing), haleler ve görsel noktacıklar"
+      },
+      {
+        "clueIndex": 4,
+        "text": "gördüğü görsel fenomenlerin gerçek olmadığını tamamen biliyor (içgörü ve gerçeklik değerlendirmesi tam).",
+        "dsmMatch": "Gerçeklik değerlendirmesinin korunmuş olması (psikozdan ayrım)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Bilişsel-Davranışçı Terapi (BDT), Psikoeğitim ve Kaygı Yönetimi",
+      "therapyDetails": "Görsel belirtilere yönelik felaketleştirme ve aşırı odaklanmayı azaltan BDT, görsel gürültüyü artıran tetikleyicilerden (kafein, uykusuzluk, stres, tüm maddeler) kaçınma ve güvence verme temel yaklaşımdır.",
+      "pharmacologyNote": "Kanıta dayalı vaka serilerinde lamotrijin veya seçilmiş olgularda düşük doz klonazepam belirtileri hafifletebilir; SSRI'lar ve antipsikotikler bazı hastalarda görsel belirtileri artırabileceğinden dikkatle değerlendirilir."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloyu şizofreni veya maddeye bağlı psikotik bozukluktan ayıran en temel ruhsal durum muayenesi özelliği hangisidir?",
+      "options": [
+        "Görsel fenomenlere her zaman işitsel varsanıların eşlik etmesi",
+        "Gerçeklik değerlendirmesinin ve içgörünün tamamen korunmuş olması",
+        "EEG'de oksipital bölgede sürekli epileptiform deşarjların görülmesi",
+        "Belirtilerin yalnızca aktif madde alımı sırasında birkaç saat sürmesi"
+      ],
+      "correctIndex": 1,
+      "explanation": "Bu bozuklukta kişi gördüğü hareket izlerinin, halelerin ve geometrik desenlerin gerçek olmadığının tamamen farkındadır; sanrısal yorumlama veya gerçeklikten kopma yoktur."
+    },
+    "differentialDiagnosis": "• Şizofreni: Gerçeklik değerlendirmesi bozulur, sanrılar ve genellikle işitsel varsanılar eşlik eder; burada içgörü tamdır.\n• Maddenin/İlacın Yol Açtığı Psikotik Bozukluk: Gerçeklikten kopma ve sanrısal inançlar görülür; burada hasta görsel algıların gerçek olmadığını bilir.\n• Depersonalizasyon / Derealizasyon Bozukluğu: Çevreye veya kendine yabancılaşma ön plandadır; burada somut optik fenomenler (hareket izleri, haleler, noktacıklar) baskındır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Kullanımın kesilmesinin ardından algısal belirtilerin (geometrik desenler, hareket izleri, haleler, ışık parlamaları) yeniden yaşanması + Gerçeklik değerlendirmesinin korunması + Belirgin sıkıntı/işlev kaybı + Nörolojik/oftalmolojik nedenlerin dışlanması.",
+    "therapyId": "cbt_general",
+    "explanation": {
+      "whyThis": [
+        "Sekiz ay önceki tekil deneyimin ardından tamamen madde kullanmayan hastada hareket izleri, ışık haleleri ve noktasal görsel titreşimler kalıcı hâle gelmiştir.",
+        "Göz muayenesi, beyin MR'ı ve EEG'nin normal olması migren aurası, epilepsi ve yapısal lezyonları dışlar.",
+        "İçgörü ve gerçeklik değerlendirmesinin tamamen korunmuş olması tabloyu psikotik bozukluklardan kesin olarak ayırır."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "schizophrenia",
+          "reason": "Gerçeklik değerlendirmesi ve içgörü tamdır; sanrı, dezorganizasyon veya işitsel varsanı yoktur."
+        },
+        {
+          "diagnosisId": "substance_induced_psychotic",
+          "reason": "Hasta algısal bozulmaların gerçek olmadığını bilmekte olup psikotik gerçeklik kopması yaşamamaktadır."
+        },
+        {
+          "diagnosisId": "depersonalization_derealization",
+          "reason": "Yakınmalar öznel yabancılaşmadan ziyade somut görsel fenomenler (iz kalması, haleler, noktacıklar) şeklindedir."
+        }
+      ],
+      "teachingPoint": "Madde bırakıldıktan aylar sonra bile süren hareket izleri ve halelerde, normal nörolojik-oftalmolojik tetkikler ve korunmuş içgörü bu tanıyı psikozdan ayırır."
+    }
+  },
+  {
+    "difficulty": "İleri Düzey",
+    "course": "SUBSTANCE",
+    "diagnosisId": "inhalant_use_disorder",
+    "category": "SUBSTANCE",
+    "patientSummary": "16 yaşında, erkek, ayakkabı atölyesi çırağı",
+    "clues": [
+      "16 yaşındaki ayakkabı atölyesi çırağı, son aylarda çıraklık eğitim okuluna sık devamsızlık yaptığı, dalgınlaştığı ve evden sık sık para kaybolduğu gerekçesiyle ailesi tarafından çocuk-ergen psikiyatrisine getiriliyor.",
+      "Başlangıçta atölyede kullandıkları güçlü yapıştırıcı ve çözücülerin kokusunun başını döndürdüğünü fark ettiğini; son bir yıldır bu sıvıları bir naylon poşete sıkıp gizlice ağzından ve burnundan soluduğunu anlatıyor.",
+      "Kısa süren baş dönmesi ve rahatlama hissini sürdürebilmek için poşete sıktığı miktarı ve günlük sıklığı giderek artırdığını; ustası ve ailesi uyardığı hâlde yoğun istekle gizlice devam ettiğini söylüyor.",
+      "Fizik muayenede ağız ve burun çevresinde kızarık döküntüler, kıyafetlerinde keskin çözücü kokusu ve hafif yürüyüş dengesizliği izleniyor. Son iki aydır el-ayak parmaklarında uyuşma ve dikkat dağınıklığı başlamasına rağmen kullanmayı bırakmamış; rutin idrar toksikoloji paneli negatif.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, konuşması hafif yavaşlamış, duygudurumu künt ve huzursuz. Kısa süreli bellek ve dikkat testlerinde hafif aksama saptanıyor; varsanı ya da sanrı yok.",
+      "Son 12 ayda hidrokarbon bazlı çözücü buharlarına karşı tolerans, başarısız bırakma çabaları, yoğun aşerme, okul-iş aksaması ve periferik uyuşma/bilişsel yavaşlamaya rağmen sürdürme görülüyor; kullanmadığı günlerde özgül bir fiziksel kesilme sendromu oluşmuyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "son bir yıldır bu sıvıları bir naylon poşete sıkıp gizlice ağzından ve burnundan soluduğunu",
+        "dsmMatch": "Kriter A: Hidrokarbon bazlı çözücü buharlarının sorunlu kullanımı"
+      },
+      {
+        "clueIndex": 3,
+        "text": "ağız ve burun çevresinde kızarık döküntüler, kıyafetlerinde keskin çözücü kokusu",
+        "dsmMatch": "Tipik fizik muayene bulgusu (perioral dermatit ve çözücü kokusu)"
+      },
+      {
+        "clueIndex": 5,
+        "text": "periferik uyuşma/bilişsel yavaşlamaya rağmen sürdürme görülüyor; kullanmadığı günlerde özgül bir fiziksel kesilme sendromu oluşmuyor.",
+        "dsmMatch": "Kriter A9 ve DSM-5-TR notu: Zarara rağmen sürdürme, yoksunluk ölçütü yok (10 ölçüt)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme, Aile Temelli Müdahale ve Sosyal Hizmet Desteği",
+      "therapyDetails": "Ergenin güvenli iş/eğitim ortamına yönlendirilmesi, aile içi gözetimin güçlendirilmesi, ani kardiyak ölüm ve nörolojik hasar riskine yönelik psikoeğitim ve bilişsel-davranışçı başa çıkma becerileri uygulanır.",
+      "pharmacologyNote": "Özgün bir farmakoterapi yoktur; birinci basamak ilaçsız kapsamlı psikososyal ve tıbbi izlemdir. Nörolojik, hepatik ve renal hasar açısından organ taramaları yapılır."
+    },
+    "miniQuiz": {
+      "question": "Hidrokarbon bazlı çözücülerin solunmasına bağlı bu bozuklukta, ilk kullanımda dahi ani ölüme yol açabilen en tehlikeli akut tıbbi komplikasyon hangisidir?",
+      "options": [
+        "Miyokardın katekolaminlere aşırı duyarlılaşmasına bağlı ani kardiyak aritmi ('ani koklama ölümü')",
+        "Akut tiamin eksikliğine bağlı Wernicke ensefalopatisi",
+        "Opioid reseptör aracılı solunum merkezi felci",
+        "Serotonin sendromu"
+      ],
+      "correctIndex": 0,
+      "explanation": "Uçucu hidrokarbonlar miyokardı endojen katekolaminlere aşırı duyarlı hâle getirir; ani korku, koşma veya efor sırasında ölümcül ventriküler aritmi ('sudden sniffing death') gelişebilir."
+    },
+    "differentialDiagnosis": "• Alkol Kullanım Bozukluğu (Alkolizm): Benzer baskılayıcı etkiler oluşturabilir ancak alkol tüketimi yoktur ve perioral döküntü ile çözücü kokusu mevcuttur.\n• Esrar (Kannabis) Kullanım Bozukluğu: Rutin idrar toksikolojisinde THC negatiftir; hidrokarbonlar standart idrar panellerinde saptanmaz.\n• Sedatif, Hipnotik ya da Anksiyolitik Kullanım Bozukluğu (Benzodiazepin): Tablet kullanımı yoktur ve benzodiazepin taraması negatiftir.",
+    "dsmCriteriaSummary": "DSM-5-TR: 12 aylık dönemde hidrokarbon bazlı çözücü/yapıştırıcı buharlarının kontrolsüz kullanımı, bırakma güçlüğü, aşerme, okul/iş aksaması, bedensel/nörolojik zarara rağmen sürdürme ve tolerans dahil 10 ölçütten (yoksunluk hariç) en az 2'si.",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "Bir yıldır naylon poşetten çözücü/yapıştırıcı buharı solumada tolerans, başarısız bırakma girişimleri, aşerme ve okul devamsızlığı 10 Kriter A ölçütünden çoğunu doldurur.",
+        "Perioral dermatit, çözücü kokusu, dengesizlik ve el-ayak uyuşması (periferik nöropati) ile bilişsel yavaşlamaya rağmen kullanımın sürmesi ağır tıbbi riski gösterir.",
+        "Standart idrar toksikolojisinin negatif çıkması bu madde grubunun tipik laboratuvar özelliğidir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "alcohol_use_disorder",
+          "reason": "Öyküde alkol tüketimi olmayıp doğrudan çözücü/yapıştırıcı buharı solunmaktadır."
+        },
+        {
+          "diagnosisId": "cannabis_use_disorder",
+          "reason": "İdrar taramasında THC negatiftir ve fizik muayenede çözücü kokusu ile perioral döküntü vardır."
+        },
+        {
+          "diagnosisId": "sedative_hypnotic_use_disorder",
+          "reason": "Benzodiazepin ya da sedatif ilaç kullanımı bulunmamaktadır."
+        }
+      ],
+      "teachingPoint": "Uçucu hidrokarbonlar standart idrar toksikoloji panellerinde çıkmaz; ağız-burun çevresi döküntü, çözücü kokusu, nöropati ve ani kardiyak aritmi riski klinik olarak tanınmalıdır."
+    }
+  }
+]

@@ -483,6 +483,7 @@
                 ${whyThis ? `<p class="tr-result-why">${esc(whyThis)}</p>` : ''}
                 ${teaching ? `<div class="tr-result-tip"><strong>💡 Klinik Not:</strong> ${esc(teaching)}</div>` : ''}
                 <div class="tr-result-actions">
+                    <a class="btn btn-secondary" href="#/kutuphane/tani/${encodeURIComponent(caseObj.diagnosisId)}">📖 Tanıyı İncele</a>
                     ${res.won
                         ? `<button type="button" class="btn btn-primary tr-start-btn" id="btnTrNextPatient">➡️ Sıradaki Danışan (Vaka #${res.streakAfter + 1})</button>`
                         : `<button type="button" class="btn btn-primary tr-start-btn" id="btnClimbStart">🔄 Yeni Tırmanışa Başla</button>`
@@ -605,21 +606,23 @@
                 </div>
             </div>
 
-            <div class="tr-stage${inCase ? ' is-in-session' : ''}">
-                <div class="tr-bg-photo" aria-hidden="true"></div>
-                <div class="tr-fire-ambient" aria-hidden="true"></div>
-                <div class="tr-motes" aria-hidden="true">
-                    <span class="tr-mote" style="left:28%;top:28%;animation-delay:0s"></span>
-                    <span class="tr-mote" style="left:45%;top:36%;animation-delay:2.1s"></span>
-                    <span class="tr-mote" style="left:62%;top:30%;animation-delay:4.2s"></span>
-                    <span class="tr-mote" style="left:78%;top:40%;animation-delay:1.5s"></span>
+            <div class="tr-stage-shell">
+                <div class="tr-stage${inCase ? ' is-in-session' : ''}">
+                    <div class="tr-bg-photo" aria-hidden="true"></div>
+                    <div class="tr-fire-ambient" aria-hidden="true"></div>
+                    <div class="tr-motes" aria-hidden="true">
+                        <span class="tr-mote" style="left:28%;top:28%;animation-delay:0s"></span>
+                        <span class="tr-mote" style="left:45%;top:36%;animation-delay:2.1s"></span>
+                        <span class="tr-mote" style="left:62%;top:30%;animation-delay:4.2s"></span>
+                        <span class="tr-mote" style="left:78%;top:40%;animation-delay:1.5s"></span>
+                    </div>
+                    ${patientHtml}
+                    <div class="tr-noro-seat">
+                        ${renderAvatar(myCfg, 90, { facing: 'left', activity: inCase ? 'think' : (session && session.result && session.result.won ? 'wave' : null) })}
+                        <span class="tr-noro-tag">Sen</span>
+                    </div>
                 </div>
                 ${clueBubbleHtml}
-                ${patientHtml}
-                <div class="tr-noro-seat">
-                    ${renderAvatar(myCfg, 90, { facing: 'left', activity: inCase ? 'think' : (session && session.result && session.result.won ? 'wave' : null) })}
-                    <span class="tr-noro-tag">Sen</span>
-                </div>
             </div>
 
             ${bottomControlHtml}

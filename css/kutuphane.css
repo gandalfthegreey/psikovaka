@@ -127,7 +127,17 @@
     background: var(--color-surface-2);
     flex-shrink: 0;
 }
-@media (max-width: 767px) { .lib-search-kbd { display: none; } }
+@media (max-width: 767px) {
+    .lib-search-kbd { display: none; }
+    .screen-library .lib-page { padding: var(--space-4) var(--space-3); }
+    .screen-library .lib-page .lib-search { margin-left: 0; gap: 8px; }
+    .screen-library .lib-page .lib-search-input { font-size: 16px; }
+    .screen-library .lib-page .lib-search-status,
+    .screen-library .lib-contents-title { margin-left: 0; }
+    .screen-library .lib-tabs.segmented { padding-left: 0; overflow-x: auto; scrollbar-width: none; }
+    .screen-library .lib-tabs .lib-tab,
+    [data-theme="dark"] .screen-library .lib-tabs .lib-tab { padding: 0 11px; font-size: 0.875rem; white-space: nowrap; }
+}
 .screen-library .lib-contents .lib-group-head {
     position: relative;
     display: flex;

@@ -1,0 +1,1463 @@
+[
+  {
+    "difficulty": "Kolay",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "psychological_factors_affecting_medical",
+    "category": "SOMATIC",
+    "patientSummary": "46 yaşında, kadın, lise biyoloji öğretmeni",
+    "clues": [
+      "46 yaşındaki lise biyoloji öğretmeni, son 6 ayda üç kez nefes darlığı nedeniyle acil servise başvurması üzerine göğüs hastalıkları uzmanı tarafından yönlendiriliyor.",
+      "8 yıldır orta düzeyde bronşiyal astım tanısıyla izlendiği, son dönemde okul yönetimindeki anlaşmazlıklar ve iş yoğunluğunun arttığı haftalarda solunum yakınmalarının belirginleştiği öğreniliyor.",
+      "Solunum fonksiyon testleri ve alerji tetkikleri altta yatan astım tanısını doğruluyor; ek kardiyak, tiroid ya da enfeksiyöz bir patoloji saptanmıyor.",
+      "Öykü derinleştirildiğinde, hastanın koruyucu inhaler ilacını 'ilaçlara bağımlı olmak istemediği' için sık sık aksattığı, belirtiler başlarken ciddiyetini küçümseyip acil müdahaleyi geciktirdiği görülüyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliğine kısmen açık. Duygudurum hafif gergin, duygulanım uygun. Düşünce süreci düzenli; tıbbi hastalığının yönetiminde küçümseme ve kaçınma eğilimi belirgin. Panik atağı, depresif epizod ya da psikotik belirti yok.",
+      "Altta yatan doğrulanmış tıbbi hastalığın alevlenmeleri, hastanın öfke ve stres tepkileriyle yakın zamansal ilişki içinde ortaya çıkmakta; tedaviye uyumsuzluk ve belirtileri inkar etme tutumu doğrudan acil başvurularına yol açmakta, tablo başka bir ruhsal bozuklukla açıklanamamaktadır."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "8 yıldır orta düzeyde bronşiyal astım tanısıyla izlendiği",
+        "dsmMatch": "Kriter A: Ruhsal bozukluk dışında doğrulanmış bir tıbbi hastalığın varlığı"
+      },
+      {
+        "clueIndex": 3,
+        "text": "koruyucu inhaler ilacını 'ilaçlara bağımlı olmak istemediği' için sık sık aksattığı",
+        "dsmMatch": "Kriter B: Davranışsal ve psikolojik etkenlerin tedaviye engel olarak tıbbi durumu olumsuz etkilemesi"
+      },
+      {
+        "clueIndex": 5,
+        "text": "tablo başka bir ruhsal bozuklukla açıklanamamaktadır",
+        "dsmMatch": "Kriter C: Etkenlerin panik bozukluk ya da depresyon gibi başka bir ruhsal bozuklukla daha iyi açıklanamaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Motivasyonel Görüşme & Bilişsel Davranışçı Stres Yönetimi",
+      "therapyDetails": "Tıbbi ekiple eşgüdümlü konsültasyon-liyezon yaklaşımı içinde tedavi uyumunu artırmaya yönelik motivasyonel görüşme, hastalık algısı üzerine bilişsel çalışma ve stres yönetimi becerileri uygulanır.",
+      "pharmacologyNote": "Birinci basamak müdahale psikolojik ve davranışsal yaklaşımdır; eşlik eden bağımsız bir depresyon veya anksiyete bozukluğu yoksa rutin psikotrop ilaç başlanmaz, tıbbi tedavi optimize edilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastadaki klinik tabloyu Bedensel Belirti Bozukluğundan ayıran en temel özellik nedir?",
+      "options": [
+        "Odak noktasının ruhsal etkenlerin doğrulanmış bir tıbbi hastalığın seyrini ve tedavisini olumsuz etkilemesi olması",
+        "Hastada hiçbir organik ya da tıbbi hastalık kanıtının bulunmaması",
+        "Hastanın tıbbi belirtileri bilinçli olarak taklit etmesi",
+        "Yakınmaların yalnızca nörolojik duyu-motor kayıplarla sınırlı olması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Başka Sağlık Durumunu Etkileyen Ruhsal Etkenlerde gerçek bir tıbbi hastalık vardır ve psikolojik/davranışsal etkenler bu hastalığın seyrini, alevlenmelerini veya tedavi uyumunu olumsuz etkiler. Bedensel Belirti Bozukluğunda ise temel sorun belirtilerle ilgili aşırı kaygı ve uğraşıdır."
+    },
+    "differentialDiagnosis": "• Bedensel Belirti Bozukluğu (Somatik Semptom Bozukluğu): Belirtilere dair aşırı kaygı ve yoğun sağlık arayışı ön plandadır; burada ise belirtileri küçümseme ve tedaviye uyumsuzluk vardır.\n• Hastalık Kaygısı Bozukluğu (Hipokondriyazis): Ciddi bir tıbbi hastalık olmadığı hâlde ağır hastalık kapma korkusu baskındır.\n• Panik Bozukluk: Beklenmedik yineleyici panik atakları görülür; burada nefes darlığı doğrulanmış astım alevlenmesine bağlıdır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Doğrulanmış tıbbi hastalık (A) + Psikolojik/davranışsal etkenlerin seyre, tedaviye veya risklere olumsuz etkisi (B) + Başka ruhsal bozuklukla daha iyi açıklanamama (C).",
+    "therapyId": "motivational_interviewing",
+    "explanation": {
+      "whyThis": [
+        "Hastada solunum testleriyle doğrulanmış bronşiyal astım bulunması Kriter A'yı karşılar.",
+        "Stresle tetiklenen alevlenmeler, koruyucu ilacı aksatma ve belirtileri küçümseyerek acil başvurulara yol açma Kriter B'yi gösterir.",
+        "Tabloyu açıklayacak bağımsız bir panik bozukluk ya da majör depresif bozukluk yoktur (Kriter C)."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "somatic_symptom_disorder",
+          "reason": "Belirtilerle ilgili aşırı kaygı ve sağlık arayışı yerine tıbbi gereksinimi küçümseme ve tedavi uyumsuzluğu vardır."
+        },
+        {
+          "diagnosisId": "panic_disorder",
+          "reason": "Nefes darlığı atakları doğrulanmış astım alevlenmelerine bağlıdır, beklenmedik panik atakları yoktur."
+        },
+        {
+          "diagnosisId": "illness_anxiety_disorder",
+          "reason": "Hasta gerçek bir kronik tıbbi hastalığa sahiptir ve ağır hastalık kaygısı değil inkar sergilemektedir."
+        }
+      ],
+      "teachingPoint": "Doğrulanmış bir tıbbi hastalığın seyrini stres, inkar veya tedavi uyumsuzluğu ağırlaştırıyorsa ve başka bir ruhsal bozukluk yoksa bu tanı düşünülür."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "anorexia_nervosa",
+    "category": "EATING",
+    "patientSummary": "23 yaşında, kadın, tekstil mühendisi (BKİ: 15.8 kg/m²)",
+    "clues": [
+      "23 yaşındaki tekstil mühendisi, son 7 aydır giderek artan halsizlik, sürekli üşüme, ayağa kalkınca göz kararması ve 4 aydır adet görememe yakınmalarıyla dahiliye bölümünden yönlendiriliyor.",
+      "Son bir yılda öğün porsiyonlarını giderek kısıtlayarak yaklaşık 14 kilogram verdiği, işyerinde arkadaşlarıyla öğle yemeğine çıkmaktan kaçındığı ve akşamları geç saatlere dek hızlı tempoda yürüyüş yaptığı öğreniliyor.",
+      "Tiroid fonksiyon testleri, çölyak antikorları, enflamatuvar belirteçler ve karın görüntülemesi olağan; kronik enfeksiyon ya da malignite bulgusu yok.",
+      "Fizik muayenede kan basıncı 88/56 mmHg, nabız 48/dk (sinüs bradikardisi), kol ve sırtta ince ayva tüyleri (lanugo) izleniyor; kendini kusturma ya da müshil kullanımı öyküsü yok.",
+      "Ruhsal Durum Muayenesinde: Zayıf görünümüne karşın bol giysiler giymiş, göz teması sınırlı. Duygudurum hafif çökkün ve gergin. Düşünce içeriğinde kalori hesabı ve 'kontrolü kaybetme' endişesi baskın. İçgörü belirgin biçimde bozuk.",
+      "Belirgin derecede düşük vücut ağırlığına karşın 1-2 kilo almaktan bile yoğun korku duymakta, aynada bel ve kalçasını 'hâlâ fazlalıklı' algılamakta ve düşük kilonun tıbbi tehlikesini kabul etmemektedir."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "Son bir yılda öğün porsiyonlarını giderek kısıtlayarak yaklaşık 14 kilogram verdiği",
+        "dsmMatch": "Kriter A: Enerji alımının kısıtlanması sonucu belirgin derecede düşük vücut ağırlığı"
+      },
+      {
+        "clueIndex": 5,
+        "text": "1-2 kilo almaktan bile yoğun korku duymakta",
+        "dsmMatch": "Kriter B: Düşük kiloya karşın kilo almaktan aşırı korkma"
+      },
+      {
+        "clueIndex": 5,
+        "text": "aynada bel ve kalçasını 'hâlâ fazlalıklı' algılamakta",
+        "dsmMatch": "Kriter C: Beden ağırlığı ve biçimini algılamada bozulma ve tıbbi riski inkar"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Geliştirilmiş Bilişsel Davranışçı Terapi (CBT-E) & Medikal İzlem",
+      "therapyDetails": "Öncelikle hemodinamik stabilizasyon ve beslenme rehabilitasyonu (refeeding sendromu izlemiyle) sağlanır; erişkin olgularda CBT-E ile katı diyet kuralları ve beden algısı çarpıtmaları çalışılır.",
+      "pharmacologyNote": "Birinci basamak tedavi beslenme rehabilitasyonu ve psikoterapidir; SSRI'lar ağır düşük kiloda sınırlı etkinlik gösterir, şiddetli kilo kaygısı ve dirençli olgularda düşük doz olanzapin destekleyici olarak değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada yeniden beslenme (beslenme rehabilitasyonu) sürecinin ilk günlerinde en yakından izlenmesi gereken yaşamı tehdit edici elektrolit bozukluğu hangisidir?",
+      "options": [
+        "Hiperkalsemi",
+        "Hipofosfatemi",
+        "Hipernatremi",
+        "Hipermagnezemi"
+      ],
+      "correctIndex": 1,
+      "explanation": "Uzun süreli açlık sonrası karbonhidrat alımının artması insülin salınımını tetikler ve fosfat, potasyum ile magnezyumun hızla hücre içine geçmesine yol açar. Gelişen ağır hipofosfatemi (refeeding sendromu) kardiyak ve solunum yetmezliğine neden olabilir."
+    },
+    "differentialDiagnosis": "• Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID): Kilo kaybı vardır ancak kilo alma korkusu ve beden algısı bozukluğu bulunmaz.\n• Bulimiya Nervoza: Tıkınırcasına yeme ve ödünleyici davranışlar görülür ancak vücut ağırlığı normal aralıktadır.\n• Majör Depresif Bozukluk: İştah kaybına bağlı kilo düşüşü olabilir fakat şişmanlama korkusu ve beden biçimi çarpıtması yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Enerji kısıtlamasıyla belirgin düşük vücut ağırlığı (A) + Kilo alma korkusu veya kilo almayı engelleyen davranışlar (B) + Beden algısı bozukluğu ya da düşük kilonun ciddiyetini inkar (C).",
+    "therapyId": "cbt_e",
+    "explanation": {
+      "whyThis": [
+        "BKİ 15.8 kg/m², amenore, bradikardi ve lanugo bulguları enerji kısıtlamasına bağlı belirgin düşük vücut ağırlığını (Kriter A) gösterir.",
+        "Düşük kilosuna rağmen kilo almaktan yoğun korku duyması ve aşırı yürüyüş yapması Kriter B'yi karşılar.",
+        "Kendini fazlalıklı algılaması ve tıbbi riski reddetmesi Kriter C'yi doğrular; kusma/müshil olmaması kısıtlayıcı alt tipe işaret eder."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "arfid",
+          "reason": "ARFID'de kilo alma korkusu ve beden algısı bozukluğu bulunmaz."
+        },
+        {
+          "diagnosisId": "bulimia_nervosa",
+          "reason": "Vücut ağırlığı belirgin derecede düşüktür ve tıkınma-çıkarma döngüsü yoktur."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Kilo kaybı iştah azalmasından değil bilinçli enerji kısıtlaması ve şişmanlama korkusundan kaynaklanır."
+        }
+      ],
+      "teachingPoint": "Düşük BKİ'ye eşlik eden yoğun kilo alma korkusu ve beden algısı çarpıtması bu tanıyı ARFID ve depresyondan kesin olarak ayırır."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "bulimia_nervosa",
+    "category": "EATING",
+    "patientSummary": "27 yaşında, kadın, diş hekimi asistanı (BKİ: 22.1 kg/m²)",
+    "clues": [
+      "27 yaşındaki diş hekimi asistanı, son aylarda artan halsizlik, boğaz yanması, ara sıra çarpıntı ve kendini sürekli suçlu hissetme yakınmalarıyla başvuruyor.",
+      "Akşamları işten döndüğünde günün gerginliğiyle baş edemeyip mutfakta kısa sürede yüksek kalorili yiyecekleri durmaksızın tükettiği, sonrasında yoğun pişmanlık yaşadığı öğreniliyor.",
+      "Fizik muayenede her iki parotis bezinde hafif şişlik, ön dişlerin iç yüzeyinde mine aşınması ve sağ el parmak eklem sırtında nasırlaşma fark ediliyor; BKİ normal aralıkta.",
+      "Biyokimya tetkikinde serum potasyumu 3.2 mEq/L (hafif hipokalemi), metabolik alkaloz eğilimi saptanıyor; tiroid, kan şekeri ve diğer sistemik testler olağan.",
+      "Ruhsal Durum Muayenesinde: Bakımlı, ancak utangaç ve gergin. Duygudurum hafif çökkün. Düşünce içeriğinde beden ölçüleri, kıyafet bedeni ve başarısızlık algısı yoğun. İntihar düşüncesi yok, içgörü kısmi.",
+      "Son 6 aydır haftada 3-4 kez denetimi yitirerek olağandan çok fazla yiyecek tükettikten sonra kilo almayı önlemek için kendini kusturduğu ve özdeğerini neredeyse tümüyle beden biçimine bağladığı netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "haftada 3-4 kez denetimi yitirerek olağandan çok fazla yiyecek tükettikten sonra",
+        "dsmMatch": "Kriter A & C: Yineleyen tıkınırcasına yeme nöbetleri (en az 3 ay, haftada ≥ 1)"
+      },
+      {
+        "clueIndex": 5,
+        "text": "kilo almayı önlemek için kendini kusturduğu",
+        "dsmMatch": "Kriter B: Kilo almayı engellemeye yönelik uygunsuz ödünleyici davranış"
+      },
+      {
+        "clueIndex": 2,
+        "text": "BKİ normal aralıkta",
+        "dsmMatch": "Kriter E: Tablonun belirgin düşük kilolu bir anoreksiya dönemi sırasında olmaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Geliştirilmiş Bilişsel Davranışçı Terapi (CBT-E)",
+      "therapyDetails": "Düzenli öğün planlaması, katı diyet kurallarının esnetilmesi, tıkınma tetikleyicilerinin izlenmesi ve özdeğerin beden biçimi dışındaki alanlara genişletilmesi hedeflenir.",
+      "pharmacologyNote": "Yüksek doz fluoksetin (60 mg/gün) tıkınma ve çıkarma sıklığını azaltmada onaylı ilk basamak farmakoterapidir; elektrolit dengesizliği (hipokalemi) mutlaka düzeltilmelidir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada sık tekrarlayan kendini kusturma davranışına bağlı en sık beklenen laboratuvar ve fizik muayene bulgusu kombinasyonu hangisidir?",
+      "options": [
+        "Hiperkalemi ve metabolik asidoz",
+        "Hipernatremi ve bradikardi",
+        "Hipokalemi, hipokloremik metabolik alkaloz ve parotis bezlerinde büyüme",
+        "Hipokalsemi ve tiroid bezinde büyüme"
+      ],
+      "correctIndex": 2,
+      "explanation": "Tekrarlayan kusmalar mide asidi (HCl) ve potasyum kaybına yol açarak hipokloremik hipokalemik metabolik alkaloza neden olur; ayrıca parotis bezlerinde hipertrofi, diş minesi erozyonu ve el sırtında Russell bulgusu sık görülür."
+    },
+    "differentialDiagnosis": "• Anoreksiya Nervoza: Tıkınma-çıkarma alt tipinde de kusma görülebilir ancak vücut ağırlığı belirgin derecede düşüktür; burada BKİ normaldir.\n• Tıkınırcasına Yeme Bozukluğu (BED): Yineleyen tıkınma atakları vardır ancak kusma veya müshil gibi ödünleyici davranışlar bulunmaz.\n• Majör Depresif Bozukluk: Atipik özelliklerde aşırı yeme görülebilir ancak düzenli ödünleyici çıkarma davranışı ve aşırı beden biçimi odaklı özdeğer yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Denetim kaybıyla tıkınırcasına yeme (A) + Uygunsuz ödünleyici davranışlar (B) + En az 3 ay, haftada ≥ 1 sıklık (C) + Beden biçiminden aşırı etkilenen özdeğer (D) + Normal kilo (E).",
+    "therapyId": "cbt_e",
+    "explanation": {
+      "whyThis": [
+        "Son 6 aydır haftada 3-4 kez denetim kaybıyla aşırı yeme ve ardından kendini kusturma Kriter A, B ve C'yi karşılar.",
+        "Parotis şişliği, diş minesi aşınması, el sırtında nasır ve hipokalemi tekrarlayan kusmanın somut fiziksel kanıtlarıdır.",
+        "BKİ'nin 22.1 kg/m² ile normal aralıkta olması ve özdeğerin beden biçimine aşırı bağlı olması Kriter D ve E'yi doğrular."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "anorexia_nervosa",
+          "reason": "Hastanın vücut ağırlığı normal aralıktadır; belirgin düşük kilo yoktur."
+        },
+        {
+          "diagnosisId": "binge_eating",
+          "reason": "Tıkınma nöbetlerini düzenli olarak kendini kusturma gibi telafi edici davranışlar izlemektedir."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Temel klinik tablo çökkünlük değil, tıkınma-çıkarma döngüsü ve beden biçimi odaklı özdeğerdir."
+        }
+      ],
+      "teachingPoint": "Normal BKİ'ye eşlik eden parotis şişliği, diş erozyonu, hipokalemi ve tıkınma sonrası kusma döngüsü bu tanıyı anoreksiya ve tıkınırcasına yeme bozukluğundan ayırır."
+    }
+  },
+  {
+    "difficulty": "Kolay",
+    "course": "ADULT",
+    "diagnosisId": "binge_eating",
+    "category": "EATING",
+    "patientSummary": "38 yaşında, erkek, mali müşavir (BKİ: 33.2 kg/m²)",
+    "clues": [
+      "38 yaşındaki mali müşavir, son bir yıldır hızla artan kilo, sabahları bitkinlik ve toplumsal etkinliklerden uzaklaşma yakınmalarıyla başvuruyor.",
+      "Özellikle vergi beyan dönemleri gibi stresli günlerde akşam herkes uyuduktan sonra mutfağa girip kısa sürede büyük miktarlarda yemek tükettiği, o anlarda kendini durduramadığı öğreniliyor.",
+      "Endokrinoloji değerlendirmesinde tiroid fonksiyonları, sabah kortizolü ve prolaktin olağan; açlık glukozu sınırda yüksek, başka bir ilaç ya da madde kullanımı yok.",
+      "Öyküsünde gün içinde öğün atlama ya da katı açlık dönemleri olmadığı; yemeklerden sonra kusma, müshil, idrar söktürücü ya da aşırı egzersiz gibi uygulamalara hiç başvurmadığı netleştiriliyor.",
+      "Ruhsal Durum Muayenesinde: Göz temasından kaçınan, utanmış bir duruş sergiliyor. Duygudurum hafif çökkün, duygulanım sıkıntılı. Düşünce içeriğinde iradesizlik ve kendinden iğrenme temaları öne çıkıyor. İçgörü iyi.",
+      "Son 8 aydır haftada 2-3 kez fiziksel olarak aç olmadığı hâlde rahatsız edici tokluğa dek çok hızlı yediği, utandığı için hep yalnız yediği ve ardından yoğun suçluluk duyduğu saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "kısa sürede büyük miktarlarda yemek tükettiği, o anlarda kendini durduramadığı",
+        "dsmMatch": "Kriter A: Kısa sürede aşırı miktarda yeme ve denetim yitimi"
+      },
+      {
+        "clueIndex": 5,
+        "text": "aç olmadığı hâlde rahatsız edici tokluğa dek çok hızlı yediği, utandığı için hep yalnız yediği",
+        "dsmMatch": "Kriter B: Tıkınma özelliklerinden en az üçünün varlığı ve belirgin sıkıntı"
+      },
+      {
+        "clueIndex": 3,
+        "text": "kusma, müshil, idrar söktürücü ya da aşırı egzersiz gibi uygulamalara hiç başvurmadığı",
+        "dsmMatch": "Kriter E: Uygunsuz ödünleyici davranışların bulunmaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Geliştirilmiş Bilişsel Davranışçı Terapi (CBT-E)",
+      "therapyDetails": "Duygusal tetikleyicilerin tanınması, düzenli öğün yapısının kurulması, stresle baş etme becerileri ve suçluluk döngüsünün kırılması hedeflenir.",
+      "pharmacologyNote": "Psikoterapiye ek olarak seçilmiş olgularda SSRI'lar (ör. fluoksetin, sertralin) veya lisdeksamfetamin tıkınma ataklarının sıklığını azaltmada etkilidir."
+    },
+    "miniQuiz": {
+      "question": "Bu bozukluğu Bulimiya Nervozadan kesin olarak ayıran DSM-5-TR ölçütü aşağıdakilerden hangisidir?",
+      "options": [
+        "Atakların yalnızca gece saatlerinde ortaya çıkması",
+        "Hastanın mutlaka erkek cinsiyette olması",
+        "Atak sonrasında yoğun suçluluk hissedilmemesi",
+        "Kusma, müshil kullanımı veya aşırı egzersiz gibi yineleyici ödünleyici davranışların bulunmaması"
+      ],
+      "correctIndex": 3,
+      "explanation": "Her iki bozuklukta da denetim kaybıyla giden tıkınma atakları haftada en az bir kez ve en az 3 ay sürer; ancak bu tabloda Bulimiya Nervozadaki gibi uygunsuz telafi edici davranışlar kesinlikle yoktur."
+    },
+    "differentialDiagnosis": "• Bulimiya Nervoza: Tıkınma ataklarını düzenli kusma, laksatif veya aşırı egzersiz gibi ödünleyici davranışlar izler; burada hiçbiri yoktur.\n• Majör Depresif Bozukluk: Atipik özelliklerde iştah artışı görülebilir ancak bu denli belirgin denetim kaybı, yalnız yeme ve hızlı tıkınma nöbetleri temel tablo değildir.\n• Anoreksiya Nervoza: Belirgin düşük vücut ağırlığı gerektirir; burada BKİ obezite sınırındadır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Denetim kaybıyla tıkınma atakları (A) + En az 3/5 özellik (hızlı yeme, aşırı tokluk, aç değilken yeme, yalnız yeme, suçluluk) (B) + Belirgin sıkıntı (C) + En az 3 ay, haftada ≥ 1 (D) + Ödünleyici davranış yokluğu (E).",
+    "therapyId": "cbt_e",
+    "explanation": {
+      "whyThis": [
+        "Sekiz aydır haftada 2-3 kez kısa sürede aşırı miktarda ve denetimsiz yemek yemesi Kriter A ve D'yi karşılar.",
+        "Aç değilken hızlı yeme, rahatsız edici tokluk, utandığı için yalnız yeme ve sonrasında kendinden iğrenme Kriter B ve C'yi doğrular.",
+        "Kusma, müshil veya aşırı egzersiz gibi hiçbir telafi edici eylemin olmaması Kriter E'yi netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "bulimia_nervosa",
+          "reason": "Tıkınma nöbetlerinin ardından uygunsuz ödünleyici davranışlar bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Suçluluk ve çökkünlük yalnızca yeme ataklarına ikincildir; bağımsız majör depresif dönem ölçütleri yoktur."
+        },
+        {
+          "diagnosisId": "anorexia_nervosa",
+          "reason": "Vücut ağırlığı düşük değil, BKİ 33.2 kg/m² ile yüksektir."
+        }
+      ],
+      "teachingPoint": "Denetim kaybı ve suçlulukla giden düzenli tıkınma ataklarında ödünleyici davranışların yokluğu bu tanıyı bulimiyadan ayıran kilit noktadır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "arfid",
+    "category": "EATING",
+    "patientSummary": "21 yaşında, erkek, bilgisayar programcılığı öğrencisi (BKİ: 16.9 kg/m²)",
+    "clues": [
+      "21 yaşındaki bilgisayar programcılığı öğrencisi, son 6 aydır belirgin kilo kaybı, halsizlik ve arkadaşlarıyla kafeteryada oturmaktan çekinme yakınmalarıyla gastroenteroloji bölümünden yönlendiriliyor.",
+      "8 ay önce bir lokantada katı bir et parçasının boğazına takılıp kısa süre nefes almakta zorlanmasının ardından katı gıdalara karşı yoğun tedirginlik geliştirdiği öğreniliyor.",
+      "Üst gastrointestinal endoskopi, özofagus manometri ve yutma grafisi tamamen normal; yapısal bir darlık ya da nöromüsküler yutma bozukluğu saptanmıyor.",
+      "Son 5 aydır yalnızca süzülmüş çorba, yoğurt, süt ve doktorun önerdiği sıvı takviye içeceklerle beslendiği; 9 kilogram kaybettiği, demir ve B12 eksikliği geliştiği belirleniyor.",
+      "Ruhsal Durum Muayenesinde: Zayıf ve solgun görünümde, işbirliğine açık. Duygudurum kaygılı, duygulanım uyumlu. Zayıf görünmekten rahatsız olduğunu ve 'eski kilosuna dönmek istediğini' söylüyor. Psikotik belirti yok.",
+      "Belirgin kilo kaybı ve besin takviyesine bağımlılık gelişmesine karşın kilo alma korkusu ya da beden biçimini yanlış algılamanın hiç bulunmadığı; gıda kısıtlamasının tümüyle katı lokmanın soluk borusuna kaçacağı endişesine bağlı olduğu netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 3,
+        "text": "9 kilogram kaybettiği, demir ve B12 eksikliği geliştiği",
+        "dsmMatch": "Kriter A: Besin gereksinimini karşılayamama, belirgin kilo kaybı ve beslenme eksikliği"
+      },
+      {
+        "clueIndex": 3,
+        "text": "doktorun önerdiği sıvı takviye içeceklerle beslendiği",
+        "dsmMatch": "Kriter A: Oral beslenme takviyelerine bağımlılık"
+      },
+      {
+        "clueIndex": 5,
+        "text": "kilo alma korkusu ya da beden biçimini yanlış algılamanın hiç bulunmadığı",
+        "dsmMatch": "Kriter C: Beden ağırlığı veya biçimini algılamada bozulma olmaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "ARFID için Bilişsel Davranışçı Terapi (CBT-AR) & Kademeli Gıda Maruziyeti",
+      "therapyDetails": "Beslenme rehabilitasyonu eşliğinde güvenli yutma psikoeğitimi, felaketleştirici inançların yeniden yapılandırılması ve pürelerden katı gıdalara aşamalı maruziyet uygulanır.",
+      "pharmacologyNote": "Temel tedavi CBT-AR ve beslenme desteğidir; şiddetli kaygı ve iştahsızlıkla giden seçilmiş olgularda iştahı ve kilo alımını desteklemek amacıyla mirtazapin değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastayı Anoreksiya Nervozadan ayıran en belirleyici klinik bulgu hangisidir?",
+      "options": [
+        "Kilo alma korkusunun ve beden algısı bozukluğunun olmaması, aksine hastanın kilo almak istemesi",
+        "Hastanın erkek cinsiyette olması",
+        "BKİ değerinin 17 kg/m²'nin altında olması",
+        "Demir ve B12 eksikliğinin eşlik etmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "Her iki bozuklukta da ağır kilo kaybı ve beslenme yetersizliği gelişebilir; ancak bu tabloda zayıf kalma arzusu, şişmanlama korkusu ve beden algısı çarpıtması yoktur. Kısıtlama duyusal hassasiyet, ilgisizlik veya olumsuz bir deneyim sonrası gelişen korkuya bağlıdır."
+    },
+    "differentialDiagnosis": "• Anoreksiya Nervoza: Belirgin düşük kilo vardır ancak kilo alma korkusu ve beden algısı bozukluğu zorunludur; bu hasta kilo almak istemektedir.\n• Özgül Fobi: Yutma veya boğulma korkusu bulunabilir ancak beslenme eksikliği, ağır kilo kaybı ve oral takviye bağımlılığı düzeyine ulaştığında bu tanı önceliklidir.\n• Bedensel Belirti Bozukluğu (Somatik Semptom Bozukluğu): Tıbbi belirtilerle aşırı uğraşı vardır; burada odak yiyeceklerin olumsuz sonuçlarına yönelik kısıtlayıcı beslenmedir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Belirgin kilo kaybı, beslenme eksikliği veya takviye bağımlılığına yol açan gıda kısıtlaması (A) + Kültürel/ulaşım kaynaklı olmama (B) + Kilo alma korkusu veya beden algısı bozukluğu yokluğu (C) + Tıbbi durumla açıklanamama (D).",
+    "therapyId": "cbt_ar",
+    "explanation": {
+      "whyThis": [
+        "Katı lokmanın boğazına takılması sonrasında gelişen gıda kısıtlaması 9 kg kayba, demir-B12 eksikliğine ve sıvı takviye bağımlılığına yol açmıştır (Kriter A).",
+        "Endoskopi ve manometri normal olduğundan organik özofageal patoloji dışlanmıştır (Kriter D).",
+        "Hastanın kilo alma korkusu yaşamaması ve kilo almak istemesi, beden algısı bozukluğunun yokluğunu doğrular (Kriter C)."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "anorexia_nervosa",
+          "reason": "Kilo alma korkusu ve beden biçimini yanlış algılama yoktur; hasta zayıflıktan yakınıp kilo almak istemektedir."
+        },
+        {
+          "diagnosisId": "specific_phobia",
+          "reason": "Korku belirgin kilo kaybı, vitamin eksikliği ve beslenme takviyesi bağımlılığına yol açtığında yeme bozukluğu tanısı konur."
+        },
+        {
+          "diagnosisId": "somatic_symptom_disorder",
+          "reason": "Tabloyu belirleyen, genel bedensel belirti kaygısı değil gıda alımının ciddi biçimde kısıtlanmasıdır."
+        }
+      ],
+      "teachingPoint": "Düşük BKİ her zaman anoreksiya demek değildir; kilo alma korkusu ve beden algısı bozukluğu yoksa travmatik yutma öyküsü veya duyusal seçicilik mutlaka sorgulanmalıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "pica",
+    "category": "EATING",
+    "patientSummary": "29 yaşında, kadın, 24 haftalık gebe, eczacı",
+    "clues": [
+      "29 yaşındaki 24 haftalık gebe eczacı, son 3 aydır artan halsizlik, karın ağrısı, inatçı kabızlık ve eşinin fark ettiği alışılmadık davranışlar nedeniyle kadın doğum hekimi tarafından yönlendiriliyor.",
+      "Eşi, hastanın özellikle akşamları kiler ve balkonda uzun süre gizlice vakit geçirdiğini, bu durumu sorduğunda utandığını ve konuyu kapattığını aktarıyor.",
+      "Kan tahlilinde hemoglobin 9.2 g/dL, ferritin 6 ng/mL ve transferrin satürasyonu düşük (demir eksikliği anemisi); serum kurşun düzeyi normal, karın ultrasonografisinde tıkanıklık bulgusu yok.",
+      "Gebelik öncesinde benzer bir öyküsü olmadığı; kilo verme kaygısı, obsesif takıntı, halüsinasyon ya da sanrı bulunmadığı belirleniyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliğine açık ancak belirgin biçimde mahcup. Duygudurum hafif kaygılı. Davranışının bebeğe zarar verebileceğinden endişe ediyor ancak dürtüsüne karşı koymakta zorlandığını belirtiyor. İçgörü korunmuş.",
+      "Son 3 aydır hemen her gün pişmemiş nişasta kalıpları ile balkondaki saksı kenarından kazıdığı kuru kil parçalarını çiğneyip yuttuğu, bu uygulamanın kültürel ya da toplumsal bir gelenekle ilişkili olmadığı netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "Son 3 aydır hemen her gün pişmemiş nişasta kalıpları ile balkondaki saksı kenarından kazıdığı kuru kil parçalarını çiğneyip yuttuğu",
+        "dsmMatch": "Kriter A: En az 1 ay boyunca besin değeri olmayan, yenmeyen maddeleri sürekli yeme"
+      },
+      {
+        "clueIndex": 5,
+        "text": "kültürel ya da toplumsal bir gelenekle ilişkili olmadığı",
+        "dsmMatch": "Kriter C: Davranışın kültürel olarak desteklenen bir uygulama olmaması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "hemoglobin 9.2 g/dL, ferritin 6 ng/mL",
+        "dsmMatch": "Klinik bağlam: Gebelik ve ağır demir eksikliği ile sık birliktelik"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Davranışsal Müdahale (CBT-AR) & Mineral Replasmanı",
+      "therapyDetails": "Öncelikle demir ve çinko eksikliğinin medikal tedavisi yapılır; davranışsal olarak tetikleyicilerin azaltılması, güvenli duyusal alternatiflerin (ör. buz, sert sebzeler) yerleştirilmesi ve gebelik güvenliği danışmanlığı sağlanır.",
+      "pharmacologyNote": "Bu tabloda özgül bir psikotrop ilaç endikasyonu yoktur; altta yatan demir/çinko eksikliğinin yerine konması çoğu erişkin ve gebe olguda dürtünün hızla gerilemesini sağlar."
+    },
+    "miniQuiz": {
+      "question": "Erişkinlerde ve gebelerde bu tablonun değerlendirilmesinde öncelikle araştırılması ve düzeltilmesi gereken biyolojik etken hangisidir?",
+      "options": [
+        "D vitamini fazlalığı",
+        "Demir ve çinko eksikliği ile ağır metal maruziyeti",
+        "Büyüme hormonu yüksekliği",
+        "Kalsiyum yüksekliği"
+      ],
+      "correctIndex": 1,
+      "explanation": "Demir ve çinko eksikliği bu tablonun hem nedeni hem de sonucu olabilir; ayrıca kil veya toprak tüketimi kurşun zehirlenmesi, paraziter enfeksiyon ve bağırsak tıkanıklığı riski taşıdığından tıbbi tarama şarttır."
+    },
+    "differentialDiagnosis": "• Anoreksiya Nervoza: Açlığı bastırmak için kağıt veya buz çiğnenebilir ancak temel güdü kilo kontrolü ve beden algısı bozukluğudur.\n• Obsesif Kompulsif Bozukluk (OKB): Zorlayıcı düşüncelerle bağlantılı ritüelistik davranışlar görülür; burada obsesyon yoktur.\n• Yapay Bozukluk (Kendine Yüklenen / Münchausen Sendromu): Hasta rolünü üstlenmek için zararlı maddeler alınır; bu hastada aldatma amacı değil utanma ve yardım arayışı vardır.",
+    "dsmCriteriaSummary": "DSM-5-TR: En az 1 ay boyunca besin değeri olmayan, yenmeyen maddeleri sürekli yeme (A) + Gelişimsel düzeye uygunsuzluk (B) + Kültürel uygulama olmaması (C) + Gebelikte ek klinik ilgi gerektirecek şiddette olma (D).",
+    "therapyId": "cbt_ar",
+    "explanation": {
+      "whyThis": [
+        "Üç aydır hemen her gün kuru kil ve pişmemiş nişasta yutması, en az 1 ay süreyle besin değeri olmayan maddeleri tüketme ölçütünü (Kriter A) karşılar.",
+        "Erişkin gelişimsel düzeyine uygunsuzdur, kültürel bir uygulama değildir ve gebelikte anemi ile gastrointestinal risk oluşturduğu için ek klinik ilgi gerektirir (Kriter B-D).",
+        "Ağır demir eksikliği (ferritin 6 ng/mL) bu tabloda sık görülen biyolojik eşlikçidir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "anorexia_nervosa",
+          "reason": "Kilo verme amacı, enerji kısıtlaması veya beden algısı bozukluğu bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "ocd",
+          "reason": "Davranış obsesif bir düşünceyi nötralize etmeye yönelik kompulsif bir ritüel değildir."
+        },
+        {
+          "diagnosisId": "factitious_disorder",
+          "reason": "Hasta rolünü benimseme ya da tıbbi aldatma amacı yoktur; hasta davranışından utanıp çözüm aramaktadır."
+        }
+      ],
+      "teachingPoint": "Gebelikte ortaya çıkan ve en az 1 ay süren yenmeyen madde tüketimi, fetüs ve anne için risk oluşturduğunda ayrı tanı olarak değerlendirilmeli ve demir/çinko eksikliği mutlaka araştırılmalıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "ADULT",
+    "diagnosisId": "rumination_disorder",
+    "category": "EATING",
+    "patientSummary": "24 yaşında, kadın, hastane hemşiresi",
+    "clues": [
+      "24 yaşındaki hastane hemşiresi, son 4 aydır yemeklerden sonra gelişen mide rahatsızlığı, ağızda ekşi tat ve işyerinde arkadaşlarıyla yemekhaneye inmekten çekinme yakınmalarıyla gastroenterolojiden yönlendiriliyor.",
+      "Yakınmaların yoğun servis nöbetleri ve aile içi stresin arttığı bir dönemde başladığı; hemen her ana öğünden yaklaşık 15-20 dakika sonra yediği lokmaların ağzına geldiği öğreniliyor.",
+      "Üst gastrointestinal endoskopi, 24 saatlik özofageal pH-impedans monitorizasyonu ve mide boşalım sintigrafisi tamamen normal; yüksek doz proton pompa inhibitörü tedavisine hiçbir yanıt alınmamış.",
+      "BKİ 21.3 kg/m² ile normal aralıkta; kilo verme isteği, şişmanlama korkusu, tıkınma atakları ya da parmakla kendini kusturma öyküsü bulunmuyor.",
+      "Ruhsal Durum Muayenesinde: Görüşmeye istekli, genel görünüm olağan. Duygudurum hafif sıkıntılı, duygulanım uygun. Yakınmasının iş arkadaşları tarafından fark edilmesinden çekindiğini belirtiyor. Düşünce süreci ve içeriği doğal, içgörü iyi.",
+      "Yutulan yiyeceklerin herhangi bir bulantı, öğürme ya da iğrenme olmaksızın zahmetsizce ağza geldiği, hastanın bunları çoğunlukla yeniden çiğneyip yuttuğu ya da lavaboya tükürdüğü ve bu döngünün 4 aydır sürdüğü belirleniyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "bulantı, öğürme ya da iğrenme olmaksızın zahmetsizce ağza geldiği, hastanın bunları çoğunlukla yeniden çiğneyip yuttuğu",
+        "dsmMatch": "Kriter A: En az 1 ay boyunca yiyeceklerin öğürmesiz biçimde ağza gelip yeniden çiğnenmesi/yutulması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "endoskopi, 24 saatlik özofageal pH-impedans monitorizasyonu ve mide boşalım sintigrafisi tamamen normal",
+        "dsmMatch": "Kriter B: Gastrointestinal bir tıbbi durumla (GÖRH vb.) açıklanamaması"
+      },
+      {
+        "clueIndex": 3,
+        "text": "kilo verme isteği, şişmanlama korkusu, tıkınma atakları ya da parmakla kendini kusturma öyküsü bulunmuyor",
+        "dsmMatch": "Kriter C: Başka bir yeme bozukluğu seyri içinde ortaya çıkmaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Alışkanlığı Tersine Çevirme (HRT) & Diyafram Nefesi Eğitimi",
+      "therapyDetails": "Yemek sonrası karın duvarı kasılmasını önleyen rakip yanıt olarak derin, yavaş diyafram solunumu eğitimi (postprandiyal diyafram nefesi) uygulanır; yüksek oranda kalıcı düzelme sağlar.",
+      "pharmacologyNote": "Birinci basamak tedavi davranışsal diyafram nefesi eğitimidir; proton pompa inhibitörleri etkisizdir ve rutin psikotrop ilaç önerilmez."
+    },
+    "miniQuiz": {
+      "question": "Bu bozuklukta yemek sonrası istemsiz karın duvarı kasılmasını durdurmak için kullanılan kanıta dayalı ilk basamak davranışsal teknik hangisidir?",
+      "options": [
+        "Yüksek doz proton pompa inhibitörü ile asit baskılama",
+        "Yemekten sonra 2 saat sırtüstü düz yatma",
+        "Yemek sonrası düzenli diyafram nefesi (karın solunumu) eğitimi",
+        "Katı gıdaların tümüyle diyetten çıkarılması"
+      ],
+      "correctIndex": 2,
+      "explanation": "Tablonun mekanizması yemek sonrası öğrenilmiş karın duvarı kasılması ve alt özofageal sfinkter gevşemesidir. Diyafram nefesi karın kaslarının kasılmasıyla fizyolojik olarak bağdaşmayan bir rakip yanıt oluşturarak belirtiyi hızla söndürür."
+    },
+    "differentialDiagnosis": "• Bulimiya Nervoza: Yiyeceklerin çıkarılması bilinçli olarak kilo kontrolü amacıyla ve genellikle tıkınma sonrasında yapılır; burada öğürme veya kilo kaygısı yoktur.\n• Anoreksiya Nervoza: Belirgin düşük kilo ve beden algısı bozukluğu vardır; bu hastanın BKİ'si normaldir.\n• Kaçıngan/Kısıtlı Yiyecek Alımı Bozukluğu (ARFID): Yiyeceklerden kaçınmaya bağlı beslenme yetersizliği ön plandadır; burada temel belirti zahmetsiz regürjitasyondur.",
+    "dsmCriteriaSummary": "DSM-5-TR: En az 1 ay boyunca yiyeceklerin bulantı/öğürme olmadan ağza gelip yeniden çiğnenmesi, yutulması veya tükürülmesi (A) + GÖRH/tıbbi durum dışlaması (B) + Başka yeme bozukluğu seyri içinde olmama (C).",
+    "therapyId": "habit_reversal",
+    "explanation": {
+      "whyThis": [
+        "Dört aydır yemeklerden 15-20 dakika sonra bulantı veya öğürme olmaksızın yiyeceklerin ağza gelip yeniden çiğnenmesi Kriter A'yı karşılar.",
+        "Normal endoskopi, pH-impedans ve mide boşalım testleri ile PPI yanıtsızlığı GÖRH ve gastropareziyi dışlar (Kriter B).",
+        "Normal BKİ ve kilo verme amacının bulunmaması diğer yeme bozukluklarını dışlar (Kriter C)."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "bulimia_nervosa",
+          "reason": "Kendini kusturma, tıkınma atakları ve kilo kontrolü amacı yoktur; olay zahmetsiz ve bulantısızdır."
+        },
+        {
+          "diagnosisId": "anorexia_nervosa",
+          "reason": "BKİ normaldir ve beden algısı bozukluğu ya da kilo alma korkusu bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "arfid",
+          "reason": "Temel klinik bulgu gıda kısıtlaması değil, yemek sonrası zahmetsiz regürjitasyon ve yeniden çiğnemedir."
+        }
+      ],
+      "teachingPoint": "PPI'ya yanıtsız ve bulantısız yemek sonrası regürjitasyonda pH-impedans normalse bu tanı akla gelmeli; ilk basamak tedavi diyafram nefesi temelli alışkanlığı tersine çevirmedir."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "CHILD",
+    "diagnosisId": "enuresis",
+    "category": "ELIMINATION",
+    "patientSummary": "9 yaşında, erkek, ilkokul 4. sınıf öğrencisi",
+    "clues": [
+      "9 yaşındaki ilkokul 4. sınıf öğrencisi, son aylarda içine kapanma, yatılı okul gezisine katılmayı reddetme ve sabahları huysuz uyanma yakınmalarıyla annesi tarafından getiriliyor.",
+      "Altı ay önce başka bir ilçeye taşınıp okulu değiştikten sonra, 4 yaşından beri sorunsuz giden gece kontrolünün bozulduğu; haftada 3-4 kez sabahları çarşafının ıslak bulunduğu öğreniliyor.",
+      "Tam idrar tetkiki, idrar kültürü, açlık kan şekeri ve üriner sistem ultrasonografisi tamamen normal; gündüz sık idrara çıkma, yanma, kabızlık ya da nörolojik bulgu yok.",
+      "Düzenli kullandığı bir ilaç (diüretik, antipsikotik vb.) bulunmuyor; babasının da çocukluk döneminde 10 yaşına dek benzer bir süreç yaşadığı öğreniliyor.",
+      "Ruhsal Durum Muayenesinde: Yaşına uygun giyimli, başlangıçta çekingen. Duygudurum hafif üzgün, özellikle arkadaşlarının durumu öğreneceğinden utandığını ifade ediyor. Gelişimsel düzeyi yaşıyla uyumlu, psikotik belirti yok.",
+      "Takvim yaşı 5'in üzerinde olan çocukta son 6 aydır haftada en az 3 gece yalnızca uykuda istemsiz mesane boşalması olduğu, bunun tıbbi bir durum ya da madde etkisiyle açıklanamadığı ve toplumsal çekinmeye yol açtığı saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "haftada 3-4 kez sabahları çarşafının ıslak bulunduğu",
+        "dsmMatch": "Kriter A & B: Yatağa yineleyen istemsiz boşalma (en az 3 ay, haftada ≥ 2)"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Takvim yaşı 5'in üzerinde olan çocukta",
+        "dsmMatch": "Kriter C: Takvim yaşının en az 5 olması"
+      },
+      {
+        "clueIndex": 2,
+        "text": "Tam idrar tetkiki, idrar kültürü, açlık kan şekeri ve üriner sistem ultrasonografisi tamamen normal",
+        "dsmMatch": "Kriter D: Diyabet, enfeksiyon veya ürolojik tıbbi durumun dışlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Gece Alarmı & Davranışsal Koşullanma (Alışkanlık Eğitimi)",
+      "therapyDetails": "Aileye suçlama ve cezalandırmanın durdurulması anlatılır; nem algılayıcı alarm cihazı, ödül takvimi ve akşam sıvı düzenlemesi ile uzun dönemde en yüksek kalıcı iyileşme sağlanır.",
+      "pharmacologyNote": "Alarm tedavisine ek olarak veya kamp/gezi gibi kısa süreli hızlı kontrol gereken durumlarda yatmadan önce desmopressin (sentetik ADH analoğu) etkilidir."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloda uzun dönemde en düşük yineleme (relaps) oranına sahip ilk basamak tedavi yöntemi hangisidir?",
+      "options": [
+        "Çocuğu her gece saat başı zorla uyandırmak",
+        "Yalnızca sıvı alımını tüm gün boyunca sert biçimde kısıtlamak",
+        "Kısa süreli trisiklik antidepresan (imipramin) başlamak",
+        "Nem algılayıcı alarm cihazı ile davranışsal koşullanma eğitimi"
+      ],
+      "correctIndex": 3,
+      "explanation": "Nem algılayıcı alarm tedavisi, mesane doluluğu ile uyanma refleksini koşullandırarak ilaçlara kıyasla uzun dönemde en yüksek kalıcı kür ve en düşük yineleme oranını sağlar. Desmopressin hızlı etkilidir ancak kesilince yineleme daha sıktır."
+    },
+    "differentialDiagnosis": "• Enkoprezis (İstemsiz Kaka Kaçırma): Uygunsuz yerlere dışkı kaçırma ile karakterizedir; burada yalnızca gece mesane boşalması vardır.\n• Ayrılma Kaygısı Bozukluğu: Evden veya bağlanma figürlerinden ayrılmaya yönelik yoğun kaygı baskındır; burada okul gezisinden kaçınma yalnızca utanma korkusuna ikincildir.\n• Uyum Bozuklukları: Taşınma sonrası duygusal belirtiler gelişebilir ancak ölçütleri tam karşılanan özgül dışa atım tablosu ayrı tanı alır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Yatağa/giysilere yineleyen mesane boşalması (A) + Art arda ≥ 3 ay, haftada ≥ 2 kez veya belirgin sıkıntı (B) + Yaş ≥ 5 (C) + Madde/tıbbi durum dışlaması (D).",
+    "therapyId": "habit_reversal",
+    "explanation": {
+      "whyThis": [
+        "Dokuz yaşındaki çocukta son 6 aydır haftada 3-4 gece uykuda istemsiz boşalma olması Kriter A, B ve C'yi karşılar.",
+        "İdrar tetkiki, kan şekeri ve ultrasonografinin normal olması ile ilaç kullanılmaması Kriter D'yi doğrular.",
+        "Uzun bir kuru dönemin ardından taşınma stresörüyle başlaması ikincil, yalnızca gece alt tipine işaret eder."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "encopresis",
+          "reason": "Dışkı kontrolünde herhangi bir sorun yoktur; yakınma yalnızca gece idrar kontrolüyle ilgilidir."
+        },
+        {
+          "diagnosisId": "separation_anxiety",
+          "reason": "Okul gezisine gitmeme nedeni ebeveynden ayrılma korkusu değil, arkadaşlarının önünde utanma endişesidir."
+        },
+        {
+          "diagnosisId": "adjustment_disorder",
+          "reason": "Stresör sonrası gelişse de özgül DSM-5-TR ölçütlerini tam karşılayan bu tanı önceliklidir."
+        }
+      ],
+      "teachingPoint": "5 yaş üzerinde en az 3 ay ve haftada ≥ 2 gece süren, tıbbi nedenlerin dışlandığı bu tabloda cezalandırma durdurulmalı ve ilk basamakta nem alarmı önerilmelidir."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "CHILD",
+    "diagnosisId": "encopresis",
+    "category": "ELIMINATION",
+    "patientSummary": "8 yaşında, erkek, ilkokul 3. sınıf öğrencisi",
+    "clues": [
+      "8 yaşındaki ilkokul 3. sınıf öğrencisi, okulda arkadaşlarının kendisinden uzaklaşması, derste huzursuzluk ve eve döndüğünde kirlenen giysilerini yatağın altına saklama davranışları nedeniyle rehberlik servisinin önerisiyle getiriliyor.",
+      "Son 5 aydır hemen her hafta bir-iki kez iç çamaşırında lekelenme görüldüğü, çocuğun çoğu zaman bunu o anda fark etmediğini söylediği ve okul tuvaletini kullanmaktan kaçındığı öğreniliyor.",
+      "Öyküsünde bir yıl önce birkaç gün süren sert ve ağrılı dışkılama sonrasında tuvalete gitmeyi ertelemeye başladığı, haftada yalnızca bir kez büyük hacimli tuvalet yaptığı belirtiliyor.",
+      "Çocuk cerrahisi muayenesinde sol alt kadranda sert kitle palpe ediliyor, direkt karın grafisinde rektumda yoğun sertleşmiş birikinti izleniyor; Hirschsprung hastalığı, hipotiroidi ve nörolojik patoloji dışlanıyor.",
+      "Ruhsal Durum Muayenesinde: Çekingen, başı öne eğik. Duygudurum üzgün ve utanmış; anne-babasının 'bilerek yaptığı' yönündeki kızgınlığından çok etkilendiğini belirtiyor. Karşıt gelme ya da kasıtlı zarar verme niyeti yok.",
+      "4 yaş eşiğinin oldukça üzerindeki çocukta, ağrılı tuvalet deneyimi sonrası gelişen kronik kabızlığa ikincil olarak rektumdaki sert tıkacın etrafından sıvı içeriğin 5 aydır istemsiz biçimde iç çamaşırına sızdığı netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "Son 5 aydır hemen her hafta bir-iki kez iç çamaşırında lekelenme görüldüğü",
+        "dsmMatch": "Kriter A & B: Uygunsuz yerlere yineleyen istemsiz boşalma (en az 3 ay, ayda ≥ 1)"
+      },
+      {
+        "clueIndex": 5,
+        "text": "4 yaş eşiğinin oldukça üzerindeki çocukta",
+        "dsmMatch": "Kriter C: Takvim yaşının en az 4 olması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "kronik kabızlığa ikincil olarak rektumdaki sert tıkacın etrafından sıvı içeriğin 5 aydır istemsiz biçimde iç çamaşırına sızdığı",
+        "dsmMatch": "Alt Tip: Kabızlık ve taşma inkontinansı ile giden tip (en sık biçim)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Ebeveyn Eğitimi, Cezalandırmanın Sonlandırılması & Düzenli Tuvalet Programı",
+      "therapyDetails": "Aileye bunun kasıtlı bir inatlaşma değil taşma mekanizması olduğu açıklanır; yemeklerden sonra gastrokolik refleksten yararlanan düzenli tuvalet oturuşları ve olumlu pekiştirme uygulanır.",
+      "pharmacologyNote": "Psikotrop ilaç endikasyonu yoktur; pediatri işbirliğiyle öncelikle sertleşmiş birikintinin temizlenmesi (deimpaksiyon) ve ardından dışkıyı yumuşak tutan osmotik laksatif (polietilen glikol/PEG) idamesi esastır."
+    },
+    "miniQuiz": {
+      "question": "Kabızlık ve taşma inkontinansı ile giden bu tabloda tedavinin ilk ve vazgeçilmez tıbbi-davranışsal adımı nedir?",
+      "options": [
+        "Çocuğun kasıtlı inatlaşmasını kırmak için kesin disiplin ve ceza uygulamak",
+        "Rektumdaki sert birikintinin temizlenmesi, PEG ile yumuşatma ve suçlayıcı olmayan düzenli tuvalet eğitimi",
+        "Düşük doz antipsikotik ilaç başlamak",
+        "Sıvı ve lif alımını azaltarak bağırsak hareketlerini yavaşlatmak"
+      ],
+      "correctIndex": 1,
+      "explanation": "Olguların yaklaşık %85'i kabızlık ve taşma inkontinansına bağlıdır. Rektal duvar genişleyip duyusunu kaybettiğinden çocuk sızıntıyı istemsiz yaşar; önce tıkacın temizlenmesi, PEG ile yumuşatma ve cezalandırmadan tuvalet rutini kurulması gerekir."
+    },
+    "differentialDiagnosis": "• Enürezis (İstemsiz İdrar Kaçırma / Alt Islatma): İdrar kontrolüne ilişkindir; burada sorun dışkı tutma ve taşma sızıntısıdır.\n• Karşıt Olma Karşı Gelme Bozukluğu (KOKGB / ODD): Otoriteye yönelik yaygın öfke ve kasıtlı karşı gelme vardır; bu çocukta sızıntı tamamen istemsizdir ve çocuk durumdan utanmaktadır.\n• Özgül Fobi: Tuvalete ilişkin kaçınma vardır ancak ayda ≥ 1 ve en az 3 ay süren istemsiz sızıntı bu tanıyı belirler.",
+    "dsmCriteriaSummary": "DSM-5-TR: Uygunsuz yerlere istemsiz/kasıtlı dışkı boşalması (A) + En az 3 ay, ayda ≥ 1 sıklık (B) + Yaş ≥ 4 (C) + Kabızlık dışı tıbbi durumun dışlanması (D); kabızlık ve taşma inkontinansı alt tipi.",
+    "therapyId": "parent_training",
+    "explanation": {
+      "whyThis": [
+        "Sekiz yaşındaki çocukta 5 aydır haftada 1-2 kez iç çamaşırına istemsiz sızıntı olması Kriter A, B ve C'yi karşılar.",
+        "Karın muayenesi ve grafideki rektal birikinti ile Hirschsprung dışlaması, kabızlık ve taşma inkontinansı alt tipini doğrular (Kriter D).",
+        "Çocuğun sızıntıyı fark etmemesi ve utandığı için giysilerini saklaması istemsiz taşma mekanizmasının tipik göstergesidir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "enuresis",
+          "reason": "Yakınma idrar değil, kronik kabızlığa bağlı istemsiz dışkı sızıntısıdır."
+        },
+        {
+          "diagnosisId": "odd",
+          "reason": "Davranış kasıtlı bir inatlaşma değil fizyolojik taşma inkontinansıdır; yaygın karşıt gelme örüntüsü yoktur."
+        },
+        {
+          "diagnosisId": "specific_phobia",
+          "reason": "Ağrılı dışkılama korkusu tetikleyici olsa da temel klinik tablo kronik retansiyonlu taşma sızıntısıdır."
+        }
+      ],
+      "teachingPoint": "Kabızlıkla giden olgularda sızıntı kasıtlı değil taşma mekanizmasına bağlıdır; aileyi suçlamaktan vazgeçirmek ve PEG + tuvalet rutini kurmak tedavinin temelidir."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "insomnia_disorder",
+    "category": "SLEEP",
+    "patientSummary": "51 yaşında, kadın, serbest avukat",
+    "clues": [
+      "51 yaşındaki serbest avukat, son aylarda gün içi yoğun bitkinlik, duruşmalarda odaklanma güçlüğü ve çabuk sinirlenme yakınmalarıyla başvuruyor.",
+      "Yaklaşık 7 ay önce ağır bir miras davası sürecinde başlayan gece dinlenememe sorununun, dava sonuçlandıktan sonra da devam ettiği; akşam yaklaştıkça 'bu gece de dinlenemeyeceğim' diye gerginleştiği öğreniliyor.",
+      "Tiroid hormonları, ferritin, B12 ve tam kan sayımı olağan; akşam saatlerinde kafein, alkol ya da uyarıcı kullanımı yok; gündüz şekerleme yapmıyor.",
+      "Eşi horlama, gece nefes durması ya da bacaklarda huzursuzluk gözlemlemediğini bildiriyor; sabahları normal saatte kalkıp işine gidiyor ancak gün boyu verimi düşüyor.",
+      "Ruhsal Durum Muayenesinde: Yorgun görünümlü, göz altları mor. Duygudurum hafif gergin, anhedoni ya da yaygın çökkünlük yok (majör depresif dönem ölçütü karşılanmıyor). Düşünce içeriğinde gece saate bakma ve ertesi günün performansını felaketleştirme belirgin.",
+      "Yeterli zaman ve sessiz, karanlık yatak odası koşulları bulunmasına karşın son 7 aydır haftada 4-5 gece yatağa girdikten sonra bir saatten uzun süre uyanık kaldığı, gece sık uyanıp tekrar dalmakta zorlandığı ve işlevselliğinin bozulduğu belirleniyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "son 7 aydır haftada 4-5 gece yatağa girdikten sonra bir saatten uzun süre uyanık kaldığı",
+        "dsmMatch": "Kriter A, C & D: En az 3 aydır haftada ≥ 3 gece süren başlatma/sürdürme güçlüğü"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Yeterli zaman ve sessiz, karanlık yatak odası koşulları bulunmasına karşın",
+        "dsmMatch": "Kriter E: Yeterli uyku fırsatı varlığında ortaya çıkması"
+      },
+      {
+        "clueIndex": 0,
+        "text": "gün içi yoğun bitkinlik, duruşmalarda odaklanma güçlüğü",
+        "dsmMatch": "Kriter B: Gündüz işlevselliğinde belirgin bozulma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Uykusuzluk için Bilişsel Davranışçı Terapi (CBT-I)",
+      "therapyDetails": "Uyaran kontrolü (yatakta uyanık kalmamak), uyku kısıtlama, uyku hijyeni, gevşeme ve 'uyuyamazsam yarın mahvolurum' gibi felaketleştirici düşüncelerin bilişsel yeniden yapılandırılması ilk basamaktır.",
+      "pharmacologyNote": "Birinci basamak tedavi CBT-I'dır. Kısa süreli veya seçilmiş olgularda düşük doz mirtazapin, trazodon veya kısa etkili Z-ilaçları değerlendirilebilir; uzun süreli benzodiazepin kullanımından kaçınılır."
+    },
+    "miniQuiz": {
+      "question": "Kronik olgularda yatak ile uyanıklık arasındaki olumsuz koşullanmayı kırmayı amaçlayan temel CBT-I bileşeni hangisidir?",
+      "options": [
+        "Uykunun gelmesini beklemek için yatakta telefonla oyalanmak",
+        "Yatakta 20 dakikadan uzun süre uyanık kalındığında yataktan çıkıp loş ışıkta sakin bir etkinlik yapmak (uyaran kontrolü)",
+        "Gece kaybedilen süreyi telafi etmek için öğleden sonra 2 saat uyumak",
+        "Her akşam yatmadan önce düzenli alkol almak"
+      ],
+      "correctIndex": 1,
+      "explanation": "Uyaran kontrolü, yatağın yalnızca uyku ve cinsellikle eşleşmesini yeniden kurar. Yatakta dönüp durmak ve saate bakmak uyarılmayı artırarak kronikleşmeyi (Spielman'ın sürdürücü etkenlerini) pekiştirir."
+    },
+    "differentialDiagnosis": "• Yaygın Anksiyete Bozukluğu (YAB): Birçok yaşam alanında yaygın ve denetlenemeyen endişe vardır; burada kaygı yalnızca gece dinlenememeye odaklanmıştır.\n• Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu: Sorun uyku zamanlamasındaki kaymadır; kendi programında uyku kalitesi normaldir.\n• Majör Depresif Bozukluk: Yaygın çökkünlük ve anhedoni eşlik eder; burada duygudurum yalnızca yorgunluğa ikincil hafif gergindir.",
+    "dsmCriteriaSummary": "DSM-5-TR: Başlatma/sürdürme/erken uyanma hoşnutsuzluğu (A) + Gündüz işlev kaybı (B) + Haftada ≥ 3 gece (C) + En az 3 ay (D) + Yeterli uyku fırsatı (E) + Başka bozukluk/madde dışlaması (F-H).",
+    "therapyId": "cbt_i",
+    "explanation": {
+      "whyThis": [
+        "Yedi aydır haftada 4-5 gece uykuya dalma ve sürdürme güçlüğü Kriter A, C ve D'yi karşılar.",
+        "Yeterli uyku fırsatı olmasına karşın gündüz yorgunluk ve duruşmalarda odaklanma kaybı yaratması Kriter B ve E'yi doğrular.",
+        "Solunum olayı, huzursuz bacak, kafein/madde ve majör depresyonun dışlanması birincil tabloyu netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "gad",
+          "reason": "Endişeler birçok yaşam alanına yayılmamıştır; yalnızca uyuyamama ve ertesi günün yorgunluğuna odaklanmıştır."
+        },
+        {
+          "diagnosisId": "circadian_rhythm_sleep_wake",
+          "reason": "Sorun geç saatlere kayan bir ritim değil, yeterli fırsata rağmen uykuyu başlatma ve sürdürme güçlüğüdür."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Yaygın çökkünlük, anhedoni veya değersizlik düşünceleri yoktur."
+        }
+      ],
+      "teachingPoint": "Tetikleyici stresör bitse bile yatakta saate bakma ve felaketleştirme bu tabloyu kronikleştirir; birinci basamak kalıcı tedavi CBT-I'dır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "hypersomnolence",
+    "category": "SLEEP",
+    "patientSummary": "29 yaşında, erkek, mimari çizim teknikeri",
+    "clues": [
+      "29 yaşındaki mimari çizim teknikeri, son aylarda işyerinde bilgisayar başında dalıp gitme, sabahları işe geç kalma ve gün boyu süren ağır sersemlik hissi nedeniyle başvuruyor.",
+      "Gece 22.30'da yatıp sabah 08.00'e dek kesintisiz 9-10 saat uyumasına karşın hiç dinlenmeden uyandığı, hafta sonları 12 saati aşan uykuların ardından bile öğleden sonra yeniden uzun süre uyuduğu öğreniliyor.",
+      "Tam kan sayımı, ferritin, B12, tiroid paneli ve karaciğer testleri olağan; sedatif ilaç, alkol ya da madde kullanımı yok; majör depresif dönem ölçütleri karşılanmıyor.",
+      "Polisomnografide uyku etkinliği %92, apne-hipopne indeksi 1.8/saat (solunum olayı yok); MSLT'de ortalama uyku latansı 6 dakika ancak hiç uykuya başlangıç REM dönemi (SOREMP) izlenmiyor.",
+      "Ruhsal Durum Muayenesinde: Sakin, hafif uykulu görünümde. Duygudurum ötimik, yalnızca işini kaybetme kaygısı taşıyor. Gülmeyle kas güçsüzlüğü, uyku felci ya da uykuya dalarken varsanı öyküsü kesinlikle yok.",
+      "En az 7 saatlik ana gece uykusuna karşın 8 aydır haftada 5-6 gün süren yoğun gündüz uyku hali, 1-2 saatlik gündüz kestirmelerinin bile dinlendirmemesi ve sabahları çalar saati kapatıp 40 dakika boyunca sersem kalma (uyku sarhoşluğu) saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "kesintisiz 9-10 saat uyumasına karşın hiç dinlenmeden uyandığı",
+        "dsmMatch": "Kriter A: En az 7 saatlik ana uykuya karşın 9 saatten uzun dinlendirmeyen uyku"
+      },
+      {
+        "clueIndex": 5,
+        "text": "sabahları çalar saati kapatıp 40 dakika boyunca sersem kalma (uyku sarhoşluğu)",
+        "dsmMatch": "Kriter A: Ani uyanma sonrası tam uyanıklığa geçmede belirgin güçlük"
+      },
+      {
+        "clueIndex": 3,
+        "text": "apne-hipopne indeksi 1.8/saat (solunum olayı yok); MSLT'de ortalama uyku latansı 6 dakika ancak hiç uykuya başlangıç REM dönemi (SOREMP) izlenmiyor",
+        "dsmMatch": "Kriter D: Narkolepsi ve uyku apnesinin polisomnografi/MSLT ile dışlanması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Davranışsal Uyku Planlaması & Bilişsel Davranışçı Destek",
+      "therapyDetails": "Düzenli uyku-uyanıklık saatlerinin sürdürülmesi, sabah uyanma stratejileri, işyeri/trafik güvenliği danışmanlığı ve kronik yorgunlukla baş etmeye yönelik psikoeğitim uygulanır.",
+      "pharmacologyNote": "Uyanıklığı artırmak için ilk basamakta modafinil veya armodafinil kullanılır; yanıtsız olgularda metilfenidat, pitolisant veya sodyum oksibat seçenekleri değerlendirilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada gündüz kestirmelerinin özelliği ve MSLT bulgusu, tabloyu Narkolepsiden nasıl ayırır?",
+      "options": [
+        "Kestirmeler kısa ve çok dinlendiricidir, MSLT'de ≥ 2 SOREMP görülür",
+        "Gece uyku süresi her zaman 5 saatin altındadır",
+        "Kestirmeler uzun ve dinlendirmeyicidir, sabah uyku sarhoşluğu belirgindir ve MSLT'de SOREMP yoktur",
+        "Gülmeyle tetiklenen kas güçsüzlüğü mutlaka eşlik eder"
+      ],
+      "correctIndex": 2,
+      "explanation": "Narkolepside kısa gündüz kestirmeleri genellikle dinlendiricidir ve MSLT'de ≥ 2 SOREMP saptanır. Bu tabloda ise uzun gece uykuları ve uzun gündüz kestirmeleri dinlendirmez, sabah uyku sarhoşluğu (sleep inertia) belirgindir ve SOREMP yoktur."
+    },
+    "differentialDiagnosis": "• Narkolepsi: Kısa kestirmeler dinlendiricidir, katapleksi veya MSLT'de ≥ 2 SOREMP bulunur; burada hiç SOREMP ve katapleksi yoktur.\n• Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi: Polisomnografide saatte ≥ 5 tıkayıcı solunum olayı görülür; burada AHİ 1.8/saat ile normaldir.\n• Majör Depresif Bozukluk: Atipik özelliklerde uzun uyku görülebilir ancak çökkünlük ve anhedoni eşlik eder; bu hasta ötimiktir.",
+    "dsmCriteriaSummary": "DSM-5-TR: ≥ 7 saat ana uykuya karşın aşırı uyku hali, > 9 saat dinlendirmeyen uyku veya uyanma güçlüğü (A) + Haftada ≥ 3 kez, en az 3 ay (B) + Belirgin sıkıntı/işlev kaybı (C) + Narkolepsi/apne/madde dışlaması (D-F).",
+    "therapyId": "cbt_general",
+    "explanation": {
+      "whyThis": [
+        "Gece 9-10 saatlik ana uykuya rağmen dinlenememe, dinlendirmeyen gündüz uykuları ve 40 dakikalık uyku sarhoşluğu Kriter A'yı karşılar.",
+        "Sekiz aydır haftada 5-6 gün sürmesi ve iş performansını bozması Kriter B ve C'yi doğrular.",
+        "Normal AHİ (1.8/saat), katapleksi yokluğu ve MSLT'de SOREMP olmaması uyku apnesi ile narkolepsiyi dışlar (Kriter D)."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "narcolepsy",
+          "reason": "Katapleksi yoktur, kestirmeler dinlendirmemektedir ve MSLT'de SOREMP saptanmamıştır."
+        },
+        {
+          "diagnosisId": "obstructive_sleep_apnea",
+          "reason": "Polisomnografide AHİ 1.8/saat ile normal sınırlardadır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Duygudurum ötimiktir; depresif epizod ölçütleri karşılanmamaktadır."
+        }
+      ],
+      "teachingPoint": "9 saati aşan dinlendirmeyen uyku, ağır sabah uyku sarhoşluğu ve MSLT'de SOREMP yokluğu bu tabloyu narkolepsiden ayırır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "narcolepsy",
+    "category": "SLEEP",
+    "patientSummary": "25 yaşında, kadın, şehir plancısı",
+    "clues": [
+      "25 yaşındaki şehir plancısı, son bir yıldır proje toplantılarında ani dalgınlık, gün içinde engelleyemediği bitkinlik ve son aylarda iki kez aniden yere yığılma benzeri durumlar nedeniyle başvuruyor.",
+      "Öğle saatlerinde masa başında 10-15 dakikalık kısa kestirmeler yaptıktan sonra şaşırtıcı biçimde dinç uyandığı; ayrıca uykuya dalarken odada gerçekçi gölgeler görme ve sabah uyanınca birkaç saniye kıpırdayamama yaşadığı öğreniliyor.",
+      "Beyin MR, rutin EEG, kardiyoloji Holter kaydı, ortostatik kan basıncı ve tiroid testleri tamamen normal; epilepsi ya da senkop lehine bulgu yok.",
+      "Polisomnografide tıkayıcı solunum olayı saptanmıyor (AHİ: 1.2/saat), gece uykusu başlangıcında REM latansı 11 dakika; MSLT'de ortalama uyku latansı 4.2 dakika ve 3 adet SOREMP izleniyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliğine açık. Duygudurum hafif kaygılı; toplum içinde aniden yığılmaktan çekindiğini anlatıyor. Gündüz uyanıklıkta varsanı ya da sanrı yok, içgörü tam.",
+      "Son 10 aydır haftada 4-5 kez ortaya çıkan karşı konulamaz gündüz uyku ataklarına ek olarak, arkadaşlarıyla kahkahayla güldüğü anlarda bilinci tamamen açıkken 15-20 saniye süreyle çenesinin ve dizlerinin aniden boşaldığı doğrulanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "Son 10 aydır haftada 4-5 kez ortaya çıkan karşı konulamaz gündüz uyku ataklarına",
+        "dsmMatch": "Kriter A: En az 3 aydır haftada ≥ 3 kez yineleyen karşı konulamaz uyku atakları"
+      },
+      {
+        "clueIndex": 5,
+        "text": "kahkahayla güldüğü anlarda bilinci tamamen açıkken 15-20 saniye süreyle çenesinin ve dizlerinin aniden boşaldığı",
+        "dsmMatch": "Kriter B1: Güçlü olumlu duyguyla tetiklenen ani kas tonusu kaybı (katapleksi)"
+      },
+      {
+        "clueIndex": 3,
+        "text": "MSLT'de ortalama uyku latansı 4.2 dakika ve 3 adet SOREMP izleniyor",
+        "dsmMatch": "Kriter B3: Polisomnografi/MSLT'de patolojik REM başlangıcı doğrulaması"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Planlı Kısa Şekerlemeler, Uyku Hijyeni & Güvenlik Danışmanlığı",
+      "therapyDetails": "Günün belirli saatlerine 15-20 dakikalık planlı kestirmeler yerleştirilmesi, düzenli gece uykusu ve araç kullanma gibi güvenlik konularında yapılandırılmış danışmanlık verilir.",
+      "pharmacologyNote": "Gündüz uykululuğu için modafinil/armodafinil veya pitolisant; hem gündüz atakları hem katapleksi için sodyum oksibat veya katapleksiye yönelik venlafaksin/SSRI kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Tip 1 olgularda temel nörobiyolojik patoloji aşağıdakilerden hangisidir?",
+      "options": [
+        "Substantia nigra dopaminerjik nöronlarının kaybı",
+        "Prefrontal kortekste serotonin reseptör artışı",
+        "Serebellar Purkinje hücrelerinde dejenerasyon",
+        "Lateral hipotalamusta hipokretin (oreksin) üreten nöronların otoimmün kaybı"
+      ],
+      "correctIndex": 3,
+      "explanation": "Tip 1 olgularda HLA-DQB1*06:02 ilişkili otoimmün süreçle hipotalamustaki hipokretin (oreksin) nöronları yıkılır; bu da BOS hipokretin-1 düzeyinin ≤ 110 pg/mL'ye düşmesine ve REM/uyanıklık sınırlarının bozulmasına yol açar."
+    },
+    "differentialDiagnosis": "• Aşırı Uykululuk Bozukluğu (Hipersomnolans): Katapleksi yoktur, gündüz kestirmeleri dinlendirmez ve MSLT'de SOREMP görülmez.\n• Konversiyon Bozukluğu (İşlevsel Nörolojik Belirti Bozukluğu): Yığılma atakları duygusal stresle ilişkili olabilir ancak kısa REM latansı ve MSLT'de çoklu SOREMP izlenmez.\n• Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi: Gündüz uykululuğu yapar ancak AHİ yüksektir ve katapleksi bulunmaz.",
+    "dsmCriteriaSummary": "DSM-5-TR: En az 3 aydır haftada ≥ 3 kez karşı konulamaz uyku atakları (A) + Katapleksi, BOS hipokretin-1 eksikliği (≤ 110 pg/mL) ya da PSG/MSLT'de REM latansı ≤ 15 dk / latans ≤ 8 dk ve ≥ 2 SOREMP (B).",
+    "therapyId": "sleep_hygiene_stimulants",
+    "explanation": {
+      "whyThis": [
+        "On aydır haftada 4-5 kez ortaya çıkan karşı konulamaz gündüz uyku atakları ve kısa dinlendirici kestirmeler Kriter A'yı karşılar.",
+        "Kahkahayla tetiklenen, bilincin açık olduğu ani çene-diz boşalması (katapleksi) ile hipnagojik varsanılar ve uyku felci tipik klinik tetradı oluşturur.",
+        "PSG'de 11 dakikalık REM latansı ve MSLT'de 4.2 dakika ortalama latans ile 3 SOREMP tanıyı laboratuvar olarak kesinleştirir (Kriter B)."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "hypersomnolence",
+          "reason": "Katapleksi mevcuttur, kısa kestirmeler dinlendiricidir ve MSLT'de 3 SOREMP saptanmıştır."
+        },
+        {
+          "diagnosisId": "conversion_disorder",
+          "reason": "Yığılma atakları tipik katapleksidir ve nesnel PSG/MSLT bulgularıyla doğrulanmıştır."
+        },
+        {
+          "diagnosisId": "obstructive_sleep_apnea",
+          "reason": "Polisomnografide AHİ 1.2/saat ile tamamen normaldir."
+        }
+      ],
+      "teachingPoint": "Bilincin açık olduğu gülmeyle tetiklenen ani kas tonusu kaybı ve MSLT'de ≥ 2 SOREMP bu tanının en güçlü ayırt edici kanıtlarıdır."
+    }
+  },
+  {
+    "difficulty": "Orta",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "obstructive_sleep_apnea",
+    "category": "SLEEP",
+    "patientSummary": "48 yaşında, erkek, otomotiv servis şefi (BKİ: 32.6 kg/m²)",
+    "clues": [
+      "48 yaşındaki otomotiv servis şefi, son bir yıldır sabahları zonklayıcı baş ağrısı, gün içinde dikkat dağınıklığı, çabuk öfkelenme ve kırmızı ışıkta beklerken gözlerinin kapanması yakınmalarıyla başvuruyor.",
+      "Gece 8 saat yatakta kalmasına karşın sabahları ağız kuruluğuyla ve hiç dinlenmemiş gibi uyandığı; işyerinde fatura ve parça hesabında sık hata yapmaya başladığı öğreniliyor.",
+      "Kan şekeri, tiroid fonksiyonları, B12 ve ferritin düzeyleri olağan; düzenli kullandığı tek ilaç son iki yıldır kontrolü zorlaşan hipertansiyonu için aldığı antihipertansiftir.",
+      "Fizik muayenede boyun çevresi 44 cm, orofarenkste darlık (Mallampati sınıf III) saptanıyor; depresyon ve anksiyete ölçek puanları klinik eşiğin altında.",
+      "Ruhsal Durum Muayenesinde: Yorgun ancak kooperatif. Duygudurum hafif irritabl, temel çökkünlük ya da anhedoni yok. Dikkat sürdürülebilirliğinde hafif azalma dışında bilişsel muayene olağan. İçgörü iyi.",
+      "Eşinin gece boyunca şiddetli horultu ve 20-30 saniyelik solunum duraklamaları ardından nefes nefese sıçramalar tanımlaması üzerine yapılan polisomnografide, göğüs-karın solunum çabasının sürdüğü ancak üst hava akımının kesildiği saatte 28 solunum olayı (AHİ: 28/saat) saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "şiddetli horultu ve 20-30 saniyelik solunum duraklamaları ardından nefes nefese sıçramalar",
+        "dsmMatch": "Kriter A1: Gece solunum bozuklukları ve tanıklı solunum duraklamaları"
+      },
+      {
+        "clueIndex": 0,
+        "text": "sabahları zonklayıcı baş ağrısı, gün içinde dikkat dağınıklığı",
+        "dsmMatch": "Kriter A1: Yeterli uyku fırsatına karşın gündüz yorgunluk ve dinlendirmeyen uyku"
+      },
+      {
+        "clueIndex": 5,
+        "text": "göğüs-karın solunum çabasının sürdüğü ancak üst hava akımının kesildiği saatte 28 solunum olayı (AHİ: 28/saat)",
+        "dsmMatch": "Kriter A: Polisomnografide saatte ≥ 5 (burada orta düzey: 15-30) üst yol kaynaklı olay"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Sürekli Pozitif Hava Yolu Basıncı (CPAP) & Davranışsal Uyum Desteği",
+      "therapyDetails": "İlk basamak tedavi gece CPAP cihazı kullanımıdır; kilo verme, sırtüstü yatıştan kaçınma, alkol/sedatif kesilmesi ve CPAP uyumunu artıran davranışsal destek (CBT-I ilkeleri) eklenir.",
+      "pharmacologyNote": "Birinci basamak tedavi mekaniktir (CPAP); psikotrop sedatifler üst hava yolu tonusunu daha da azaltarak tabloyu ağırlaştırabileceğinden kaçınılmalıdır."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada polisomnografi kaydında solunum durması sırasında torakoabdominal solunum çabasının devam etmesi, tabloyu hangi bozukluktan ayırır?",
+      "options": [
+        "Santral Uyku Apnesi",
+        "Narkolepsi",
+        "Kabus Bozukluğu",
+        "Huzursuz Bacaklar Sendromu"
+      ],
+      "correctIndex": 0,
+      "explanation": "Üst hava yolu tıkanıklığında solunum merkezi çalışmaya devam ettiği için göğüs ve karın duvarı çabası sürer; Santral Uyku Apnesinde ise beyin sapı uyarısı kesildiği için hava akımıyla birlikte solunum çabası da durur."
+    },
+    "differentialDiagnosis": "• Santral Uyku Apnesi: Hava akımı durduğunda torakoabdominal solunum çabası da yoktur; burada solunum çabası sürmektedir.\n• Aşırı Uykululuk Bozukluğu (Hipersomnolans): Polisomnografide anlamlı solunum olayı bulunmaz; burada AHİ 28/saattir.\n• Majör Depresif Bozukluk: Yorgunluk, dikkat dağınıklığı ve irritabilite ortak olabilir ancak burada tüm yakınmalar gece hipoksisi ve uyku bölünmesine bağlıdır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Polisomnografide saatte ≥ 5 tıkayıcı apne/hipopne + gece solunum belirtileri veya gündüz uykululuk/yorgunluk (A1) YA DA belirtiden bağımsız saatte ≥ 15 olay (A2).",
+    "therapyId": "cbt_i",
+    "explanation": {
+      "whyThis": [
+        "Sabah baş ağrısı, ağız kuruluğu, gündüz uykululuk ve dirençli hipertansiyona eşlik eden tanıklı horultu ile solunum duraklamaları tipik klinik örüntüdür.",
+        "Polisomnografide solunum çabasının sürdüğü ancak hava akımının kesildiği saatte 28 olay (AHİ: 28/saat) orta şiddette Kriter A'yı kesinleştirir.",
+        "Obezite (BKİ 32.6), kalın boyun çevresi (44 cm) ve Mallampati III önemli anatomik risk etkenleridir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "central_sleep_apnea",
+          "reason": "Solunum duraklamaları sırasında göğüs-karın solunum çabası kaybolmamış, aksine sürmüştür."
+        },
+        {
+          "diagnosisId": "hypersomnolence",
+          "reason": "Gündüz uykululuğu birincil değildir; polisomnografide AHİ 28/saat ile solunum bozukluğu saptanmıştır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Depresyon ölçeği eşik altıdır; irritabilite ve dikkat güçlüğü uyku bölünmesine ikincildir."
+        }
+      ],
+      "teachingPoint": "Dirençli hipertansiyon, sabah baş ağrısı, gündüz uykululuğu ve solunum çabasının sürdüğü yüksek AHİ değeri bu tanıyı doğrular; sedatif ilaçlardan kaçınılmalıdır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "central_sleep_apnea",
+    "category": "SLEEP",
+    "patientSummary": "63 yaşında, kadın, emekli eczacı",
+    "clues": [
+      "63 yaşındaki emekli eczacı, son 6 aydır gece sık sık nefes açlığıyla uyanma, gündüz belirgin bitkinlik ve okuduğuna odaklanamama yakınmalarıyla kardiyoloji polikliniğinden yönlendiriliyor.",
+      "Gece uykusunun neredeyse her saat başı bölündüğü, gündüz koltukta sık sık dalıp gittiği; ancak eşinin belirgin bir horlama gözlemlemediği öğreniliyor.",
+      "Öyküsünde 4 yıldır kronik sistolik kalp yetmezliği (ejeksiyon fraksiyonu %32) nedeniyle kılavuza uygun tedavi aldığı; BKİ 23.8 kg/m², boyun çevresi ve üst hava yolu anatomisinin olağan olduğu görülüyor.",
+      "Anemi, tiroid bozukluğu ve elektrolit dengesizliği saptanmıyor; opioid ya da sedatif ilaç kullanımı yok; depresyon tarama ölçeği düşük.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, hafif yorgun görünümde. Duygudurum ötimik, yalnızca gece uyanmalarından bezgin. Bilişsel tarama normal, kaygı bozukluğu ya da panik atağı ölçütü yok.",
+      "Polisomnografide üst hava yolu tıkanıklığı ve göğüs-karın solunum çabası olmaksızın soluk hacminin düzenli olarak artıp azaldığı (kreşendo-dekreşendo) periyodik bir örüntü ile uyku saati başına 19 kez solunum çabası duraklaması saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "üst hava yolu tıkanıklığı ve göğüs-karın solunum çabası olmaksızın",
+        "dsmMatch": "Kriter A: Tıkanıklık olmadan beyin sapı solunum çabasının durması"
+      },
+      {
+        "clueIndex": 5,
+        "text": "soluk hacminin düzenli olarak artıp azaldığı (kreşendo-dekreşendo) periyodik bir örüntü ile uyku saati başına 19 kez solunum çabası duraklaması",
+        "dsmMatch": "Kriter A & Alt Tip: Saatte ≥ 5 santral olay ve periyodik solunum örüntüsü"
+      },
+      {
+        "clueIndex": 2,
+        "text": "kronik sistolik kalp yetmezliği (ejeksiyon fraksiyonu %32)",
+        "dsmMatch": "Etiyolojik bağlam: Düşük ejeksiyon fraksiyonlu kalp yetmezliğiyle güçlü birliktelik"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Altta Yatan Tıbbi Durumun Optimizasyonu (Medikal Stabilizasyon) & Solunum Desteği",
+      "therapyDetails": "Öncelik kalp yetmezliği tedavisinin en üst düzeye çıkarılmasıdır; uygun hastalarda kardiyoloji ve uyku tıbbı eşgüdümüyle gece oksijen desteği veya seçilmiş pozitif basınç tedavileri planlanır.",
+      "pharmacologyNote": "Psikotrop sedatifler solunum merkezini baskılayabileceğinden kontrendikedir; kardiyoloji tarafından kalp yetmezliği farmakoterapisinin optimizasyonu temeldir."
+    },
+    "miniQuiz": {
+      "question": "Düşük ejeksiyon fraksiyonlu kalp yetmezliğinde (EF ≤ %45) görülen periyodik solunum örüntülü bu tabloda hangi pozitif hava yolu basıncı cihazı mortalite artışı nedeniyle kontrendikedir?",
+      "options": [
+        "Adaptif servo-ventilasyon (ASV)",
+        "Gece nazal kanül ile düşük akımlı oksijen",
+        "Kılavuza uygun kalp yetmezliği ilaç tedavisinin optimizasyonu",
+        "Yatak başının hafif yükseltilmesi"
+      ],
+      "correctIndex": 0,
+      "explanation": "SERVE-HF çalışması sonrasında, ejeksiyon fraksiyonu ≤ %45 olan kalp yetmezliğine bağlı santral uyku apnesinde adaptif servo-ventilasyon (ASV) kardiyovasküler mortaliteyi artırdığı için kontrendike kabul edilmektedir."
+    },
+    "differentialDiagnosis": "• Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi: Hava akımı kesildiğinde torakoabdominal solunum çabası devam eder ve horlama/obezite sıktır; burada solunum çabası da durmaktadır.\n• Uykuda Hipoventilasyon (Ondine Laneti Dahil): Uykuda kalıcı karbondioksit artışı (hiperkapni) baskındır; burada periyodik kreşendo-dekreşendo duraklamalar vardır.\n• Uykusuzluk Bozukluğu (Kronik İnsomni): Gece sık uyanma görülür ancak polisomnografide solunum duraklamaları saptanmaz.",
+    "dsmCriteriaSummary": "DSM-5-TR: Polisomnografide uyku saati başına ≥ 5 santral apne (solunum çabası olmaksızın) (A) + Başka bir güncel uyku bozukluğuyla daha iyi açıklanamama (B); kalp yetmezliğinde periyodik solunum alt tipi.",
+    "therapyId": "medical_stabilization",
+    "explanation": {
+      "whyThis": [
+        "Polisomnografide üst hava yolu tıkanıklığı ve torakoabdominal solunum çabası olmaksızın saatte 19 solunum duraklaması Kriter A'yı kesinleştirir.",
+        "Düşük ejeksiyon fraksiyonlu kalp yetmezliği (EF %32) zemininde kreşendo-dekreşendo periyodik örüntü klasik alt tipi yansıtır.",
+        "Normal BKİ, horlama yokluğu ve başka bir uyku bozukluğunun bulunmaması Kriter B'yi doğrular."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "obstructive_sleep_apnea",
+          "reason": "Solunum duraklamalarında torakoabdominal çaba yoktur ve üst hava yolu tıkanıklığı saptanmamıştır."
+        },
+        {
+          "diagnosisId": "sleep_related_hypoventilation",
+          "reason": "Tablo kalıcı hiperkapnik hipoventilasyon değil, periyodik santral apne nöbetleridir."
+        },
+        {
+          "diagnosisId": "insomnia_disorder",
+          "reason": "Gece sık uyanmalar birincil değil, polisomnografide gösterilen solunum duraklamalarına ikincildir."
+        }
+      ],
+      "teachingPoint": "Kalp yetmezliği olan hastada horlamasız gece uyanmaları ve solunum çabasının da durduğu kreşendo-dekreşendo örüntüsü bu tanının anahtarıdır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "circadian_rhythm_sleep_wake",
+    "category": "SLEEP",
+    "patientSummary": "34 yaşında, erkek, acil servis radyoloji teknikeri",
+    "clues": [
+      "34 yaşındaki acil servis radyoloji teknikeri, son 5 aydır kronik yorgunluk, iş çıkışı dikkat hataları, mide yanması ve evde eşiyle artan tartışmalar nedeniyle başvuruyor.",
+      "Altı ay önce sürekli gece nöbeti (23.00-07.00) düzenine geçtiğinden beri sabah eve döndüğünde en fazla 3-4 saat parça parça uyuyabildiği, gece nöbetinin son saatlerinde ise gözlerini açık tutmakta zorlandığı öğreniliyor.",
+      "Tam kan sayımı, tiroid hormonları, B12 ve ferritin olağan; polisomnografide solunum olayı ya da bacak hareketi bozukluğu saptanmıyor.",
+      "Aşırı kafein, alkol ya da uyarıcı madde kullanımı yok; genel kaygı düzeyi ve duygudurum bozukluğu taraması klinik eşiğin altında.",
+      "Ruhsal Durum Muayenesinde: Yorgun görünümlü, işbirliğine açık. Duygudurum hafif bezgin, anhedoni ya da intihar düşüncesi yok. Gece işinde hata yapmaktan endişe ediyor ancak yaygın depresif içerik bulunmuyor.",
+      "İki haftalık aktigrafi ve uyku günlüğünde, yıllık izin dönemlerinde gece 23.30-07.30 arasında kesintisiz ve dinlendirici 8 saat uyuyabildiği; sorunun tümüyle içsel uyku düzeni ile gece çalışma takvimi arasındaki uyumsuzluktan kaynaklandığı doğrulanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "sürekli gece nöbeti (23.00-07.00) düzenine geçtiğinden beri sabah eve döndüğünde en fazla 3-4 saat parça parça uyuyabildiği",
+        "dsmMatch": "Kriter A & B: İçsel ritim ile mesleki takvim uyumsuzluğuna bağlı uyku bölünmesi ve uykululuk"
+      },
+      {
+        "clueIndex": 5,
+        "text": "yıllık izin dönemlerinde gece 23.30-07.30 arasında kesintisiz ve dinlendirici 8 saat uyuyabildiği",
+        "dsmMatch": "Ayırt edici bulgu: Kendi ritmine uygun saatlerde uyku süresi ve kalitesinin normal olması"
+      },
+      {
+        "clueIndex": 0,
+        "text": "iş çıkışı dikkat hataları, mide yanması ve evde eşiyle artan tartışmalar",
+        "dsmMatch": "Kriter C: Mesleki ve toplumsal işlevsellikte belirgin bozulma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Zamanlanmış Parlak Işık Tedavisi, Planlı Şekerleme & Uyku Ortamı Düzenlemesi",
+      "therapyDetails": "Gece çalışmasının ilk yarısında parlak ışık maruziyeti, sabah eve dönerken koyu güneş gözlüğü takma, karartılmış sessiz gündüz uyku odası ve nöbet öncesi kısa planlı şekerleme uygulanır.",
+      "pharmacologyNote": "Gündüz uykusunu kolaylaştırmak için sabah uygun zamanlanmış melatonin, gece nöbetinde ağır uykululuk ve kaza riski varsa seçilmiş olgularda modafinil veya armodafinil değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastanın kronik birincil uykusuzluktan ayırt edilmesini sağlayan en kritik öykü ve aktigrafi bulgusu hangisidir?",
+      "options": [
+        "Yıllık izin gibi kendi doğal saatlerinde yatabildiği dönemlerde uyku süresi ve kalitesinin tamamen normal olması",
+        "Gece nöbeti sırasında kafein tüketmesi",
+        "Gündüz işlevselliğinin bozulmaması",
+        "Polisomnografide REM latansının 10 dakikanın altında olması"
+      ],
+      "correctIndex": 0,
+      "explanation": "Birincil uykusuzlukta kişi uygun saatte ve tatilde de uyuyamaz. Bu tabloda ise uyku üretme kapasitesi sağlamdır; sorun yalnızca içsel zamanlama ile dışsal mesleki programın çakışmasıdır."
+    },
+    "differentialDiagnosis": "• Uykusuzluk Bozukluğu (Kronik İnsomni): Uyku güçlüğü tatil ve serbest zamanlarda da sürer; bu hasta izinde gece 8 saat dinlendirici uyuyabilmektedir.\n• Aşırı Uykululuk Bozukluğu (Hipersomnolans): En az 7 saatlik gece uykusuna karşın uykululuk vardır; burada toplam uyku süresi mesleki takvim nedeniyle 3-4 saate düşmüştür.\n• Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi: Polisomnografide solunum olayları saptanır; burada polisomnografi normaldir.",
+    "dsmCriteriaSummary": "DSM-5-TR: İçsel ritim ile toplumsal/mesleki program uyumsuzluğuna bağlı uyku bölünmesi (A) + Aşırı uykululuk ve/veya uykusuzluk (B) + Belirgin sıkıntı/işlev bozulması (C); vardiyalı çalışma alt tipi.",
+    "therapyId": "cbt_i",
+    "pharmacologyId": "psychotherapy_first_no_drug",
+    "explanation": {
+      "whyThis": [
+        "Gece nöbetine geçtikten sonra gündüz 3-4 saat parçalı uyku ve gece çalışma saatlerinde şiddetli uykululuk gelişmesi Kriter A ve B'yi karşılar.",
+        "İşte dikkat hataları ve aile içi çatışmalar Kriter C'yi doğrular.",
+        "Aktigrafide izin dönemlerinde gece 8 saat normal ve dinlendirici uyuyabilmesi, sorunun zamanlama uyumsuzluğu olduğunu kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "insomnia_disorder",
+          "reason": "Kendi doğal gece saatlerinde (izin döneminde) uyku başlatma ve sürdürme tamamen normaldir."
+        },
+        {
+          "diagnosisId": "hypersomnolence",
+          "reason": "Gündüz uykululuğu uzun ana uykuya rağmen değil, gece nöbetine bağlı yetersiz gündüz uykusu nedeniyledir."
+        },
+        {
+          "diagnosisId": "obstructive_sleep_apnea",
+          "reason": "Polisomnografi normaldir ve gece solunum olayı saptanmamıştır."
+        }
+      ],
+      "teachingPoint": "Kendi doğal saatlerinde normal ve dinlendirici uyuyabilen ancak mesleki/toplumsal takvimle çakışan hastalarda uyku günlüğü ve aktigrafi bu tanıyı netleştirir."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "nightmare_disorder",
+    "category": "SLEEP",
+    "patientSummary": "31 yaşında, kadın, sınıf öğretmeni",
+    "clues": [
+      "31 yaşındaki sınıf öğretmeni, son 4 aydır gece geç saatlere kadar yatağa girmeyi erteleme, sabahları bitkin uyanma ve gün içinde gerginlik yakınmalarıyla başvuruyor.",
+      "Özellikle gecenin ikinci yarısında yoğun korku ve çarpıntıyla uyandığı, bu nedenle tekrar uykuya dalmaktan çekindiği ve derslerde dikkatinin dağıldığı öğreniliyor.",
+      "Öyküsünde yaşamı tehdit eden travmatik bir olay, gündüz istemsiz anı canlanmaları (flashback), kaçınma ya da aşırı irkilme tepkisi bulunmuyor.",
+      "Beta-bloker, antidepresan, alkol ya da madde kullanımı yok; tiroid paneli, rutin EEG ve nörolojik muayene olağan.",
+      "Ruhsal Durum Muayenesinde: Uyanık, işbirliğine açık, hafif yorgun. Duygudurum hafif kaygılı; özellikle uyku saati yaklaştığında huzursuzlandığını ifade ediyor. Düşünce içeriğinde travma teması ya da psikotik bulgu yok, içgörü tam.",
+      "Haftada 4-5 kez kovalanma ve yüksekten düşme gibi fiziksel bütünlüğünü tehdit eden son derece canlı ve ayrıntılı korkutucu rüyalarla uyandığı; uyandığı anda bilincinin hemen açıldığı, nerede olduğunu tam olarak bildiği ve yatakta fiziksel olarak vurma ya da sıçrama sergilemediği saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "fiziksel bütünlüğünü tehdit eden son derece canlı ve ayrıntılı korkutucu rüyalarla uyandığı",
+        "dsmMatch": "Kriter A: Hayatta kalma/güvenlik tehdidi içeren iyi hatırlanan yineleyici rüyalar"
+      },
+      {
+        "clueIndex": 5,
+        "text": "uyandığı anda bilincinin hemen açıldığı, nerede olduğunu tam olarak bildiği",
+        "dsmMatch": "Kriter B: Uyanma anında hızlı uyanıklık ve tam yönelim (konfüzyon yokluğu)"
+      },
+      {
+        "clueIndex": 0,
+        "text": "gece geç saatlere kadar yatağa girmeyi erteleme, sabahları bitkin uyanma",
+        "dsmMatch": "Kriter C: Belirgin sıkıntı ve gündüz işlevsellik kaybı"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "İmgeleme Provası Terapisi (IRT)",
+      "therapyDetails": "Uyanıkken rahatsız edici rüyanın senaryosunun seçilip güvenli/olumlu bir sonla yeniden yazılması ve günde birkaç dakika zihinsel olarak prova edilmesi sıklık ve şiddeti hızla azaltır.",
+      "pharmacologyNote": "Birinci basamak tedavi IRT'dir; sık ve şiddetli olgularda gece sempatik aktivasyonu azaltmak için alfa-1 adrenerjik antagonist olan prazosin değerlendirilebilir."
+    },
+    "miniQuiz": {
+      "question": "Bu tabloyu NREM Uykusundan Uyanma Bozukluğundaki uyku teröründen ayıran en tipik iki özellik hangisidir?",
+      "options": [
+        "Gecenin ilk üçte birinde olması ve sabah olayın hiç hatırlanmaması",
+        "Yatakta karmaşık dövüşme hareketlerinin eşlik etmesi ve EMG atonisinin kaybı",
+        "Uyanıldığında uzun süreli konfüzyon ve teselli edilememe",
+        "Gecenin ikinci yarısında ortaya çıkması, rüyanın ayrıntılı hatırlanması ve uyanınca hemen tam yönelim sağlanması"
+      ],
+      "correctIndex": 3,
+      "explanation": "Uyku terörü NREM'de (gecenin ilk üçte birinde) olur, yoğun otonomik panikle gider, kişi konfüzedir ve sabah olayı hatırlamaz. Bu tabloda ise olaylar REM ağırlıklı ikinci yarıdadır, rüya ayrıntılı hatırlanır ve uyanır uyanmaz bilinç berraktır."
+    },
+    "differentialDiagnosis": "• NREM Uykusundan Uyanma Bozukluğu: Gecenin ilk yarısında çığlık, konfüzyon ve sabah tam amnezi görülür; burada uyanınca hemen tam yönelim vardır ve rüya ayrıntılı hatırlanır.\n• REM Uykusu Davranış Bozukluğu (RBD): Rüyalar vurma, tekmeleme gibi motor eylemlere dökülür; bu hastada motor canlandırma yoktur.\n• Travma Sonrası Stres Bozukluğu (TSSB / PTSD): Travmatik olay öyküsü, gündüz flashback ve aşırı uyarılmışlık eşlik eder; burada travma öyküsü yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Hayatta kalma/güvenlik tehdidi içeren iyi hatırlanan yineleyici rüyalar (A) + Uyanınca hızlı yönelim (B) + Klinik sıkıntı/işlev bozulması (C) + Madde/tıbbi durum ve başka ruhsal bozukluk dışlaması (D-E).",
+    "therapyId": "irt",
+    "explanation": {
+      "whyThis": [
+        "Gecenin ikinci yarısında haftada 4-5 kez fiziksel tehdit içeren, ayrıntılı hatırlanan korkutucu rüyalarla uyanma Kriter A'yı karşılar.",
+        "Uyandığı anda bilincin hızla açılıp tam yönelim sağlanması Kriter B'yi, uyku erteleme ve gündüz yorgunluğu Kriter C'yi doğrular.",
+        "Travma öyküsü, ilaç/madde etkisi ve motor rüya canlandırmasının yokluğu TSSB ve RBD'yi dışlar."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "nrem_sleep_arousal",
+          "reason": "Konfüzyon ve amnezi yoktur; hasta uyandığında hemen yönelimlidir ve rüyasını ayrıntılı anlatmaktadır."
+        },
+        {
+          "diagnosisId": "rem_sleep_behavior_disorder",
+          "reason": "Yatakta vurma, tekmeleme veya rüyayı fiziksel olarak eyleme dökme bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "ptsd",
+          "reason": "Travmatik yaşam olayı öyküsü ve gündüz yeniden yaşantılama belirtileri yoktur."
+        }
+      ],
+      "teachingPoint": "Gecenin ikinci yarısında ayrıntılı hatırlanan korkutucu rüya + uyanınca anında tam yönelim + motor canlandırma yokluğu bu tanıyı uyku terörü ve RBD'den ayırır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "rem_sleep_behavior_disorder",
+    "category": "SLEEP",
+    "patientSummary": "66 yaşında, erkek, emekli ilkokul müdürü",
+    "clues": [
+      "66 yaşındaki emekli ilkokul müdürü, son bir yılda iki kez gece yataktan düşüp omzunu ve kaşını yaralaması üzerine eşinin ısrarıyla başvuruyor.",
+      "Olayların hep gecenin ikinci yarısında ortaya çıktığı; eşinin hastanın uykuda yüksek sesle bağırdığını, kollarını savurduğunu ve kendisini uyandırmaya çalışırken yüzüne dirsek darbesi aldığını anlattığı öğreniliyor.",
+      "Beyin MR yaşla uyumlu, rutin EEG'de epileptiform aktivite yok; alkol, sedatif yoksunluğu ya da SSRI/SNRI gibi tetikleyici ilaç kullanımı bulunmuyor.",
+      "Bilişsel tarama normal ve belirgin demans bulgusu yok; ancak ayrıntılı sorgulamada son iki yıldır koku alma duyusunda azalma ve hafif kabızlık tarifliyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliğine açık, konuşma doğal. Duygudurum ötimik; eşine istemeden zarar verdiği için üzgün. Uyanıklıkta varsanı, sanrı ya da şiddet eğilimi yok.",
+      "Eşi tarafından uyandırıldığında hızla kendine gelip rüyasında bir köpek sürüsünden kendini savunduğunu anlattığı; polisomnografi kaydında rüya evresinde normalde beklenen fizyolojik kas felcinin (atonin) kaybolduğu ve çene-ekstremite EMG'sinde artmış tonus ile motor hareketler izlendiği saptanıyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "gecenin ikinci yarısında ortaya çıktığı; eşinin hastanın uykuda yüksek sesle bağırdığını, kollarını savurduğunu",
+        "dsmMatch": "Kriter A & B: Rüya evresinde sesli ve karmaşık motor davranışlar"
+      },
+      {
+        "clueIndex": 5,
+        "text": "uyandırıldığında hızla kendine gelip rüyasında bir köpek sürüsünden kendini savunduğunu anlattığı",
+        "dsmMatch": "Kriter C: Uyanınca hızlı yönelim ve eylemle uyumlu rüya içeriği"
+      },
+      {
+        "clueIndex": 5,
+        "text": "polisomnografi kaydında rüya evresinde normalde beklenen fizyolojik kas felcinin (atonin) kaybolduğu",
+        "dsmMatch": "Kriter D: Polisomnografide atoni olmaksızın REM uykusu (RSWA) gösterilmesi"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Yatak Odası Güvenlik Düzenlemesi & Nörolojik İzlem",
+      "therapyDetails": "Keskin nesnelerin kaldırılması, yatak kenarına yumuşak bariyer/minder konması ve gerekirse eşin güvenliği için ayrı yatak düzenlemesi yapılır; alfa-sinükleinopati gelişimi açısından düzenli nörolojik takip planlanır.",
+      "pharmacologyNote": "İlk basamakta yüksek doz melatonin (3-12 mg) veya düşük doz klonazepam (0.25-1 mg) etkilidir; yaşlı ve düşme/bilişsel risk taşıyan hastalarda melatonin daha iyi tolere edilir."
+    },
+    "miniQuiz": {
+      "question": "İdiyopatik olarak 50 yaş üzerinde başlayan bu uyku bozukluğu, uzun vadede hangi nörodejeneratif hastalık grubunun en güçlü prodromal belirtecidir?",
+      "options": [
+        "Alfa-sinükleinopatiler (Parkinson hastalığı, Lewy cisimcikli demans, çoklu sistem atrofisi)",
+        "Huntington hastalığı",
+        "Miyastenia gravis",
+        "Multipl skleroz"
+      ],
+      "correctIndex": 0,
+      "explanation": "İdiyopatik olguların büyük çoğunluğunda 10-15 yıl içinde Parkinson hastalığı, Lewy cisimcikli demans veya çoklu sistem atrofisi gibi alfa-sinükleinopatiler gelişir; koku kaybı (hiposmi) ve kabızlık da eşlik eden erken prodromal bulgulardır."
+    },
+    "differentialDiagnosis": "• NREM Uykusundan Uyanma Bozukluğu: Gecenin ilk yarısında görülür, uyandırılınca konfüzyon ve olayla ilgili amnezi vardır; burada uyanınca hemen yönelim ve uyumlu rüya anlatımı vardır.\n• Kabus Bozukluğu (Nightmare Disorder): Korkutucu rüyalar ayrıntılı hatırlanır ancak fizyolojik atoni korunduğundan motor eyleme dökme görülmez.\n• Tıkayıcı (Obstrüktif) Uyku Apnesi Hipopnesi: Ağır apne sıçramaları taklit edebilir (psödo-RBD) ancak polisomnografide REM atonisi korunmuştur.",
+    "dsmCriteriaSummary": "DSM-5-TR: REM uykusunda sesli/karmaşık motor davranışlar (A-B) + Uyanınca hızlı yönelim ve konfüzyon yokluğu (C) + Polisomnografide REM atonisinin kaybı (D) + Yaralanma/sıkıntı (E) + Madde/epilepsi dışlaması (F-G).",
+    "therapyId": "safety_clonazepam",
+    "explanation": {
+      "whyThis": [
+        "Gecenin ikinci yarısında yüksek sesle bağırma, kollarını savurma ve yataktan düşerek yaralanma Kriter A, B ve E'yi karşılar.",
+        "Uyandırılınca hızla kendine gelip eylemle uyumlu rüya içeriğini anlatması Kriter C'yi doğrular.",
+        "Polisomnografide REM evresinde fizyolojik atoni kaybının gösterilmesi Kriter D'yi kesinleştirir; hiposmi ve kabızlık prodromal sinükleinopati ipucudur."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "nrem_sleep_arousal",
+          "reason": "Olaylar gecenin ikinci yarısındadır, uyanınca konfüzyon yoktur ve rüya ayrıntılı hatırlanmaktadır."
+        },
+        {
+          "diagnosisId": "nightmare_disorder",
+          "reason": "Yalnızca korkutucu rüya değil, EMG atonisinin kaybına bağlı tehlikeli motor davranışlar mevcuttur."
+        },
+        {
+          "diagnosisId": "obstructive_sleep_apnea",
+          "reason": "Polisomnografi apne kaynaklı sıçrama değil, doğrudan REM atonisi kaybını göstermiştir."
+        }
+      ],
+      "teachingPoint": "İleri yaşta gecenin ikinci yarısında rüyayla uyumlu şiddetli hareketler ve PSG'de REM atonisi kaybı bu tanıyı koyar; yatak odası güvenliği ve sinükleinopati izlemi şarttır."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "NEURO_SOMATIC",
+    "diagnosisId": "restless_legs_syndrome",
+    "category": "SLEEP",
+    "patientSummary": "39 yaşında, kadın, diyetisyen",
+    "clues": [
+      "39 yaşındaki diyetisyen, son 6 aydır akşamları evde oturmakta zorlanma, gece geç saatlere kadar uyuyamama ve gündüz yoğun bitkinlik yakınmalarıyla başvuruyor.",
+      "Özellikle akşam 21.00'den sonra koltukta dinlenirken ya da yatağa uzandığında diz altı bölgelerinin derininde tarif etmesi güç bir çekilme ve rahatsızlık hissi başladığı, uzun otobüs yolculuklarında yerinde duramadığı öğreniliyor.",
+      "Nörolojik muayenede kas gücü, derin tendon refleksleri, duyu muayenesi ve EMG tamamen normal (periferik nöropati dışlandı); alt ekstremite venöz Doppler incelemesi olağan.",
+      "Kan tahlilinde serum ferritin düzeyi 18 ng/mL (düşük) saptanıyor; antipsikotik, SSRI, mirtazapin ya da antihistaminik kullanımı yok.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, hafif yorgun ancak işbirliğine açık. Duygudurum ötimik, gece uyuyamama nedeniyle hafif bezgin. Akatiziye yol açacak ilaç öyküsü ya da psikotik belirti yok.",
+      "Son 6 aydır haftada 5 gece ortaya çıkan bu duyumlar ve alt ekstremitelerini oynatma dürtüsünün, ayağa kalkıp koridorda birkaç dakika yürüyünce ya da gerince hemen hafiflediği, tekrar uzanınca geri döndüğü belirleniyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 1,
+        "text": "akşam 21.00'den sonra koltukta dinlenirken ya da yatağa uzandığında diz altı bölgelerinin derininde tarif etmesi güç bir çekilme ve rahatsızlık hissi",
+        "dsmMatch": "Kriter A: Dinlenmede başlayan ve akşam/gece kötüleşen rahatsız edici duyumlar"
+      },
+      {
+        "clueIndex": 5,
+        "text": "ayağa kalkıp koridorda birkaç dakika yürüyünce ya da gerince hemen hafiflediği",
+        "dsmMatch": "Kriter A: Hareketle kısmen ya da tamamen rahatlama"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Son 6 aydır haftada 5 gece ortaya çıkan",
+        "dsmMatch": "Kriter B: En az 3 aydır haftada ≥ 3 kez ortaya çıkma"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Demir Replasmanı, Tetikleyicilerden Kaçınma & Uyku Hijyeni (CBT-I İlkeleri)",
+      "therapyDetails": "Ferritin düzeyi > 75 ng/mL hedeflenerek demir tedavisi planlanır; kafein, alkol, nikotin ile antihistaminik/SSRI/mirtazapin gibi tetikleyicilerden kaçınma ve düzenli uyku hijyeni öğretilir.",
+      "pharmacologyNote": "Demir replasmanına rağmen süren orta-ağır olgularda alfa-2-delta ligandları (pregabalin, gabapentin) ilk basamakta tercih edilir; dopamin agonistleri (pramipeksol, ropinirol) uzun dönemde ogmentasyon riski gözetilerek kullanılır."
+    },
+    "miniQuiz": {
+      "question": "Bu sendromun yönetiminde serum ferritin düzeyinin hangi eşiğin üzerinde tutulması ve hangi ilaç grubunun belirtileri alevlendirebileceği bilinmelidir?",
+      "options": [
+        "Ferritin > 10 ng/mL yeterlidir; benzodiazepinler belirtileri alevlendirir",
+        "Ferritin > 75 ng/mL hedeflenir; antihistaminikler, SSRI'lar ve mirtazapin belirtileri kötüleştirebilir",
+        "Ferritin düzeyiyle ilişkisi yoktur; yalnızca B12 takviyesi yeterlidir",
+        "Ferritin < 20 ng/mL tutulmalıdır; pregabalin belirtileri kötüleştirir"
+      ],
+      "correctIndex": 1,
+      "explanation": "Merkezi sinir sisteminde demir eksikliği dopaminerjik işlevi bozar; bu nedenle rutin laboratuvar alt sınırının üzerinde (ferritin > 75 ng/mL) hedef konur. Antihistaminikler, antipsikotikler, SSRI'lar ve mirtazapin belirtileri belirgin biçimde artırır."
+    },
+    "differentialDiagnosis": "• Uykusuzluk Bozukluğu (Kronik İnsomni): Uykuya dalma güçlüğü vardır ancak dinlenmeyle başlayan ve yürümekle geçen bacak duyumları yoktur.\n• Yaygın Anksiyete Bozukluğu (YAB): Gece huzursuzluk ve gerginlik görülebilir ancak tipik akşam zirveli, hareketle anında geçen URGE örüntüsü yoktur.\n• Sirkadiyen Ritim Uyku-Uyanıklık Bozukluğu: Geç uyuma görülür fakat nedeni bacaklardaki duyumsal dürtü değil biyolojik saat kaymasıdır.",
+    "dsmCriteriaSummary": "DSM-5-TR: Rahatsız edici duyumlarla bacakları hareket ettirme dürtüsü + Dinlenmede başlama + Hareketle rahatlama + Akşam/gece kötüleşme (A) + En az 3 aydır haftada ≥ 3 kez (B) + Sıkıntı/işlev kaybı (C) + Nöropati/akatizi dışlaması (D-E).",
+    "therapyId": "cbt_i",
+    "explanation": {
+      "whyThis": [
+        "Dinlenmede başlayan, akşam 21.00'den sonra belirginleşen, yürümekle hemen hafifleyen bacakları hareket ettirme dürtüsü tüm URGE ölçütlerini (Kriter A) karşılar.",
+        "Altı aydır haftada 5 gece görülmesi ve ağır uykuya dalma güçlüğü yaratması Kriter B ve C'yi doğrular.",
+        "Normal EMG/Doppler, ilaçsız öykü ve düşük ferritin (18 ng/mL) periferik nöropati ile ilaca bağlı akatiziyi dışlayıp etiyolojiyi destekler."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "insomnia_disorder",
+          "reason": "Uykuya dalma güçlüğü birincil değil, tipik akşam-dinlenme-hareketle rahatlama örüntüsü gösteren bacak duyumlarına ikincildir."
+        },
+        {
+          "diagnosisId": "gad",
+          "reason": "Akşam yaşanan huzursuzluk bilişsel endişe değil, fiziksel olarak hareketle anında hafifleyen duyumsal dürtüdür."
+        },
+        {
+          "diagnosisId": "circadian_rhythm_sleep_wake",
+          "reason": "Uykunun gecikmesi içsel saat kaymasından değil bacaklardaki rahatsız edici duyumlardan kaynaklanmaktadır."
+        }
+      ],
+      "teachingPoint": "URGE dörtlüsünü (dürtü, dinlenmede başlama, hareketle geçme, akşam kötüleşme) karşılayan her hastada ferritin mutlaka istenmeli ve > 75 ng/mL hedeflenmelidir."
+    }
+  },
+  {
+    "difficulty": "Zor",
+    "course": "ADULT",
+    "diagnosisId": "erectile_disorder",
+    "category": "SEXUAL",
+    "patientSummary": "37 yaşında, erkek, iç mimar",
+    "clues": [
+      "37 yaşındaki iç mimar, son aylarda eşiyle yakınlaşmaktan kaçınma, eve geç dönme ve evlilikte artan gerginlik nedeniyle başvuruyor.",
+      "Yaklaşık 9 ay önce işyerinde yaşadığı ağır bir proje krizi döneminde eşiyle yaşadığı bir başarısızlık deneyiminin ardından, her yakınlaşma öncesi yoğun performans endişesi duymaya başladığı öğreniliyor.",
+      "Üroloji değerlendirmesinde açlık kan şekeri, lipid profili, total testosteron, prolaktin, tiroid paneli ve penil Doppler incelemesi tamamen olağan; hipertansiyon, diyabet, sigara, alkol ya da antidepresan kullanımı yok.",
+      "Sabah uyanma sırasındaki fizyolojik yanıtların ve tek başına uyarılmanın tamamen korunduğu, sorunun yalnızca eşiyle cinsel girişim sırasında ortaya çıktığı belirtiliyor.",
+      "Ruhsal Durum Muayenesinde: Bakımlı, ancak belirgin biçimde gergin ve utangaç. Duygudurum hafif kaygılı; majör depresif dönem ya da yaygın anksiyete ölçütleri karşılanmıyor. Düşünce içeriğinde 'yine başaramayacağım' beklentisi hakim.",
+      "Son 9 aydır eşiyle yaşanan cinsel girişimlerin neredeyse tamamında (%90) yeterli fizyolojik yanıtı elde etmede ya da ilişki tamamlanana dek sürdürmede belirgin güçlük yaşadığı ve bu sırada sürekli kendi bedenini dışarıdan izler gibi kontrol ettiği netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "cinsel girişimlerin neredeyse tamamında (%90) yeterli fizyolojik yanıtı elde etmede ya da ilişki tamamlanana dek sürdürmede belirgin güçlük",
+        "dsmMatch": "Kriter A: Cinsel etkinliklerin %75-100'ünde sertliği sağlama veya sürdürmede güçlük"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Son 9 aydır",
+        "dsmMatch": "Kriter B: Belirtilerin en az 6 aydır sürmesi"
+      },
+      {
+        "clueIndex": 3,
+        "text": "Sabah uyanma sırasındaki fizyolojik yanıtların ve tek başına uyarılmanın tamamen korunduğu",
+        "dsmMatch": "Klinik bulgu: Organik damarsal patolojinin dışlanması ve durumsal/psikojenik köken"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Duyusal Odaklanma (Sensate Focus) & Cinsel Terapi",
+      "therapyDetails": "Çiftin birlikte katılımıyla penetrasyon baskısının geçici olarak kaldırıldığı Duyusal Odaklanma egzersizleri, performans kaygısı ('seyirci kalma' rolü) üzerine bilişsel çalışma ve çift iletişimi uygulanır.",
+      "pharmacologyNote": "Performans kaygısı döngüsünü kırmada cinsel terapiye ek olarak üroloji eşgüdümünde PDE-5 inhibitörleri (sildenafil, tadalafil) kısa süreli güven desteği sağlayabilir; eşlik eden depresyon varsa bupropion tercih edilir."
+    },
+    "miniQuiz": {
+      "question": "Bu hastada sabah fizyolojik yanıtlarının ve tek başına uyarılmanın tamamen korunmuş olması klinisyene en güçlü biçimde neyi düşündürür?",
+      "options": [
+        "İleri düzeyde yaygın damarsal (aterosklerotik) yetmezlik olduğunu",
+        "Ağır hipogonadizm ve prolaktinoma bulunduğunu",
+        "Nörovasküler mekanizmanın sağlam olduğunu ve tablonun ağırlıklı olarak psikojenik/performans kaygısı kaynaklı olduğunu",
+        "Bozukluğun mutlaka SSRI yan etkisine bağlı olduğunu"
+      ],
+      "correctIndex": 2,
+      "explanation": "Sabah yanıtlarının ve tek başına uyarılmanın korunmuş olması sinirsel ve damarsal yolların sağlam olduğunu gösterir; sorunun yalnızca partnerle ilişkide ortaya çıkması durumsal/psikojenik performans kaygısını ('seyirci kalma' etkisini) destekler."
+    },
+    "differentialDiagnosis": "• Erkekte Düşük Cinsel İstek Bozukluğu: Cinsel düşünce ve istek belirgin azalmıştır; bu hastada istek vardır ancak performans kaygısı nedeniyle kaçınma gelişmiştir.\n• Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu: SSRI, antihipertansif veya alkol kullanımına bağlıdır; bu hastada ilaç/madde kullanımı yoktur.\n• Majör Depresif Bozukluk: Yaygın çökkünlük ve anhedoniye ikincil cinsel işlev kaybı görülür; burada depresif dönem ölçütleri yoktur.",
+    "dsmCriteriaSummary": "DSM-5-TR: Cinsel etkinliklerin %75-100'ünde sertliği sağlama/sürdürme güçlüğü veya derecesinde azalma (A) + En az 6 ay süre (B) + Klinik sıkıntı (C) + Başka ruhsal bozukluk, ilaç veya tıbbi durumla açıklanamama (D).",
+    "therapyId": "sensate_focus",
+    "explanation": {
+      "whyThis": [
+        "Dokuz aydır eşiyle cinsel girişimlerin %90'ında yeterli yanıtı elde etme ve sürdürmede güçlük yaşanması Kriter A ve B'yi karşılar.",
+        "Evlilikte gerginlik ve kaçınma Kriter C'yi doğrular; normal hormonlar, Doppler ve ilaçsız öykü organik/madde nedenlerini dışlar (Kriter D).",
+        "Sabah yanıtlarının korunması ve 'seyirci kalma' kaygısı edinilmiş, durumsal (psikojenik) tabloyu netleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "male_hypoactive_desire",
+          "reason": "Temel sorun cinsel istek yokluğu değil, istek olmasına rağmen performans kaygısıyla fizyolojik yanıtın sürdürülememesidir."
+        },
+        {
+          "diagnosisId": "substance_induced_sexual_dysfunction",
+          "reason": "SSRI, alkol veya başka bir ilaç/madde kullanımı bulunmamaktadır."
+        },
+        {
+          "diagnosisId": "mdd",
+          "reason": "Majör depresif dönem ölçütleri karşılanmamaktadır; kaygı yalnızca cinsel performansa özgüdür."
+        }
+      ],
+      "teachingPoint": "Sabah yanıtlarının korunması damarsal-nörolojik sağlamlığı gösterir; psikojenik olgularda performans baskısını kaldıran Duyusal Odaklanma terapisi temeldir."
+    }
+  },
+  {
+    "difficulty": "İleri Düzey",
+    "course": "ADULT",
+    "diagnosisId": "premature_ejaculation",
+    "category": "SEXUAL",
+    "patientSummary": "31 yaşında, erkek, banka müfettişi",
+    "clues": [
+      "31 yaşındaki banka müfettişi, iki yıllık evliliğinde son aylarda artan gerginlik, eşiyle duygusal uzaklaşma ve yoğun yetersizlik hissi nedeniyle başvuruyor.",
+      "Yakınmasının ilk cinsel deneyimlerinden bu yana sürdüğü, evlilikle birlikte eşinin hayal kırıklığından çekindiği için yakınlaşma fırsatlarını ertelemeye başladığı öğreniliyor.",
+      "Ürolojik muayene, tiroid fonksiyon testleri, prostat değerlendirmesi ve kan tahlilleri tamamen normal; hipertansiyon, diyabet ya da nörolojik hastalık yok.",
+      "Alkol, madde kullanımı ya da yakın dönemde opioid/SSRI kesilmesi öyküsü bulunmuyor; eşiyle genel iletişim sorunlarının bu durumun nedeni değil sonucu olduğu değerlendiriliyor.",
+      "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliğine açık, konuşması düzenli. Duygudurum hafif sıkıntılı ve mahcup; majör depresif dönem ya da yaygın anksiyete bozukluğu ölçütü yok. İçgörü tam.",
+      "Altı aydan çok daha uzun süredir partnerle yaşanan birleşmelerin neredeyse tamamında (%90'dan fazlasında) vajinal birleşmenin hemen ardından 30-45 saniye içinde, kendi isteğinden önce ve denetleyemediği biçimde boşalma gerçekleştiği netleşiyor."
+    ],
+    "symptomHighlights": [
+      {
+        "clueIndex": 5,
+        "text": "vajinal birleşmenin hemen ardından 30-45 saniye içinde, kendi isteğinden önce ve denetleyemediği biçimde boşalma",
+        "dsmMatch": "Kriter A: Vajinal penetrasyondan sonraki ~1 dakika içinde ve arzusundan önce boşalma"
+      },
+      {
+        "clueIndex": 5,
+        "text": "Altı aydan çok daha uzun süredir partnerle yaşanan birleşmelerin neredeyse tamamında (%90'dan fazlasında)",
+        "dsmMatch": "Kriter B: En az 6 aydır ve cinsel etkinliklerin %75-100'ünde ortaya çıkması"
+      },
+      {
+        "clueIndex": 1,
+        "text": "ilk cinsel deneyimlerinden bu yana sürdüğü",
+        "dsmMatch": "Belirleyici: Yaşam boyu (birincil) alt tip ve belirgin sıkıntı (Kriter C)"
+      }
+    ],
+    "treatmentModality": {
+      "goldStandardTherapy": "Cinsel Terapi (Dur-Başlat & Sıkma Teknikleri, Duyusal Odaklanma)",
+      "therapyDetails": "Uyarılma farkındalığını artıran Dur-Başlat (Start-Stop) ve Sıkma (Squeeze) teknikleri, pelvik taban gevşeme egzersizleri ve çiftin performans kaygısını azaltan Duyusal Odaklanma uygulanır.",
+      "pharmacologyNote": "Serotoninerjik geciktirici etkisinden yararlanmak üzere günlük düşük doz SSRI'lar (paroksetin, sertralin, fluoksetin) veya ilişki öncesi hızlı etkili dapoksetin ve topikal lokal anestezikler etkilidir."
+    },
+    "miniQuiz": {
+      "question": "DSM-5-TR ölçütlerine göre bu bozukluğun şiddeti 'Orta' düzey olarak sınıflandırıldığında tipik vajinal penetrasyon sonrası süre aralığı hangisidir?",
+      "options": [
+        "3-5 dakika arası",
+        "1-2 dakika arası",
+        "Yaklaşık 15-30 saniye içinde",
+        "Yalnızca 10 saniyenin altında"
+      ],
+      "correctIndex": 2,
+      "explanation": "DSM-5-TR şiddet belirleyicisine göre hafif düzey 30 saniye-1 dakika içinde, orta düzey 15-30 saniye içinde, ağır düzey ise penetrasyon öncesi, sırasında veya ilk 15 saniye içinde gerçekleşen boşalmayı tanımlar."
+    },
+    "differentialDiagnosis": "• Sertleşme Bozukluğu (Erektil Bozukluk): Temel sorun sertliği sağlama veya sürdürme güçlüğüdür; bazen ikisi birlikte görülse de burada birincil sorun 1 dakika içi kontrolsüz boşalmadır.\n• Maddenin/İlacın Yol Açtığı Cinsel İşlev Bozukluğu: Özellikle opioid kesilmesi sırasında geçici olarak ortaya çıkabilir; burada madde veya ilaç yoksunluğu yoktur.\n• Geç Boşalma (Gecikmiş Ejakülasyon): Tam tersi biçimde boşalmada belirgin gecikme veya boşalamama ile gider.",
+    "dsmCriteriaSummary": "DSM-5-TR: Partnerle cinsel etkinlikte vajinal penetrasyon sonrası ~1 dk içinde ve isteğinden önce boşalma (A) + ≥ 6 ay ve etkinliklerin %75-100'ünde (B) + Klinik sıkıntı (C) + Başka bozukluk/madde/tıbbi durum dışlaması (D).",
+    "therapyId": "sensate_focus",
+    "explanation": {
+      "whyThis": [
+        "Partnerle birleşmelerin %90'ından fazlasında penetrasyon sonrası 30-45 saniye içinde ve isteğinden önce boşalma olması Kriter A ve B'yi karşılar.",
+        "Evlilikte uzaklaşma, kaçınma ve yetersizlik hissi Kriter C'yi doğrular; ilk deneyimlerden beri sürmesi yaşam boyu belirleyicisine işaret eder.",
+        "Normal ürolojik-tiroid tetkikleri ve opioid/madde yoksunluğunun bulunmaması Kriter D'yi kesinleştirir."
+      ],
+      "whyNot": [
+        {
+          "diagnosisId": "erectile_disorder",
+          "reason": "Sertliği sağlama ya da sürdürmede birincil bir güçlük değil, penetrasyon sonrası 1 dakika içinde kontrolsüz boşalma vardır."
+        },
+        {
+          "diagnosisId": "substance_induced_sexual_dysfunction",
+          "reason": "Opioid kesilmesi veya başka bir madde/ilaç etkisi söz konusu değildir."
+        },
+        {
+          "diagnosisId": "delayed_ejaculation",
+          "reason": "Boşalma süresinde gecikme değil, aksine 1 dakikanın altında aşırı hızlanma mevcuttur."
+        }
+      ],
+      "teachingPoint": "Penetrasyon sonrası ~1 dakika içinde, en az 6 aydır ve ilişkilerin %75-100'ünde süren kontrolsüz boşalmada Dur-Başlat/Sıkma teknikleri ve SSRI'lar yüksek başarı sağlar."
+    }
+  }
+]

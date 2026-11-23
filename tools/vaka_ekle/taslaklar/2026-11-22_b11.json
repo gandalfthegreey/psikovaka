@@ -1,0 +1,1442 @@
+[
+    {
+        "difficulty": "Kolay",
+        "course": "SUBSTANCE",
+        "diagnosisId": "tobacco_use_disorder",
+        "category": "SUBSTANCE",
+        "patientSummary": "53 yaşında, kadın, tekstil atölyesi ustabaşı",
+        "clues": [
+            "53 yaşındaki tekstil ustabaşı, aile hekiminin yönlendirmesiyle başvuruyor; son yıllarda sabahları göğsünde sıkışma, çabuk yorulma ve öksürük yakınmaları artmış olmasına karşın günlük bir alışkanlığını bir türlü bırakamadığını söylüyor.",
+            "Eşi ve çocukları evde sürekli tartışma çıktığını, hastanın sinirlilik ve huzursuzluk yaşadığında mola verip dışarı çıkmadan rahatlayamadığını, uzun otobüs yolculuklarından ve kapalı alan toplantılarından kaçındığını belirtiyor.",
+            "Öyküde 28 yıldır düzenli olarak günde bir buçuk ila iki paket sigara içtiği, son 12 ayda KOAH başlangıcı tanısı almasına ve üç kez bırakmayı denemesine rağmen her seferinde birkaç gün içinde yeniden başladığı öğreniliyor.",
+            "Göğüs hastalıkları muayenesinde solunum fonksiyon testinde hafif obstrüksiyon saptanmış; alkol, esrar veya başka psikoaktif madde kullanımı yok. Tiroid testleri, kan sayımı ve EKG olağan.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Duygudurum hafif kaygılı, duygulanım uyumlu. Düşünce akışı düzenli, varsanı ya da sanrı yok. Sağlık zararlarının farkında ancak bırakma konusunda çaresizlik bildiriyor.",
+            "Sabah uyanır uyanmaz ilk 10 dakika içinde içmeye başladığını, bir paketle artık eskisi gibi rahatlayamadığı için miktarı artırdığını ve birkaç saat içmediğinde yoğun aşerme ile gerginlik geliştiği için yeniden yaktığını ifade ediyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "KOAH başlangıcı tanısı almasına ve üç kez bırakmayı denemesine rağmen her seferinde birkaç gün içinde yeniden başladığı",
+                "dsmMatch": "Kriter A2 & A9: Başarısız bırakma çabaları ve sağlık sorununa karşın sürdürme"
+            },
+            {
+                "clueIndex": 5,
+                "text": "bir paketle artık eskisi gibi rahatlayamadığı için miktarı artırdığını",
+                "dsmMatch": "Kriter A10: Tolerans gelişimi"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yoğun aşerme ile gerginlik geliştiği için yeniden yaktığını",
+                "dsmMatch": "Kriter A4 & A11: Yoğun aşerme ve yoksunluktan kaçınmak için kullanım"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Motivasyonel Görüşme & Davranışsal Bırakma Desteği",
+            "therapyDetails": "Tetikleyici ipuçlarının (kahve, yemek sonrası, stres) belirlenmesi, başa çıkma planı oluşturma, motivasyonel görüşme ile ikircikliliği çözme ve düzenli takip görüşmeleri.",
+            "pharmacologyNote": "Nikotin replasman tedavisi (bant, sakız), vareniklin veya bupropion davranışsal destekle birleştirildiğinde uzun dönem bırakma oranlarını belirgin biçimde artırır."
+        },
+        "miniQuiz": {
+            "question": "Bu hastanın tanısında aşağıdaki DSM-5-TR ölçütlerinden hangisi 12 aylık dönem içinde tanı koymak için tek başına yeterlidir?",
+            "options": [
+                "Hiçbiri; tanı için 11 ölçütten en az ikisinin 12 ay içinde karşılanması gerekir",
+                "Yalnızca günde bir paketten fazla içmek tanı için tek başına yeterlidir",
+                "Yalnızca sabah erken saatte ilk sigarayı yakmak tek başına yeterlidir",
+                "Yalnızca akciğer hastalığı eşlik ediyorsa tek ölçüt yeterlidir"
+            ],
+            "correctIndex": 0,
+            "explanation": "DSM-5-TR'ye göre kullanım bozukluğu tanısı için 12 aylık bir dönemde 11 ölçütten en az ikisinin karşılanması gerekir; tek bir belirti veya günlük miktar tek başına tanı koydurmaz."
+        },
+        "differentialDiagnosis": "• Tütün (Nikotin) Yoksunluğu: Bırakma ya da azaltma sonrası 24 saat içinde gelişen akut sendromdur; burada süregelen 12 aylık denetimsiz kullanım örüntüsü esastır.\n• Yaygın Anksiyete Bozukluğu (YAB): Kaygı birçok yaşam alanına yaygındır; burada gerginlik yalnızca kullanım kesintisi ve aşerme bağlamındadır.\n• Alkol Kullanım Bozukluğu (Alkolizm): Öyküde alkol ya da başka bir madde kullanımı yoktur.",
+        "dsmCriteriaSummary": "DSM-5-TR: 12 ayda 11 ölçütten en az 2'si (bırakamama, aşerme, tolerans, yoksunluk, bedensel zarara karşın sürdürme) + Klinik açıdan belirgin sıkıntı veya işlevsellik kaybı.",
+        "therapyId": "motivational_interviewing",
+        "explanation": {
+            "whyThis": [
+                "KOAH başlangıcına rağmen bırakma girişimlerinin başarısız olması ve zarara karşın kullanımın sürmesi denetim kaybını gösterir.",
+                "Aynı etki için günlük miktarın artması toleransı, birkaç saatlik kesintide yoğun aşerme ve rahatlamak için yeniden yakma ise aşerme ile yoksunluk ölçütlerini karşılar.",
+                "Diğer psikoaktif maddeler ve birincil psikiyatrik tablolar dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "tobacco_withdrawal",
+                    "reason": "Hasta şu an aktif kullanımını sürdürmektedir; akut bırakma sonrası gelişen bir yoksunluk epizoduyla başvurmamıştır."
+                },
+                {
+                    "diagnosisId": "gad",
+                    "reason": "Huzursuzluk ve gerginlik yaygın ve denetlenemez endişelerden değil, yalnızca kullanım aralarındaki aşermeden kaynaklanmaktadır."
+                },
+                {
+                    "diagnosisId": "alcohol_use_disorder",
+                    "reason": "Öyküde alkol veya başka bir psikoaktif madde kullanımı bulunmamaktadır."
+                }
+            ],
+            "teachingPoint": "Tütün kullanım bozukluğunda iş veya toplumsal yükümlülük aksamasından çok bırakmada başarısızlık, tolerans, yoğun aşerme ve bilinen sağlık zararına karşın sürdürme öne çıkar."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "SUBSTANCE",
+        "diagnosisId": "tobacco_withdrawal",
+        "category": "SUBSTANCE",
+        "patientSummary": "38 yaşında, erkek, yazılım geliştirici",
+        "clues": [
+            "38 yaşındaki yazılım geliştirici, son üç gündür dayanılmaz bir sinirlilik, yerinde duramama, işine odaklanamama ve gece sık uyanma yakınmalarıyla psikiyatri polikliniğine başvuruyor.",
+            "Eşi, hastanın normalde sakin biri olduğunu ancak bu hafta en ufak seste parladığını, sürekli buzdolabını açıp bir şeyler atıştırdığını ve akşamları keyifsiz, gergin oturduğunu anlatıyor.",
+            "Ayrıntılı öyküde hastanın 14 yıldır günde ortalama 25 adet sigara içtiği, dört gün önce akciğer filmi sonrası korkup aniden tamamen kestiği, belirtilerin kesmeden yaklaşık 16 saat sonra başladığı öğreniliyor.",
+            "Alkol, esrar, uyarıcı ya da sedatif kullanımı yok; son günlerde kafein tüketimi değişmemiş. Fizik muayenede kan basıncı 120/75 mmHg, nabız 64/dk (alışılmışın biraz altında), ateş normal, tiroid fonksiyonları olağan.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, işbirliği iyi ancak bacaklarını sürekli sallıyor. Duygudurum gergin ve hafif çökkün, duygulanım irritabl. Düşünce içeriğinde intihar fikri ya da sanrı yok; içgörü tam.",
+            "Hasta, bırakma kararının ardından ilk gün içinde ortaya çıkan yoğun öfke, kaygı, konsantrasyon güçlüğü, iştah artışı, huzursuzluk ve uykusuzluğun çalışma verimini belirgin düşürdüğünü, bir nefes çekerse hemen geçeceğini bildiği için zor dayandığını belirtiyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "14 yıldır günde ortalama 25 adet sigara içtiği, dört gün önce akciğer filmi sonrası korkup aniden tamamen kestiği, belirtilerin kesmeden yaklaşık 16 saat sonra başladığı",
+                "dsmMatch": "Kriter A & B: Günlük kullanımın ani kesilmesini izleyen 24 saat içinde başlangıç"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yoğun öfke, kaygı, konsantrasyon güçlüğü, iştah artışı, huzursuzluk ve uykusuzluğun",
+                "dsmMatch": "Kriter B: En az 4 tipik yoksunluk belirtisinin bulunması"
+            },
+            {
+                "clueIndex": 5,
+                "text": "çalışma verimini belirgin düşürdüğünü",
+                "dsmMatch": "Kriter C: Klinik açıdan belirgin sıkıntı veya işlevsellikte düşme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Aşerme Yönetimi",
+            "therapyDetails": "Yoksunluk belirtilerinin geçici doğası (genellikle 2-4 haftada azalması) konusunda psikoeğitim, gevşeme teknikleri, dürtü sörfü ve nüks önleme becerileri.",
+            "pharmacologyNote": "Nikotin replasman tedavisi (transdermal bant + hızlı etkili sakız/pastil), vareniklin veya bupropion yoksunluk şiddetini belirgin azaltır."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'ye göre bu sendromun tanısı için kullanımın kesilmesi veya azaltılmasından sonra belirtiler hangi zaman penceresinde başlamalı ve en az kaç belirti bulunmalıdır?",
+            "options": [
+                "72 saat içinde başlamalı ve en az 2 belirti bulunmalıdır",
+                "24 saat içinde başlamalı ve 7 belirtiden en az 4'ü bulunmalıdır",
+                "1 hafta içinde başlamalı ve en az 5 belirti bulunmalıdır",
+                "6 saat içinde başlamalı ve mutlaka titreme ile terleme eşlik etmelidir"
+            ],
+            "correctIndex": 1,
+            "explanation": "DSM-5-TR ölçütlerine göre en az birkaç hafta günlük tütün kullanımının ani kesilmesi veya azaltılmasını izleyen 24 saat içinde 7 belirtiden (irritabilite/öfke, kaygı, odaklanma güçlüğü, iştah artışı, huzursuzluk, çökkün duygudurum, uykusuzluk) en az 4'ü gelişmelidir."
+        },
+        "differentialDiagnosis": "• Yaygın Anksiyete Bozukluğu (YAB): En az 6 ay süren yaygın endişe gerektirir; burada belirtiler 3 günlüktür ve ani kesilme sonrası başlamıştır.\n• Esrar Yoksunluğu: Benzer irritabilite ve uykusuzluk görülse de hastada esrar kullanımı yoktur ve iştah azalması yerine artışı vardır.\n• Kafein Yoksunluğu (Baş Ağrısı, Yorgunluk): Kafein tüketimi değişmemiştir ve baş ağrısı ile belirgin bitkinlik ön planda değildir.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az birkaç hafta günlük kullanım + Ani kesme/azaltmadan sonraki 24 saat içinde ≥4/7 belirti (irritabilite, kaygı, odaklanma güçlüğü, iştah artışı, huzursuzluk, çökkünlük, uykusuzluk) + Belirgin sıkıntı/işlevsellik kaybı.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "14 yıllık günlük kullanımın aniden bırakılmasından 16 saat sonra (24 saat içinde) semptomların başlaması zamansal ölçütü karşılar.",
+                "İrritabilite, kaygı, odaklanma güçlüğü, iştah artışı, huzursuzluk, çökkünlük ve uykusuzluk dahil 7 ölçütten altısı mevcuttur.",
+                "Belirtiler işlevselliği bozmaktadır ve başka bir madde ya da tıbbi durumla açıklanmamaktadır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "gad",
+                    "reason": "Belirtiler yalnızca 3 gündür sürmekte olup 6 aylık yaygın kaygı öyküsü bulunmamaktadır."
+                },
+                {
+                    "diagnosisId": "cannabis_withdrawal",
+                    "reason": "Hastada esrar kullanımı yoktur; ayrıca esrar yoksunluğunda genellikle iştah azalması görülürken burada iştah artışı vardır."
+                },
+                {
+                    "diagnosisId": "caffeine_withdrawal",
+                    "reason": "Kafein alımında değişiklik olmamış, zonklayıcı baş ağrısı veya aşırı uyuklama gelişmemiştir."
+                }
+            ],
+            "teachingPoint": "Tütün yoksunluğu bırakmadan sonraki 24 saat içinde başlar, 2-3. günlerde zirve yapar; iştah artışı ve hafif bradikardi diğer uyarıcı yoksunluklarından ayrımında yardımcı ipuçlarıdır."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "SUBSTANCE",
+        "diagnosisId": "caffeine_intoxication",
+        "category": "SUBSTANCE",
+        "patientSummary": "24 yaşında, kadın, mimarlık yüksek lisans öğrencisi",
+        "clues": [
+            "24 yaşındaki yüksek lisans öğrencisi, gece geç saatlerde acil servise şiddetli çarpıntı, ellerde titreme, yerinde duramama ve 'kalbim yerinden çıkacak gibi' hissiyle başvuruyor.",
+            "Arkadaşı, hastanın son 24 saattir proje teslimi nedeniyle hiç uyumadığını, akşam saatlerinden itibaren konuşmasının hızlandığını, düşüncelerinin dağıldığını ve yüzünün kızardığını söylüyor.",
+            "Öyküde daha önce psikiyatrik hastalık, panik atağı veya mani dönemi olmadığı; son 8 saat içinde dört büyük kupa filtre kahve, üç kutu enerji içeceği ve iki adet 200 mg uyarıcı tablet aldığı (toplam yaklaşık 900 mg'ın üzerinde) öğreniliyor.",
+            "Fizik muayenede kan basıncı 138/84 mmHg, nabız 118/dk sinüs taşikardisi, hafif ince tremor, yüzde kızarıklık ve sık idrara çıkma mevcut; idrar toksikoloji paneli (amfetamin, kokain, esrar) negatif, TSH ve kan şekeri normal.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Psikomotor ajitasyon belirgin, konuşma hızlı ama kesilebilir. Duygudurum kaygılı, duygulanım gergin; varsanı, sanrı ya da grandiyözite yok.",
+            "Yüksek miktarda uyarıcı içecek ve tablet alımının hemen ardından gelişen huzursuzluk, sinirlilik, uykusuzluk, yüzde kızarma, diürez, mide rahatsızlığı, kas seğirmesi ve taşikardi belirtilerinin sıvı desteği ve gözlemle saatler içinde gerilediği izleniyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "dört büyük kupa filtre kahve, üç kutu enerji içeceği ve iki adet 200 mg uyarıcı tablet aldığı",
+                "dsmMatch": "Kriter A: Yakın zamanda yüksek doz (>250 mg) alım öyküsü"
+            },
+            {
+                "clueIndex": 5,
+                "text": "huzursuzluk, sinirlilik, uykusuzluk, yüzde kızarma, diürez, mide rahatsızlığı, kas seğirmesi ve taşikardi",
+                "dsmMatch": "Kriter B: En az 5 tipik akut belirti"
+            },
+            {
+                "clueIndex": 3,
+                "text": "idrar toksikoloji paneli (amfetamin, kokain, esrar) negatif, TSH ve kan şekeri normal",
+                "dsmMatch": "Kriter D: Başka madde ve tıbbi durumların dışlanması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Acil Tıbbi Stabilizasyon & Destekleyici Gözlem",
+            "therapyDetails": "Alımın derhal durdurulması, sakin ve düşük uyaranlı ortamda gözlem, oral/IV hidrasyon, vital bulguların ve EKG'nin izlenmesi ile güvenli kullanım psikoeğitimi.",
+            "pharmacologyNote": "Çoğu olgu destekleyici bakımla kendiliğinden düzelir; şiddetli ajitasyon veya taşikardide kısa süreli anksiyolitik ya da beta-bloker hekim gözetiminde değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'ye göre bu akut tablonun tanı eşiği genellikle hangi dozun üzerindeki alımdan sonra ve en az kaç belirtinin varlığında karşılanır?",
+            "options": [
+                "100 mg üzerinde ve en az 2 belirti",
+                "500 mg üzerinde ve en az 7 belirti",
+                "250 mg üzerinde ve 12 belirtiden en az 5'i",
+                "1000 mg üzerinde ve mutlaka bilinç bulanıklığı"
+            ],
+            "correctIndex": 2,
+            "explanation": "DSM-5-TR'de kafein intoksikasyonu için yakın zamanda genellikle 250 mg'ın üzerinde alım ve alım sırasında ya da hemen sonrasında 12 belirtiden en az 5'inin (huzursuzluk, sinirlilik, heyecan, uykusuzluk, yüzde kızarma, diürez, GI yakınma, kas seğirmesi, dağınık düşünce/konuşma, taşikardi/aritmi, yorulmazlık, psikomotor ajitasyon) bulunması gerekir."
+        },
+        "differentialDiagnosis": "• Panik Bozukluk: Yineleyici beklenmedik panik atakları ve en az 1 ay beklenti kaygısı gerekir; burada tek seferlik yüksek doz madde alımı sonrası akut tablo vardır.\n• Maddenin/İlacın Yol Açtığı Anksiyete Bozukluğu: Yalnızca akut intoksikasyonun olağan semptomlarıyla açıklanan geçici tablo bu tanıyı almaz.\n• Bipolar I Bozukluğu: Mani en az 7 gün sürer ve grandiyözite ile seyreder; burada saatler içinde gerileyen toksik etki vardır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Yakın zamanda yüksek doz (>250 mg) alım + Alım sırasında/sonrasında ≥5/12 belirti (huzursuzluk, sinirlilik, yüzde kızarma, diürez, taşikardi, psikomotor ajitasyon vb.) + Belirgin sıkıntı + Başka tıbbi durum/maddeyle açıklanamama.",
+        "therapyId": "medical_stabilization",
+        "explanation": {
+            "whyThis": [
+                "Kısa sürede 250 mg eşiğinin çok üzerinde yüksek doz alım öyküsü mevcuttur.",
+                "Huzursuzluk, sinirlilik, uykusuzluk, yüzde kızarma, diürez, mide rahatsızlığı, kas seğirmesi, taşikardi ve psikomotor ajitasyon ile 5 belirti eşiği rahatlıkla aşılmıştır.",
+                "İdrar toksikolojisi ve tiroid testleri diğer uyarıcıları ve hipertiroidiyi dışlamaktadır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "panic_disorder",
+                    "reason": "Yineleyici beklenmedik panik atak öyküsü yoktur; belirtiler doğrudan yüksek doz alımına bağlıdır."
+                },
+                {
+                    "diagnosisId": "substance_induced_anxiety",
+                    "reason": "Belirtiler akut intoksikasyonun tipik fizyolojik etkilerini aşmamakta ve saatler içinde gerilemektedir."
+                },
+                {
+                    "diagnosisId": "bipolar_1",
+                    "reason": "Grandiyözite veya günler süren taşkın duygudurum yoktur; tablo geçici ve maddeye bağlıdır."
+                }
+            ],
+            "teachingPoint": "Yüksek doz enerji içeceği, kahve ve uyarıcı tablet kombinasyonu panik atağı veya mani gibi görünebilir; yüzde kızarma, diürez, kas seğirmesi ve toksikoloji negatifliği tanıyı netleştirir."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "SUBSTANCE",
+        "diagnosisId": "caffeine_withdrawal",
+        "category": "SUBSTANCE",
+        "patientSummary": "46 yaşında, erkek, banka şube müdürü",
+        "clues": [
+            "46 yaşındaki banka müdürü, iki gündür süren zonklayıcı baş ağrısı, yoğun bitkinlik, iş toplantılarında odaklanamama ve belirgin halsizlik yakınmasıyla dahiliye ve ardından psikiyatriye danışıyor.",
+            "Eşi, hastanın son iki gündür işten eve gelir gelmez koltukta uyuyakaldığını, normalde enerjik olmasına karşın bu hafta son derece keyifsiz, tahammülsüz ve hafif bulantılı olduğunu aktarıyor.",
+            "Öyküde hastanın 10 yıldır her gün sabah akşam toplam 6-7 kupa sert kahve ve koyu çay tükettiği, üç gün önce gastroözofageal reflü nedeniyle doktor önerisiyle bunların tamamını aniden kestiği öğreniliyor.",
+            "Ateş, ense sertliği, fokal nörolojik defisit, görme bozukluğu ya da üst solunum yolu enfeksiyonu bulgusu yok. Kan basıncı 125/80 mmHg, tam kan sayımı, CRP, açlık kan şekeri ve elektrolitler normal; başka madde kullanımı yok.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam ancak yanıtlar yavaş ve yorgun. Duygudurum çökkün ve hafif irritabl, duygulanım kısıtlı. Düşünce içeriğinde intihar fikri, sanrı ya da varsanı yok.",
+            "Belirtilerin son tüketimden yaklaşık 18 saat sonra başladığı, hastanın baş ağrısının iki taraflı ve zonklayıcı olduğu, eşlik eden belirgin yorgunluk, çökkünlük, odaklanma güçlüğü ve hafif grip benzeri kas ağrılarının iş performansını belirgin aksattığı saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "10 yıldır her gün sabah akşam toplam 6-7 kupa sert kahve ve koyu çay tükettiği, üç gün önce gastroözofageal reflü nedeniyle doktor önerisiyle bunların tamamını aniden kestiği",
+                "dsmMatch": "Kriter A: Uzun süreli günlük kullanımın ani kesilmesi"
+            },
+            {
+                "clueIndex": 5,
+                "text": "son tüketimden yaklaşık 18 saat sonra başladığı",
+                "dsmMatch": "Kriter B: Kesilmeden sonraki 24 saat içinde başlangıç"
+            },
+            {
+                "clueIndex": 5,
+                "text": "baş ağrısının iki taraflı ve zonklayıcı olduğu, eşlik eden belirgin yorgunluk, çökkünlük, odaklanma güçlüğü ve hafif grip benzeri kas ağrılarının",
+                "dsmMatch": "Kriter B: 5 belirtiden en az 3'ünün bulunması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Destekleyici Psikoterapi & Kademeli Azaltma Psikoeğitimi",
+            "therapyDetails": "Belirtilerin genellikle 2-9 gün içinde kendiliğinden geçtiğine dair bilgilendirme, gelecekte ani kesme yerine 1-2 haftalık kademeli azaltma planı, yeterli sıvı alımı ve uyku hijyeni.",
+            "pharmacologyNote": "Özgül psikotrop ilaç gerekmez; baş ağrısı için kısa süreli basit analjezikler (reflüye uygun biçimde) kullanılabilir."
+        },
+        "miniQuiz": {
+            "question": "Bu sendromda en sık görülen ve hastayı kliniğe getiren temel belirti aşağıdakilerden hangisidir?",
+            "options": [
+                "Şiddetli görsel varsanılar ve otonomik fırtına",
+                "Yüksek ateş, ense sertliği ve bilinç bulanıklığı",
+                "İştah artışı ve belirgin psikomotor ajitasyon",
+                "İki taraflı zonklayıcı baş ağrısı ile belirgin yorgunluk/uyuklama"
+            ],
+            "correctIndex": 3,
+            "explanation": "Kafein kesilmesini izleyen 24 saat içinde en karakteristik bulgular serebral vazodilatasyona bağlı zonklayıcı baş ağrısı ve belirgin yorgunluk/uyuklamadır; otonomik fırtına ya da deliryum beklenmez."
+        },
+        "differentialDiagnosis": "• Majör Depresif Bozukluk: En az 2 hafta süren çökkünlük gerekir; burada tablo 2 günlüktür ve ani kesilmeyle doğrudan ilişkilidir.\n• Tütün (Nikotin) Yoksunluğu: Tütün kullanımı yoktur ve zonklayıcı baş ağrısı ile yoğun uyuklama tütün yoksunluğunun temel özelliği değildir.\n• Sedatif/Benzodiazepin Yoksunluğu: Sedatif kullanım öyküsü ve otonomik hiperaktivite (tremor, taşikardi, terleme) bulunmamaktadır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Uzun süreli günlük kullanım + Ani kesme/azaltmadan sonraki 24 saat içinde ≥3/5 belirti (baş ağrısı, belirgin yorgunluk, disfori/irritabilite, odaklanma güçlüğü, grip benzeri belirtiler) + Belirgin sıkıntı/işlevsellik kaybı.",
+        "therapyId": "supportive_psychotherapy",
+        "explanation": {
+            "whyThis": [
+                "10 yıllık yüksek günlük tüketimin aniden kesilmesinden 18 saat sonra (24 saat içinde) semptomların başlaması zamansal ölçütü karşılar.",
+                "Zonklayıcı baş ağrısı, belirgin yorgunluk/uyuklama, disforik-irritabl duygudurum, odaklanma güçlüğü ve grip benzeri kas ağrılarıyla 5 ölçütten 5'i de mevcuttur.",
+                "Enfeksiyon, migren dışı acil nörolojik nedenler ve başka maddeler dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Semptomlar yalnızca 2 gündür sürmekte olup 2 haftalık depresif dönem ölçütünü karşılamaz."
+                },
+                {
+                    "diagnosisId": "tobacco_withdrawal",
+                    "reason": "Tütün kullanım öyküsü yoktur; zonklayıcı baş ağrısı ve yoğun uyuklama bu tabloyu destekler."
+                },
+                {
+                    "diagnosisId": "sedative_withdrawal",
+                    "reason": "Sedatif-hipnotik kullanımı ve otonomik hiperaktivite bulguları bulunmamaktadır."
+                }
+            ],
+            "teachingPoint": "Kafein yoksunluğu, ameliyat öncesi açlık veya reflü diyeti gibi ani kesintilerde sıklıkla migren ya da viral enfeksiyonla karıştırılır; 24 saat içinde başlayan baş ağrısı ve yoğun bitkinlik anahtardır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "mild_neurocognitive_vascular",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "69 yaşında, kadın, emekli banka memuru",
+        "clues": [
+            "69 yaşındaki emekli banka memuru, son 10 aydır 'zihninin ağırlaştığını', fatura kalemlerini sıraya koyarken zorlandığını ve aynı anda iki işle uğraşamadığını belirterek nöroloji sonrası psikiyatriye başvuruyor.",
+            "Kızı, annesinin 11 ay önce geçirdiği hafif sol yüz asimetrisi ve konuşma güçlüğü atağından sonra belirgin biçimde yavaşladığını, o dönemden bu yana basamaklı bir duraksama yaşadığını ancak dünkü aile sohbetlerini ve torunlarının doğum günlerini hâlâ bildiğini söylüyor.",
+            "Özgeçmişte 18 yıldır hipertansiyon, dislipidemi ve atriyal fibrilasyon bulunuyor. B12, folat, TSH, hemogram ve biyokimya normal; alkol veya bilişi bozan antikolinerjik ilaç kullanımı yok.",
+            "Beyin MR incelemesinde periventriküler beyaz cevherde Fazekas evre 2 iskemik gliozis ve sağ bazal ganglion ile talamusta eski küçük damar enfarktları saptanıyor; medial temporal lob ve hipokampus hacimleri yaşıyla uyumlu.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, gün içi dalgalanma yok. MoCA 23/30; iz sürme, saat çizimi ve sözel akıcılıkta puan kaybı var, gecikmeli hatırlama kendiliğinden 2/5 iken ipucuyla 5/5. Duygudurum ötimik, Geriatrik Depresyon Ölçeği 2/15.",
+            "Alışverişini, banka işlemlerini ve ilaç takibini kimsenin yardımına gerek kalmadan tek başına sürdürdüğünü; yalnızca artık her adımı ajandaya not aldığını ve eskisine göre daha fazla zaman ayırdığını ifade ediyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "11 ay önce geçirdiği hafif sol yüz asimetrisi ve konuşma güçlüğü atağından sonra belirgin biçimde yavaşladığını",
+                "dsmMatch": "Kriter B: Serebrovasküler olayla zamansal ilişki"
+            },
+            {
+                "clueIndex": 3,
+                "text": "sağ bazal ganglion ile talamusta eski küçük damar enfarktları",
+                "dsmMatch": "Kriter C: Nörogörüntülemede serebrovasküler hastalık kanıtı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "kimsenin yardımına gerek kalmadan tek başına sürdürdüğünü; yalnızca artık her adımı ajandaya not aldığını",
+                "dsmMatch": "Kriter A/B: Gündelik yaşamda bağımsızlık korunmuş (telafi stratejileriyle)"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Vasküler Risk Kontrolü",
+            "therapyDetails": "Hipertansiyon, lipid ve ritim kontrolünün sıkılaştırılması, düzenli aerobik yürüyüş, bilişsel telafi stratejileri (ajanda, hatırlatıcılar) ve aileye psikoeğitim.",
+            "pharmacologyNote": "Birincil hedef ikincil inme profilaksisi ve vasküler risk yönetimidir; hafif düzeyde kolinesteraz inhibitörlerinin kanıtı sınırlıdır."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada tablonun 'majör' değil 'hafif' düzeyde sınıflandırılmasını sağlayan temel klinik ölçüt nedir?",
+            "options": [
+                "MR'da hipokampus hacminin korunmuş olması",
+                "İlaç ve mali işler gibi karmaşık gündelik etkinliklerde bağımsızlığın telafi stratejileriyle korunması",
+                "Geriatrik Depresyon Ölçeği puanının düşük olması",
+                "Serebrovasküler olayın 1 yıldan kısa süre önce gerçekleşmiş olması"
+            ],
+            "correctIndex": 1,
+            "explanation": "DSM-5-TR'de hafif ve majör nörobilişsel bozukluk arasındaki temel ayrım, bilişsel eksikliğin gündelik yaşam aktivitelerindeki (fatura ödeme, ilaç yönetimi vb.) bağımsızlığı bozup bozmamasıdır."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Karmaşık gündelik işlerde bağımsızlık yitirilmiştir; bu hastada bağımsızlık korunmaktadır.\n• Hafif Nörobilişsel Bozukluk (Alzheimer Hastalığına Bağlı / MCI): Sinsi başlar ve ipucuyla düzelmeyen yeni öğrenme kaybı baskındır.\n• Majör Depresif Bozukluk: Duygudurum ötimik ve depresyon ölçeği puanı normal sınırdadır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Karmaşık dikkat/yürütücü işlevlerde ılımlı gerileme + Gündelik bağımsızlık korunmuş + Serebrovasküler olayla zamansal ilişki + Görüntülemede damarsal lezyon kanıtı.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "İşlem hızı ve yürütücü işlevlerdeki ılımlı gerileme, gecikmeli hatırlamanın ipucuyla tam düzelmesiyle birlikte ön-subkortikal vasküler profili gösterir.",
+                "Geçirilmiş fokal nörolojik atakla zamansal ilişki ve MR'daki laküner enfarktlar serebrovasküler etiyolojiyi doğrular.",
+                "Hasta ajanda kullanarak ve daha çok çaba harcayarak mali işlerini ve ilaçlarını tek başına yürütebildiği için bağımsızlık korunmuştur."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "Gündelik yaşam etkinliklerinde bağımsızlık bozulmamış, yalnızca daha fazla çaba ve telafi gerekmiştir."
+                },
+                {
+                    "diagnosisId": "mild_neurocognitive_alzheimer",
+                    "reason": "Başlangıç bir damarsal olay sonrası basamaklıdır, bellek sorunu geri getirme düzeyindedir ve hipokampus korunmuştur."
+                },
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Çökkün duygudurum ve anhedoni yoktur; Geriatrik Depresyon Ölçeği puanı düşüktür."
+                }
+            ],
+            "teachingPoint": "Hafif vasküler nörobilişsel bozuklukta işlem hızı ve yürütücü işlev kaybı baskındır; bağımsızlığın telafiyle korunması onu majör formdan ayırır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_parkinson",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "73 yaşında, kadın, emekli ilkokul öğretmeni",
+        "clues": [
+            "73 yaşındaki emekli öğretmen, oğlu tarafından son iki yıldır giderek artan unutkanlık, ev işlerini yönetememe, faturaları karıştırma ve gün içinde dalgınlık yakınmalarıyla getiriliyor.",
+            "Öyküde hastanın 9 yıl önce sağ elinde başlayan istirahat titremesi, hareketlerde yavaşlama, küçük adımlarla öne eğik yürüme ve yüz ifadesinde donukluk nedeniyle nöroloji takibine girdiği ve uzun yıllardır levodopa/karbidopa tedavisinden belirgin yarar gördüğü öğreniliyor.",
+            "Oğlu, zihinsel gerilemenin motor yakınmaların başlamasından yaklaşık 7 yıl sonra sinsi biçimde eklendiğini; son bir yılda annesinin yemek yaparken ocağı unuttuğunu, ilaç saatlerini tek başına ayarlayamadığını ve akşamları odada sessizce oturan yabancılar gördüğünü aktarıyor.",
+            "Kan sayımı, B12, folat, TSH, elektrolitler ve idrar tetkiki normal; enfeksiyon ya da akut metabolik bozukluk yok. Beyin MR'ında yaşla uyumlu hafif yaygın kortikal atrofi dışında inme, kitle veya hidrosefali izlenmiyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık ancak dikkat zaman zaman dalgalanıyor. Konuşma alçak sesli ve monoton. MoCA 15/30; görsel-uzamsal küp kopyalama, saat çizimi ve yürütücü işlevlerde ağır kayıp, ipucuyla kısmen düzelen hatırlama. Duygudurum hafif apatik.",
+            "Nörolojik muayenede belirgin bradikinezi, dişli çark rijiditesi ve istirahat tremoru mevcut; yerleşik hareket bozukluğu tanısından yıllar sonra gelişen, bağımsızlığı bozan bu ilerleyici bilişsel yıkıma görsel varsanılar ve apati eşlik ediyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "9 yıl önce sağ elinde başlayan istirahat titremesi, hareketlerde yavaşlama, küçük adımlarla öne eğik yürüme",
+                "dsmMatch": "Kriter B: Yerleşik extrapiramidal hareket bozukluğu zemininde gelişim"
+            },
+            {
+                "clueIndex": 2,
+                "text": "zihinsel gerilemenin motor yakınmaların başlamasından yaklaşık 7 yıl sonra sinsi biçimde eklendiğini; son bir yılda annesinin yemek yaparken ocağı unuttuğunu, ilaç saatlerini tek başına ayarlayamadığını",
+                "dsmMatch": "Kriter A & C: Motor başlangıçtan yıllar sonra sinsi ilerleyen ve bağımsızlığı bozan bilişsel gerileme"
+            },
+            {
+                "clueIndex": 4,
+                "text": "görsel-uzamsal küp kopyalama, saat çizimi ve yürütücü işlevlerde ağır kayıp",
+                "dsmMatch": "Kriter A: Yürütücü ve görsel-uzamsal işlevlerde belirgin bozulma"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Bakıcı Desteği",
+            "therapyDetails": "Ev içi düşme güvenliği, sadeleştirilmiş günlük rutinler, ilaç saatlerinin bakıcı tarafından düzenlenmesi, varsanılarda tartışmadan güven verme ve nörolojiyle ortak takip.",
+            "pharmacologyNote": "Rivastigmin veya donepezil gibi kolinesteraz inhibitörleri bilişsel ve davranışsal belirtilerde yararlıdır; klasik antipsikotikler motor belirtileri ağırlaştırdığı için kaçınılır."
+        },
+        "miniQuiz": {
+            "question": "Bu tabloyu Lewy Cisimcikli Demanstan ayıran en temel zamansal kural aşağıdakilerden hangisidir?",
+            "options": [
+                "Görsel varsanıların hiç görülmemesi",
+                "Bilişsel gerilemenin, yerleşik motor belirtilerin başlamasından yıllar sonra (1 yıl kuralından çok sonra) gelişmesi",
+                "Beyin MR'ında mutlaka yaygın laküner enfarkt bulunması",
+                "Levodopa tedavisine hiçbir zaman yanıt alınmaması"
+            ],
+            "correctIndex": 1,
+            "explanation": "Klinik '1 yıl kuralı'na göre bilişsel yıkım yerleşik motor tablodan en az 1 yıl (burada 7 yıl) sonra ortaya çıkıyorsa Parkinson hastalığına bağlı nörobilişsel bozukluk; bilişsel yıkım motor belirtilerden önce ya da aynı yıl içinde başlıyorsa Lewy cisimcikli demans düşünülür."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans): Bilişsel yıkım motor belirtilerden önce ya da ilk 1 yıl içinde başlar; burada 7 yıllık belirgin bir motor dönem önceliği vardır.\n• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Erken dönemde belirgin bradikinezi, rijidite ve istirahat tremoru beklenmez.\n• Deliryum (Akut Bilinç Bulanıklığı): Akut başlangıçlıdır ve saatler/günler içinde gelişir; burada 2 yıllık sinsi ilerleyici seyir vardır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme + Yerleşik hareket bozukluğu (istirahat tremoru, bradikinezi, rijidite) zemininde + Motor başlangıçtan uzun süre sonra sinsi başlangıç ve kademeli ilerleme.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "İlaç yönetimi ve yemek hazırlama gibi gündelik işlerde bağımsızlık kaybolmuş ve MoCA 15/30 saptanmıştır.",
+                "Bilişsel yıkım, 9 yıldır süren ve levodopaya yanıtlı yerleşik motor hastalıktan 7 yıl sonra sinsi biçimde gelişmiştir.",
+                "Görsel-uzamsal ve yürütücü işlev kaybı ile görsel varsanılar bu subkortikal-kortikal profili destekler."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_lewy_body",
+                    "reason": "Lewy cisimcikli tabloda bilişsel yıkım motor belirtilerden önce veya ilk 1 yıl içinde başlar; burada 7 yıl sonra gelişmiştir."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_alzheimer",
+                    "reason": "9 yıllık yerleşik levodopa yanıtlı motor hastalık ve baskın görsel-uzamsal/yürütücü kayıp Alzheimer'dan ayırır."
+                },
+                {
+                    "diagnosisId": "delirium",
+                    "reason": "Metabolik/enfeksiyöz tetikleyici yoktur ve süreç akut değil 2 yıldır kademeli ilerlemektedir."
+                }
+            ],
+            "teachingPoint": "Motor belirtilerin bilişsel yıkımdan yıllar önce yerleşmiş olması, Parkinson hastalığına bağlı nörobilişsel bozukluğu Lewy cisimcikli demanstan ayıran temel zamansal ölçüttür."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_tbi",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "42 yaşında, erkek, eski kamyon şoförü",
+        "clues": [
+            "42 yaşındaki eski kamyon şoförü, eşi tarafından son 14 aydır ağır unutkanlık, faturaları ve banka işlerini yürütememe, evin yolunu karıştırma ve ani öfke patlamaları nedeniyle getiriliyor.",
+            "Öyküde hastanın bu yakınmalardan önce tamamen sağlıklı ve çalışkan biri olduğu; 16 ay önce geçirdiği yüksek hızlı araç kazasında ağır kafa darbesi aldığı, olay yerinde bilincinin kapandığı (GKS 6) ve 18 gün yoğun bakımda kaldığı öğreniliyor.",
+            "Taburculuk sonrası haftalarca süren kafa karışıklığı ve kaza sonrası dönemi hatırlayamama (posttravmatik amnezi) yaşadığı; akut dönem geçtikten sonra bile yeni bilgileri öğrenemediği, basit yemekleri yakıp bıraktığı ve mesleğine dönemediği belirtiliyor.",
+            "Rutin kan testleri, B12, TSH, karaciğer-böbrek fonksiyonları normal; alkol veya madde kullanımı yok. Güncel beyin MR'ında bilateral frontal ve anterior temporal bölgelerde geçirilmiş kontüzyona sekonder ensefalomalazi ve yaygın aksonal hasar sekelleri görülüyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, kişi ve yer yönelimi tam ancak tarih yönelimi bozuk. Duygudurum çabuk öfkelenen ve labil. MoCA 16/30; karmaşık dikkat, işlem hızı, yürütücü işlev ve gecikmeli hatırlamada ağır kayıp; içgörü kısıtlı.",
+            "Ağır kafa darbesi, uzun süreli bilinç kaybı, posttravmatik amnezi ve nörogörüntülemedeki yapısal hasar bulgularının hemen ardından ortaya çıkan bu kalıcı bilişsel yıkım, hastanın gündelik yaşamda tam bağımsızlığını ortadan kaldırmıştır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "yüksek hızlı araç kazasında ağır kafa darbesi aldığı, olay yerinde bilincinin kapandığı (GKS 6)",
+                "dsmMatch": "Kriter B: Kafa darbesi ve bilinç kaybı kanıtı"
+            },
+            {
+                "clueIndex": 2,
+                "text": "posttravmatik amnezi",
+                "dsmMatch": "Kriter B: Kaza sonrası bellek kaybı bulgusu"
+            },
+            {
+                "clueIndex": 5,
+                "text": "gündelik yaşamda tam bağımsızlığını ortadan kaldırmıştır",
+                "dsmMatch": "Kriter A & C: Olay sonrası kalıcı ve bağımsızlığı bozan majör bilişsel gerileme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Rehabilitasyon & Bakıcı Desteği",
+            "therapyDetails": "Yapılandırılmış günlük çizelgeler, dışsal bellek destekleri, öfke ve dürtü kontrolü için çevresel düzenlemeler, ergoterapi ve aileye kapsamlı bakım eğitimi.",
+            "pharmacologyNote": "Dikkat ve işlem hızı için düşük doz uyarıcılar veya amantadin, davranışsal irritabilite için SSRI ya da duygudurum düzenleyiciler seçili olgularda değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu tanının DSM-5-TR'ye göre doğrulanması için kafa darbesinin ardından aşağıdakilerden hangisinin bulunması gerekir?",
+            "options": [
+                "Belirtilerin darbeden en az 5 yıl sonra sinsi biçimde başlaması",
+                "Bilinç kaybı, posttravmatik amnezi, dezoryantasyon veya nörogörüntülemede hasar bulgularından en az biri ve bilişsel bozukluğun olayın hemen ardından kalıcı olarak sürmesi",
+                "Ailede otozomal dominant geçişli benzer öykü bulunması",
+                "EEG'de periyodik keskin dalga komplekslerinin görülmesi"
+            ],
+            "correctIndex": 1,
+            "explanation": "DSM-5-TR'de kafa travmasına bağlı nörobilişsel bozukluk için kafa darbesine eşlik eden bilinç kaybı, posttravmatik amnezi, dezoryantasyon veya nörolojik/görüntüleme bulgularından en az biri ve bilişsel gerilemenin olayın hemen ardından ortaya çıkıp akut dönem sonrasında da sürmesi gerekir."
+        },
+        "differentialDiagnosis": "• Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği: Yalnızca kişilik ve davranış değişimi vardır; burada MoCA 16/30 ile ağır yaygın bilişsel yıkım ve özbakım/bağımsızlık kaybı ön plandadır.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Serebrovasküler olay değil, ağır kafa kazası ve kontüzyon sekeli mevcuttur.\n• Deliryum (Akut Bilinç Bulanıklığı): Bilinç açıktır ve dalgalanma olmadan 14 aydır kalıcı seyretmektedir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme + Kafa darbesi ve bilinç kaybı/posttravmatik amnezi/görüntüleme kanıtı + Olayın hemen ardından başlayıp akut dönem sonrasında da kalıcı olması.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "Kaza öncesi tamamen sağlıklı olan hastada GKS 6 ile ağır bilinç kaybı, posttravmatik amnezi ve MR'da bilateral frontal-temporal ensefalomalazi mevcuttur.",
+                "Bilişsel gerileme olayın hemen ardından gelişmiş ve akut dönem geçtikten 14 ay sonra da kalıcı biçimde sürmüştür.",
+                "İşini, mali yönetimini ve ev içi güvenliğini tek başına sürdürememesi majör düzeyi gösterir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "personality_change_due_to_medical",
+                    "reason": "Öfke patlamalarının yanında ağır bellek, dikkat ve yürütücü işlev yıkımı ile tam bağımsızlık kaybı vardır."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "Görüntülemede damarsal enfarkt değil travmatik kontüzyon ve aksonal hasar sekelleri izlenmektedir."
+                },
+                {
+                    "diagnosisId": "delirium",
+                    "reason": "Bilinç açık ve stabildir; tablo akut değil 14 aydır süreğendir."
+                }
+            ],
+            "teachingPoint": "Travma sonrası nörobilişsel bozuklukta bilişsel yıkım olayın hemen ardından başlar; yalnızca mizaç değişikliğinden farklı olarak yaygın bilişsel işlev kaybı ve bağımsızlık yitimi vardır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_hiv",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "47 yaşında, erkek, otel resepsiyon şefi",
+        "clues": [
+            "47 yaşındaki otel çalışanı, kardeşi tarafından son 8 aydır giderek ağırlaşan unutkanlık, düşünme ve konuşmada belirgin yavaşlama, işini sürdürememe ve evden çıkmama yakınmalarıyla getiriliyor.",
+            "Kardeşi, hastanın son aylarda faturalarını ödeyemediğini, ilaçlarını sık sık unuttuğunu, yürürken dengesinin bozulduğunu ve eskiden canlı biriyken artık gün boyu donuk, ilgisiz oturduğunu aktarıyor.",
+            "Öyküde hastaya 6 yıl önce kronik retroviral enfeksiyon tanısı konduğu ancak son iki yıldır damgalanma kaygısıyla enfeksiyon polikliniğine gitmediği ve antiretroviral tedavisini tamamen bıraktığı öğreniliyor.",
+            "Laboratuvarda CD4 T-lenfosit sayısı 145/mm³, plazma viral yükü yüksek saptanıyor. Beyin MR'ında yaygın simetrik beyaz cevher hiperintensiteleri ve hafif serebral atrofi var; kitle ya da kontrast tutan lezyon yok. BOS incelemesinde toksoplazmoz, kriptokok, sifiliz ve PML (JC virüs) dışlanıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yanıt latansı belirgin uzamış. Duygudurum apatik, duygulanım künt; çökkünlük veya suçluluk fikirleri yok. MoCA 17/30; özellikle dikkat, işlem hızı, yürütücü işlev ve motor hızda belirgin bozulma.",
+            "Antiretroviral tedavi kesintisiyle viral yükün yükseldiği ve CD4 düzeyinin düştüğü zeminde, fırsatçı santral sinir sistemi enfeksiyonları dışlandıktan sonra bağımsızlığı bozan bu subkortikal ağırlıklı bilişsel yıkımın altta yatan kronik enfeksiyona doğrudan bağlı olduğu saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "6 yıl önce kronik retroviral enfeksiyon tanısı konduğu ancak son iki yıldır damgalanma kaygısıyla enfeksiyon polikliniğine gitmediği ve antiretroviral tedavisini tamamen bıraktığı",
+                "dsmMatch": "Kriter B: Belgelenmiş kronik retroviral enfeksiyon ve tedavi kesintisi"
+            },
+            {
+                "clueIndex": 3,
+                "text": "BOS incelemesinde toksoplazmoz, kriptokok, sifiliz ve PML (JC virüs) dışlanıyor",
+                "dsmMatch": "Kriter C: Fırsatçı enfeksiyonlar ve diğer ikincil nedenlerin dışlanması"
+            },
+            {
+                "clueIndex": 4,
+                "text": "MoCA 17/30; özellikle dikkat, işlem hızı, yürütücü işlev ve motor hızda belirgin bozulma",
+                "dsmMatch": "Kriter A: Bağımsızlığı bozan subkortikal ağırlıklı majör bilişsel gerileme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Antiretroviral Uyum Desteği",
+            "therapyDetails": "Enfeksiyon hastalıklarıyla iş birliği içinde santral sinir sistemi geçişi yüksek antiretroviral rejimin yeniden başlanması, ilaç uyumunun bakıcı desteğiyle güvenceye alınması ve bilişsel rehabilitasyon.",
+            "pharmacologyNote": "Temel tedavi kombine antiretroviral tedavidir (cART); rutin kolinesteraz inhibitörleri birinci basamak değildir. Eşlik eden davranışsal belirtiler varsa ilaç etkileşimleri gözetilerek yönetilir."
+        },
+        "miniQuiz": {
+            "question": "Bu tabloda tanı kesinleştirilmeden önce nörogörüntüleme ve BOS incelemesiyle mutlaka dışlanması gereken durumlar hangileridir?",
+            "options": [
+                "Yalnızca tiroid hormon yüksekliği ve B12 eksikliği",
+                "Yalnızca majör depresif bozukluk",
+                "Toksoplazmoz, kriptokok menenjiti, progresif multifokal lökoensefalopati ve santral sinir sistemi lenfoması gibi fırsatçı/ikincil süreçler",
+                "Yalnızca küçük damar hastalığı"
+            ],
+            "correctIndex": 2,
+            "explanation": "DSM-5-TR'ye göre bu tanının konabilmesi için bilişsel yıkımın toksoplazmoz, kriptokok, PML veya SSS lenfoması gibi fırsatçı enfeksiyon ya da neoplazilerle değil, doğrudan primer enfeksiyonla açıklanması gerekir."
+        },
+        "differentialDiagnosis": "• Majör Depresif Bozukluk: Apati ve psikomotor yavaşlama depresyonu taklit edebilir; ancak çökkünlük/suçluluk yoktur ve beyaz cevher bulguları ile ağır bilişsel yıkım mevcuttur.\n• Deliryum (Akut Bilinç Bulanıklığı): Bilinç açık olup 8 aylık sinsi ilerleyici seyir göstermektedir.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Vasküler risk profili veya fokal enfarkt yoktur; yaygın simetrik beyaz cevher tutulumu ve yüksek viral yük esastır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme (dikkat, işlem hızı, yürütücü/motor yavaşlama) + Belgelenmiş enfeksiyon + Fırsatçı SSS enfeksiyonu/neoplazisi veya başka durumla açıklanamama.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "Hasta faturalarını ve ilaçlarını yönetememekte, MoCA 17/30 ile belirgin subkortikal bilişsel ve motor yavaşlama göstermektedir.",
+                "Tedavisiz kalan retroviral enfeksiyon, düşük CD4 sayısı ve yüksek viral yük doğrudan etiyolojik zemini oluşturmaktadır.",
+                "MR ve BOS incelemeleriyle toksoplazmoz, kriptokok, sifiliz ve PML gibi ikincil nedenler dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Apati depresyonla karışabilir ancak çökkün duygudurum ve bilişsel çarpıtmalar yoktur; yapısal MR ve viral yük bulguları organiktir."
+                },
+                {
+                    "diagnosisId": "delirium",
+                    "reason": "Bilinç açıktır ve tablo akut değil 8 aydır ilerleyici seyretmektedir."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "Laküner enfarkt veya inme öyküsü olmayıp simetrik beyaz cevher tutulumu mevcuttur."
+                }
+            ],
+            "teachingPoint": "Tedavisiz kronik retroviral enfeksiyona bağlı nörobilişsel yıkım, apati ve motor yavaşlamayla depresyonu taklit edebilir; fırsatçı SSS enfeksiyonlarının dışlanması ve cART'nin yeniden başlanması kritiktir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_prion",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "64 yaşında, erkek, emekli makinist",
+        "clues": [
+            "64 yaşındaki emekli makinist, eşi ve çocukları tarafından son üç aydır çok hızlı ilerleyen unutkanlık, konuşmada bozulma, dengesiz yürüme ve günlük ihtiyaçlarını karşılayamama nedeniyle hastaneye yatırılıyor.",
+            "Ailesi, hastanın dört ay önce tamamen bağımsız olduğunu, önce görmede bulanıklık ve tökezlemelerin başladığını, haftalar içinde eşinin adını karıştırmaya, yemek yerken kaşığı kullanamamaya ve yüksek seste aniden irkilip sıçramaya başladığını anlatıyor.",
+            "Öyküde alkol, madde kullanımı, yeni ilaç başlangıcı veya kafa travması yok. Kan sayımı, elektrolitler, B12, TSH, karaciğer-böbrek fonksiyonları, otoimmün ensefalit antikor paneli ve paraneoplastik tarama negatif saptanıyor.",
+            "Difüzyon ağırlıklı beyin MR'ında (DWI) kortekste yaygın şeritlenme biçiminde difüzyon kısıtlılığı ve bilateral kaudat çekirdek ile putamende hiperintensite izleniyor. EEG'de saniyede bir yineleyen yaygın periyodik keskin dalga kompleksleri görülüyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç uyanık ancak çevreye yanıtı çok kısıtlı, konuşma ileri derecede azalmış (akinetik mutizme eğilim). Muayene sırasında ani alkış sesiyle tüm ekstremitelerde kısa, istemsiz sıçrama (irkilmeyle tetiklenen miyoklonus) ortaya çıkıyor.",
+            "Üç ay içinde tam bağımlılık düzeyine ulaşan bu hızla ilerleyici bilişsel yıkım, serebellar ataksi ve miyoklonus tablosu; BOS incelemesinde 14-3-3 protein pozitifliği ve RT-QuIC testinin pozitif gelmesiyle doğrulanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 0,
+                "text": "son üç aydır çok hızlı ilerleyen unutkanlık, konuşmada bozulma, dengesiz yürüme ve günlük ihtiyaçlarını karşılayamama",
+                "dsmMatch": "Kriter B: Sinsi başlangıçlı ve hızla ilerleyen majör bilişsel gerileme"
+            },
+            {
+                "clueIndex": 3,
+                "text": "kortekste yaygın şeritlenme biçiminde difüzyon kısıtlılığı ve bilateral kaudat çekirdek ile putamende hiperintensite",
+                "dsmMatch": "Kriter C: Tipik nörogörüntüleme (DWI MR) ve EEG bulguları"
+            },
+            {
+                "clueIndex": 5,
+                "text": "BOS incelemesinde 14-3-3 protein pozitifliği ve RT-QuIC testinin pozitif gelmesiyle",
+                "dsmMatch": "Kriter C: Özgül BOS biyobelirteç doğrulaması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Palyatif Bakım & Bakıcı/Aile Desteği",
+            "therapyDetails": "Hastalığın hızla ilerleyici seyri konusunda aileye şefkatli bilgilendirme, beslenme ve solunum güvenliğinin planlanması, düşme önlemleri ve multidisipliner palyatif destek.",
+            "pharmacologyNote": "Hastalığı durduran özgül bir ilaç yoktur; miyoklonus için klonazepam veya levetirasetam, şiddetli ajitasyonda düşük doz destekleyici tedavi semptomatik olarak uygulanabilir."
+        },
+        "miniQuiz": {
+            "question": "Hızla ilerleyen bu nörobilişsel tabloda tanıyı en yüksek özgüllükle destekleyen laboratuvar ve görüntüleme kombinasyonu hangisidir?",
+            "options": [
+                "Beyin MR'ında izole hipokampal atrofi ve BOS'ta düşük amiloid-beta",
+                "DWI MR'da kortikal şeritlenme/striatal hiperintensite, EEG'de periyodik keskin dalga kompleksleri ve BOS'ta RT-QuIC pozitifliği",
+                "Beyin MR'ında Evans indeksi artışı ve lomber ponksiyon sonrası yürümede düzelme",
+                "Genetik testte 4. kromozomda CAG tekrar artışı"
+            ],
+            "correctIndex": 1,
+            "explanation": "DWI MR'da kortikal şeritlenme ve bazal ganglion hiperintensitesi, EEG'de 1 Hz periyodik keskin dalga kompleksleri ile BOS'ta RT-QuIC (ve 14-3-3) pozitifliği bu tablonun ayırt edici biyobelirteçleridir."
+        },
+        "differentialDiagnosis": "• Deliryum (Akut Bilinç Bulanıklığı): Genellikle saatler/günler içinde başlar, altta yatan metabolik/enfeksiyöz neden bulunur ve dalgalanır; burada 3 aydır kesintisiz ağırlaşma ve özgül DWI/EEG/BOS bulguları vardır.\n• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Yıllar içinde yavaş ilerler; haftalar içinde miyoklonus ve ataksi geliştirmez.\n• Majör Nörobilişsel Bozukluk (Lewy Cisimcikli Demans): Erken dönemde bu denli hızlı yıkım, periyodik EEG kompleksleri ve RT-QuIC pozitifliği görülmez.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı hızla bozan majör bilişsel gerileme + Sinsi başlangıç ve hızlı ilerleme + Tipik motor bulgular (miyoklonus, ataksi) veya biyobelirteçler (DWI MR, EEG, BOS RT-QuIC/14-3-3).",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "Yalnızca 3 ay içinde tam bağımlılık geliştiren hızla ilerleyici bilişsel yıkım, serebellar ataksi ve irkilmeyle tetiklenen miyoklonus klasik klinik üçlüyü oluşturur.",
+                "DWI MR'da kortikal şeritlenme ve striatal tutulum, EEG'de periyodik keskin dalga kompleksleri ve BOS'ta 14-3-3 ile RT-QuIC pozitifliği tanıyı doğrular.",
+                "Otoimmün ensefalit, metabolik bozukluklar ve paraneoplastik nedenler kapsamlı testlerle dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "delirium",
+                    "reason": "Metabolik veya enfeksiyöz tetikleyici yoktur; bilinç dalgalanmasından çok 3 aydır aralıksız nörodejeneratif yıkım vardır."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_alzheimer",
+                    "reason": "Alzheimer demansı yıllar içinde yavaş ilerler; aylar içinde ataksi, miyoklonus ve RT-QuIC pozitifliği oluşturmaz."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_lewy_body",
+                    "reason": "Hızlı seyir, periyodik keskin dalgalı EEG ve DWI MR bulguları Lewy cisimcikli demansta görülmez."
+                }
+            ],
+            "teachingPoint": "Aylar içinde tam bağımlılığa ilerleyen demans, ataksi ve irkilmeyle tetiklenen miyoklonus görüldüğünde geri dönüşümlü ensefalitler dışlanmalı ve DWI MR, EEG ile BOS RT-QuIC istenmelidir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_huntington",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "44 yaşında, kadın, muhasebe uzmanı",
+        "clues": [
+            "44 yaşındaki muhasebe uzmanı, eşi tarafından son üç yıldır giderek artan unutkanlık, iş yerinde hesap hataları yapma, tahammülsüzlük ve elinden sık sık eşya düşürme yakınmalarıyla getiriliyor.",
+            "Eşi, hastanın son bir yılda işten ayrılmak zorunda kaldığını, evin bütçesini ve faturalarını artık yönetemediğini, konuşurken yüzünde ve parmaklarında istemsiz kıpırdanmalar olduğunu ve bazen durduk yere öfkelendiğini anlatıyor.",
+            "Soygeçmişte hastanın babasının ve halasının 40'lı yaşların sonunda benzer istemsiz sıçrayıcı hareketler, kişilik değişimi ve ağır unutkanlık geliştirip 50'li yaşlarda yatağa bağımlı kaldıkları öğreniliyor.",
+            "Kan testleri, seruloplazmin, bakır düzeyleri, tiroid fonksiyonları ve B12 normal; antipsikotik veya dopamin blokörü kullanım öyküsü yok. Beyin MR'ında bilateral kaudat çekirdek başında belirgin atrofi ve lateral ventrikül ön boynuzlarında genişleme izleniyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, konuşma hafif dizartrik. Duygudurum irritabl, duygulanım yüzeysel. MoCA 17/30; planlama, sözel akıcılık, işlem hızı ve görsel-motor iz sürmede belirgin kayıp. Muayene boyunca ellerde ve omuzlarda kısa, düzensiz, dansvari istemsiz hareketler gözleniyor.",
+            "Otozomal dominant aile öyküsü, koreiform hareket bozukluğu ve bağımsızlığı bozan ilerleyici yürütücü işlev yıkımının eşlik ettiği bu tabloda, moleküler genetik testte 4. kromozom kısa kolunda 44 adet CAG üçlü nükleotid tekrarı saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "babasının ve halasının 40'lı yaşların sonunda benzer istemsiz sıçrayıcı hareketler, kişilik değişimi ve ağır unutkanlık geliştirip",
+                "dsmMatch": "Kriter C: Ailede otozomal dominant geçişli öykü"
+            },
+            {
+                "clueIndex": 4,
+                "text": "ellerde ve omuzlarda kısa, düzensiz, dansvari istemsiz hareketler",
+                "dsmMatch": "Kriter B: Karakteristik koreiform hareket bozukluğu"
+            },
+            {
+                "clueIndex": 5,
+                "text": "4. kromozom kısa kolunda 44 adet CAG üçlü nükleotid tekrarı",
+                "dsmMatch": "Kriter C: Kesin genetik test doğrulaması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Multidisipliner Bakıcı Desteği",
+            "therapyDetails": "Konuşma-yutma terapisi, fizyoterapi, yapılandırılmış güvenli ev ortamı, öfke/dürtü yönetimi stratejileri ve aile bireyleri için genetik danışmanlık.",
+            "pharmacologyNote": "Koreiform hareketler için VMAT2 inhibitörleri (tetrabenazin, deutetrabenazin, valbenazin) tercih edilir; irritabilite ve depresyon için SSRI veya düşük doz atipik antipsikotikler eklenebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastalıkta bilişsel gerilemenin başlangıç profili ve temel nörogörüntüleme bulgusu aşağıdakilerden hangisidir?",
+            "options": [
+                "Erken izole bellek kaybı ve hipokampal atrofi",
+                "Yürütücü işlevler ve işlem hızında erken bozulma ile bilateral kaudat çekirdek atrofisi",
+                "Ani basamaklı kötüleşme ve çoklu kortikal enfarktlar",
+                "Görsel varsanılar ve oksipital hipometabolizma"
+            ],
+            "correctIndex": 1,
+            "explanation": "Striatal (özellikle kaudat çekirdek) dejenerasyon nedeniyle yürütücü işlevler, planlama, bilişsel esneklik ve işlem hızı erken dönemde bozulur; MR'da kaudat başında atrofi ve lateral ventrikül ön boynuzlarında genişleme tipiktir."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Frontotemporal / Pick Hastalığı): Kişilik ve yürütücü işlev değişimi benzer olabilir ancak koreiform hareket bozukluğu, kaudat atrofisi ve CAG tekrar artışı yoktur.\n• Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı): Hiperkinetik kore değil, hipokinetik bradikinezi ve istirahat tremoru baskındır.\n• Majör Nörobilişsel Bozukluk (Prion Hastalığı / Creutzfeldt-Jakob): Aylar içinde hızla yıkıma gider ve miyoklonus gösterir; burada yıllar içinde ilerleyen genetik koreiform tablo vardır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme (yürütücü işlev/işlem hızı) + Sinsi başlangıç ve kademeli ilerleme + Aile öyküsü veya genetik testle doğrulanmış CAG tekrar artışı.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "İşini kaybetmesi, ev bütçesini yönetememesi ve MoCA 17/30 ile yürütücü işlevlerdeki ağır kayıp majör nörobilişsel bozukluk ölçütünü karşılar.",
+                "Otozomal dominant aile öyküsü, dansvari koreiform hareketler ve MR'daki bilateral kaudat atrofisi tanıyı güçlü biçimde destekler.",
+                "4. kromozomda 44 CAG tekrarının saptanması (40 ve üzeri tam penetrans) etiyolojiyi kesinleştirir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_frontotemporal",
+                    "reason": "Koreiform hareket bozukluğu, kaudat atrofisi ve 4. kromozom CAG tekrar artışı frontotemporal demansta bulunmaz."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_parkinson",
+                    "reason": "Bradikinezi ve istirahat tremoru yerine istemsiz dansvari kore hareketleri ve otozomal dominant genetik geçiş vardır."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_prion",
+                    "reason": "Hastalık 3 yıldır yavaş ilerlemekte olup miyoklonus veya DWI kortikal şeritlenme bulgusu yoktur."
+                }
+            ],
+            "teachingPoint": "Orta erişkinlikte yürütücü işlev kaybı, irritabilite, koreiform hareketler ve otozomal dominant aile öyküsü birlikteyse kaudat atrofisi ve CAG tekrar analizi tanıyı kesinleştirir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_another_medical",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "72 yaşında, kadın, emekli terzi",
+        "clues": [
+            "72 yaşındaki emekli terzi, kızı tarafından son bir yıldır giderek artan unutkanlık, ev işlerini sürdürememe, ayaklarını yerden kaldıramadan yürüme ve tuvalete yetişememe yakınmalarıyla getiriliyor.",
+            "Kızı, annesinin önce yürüyüşünün bozulduğunu, sanki ayakkabıları zemine yapışmış gibi küçük ve geniş tabanlı adımlarla döndüğünü; birkaç ay sonra idrar kaçırmaların ve ardından faturaları karıştırma, ilaçlarını unutma gibi zihinsel gerilemelerin eklendiğini anlatıyor.",
+            "Öyküde inme, kafa travması, menenjit ya da alkol kullanımı yok. Kan sayımı, B12, folat, TSH, böbrek-karaciğer testleri ve idrar kültürü olağan; ürolojik değerlendirmede mesane çıkım obstrüksiyonu saptanmıyor.",
+            "Beyin MR'ında kortikal sulkuslarda belirgin atrofi olmaksızın ventriküler sistemde orantısız genişleme (Evans indeksi 0,36) ve transependimal sıvı geçişi izleniyor; kitle ya da akut enfarkt yok.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, psikomotor yavaşlama belirgin. Duygudurum hafif apatik, duygulanım kısıtlı. MoCA 17/30; özellikle yürütücü işlevler, dikkat ve işlem hızında belirgin bozulma, görsel varsanı yok.",
+            "Nöroloji tarafından yapılan lomber ponksiyonda açılış basıncının normal sınırda olduğu saptanıyor ve 40 mL BOS boşaltılmasının ardından ertesi gün yürüme hızında ve dikkat performansında belirgin düzelme gözleniyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "sanki ayakkabıları zemine yapışmış gibi küçük ve geniş tabanlı adımlarla döndüğünü; birkaç ay sonra idrar kaçırmaların ve ardından faturaları karıştırma, ilaçlarını unutma",
+                "dsmMatch": "Kriter A & B: Yürüme apraksisi, idrar inkontinansı ve bağımsızlığı bozan bilişsel yıkım üçlüsü"
+            },
+            {
+                "clueIndex": 3,
+                "text": "ventriküler sistemde orantısız genişleme (Evans indeksi 0,36)",
+                "dsmMatch": "Kriter C: Altta yatan tıbbi durumu gösteren nörogörüntüleme kanıtı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "açılış basıncının normal sınırda olduğu saptanıyor ve 40 mL BOS boşaltılmasının ardından ertesi gün yürüme hızında ve dikkat performansında belirgin düzelme",
+                "dsmMatch": "Kriter C: BOS boşaltma testine pozitif yanıt ile geri dönüşümlü tıbbi etiyoloji doğrulaması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Ventriküloperitoneal Şant Cerrahisi & Nörorehabilitasyon",
+            "therapyDetails": "Beyin cerrahisi tarafından ventriküloperitoneal şant yerleştirilmesi, ameliyat sonrası yürüme-denge rehabilitasyonu, mesane eğitimi ve düzenli nörobilişsel izlem.",
+            "pharmacologyNote": "Temel tedavi cerrahidir; kolinesteraz inhibitörleri altta yatan mekanik BOS dolaşım sorununu çözmez."
+        },
+        "miniQuiz": {
+            "question": "Bu hastadaki tablonun diğer dejeneratif demanslardan ayrılmasının en önemli klinik nedeni aşağıdakilerden hangisidir?",
+            "options": [
+                "Yalnızca yüksek doz antipsikotiklerle düzelmesi",
+                "Altta yatan tıbbi durumun cerrahi girişimle (şant) potansiyel olarak geri döndürülebilir olması",
+                "Sadece genç erişkinlerde görülmesi",
+                "Her zaman ailevi genetik geçiş göstermesi"
+            ],
+            "correctIndex": 1,
+            "explanation": "Normal basınçlı ventrikülomegali gibi başka bir sağlık durumuna bağlı majör nörobilişsel bozuklukların tanınması hayatidir; çünkü erken dönemde uygulanan ventriküloperitoneal şant cerrahisiyle yürüme ve bilişsel işlevlerde belirgin düzelme sağlanabilir."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Erken dönemde manyetik yürüme ve idrar kaçırma üçlüsü ile orantısız ventrikülomegali görülmez.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Yaygın enfarkt yerine orantısız ventrikül genişlemesi ve BOS boşaltma testine dramatik yanıt vardır.\n• Majör Nörobilişsel Bozukluk (Parkinson Hastalığına Bağlı): İstirahat tremoru ve dişli çark rijiditesi yoktur; geniş tabanlı manyetik yürüyüş ön plandadır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme + Öykü, muayene veya laboratuvar/görüntülemede başka bir sağlık durumunun doğrudan fizyopatolojik sonucu olduğuna dair kanıt.",
+        "therapyId": "surgical_shunt",
+        "explanation": {
+            "whyThis": [
+                "Manyetik yürüyüş, idrar inkontinansı ve bağımsızlığı bozan subkortikal bilişsel gerileme (MoCA 17/30) klasik klinik üçlüyü oluşturur.",
+                "Beyin MR'ında kortikal atrofiyle orantısız ventrikülomegali (Evans indeksi 0,36) ve normal basınçlı lomber ponksiyon sonrası belirgin düzelme altta yatan tıbbi etiyolojiyi doğrular.",
+                "Diğer metabolik, ürolojik ve dejeneratif nedenler dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_alzheimer",
+                    "reason": "Erken manyetik yürüme bozukluğu, idrar kaçırma ve BOS boşaltma testine yanıt Alzheimer tablosuyla uyumsuzdur."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "MR'da enfarkt yükü yerine orantısız ventrikül genişlemesi ve transependimal sıvı geçişi ön plandadır."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_parkinson",
+                    "reason": "İstirahat tremoru, bradikinezi ve levodopa yanıtı yoktur; yürüyüş dar değil geniş tabanlı ve manyetiktir."
+                }
+            ],
+            "teachingPoint": "Yürüme apraksisi, idrar kaçırma ve bilişsel yıkım üçlüsü görüldüğünde kortikal atrofiyle orantısız ventrikülomegali araştırılmalı; erken şant cerrahisiyle geri döndürülebilir bir tablo atlanmamalıdır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "major_neurocognitive_multiple",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "78 yaşında, kadın, emekli eczacı",
+        "clues": [
+            "78 yaşındaki emekli eczacı, oğlu tarafından son üç yıldır ilerleyen unutkanlık, günlük ev işlerini sürdürememe, ilaçlarını karıştırma ve son aylarda belirginleşen düşünce yavaşlığı nedeniyle getiriliyor.",
+            "Oğlu, ilk iki yılda annesinin sinsi biçimde yeni olayları ve az önce sorduğu soruları unutmaya başladığını; 8 ay önce geçirdiği hafif bir sağ bacak güçsüzlüğü atağından sonra ise durumun belirgin bir basamak aşağı indiğini ve planlama, konuşmayı sürdürme becerisinin hızla bozulduğunu söylüyor.",
+            "Özgeçmişte 20 yıldır hipertansiyon ve tip 2 diyabet mevcut. Kan sayımı, B12, folat, TSH ve elektrolitler normal; alkol, antikolinerjik ilaç veya akut enfeksiyon yok.",
+            "Beyin MR'ında hem bilateral medial temporal lob ve hipokampusta belirgin atrofi (Scheltens evre 3) hem de periventriküler beyaz cevherde yaygın iskemik lezyonlar ile sol talamus ve bazal ganglionlarda çoklu eski laküner enfarktlar saptanıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yer ve zaman yönelimi bozuk. Duygudurum hafif kaygılı. MoCA 13/30; gecikmeli hatırlamada kendiliğinden 0/5 ve ipucuyla 1/5 (kodlama kaybı), buna ek olarak iz sürme, saat çizimi ve sözel akıcılıkta ağır bozulma.",
+            "Alışveriş, finans ve ilaç yönetiminde tam bağımlı hâle gelen hastada, hem sinsi ilerleyen hipokampal tip yeni öğrenme yıkımının hem de damarsal atak sonrası basamaklı yürütücü işlev kaybının klinik ve nörogörüntüleme kanıtlarıyla bir arada bulunduğu saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "ilk iki yılda annesinin sinsi biçimde yeni olayları ve az önce sorduğu soruları unutmaya başladığını; 8 ay önce geçirdiği hafif bir sağ bacak güçsüzlüğü atağından sonra ise durumun belirgin bir basamak aşağı indiğini",
+                "dsmMatch": "Kriter B: Sinsi başlangıçlı ve basamaklı iki ayrı klinik seyrin birlikteliği"
+            },
+            {
+                "clueIndex": 3,
+                "text": "hem bilateral medial temporal lob ve hipokampusta belirgin atrofi (Scheltens evre 3) hem de periventriküler beyaz cevherde yaygın iskemik lezyonlar ile sol talamus ve bazal ganglionlarda çoklu eski laküner enfarktlar",
+                "dsmMatch": "Kriter B: İki ayrı etiyolojiyi doğrulayan eşzamanlı nörogörüntüleme bulguları"
+            },
+            {
+                "clueIndex": 4,
+                "text": "gecikmeli hatırlamada kendiliğinden 0/5 ve ipucuyla 1/5 (kodlama kaybı), buna ek olarak iz sürme, saat çizimi ve sözel akıcılıkta ağır bozulma",
+                "dsmMatch": "Kriter A: Hem epizodik bellek kodlama hem yürütücü işlevlerde ağır kayıp"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Bakıcı Desteği",
+            "therapyDetails": "Ev içi güvenlik ve sadeleştirilmiş rutinler, vasküler risk faktörlerinin (tansiyon, glisemi, lipid) sıkı kontrolü, ilaç takibinin bakıcıya devredilmesi ve aileye tükenmişlik desteği.",
+            "pharmacologyNote": "Kolinesteraz inhibitörleri (donepezil, rivastigmin, galantamin) ve orta-ileri evrede memantin bilişsel ve işlevsel destek için kullanılır; ikincil inme önlemleri eşzamanlı sürdürülür."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada tek bir etiyoloji yerine çoklu etiyoloji tanısını koyduran temel bulgu çifti nedir?",
+            "options": [
+                "Yalnızca ileri yaş ve hipertansiyon öyküsü",
+                "Yalnızca MoCA puanının 15'in altında olması",
+                "B12 eksikliği ile birlikte depresif belirtilerin bulunması",
+                "Hem ipucuyla düzelmeyen kodlama/hipokampal atrofi kanıtı hem de fokal atakla basamaklı yürütücü kayıp ve çoklu laküner enfarktların birlikte bulunması"
+            ],
+            "correctIndex": 3,
+            "explanation": "Çoklu etiyolojiye bağlı nörobilişsel bozuklukta iki ayrı patolojinin (burada nörodejeneratif hipokampal bellek kaybı ile serebrovasküler laküner hastalık) hem klinik seyirde hem nörogörüntülemede bilişsel yıkıma birlikte katkı yaptığı gösterilir."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Tek başına inme benzeri atak sonrası basamaklı kötüleşmeyi ve çoklu talamik/bazal ganglion laküner enfarktlarını açıklamaz.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): Tek başına 2 yıllık sinsi başlangıçlı, ipucuyla düzelmeyen ağır epizodik kodlama kaybını ve evre 3 hipokampal atrofiyi açıklamaz.\n• Hafif Vasküler Nörobilişsel Bozukluk: Gündelik yaşamda tam bağımlılık gelişmiş olup hafif düzey aşılmıştır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Bağımsızlığı bozan majör bilişsel gerileme + Öykü, muayene veya görüntülemede birden fazla etiyolojik sürecin (ör. nörodejeneratif + serebrovasküler) birlikte rol oynadığına dair kanıt.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "Üç yıllık sinsi epizodik bellek yıkımı, ipucuyla düzelmeyen kodlama kaybı ve evre 3 hipokampal atrofi nörodejeneratif süreci gösterir.",
+                "Geçirilmiş fokal nörolojik atak sonrası basamaklı kötüleşme, ağır yürütücü işlev kaybı ve çoklu laküner enfarktlar serebrovasküler bileşeni doğrular.",
+                "Her iki süreç birlikte hastanın gündelik bağımsızlığını yitirmesine yol açmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_alzheimer",
+                    "reason": "Basamaklı kötüleşme ve çoklu talamik-bazal ganglion laküner enfarktları yalnızca tek bir nörodejeneratif süreçle açıklanamaz."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "İki yıl süren sinsi kodlama kaybı ve belirgin bilateral hipokampal atrofi yalnızca damarsal etiyolojiyle açıklanamaz."
+                },
+                {
+                    "diagnosisId": "mild_neurocognitive_vascular",
+                    "reason": "Hasta finans, alışveriş ve ilaç yönetiminde tamamen bağımlı hâle gelmiştir; tablo majör düzeydedir."
+                }
+            ],
+            "teachingPoint": "İleri yaşta sinsi ilerleyen epizodik bellek yıkımı ile damarsal olay sonrası basamaklı kötüleşme ve çift görüntüleme bulgusu birlikteyse tek etiyoloji yerine çoklu etiyoloji tanısı düşünülmelidir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "avoidant_pd",
+        "category": "PERSONALITY_C",
+        "patientSummary": "35 yaşında, erkek, adliye arşiv memuru",
+        "clues": [
+            "35 yaşındaki arşiv memuru, kurum içi terfi ve görev değişikliği teklifini reddettikten sonra yaşadığı yoğun gerginlik, uykusuzluk ve kendi deyimiyle 'insanların içine karışamama' yakınmasıyla başvuruyor.",
+            "İş arkadaşlarıyla neredeyse hiç öğle yemeğine çıkmadığı, kurumsal toplantılarda söz almaktan kaçındığı ve yeni bir birime geçerse eleştirilip rezil olacağı düşüncesiyle daha yüksek maaşlı kadroyu geri çevirdiği öğreniliyor.",
+            "Öyküde bu örüntünün belirli bir iş yeri olayından sonra başlamadığı; ergenlikten bu yana devam ettiği, yakın arkadaş edinmeyi ve evlenmeyi çok arzulamasına karşın 'beni gerçekten tanırlarsa beğenmezler' korkusuyla hiçbir ilişkiye adım atamadığı belirtiliyor.",
+            "Panik atakları, obsesyonları, şizofreni spektrum belirtileri ya da madde kullanımı yok. Tiroid fonksiyonları ve rutin kan tetkikleri olağan; herhangi bir kafa travması veya nörolojik hastalık öyküsü bulunmuyor.",
+            "Ruhsal Durum Muayenesinde: Göz teması kısıtlı, otururken omuzları hafif çökük ve tetikte. Duygudurum kaygılı, duygulanım utangaç ve gergin. Düşünce içeriğinde başkalarınca olumsuz değerlendirilme ve kendini yetersiz görme temaları baskın; varsanı ya da sanrı yok.",
+            "Genç erişkinlikten beri tüm yaşam alanlarında süregelen; eleştirilme ve dışlanma korkusuyla kişilerarası mesleki etkinliklerden kaçınma, sevileceğinden emin olmadan insanlarla yakınlaşamama, kendini toplumsal olarak beceriksiz ve değersiz görme ile yeni riskler almaktan aşırı çekinme örüntüsü saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "eleştirilip rezil olacağı düşüncesiyle daha yüksek maaşlı kadroyu geri çevirdiği",
+                "dsmMatch": "Kriter 1 & 7: Eleştirilme/reddedilme korkusuyla mesleki etkinliklerden ve yeni girişimlerden kaçınma"
+            },
+            {
+                "clueIndex": 2,
+                "text": "yakın arkadaş edinmeyi ve evlenmeyi çok arzulamasına karşın 'beni gerçekten tanırlarsa beğenmezler' korkusuyla hiçbir ilişkiye adım atamadığı",
+                "dsmMatch": "Kriter 2 & 3: Sevileceğinden emin olmadan yakınlaşamama (ilişki arzusu korunmuş)"
+            },
+            {
+                "clueIndex": 5,
+                "text": "kendini toplumsal olarak beceriksiz ve değersiz görme",
+                "dsmMatch": "Kriter 6: Kendini toplumsal olarak yetersiz, çekici olmayan ya da başkalarından aşağı görme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Bilişsel Davranışçı Grup/Bireysel Terapi",
+            "therapyDetails": "Kusurluluk ve sosyal izolasyon şemalarının çalışılması, güvenli terapötik ilişki içinde kademeli sosyal risk alma deneyleri, öz-şefkat ve kişilerarası beceri geliştirme.",
+            "pharmacologyNote": "Birincil tedavi psikoterapidir; yalnızca eşlik eden ağır anksiyete veya depresif belirtiler varsa SSRI/SNRI ek tedavi olarak değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastayı Şizoid Kişilik Bozukluğundan ayıran en temel klinik özellik aşağıdakilerden hangisidir?",
+            "options": [
+                "Varsanıların eşlik etmesi",
+                "Yakın ilişki ve kabul görme arzusunun güçlü olması, ancak reddedilme korkusu nedeniyle uzak durması",
+                "Yalnızca ileri yaşta ortaya çıkması",
+                "Başkalarının haklarını sürekli ihlal etmesi"
+            ],
+            "correctIndex": 1,
+            "explanation": "Şizoid tabloda yakın ilişkilere karşı belirgin ilgisizlik ve soğukluk varken, bu tabloda kişi yakınlık kurmayı çok ister ancak eleştirilme ve reddedilme korkusuyla geri çekilir."
+        },
+        "differentialDiagnosis": "• Şizoid Kişilik Bozukluğu: Yakın ilişki kurma isteği yoktur ve duygusal soğukluk baskındır; bu hasta arkadaşlık ve evlilik arzulamakta, reddedilme korkusuyla kaçınmaktadır.\n• Toplumsal Kaygı Bozukluğu (Sosyal Anksiyete / Sosyal Fobi): Performans ya da belirli sosyal durumlarda kaygı ön plandadır; burada erken erişkinlikten beri yaygın değersizlik algısı ve tüm kişilik örüntüsünü saran kaçınma vardır.\n• Bağımlı Kişilik Bozukluğu: Yalnız kalma korkusuyla hızla yeni ilişkilere tutunma görülür; burada ilişkiye başlamaktan kaçınma esastır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan yaygın toplumsal ketlenme, değersizlik ve olumsuz değerlendirilmeye aşırı duyarlılık (≥4/7 ölçüt: mesleki kaçınma, sevilmeden yakınlaşamama, utanma korkusu, eleştirilme uğraşı, ketlenme, kendini aşağı görme, risk almama).",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Ergenlikten beri süren yaygın örüntü, eleştirilme korkusuyla terfiyi reddetme ve yeni girişimlerden kaçınmayla işlevselliği bozmaktadır.",
+                "Yakın ilişki istemesine rağmen beğenilmeyeceğinden korkarak geri durması ve kendini toplumsal olarak beceriksiz/değersiz görmesi temel ölçütleri karşılar.",
+                "Psikotik belirtiler, madde kullanımı ve tıbbi nedenler dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "schizoid_pd",
+                    "reason": "Şizoid tabloda ilişki arzusu yoktur; bu hasta yakınlık ve evlilik istemekte ancak reddedilmekten korkmaktadır."
+                },
+                {
+                    "diagnosisId": "social_anxiety",
+                    "reason": "Belirli performans kaygısının ötesinde yaşam boyu süren yaygın kimlik/değersizlik algısı ve tüm ilişkisel alanlara yayılan kişilik örüntüsü vardır."
+                },
+                {
+                    "diagnosisId": "dependent_pd",
+                    "reason": "İlişkilere aşırı tutunmak yerine reddedilme korkusuyla ilişkiye hiç girememe ön plandadır."
+                }
+            ],
+            "teachingPoint": "Yakınlık kurmayı içtenlikle arzuladığı hâlde eleştirilme ve reddedilme korkusuyla hem terfiden hem ilişkilerden geri çekilme, bu tabloyu şizoid kopukluktan net biçimde ayırır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "dependent_pd",
+        "category": "PERSONALITY_C",
+        "patientSummary": "33 yaşında, kadın, avukatlık bürosu sekreteri",
+        "clues": [
+            "33 yaşındaki sekreter, 6 yıllık nişanlısının ayrılma kararı almasının ardından yaşadığı yoğun çaresizlik, panik benzeri ağlama nöbetleri ve 'tek başıma hiçbir şeyi idare edemem' yakınmasıyla başvuruyor.",
+            "Ailesi, hastanın iş yerinde küçük bir yazışma biçimine bile çalışma arkadaşlarına defalarca sormadan karar veremediğini, ev kirası, banka hesabı ve sağlık randevuları gibi tüm sorumlulukları yıllardır nişanlısına bıraktığını anlatıyor.",
+            "Öyküde bu örüntünün genç erişkinlikten beri sürdüğü; lise ve üniversitede annesinin yönlendirmesi olmadan kıyafet bile seçemediği, nişanlısıyla sık sık haksızlığa uğramasına rağmen desteğini yitirme korkusuyla hiç itiraz edemediği ve onun hoşuna gitmeyen arkadaşlarıyla görüşmeyi bıraktığı öğreniliyor.",
+            "Kendine zarar verme, kimlik karmaşası, dürtüsel öfke patlamaları veya boşluk hissi yok; madde kullanımı ve tıbbi hastalık bulunmuyor. Rutin laboratuvar testleri normal.",
+            "Ruhsal Durum Muayenesinde: Görüşme boyunca sık sık terapistten onay arıyor ve 'sizce ne yapmalıyım, hemen yeni biriyle tanışmalı mıyım?' diye soruyor. Duygudurum kaygılı ve çökkün, duygulanım çaresiz; varsanı ya da sanrı yok.",
+            "Nişanlısı evden ayrılır ayrılmaz daha 48 saat geçmeden kendisini koruyup yönlendirecek yeni bir partner arayışına girdiği; kendi başına kaldığında bakımını sağlayamayacağına dair gerçekçi olmayan, sürekli bir korkuyla kıvrandığı saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "küçük bir yazışma biçimine bile çalışma arkadaşlarına defalarca sormadan karar veremediğini, ev kirası, banka hesabı ve sağlık randevuları gibi tüm sorumlulukları yıllardır nişanlısına bıraktığını",
+                "dsmMatch": "Kriter 1 & 2: Aşırı öğüt almadan gündelik karar verememe ve temel sorumlulukları başkalarına bırakma"
+            },
+            {
+                "clueIndex": 2,
+                "text": "desteğini yitirme korkusuyla hiç itiraz edemediği",
+                "dsmMatch": "Kriter 3: Onay yitirme korkusuyla görüş ayrılığını dile getirememe"
+            },
+            {
+                "clueIndex": 5,
+                "text": "48 saat geçmeden kendisini koruyup yönlendirecek yeni bir partner arayışına girdiği",
+                "dsmMatch": "Kriter 7: Yakın bir ilişki bittiğinde ivedilikle yeni bir bakım/destek kaynağı arama"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Bilişsel Davranışçı Özerklik Eğitimi",
+            "therapyDetails": "Yetersizlik ve iç içe geçme şemalarının çalışılması, kademeli karar alma ve problem çözme ödevleri, girişkenlik (atılganlık) becerileri ve terapötik bağımlılığı önleyen net sınırlar.",
+            "pharmacologyNote": "Temel tedavi uzun süreli psikoterapidir; yalnızca eşlik eden majör depresif veya anksiyete epizodu varsa semptomatik farmakoterapi eklenir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastadaki terk edilme tepkisini Sınırda (Borderline) Kişilik Bozukluğundan ayıran en belirgin örüntü nedir?",
+            "options": [
+                "Ayrılıkta yoğun öfke patlamaları, duygusal boşluk ve kendine zarar verme yerine boyun eğici tutunma ve ivedilikle yeni bakım kaynağı arama",
+                "Ayrılık sonrası hiç üzüntü duymama ve tam duygusal soğukluk",
+                "Başkalarının bakımına hiç gereksinim duymama",
+                "Yalnızca iş ortamında ortaya çıkması"
+            ],
+            "correctIndex": 0,
+            "explanation": "Sınırda kişilik bozukluğunda terk edilmeye öfke, kimlik dağılması ve dürtüsel davranışlarla yanıt verilirken; burada aşırı boyun eğme, yatıştırma ve hızla yeni bir koruyucu ilişki arama örüntüsü görülür."
+        },
+        "differentialDiagnosis": "• Sınırda (Borderline) Kişilik Bozukluğu: Terk edilmeye öfke patlamaları, kimlik karmaşası ve kendine zarar verme ile tepki verir; bu hastada boyun eğici tutunma ve dürtüsellik yokluğu vardır.\n• Çekingen Kişilik Bozukluğu: Eleştirilme korkusuyla ilişkilerden uzak durur; bu hasta ise ilişkilere aşırı tutunur ve ivedilikle yeni partner arar.\n• Ayrılma Kaygısı Bozukluğu: Belirli bir bağlanma figürüne zarar geleceği endişesi baskındır; burada günlük karar verememe ve yaşam sorumluluklarını devretme gibi yaygın bir örüntü esastır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan aşırı bakım gereksinimi ve boyun eğici/tutunucu davranış (≥5/8 ölçüt: öğütsüz karar verememe, sorumluluk devretme, itiraz edememe, yalnız işe başlayamama, aşırı boyun eğme, yalnızlıkta çaresizlik, ivedilikle yeni ilişki arama, kendi kendine kalamama korkusu).",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Genç erişkinlikten beri süren biçimde gündelik kararları tek başına alamama ve temel yaşam sorumluluklarını başkalarına devretme örüntüsü mevcuttur.",
+                "Desteği yitirme korkusuyla haksızlıklara itiraz edememe, yalnız kalınca yoğun çaresizlik yaşama ve ayrılıktan hemen sonra yeni koruyucu partner arama temel ölçütleri karşılar.",
+                "Kimlik karmaşası, dürtüsel kendine zarar verme ve madde kullanımı dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "borderline_pd",
+                    "reason": "Terk edilme karşısında öfke patlamaları, kimlik dağınıklığı ve kendine zarar verme yerine boyun eğici tutunma vardır."
+                },
+                {
+                    "diagnosisId": "avoidant_pd",
+                    "reason": "İlişkilerden kaçınmak yerine bakım ve yönlendirme almak için ivedilikle yeni bir ilişkiye tutunma görülmektedir."
+                },
+                {
+                    "diagnosisId": "separation_anxiety",
+                    "reason": "Sorun yalnızca bağlanma figürünün güvenliği kaygısı değil, karar verme ve sorumluluk alma alanlarına yayılan kişilik örüntüsüdür."
+                }
+            ],
+            "teachingPoint": "Terk edilme korkusu hem sınırda hem bağımlı kişilik örüntüsünde bulunur; ancak ikincisinde yanıt öfke ve kaotik kopuş değil, boyun eğici yatıştırma ve hızla yeni bir bakım kaynağına tutunmadır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "personality_change_due_to_medical",
+        "category": "PERSONALITY_B",
+        "patientSummary": "48 yaşında, erkek, lise matematik öğretmeni",
+        "clues": [
+            "48 yaşındaki matematik öğretmeni, okul yönetimi tarafından disiplin kuruluna sevk edilmesinin ardından eşi tarafından psikiyatri polikliniğine getiriliyor; son 9 aydır veli toplantılarında kaba espriler yaptığı, öğrencilere bağırıp çağırdığı ve çalışma arkadaşlarına karşı aşırı küstah davrandığı belirtiliyor.",
+            "Eşi, hastanın 22 yıllık evlilikleri boyunca son derece ölçülü, sabırlı, kibar ve kurallara titiz biri olduğunu; ancak geçen yıl geçirdiği bir beyin ameliyatından sonra 'bambaşka bir insana dönüştüğünü' gözyaşlarıyla anlatıyor.",
+            "Tıbbi kayıtlarda 11 ay önce şiddetli baş ağrısı nedeniyle çekilen görüntülemede saptanan büyük bir bilateral orbitofrontal menenjiomun ameliyatla çıkarıldığı, ameliyat sonrası ön lob bazal korteksinde gliozis ve doku kaybı geliştiği görülüyor.",
+            "Güncel nörolojik muayenede motor güç ve duyu olağan. Kan testleri, tiroid ve B12 normal; alkol, uyarıcı ya da steroid kullanımı yok. MoCA 27/30; bellek, dil, yönelim ve hesaplama korunmuş, hasta günlük özbakımını ve faturalarını eksiksiz yönetebiliyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Muayene sırasında hekimin görünüşüyle ilgili uygunsuz şakalar yapıyor, uyarılınca hızla öfkelenip sesini yükseltiyor. Duygudurum labil ve taşkın değil, dürtüsel/disinhibe; varsanı, sanrı ya da grandiyözite yok; içgörü belirgin azalmış.",
+            "Önceki sakin ve ölçülü mizacından keskin biçimde kopan, toplumsal yargılama bozukluğu, dürtüsel öfke ve cinsel/sözel disinhibisyonla giden bu kalıcı örüntünün deliryum dışında geliştiği ve doğrudan ön lob cerrahi lezyonunun fizyopatolojik sonucu olduğu saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "22 yıllık evlilikleri boyunca son derece ölçülü, sabırlı, kibar ve kurallara titiz biri olduğunu; ancak geçen yıl geçirdiği bir beyin ameliyatından sonra 'bambaşka bir insana dönüştüğünü'",
+                "dsmMatch": "Kriter A: Önceki karakteristik örüntüden kalıcı sapma"
+            },
+            {
+                "clueIndex": 2,
+                "text": "bilateral orbitofrontal menenjiomun ameliyatla çıkarıldığı, ameliyat sonrası ön lob bazal korteksinde gliozis ve doku kaybı",
+                "dsmMatch": "Kriter B: Tıbbi durumun doğrudan fizyopatolojik sonucu olduğuna dair kanıt"
+            },
+            {
+                "clueIndex": 3,
+                "text": "MoCA 27/30; bellek, dil, yönelim ve hesaplama korunmuş, hasta günlük özbakımını ve faturalarını eksiksiz yönetebiliyor",
+                "dsmMatch": "Kriter C & D: Yaygın bilişsel yıkım (demans) veya deliryumla açıklanamama"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Çevre Yönetimi & Bakıcı/Aile Psikoeğitimi",
+            "therapyDetails": "Disinhibisyon ve öfke tetikleyicilerinin azaltılması, aile ve iş ortamında net davranışsal sınırlar ve geri bildirim stratejileri, mesleki/adli risk danışmanlığı ve nöropsikiyatrik izlem.",
+            "pharmacologyNote": "Şiddetli dürtüsellik ve agresyon kontrolünde düşük doz atipik antipsikotikler, duygudurum düzenleyiciler (valproat, karbamazepin) veya SSRI'lar hedef belirtiye göre seçilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada Majör Nörobilişsel Bozukluk yerine mevcut tanının seçilmesini sağlayan en kritik bulgu nedir?",
+            "options": [
+                "Hastanın 50 yaşından genç olması",
+                "Belirgin davranışsal disinhibisyon ve mizaç değişimine karşın bellek, yönelim ve gündelik özbakımın korunmuş olması (MoCA 27/30)",
+                "Cerrahi geçirmiş olması",
+                "Varsanıların bulunmaması"
+            ],
+            "correctIndex": 1,
+            "explanation": "Orbitofrontal lezyon sonrası yaygın bilişsel işlevler ve gündelik bağımsızlık korunurken yalnızca önceki mizacından keskin biçimde ayrılan kalıcı kişilik/davranış değişikliği (disinhibe tip) geliştiğinde bu tanı konur."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Frontotemporal / Pick Hastalığı): İlerleyici nörodejeneratif bir süreçtir ve yürütücü/bilişsel yıkımla bağımsızlığı bozar; burada menenjiom rezeksiyonu sonrası stabil fokal lezyon ve korunmuş biliş (MoCA 27/30) vardır.\n• Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati): 15 yaş öncesi davranış bozukluğu ve genç erişkinlikten beri süren örüntü gerektirir; bu hasta 47 yaşına dek tamamen uyumlu yaşamıştır.\n• Başka Bir Sağlık Durumuna Bağlı Bipolar Bozukluk: Uyku gereksiniminde azalma, grandiyözite ve belirgin taşkın duygudurum dönemi yoktur; baskın olan kalıcı disinhibisyon ve yargılama kaybıdır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Önceki karakteristik örüntüden kalıcı kişilik/davranış sapması (disinhibe/labil/agresif/apatik/paranoid tip) + Başka bir sağlık durumunun doğrudan fizyopatolojik sonucu + Deliryum veya başka ruhsal bozuklukla açıklanamama + İşlevsellikte belirgin bozulma.",
+        "therapyId": "caregiver_behavioral",
+        "explanation": {
+            "whyThis": [
+                "47 yaşına dek sakin ve ölçülü olan hastada orbitofrontal menenjiom rezeksiyonu sonrasında kalıcı disinhibisyon, uygunsuz şakalar ve öfke patlamaları gelişmiştir.",
+                "Ameliyat sonrası ön lob korteks hasarı doğrudan fizyopatolojik nedendir ve tablo iş yaşamında disiplin soruşturmasına yol açacak düzeyde işlevselliği bozmaktadır.",
+                "MoCA 27/30 ile bilişsel işlevler ve günlük özbakım korunduğu için demans, bilincin açık ve stabil olmasıyla deliryum dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_frontotemporal",
+                    "reason": "Sinsi nörodejeneratif ilerleme ve yaygın bilişsel bağımsızlık kaybı yoktur; fokal cerrahi hasar sonrası izole davranışsal değişiklik mevcuttur."
+                },
+                {
+                    "diagnosisId": "antisocial_pd",
+                    "reason": "Ergenlikten beri süren kural ihlali öyküsü olmayıp 47 yaşından sonra organik beyin lezyonuyla başlamıştır."
+                },
+                {
+                    "diagnosisId": "bipolar_due_to_medical",
+                    "reason": "Manik duygudurum, uyku gereksiniminde azalma veya grandiyözite yoktur; tablo kalıcı orbitofrontal disinhibisyondur."
+                }
+            ],
+            "teachingPoint": "Orta yaşta aniden ortaya çıkan uygunsuz davranış, küstahlık ve dürtüsel öfke patlamalarında mutlaka nörogörüntüleme istenmeli; biliş korunmuşsa organik kişilik değişikliği akla gelmelidir."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "voyeuristic",
+        "category": "PARAPHILIC",
+        "patientSummary": "27 yaşında, erkek, apartman site güvenlik personeli",
+        "clues": [
+            "27 yaşındaki site güvenlik personeli, hakkında başlatılan adli soruşturma ve işten çıkarılma sürecinin ardından avukatının önerisiyle ve yoğun utanç, uyku bozukluğu yakınmalarıyla psikiyatri polikliniğine başvuruyor.",
+            "Görüşmede, son iki yıldır gece nöbetlerinde ve iş çıkışı saatlerinde yoğun bir içsel gerilim ve dürtü hissettiğini, bu dürtüyü bastıramadığı için ciddi yasal ve mesleki sonuçlarla karşı karşıya kaldığını itiraf ediyor.",
+            "Öyküde hastanın evli olmadığı, alkol veya uyarıcı madde kullanmadığı, manik dönem ya da psikotik atak geçirmediği öğreniliyor; fizik muayene ve rutin laboratuvar testleri normal.",
+            "Detaylı değerlendirmede hastanın en az 18 aydır, kendisinden habersiz olan komşuların ve site sakinlerinin pencerelerinden soyunma ya da cinsel eylem anlarını gizlice izleme yönünde yineleyici, yoğun cinsel uyarılma fantezileri ve dürtüleri olduğu anlaşılıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Duygudurum kaygılı ve pişman, duygulanım gergin. Düşünce akışı düzenli, varsanı ya da sanrı yok; davranışının yasa dışı ve zararlı olduğunun farkında ancak dürtü geldiğinde kendini durduramadığını söylüyor.",
+            "27 yaşındaki hastanın, bu dürtüleri son bir yılda birçok kez rızası ve haberi olmayan kişileri gece dürbünle ve site kameralarının açısını kaydırarak izlemek suretiyle eyleme döktüğü, bu anlarda cinsel uyarılma yaşadığı ve yakalanınca adli işlem gördüğü doğrulanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 3,
+                "text": "en az 18 aydır, kendisinden habersiz olan komşuların ve site sakinlerinin pencerelerinden soyunma ya da cinsel eylem anlarını gizlice izleme yönünde yineleyici, yoğun cinsel uyarılma fantezileri ve dürtüleri",
+                "dsmMatch": "Kriter A: En az 6 ay süren, habersiz kişiyi çıplakken/soyunurken/cinsel eylemde gizlice izleme fantezi ve dürtüleri"
+            },
+            {
+                "clueIndex": 5,
+                "text": "rızası ve haberi olmayan kişileri gece dürbünle ve site kameralarının açısını kaydırarak izlemek suretiyle eyleme döktüğü",
+                "dsmMatch": "Kriter B: Onay vermeyen kişiyle eyleme dökme"
+            },
+            {
+                "clueIndex": 5,
+                "text": "27 yaşındaki hastanın",
+                "dsmMatch": "Kriter C: Bireyin en az 18 yaşında olması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Nüks Önleme Programı",
+            "therapyDetails": "Yüksek riskli durumların (gece yalnızlığı, stres, kamera erişimi) haritalanması, bilişsel çarpıtmaların yeniden yapılandırılması, dürtü kontrol becerileri, empati eğitimi ve sağlıklı cinsel/sosyal ilişki geliştirme.",
+            "pharmacologyNote": "Cinsel dürtü yoğunluğunu azaltmak için birinci basamakta SSRI'lar (ör. fluoksetin, sertralin) kullanılır; ağır ve dirençli adli nüks riskinde antiandrojenler uzman değerlendirmesiyle gündeme gelebilir."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'ye göre bu tanının konabilmesi için hastanın en az kaç yaşında olması ve belirtilerin en az ne kadar sürmesi gerekir?",
+            "options": [
+                "En az 16 yaşında ve en az 3 ay",
+                "En az 18 yaşında ve en az 6 ay",
+                "En az 21 yaşında ve en az 12 ay",
+                "Yaş sınırı yoktur; tek bir olay yeterlidir"
+            ],
+            "correctIndex": 1,
+            "explanation": "DSM-5-TR'de bu bozukluk için Kriter A en az 6 aylık süre, Kriter B eyleme dökme veya belirgin sıkıntı, Kriter C ise kişinin en az 18 yaşında olmasını şart koşar."
+        },
+        "differentialDiagnosis": "• Göstermecilik Bozukluğu (Ekzibisyonizm): Cinsel uyarılma başkasını gizlice izlemekle değil, kendi cinsel organlarını habersiz birine göstermekle ilişkilidir.\n• Sürtünmecilik Bozukluğu (Frotteurizm): Rıza dışı fiziksel temas ve sürtünme esastır; bu hasta temas kurmadan gizlice izlemektedir.\n• Bipolar I Bozukluğu: Manik dönemde artmış cinsel dürtü görülebilir; burada mani belirtisi olmayıp 18 aydır süren özgül bir örüntü vardır.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 6 ay boyunca habersiz bir kişiyi çıplakken/soyunurken/cinsel eylemde gizlice izlemeyle ilgili yineleyen yoğun cinsel uyarılma + Rızasız kişiyle eyleme dökme veya belirgin sıkıntı + Kişinin ≥18 yaşında olması.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "18 aydır (6 ay eşiğini aşarak) habersiz kişileri soyunurken veya cinsel eylem sırasında gizlice izlemeye yönelik yoğun cinsel uyarılma fantezi ve dürtüleri mevcuttur.",
+                "Dürtülerin rızasız kişiler üzerinde tekrarlayıcı biçimde eyleme dökülmesi ve iş kaybıyla adli süreç yaşanması Kriter B'yi karşılar.",
+                "Hasta 27 yaşındadır (≥18 yaş ölçütü karşılanmış) ve mani, psikoz ya da madde etkisi dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "exhibitionistic",
+                    "reason": "Hasta kendini göstermek yerine habersiz kişileri gizlice izleyerek cinsel uyarılma yaşamaktadır."
+                },
+                {
+                    "diagnosisId": "frotteuristic",
+                    "reason": "Fiziksel temas veya sürtünme arayışı yoktur; davranış uzaktan gizli gözlem biçimindedir."
+                },
+                {
+                    "diagnosisId": "bipolar_1",
+                    "reason": "Manik epizot bulguları yoktur; örüntü 18 aydır süreğen ve tek bir özgül cinsel dürtüye odaklıdır."
+                }
+            ],
+            "teachingPoint": "Bu bozuklukta tanı için 6 aylık süre ve rızasız eyleme dökme/sıkıntı yanında kişinin en az 18 yaşında olması (Kriter C) DSM-5-TR'nin özgün yaş koşuludur."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "exhibitionistic",
+        "category": "PARAPHILIC",
+        "patientSummary": "31 yaşında, erkek, depo lojistik sorumlusu",
+        "clues": [
+            "31 yaşındaki lojistik sorumlusu, savcılık soruşturması ve denetimli serbestlik değerlendirmesi kapsamında psikiyatri polikliniğine yönlendiriliyor; son dönemde yaşadığı yoğun kaygı, uykusuzluk ve 'kendimi durduramadığım bir dürtü yüzünden hayatım dağıldı' yakınmasını dile getiriyor.",
+            "Öyküde işinde ve ailesinde genel olarak uyumlu biri olduğu, ancak son bir yıldır özellikle iş stresi arttığı akşamlarda ıssız park yollarında ve sakin sokaklarda saatlerce dolaştığı, ardından yoğun suçluluk hissettiği öğreniliyor.",
+            "Alkol, esrar veya uyarıcı madde kullanımı yok; nörolojik hastalık, kafa travması, demans ya da manik epizot öyküsü bulunmuyor. Rutin kan testleri ve beyin görüntülemesi olağan.",
+            "Görüşmede derinleşildiğinde hastanın 14 aydır, kendisini beklemeyen yabancı kişilere cinsel organını aniden açıp gösterme ve onların şaşkınlık tepkisini görme yönünde yineleyici, yoğun cinsel uyarılma fantezileri ve dürtüleri olduğu ortaya çıkıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Duygudurum kaygılı ve utanmış, duygulanım uyumlu. Düşünce akışı düzenli, varsanı ya da sanrı yok; kurbanlara fiziksel temas ya da zarar verme niyeti olmadığını, eylem anındaki şok ifadesinin kendisini uyardığını anlatıyor.",
+            "Bu dürtüleri son 10 ayda beş farklı kez, rızası ve haberi olmayan erişkin kadınların önünde aniden paltosunu açarak eyleme döktüğü ve son olayda güvenlik kamerası kaydıyla gözaltına alındığı doğrulanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 3,
+                "text": "14 aydır, kendisini beklemeyen yabancı kişilere cinsel organını aniden açıp gösterme ve onların şaşkınlık tepkisini görme yönünde yineleyici, yoğun cinsel uyarılma fantezileri ve dürtüleri",
+                "dsmMatch": "Kriter A: En az 6 ay süren, kuşkulanmayan birine cinsel organını gösterme fantezi ve dürtüleri"
+            },
+            {
+                "clueIndex": 5,
+                "text": "beş farklı kez, rızası ve haberi olmayan erişkin kadınların önünde aniden paltosunu açarak eyleme döktüğü",
+                "dsmMatch": "Kriter B: Onay vermeyen kişilerle eyleme dökme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Nüks Önleme Programı",
+            "therapyDetails": "Stres ve öfke gibi duygusal tetikleyicilerin tanımlanması, yüksek riskli ortam ve saatlerden kaçınma planı, mağdur empatisi çalışması ve dürtü yönetimi teknikleri.",
+            "pharmacologyNote": "SSRI'lar dürtü sıklığını ve yoğunluğunu azaltmada ilk seçenektir; tekrarlayıcı adli risk taşıyan dirençli olgularda antiandrojen tedavisi uzman kurulca değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'de bu bozukluk için hangi belirleyicilerin kaydedilmesi istenir?",
+            "options": [
+                "Yalnızca gece veya gündüz gerçekleşmesi",
+                "Yalnızca alkol eşlik edip etmemesi",
+                "Eylemin ergenlik öncesi çocuklara, fiziksel olarak olgun kişilere ya da her ikisine yönelik olması",
+                "Kişinin evli ya da bekar olması"
+            ],
+            "correctIndex": 2,
+            "explanation": "DSM-5-TR'de bu bozuklukta cinsel uyarılmanın ergenlik öncesi çocuklara, fiziksel olarak olgun kişilere veya her ikisine yönelik olup olmadığı belirleyici olarak kaydedilir; bu, adli risk değerlendirmesi açısından kritiktir."
+        },
+        "differentialDiagnosis": "• Gözetlemecilik Bozukluğu (Voyörizm): Başkasını gizlice izlemekten cinsel haz alınır; burada kendi cinsel organını habersiz kişiye gösterme esastır.\n• Sürtünmecilik Bozukluğu (Frotteurizm): Rıza dışı fiziksel temas ve sürtünme vardır; bu hasta temas kurmamakta, şaşkınlık tepkisinden uyarılmaktadır.\n• Başka Bir Sağlık Durumuna Bağlı Kişilik Değişikliği: Beyin görüntülemesi normaldir ve yaygın frontal disinhibisyon yoktur.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 6 ay boyunca kuşkulanmayan bir kişiye cinsel organını göstermeyle ilgili yineleyen yoğun cinsel uyarılma fantezi/dürtü/davranışları + Onay vermeyen kişiyle eyleme dökme veya belirgin sıkıntı.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "14 aydır (≥6 ay) habersiz yabancılara cinsel organını aniden gösterme ve şaşkınlık tepkisinden cinsel uyarılma duyma örüntüsü Kriter A'yı karşılar.",
+                "Dürtülerin beş kez rızasız erişkinler üzerinde eyleme dökülmesi ve adli soruşturma ile belirgin sıkıntı gelişmesi Kriter B'yi karşılar.",
+                "Nörolojik hastalık, demans, mani ve madde etkisi dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "voyeuristic",
+                    "reason": "Cinsel uyarılma gizlice izlemekle değil, habersiz kişiye kendini göstermekle sağlanmaktadır."
+                },
+                {
+                    "diagnosisId": "frotteuristic",
+                    "reason": "Rıza dışı dokunma veya sürtünme eylemi yoktur; fiziksel mesafe korunmaktadır."
+                },
+                {
+                    "diagnosisId": "personality_change_due_to_medical",
+                    "reason": "Beyin görüntülemesi olağandır ve organik frontal disinhibisyon bulgusu bulunmamaktadır."
+                }
+            ],
+            "teachingPoint": "Bu bozuklukta temel uyaran kurbanın şaşkınlık veya şok tepkisidir; değerlendirmede mağdur grubunun (erişkin/çocuk) belirlenmesi ve mani/frontal lob disinhibisyonunun dışlanması esastır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "frotteuristic",
+        "category": "PARAPHILIC",
+        "patientSummary": "24 yaşında, erkek, çağrı merkezi çalışanı",
+        "clues": [
+            "24 yaşındaki çağrı merkezi çalışanı, işe gidiş geliş saatlerinde yaşadığı yoğun huzursuzluk, suçluluk ve 'kontrol edemediğim bir davranış yüzünden başım belaya girecek' korkusuyla gönüllü olarak psikiyatri polikliniğine başvuruyor.",
+            "Öyküde son bir yıldır iş çıkışlarında boş otobüslere binmek yerine özellikle en kalabalık metro ve metrobüs seferlerini beklediği, yolculuk sonrası yoğun pişmanlık duyup eve kapandığı öğreniliyor.",
+            "Alkol, uyarıcı veya başka madde kullanımı yok; bipolar bozukluk, psikotik bozukluk ya da nörolojik hastalık öyküsü bulunmuyor. Rutin laboratuvar incelemeleri olağan.",
+            "Güvenli görüşme ortamında hasta, 11 aydır kalabalık ortamlarda kendisinden habersiz veya onay vermeyen kişilere bilerek yakınlaşıp bedenini temas ettirme ve bastırma yönünde yineleyici, yoğun cinsel uyarılma fantezileri ile dürtüleri yaşadığını anlatıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Duygudurum kaygılı ve mahcup, duygulanım gergin. Düşünce akışı düzenli, varsanı ya da sanrı yok; bu dürtülerden kurtulmak istediğini ve yardım aradığını belirtiyor.",
+            "Son 8 ayda birçok kez tıklım tıklım metro vagonlarında rızası olmayan yolcuların arkasına geçip kalabalık bahanesiyle kasıtlı biçimde bedenini temas ettirerek cinsel uyarılma sağladığı, bir yolcunun tepki göstermesi üzerine panikle inip tedaviye başvurduğu öğreniliyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 3,
+                "text": "11 aydır kalabalık ortamlarda kendisinden habersiz veya onay vermeyen kişilere bilerek yakınlaşıp bedenini temas ettirme ve bastırma yönünde yineleyici, yoğun cinsel uyarılma fantezileri ile dürtüleri",
+                "dsmMatch": "Kriter A: En az 6 ay süren, rızasız kişiye dokunma/temasla cinsel uyarılma dürtüleri"
+            },
+            {
+                "clueIndex": 5,
+                "text": "rızası olmayan yolcuların arkasına geçip kalabalık bahanesiyle kasıtlı biçimde bedenini temas ettirerek cinsel uyarılma sağladığı",
+                "dsmMatch": "Kriter B: Onay vermeyen kişiyle eyleme dökme ve belirgin sıkıntı"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Nüks Önleme Eğitimi",
+            "therapyDetails": "Yüksek riskli ulaşım saat ve güzergâhlarının değiştirilmesi, dürtü başa çıkma stratejileri, bilişsel çarpıtmaların ('kalabalıkta fark edilmez') düzeltilmesi, empati ve sağlıklı ilişki becerileri.",
+            "pharmacologyNote": "SSRI'lar cinsel dürtü yoğunluğunu ve obsesif nitelikli fantezi sıklığını azaltmada birinci basamakta etkilidir."
+        },
+        "miniQuiz": {
+            "question": "Bu bozukluğun epidemiyolojisi ve tipik gerçekleşme bağlamı hakkında aşağıdaki ifadelerden hangisi doğrudur?",
+            "options": [
+                "Genellikle 60 yaşından sonra başlar ve evde yalnızken gerçekleşir",
+                "Sıklıkla geç ergenlik ve genç erişkinlikte zirve yapar; kalabalık toplu taşıma veya dar geçitlerde rızasız temasla gerçekleşir",
+                "Yalnızca madde zehirlenmesi sırasında ortaya çıkarsa tanı konur",
+                "Tanı için en az 5 yıllık süre gereklidir"
+            ],
+            "correctIndex": 1,
+            "explanation": "Bu bozukluk tipik olarak ergenlik veya genç erişkinlikte (15-25 yaş) en sık görülür, kalabalık toplu taşıma gibi kaçışın kolay olduğu ortamlarda rızasız temasla eyleme dökülür ve DSM-5-TR'de 6 aylık süre ölçütü aranır."
+        },
+        "differentialDiagnosis": "• Göstermecilik Bozukluğu (Ekzibisyonizm): Temas kurulmaksızın cinsel organın gösterilmesi esastır; burada rızasız fiziksel temas ön plandadır.\n• Gözetlemecilik Bozukluğu (Voyörizm): Uzaktan gizlice izleme söz konusudur; fiziksel temas yoktur.\n• Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati): Yaygın kural ihlali, empati yoksunluğu ve suç örüntüsü vardır; bu hasta yoğun pişmanlık duyarak gönüllü tedaviye başvurmuştur.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 6 ay boyunca onay vermeyen bir kişiye dokunma veya sürtünmeyle ilgili yineleyen yoğun cinsel uyarılma fantezi/dürtü/davranışları + Onay vermeyen kişiyle eyleme dökme veya belirgin sıkıntı/işlevsellik kaybı.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "11 aydır (≥6 ay) kalabalık ortamlarda rızasız kişilere kasıtlı fiziksel temasla ilişkili yoğun cinsel uyarılma fantezi ve dürtüleri vardır.",
+                "Dürtülerin toplu taşımada rızasız yolcular üzerinde tekrarlayıcı biçimde eyleme dökülmesi ve hastanın yoğun sıkıntı yaşaması Kriter B'yi karşılar.",
+                "Madde kullanımı, mani, psikoz ve yaygın antisosyal örüntü dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "exhibitionistic",
+                    "reason": "Cinsel organını gösterme davranışı yoktur; uyarılma kalabalıkta rızasız bedensel temasla sağlanmaktadır."
+                },
+                {
+                    "diagnosisId": "voyeuristic",
+                    "reason": "Gizlice izleme değil, doğrudan rızasız fiziksel temas esastır."
+                },
+                {
+                    "diagnosisId": "antisocial_pd",
+                    "reason": "Genel suç örüntüsü ve vicdan yoksunluğu yoktur; hasta pişmanlıkla kendi isteğiyle tedaviye başvurmuştur."
+                }
+            ],
+            "teachingPoint": "Kalabalık toplu taşımada rızasız fiziksel temasla sağlanan cinsel uyarılma en az 6 ay sürdüğünde ve eyleme döküldüğünde ya da sıkıntı yarattığında bu tanı konur; gönüllü başvuru tedavi yanıtını olumlu etkiler."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "FORENSIC",
+        "diagnosisId": "sexual_masochism",
+        "category": "PARAPHILIC",
+        "patientSummary": "29 yaşında, erkek, grafik tasarımcı",
+        "clues": [
+            "29 yaşındaki grafik tasarımcı, ev arkadaşının kendisini odasında boynunda kızarıklık ve kısa süreli baygınlık hâlinde bulup acil servise getirmesinin ardından psikiyatri konsültasyonuna yönlendiriliyor.",
+            "Acil serviste vital bulgular stabilize edildikten sonra intihar girişimi şüphesiyle değerlendirilen hasta, ölme niyeti olmadığını, işini ve yaşamını sevdiğini ancak uzun süredir utandığı bir alışkanlığının kontrolden çıktığını söylüyor.",
+            "Öyküde majör depresif dönem, umutsuzluk, intihar planı, psikoz veya madde kullanımı yok. Fizik muayenede boyunda yüzeyel kemer izi dışında akut patoloji saptanmıyor; kan testleri olağan.",
+            "Ayrıntılı görüşmede hastanın yaklaşık 3 yıldır, cinsel uyarılma sağlayabilmek için kendi kendini bağlama, bedensel acı verme, aşağılanma fantezileri kurma ve özellikle solunumunu kısıtlayarak bayılma eşiğine gelme eylemlerine yönelik yoğun dürtüleri olduğu öğreniliyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam. Duygudurum kaygılı ve utanmış, duygulanım uyumlu. İntihar düşüncesi kesinlikle yok; bu eylemler olmadan cinsel doyum sağlayamadığını, her seferinde 'bu son' dediği hâlde tehlikeli davranışa geri döndüğünü ve ölüm korkusuyla yoğun sıkıntı yaşadığını ifade ediyor.",
+            "Üç yıldır süren bu bağlanma, acı çekme ve soluksuz bırakılma yoluyla cinsel uyarılma örüntüsünün yaşamı tehdit eden solunum kısıtlamasına ulaştığı ve hastada klinik açıdan belirgin sıkıntı ile işlevsellik kaybı yarattığı saptanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 3,
+                "text": "yaklaşık 3 yıldır, cinsel uyarılma sağlayabilmek için kendi kendini bağlama, bedensel acı verme, aşağılanma fantezileri kurma ve özellikle solunumunu kısıtlayarak bayılma eşiğine gelme",
+                "dsmMatch": "Kriter A: En az 6 ay süren, aşağılanma, bağlanma, acı çekme veya solunum kısıtlamasıyla cinsel uyarılma"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yaşamı tehdit eden solunum kısıtlamasına ulaştığı ve hastada klinik açıdan belirgin sıkıntı ile işlevsellik kaybı yarattığı",
+                "dsmMatch": "Kriter B & Belirleyici: Belirgin sıkıntı/tehlike ve solunum kısıtlaması (asfiksiyofili) eşlik etmesi"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Güvenlik/Dürtü Yönetimi",
+            "therapyDetails": "Ölümcül risk taşıyan solunum kısıtlama ritüellerinin derhal sonlandırılması için acil güvenlik planı, dürtü tetikleyicilerinin çalışılması, bilişsel yeniden yapılandırma ve sağlıklı cinsel işlev geliştirme.",
+            "pharmacologyNote": "Yoğun ve kontrolü güç cinsel dürtüleri azaltmak için SSRI'lar birinci basamakta yararlı olabilir; düzenli psikiyatrik takip esastır."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'de bu bozukluğun en yüksek kaza sonucu ölüm riski taşıyan belirleyicisi aşağıdakilerden hangisidir?",
+            "options": [
+                "Yalnızca sözel aşağılanma fantezileriyle sınırlı olması",
+                "Yalnızca ergenlikte kısa süre görülmesi",
+                "Partnerle rızaya dayalı güvenli sınırlar içinde kalması",
+                "Solunum kısıtlaması (asfiksiyofili) eşlik etmesi"
+            ],
+            "correctIndex": 3,
+            "explanation": "Solunum kısıtlamasıyla (asfiksiyofili) seyreden form, hipoksiye bağlı ani bilinç kaybı nedeniyle yüksek kaza sonucu ölüm riski taşır ve acil serviste sıklıkla intihar girişimiyle karışır."
+        },
+        "differentialDiagnosis": "• Majör Depresif Bozukluk: Boyunda bağ izi intihar girişimini düşündürebilir; ancak çökkünlük, umutsuzluk ve ölüm isteği kesinlikle yoktur, amaç cinsel uyarılmadır.\n• Sınırda (Borderline) Kişilik Bozukluğu: Kendine zarar verme duygusal acıyı düzenlemek içindir; burada 3 yıldır cinsel uyarılma amacıyla yapılan ritüelistik davranışlar vardır.\n• Cinsel Sadizm Bozukluğu: Cinsel uyarılma kendisinin değil, bir başkasının acı çekmesiyle sağlanır.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 6 ay boyunca aşağılanma, dövülme, bağlanma ya da başka biçimde acı çekmeyle ilgili yineleyen yoğun cinsel uyarılma + Klinik açıdan belirgin sıkıntı veya işlevsellikte düşme (belirleyici: solunum kısıtlaması/asfiksiyofili ile).",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "Üç yıldır (≥6 ay) bağlanma, bedensel acı çekme, aşağılanma ve solunum kısıtlamasıyla cinsel uyarılma fantezi ve davranışları mevcuttur.",
+                "Davranış yaşamı tehdit eden bayılmaya yol açmış ve hastada yoğun utanç, ölüm korkusu ile klinik sıkıntı oluşturmuştur.",
+                "Ölüm niyeti ve depresif belirtilerin yokluğu intihar girişimini dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Ölüm isteği, çökkünlük veya umutsuzluk yoktur; boyundaki iz intihar değil solunum kısıtlamalı cinsel uyarılma eylemine bağlıdır."
+                },
+                {
+                    "diagnosisId": "borderline_pd",
+                    "reason": "Duygusal düzenleme amaçlı kendine zarar verme ve ilişkisel dengesizlik yerine cinsel uyarılma odaklı ritüel vardır."
+                },
+                {
+                    "diagnosisId": "sexual_sadism",
+                    "reason": "Hasta başkasına değil, kendi bedenine acı/kısıtlama uygulanmasıyla cinsel uyarılma yaşamaktadır."
+                }
+            ],
+            "teachingPoint": "Acil servise boyunda bağ iziyle gelen olgularda intihar girişimi mutlaka araştırılmalı; ancak ölüm niyeti yoksa solunum kısıtlamalı cinsel uyarılma (asfiksiyofili) olasılığı da akılda tutulmalıdır."
+        }
+    },
+    {
+        "difficulty": "İleri Düzey",
+        "course": "FORENSIC",
+        "diagnosisId": "sexual_sadism",
+        "category": "PARAPHILIC",
+        "patientSummary": "36 yaşında, erkek, gece bekçisi",
+        "clues": [
+            "36 yaşındaki gece bekçisi, ağır yaralama ve alıkoyma suçlamasıyla tutuklu bulunduğu ceza infaz kurumundan mahkeme kararıyla adli psikiyatri değerlendirmesine getiriliyor.",
+            "Adli dosyada son iki yıl içinde iki farklı mağdura yönelik planlı saldırılar yer aldığı, mağdurların ifadelerinde sanığın herhangi bir maddi gasp amacı gütmediği, yalnızca onları bağlayıp korkutarak fiziksel acı verdiği belirtiliyor.",
+            "Öyküde şizofreni spektrum belirtileri, sanrılar, varsanılar, manik dönem, beyin hasarı veya eylem anında ağır madde intoksikasyonu bulunmuyor. Nörolojik muayene ve beyin MR'ı normal.",
+            "Kapsamlı adli görüşmede sanığın 20'li yaşlarının ortasından bu yana, bir başka insanın bedensel acı çekmesi, yalvarması ve yoğun korku yaşamasından güçlü cinsel uyarılma duyduğu, yıllarca bu içerikte yineleyici fanteziler kurduğu ortaya çıkıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, yönelim tam, işbirliği mesafeli. Duygudurum soğuk ve duygulanım kısıtlı; mağdurların çektiği acıya karşı empati ya da pişmanlık göstermiyor. Düşünce süreci düzenli, psikotik bulgu yok.",
+            "En az on yıldır süren, başkasının fiziksel ve ruhsal acı çekmesiyle cinsel uyarılma fantezi ve dürtülerini, son iki yılda onay vermeyen iki kişi üzerinde planlı bağlama ve fiziksel yaralama biçiminde eyleme döktüğü adli bulgularla doğrulanıyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 3,
+                "text": "20'li yaşlarının ortasından bu yana, bir başka insanın bedensel acı çekmesi, yalvarması ve yoğun korku yaşamasından güçlü cinsel uyarılma duyduğu",
+                "dsmMatch": "Kriter A: En az 6 ay süren, başkasının bedensel/ruhsal acı çekmesinden cinsel uyarılma fantezi ve dürtüleri"
+            },
+            {
+                "clueIndex": 5,
+                "text": "son iki yılda onay vermeyen iki kişi üzerinde planlı bağlama ve fiziksel yaralama biçiminde eyleme döktüğü",
+                "dsmMatch": "Kriter B: Onay vermeyen kişilerle eyleme dökme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Yüksek Güvenlikli Adli BDT & Nüks Önleme Programı",
+            "therapyDetails": "Kurumsal/adli gözetim altında uzun dönemli bilişsel davranışçı nüks önleme, risk faktörü izlemi, bilişsel çarpıtmaların ele alınması ve sıkı dışsal denetim protokolleri.",
+            "pharmacologyNote": "Yüksek tekrarlama ve ağır zarar riski nedeniyle SSRI'lara ek olarak uzman adli kurul değerlendirmesiyle antiandrojen (siproteron asetat veya GnRH agonistleri) tedavisi gündeme gelir."
+        },
+        "miniQuiz": {
+            "question": "Bu bozukluğu Antisosyal Kişilik Bozukluğundan ayıran temel psikopatolojik özellik aşağıdakilerden hangisidir?",
+            "options": [
+                "Şiddetin maddi çıkar veya genel öfkeden ziyade doğrudan kurbanın acı ve korkusundan cinsel uyarılma elde etme amacına bağlı olması",
+                "Hastanın her zaman derin pişmanlık ve empati göstermesi",
+                "Yalnızca 60 yaş üzerinde ortaya çıkması",
+                "Psikotik sanrıların şiddeti tetiklemesi"
+            ],
+            "correctIndex": 0,
+            "explanation": "Antisosyal kişilik bozukluğunda saldırganlık genellikle çıkar, dürtüsellik veya öfke kaynaklıdır; bu bozuklukta ise ayırıcı olan, kurbanın fiziksel veya psikolojik acı çekmesinin doğrudan cinsel uyarılma kaynağı olmasıdır."
+        },
+        "differentialDiagnosis": "• Antisosyal Kişilik Bozukluğu (Sosyopati / Psikopati): Eşlik edebilir ancak tek başına kurbanın acı ve korkusundan kaynaklanan yineleyici cinsel uyarılmayı açıklamaz.\n• Cinsel Mazoşizm Bozukluğu (Asfiksi Tipi Dahil): Cinsel uyarılma başkasına acı çektirmekle değil, kendisinin acı çekmesiyle sağlanır.\n• Aralıklı Patlayıcı Bozukluk (IED): Planlı olmayan, anlık öfke patlamalarıdır ve cinsel uyarılma bileşeni içermez.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 6 ay boyunca başka bir kişinin bedensel veya ruhsal acı çekmesinden yineleyen yoğun cinsel uyarılma fantezi/dürtü/davranışları + Onay vermeyen kişiyle eyleme dökme veya belirgin sıkıntı/işlevsellik kaybı.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "Yaklaşık 10 yıldır (≥6 ay) başka bir insanın fiziksel acı ve korku yaşamasından yoğun cinsel uyarılma duyma örüntüsü Kriter A'yı karşılar.",
+                "Bu dürtülerin onay vermeyen iki mağdur üzerinde planlı fiziksel yaralamayla eyleme dökülmesi Kriter B'yi karşılar.",
+                "Psikoz, mani, organik beyin lezyonu ve madde intoksikasyonu dışlanmıştır."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "antisocial_pd",
+                    "reason": "Eylemler maddi çıkar ya da genel dürtüsellikten değil, doğrudan kurbanın acısından cinsel uyarılma elde etme örüntüsünden kaynaklanmaktadır."
+                },
+                {
+                    "diagnosisId": "sexual_masochism",
+                    "reason": "Cinsel uyarılma kendisinin acı çekmesinden değil, bir başkasına acı çektirmekten doğmaktadır."
+                },
+                {
+                    "diagnosisId": "intermittent_explosive",
+                    "reason": "Saldırılar dürtüsel öfke patlaması değil, planlı ve cinsel uyarılma odaklı eylemlerdir."
+                }
+            ],
+            "teachingPoint": "Adli değerlendirmede şiddet eylemlerinin maddi çıkar veya öfke yerine kurbanın acı ve korkusundan doğan cinsel uyarılma odaklı olması bu tanının ayırt edici eksenidir."
+        }
+    }
+]

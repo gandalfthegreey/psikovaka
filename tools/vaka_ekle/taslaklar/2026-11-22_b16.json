@@ -1,0 +1,1463 @@
+[
+    {
+        "difficulty": "Kolay",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "wernicke_korsakoff_syndrome",
+        "category": "NEUROCOGNITIVE",
+        "patientSummary": "59 yaşında, erkek, emekli gemi makinisti",
+        "clues": [
+            "59 yaşındaki emekli gemi makinisti, son aylarda yeni olayları hemen unuttuğu, aynı soruları defalarca sorduğu ve evin yolunu karıştırdığı için eşi tarafından polikliniğe getirildi.",
+            "Öyküsünde 25 yılı aşkın süredir günde en az bir şişe rakı tükettiği ve son iki yılda öğün atlayıp neredeyse yalnızca çayla beslendiği öğreniliyor; beş ay önce dengesiz yürüyüş, çift görme ve zihin bulanıklığı nedeniyle acile başvurmuş, ancak tedaviyi yarım bırakıp çıkmış.",
+            "Eşi, hastanın yıllar önceki denizcilik anılarını canlı biçimde anlattığını, buna karşın on dakika önce kahvaltıda ne yediğini ya da sabah hastaneye kiminle geldiğini hiç anımsamadığını belirtiyor.",
+            "Kan şekeri, tiroid, B12 ve elektrolitler olağan; karaciğer enzimleri hafif yüksek ve MCV 104 fL. Beyin MR'ında mamiller cisimciklerde belirgin atrofi ve dorsomedial talamik bölgede simetrik sinyal değişikliği saptanıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, dikkat ve anlık sayı dizisi tekrarı korunmuş, ancak beş dakika sonraki gecikmeli hatırlama 0/3. Duygudurum kaygısız, içgörü yok; dün akşam nerede olduğu sorulduğunda kendinden emin biçimde 'limanda gemi motoru tamir ettim' diye ayrıntılı bir öykü anlatıyor.",
+            "Genel zekâ düzeyi ve eski uzak anılar büyük ölçüde korunmuşken, ağır düzeyde yeni bilgi kaydedememe ve bellek boşluklarını gerçeğe uymayan ama kendisinin inandığı kurgusal olaylarla doldurma örüntüsü, yüksek doz B1 vitamini başlanmasına karşın kalıcı seyrediyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "dengesiz yürüyüş, çift görme ve zihin bulanıklığı",
+                "dsmMatch": "Kriter B: Tiamin eksikliğine bağlı akut ensefalopati triadı öyküsü"
+            },
+            {
+                "clueIndex": 3,
+                "text": "mamiller cisimciklerde belirgin atrofi ve dorsomedial talamik bölgede simetrik sinyal değişikliği",
+                "dsmMatch": "Kriter B: Mamillo-talamik yapısal lezyon kanıtı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yeni bilgi kaydedememe ve bellek boşluklarını gerçeğe uymayan ama kendisinin inandığı kurgusal olaylarla doldurma",
+                "dsmMatch": "Kriter A: Ağır anterograd amnezi ve konfabülasyon"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Rehabilitasyon, Yapılandırılmış Çevre & Motivasyonel Görüşme",
+            "therapyDetails": "Alkolün tamamen bırakılması için motivasyonel yaklaşım, bellek defteri ve görsel hatırlatıcılarla telafi stratejileri, güvenli yaşam düzeni ve bakım verene psikoeğitim uygulanır.",
+            "pharmacologyNote": "Akut dönemde glukozdan önce yüksek doz parenteral tiamin (B1 vitamini) verilmesi zorunludur; kronik evrede oral tiamin ve dengeli beslenme sürdürülse de bellek hasarı çoğunlukla kalıcıdır."
+        },
+        "miniQuiz": {
+            "question": "Kronik alkol kullanımı ve tiamin eksikliğine bağlı bu amnestik tabloda, acil serviste glukoz infüzyonundan önce hangi uygulamanın yapılması yaşamsaldır?",
+            "options": [
+                "Yüksek doz parenteral tiamin (B1 vitamini) verilmesi",
+                "İntravenöz B12 vitamini ve folik asit başlanması",
+                "Yüksek doz haloperidol ile sedasyon sağlanması",
+                "Acil lomber ponksiyon yapılması"
+            ],
+            "correctIndex": 0,
+            "explanation": "Tiamin depoları tükenmiş hastaya önce glukoz verilmesi kalan tiamini tüketerek akut Wernicke ensefalopatisini ve kalıcı Korsakoff hasarını hızlandırır; bu nedenle parenteral tiamin mutlaka glukozdan önce uygulanmalıdır."
+        },
+        "differentialDiagnosis": "• Majör Nörobilişsel Bozukluk (Alzheimer Tipi Demans): Sinsi başlar, dil ve yürütücü işlevler de progresif bozulur; mamiller atrofi ve konfabülasyon tipik değildir.\n• Deliryum (Akut Bilinç Bulanıklığı): Bilinç ve dikkat gün içinde dalgalanır; burada bilinç açık ve anlık dikkat korunmuştur.\n• Majör Nörobilişsel Bozukluk (Vasküler / Damarsal Demans): İnme öyküsü ve basamaklı yürütücü işlev kaybı ön plandadır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Uzun süreli ağır alkol kullanımı ve tiamin eksikliği + Akut ensefalopati öyküsü + Anlık bellek korunmuşken ağır anterograd amnezi ve konfabülasyon + Mamillo-talamik hasar.",
+        "therapyId": "motivational_interviewing",
+        "explanation": {
+            "whyThis": [
+                "Yirmi beş yıllık ağır alkol kullanımı ve yetersiz beslenme zemininde gelişen çift görme, ataksi ve konfüzyon öyküsü tiamin eksikliğine bağlı akut ensefalopatiyi gösterir.",
+                "Bilinç açık ve anlık bellek korunmuşken yeni bilgi öğrenememe ve boşlukları kurgusal öykülerle doldurma, amnestik-konfabulatuvar tabloya özgüdür.",
+                "MR'da mamiller cisimcik atrofisi ve dorsomedial talamik tutulum tanıyı anatomik olarak doğrular."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "major_neurocognitive_alzheimer",
+                    "reason": "Alzheimer demansında yavaş ilerleyici yaygın bilişsel yıkım vardır; akut okülomotor-ataksi atağı ve mamiller atrofi görülmez."
+                },
+                {
+                    "diagnosisId": "delirium",
+                    "reason": "Bilinç açıktır, gün içi dalgalanma yoktur ve anlık dikkat korunmuştur."
+                },
+                {
+                    "diagnosisId": "major_neurocognitive_vascular",
+                    "reason": "Görüntülemede serebrovasküler enfarkt değil, tiamin eksikliğine özgü mamillo-talamik hasar saptanmıştır."
+                }
+            ],
+            "teachingPoint": "Ağır alkol kullanımı sonrası akut oftalmopleji-ataksi-konfüzyon atağı tedavi edilmezse, mamillo-talamik hasarla kalıcı anterograd amnezi ve konfabülasyon gelişir."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "FORENSIC",
+        "diagnosisId": "paranoid_pd",
+        "category": "PERSONALITY_A",
+        "patientSummary": "51 yaşında, erkek, vergi dairesi eski şefi",
+        "clues": [
+            "51 yaşındaki emekli vergi dairesi şefi, komşuları ve eski çalışma arkadaşları hakkında art arda açtığı hakaret ve iftira davaları sonrası mahkeme yönlendirmesiyle değerlendirmeye alındı.",
+            "Yirmili yaşlarından beri çalıştığı her kurumda yöneticilerin kendi başarısını baltalamak için gizli tutanak tuttuğuna inandığı, bu nedenle dört kez tayin istediği ve hiç yakın arkadaş edinemediği öğreniliyor.",
+            "Sıradan bir merhabalaşmayı ya da apartman toplantısındaki bir bütçe maddesini bile kendisine yönelik örtülü bir gözdağı olarak yorumluyor; yirmi yıl önce bir akrabasının yaptığı küçük bir şakayı hâlâ affetmediğini söylüyor.",
+            "Alkol ya da madde kullanımı yok; nörolojik muayene ve laboratuvar bulguları olağan. İki kez evlenmiş, her iki evliliği de eşlerinin kendisine sadık olmadığına dair kanıtsız suçlamaları nedeniyle boşanmayla sonuçlanmış.",
+            "Ruhsal Durum Muayenesinde: Gergin, savunmacı ve mesafeli; görüşme notlarının aleyhine kullanılacağı endişesiyle ayrıntı vermekten kaçınıyor. Düşünce akışı düzenli, varsanı yok, bizar olmayan sabit bir hezeyan sistemi yerine yaşam boyu süren yaygın güvensizlik ön planda.",
+            "Erken erişkinlikten bu yana farklı yaşam alanlarında süregelen bu katı güvensizlik, kin tutma, sır vermeme ve masum sözlerde kötü niyet arama örüntüsü, ayrı bir psikotik dönem ya da duygudurum atağına bağlı değildir."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "Sıradan bir merhabalaşmayı ya da apartman toplantısındaki bir bütçe maddesini bile kendisine yönelik örtülü bir gözdağı olarak yorumluyor",
+                "dsmMatch": "Kriter A4: Sıradan söz ve olaylardan aşağılayıcı ya da tehditkâr anlam çıkarma"
+            },
+            {
+                "clueIndex": 3,
+                "text": "eşlerinin kendisine sadık olmadığına dair kanıtsız suçlamaları",
+                "dsmMatch": "Kriter A7: Eşin sadakatsizliğine ilişkin yersiz yineleyen şüpheler"
+            },
+            {
+                "clueIndex": 4,
+                "text": "görüşme notlarının aleyhine kullanılacağı endişesiyle ayrıntı vermekten kaçınıyor",
+                "dsmMatch": "Kriter A3: Söylediklerinin aleyhine kullanılacağı korkusuyla sır vermeme"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Destekleyici Bilişsel Terapi",
+            "therapyDetails": "Şeffaf, saygılı ve öngörülebilir bir terapötik çerçeve kurularak tehdit algılarının gerçeklik testi, güvensizlik şemalarının çalışılması ve öfke tepkilerinin düzenlenmesi hedeflenir.",
+            "pharmacologyNote": "Birinci basamak tedavi psikoterapidir; yalnızca eşlik eden ağır anksiyete, depresyon veya geçici stres ilişkili kuşkucu alevlenmelerde kısa süreli düşük doz ilaç düşünülebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada görülen tablonun Sanrılı Bozukluk (Persekütuar Tip) yerine kişilik örüntüsü olarak değerlendirilmesini sağlayan temel ayrım nedir?",
+            "options": [
+                "Eşlik eden belirgin işitsel varsanıların bulunması",
+                "Erken erişkinlikten beri süren yaygın güvensizlik örüntüsüne karşın sarsılmaz, sistemli bir hezeyan olmaması",
+                "Belirtilerin yalnızca son bir aydır başlamış olması",
+                "Yüksek doz antipsikotiklere günler içinde tam yanıt vermesi"
+            ],
+            "correctIndex": 1,
+            "explanation": "Paranoid kişilik bozukluğunda erken erişkinlikten beri tüm ilişkileri kapsayan yaygın güvensizlik, kin gütme ve art niyet okuma vardır; ancak sanrılı bozukluktaki gibi sarsılmaz ve sistemli bir hezeyan düzeyi yoktur."
+        },
+        "differentialDiagnosis": "• Sanrılı Bozukluk (Hezeyanlı Bozukluk): Belirli bir konuda sarsılmaz, sabit hezeyan bulunur; burada yaşam boyu yaygın güvensizlik vardır.\n• Şizotipal Kişilik Bozukluğu: Garip inançlar, olağandışı algısal yaşantılar ve eksantrik davranışlar eşlik eder; burada düşünce ve davranış düzenli ama savunmacıdır.\n• Şizofreni: Varsanılar, dezorganize konuşma ve negatif belirtiler görülür; bu olguda hiçbiri yoktur.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan yaygın güvensizlik ve başkalarının niyetlerini kötüye yorma (en az 4/7 ölçüt: sömürülme şüphesi, sır vermeme, gizli anlam çıkarma, kin gütme, sadakatsizlik şüphesi) + Psikotik bozukluk dışında seyretme.",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Yirmili yaşlardan beri iş, komşuluk ve evlilik alanlarında süren yaygın güvensizlik, sır vermeme, kin gütme ve sadakatsizlik suçlamaları en az dört ölçütü karşılar.",
+                "Sıradan sosyal ifadeleri tehdit olarak yorumlama ve savunmacı öfke tepkileri yaşam boyu süreğen bir örüntüdür.",
+                "Varsanı, düşünce bozukluğu veya sarsılmaz sistemli bir hezeyan bulunmaması psikotik bozuklukları dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "delusional_disorder",
+                    "reason": "Belirli bir temada sarsılmaz, kalıcı bir hezeyan yerine erken erişkinlikten beri tüm ilişkilere yayılan kişilik örüntüsü vardır."
+                },
+                {
+                    "diagnosisId": "schizotypal_pd",
+                    "reason": "Büyüsel düşünce, algısal çarpıtma veya tuhaf konuşma ve görünüm saptanmamıştır."
+                },
+                {
+                    "diagnosisId": "schizophrenia",
+                    "reason": "Varsanı, dezorganizasyon ve negatif belirtiler yoktur."
+                }
+            ],
+            "teachingPoint": "Paranoid kişilik bozukluğu, erken erişkinlikten beri süren yaygın güvensizlik ve kin gütme örüntüsüyle karakterizedir; sistemli hezeyan veya varsanı düzeyine ulaşmaz."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "FORENSIC",
+        "diagnosisId": "schizoid_pd",
+        "category": "PERSONALITY_A",
+        "patientSummary": "47 yaşında, erkek, su sayacı okuma görevlisi",
+        "clues": [
+            "47 yaşındaki su sayacı okuma görevlisi, iş yerinde tanık olduğu bir darp olayıyla ilgili mahkeme sürecinde 'olaya hiç tepki vermeden yürüyüp gitmesi' üzerine bilirkişi değerlendirmesine gönderildi.",
+            "Kendisiyle görüşüldüğünde bir yakınması olmadığını, ergenlikten beri tek başına yaşadığını, ne iş yerinde ne de mahallede tek bir arkadaşının bulunmadığını ve bundan hiçbir rahatsızlık duymadığını ifade ediyor.",
+            "Boş zamanlarını tek başına eski radyo devrelerini söküp takarak geçiriyor; bayramlarda bile akrabalarını aramıyor, bugüne dek hiçbir romantik ya da cinsel ilişki yaşamadığını ve böyle bir isteğinin de olmadığını söylüyor.",
+            "Öyküsünde travma, madde kullanımı, depresif atak ya da psikotik dönem yok. Çocuklukta konuşma ve motor gelişimi olağan; daraltılmış tekrarlayıcı motor davranışları ya da duyusal hassasiyetleri bulunmuyor.",
+            "Ruhsal Durum Muayenesinde: Göz teması kısa, yüz ifadesi tekdüze ve mesafeli. Görüşmecinin övgülerine de eleştirilerine de aynı kayıtsız tonda yanıt veriyor; düşünce içeriği olağan, algı bozukluğu yok, duygudurum ne çökkün ne de kaygılı.",
+            "Başkalarınca dışlanma ya da eleştirilme korkusu olmadan, yakın ilişki kurmaya karşı yaşam boyu süren içten bir isteksizlik ve kişilerarası ortamlarda belirgin biçimde kısıtlı duygusal dışavurum tablosu dikkat çekiyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "bugüne dek hiçbir romantik ya da cinsel ilişki yaşamadığını ve böyle bir isteğinin de olmadığını söylüyor",
+                "dsmMatch": "Kriter A1 & A3: Yakın ilişki ve cinsel deneyim isteğinin olmaması"
+            },
+            {
+                "clueIndex": 4,
+                "text": "Görüşmecinin övgülerine de eleştirilerine de aynı kayıtsız tonda yanıt veriyor",
+                "dsmMatch": "Kriter A6: Başkalarının övgü ya da eleştirilerine karşı kayıtsızlık"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yakın ilişki kurmaya karşı yaşam boyu süren içten bir isteksizlik ve kişilerarası ortamlarda belirgin biçimde kısıtlı duygusal dışavurum",
+                "dsmMatch": "Kriter A: Toplumsal ilişkilerden kopma ve kısıtlı duygusal dışavurum"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Destekleyici Psikodinamik Psikoterapi & Sosyal Beceri Desteği",
+            "therapyDetails": "Hastanın mesafe gereksinimine saygı duyan, zorlayıcı olmayan bir terapötik ilişki içinde duygusal farkındalık ve işlevsel yaşam becerileri desteklenir.",
+            "pharmacologyNote": "Birinci basamakta ilaç endikasyonu yoktur; yalnızca eşlik eden depresif ya da kaygı belirtileri gelişirse hedefe yönelik tedavi değerlendirilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastayı Çekingen (Kaçıngan) Kişilik Bozukluğundan ayıran en temel klinik özellik hangisidir?",
+            "options": [
+                "Çocukluk çağında başlayan konuşma gecikmesi öyküsü",
+                "Yoğun reddedilme korkusuyla sosyal ortamlardan kaçınması",
+                "Yakın ilişki kurma arzusunun olmaması ve yalnızlıktan rahatsızlık duymaması",
+                "Dönem dönem ortaya çıkan işitsel varsanıların bulunması"
+            ],
+            "correctIndex": 2,
+            "explanation": "Çekingen kişilik bozukluğunda kişi yakın ilişki kurmayı çok ister ancak eleştirilme ve reddedilme korkusuyla geri çekilir; şizoid kişilik bozukluğunda ise yakın ilişkiye yönelik içsel bir arzu yoktur ve yalnızlık benlikle uyumludur."
+        },
+        "differentialDiagnosis": "• Çekingen (Kaçıngan) Kişilik Bozukluğu: Yakınlık arzusu vardır ancak reddedilme korkusuyla kaçınılır; burada yalnızlık istenen bir durumdur.\n• Şizotipal Kişilik Bozukluğu: Garip inançlar, algısal çarpıtmalar ve eksantrik konuşma görülür; bu olguda düşünce içeriği tamamen olağandır.\n• Otizm Spektrum Bozukluğu: Erken çocukluktan beri süren sosyal iletişim güçlüğüne kısıtlı-yineleyici davranışlar eşlik eder; burada gelişim öyküsü olağandır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan toplumsal ilişkilerden kopma + Kısıtlı duygusal dışavurum (en az 4/7 ölçüt: yakın ilişki istememe, tek başına etkinlikler, cinsel isteksizlik, yakın arkadaş yokluğu, övgü/eleştiriye kayıtsızlık, duygusal soğukluk).",
+        "therapyId": "psychodynamic",
+        "explanation": {
+            "whyThis": [
+                "Ergenlikten beri süren tek başına yaşam, arkadaş ve romantik ilişki isteğinin olmaması, yalnızca tekil uğraşlar seçmesi toplumsal kopukluğu gösterir.",
+                "Övgü ve eleştirilere kayıtsızlık ile tekdüze duygusal dışavurum tanı ölçütlerini tamamlar.",
+                "Reddedilme kaygısı ya da algısal-bilişsel çarpıtma bulunmaması komşu kişilik ve psikotik bozuklukları dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "avoidant_pd",
+                    "reason": "Hasta yakın ilişki özlemi ya da eleştirilme korkusu yaşamamakta, yalnızlıktan memnuniyet duymaktadır."
+                },
+                {
+                    "diagnosisId": "schizotypal_pd",
+                    "reason": "Büyüsel düşünce, referans fikirleri veya eksantrik konuşma ve davranış yoktur."
+                },
+                {
+                    "diagnosisId": "asd",
+                    "reason": "Erken çocukluk gelişimi olağandır; yineleyici motor davranışlar veya duyusal hassasiyet bildirilmemiştir."
+                }
+            ],
+            "teachingPoint": "Şizoid kişilik bozukluğunu çekingen kişilikten ayıran anahtar fark, sosyal uzaklığın reddedilme korkusundan değil yakın ilişki kurma arzusunun yokluğundan kaynaklanmasıdır."
+        }
+    },
+    {
+        "difficulty": "Kolay",
+        "course": "FORENSIC",
+        "diagnosisId": "schizotypal_pd",
+        "category": "PERSONALITY_A",
+        "patientSummary": "42 yaşında, erkek, saat tamircisi",
+        "clues": [
+            "42 yaşındaki saat tamircisi, apartman koridorunda komşularının kapı eşiklerine tebeşirle geometrik şekiller çizdiği için yapılan şikâyet üzerine mahkeme kararıyla psikiyatrik değerlendirmeye getirildi.",
+            "Ailesi, lise yıllarından beri yaşıtlarıyla kaynaşamadığını, garip giyim tarzı ve alışılmadık sohbetleri yüzünden sosyal ortamlarda hep dışlandığını ve yıllardır yalnızca küçük dükkânında tek başına çalıştığını anlatıyor.",
+            "Görüşmede kapılara çizdiği şekillerin 'apartmandaki görünmez enerji akışını dengelediğini', ayrıca düşünceleriyle trafik ışıklarının rengini zaman zaman değiştirebildiğine ve rüyalarında gelecekteki depremleri önceden sezdiğine inandığını belirtiyor.",
+            "Madde ve alkol kullanımı yok; nörolojik inceleme ve kan testleri olağan. Öyküsünde belirgin işitsel varsanıların ya da tam anlamıyla sarsılmaz hezeyanların egemen olduğu akut bir psikotik atak hiç yaşanmamış.",
+            "Ruhsal Durum Muayenesinde: Yaz sıcağında kalın yün ceket ve uyumsuz renkte eldiven giymiş. Konuşması dolambaçlı, eğretilemeli ve aşırı ayrıntılı ancak çağrışım çözülmesi yok; duygulanımı kısıtlı ve zaman zaman bağlama uygunsuz gülümsemeler eşlik ediyor.",
+            "Sosyal ortamlarda tanıdıklaşmayla azalmayan aşırı kaygıya eşlik eden bu alışılmadık inançlar, tuhaf konuşma ve görünüm ile zaman zaman gölgelerde siluet seçer gibi olma yaşantıları erken erişkinlikten beri süreğen bir kişilik örüntüsü oluşturuyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "düşünceleriyle trafik ışıklarının rengini zaman zaman değiştirebildiğine ve rüyalarında gelecekteki depremleri önceden sezdiğine inandığını",
+                "dsmMatch": "Kriter A2: Davranışı etkileyen tuhaf inançlar ve büyüsel düşünce"
+            },
+            {
+                "clueIndex": 4,
+                "text": "Konuşması dolambaçlı, eğretilemeli ve aşırı ayrıntılı ancak çağrışım çözülmesi yok",
+                "dsmMatch": "Kriter A4: Tuhaf düşünce ve konuşma biçimi"
+            },
+            {
+                "clueIndex": 5,
+                "text": "Sosyal ortamlarda tanıdıklaşmayla azalmayan aşırı kaygıya eşlik eden bu alışılmadık inançlar, tuhaf konuşma ve görünüm",
+                "dsmMatch": "Kriter A7 & A9: Eksantrik görünüm ve kuşkucu korkularla ilişkili aşırı sosyal kaygı"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi (Psikoz Spektrumu Uyarlaması) & Sosyal Beceri Eğitimi",
+            "therapyDetails": "Tuhaf inançların yargılayıcı olmadan gerçeklik testiyle ele alınması, sosyal iletişim becerilerinin geliştirilmesi ve stres yönetimi hedeflenir.",
+            "pharmacologyNote": "Psikoterapi temeldir; belirgin bilişsel-algısal çarpıtmalar veya stresle tetiklenen geçici psikotik benzeri belirtiler varsa düşük doz ikinci kuşak antipsikotik düşünülebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada görülen klinik tabloyu Şizofreniden ayıran en önemli bulgu nedir?",
+            "options": [
+                "Sosyal izolasyonun yalnızca son altı ayda gelişmiş olması",
+                "Ailede hiçbir psikiyatrik öykü bulunmaması",
+                "Yalnızca depresif dönemlerde ortaya çıkan büyüsel inançlar",
+                "Süreğen varsanı, belirgin çağrışım çözülmesi ve tam gelişmiş psikotik yıkım olmadan erken erişkinlikten beri süren kişilik örüntüsü"
+            ],
+            "correctIndex": 3,
+            "explanation": "Şizotipal kişilik bozukluğu şizofreni spektrumunda yer alır ancak belirgin ve kalıcı varsanılar, dezorganize konuşma ya da açık psikotik yıkım gelişmeden yaşam boyu süren bilişsel-algısal tuhaflıklar ve sosyal eksiklikle seyreder."
+        },
+        "differentialDiagnosis": "• Şizofreni: Kalıcı varsanılar, belirgin hezeyanlar ve işlevsellikte ciddi yıkım görülür; bu hastada açık psikotik dönem yoktur.\n• Şizoid Kişilik Bozukluğu: Yalnızlık ve duygusal soğukluk vardır ancak tuhaf inançlar, algısal çarpıtmalar ve eksantrik konuşma görülmez.\n• Paranoid Kişilik Bozukluğu: Kuşkuculuk ön plandadır fakat büyüsel düşünce ve garip görünüm/konuşma eşlik etmez.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan yakın ilişkilerde akut rahatsızlık + Bilişsel-algısal çarpıtmalar ve davranış tuhaflıkları (en az 5/9: referans fikirleri, büyüsel düşünce, olağandışı algılar, tuhaf konuşma, kuşkuculuk, kısıtlı/uygunsuz duygulanım, eksantrik görünüm, arkadaş yokluğu, aşırı sosyal kaygı).",
+        "therapyId": "cbtp",
+        "explanation": {
+            "whyThis": [
+                "Düşüncelerle trafik ışıklarını etkileme ve enerji dengeleme inançları, gölgelerde siluet algıları ile dolambaçlı-eğretilemeli konuşma bilişsel-algısal çarpıtmaları gösterir.",
+                "Mevsime uyumsuz eksantrik giyim, yakın arkadaş yokluğu ve kuşkucu içerikli aşırı sosyal kaygı en az beş ölçütü karşılar.",
+                "Açık psikotik atak, belirgin varsanı veya çağrışım çözülmesi olmaması şizofreniyi dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "schizophrenia",
+                    "reason": "Belirgin varsanılar, dezorganize konuşma ve kalıcı hezeyanların egemen olduğu açık bir psikotik dönem yoktur."
+                },
+                {
+                    "diagnosisId": "schizoid_pd",
+                    "reason": "Şizoid kişilikte yalnızca sosyal kopukluk vardır; büyüsel düşünce, algısal tuhaflıklar ve eksantrik konuşma görülmez."
+                },
+                {
+                    "diagnosisId": "paranoid_pd",
+                    "reason": "Yalnızca güvensizlik değil, büyüsel inançlar, garip giyim ve olağandışı algısal yaşantılar da belirgindir."
+                }
+            ],
+            "teachingPoint": "Şizotipal kişilik bozukluğu, açık psikoz ölçütlerini karşılamadan erken erişkinlikten beri süren bilişsel-algısal tuhaflıklar, eksantrik davranış ve kuşkucu sosyal kaygı ile tanınır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "antisocial_pd",
+        "category": "PERSONALITY_B",
+        "patientSummary": "34 yaşında, kadın, emlak dolandırıcılığı şüphelisi",
+        "clues": [
+            "34 yaşındaki kadın, aynı daireyi sahte kira sözleşmeleriyle birden fazla kişiye kiraladığı iddiasıyla yürütülen soruşturmada ceza ehliyeti değerlendirmesi için adli psikiyatri polikliniğine sevk edildi.",
+            "Adli sicil ve sosyal inceleme kayıtlarında son on yılda üç kez sahtecilik, bir kez trafik kazası sonrası olay yerinden kaçma ve alacak-verecek anlaşmazlığında darp nedeniyle işlem gördüğü; son beş yılda hiçbir işte dört aydan uzun çalışmadığı görülüyor.",
+            "Ailesinden alınan çocukluk öyküsünde 13 yaşından itibaren sık sık okuldan kaçtığı, sınıf arkadaşlarının eşyalarını çaldığı, mahallede kavga çıkarıp iki kez karakola düştüğü ve evden izinsiz günlerce uzaklaştığı öğreniliyor.",
+            "Öyküsünde mani ya da psikotik bozukluk dönemi yok; tıbbi muayene ve toksikoloji taraması olağan. Dolandırıcılık eylemlerini madde etkisi altında değil, planlı biçimde kendi maddi çıkarı için gerçekleştirdiği belirleniyor.",
+            "Ruhsal Durum Muayenesinde: Rahat, yapay biçimde kibar ve yüzeysel olarak çekici; düşünce akışı düzenli, gerçeği değerlendirme tam. Mağdurların birikimlerini kaybetmesi sorulduğunda 'sözleşmeyi okumadan para veren kendi düşünsün' diyerek en ufak bir pişmanlık göstermiyor.",
+            "On sekiz yaşının üzerinde olan hastada, 15 yaş öncesinde başlayan kural çiğneme ve başkalarının haklarını hiçe sayma öyküsü, erişkinlikte yineleyen yasa dışı eylemler, aldatma, dürtüsellik, sorumsuzluk ve tam bir vicdanen kayıtsızlıkla sürüyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "13 yaşından itibaren sık sık okuldan kaçtığı, sınıf arkadaşlarının eşyalarını çaldığı, mahallede kavga çıkarıp iki kez karakola düştüğü",
+                "dsmMatch": "Kriter C: 15 yaşından önce başlayan davranım bozukluğu kanıtı"
+            },
+            {
+                "clueIndex": 4,
+                "text": "sözleşmeyi okumadan para veren kendi düşünsün' diyerek en ufak bir pişmanlık göstermiyor",
+                "dsmMatch": "Kriter A7: Başkasına zarar verdikten sonra pişmanlık duymama ve rasyonalizasyon"
+            },
+            {
+                "clueIndex": 5,
+                "text": "yineleyen yasa dışı eylemler, aldatma, dürtüsellik, sorumsuzluk ve tam bir vicdanen kayıtsızlık",
+                "dsmMatch": "Kriter A: 15 yaşından beri süren başkalarının haklarını hiçe sayma ve çiğneme örüntüsü"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Yapılandırılmış Bilişsel Davranışçı Programlar",
+            "therapyDetails": "Net sınırların korunduğu yapılandırılmış ortamlarda dürtü denetimi, sonuç öngörme, öfke yönetimi ve manipülatif kalıpların fark edilmesi çalışılır.",
+            "pharmacologyNote": "Temel kişilik örüntüsü için onaylı ilaç yoktur; eşlik eden ağır dürtüsel saldırganlık veya duygudurum belirtileri varsa hedef belirtiye yönelik değerlendirme yapılabilir."
+        },
+        "miniQuiz": {
+            "question": "DSM-5-TR'ye göre bu tanının konulabilmesi için yaş ve geçmiş öyküyle ilgili zorunlu ölçüt hangisidir?",
+            "options": [
+                "En az 18 yaşında olmak ve 15 yaşından önce başlayan davranım bozukluğu kanıtının bulunması",
+                "En az 21 yaşında olmak ve en az bir kez hapis yatmış olmak",
+                "Belirtilerin yalnızca alkol veya madde kullanımı sırasında ortaya çıkması",
+                "Çocuklukta zihinsel yetiyitimi tanısı almış olmak"
+            ],
+            "correctIndex": 0,
+            "explanation": "Antisosyal kişilik bozukluğu tanısı için kişinin en az 18 yaşında olması (Kriter B) ve 15 yaşından önce başlayan davranım bozukluğu kanıtının bulunması (Kriter C) şarttır."
+        },
+        "differentialDiagnosis": "• Narsisistik Kişilik Bozukluğu: Sömürücü ve empati yoksunu olabilir ancak 15 yaş öncesi davranım bozukluğu ve yineleyen yasa dışı saldırganlık zorunlu değildir.\n• Sınırda (Borderline) Kişilik Bozukluğu: Dürtüsellik ve öfke vardır fakat davranışlar çıkar amaçlı manipülasyondan çok terk edilme korkusuna bağlıdır.\n• Davranım Bozukluğu: 18 yaş altında konulan çocukluk-ergenlik tanısıdır; 18 yaş sonrasında örüntü sürüyorsa erişkin tanısına geçilir.",
+        "dsmCriteriaSummary": "DSM-5-TR: 15 yaşından beri başkalarının haklarını çiğneme (en az 3/7: yasa dışı davranışlar, aldatma, dürtüsellik, saldırganlık, umursamazlık, sorumsuzluk, pişmanlık yokluğu) + En az 18 yaşında olma + 15 yaş öncesi davranım bozukluğu kanıtı.",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Yineleyen sahtecilik, darp, sürekli iş değiştiren sorumsuzluk ve mağdurlara karşı tam pişmanlık yokluğu erişkin ölçütlerini karşılar.",
+                "On üç yaşında başlayan okuldan kaçma, hırsızlık ve kavga öyküsü 15 yaş öncesi davranım bozukluğu şartını doğrular.",
+                "Belirtiler mani veya şizofreni dönemine bağlı değildir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "narcissistic_pd",
+                    "reason": "Temel eksen hayranlık ve büyüklük arayışı değil, 15 yaş öncesi davranım bozukluğu zemininde gelişen yasa dışı aldatma ve saldırganlıktır."
+                },
+                {
+                    "diagnosisId": "borderline_pd",
+                    "reason": "Kimlik karmaşası, boşluk duygusu veya terk edilme paniği değil, soğukkanlı çıkar amaçlı aldatma ve pişmanlık yokluğu ön plandadır."
+                },
+                {
+                    "diagnosisId": "conduct_disorder",
+                    "reason": "Hasta 34 yaşındadır; 18 yaşından sonra süren bu örüntü artık davranım bozukluğu olarak kodlanmaz."
+                }
+            ],
+            "teachingPoint": "Antisosyal kişilik bozukluğu tanısı için erişkinlikteki yasa dışı ve pişmanlıktan yoksun davranışların yanı sıra mutlaka 18 yaş sınırı ve 15 yaş öncesi davranım bozukluğu öyküsü aranır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "borderline_pd",
+        "category": "PERSONALITY_B",
+        "patientSummary": "29 yaşında, erkek, bar işletmecisi",
+        "clues": [
+            "29 yaşındaki bar işletmecisi, eski kız arkadaşının evinin önünde yüksek sesle bağırıp camları kırdığı ve bileğine kırık şişe dayadığı için polis eşliğinde acil psikiyatri değerlendirmesine getirildi.",
+            "Kız arkadaşı, üç aylık ilişkilerinde hastanın kimi gün kendisini 'hayatının tek anlamı' diye göklere çıkardığını, telefonuna yirmi dakika yanıt veremediğinde ise 'sen de herkes gibi beni satıyorsun' diyerek öfke nöbeti geçirdiğini anlatıyor.",
+            "Hasta, 19 yaşından beri süregelen biçimde içsel bir boşluk hissettiğini, meslek ve yaşam hedeflerinin birkaç ayda bir tamamen değiştiğini; gerilimi arttığında aşırı alkol aldığını, tehlikeli araç kullandığını ve öfkesini bastırmak için ön kolunu çizdiğini söylüyor.",
+            "Öyküsünde günlerce süren uykusuzlukla giden öforik mani dönemi yok; duygudurum dalgalanmaları genellikle kişilerarası kırılmalarla tetikleniyor ve birkaç saat içinde yatışabiliyor. Laboratuvar ve nörolojik bulgular olağan.",
+            "Ruhsal Durum Muayenesinde: Başta görüşmeciye aşırı sıcak ve hayranlık dolu yaklaşırken, yatış olasılığı gündeme gelince bir anda öfkelenip 'siz de beni başınızdan savıyorsunuz' diye bağırdı. Ön kollarında farklı dönemlere ait yüzeysel kesik izleri var; algı bozukluğu yok.",
+            "Gerçek ya da hayali bir ayrılık karşısında çılgınca çabalar, aşırı yüceltme ile yerin dibine batırma arasında savrulan fırtınalı ilişkiler, kimlik dağınıklığı, kronik boşluk duygusu ve yineleyici özkıyım tehditleri genç erişkinlikten beri sürüyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "kimi gün kendisini 'hayatının tek anlamı' diye göklere çıkardığını, telefonuna yirmi dakika yanıt veremediğinde ise 'sen de herkes gibi beni satıyorsun' diyerek öfke nöbeti geçirdiğini",
+                "dsmMatch": "Kriter A2: Aşırı yüceltme ve değersizleştirme uçları arasında giden dengesiz ilişkiler"
+            },
+            {
+                "clueIndex": 2,
+                "text": "içsel bir boşluk hissettiğini, meslek ve yaşam hedeflerinin birkaç ayda bir tamamen değiştiğini",
+                "dsmMatch": "Kriter A3 & A7: Kimlik karmaşası ve süreğen boşluk duygusu"
+            },
+            {
+                "clueIndex": 5,
+                "text": "Gerçek ya da hayali bir ayrılık karşısında çılgınca çabalar",
+                "dsmMatch": "Kriter A1: Gerçek ya da imgesel terk edilmeden kaçınmak için çılgınca çabalar"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Diyalektik Davranış Terapisi (DBT)",
+            "therapyDetails": "Duygu düzenleme, sıkıntıya dayanma, kişilerarası etkililik ve bilinçli farkındalık becerileri yapılandırılmış bireysel terapi ve beceri grubuyla kazandırılır.",
+            "pharmacologyNote": "Temel tedavi psikoterapidir; ilaçlar yalnızca eşlik eden yoğun duygulanım dengesizliği, depresyon veya stres ilişkili geçici bilişsel belirtilerde yardımcı olarak düşünülür."
+        },
+        "miniQuiz": {
+            "question": "Bu hastadaki duygudurum dalgalanmalarını Bipolar II Bozukluğundan ayıran en önemli klinik özellik hangisidir?",
+            "options": [
+                "Duygudurum değişimlerinin yalnızca kış aylarında görülmesi",
+                "Duygudurum değişimlerinin genellikle kişilerarası tetikleyicilere bağlı, saatler içinde hızla değişen tepkisel yapıda olması",
+                "Hastada hiçbir dürtüsel davranışın bulunmaması",
+                "Duygudurum dalgalanmalarının her zaman en az iki hafta sürmesi"
+            ],
+            "correctIndex": 1,
+            "explanation": "Sınırda kişilik bozukluğunda duygulanım dengesizliği genellikle reddedilme veya ayrılık gibi kişilerarası tetikleyicilere bağlıdır ve saatler (nadiren birkaç gün) sürer; bipolar bozuklukta ise daha otonom, günlerce süren epizodlar görülür."
+        },
+        "differentialDiagnosis": "• Bipolar II Bozukluğu: En az dört gün süren otonom hipomani ve en az iki haftalık depresyon epizodları vardır; burada saatlik tepkisel dalgalanmalar egemendir.\n• Histriyonik Kişilik Bozukluğu: İlgi arayışı ve duygusal oynaklık vardır ancak kronik boşluk, kimlik karmaşası ve kendine zarar verme davranışı tipik değildir.\n• Antisosyal Kişilik Bozukluğu: Dürtüsellik ve öfke görülür ancak davranışlar ayrılık kaygısına değil kişisel çıkara yöneliktir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan kişilerarası ilişkilerde, benlik algısında ve duygulanımda yaygın dengesizlik ile belirgin dürtüsellik (en az 5/9: terk edilmeden kaçınma, yüceltme/değersizleştirme, kimlik karmaşası, dürtüsellik, kendine zarar verme, duygulanım dengesizliği, kronik boşluk, uygunsuz öfke).",
+        "therapyId": "dbt",
+        "explanation": {
+            "whyThis": [
+                "Ayrılık tehdidi karşısında aşırı tepki, ilişkilerde hızlı yüceltme-değersizleştirme ve uygunsuz öfke patlamaları kişilerarası dengesizliği gösterir.",
+                "Kronik boşluk hissi, değişken yaşam hedefleri, tehlikeli dürtüsel davranışlar ve yineleyici yüzeysel kesikler tanı ölçütlerini fazlasıyla karşılar.",
+                "Duygudurum değişimlerinin saatlik ve kişilerarası tetikleyicilere bağlı olması bipolar epizodlardan ayrım sağlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "bipolar_2",
+                    "reason": "En az dört gün süren otonom hipomani epizodu yoktur; dalgalanmalar saatler içinde ve ilişki stresörleriyle ortaya çıkmaktadır."
+                },
+                {
+                    "diagnosisId": "histrionic_pd",
+                    "reason": "Özkıyım tehditleri, ön kol kesikleri, kimlik dağınıklığı ve süreğen boşluk hissi histriyonik tabloyu aşar."
+                },
+                {
+                    "diagnosisId": "antisocial_pd",
+                    "reason": "15 yaş öncesi davranım bozukluğu yoktur ve öfke tepkileri çıkar amaçlı değil terk edilme dehşetiyle tetiklenmektedir."
+                }
+            ],
+            "teachingPoint": "Sınırda kişilik bozukluğunda duygu dalgalanmaları kişilerarası reddedilme ve ayrılık algısıyla saatler içinde tetiklenir; altın standart tedavi Diyalektik Davranış Terapisidir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "histrionic_pd",
+        "category": "PERSONALITY_B",
+        "patientSummary": "36 yaşında, kadın, güzellik salonu yöneticisi",
+        "clues": [
+            "36 yaşındaki güzellik salonu yöneticisi, çekişmeli boşanma ve velayet davası sürecinde mahkemece istenen kişilik değerlendirmesi için polikliniğe başvurdu.",
+            "Eşi ve avukat kayıtlarında, girdiği her toplantı ya da aile ortamında tüm bakışlar kendi üzerinde olmadığında huzursuzlandığı, konuyu hızla kendi yaşadığı olaylara çektiği ve yakınlarının uyarılarına aşırı alıngan tepkiler verdiği aktarılıyor.",
+            "Öyküsünde yeni tanıştığı avukatını iki görüşme sonunda 'hayatımdaki en yakın sırdaşım' diye nitelediği, ancak bir hafta sonra tanıştığı bir danışmanın sözleriyle tüm stratejisini aniden değiştirdiği belirtiliyor.",
+            "Özkıyım girişimi, kendini kesme, kronik boşluk hissi ya da madde kullanımı öyküsü yok. Tıbbi incelemeleri olağan; günlerce süren uykusuzlukla giden mani atağı hiç geçirmemiş.",
+            "Ruhsal Durum Muayenesinde: Resmî bir değerlendirme ortamına karşın abartılı parlak makyaj ve dikkat çekici kıyafetle gelmiş; görüşmeciye karşı uygunsuz biçimde flörtöz bir tutum sergiliyor. Konuşması coşkulu, izlenimci ve ayrıntıdan yoksun; bir anda gözyaşlarına boğulup saniyeler sonra kahkahayla başka bir konuya geçiyor.",
+            "Erken erişkinlikten beri tüm ortamlarda süren bu aşırı duygusallık, tüm dikkati üzerine toplama gereksinimi, dış görünümü sürekli bunun için kullanma, yüzeysel ve hızla değişen duygular ile kolay etkilenebilirlik örüntüsü belirgindir."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "yeni tanıştığı avukatını iki görüşme sonunda 'hayatımdaki en yakın sırdaşım' diye nitelediği",
+                "dsmMatch": "Kriter A8: İlişkilerin olduğundan daha yakın olduğunu düşünme"
+            },
+            {
+                "clueIndex": 4,
+                "text": "Konuşması coşkulu, izlenimci ve ayrıntıdan yoksun; bir anda gözyaşlarına boğulup saniyeler sonra kahkahayla başka bir konuya geçiyor",
+                "dsmMatch": "Kriter A3 & A5: Hızla değişen yüzeysel duygular ve aşırı izlenimci konuşma"
+            },
+            {
+                "clueIndex": 5,
+                "text": "tüm dikkati üzerine toplama gereksinimi, dış görünümü sürekli bunun için kullanma",
+                "dsmMatch": "Kriter A1 & A4: İlgi odağı olmadığında rahatsızlık ve dış görünümü ilgi çekmek için kullanma"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Psikodinamik Psikoterapi & Destekleyici BDT",
+            "therapyDetails": "Yüzeysel duygusal anlatımın altında yatan onay gereksinimini fark etme, daha gerçekçi ilişki sınırları kurma ve duyguları somutlaştırarak ifade etme çalışılır.",
+            "pharmacologyNote": "Temel tedavi psikoterapidir; yalnızca eşlik eden depresif veya anksiyete belirtileri varsa ilaç değerlendirilir."
+        },
+        "miniQuiz": {
+            "question": "Bu kişilik örüntüsünün konuşma biçimi için en karakteristik özellik aşağıdakilerden hangisidir?",
+            "options": [
+                "Aşırı ayrıntılı, kuralcı ve listelemeye dayalı anlatım",
+                "Tek kelimelik, donuk ve duygudan tamamen arınmış yanıtlar",
+                "Aşırı izlenimci, coşkulu ancak somut ayrıntılardan yoksun anlatım",
+                "Çağrışım çözülmesi ve yeni sözcük türetme"
+            ],
+            "correctIndex": 2,
+            "explanation": "Histriyonik kişilik bozukluğunda konuşma biçimi aşırı derecede izlenimci ve abartılıdır ('harika bir insandı', 'korkunçtu') ancak somut ayrıntı istendiğinde içi boş kalır."
+        },
+        "differentialDiagnosis": "• Sınırda (Borderline) Kişilik Bozukluğu: Duygusal oynaklık paylaşılır ancak burada kendine zarar verme, kimlik karmaşası ve kronik boşluk duygusu yoktur.\n• Narsisistik Kişilik Bozukluğu: İlgi ve hayranlık arar ancak kırılgan veya bağımlı görünmekten kaçınır; burada onay uğruna kolay etkilenebilirlik ve flörtöz sıcakkanlılık öne çıkar.\n• Bağımlı Kişilik Bozukluğu: Onay arayışı vardır fakat abartılı, tiyatral duygusallık ve dış görünümle dikkat çekme örüntüsü bulunmaz.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan aşırı duygusallık ve ilgi arayışı örüntüsü (en az 5/8: ilgi odağı olamama rahatsızlığı, uygunsuz flörtöz davranış, hızla değişen yüzeysel duygular, dış görünümü kullanma, izlenimci konuşma, tiyatral anlatım, telkine yatkınlık, ilişkileri olduğundan yakın görme).",
+        "therapyId": "psychodynamic",
+        "explanation": {
+            "whyThis": [
+                "Tüm ortamlarda bakışların odağı olma arayışı, dış görünümü dikkat çekmek için kullanma ve uygunsuz flörtöz tutum temel ölçütleri karşılar.",
+                "İzlenimci-ayrıntısız konuşma, hızla değişen yüzeysel duygular, kolay etkilenebilirlik ve yeni tanışılan kişileri en yakın sırdaş görme tabloyu tamamlar.",
+                "Kendine zarar verme, kimlik dağınıklığı ve kronik boşluk hissinin olmaması sınırda kişilikten ayrımı sağlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "borderline_pd",
+                    "reason": "Özkıyım davranışı, kronik boşluk duygusu ve öfkeli yıkıcı ilişki döngüleri yoktur."
+                },
+                {
+                    "diagnosisId": "narcissistic_pd",
+                    "reason": "Üstünlük ve kibirli hayranlık talebinden çok, telkine yatkınlık, duygusal coşku ve flörtöz ilgi arayışı ön plandadır."
+                },
+                {
+                    "diagnosisId": "dependent_pd",
+                    "reason": "Pasif boyun eğme değil, sahne önünde olma, abartılı duygusallık ve dikkat çekici görünüm sergilenmektedir."
+                }
+            ],
+            "teachingPoint": "Histriyonik kişilik bozukluğu, yüzeysel-hızla değişen duygular, izlenimci konuşma ve ilgi odağı olma gereksinimiyle seyreder; sınırda kişilikteki kronik boşluk ve kendine zarar verme eşlik etmez."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "narcissistic_pd",
+        "category": "PERSONALITY_B",
+        "patientSummary": "48 yaşında, erkek, özel klinik sahibi diş hekimi",
+        "clues": [
+            "48 yaşındaki diş hekimi, kliniğinde kendisine olumsuz yorum yazan bir hastaya hakaret ettiği ve sekreterini herkesin içinde aşağılayarak işten çıkardığı gerekçesiyle açılan tazminat davası sürecinde değerlendirmeye geldi.",
+            "Görüşmede meslek odasının ve mahkemenin 'kendi çapındaki bir uzmanı yargılayacak donanımda olmadığını' savunuyor; sıradan kuralların ve randevu sırasının kendisi gibi seçkin kişilere uygulanamayacağını belirtiyor.",
+            "Öyküsünde gençliğinden beri yalnızca yüksek statülü çevrelerle dostluk kurmaya çalıştığı, asistanlarının emeklerini kendi başarısı gibi sunduğu, ancak en küçük bir mesleki eleştiri karşısında yoğun öfke ve aşağılanmışlık yaşadığı öğreniliyor.",
+            "Ergenlikte davranım bozukluğu ya da yasa dışı suç öyküsü yok; uyku gereksinimi olağan, konuşma hızı ve çağrışımları normal, madde kullanımı bulunmuyor.",
+            "Ruhsal Durum Muayenesinde: Kibirli, üstten bakan ve mesafeli bir duruşta; değerlendirmeyi yapacak hekimin akademik unvanını sorgulayıp 'en kıdemli profesörle görüşmek' istediğini söylüyor. Eski çalışanının yaşadığı mağduriyet anımsatıldığında hiçbir duygudaşlık göstermiyor.",
+            "Erken erişkinlikten bu yana süregelen bu kendini aşırı önemli görme, sınırsız başarı ve hayranlık beklentisi, ayrıcalıklı davranılma hakkı gördüğü tutum, başkalarını kendi çıkarı için kullanma ve duygudaşlık yoksunluğu iş ve aile ilişkilerini bozmuştur."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "sıradan kuralların ve randevu sırasının kendisi gibi seçkin kişilere uygulanamayacağını belirtiyor",
+                "dsmMatch": "Kriter A5: Hak görme ve ayrıcalıklı muamele beklentisi"
+            },
+            {
+                "clueIndex": 2,
+                "text": "asistanlarının emeklerini kendi başarısı gibi sunduğu",
+                "dsmMatch": "Kriter A6: Kişilerarası ilişkilerde başkalarını kendi çıkarı için sömürme"
+            },
+            {
+                "clueIndex": 4,
+                "text": "Eski çalışanının yaşadığı mağduriyet anımsatıldığında hiçbir duygudaşlık göstermiyor",
+                "dsmMatch": "Kriter A7: Başkalarının duygularını ve gereksinimlerini tanımada isteksizlik"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Aktarım Odaklı Psikoterapi",
+            "therapyDetails": "Üstünlük savunmasının ardındaki kırılgan benlik algısını fark etme, eleştiriye tolerans geliştirme ve kişilerarası empatiyi güçlendirme üzerine çalışılır.",
+            "pharmacologyNote": "Birinci basamak tedavi psikoterapidir; eşlik eden depresif çöküntü veya kaygı bozukluğu gelişirse semptomatik ilaç desteği değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu kişilik örüntüsünü Bipolar I Bozukluğundaki büyüklük (grandiyözite) bulgularından ayıran temel klinik fark nedir?",
+            "options": [
+                "Belirtilerin yalnızca 48 yaşından sonra aniden başlaması",
+                "Lityum tedavisine bir hafta içinde tam yanıt alınması",
+                "Görüşme sırasında işitsel varsanıların bulunması",
+                "Büyüklük algısının epizodik değil erken erişkinlikten beri süreğen olması ve uyku azalması ya da psikomotor hızlanmanın eşlik etmemesi"
+            ],
+            "correctIndex": 3,
+            "explanation": "Narsisistik kişilik bozukluğundaki büyüklük ve hak görme tutumu erken erişkinlikten beri kalıcıdır; bipolar manide ise epizodiktir ve uyku gereksiniminde azalma, basınçlı konuşma ve psikomotor hızlanma eşlik eder."
+        },
+        "differentialDiagnosis": "• Antisosyal Kişilik Bozukluğu: Sömürü ve empati yoksunluğu paylaşılır ancak burada 15 yaş öncesi davranım bozukluğu ve dürtüsel suç örüntüsü yoktur; temel motivasyon hayranlık ve statüdür.\n• Histriyonik Kişilik Bozukluğu: İlgi ister ancak kibirli üstünlük ve statü takıntısı yerine duygusal coşku ve kolay etkilenebilirlik öne çıkar.\n• Bipolar I Bozukluğu: Büyüklük fikirleri epizodiktir ve uyku azalması ile konuşma hızlanması eşlik eder.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan yaygın büyüklük duygusu, hayranlık gereksinimi ve empati yoksunluğu (en az 5/9: kendini aşırı önemli görme, sınırsız başarı fantezileri, özel olduğuna inanma, aşırı hayranlık bekleme, hak görme, sömürücülük, empati yokluğu, kıskançlık, kibirli tutumlar).",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Kendini kuralların üstünde görme, yalnızca seçkin kişilerle muhatap olma talebi ve kibirli duruş büyüklük ve hak görme ölçütlerini karşılar.",
+                "Asistanlarının emeğini sahiplenme, empati yoksunluğu ve eleştiriye karşı aşırı öfke tepkisi en az beş ölçütü tamamlar.",
+                "Ergenlikte davranım bozukluğu ve epizodik mani bulgularının olmaması ayırıcı tanıyı netleştirir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "antisocial_pd",
+                    "reason": "15 yaş öncesi davranım bozukluğu ve yaygın yasa dışı dürtüsellik yoktur; temel eksen statü ve hayranlık beklentisidir."
+                },
+                {
+                    "diagnosisId": "histrionic_pd",
+                    "reason": "Sıcakkanlı ve telkine yatkın ilgi arayışı değil, soğuk kibir, statü vurgusu ve ayrıcalık talebi ön plandadır."
+                },
+                {
+                    "diagnosisId": "bipolar_1",
+                    "reason": "Uyku gereksiniminde azalma, konuşma artışı veya epizodik başlangıç yoktur; örüntü yaşam boyu süreğendir."
+                }
+            ],
+            "teachingPoint": "Narsisistik kişilik bozukluğu, yaşam boyu süren ayrıcalık beklentisi, hayranlık gereksinimi ve empati eksikliğiyle karakterizedir; eleştiriye karşı kırılganlık öfke ve kibirle örtülür."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "FORENSIC",
+        "diagnosisId": "ocpd",
+        "category": "PERSONALITY_C",
+        "patientSummary": "53 yaşında, erkek, gümrük müşaviri",
+        "clues": [
+            "53 yaşındaki gümrük müşaviri, ofisinde çalışan üç memurun 'aşırı denetim ve baskı' iddiasıyla açtığı iş mahkemesi davası ve eşinin boşanma talebi sonrasında değerlendirmeye başvurdu.",
+            "İş arkadaşları, hastanın her belgenin yazı tipinden klasör rengine kadar en küçük ayrıntılara saplandığını, bu yüzden gümrük beyannamelerinin sık sık son teslim tarihine yetişmediğini ve kimseye tek bir görev bile devredemediğini bildiriyor.",
+            "Eşi, hastanın yirmi yıldır tek bir hafta sonu tatili yapmadığını, boş zaman etkinliklerini 'zaman israfı' saydığını, evdeki harcamaları kuruşu kuruşuna deftere işleyip ailesine karşı aşırı cimri davrandığını ve on beş yıllık eski faturaları bile atamadığını anlatıyor.",
+            "Aklına istemsizce gelip kaygı yaratan, benliğine yabancı düşünceleri ya da bunları yatıştırmak için yaptığı el yıkama, kapı kontrolü gibi yineleyici törenleri hiç olmamış. Tıbbi incelemeleri olağan.",
+            "Ruhsal Durum Muayenesinde: Son derece resmi, dik oturuşlu, duygusal ifadesi kısıtlı ve kontrollü. Konuşması aşırı ayrıntılı ve kuralcı; tutumlarının sorun değil 'doğru çalışma disiplini' olduğunu savunuyor, esneklik göstermekte zorlanıyor.",
+            "Erken erişkinlikten beri tüm yaşam alanlarında süren bu düzen, kusursuzluk dayatması ve zihinsel-kişilerarası denetim uğraşısı; görevlerin tamamlanmasını engelleyecek ölçüde katı ilkelere bağlılık, aşırı iş odaklılık ve benlikle uyumlu inatçılıkla seyrediyor."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "en küçük ayrıntılara saplandığını, bu yüzden gümrük beyannamelerinin sık sık son teslim tarihine yetişmediğini ve kimseye tek bir görev bile devredemediğini",
+                "dsmMatch": "Kriter A1, A2 & A6: Ayrıntılara saplanma, işi bitirmeyi bozan kusursuzluk ve görev devredememe"
+            },
+            {
+                "clueIndex": 2,
+                "text": "boş zaman etkinliklerini 'zaman israfı' saydığını, evdeki harcamaları kuruşu kuruşuna deftere işleyip ailesine karşı aşırı cimri davrandığını",
+                "dsmMatch": "Kriter A3 & A7: Aşırı iş adanmışlığı ve cimri harcama biçimi"
+            },
+            {
+                "clueIndex": 4,
+                "text": "tutumlarının sorun değil 'doğru çalışma disiplini' olduğunu savunuyor",
+                "dsmMatch": "Kriter A8 & Ayırıcı Özellik: Katılık, inatçılık ve örüntünün benlikle uyumlu (egosintonik) olması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Şema Terapi & Bilişsel Davranışçı Terapi",
+            "therapyDetails": "Yüksek standartlar ve acımasız eleştirellik şemalarını esnetme, 'yeterince iyi' kavramını kabullenme, görev devretme ve duygusal yakınlığa alan açma çalışılır.",
+            "pharmacologyNote": "Temel tedavi psikoterapidir; eşlik eden depresyon veya yaygın kaygı belirtileri gelişirse SSRI değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu tabloyu Obsesif-Kompulsif Bozukluktan (OKB) ayıran en temel klinik fark aşağıdakilerden hangisidir?",
+            "options": [
+                "Gerçek obsesyon ve kompulsiyonların olmaması; düzen ve kuralcılık örüntüsünün benlikle uyumlu (egosintonik) yaşanması",
+                "Belirtilerin yalnızca iş yerinde ortaya çıkması",
+                "Sadece 50 yaş üzerinde ortaya çıkması",
+                "Yüksek doz SSRI tedavisine günler içinde tam yanıt vermesi"
+            ],
+            "correctIndex": 0,
+            "explanation": "OKKB'de istemsiz, benliğe yabancı (egodistonik) obsesyonlar ve kaygı giderici kompulsiyonlar yoktur; bunun yerine düzen, mükemmeliyetçilik ve denetim kişinin kendi değerleriyle uyumlu (egosintonik) yaşam boyu bir kişilik örüntüsüdür."
+        },
+        "differentialDiagnosis": "• Obsesif-Kompulsif Bozukluk (OKB): İstemsiz, sıkıntı verici obsesyonlar ve bunları nötralize eden kompulsiyonlar vardır; burada örüntü benlikle uyumludur.\n• Narsisistik Kişilik Bozukluğu: Mükemmeliyetçilik olabilir ancak temel eksen hayranlık ve üstünlük beklentisidir; burada katı ahlaki kurallar ve iş odaklılık egemendir.\n• Şizoid Kişilik Bozukluğu: Duygusal mesafe paylaşılır ancak burada ilişki isteksizliğinden çok iş ve kural odaklı katılık vardır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Erken erişkinlikte başlayan düzen, mükemmeliyetçilik ve zihinsel-kişilerarası denetim uğraşısı (en az 4/8: ayrıntı/liste saplantısı, işi bozan kusursuzluk, aşırı iş odaklılık, katı ahlakçılık, eşya atamama, görev devredememe, cimrilik, katılık/inatçılık).",
+        "therapyId": "schema_therapy",
+        "explanation": {
+            "whyThis": [
+                "Ayrıntılara saplanıp işleri geciktirme, görev devredememe, tatil ve eğlenceyi dışlayan aşırı iş odaklılık, cimrilik ve eski faturaları atamama en az dört ölçütü karşılar.",
+                "Hastanın bu tutumları sorun değil doğru disiplin olarak görmesi örüntünün benlikle uyumlu (egosintonik) yapısını gösterir.",
+                "İstemsiz obsesyon ve kompulsiyonların bulunmaması OKB'yi dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "ocd",
+                    "reason": "Benliğe yabancı istemsiz düşünceler ve bunları yatıştırmaya dönük ritüeller yoktur; davranışlar egosintonik kişilik yapısındadır."
+                },
+                {
+                    "diagnosisId": "narcissistic_pd",
+                    "reason": "Temel motivasyon hayranlık ve ayrıcalık değil, katı kuralcılık, tutumluluk ve kusursuzluk dayatmasıdır."
+                },
+                {
+                    "diagnosisId": "schizoid_pd",
+                    "reason": "Yakın ilişkilere temel isteksizlik değil, duygusal kısıtlılıkla birlikte aşırı denetim ve kuralcılık ön plandadır."
+                }
+            ],
+            "teachingPoint": "Obsesif-kompulsif kişilik bozukluğu egosintonik bir düzen ve denetim örüntüsüdür; egodistonik obsesyon ve kompulsiyonların bulunduğu OKB'den bu yönüyle ayrılır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "ADULT",
+        "diagnosisId": "bipolar_1",
+        "category": "BIPOLAR",
+        "patientSummary": "33 yaşında, kadın, tekstil ihracat sorumlusu",
+        "clues": [
+            "33 yaşındaki tekstil ihracat sorumlusu, son on gündür neredeyse hiç uyumadığı, gece yarısı iş ortaklarını arayıp yeni şirket kuracağını söylediği ve iki günde kredi kartı limitlerini tükettiği için ailesi tarafından acil servise getirildi.",
+            "Öyküsünde üç yıl önce iki ay süren, yataktan kalkamadığı ve işine ara verdiği ağır bir isteksizlik ve çökkünlük dönemi geçirdiği; ancak o dönemden sonra son iki haftaya dek tamamen olağan işlevsellikte çalıştığı öğreniliyor.",
+            "Son dokuz gündür günde en fazla iki saat uyuyup sabah kendini olağanüstü dinç hissettiğini, Avrupa'daki tüm moda evlerinin kendisini beklediğini söyleyerek havaalanına biletsiz gitmeye kalkıştığı belirtiliyor.",
+            "İdrar toksikoloji taraması negatif, tiroid hormonları ve beyin BT olağan; alkol ya da uyarıcı madde kullanımı yok, son dönemde kortikosteroid ya da antidepresan başlanmamış.",
+            "Ruhsal Durum Muayenesinde: Aşırı hareketli, yerinde duramıyor, yüksek sesle ve araya girilmesi imkânsız bir hızda konuşuyor; konudan konuya hızla sıçrıyor. Duygudurumu taşkın ve eleştirildiğinde aniden öfkeleniyor; 'dünya tekstil piyasasını tek başıma yönetmek için seçildim' diyerek içgörü göstermiyor.",
+            "Bir haftayı aşan bu taşkınlık, uyku gereksiniminde belirgin azalma, fikir uçuşması, dürtüsel harcama ve büyüklük hezeyanları hastanın işlevselliğini ağır biçimde bozmuş ve güvenliği için psikiyatri servisine yatış gerektirmiştir."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "Son dokuz gündür günde en fazla iki saat uyuyup sabah kendini olağanüstü dinç hissettiğini",
+                "dsmMatch": "Kriter A & B2: En az 1 hafta süren dönem ve uyku gereksiniminde belirgin azalma"
+            },
+            {
+                "clueIndex": 4,
+                "text": "yüksek sesle ve araya girilmesi imkânsız bir hızda konuşuyor; konudan konuya hızla sıçrıyor",
+                "dsmMatch": "Kriter B3 & B4: Basınçlı konuşma ve fikir uçuşması"
+            },
+            {
+                "clueIndex": 5,
+                "text": "büyüklük hezeyanları hastanın işlevselliğini ağır biçimde bozmuş ve güvenliği için psikiyatri servisine yatış gerektirmiştir",
+                "dsmMatch": "Kriter C: Psikotik özellikler veya hastaneye yatış gerektiren şiddette işlevsellik bozulması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Kişilerarası ve Sosyal Ritim Terapisi (IPSRT) & Psikoeğitim",
+            "therapyDetails": "Akut dönem yatıştıktan sonra uyku-uyanıklık düzeninin korunması, erken uyarı belirtilerinin tanınması, tedavi uyumu ve aile psikoeğitimi sağlanır.",
+            "pharmacologyNote": "Akut dönemde duygudurum dengeleyici (lityum veya valproat) ve/veya ikinci kuşak antipsikotik başlanır; uzun dönem korumada lityum altın standarttır."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada tablonun Bipolar II değil Bipolar I olarak sınıflandırılmasını kesinleştiren bulgular hangileridir?",
+            "options": [
+                "Üç yıl önce geçirilmiş çökkünlük döneminin bulunması",
+                "Dönemin 7 günü aşması, psikotik özellik (büyüklük hezeyanı) içermesi ve hastaneye yatış gerektirmesi",
+                "Hastanın 33 yaşında ve kadın olması",
+                "Tiroid testlerinin normal çıkması"
+            ],
+            "correctIndex": 1,
+            "explanation": "Bipolar I tanısı için yaşam boyu en az bir manik epizod yeterlidir; en az 7 gün sürmesi, belirgin işlevsellik yıkımı, psikotik özellik varlığı veya hastaneye yatış gereksinimi maniyi hipomaniden kesin olarak ayırır."
+        },
+        "differentialDiagnosis": "• Bipolar II Bozukluğu: Yalnızca hipomani ve depresyon dönemleri vardır; psikotik özellik veya yatış gerektiren ağır işlevsellik yıkımı görülmez.\n• Şizoaffektif Bozukluk: Duygudurum dönemi dışında en az iki hafta süren psikotik belirtiler gerekir; burada psikotik belirti yalnızca taşkınlık dönemindedir.\n• Kısa Psikotik Bozukluk: Belirgin duygudurum epizodu ölçütlerini karşılayan tam bir yükselme tablosu eşlik etmez.",
+        "dsmCriteriaSummary": "DSM-5-TR: Yaşam boyu en az bir manik epizod (en az 7 gün ya da yatış gerektiren taşkın/irritabl duygudurum + enerji artışı + en az 3/7 belirti: büyüklük, uyku gereksiniminde azalma, basınçlı konuşma, fikir uçuşması, dikkat dağınıklığı, amaçlı etkinlik artışı, riskli davranış) + Belirgin işlevsellik bozulması veya psikotik özellik.",
+        "therapyId": "ipsrt",
+        "explanation": {
+            "whyThis": [
+                "Dokuz gündür süren taşkın-irritabl duygudurum ve enerji artışına uyku gereksiniminde azalma, basınçlı konuşma, fikir uçuşması ve dürtüsel harcamalar eşlik etmektedir.",
+                "Büyüklük hezeyanı varlığı ve hastaneye yatış gerektiren ağır işlevsellik bozulması tam bir manik epizod ölçütlerini karşılar.",
+                "Madde, ilaç ve tiroid bozukluklarının dışlanması birincil tanıyı kesinleştirir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "bipolar_2",
+                    "reason": "Hipomanide psikotik özellik ve hastaneye yatış gerektiren ağır yıkım bulunmaz; bunların varlığı doğrudan maniyi gösterir."
+                },
+                {
+                    "diagnosisId": "schizoaffective",
+                    "reason": "Duygudurum belirtileri yokken en az iki hafta süren bağımsız psikotik belirti öyküsü yoktur."
+                },
+                {
+                    "diagnosisId": "brief_psychotic",
+                    "reason": "Tablo yalnızca psikotik belirtilerden değil, tam ölçütleri karşılayan bir duygudurum yükselmesi döneminden oluşmaktadır."
+                }
+            ],
+            "teachingPoint": "Psikotik özelliklerin varlığı veya hastaneye yatış gereksinimi, süresi ne olursa olsun yükseliş dönemini hipomaniden ayırarak Bipolar I tanısını kesinleştirir."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "ADULT",
+        "diagnosisId": "social_anxiety",
+        "category": "ANXIETY",
+        "patientSummary": "29 yaşında, kadın, eczacı",
+        "clues": [
+            "29 yaşındaki eczacı, çalıştığı hastanede kendisine önerilen birim sorumluluğu terfisini reddettiği ve son bir yıldır iş toplantılarına katılmamak için sık sık rapor aldığı gerekçesiyle bir meslektaşının önerisiyle başvurdu.",
+            "Öyküsünde sorunların iki yıl önce mesleki bir sunum sırasında sesinin titremesiyle belirginleştiği; o günden beri tanımadığı kişilerin bulunduğu ortamlarda yemek yemekten, telefonla resmî görüşme yapmaktan ve toplantılarda söz almaktan kaçındığı öğreniliyor.",
+            "Ailesiyle ve çocukluktan beri tanıdığı iki yakın arkadaşıyla gayet rahat vakit geçirebiliyor, kalabalık markette tek başına alışveriş yaparken ya da otobüse binerken sorun yaşamıyor; ancak gözlerin üzerinde olabileceği her etkileşimde yoğun çarpıntı, terleme ve yüz kızarması başlıyor.",
+            "Tiroid işlevleri, EKG ve kan sayımı olağan; kafein ve madde kullanımı yok. Beklenmedik, tetikleyicisiz panik atakları ya da yalnızca kapalı alanlarda sıkışma korkusu bulunmuyor.",
+            "Ruhsal Durum Muayenesinde: Başta gergin, sesi kısık ve göz temasından kaçınıyor; görüşme ilerledikçe gevşiyor. Düşünce içeriğinde 'söz alırsam yüzüm kızaracak, ellerim titreyecek ve herkes yetersiz olduğumu düşünecek' biçiminde olumsuz değerlendirilme endişesi egemen; içgörüsü tam.",
+            "Altı aydan uzun süredir neredeyse her etkileşim ve gözlem altında bulunma durumunda orantısız biçimde tetiklenen bu küçük düşme ve olumsuz yargılanma korkusu, mesleki gelişimini ciddi biçimde kısıtlamıştır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "tanımadığı kişilerin bulunduğu ortamlarda yemek yemekten, telefonla resmî görüşme yapmaktan ve toplantılarda söz almaktan kaçındığı",
+                "dsmMatch": "Kriter A & D: Başkalarınca değerlendirilebileceği durumlardan belirgin kaçınma"
+            },
+            {
+                "clueIndex": 4,
+                "text": "söz alırsam yüzüm kızaracak, ellerim titreyecek ve herkes yetersiz olduğumu düşünecek",
+                "dsmMatch": "Kriter B: Olumsuz değerlendirilme ve belirtilerinin fark edilerek küçük düşme korkusu"
+            },
+            {
+                "clueIndex": 5,
+                "text": "Altı aydan uzun süredir neredeyse her etkileşim ve gözlem altında bulunma durumunda orantısız biçimde tetiklenen",
+                "dsmMatch": "Kriter C, E & F: Neredeyse her zaman tetiklenme, orantısızlık ve en az 6 ay süre"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Kademeli Canlı Maruz Bırakma & Bilişsel Davranışçı Terapi",
+            "therapyDetails": "Olumsuz değerlendirilme bilişlerinin yeniden yapılandırılması, güvenlik sağlayıcı davranışların (göz kaçırma, aşırı prova) bırakılması ve aşamalı canlı maruz bırakma uygulanır.",
+            "pharmacologyNote": "Yaygın tabloda birinci basamak farmakoterapi SSRI veya SNRI'dır; yalnızca performansla sınırlı durumlarda durumsal beta bloker düşünülebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada görülen klinik tabloyu Agorafobiden ayıran temel özellik nedir?",
+            "options": [
+                "Belirtilerin altı aydan kısa sürmesi",
+                "Yalnızca kapalı alanlarda ortaya çıkması",
+                "Kaçınmanın yardım alamama ya da kaçamama korkusundan değil, başkaları tarafından olumsuz değerlendirilme ve küçük düşme endişesinden kaynaklanması",
+                "Yakın aile bireyleriyle birlikteyken belirtilerin daha da şiddetlenmesi"
+            ],
+            "correctIndex": 2,
+            "explanation": "Toplumsal kaygı bozukluğunda temel korku başkalarınca incelenme, utanç duyma ve olumsuz yargılanmadır; agorafobide ise bir belirti geliştiğinde ortamdan kaçamama veya yardım bulamama korkusu ön plandadır."
+        },
+        "differentialDiagnosis": "• Çekingen (Kaçıngan) Kişilik Bozukluğu: Erken erişkinlikten beri tüm yakın ilişkileri ve benlik algısını kapsayan yaygın yetersizlik örüntüsü vardır; burada yakın arkadaşlarla rahat ilişki kurulabilmekte ve başlangıç daha geçtir.\n• Panik Bozukluğu: Beklenmedik, tetikleyicisiz panik atakları gereklidir; burada otonomik belirtiler yalnızca sosyal değerlendirme durumlarında çıkar.\n• Agorafobi: Kalabalık veya toplu taşımada kaçamama korkusu vardır; bu hasta tek başına otobüse binebilmekte ve alışveriş yapabilmektedir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Başkalarınca değerlendirilebileceği bir veya daha çok toplumsal durumda belirgin korku/kaygı + Olumsuz değerlendirilme korkusu + Durumların neredeyse her zaman korku uyandırması ve kaçınma + Orantısızlık + En az 6 ay süre + İşlevsellik bozulması.",
+        "therapyId": "invivo_exposure",
+        "explanation": {
+            "whyThis": [
+                "Toplantıda konuşma, yabancıların önünde yemek yeme ve resmî telefon görüşmesi gibi gözlem altındaki durumlarda yüz kızarması ve küçük düşme endişesi temel ölçütü karşılar.",
+                "İki yıldır süren kaçınma davranışı hastanın terfisini reddetmesine ve işten rapor almasına yol açarak belirgin işlevsellik kaybı oluşturmuştur.",
+                "Beklenmedik panik ataklarının olmaması ve toplu taşımada sorun yaşamaması panik bozukluğu ile agorafobiyi dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "avoidant_pd",
+                    "reason": "Yakın arkadaşları ve ailesiyle sağlıklı ilişkiler kurabilmekte, yaygın yaşam boyu kişilik örüntüsünden çok son iki yılda belirginleşen durum odaklı kaygı sergilemektedir."
+                },
+                {
+                    "diagnosisId": "panic_disorder",
+                    "reason": "Çarpıntı ve terleme yalnızca sosyal değerlendirme ortamlarında tetiklenmekte, beklenmedik panik atağı bulunmamaktadır."
+                },
+                {
+                    "diagnosisId": "agoraphobia",
+                    "reason": "Otobüs ve kalabalık markette kaçamama korkusu yoktur; temel korku başkalarının olumsuz yargısıdır."
+                }
+            ],
+            "teachingPoint": "Toplumsal kaygı bozukluğunun çekirdek bilişi 'olumsuz değerlendirilme ve küçük düşme' endişesidir; terfi reddi gibi mesleki kaçınmalar sık görülür ve en etkili terapi canlı maruz bırakmadır."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "ADULT",
+        "diagnosisId": "bdd",
+        "category": "OCD_RELATED",
+        "patientSummary": "27 yaşında, kadın, iç mimar",
+        "clues": [
+            "27 yaşındaki iç mimar, son sekiz aydır arkadaş buluşmalarını iptal ettiği, iş toplantılarına kamerasını kapalı tutarak katıldığı ve evden çıkamadığı için ablasının ısrarıyla psikiyatri polikliniğine başvurdu.",
+            "Ablasının aktarımına göre hasta, son bir yılda üç farklı dermatoloji ve plastik cerrahi uzmanına başvurarak çene hattındaki 'belirgin yamukluk' ve yanak gözenekleri için dolgu ve lazer işlemleri yaptırmış, ancak her işlem sonrasında eskisinden daha mutsuz olmuş.",
+            "Günde ortalama dört saatini büyüteçli aynada yüzünü inceleyerek, farklı ışık açılarında fotoğraflar çekerek, kapatıcı makyajı defalarca silip yeniden uygulayarak ve çevresindekilerden yüzünün düzgün göründüğüne dair güvence isteyerek geçiriyor.",
+            "Kilo verme isteği, besin kısıtlaması ya da tartı takıntısı yok; beden kitle indeksi 21.4 kg/m² ve adet düzeni olağan. Görüşmede fiziksel muayene ve dermatoloji kayıtlarında yüzünde başkalarınca fark edilebilir herhangi bir asimetri ya da lezyon bulunmadığı görülüyor.",
+            "Ruhsal Durum Muayenesinde: Yüzünü saçlarıyla ve yüksek yakalı kazağıyla örtmeye çalışıyor, görüşme sırasında iki kez telefon kamerasından çenesini kontrol etti. Duygudurumu çökkün ve bunaltılı; 'ışık vurduğunda çenemdeki bozukluğu herkes görüp tiksiniyor' diyor, içgörüsü zayıf.",
+            "Başkalarınca hiç fark edilmeyen bir dış görünüm kusuruna yönelik bu yoğun zihinsel uğraşı, eşlik eden yineleyici ayna kontrolü, kamuflaj ve güvence arama davranışlarıyla hastanın sosyal ve mesleki yaşamını ağır biçimde kısıtlamaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "Günde ortalama dört saatini büyüteçli aynada yüzünü inceleyerek, farklı ışık açılarında fotoğraflar çekerek, kapatıcı makyajı defalarca silip yeniden uygulayarak",
+                "dsmMatch": "Kriter B: Görünüm kaygılarına yanıt olarak yineleyici davranışlar (ayna kontrolü, kamuflaj, güvence arama)"
+            },
+            {
+                "clueIndex": 3,
+                "text": "yüzünde başkalarınca fark edilebilir herhangi bir asimetri ya da lezyon bulunmadığı",
+                "dsmMatch": "Kriter A: Başkalarınca gözlemlenemeyen veya çok hafif algılanan görünüm kusuru uğraşısı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "sosyal ve mesleki yaşamını ağır biçimde kısıtlamaktadır",
+                "dsmMatch": "Kriter C: Klinik açıdan belirgin sıkıntı ve işlevsellik bozulması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi (Ayna Yeniden Eğitimi & Maruz Bırakma)",
+            "therapyDetails": "Algısal yeniden eğitim, ayna kontrolü ve kamuflaj davranışlarının tepki önleme ile azaltılması, görünüm odaklı çarpıtılmış inançların çalışılması ve gereksiz estetik işlemlerin önlenmesi hedeflenir.",
+            "pharmacologyNote": "Orta-ağır olgularda yüksek doz ve yeterli sürede (en az 12 hafta) SSRI birinci basamak farmakoterapidir; estetik girişimler belirtileri düzeltmez."
+        },
+        "miniQuiz": {
+            "question": "Bu bozuklukta hastaların sıkça başvurduğu estetik veya dermatolojik işlemlerin klinik seyir üzerindeki tipik etkisi nedir?",
+            "options": [
+                "İşlem sonrasında zihinsel uğraşı kalıcı olarak tamamen düzelir",
+                "Psikoterapiye eşdeğer uzun dönem remisyon sağlar",
+                "Yalnızca içgörüsü tam olan hastalarda belirtileri artırır",
+                "Çoğunlukla tatminsizlikle sonuçlanır; uğraşı aynı bölgede sürer ya da başka bir beden bölgesine kayar"
+            ],
+            "correctIndex": 3,
+            "explanation": "Beden algısı bozukluğunda estetik ve dermatolojik girişimler neredeyse her zaman kalıcı rahatlama sağlamaz; hastalar ya sonuçtan memnun kalmaz ya da algılanan kusur başka bir bölgeye kayar."
+        },
+        "differentialDiagnosis": "• Obsesif-Kompulsif Bozukluk (OKB): Tekrarlayıcı davranışlar vardır ancak uğraşının içeriği yalnızca dış görünüm kusuruyla sınırlı değildir.\n• Toplumsal Kaygı Bozukluğu: Sosyal ortamlardan kaçınma paylaşılır fakat temel korku belirli bir bedensel kusurdan tiksinilmesi değil genel olumsuz değerlendirilmedir.\n• Anoreksiya Nervoza: Görünüm kaygısı özellikle kilo ve vücut yağına yöneliktir; burada kilo ve yeme davranışı tamamen olağandır.",
+        "dsmCriteriaSummary": "DSM-5-TR: Başkalarınca fark edilmeyen veya hafif bir dış görünüm kusuruyla zihinsel uğraşı + Yineleyici davranışlar veya zihinsel eylemler (ayna kontrolü, kamuflaj, kıyaslama, güvence arama) + Belirgin sıkıntı/işlevsellik kaybı + Yeme bozukluğuyla açıklanamama.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "Muayenede saptanmayan çene asimetrisi ve gözenek algısıyla yoğun uğraşı ile günde dört saat süren ayna kontrolü, fotoğraf çekme ve kamuflaj temel ölçütleri karşılar.",
+                "Üç estetik girişime karşın rahatlama olmaması ve evden çıkamayacak düzeyde sosyal-mesleki kaçınma klinik şiddeti gösterir.",
+                "Normal BKİ ve yeme kısıtlamasının olmaması yeme bozukluklarını dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "ocd",
+                    "reason": "Zihinsel uğraşı ve yineleyici davranışlar özgül olarak algılanan dış görünüm kusuruna odaklıdır."
+                },
+                {
+                    "diagnosisId": "social_anxiety",
+                    "reason": "Sosyal kaçınma genel performans ya da etkileşim kaygısından değil, yüzündeki algılanan kusurun görülmesi endişesinden kaynaklanmaktadır."
+                },
+                {
+                    "diagnosisId": "anorexia_nervosa",
+                    "reason": "BKİ normaldir; kilo verme isteği veya besin kısıtlaması yoktur."
+                }
+            ],
+            "teachingPoint": "Beden algısı bozukluğunda tekrarlayan estetik işlemler çözüm sağlamaz; tanı, başkalarınca fark edilmeyen görünüm kusuru uğraşısı ve yineleyici kontrol-kamuflaj davranışlarıyla konur."
+        }
+    },
+    {
+        "difficulty": "Orta",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "conversion_disorder",
+        "category": "SOMATIC",
+        "patientSummary": "38 yaşında, erkek, şehirlerarası otobüs şoförü",
+        "clues": [
+            "38 yaşındaki şehirlerarası otobüs şoförü, dört gün önce aniden başlayan sol bacağında güçsüzlük ve yürüyememe yakınmasıyla acil servise başvurdu.",
+            "Öyküsünde belirtilerin başlamasından iki gün önce kullandığı otobüsün buzlanmada kaydığı, kimsenin yaralanmadığı ancak firma sahibinin kendisini kusurlu bulup işten çıkarmakla tehdit ettiği öğreniliyor.",
+            "Nöroloji değerlendirmesinde kraniyal ve lomber MR, beyin BT, sinir ileti çalışmaları ve iğne EMG tamamen normal bulunuyor; kan testleri ve kas enzimleri olağan. Hasta bacağındaki güçsüzlüğü bilinçli olarak kurguladığına ya da rapor/tazminat peşinde olduğuna dair hiçbir çelişkili davranış göstermiyor.",
+            "Nörolojik muayenede derin tendon refleksleri simetrik, Babinski negatif; sol kalça ekstansiyonu istemli testte 1/5 görünürken, hasta sırtüstü yatarken sağlam sağ bacağını dirence karşı kaldırması istendiğinde sol topuğun yatağa tam güçle bastığı (Hoover bulgusu pozitif) saptanıyor.",
+            "Ruhsal Durum Muayenesinde: Bilinci açık, iş birliğine yatkın; yaşadığı ağır yürüyememe durumuna karşın beklenenden daha sakin ve kayıtsız bir duygulanım sergiliyor. Düşünce akışı düzenli, algı bozukluğu yok; 'işten atılırsam borçları nasıl öderim bilmiyorum' diyerek stresini dile getiriyor.",
+            "İstemli motor işlevdeki bu ani güçsüzlük, tanısal incelemeler ve pozitif Hoover bulgusuyla bilinen yapısal nörolojik hastalıklarla açık bir uyumsuzluk göstermekte ve hastanın yürüyüp çalışmasını belirgin biçimde bozmaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 0,
+                "text": "aniden başlayan sol bacağında güçsüzlük ve yürüyememe",
+                "dsmMatch": "Kriter A: İstemli motor işlevde bir veya daha çok belirti"
+            },
+            {
+                "clueIndex": 3,
+                "text": "sağlam sağ bacağını dirence karşı kaldırması istendiğinde sol topuğun yatağa tam güçle bastığı (Hoover bulgusu pozitif)",
+                "dsmMatch": "Kriter B: Belirti ile bilinen nörolojik hastalık arasında pozitif muayene bulgusuyla uyumsuzluk kanıtı"
+            },
+            {
+                "clueIndex": 5,
+                "text": "hastanın yürüyüp çalışmasını belirgin biçimde bozmaktadır",
+                "dsmMatch": "Kriter D: Klinik açıdan belirgin sıkıntı veya işlevsellik bozulması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bilişsel Davranışçı Terapi & Yapılandırılmış Fizyoterapi",
+            "therapyDetails": "Belirtilerin gerçek olduğu ancak yapısal sinir hasarına dayanmadığı yargılayıcı olmadan açıklanır; aşamalı motor yeniden eğitim (fizyoterapi) ve stresörlere yönelik BDT/psikodinamik terapi birlikte yürütülür.",
+            "pharmacologyNote": "Birincil tedavi psikoterapi ve nörorehabilitasyondur; yalnızca eşlik eden depresyon veya kaygı bozukluğu varsa ilaç eklenir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada tek taraflı bacak güçsüzlüğünün yapısal nörolojik hastalıktan ayırt edilmesinde kullanılan pozitif klinik muayene bulgusu hangisidir?",
+            "options": [
+                "Hoover bulgusunun pozitif olması",
+                "Babinski refleksinin ekstansör yanıt vermesi",
+                "Aşil refleksinin tek taraflı kaybolması",
+                "EMG'de yaygın denervasyon potansiyelleri saptanması"
+            ],
+            "correctIndex": 0,
+            "explanation": "Hoover bulgusu, istemli olarak zayıf görünen bacağın karşı bacak dirence karşı kaldırılırken istemsiz biçimde tam güçle yatağa basmasıdır ve işlevsel (konversiyon) motor güçsüzlüğü için pozitif uyumsuzluk kanıtıdır."
+        },
+        "differentialDiagnosis": "• Hastalık Kaygısı Bozukluğu (Hipokondriyazis): Belirgin motor veya duyusal işlev kaybı değil, ağır bir hastalığa yakalanma endişesi ön plandadır.\n• Yapay Bozukluk: Kişi hasta rolünü üstlenmek için belirtileri kasıtlı olarak üretir; bu olguda istemli sahtecilik kanıtı yoktur.\n• Bedensel Belirti Bozukluğu: Ağrı veya yorgunluk gibi belirtilere yönelik aşırı kaygı ve uğraşı ön plandadır; pozitif nörolojik uyumsuzluk bulgusu esas değildir.",
+        "dsmCriteriaSummary": "DSM-5-TR: İstemli motor veya duyusal işlevde belirti + Belirti ile bilinen nörolojik/tıbbi durum arasında pozitif bulgularla uyumsuzluk kanıtı + Başka tıbbi/ruhsal bozuklukla açıklanamama + Belirgin sıkıntı veya işlevsellik kaybı.",
+        "therapyId": "cbt_general",
+        "explanation": {
+            "whyThis": [
+                "Ani gelişen sol bacak güçsüzlüğü istemli motor işlev belirtisidir.",
+                "Normal MR ve EMG'nin yanında pozitif Hoover bulgusu, bilinen yapısal nörolojik hastalıklarla açık uyumsuzluk kanıtı (Kriter B) sağlar.",
+                "Bilinçli taklit kanıtının olmaması ve akut iş stresiyle zamansal ilişki tanıyı destekler."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "illness_anxiety_disorder",
+                    "reason": "Hastanın temel sorunu ağır bir hastalığa yakalanma korkusu değil, ani gelişen istemli motor güçsüzlüktür."
+                },
+                {
+                    "diagnosisId": "factitious_disorder",
+                    "reason": "Hasta rolünü benimsemek için kasıtlı belirti uydurma veya tıbbi kayıtlarla oynama saptanmamıştır."
+                },
+                {
+                    "diagnosisId": "somatic_symptom_disorder",
+                    "reason": "Tablonun merkezinde kronik bedensel uğraşı ve aşırı sağlık kaygısı değil, pozitif Hoover bulgulu ani motor kayıp yer almaktadır."
+                }
+            ],
+            "teachingPoint": "DSM-5-TR'de işlevsel nörolojik belirti bozukluğu tanısı yalnızca dışlamayla değil, Hoover bulgusu gibi yapısal hastalıkla uyumsuzluğu gösteren pozitif muayene kanıtlarıyla konur."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "NEURO_SOMATIC",
+        "diagnosisId": "nrem_sleep_arousal",
+        "category": "SLEEP",
+        "patientSummary": "28 yaşında, kadın, yoğun bakım hemşiresi",
+        "clues": [
+            "28 yaşındaki yoğun bakım hemşiresi, son dokuz aydır gece ev arkadaşını korkutan garip davranışlar sergilediği ve bir kez balkon kapısını açarken son anda durdurulduğu için uyku polikliniğine başvurdu.",
+            "Ev arkadaşı, olayların özellikle hastanın 24 saatlik nöbetten çıkıp derin uykuya daldığı gecelerde, uykuya geçtikten yaklaşık bir ila iki saat sonra ortaya çıktığını; hastanın gözleri açık biçimde yataktan kalkıp mutfak dolaplarını boşalttığını anlatıyor.",
+            "Ataklar sırasında ev arkadaşının seslenmesine donuk bakışlarla ve anlamsız tek heceli sözcüklerle yanıt veriyor, yatağa yönlendirilmeye çalışıldığında kısa süre şaşkınlık yaşıyor; sabah uyandığında ise olanlara dair hiçbir anısı olmuyor ve rüya anımsamıyor.",
+            "Öyküsünde çocukluk çağında benzer kısa süreli gece kalkmaları yaşadığı öğreniliyor. Alkol, sedatif ya da zolpidem kullanımı yok; gündüz nörolojik muayenesi ve uyanıklık EEG'si olağan.",
+            "Ruhsal Durum Muayenesinde: Bilinç açık, duygudurum ötimik, gece kendine zarar verebileceği düşüncesiyle kaygılı; düşünce ve algı bozukluğu yok. Video-polisomnografide gecenin ilk üçte birinde yavaş dalga evresinden kısmi uyanma izleniyor; REM kas atonisi tamamen korunmuş ve epileptiform deşarj saptanmıyor.",
+            "Büyük uyku döneminin ilk üçte birinde tekrarlayan bu yataktan kalkıp dolaşma atakları, uyandırılmaya direnç, tam amnezi ve rüya imgeleminin yokluğuyla birlikte güvenlik riski ve klinik sıkıntı doğurmaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "uykuya geçtikten yaklaşık bir ila iki saat sonra ortaya çıktığını; hastanın gözleri açık biçimde yataktan kalkıp mutfak dolaplarını boşalttığını",
+                "dsmMatch": "Kriter A1: Büyük uyku döneminin ilk üçte birinde yineleyen kısmi uyanma ve dolaşma"
+            },
+            {
+                "clueIndex": 2,
+                "text": "sabah uyandığında ise olanlara dair hiçbir anısı olmuyor ve rüya anımsamıyor",
+                "dsmMatch": "Kriter B & C: Rüya imgeleminin anımsanmaması ve epizod için amnezi"
+            },
+            {
+                "clueIndex": 4,
+                "text": "yavaş dalga evresinden kısmi uyanma izleniyor; REM kas atonisi tamamen korunmuş ve epileptiform deşarj saptanmıyor",
+                "dsmMatch": "Kriter A & E: Yavaş dalga uykusundan kaynaklanma; REM bozukluğu ve epilepsinin dışlanması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Uyku Güvenliği Protokolü, Uyku Hijyeni & Stres Yönetimi",
+            "therapyDetails": "Pencere ve balkon kilitlerinin güçlendirilmesi, tehlikeli eşyaların kaldırılması, uyku yoksunluğunun önlenmesi, düzenli uyku saatleri ve gerekirse planlı uyandırma uygulanır.",
+            "pharmacologyNote": "Güvenlik önlemleri ve uyku düzeni yetersiz kalır ya da yaralanma riski sürerse yatmadan önce düşük doz klonazepam değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastadaki gece ataklarını REM Uykusu Davranış Bozukluğundan ayıran en güçlü polisomnografi ve klinik bulgular hangileridir?",
+            "options": [
+                "Atakların sabaha karşı olması ve canlı rüya öyküsünün bulunması",
+                "Atakların gecenin ilk üçte birinde yavaş dalga uykusundan çıkması, REM atonisinin korunması ve sabah amnezi ile rüya yokluğu",
+                "EEG'de frontal lob epileptiform diken-dalga aktivitesi görülmesi",
+                "Atakların yalnızca zolpidem alınan gecelerde ortaya çıkması"
+            ],
+            "correctIndex": 1,
+            "explanation": "NREM uykusundan uyanma bozukluğu gecenin ilk üçte birinde (yavaş dalga uykusunda) görülür, REM atonisi normaldir, rüya anımsanmaz ve amnezi vardır; REM uykusu davranış bozukluğu ise gecenin ikinci yarısında canlı rüyaları eyleme dökme ve REM atonisinin kaybıyla gider."
+        },
+        "differentialDiagnosis": "• REM Uykusu Davranış Bozukluğu: Gecenin ikinci yarısında canlı rüyaları eyleme dökme ve polisomnografide REM atonisi kaybı vardır; burada REM atonisi normaldir.\n• Kâbus Bozukluğu: Gecenin ikinci yarısında korkutucu rüyalarla hızla tam uyanıklık gelişir ve rüya ayrıntılı anımsanır.\n• Uykusuzluk (İnsomni) Bozukluğu: Uykuya dalma veya sürdürme güçlüğü esastır; amnezik gece dolaşma atakları görülmez.",
+        "dsmCriteriaSummary": "DSM-5-TR: Büyük uyku döneminin ilk üçte birinde yineleyen kısmi uyanma epizodları (yataktan kalkıp dolaşma veya gece paniği) + Rüya imgeleminin hiç veya çok az anımsanması + Epizod için amnezi + Belirgin sıkıntı/güvenlik riski + Madde veya başka tıbbi/uyku bozukluğunun dışlanması.",
+        "therapyId": "sleep_safety_cbt",
+        "explanation": {
+            "whyThis": [
+                "Uyku yoksunluğu sonrası gecenin ilk iki saatinde gözleri açık yataktan kalkıp amaçsız dolaşma, uyandırılmaya direnç ve sabah tam amnezi klasik yavaş dalga parasomnisi özellikleridir.",
+                "Video-polisomnografide yavaş dalga evresinden kısmi uyanma saptanması, normal REM atonisi ve epileptiform aktivite olmaması tanıyı kesinleştirir.",
+                "Balkon kapısını açma girişimi klinik önemi ve güvenlik riskini gösterir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "rem_sleep_behavior_disorder",
+                    "reason": "Ataklar gecenin ilk üçte birindedir, canlı rüya öyküsü yoktur ve polisomnografide REM kas atonisi tamamen korunmuştur."
+                },
+                {
+                    "diagnosisId": "nightmare_disorder",
+                    "reason": "Kâbuslarda kişi hızla tam uyanıklığa geçer ve korkutucu rüyayı ayrıntılarıyla anımsar; burada amnezi vardır."
+                },
+                {
+                    "diagnosisId": "insomnia_disorder",
+                    "reason": "Temel sorun uykuyu başlatamama değil, derin uyku sırasındaki amnezik kısmi uyanma ataklarıdır."
+                }
+            ],
+            "teachingPoint": "Gecenin ilk üçte birinde yavaş dalga uykusundan çıkan, rüya anımsamanın olmadığı ve sabah amneziyle giden motor ataklar NREM uykusundan uyanma bozukluğunu gösterir."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "ADULT",
+        "diagnosisId": "specific_phobia",
+        "category": "ANXIETY",
+        "patientSummary": "44 yaşında, kadın, okul öncesi öğretmeni",
+        "clues": [
+            "44 yaşındaki okul öncesi öğretmeni, son iki yıldır ilkbahar ve sonbahar aylarında işine gitmekte zorlandığı, sık sık izin aldığı ve evin perdelerini gündüzleri bile kapalı tuttuğu için aile hekimi tarafından psikiyatriye yönlendirildi.",
+            "Öyküsünde günde onlarca kez telefonundan meteoroloji radarını kontrol ettiği, havada koyu bulut gördüğünde sınıftaki çocukları bahçeye çıkaramadığı ve yağış ihtimali olan günlerde arabasıyla evden hiç ayrılmadığı öğreniliyor.",
+            "Güneşli ve açık havalarda kalabalık alışveriş merkezlerine, sosyal davetlere, yüksek binalara ve toplu taşımaya hiçbir huzursuzluk duymadan gidebiliyor; yalnızca gök gürültüsü duyduğunda ya da şimşek çakma olasılığı doğduğunda kalbi yerinden çıkacakmış gibi çarpıp kulaklarını kapatarak penceresiz banyoya sığınıyor.",
+            "Tiroid paneli, EKG ve işitme muayenesi olağan; geçmişte yıldırım düşmesi ya da travmatik bir kaza öyküsü, kâbus veya yeniden yaşantılama belirtisi yok. Beklenmedik, tetikleyicisiz panik atağı hiç yaşamamış.",
+            "Ruhsal Durum Muayenesinde: Bilinci açık, iş birliğine yatkın, duygudurumu ötimik. Gök gürültüsü ve şimşek olasılığının gerçek tehlikesine göre tepkisinin aşırı olduğunu kendisi de kabul ediyor ancak o an kendini durduramadığını anlatıyor; düşünce ve algı bozukluğu yok.",
+            "Altı aydan uzun süredir yalnızca tek bir doğal çevre uyaranıyla (gök gürültüsü ve şimşek) neredeyse her karşılaşmada anında tetiklenen bu orantısız dehşet ve katı kaçınma davranışı, hastanın mesleki ve günlük işlevselliğini belirgin biçimde bozmuştur."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "yalnızca gök gürültüsü duyduğunda ya da şimşek çakma olasılığı doğduğunda kalbi yerinden çıkacakmış gibi çarpıp kulaklarını kapatarak penceresiz banyoya sığınıyor",
+                "dsmMatch": "Kriter A & B: Belirli bir doğal çevre durumunun neredeyse her zaman anında yoğun kaygı uyandırması"
+            },
+            {
+                "clueIndex": 4,
+                "text": "gerçek tehlikesine göre tepkisinin aşırı olduğunu kendisi de kabul ediyor",
+                "dsmMatch": "Kriter D: Duyulan kaygının gerçek tehlikeyle orantısız olması"
+            },
+            {
+                "clueIndex": 5,
+                "text": "Altı aydan uzun süredir yalnızca tek bir doğal çevre uyaranıyla",
+                "dsmMatch": "Kriter E & F: En az 6 ay sürme ve belirgin işlevsellik bozulması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Kademeli Canlı Maruz Bırakma (In Vivo Exposure)",
+            "therapyDetails": "Hava durumu kontrolü gibi güvenlik davranışlarının azaltılması ve ses kayıtlarından başlayıp gerçek hava koşullarına uzanan kademeli maruz bırakma hiyerarşisi uygulanır.",
+            "pharmacologyNote": "Birinci basamak tedavi maruz bırakma temelli psikoterapidir; ilaç tedavisi rutin olarak önerilmez ve kaçınmayı pekiştirebileceğinden benzodiazepinlerden kaçınılır."
+        },
+        "miniQuiz": {
+            "question": "Bu hastadaki tablonun Yaygın Anksiyete Bozukluğu ve Agorafobiden ayrılmasını sağlayan en temel bulgu nedir?",
+            "options": [
+                "Belirtilerin yalnızca 40 yaşından sonra başlamış olması",
+                "Hastanın tepkisinin aşırı olduğuna dair içgörüsünün bulunmaması",
+                "Yoğun kaygı ve kaçınmanın yalnızca tek bir doğal çevre uyaranıyla sınırlı olması; açık havalarda işlevselliğin tamamen olağan olması",
+                "Geçmişte yıldırım çarpmasına bağlı travma öyküsünün varlığı"
+            ],
+            "correctIndex": 2,
+            "explanation": "Özgül fobide yoğun korku ve kaçınma belirli bir nesne veya durumla (burada gök gürültüsü/şimşek) sınırlıdır; yaygın anksiyetedeki çoklu alan endişesi veya agorafobideki en az iki farklı ortamdan kaçınma görülmez."
+        },
+        "differentialDiagnosis": "• Panik Bozukluğu: Beklenmedik, tetikleyicisiz panik atakları gereklidir; burada otonomik tepkiler yalnızca belirli doğal çevre uyaranında çıkar.\n• Agorafobi: Toplu taşıma, açık/kapalı alan veya kalabalık gibi en az iki farklı ortamda kaçamama korkusu vardır; bu hasta açık havalarda her yere rahatça gitmektedir.\n• Yaygın Anksiyete Bozukluğu: Sağlık, iş, aile gibi birçok alanda yaygın endişe bulunur; burada kaygı tek bir uyarana özgüdür.",
+        "dsmCriteriaSummary": "DSM-5-TR: Belirli bir nesne veya duruma karşı belirgin korku/kaygı + Uyaranın neredeyse her zaman anında korku uyandırması + Aktif kaçınma veya yoğun sıkıntıyla katlanma + Gerçek tehlikeyle orantısızlık + En az 6 ay süre + İşlevsellik bozulması.",
+        "therapyId": "invivo_exposure",
+        "explanation": {
+            "whyThis": [
+                "Gök gürültüsü ve şimşek olasılığıyla anında tetiklenen çarpıntı, banyoya sığınma ve meteoroloji takibi tek bir doğal çevre uyaranına bağlı orantısız korku ve kaçınmayı gösterir.",
+                "İki yıldır sürmesi ve işe gidememe, bahçeye çıkamama gibi belirgin işlevsellik kayıplarına yol açması tüm ölçütleri karşılar.",
+                "Açık havalarda toplu taşıma ve kalabalıklarda rahat olması agorafobi ve panik bozukluğunu dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "panic_disorder",
+                    "reason": "Beklenmedik panik atağı yoktur; tüm otonomik belirtiler tek bir öngörülebilir uyaranla tetiklenmektedir."
+                },
+                {
+                    "diagnosisId": "agoraphobia",
+                    "reason": "Açık havalarda kalabalık, toplu taşıma ve kapalı alanlarda hiçbir kaçınma yoktur."
+                },
+                {
+                    "diagnosisId": "gad",
+                    "reason": "Çok sayıda yaşam alanına yayılan kronik endişe değil, tek bir doğal çevre uyaranına sınırlı korku söz konusudur."
+                }
+            ],
+            "teachingPoint": "Özgül fobi yalnızca tek bir nesne ya da durumla sınırlı, gerçek tehlikeyle orantısız ve en az 6 ay süren korku-kaçınma örüntüsüdür; altın standart tedavi kademeli canlı maruz bırakmadır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "ADULT",
+        "diagnosisId": "ocd",
+        "category": "OCD_RELATED",
+        "patientSummary": "35 yaşında, erkek, ilkokul müzik öğretmeni",
+        "clues": [
+            "35 yaşındaki ilkokul müzik öğretmeni, son yedi aydır şiddetli uykusuzluk, yoğun suçluluk duygusu ve evdeki günlük işlerini sürdürememe yakınmasıyla polikliniğe başvurdu.",
+            "Görüşme derinleştirildiğinde, altı ay önce yeni doğan yeğenini kucağına aldığı sırada zihninden aniden 'ya elimi bırakıp düşürürsem ya da mutfaktaki bıçakla ona zarar verirsem' biçiminde istemsiz görüntüler geçtiği ve o günden beri bu düşüncelerin yakasını bırakmadığı öğreniliyor.",
+            "Bu görüntülerin kendi ahlaki değerlerine tamamen ters olduğunu ve yeğenini çok sevdiğini vurguluyor; ancak düşünceler geldiğinde bunaltıyı bastırmak için evdeki tüm bıçak ve makasları kilitli çekmeceye kaldırıyor ve içinden belirli bir cümleyi yedi kez hatasız biçimde tekrarlayana kadar rahatlayamıyor.",
+            "Bu zihinsel tekrarlar ve eşyaları ortadan kaldırma davranışları günde iki saatten fazla zamanını alıyor. Madde kullanımı yok, nörolojik inceleme olağan; öyküsünde fiziksel şiddet, dürtü kontrol sorunu ya da işitsel emir varsanısı hiç olmamış.",
+            "Ruhsal Durum Muayenesinde: Kaygılı, gergin ve utangaç; 'bunlar benim isteğim değil, çok saçma ama aklımdan atamıyorum' diyerek içgörüsünün iyi olduğunu gösteriyor. Düşünce akışı düzenli, gerçeği değerlendirme tam, saldırganlık niyeti yok.",
+            "Benliğe tamamen yabancı, istemsiz ve yoğun sıkıntı yaratan bu zarar verme düşünceleri ile bunları etkisizleştirmek için yapılan zaman alıcı zihinsel tekrar ritüelleri, hastanın aile ziyaretlerinden kaçınmasına ve mesleki veriminin düşmesine yol açmaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "zihninden aniden 'ya elimi bırakıp düşürürsem ya da mutfaktaki bıçakla ona zarar verirsem' biçiminde istemsiz görüntüler geçtiği",
+                "dsmMatch": "Kriter A (Obsesyonlar): İstemsiz, yineleyici ve yoğun sıkıntı yaratan düşünceler/imgeler"
+            },
+            {
+                "clueIndex": 2,
+                "text": "içinden belirli bir cümleyi yedi kez hatasız biçimde tekrarlayana kadar rahatlayamıyor",
+                "dsmMatch": "Kriter A (Kompulsiyonlar): Sıkıntıyı azaltmak için yapılan katı zihinsel eylemler"
+            },
+            {
+                "clueIndex": 3,
+                "text": "günde iki saatten fazla zamanını alıyor",
+                "dsmMatch": "Kriter B: Günde 1 saatten fazla zaman alma ve işlevsellik bozulması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Maruz Bırakma ve Tepki Önleme (ERP)",
+            "therapyDetails": "Zarar verme imgelerine yönelik felaketleştirici anlamlandırmaların bilişsel olarak çalışılması, zihinsel tekrar ritüellerinin ve kaçınmaların tepki önleme ile aşamalı bırakılması hedeflenir.",
+            "pharmacologyNote": "Orta-ağır olgularda yüksek dozda ve en az 8-12 hafta süreyle SSRI birinci basamak farmakoterapidir; dirençli olgularda klomipramin veya düşük doz antipsikotik eklemesi düşünülebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada görülen 'yeğenine zarar verme' imgelerini psikotik bir saldırganlık hezeyanından ayıran en kritik klinik özellik nedir?",
+            "options": [
+                "İmgelerin yalnızca akşam saatlerinde ortaya çıkması",
+                "Belirtilerin bir haftadan kısa sürmesi",
+                "Hastanın yeğenine gerçekten zarar vermek istemesi",
+                "Düşüncelerin benliğe yabancı (egodistonik) yaşanması, hastanın bunları saçma bulup dehşet duyması ve etkisizleştirici ritüeller yapması"
+            ],
+            "correctIndex": 3,
+            "explanation": "OKB'deki tabu/zarar verme obsesyonları egodistoniktir; kişi bu düşüncelerden dehşet duyar, eyleme dökme niyeti taşımaz ve kaygıyı azaltmak için kaçınma veya zihinsel kompulsiyonlara başvurur."
+        },
+        "differentialDiagnosis": "• Obsesif-Kompulsif Kişilik Bozukluğu (OKKB): Egodistonik obsesyon ve zihinsel nötralizasyon ritüelleri yoktur; kuralcılık benlikle uyumludur.\n• Yaygın Anksiyete Bozukluğu: Endişeler gerçek yaşam sorunlarına (maddi durum, sağlık) yöneliktir; belirli cümleleri 7 kez tekrarlama gibi katı kompulsiyonlar görülmez.\n• Sanrılı Bozukluk (Hezeyanlı Bozukluk): İnançlar sarsılmazdır ve içgörü yoktur; burada hasta düşüncelerin kendi isteği olmadığını ve saçma olduğunu bilmektedir.",
+        "dsmCriteriaSummary": "DSM-5-TR: İstemsiz, sıkıntı verici yineleyici düşünceler/imgeler (obsesyonlar) ve/veya bunları etkisizleştirmek için yapılan yineleyici davranışlar/zihinsel eylemler (kompulsiyonlar) + Günde >1 saat zaman alma veya belirgin sıkıntı/işlevsellik bozulması + İyi/orta/zayıf içgörü belirleyicisi.",
+        "therapyId": "erp",
+        "explanation": {
+            "whyThis": [
+                "Sevdiği yeğenine zarar verme yönündeki istemsiz, benliğe yabancı imgeler ve bunları bastırmak için içinden yedi kez cümle tekrarlama obsesyon-kompulsiyon döngüsünü oluşturur.",
+                "Günde iki saati aşan uğraşı, bıçakları kilitleme ve aile ziyaretlerinden kaçınma Kriter B'yi karşılar.",
+                "İyi içgörü ve gerçeği değerlendirmenin tam olması psikotik bozuklukları kesin olarak dışlar."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "ocpd",
+                    "reason": "Egosintonik düzen ve mükemmeliyetçilik değil, yoğun sıkıntı veren istemsiz imgeler ve zihinsel tekrar ritüelleri vardır."
+                },
+                {
+                    "diagnosisId": "gad",
+                    "reason": "Gündelik gerçekçi kaygılar yerine bizar/tabu zarar verme imgeleri ve bunları nötralize eden katı zihinsel sayma kompulsiyonları mevcuttur."
+                },
+                {
+                    "diagnosisId": "delusional_disorder",
+                    "reason": "Hasta düşüncelerin saçma ve istemsiz olduğunu bilmekte, sarsılmaz bir inanç ya da eylem niyeti taşımamaktadır."
+                }
+            ],
+            "teachingPoint": "Zarar verme içerikli tabu obsesyonlar egodistoniktir ve şiddet riski değil yoğun suçluluk doğurur; zihinsel tekrarlar da görünür ritüeller kadar gerçek kompulsiyondur."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "ADULT",
+        "diagnosisId": "mdd",
+        "category": "MOOD",
+        "patientSummary": "49 yaşında, erkek, marangoz ustası",
+        "clues": [
+            "49 yaşındaki marangoz ustası, son iki aydır süren geçmeyen sırt ağrısı, iştahsızlık ve altı kilogram kilo kaybı nedeniyle dahiliye ve ortopedi polikliniklerinde yapılan tetkikler normal çıkınca psikiyatriye yönlendirildi.",
+            "Ayrıntılı sorgulamada son yedi haftadır neredeyse her gün, günün büyük bölümünde içine çöken bir ağırlık hissettiği; otuz yıldır severek yaptığı ahşap oymacılığından ve torunuyla vakit geçirmekten artık hiç keyif almadığı öğreniliyor.",
+            "Her sabah saat dört civarında kendiliğinden uyanıp bir daha uyuyamadığını, sabahları yataktan kalkmanın 'üzerinde beton varmış gibi' zor olduğunu, akşamüstüne doğru ise bunaltısının biraz hafiflediğini anlatıyor. Geçmişte uykusuzlukla giden taşkınlık ya da aşırı enerji dönemi hiç olmamış.",
+            "Hemogram, TSH, B12, HbA1c, karaciğer-böbrek testleri ve torakolomber MR tamamen olağan; alkol veya madde kullanımı yok, son bir yılda yakın kaybı ya da yas süreci yaşanmamış.",
+            "Ruhsal Durum Muayenesinde: Omuzları çökük, hareketleri ve konuşma temposu belirgin biçimde yavaşlamış; sorulara uzun duraksamalarla yanıt veriyor. Yüz ifadesi kederli, 'aileme yük oluyorum, işe yaramazın tekiyim' diyerek yoğun değersizlik düşünceleri dile getiriyor; aktif intihar planı yok ancak 'sabah uyanmasam daha iyi' biçiminde pasif ölüm düşünceleri var.",
+            "İki haftayı çoktan aşan bu sürekli çökkünlük, belirgin ilgi-zevk kaybı, sabah erken uyanma, istemsiz kilo kaybı, psikomotor yavaşlama, değersizlik ve pasif ölüm düşünceleri tıbbi bir hastalığa ya da iki uçlu bir geçmişe bağlı olmadan işlevselliğini ağır biçimde bozmuştur."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "son yedi haftadır neredeyse her gün, günün büyük bölümünde içine çöken bir ağırlık hissettiği; otuz yıldır severek yaptığı ahşap oymacılığından ve torunuyla vakit geçirmekten artık hiç keyif almadığı",
+                "dsmMatch": "Kriter A1 & A2: En az 2 hafta süren çökkün duygudurum ve belirgin anhedoni"
+            },
+            {
+                "clueIndex": 2,
+                "text": "Her sabah saat dört civarında kendiliğinden uyanıp bir daha uyuyamadığını",
+                "dsmMatch": "Kriter A4: Terminal uykusuzluk (sabah erken uyanma)"
+            },
+            {
+                "clueIndex": 4,
+                "text": "hareketleri ve konuşma temposu belirgin biçimde yavaşlamış",
+                "dsmMatch": "Kriter A5: Gözlemlenebilir psikomotor yavaşlama"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Davranışsal Aktivasyon & Bilişsel Davranışçı Terapi",
+            "therapyDetails": "Günlük etkinlik planlaması ile anhedoni ve geri çekilme döngüsünün kırılması, değersizlik bilişlerinin çalışılması ve pasif ölüm düşünceleri açısından güvenlik izlemi yürütülür.",
+            "pharmacologyNote": "Orta-ağır ve vejetatif belirtilerin belirgin olduğu bu tabloda birinci basamak farmakoterapi SSRI veya SNRI'dır; tedavi yanıtı 4-6 haftada değerlendirilir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada görülen 'sabahları belirtilerin en ağır olması, sabah erken uyanma, belirgin iştah/kilo kaybı ve psikomotor yavaşlama' kümesi DSM-5-TR'de hangi belirleyiciye işaret eder?",
+            "options": [
+                "Melankolik özellikler",
+                "Atipik özellikler",
+                "Mevsimsel örüntü",
+                "Katatoni ile giden"
+            ],
+            "correctIndex": 0,
+            "explanation": "Anhedoni, sabahları kötüleşme, normalden en az 2 saat erken uyanma, belirgin psikomotor yavaşlama/ajitasyon ve ciddi iştah/kilo kaybı melankolik özellikler belirleyicisinin klasik bulgularıdır."
+        },
+        "differentialDiagnosis": "• Kalıcı Depresif Bozukluk (Distimi): En az iki yıl süren daha kronik ve genellikle daha hafif çökkünlük gerekir; burada 7 haftalık akut ve ağır bir epizod vardır.\n• Bipolar II Bozukluğu: Geçmişte en az bir hipomani epizodu bulunmalıdır; bu hastada hiç taşkınlık veya enerji artışı dönemi olmamıştır.\n• Bedensel Belirti Bozukluğu: Ağrıya yönelik orantısız sağlık kaygısı ön plandadır; burada temel tablo anhedoni, değersizlik ve vejetatif çökkünlük belirtileridir.",
+        "dsmCriteriaSummary": "DSM-5-TR: En az 2 hafta boyunca 5 veya daha fazla belirti (en az biri çökkün duygudurum veya anhedoni; ek olarak kilo/iştah değişikliği, uykusuzluk, psikomotor yavaşlama, yorgunluk, değersizlik, odaklanma güçlüğü, ölüm düşünceleri) + İşlevsellik bozulması + Mani/hipomani öyküsü yokluğu.",
+        "therapyId": "behavioral_activation",
+        "pharmacologyId": "ssri_firstline",
+        "explanation": {
+            "whyThis": [
+                "Yedi haftadır süren çökkünlük ve anhedoniye iştahsızlıkla altı kilo kaybı, sabah erken uyanma, psikomotor yavaşlama, değersizlik ve pasif ölüm düşünceleri eşlik ederek yedi ölçütü karşılamaktadır.",
+                "Başlangıçta sırt ağrısı gibi bedensel yakınmalarla maskelenmesine karşın organik nedenler dışlanmıştır.",
+                "Geçmişte mani ya da hipomani döneminin bulunmaması tek kutuplu tanıyı kesinleştirir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "dysthymia",
+                    "reason": "Belirtiler iki yıldır süren kronik bir tablo değil, yedi hafta önce başlayan akut ve ağır bir epizoddur."
+                },
+                {
+                    "diagnosisId": "bipolar_2",
+                    "reason": "Yaşam boyu hiçbir hipomani veya mani epizodu öyküsü bulunmamaktadır."
+                },
+                {
+                    "diagnosisId": "somatic_symptom_disorder",
+                    "reason": "Sırt ağrısı tek başına bir sağlık kaygısı odağı değil, ağır anhedoni, kilo kaybı ve pasif ölüm düşüncelerinin eşlik ettiği duygudurum atağının parçasıdır."
+                }
+            ],
+            "teachingPoint": "Özellikle orta yaş erkeklerde majör depresif epizod sırt ağrısı ve kilo kaybı gibi bedensel yakınmalarla maskelenebilir; anhedoni, sabah erken uyanma ve psikomotor yavaşlama mutlaka sorgulanmalıdır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "ADULT",
+        "diagnosisId": "delusional_disorder",
+        "category": "PSYCHOTIC",
+        "patientSummary": "41 yaşında, erkek, matbaa ustabaşısı",
+        "clues": [
+            "41 yaşındaki matbaa ustabaşısı, son beş aydır uykularının bölündüğü ve üst kattaki komşusunun kendisini evden çıkarmak için gizlice uğraştığı gerekçesiyle eşinin ricası üzerine polikliniğe geldi.",
+            "Öyküsünde üst kat komşusunun oturma odası tabanına yerleştirdiği sessiz bir titreşim ve elektromanyetik cihazla geceleri yalnızca kendi yatağının üzerine dalga gönderdiğine inandığı; bu nedenle apartman yönetimine ve savcılığa üç kez dilekçe verdiği öğreniliyor.",
+            "Eşi, hastanın bu komşu konusu dışında iş yerindeki ustabaşılık görevini aksatmadan sürdürdüğünü, çocuklarıyla ilgilendiğini, arkadaş çevresiyle olağan biçimde görüştüğünü ve günlük yaşamında hiçbir garip davranış sergilemediğini belirtiyor.",
+            "Alkol ve uyarıcı madde kullanımı yok; nörolojik muayene, kan testleri ve beyin MR'ı olağan. Sesler duyma, görüntü görme, düşüncelerinin okunduğunu hissetme ya da geçmişte ağır çökkünlük/taşkınlık dönemi öyküsü hiç olmamış.",
+            "Ruhsal Durum Muayenesinde: Bakımlı, sakin, iş birliğine yatkın; konuşması son derece düzenli, amaca yönelik ve çağrışımları sağlam. Duygulanımı uygun ve kısıtlı değil; ancak üst kat komşusunun cihaz kurduğu inancı kanıtlarla sarsılmıyor ve bu konuda içgörüsü yok.",
+            "Bir ayı çoktan aşan süredir devam eden bu tek temalı, sarsılmaz yanlış inanca karşın herhangi bir varsanı, dezorganize konuşma ya da negatif belirti bulunmamakta ve bu inancın doğrudan etkileri dışında hastanın işlevselliği belirgin biçimde bozulmamaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 1,
+                "text": "sessiz bir titreşim ve elektromanyetik cihazla geceleri yalnızca kendi yatağının üzerine dalga gönderdiğine inandığı",
+                "dsmMatch": "Kriter A: 1 ay veya daha uzun süren bir veya daha çok sarsılmaz yanlış inanç"
+            },
+            {
+                "clueIndex": 2,
+                "text": "bu komşu konusu dışında iş yerindeki ustabaşılık görevini aksatmadan sürdürdüğünü",
+                "dsmMatch": "Kriter C: İnancın doğrudan etkileri dışında işlevselliğin belirgin biçimde bozulmaması"
+            },
+            {
+                "clueIndex": 4,
+                "text": "konuşması son derece düzenli, amaca yönelik ve çağrışımları sağlam. Duygulanımı uygun ve kısıtlı değil",
+                "dsmMatch": "Kriter B: Şizofreni A ölçütünün (varsanı, dezorganizasyon, negatif belirtiler) hiç karşılanmamış olması"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Psikoz için Bilişsel Davranışçı Terapi (BDT-P)",
+            "therapyDetails": "İnancı doğrudan çatışmayla çürütmeye çalışmadan güven ilişkisi kurmak, uyku ve stres sıkıntısını hedeflemek ve kanıt değerlendirme esnekliğini artırmak amaçlanır.",
+            "pharmacologyNote": "Düşük-orta doz ikinci kuşak antipsikotik (ör. risperidon, aripiprazol) veya tarihsel seçenek olarak pimozid kullanılır; içgörü kısıtlılığı nedeniyle tedavi uyumu yakından izlenmelidir."
+        },
+        "miniQuiz": {
+            "question": "Bu hastada Şizofreni yerine bu tanının konulmasını sağlayan en belirleyici iki ölçüt hangileridir?",
+            "options": [
+                "Belirtilerin beş aydır sürmesi ve hastanın erkek olması",
+                "Varsanı, dezorganize konuşma ve negatif belirtilerin olmaması ile inanç alanı dışında işlevselliğin korunması",
+                "Hastanın savcılığa dilekçe vermiş olması",
+                "Beyin MR'ında ventrikül genişlemesi saptanması"
+            ],
+            "correctIndex": 1,
+            "explanation": "Sanrılı bozuklukta en az 1 ay süren sarsılmaz sanrı vardır ancak şizofreninin A ölçütü (belirgin varsanılar, dezorganizasyon, negatif belirtiler) hiç karşılanmamıştır ve sanrı alanı dışında işlevsellik belirgin biçimde korunmuştur."
+        },
+        "differentialDiagnosis": "• Şizofreni: Varsanılar, dezorganize konuşma, negatif belirtiler ve yaygın işlevsellik yıkımı görülür; bu olguda hiçbiri yoktur.\n• Paranoid Kişilik Bozukluğu: Erken erişkinlikten beri tüm ilişkilere yayılan genel güvensizlik vardır; burada son beş ayda ortaya çıkan tek temalı, sarsılmaz bir inanç mevcuttur.\n• Majör Depresif Bozukluk: Psikotik özellikli depresyonda inançlar ağır depresif epizod içinde ortaya çıkar; burada duygudurum olağandır.",
+        "dsmCriteriaSummary": "DSM-5-TR: 1 ay veya daha uzun süren bir veya daha çok sanrı + Şizofreni A ölçütünün hiç karşılanmamış olması + Sanrı etkileri dışında işlevselliğin belirgin bozulmaması ve davranışın açıkça tuhaf olmaması + Duygudurum dönemlerinin kısa olması + Madde/tıbbi durumun dışlanması.",
+        "therapyId": "cbtp",
+        "explanation": {
+            "whyThis": [
+                "Beş aydır süren, komşunun elektromanyetik cihazla uykusunu hedef aldığı yönündeki sarsılmaz inanç Kriter A'yı karşılar.",
+                "Varsanı, dezorganize konuşma ve negatif belirtilerin bulunmaması şizofreni A ölçütünün karşılanmadığını gösterir.",
+                "İş, aile ve arkadaşlık işlevselliğinin sanrı alanı dışında tamamen korunmuş olması tanıyı kesinleştirir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "schizophrenia",
+                    "reason": "Varsanı, çağrışım bozukluğu, negatif belirti ve yaygın işlevsellik yıkımı yoktur."
+                },
+                {
+                    "diagnosisId": "paranoid_pd",
+                    "reason": "Erken erişkinlikten beri süren yaygın kişilik güvensizliği yerine son beş ayda yerleşmiş, tek temalı ve sarsılmaz bir inanç vardır."
+                },
+                {
+                    "diagnosisId": "mdd",
+                    "reason": "Çökkün duygudurum, anhedoni veya vejetatif belirtilerle giden bir depresif epizod bulunmamaktadır."
+                }
+            ],
+            "teachingPoint": "Sanrılı bozukluğun şizofreniden ana farkı, sarsılmaz sanrıya karşın varsanı-dezorganizasyon-negatif belirti yokluğu ve sanrı alanı dışındaki işlevselliğin korunmasıdır."
+        }
+    },
+    {
+        "difficulty": "Zor",
+        "course": "CHILD",
+        "diagnosisId": "intellectual_disability_profound",
+        "category": "NEURODEV",
+        "patientSummary": "9 yaşında, erkek çocuğu, evde tam zamanlı bakım alan hasta",
+        "clues": [
+            "9 yaşındaki erkek çocuğu, artan huzursuzluk ve bakım güçlüklerinin değerlendirilmesi ile destek hizmetlerinin planlanması amacıyla anne ve babası tarafından çocuk psikiyatrisi polikliniğine getirildi.",
+            "Doğum öyküsünde ağır perinatal oksijen yetersizliği nedeniyle yenidoğan yoğun bakımda uzun süre izlendiği, yaşamının ilk yılından itibaren baş kontrolü ve oturma gibi temel motor basamakları kazanamadığı ve spastik kuadriparezi ile ağır görme kısıtlılığının eşlik ettiği öğreniliyor.",
+            "Dokuz yaşında olmasına karşın hiçbir sözcük ya da sembolik işaret gelişmemiş; yalnızca açlık, ağrı ya da müzik sesi gibi uyaranlara ağlama, gülümseme ve basit seslerle tepki verebiliyor, tanıdık bakım verenin sesine başını çevirerek kısmi yönelim gösteriyor.",
+            "Beslenme, giyinme, banyo, tuvalet ve bedensel güvenlik dahil günlük yaşamın tüm pratik alanlarında 24 saat boyunca bakım verenlere tamamen bağımlı. Metabolik taramalar tamamlanmış, epilepsisi antiepileptik ilaçla kontrol altında.",
+            "Ruhsal Durum Muayenesinde: Tekerlekli destekli sandalyesinde oturuyor, göz teması görme kısıtlılığı nedeniyle sınırlı; nesneleri kavramsal amaçla değil yalnızca dokunma ve ağıza götürme düzeyinde keşfediyor. Standart bilişsel ölçeklerde taban puanın altında kalıyor, değerlendirme gözlem ve uyumsal ölçeklerle yapılabiliyor.",
+            "Gelişim döneminde başlayan bu tabloda kavramsal becerilerin yalnızca fiziksel-duyusal düzeyde kalması, iletişimin neredeyse tamamen sözel olmayan basit tepkilerle sınırlı olması ve tüm öz bakım ile sağlık-güvenlik alanlarında yaşam boyu tam bağımlılık bulunması en ağır düzeyi göstermektedir."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "hiçbir sözcük ya da sembolik işaret gelişmemiş; yalnızca açlık, ağrı ya da müzik sesi gibi uyaranlara ağlama, gülümseme ve basit seslerle tepki verebiliyor",
+                "dsmMatch": "Şiddet Belirleyicisi (Toplumsal Alan): Sözel olmayan sınırlı iletişim, sembolik dilin gelişmemesi"
+            },
+            {
+                "clueIndex": 3,
+                "text": "Beslenme, giyinme, banyo, tuvalet ve bedensel güvenlik dahil günlük yaşamın tüm pratik alanlarında 24 saat boyunca bakım verenlere tamamen bağımlı",
+                "dsmMatch": "Şiddet Belirleyicisi (Pratik Alan): Günlük fiziksel bakım, sağlık ve güvenliğin her yönünde tam bağımlılık"
+            },
+            {
+                "clueIndex": 4,
+                "text": "nesneleri kavramsal amaçla değil yalnızca dokunma ve ağıza götürme düzeyinde keşfediyor",
+                "dsmMatch": "Şiddet Belirleyicisi (Kavramsal Alan): Sembolik değil somut fiziksel-duyusal düzeyde beceriler"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Çok Duyulu Yapılandırılmış Özel Eğitim & Bakım Veren Desteği",
+            "therapyDetails": "Duyusal uyaranlara dayalı iletişim destekleri, fizyoterapi ve ergoterapi ile kontraktürlerin önlenmesi, beslenme-güvenlik planlaması ve aileye psikososyal bakım desteği sağlanır.",
+            "pharmacologyNote": "Temel bilişsel yetersizliği düzelten ilaç yoktur; eşlik eden epilepsi nörolojiyle izlenir, ağır kendine zarar verme veya ajitasyon varsa düşük doz atipik antipsikotik dikkatle değerlendirilebilir."
+        },
+        "miniQuiz": {
+            "question": "Bu 9 yaşındaki çocukta 'Genel Gelişimsel Gecikme' yerine bu tanının seçilmesinin ve şiddet düzeyinin belirlenmesinin temel kuralı nedir?",
+            "options": [
+                "Genel Gelişimsel Gecikme 12 yaşına kadar kullanılabilir",
+                "Şiddet düzeyi yalnızca beyin MR bulgusuna göre belirlenir",
+                "Genel Gelişimsel Gecikme yalnızca 5 yaş altı çocuklarda kullanılır; şiddet düzeyi ise IQ puanından çok uyumsal işlevselliğe göre belirlenir",
+                "Sadece konuşmanın olmaması şiddet düzeyini belirlemek için tek başına yeterlidir"
+            ],
+            "correctIndex": 2,
+            "explanation": "DSM-5-TR'de Genel Gelişimsel Gecikme 5 yaş altındaki çocuklar için ayrılmıştır. Zihinsel yetiyitimi şiddet düzeyi ise artık tek başına IQ puanına göre değil, kavramsal, toplumsal ve pratik alanlardaki uyumsal işlevselliğe göre belirlenir."
+        },
+        "differentialDiagnosis": "• Zihinsel Yetiyitimi (Ağır Düzey): Tek sözcükler veya basit ifadelerle sınırlı konuşma ve yoğun destekle bazı temel öz bakım becerilerine katılım gelişebilir; burada sembolik iletişim hiç yoktur ve tüm alanlarda tam bağımlılık mevcuttur.\n• Küresel Gelişimsel Gecikme: Yalnızca 5 yaş altındaki ve sistematik değerlendirme yapılamayan çocuklar için kullanılır; bu hasta 9 yaşındadır.\n• Otizm Spektrum Bozukluğu: Eşlik edebilir ancak bu tabloda perinatal beyin hasarına bağlı tüm bilişsel, motor ve uyumsal alanlarda en ağır küresel yetersizlik egemendir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Gelişim döneminde başlayan zihinsel işlev yetersizliği + Kavramsal (sembolik değil fiziksel/duyusal), toplumsal (sözel olmayan çok sınırlı iletişim) ve pratik (tüm öz bakım, sağlık ve güvenlikte 24 saat tam bağımlılık) uyumsal alanlarda en ağır düzeyde kısıtlılık.",
+        "therapyId": "special_education",
+        "explanation": {
+            "whyThis": [
+                "Perinatal hipoksik hasar zemininde gelişim döneminde başlayan tablo, standart testlerde taban puanın altında kalan ağır zihinsel yetersizlikle uyumludur.",
+                "Sembolik iletişim yokluğu, nesnelerin yalnızca duyusal-motor kullanımı ve tüm öz bakım ile güvenlik alanlarında 24 saat tam bağımlılık ileri derecede ağır düzeyi belirler.",
+                "Dokuz yaşında olması nedeniyle 5 yaş altına özgü genel gelişimsel gecikme tanısı artık kullanılmaz."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "intellectual_disability_severe",
+                    "reason": "Ağır düzeyde basit tek sözcükler ve destekle kısmi öz bakım katılımı görülebilir; burada sembolik iletişim hiç gelişmemiş ve tam bakım bağımlılığı vardır."
+                },
+                {
+                    "diagnosisId": "global_developmental_delay",
+                    "reason": "Bu tanı yalnızca 5 yaş altındaki çocuklar için geçerlidir; hasta 9 yaşındadır."
+                },
+                {
+                    "diagnosisId": "asd",
+                    "reason": "Tablo yalnızca sosyal iletişim ve kısıtlı ilgi alanlarıyla değil, spastik kuadriparezi ve görme kaybının eşlik ettiği en ağır küresel bilişsel-uyumsal yetersizlikle açıklanır."
+                }
+            ],
+            "teachingPoint": "DSM-5-TR'de zihinsel yetiyitimi şiddet düzeyi uyumsal işlevselliğe göre belirlenir; sembolik iletişimin hiç gelişmemesi ve tüm fiziksel bakımda tam bağımlılık en ağır düzeyi tanımlar."
+        }
+    },
+    {
+        "difficulty": "İleri Düzey",
+        "course": "CHILD",
+        "diagnosisId": "intellectual_disability_mild",
+        "category": "NEURODEV",
+        "patientSummary": "14 yaşında, erkek çocuğu, 8. sınıf öğrencisi",
+        "clues": [
+            "14 yaşındaki 8. sınıf öğrencisi, okul başarısızlığı ve son aylarda mahalledeki büyük çocukların kendisini kandırıp harçlığını elinden alması nedeniyle rehber öğretmen yönlendirmesiyle polikliniğe getirildi.",
+            "Gelişim öyküsünde yürüme ve temel konuşmasının zamanında olduğu için okul öncesinde hiç fark edilmediği; ancak ilkokul birinci sınıftan beri okuma-yazma, okuduğunu anlama ve dört işlemde yaşıtlarının belirgin biçimde gerisinde kaldığı öğreniliyor.",
+            "Annesi, oğlunun giyinme, banyo yapma ve kendi yemeğini hazırlama gibi kişisel öz bakım işlerini tamamen bağımsız yürüttüğünü; buna karşın markette para üstünü hesaplamakta, saat-takvim planlamakta ve iki aktarmalı otobüs yolculuğunu tek başına yapmakta desteğe gereksinim duyduğunu anlatıyor.",
+            "İşitme ve görme muayenesi olağan, nörolojik inceleme normal; aşırı hareketlilik ya da dürtüsellikten çok tüm derslerde ve günlük problem çözmede genel bir soyutlama güçlüğü dikkat çekiyor. Yaşıtlarıyla sohbeti somut düzeyde kalıyor, ince alayları ve sosyal riskleri fark edemiyor.",
+            "Ruhsal Durum Muayenesinde: Sıcakkanlı, uyumlu ve çaba gösteriyor; ancak duygusal ve sosyal olgunluğu yaşıtlarından geri. Bireysel uygulanan WISC-IV değerlendirmesinde tüm ölçek puanı 64 (ortalama altı 2 standart sapmadan düşük); Vineland uyumsal davranış ölçeğinde kavramsal, toplumsal ve pratik alanların üçünde de hafif düzeyde yetersizlik saptanıyor.",
+            "Gelişim döneminde başlayan, hem bireysel standart bilişsel testle doğrulanan genel akıl yürütme ve akademik öğrenme güçlüğü hem de temel öz bakım korunmuşken sosyal yargı, para yönetimi ve karmaşık günlük işlerde destek gerektiren uyumsal kısıtlılık birlikte bulunmaktadır."
+        ],
+        "symptomHighlights": [
+            {
+                "clueIndex": 2,
+                "text": "kişisel öz bakım işlerini tamamen bağımsız yürüttüğünü; buna karşın markette para üstünü hesaplamakta, saat-takvim planlamakta ve iki aktarmalı otobüs yolculuğunu tek başına yapmakta desteğe gereksinim duyduğunu",
+                "dsmMatch": "Şiddet Belirleyicisi (Pratik Alan): Öz bakımda bağımsızlık, karmaşık günlük işlerde destek gereksinimi"
+            },
+            {
+                "clueIndex": 3,
+                "text": "Yaşıtlarıyla sohbeti somut düzeyde kalıyor, ince alayları ve sosyal riskleri fark edemiyor",
+                "dsmMatch": "Şiddet Belirleyicisi (Toplumsal Alan): Olgunlaşmamış sosyal iletişim ve kandırılmaya açıklık"
+            },
+            {
+                "clueIndex": 4,
+                "text": "WISC-IV değerlendirmesinde tüm ölçek puanı 64 (ortalama altı 2 standart sapmadan düşük); Vineland uyumsal davranış ölçeğinde kavramsal, toplumsal ve pratik alanların üçünde de hafif düzeyde yetersizlik",
+                "dsmMatch": "Kriter A & B: Standart testle doğrulanan zihinsel işlev yetersizliği ve üç alanda uyumsal kısıtlılık"
+            }
+        ],
+        "treatmentModality": {
+            "goldStandardTherapy": "Bireyselleştirilmiş Özel Eğitim (BEP) & Sosyal Beceri Eğitimi",
+            "therapyDetails": "Kaynaştırma ve bireyselleştirilmiş eğitim programı, para-zaman yönetimi ve toplu taşıma gibi pratik yaşam becerileri, istismardan korunmaya yönelik sosyal yargı eğitimi ve mesleki yönlendirme uygulanır.",
+            "pharmacologyNote": "Bilişsel yetersizlik için birincil ilaç tedavisi yoktur; yalnızca eşlik eden DEHB, anksiyete veya depresyon saptanırsa hedefe yönelik farmakoterapi düşünülür."
+        },
+        "miniQuiz": {
+            "question": "Bu 14 yaşındaki ergende 'Özgül Öğrenme Bozukluğu' yerine bu tanının konulmasını sağlayan temel klinik ayrım nedir?",
+            "options": [
+                "Okuma ve matematikte güçlüğün ilkokuldan beri sürmesi",
+                "Okul öncesi dönemde motor gelişimin normal olması",
+                "Kişisel öz bakım becerilerinin korunmuş olması",
+                "Güçlüğün yalnızca akademik becerilerle sınırlı olmayıp genel bilişsel testte belirgin düşüklük (IQ 64) ve sosyal-pratik uyumsal işlevlerde de yetersizlik bulunması"
+            ],
+            "correctIndex": 3,
+            "explanation": "Özgül öğrenme bozukluğunda genel zihinsel işlevsellik ve uyumsal beceriler normaldir; hafif düzey zihinsel yetiyitiminde ise hem standart bilişsel testte belirgin yetersizlik hem de kavramsal, toplumsal ve pratik uyumsal alanlarda destek gereksinimi vardır."
+        },
+        "differentialDiagnosis": "• Özgül Öğrenme Bozukluğu: Akademik becerilerde geri kalma vardır ancak genel zekâ düzeyi ve toplumsal-pratik uyumsal işlevler yaşına uygundur.\n• Zihinsel Yetiyitimi (Orta Düzey): Okul öncesinden itibaren dil ve motor gelişimde belirgin gecikme görülür ve kişisel öz bakımda bile uzun süreli öğretim ve hatırlatma gerekir.\n• Dikkat Eksikliği / Hiperaktivite Bozukluğu (DEHB): Akademik sorunlar dikkat dağınıklığından kaynaklanır; genel akıl yürütme ve uyumsal sosyal yargı bu düzeyde düşük değildir.",
+        "dsmCriteriaSummary": "DSM-5-TR: Gelişim döneminde başlayan zihinsel işlev yetersizliği (klinik değerlendirme + standart test) + Kavramsal (akademik/para-zaman), toplumsal (olgunlaşmamış yargı, kandırılmaya açıklık) ve pratik (öz bakım korunmuş, karmaşık günlük işlerde destek) alanlarda hafif düzeyde uyumsal kısıtlılık.",
+        "therapyId": "special_education",
+        "explanation": {
+            "whyThis": [
+                "İlkokuldan beri süren akademik güçlük, soyutlama kısıtlılığı ve WISC-IV 64 puanı gelişim döneminde başlayan zihinsel işlev yetersizliğini doğrular.",
+                "Temel öz bakımda tam bağımsızlık korunurken para yönetimi, toplu taşıma planlama ve sosyal risk değerlendirmede (kandırılma) destek gereksinimi hafif düzey uyumsal profili tanımlar.",
+                "Okul öncesi dönemde fark edilmemesi bu düzeyin tipik klinik seyridir."
+            ],
+            "whyNot": [
+                {
+                    "diagnosisId": "specific_learning_disorder",
+                    "reason": "Sorun yalnızca okuma veya matematikle sınırlı değildir; genel bilişsel puan düşük ve toplumsal-pratik uyumsal işlevlerde belirgin kısıtlılık vardır."
+                },
+                {
+                    "diagnosisId": "intellectual_disability_moderate",
+                    "reason": "Okul öncesi temel konuşma ve motor gelişim zamanındadır ve kişisel öz bakım tamamen bağımsız sürdürülmektedir."
+                },
+                {
+                    "diagnosisId": "adhd",
+                    "reason": "Temel sorun dikkat eksikliği veya hiperaktivite değil, standart testle doğrulanan genel akıl yürütme ve uyumsal işlev yetersizliğidir."
+                }
+            ],
+            "teachingPoint": "Hafif düzey zihinsel yetiyitimi çoğu kez okul öncesinde fark edilmez ve öz bakım korunur; ancak akademik güçlüğe eşlik eden genel bilişsel düşüklük, para-ulaşım desteği gereksinimi ve kandırılmaya açıklık tanıyı özgül öğrenme bozukluğundan ayırır."
+        }
+    }
+]

@@ -3249,3 +3249,14 @@ body::before {
     .clue-box.is-latest, .is-shake, .result-inline.is-win { animation: none !important; }
     .btn:active, .segmented-btn:active, .desk-strip:active, .ol-cta-card:active { transform: none !important; }
 }
+
+/* Mobil alt sekme çubuğu çakışma koruması & genel telefon akıcılığı */
+@media (max-width: 767px) {
+    body:not(.is-playing) .app-main {
+        padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 28px);
+    }
+    .ol-cta-card { min-height: 72px; padding: 12px 14px; }
+    .ol-quick { padding: 14px; }
+    .ol-join-row { flex-wrap: wrap; }
+    .ol-code-input { font-size: 16px; }
+}
